@@ -6,7 +6,7 @@ import { createHash } from 'node:crypto';
 import { cp, mkdir, readFile, readdir, realpath, rm, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import path from 'node:path';
-import { completeProbe, disposeObservers, errorDetails, observeApplication, waitForApplications } from './mac_probe_lifecycle.mjs';
+import { completeProbe, disposeObservers, errorDetails, observeApplication, receiptPublication, waitForApplications } from './mac_probe_lifecycle.mjs';
 
 assert.equal(process.platform, 'darwin');
 assert.equal(process.arch, 'arm64');
@@ -234,12 +234,13 @@ try {
   }
 } finally {
   clearTimeout(timeout);
-  let nativeExits;
+  let launchObservers;
+  const publication = receiptPublication(path.join(evidence, 'receipt.json'));
   await completeProbe({
     primaryError,
     cleanup: [
       ['authenticated shutdown', stop],
-      ['native application exits', async () => { nativeExits = await waitForApplications(observers); }],
+      ['LaunchServices exit observations', async () => { launchObservers = await waitForApplications(observers); }],
       ['trace', async () => { if (context) await context.tracing.stop({ path: path.join(evidence, 'trace.zip') }); }],
       ['browser', async () => { if (browser) await browser.close(); }],
       ['deadline browser cleanup', async () => { const result = await deadlineClose; if (result.error) throw result.error; }],
@@ -247,9 +248,9 @@ try {
     ],
     commit: async () => {
       assert(receipt && !expired, 'A completed in-deadline probe is required');
-      await writeFile(path.join(evidence, 'receipt.json'),
-        JSON.stringify({ ...receipt, native_exits: nativeExits, cleanup: 'confirmed' }, null, 2) + '\n', { flag: 'wx' });
+      await publication.publish({ ...receipt, launch_observers: launchObservers, cleanup: 'confirmed' });
     },
+    rollback: () => publication.rollback(),
     dispose: () => disposeObservers(observers),
     recordFailure: error => writeFile(path.join(evidence, 'failure.json'),
       JSON.stringify(errorDetails(error), null, 2) + '\n', { flag: 'wx' }),

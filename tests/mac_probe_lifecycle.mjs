@@ -1,7 +1,9 @@
 // QA authority is an authenticated endpoint plus the retained `open -W -n`
 // invocation. A process-list snapshot never grants authority over an app.
 import { spawn } from 'node:child_process';
+import { randomUUID } from 'node:crypto';
 import { closeSync, openSync } from 'node:fs';
+import * as files from 'node:fs/promises';
 
 async function bounded(promise, milliseconds, message) {
   let timer;
@@ -35,7 +37,8 @@ export function observeApplication(application, args, logPath, spawnProcess = sp
       if (cancelled || result.error || result.code !== 0 || result.signal) {
         throw new Error(`LaunchServices observer did not confirm native exit: ${JSON.stringify({ application, cancelled, ...result })}`);
       }
-      return { application, exit_code: result.code, signal: result.signal };
+      return { application, launch_services_exit_observed: true,
+        observer_exit_code: result.code, observer_signal: result.signal };
     },
     async dispose() {
       if (outcome) return;
@@ -66,14 +69,67 @@ export async function disposeObservers(observers) {
 export function errorDetails(error) {
   return {
     name: error.name, message: error.message, stack: error.stack,
+    ...(error.code ? { code: error.code } : {}),
     ...(error.cause ? { cause: errorDetails(error.cause) } : {}),
     ...(error.errors ? { errors: Array.from(error.errors, errorDetails) } : {}),
   };
 }
 
-export async function completeProbe({ primaryError, cleanup, commit, dispose, recordFailure,
+export function receiptPublication(receiptPath, io = files) {
+  // The caller exclusively owns a fresh evidence directory. Identity checks
+  // detect replaced files; this is not a transaction over a hostile namespace.
+  const pendingPath = `${receiptPath}.${randomUUID()}.pending`;
+  let pendingIdentity, receiptIdentity, started = false;
+  async function removeOwned(file, identity) {
+    if (!identity) return;
+    let actual;
+    try { actual = await io.lstat(file, { bigint: true }); }
+    catch (error) { if (error.code === 'ENOENT') return; throw error; }
+    if (!actual.isFile() || actual.dev !== identity.dev || actual.ino !== identity.ino) {
+      throw new Error(`Receipt path changed; refusing to remove another file: ${file}`);
+    }
+    await io.unlink(file);
+  }
+  return {
+    async publish(value) {
+      if (started) throw new Error('Receipt publication was already attempted');
+      started = true;
+      const handle = await io.open(pendingPath, 'wx', 0o600);
+      let writeError;
+      try {
+        pendingIdentity = await handle.stat({ bigint: true });
+        await handle.writeFile(JSON.stringify(value, null, 2) + '\n');
+      }
+      catch (error) { writeError = error; }
+      try { await handle.close(); }
+      catch (error) {
+        if (writeError) throw new AggregateError([writeError, error], 'Receipt write and close failed', { cause: writeError });
+        throw error;
+      }
+      if (writeError) throw writeError;
+      // Atomic no-replace publication on this same-filesystem QA directory.
+      // Keep ownership identity before the call so post-operation errors can
+      // still roll back our inode. No directory-wide cleanup is permitted.
+      receiptIdentity = pendingIdentity;
+      try { await io.link(pendingPath, receiptPath); }
+      catch (error) { if (error.code === 'EEXIST') receiptIdentity = undefined; throw error; }
+      await removeOwned(pendingPath, pendingIdentity);
+    },
+    async rollback() {
+      const errors = [];
+      for (const [file, identity] of [[receiptPath, receiptIdentity], [pendingPath, pendingIdentity]]) {
+        try { await removeOwned(file, identity); }
+        catch (error) { errors.push(error); }
+      }
+      if (errors.length) throw new AggregateError(errors, 'Owned receipt rollback failed');
+    },
+  };
+}
+
+export async function completeProbe({ primaryError, cleanup, commit, rollback, dispose, recordFailure,
   cleanupTimeoutMs = 60_000 }) {
   const errors = primaryError ? [primaryError] : [];
+  let commitAttempted = false;
   const deadline = Date.now() + cleanupTimeoutMs;
   for (const [name, action] of cleanup) {
     try {
@@ -85,8 +141,16 @@ export async function completeProbe({ primaryError, cleanup, commit, dispose, re
   if (!errors.length) {
     // Never race a non-cancellable write against a timeout: a late write could
     // otherwise leave a PASS file after this function had reported failure.
-    try { await commit(); return; }
+    try {
+      if (typeof rollback !== 'function') throw new Error('Owned receipt rollback is required');
+      commitAttempted = true;
+      await commit(); return;
+    }
     catch (error) { errors.push(new Error('Probe receipt commit failed', { cause: error })); }
+  }
+  if (commitAttempted) {
+    try { await rollback(); }
+    catch (error) { errors.push(new Error('Probe receipt rollback failed', { cause: error })); }
   }
   try { await bounded(Promise.resolve().then(dispose), 5_000, 'Observer disposal timed out'); }
   catch (error) { errors.push(new Error('Probe observer disposal failed', { cause: error })); }

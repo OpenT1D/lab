@@ -1,11 +1,12 @@
 // These are adversarial QA lifecycle fixtures, not a simulated MMTT backend.
 import assert from 'node:assert/strict';
 import { EventEmitter } from 'node:events';
-import { mkdtemp, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import * as files from 'node:fs/promises';
+import { mkdtemp, readFile, readdir, rename, rm, stat, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { test } from 'node:test';
-import { completeProbe, disposeObservers, errorDetails, observeApplication, waitForApplications } from './mac_probe_lifecycle.mjs';
+import { completeProbe, disposeObservers, errorDetails, observeApplication, receiptPublication, waitForApplications } from './mac_probe_lifecycle.mjs';
 
 async function folder(t) {
   const root = await mkdtemp(path.join(os.tmpdir(), 'opent1d-probe-unit-'));
@@ -21,19 +22,117 @@ class OpenFixture extends EventEmitter {
 
 test('PASS commits only after every cleanup stage succeeds', async t => {
   const root = await folder(t), order = [];
+  const publication = receiptPublication(path.join(root, 'receipt.json'));
   await completeProbe({
     cleanup: ['authenticated shutdown', 'native exits', 'trace', 'browser'].map(name =>
       [name, async () => { order.push(name); }]),
     commit: async () => {
       assert.deepEqual(order, ['authenticated shutdown', 'native exits', 'trace', 'browser']);
       order.push('PASS');
-      await writeFile(path.join(root, 'receipt.json'), '{"passed":true}\n', { flag: 'wx' });
+      await publication.publish({ passed: true });
     },
+    rollback: () => publication.rollback(),
     dispose: async () => { assert.fail('Successful observers need no cancellation'); },
     recordFailure: async () => { assert.fail('No failure is expected'); },
   });
   assert.equal(JSON.parse(await readFile(path.join(root, 'receipt.json'))).passed, true);
   assert.equal(order.at(-1), 'PASS');
+  assert.deepEqual(await readdir(root), ['receipt.json']);
+});
+
+test('A complete pending write followed by close EIO is never published', async t => {
+  const root = await folder(t), target = path.join(root, 'receipt.json');
+  const cause = Object.assign(new Error('Invented close EIO'), { code: 'EIO' });
+  const publication = receiptPublication(target, { ...files, open: async (...args) => {
+    const handle = await files.open(...args);
+    return { stat: (...args) => handle.stat(...args), writeFile: (...args) => handle.writeFile(...args),
+      close: async () => {
+        await handle.close();
+        assert.equal(JSON.parse(await readFile(args[0])).checks.length, 7);
+        await assert.rejects(stat(target), { code: 'ENOENT' });
+        throw cause;
+      } };
+  } });
+  await assert.rejects(completeProbe({ cleanup: [],
+    commit: () => publication.publish({ checks: Array(7).fill('controlled'), cleanup: 'confirmed' }),
+    rollback: () => publication.rollback(), dispose: async () => {},
+    recordFailure: error => writeFile(path.join(root, 'failure.json'), JSON.stringify(errorDetails(error))),
+  }), error => error.errors[0].cause === cause);
+  await assert.rejects(stat(target), { code: 'ENOENT' });
+  assert.deepEqual(await readdir(root), ['failure.json']);
+});
+
+test('A published valid receipt is rolled back when commit subsequently rejects EIO', async t => {
+  const root = await folder(t), target = path.join(root, 'receipt.json');
+  const cause = Object.assign(new Error('Invented post-publication EIO'), { code: 'EIO' });
+  let fail = true;
+  const publication = receiptPublication(target, { ...files, unlink: async file => {
+    if (file.endsWith('.pending') && fail) {
+      fail = false;
+      const visible = JSON.parse(await readFile(target));
+      assert.equal(visible.checks.length, 7);
+      assert.equal(visible.cleanup, 'confirmed');
+      throw cause;
+    }
+    return files.unlink(file);
+  } });
+  await assert.rejects(completeProbe({ cleanup: [],
+    commit: () => publication.publish({ checks: Array(7).fill('controlled'), cleanup: 'confirmed' }),
+    rollback: () => publication.rollback(), dispose: async () => {},
+    recordFailure: async error => {
+      await assert.rejects(stat(target), { code: 'ENOENT' });
+      await writeFile(path.join(root, 'failure.json'), JSON.stringify(errorDetails(error)));
+    },
+  }), error => error.errors[0].cause === cause);
+  assert.deepEqual(await readdir(root), ['failure.json']);
+  assert.equal(JSON.parse(await readFile(path.join(root, 'failure.json'))).errors[0].cause.code, 'EIO');
+});
+
+test('Exclusive publication preserves an existing unrelated receipt', async t => {
+  const root = await folder(t), target = path.join(root, 'receipt.json');
+  await writeFile(target, 'unrelated evidence');
+  const publication = receiptPublication(target);
+  await assert.rejects(completeProbe({ cleanup: [],
+    commit: () => publication.publish({ passed: true }), rollback: () => publication.rollback(),
+    dispose: async () => {}, recordFailure: async () => {},
+  }), error => error.errors[0].cause.code === 'EEXIST');
+  assert.equal(await readFile(target, 'utf8'), 'unrelated evidence');
+  assert.deepEqual(await readdir(root), ['receipt.json']);
+});
+
+test('Rollback refuses a replaced file and retains both commit and rollback evidence', async t => {
+  const root = await folder(t), target = path.join(root, 'receipt.json');
+  const publication = receiptPublication(target), cause = new Error('Invented commit rejection');
+  await assert.rejects(completeProbe({ cleanup: [],
+    commit: async () => {
+      await publication.publish({ passed: true });
+      await rename(target, path.join(root, 'retained-original'));
+      await writeFile(target, 'unrelated replacement');
+      throw cause;
+    },
+    rollback: () => publication.rollback(), dispose: async () => {},
+    recordFailure: error => writeFile(path.join(root, 'failure.json'), JSON.stringify(errorDetails(error))),
+  }), error => error.errors[0].cause === cause && error.errors[1].message === 'Probe receipt rollback failed');
+  assert.equal(await readFile(target, 'utf8'), 'unrelated replacement');
+  assert.match(await readFile(path.join(root, 'failure.json'), 'utf8'), /refusing to remove another file/);
+});
+
+test('Filesystem rollback denial stays failed and keeps the original commit cause', async t => {
+  const root = await folder(t), target = path.join(root, 'receipt.json');
+  const cause = Object.assign(new Error('Invented commit EIO'), { code: 'EIO' });
+  const denied = Object.assign(new Error('Invented rollback denial'), { code: 'EACCES' });
+  const publication = receiptPublication(target, { ...files, unlink: file => {
+    if (file === target) return Promise.reject(denied);
+    return files.unlink(file);
+  } });
+  await assert.rejects(completeProbe({ cleanup: [],
+    commit: async () => { await publication.publish({ passed: true }); throw cause; },
+    rollback: () => publication.rollback(), dispose: async () => {},
+    recordFailure: error => writeFile(path.join(root, 'failure.json'), JSON.stringify(errorDetails(error))),
+  }), error => error.errors[0].cause === cause && error.errors[1].cause.errors[0] === denied);
+  const failure = JSON.parse(await readFile(path.join(root, 'failure.json')));
+  assert.equal(failure.errors[0].cause.code, 'EIO');
+  assert.equal(failure.errors[1].cause.errors[0].code, 'EACCES');
 });
 
 for (const failing of ['authenticated shutdown', 'native exits', 'trace', 'browser']) {
@@ -93,7 +192,10 @@ test('Each new-instance observer waits independently; a secondary exit is insuff
   await assert.rejects(waitForApplications([first, second], 10), /unconfirmed/);
   assert.deepEqual(children.map(child => child.signals), [[], []]);
   children[0].emit('close', 0, null);
-  assert.equal((await waitForApplications([first, second], 10)).length, 2);
+  const observations = await waitForApplications([first, second], 10);
+  assert.equal(observations.length, 2);
+  assert.deepEqual(observations[0], { application: '/owned/OpenT1D.app',
+    launch_services_exit_observed: true, observer_exit_code: 0, observer_signal: null });
 });
 
 test('Cancelling only the retained open helper never confirms native app exit', async t => {
