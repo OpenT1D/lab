@@ -4,6 +4,10 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Add an unsigned internal Apple Silicon MMTT application candidate with its
+  own pinned interpreter, two enforced task capabilities, source/runtime
+  inventories and bounded real-application verification tools.
+
 - Limit monthly Dependabot version updates to minor/patch groups and explicitly
   ignore major updates in both root uv and Actions. Keep major proposals manual,
   existing PR caps, historical exclusions and dependency-review requirements.
