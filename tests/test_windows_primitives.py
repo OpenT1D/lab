@@ -733,7 +733,22 @@ class WindowsOwnershipTests(unittest.TestCase):
 
     @unittest.skipUnless(os.name == "nt", "Actual Windows kernel required")
     def test_real_job_launch_gates_and_reaps_example(self):
+        import ctypes
+        from ctypes import wintypes
+
         from experiments.gui.windows_process import spawn_owned
+
+        kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel.OpenProcess.argtypes = (wintypes.DWORD, wintypes.BOOL, wintypes.DWORD)
+        kernel.OpenProcess.restype = wintypes.HANDLE
+        kernel.IsProcessInJob.argtypes = (wintypes.HANDLE, wintypes.HANDLE, ctypes.c_void_p)
+        kernel.IsProcessInJob.restype = wintypes.BOOL
+        kernel.GetExitCodeProcess.argtypes = (wintypes.HANDLE, ctypes.c_void_p)
+        kernel.GetExitCodeProcess.restype = wintypes.BOOL
+        kernel.WaitForSingleObject.argtypes = (wintypes.HANDLE, wintypes.DWORD)
+        kernel.WaitForSingleObject.restype = wintypes.DWORD
+        kernel.CloseHandle.argtypes = (wintypes.HANDLE,)
+        kernel.CloseHandle.restype = wintypes.BOOL
 
         with tempfile.TemporaryDirectory() as temporary:
             output = Path(temporary) / "invented"
@@ -753,13 +768,48 @@ class WindowsOwnershipTests(unittest.TestCase):
                     stdout=log,
                     stderr=log,
                 )
+                observations = []
+                original_pids = process.job.pids
+
+                def observe_cleanup_inventory():
+                    # Diagnose only the current live Job's returned IDs. Query
+                    # and synchronization rights confer no termination authority.
+                    pids = original_pids()
+                    row = {"leader_returncode": process.poll(), "associated": pids, "processes": []}
+                    for pid in pids:
+                        handle = kernel.OpenProcess(0x00100000 | 0x1000, False, pid)
+                        item = {"pid": pid, "leader": pid == process.pid}
+                        row["processes"].append(item)
+                        if not handle:
+                            item["open_error"] = ctypes.get_last_error()
+                            continue
+                        try:
+                            member, code = wintypes.BOOL(), wintypes.DWORD()
+                            if not kernel.IsProcessInJob(
+                                handle, process.job.handle, ctypes.byref(member)
+                            ):
+                                raise ctypes.WinError(ctypes.get_last_error())
+                            if not kernel.GetExitCodeProcess(handle, ctypes.byref(code)):
+                                raise ctypes.WinError(ctypes.get_last_error())
+                            item.update(
+                                in_job=bool(member.value),
+                                exit_code=code.value,
+                                wait_result=kernel.WaitForSingleObject(handle, 0),
+                            )
+                        finally:
+                            if not kernel.CloseHandle(handle):
+                                raise ctypes.WinError(ctypes.get_last_error())
+                    observations.append(row)
+                    return pids  # Preserve the exact production inventory/result.
+
                 try:
                     self.assertEqual(process.wait(timeout=15), 0)
                     self.assertTrue((output / "observations.csv").is_file())
                 finally:
-                    forced, remaining = owner.cleanup(0)
-                self.assertFalse(forced)
-                self.assertEqual(remaining, [])
+                    with patch.object(process.job, "pids", side_effect=observe_cleanup_inventory):
+                        forced, remaining = owner.cleanup(0)
+                self.assertFalse(forced, observations)
+                self.assertEqual(remaining, [], observations)
 
 
 if __name__ == "__main__":

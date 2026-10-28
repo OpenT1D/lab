@@ -336,8 +336,12 @@ def check(task, args, *, reconstruction=False):
 def assemble_check(task, details, observation_issues, runtimes):
     """Keep readiness/provenance fields independent of phase timing telemetry."""
     uv = uv_ready()
+    # These two source routes use the shared Windows Job/control-pipe worker
+    # and stdlib runtime. Other source tasks retain their POSIX-only boundary;
+    # installed Windows-v1 runtimes retain their existing manifest admission.
+    windows_source = os.name == "nt" and task.id in {"mmtt-sensitivity", "mmtt-sampling"}
     runtime_ready = (
-        (os.name == "posix" or packaged_manifest(ROOT) is not None)
+        (os.name == "posix" or windows_source or packaged_manifest(ROOT) is not None)
         and all(item["ready"] for item in runtimes)
         and uv["ready"]
     )

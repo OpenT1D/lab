@@ -9,6 +9,10 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
   cancellation. Add deterministic malformed-hint and operation-state
   regressions while retaining cancellation and reconstruction accounting.
 
+- Admit Windows source checks for only the two standard-library MMTT routes,
+  preserving runtime/uv requirements and other source-task boundaries. Read
+  their UTF-8 Markdown reports explicitly in portable CLI regression checks.
+
 - Close the cancellation window at local-tool cleanup entry and bound the final
   direct-worker reap. Retain catalogue/setup descendant cleanup, prior signal
   handlers and existing timeout/exit receipts. Add focused transition and real
