@@ -15,9 +15,11 @@ class MaintainedCampaignRuntimeTests(unittest.TestCase):
         darwin, selection = root_selection("darwin")
         linux, _ = root_selection("linux")
         windows, win_selection = root_selection("win32")
-        self.assertEqual(set(darwin), set(linux))
+        self.assertEqual(darwin, linux)
         self.assertEqual(set(windows) - set(darwin), {"colorama"})
-        self.assertEqual((len(darwin), len(windows)), (61, 62))
+        self.assertEqual(
+            {name: item for name, item in windows.items() if name != "colorama"}, darwin
+        )
         self.assertEqual(selection["marker_environment"], {"sys_platform": "darwin"})
         self.assertEqual(
             selection["markers"],
