@@ -2,6 +2,7 @@
 
 import io
 import json
+import struct
 import tarfile
 import tempfile
 import unittest
@@ -90,6 +91,69 @@ class MacArchiveTests(unittest.TestCase):
 
 
 class MacMachOTests(unittest.TestCase):
+    def test_upward_and_lazy_loads_are_checked_but_dylib_identity_is_not_a_dependency(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            runtime = Path(temporary).resolve()
+            binary = runtime / "library.dylib"
+            binary.write_bytes(b"\xcf\xfa\xed\xfe" + b"load-command parser fixture")
+            identity = (
+                "\n minos 11.0\nLoad command 0\n cmd LC_ID_DYLIB\n"
+                " name /opt/provider/library.dylib (offset 24)\n"
+            )
+            for command in ("LC_LOAD_UPWARD_DYLIB", "LC_LAZY_LOAD_DYLIB"):
+                for dependency in ("/opt/foreign/libexternal.dylib", "/usr/lib/libSystem.B.dylib"):
+                    with self.subTest(command=command, dependency=dependency):
+                        commands = identity + (
+                            f"Load command 1\n cmd {command}\n name {dependency} (offset 24)\n"
+                        )
+                        with patch.object(
+                            builder.subprocess, "check_output", side_effect=["arm64\n", commands]
+                        ):
+                            if dependency.startswith("/opt/"):
+                                with self.assertRaisesRegex(ValueError, "external library"):
+                                    builder.macho_inventory(runtime, "11.0", require_python=False)
+                            else:
+                                observed = builder.macho_inventory(
+                                    runtime, "11.0", require_python=False
+                                )
+                                self.assertEqual(
+                                    observed[binary.name]["dependencies"], [dependency]
+                                )
+            with patch.object(
+                builder.subprocess, "check_output", side_effect=["arm64\n", identity]
+            ):
+                observed = builder.macho_inventory(runtime, "11.0", require_python=False)
+                self.assertEqual(observed[binary.name]["dependencies"], [])
+
+    def test_fat64_x86_slice_cannot_hide_next_to_an_approved_arm64_interpreter(self):
+        # Apple's fat_header/fat_arch_64 layout, with one aligned x86_64 Mach-O
+        # object slice. This is a full wrapper, not an isolated magic prefix.
+        # The swapped header is rejected too, independent of tool support for it.
+        slice_bytes = struct.pack("<IiiIIIII", 0xFEEDFACF, 0x01000007, 3, 1, 0, 0, 0, 0)
+        with tempfile.TemporaryDirectory() as temporary:
+            runtime = Path(temporary).resolve()
+            python = runtime / "bin/python3.12"
+            python.parent.mkdir()
+            python.write_bytes(b"\xcf\xfa\xed\xfe" + b"approved interpreter control")
+            image = runtime / "extra-image"
+            for order in (">", "<"):
+                with self.subTest(byte_order=order):
+                    header = struct.pack(order + "II", 0xCAFEBABF, 1)
+                    arch = struct.pack(
+                        order + "iiQQII", 0x01000007, 3, 4096, len(slice_bytes), 12, 0
+                    )
+                    image.write_bytes((header + arch).ljust(4096, b"\0") + slice_bytes)
+                    with patch.object(
+                        builder.subprocess,
+                        "check_output",
+                        side_effect=["arm64\n", "\n minos 11.0\n"],
+                    ) as inspect:
+                        with self.assertRaisesRegex(ValueError, "Only thin ARM64"):
+                            builder.macho_inventory(runtime, "11.0")
+                    # The permitted thin interpreter was inspected normally;
+                    # rejecting the unrelated fat image is the required failure.
+                    self.assertEqual(inspect.call_count, 2)
+
     def test_external_missing_and_escaping_dylibs_and_newer_os_are_refused(self):
         with tempfile.TemporaryDirectory() as temporary:
             runtime = Path(temporary).resolve()

@@ -115,6 +115,8 @@ def macho_inventory(runtime, minimum, *, require_python=True):
         if magic in {
             b"\xca\xfe\xba\xbe",
             b"\xbe\xba\xfe\xca",
+            b"\xca\xfe\xba\xbf",  # FAT_MAGIC_64 (mach-o/fat.h)
+            b"\xbf\xba\xfe\xca",  # FAT_CIGAM_64
             b"\xce\xfa\xed\xfe",
             b"\xfe\xed\xfa\xce",
             b"\xfe\xed\xfa\xcf",
@@ -138,7 +140,9 @@ def macho_inventory(runtime, minimum, *, require_python=True):
                 value = re.search(r"\n\s+path (.+?) \(offset", block).group(1)
                 search_paths.append(_internal_path(value, path, runtime))
         for block in commands.split("Load command"):
-            if re.search(r"\bcmd LC_(?:LOAD|LOAD_WEAK|REEXPORT)_DYLIB\b", block):
+            if re.search(
+                r"\bcmd LC_(?:LOAD|LOAD_WEAK|REEXPORT|LOAD_UPWARD|LAZY_LOAD)_DYLIB\b", block
+            ):
                 dependency = re.search(r"\n\s+name (.+?) \(offset", block).group(1)
                 if dependency.startswith("@rpath/"):
                     candidates = [
