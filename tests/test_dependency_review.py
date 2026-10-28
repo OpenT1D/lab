@@ -358,6 +358,18 @@ class DependencyPolicyTests(unittest.TestCase):
         self.assertEqual(set(updates), {"uv", "github-actions"})
         self.assertEqual(len(data["updates"]), 2)
         for config in updates.values():
+            self.assertEqual(
+                set(config),
+                {
+                    "package-ecosystem",
+                    "directory",
+                    "schedule",
+                    "open-pull-requests-limit",
+                    "groups",
+                    "ignore",
+                }
+                | ({"exclude-paths"} if config["package-ecosystem"] == "uv" else set()),
+            )
             self.assertEqual(config["directory"], "/")
             self.assertEqual(config["schedule"], {"interval": "monthly"})
             self.assertEqual(config["open-pull-requests-limit"], 3)
@@ -365,6 +377,24 @@ class DependencyPolicyTests(unittest.TestCase):
             updates["uv"]["exclude-paths"], ["experiments/**", "packaging/**", "tests/**"]
         )
         self.assertFalse((ROOT / ".github/dependabot.example.yml").exists())
+
+    def test_group_filter_and_global_major_ignore_both_require_manual_major_proposals(self):
+        data = yaml.safe_load((ROOT / ".github/dependabot.yml").read_text())
+        groups = {"github-actions": "actions", "uv": "repository-tooling"}
+        for config in data["updates"]:
+            ecosystem = config["package-ecosystem"]
+            with self.subTest(ecosystem=ecosystem, layer="group"):
+                self.assertEqual(
+                    config["groups"],
+                    {groups[ecosystem]: {"patterns": ["*"], "update-types": ["minor", "patch"]}},
+                )
+            # Unmatched major updates otherwise become individual PRs. Group
+            # filtering alone does not disable that independent update path.
+            with self.subTest(ecosystem=ecosystem, layer="global-major-ignore"):
+                self.assertEqual(
+                    config.get("ignore"),
+                    [{"dependency-name": "*", "update-types": ["version-update:semver-major"]}],
+                )
 
 
 if __name__ == "__main__":
