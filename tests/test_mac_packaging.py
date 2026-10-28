@@ -150,7 +150,7 @@ class MacBuildBoundaryTests(unittest.TestCase):
 
     def test_payload_selector_keeps_mmtt_ancestry_and_excludes_native_runtime_locks(self):
         names = [
-            "experiments/mmtt/core.py",
+            "experiments/observation_analysis/analysis.py",
             "experiments/desktop/runtime.py",
             "experiments/m4/beta_cell/runtime/uv.lock",
             "tests/private.json",
@@ -164,6 +164,25 @@ class MacBuildBoundaryTests(unittest.TestCase):
         lock = json.loads((builder.ROOT / names[4]).read_text())
         self.assertEqual(lock["architecture"], "arm64")
         self.assertEqual(len(lock["sha256"]), 64)
+
+    def test_actual_payload_excludes_historical_environments_outputs_and_root_tooling(self):
+        from scripts.build_windows_installer import source_inventory
+
+        selected = builder.selected_source(source_inventory(builder.ROOT, allow_dirty=True))
+        for name in selected:
+            self.assertNotEqual(Path(name).name, "uv.lock")
+            self.assertNotEqual(Path(name).name, "pyproject.toml")
+            self.assertNotIn("runtime", Path(name).parts)
+            self.assertFalse(name.endswith(("execution.json", "report.json", "verification.json")))
+        for required in (
+            "experiments/m3/researcher/intake.py",
+            "experiments/m0/simglucose/recording.py",
+            "experiments/m4/c_peptide/model.py",
+            "experiments/observation_analysis/analysis.py",
+            "experiments/mmtt_sampling/plan.py",
+            "packaging/mac/Launcher.m",
+        ):
+            self.assertIn(required, selected)
 
 
 if __name__ == "__main__":

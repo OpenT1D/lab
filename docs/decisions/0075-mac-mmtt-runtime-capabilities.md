@@ -36,6 +36,13 @@ root development packages or historical native environments enter the runtime.
 Record the source commit, selected source bytes, toolchain, upstream archives,
 transformation and complete delivered payload identity.
 
+Select only the two task implementations, protocols and fixtures, their actual
+shared standard-library helpers and source identities, GUI/desktop source and
+static assets, required C-peptide ancestry and licence material. Some reused
+file-reading and serialization helpers retain their original M3/M1/M0 paths;
+their native environments and task assets are not included. Exclude root
+development selectors, historical native project selectors and saved results.
+
 A thin native Cocoa launcher starts that interpreter and surfaces startup
 failures. No Developer ID, signing identity, paid service, notarisation or public
 release is selected. Retain any linker/upstream ad-hoc code-signature metadata

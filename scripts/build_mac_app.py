@@ -200,28 +200,55 @@ def runtime_materials(payload, cache, lock):
 
 
 def selected_source(identity):
-    ancestry = {
-        "0067-mmtt-feasibility-boundary.md",
-        "0068-synthetic-observation-analysis-contract.md",
-        "0069-mmtt-sampling-reuse.md",
+    # Keep the current shared stdlib import/source-identity closure. Earlier task
+    # helper names are ancestry, not permission to ship their native projects.
+    python_directories = {
+        "experiments/desktop",
+        "experiments/gui",
+        "experiments/workflows",
+        "experiments/observation_analysis",
+        "experiments/mmtt_sampling",
     }
-    return {
-        name: record
-        for name, record in identity["files"].items()
-        if (name.startswith("experiments/") and "runtime" not in PurePosixPath(name).parts)
-        or name.startswith(("LICENSES/", "packaging/mac/"))
-        or (name.startswith("docs/decisions/") and PurePosixPath(name).name in ancestry)
-        or name
-        in {
-            "LICENSE",
-            "NOTICE",
-            "pyproject.toml",
-            "uv.lock",
-            ".python-version",
-            "publication-snapshot.json",
-            "publication-security.json",
-        }
+    required = {
+        "LICENSE",
+        "NOTICE",
+        "experiments/platform_files.py",
+        "experiments/platform_process.py",
+        "experiments/catalogue/storage.py",
+        "experiments/durable_archives/storage.py",
+        "experiments/m0/simglucose/recording.py",
+        "experiments/m1/artifacts.py",
+        "experiments/m1/contracts.py",
+        "experiments/m1/metrics.py",
+        "experiments/m1/validation.py",
+        "experiments/m3/common.py",
+        "experiments/m3/researcher/intake.py",
+        "experiments/gui/contract.json",
+        "experiments/observation_analysis/protocol.json",
+        "experiments/mmtt_sampling/protocol.json",
+        "experiments/mmtt_sampling/fixtures/design.json",
+        "experiments/mmtt_sampling/fixtures/numerical-reference.json",
+        "experiments/m4/c_peptide/model.py",
+        "experiments/m4/c_peptide/reference.py",
+        "experiments/m4/c_peptide/protocol.json",
+        "experiments/ot053_feasibility/handoff.json",
+        "docs/decisions/0067-mmtt-feasibility-boundary.md",
+        "docs/decisions/0068-synthetic-observation-analysis-contract.md",
+        "docs/decisions/0069-mmtt-sampling-reuse.md",
     }
+    names = {
+        name
+        for name in identity["files"]
+        if name in required
+        or (PurePosixPath(name).parent.as_posix() in python_directories and name.endswith(".py"))
+        or name.startswith(("experiments/gui/static/", "LICENSES/", "packaging/mac/"))
+    }
+    for name in tuple(names):
+        for parent in PurePosixPath(name).parents:
+            initializer = (parent / "__init__.py").as_posix()
+            if initializer in identity["files"]:
+                names.add(initializer)
+    return {name: record for name, record in identity["files"].items() if name in names}
 
 
 def build(root, output, cache):
@@ -262,11 +289,13 @@ def build(root, output, cache):
     compiler = Path(
         subprocess.check_output(["/usr/bin/xcrun", "--find", "clang"], text=True).strip()
     )
+    sdk = Path(subprocess.check_output(["/usr/bin/xcrun", "--show-sdk-path"], text=True).strip())
     tool = {
         "path": str(compiler),
         "sha256": sha256(compiler),
         "version": subprocess.check_output([compiler, "--version"], text=True),
         "sdk": subprocess.check_output(["/usr/bin/xcrun", "--show-sdk-version"], text=True).strip(),
+        "sdk_settings_sha256": sha256(sdk / "SDKSettings.json"),
     }
     build_id = (
         "mac-mmtt-"
@@ -281,6 +310,8 @@ def build(root, output, cache):
     subprocess.run(
         [
             compiler,
+            "-isysroot",
+            sdk,
             "-fobjc-arc",
             "-arch",
             "arm64",
