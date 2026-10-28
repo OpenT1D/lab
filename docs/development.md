@@ -39,7 +39,7 @@ Ownership below means the implementation boundary responsible for a behavior. Re
 | Shared MMTT estimator and paired sensitivity | `experiments/observation_analysis/` | `test_observation_estimator.py`: separate RK4/Decimal references and unit covariance; `test_observation_import.py`, `test_observation_workflow.py`: intake, CLI, interrupted evidence and reconstruction. |
 | Reduced MMTT measurement schedules | `experiments/mmtt_sampling/`, reused `experiments/observation_analysis/analysis.py` | `test_mmtt_sampling_masking.py`, `test_mmtt_sampling_estimator.py`, `test_mmtt_sampling_comparison.py`, `test_mmtt_sampling_workflow.py`: masking, shared estimator boundary, descriptive comparisons and saved workflow. |
 | Local GUI and HTTP lifecycle | `experiments/gui/server.py`, `service.py`, route managers and `static/` | `test_local_gui.py`, `test_gui_observations.py`, `test_gui_sampling.py`: local HTTP, jobs, cancellation, reports and tampering. `test_gui_observation_frontend.py`, `test_gui_sampling_summary.py` and other frontend wrappers exercise their controlled fixtures with Node where declared. |
-| File and process primitives | `experiments/platform_files.py`, `platform_process.py`, `experiments/gui/windows_process.py` | `test_regular_file_snapshots.py`, `test_windows_primitives.py`: stable reads and platform boundaries. Process callers also need their lifecycle tests, for example `test_local_campaign_process.py`, `test_maintained_campaign_process.py`, `test_task_setup.py`; host-specific cases can skip. |
+| File and process primitives | `experiments/platform_files.py`, `platform_process.py`, `experiments/gui/windows_process.py` | `test_regular_file_snapshots.py`, `test_windows_primitives.py`: stable reads and platform boundaries. `test_windows_launch.py`, `test_windows_source_admission.py`: current/base interpreter selection and source-only MMTT guards. Process callers also need their lifecycle tests, for example `test_local_campaign_process.py`, `test_maintained_campaign_process.py`, `test_task_setup.py`; host-specific cases can skip. |
 | Campaigns, catalogue and durable archives | `experiments/campaigns/`, `maintained_campaigns/`, `catalogue/`, `durable_archives/`, `historical_readers/` | `test_local_campaigns.py`, `test_maintained_campaigns.py`, `test_experiment_catalogue.py`, `test_durable_archives.py`, `test_historical_readers.py`: scheduling, eligibility, reconstruction and reader compatibility, with synthetic/fixture inputs. |
 | M0/M1/M2 and controller work | `experiments/m0/`, `m1/`, `m2/`, `p1_external/`, `c1/` | Root `test_m1_contracts.py`, `test_m1_artifacts.py`, `test_m2.py`, `test_p1_external.py` and `test_c1_*.py` cover their declared contracts/fixtures. Separately selected native tests and numerical runs in the task guides verify actual engines. |
 | M3 forecasting | `experiments/m3/` | Root `test_m3_artifacts.py`, `test_m3_researcher_study.py`, `test_m3_comparison_study.py` and source-specific families cover declared intake, causal/artifact and report contracts. Native estimator execution uses the separate M3 guide/environment. |
@@ -72,19 +72,44 @@ Run the repository entry point defined for local checks and the CI workflow:
 uv run --locked python scripts/check.py
 ```
 
+The default command retains the full order. For a bounded change, select one
+family explicitly:
+
+```sh
+uv run --locked python scripts/check.py --stage style
+uv run --locked python scripts/check.py --stage tests
+uv run --locked python scripts/check.py --stage docs
+uv run --locked python scripts/public_smoke.py --output results/ci/local-smoke.json
+```
+
+Style includes metadata and navigation checks; tests runs root unittest discovery;
+docs performs the clean strict Sphinx build. These focused commands do not replace
+the integration owner's final full check. The public smoke receipt needs a fresh
+output path. It runs explicit synthetic CLI/HTTP, file and process cases on the
+actual host, refuses unexpected skips/missing cases and installs no native runtime.
+Windows selects its control-pipe and Job tests; Linux/macOS select POSIX lifecycle
+cases. The HTTP fixture uses a separate temporary workspace and an explicit root
+interpreter without making a virtual-environment symlink.
+
+Windows source MMTT dispatch requires current CPython 3.12 in addition to the
+declared root environment checks. Explicit no-site launches of that same current
+interpreter use its verified base path to avoid a venv redirector creating the
+worker before Job assignment. Actual membership, immediate cleanup and task
+flows still need Windows execution; see [decision 0079](decisions/0079-windows-stdlib-worker-identity.md).
+
 It checks Python tooling style, Markdown, YAML, citation metadata, navigation, documentation regression tests and a clean documentation build. Sphinx warnings, including unresolved document references, fail the build. The file checks include untracked, non-ignored files, so they also cover a first contribution before it is committed.
 
 The Markdown configuration allows long prose lines and template checklists. It checks structure rather than imposing hard wrapping on research reports. The root suite also checks bounded contracts, artifact validation and analysis fixtures. It does not execute native physiology; run the isolated checks in the canonical tutorials as appropriate. Neither passing tooling tests nor native regression equality establishes biological validity.
 The [public source policy](publication-security.md) limits the initial supported
 exercise to the two synthetic MMTT tasks. Initial publication used disabled
-Actions; local results must not be reported as hosted CI. The prepared public
+Actions; local results must not be reported as hosted CI. The prepared `Root checks`
 job explicitly installs the selected Python 3.12, uv 0.11.16 and Node 24.22.1,
 then runs the root suite and standard-library boundary checks. Its Node preflight
 fails when Node is unavailable. Historical native jobs additionally require
 literal private-repository/manual-dispatch guards and cannot run in a public
 repository, even if a changed scope helper reports them enabled.
 
-The public job keeps dependency caching off and its existing fifteen-minute
+The root job keeps dependency caching off and its existing fifteen-minute
 limit. It attempts to retain setup/check/boundary logs and a selected environment
 receipt under `results/ci` for five days, including after a failed check. The
 receipt distinguishes the checked-out source SHA, event SHA and PR-head SHA;
@@ -96,8 +121,27 @@ changing timeouts, caching or parallelism; a local duration is not that benchmar
 Follow the [activation procedure](publication-security.md#activate-on-the-selected-public-destination)
 to review the exact Action allowlist, enable the intended checks, obtain actual
 PR/main results and only then require `Repository checks`. Source changes alone
-do not activate GitHub settings. Broader platform and real-browser coverage remain
-separate roadmap work; the current Node fixtures are controlled DOM checks.
+do not activate GitHub settings. That stable result now aggregates the root job,
+the Linux/macOS/Windows public-smoke matrix and four Linux Chromium flows. Every
+family must succeed; cancellation, skip or a missing result cannot pass the gate.
+Native jobs remain outside its dependency roster. The existing Node fixtures
+continue to provide separate controlled DOM checks. See [decision 0076](decisions/0076-public-check-families.md).
+
+Run the real-browser family with the selected Node 24 and the locked root Python:
+
+```sh
+npm --prefix tests/browser ci --ignore-scripts --no-audit --no-fund
+npm --prefix tests/browser run install:browser
+npm --prefix tests/browser test
+```
+
+Set `PLAYWRIGHT_BROWSERS_PATH` to an absolute temporary browser-cache directory
+first. Linux hosts can add `-- --with-deps` to the browser-install command. The
+suite uses Playwright 1.64.1, one Chromium worker, no retries and four synthetic
+task/failure/reopen flows. Synthetic screenshots, traces, logs and failure
+workspaces are under `output/playwright/`. Additional browsers, Windows browser
+shutdown and OS/release qualification require separate evidence; configured jobs
+do not establish hosted passes.
 
 ## Preview the documentation
 

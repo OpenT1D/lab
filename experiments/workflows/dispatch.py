@@ -1,13 +1,22 @@
 """Explicit dispatch, signal forwarding and recorded native-report discovery."""
 
 import json
+import os
 import signal
 import subprocess
+import sys
 from pathlib import Path
 
 from experiments.platform_process import close_tree, handled_signals, signal_tree, spawn
 
-from .checks import check, interpreter, safe_environment, value
+from .checks import (
+    check,
+    current_stdlib_runtime,
+    interpreter,
+    packaged_manifest,
+    safe_environment,
+    value,
+)
 from .registry import ROOT, VERSION
 
 
@@ -20,7 +29,19 @@ def command_for(task, args, *, operation="run"):
     reconstruction = operation == "reconstruct"
     project = "." if reconstruction else task.run_project
     argv = [str(interpreter(project)), "-B", "-E", "-s"]
-    if reconstruction:
+    windows_mmtt = (
+        os.name == "nt"
+        and task.id in ("mmtt-sensitivity", "mmtt-sampling")
+        and packaged_manifest(ROOT) is None
+    )
+    if windows_mmtt:
+        if not current_stdlib_runtime()["ready"]:
+            raise ValueError("Windows source MMTT workers require current CPython 3.12")
+        # These two tasks already require no external numerical packages. Keep
+        # their admitted current CPython for nested launches instead of starting
+        # another venv redirector outside a newly assigned child Job.
+        argv[0] = sys.executable
+    if reconstruction or windows_mmtt:
         argv.append("-S")
     argv.extend(["-m", task.reconstruct_module if reconstruction else task.run_module])
     if reconstruction:

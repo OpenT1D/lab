@@ -7,6 +7,7 @@ import re
 import shutil
 import stat
 import subprocess
+import sys
 from pathlib import Path
 
 from experiments.desktop.runtime import (
@@ -336,10 +337,23 @@ def check(task, args, *, reconstruction=False):
 def assemble_check(task, details, observation_issues, runtimes):
     """Keep readiness/provenance fields independent of phase timing telemetry."""
     uv = uv_ready()
+    # These two source routes use the shared Windows Job/control-pipe worker
+    # and stdlib runtime. Other source tasks retain their POSIX-only boundary;
+    # installed Windows-v1 runtimes retain their existing manifest admission.
+    windows_mmtt = os.name == "nt" and task.id in {"mmtt-sensitivity", "mmtt-sampling"}
+    bundled = packaged_manifest(ROOT) if windows_mmtt else None
+    windows_source = windows_mmtt and bundled is None
+    current = current_stdlib_runtime() if windows_source else None
     runtime_ready = (
-        (os.name == "posix" or packaged_manifest(ROOT) is not None)
+        (
+            os.name == "posix"
+            or windows_source
+            or bundled is not None
+            or packaged_manifest(ROOT) is not None
+        )
         and all(item["ready"] for item in runtimes)
         and uv["ready"]
+        and (current is None or current["ready"])
     )
     return {
         "schema": VERSION,
@@ -348,6 +362,7 @@ def assemble_check(task, details, observation_issues, runtimes):
         "metadata_valid": True,
         "metadata": details,
         "runtimes": runtimes,
+        **({"current_stdlib_runtime": current} if current is not None else {}),
         "uv": uv,
         "posix_host": os.name == "posix",
         "runtimes_ready": runtime_ready,
@@ -366,4 +381,14 @@ def assemble_check(task, details, observation_issues, runtimes):
             else "declaration identities and installed metadata; "
             "candidate behavior and observation bytes unverified"
         ),
+    }
+
+
+def current_stdlib_runtime():
+    """Identify the actual current interpreter separately from installed metadata."""
+    return {
+        "implementation": sys.implementation.name,
+        "python": ".".join(map(str, sys.version_info[:3])),
+        "executable": sys.executable,
+        "ready": sys.implementation.name == "cpython" and sys.version_info[:2] == (3, 12),
     }

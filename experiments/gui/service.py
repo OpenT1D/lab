@@ -878,6 +878,9 @@ class Service:
                             from .windows_process import spawn_owned
 
                             self.process, ownership = spawn_owned(argv, **options)
+                            launch_record = getattr(self.process, "launch_record", None)
+                            if isinstance(launch_record, dict):
+                                job["commands"][-1]["windows_launch"] = launch_record
                         else:
                             self.process = subprocess.Popen(argv, start_new_session=True, **options)
                     except BaseException:

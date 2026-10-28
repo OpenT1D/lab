@@ -9,10 +9,27 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
   cancellation. Add deterministic malformed-hint and operation-state
   regressions while retaining cancellation and reconstruction accounting.
 
+- Start Windows source MMTT workers through the current CPython 3.12 base
+  executable with site initialization disabled, so the actual worker can enter
+  its Job before START. Keep root-runtime checks, strict cleanup and actual
+  launch provenance; preserve foreign, site-enabled and installed-v1 routing.
+
+- Admit Windows source checks for only the two standard-library MMTT routes,
+  preserving runtime/uv requirements and other source-task boundaries. Read
+  their UTF-8 Markdown reports explicitly in portable CLI regression checks.
+
+- Publish catalogue Markdown as canonical UTF-8/LF bytes, matching its strict
+  reader on Windows while retaining the existing POSIX bytes and integrity rules.
+
 - Close the cancellation window at local-tool cleanup entry and bound the final
   direct-worker reap. Retain catalogue/setup descendant cleanup, prior signal
   handlers and existing timeout/exit receipts. Add focused transition and real
   caller receipt regressions with strict process observations.
+
+- Add named local check stages, explicit Linux/macOS/Windows synthetic task
+  smokes and four real Chromium flows. Keep the broad root job and historical
+  native gates; the stable required public result accepts only successful root,
+  platform and browser families. Hosted platform results remain to be measured.
 
 - Prepare the bounded public CI baseline with explicit Python/uv/Node setup,
   independent private/manual guards for historical native jobs and short-lived

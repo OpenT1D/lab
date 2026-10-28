@@ -23,7 +23,7 @@ jobs:
   repository-checks:
     outputs:
       native_enabled: ${{ steps.scope.outputs.native_enabled }}
-    name: Repository checks
+    name: Root checks
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     defaults:
@@ -202,6 +202,131 @@ jobs:
             results/m4-feedback-preflight/reconstructed.json
           if-no-files-found: warn
           retention-days: 14
+
+  public-smoke:
+    name: Public smoke (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            platform: linux-x86_64
+          - os: macos-15
+            platform: darwin-arm64
+          - os: windows-2025
+            platform: windows-amd64
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Set up uv
+        uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4  # v10.1.0
+        with:
+          version: '0.11.16'
+          enable-cache: false
+      - name: Install selected Python
+        run: uv python install
+      - name: Set up selected Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1  # v7.1.0
+        with:
+          node-version: '24.22.1'
+          package-manager-cache: false
+      - name: Install locked root tooling
+        run: uv sync --locked
+      - name: Record source and tools
+        env:
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          mkdir -p results/ci
+          uv run --locked python scripts/ci_environment.py > results/ci/environment.json
+      - name: Run the shared real-host smoke
+        run: |
+          uv run --locked python scripts/public_smoke.py --expected-platform '${{ matrix.platform }}' \
+            --output results/ci/smoke.json 2>&1 | tee results/ci/smoke.log
+      - name: Preserve smoke diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: public-smoke-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: results/ci/
+          if-no-files-found: warn
+          retention-days: 5
+
+  browser:
+    name: Chromium MMTT flows
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Set up uv
+        uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4  # v10.1.0
+        with:
+          version: '0.11.16'
+          enable-cache: false
+      - name: Install selected Python
+        run: uv python install
+      - name: Set up selected Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1  # v7.1.0
+        with:
+          node-version: '24.22.1'
+          package-manager-cache: false
+      - name: Install locked root tooling
+        run: uv sync --locked
+      - name: Record source and tools
+        env:
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          mkdir -p results/ci
+          uv run --locked python scripts/ci_environment.py > results/ci/environment.json
+      - name: Install locked browser tooling
+        run: npm --prefix tests/browser ci --ignore-scripts --no-audit --no-fund
+      - name: Select temporary browser cache
+        run: echo "PLAYWRIGHT_BROWSERS_PATH=$RUNNER_TEMP/opent1d-playwright-browsers" >> "$GITHUB_ENV"
+      - name: Install Chromium and its Linux dependencies
+        run: npm --prefix tests/browser run install:browser -- --with-deps
+      - name: Run four real browser flows
+        run: npm --prefix tests/browser test 2>&1 | tee results/ci/browser.log
+      - name: Preserve browser diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: browser-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            output/playwright/
+            results/ci/
+          if-no-files-found: warn
+          retention-days: 5
+
+  public-checks:
+    name: Repository checks
+    needs: [repository-checks, public-smoke, browser]
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out reviewed gate
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Require every public family
+        env:
+          PUBLIC_CHECK_RESULTS: ${{ toJSON(needs) }}
+        run: python3 scripts/ci_gate.py
 
   beta-cell-feedback:
     needs: repository-checks

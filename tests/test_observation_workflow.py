@@ -213,7 +213,7 @@ class ObservationWorkflowTests(unittest.TestCase):
                     (directory / "relocated" / name).read_bytes(),
                     (directory / "reconstructed" / name).read_bytes(),
                 )
-            markdown = (directory / "reconstructed/report.md").read_text()
+            markdown = (directory / "reconstructed/report.md").read_text(encoding="utf-8")
             for phrase in (
                 "consistent within investigated assumptions",
                 "C-peptide AUC",
@@ -254,7 +254,8 @@ class ObservationWorkflowTests(unittest.TestCase):
             self.assertEqual(result, rebuilt)
             self.assertEqual(len(rebuilt["people"]["invented-01"]["variants"]), 3)
             self.assertIn(
-                "missing_or_censored_cpeptide", (directory / "rebuilt/report.md").read_text()
+                "missing_or_censored_cpeptide",
+                (directory / "rebuilt/report.md").read_text(encoding="utf-8"),
             )
 
     def test_resealed_forged_attempt_is_refused_by_independent_replay(self):

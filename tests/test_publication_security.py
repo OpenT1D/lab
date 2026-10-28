@@ -12,6 +12,7 @@ from packaging.specifiers import SpecifierSet
 
 from experiments.setup.publication import check_install
 from scripts.publication_ci_scope import native_enabled
+from tests.ci_policy import NATIVE_JOBS, PUBLIC_JOBS
 
 ROOT = Path(__file__).resolve().parents[1]
 PRIVATE_DISPATCH = (
@@ -70,14 +71,17 @@ class PublicSecurityTests(unittest.TestCase):
     def test_workflow_and_public_branch_policy_enforce_supported_scope(self):
         workflow = yaml.safe_load((ROOT / ".github/workflows/checks.yml").read_text())
         jobs = workflow["jobs"]
-        for key, job in jobs.items():
-            if key != "repository-checks":
-                self.assertEqual(job["needs"], "repository-checks")
-                self.assertEqual(
-                    job["if"],
-                    PRIVATE_DISPATCH
-                    + " && needs.repository-checks.outputs.native_enabled == 'true'",
-                )
+        self.assertEqual(set(jobs), PUBLIC_JOBS | NATIVE_JOBS)
+        for key in NATIVE_JOBS:
+            job = jobs[key]
+            self.assertEqual(job["needs"], "repository-checks")
+            self.assertEqual(
+                job["if"],
+                PRIVATE_DISPATCH + " && needs.repository-checks.outputs.native_enabled == 'true'",
+            )
+        for key in PUBLIC_JOBS - {"repository-checks"}:
+            for step in jobs[key]["steps"]:
+                self.assertNotIn("--project experiments/", step.get("run", ""))
         for step in jobs["repository-checks"]["steps"]:
             if "--project experiments/" in step.get("run", ""):
                 self.assertEqual(
@@ -93,6 +97,8 @@ class PublicSecurityTests(unittest.TestCase):
         dispatch = workflow["on"]["workflow_dispatch"]["inputs"]["historical_native"]
         self.assertFalse(dispatch["default"])
         public = json.loads((ROOT / ".github/public-source-branch-protection.json").read_text())
+        self.assertEqual(set(public["required_status_checks"]), {"strict", "checks"})
+        self.assertTrue(public["required_status_checks"]["strict"])
         self.assertEqual(
             public["required_status_checks"]["checks"],
             [{"context": "Repository checks", "app_id": 15368}],
