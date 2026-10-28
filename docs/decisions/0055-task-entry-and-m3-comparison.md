@@ -23,7 +23,7 @@ executes supplied code, so it cannot silently become a metadata-only check.
 ## Decision
 
 Refine [decision 0045](0045-tool-first-research-platform.md) through the
-[roadmap's OT-028–030 packages](../../ROADMAP.md#post-integration-internal-work-packages).
+[roadmap's OT-028–030 packages](../research/roadmap-history-2026-10-28.md#post-integration-internal-work-packages).
 First correct canonical status/navigation. Next add one checkout-based entry
 for the existing controller, forecast, secretion and prognosis tasks. Use an
 explicit task registry and delegate execution/reconstruction to their current

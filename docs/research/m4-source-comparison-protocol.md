@@ -2,7 +2,7 @@
 
 **Specified:** 3 October 2026, before implementation and new comparison runs.
 This protocol implements the bounded question in
-[OT-031](../../ROADMAP.md#proposed-internal-follow-up--ot-031-multiple-m4-secretion-sources)
+[OT-031](roadmap-history-2026-10-28.md#proposed-internal-follow-up--ot-031-multiple-m4-secretion-sources)
 under [decision 0057](../decisions/0057-m4-source-comparison.md).
 The [machine protocol](../../experiments/m4/comparison/protocol.json) freezes
 the analysis and inherited protocol/runtime file identities. Execution and

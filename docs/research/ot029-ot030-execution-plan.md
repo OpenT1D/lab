@@ -7,7 +7,7 @@ Prepared on 2 October 2026 from local main `e77c9d7`, the completed OT-028
 documentation update, [decision 0055](../decisions/0055-task-entry-and-m3-comparison.md)
 and read-only reviews by three planning agents.
 
-The [roadmap](../../ROADMAP.md#post-integration-internal-work-packages) owns
+The [roadmap](roadmap-history-2026-10-28.md#post-integration-internal-work-packages) owns
 scope and acceptance. This record assigns implementation work and sequencing;
 the existing task guides continue to own executable commands.
 

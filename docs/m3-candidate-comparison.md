@@ -139,4 +139,4 @@ model reproduction or clinical validity.
 
 Repository verification uses `uv run --locked python scripts/check.py`.
 Independent scientific review and authorized human evaluation remain
-separate evidence gates in the [roadmap](../ROADMAP.md#post-integration-internal-work-packages).
+separate evidence gates in the [roadmap](research/roadmap-history-2026-10-28.md#post-integration-internal-work-packages).

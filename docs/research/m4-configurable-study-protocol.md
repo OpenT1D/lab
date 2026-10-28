@@ -4,7 +4,7 @@
 explicit coarse-solver refinement before new execution,
 3 October 2026. This is a bounded synthetic software protocol, not a human
 or therapy study. [Decision 0058](../decisions/0058-configurable-study-and-local-research-tools.md)
-and [OT-032](../../ROADMAP.md#functional-development-after-ot-031) own its scope.
+and [OT-032](roadmap-history-2026-10-28.md#functional-development-after-ot-031) own its scope.
 
 ## Question and frozen choices
 

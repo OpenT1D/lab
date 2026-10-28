@@ -107,7 +107,7 @@ explicit launch files and local observation export/restore, with an actual
 Windows/WSL host check and human sessions still separate.
 
 The [roadmap](../ROADMAP.md) is the canonical implementation plan. Its
-[post-integration internal work packages](../ROADMAP.md#post-integration-internal-work-packages)
+[post-integration internal work packages](research/roadmap-history-2026-10-28.md#post-integration-internal-work-packages)
 record the completed local entry and multiple-candidate comparison. The
 [OT-029/030 verification record](research/ot029-ot030-verification.md) binds their
 local acceptance and preserves separate external evidence requirements.

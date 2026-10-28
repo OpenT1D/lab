@@ -17,6 +17,7 @@ subtrees:
       - file: docs/publication-security
   - caption: Research
     entries:
+      - file: docs/research/roadmap-history-2026-10-28
       - file: docs/research/ot056-researcher-pilot
       - file: docs/research/ot056-pilot-forms
       - file: docs/research/c1-controller-protocol

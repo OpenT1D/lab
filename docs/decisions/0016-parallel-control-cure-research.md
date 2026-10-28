@@ -8,7 +8,7 @@ The laboratory has bounded glucose-control experiments and synthetic forecast pr
 
 ## Decision
 
-Keep the [roadmap](../../ROADMAP.md#development-sequence-after-m2) canonical. Give glucose regulation (M3/C1/B1/V1) and cure-oriented biology (M4/M5) explicit parallel preparation priorities, using the existing laboratory where suitable. This amends the priority ordering in [decision 0006](0006-model-controller-development.md), preserving its evidence requirements and historical protocols.
+Keep the [roadmap](../research/roadmap-history-2026-10-28.md#development-sequence-after-m2) canonical. Give glucose regulation (M3/C1/B1/V1) and cure-oriented biology (M4/M5) explicit parallel preparation priorities, using the existing laboratory where suitable. This amends the priority ordering in [decision 0006](0006-model-controller-development.md), preserving its evidence requirements and historical protocols.
 
 Begin biological preparation with OT-024 question/evidence feasibility and OT-015 secretion specification. OT-025 reproduces a standalone functional reference; OT-026 couples and assesses it. OT-027 prepares one cell- or immune-therapy question in parallel, allowing its measurement needs to inform model selection. Therapy execution depends on the mechanisms and observations required by that question; it does not require an entire immune-system model or completion of a new controller.
 

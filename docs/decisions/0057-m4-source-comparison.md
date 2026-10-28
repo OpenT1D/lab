@@ -8,7 +8,7 @@ The configured [M4 researcher workflow](../m4-researcher-workflow.md) runs one
 causal secretion source through the fixed glucose/insulin task and passive
 C-peptide observation. Comparing its separate Dalla Man and ultradian reports
 requires researchers to check the common conditions, reference, controls and
-failure status themselves. [OT-031](../../ROADMAP.md#proposed-internal-follow-up--ot-031-multiple-m4-secretion-sources)
+failure status themselves. [OT-031](../research/roadmap-history-2026-10-28.md#proposed-internal-follow-up--ot-031-multiple-m4-secretion-sources)
 selects one combined comparison without adding secretion physiology or data.
 
 ## Decision

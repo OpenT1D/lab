@@ -5,7 +5,7 @@ No suitable participant observations, access rights, investigator, clinical
 margin, sample size or empirical result is established. Public fixtures are
 invented. This document does not approve prospective clinical sampling.
 
-The [canonical task plan](../../ROADMAP.md#planned-mixed-meal-analysis-tasks)
+The [canonical task plan](roadmap-history-2026-10-28.md#planned-mixed-meal-analysis-tasks)
 and [decision 0066](../decisions/0066-observation-analysis-tasks.md) govern this
 work. [Decision 0067](../decisions/0067-mmtt-feasibility-boundary.md) freezes
 the separate synthetic endpoint as whole-body total secretion including basal

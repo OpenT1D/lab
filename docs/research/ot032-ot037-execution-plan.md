@@ -2,7 +2,7 @@
 
 **Status:** authorized internal implementation plan, 3 October 2026, prepared
 from main `d9991c115e795c2977177349805619df15981598`. Protocols precede new
-numerical execution. The [roadmap](../../ROADMAP.md#functional-development-after-ot-031)
+numerical execution. The [roadmap](roadmap-history-2026-10-28.md#functional-development-after-ot-031)
 owns scope; [decision 0058](../decisions/0058-configurable-study-and-local-research-tools.md)
 owns the architectural/scientific boundaries. Completion requires a separate
 dated verification record, rather than this plan.

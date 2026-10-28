@@ -8,7 +8,7 @@ M2 software and the bounded IV-001 internal verification campaign are complete. 
 
 ## Decision
 
-Keep the [roadmap](../../ROADMAP.md#development-sequence-after-m2) canonical. Prioritize M3 human-observation evaluation and C1 controller specification. Add B1 for a targeted physiological improvement informed by measured limitations, V1 for cross-evaluation, and P1 for a usable research product. Retain M4–M6 names and aims as question-dependent longer-term paths.
+Keep the [roadmap](../research/roadmap-history-2026-10-28.md#development-sequence-after-m2) canonical. Prioritize M3 human-observation evaluation and C1 controller specification. Add B1 for a targeted physiological improvement informed by measured limitations, V1 for cross-evaluation, and P1 for a usable research product. Retain M4–M6 names and aims as question-dependent longer-term paths.
 
 Separate completion of an implementation/evaluation from a successful improvement claim. Prespecify benefits, non-degradation limits, uncertainty, coverage and failure handling before tuning. Preserve untouched assessment material for each new claim: inspected M2/IV-001 cases and M3 data used to choose model changes cannot be presented as fresh evaluation. Evaluate physiology against observations separately from controller performance in simulation; historical treatment traces do not establish counterfactual treatment effects.
 
