@@ -2,6 +2,7 @@
 
 import http.client
 import json
+import sys
 import tempfile
 import threading
 import unittest
@@ -183,6 +184,47 @@ class MacCapabilityHTTPTests(unittest.TestCase):
             for method in ("GET", "POST"):
                 with self.subTest(route=route, method=method):
                     self.assertEqual(self.request(method, "/api/v1/" + route)[0], 403)
+
+
+class MacCapabilityJournalTests(unittest.TestCase):
+    def test_foreign_operations_are_ignored_before_legacy_imports_and_left_unchanged(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            workspace = Path(temporary).resolve()
+            retained = {}
+            for i, (task, operation) in enumerate(
+                (
+                    ("mmtt-sensitivity", "library_index"),
+                    ("mmtt-sampling", "library_verify"),
+                    ("mmtt-sensitivity", "m3_run"),
+                    ("mmtt-sensitivity", "sampling_run"),
+                    ("m4-study-secure", "observation_run"),
+                )
+            ):
+                identity = f"job-foreign-{i}"
+                journal = workspace / "results/gui" / identity / "job.json"
+                journal.parent.mkdir(parents=True)
+                raw = json.dumps(
+                    {
+                        "schema": "opent1d.gui-job/1",
+                        "id": identity,
+                        "task": task,
+                        "operation": operation,
+                        "state": "running",
+                    }
+                ).encode()
+                journal.write_bytes(raw)
+                retained[journal] = raw
+            with (
+                patch.object(runtime, "packaged_capabilities", return_value=runtime.MMTT_TASKS),
+                patch.dict(sys.modules, {"experiments.catalogue.formats": None}),
+            ):
+                service = Service(workspace, profile="desktop", source_root=ROOT)
+                try:
+                    self.assertEqual(service.jobs, {})
+                    for journal, raw in retained.items():
+                        self.assertEqual(journal.read_bytes(), raw)
+                finally:
+                    service.close()
 
 
 if __name__ == "__main__":

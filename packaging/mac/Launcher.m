@@ -33,7 +33,7 @@
     task.arguments = arguments;
     NSMutableDictionary *environment = [[[NSProcessInfo processInfo] environment] mutableCopy];
     for (NSString *key in [environment allKeys]) {
-        if ([key hasPrefix:@"PYTHON"] || [key hasPrefix:@"UV_"] || [key hasPrefix:@"DYLD_"] || [key isEqualToString:@"VIRTUAL_ENV"]) [environment removeObjectForKey:key];
+        if ([key hasPrefix:@"PYTHON"] || [key hasPrefix:@"UV_"] || [key hasPrefix:@"DYLD_"] || [key isEqualToString:@"VIRTUAL_ENV"] || [key isEqualToString:@"__PYVENV_LAUNCHER__"]) [environment removeObjectForKey:key];
     }
     environment[@"PATH"] = @"/usr/bin:/bin:/usr/sbin:/sbin";
     task.environment = environment;
@@ -41,7 +41,7 @@
     task.standardError = self.log;
     task.terminationHandler = ^(NSTask *finished) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (finished.terminationStatus != 0 && !self.stopping) {
+            if (finished.terminationStatus != 0) {
                 [self showFailure:@"The included interpreter reported a startup or shutdown error. Your saved analyses remain outside the application."];
             }
             if (primary) {

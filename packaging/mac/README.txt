@@ -37,3 +37,15 @@ Focused checks:
   uv run --locked python -m unittest tests.test_mac_contract tests.test_mac_packaging
   uv run --locked ruff check experiments/desktop experiments/gui \
     scripts/build_mac_app.py packaging/mac/bootstrap.py tests/test_mac_*.py
+
+Opt-in native Quit success/error callback probe (fresh evidence directory):
+  uv run --locked python tests/mac_launcher_probe.py \
+    --output /private/tmp/opent1d-mac-launcher-probe-UNIQUE
+This substitutes an owned fault worker and records NSAlert calls. It does not
+replace the separate check that an actual startup error is visibly presented.
+
+Real application/Chromium probe, with an installed tests/browser tooling project
+and its intentional temporary PLAYWRIGHT_BROWSERS_PATH (Node 24):
+  node tests/mac_app_probe.mjs /path/to/OpenT1D.app \
+    /private/tmp/opent1d-mac-evidence-UNIQUE /path/to/tests/browser
+It uses only fresh test data and keeps screenshots, trace, reports and a receipt.

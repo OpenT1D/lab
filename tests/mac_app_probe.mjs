@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { cp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, readdir, realpath, rm, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
@@ -21,14 +21,26 @@ await mkdir(workspace);
 const marker = path.join(workspace, 'user-marker.txt');
 await writeFile(marker, 'This user evidence must survive application replacement and removal.\n');
 const markerBytes = await readFile(marker);
+const foreign = path.join(workspace, 'results/gui/job-foreign/job.json');
+await mkdir(path.dirname(foreign), { recursive: true });
+const foreignBytes = Buffer.from(JSON.stringify({ schema: 'opent1d.gui-job/1', id: 'job-foreign',
+  task: 'mmtt-sensitivity', operation: 'library_index', state: 'running' }));
+await writeFile(foreign, foreignBytes);
 const statePath = path.join(evidence, 'session.json');
-const timeout = setTimeout(() => { console.error('Mac application probe exceeded 300 seconds'); process.exit(1); }, 300_000);
+let expired = false;
+const timeout = setTimeout(() => {
+  expired = true;
+  console.error('Mac application probe exceeded 300 seconds');
+  // Closing Chromium rejects pending UI waits; the ordinary finally still owns
+  // application shutdown. Do not exit past cleanup while a worker may be live.
+  if (browser) void browser.close().catch(() => {});
+}, 300_000);
 let state, browser, context, page;
 const errors = [], ownedApps = new Set([application]), checks = [];
 
-async function until(read, test, milliseconds = 30_000) {
+async function until(read, test, milliseconds = 30_000, cleanup = false) {
   const end = Date.now() + milliseconds;
-  while (Date.now() < end) {
+  while (Date.now() < end && (cleanup || !expired)) {
     try { const value = await read(); if (test(value)) return value; } catch { /* bounded startup */ }
     await new Promise(resolve => setTimeout(resolve, 50));
   }
@@ -38,6 +50,7 @@ async function api(route, body) {
   const response = await fetch(new URL(route, state.url), {
     method: body === undefined ? 'GET' : 'POST',
     headers: { 'X-OpenT1D-Token': state.token, Origin: state.url.replace(/\/$/, ''), 'Content-Type': 'application/json' },
+    signal: AbortSignal.timeout(5_000),
     ...(body === undefined ? {} : { body: JSON.stringify(body) }),
   });
   return response;
@@ -52,8 +65,12 @@ async function launch(app) {
   const bootstrap = await until(async () => (await api('/api/v1/bootstrap')).json(), value => value.schema === 'opent1d.gui-session/2');
   assert.deepEqual(bootstrap.capabilities, ['mmtt-sensitivity', 'mmtt-sampling']);
   assert.equal(bootstrap.profile, 'desktop');
-  const actualPython = execFileSync('/bin/ps', ['-p', String(state.pid), '-o', 'command='], { encoding: 'utf8' });
-  assert(actualPython.startsWith(path.join(app, 'Contents/Resources/payload/runtime/bin/python3.12') + ' '));
+  assert(!bootstrap.jobs.some(job => job.id === 'job-foreign'));
+  assert.deepEqual(await readFile(foreign), foreignBytes);
+  const actualPython = execFileSync('/bin/ps', ['-ww', '-p', String(state.pid), '-o', 'command='], { encoding: 'utf8' }).trim();
+  const flags = actualPython.indexOf(' -I -B -S ');
+  assert(flags > 0, 'The worker must use the included isolated interpreter');
+  assert.equal(await realpath(actualPython.slice(0, flags)), await realpath(path.join(app, 'Contents/Resources/payload/runtime/bin/python3.12')));
   return state;
 }
 async function stop() {
@@ -63,7 +80,7 @@ async function stop() {
   assert.equal(response.status, 202);
   await until(async () => {
     try { process.kill(pid, 0); return false; } catch (error) { if (error.code === 'ESRCH') return true; throw error; }
-  }, Boolean, 45_000);
+  }, Boolean, 45_000, true);
   state = undefined;
 }
 async function inventory(folder) {
@@ -201,6 +218,7 @@ try {
   assert.deepEqual(await readFile(marker), markerBytes);
   checks.push('Relocation, app removal/replacement and reopening preserve old report bytes and unrelated user file');
   assert.deepEqual(errors, []);
+  assert(!expired, 'The application probe exceeded its global deadline');
   const manifest = JSON.parse(await readFile(path.join(application, 'Contents/Resources/payload/package-manifest.json')));
   await writeFile(path.join(evidence, 'receipt.json'), JSON.stringify({
     build_id: manifest.build_id, source_revision: manifest.source.revision,
@@ -213,14 +231,16 @@ try {
   throw error;
 } finally {
   clearTimeout(timeout);
-  if (context) await context.tracing.stop({ path: path.join(evidence, 'trace.zip') });
-  if (browser) await browser.close();
+  if (context) await context.tracing.stop({ path: path.join(evidence, 'trace.zip') }).catch(() => {});
+  if (browser) await browser.close().catch(() => {});
   if (state) await stop().catch(() => {});
   // Only native launchers from this invocation's explicit app paths are owned.
-  const processes = execFileSync('/bin/ps', ['-axo', 'pid=,command='], { encoding: 'utf8' });
+  const processes = execFileSync('/bin/ps', ['-ww', '-axo', 'pid=,command='], { encoding: 'utf8' });
+  const nativePaths = await Promise.all([...ownedApps].map(app => realpath(path.join(app, 'Contents/MacOS/OpenT1D')).catch(() => null)));
   for (const line of processes.split('\n')) {
     const match = line.trim().match(/^(\d+)\s+(.+)$/);
-    if (match && [...ownedApps].some(app => match[2] === path.join(app, 'Contents/MacOS/OpenT1D'))) {
+    const binary = match && match[2].split(' --data-dir ')[0];
+    if (binary && nativePaths.includes(await realpath(binary).catch(() => undefined))) {
       try { process.kill(Number(match[1]), 'SIGTERM'); } catch { /* already exited */ }
     }
   }

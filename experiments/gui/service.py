@@ -233,8 +233,16 @@ class Service:
                 job = read_json(journal)
                 if not isinstance(job, dict):
                     continue
-                if self.capabilities is not None and job.get("task") not in self.capabilities:
-                    continue
+                if self.capabilities is not None:
+                    prefix = {"mmtt-sensitivity": "observation_", "mmtt-sampling": "sampling_"}.get(
+                        job.get("task")
+                    )
+                    if (
+                        prefix is None
+                        or job.get("operation") not in OBSERVATION_OPERATIONS
+                        or not job["operation"].startswith(prefix)
+                    ):
+                        continue
                 if job.get("id") != directory.name or job.get("schema") != "opent1d.gui-job/1":
                     continue
                 if job.get("operation") in LIBRARY_OPERATIONS:
