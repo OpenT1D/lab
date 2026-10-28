@@ -37,7 +37,7 @@ Use workflow-type Pages with an explicitly verified main environment rule.
 ## Consequences
 
 PRs can inspect the same staged content without deployment credentials. All
-public check families must pass before main can publish, and failures preserve
+applicable public check families must pass before main can publish, and failures preserve
 the previous site. Artifact expiration bounds storage without deleting the live
 site. The repository homepage is set only after actual site acceptance.
 

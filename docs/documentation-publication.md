@@ -36,6 +36,11 @@ same run's complete `Repository checks` gate: root checks, the three-host smoke
 matrix and Linux Chromium flows must all succeed. A failed, cancelled or skipped
 family prevents deployment. The deployment job is not a dependency of that gate.
 
+Pull requests also require the read-only [dependency review](publication-security.md).
+On main pushes, that PR-only job is explicitly skipped; the aggregate validates
+that event-specific result while requiring the root, matrix and browser results
+to succeed.
+
 Only the deployment job grants `pages: write` and `id-token: write`, and it does
 not check out or execute repository code. The `github-pages` environment must have
 an exact `main` branch deployment policy and Pages must use the workflow build
