@@ -12,16 +12,19 @@ source-only rights/security preparation from pending hosted-CI, destination
 activation and independent-use actions. Original-material authority and
 contact receipt are confirmed; [source-only rights and security policy](docs/publication-security.md)
 excludes unresolved parameter rows and vulnerable historical automatic runtimes.
-The new `OpenT1D/lab` destination is configured but empty. The maintainer has
-explicitly deferred source publication while the first version is prepared.
-Hosted CI, main-branch enforcement and later release acceptance remain open.
+On 28 October 2026 the maintainer authorized the reviewed development source
+publication on `OpenT1D/lab`. Its independent public root is `60a756b37078`;
+GitHub Actions remains disabled and main uses pull-request protection without
+a required CI status. The original development archive remains private.
+Later product-release acceptance remains open.
 This preparation does not accept
 the shared laboratory, a Windows installer or any empirical/clinical claim.
 
 The [private installer/publication integration](docs/research/installer-publication-integration.md)
 combines the OT-058 branch with this plan and the source-publication safeguards.
 Its local checks do not create a new signed/verified Windows release or widen
-the two-task source offering. Public source and release remain deferred.
+the two-task source offering. Public source publication does not complete the
+separate Windows or product-release acceptance.
 
 ## Common laboratory delivery plan
 
@@ -358,7 +361,9 @@ binds its source inputs and checks. A fresh independent source root exported
 from `0a030a7` also passed 1,560 tests with 32 existing skips, both complete
 synthetic MMTT examples and 12 byte-identical reconstructed reports. These are
 local source checks; no new Windows executable, hosted CI or public release is
-established by them. `OpenT1D/lab` remains empty pending publication authorization.
+established by them. On 28 October, source publication was authorized for the
+independent `OpenT1D/lab` root, with a documentation-only status follow-up.
+No private history is merged into that public root.
 
 **Earlier software integration, 19 October; remote verified 22 October 2026:**
 OT-057 is integrated into local and GitHub main at

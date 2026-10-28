@@ -10,11 +10,13 @@ repository creation, push and verified server controls are recorded separately.
 
 ## Current publication decision
 
-The maintainer explicitly requested **preparation only** on 25 October 2026.
-`OpenT1D/lab` exists as an empty public destination with preparation metadata and
-security settings. No source branch, commit, version tag or release has been
-published there. Keep the prepared source local until the maintainer explicitly
-authorizes publication after the remaining first-version work.
+On **28 October 2026**, the maintainer authorized publication of the reviewed
+source on `OpenT1D/lab` as development research software. This replaces the
+25 October preparation-only decision. The reviewed initial public root is
+`60a756b3707827c7e7cc76a65f817f21d52cae40`; a separate documentation commit records
+publication status. The original `OpenT1D/OpenT1D` archive stays private.
+GitHub Actions remains disabled. No version tag, packaged release, installer or
+bundled runtime is published by this source-publication decision.
 
 The current local review scope is described in the
 [28 October review](research/publication-preparation.md#source-review-28-october-2026).
@@ -24,7 +26,7 @@ Do not push a private development branch or infer source-publication permission
 from the existence of the empty destination.
 
 The later [private installer integration](research/installer-publication-integration.md)
-preserves this deferral and source-only boundary. Its native Windows builder
+preserves the source-only boundary. Its native Windows builder
 is available for private internal candidates, but is blocked in a public source
 snapshot pending a separate distribution decision. Earlier ZIPs remain frozen
 and do not silently acquire installer changes or a new verification claim.
@@ -43,7 +45,8 @@ root or use a mirror push. Future public work must descend from the public root.
 A file named `publication-snapshot.json` records the source revision and hashes
 of the exported files, without copying that source revision's Git object. Its
 publication flag describes export-time state; later publication does not rewrite
-that initial manifest or its verified commit.
+that initial manifest or its verified commit. Its file hashes describe the
+initial export, rather than the evolving tree of subsequent public commits.
 
 ## Personal information and historical evidence
 

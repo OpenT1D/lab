@@ -14,6 +14,23 @@ The [maintainer guide](../maintenance.md) owns the publication checklist and
 proposed first-release exercise; the [roadmap](../../ROADMAP.md) owns delivery
 order and scientific acceptance.
 
+## Source publication 28 October 2026
+
+The maintainer authorized publication of the reviewed source on `OpenT1D/lab`,
+with the original `OpenT1D/OpenT1D` repository kept private. The public history
+starts at reviewed root `60a756b3707827c7e7cc76a65f817f21d52cae40`; a separate
+public documentation commit records the changed publication status and manual
+branch policy. No development commits are copied into this new ancestry.
+`publication-snapshot.json` remains the immutable initial-export record.
+
+Actions is disabled. The main-branch policy requires pull requests, conversation
+resolution and administrator enforcement, prevents force pushes/deletion and
+requires no CI status. No workflow is dispatched and no hosted check is claimed.
+The publication operation reads the server settings back after the initial push.
+No version tag, release, installer or bundled runtime is part of this operation.
+The earlier preparation-only observations below retain their original scope;
+they do not override the maintainer's later source-publication authorization.
+
 ## Source review 28 October 2026
 
 The current preparation combines private main, the OT-058 installer source and
@@ -39,7 +56,7 @@ update: the first patched version is now reported as 2026.10.18, rather than the
 [security inventory](../../publication-security.json) retains both observations;
 root 2026.10.23 remains beyond the affected range.
 
-`OpenT1D/lab` is still empty and the original repository remains private.
+At the start of this review, `OpenT1D/lab` was still empty and the original repository remained private.
 Actions was observed enabled on the destination with zero runs. The requested
 publication has no CI/CD: disable Actions before a future authorized first push,
 then apply the [manual branch controls](../publication-security.md#ci-and-branch-controls)

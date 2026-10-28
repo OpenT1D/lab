@@ -31,14 +31,19 @@ The maintainer selected `OpenT1D/lab` for the independent public source on
 remote configuration. The observations above refer to that private archive;
 activation and current-head CI on the selected destination are verified separately.
 
-The destination now exists **empty**, with the description `OpenT1D research
-software. First version in preparation; source publication pending.` and five
-research topics. Repository-specific read-only workflow tokens, a four-revision
-Action allowlist with SHA pinning, external contributor approval, dependency
-alerts, private reporting, secret scanning and push protection were configured
-and their API states read back. The maintainer then explicitly deferred source
-publication: no branch, commit, tag or release is present. Hosted CI, source-panel
-rendering and main-branch protection remain pending a future authorized push.
+On 28 October 2026, the maintainer authorized the reviewed source publication.
+`OpenT1D/lab` starts from the independently reviewed root
+`60a756b3707827c7e7cc76a65f817f21d52cae40`, followed by a documentation-only status
+commit. It is development research source, with no version tag, release,
+installer or bundled runtime. The private development archive is not pushed.
+
+GitHub Actions is disabled. The initial main branch uses the
+[manual branch policy](../.github/public-source-manual-branch-protection.json):
+pull requests, conversation resolution and administrator enforcement, no force
+pushes/deletion, and no required CI status. No hosted pass is claimed. Private
+vulnerability reporting, dependency alerts and available secret scanning/push
+protection remain separate repository controls. The dated preparation record
+retains the earlier empty-destination observations and local verification.
 
 Use the [public-source guide](public-source.md) to prepare a new local Git root
 without the private development history. Preserve original evidence privately and

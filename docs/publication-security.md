@@ -114,12 +114,14 @@ allowed Action revisions with mandatory SHA pinning, approval for all external
 contributors, dependency alerts, private reporting, secret scanning and push
 protection. Their API states were read back on 25 October 2026.
 
-The maintainer explicitly requested preparation only. `OpenT1D/lab` remains
-empty, so no hosted source check or main-branch protection is claimed active.
-The checked-in branch policy awaits a future authorized first source push and
-its verification. The separate private archive's earlier plan/account limitations
-remain dated observations; they do not establish the new destination's CI result.
-Local verification and repository metadata are separate from source publication.
+On 28 October 2026 the maintainer authorized publication of the reviewed source
+without CI/CD. Actions is disabled. The initial main branch uses
+[the manual branch policy](../.github/public-source-manual-branch-protection.json),
+with pull requests, conversation resolution, administrator enforcement and no
+force pushes/deletion; it does not require an unexecuted CI status. The
+CI-enabled JSON above remains reserved for a later explicit activation.
+The separate private archive's earlier plan/account limitations remain dated
+observations. Local verification is not a hosted CI result.
 
 ## Activate on the selected public destination
 
