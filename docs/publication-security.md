@@ -88,17 +88,21 @@ When enabled, push and pull-request CI runs the root repository suite and docume
 plus the standard-library paired boundary check. The suite includes the synthetic
 MMTT routes. Native jobs and root steps that install native projects are gated.
 A manual `historical_native` dispatch can enable them **only** in a private
-repository without the public snapshot marker. Its default is false. The input
+repository without the public snapshot marker. Its default is false. Every
+native job/step also requires literal private-repository, `workflow_dispatch`
+and `historical_native` conditions in the workflow, alongside the scope helper's
+output. A pull request that changes the helper to print `native_enabled=true`
+cannot satisfy those independent public/private and event guards. The input
 cannot enable historical native jobs in a public repository or exported snapshot.
 A skipped native job is not numerical verification.
 
-The requested first source publication has **no hosted CI/CD**. Before its first
-push, disable GitHub Actions on `OpenT1D/lab` and verify that setting. Retain the
-local checks and exact source receipts; do not describe them as hosted results.
-After main exists, enable pull-request and conversation requirements, administrator
-enforcement, and force-push/deletion protection **without a required CI status**.
-The JSON policy below is reserved for a later explicit CI activation; requiring
-its unexecuted check while Actions is disabled would prevent ordinary changes.
+The initial source publication on 28 October 2026 had **no hosted CI/CD** and
+disabled GitHub Actions on `OpenT1D/lab`. Its local checks and exact source receipts
+are not hosted results. Initial main used pull-request and conversation
+requirements, administrator enforcement and force-push/deletion protection
+**without a required CI status**. Requiring an unexecuted check while Actions is
+disabled would prevent ordinary changes. The activation procedure below prepares
+the later operational change without claiming it has happened.
 
 Use [.github/public-source-branch-protection.json](../.github/public-source-branch-protection.json)
 for the public source default branch. It requires the actual **Repository
@@ -108,14 +112,16 @@ reviewer. The older `main-branch-protection.json` retains the complete historica
 16-job policy for deliberate private native verification; it is not the policy
 for this bounded public offering.
 
-The public destination's repository-level security settings are now configured:
-read-only workflow tokens, PR approval by workflows disabled, exactly four
-allowed Action revisions with mandatory SHA pinning, approval for all external
+The 25 October 2026 preparation recorded read-only workflow tokens, PR approval
+by workflows disabled, four selected Action revisions, approval for all external
 contributors, dependency alerts, private reporting, secret scanning and push
-protection. Their API states were read back on 25 October 2026.
+protection. These dated observations do not establish the current platform
+settings. Current checked-in workflows pin their Action references; the prepared
+allowlist below admits exactly their five revisions. A separately enforced
+platform SHA-pinning flag is not asserted here.
 
 On 28 October 2026 the maintainer authorized publication of the reviewed source
-without CI/CD. Actions is disabled. The initial main branch uses
+without CI/CD. Actions was disabled. The initial main branch used
 [the manual branch policy](../.github/public-source-manual-branch-protection.json),
 with pull requests, conversation resolution, administrator enforcement and no
 force pushes/deletion; it does not require an unexecuted CI status. The
@@ -136,44 +142,80 @@ these service outcomes are not scientific or release verification.
 Both generated update PRs were closed without merging. The configuration was
 renamed to `.github/dependabot.example.yml` to disable automatic version updates.
 It is an inactive example, not a recognized `dependabot.yml` or `dependabot.yaml`.
-Repository Actions stays disabled. The passive dependency graph, vulnerability
+Repository Actions remained disabled. The passive dependency graph, vulnerability
 alerts, secret scanning and private reporting remain separate security features;
 the graph may run platform metadata processing when supported manifests change.
-No hosted repository CI, release automation or installer build is enabled.
+Those dependency-service outcomes did not activate repository CI, release
+automation or installer builds.
 
 ## Activate on the selected public destination
 
 The selected new destination is [OpenT1D/lab](https://github.com/OpenT1D/lab).
-Keep `OpenT1D/OpenT1D` private. After the independent root is published to `lab`,
-perform and verify these platform steps there:
+Keep `OpenT1D/OpenT1D` private. The checked-in baseline retains the existing
+sixteen-job layout, the single public `Repository checks` result, read-only tokens
+and no checkout credentials. It explicitly selects Python 3.12, uv 0.11.16 and
+Node 24.22.1 with dependency caching off. Historical native Node versions and
+runtime locks remain separate. Public diagnostics contain synthetic-check logs,
+per-command timing and selected source/event/runner/tool identities, retained for
+five days. They supply evidence of the actual run, not scientific validation.
 
-For the initial publication without CI/CD, apply the disabled-Actions and manual
-branch-control variant above. Do not run the workflows mentioned below. Steps 2,
-4 and 6 describe later hosted-CI activation and require a separate decision.
+Activate only after review and local verification of the exact candidate. The
+repository-level Actions switch and each workflow's state are separate controls.
+Keep every checked-in workflow manually disabled while staging repository policy:
 
-1. Set the description to `Open, modular research tools for reproducible type 1
-   diabetes experiments.` Add `type-1-diabetes`, `research-software`, `simulation`,
-   `reproducible-research` and `python` topics. Add a homepage only after checking
-   an actual hosted site.
-2. In **Settings → Actions → General**, use read-only workflow permissions,
-   disable pull-request approval by workflows, and require approval for all
-   external contributors. Retain commit-pinned Actions and no checkout credentials.
-3. In **Settings → Advanced Security**, enable dependency alerts, available secret
+- [Action permissions](../.github/public-source-actions-permissions.json) is the
+  prepared final body for `PUT /repos/OpenT1D/lab/actions/permissions`, including
+  the requested `sha_pinning_required: true` setting. Verify its actual readback.
+- [Selected revisions](../.github/public-source-selected-actions.json) is the body
+  for `PUT /repos/OpenT1D/lab/actions/permissions/selected-actions`. It disables
+  blanket GitHub-owned/verified-publisher allowances and lists exactly the five
+  checked-in Action revisions, including both historical and public Node actions.
+
+These are prepared REST payloads, not settings receipts. Repository-level disabled
+Actions can make the selected-actions API return HTTP 409; do not assume allowlist
+staging/readback works in that state. Keep individual workflows disabled while
+enabling repository-level access when required for those API operations. The
+[official permissions API](https://docs.github.com/en/rest/actions/permissions)
+describes the endpoints. Review inherited organization policy as well; do not
+widen to wildcard or all-publisher access when a revision is missing.
+
+Then perform and retain evidence for these platform steps:
+
+1. List the actual workflows and put `checks.yml`, `links.yml` and
+   `windows-installer.yml` into `disabled_manually` state. Read back every state
+   before enabling repository-level Actions. A workflow source file or a native
+   condition is not a receipt for this platform control.
+2. Apply the reviewed repository Actions permissions with `allowed_actions:
+   selected` and `sha_pinning_required: true`, enabling the repository if needed
+   to use the selected-actions API. While all workflows remain manually disabled,
+   apply and read back the exact five-revision allowlist. Verify read-only workflow
+   tokens, PR approval by workflows disabled and approval for all external
+   contributors. Read back the requested SHA-pinning setting as well.
+3. Only after those controls match, enable the reviewed `checks.yml` workflow.
+   Read back its enabled state and retain the reviewed source identity. Leave
+   `links.yml` and `windows-installer.yml` manually disabled. The Windows workflow's
+   separate private-only condition remains in place too.
+4. In **Settings → Advanced Security**, verify dependency alerts, available secret
    scanning/push protection and private vulnerability reporting. Verify the private
    reporting entry point; the maintainer-confirmed email remains the fallback.
-4. Apply the public source branch policy after **Repository checks** has run on
-   the new default branch. The REST endpoint is
+5. Obtain successful hosted **Repository checks** runs for the exact PR head and
+   integrated main; inspect their event/source SHA receipts and explicit skips.
+   Record cold-run setup/check times before changing runner sizes or timeouts.
+   Only then apply the public source branch policy. The REST endpoint is
    `PUT /repos/{owner}/{repo}/branches/main/protection`, with the checked-in public
    JSON as its body. Inspect the resulting rules and verify an administrator
-   cannot force-push/delete or bypass a required failed check. Do not apply the
+   cannot force-push/delete or bypass a required failed check. A manual dispatch
+   alone does not replace the required PR/main event results. Do not apply the
    historical 16-job policy by accident.
-5. Confirm the issue forms, pull-request template, license and citation panels.
+6. Confirm the description/topics, issue forms, pull-request template, license
+   and citation panels. Add a homepage only after checking an actual hosted site.
    Check account notification delivery separately. Review alerts on the actual
    default branch; preserved historical alerts are not automatically closed by
    excluding their installation routes.
-6. Retain the narrow link-check exclusion for the separate private development
-   archive. Public `OpenT1D/lab` URLs must not be excluded. Run the manual
-   external-link workflow and inspect its report after the default branch exists.
+7. Retain the narrow link-check exclusion for the separate private development
+   archive. Public `OpenT1D/lab` URLs must not be excluded. Enabling/running the
+   external-link workflow is a separate reviewed operation; retain its report
+   when that operation is selected.
 
 No platform setting is described as active until its actual response and
 behavior have been verified. Publishing source does not create a supported

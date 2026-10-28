@@ -4,6 +4,7 @@ import subprocess
 import sys
 from pathlib import Path
 from shutil import rmtree
+from time import perf_counter
 
 from sphinx_external_toc.parsing import parse_toc_yaml
 
@@ -12,7 +13,11 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def run(*args: str, root: Path = ROOT) -> None:
     print(f"\n> {' '.join(args)}", flush=True)
-    subprocess.run(args, cwd=root, check=True)
+    started = perf_counter()
+    try:
+        subprocess.run(args, cwd=root, check=True)
+    finally:
+        print(f"Elapsed: {perf_counter() - started:.3f} seconds", flush=True)
 
 
 def build_documentation(root: Path = ROOT) -> None:

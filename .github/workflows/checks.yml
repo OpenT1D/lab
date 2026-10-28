@@ -26,38 +26,69 @@ jobs:
     name: Repository checks
     runs-on: ubuntu-24.04
     timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
     steps:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           persist-credentials: false
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      - name: Select source-publication verification scope
-        id: scope
-        env:
-          PRIVATE_REPOSITORY: ${{ github.event.repository.private }}
-          HISTORICAL_REQUESTED: ${{ github.event_name == 'workflow_dispatch' && inputs.historical_native }}
-        run: python3 scripts/publication_ci_scope.py >> "$GITHUB_OUTPUT"
       - name: Set up uv
         uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4  # v10.1.0
         with:
           version: '0.11.16'
           enable-cache: false
+      - name: Install selected Python
+        run: uv python install
+      - name: Set up required frontend Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1  # v7.1.0
+        with:
+          node-version: '24.22.1'
+          package-manager-cache: false
       - name: Install locked repository tooling
-        run: uv sync --locked
+        run: |
+          mkdir -p results/ci
+          TIMEFORMAT='Tooling sync elapsed: %3R seconds'
+          { time uv sync --locked; } 2>&1 | tee results/ci/setup.log
+      - name: Record selected toolchain and source identities
+        env:
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: uv run --locked python scripts/ci_environment.py > results/ci/environment.json
+      - name: Select source-publication verification scope
+        id: scope
+        env:
+          PRIVATE_REPOSITORY: ${{ github.event.repository.private }}
+          HISTORICAL_REQUESTED: ${{ github.event_name == 'workflow_dispatch' && inputs.historical_native }}
+        run: uv run --locked python scripts/publication_ci_scope.py >> "$GITHUB_OUTPUT"
       - name: Check repository and build documentation
-        run: uv run --locked python scripts/check.py
+        run: uv run --locked python scripts/check.py 2>&1 | tee results/ci/repository-checks.log
 
       - name: Verify paired boundary preflight and reconstruction
         run: |
-          uv run --locked python -m experiments.m4.paired_observation.run \
-            --output results/m4-paired/ci-reference
-          uv run --locked python -S -m experiments.m4.paired_observation.run \
-            --reconstruct results/m4-paired/ci-reference \
-            --output results/m4-paired/reconstructed.json
-          cmp results/m4-paired/ci-reference/preflight.json results/m4-paired/reconstructed.json
+          {
+            uv run --locked python -m experiments.m4.paired_observation.run \
+              --output results/m4-paired/ci-reference
+            uv run --locked python -S -m experiments.m4.paired_observation.run \
+              --reconstruct results/m4-paired/ci-reference \
+              --output results/m4-paired/reconstructed.json
+            cmp results/m4-paired/ci-reference/preflight.json results/m4-paired/reconstructed.json
+          } 2>&1 | tee results/ci/paired-boundary.log
+      - name: Preserve public check diagnostics including failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: repository-checks-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            results/ci/*.log
+            results/ci/*.json
+          if-no-files-found: warn
+          retention-days: 5
       - name: Verify standalone beta-cell reference and reconstruction
-        if: steps.scope.outputs.native_enabled == 'true'
+        if: >-
+          github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+          && steps.scope.outputs.native_enabled == 'true'
         run: |
           uv sync --locked --project experiments/m4/beta_cell/runtime
           uv run --locked --project experiments/m4/beta_cell/runtime \
@@ -68,7 +99,9 @@ jobs:
             results/m4/ci-reference --output results/m4/reconstructed.json
           cmp results/m4/ci-reference/report.json results/m4/reconstructed.json
       - name: Verify forward C-peptide reference and reconstruct its report
-        if: steps.scope.outputs.native_enabled == 'true'
+        if: >-
+          github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+          && steps.scope.outputs.native_enabled == 'true'
         run: |
           uv run --locked --project experiments/m4/beta_cell/runtime \
             python -m unittest discover -s experiments/m4/c_peptide -p test_model.py -v
@@ -78,7 +111,9 @@ jobs:
             results/m4-cpeptide/ci-reference --output results/m4-cpeptide/reconstructed.json
           cmp results/m4-cpeptide/ci-reference/report.json results/m4-cpeptide/reconstructed.json
       - name: Verify native insulin inlet and reconstruct its report
-        if: steps.scope.outputs.native_enabled == 'true'
+        if: >-
+          github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+          && steps.scope.outputs.native_enabled == 'true'
         run: |
           uv sync --locked --project experiments/m0/simglucose
           uv run --locked --project experiments/m0/simglucose \
@@ -90,13 +125,17 @@ jobs:
             results/m4-inlet/ci-reference --output results/m4-inlet/reconstructed.json
           cmp results/m4-inlet/ci-reference/report.json results/m4-inlet/reconstructed.json
       - name: Check paired baseline states against native insulin derivatives
-        if: steps.scope.outputs.native_enabled == 'true'
+        if: >-
+          github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+          && steps.scope.outputs.native_enabled == 'true'
         run: >-
           uv run --locked --project experiments/m0/simglucose
           python -m experiments.m4.paired_observation.native_probe
           results/m4-paired/ci-reference --output results/m4-paired/native-probe.json
       - name: Verify paired kinetic execution and reconstruction
-        if: steps.scope.outputs.native_enabled == 'true'
+        if: >-
+          github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+          && steps.scope.outputs.native_enabled == 'true'
         run: |
           uv run --locked --project experiments/m0/simglucose \
             python -m unittest experiments.m4.paired_kinetics.test_insulin -v
@@ -110,7 +149,9 @@ jobs:
             --output results/m4-paired-kinetics/reconstructed.json
           cmp results/m4-paired-kinetics/ci-reference/report.json results/m4-paired-kinetics/reconstructed.json
       - name: Verify secretion source audit and reconstruction
-        if: steps.scope.outputs.native_enabled == 'true'
+        if: >-
+          github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+          && steps.scope.outputs.native_enabled == 'true'
         run: |
           uv run --locked --project experiments/m4/beta_cell/runtime \
             python -m unittest experiments.m4.source_audit.test_numerical -v
@@ -121,7 +162,9 @@ jobs:
             --output results/m4-source-audit/reconstructed.json
           cmp results/m4-source-audit/ci-reference/report.json results/m4-source-audit/reconstructed.json
       - name: Verify prescribed glucose to paired kinetic chain
-        if: steps.scope.outputs.native_enabled == 'true'
+        if: >-
+          github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+          && steps.scope.outputs.native_enabled == 'true'
         run: |
           uv run --locked python -m experiments.m4.chain.run \
             --output results/m4-chain/ci-reference
@@ -129,7 +172,9 @@ jobs:
             results/m4-chain/ci-reference --output results/m4-chain/reconstructed.json
           cmp results/m4-chain/ci-reference/report.json results/m4-chain/reconstructed.json
       - name: Verify feedback specification preflight without coupled trajectories
-        if: steps.scope.outputs.native_enabled == 'true'
+        if: >-
+          github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+          && steps.scope.outputs.native_enabled == 'true'
         run: |
           uv run --locked python -m experiments.m4.feedback.preflight \
             --output results/m4-feedback-preflight/ci-reference
@@ -138,7 +183,9 @@ jobs:
             --output results/m4-feedback-preflight/reconstructed.json
           cmp results/m4-feedback-preflight/ci-reference/report.json results/m4-feedback-preflight/reconstructed.json
       - name: Preserve beta-cell numerical evidence including failures
-        if: always() && steps.scope.outputs.native_enabled == 'true'
+        if: >-
+          always() && github.event.repository.private && github.event_name == 'workflow_dispatch'
+          && inputs.historical_native && steps.scope.outputs.native_enabled == 'true'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: m4-beta-cell
@@ -158,7 +205,9 @@ jobs:
 
   beta-cell-feedback:
     needs: repository-checks
-    if: needs.repository-checks.outputs.native_enabled == 'true'
+    if: >-
+      github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+      && needs.repository-checks.outputs.native_enabled == 'true'
     name: Bounded beta-cell glucose feedback
     runs-on: ubuntu-24.04
     timeout-minutes: 30
@@ -250,7 +299,9 @@ jobs:
 
   configurable-study-tools:
     needs: repository-checks
-    if: needs.repository-checks.outputs.native_enabled == 'true'
+    if: >-
+      github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+      && needs.repository-checks.outputs.native_enabled == 'true'
     name: Configurable M4 study and local research tools
     runs-on: ubuntu-24.04
     timeout-minutes: 30
@@ -376,7 +427,9 @@ jobs:
 
   maintained-m4-study:
     needs: repository-checks
-    if: needs.repository-checks.outputs.native_enabled == 'true'
+    if: >-
+      github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+      && needs.repository-checks.outputs.native_enabled == 'true'
     name: Maintained M4 numerical study
     runs-on: ubuntu-24.04
     timeout-minutes: 30
@@ -440,7 +493,9 @@ jobs:
 
   c1-patched-checkpoint-boundary:
     needs: repository-checks
-    if: needs.repository-checks.outputs.native_enabled == 'true'
+    if: >-
+      github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+      && needs.repository-checks.outputs.native_enabled == 'true'
     name: Patched C1 checkpoint and synthetic actor boundary
     runs-on: ubuntu-24.04
     timeout-minutes: 30
@@ -512,7 +567,9 @@ jobs:
 
   beta-cell-joint-identifiability:
     needs: repository-checks
-    if: needs.repository-checks.outputs.native_enabled == 'true'
+    if: >-
+      github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+      && needs.repository-checks.outputs.native_enabled == 'true'
     name: Conditional beta-cell parameter recovery
     runs-on: ubuntu-24.04
     timeout-minutes: 30
@@ -553,7 +610,9 @@ jobs:
 
   cpeptide-volume-sensitivity:
     needs: repository-checks
-    if: needs.repository-checks.outputs.native_enabled == 'true'
+    if: >-
+      github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+      && needs.repository-checks.outputs.native_enabled == 'true'
     name: C-peptide volume sensitivity
     runs-on: ubuntu-24.04
     # Run 37014981209 retained 60 primary / 36 repeat attempts at the 30m limit.
@@ -603,7 +662,9 @@ jobs:
 
   beta-cell-likelihood-profiles:
     needs: repository-checks
-    if: needs.repository-checks.outputs.native_enabled == 'true'
+    if: >-
+      github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+      && needs.repository-checks.outputs.native_enabled == 'true'
     name: Conditional beta-cell likelihood profiles
     # Preserve all nine cases, 27 profiles and the full fresh-process repeat.
     # The private two-CPU Linux job timed out during the primary execution;
@@ -653,7 +714,9 @@ jobs:
 
   simglucose-reference:
     needs: repository-checks
-    if: needs.repository-checks.outputs.native_enabled == 'true'
+    if: >-
+      github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+      && needs.repository-checks.outputs.native_enabled == 'true'
     name: simglucose reference
     runs-on: ubuntu-24.04
     timeout-minutes: 15
@@ -701,7 +764,9 @@ jobs:
 
   lt1-reference:
     needs: repository-checks
-    if: needs.repository-checks.outputs.native_enabled == 'true'
+    if: >-
+      github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+      && needs.repository-checks.outputs.native_enabled == 'true'
     name: LT1 Cambridge reference
     runs-on: ubuntu-24.04
     timeout-minutes: 15
@@ -749,7 +814,9 @@ jobs:
 
   m1-demonstration:
     needs: repository-checks
-    if: needs.repository-checks.outputs.native_enabled == 'true'
+    if: >-
+      github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+      && needs.repository-checks.outputs.native_enabled == 'true'
     name: M1 demonstration
     runs-on: ubuntu-24.04
     timeout-minutes: 15
@@ -784,7 +851,9 @@ jobs:
 
   m2-cambridge:
     needs: repository-checks
-    if: needs.repository-checks.outputs.native_enabled == 'true'
+    if: >-
+      github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+      && needs.repository-checks.outputs.native_enabled == 'true'
     name: M2 Cambridge integration
     runs-on: ubuntu-24.04
     timeout-minutes: 25
@@ -829,7 +898,9 @@ jobs:
 
   internal-verification:
     needs: repository-checks
-    if: needs.repository-checks.outputs.native_enabled == 'true'
+    if: >-
+      github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+      && needs.repository-checks.outputs.native_enabled == 'true'
     name: Internal numerical verification
     runs-on: ubuntu-24.04
     timeout-minutes: 25
@@ -879,7 +950,9 @@ jobs:
 
   internal-robustness:
     needs: repository-checks
-    if: needs.repository-checks.outputs.native_enabled == 'true'
+    if: >-
+      github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+      && needs.repository-checks.outputs.native_enabled == 'true'
     name: Internal robustness verification
     runs-on: ubuntu-24.04
     timeout-minutes: 40
@@ -922,7 +995,9 @@ jobs:
 
   m3-forecast:
     needs: repository-checks
-    if: needs.repository-checks.outputs.native_enabled == 'true'
+    if: >-
+      github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+      && needs.repository-checks.outputs.native_enabled == 'true'
     name: M3 causal forecasting
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -973,7 +1048,9 @@ jobs:
 
   lit002-absorption:
     needs: repository-checks
-    if: needs.repository-checks.outputs.native_enabled == 'true'
+    if: >-
+      github.event.repository.private && github.event_name == 'workflow_dispatch' && inputs.historical_native
+      && needs.repository-checks.outputs.native_enabled == 'true'
     name: LIT-002 absorption verification
     runs-on: ubuntu-24.04
     timeout-minutes: 10

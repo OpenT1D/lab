@@ -76,12 +76,28 @@ It checks Python tooling style, Markdown, YAML, citation metadata, navigation, d
 
 The Markdown configuration allows long prose lines and template checklists. It checks structure rather than imposing hard wrapping on research reports. The root suite also checks bounded contracts, artifact validation and analysis fixtures. It does not execute native physiology; run the isolated checks in the canonical tutorials as appropriate. Neither passing tooling tests nor native regression equality establishes biological validity.
 The [public source policy](publication-security.md) limits the initial supported
-exercise to the two synthetic MMTT tasks. Public Actions is currently disabled;
-local results must not be reported as hosted CI. When deliberately enabled, the
-workflow's default scope is the root suite and standard-library boundary checks;
-historical native jobs require explicit private-archive dispatch and cannot run
-in the public snapshot. CI activation and broader platform coverage are separate
-roadmap work.
+exercise to the two synthetic MMTT tasks. Initial publication used disabled
+Actions; local results must not be reported as hosted CI. The prepared public
+job explicitly installs the selected Python 3.12, uv 0.11.16 and Node 24.22.1,
+then runs the root suite and standard-library boundary checks. Its Node preflight
+fails when Node is unavailable. Historical native jobs additionally require
+literal private-repository/manual-dispatch guards and cannot run in a public
+repository, even if a changed scope helper reports them enabled.
+
+The public job keeps dependency caching off and its existing fifteen-minute
+limit. It attempts to retain setup/check/boundary logs and a selected environment
+receipt under `results/ci` for five days, including after a failed check. The
+receipt distinguishes the checked-out source SHA, event SHA and PR-head SHA;
+command timings remain in the logs. It does not dump environment variables or
+upload experiment directories. Cancellation, runner loss or an early setup
+failure can leave partial or missing diagnostics. Measure cold hosted runs before
+changing timeouts, caching or parallelism; a local duration is not that benchmark.
+
+Follow the [activation procedure](publication-security.md#activate-on-the-selected-public-destination)
+to review the exact Action allowlist, enable the intended checks, obtain actual
+PR/main results and only then require `Repository checks`. Source changes alone
+do not activate GitHub settings. Broader platform and real-browser coverage remain
+separate roadmap work; the current Node fixtures are controlled DOM checks.
 
 ## Preview the documentation
 

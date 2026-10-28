@@ -14,6 +14,10 @@ from experiments.setup.publication import check_install
 from scripts.publication_ci_scope import native_enabled
 
 ROOT = Path(__file__).resolve().parents[1]
+PRIVATE_DISPATCH = (
+    "github.event.repository.private && github.event_name == 'workflow_dispatch' "
+    "&& inputs.historical_native"
+)
 
 
 class PublicSecurityTests(unittest.TestCase):
@@ -70,11 +74,22 @@ class PublicSecurityTests(unittest.TestCase):
             if key != "repository-checks":
                 self.assertEqual(job["needs"], "repository-checks")
                 self.assertEqual(
-                    job["if"], "needs.repository-checks.outputs.native_enabled == 'true'"
+                    job["if"],
+                    PRIVATE_DISPATCH
+                    + " && needs.repository-checks.outputs.native_enabled == 'true'",
                 )
         for step in jobs["repository-checks"]["steps"]:
             if "--project experiments/" in step.get("run", ""):
-                self.assertEqual(step["if"], "steps.scope.outputs.native_enabled == 'true'")
+                self.assertEqual(
+                    step["if"],
+                    PRIVATE_DISPATCH + " && steps.scope.outputs.native_enabled == 'true'",
+                )
+        for step in jobs["repository-checks"]["steps"]:
+            if "native_enabled" in step.get("if", ""):
+                expected = PRIVATE_DISPATCH + " && steps.scope.outputs.native_enabled == 'true'"
+                if step.get("uses", "").startswith("actions/upload-artifact@"):
+                    expected = "always() && " + expected
+                self.assertEqual(step["if"], expected)
         dispatch = workflow["on"]["workflow_dispatch"]["inputs"]["historical_native"]
         self.assertFalse(dispatch["default"])
         public = json.loads((ROOT / ".github/public-source-branch-protection.json").read_text())
