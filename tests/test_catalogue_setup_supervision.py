@@ -77,10 +77,32 @@ class CatalogueSetupSupervisionTests(unittest.TestCase):
             process.wait(timeout=5)
 
     def live(self, pid):
-        state = subprocess.run(
+        observed = subprocess.run(
             ["ps", "-p", str(pid), "-o", "stat="], capture_output=True, text=True, check=False
-        ).stdout.strip()
-        return bool(state) and not state.startswith("Z")
+        )
+        state, error = observed.stdout.strip(), observed.stderr.strip()
+        if observed.returncode == 0 and state and not error:
+            return not state.startswith("Z")
+        if observed.returncode == 1 and not state and not error:
+            return False
+        raise RuntimeError(f"Could not observe synthetic process {pid}: {observed!r}")
+
+    def test_process_observation_errors_cannot_claim_successful_cleanup(self):
+        for code, output, error in (
+            (2, "", "invalid ps arguments"),
+            (1, "", "Operation not permitted"),
+            (0, "", ""),
+        ):
+            with self.subTest(code=code, error=error):
+                with (
+                    patch.object(
+                        subprocess,
+                        "run",
+                        return_value=subprocess.CompletedProcess([], code, output, error),
+                    ),
+                    self.assertRaisesRegex(RuntimeError, "Could not observe synthetic process"),
+                ):
+                    self.live(123)
 
     def wait_for_marker(self, marker):
         deadline = time.monotonic() + 10
