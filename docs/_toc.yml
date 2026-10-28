@@ -12,6 +12,7 @@ subtrees:
       - file: docs/product-laboratory
 
       - file: docs/windows-installation
+      - file: docs/mac-mmtt-candidate
 
       - file: docs/public-source
       - file: docs/publication-security

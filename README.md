@@ -53,6 +53,11 @@ This integration is a new source identity; the previous J executable's checks do
 not verify a newly built installer. Public installer distribution, signing and
 its separate runtime/table-rights review remain open.
 
+A bounded [unsigned Apple Silicon MMTT candidate](docs/mac-mmtt-candidate.md)
+bundles its own interpreter for the two synthetic tasks. Its guide explains the
+internal build, saved workspace and exact-artifact checks. Signing, notarisation,
+clean-host and independent-user acceptance remain separate.
+
 Historical native environments retain dependency advisories. The public snapshot
 [limits automatic setup and CI](docs/publication-security.md) to the reviewed
 source scope; old native guides are research records. The word `secure` in an
@@ -99,7 +104,7 @@ research, not prerequisites for using the tools.
 
 ## Explore the repository
 
-- [Documentation](docs/index.md): choose a task, run it and interpret its limits.
+- [Documentation](https://opent1d.github.io/lab/): choose a task, run it and interpret its limits.
 - [Roadmap](ROADMAP.md): completed work, next packages and open evidence.
 - [Development](docs/development.md): locked tooling, checks and documentation preview.
 - [Research reports](docs/onderzoek/projectopzet.md): the Dutch research basis.

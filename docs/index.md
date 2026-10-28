@@ -48,6 +48,10 @@ No GitHub checkout, WSL or separate Python setup is required by that flow.
 Actual Windows installation and independent user acceptance remain open; this
 is not a public release. The commands below describe the developer checkout.
 
+For Apple Silicon, the [unsigned internal MMTT candidate](mac-mmtt-candidate.md)
+bundles its own interpreter for the two synthetic tasks. Its source and binary
+checks are separate from signing, downloaded-copy and independent-user acceptance.
+
 ## Choose a researcher task
 
 These ten bounded tasks use synthetic inputs and trusted local Python
