@@ -12,7 +12,7 @@ from packaging.specifiers import SpecifierSet
 
 from experiments.setup.publication import check_install
 from scripts.publication_ci_scope import native_enabled
-from tests.ci_policy import NATIVE_JOBS, PUBLIC_JOBS
+from tests.ci_policy import NATIVE_JOBS, PUBLIC_JOBS, PUBLICATION_JOBS
 
 ROOT = Path(__file__).resolve().parents[1]
 PRIVATE_DISPATCH = (
@@ -71,7 +71,7 @@ class PublicSecurityTests(unittest.TestCase):
     def test_workflow_and_public_branch_policy_enforce_supported_scope(self):
         workflow = yaml.safe_load((ROOT / ".github/workflows/checks.yml").read_text())
         jobs = workflow["jobs"]
-        self.assertEqual(set(jobs), PUBLIC_JOBS | NATIVE_JOBS)
+        self.assertEqual(set(jobs), PUBLIC_JOBS | NATIVE_JOBS | PUBLICATION_JOBS)
         for key in NATIVE_JOBS:
             job = jobs[key]
             self.assertEqual(job["needs"], "repository-checks")
