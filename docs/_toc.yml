@@ -209,6 +209,7 @@ subtrees:
       - file: docs/m1-tutorial
       - file: docs/research/m1-reproduction
       - file: docs/development
+      - file: docs/research/ai-development-trial
       - file: GOVERNANCE
       - file: CODE_OF_CONDUCT
       - file: SECURITY
