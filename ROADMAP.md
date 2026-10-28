@@ -24,13 +24,20 @@ predictive validity or treatment benefit. No supported product release is
 published. The private Windows installer is a separately verified internal
 candidate with open distribution, maintenance and independent-use gates.
 
-Source publication is complete within its recorded scope. Public CI activation,
-documentation hosting, a Mac distribution and the shared SDK are planned work.
-The recorded publication policy uses disabled Actions and manual branch
-protection without a required CI check; activation must verify the actual
-settings and current-head results. Dependency-service runs are not repository
-verification. See the [publication record](docs/research/publication-preparation.md)
-and [security boundary](docs/publication-security.md).
+Source publication and the bounded public CI baseline are implemented.
+[PR 9](https://github.com/OpenT1D/lab/pull/9) added the explicit public toolchain,
+guarded native jobs and retained diagnostics; the
+[baseline main run](https://github.com/OpenT1D/lab/actions/runs/40763325611)
+passed on `c2db13a`. Main now requires the strict, app-bound `Repository checks`
+result, with pull-request and conversation-resolution requirements.
+[PR 13](https://github.com/OpenT1D/lab/pull/13) adds reviewed-main documentation
+publication; deployment and live-site acceptance follow the
+[publication guide](docs/documentation-publication.md). A Mac distribution and the
+shared SDK remain planned work. The
+[publication record](docs/research/publication-preparation.md) retains the initial
+disabled-Actions state; the [security boundary](docs/publication-security.md)
+still governs public execution. Dependency-service runs are not repository
+verification.
 
 ## Public development priorities
 
@@ -38,30 +45,43 @@ The next product outcome is a reliable public development loop and a small
 application that another researcher can use independently. Both start from the
 two existing synthetic MMTT tasks. This planning change selects work; completion
 requires the artifacts and checks below. Queue names are planning labels, not
-new issue numbers, release versions or delivery dates. After the selected
-AI-development PR, choose one bounded artifact at a time. The remaining rows
-express priority; unfinished distribution or external-acceptance gates do not
-block unrelated internal fixes, contract inventory or feasibility work.
+new issue numbers, release versions or delivery dates. The AI-development,
+public CI baseline and check-family increments are implemented. Select one
+bounded documentation/first-use artifact next; Mac feasibility can proceed in
+parallel. Unfinished distribution or external-acceptance gates do not block
+unrelated internal fixes, contract inventory or feasibility work.
 
 ### Now, next and later
 
 | Order | Bounded change | Exit criterion and dependency |
 | --- | --- | --- |
 | Implemented internal increment — AI development | Refreshed agent guidance, canonical component/test map, issue/PR handoff and two focused repository skills. | The [trial record](docs/research/ai-development-trial.md) records existing review cases and internal numerical checks. Independent usability and productivity gains are not established. Widening the workflow requires a separate selected change. |
-| Implemented internal increment — Reliability fixes | Shared POSIX publication, catalogue/setup supervision and setup process-helper identity now have bounded fixes and regressions. | Each negative reproduction fails on the old behavior and passes after correction; preserve supported complete, failed and relocated results. A workflow trial may reproduce a defect in temporary fixtures, but permanent regression tests land with their fixes. |
-| Next — Public CI baseline | Deliberately enable the reviewed public checks, explicitly set up Python/uv/Node, retain diagnostic output and measure cold-run duration. | The exact PR revision and integrated main pass hosted checks. Only then require the stable `Repository checks` status and read back branch protection. Keep historical native execution excluded. |
-| Prepared increment — Test families and platform coverage | Named local style/tests/docs stages, one broad Linux root job, shared three-host public smokes, four Linux Chromium flows and one required public gate. | Exact PR/main hosted results remain required. macOS and Windows must demonstrate both MMTT tasks, local HTTP, filesystem/process behavior and byte-exact reconstruction. The gate rejects failed, cancelled, skipped or missing public families. Expand the root matrix only from observed portability results; native jobs retain their private/manual boundary. |
-| Parallel bounded work — Documentation and first use | Publish the existing Sphinx output and improve the routes for trying, extending and contributing to the project. Run the source-checkout exercise with an actual intended user when available. | A warning-free build is hosted at a verified URL. A user can prepare, freeze, run, interpret and reopen a synthetic result; record assistance, mistakes and failed attempts. User availability does not block internal fixes or packaging probes. |
-| Early feasibility — Mac application | Build an internal Apple Silicon candidate for the two MMTT tasks using the existing calculations and reports, a real bundled CPython interpreter and a thin `.app` launcher. | Finder launch, both task chains and report reconstruction work without Git, uv, host Python or terminal setup. Record actual runtime, architecture, minimum OS, rights and payload identity. This probe may overlap CI/docs and does not wait for the whole shared SDK. |
+| Implemented internal increment — Reliability fixes | Shared POSIX publication, catalogue/setup supervision, setup process-helper identity and sampling cancellation phase checks have bounded fixes and regressions. | The cases below retain their own reproduction and verification scopes; preserve supported complete, failed and relocated results. Permanent regression tests accompany the fixes. |
+| Implemented public increment — CI baseline | Reviewed checks are active with explicit Python/uv/Node setup, retained diagnostics and actual hosted runs. | The baseline main run passed and branch protection reads back the strict app-bound `Repository checks` requirement. Keep historical native execution excluded. |
+| Implemented public increment — Test families and platform coverage | [PR 11](https://github.com/OpenT1D/lab/pull/11) adds named local style/tests/docs stages, one broad Linux root job, three-host public smokes, four Linux Chromium flows and one required public gate. | The final PR-head families passed; integrated-main acceptance is recorded below. Both MMTT tasks, local HTTP, filesystem/process behavior and byte-exact reconstruction have bounded actual-host coverage. The gate rejects failed, cancelled, skipped or missing public families. Broader root, browser and release coverage remains separate. |
+| Next — Documentation acceptance and first use | The reviewed-main publication workflow is implemented in [PR 13](https://github.com/OpenT1D/lab/pull/13). Verify the deployed site and improve the routes for trying, extending and contributing to the project. Run the source-checkout exercise with an actual intended user when available. | A warning-free build is hosted at a verified URL. A user can prepare, freeze, run, interpret and reopen a synthetic result; record assistance, mistakes and failed attempts. User availability does not block internal fixes or packaging probes. |
+| Parallel feasibility — Mac application | Build an internal Apple Silicon candidate for the two MMTT tasks using the existing calculations and reports, a real bundled CPython interpreter and a thin `.app` launcher. | Finder launch, both task chains and report reconstruction work without Git, uv, host Python or terminal setup. Record actual runtime, architecture, minimum OS, rights and payload identity. This probe may overlap documentation work and does not wait for the whole shared SDK. |
 | Conditional follow-up — Mac distribution | Turn the verified probe into a signed/notarized download with a controlled build/release workflow and clean-host/user evidence. | The exact downloaded artifact passes the lifecycle, data-preservation and interpretation checks below. Signing credentials, runtime rights and actual hosts/users are prerequisites for the affected acceptance, not assumed resources. |
 | Subsequent shared-laboratory work | Execute the named two-route extraction queue under OT-059 and minimal OT-060/061/064, followed by the remaining delivery slices. | Existing routes use shared services and preserve their scientific contracts/readers. Inventory can overlap the public work; public native execution needs a reviewed successor environment. Mac MMTT packaging is not gated on native remediation. |
 
-The Windows source smoke exposed a venv redirector creating the actual worker
-before Job assignment. [Decision 0079](docs/decisions/0079-windows-stdlib-worker-identity.md)
-selects the bounded current-CPython/no-site launch convention. Final real Job
-membership, strict cleanup and task-flow results remain platform acceptance gates.
+[PR 11's final head run](https://github.com/OpenT1D/lab/actions/runs/40774136075)
+passed on `dc4666f`: the Linux root suite ran 1,645 tests with 32 expected
+platform/optional-runtime skips; all selected Linux/macOS/Windows smoke cases
+passed without skips, and all four Linux Chromium flows passed. Windows ran 20 named smoke cases,
+including three HTTP repetitions of each MMTT task with strict owned-process
+cleanup and unchanged downloaded/reconstructed bytes. The actual worker passed
+Job-membership admission before START under the current-CPython/no-site launch
+convention in [decision 0079](docs/decisions/0079-windows-stdlib-worker-identity.md).
+The [integrated-main run](https://github.com/OpenT1D/lab/actions/runs/40775999066)
+on `a70f79e` also passed the root job, all three host smokes, all four Chromium
+flows and the final required `Repository checks` gate.
 
-### Next implementation: AI development
+These runs do not establish a broad Windows/macOS root suite, browser coverage
+outside Linux Chromium, release/native qualification, independent usability or
+scientific validity. Historical native jobs retain their private/manual guards
+and remain excluded from the public gate.
+
+### Implemented AI development and ongoing review practice
 
 The first bounded increment is implemented in the
 [development guide](docs/development.md) and repository skills, with
@@ -93,13 +113,15 @@ agent automation or release workflow:
   ancestry; a green run obtained by silently refreezing expected results is not
   acceptable evidence.
 
-### Reliability cases to close
+### Reliability cases and remaining work
 
 | Case | Status and required regression boundary |
 | --- | --- |
 | POSIX temporary-file publication follows an existing symlink | Implemented for the shared byte/text helpers: fresh exclusive byte siblings preserve stale entries; fixed text pending names refuse existing entries. Primitive and actual GUI persistence/restart regressions check unrelated bytes, regular published files and prior journal readers. Independent historical native POSIX writers retain their separate scope. |
-| Catalogue/setup supervision returns after leader exit with a live descendant | Implemented for the shared tool supervisor used by catalogue verification, setup and historical readers. Real-process regressions cover normal exit, crash, timeout, cancellation, launch/cleanup signals, partial evidence and preservation of unrelated processes. Actual Windows ownership remains a separate host check. |
+| Catalogue/setup supervision returns after leader exit with a live descendant | Implemented for the shared tool supervisor used by catalogue verification, setup and historical readers. Real-process regressions cover normal exit, crash, timeout, cancellation, launch/cleanup signals, partial evidence and preservation of unrelated processes. Windows catalogue/setup supervision still requires its own host evidence. |
+| Catalogue/setup cancellation arrives at cleanup entry | Implemented in [PR 10](https://github.com/OpenT1D/lab/pull/10): close the cleanup-entry cancellation window and bound the final direct-worker reap. Transition and real caller regressions retain prior signal handlers, partial logs and timeout/exit receipts. |
 | Setup source identity omits process helpers | Implemented by reusing the shared process-helper inventory. Independent byte mutations of each helper are refused before readiness, installation or output creation; unchanged plans and failed-install receipts retain their existing behavior. |
+| Sampling cancellation fixture reads incomplete live phase JSON | Implemented in [PR 12](https://github.com/OpenT1D/lab/pull/12): retry absent/incomplete hints within the original deadline and require a running analysis before cancellation. Deterministic malformed-hint and operation-state regressions preserve interrupted accounting and reconstruction. |
 
 Retain a separate low-priority robustness case for the observation estimator's
 trapezoid overflow at extreme finite inputs. Require finite output or a retained
@@ -109,20 +131,22 @@ itself.
 
 ### Public CI and documentation boundaries
 
-Keep one stable required public-check result. Split or extend the current
-workflow policy tests deliberately: they currently gate all extra jobs as
-historical native work. New public jobs must have an explicit supported scope;
-removing the policy test or native gate is not a migration. Measure hosted run
-time before selecting timeouts or shards. Use platform-neutral smoke commands.
-Add a small real-browser task suite alongside the existing controlled DOM tests.
+Keep the stable required public-check result and its explicit root, OS-smoke and
+browser dependency roster. The implemented workflow policy tests distinguish
+those families from historical native jobs; the public gate accepts only a
+successful result from every selected family. Extend scope deliberately and use
+actual hosted durations before changing timeouts, caching or shards. The shared
+platform smoke runner and Linux Chromium suite complement the controlled DOM
+tests; broader coverage needs its own selected scope and actual results.
 
-Publish the existing canonical Markdown through Sphinx. PRs build/check the
-site; trusted main deploys it. Verify navigation, search and example downloads
-before advertising a homepage. Preserve the Dutch research reports and register
+Use the implemented [reviewed-main publication workflow](docs/documentation-publication.md)
+for the canonical Sphinx output. PRs build/check the staged site; a separate
+deployment follows the same main run's complete public gate. Verify navigation,
+search and example downloads before advertising a homepage. Preserve the Dutch research reports and register
 new public guides in `docs/_toc.yml`. External link checks remain separate from
 unrelated PR acceptance.
 
-After the baseline is working, introduce small reviewed dependency-update PRs
+Use small reviewed dependency-update PRs
 for root tooling and pinned Actions. New Actions may require a revised verified
 allowlist; deployment/signing permissions belong only to the jobs that need
 them. Historical numerical locks retain their own source identity and reviewed
@@ -409,6 +433,14 @@ completed OT-001–058 work, prior plans, source/verification chronology and the
 original detailed scientific milestone criteria. Its older "next" sections
 are historical context. Select new implementation from the public-development
 queue and shared-laboratory slices in this document.
+
+### Next implementation: AI development
+
+This historical heading preserves the link in the
+[AI-development trial](docs/research/ai-development-trial.md). The bounded
+increment is implemented; use the
+[ongoing review practice](#implemented-ai-development-and-ongoing-review-practice)
+above and select new work from the current queue.
 
 ### Proposed internal follow-up — OT-031: multiple M4 secretion sources
 
