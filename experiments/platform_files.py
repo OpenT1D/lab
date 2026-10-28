@@ -323,27 +323,67 @@ def _windows_atomic_write(path, temporary, content, *, text):
                 temporary.unlink()
 
 
-def atomic_write_bytes(path, content, *, temporary=None):
-    """Publish complete bytes; Windows keeps old readers and uses a fresh sibling.
+def _posix_atomic_write(path, temporary, content, *, text):
+    """Write a fresh regular sibling; callers own their directory ancestry policy."""
+    import uuid
 
-    ``temporary`` is the sibling template on Windows and the exact name on POSIX.
-    Old Windows pending files remain evidence, never authority for a new write.
+    path, temporary = native_absolute(path), native_absolute(temporary)
+    if path == temporary or path.parent != temporary.parent:
+        raise ValueError("Publication requires distinct sibling paths")
+    if not text:
+        # A crash's fixed-name GUI pending entry is evidence, never authority.
+        temporary = temporary.with_name(temporary.name + "." + uuid.uuid4().hex + ".tmp")
+    descriptor = os.open(
+        temporary,
+        os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW | os.O_NONBLOCK | os.O_CLOEXEC,
+        0o666,
+    )
+    identity = None
+    try:
+        identity = _publication_signature(os.fstat(descriptor))[:2]
+        if _publication_signature(temporary.lstat())[:2] != identity:
+            raise ValueError("Publication pending file was replaced")
+        # Match Path.write_text's default encoding/newline and keep bytes exact.
+        with os.fdopen(descriptor, "w" if text else "wb", closefd=False) as stream:
+            stream.write(content)
+            stream.flush()
+        before = _publication_signature(os.fstat(descriptor))
+        if (
+            _publication_signature(temporary.lstat()) != before
+            or _publication_signature(os.fstat(descriptor)) != before
+        ):
+            raise ValueError("Publication pending file changed")
+        temporary.replace(path)
+    finally:
+        os.close(descriptor)
+        # A substituted or newly hardlinked pending entry is not ours to remove.
+        try:
+            current = _publication_signature(temporary.lstat())[:2]
+        except (OSError, ValueError):
+            current = None
+        if identity is not None and current == identity:
+            temporary.unlink()
+
+
+def atomic_write_bytes(path, content, *, temporary=None):
+    """Publish complete bytes through a fresh sibling, retaining existing readers.
+
+    ``temporary`` is a sibling naming template on both platforms. Old pending
+    entries remain evidence, never authority for a new write.
     """
     path = Path(path)
     temporary = path.with_name(path.name + ".tmp") if temporary is None else Path(temporary)
     if os.name == "nt":
         _windows_atomic_write(path, temporary, content, text=False)
     else:
-        temporary.write_bytes(content)
-        temporary.replace(path)
+        _posix_atomic_write(path, temporary, content, text=False)
 
 
 def atomic_write_text(path, content, *, temporary=None):
-    """Keep native text bytes and fixed pending names used by archive validators."""
+    """Keep native text bytes and fixed pending names; refuse existing pending entries."""
     path = Path(path)
     temporary = path.with_name(path.name + ".tmp") if temporary is None else Path(temporary)
     if os.name == "nt":
         _windows_atomic_write(path, temporary, content, text=True)
     else:
-        temporary.write_text(content)
-        temporary.replace(path)
+        _posix_atomic_write(path, temporary, content, text=True)
