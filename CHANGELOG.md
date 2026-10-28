@@ -4,6 +4,11 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Retain local-tool process ownership after normal worker exit or crash, so
+  catalogue verification, historical readers and task setup clean up owned
+  descendants before returning. Preserve partial logs, graceful cleanup and
+  cancellation while leaving unrelated processes alone.
+
 - Bind task-directed setup plans to the shared process-helper source inventory.
   Reject changed worker/supervisor bytes before readiness checks, installation
   or output creation, while preserving missing-environment and failed-install

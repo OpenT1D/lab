@@ -5,15 +5,24 @@ import json
 import re
 import signal
 import stat
-import subprocess
+import time
 from pathlib import Path
 
 from experiments.platform_files import is_link
-from experiments.platform_process import close_tree, force_tree, handled_signals, signal_tree, spawn
+from experiments.platform_process import (
+    close_tree,
+    force_tree,
+    handled_signals,
+    signal_tree,
+    spawn,
+    tree_exists,
+)
 
 ROOT = Path(__file__).resolve().parents[2]
 ID = re.compile(r"[a-z][a-z0-9_-]{0,63}\Z")
 SHA = re.compile(r"[0-9a-f]{64}\Z")
+CLEANUP_GRACE_SECONDS = 10
+GROUP_RECHECK_SECONDS = 1
 
 
 def require(condition, message):
@@ -133,41 +142,82 @@ def text(value):
     return str(value).replace("\n", " ").replace("\r", " ").replace("|", "\\|").replace("`", "'")
 
 
+def _owned_tree_call(process, operation):
+    """Clear an access denial only after reaping and observing group disappearance."""
+    try:
+        return operation(process)
+    except PermissionError as error:
+        # Darwin killpg excludes zombies and can report EPERM between a leader's
+        # exit and our reap. A denied probe alone never establishes an empty group.
+        deadline = time.monotonic() + GROUP_RECHECK_SECONDS
+        while True:
+            process.poll()
+            try:
+                remaining = tree_exists(process)
+            except PermissionError:
+                remaining = None
+            if remaining is False:
+                return False
+            if remaining is True or time.monotonic() >= deadline:
+                raise error
+            time.sleep(0.02)
+
+
 def cleanup(process):
-    """Terminate the owned session group and reap its direct child."""
-    signal_tree(process, signal.SIGTERM)
+    """Retain tree ownership after leader exit, allowing bounded graceful cleanup."""
     try:
-        process.wait(timeout=10)
-    except subprocess.TimeoutExpired:
-        pass
-    try:
-        force_tree(process)
-        process.wait()
+        _owned_tree_call(process, lambda owned: signal_tree(owned, signal.SIGTERM))
+        deadline = time.monotonic() + CLEANUP_GRACE_SECONDS
+        while True:
+            process.poll()
+            if not _owned_tree_call(process, tree_exists) or time.monotonic() >= deadline:
+                break
+            time.sleep(0.02)
     finally:
-        close_tree(process)
+        # Also force the tree if cancellation arrives during graceful cleanup.
+        try:
+            process.poll()
+            if _owned_tree_call(process, tree_exists):
+                _owned_tree_call(process, force_tree)
+            process.wait()
+        finally:
+            close_tree(process)
 
 
 def supervise(args, logfile, cwd, env, timeout):
     """Scoped signal handling for explicit trusted tools, never archived scripts."""
     process, received, previous = None, None, {}
+    cleaning = False
 
     def stop(signum, _frame):
         nonlocal received
         if received is None:
             received = signum
-            raise KeyboardInterrupt("Local tool operation interrupted")
+            # Launch and final cleanup must finish establishing/releasing their
+            # ownership. Their latched signal is checked before returning.
+            if process is not None and not cleaning:
+                raise KeyboardInterrupt("Local tool operation interrupted")
 
     try:
         for signum in handled_signals():
             previous[signum] = signal.signal(signum, stop)
         with Path(logfile).open("wb") as log:
-            process = spawn(args, cwd=cwd, env=env, stdout=log, stderr=log, start_new_session=True)
             try:
+                if received is not None:
+                    raise KeyboardInterrupt("Local tool operation interrupted")
+                process = spawn(
+                    args, cwd=cwd, env=env, stdout=log, stderr=log, start_new_session=True
+                )
+                if received is not None:
+                    raise KeyboardInterrupt("Local tool operation interrupted")
                 code = process.wait(timeout=timeout)
-                return {"status": "completed" if code == 0 else "failed", "exit_code": code}
-            except BaseException:
-                cleanup(process)
-                raise
+            finally:
+                cleaning = True
+                if process is not None:
+                    cleanup(process)
+        if received is not None:
+            raise KeyboardInterrupt("Local tool operation interrupted")
+        return {"status": "completed" if code == 0 else "failed", "exit_code": code}
     except KeyboardInterrupt:
         return {
             "status": "interrupted",
@@ -177,7 +227,3 @@ def supervise(args, logfile, cwd, env, timeout):
     finally:
         for signum, handler in previous.items():
             signal.signal(signum, handler)
-        if process is not None and process.poll() is None:
-            cleanup(process)
-        elif process is not None:
-            close_tree(process)
