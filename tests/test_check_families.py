@@ -152,6 +152,14 @@ class SmokeSelectionTests(unittest.TestCase):
             def test_skipped(self):
                 pass
 
+            @unittest.expectedFailure
+            def test_expected_failure(self):
+                self.fail("A required host behavior is still broken")
+
+            @unittest.expectedFailure
+            def test_unexpected_success(self):
+                pass
+
         class Empty(unittest.TestCase):
             pass
 
@@ -161,11 +169,17 @@ class SmokeSelectionTests(unittest.TestCase):
                 ("Cases.test_pass", True),
                 ("Cases.test_failure", False),
                 ("Cases.test_skipped", False),
+                ("Cases.test_expected_failure", False),
+                ("Cases.test_unexpected_success", False),
                 ("Cases.test_missing", False),
                 ("Empty", False),
             ):
                 result = public_smoke.run_cases([module.__name__ + "." + name], io.StringIO())
                 self.assertEqual(result["passed"], passed, result)
+                if name == "Cases.test_expected_failure":
+                    self.assertEqual(len(result["expected_failures"]), 1)
+                if name == "Cases.test_unexpected_success":
+                    self.assertEqual(len(result["unexpected_successes"]), 1)
             with self.assertRaises(ValueError):
                 public_smoke.run_cases([])
 

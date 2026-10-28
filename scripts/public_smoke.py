@@ -77,11 +77,18 @@ def run_cases(names, stream=sys.stderr):
     started = perf_counter()
     result = unittest.TextTestRunner(stream=stream, verbosity=2).run(suite)
     return {
-        "passed": result.wasSuccessful() and not result.skipped and result.testsRun == len(names),
+        "passed": (
+            result.wasSuccessful()
+            and not result.skipped
+            and not result.expectedFailures
+            and result.testsRun == len(names)
+        ),
         "planned": list(names),
         "executed": result.testsRun,
         "failures": len(result.failures),
         "errors": len(result.errors),
+        "expected_failures": [test.id() for test, _ in result.expectedFailures],
+        "unexpected_successes": [test.id() for test in result.unexpectedSuccesses],
         "skips": [{"case": test.id(), "reason": reason} for test, reason in result.skipped],
         "elapsed_seconds": perf_counter() - started,
     }
