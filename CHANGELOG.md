@@ -14,6 +14,11 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
   handlers and existing timeout/exit receipts. Add focused transition and real
   caller receipt regressions with strict process observations.
 
+- Add named local check stages, explicit Linux/macOS/Windows synthetic task
+  smokes and four real Chromium flows. Keep the broad root job and historical
+  native gates; the stable required public result accepts only successful root,
+  platform and browser families. Hosted platform results remain to be measured.
+
 - Prepare the bounded public CI baseline with explicit Python/uv/Node setup,
   independent private/manual guards for historical native jobs and short-lived
   diagnostic artifacts. Add the exact Action allowlist and a staged activation

@@ -72,19 +72,38 @@ Run the repository entry point defined for local checks and the CI workflow:
 uv run --locked python scripts/check.py
 ```
 
+The default command retains the full order. For a bounded change, select one
+family explicitly:
+
+```sh
+uv run --locked python scripts/check.py --stage style
+uv run --locked python scripts/check.py --stage tests
+uv run --locked python scripts/check.py --stage docs
+uv run --locked python scripts/public_smoke.py --output results/ci/local-smoke.json
+```
+
+Style includes metadata and navigation checks; tests runs root unittest discovery;
+docs performs the clean strict Sphinx build. These focused commands do not replace
+the integration owner's final full check. The public smoke receipt needs a fresh
+output path. It runs explicit synthetic CLI/HTTP, file and process cases on the
+actual host, refuses unexpected skips/missing cases and installs no native runtime.
+Windows selects its control-pipe and Job tests; Linux/macOS select POSIX lifecycle
+cases. The HTTP fixture uses a separate temporary workspace and an explicit root
+interpreter without making a virtual-environment symlink.
+
 It checks Python tooling style, Markdown, YAML, citation metadata, navigation, documentation regression tests and a clean documentation build. Sphinx warnings, including unresolved document references, fail the build. The file checks include untracked, non-ignored files, so they also cover a first contribution before it is committed.
 
 The Markdown configuration allows long prose lines and template checklists. It checks structure rather than imposing hard wrapping on research reports. The root suite also checks bounded contracts, artifact validation and analysis fixtures. It does not execute native physiology; run the isolated checks in the canonical tutorials as appropriate. Neither passing tooling tests nor native regression equality establishes biological validity.
 The [public source policy](publication-security.md) limits the initial supported
 exercise to the two synthetic MMTT tasks. Initial publication used disabled
-Actions; local results must not be reported as hosted CI. The prepared public
+Actions; local results must not be reported as hosted CI. The prepared `Root checks`
 job explicitly installs the selected Python 3.12, uv 0.11.16 and Node 24.22.1,
 then runs the root suite and standard-library boundary checks. Its Node preflight
 fails when Node is unavailable. Historical native jobs additionally require
 literal private-repository/manual-dispatch guards and cannot run in a public
 repository, even if a changed scope helper reports them enabled.
 
-The public job keeps dependency caching off and its existing fifteen-minute
+The root job keeps dependency caching off and its existing fifteen-minute
 limit. It attempts to retain setup/check/boundary logs and a selected environment
 receipt under `results/ci` for five days, including after a failed check. The
 receipt distinguishes the checked-out source SHA, event SHA and PR-head SHA;
@@ -96,8 +115,27 @@ changing timeouts, caching or parallelism; a local duration is not that benchmar
 Follow the [activation procedure](publication-security.md#activate-on-the-selected-public-destination)
 to review the exact Action allowlist, enable the intended checks, obtain actual
 PR/main results and only then require `Repository checks`. Source changes alone
-do not activate GitHub settings. Broader platform and real-browser coverage remain
-separate roadmap work; the current Node fixtures are controlled DOM checks.
+do not activate GitHub settings. That stable result now aggregates the root job,
+the Linux/macOS/Windows public-smoke matrix and four Linux Chromium flows. Every
+family must succeed; cancellation, skip or a missing result cannot pass the gate.
+Native jobs remain outside its dependency roster. The existing Node fixtures
+continue to provide separate controlled DOM checks. See [decision 0076](decisions/0076-public-check-families.md).
+
+Run the real-browser family with the selected Node 24 and the locked root Python:
+
+```sh
+npm --prefix tests/browser ci --ignore-scripts --no-audit --no-fund
+npm --prefix tests/browser run install:browser
+npm --prefix tests/browser test
+```
+
+Set `PLAYWRIGHT_BROWSERS_PATH` to an absolute temporary browser-cache directory
+first. Linux hosts can add `-- --with-deps` to the browser-install command. The
+suite uses Playwright 1.64.1, one Chromium worker, no retries and four synthetic
+task/failure/reopen flows. Synthetic screenshots, traces, logs and failure
+workspaces are under `output/playwright/`. Additional browsers, Windows browser
+shutdown and OS/release qualification require separate evidence; configured jobs
+do not establish hosted passes.
 
 ## Preview the documentation
 

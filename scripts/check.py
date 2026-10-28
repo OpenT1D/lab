@@ -1,5 +1,6 @@
 """Run the same repository checks locally and in CI."""
 
+import argparse
 import subprocess
 import sys
 from pathlib import Path
@@ -67,7 +68,7 @@ def check_navigation(markdown: list[str], root: Path = ROOT) -> None:
         raise ValueError("\n".join(errors))
 
 
-def main() -> None:
+def check_style() -> None:
     # Include new, untracked files so the first contribution is checked too.
     files = (
         subprocess.check_output(
@@ -85,8 +86,19 @@ def main() -> None:
     run("yamllint", "--strict", *yaml)
     run("cffconvert", "--validate")
     check_navigation(markdown)
+
+
+def check_tests() -> None:
     run(sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v")
-    build_documentation()
+
+
+def main(argv=None) -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--stage", choices=("style", "tests", "docs"))
+    args = parser.parse_args(argv)
+    stages = {"style": check_style, "tests": check_tests, "docs": build_documentation}
+    for stage in (args.stage,) if args.stage else stages:
+        stages[stage]()
 
 
 if __name__ == "__main__":

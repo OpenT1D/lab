@@ -6,17 +6,21 @@ from pathlib import Path
 
 import yaml
 
+from tests.ci_policy import NATIVE_JOBS, PUBLIC_JOBS
+
 
 class BranchPolicyTests(unittest.TestCase):
-    def test_prepared_required_checks_cover_actual_workflow_jobs(self):
+    def test_historical_required_checks_cover_native_jobs_and_the_public_gate(self):
         root = Path(__file__).resolve().parents[1]
         policy = json.loads((root / ".github/main-branch-protection.json").read_text())
         workflow = yaml.safe_load((root / ".github/workflows/checks.yml").read_text())
         checks = policy["required_status_checks"]["checks"]
+        self.assertEqual(set(workflow["jobs"]), PUBLIC_JOBS | NATIVE_JOBS)
         self.assertEqual(
-            {c["context"] for c in checks}, {j["name"] for j in workflow["jobs"].values()}
+            {c["context"] for c in checks},
+            {workflow["jobs"][name]["name"] for name in NATIVE_JOBS} | {"Repository checks"},
         )
-        self.assertEqual(len(checks), len(workflow["jobs"]))
+        self.assertEqual(len(checks), 16)
         self.assertTrue(all(c["app_id"] == 15368 for c in checks))
 
     def workflow(self):

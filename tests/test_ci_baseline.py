@@ -17,6 +17,7 @@ import yaml
 
 from scripts import ci_environment
 from scripts.check import run
+from tests.ci_policy import NATIVE_JOBS, PUBLIC_JOBS
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -27,9 +28,12 @@ class CIBaselinePolicyTests(unittest.TestCase):
         self.job = self.workflow["jobs"]["repository-checks"]
         self.steps = {step["name"]: step for step in self.job["steps"]}
 
-    def test_public_job_keeps_its_name_scope_and_explicit_uncached_toolchain(self):
-        self.assertEqual(len(self.workflow["jobs"]), 16)
-        self.assertEqual(self.job["name"], "Repository checks")
+    def test_root_job_keeps_its_id_outputs_scope_and_explicit_uncached_toolchain(self):
+        self.assertEqual(set(self.workflow["jobs"]), PUBLIC_JOBS | NATIVE_JOBS)
+        self.assertEqual(self.job["name"], "Root checks")
+        self.assertEqual(
+            self.job["outputs"], {"native_enabled": "${{ steps.scope.outputs.native_enabled }}"}
+        )
         self.assertNotIn("if", self.job)
         self.assertEqual(self.job["runs-on"], "ubuntu-24.04")
         self.assertEqual(self.job["timeout-minutes"], 15)
@@ -57,10 +61,55 @@ class CIBaselinePolicyTests(unittest.TestCase):
             self.steps["Check repository and build documentation"]["run"],
         )
         for name, job in self.workflow["jobs"].items():
-            if name != "repository-checks":
+            if name in NATIVE_JOBS:
                 for step in job["steps"]:
                     if step.get("uses", "").startswith("actions/setup-node@"):
                         self.assertEqual(step["with"]["node-version"], "22.22.2")
+
+    def test_public_gate_matrix_and_browser_are_explicit_and_not_optional(self):
+        jobs = self.workflow["jobs"]
+        gate = jobs["public-checks"]
+        self.assertEqual(gate["name"], "Repository checks")
+        self.assertEqual(gate["if"], "always()")
+        self.assertEqual(gate["needs"], ["repository-checks", "public-smoke", "browser"])
+        final = gate["steps"][-1]
+        self.assertEqual(final["env"]["PUBLIC_CHECK_RESULTS"], "${{ toJSON(needs) }}")
+        self.assertEqual(final["run"], "python3 scripts/ci_gate.py")
+        self.assertEqual(
+            jobs["public-smoke"]["strategy"],
+            {
+                "fail-fast": False,
+                "matrix": {
+                    "include": [
+                        {"os": "ubuntu-24.04", "platform": "linux-x86_64"},
+                        {"os": "macos-15", "platform": "darwin-arm64"},
+                        {"os": "windows-2025", "platform": "windows-amd64"},
+                    ]
+                },
+            },
+        )
+        self.assertEqual(jobs["browser"]["runs-on"], "ubuntu-24.04")
+        for key in PUBLIC_JOBS:
+            self.assertNotIn("continue-on-error", jobs[key])
+            if key not in {"repository-checks", "public-checks"}:
+                self.assertNotIn("if", jobs[key])
+            for step in jobs[key]["steps"]:
+                self.assertNotIn("continue-on-error", step)
+        for key in ("public-smoke", "browser"):
+            steps = jobs[key]["steps"]
+            upload = steps[-1]
+            self.assertEqual(upload["if"], "always()")
+            self.assertEqual(upload["with"]["retention-days"], 5)
+            self.assertTrue(any("uv sync --locked" == step.get("run") for step in steps))
+            self.assertTrue(
+                any(step.get("with", {}).get("node-version") == "24.22.1" for step in steps)
+            )
+        browser = "\n".join(step.get("run", "") for step in jobs["browser"]["steps"])
+        self.assertIn(
+            "npm --prefix tests/browser ci --ignore-scripts --no-audit --no-fund", browser
+        )
+        self.assertIn("npm --prefix tests/browser run install:browser -- --with-deps", browser)
+        self.assertIn("npm --prefix tests/browser test", browser)
 
     def test_selected_action_payload_allows_exactly_the_checked_in_revisions(self):
         uses = set()
