@@ -31,6 +31,19 @@ No version tag, release, installer or bundled runtime is part of this operation.
 The earlier preparation-only observations below retain their original scope;
 they do not override the maintainer's later source-publication authorization.
 
+## Initial platform automation observation
+
+The authorized initial source push produced three GitHub-managed Dependabot
+runs even though repository Actions had already been disabled. Runs
+`40712032708` and `40712032362` completed successfully before cancellation;
+`40712032550` was cancelled. These were package-update/graph metadata jobs,
+not the repository checks, external-link or Windows installer workflows.
+The raw run/job receipts are preserved privately. They are not hidden or counted
+as scientific verification. Generated PRs #1 and #2 were closed without merging;
+their temporary bot branches were removed. The active Dependabot configuration
+was renamed to an inactive example through the protected-branch PR process.
+Actions remains disabled; passive vulnerability information remains available.
+
 ## Source review 28 October 2026
 
 The current preparation combines private main, the OT-058 installer source and
