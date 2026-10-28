@@ -6,7 +6,7 @@ from pathlib import Path
 
 import yaml
 
-from tests.ci_policy import NATIVE_JOBS, PUBLIC_JOBS
+from tests.ci_policy import NATIVE_JOBS, PUBLIC_JOBS, PUBLICATION_JOBS
 
 
 class BranchPolicyTests(unittest.TestCase):
@@ -15,7 +15,7 @@ class BranchPolicyTests(unittest.TestCase):
         policy = json.loads((root / ".github/main-branch-protection.json").read_text())
         workflow = yaml.safe_load((root / ".github/workflows/checks.yml").read_text())
         checks = policy["required_status_checks"]["checks"]
-        self.assertEqual(set(workflow["jobs"]), PUBLIC_JOBS | NATIVE_JOBS)
+        self.assertEqual(set(workflow["jobs"]), PUBLIC_JOBS | NATIVE_JOBS | PUBLICATION_JOBS)
         self.assertEqual(
             {c["context"] for c in checks},
             {workflow["jobs"][name]["name"] for name in NATIVE_JOBS} | {"Repository checks"},

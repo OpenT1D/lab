@@ -17,7 +17,7 @@ import yaml
 
 from scripts import ci_environment
 from scripts.check import run
-from tests.ci_policy import NATIVE_JOBS, PUBLIC_JOBS
+from tests.ci_policy import NATIVE_JOBS, PUBLIC_JOBS, PUBLICATION_JOBS
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -29,7 +29,7 @@ class CIBaselinePolicyTests(unittest.TestCase):
         self.steps = {step["name"]: step for step in self.job["steps"]}
 
     def test_root_job_keeps_its_id_outputs_scope_and_explicit_uncached_toolchain(self):
-        self.assertEqual(set(self.workflow["jobs"]), PUBLIC_JOBS | NATIVE_JOBS)
+        self.assertEqual(set(self.workflow["jobs"]), PUBLIC_JOBS | NATIVE_JOBS | PUBLICATION_JOBS)
         self.assertEqual(self.job["name"], "Root checks")
         self.assertEqual(
             self.job["outputs"], {"native_enabled": "${{ steps.scope.outputs.native_enabled }}"}
@@ -128,8 +128,13 @@ class CIBaselinePolicyTests(unittest.TestCase):
         selected = json.loads((ROOT / ".github/public-source-selected-actions.json").read_text())
         self.assertFalse(selected["github_owned_allowed"])
         self.assertFalse(selected["verified_allowed"])
-        self.assertEqual(set(selected["patterns_allowed"]), uses)
-        self.assertEqual(len(selected["patterns_allowed"]), 5)
+        dependencies = json.loads((ROOT / ".github/action-dependencies.json").read_text())
+        self.assertTrue(set(dependencies) <= uses)
+        transitive = {action for nested in dependencies.values() for action in nested}
+        for action in transitive:
+            self.assertRegex(action, r"^[^@*]+@[0-9a-f]{40}$")
+        self.assertEqual(set(selected["patterns_allowed"]), uses | transitive)
+        self.assertEqual(len(selected["patterns_allowed"]), 8)
         self.assertEqual(
             json.loads((ROOT / ".github/public-source-actions-permissions.json").read_text()),
             {"enabled": True, "allowed_actions": "selected", "sha_pinning_required": True},

@@ -1,6 +1,7 @@
 """Explicit job rosters for the public boundary and retained historical CI."""
 
 PUBLIC_JOBS = frozenset({"repository-checks", "public-smoke", "browser", "public-checks"})
+PUBLICATION_JOBS = frozenset({"pages-deploy"})
 NATIVE_JOBS = frozenset(
     {
         "beta-cell-feedback",
