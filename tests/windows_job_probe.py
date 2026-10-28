@@ -14,6 +14,11 @@ def kernel():
         ("IsProcessInJob", (wintypes.HANDLE, wintypes.HANDLE, ctypes.c_void_p), wintypes.BOOL),
         ("GetExitCodeProcess", (wintypes.HANDLE, ctypes.c_void_p), wintypes.BOOL),
         (
+            "GetProcessTimes",
+            (wintypes.HANDLE,) + (ctypes.c_void_p,) * 4,
+            wintypes.BOOL,
+        ),
+        (
             "QueryFullProcessImageNameW",
             (wintypes.HANDLE, wintypes.DWORD, wintypes.LPWSTR, ctypes.c_void_p),
             wintypes.BOOL,
@@ -26,7 +31,7 @@ def kernel():
     return library
 
 
-def inspect_job_processes(process, pids):
+def inspect_job_processes(process, pids, *, image_cache=None):
     """Call only with IDs just returned by this retained process's live Job."""
     if len(pids) > 512:
         raise ValueError("Windows test probe exceeds current Job capacity")
@@ -57,12 +62,35 @@ def inspect_job_processes(process, pids):
                 exit_code=code.value,
                 wait_result=api.WaitForSingleObject(handle, 0),
             )
+            creation, exited, system, user = (wintypes.FILETIME() for _ in range(4))
+            if api.GetProcessTimes(
+                handle,
+                ctypes.byref(creation),
+                ctypes.byref(exited),
+                ctypes.byref(system),
+                ctypes.byref(user),
+            ):
+                item["creation_time"] = creation.dwLowDateTime | creation.dwHighDateTime << 32
+            else:
+                item["creation_error"] = ctypes.get_last_error()
             image = ctypes.create_unicode_buffer(32768)
             size = wintypes.DWORD(len(image))
             if api.QueryFullProcessImageNameW(handle, 0, image, ctypes.byref(size)):
                 item["image_basename"] = PureWindowsPath(image.value).name
             else:
                 item["image_error"] = ctypes.get_last_error()
+            if image_cache is not None and member.value and "creation_time" in item:
+                previous = image_cache.get(pid)
+                if previous is not None and previous[0] == item["creation_time"]:
+                    item["earlier_running_image_basename"] = previous[1]
+                if (
+                    row["leader_returncode"] is None
+                    and item["wait_result"] == 258
+                    and "image_basename" in item
+                    and (pid in image_cache or len(image_cache) < 512)
+                ):
+                    # Values only: never retain a query handle or a process object.
+                    image_cache[pid] = (item["creation_time"], item["image_basename"])
         finally:
             if not api.CloseHandle(handle):
                 raise ctypes.WinError(ctypes.get_last_error())

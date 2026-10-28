@@ -29,14 +29,19 @@ class HTTPTaskSmoke(unittest.TestCase):
 
             def observe(owner):
                 live = original(owner)
-                if live and owner.process.poll() is not None:
+                if live:
+                    cache = owner.__dict__.setdefault("_test_running_image_cache", {})
+                    before = dict(cache)
                     frame = sys._getframe(1)
-                    row = inspect_job_processes(owner.process, list(live))
+                    row = inspect_job_processes(owner.process, list(live), image_cache=cache)
                     row["caller"] = f"{Path(frame.f_code.co_filename).name}:{frame.f_lineno}"
-                    print(
-                        "OPENT1D_WINDOWS_EXIT_INVENTORY=" + json.dumps(row, sort_keys=True),
-                        flush=True,
-                    )
+                    if row["leader_returncode"] is not None or cache != before:
+                        prefix = (
+                            "OPENT1D_WINDOWS_EXIT_INVENTORY="
+                            if row["leader_returncode"] is not None
+                            else "OPENT1D_WINDOWS_RUNNING_INVENTORY="
+                        )
+                        print(prefix + json.dumps(row, sort_keys=True), flush=True)
                 return live
 
             observer = patch.object(WindowsOwnership, "observe", observe)
