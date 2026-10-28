@@ -6,6 +6,7 @@ import { createHash } from 'node:crypto';
 import { cp, mkdir, readFile, readdir, realpath, rm, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import path from 'node:path';
+import { completeProbe, disposeObservers, errorDetails, observeApplication, waitForApplications } from './mac_probe_lifecycle.mjs';
 
 assert.equal(process.platform, 'darwin');
 assert.equal(process.arch, 'arm64');
@@ -28,15 +29,16 @@ const foreignBytes = Buffer.from(JSON.stringify({ schema: 'opent1d.gui-job/1', i
 await writeFile(foreign, foreignBytes);
 const statePath = path.join(evidence, 'session.json');
 let expired = false;
+let deadlineClose = Promise.resolve({});
 const timeout = setTimeout(() => {
   expired = true;
   console.error('Mac application probe exceeded 300 seconds');
   // Closing Chromium rejects pending UI waits; the ordinary finally still owns
   // application shutdown. Do not exit past cleanup while a worker may be live.
-  if (browser) void browser.close().catch(() => {});
+  if (browser) deadlineClose = browser.close().then(() => ({}), error => ({ error }));
 }, 300_000);
-let state, browser, context, page;
-const errors = [], ownedApps = new Set([application]), checks = [];
+let state, browser, context, page, primaryError, screenshotError, receipt;
+const errors = [], observers = [], checks = [];
 
 async function until(read, test, milliseconds = 30_000, cleanup = false) {
   const end = Date.now() + milliseconds;
@@ -56,11 +58,10 @@ async function api(route, body) {
   return response;
 }
 async function launch(app) {
-  ownedApps.add(app);
   await rm(statePath, { force: true });
-  execFileSync('/usr/bin/open', ['-n', app, '--args', '--data-dir', workspace, '--state-file', statePath, '--no-browser'], {
-    env: { ...process.env, PATH: '/nonexistent', PYTHONPATH: '/nonexistent', VIRTUAL_ENV: '/nonexistent' },
-  });
+  observers.push(observeApplication(app,
+    ['--data-dir', workspace, '--state-file', statePath, '--no-browser'],
+    path.join(evidence, `launch-${observers.length + 1}.log`)));
   state = await until(async () => JSON.parse(await readFile(statePath)), value => Number.isInteger(value.pid));
   const bootstrap = await until(async () => (await api('/api/v1/bootstrap')).json(), value => value.schema === 'opent1d.gui-session/2');
   assert.deepEqual(bootstrap.capabilities, ['mmtt-sensitivity', 'mmtt-sampling']);
@@ -75,12 +76,12 @@ async function launch(app) {
 }
 async function stop() {
   if (!state) return;
-  const pid = state.pid;
   const response = await api('/api/desktop/shutdown', {});
   assert.equal(response.status, 202);
-  await until(async () => {
-    try { process.kill(pid, 0); return false; } catch (error) { if (error.code === 'ESRCH') return true; throw error; }
-  }, Boolean, 45_000, true);
+  await waitForApplications(observers);
+  // The endpoint and its manager must be gone before another app is admitted.
+  await assert.rejects(readFile(path.join(workspace, 'application-session.json')),
+    error => error.code === 'ENOENT');
   state = undefined;
 }
 async function inventory(folder) {
@@ -220,28 +221,38 @@ try {
   assert.deepEqual(errors, []);
   assert(!expired, 'The application probe exceeded its global deadline');
   const manifest = JSON.parse(await readFile(path.join(application, 'Contents/Resources/payload/package-manifest.json')));
-  await writeFile(path.join(evidence, 'receipt.json'), JSON.stringify({
+  receipt = {
     build_id: manifest.build_id, source_revision: manifest.source.revision,
     runtime: manifest.runtime.version, browser: browser.version(), checks,
     page_errors: errors, signed_developer_id: false, notarised: false,
-  }, null, 2) + '\n');
-  console.log(JSON.stringify({ evidence, checks: checks.length, build_id: manifest.build_id }));
+  };
 } catch (error) {
-  if (page) await page.screenshot({ path: path.join(evidence, 'failure.png'), fullPage: true }).catch(() => {});
-  throw error;
+  primaryError = error;
+  if (page) {
+    try { await page.screenshot({ path: path.join(evidence, 'failure.png'), fullPage: true }); }
+    catch (error) { screenshotError = error; }
+  }
 } finally {
   clearTimeout(timeout);
-  if (context) await context.tracing.stop({ path: path.join(evidence, 'trace.zip') }).catch(() => {});
-  if (browser) await browser.close().catch(() => {});
-  if (state) await stop().catch(() => {});
-  // Only native launchers from this invocation's explicit app paths are owned.
-  const processes = execFileSync('/bin/ps', ['-ww', '-axo', 'pid=,command='], { encoding: 'utf8' });
-  const nativePaths = await Promise.all([...ownedApps].map(app => realpath(path.join(app, 'Contents/MacOS/OpenT1D')).catch(() => null)));
-  for (const line of processes.split('\n')) {
-    const match = line.trim().match(/^(\d+)\s+(.+)$/);
-    const binary = match && match[2].split(' --data-dir ')[0];
-    if (binary && nativePaths.includes(await realpath(binary).catch(() => undefined))) {
-      try { process.kill(Number(match[1]), 'SIGTERM'); } catch { /* already exited */ }
-    }
-  }
+  let nativeExits;
+  await completeProbe({
+    primaryError,
+    cleanup: [
+      ['authenticated shutdown', stop],
+      ['native application exits', async () => { nativeExits = await waitForApplications(observers); }],
+      ['trace', async () => { if (context) await context.tracing.stop({ path: path.join(evidence, 'trace.zip') }); }],
+      ['browser', async () => { if (browser) await browser.close(); }],
+      ['deadline browser cleanup', async () => { const result = await deadlineClose; if (result.error) throw result.error; }],
+      ['failure screenshot', async () => { if (screenshotError) throw screenshotError; }],
+    ],
+    commit: async () => {
+      assert(receipt && !expired, 'A completed in-deadline probe is required');
+      await writeFile(path.join(evidence, 'receipt.json'),
+        JSON.stringify({ ...receipt, native_exits: nativeExits, cleanup: 'confirmed' }, null, 2) + '\n', { flag: 'wx' });
+    },
+    dispose: () => disposeObservers(observers),
+    recordFailure: error => writeFile(path.join(evidence, 'failure.json'),
+      JSON.stringify(errorDetails(error), null, 2) + '\n', { flag: 'wx' }),
+  });
 }
+console.log(JSON.stringify({ evidence, checks: checks.length, build_id: receipt.build_id }));
