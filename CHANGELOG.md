@@ -4,6 +4,11 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Close the cancellation window at local-tool cleanup entry and bound the final
+  direct-worker reap. Retain catalogue/setup descendant cleanup, prior signal
+  handlers and existing timeout/exit receipts. Add focused transition and real
+  caller receipt regressions with strict process observations.
+
 - Retain local-tool process ownership after normal worker exit or crash, so
   catalogue verification, historical readers and task setup clean up owned
   descendants before returning. Preserve partial logs, graceful cleanup and

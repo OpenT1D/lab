@@ -5,6 +5,7 @@ import json
 import re
 import signal
 import stat
+import subprocess
 import time
 from pathlib import Path
 
@@ -22,6 +23,7 @@ ROOT = Path(__file__).resolve().parents[2]
 ID = re.compile(r"[a-z][a-z0-9_-]{0,63}\Z")
 SHA = re.compile(r"[0-9a-f]{64}\Z")
 CLEANUP_GRACE_SECONDS = 10
+CLEANUP_REAP_SECONDS = 2
 GROUP_RECHECK_SECONDS = 1
 
 
@@ -179,7 +181,7 @@ def cleanup(process):
             process.poll()
             if _owned_tree_call(process, tree_exists):
                 _owned_tree_call(process, force_tree)
-            process.wait()
+            process.wait(timeout=CLEANUP_REAP_SECONDS)
         finally:
             close_tree(process)
 
@@ -187,16 +189,13 @@ def cleanup(process):
 def supervise(args, logfile, cwd, env, timeout):
     """Scoped signal handling for explicit trusted tools, never archived scripts."""
     process, received, previous = None, None, {}
-    cleaning = False
 
     def stop(signum, _frame):
         nonlocal received
         if received is None:
             received = signum
-            # Launch and final cleanup must finish establishing/releasing their
-            # ownership. Their latched signal is checked before returning.
-            if process is not None and not cleaning:
-                raise KeyboardInterrupt("Local tool operation interrupted")
+            # Raising here could bypass the transition into final cleanup.
+            # Bounded waits observe cancellation while ownership stays scoped.
 
     try:
         for signum in handled_signals():
@@ -210,9 +209,22 @@ def supervise(args, logfile, cwd, env, timeout):
                 )
                 if received is not None:
                     raise KeyboardInterrupt("Local tool operation interrupted")
-                code = process.wait(timeout=timeout)
+                deadline = None if timeout is None else time.monotonic() + timeout
+                while received is None:
+                    budget = (
+                        0.1 if deadline is None else max(0, min(0.1, deadline - time.monotonic()))
+                    )
+                    try:
+                        code = process.wait(timeout=budget)
+                        break
+                    except subprocess.TimeoutExpired:
+                        if (
+                            received is None
+                            and deadline is not None
+                            and time.monotonic() >= deadline
+                        ):
+                            raise subprocess.TimeoutExpired(args, timeout) from None
             finally:
-                cleaning = True
                 if process is not None:
                     cleanup(process)
         if received is not None:
