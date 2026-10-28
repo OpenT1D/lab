@@ -298,6 +298,7 @@ subtrees:
       - file: docs/decisions/0074-private-installer-publication-integration
       - file: docs/decisions/0076-public-check-families
       - file: docs/decisions/0077-reviewed-main-documentation-publication
+      - file: docs/decisions/0078-dependency-review-completeness
       - file: docs/decisions/0079-windows-stdlib-worker-identity
       - file: docs/decisions/0059-maintained-runtimes-and-local-gui
       - file: docs/templates/model-card

@@ -331,9 +331,55 @@ jobs:
           if-no-files-found: warn
           retention-days: 5
 
+  dependency-review:
+    name: Dependency review
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Review introduced dependency vulnerabilities
+        id: review
+        uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294  # v5.0.0
+        with:
+          base-ref: ${{ github.event.pull_request.base.sha }}
+          head-ref: ${{ github.event.pull_request.head.sha }}
+          fail-on-severity: high
+          fail-on-scopes: runtime, development, unknown
+          vulnerability-check: true
+          license-check: false
+          warn-only: false
+          comment-summary-in-pr: never
+          show-openssf-scorecard: false
+          retry-on-snapshot-warnings: true
+          retry-on-snapshot-warnings-timeout: 120
+      - name: Require complete matching dependency snapshots
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          DEPENDENCY_CHANGES: ${{ steps.review.outputs.dependency-changes }}
+        run: |
+          mkdir -p results/ci
+          python3 scripts/dependency_snapshot.py > results/ci/dependency-snapshot.json
+      - name: Preserve dependency completeness receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: dependency-review-${{ github.run_id }}-${{ github.run_attempt }}
+          path: results/ci/dependency-snapshot.json
+          if-no-files-found: warn
+          retention-days: 5
+
   public-checks:
     name: Repository checks
-    needs: [repository-checks, public-smoke, browser]
+    needs: [repository-checks, public-smoke, browser, dependency-review]
     if: always()
     runs-on: ubuntu-24.04
     timeout-minutes: 15
@@ -346,6 +392,7 @@ jobs:
       - name: Require every public family
         env:
           PUBLIC_CHECK_RESULTS: ${{ toJSON(needs) }}
+          PUBLIC_CHECK_EVENT: ${{ github.event_name }}
         run: python3 scripts/ci_gate.py
 
   pages-deploy:

@@ -68,7 +68,7 @@ class PublicGateTests(unittest.TestCase):
     def test_every_failure_cancellation_skip_or_missing_result_is_rejected(self):
         names = sorted(ci_gate.REQUIRED)
         for states in itertools.product(
-            ("success", "failure", "cancelled", "skipped", None), repeat=3
+            ("success", "failure", "cancelled", "skipped", None), repeat=len(names)
         ):
             results = {name: {"result": state} for name, state in zip(names, states, strict=True)}
             with self.subTest(states=states):
@@ -94,11 +94,23 @@ class PublicGateTests(unittest.TestCase):
             with self.subTest(missing=name), self.assertRaises(ValueError):
                 ci_gate.validate({key: value for key, value in valid.items() if key != name})
 
+    def test_pr_cannot_pass_with_only_the_previous_three_public_families(self):
+        previous = {
+            name: {"result": "success"} for name in ("repository-checks", "public-smoke", "browser")
+        }
+        with self.assertRaisesRegex(ValueError, "Missing"):
+            ci_gate.validate(previous)
+
     def test_gate_cli_returns_failure_for_bad_or_absent_input(self):
         path = Path(ci_gate.__file__)
         valid = json.dumps({name: {"result": "success"} for name in ci_gate.REQUIRED})
         for payload, expected in ((None, 1), ("not-json", 1), ("{}", 1), (valid, 0)):
-            env = {key: value for key, value in os.environ.items() if key != "PUBLIC_CHECK_RESULTS"}
+            env = {
+                key: value
+                for key, value in os.environ.items()
+                if key not in {"PUBLIC_CHECK_RESULTS", "PUBLIC_CHECK_EVENT"}
+            }
+            env["PUBLIC_CHECK_EVENT"] = "pull_request"
             if payload is not None:
                 env["PUBLIC_CHECK_RESULTS"] = payload
             completed = subprocess.run(
@@ -109,6 +121,18 @@ class PublicGateTests(unittest.TestCase):
                 check=False,
             )
             self.assertEqual(completed.returncode, expected, completed.stderr)
+
+    def test_only_named_non_pr_events_allow_the_dependency_only_skip(self):
+        valid = {name: {"result": "success"} for name in ci_gate.REQUIRED}
+        skipped = valid | {"dependency-review": {"result": "skipped"}}
+        for event in ("push", "workflow_dispatch"):
+            ci_gate.validate(skipped, event)
+            for name in ci_gate.REQUIRED - {"dependency-review"}:
+                with self.subTest(event=event, name=name), self.assertRaises(ValueError):
+                    ci_gate.validate(skipped | {name: {"result": "skipped"}}, event)
+        for event in ("pull_request", "pull_request_target", "schedule", "", None):
+            with self.subTest(event=event), self.assertRaises(ValueError):
+                ci_gate.validate(skipped, event)
 
 
 class SmokeSelectionTests(unittest.TestCase):

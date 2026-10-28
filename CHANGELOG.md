@@ -26,6 +26,11 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
   handlers and existing timeout/exit receipts. Add focused transition and real
   caller receipt regressions with strict process observations.
 
+- Prepare monthly root-tooling/Action update PRs and require read-only dependency
+  review on pull requests. Reject introduced high/critical advisories in every
+  dependency scope and require complete API comparisons matching the official
+  action's scan. Historical native locks and existing alert triage remain separate.
+
 - Add named local check stages, explicit Linux/macOS/Windows synthetic task
   smokes and four real Chromium flows. Keep the broad root job and historical
   native gates; the stable required public result accepts only successful root,
