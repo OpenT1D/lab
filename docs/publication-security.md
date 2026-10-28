@@ -195,6 +195,36 @@ Snapshot completeness is bounded API evidence, not a guarantee that every
 vulnerability is known or that software/scientific results are valid. Review
 existing alerts separately; this increment supplies no automatic dismissals.
 
+### Hosted delta acceptance — 28 October 2026
+
+The disposable [negative PR 14](https://github.com/OpenT1D/lab/pull/14) introduced
+`requests==2.19.1` only in a root requirements manifest. The root uv project did
+not install or import that package. In the [final negative run](https://github.com/OpenT1D/lab/actions/runs/40779423853),
+the official action rejected high-severity
+[GHSA-x84v-xcm2-53pg](https://github.com/advisories/GHSA-x84v-xcm2-53pg).
+Root checks, all three platform smokes and Chromium succeeded; only dependency
+review and the required aggregate failed. Root verification ran 1,668 tests
+with 32 expected skips. This establishes the aggregate's dependency failure
+path independently of unrelated root failures.
+
+The [safe counterprobe PR 16](https://github.com/OpenT1D/lab/pull/16) removed that
+manifest and retained only an inspected `more-itertools==10.8.0` addition to the
+actual root `uv.lock`. Its [final hosted run](https://github.com/OpenT1D/lab/actions/runs/40779435592)
+passed every public family and the aggregate. GitHub's actual comparison
+contained the new uv-lock entry, classified as runtime despite its development
+group; all three scopes are checked. The guard bound four complete changes on
+one warning-free page to the official scan, in one attempt. Root verification
+again ran 1,668 tests with 32 expected skips. No probe dependency or lock change
+is retained in main. Both PRs were closed without merge and their remote probe
+branches were deleted.
+
+The first two probe runs remain recorded failures: their root checks exposed a
+fixed 61/62 tooling-count assertion. Its replacement checks complete shared
+package records across Linux/macOS/Windows and the sole Windows `colorama`
+addition. Independent version/source/drop counterexamples remain rejected;
+archived runtime validation is unchanged. Local test fixtures alone were not
+used to claim either hosted graph coverage or aggregate success.
+
 ## CodeQL observation — 28 October 2026
 
 The maintainer separately enabled GitHub-managed CodeQL default setup and read
