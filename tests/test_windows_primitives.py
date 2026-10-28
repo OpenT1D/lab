@@ -733,9 +733,121 @@ class WindowsOwnershipTests(unittest.TestCase):
 
     @unittest.skipUnless(os.name == "nt", "Actual Windows kernel required")
     def test_real_job_launch_gates_and_reaps_example(self):
+        with self.subTest(boundary="actual worker membership before START"):
+            self._probe_membership_before_start()
         for repetition in range(5):
             with self.subTest(repetition=repetition):
                 self._probe_real_job_completion(repetition)
+
+    def _probe_membership_before_start(self):
+        import ctypes
+        from ctypes import wintypes
+
+        from experiments.gui.windows_process import Job, spawn_owned
+        from experiments.workflows.checks import safe_environment
+        from tests.windows_job_probe import kernel
+
+        api = kernel()
+        inner_handle, process, owner = None, None, None
+        observed = {}
+        original_assign = Job.assign
+        with tempfile.TemporaryDirectory(prefix="opent1d-before-assign-") as temporary:
+            root = Path(temporary).resolve()
+            ready, work = root / "ready.json", root / "work-started"
+            package = root / "experiments"
+            package.mkdir()
+            (package / "__init__.py").write_text(
+                "import json,os,threading\n"
+                "from pathlib import Path\n"
+                f"__path__.append({str(ROOT / 'experiments')!r})\n"
+                "from experiments.platform_files import atomic_write_bytes\n"
+                "backstop=threading.Timer(10,lambda:os._exit(97))\n"
+                "backstop.daemon=True\nbackstop.start()\n"
+                f"atomic_write_bytes(Path({str(ready)!r}),json.dumps({{'pid':os.getpid()}}).encode())\n",
+                encoding="utf-8",
+            )
+            (package / "synthetic_gate_probe.py").write_text(
+                "from pathlib import Path\n"
+                f"Path({str(work)!r}).write_bytes(b'Only admitted module work')\n",
+                encoding="utf-8",
+            )
+
+            def delayed_assign(job, native):
+                nonlocal inner_handle
+                deadline = time.monotonic() + 5
+                actual = None
+                while time.monotonic() < deadline:
+                    try:
+                        candidate = json.loads(ready.read_text(encoding="utf-8"))
+                        if isinstance(candidate, dict) and set(candidate) == {"pid"}:
+                            if type(candidate["pid"]) is int and candidate["pid"] > 0:
+                                actual = candidate["pid"]
+                                break
+                    except (FileNotFoundError, json.JSONDecodeError):
+                        pass
+                    time.sleep(0.01)
+                self.assertIsNotNone(actual, "Actual worker did not publish bounded readiness")
+                self.assertFalse(work.exists(), "Module ran before START admission")
+                inner_handle = api.OpenProcess(0x00100000 | 0x1000, False, actual)
+                self.assertTrue(inner_handle, "Actual ready worker query handle is unavailable")
+                original_assign(job, native)
+                member = wintypes.BOOL()
+                if not api.IsProcessInJob(inner_handle, job.handle, ctypes.byref(member)):
+                    raise ctypes.WinError(ctypes.get_last_error())
+                observed.update(
+                    leader_pid=native.pid,
+                    actual_worker_pid=actual,
+                    actual_worker_in_job=bool(member.value),
+                    actual_worker_wait=api.WaitForSingleObject(inner_handle, 0),
+                    work_started=work.exists(),
+                )
+                print(
+                    "OPENT1D_WINDOWS_BEFORE_START=" + json.dumps(observed, sort_keys=True),
+                    flush=True,
+                )
+                self.assertFalse(work.exists(), "Module ran while its START gate was closed")
+                self.assertTrue(
+                    member.value, "Actual worker is outside the assigned Job: " + repr(observed)
+                )
+
+            try:
+                with open(os.devnull, "wb") as log, patch.object(Job, "assign", delayed_assign):
+                    process, owner = spawn_owned(
+                        [
+                            sys.executable,
+                            "-B",
+                            "-E",
+                            "-s",
+                            "-S",
+                            "-m",
+                            "experiments.synthetic_gate_probe",
+                        ],
+                        cwd=root,
+                        env=safe_environment(),
+                        stdout=log,
+                        stderr=log,
+                    )
+                    self.assertEqual(process.wait(timeout=5), 0)
+                    self.assertTrue(work.is_file(), "Admitted module work did not run")
+            finally:
+                try:
+                    try:
+                        if owner is not None:
+                            _forced, remaining = owner.cleanup(0)
+                            self.assertEqual(remaining, [])
+                    finally:
+                        if inner_handle:
+                            # Failed assignment closes private stdin (EOF); the
+                            # fixture also exits itself after ten seconds. This is
+                            # synchronization only, never termination by a saved PID.
+                            result = api.WaitForSingleObject(inner_handle, 12000)
+                            print("OPENT1D_WINDOWS_BEFORE_START_CLEANUP=" + str(result), flush=True)
+                            self.assertEqual(result, 0, "Actual private fixture did not exit")
+                        if not observed.get("actual_worker_in_job", False):
+                            self.assertFalse(work.exists(), "Failed admission ran module work")
+                finally:
+                    if inner_handle and not api.CloseHandle(inner_handle):
+                        raise ctypes.WinError(ctypes.get_last_error())
 
     def _probe_real_job_completion(self, repetition):
         from experiments.gui.windows_process import spawn_owned
