@@ -47,8 +47,8 @@ block unrelated internal fixes, contract inventory or feasibility work.
 
 | Order | Bounded change | Exit criterion and dependency |
 | --- | --- | --- |
-| Next selected change — AI development | In a separate branch/PR after this roadmap lands, refresh agent guidance, map components to existing tests, define a small task/review handoff and trial two repository skills. | A fresh development session can find the current task, correct environment, relevant checks and evidence boundaries. Record observations from representative review cases; merge this bounded change before widening the agent workflow. See the next section. |
-| Next — Reliability fixes | Close the three reproduced runtime/storage/source-identity cases below through focused regression-and-fix PRs. | Each negative reproduction fails on the old behavior and passes after correction; preserve supported complete, failed and relocated results. A workflow trial may reproduce a defect in temporary fixtures, but permanent regression tests land with their fixes. |
+| Implemented internal increment — AI development | Refreshed agent guidance, canonical component/test map, issue/PR handoff and two focused repository skills. | The [trial record](docs/research/ai-development-trial.md) records existing review cases and internal numerical checks. Independent usability and productivity gains are not established. Widening the workflow requires a separate selected change. |
+| Next selected change — Reliability fixes | Close the three reproduced runtime/storage/source-identity cases below through focused regression-and-fix PRs. | Each negative reproduction fails on the old behavior and passes after correction; preserve supported complete, failed and relocated results. A workflow trial may reproduce a defect in temporary fixtures, but permanent regression tests land with their fixes. |
 | Next — Public CI baseline | Deliberately enable the reviewed public checks, explicitly set up Python/uv/Node, retain diagnostic output and measure cold-run duration. | The exact PR revision and integrated main pass hosted checks. Only then require the stable `Repository checks` status and read back branch protection. Keep historical native execution excluded. |
 | Follow-up — Test families and platform coverage | Reuse one set of check stages locally and in CI; separate style/docs, root contracts, supported-task smoke, browser, native and release checks. | Linux runs the broad root suite; macOS and Windows first demonstrate both MMTT tasks, local HTTP, filesystem/process behavior and byte-exact reconstruction. Expand the root matrix from observed portability results. Expected host/native skips are explicit; missing Node must not silently skip the required frontend tests. |
 | Parallel bounded work — Documentation and first use | Publish the existing Sphinx output and improve the routes for trying, extending and contributing to the project. Run the source-checkout exercise with an actual intended user when available. | A warning-free build is hosted at a verified URL. A user can prepare, freeze, run, interpret and reopen a synthetic result; record assistance, mistakes and failed attempts. User availability does not block internal fixes or packaging probes. |
@@ -58,8 +58,11 @@ block unrelated internal fixes, contract inventory or feasibility work.
 
 ### Next implementation: AI development
 
-After merging this roadmap, synchronize main and begin a separate AI-development
-change. Keep its first PR small:
+The first bounded increment is implemented in the
+[development guide](docs/development.md) and repository skills, with
+[trial observations](docs/research/ai-development-trial.md). The following
+defines its scope and ongoing review practice; it does not select a broader
+agent automation or release workflow:
 
 - Update the short root `AGENTS.md` with current scope and navigation. Put
   component ownership, tooling/native environment selection and the test map in
