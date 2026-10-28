@@ -1,0 +1,189 @@
+{
+  "all_engineering_checks_passed": true,
+  "base_commit": "5cc110710e8c521a08c0cc9a5e025c93523d2ab5",
+  "branch": "codex/lit002-insulin-absorption",
+  "checks_run": [
+    "uv sync --locked",
+    "native Node test-native.mjs (6 passing tests)",
+    "uv run --locked python scripts/check.py (132 tests, lint and strict docs build)",
+    "frozen 18-case matrix",
+    "python -S report reconstruction and byte-identical comparison",
+    "locked Matplotlib rendering and visual inspection"
+  ],
+  "comparisons": [
+    {
+      "arm": "cambridge_mean_matched",
+      "max_abs_glucose_difference_mg_dl": 0.0,
+      "max_abs_insulin_difference_mU_per_L": 0.0,
+      "reference_arm": "cambridge_native",
+      "resolution": "standard",
+      "scenario": "basal",
+      "signed_glucose_difference_at_max_mg_dl": 0.0,
+      "signed_insulin_difference_at_max_mU_per_L": 0.0,
+      "status": "available",
+      "time_of_max_glucose_difference_min": 0,
+      "time_of_max_insulin_difference_min": 0
+    },
+    {
+      "arm": "faggionato_sc",
+      "max_abs_glucose_difference_mg_dl": 0.0,
+      "max_abs_insulin_difference_mU_per_L": 0.0,
+      "reference_arm": "cambridge_native",
+      "resolution": "standard",
+      "scenario": "basal",
+      "signed_glucose_difference_at_max_mg_dl": 0.0,
+      "signed_insulin_difference_at_max_mU_per_L": 0.0,
+      "status": "available",
+      "time_of_max_glucose_difference_min": 0,
+      "time_of_max_insulin_difference_min": 0
+    },
+    {
+      "arm": "faggionato_sc",
+      "max_abs_glucose_difference_mg_dl": 0.0,
+      "max_abs_insulin_difference_mU_per_L": 0.0,
+      "reference_arm": "cambridge_mean_matched",
+      "resolution": "standard",
+      "scenario": "basal",
+      "signed_glucose_difference_at_max_mg_dl": 0.0,
+      "signed_insulin_difference_at_max_mU_per_L": 0.0,
+      "status": "available",
+      "time_of_max_glucose_difference_min": 0,
+      "time_of_max_insulin_difference_min": 0
+    },
+    {
+      "arm": "cambridge_mean_matched",
+      "max_abs_glucose_difference_mg_dl": 3.954232384016194,
+      "max_abs_insulin_difference_mU_per_L": 0.9405939938027554,
+      "reference_arm": "cambridge_native",
+      "resolution": "standard",
+      "scenario": "pulse",
+      "signed_glucose_difference_at_max_mg_dl": 3.954232384016194,
+      "signed_insulin_difference_at_max_mU_per_L": -0.9405939938027554,
+      "status": "available",
+      "time_of_max_glucose_difference_min": 204,
+      "time_of_max_insulin_difference_min": 164
+    },
+    {
+      "arm": "faggionato_sc",
+      "max_abs_glucose_difference_mg_dl": 4.02906253167248,
+      "max_abs_insulin_difference_mU_per_L": 1.529558859295788,
+      "reference_arm": "cambridge_native",
+      "resolution": "standard",
+      "scenario": "pulse",
+      "signed_glucose_difference_at_max_mg_dl": 4.02906253167248,
+      "signed_insulin_difference_at_max_mU_per_L": -1.529558859295788,
+      "status": "available",
+      "time_of_max_glucose_difference_min": 196,
+      "time_of_max_insulin_difference_min": 136
+    },
+    {
+      "arm": "faggionato_sc",
+      "max_abs_glucose_difference_mg_dl": 1.630928792135137,
+      "max_abs_insulin_difference_mU_per_L": 1.1559209904308174,
+      "reference_arm": "cambridge_mean_matched",
+      "resolution": "standard",
+      "scenario": "pulse",
+      "signed_glucose_difference_at_max_mg_dl": 1.630928792135137,
+      "signed_insulin_difference_at_max_mU_per_L": -1.1559209904308174,
+      "status": "available",
+      "time_of_max_glucose_difference_min": 165,
+      "time_of_max_insulin_difference_min": 134
+    },
+    {
+      "arm": "cambridge_mean_matched",
+      "max_abs_glucose_difference_mg_dl": 6.959564490356058,
+      "max_abs_insulin_difference_mU_per_L": 0.9405939938027554,
+      "reference_arm": "cambridge_native",
+      "resolution": "standard",
+      "scenario": "meal_pulse",
+      "signed_glucose_difference_at_max_mg_dl": 6.959564490356058,
+      "signed_insulin_difference_at_max_mU_per_L": -0.9405939938027554,
+      "status": "available",
+      "time_of_max_glucose_difference_min": 243,
+      "time_of_max_insulin_difference_min": 164
+    },
+    {
+      "arm": "faggionato_sc",
+      "max_abs_glucose_difference_mg_dl": 5.084432368074545,
+      "max_abs_insulin_difference_mU_per_L": 1.529558859295788,
+      "reference_arm": "cambridge_native",
+      "resolution": "standard",
+      "scenario": "meal_pulse",
+      "signed_glucose_difference_at_max_mg_dl": 5.084432368074545,
+      "signed_insulin_difference_at_max_mU_per_L": -1.529558859295788,
+      "status": "available",
+      "time_of_max_glucose_difference_min": 204,
+      "time_of_max_insulin_difference_min": 136
+    },
+    {
+      "arm": "faggionato_sc",
+      "max_abs_glucose_difference_mg_dl": 2.4363347027348823,
+      "max_abs_insulin_difference_mU_per_L": 1.1559209904308174,
+      "reference_arm": "cambridge_mean_matched",
+      "resolution": "standard",
+      "scenario": "meal_pulse",
+      "signed_glucose_difference_at_max_mg_dl": -2.4363347027348823,
+      "signed_insulin_difference_at_max_mU_per_L": -1.1559209904308174,
+      "status": "available",
+      "time_of_max_glucose_difference_min": 255,
+      "time_of_max_insulin_difference_min": 134
+    }
+  ],
+  "completed_cases": 18,
+  "completed_utc": "2026-09-19T23:33:53.593740+00:00",
+  "failed_cases": 0,
+  "impulse_metrics": {
+    "arms": {
+      "cambridge_mean_matched": {
+        "fraction_absorbed_at_horizon": 0.9999302767767481,
+        "t50_min": 99.48064980625401,
+        "t90_min": 230.55535736329665
+      },
+      "cambridge_native": {
+        "fraction_absorbed_at_horizon": 0.9999709176543559,
+        "t50_min": 92.30908445091632,
+        "t90_min": 213.9346093427086
+      },
+      "faggionato_sc": {
+        "fraction_absorbed_at_horizon": 0.999806581928901,
+        "t50_min": 97.3153844148699,
+        "t90_min": 230.82898971660256
+      }
+    },
+    "scope": "Model cumulative appearance after an ideal synthetic impulse; not clinical duration of action.",
+    "settings": {
+      "dose_mU_per_kg": 200,
+      "horizon_min": 720,
+      "note": "Separate ideal-impulse zero-history SC illustration, not the finite-pulse coupled scenario. t50/t90 from model cumulative appearance, not clinical duration of action.",
+      "prior_basal": 0,
+      "step_min": 0.25
+    }
+  },
+  "limitations": [
+    "Extrema and difference times are sampled on the archived output grid; ties use the first sample.",
+    "Finite-horizon cumulative absorption includes basal input and is balance-derived, not an independent mass measurement.",
+    "Parameter matching equates analytical mean appearance time; no data fitting or outcome ranking occurs.",
+    "Failed scheduled cases remain in coverage and make affected comparisons unavailable.",
+    "Artifact hashes check consistency with the local manifest, not independent scientific authenticity.",
+    "Local implementation verification; CI job added but remote CI not run in this task. No human validation."
+  ],
+  "local_study": "results/lit002/study",
+  "manifest_sha256": "0e09c4c90531eee0c65478a49beedb0bf0a8773d686ff23a013ee3a45342145f",
+  "maximum_contrast_glucose_refinement_mg_dl": 0.00012097765907981284,
+  "maximum_contrast_insulin_refinement_mU_per_L": 0.00033928444589292894,
+  "maximum_individual_glucose_refinement_mg_dl": 0.0005585489187183157,
+  "maximum_individual_insulin_refinement_mU_per_L": 0.0002287382127574844,
+  "native_tests_passed": 6,
+  "planned_cases": 18,
+  "protocol_sha256": "53e8368dcf25156068567a978cd88b83e00f0863378a7eadee05f3a26e1fa28b",
+  "raw_artifacts_versioned": false,
+  "reconstructed_report_sha256": "503a3f1988852ba5d9e93022c1290fb44b076cdeebf3e05d701c5b71551ec30d",
+  "report_check_count": 181,
+  "report_sha256": "503a3f1988852ba5d9e93022c1290fb44b076cdeebf3e05d701c5b71551ec30d",
+  "repository_check_log_sha256": "0989c653ae3d553396b4f0047b52cf6434322ad9a801106ab7dba0d089bb1a36",
+  "repository_tests_passed": 132,
+  "schema": "lit002-execution/1",
+  "scope": "Synthetic structural sensitivity and numerical verification only. No physiological superiority, clinical prediction, patient reproduction or full-Faggionato model reproduction is established.",
+  "sealed_artifacts": 137,
+  "started_utc": "2026-09-19T23:33:40.609772+00:00"
+}

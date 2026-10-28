@@ -1,0 +1,517 @@
+{
+  "schema": "bc004-execution/1",
+  "status": "completed_synthetic_boundary_preparation",
+  "base_commit": "166da30",
+  "run_path": "results/m4-paired/reference-01",
+  "manifest": {
+    "schema": "bc004-run/1",
+    "status": "completed",
+    "implementation": "bc004-paired-boundary/1",
+    "started_utc": "2026-09-20T09:10:54.965394+00:00",
+    "files": {
+      "preflight.json": "12485036567b0bc8de140f6f752817efd7ac1efc7ff449d648509d8d660cf945",
+      "protocol.json": "00938c5e5a4b8536b40ced817bb07b883a6401bd96dd651a747664d74279f405",
+      "root-pyproject.toml": "e4af0618d9a65625486fd760f76471c75876f20060ddaf75905505d231a557b6",
+      "root-uv.lock": "a44e7cac7edf13bbc37b71a92b61aa3d7545e85aa88dafe41ed8a78d34b56a35",
+      "source-contract.py": "eb422ce11a75840082801f8321fd10c7236509f71b7792ab83032e061b5f386d",
+      "source-forcing.py": "b26fd2fd87aa47da328d24b2cbe56d8e3be45f9b4caf2c3c453f89acb07fddd1",
+      "source-run.py": "a342e45ab3fc5218033d244d870bd2c9cd8a12099a5053b66f250b2c4b761f84",
+      "source-test.py": "0f54fa4b4a3614f94aaa3d28e545e9729bc4ea5d820a08a23bc1956d43a16334"
+    },
+    "python": "3.12.13",
+    "git_head": "166da30dc00e95b99ef68c75f17f842810fbb4b1",
+    "git_dirty": true,
+    "finished_utc": "2026-09-20T09:10:54.992139+00:00"
+  },
+  "preflight": {
+    "schema": "bc004-preflight/1",
+    "protocol": "BC-004/1",
+    "implementation": "bc004-paired-boundary/1",
+    "passed": true,
+    "checks": {
+      "zero_increment": {
+        "values": {
+          "paired_input_relative_error": 0.0,
+          "input_accounting_relative_error": 0.0,
+          "equilibrium_derivative_pmol_kg_min": 0.0,
+          "repeat_absolute_error": 0
+        },
+        "passed": true
+      },
+      "pulse_increment": {
+        "values": {
+          "paired_input_relative_error": 0.0,
+          "input_accounting_relative_error": 0.0,
+          "equilibrium_derivative_pmol_kg_min": 0.0,
+          "repeat_absolute_error": 0
+        },
+        "passed": true
+      },
+      "pulse_synthetic_total": {
+        "values": {
+          "paired_input_relative_error": 0.0,
+          "input_accounting_relative_error": 0.0,
+          "equilibrium_derivative_pmol_kg_min": 2.220446049250313e-16,
+          "repeat_absolute_error": 0
+        },
+        "passed": true
+      },
+      "mass_ramp_increment": {
+        "values": {
+          "paired_input_relative_error": 0.0,
+          "input_accounting_relative_error": 0.0,
+          "equilibrium_derivative_pmol_kg_min": 0.0,
+          "repeat_absolute_error": 0
+        },
+        "passed": true
+      }
+    },
+    "bundles": [
+      {
+        "id": "zero_increment",
+        "baseline_mode": "incremental_zero",
+        "source_unit": "pmol/min",
+        "body_weight_kg": 102.32,
+        "basal_pmol_kg_min": 0.0,
+        "evoked": {
+          "edges": [
+            0.0,
+            240.0
+          ],
+          "left": [
+            0.0
+          ],
+          "right": [
+            0.0
+          ],
+          "units": "pmol/(kg min)"
+        },
+        "insulin": {
+          "forcing": {
+            "edges": [
+              0.0,
+              240.0
+            ],
+            "left": [
+              0.0
+            ],
+            "right": [
+              0.0
+            ],
+            "units": "pmol/(kg min)"
+          },
+          "route": "liver",
+          "state_order": [
+            "Ip",
+            "Il",
+            "hepatic_loss",
+            "peripheral_loss",
+            "input"
+          ],
+          "initial": [
+            0.0,
+            0.0,
+            0,
+            0,
+            0
+          ],
+          "initial_concentration_pmol_l": 0.0,
+          "current_bc002_initial_state_supported": true
+        },
+        "cpeptide": {
+          "forcing": {
+            "edges": [
+              0.0,
+              240.0
+            ],
+            "left": [
+              0.0
+            ],
+            "right": [
+              0.0
+            ],
+            "units": "pmol/(kg min)"
+          },
+          "route": "central",
+          "state_order": [
+            "central",
+            "peripheral",
+            "eliminated",
+            "input"
+          ],
+          "initial": [
+            0.0,
+            0.0,
+            0,
+            0
+          ],
+          "initial_concentration_pmol_l": 0.0
+        },
+        "integrated_evoked_pmol_kg": 0.0,
+        "integrated_basal_pmol_kg": 0.0,
+        "integrated_each_branch_pmol_kg": 0.0,
+        "claim": "input and initial-state request only; no paired solver execution"
+      },
+      {
+        "id": "pulse_increment",
+        "baseline_mode": "incremental_zero",
+        "source_unit": "pmol/min",
+        "body_weight_kg": 102.32,
+        "basal_pmol_kg_min": 0.0,
+        "evoked": {
+          "edges": [
+            0.0,
+            10.0,
+            30.0,
+            240.0
+          ],
+          "left": [
+            0.0,
+            9.0,
+            0.0
+          ],
+          "right": [
+            0.0,
+            9.0,
+            0.0
+          ],
+          "units": "pmol/(kg min)"
+        },
+        "insulin": {
+          "forcing": {
+            "edges": [
+              0.0,
+              10.0,
+              30.0,
+              240.0
+            ],
+            "left": [
+              0.0,
+              9.0,
+              0.0
+            ],
+            "right": [
+              0.0,
+              9.0,
+              0.0
+            ],
+            "units": "pmol/(kg min)"
+          },
+          "route": "liver",
+          "state_order": [
+            "Ip",
+            "Il",
+            "hepatic_loss",
+            "peripheral_loss",
+            "input"
+          ],
+          "initial": [
+            0.0,
+            0.0,
+            0,
+            0,
+            0
+          ],
+          "initial_concentration_pmol_l": 0.0,
+          "current_bc002_initial_state_supported": true
+        },
+        "cpeptide": {
+          "forcing": {
+            "edges": [
+              0.0,
+              10.0,
+              30.0,
+              240.0
+            ],
+            "left": [
+              0.0,
+              9.0,
+              0.0
+            ],
+            "right": [
+              0.0,
+              9.0,
+              0.0
+            ],
+            "units": "pmol/(kg min)"
+          },
+          "route": "central",
+          "state_order": [
+            "central",
+            "peripheral",
+            "eliminated",
+            "input"
+          ],
+          "initial": [
+            0.0,
+            0.0,
+            0,
+            0
+          ],
+          "initial_concentration_pmol_l": 0.0
+        },
+        "integrated_evoked_pmol_kg": 180.0,
+        "integrated_basal_pmol_kg": 0.0,
+        "integrated_each_branch_pmol_kg": 180.0,
+        "claim": "input and initial-state request only; no paired solver execution"
+      },
+      {
+        "id": "pulse_synthetic_total",
+        "baseline_mode": "synthetic_equilibrium",
+        "source_unit": "pmol/min",
+        "body_weight_kg": 102.32,
+        "basal_pmol_kg_min": 1.5,
+        "evoked": {
+          "edges": [
+            0.0,
+            10.0,
+            30.0,
+            240.0
+          ],
+          "left": [
+            0.0,
+            9.0,
+            0.0
+          ],
+          "right": [
+            0.0,
+            9.0,
+            0.0
+          ],
+          "units": "pmol/(kg min)"
+        },
+        "insulin": {
+          "forcing": {
+            "edges": [
+              0.0,
+              10.0,
+              30.0,
+              240.0
+            ],
+            "left": [
+              1.5,
+              10.5,
+              1.5
+            ],
+            "right": [
+              1.5,
+              10.5,
+              1.5
+            ],
+            "units": "pmol/(kg min)"
+          },
+          "route": "liver",
+          "state_order": [
+            "Ip",
+            "Il",
+            "hepatic_loss",
+            "peripheral_loss",
+            "input"
+          ],
+          "initial": [
+            2.6663416801110733,
+            5.4383011782999695,
+            0,
+            0,
+            0
+          ],
+          "initial_concentration_pmol_l": 48.56193640241637,
+          "current_bc002_initial_state_supported": false
+        },
+        "cpeptide": {
+          "forcing": {
+            "edges": [
+              0.0,
+              10.0,
+              30.0,
+              240.0
+            ],
+            "left": [
+              1.5,
+              10.5,
+              1.5
+            ],
+            "right": [
+              1.5,
+              10.5,
+              1.5
+            ],
+            "units": "pmol/(kg min)"
+          },
+          "route": "central",
+          "state_order": [
+            "central",
+            "peripheral",
+            "eliminated",
+            "input"
+          ],
+          "initial": [
+            28.846153846153847,
+            34.42928039702233,
+            0,
+            0
+          ],
+          "initial_concentration_pmol_l": 440.39929536112743
+        },
+        "integrated_evoked_pmol_kg": 180.0,
+        "integrated_basal_pmol_kg": 360.0,
+        "integrated_each_branch_pmol_kg": 540.0,
+        "claim": "input and initial-state request only; no paired solver execution"
+      },
+      {
+        "id": "mass_ramp_increment",
+        "baseline_mode": "incremental_zero",
+        "source_unit": "ug/min",
+        "body_weight_kg": 102.32,
+        "basal_pmol_kg_min": 0.0,
+        "evoked": {
+          "edges": [
+            0.0,
+            60.0
+          ],
+          "left": [
+            0.0
+          ],
+          "right": [
+            9.77326035965598
+          ],
+          "units": "pmol/(kg min)"
+        },
+        "insulin": {
+          "forcing": {
+            "edges": [
+              0.0,
+              60.0
+            ],
+            "left": [
+              0.0
+            ],
+            "right": [
+              9.77326035965598
+            ],
+            "units": "pmol/(kg min)"
+          },
+          "route": "liver",
+          "state_order": [
+            "Ip",
+            "Il",
+            "hepatic_loss",
+            "peripheral_loss",
+            "input"
+          ],
+          "initial": [
+            0.0,
+            0.0,
+            0,
+            0,
+            0
+          ],
+          "initial_concentration_pmol_l": 0.0,
+          "current_bc002_initial_state_supported": true
+        },
+        "cpeptide": {
+          "forcing": {
+            "edges": [
+              0.0,
+              60.0
+            ],
+            "left": [
+              0.0
+            ],
+            "right": [
+              9.77326035965598
+            ],
+            "units": "pmol/(kg min)"
+          },
+          "route": "central",
+          "state_order": [
+            "central",
+            "peripheral",
+            "eliminated",
+            "input"
+          ],
+          "initial": [
+            0.0,
+            0.0,
+            0,
+            0
+          ],
+          "initial_concentration_pmol_l": 0.0
+        },
+        "integrated_evoked_pmol_kg": 293.1978107896794,
+        "integrated_basal_pmol_kg": 0.0,
+        "integrated_each_branch_pmol_kg": 293.1978107896794,
+        "claim": "input and initial-state request only; no paired solver execution"
+      }
+    ],
+    "empirical_freeze": "pending_authorized_data_and_domain_review",
+    "coupled_trajectory_executed": false
+  },
+  "native_derivative_probe": {
+    "scope": "Pinned insulin derivative at proposed baseline states; no trajectory or glucose interpretation",
+    "passed": true,
+    "max_derivative_residuals_pmol_kg_min": {
+      "zero_increment": 0.0,
+      "pulse_increment": 0.0,
+      "pulse_synthetic_total": 2.220446049250313e-16,
+      "mass_ramp_increment": 0.0
+    },
+    "native_identity": {
+      "upstream_revision": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc",
+      "package_version": "0.2.11",
+      "profile": "adult#001",
+      "patient_file_sha256": "7ad1302fbf064805e2294bbcffd482e55448e37e48b63e629a1ed7f11c701547",
+      "parameter_file_sha256": "662f3b684d160fdf485edd1d7196dd1cd85c14b53650b030fdb86aaa05bb2e50",
+      "patient_file": "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose/.venv/lib/python3.12/site-packages/simglucose/patient/t1dpatient.py",
+      "parameter_file": "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose/.venv/lib/python3.12/site-packages/simglucose/params/vpatient_params.csv",
+      "body_weight_kg": 102.32,
+      "kinetic_parameters": {
+        "BW": 102.32,
+        "Vi": 0.054906,
+        "m1": 0.15446,
+        "m2": 0.225027424083,
+        "m30": 0.23169,
+        "m4": 0.090010969633
+      }
+    },
+    "input_manifest_sha256": "98d152892765f5591bcbc270c496093ae8184bde05e73df960c481e1950ce705",
+    "probe_sha256": "53cc02fd84a05ba3d11bb3cec214fd8755c8a48ba86becf5c1f3cebed5585c77",
+    "native_lock_sha256": "634d5849a1cc4ae37f4f00c12c713f168cffa93a43d5a22b571b0c41478fc95c"
+  },
+  "checks": {
+    "root_uv_sync_locked": "passed",
+    "native_uv_sync_locked": "passed",
+    "boundary_tests": {
+      "passed": 21,
+      "log_sha256": "7fc2120b46b5062cbc302c9d9a9a849273f06d4f98eccdf1adf7f3aaa4895ab9"
+    },
+    "fresh_process_repeat": "eight deterministic artifacts byte-identical",
+    "standard_library_reconstruction": "byte-identical preflight with python -S",
+    "source_snapshots_match_current_files": true,
+    "repository_checks": {
+      "status": "passed",
+      "unit_tests": 267,
+      "strict_documentation_build": "passed",
+      "log_sha256": "00b688547c44e746efbf9074d2d3d1d4776c776699321e5df9d5685e64ce16e4"
+    },
+    "remote_ci": "not_run; local workflow commands checked"
+  },
+  "data_review": {
+    "date": "2026-09-20",
+    "polonsky_pdf": "primary publisher PDF retrieved; existing source hash recorded in BC-003",
+    "niddk_catalogue": "HTTP403; no current data-access verification",
+    "cit_protocol": "existing public-document copy reread, pp81-82; exact baseline -10,-5,-1 min, C-peptide through10min",
+    "cit_protocol_sha256": "bcc4dac6540a00a43663318fa552f24de4cec24772934cd535fd1509e541c4d7",
+    "cit_lab_manual_sha256": "6f0aa490a417d9b8f03ee8e832a7939f3b54da0b230a9c645b44127ab5f6cb85",
+    "authorized_participant_data": "none accessed",
+    "empirical_freeze": "pending actual release, assay, population, rights and evaluation design"
+  },
+  "external_review": "not performed; unsent role-specific review packet prepared",
+  "limitations": [
+    "No paired ODE trajectory or glucose feedback",
+    "No human calibration or clinical thresholds",
+    "No resolution of BC-001 basal/scale/initialization source gaps",
+    "BC-002 still needs nonzero initial inventory support for synthetic total execution",
+    "No therapy or graft mechanism"
+  ]
+}

@@ -1,0 +1,205 @@
+{
+  "schema": "opent1d.local-gui-contract/1",
+  "task": "m4-study-secure",
+  "config_schema": "m4-secure-study-config/1",
+  "sources": {
+    "minimum": 2,
+    "maximum": 8
+  },
+  "scenarios": [
+    "fasting",
+    "gastric_load_15g",
+    "gastric_load_30g"
+  ],
+  "budgets": {
+    "timeout_seconds": [
+      1,
+      1800
+    ],
+    "source_timeout_seconds": [
+      1,
+      10800
+    ]
+  },
+  "active_jobs": 1,
+  "api_version": "v1",
+  "operations": [
+    "check",
+    "install",
+    "run",
+    "reconstruct",
+    "library_index",
+    "library_verify",
+    "campaign_check",
+    "campaign_install",
+    "campaign_run",
+    "campaign_resume",
+    "campaign_reconstruct",
+    "durable_export",
+    "durable_register",
+    "durable_verify",
+    "durable_reconstruct",
+    "m3_fixture",
+    "m3_check",
+    "m3_run",
+    "m3_reconstruct",
+    "durable_forensic",
+    "observation_example",
+    "observation_freeze",
+    "observation_run",
+    "observation_reconstruct",
+    "sampling_example",
+    "sampling_freeze",
+    "sampling_run",
+    "sampling_reconstruct"
+  ],
+  "job_states": [
+    "queued",
+    "running",
+    "cancelling",
+    "cancelled",
+    "completed",
+    "failed"
+  ],
+  "reconstruction_scope": "registered native reader; independent of recorded completion",
+  "host": "127.0.0.1",
+  "mutations": "same origin and per-session token; fixed argv without shell",
+  "archives": "fresh job child directory; UI administration outside native inventory",
+  "archive_library": {
+    "metadata_tasks": 10,
+    "verification_task": "m4-study-secure",
+    "roots": "explicit startup read-only roots; opaque IDs and relative paths",
+    "administration": "own GUI workspace outside source archives",
+    "verification_tasks": [
+      "m4-study-secure",
+      "m3-forecast",
+      "m3-compare",
+      "m5-prognosis",
+      "mmtt-sensitivity",
+      "mmtt-sampling"
+    ],
+    "report_artifacts": {
+      "m4-study-secure": [
+        "report.json",
+        "report.md",
+        "figure.svg"
+      ],
+      "m3-forecast": [
+        "report.json",
+        "report.md"
+      ],
+      "m3-compare": [
+        "report.json",
+        "report.md"
+      ],
+      "m5-prognosis": [
+        "report.json",
+        "report.md"
+      ],
+      "mmtt-sensitivity": [
+        "report.json",
+        "report.md"
+      ],
+      "mmtt-sampling": [
+        "report.json",
+        "report.md"
+      ]
+    },
+    "m5": {
+      "report_schema": "m5-researcher-workflow/1",
+      "scope": "original synthetic native reports only; no candidate import, fitting or execution",
+      "roster": {
+        "planned": 32,
+        "development": 24,
+        "evaluation": 8,
+        "development_eligible": 20,
+        "evaluation_eligible": 7,
+        "evaluation_attempts": 2
+      },
+      "native_archive_file_limit": 500000,
+      "copy_boundary": "fixed in-place verification then original report bytes bound to frozen source inventory in fresh GUI output",
+      "declaration": "worker-verified model declaration; model/source/state binding and supplier self-attestation, withdrawn with report snapshot",
+      "metrics": "native U/day; full eligible baseline separate from paired baseline/candidate; null metrics on zero paired support"
+    }
+  },
+  "campaigns": {
+    "task": "m4-study-secure",
+    "cells": [
+      1,
+      32
+    ],
+    "repeats": [
+      1,
+      8
+    ],
+    "maximum_slots": 128,
+    "attempt_timeout_seconds": [
+      1,
+      10800
+    ],
+    "cleanup_seconds": 90,
+    "reports": "owned worker snapshots; JSON and Markdown without pooled outcomes"
+  },
+  "durable_archives": {
+    "tasks": [
+      "m4-study-secure",
+      "maintained-campaign",
+      "m3-forecast",
+      "m3-compare"
+    ],
+    "store": "explicit existing canonical startup root outside current checkout; new opaque children only; registration by allowed root ID and relative directory",
+    "reader_trust": "explicit clean checkout at recorded full Git revision; full tracked bytes equal Git objects and preserved reader inventory; package snapshots never executed",
+    "reports": "integrity, reconstruction and numerical completeness shown separately; no automatic resume"
+  },
+  "m3": {
+    "tasks": [
+      "m3-forecast",
+      "m3-compare"
+    ],
+    "candidates": [
+      1,
+      8
+    ],
+    "comparison_minimum": 2,
+    "participants": [
+      1,
+      128
+    ],
+    "timeout_seconds": [
+      1,
+      1800
+    ],
+    "cleanup_seconds": 30,
+    "preparation": "explicit synthetic byte access; original configuration retained, only selected roster and paths adapted",
+    "check": "native metadata/runtime readiness; no predictor execution or observation-content validation",
+    "reports": "native JSON and Markdown; execution, reconstruction and complete cohort separate",
+    "forensic": "fresh opaque external-store child, exact raw evidence, no verified package or reader claim"
+  },
+  "observations": {
+    "task": "mmtt-sensitivity",
+    "scope": "Synthetic local CSV and frozen fixed-kinetic plans only; no causal callback or human data route",
+    "operations": [
+      "example",
+      "freeze",
+      "run",
+      "reconstruct"
+    ],
+    "input_root": "Current checkout; explicit files, no symlinks/hidden paths",
+    "native_reader": "experiments.observation_analysis",
+    "artifacts": [
+      "report.json",
+      "report.md"
+    ],
+    "unfinished_atomic_attempts": "Status unavailable; declared roster retained",
+    "gui_seed_max": 9007199254740991
+  },
+  "sampling": {
+    "task": "mmtt-sampling",
+    "kind": "synthetic",
+    "native_reader": "experiments.mmtt_sampling",
+    "raw_mask_before_estimation": true,
+    "development_only_selection": true,
+    "human_execution_authorized": false,
+    "scope": "Full versus two or three reduced actual-time schedules, independent shared-core refits and all failures; no empirical equivalence or clinical schedule recommendation"
+  }
+}

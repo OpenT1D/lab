@@ -1,0 +1,158 @@
+{
+  "schema": "opent1d.ot054-core-verification/1",
+  "date": "2026-10-18",
+  "status": "core_and_cli_verified_gui_pending",
+  "full_goal_complete": false,
+  "feasibility": {
+    "disposition": "narrow",
+    "original_dossier_commit": "cd10cb07577e6fb9183934f3b59fce974bf944e4",
+    "original_handoff_commit": "4f38f01a3d3f96319155e83b9ede52bd595fb521",
+    "adopted_dossier_commit": "91bdaa8",
+    "adopted_handoff_commit": "5ee9691",
+    "verification": "Dossier tree and all 15 handoff hashes checked; identical six-file planning baseline checked and not replayed"
+  },
+  "protocol_sha256": "22ad09a02367e586114544e59859d59e296985de24810340e1d05e4393418aac",
+  "implementation_sha256": {
+    "experiments/observation_analysis/__init__.py": "b40c56243fc8d6b96d7b431e6177f379d9e3e5b2277d9bc6d8c857d30c98e1a7",
+    "experiments/observation_analysis/__main__.py": "5f8c0cf2b55bbc68b177d3ac26bd1864854a6c41d75ea3d1dd5a2535944b87cf",
+    "experiments/observation_analysis/analysis.py": "1fff9a1fd0c1eacbfd99c94d318582daea4a48a32b1c81f71955f67a7f51e42d",
+    "experiments/observation_analysis/estimator.py": "3fb9b732607f6595b51b9552c13e14545e2e71d859486e3194d47e62e84e02a4",
+    "experiments/observation_analysis/fixtures.py": "434431bbab7de4f1c6c91ef64a74ded9e97f707aa9f38523d5330cf5fb5f08df",
+    "experiments/observation_analysis/intake.py": "58d940af77498aaa59490cd1c30f5b134adeca0d738750f0de4cb051e0fde788",
+    "experiments/observation_analysis/observations.py": "e82af2ec866c1c56ca2313185cd5531d3c556b479758f72b244e24ad340f2e59",
+    "experiments/observation_analysis/plan.py": "404e553b294f79f32d661ed385ce4b3e5581daf6977cd4fc3d37871825714cf7",
+    "experiments/observation_analysis/report.py": "e750d6abc7d6b5238b4da6f4c2eab170656a4940d30d904a9f27598afb7e4cd6",
+    "experiments/observation_analysis/run.py": "518b7f37519240848be9b3caa77bb6ea697cfbea6842627ed87099f474c7b374",
+    "experiments/catalogue/storage.py": "12cf4adf488f6dbaa2db4838ad35e5d76f56e531d895abe6bc97ebe6316ca91d",
+    "experiments/m3/researcher/intake.py": "4d57ae53b3364dcebe21fdce4392c2f2ab548107126c4ec32bc55e64aeebc165",
+    "experiments/m3/common.py": "a4621cd060d8c63e26785426bef5153b91ca8f1d51a83292872df37ffe4ea2e0",
+    "experiments/m1/artifacts.py": "e7896d603e8953f9c11a58ddad116eb12494d170cdce06a02a6d53dc04548e79"
+  },
+  "runtime": {
+    "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+    "implementation": "CPython",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "numerical_dependencies": "Python standard library"
+  },
+  "checks": [
+    {
+      "command": "uv sync --locked",
+      "status": "passed"
+    },
+    {
+      "command": "uv run --locked python scripts/check.py",
+      "status": "passed",
+      "tests": 1312,
+      "skipped": 13,
+      "documentation_build": "passed",
+      "scope": "Core before final visit-interval/presentation addition and one-compartment Gaussian audit; those final changes verified by the focused checks below. Final whole-goal repository check remains required after GUI integration."
+    },
+    {
+      "command": ".venv/bin/python -m unittest tests.test_observation_analysis tests.test_observation_estimator tests.test_observation_import tests.test_observation_workflow -q",
+      "status": "passed",
+      "tests": 25,
+      "skipped": 0
+    },
+    {
+      "command": "uv sync --locked --project experiments/m4/beta_cell/runtime",
+      "status": "passed"
+    },
+    {
+      "command": "experiments/m4/beta_cell/runtime/.venv/bin/python -m unittest experiments.observation_analysis.test_numerical -v",
+      "status": "passed",
+      "tests": 1,
+      "numpy": "2.2.6",
+      "scipy": "1.15.3"
+    },
+    {
+      "command": ".venv/bin/python -m sphinx -E -a -W --keep-going -b html -c docs . /private/tmp/ot054-core-current-docs",
+      "status": "passed"
+    },
+    {
+      "command": "ruff check/format, pymarkdown and git diff --check on final changed files",
+      "status": "passed"
+    }
+  ],
+  "source_model_reference": {
+    "source": "BC-003 original analytical and ODE forward paths",
+    "known_total_pmol": 25200.0,
+    "refinement_absolute_errors_pmol": [
+      197.79020726740055,
+      1.1367110445389699,
+      0.04543336543792975,
+      0.0028395000663294923
+    ],
+    "outcomes": [
+      {
+        "step_min": 15,
+        "status": "boundary_failed",
+        "minimum_rate_pmol_min": -36.011841815747374
+      },
+      {
+        "step_min": 5,
+        "status": "completed",
+        "minimum_rate_pmol_min": 19.45508385862682
+      },
+      {
+        "step_min": 1,
+        "status": "completed",
+        "minimum_rate_pmol_min": 82.5717621692169
+      },
+      {
+        "step_min": 0.25,
+        "status": "completed",
+        "minimum_rate_pmol_min": 99.09116749905476
+      }
+    ]
+  },
+  "local_cli_cases": [
+    {
+      "case": "increase",
+      "classification": "consistent within investigated assumptions",
+      "complete_cohort": true,
+      "report_sha256": "261e7522ae79613263054b68a57b56e4f29e615eca945c404abe8591333ebf43",
+      "paired_change_nominal_pmol": 2861.039999999999
+    },
+    {
+      "case": "assumption-dependent",
+      "classification": "assumption-dependent",
+      "complete_cohort": true,
+      "report_sha256": "50c31a2c92b9447361d7327085afec993c7a28b9e012aeb8ca44f007cb0c3a30",
+      "paired_change_nominal_pmol": -10.00000000000091
+    },
+    {
+      "case": "unresolved",
+      "classification": "insufficiently determined",
+      "complete_cohort": true,
+      "report_sha256": "104368e186a22551413d056637789348481533081c5a280e5da6806534257496",
+      "paired_change_nominal_pmol": 0.0
+    },
+    {
+      "case": "censored",
+      "classification": "insufficiently determined",
+      "complete_cohort": false,
+      "report_sha256": "1e4856848d1cedcd76203cdf4991d042a9bde770404b382478d54350328decaf",
+      "paired_change_nominal_pmol": null
+    }
+  ],
+  "local_evidence_directory": "/private/tmp/opent1d-ot054-core-_8zk9vy2",
+  "real_process_control": {
+    "signal": "SIGTERM during analysis",
+    "status": "interrupted",
+    "declared_people_retained": 8,
+    "saved_analysis_verification": "passed with --allow-failed",
+    "unfinished_nested_attempts": "explicitly unavailable, not fabricated fit outcomes"
+  },
+  "core_reconstruction_scope": "Same frozen keyed variates and exact algebra; byte-identical reports, fresh-process repeat, relocation and resealed forged-attempt rejection; no new seed, optimization, R, simulator or archived Python execution",
+  "uncertainty_scope": "Declared synthetic Gaussian perturbations; independent closed-form one-compartment variance/covariance/interval audit within prespecified tolerances; no empirical assay or human coverage claim",
+  "remaining_goal_acceptance": [
+    "GUI observation validation and frozen-plan controls",
+    "GUI task execution and complete report/archive readers",
+    "Actual local browser flow and displayed-value checks",
+    "Final full repository verification of the integrated task"
+  ],
+  "human_execution_authorized": false,
+  "empirical_t1d_validity_established": false,
+  "independent_usability_established": false,
+  "comparative_researcher_value_established": false
+}

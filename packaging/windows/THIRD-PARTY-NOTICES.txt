@@ -1,0 +1,60 @@
+OpenT1D Windows installation candidate
+
+OpenT1D source code is distributed under Apache License 2.0. See app/LICENSE
+and app/NOTICE, including the documented ancestry of individual methods.
+The package contains public repository material and synthetic examples only.
+
+CPython 3.12.15, Python Software Foundation and contributors
+Astral python-build-standalone distribution, Windows x86-64, build 20261021:
+https://github.com/astral-sh/python-build-standalone/releases/tag/20261021
+The Python license is in runtime/LICENSE.txt and each scientific runtime.
+Provider and library notices are in third-party-licenses/python. The provider's
+complete corresponding build-source archive is in third-party-sources.
+OpenT1D removes regenerable bytecode and pip from the private runtime copies,
+installs the declared locked distributions, and adds one source path .pth file.
+No operating-system Python installation is changed.
+
+Python distributions are retained in their separate locked environments:
+- runtime/Lib/site-packages: repository tooling and graphical workflow runtime
+- runtimes/native/Lib/site-packages: maintained simglucose scientific runtime
+- runtimes/observer/Lib/site-packages: beta-cell observer scientific runtime
+Each distribution's metadata, copyright and license files remain beside it.
+package-manifest.json records all versions, source hashes, and installed bytes.
+
+simglucose 0.2.11, Copyright (c) 2017 Jinyu Xie, MIT License
+https://github.com/jxx123/simglucose/tree/a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc
+glucosim 0.1.2, Copyright (c) 2026 Hass Dhia and
+Smart Technology Investments Research Institute, MIT License
+https://github.com/HassDhia/glucosim/tree/6422a91d533125a8feb4f2e8737aecd67fec95c9
+Their exact complete sources and licenses are in third-party-sources.
+
+The complete corresponding source archives for yamllint (GPL-3.0-or-later),
+certifi and pathspec (MPL-2.0), and docutils (component-specific licenses) are
+included in third-party-sources. These components retain their own licenses;
+the OpenT1D license does not replace them. Source archives for the other pure
+Python dependencies built during packaging (docopt and gym) are included too.
+
+NSIS 3.13, Copyright (C) 1999-2026 Contributors
+https://nsis.sourceforge.io/License
+The installer uses the unmodified NSIS Unicode stub and zlib compression.
+NSIS code and the zlib compression module use the zlib/libpng license:
+
+This software is provided 'as-is', without any express or implied warranty.
+In no event will the authors be held liable for any damages arising from the
+use of this software.
+
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute it
+freely, subject to the following restrictions:
+
+1. The origin of this software must not be misrepresented; you must not claim
+   that you wrote the original software. If you use this software in a
+   product, an acknowledgment in the product documentation would be
+   appreciated but is not required.
+2. Altered source versions must be plainly marked as such, and must not be
+   misrepresented as being the original software.
+3. This notice may not be removed or altered from any source distribution.
+
+The supplied installer is an internal candidate, not a public release or
+scientific validation. See package-manifest.json for its exact source,
+runtime and supported workflow identities.

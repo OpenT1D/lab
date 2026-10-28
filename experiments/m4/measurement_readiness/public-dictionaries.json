@@ -1,0 +1,58 @@
+{
+  "schema": "bc015-public-dictionaries/1",
+  "id": "BC-015-P2/1",
+  "release": "CIT-07/08-v2",
+  "assessment_date": "2026-09-25",
+  "scope": "Public variable dictionaries only; no participant records or access grant.",
+  "files": {
+    "fsigt.xlsx": {
+      "url": "https://test.repository.niddk.nih.gov/api/entity/v1/study/documents/download/file/67507",
+      "sha256": "a89442dee8837e482f096b74be952ea2301fd105e503878b274d1e2567d4d354",
+      "table": "Fsigt_Raw",
+      "required_variables": ["ACCESSION", "StudyID", "NumDaysInitial", "Time ", "pstintvst", "pstfinvst", "glu", "ins_tosoh"]
+    },
+    "cpeptide.xlsx": {
+      "url": "https://test.repository.niddk.nih.gov/api/entity/v1/study/documents/download/file/67500",
+      "sha256": "2c69eba921640e04c92cb6796f838d3d8267038b3ff0fa07f8107c1abb73d8ae",
+      "table": "Cpeptide_Glucose_Creatinine",
+      "required_variables": ["ACCESSION", "StudyID", "NumDaysInitial", "Flag08", "pstintvst", "pstfinvst", "Fasting_cpeptide", "Stimulated_cpeptide_60", "Stimulated_cpeptide_90", "Fasting_glucose", "Stimulated_glucose_60", "Stimulated_glucose_90", "Creatinine"]
+    },
+    "rudbeck.xlsx": {
+      "url": "https://test.repository.niddk.nih.gov/api/entity/v1/study/documents/download/file/67544",
+      "sha256": "a1e0f832a2af4c4b108b542b6c8b53366906edd1eaaff019c711544096b2b8a9",
+      "table": "RudBeckClinical",
+      "required_variables": ["ACCESSION", "StudyID", "NumDaysInitial", "Flag08", "Sample", "C_Peptid"]
+    },
+    "insulin_use.xlsx": {
+      "url": "https://test.repository.niddk.nih.gov/api/entity/v1/study/documents/download/file/67518",
+      "sha256": "5a91969b6520894e98d6b6116431fddc0eac454ea737827f846931a69af9f485",
+      "table": "Insulin",
+      "required_variables": ["ACCESSION", "StudyID", "NumDaysInitial", "Insulin"]
+    },
+    "mean_insulin.xlsx": {
+      "url": "https://test.repository.niddk.nih.gov/api/entity/v1/study/documents/download/file/67530",
+      "sha256": "1110169d35502e44e240a23e96733287534b593f553e8f2ac9b2c1d3500994d6",
+      "table": "Mean_Insulin",
+      "required_variables": ["ACCESSION", "StudyID", "NumDaysInitial", "EndDay", "Mean_Insulin", "Weight", "Ins_kg"]
+    },
+    "gfr.xlsx": {
+      "url": "https://test.repository.niddk.nih.gov/api/entity/v1/study/documents/download/file/67510",
+      "sha256": "37493ce1c614d9d3a63665be850a16d7ff87a124f60533f57a569d63cb61f0a8",
+      "table": "GFR_Share",
+      "required_variables": ["ACCESSION", "StudyID", "NumDaysInitial", "GFR"]
+    },
+    "weight.xlsx": {
+      "url": "https://test.repository.niddk.nih.gov/api/entity/v1/study/documents/download/file/67553",
+      "sha256": "e360c2d901a950b6ad7a49ed62391d0164b561c3db4384e84bef67ebe659d542",
+      "table": "Weight",
+      "required_variables": ["ACCESSION", "StudyID", "NumDaysInitial", "Weight"]
+    },
+    "drug_dose.xlsx": {
+      "url": "https://test.repository.niddk.nih.gov/api/entity/v1/study/documents/download/file/67504",
+      "sha256": "d6f651ff2549c046a266d5255068876c3ce13c8543d860fc999770ab624868f5",
+      "table": "TreatmentRegimen",
+      "required_variables": ["ACCESSION", "StudyID", "Daysfrominitialstart", "Daysfrominitialstop", "Drug", "Dose", "Unit"]
+    }
+  },
+  "decision_rule": "A shared subject identifier or transplant-day field alone never establishes same-challenge measurements or actual sample coverage. Require a verified challenge/visit/time crosswalk and release coverage before empirical design review."
+}

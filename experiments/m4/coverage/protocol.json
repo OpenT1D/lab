@@ -1,0 +1,68 @@
+{
+  "schema": "bc014-protocol/1",
+  "id": "BC-014/1",
+  "specified_date": "2026-09-24",
+  "base_commit": "968fdfa78e8e28ab9bc62e536e8e1380df46cd99",
+  "claim": "independent_synthetic_pointwise_gain_profile_coverage",
+  "question": "How often does the unchanged BC-013 nominal pointwise gain contour include its generating gain on new synthetic noise realizations?",
+  "parent_protocol": "BC-013/1",
+  "runtime": {
+    "project": "experiments/m0/simglucose",
+    "python": "3.12",
+    "numpy": "1.26.4",
+    "scipy": "1.13.1"
+  },
+  "design": {
+    "interest_parameter": 0,
+    "interior": {
+      "truth": [1.0, 1.0, 1.0, 1.0],
+      "seeds": {"first": 140000, "count": 64},
+      "observation_designs": ["free_volume", "fixed_volume", "GI"],
+      "nominal_reference": true
+    },
+    "gain_boundary": {
+      "truth": [0.5, 1.0, 1.0, 1.0],
+      "seeds": {"first": 240000, "count": 32},
+      "observation_designs": ["free_volume"],
+      "nominal_reference": false
+    },
+    "shared_observations_within_seed": true,
+    "noise": "Fresh independent numpy default_rng(seed) Gaussian draws at all 241 times and three channels; multiply by unchanged BC-013 SD [5,10,30]; set t=0 glucose and insulin errors exactly zero; reuse each interior draw across its three observation designs. No BC-013 development seed is reused.",
+    "reference": "Generate each case's noiseless trajectory from the unchanged BC-012 reference solver at its declared truth. Exact basal G/I and known SC input remain conditioned; t=0 C-peptide remains observed.",
+    "sampling": "Unchanged 30-minute BC-013 observation selection over 0-240 minutes: 25 GIC or 16 GI residuals. No participant or human measurement is used."
+  },
+  "analysis": {
+    "target": "evoked_gain",
+    "method": "For each new dataset, minimize unchanged BC-013 Q freely with its three fixed starts and with the generating gain fixed using the same two deterministic nuisance starts. DeltaQ is constrained minus unrestricted Q; never clip negative values. A true gain is included when DeltaQ <= 3.841458820694124.",
+    "cutoff": 3.841458820694124,
+    "lower_delta_tolerance": 0.0001,
+    "reference_objective_tolerance": 0.001,
+    "reference_refit_margin": 0.01,
+    "optimizer": "Unchanged BC-013 bounds, log-coordinate trust-region solver, fixed SD, analytic nuisance-volume projection, starts and finite-difference step. The BC-013 protocol is adapted only to name each new dataset assessment; no inference rule or model equation changes.",
+    "solver_check": "Evaluate every fit-solver selected optimum with the reference forward solver. Compare each Q and DeltaQ to the fit solver within 0.001. If a fitted DeltaQ lies within 0.01 of the cutoff or the solver evaluations disagree on inclusion, rerun both unrestricted and constrained optimizations with the reference solver. Unresolved disagreement is a numerical failure.",
+    "outcome": "Primary conservative coverage is included/number planned, counting any incomplete or failed replicate as noncoverage and reporting that count separately. Also show included/number completed as a diagnostic, never as a replacement primary denominator.",
+    "uncertainty": "Report two-sided 95% Wilson score intervals for each planned-denominator proportion. At nominal p=0.95, n=64 has binomial Monte Carlo SE about 0.027 and an approximate normal 95% half-width about 0.053; n=32 has SE about 0.039. Report observed Wilson intervals even if coverage differs. These sample sizes cannot prove exact 95% calibration.",
+    "comparison": "The three interior observation designs use paired noise draws but their marginal pointwise coverages are reported separately; no independent-group test or superiority claim. The gain-boundary case is a diagnostic under nonregular conditions, not a nominal 95% calibration target.",
+    "calibration": "No threshold tuning is permitted in this assessment. Any future calibration needs separate noise realizations and a new frozen assessment set."
+  },
+  "execution": {
+    "workers": 3,
+    "repeat": "Execute the complete campaign twice in separate processes from the same frozen protocol and seeds; require byte-identical observation and case artifacts. Retain all starts, failures, solver checks, truth, observations, source snapshots and environment locks.",
+    "artifacts": "Failure-aware manifest; one observation file per generating case/seed; one fit file per case/seed/design in each run; standard-library arithmetic and completeness reconstruction; aggregate JSON and deterministic SVG. No raw health data.",
+    "acceptance": "All planned replicates must complete with all declared starts, finite model/optimizer outputs, constrained Q no more than 0.0001 below unrestricted Q, reference objective/DeltaQ agreement within 0.001, exact numeric repeat, and reconstructible denominator, Wilson interval and figure. The empirical coverage value is a finding, not an acceptance gate."
+  },
+  "limitations": [
+    "One fixed synthetic patient and unchanged 24-state model; no human or T1D population calibration",
+    "Known exact basal glucose/insulin and SC input; fixed hepatic, action, meal and C-peptide exchange assumptions",
+    "Only evoked gain is assessed; no joint coverage or other parameter coverage claim",
+    "Three starts and bounded nuisance optimization cannot prove global minima",
+    "One reference-solver check per chosen fit does not establish global solver equivalence",
+    "Finite Monte Carlo precision and an engineering parameter box",
+    "Boundary diagnostics do not validate the asymptotic chi-square cutoff",
+    "No threshold calibration, therapy effect, beta-cell count or clinical recommendation"
+  ],
+  "sources": [
+    {"doi": "10.1093/bioinformatics/btp358", "location": "Raue et al. 2009, sections 2.1-2.2 and 4", "use": "weighted Gaussian likelihood and nuisance-reoptimized pointwise profile region"},
+    {"doi": "10.1080/01621459.1987.10478472", "location": "Self and Liang 1987, sections 3-4", "use": "boundary and nonregular likelihood-ratio cautions"}
+  ]
+}

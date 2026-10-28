@@ -1,0 +1,101 @@
+{
+  "schema": "bc005-protocol/1",
+  "id": "BC-005/1",
+  "base_commit": "c9008d8",
+  "specified_before_implementation": true,
+  "claim": "synthetic_paired_kinetics_only",
+  "boundary_protocol_sha256": "00938c5e5a4b8536b40ced817bb07b883a6401bd96dd651a747664d74279f405",
+  "sample_step_min": 0.5,
+  "branches": [
+    "insulin",
+    "cpeptide"
+  ],
+  "solvers": [
+    {
+      "name": "coarse",
+      "method": "RK45",
+      "rtol": 1e-05,
+      "atol": 1e-07,
+      "max_step": 2.0
+    },
+    {
+      "name": "tight",
+      "method": "RK45",
+      "rtol": 1e-09,
+      "atol": 1e-11,
+      "max_step": 0.25
+    },
+    {
+      "name": "reference",
+      "method": "DOP853",
+      "rtol": 1e-11,
+      "atol": 1e-13,
+      "max_step": 0.125
+    }
+  ],
+  "extra_cases": {
+    "basal_only": {
+      "source": "pulse_synthetic_total",
+      "horizon_min": 240
+    },
+    "washout": {
+      "horizon_min": 60,
+      "insulin_initial": [
+        2,
+        3,
+        0,
+        0,
+        0
+      ],
+      "cpeptide_initial": [
+        4,
+        2,
+        0,
+        0
+      ]
+    }
+  },
+  "communication_intervals_min": [
+    2,
+    1,
+    0.5,
+    0.25,
+    0.125
+  ],
+  "communication_case": "mass_ramp_increment",
+  "communication_rule": "interval-average input; preserve exact delivered amount; same output grid",
+  "criteria": {
+    "oracle_state_error_pmol_kg": 1e-07,
+    "concentration_error_pmol_l": 1e-05,
+    "mass_error_pmol_kg": 1e-07,
+    "input_error_pmol_kg": 1e-07,
+    "negative_tolerance_pmol_kg": 1e-09,
+    "equilibrium_error_pmol_kg": 1e-08,
+    "superposition_error_pmol_kg": 1e-07,
+    "legacy_zero_initial_error": 0,
+    "repeat_error": 0,
+    "fine_communication_error_pmol_l": 0.01,
+    "fine_coarse_error_ratio": 0.35
+  },
+  "runtime": {
+    "insulin": {
+      "project": "experiments/m0/simglucose",
+      "numpy": "1.26.4",
+      "scipy": "1.13.1"
+    },
+    "cpeptide": {
+      "project": "experiments/m4/beta_cell/runtime",
+      "numpy": "2.2.6",
+      "scipy": "1.15.3"
+    }
+  },
+  "comparison": "zero added input; basal-only superposition; oracle; existing zero-initial insulin path; published C-peptide constant-input kernel",
+  "excluded": [
+    "glucose feedback",
+    "BC-001 scale or initialization resolution",
+    "human predictive validity",
+    "joint patient calibration",
+    "therapy or transplant effects",
+    "general inverse secretion estimation"
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "local_store": "results/m0-archive in the maintained main checkout; outside Git",
+  "scope": "public synthetic M0 evidence; local preservation, not a public release or offsite backup",
+  "archives": [
+    {
+      "directory": "2026-09-13-original-simglucose-mac",
+      "origin": "Mac native reference after clean build-tool refresh",
+      "archive_sha256": "68ae53e2f823f3abc815e1a72c609e7f088cabcc07fb8a8e00d84ac3bff85f88",
+      "inventory_sha256": "6c14182729f26b683e66bc9c913ae6cec7712d7740373f1a8a54fc6805181b38",
+      "file_count": 4
+    },
+    {
+      "directory": "2026-09-13-original-development-mac",
+      "origin": "Mac development feasibility recorded for PR #7",
+      "archive_sha256": "76d6e53fb9245046a6dda2d48a80333e05e095701c5eb1a85b8031c7c96989d8",
+      "inventory_sha256": "86e5235dbdd4e586aee484d5a07f5bda02c7d7a149382694e580d22b4f7563a7",
+      "file_count": 6
+    },
+    {
+      "directory": "2026-09-13-original-lt1-mac",
+      "origin": "Mac Cambridge reference recorded for PR #6",
+      "archive_sha256": "96678f349cfeb49200b1eb540627fa07b50ccd8c29958135230d6dbcce8de3ff",
+      "inventory_sha256": "e798f89611cc10e4d792fa3cb47c366e9653b7ad2ff6fe021cd36f43afb7c5fe",
+      "file_count": 7
+    },
+    {
+      "directory": "2026-09-13-linux-pr5",
+      "origin": "https://github.com/OpenT1D/OpenT1D/actions/runs/34721218099",
+      "archive_sha256": "dfd5b792a616a09da57eb84d3649342209e84987be3490bd882daad4501250b9",
+      "inventory_sha256": "a250742576fa285d81c88b9d8ed4abc5a70fdef6d54a4b9c407d3f5435c40486",
+      "file_count": 4
+    },
+    {
+      "directory": "2026-09-13-linux-pr6",
+      "origin": "https://github.com/OpenT1D/OpenT1D/actions/runs/34721740861",
+      "archive_sha256": "3db41378d39ad10f6503ea9f48b7463d24afb83b173f19cf598fbf526c18a2ae",
+      "inventory_sha256": "a2f1602a3e13a963d4eb8bb88b614b4ad3da3fa024f86a7b8f9a823c987ef3ad",
+      "file_count": 7
+    },
+    {
+      "directory": "2026-09-13-linux-pr7",
+      "origin": "https://github.com/OpenT1D/OpenT1D/actions/runs/34722762371",
+      "archive_sha256": "b1a9c21c471a08b3aaa3ee8013a7608103efeff4b6bc2f66e686294088d7b24b",
+      "inventory_sha256": "abe70c59f4fb11cac417e40a9dc6e64315208201dba2fb31ba8303a1b2ffc3ba",
+      "file_count": 14
+    },
+    {
+      "directory": "2026-09-13-review-linux-failed",
+      "origin": "https://github.com/OpenT1D/OpenT1D/actions/runs/34745493274; failed historical guard, full trace retained",
+      "archive_sha256": "e8ed60fc0a1d083984205d20134f5a80612e72e728ff0feeee334753ce49d9a7",
+      "inventory_sha256": "d8c2b8e4c4c5203bbcaa0c81414a774077aafe03ea9ab4a13b494b23cd64f5ea",
+      "file_count": 9
+    },
+    {
+      "directory": "2026-09-13-review-simglucose-mac",
+      "origin": "ba289c84a8d4983b364bdae99d299f632673109a; Mac native replay and original baseline",
+      "archive_sha256": "0ad8b340db37eb176b55a449defdecb14efe87e7fde30e5322208c246ec07f9f",
+      "inventory_sha256": "a2646fa606811730d58b326a739cb84df4f6a749d4e622d619084101ea1195d2",
+      "file_count": 8
+    },
+    {
+      "directory": "2026-09-13-review-lt1-mac",
+      "origin": "ba289c84a8d4983b364bdae99d299f632673109a; Mac native replay and original baseline",
+      "archive_sha256": "e289c7de277527dd64840e9cbab1c2533b47a2a6301e318030985c7c631c1c79",
+      "inventory_sha256": "9635b251516b0e70e09b193d84dca1f611e964c793416413f81716b0cbbba072",
+      "file_count": 7
+    },
+    {
+      "directory": "2026-09-13-review-development-mac",
+      "origin": "Review fixes; all four output hashes match original development evidence",
+      "archive_sha256": "079139553cae54dbb6f4dcc22b629d4b04f272c43072774100f278a8c46d63bd",
+      "inventory_sha256": "55a087dd7855a79c47f7d3f137ae7a20d491b6cff7d6d5d612042fdb97eb7586",
+      "file_count": 14
+    },
+    {
+      "directory": "2026-09-13-review-linux-verified",
+      "origin": "https://github.com/OpenT1D/OpenT1D/actions/runs/34745762999",
+      "archive_sha256": "37b8c33a0ecc59152550edccbaf877b8c7744adf629cd7d11801c6bf3d672a45",
+      "inventory_sha256": "f1b8ac8a23336a0f51093614d8e03d558e1c104f69a6410f9e34894eb74b9f69",
+      "file_count": 46
+    }
+  ]
+}

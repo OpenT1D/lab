@@ -1,0 +1,66 @@
+{
+  "candidate_structure_count": 2,
+  "cit07_cit08_partition_verified": false,
+  "claim": "synthetic_source_shaped_structure_only",
+  "diary_semantics_and_arithmetic_verified": false,
+  "dictionary_manifest_sha256": "ebebce912c664ebc6db07c5f5fa37c71fd17a9a9d3f490cd8b527ea5380b4218",
+  "fit_or_treatment_evaluation_performed": false,
+  "human_execution_authorized": false,
+  "mmtt_challenge_identity_verified": false,
+  "one_year_visit_linkage_verified": false,
+  "people": [
+    {
+      "alias": "SYN001",
+      "candidate_mean_interval": [
+        359,
+        365
+      ],
+      "candidate_structure_complete": true,
+      "infusion_days_from_first": [
+        0
+      ],
+      "intervening_infusions_before_interval_end": [],
+      "issues": []
+    },
+    {
+      "alias": "SYN002",
+      "candidate_mean_interval": [
+        360,
+        366
+      ],
+      "candidate_structure_complete": true,
+      "infusion_days_from_first": [
+        0,
+        150
+      ],
+      "intervening_infusions_before_interval_end": [
+        150
+      ],
+      "issues": []
+    },
+    {
+      "alias": "SYN003",
+      "candidate_mean_interval": [
+        358,
+        364
+      ],
+      "candidate_structure_complete": false,
+      "infusion_days_from_first": [
+        0
+      ],
+      "intervening_infusions_before_interval_end": [],
+      "issues": [
+        "daily_insulin_interval_unverified"
+      ]
+    }
+  ],
+  "roster_count": 3,
+  "schema": "ot027-native-rehearsal-report/1",
+  "source_sha256": {
+    "cpeptide.csv": "2813bbe76ce65f4641ff93d4ce4f4f6308a8a5baf726776af60b89d5f6c8f9bd",
+    "ieq_infused.csv": "18b71c63016a95e36112aade3c1d2091ad7de6e6c5694ad678057c1d7d80c668",
+    "insulin.csv": "2f95065df3c60f12e068e73f9f2f225d578a95e9d0476e01f51dc43de64b55e0",
+    "mean_insulin.csv": "89d27d778682096b22187d1b57dd1e8b1c18ec24f405be18f769bde24a048c9d",
+    "patient_status.csv": "9ebb2e3e5ca64aeca7980693ac27ac124c5272ede5f64a6723d84b4251d3a6de"
+  }
+}

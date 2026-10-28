@@ -1,0 +1,13 @@
+{
+  "schema": "opent1d.p1-controller/1",
+  "name": "simglucose_pid",
+  "source_sha256": "72e1e9769ade4709a786c8d53b5850b25d0c3215192cf45164c1b49acd3c98f5",
+  "source_identity": "OpenT1D P1 adapter for jxx123/simglucose PIDController at a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc; upstream pid_ctrller.py SHA-256 1eb84cbf2485e2eb591d221cdbf2d276072794a95ff97825795fe1bfb2c2b5bf",
+  "rights": "licensed",
+  "license": "Apache-2.0 adapter; MIT upstream simglucose dependency",
+  "dependencies": {"simglucose": "0.2.11"},
+  "step_minutes": 3,
+  "observation": "held-cgm-with-age/1",
+  "action": "simglucose-pump-rate-u-min/1",
+  "missing_sensor": true
+}

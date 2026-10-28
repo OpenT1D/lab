@@ -1,0 +1,13 @@
+{
+  "schema": "opent1d.p1-controller/1",
+  "name": "glucosim_heuristic",
+  "source_sha256": "134b7482c67f43d0889332a627ac7e83f7e19801683413be23f38343fd716c9d",
+  "source_identity": "OpenT1D P1 adapter for HassDhia/glucosim HeuristicBasalAgent at 6422a91d533125a8feb4f2e8737aecd67fec95c9; upstream heuristic.py SHA-256 8528202b65e2068f5520e066add8293c944136f5d936dc2e30d5e9512878e6aa",
+  "rights": "licensed",
+  "license": "Apache-2.0 adapter; MIT upstream GlucoSim dependency",
+  "dependencies": {"glucosim": "0.1.2", "numpy": "1.26.4"},
+  "step_minutes": 3,
+  "observation": "held-cgm-with-age/1",
+  "action": "simglucose-pump-rate-u-min/1",
+  "missing_sensor": true
+}

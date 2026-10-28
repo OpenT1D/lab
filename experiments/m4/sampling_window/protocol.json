@@ -1,0 +1,64 @@
+{
+  "schema": "bc015-sampling-window-protocol/1",
+  "id": "BC-015-P4/1",
+  "specified_date": "2026-09-25",
+  "base_commit": "be6776c7f0d8129f7e296f5dfe536e5a9ddaccd8",
+  "question": "In the unchanged two-compartment C-peptide reference with a fully known synthetic 0-10 minute pulse shape, how does an early-only C-peptide window compare with a hypothetical extension when jointly estimating pulse gain and central removal?",
+  "scope": "Sampling-information stress test only. No FSIGT glucose/insulin model, actual CIT-07 secretion input, transplant calibration, clinical sampling recommendation or human identifiability claim.",
+  "sources": {
+    "kinetics": "Polonsky et al. 1986, DOI 10.1172/JCI112308, p. 99 scheme and p. 103 Table I T1D group means, as implemented in BC-003",
+    "schedule": "CIT-07 protocol version 8 (20 August 2012), section 9.1.2.8, pp. 81-82: FSIGT clock glucose injection at -0.5 min; C-peptide at -10/-5/-1 and 1/2/3/4/5/7/10 min; later G/I blood-draw times are hypothetical C-peptide additions here",
+    "protocol_url": "https://repository.niddk.nih.gov/public/study_document/Documentation/CIT-07_Protocol_Version_8.0_20Aug12.pdf"
+  },
+  "runtime": {
+    "project": "experiments/m4/beta_cell/runtime",
+    "python": "3.12",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3"
+  },
+  "model": {
+    "profile": "t1d_mean",
+    "k1_per_min": 0.037,
+    "k2_per_min": 0.031,
+    "k3_per_min": 0.052,
+    "volume_l_kg": 0.0655,
+    "horizon_min_after_injection": 181,
+    "incremental_initial_pmol_kg": [0, 0, 0, 0],
+    "incremental_pulse_pmol_kg_min": 9.0,
+    "pulse_interval_min_after_injection": [0, 10],
+    "parameter_order": ["evoked_pulse_gain", "k3_scale"],
+    "truth": [1.0, 1.0],
+    "lower": [0.5, 0.5],
+    "upper": [1.5, 1.5],
+    "fixed": ["k1", "k2", "central volume", "pulse onset/duration", "zero incremental baseline"],
+    "output_unit": "pmol/L"
+  },
+  "observation": {
+    "injection_clock_shift_min": 0.5,
+    "protocol_early_clock_min": [1, 2, 3, 4, 5, 7, 10],
+    "hypothetical_late_clock_min": [12, 14, 16, 18, 20, 22, 25, 30, 40, 50, 70, 100, 140, 180],
+    "prechallenge_clock_min": [-10, -5, -1],
+    "designs": ["early", "early_plus_hypothetical_late"],
+    "noise_sd_pmol_l": 30.0,
+    "noise_seed_first": 315000,
+    "noise_seed_count": 64,
+    "noise": "Independent Gaussian engineering noise at all postchallenge times. Each seed's full draw is shared between nested designs. Prechallenge samples are omitted because the incremental baseline is stipulated exactly zero; this is a favorable assumption, not an assay model. No negative-value clipping."
+  },
+  "analysis": {
+    "log_difference_steps": [0.001, 0.0005],
+    "svd_relative_cutoff": 1e-06,
+    "starts": [[0.75, 1.25], [1.25, 0.75]],
+    "optimizer": "scipy least_squares trf in log parameters; residuals divided by fixed engineering SD; max_nfev 200; xtol, ftol and gtol 1e-11",
+    "report": "per-design weighted local singular values/condition; 64 paired noisy two-start fits with failures and bound hits retained; median, 90th percentile and maximum absolute relative gain/k3 errors; no empirically calibrated confidence intervals",
+    "comparison": "Descriptive paired distribution only; no pass threshold or post-result noise/bound tuning"
+  },
+  "verification": {
+    "reference": "Generate synthetic truth by segmented BC-003 ODE with DOP853 rtol 1e-11, atol 1e-13 and max_step 0.125; independently fit with BC-003 exact analytical constant-input convolution.",
+    "ode_analytical_max_error_pmol_l": 0.0001,
+    "jacobian_refinement_relative_max": 0.001,
+    "noiseless_relative_parameter_error_max": 0.01,
+    "fresh_repeat_exact_files": true,
+    "failure_policy": "Record failed or incomplete simulations/fits and full planned denominators. Verification failure marks the experiment incomplete; noisy bound hits or large errors remain reported findings. Do not overwrite output."
+  },
+  "excluded": ["human records", "actual CIT-07 FSIGT measurements", "unknown secretory waveform", "free k1/k2/volume", "oral glucose stimulation", "clinical or therapy recommendation"]
+}

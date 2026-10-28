@@ -1,0 +1,2574 @@
+{
+  "schema": "bc010-execution/1",
+  "status": "completed_synthetic_forward_observation",
+  "base_commit": "9393fb1",
+  "run_path": "results/m4-feedback-observation/reference-01",
+  "parent_mode": "verified_existing_archive",
+  "manifest_sha256": "a5f85ea2592c539311f5194bbf22c0b3389284573f732e61b5aae75664d17227",
+  "parent_manifest_sha256": "73f5b8a7f143969788122544a50d5982f25ee4a92c1fc5fcb025ddee28ed1a56",
+  "archived_source_files": {
+    "source-adapter.py": "6f2c62de4f58e7aca1c94dee2192b964387508f81889511b32eee317f1ba5a54",
+    "source-common.py": "f1a56a203fe24092a2d4ea46ec2fafeaf68457a48a5a23d2f2e6d76bc2be018e",
+    "source-experiments__m4__c_peptide__model.py": "f46453669c17d98c4dc90eec6613641d32e222c2a3dd012709ca30e6868673ae",
+    "source-experiments__m4__c_peptide__protocol.json": "763834cd460e1d5702e0b8704edc976e7724bf32a897c7c2c12a120307bc476d",
+    "source-experiments__m4__c_peptide__reference.py": "29efbcdd7065387f0089ff8704916fee48cd24237529137a5350e8886559c992",
+    "source-experiments__m4__kinetic_inlet__forcing.py": "b26fd2fd87aa47da328d24b2cbe56d8e3be45f9b4caf2c3c453f89acb07fddd1",
+    "source-experiments__m4__paired_kinetics__common.py": "0d55ab114cf6381e2837670dd2b17b50a7109a0643bce756f2bd31d06209a12d",
+    "source-experiments__m4__paired_kinetics__oracle.py": "4262e65df8501ac7ea067513fe1148c1d6ca94c6df8dfbe71506f375d29538df",
+    "source-experiments__m4__paired_kinetics__report.py": "1826c8248c02347b381b3943c7c04f949a5867dd4e701b4ada1100830e5749fd",
+    "source-experiments__m4__paired_observation__contract.py": "eb422ce11a75840082801f8321fd10c7236509f71b7792ab83032e061b5f386d",
+    "source-experiments__m4__paired_observation__run.py": "a342e45ab3fc5218033d244d870bd2c9cd8a12099a5053b66f250b2c4b761f84",
+    "source-plot.py": "c0d8b33a282889d3041c07705286f05716578d7bbbeaa76400c850446df6fbf0",
+    "source-report.py": "46d1e6caaee23c713d56a4fc7119ddb2ece069bf9da58833935713815b0491c9",
+    "source-run.py": "100f3c6f5494b5ccf6f15a4f7dd07b119c783beb6a843e578cf9244bbb22509c",
+    "source-test_numerical.py": "70a627af8ff3bdd189c7261b055887fdffd7074afc6b872a44012d043fa72ea1",
+    "source-worker.py": "2737bf6f8992277acb47615c5af74d72175b1f4815e8b4387a778280cb5ba088"
+  },
+  "report_sha256": "817b1fa2f8df424ccfcaa6ddda46f368e3ed62c68f367d70e1a0204ced672dd4",
+  "figure_sha256": "295214d0bf4d8019a4b1435f497e7b578473d659f44af6861d7c36353142e425",
+  "report": {
+    "schema": "bc010-feedback-observation/1",
+    "protocol": "BC-010/1",
+    "claim": "synthetic_forward_observation_not_human_validation",
+    "passed": true,
+    "expected_cases": 24,
+    "completed_cases": 24,
+    "checks": {
+      "oracle_concentration_error_pmol_l": {
+        "value": 2.5867009975877235e-10,
+        "limit": 1e-05,
+        "passed": true
+      },
+      "solver_concentration_error_pmol_l": {
+        "value": 2.585073800482929e-10,
+        "limit": 1e-05,
+        "passed": true
+      },
+      "mass_error_pmol_kg": {
+        "value": 5.9543481256696396e-12,
+        "limit": 1e-07,
+        "passed": true
+      },
+      "input_error_pmol_kg": {
+        "value": 4.547473508864641e-12,
+        "limit": 1e-07,
+        "passed": true
+      },
+      "negative_tolerance_pmol_kg": {
+        "value": 0.0,
+        "limit": 1e-09,
+        "passed": true
+      },
+      "equilibrium_drift_pmol_l": {
+        "value": 2.1934738470008597e-09,
+        "limit": 1e-07,
+        "passed": true
+      },
+      "zero_state_error": {
+        "value": 0.0,
+        "limit": 0,
+        "passed": true
+      },
+      "parent_source_solver_error_pmol_l": {
+        "value": 3.299182253613253e-06,
+        "limit": 0.01,
+        "passed": true
+      },
+      "finest_coarsening_error_pmol_l": {
+        "value": 0.02985165604994222,
+        "limit": 0.05,
+        "passed": true
+      },
+      "coarsening_error_ratio": {
+        "value": 0.19940866998097584,
+        "limit": 0.6,
+        "passed": true
+      },
+      "parent_dose_relative_error": {
+        "value": 1.8199182259063287e-07,
+        "limit": 0.0001,
+        "passed": true
+      },
+      "scale_ambiguity_error_pmol_l": {
+        "value": 0.0,
+        "limit": 1e-07,
+        "passed": true
+      },
+      "repeat_artifact_differences": {
+        "value": 0,
+        "limit": 0,
+        "passed": true
+      }
+    },
+    "cases": {
+      "fasting--native_zero--fixed": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 0.0,
+          "solver_concentration_error_pmol_l": 0.0,
+          "mass_error_pmol_kg": 0.0,
+          "input_error_pmol_kg": 0.0,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 0.0,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 0.0,
+          "finest_coarsening_error_pmol_l": 0.0,
+          "coarsening_error_ratio": 0.0,
+          "parent_dose_relative_error": 0.0,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 0.0,
+          "peak_pmol_l": 0.0,
+          "sampled_peak_time_min": 0.0,
+          "final_pmol_l": 0.0,
+          "auc_above_initial_pmol_min_l": 0.0
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 0.0,
+        "interpolated_amount_pmol_kg": 0.0
+      },
+      "fasting--native_zero--extraction": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 0.0,
+          "solver_concentration_error_pmol_l": 0.0,
+          "mass_error_pmol_kg": 0.0,
+          "input_error_pmol_kg": 0.0,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 0.0,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 0.0,
+          "finest_coarsening_error_pmol_l": 0.0,
+          "coarsening_error_ratio": 0.0,
+          "parent_dose_relative_error": 0.0,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 0.0,
+          "peak_pmol_l": 0.0,
+          "sampled_peak_time_min": 0.0,
+          "final_pmol_l": 0.0,
+          "auc_above_initial_pmol_min_l": 0.0
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 0.0,
+        "interpolated_amount_pmol_kg": 0.0
+      },
+      "fasting--native_zero--portal": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 0.0,
+          "solver_concentration_error_pmol_l": 0.0,
+          "mass_error_pmol_kg": 0.0,
+          "input_error_pmol_kg": 0.0,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 0.0,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 0.0,
+          "finest_coarsening_error_pmol_l": 0.0,
+          "coarsening_error_ratio": 0.0,
+          "parent_dose_relative_error": 0.0,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 0.0,
+          "peak_pmol_l": 0.0,
+          "sampled_peak_time_min": 0.0,
+          "final_pmol_l": 0.0,
+          "auc_above_initial_pmol_min_l": 0.0
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 0.0,
+        "interpolated_amount_pmol_kg": 0.0
+      },
+      "fasting--native_zero--both": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 0.0,
+          "solver_concentration_error_pmol_l": 0.0,
+          "mass_error_pmol_kg": 0.0,
+          "input_error_pmol_kg": 0.0,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 0.0,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 0.0,
+          "finest_coarsening_error_pmol_l": 0.0,
+          "coarsening_error_ratio": 0.0,
+          "parent_dose_relative_error": 0.0,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 0.0,
+          "peak_pmol_l": 0.0,
+          "sampled_peak_time_min": 0.0,
+          "final_pmol_l": 0.0,
+          "auc_above_initial_pmol_min_l": 0.0
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 0.0,
+        "interpolated_amount_pmol_kg": 0.0
+      },
+      "fasting--constant_basal--fixed": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 1.6271971047941226e-13,
+          "solver_concentration_error_pmol_l": 0.0,
+          "mass_error_pmol_kg": 2.1316282072803006e-14,
+          "input_error_pmol_kg": 1.7905676941154525e-12,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 0.0,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 0.0,
+          "finest_coarsening_error_pmol_l": 0.0,
+          "coarsening_error_ratio": 0.0,
+          "parent_dose_relative_error": 7.205103228353011e-14,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 227.28721623605404,
+          "peak_pmol_l": 227.28721623605404,
+          "sampled_peak_time_min": 0.0,
+          "final_pmol_l": 227.28721623605404,
+          "auc_above_initial_pmol_min_l": 0.0
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 185.7936620400134,
+        "interpolated_amount_pmol_kg": 185.79366204000002
+      },
+      "fasting--constant_basal--extraction": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 1.6271971047941226e-13,
+          "solver_concentration_error_pmol_l": 0.0,
+          "mass_error_pmol_kg": 2.1316282072803006e-14,
+          "input_error_pmol_kg": 1.7905676941154525e-12,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 0.0,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 0.0,
+          "finest_coarsening_error_pmol_l": 0.0,
+          "coarsening_error_ratio": 0.0,
+          "parent_dose_relative_error": 7.205103228353011e-14,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 227.28721623605404,
+          "peak_pmol_l": 227.28721623605404,
+          "sampled_peak_time_min": 0.0,
+          "final_pmol_l": 227.28721623605404,
+          "auc_above_initial_pmol_min_l": 0.0
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 185.7936620400134,
+        "interpolated_amount_pmol_kg": 185.79366204000002
+      },
+      "fasting--constant_basal--portal": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 1.6271971047941226e-13,
+          "solver_concentration_error_pmol_l": 0.0,
+          "mass_error_pmol_kg": 2.1316282072803006e-14,
+          "input_error_pmol_kg": 1.7905676941154525e-12,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 0.0,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 0.0,
+          "finest_coarsening_error_pmol_l": 0.0,
+          "coarsening_error_ratio": 0.0,
+          "parent_dose_relative_error": 7.205103228353011e-14,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 227.28721623605404,
+          "peak_pmol_l": 227.28721623605404,
+          "sampled_peak_time_min": 0.0,
+          "final_pmol_l": 227.28721623605404,
+          "auc_above_initial_pmol_min_l": 0.0
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 185.7936620400134,
+        "interpolated_amount_pmol_kg": 185.79366204000002
+      },
+      "fasting--constant_basal--both": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 1.6271971047941226e-13,
+          "solver_concentration_error_pmol_l": 0.0,
+          "mass_error_pmol_kg": 2.1316282072803006e-14,
+          "input_error_pmol_kg": 1.7905676941154525e-12,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 0.0,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 0.0,
+          "finest_coarsening_error_pmol_l": 0.0,
+          "coarsening_error_ratio": 0.0,
+          "parent_dose_relative_error": 7.205103228353011e-14,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 227.28721623605404,
+          "peak_pmol_l": 227.28721623605404,
+          "sampled_peak_time_min": 0.0,
+          "final_pmol_l": 227.28721623605404,
+          "auc_above_initial_pmol_min_l": 0.0
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 185.7936620400134,
+        "interpolated_amount_pmol_kg": 185.79366204000002
+      },
+      "fasting--feedback_full--fixed": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 6.50878841917649e-13,
+          "solver_concentration_error_pmol_l": 2.1695961397254966e-13,
+          "mass_error_pmol_kg": 5.186961971048731e-12,
+          "input_error_pmol_kg": 1.0231815394945443e-12,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 2.1934738470008597e-09,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 3.632294465205632e-11,
+          "finest_coarsening_error_pmol_l": 9.094947017729282e-13,
+          "coarsening_error_ratio": 0.0,
+          "parent_dose_relative_error": 5.507085270028099e-15,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 227.28721623605404,
+          "peak_pmol_l": 227.2872162382475,
+          "sampled_peak_time_min": 74.75,
+          "final_pmol_l": 227.28721623775198,
+          "auc_above_initial_pmol_min_l": 4.3519363401856026e-07
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 3.632294465205632e-11,
+            "min_signed_difference_pmol_l": -3.3224978324142285e-11,
+            "max_signed_difference_pmol_l": 3.632294465205632e-11,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623828125,
+              "sampled_peak_time_min": 76.0,
+              "final_pmol_l": 227.28721623775343,
+              "auc_above_initial_pmol_min_l": 4.364799224276794e-07
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 4.121147867408581e-12,
+            "min_signed_difference_pmol_l": -5.684341886080802e-14,
+            "max_signed_difference_pmol_l": 4.121147867408581e-12,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623824802,
+              "sampled_peak_time_min": 74.75,
+              "final_pmol_l": 227.28721623775206,
+              "auc_above_initial_pmol_min_l": 4.353539537760298e-07
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 9.094947017729282e-13,
+            "min_signed_difference_pmol_l": -8.526512829121202e-14,
+            "max_signed_difference_pmol_l": 9.094947017729282e-13,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623824762,
+              "sampled_peak_time_min": 74.75,
+              "final_pmol_l": 227.28721623775198,
+              "auc_above_initial_pmol_min_l": 4.352288698328266e-07
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 6.467075763794128e-10,
+            "min_signed_difference_pmol_l": -6.467075763794128e-10,
+            "max_signed_difference_pmol_l": 7.199218998721335e-11,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623824654,
+              "sampled_peak_time_min": 76.75,
+              "final_pmol_l": 227.28721623774052,
+              "auc_above_initial_pmol_min_l": 4.318033575145819e-07
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.2872162382475,
+              "sampled_peak_time_min": 74.75,
+              "final_pmol_l": 227.28721623775198,
+              "auc_above_initial_pmol_min_l": 4.3519363401856026e-07
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.2872162382475,
+              "sampled_peak_time_min": 74.75,
+              "final_pmol_l": 227.28721623775198,
+              "auc_above_initial_pmol_min_l": 4.3519363401856026e-07
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 185.79366204172172,
+        "interpolated_amount_pmol_kg": 185.7936620417207
+      },
+      "fasting--feedback_full--extraction": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 8.135985523970612e-13,
+          "solver_concentration_error_pmol_l": 2.1695961397254966e-13,
+          "mass_error_pmol_kg": 3.680611371237319e-12,
+          "input_error_pmol_kg": 2.5011104298755527e-12,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 2.1445032416522736e-09,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 7.858602657506708e-11,
+          "finest_coarsening_error_pmol_l": 7.105427357601002e-13,
+          "coarsening_error_ratio": 0.0,
+          "parent_dose_relative_error": 7.18980576920939e-15,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 227.28721623605404,
+          "peak_pmol_l": 227.28721623819854,
+          "sampled_peak_time_min": 69.0,
+          "final_pmol_l": 227.28721623752858,
+          "auc_above_initial_pmol_min_l": 3.997092363761112e-07
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 7.858602657506708e-11,
+            "min_signed_difference_pmol_l": -7.858602657506708e-11,
+            "max_signed_difference_pmol_l": 2.7142732506035827e-11,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623820735,
+              "sampled_peak_time_min": 70.0,
+              "final_pmol_l": 227.28721623745827,
+              "auc_above_initial_pmol_min_l": 3.952534441964417e-07
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 4.035882739117369e-12,
+            "min_signed_difference_pmol_l": -1.4210854715202004e-13,
+            "max_signed_difference_pmol_l": 4.035882739117369e-12,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623819897,
+              "sampled_peak_time_min": 69.0,
+              "final_pmol_l": 227.28721623752853,
+              "auc_above_initial_pmol_min_l": 3.9985425814847986e-07
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 7.105427357601002e-13,
+            "min_signed_difference_pmol_l": -1.1368683772161603e-13,
+            "max_signed_difference_pmol_l": 7.105427357601002e-13,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623819862,
+              "sampled_peak_time_min": 69.0,
+              "final_pmol_l": 227.28721623752858,
+              "auc_above_initial_pmol_min_l": 3.9973428300754676e-07
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 6.467075763794128e-10,
+            "min_signed_difference_pmol_l": -6.467075763794128e-10,
+            "max_signed_difference_pmol_l": 7.406697477563284e-11,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623819717,
+              "sampled_peak_time_min": 71.0,
+              "final_pmol_l": 227.28721623751625,
+              "auc_above_initial_pmol_min_l": 3.9676295671142725e-07
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623819854,
+              "sampled_peak_time_min": 69.0,
+              "final_pmol_l": 227.28721623752858,
+              "auc_above_initial_pmol_min_l": 3.997092363761112e-07
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623819854,
+              "sampled_peak_time_min": 69.0,
+              "final_pmol_l": 227.28721623752858,
+              "auc_above_initial_pmol_min_l": 3.997092363761112e-07
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 185.79366204156565,
+        "interpolated_amount_pmol_kg": 185.793662041567
+      },
+      "fasting--feedback_full--portal": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 6.779987936642177e-13,
+          "solver_concentration_error_pmol_l": 2.7119951746568706e-13,
+          "mass_error_pmol_kg": 2.8848035071860068e-12,
+          "input_error_pmol_kg": 7.389644451905042e-13,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 1.8957564407173777e-09,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 2.998490344907623e-11,
+          "finest_coarsening_error_pmol_l": 1.4495071809506044e-12,
+          "coarsening_error_ratio": 0.0,
+          "parent_dose_relative_error": 2.7535426350187304e-15,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 227.28721623605404,
+          "peak_pmol_l": 227.2872162379498,
+          "sampled_peak_time_min": 66.0,
+          "final_pmol_l": 227.2872162374751,
+          "auc_above_initial_pmol_min_l": 3.554058380927927e-07
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 2.998490344907623e-11,
+            "min_signed_difference_pmol_l": -2.998490344907623e-11,
+            "max_signed_difference_pmol_l": 2.0946799850207753e-11,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623795278,
+              "sampled_peak_time_min": 66.0,
+              "final_pmol_l": 227.28721623747475,
+              "auc_above_initial_pmol_min_l": 3.5515640917083147e-07
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 6.73594513500575e-12,
+            "min_signed_difference_pmol_l": -1.1368683772161603e-13,
+            "max_signed_difference_pmol_l": 6.73594513500575e-12,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623795056,
+              "sampled_peak_time_min": 66.0,
+              "final_pmol_l": 227.28721623747506,
+              "auc_above_initial_pmol_min_l": 3.55625623171818e-07
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 1.4495071809506044e-12,
+            "min_signed_difference_pmol_l": -1.1368683772161603e-13,
+            "max_signed_difference_pmol_l": 1.4495071809506044e-12,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623795005,
+              "sampled_peak_time_min": 66.0,
+              "final_pmol_l": 227.28721623747518,
+              "auc_above_initial_pmol_min_l": 3.5546266019537143e-07
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 5.980211881251307e-10,
+            "min_signed_difference_pmol_l": -5.980211881251307e-10,
+            "max_signed_difference_pmol_l": 6.582467904081568e-11,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623794846,
+              "sampled_peak_time_min": 68.0,
+              "final_pmol_l": 227.28721623746182,
+              "auc_above_initial_pmol_min_l": 3.5259962061218175e-07
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.2872162379498,
+              "sampled_peak_time_min": 66.0,
+              "final_pmol_l": 227.2872162374751,
+              "auc_above_initial_pmol_min_l": 3.554058380927927e-07
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.2872162379498,
+              "sampled_peak_time_min": 66.0,
+              "final_pmol_l": 227.2872162374751,
+              "auc_above_initial_pmol_min_l": 3.554058380927927e-07
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 185.79366204140584,
+        "interpolated_amount_pmol_kg": 185.79366204140533
+      },
+      "fasting--feedback_full--both": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 8.407185041436299e-13,
+          "solver_concentration_error_pmol_l": 4.067992761985306e-13,
+          "mass_error_pmol_kg": 3.282707439211663e-12,
+          "input_error_pmol_kg": 7.958078640513122e-13,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 1.8792718492477434e-09,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 6.332356861094013e-11,
+          "finest_coarsening_error_pmol_l": 1.3073986337985843e-12,
+          "coarsening_error_ratio": 0.0,
+          "parent_dose_relative_error": 4.589237725033493e-15,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 227.28721623605404,
+          "peak_pmol_l": 227.2872162379333,
+          "sampled_peak_time_min": 65.5,
+          "final_pmol_l": 227.28721623731556,
+          "auc_above_initial_pmol_min_l": 3.3531807730469154e-07
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 6.332356861094013e-11,
+            "min_signed_difference_pmol_l": -6.332356861094013e-11,
+            "max_signed_difference_pmol_l": 1.1368683772161603e-12,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.2872162379286,
+              "sampled_peak_time_min": 9.5,
+              "final_pmol_l": 227.28721623730007,
+              "auc_above_initial_pmol_min_l": 3.2833104768315025e-07
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 6.707523425575346e-12,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 6.707523425575346e-12,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623793558,
+              "sampled_peak_time_min": 9.5,
+              "final_pmol_l": 227.28721623731576,
+              "auc_above_initial_pmol_min_l": 3.355447617536811e-07
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 1.3073986337985843e-12,
+            "min_signed_difference_pmol_l": -1.1368683772161603e-13,
+            "max_signed_difference_pmol_l": 1.3073986337985843e-12,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623793345,
+              "sampled_peak_time_min": 65.5,
+              "final_pmol_l": 227.28721623731562,
+              "auc_above_initial_pmol_min_l": 3.3535948773533164e-07
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 5.980211881251307e-10,
+            "min_signed_difference_pmol_l": -5.980211881251307e-10,
+            "max_signed_difference_pmol_l": 6.752998160663992e-11,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623793194,
+              "sampled_peak_time_min": 67.5,
+              "final_pmol_l": 227.28721623730272,
+              "auc_above_initial_pmol_min_l": 3.3280412026215345e-07
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.2872162379333,
+              "sampled_peak_time_min": 65.5,
+              "final_pmol_l": 227.28721623731556,
+              "auc_above_initial_pmol_min_l": 3.3531807730469154e-07
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.2872162379333,
+              "sampled_peak_time_min": 65.5,
+              "final_pmol_l": 227.28721623731556,
+              "auc_above_initial_pmol_min_l": 3.3531807730469154e-07
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 185.79366204131372,
+        "interpolated_amount_pmol_kg": 185.79366204131458
+      },
+      "gastric_load_30g--native_zero--fixed": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 0.0,
+          "solver_concentration_error_pmol_l": 0.0,
+          "mass_error_pmol_kg": 0.0,
+          "input_error_pmol_kg": 0.0,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 0.0,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 0.0,
+          "finest_coarsening_error_pmol_l": 0.0,
+          "coarsening_error_ratio": 0.0,
+          "parent_dose_relative_error": 0.0,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 0.0,
+          "peak_pmol_l": 0.0,
+          "sampled_peak_time_min": 0.0,
+          "final_pmol_l": 0.0,
+          "auc_above_initial_pmol_min_l": 0.0
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 0.0,
+        "interpolated_amount_pmol_kg": 0.0
+      },
+      "gastric_load_30g--native_zero--extraction": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 0.0,
+          "solver_concentration_error_pmol_l": 0.0,
+          "mass_error_pmol_kg": 0.0,
+          "input_error_pmol_kg": 0.0,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 0.0,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 0.0,
+          "finest_coarsening_error_pmol_l": 0.0,
+          "coarsening_error_ratio": 0.0,
+          "parent_dose_relative_error": 0.0,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 0.0,
+          "peak_pmol_l": 0.0,
+          "sampled_peak_time_min": 0.0,
+          "final_pmol_l": 0.0,
+          "auc_above_initial_pmol_min_l": 0.0
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 0.0,
+        "interpolated_amount_pmol_kg": 0.0
+      },
+      "gastric_load_30g--native_zero--portal": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 0.0,
+          "solver_concentration_error_pmol_l": 0.0,
+          "mass_error_pmol_kg": 0.0,
+          "input_error_pmol_kg": 0.0,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 0.0,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 0.0,
+          "finest_coarsening_error_pmol_l": 0.0,
+          "coarsening_error_ratio": 0.0,
+          "parent_dose_relative_error": 0.0,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 0.0,
+          "peak_pmol_l": 0.0,
+          "sampled_peak_time_min": 0.0,
+          "final_pmol_l": 0.0,
+          "auc_above_initial_pmol_min_l": 0.0
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 0.0,
+        "interpolated_amount_pmol_kg": 0.0
+      },
+      "gastric_load_30g--native_zero--both": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 0.0,
+          "solver_concentration_error_pmol_l": 0.0,
+          "mass_error_pmol_kg": 0.0,
+          "input_error_pmol_kg": 0.0,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 0.0,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 0.0,
+          "finest_coarsening_error_pmol_l": 0.0,
+          "coarsening_error_ratio": 0.0,
+          "parent_dose_relative_error": 0.0,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 0.0,
+          "peak_pmol_l": 0.0,
+          "sampled_peak_time_min": 0.0,
+          "final_pmol_l": 0.0,
+          "auc_above_initial_pmol_min_l": 0.0
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 0.0,
+              "peak_pmol_l": 0.0,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 0.0,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 0.0,
+        "interpolated_amount_pmol_kg": 0.0
+      },
+      "gastric_load_30g--constant_basal--fixed": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 1.6271971047941226e-13,
+          "solver_concentration_error_pmol_l": 0.0,
+          "mass_error_pmol_kg": 2.1316282072803006e-14,
+          "input_error_pmol_kg": 1.7905676941154525e-12,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 0.0,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 0.0,
+          "finest_coarsening_error_pmol_l": 0.0,
+          "coarsening_error_ratio": 0.0,
+          "parent_dose_relative_error": 7.205103228353011e-14,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 227.28721623605404,
+          "peak_pmol_l": 227.28721623605404,
+          "sampled_peak_time_min": 0.0,
+          "final_pmol_l": 227.28721623605404,
+          "auc_above_initial_pmol_min_l": 0.0
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 185.7936620400134,
+        "interpolated_amount_pmol_kg": 185.79366204000002
+      },
+      "gastric_load_30g--constant_basal--extraction": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 1.6271971047941226e-13,
+          "solver_concentration_error_pmol_l": 0.0,
+          "mass_error_pmol_kg": 2.1316282072803006e-14,
+          "input_error_pmol_kg": 1.7905676941154525e-12,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 0.0,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 0.0,
+          "finest_coarsening_error_pmol_l": 0.0,
+          "coarsening_error_ratio": 0.0,
+          "parent_dose_relative_error": 7.205103228353011e-14,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 227.28721623605404,
+          "peak_pmol_l": 227.28721623605404,
+          "sampled_peak_time_min": 0.0,
+          "final_pmol_l": 227.28721623605404,
+          "auc_above_initial_pmol_min_l": 0.0
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 185.7936620400134,
+        "interpolated_amount_pmol_kg": 185.79366204000002
+      },
+      "gastric_load_30g--constant_basal--portal": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 1.6271971047941226e-13,
+          "solver_concentration_error_pmol_l": 0.0,
+          "mass_error_pmol_kg": 2.1316282072803006e-14,
+          "input_error_pmol_kg": 1.7905676941154525e-12,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 0.0,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 0.0,
+          "finest_coarsening_error_pmol_l": 0.0,
+          "coarsening_error_ratio": 0.0,
+          "parent_dose_relative_error": 7.205103228353011e-14,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 227.28721623605404,
+          "peak_pmol_l": 227.28721623605404,
+          "sampled_peak_time_min": 0.0,
+          "final_pmol_l": 227.28721623605404,
+          "auc_above_initial_pmol_min_l": 0.0
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 185.7936620400134,
+        "interpolated_amount_pmol_kg": 185.79366204000002
+      },
+      "gastric_load_30g--constant_basal--both": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 1.6271971047941226e-13,
+          "solver_concentration_error_pmol_l": 0.0,
+          "mass_error_pmol_kg": 2.1316282072803006e-14,
+          "input_error_pmol_kg": 1.7905676941154525e-12,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 0.0,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 0.0,
+          "finest_coarsening_error_pmol_l": 0.0,
+          "coarsening_error_ratio": 0.0,
+          "parent_dose_relative_error": 7.205103228353011e-14,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 227.28721623605404,
+          "peak_pmol_l": 227.28721623605404,
+          "sampled_peak_time_min": 0.0,
+          "final_pmol_l": 227.28721623605404,
+          "auc_above_initial_pmol_min_l": 0.0
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 227.28721623605404,
+              "sampled_peak_time_min": 0.0,
+              "final_pmol_l": 227.28721623605404,
+              "auc_above_initial_pmol_min_l": 0.0
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 185.7936620400134,
+        "interpolated_amount_pmol_kg": 185.79366204000002
+      },
+      "gastric_load_30g--feedback_full--fixed": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 2.5867009975877235e-10,
+          "solver_concentration_error_pmol_l": 2.585073800482929e-10,
+          "mass_error_pmol_kg": 5.9543481256696396e-12,
+          "input_error_pmol_kg": 4.547473508864641e-12,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 0.0,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 5.13832446813467e-07,
+          "finest_coarsening_error_pmol_l": 0.02985165604994222,
+          "coarsening_error_ratio": 0.1994057503325491,
+          "parent_dose_relative_error": 1.6277853875713776e-07,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 227.28721623605404,
+          "peak_pmol_l": 902.9284149794835,
+          "sampled_peak_time_min": 106.5,
+          "final_pmol_l": 548.1867872279792,
+          "auc_above_initial_pmol_min_l": 111958.1595977576
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 5.13832446813467e-07,
+            "min_signed_difference_pmol_l": -5.13832446813467e-07,
+            "max_signed_difference_pmol_l": 1.0754774848464876e-10,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 902.9284148344136,
+              "sampled_peak_time_min": 106.5,
+              "final_pmol_l": 548.1867870671042,
+              "auc_above_initial_pmol_min_l": 111958.15954738269
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 0.14970308529296972,
+            "min_signed_difference_pmol_l": -0.09104447897641421,
+            "max_signed_difference_pmol_l": 0.14970308529296972,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 902.9176193643312,
+              "sampled_peak_time_min": 106.5,
+              "final_pmol_l": 548.1954233600761,
+              "auc_above_initial_pmol_min_l": 111957.83175759448
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 0.02985165604994222,
+            "min_signed_difference_pmol_l": -0.018070252539814646,
+            "max_signed_difference_pmol_l": 0.02985165604994222,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 902.9266211263273,
+              "sampled_peak_time_min": 106.5,
+              "final_pmol_l": 548.1908046213832,
+              "auc_above_initial_pmol_min_l": 111958.18832831849
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 39.410395025093976,
+            "min_signed_difference_pmol_l": -39.410395025093976,
+            "max_signed_difference_pmol_l": 9.84736615668271,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 902.629941192024,
+              "sampled_peak_time_min": 108.5,
+              "final_pmol_l": 551.6932079872611,
+              "auc_above_initial_pmol_min_l": 111309.38448459603
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 902.9284149794835,
+              "sampled_peak_time_min": 106.5,
+              "final_pmol_l": 548.1867872279792,
+              "auc_above_initial_pmol_min_l": 111958.1595977576
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 902.9284149794835,
+              "sampled_peak_time_min": 106.5,
+              "final_pmol_l": 548.1867872279792,
+              "auc_above_initial_pmol_min_l": 111958.1595977576
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 617.5166063247348,
+        "interpolated_amount_pmol_kg": 617.5165058062839
+      },
+      "gastric_load_30g--feedback_full--extraction": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 2.585073800482929e-10,
+          "solver_concentration_error_pmol_l": 2.583446603378135e-10,
+          "mass_error_pmol_kg": 2.6361135496699717e-12,
+          "input_error_pmol_kg": 1.5916157281026244e-12,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 0.0,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 2.110870809701737e-06,
+          "finest_coarsening_error_pmol_l": 0.029850488330595226,
+          "coarsening_error_ratio": 0.19940866998097584,
+          "parent_dose_relative_error": 1.8199182259063287e-07,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 227.28721623605404,
+          "peak_pmol_l": 849.9800297443518,
+          "sampled_peak_time_min": 97.25,
+          "final_pmol_l": 397.3707199479269,
+          "auc_above_initial_pmol_min_l": 90298.57258729193
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 2.110870809701737e-06,
+            "min_signed_difference_pmol_l": -3.001332515850663e-11,
+            "max_signed_difference_pmol_l": 2.110870809701737e-06,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 849.980030204942,
+              "sampled_peak_time_min": 97.25,
+              "final_pmol_l": 397.3707206540856,
+              "auc_above_initial_pmol_min_l": 90298.57280284661
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 0.14969503749983915,
+            "min_signed_difference_pmol_l": -0.09331743842494689,
+            "max_signed_difference_pmol_l": 0.14969503749983915,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 849.9672626633837,
+              "sampled_peak_time_min": 97.25,
+              "final_pmol_l": 397.3689052317982,
+              "auc_above_initial_pmol_min_l": 90298.72853155754
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 0.029850488330595226,
+            "min_signed_difference_pmol_l": -0.018532697807927434,
+            "max_signed_difference_pmol_l": 0.029850488330595226,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 849.9772542577647,
+              "sampled_peak_time_min": 97.25,
+              "final_pmol_l": 397.3705732438522,
+              "auc_above_initial_pmol_min_l": 90298.60625427644
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 39.344414287260065,
+            "min_signed_difference_pmol_l": -39.344414287260065,
+            "max_signed_difference_pmol_l": 12.747693954714919,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 849.6037356479233,
+              "sampled_peak_time_min": 99.25,
+              "final_pmol_l": 400.1378083981608,
+              "auc_above_initial_pmol_min_l": 89952.83657657016
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 849.9800297443518,
+              "sampled_peak_time_min": 97.25,
+              "final_pmol_l": 397.3707199479269,
+              "auc_above_initial_pmol_min_l": 90298.57258729193
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 849.9800297443518,
+              "sampled_peak_time_min": 97.25,
+              "final_pmol_l": 397.3707199479269,
+              "auc_above_initial_pmol_min_l": 90298.57258729193
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 521.1295679575809,
+        "interpolated_amount_pmol_kg": 521.1296627989008
+      },
+      "gastric_load_30g--feedback_full--portal": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 2.3263494608206637e-10,
+          "solver_concentration_error_pmol_l": 2.3274342588905266e-10,
+          "mass_error_pmol_kg": 2.5224267119483557e-12,
+          "input_error_pmol_kg": 1.8189894035458565e-12,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 0.0,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 3.0476326173811685e-07,
+          "finest_coarsening_error_pmol_l": 0.026960975448787394,
+          "coarsening_error_ratio": 0.19902009485122418,
+          "parent_dose_relative_error": 1.731609706206297e-07,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 227.28721623605404,
+          "peak_pmol_l": 798.9043033101569,
+          "sampled_peak_time_min": 99.0,
+          "final_pmol_l": 490.7879811328653,
+          "auc_above_initial_pmol_min_l": 91132.80122049585
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 3.0476326173811685e-07,
+            "min_signed_difference_pmol_l": -3.0476326173811685e-07,
+            "max_signed_difference_pmol_l": 9.610175766283646e-09,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 798.9043033152288,
+              "sampled_peak_time_min": 99.0,
+              "final_pmol_l": 490.78798082810204,
+              "auc_above_initial_pmol_min_l": 91132.80120891321
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 0.13546860918211223,
+            "min_signed_difference_pmol_l": -0.08339124264307429,
+            "max_signed_difference_pmol_l": 0.13546860918211223,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 798.8941556115911,
+              "sampled_peak_time_min": 99.0,
+              "final_pmol_l": 490.78820065835174,
+              "auc_above_initial_pmol_min_l": 91133.18105889359
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 0.026960975448787394,
+            "min_signed_difference_pmol_l": -0.016546292431598886,
+            "max_signed_difference_pmol_l": 0.026960975448787394,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 798.9015157180108,
+              "sampled_peak_time_min": 99.0,
+              "final_pmol_l": 490.78830647645054,
+              "auc_above_initial_pmol_min_l": 91132.69515836953
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 35.46655028814996,
+            "min_signed_difference_pmol_l": -35.46655028814996,
+            "max_signed_difference_pmol_l": 9.23225358546813,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 798.5914549972993,
+              "sampled_peak_time_min": 101.0,
+              "final_pmol_l": 493.32966884008175,
+              "auc_above_initial_pmol_min_l": 90600.7010115958
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 798.9043033101569,
+              "sampled_peak_time_min": 99.0,
+              "final_pmol_l": 490.7879811328653,
+              "auc_above_initial_pmol_min_l": 91132.80122049585
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 798.9043033101569,
+              "sampled_peak_time_min": 99.0,
+              "final_pmol_l": 490.7879811328653,
+              "auc_above_initial_pmol_min_l": 91132.80122049585
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 536.1310628751359,
+        "interpolated_amount_pmol_kg": 536.1311557121111
+      },
+      "gastric_load_30g--feedback_full--both": {
+        "checks": {
+          "oracle_concentration_error_pmol_l": 2.3268918598555953e-10,
+          "solver_concentration_error_pmol_l": 2.328519056960389e-10,
+          "mass_error_pmol_kg": 2.2950530365051236e-12,
+          "input_error_pmol_kg": 2.5011104298755527e-12,
+          "negative_tolerance_pmol_kg": 0.0,
+          "equilibrium_drift_pmol_l": 0.0,
+          "zero_state_error": 0.0,
+          "parent_source_solver_error_pmol_l": 3.299182253613253e-06,
+          "finest_coarsening_error_pmol_l": 0.026960300907120427,
+          "coarsening_error_ratio": 0.19901953725092775,
+          "parent_dose_relative_error": 6.040482746494565e-09,
+          "scale_ambiguity_error_pmol_l": 0.0,
+          "repeat_artifact_differences": 0.0
+        },
+        "outcomes": {
+          "baseline_pmol_l": 227.28721623605404,
+          "peak_pmol_l": 764.743130718792,
+          "sampled_peak_time_min": 92.5,
+          "final_pmol_l": 405.4252500725967,
+          "auc_above_initial_pmol_min_l": 76558.89226859993
+        },
+        "diagnostics": {
+          "parent_tight": {
+            "max_abs_difference_pmol_l": 3.299182253613253e-06,
+            "min_signed_difference_pmol_l": -3.299182253613253e-06,
+            "max_signed_difference_pmol_l": 2.731894710450433e-10,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 764.7431294681212,
+              "sampled_peak_time_min": 92.5,
+              "final_pmol_l": 405.42524957493634,
+              "auc_above_initial_pmol_min_l": 76558.89192402276
+            }
+          },
+          "sampling_1": {
+            "max_abs_difference_pmol_l": 0.13546559940559177,
+            "min_signed_difference_pmol_l": -0.0851602665181872,
+            "max_signed_difference_pmol_l": 0.13546559940559177,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 764.7259546451107,
+              "sampled_peak_time_min": 92.5,
+              "final_pmol_l": 405.42222957147544,
+              "auc_above_initial_pmol_min_l": 76558.36256650958
+            }
+          },
+          "sampling_0.5": {
+            "max_abs_difference_pmol_l": 0.026960300907120427,
+            "min_signed_difference_pmol_l": -0.016901477527994757,
+            "max_signed_difference_pmol_l": 0.026960300907120427,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 764.7400144935314,
+              "sampled_peak_time_min": 92.5,
+              "final_pmol_l": 405.42487920439953,
+              "auc_above_initial_pmol_min_l": 76558.88889688885
+            }
+          },
+          "liver_fault": {
+            "max_abs_difference_pmol_l": 35.413980502100344,
+            "min_signed_difference_pmol_l": -35.413980502100344,
+            "max_signed_difference_pmol_l": 11.28670430998477,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 764.3707955381889,
+              "sampled_peak_time_min": 94.5,
+              "final_pmol_l": 406.9514189211677,
+              "auc_above_initial_pmol_min_l": 76199.55172181145
+            }
+          },
+          "scale_0.5": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 764.743130718792,
+              "sampled_peak_time_min": 92.5,
+              "final_pmol_l": 405.4252500725967,
+              "auc_above_initial_pmol_min_l": 76558.89226859993
+            }
+          },
+          "scale_2": {
+            "max_abs_difference_pmol_l": 0.0,
+            "min_signed_difference_pmol_l": 0.0,
+            "max_signed_difference_pmol_l": 0.0,
+            "outcomes": {
+              "baseline_pmol_l": 227.28721623605404,
+              "peak_pmol_l": 764.743130718792,
+              "sampled_peak_time_min": 92.5,
+              "final_pmol_l": 405.4252500725967,
+              "auc_above_initial_pmol_min_l": 76558.89226859993
+            }
+          }
+        },
+        "pancreatic_amount_pmol_kg": 473.10529178003435,
+        "interpolated_amount_pmol_kg": 473.10528892225
+      }
+    },
+    "repeat_changed_files": [],
+    "limitations": [
+      "changes to parent physiology or existing C-peptide reference",
+      "human/cohort reproduction",
+      "clinical C-peptide prediction",
+      "C-peptide bioactivity feedback",
+      "graft drainage/processing model",
+      "parameter calibration or deconvolution",
+      "claim that added observations identify hepatic action",
+      "treatment efficacy or cell counts"
+    ]
+  },
+  "checks": {
+    "root_locked_sync": "passed",
+    "cpeptide_locked_sync": "passed",
+    "root_tests": {
+      "status": "passed",
+      "count": 349,
+      "new_test_count": 11,
+      "strict_documentation_build": "passed",
+      "log_sha256": "b922f8ad4c13b7e2c2abf974f9cf710669a775f0ff70d1a9f47fa13ae501a707"
+    },
+    "numerical_tests": {
+      "status": "passed",
+      "count": 3,
+      "log_sha256": "01ca15e6234f231aa0b8ac62099c03638733cd0a44c1ffa2527c848dc66d22dd"
+    },
+    "simulator_free_reconstruction": "byte-identical with python -S",
+    "figure_reconstruction": "byte-identical SVG; PNG visually inspected",
+    "current_source_and_lock_snapshots": "all identical to executed versions",
+    "parent_preservation": "copied archive manifest identical to original; full parent reconstruction passed",
+    "fresh_parent_mode": {
+      "status": "passed",
+      "run_path": "results/m4-feedback-observation/reference-fresh-01",
+      "started_utc": "2026-09-22T12:57:06.771908+00:00",
+      "finished_utc": "2026-09-22T13:02:27.060473+00:00",
+      "manifest_sha256": "a7f2f49cbe0c446dff676863b1394ec3a8a0e7b45ca34fef1a0ed744f6b55c13",
+      "parent_manifest_sha256": "8c70003547acb55239d37c8433e836308827cd9771d0482b4232157e0ac22bc4",
+      "parent_numerical_files_identical_to_reused_archive": 82,
+      "observation_numerical_files_identical_to_reused_archive": 25,
+      "report_and_figure": "byte-identical to reused-parent observation run",
+      "source_and_lock_snapshots": "identical to final implementation",
+      "simulator_free_report_reconstruction": "byte-identical with python -S"
+    },
+    "remote_ci": "configured; not run",
+    "native_locked_sync": "passed",
+    "root_test_source_sha256": "e256744c0a936678f5ac64dc84dd65f46bebdd720a5177709fbb6beaeec7349f",
+    "initial_repository_check": "YAML line-length failure; fixed without changing scientific code, parameters, protocol or limits",
+    "sync_logs": {
+      "root-sync.log": "c72c7efa7a7e9810998d215438b002f9db1912ca1d6b21678d653bb195f81e75",
+      "cpeptide-sync.log": "7ae47a68df027600513a5a330ea270167609b2574668382927f59d2c507cf204",
+      "native-sync.log": "146ae12f989190effdc952634c2c9df4cee82dc1af8fe114818287f94fd95d8c"
+    },
+    "final_documentation_build": {
+      "status": "passed",
+      "log_sha256": "85072aaad87d510f049e10873c03b15e18b7bcd5a731158ce0beaa1b579cf37e"
+    }
+  },
+  "failed_scientific_attempts": [],
+  "limitations": [
+    "changes to parent physiology or existing C-peptide reference",
+    "human/cohort reproduction",
+    "clinical C-peptide prediction",
+    "C-peptide bioactivity feedback",
+    "graft drainage/processing model",
+    "parameter calibration or deconvolution",
+    "claim that added observations identify hepatic action",
+    "treatment efficacy or cell counts"
+  ]
+}

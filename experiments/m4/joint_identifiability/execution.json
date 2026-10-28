@@ -1,0 +1,3520 @@
+{
+  "schema": "bc011-execution/1",
+  "date": "2026-09-22",
+  "protocol": "BC-011/2",
+  "base_commit": "b0bd51421b2ecdfc569e2d740f36cdf0402bcbfc",
+  "git_dirty_during_execution": true,
+  "claim": "conditional_synthetic_local_sensitivity_and_parameter_recovery",
+  "archive": "results/m4-joint-identifiability/reference-01",
+  "started_utc": "2026-09-22T13:50:39.544122+00:00",
+  "finished_utc": "2026-09-22T13:55:35.957358+00:00",
+  "commands": [
+    [
+      "uv",
+      "run",
+      "--locked",
+      "--project",
+      "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose",
+      "python",
+      "-m",
+      "experiments.m4.joint_identifiability.worker",
+      "/private/tmp/opent1d-beta-cell-reference/results/m4-joint-identifiability/reference-01",
+      "/private/tmp/opent1d-beta-cell-reference/results/m4-joint-identifiability/reference-01"
+    ],
+    [
+      "uv",
+      "run",
+      "--locked",
+      "--project",
+      "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose",
+      "python",
+      "-m",
+      "experiments.m4.joint_identifiability.worker",
+      "/private/tmp/opent1d-beta-cell-reference/results/m4-joint-identifiability/reference-01",
+      "/private/tmp/opent1d-beta-cell-reference/results/m4-joint-identifiability/reference-01/repeat"
+    ],
+    [
+      "uv",
+      "run",
+      "--locked",
+      "--project",
+      "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose",
+      "python",
+      "-m",
+      "experiments.m4.joint_identifiability.plot",
+      "/private/tmp/opent1d-beta-cell-reference/results/m4-joint-identifiability/reference-01",
+      "--output",
+      "/private/tmp/opent1d-beta-cell-reference/results/m4-joint-identifiability/reference-01/figure.svg",
+      "--allow-pending"
+    ]
+  ],
+  "hashes": {
+    "protocol.json": "ebad643ffb59534c37fc5d3fa29d7c19ea5701b23e35e249ad6aa44ed2f507e8",
+    "manifest.json": "2b28abf19d1062d368aa3ec22c2bd4eb80a76660e828f5625372fb748c2bb322",
+    "report.json": "2d33eb4a73de4bcb4b942b8d5d3a9e070c734d4b98f96b17da75eff64582bdae",
+    "figure.svg": "b4148571da50791e26efbb241a0a1929c89339b492ad6e51ab205f80fc58a5a4",
+    "uv.lock": "634d5849a1cc4ae37f4f00c12c713f168cffa93a43d5a22b571b0c41478fc95c",
+    "pyproject.toml": "107d7792bf6e99575e6b30f3639376059d5f9323bc8dedfd09c82824613c8cd5"
+  },
+  "source_hashes": {
+    "common.py": "058a959f44f56cbe8beb7531ef350230c51f6b989f877bb1a96977c09f51cdd2",
+    "model.py": "ef5d4392f4642c50cd78675ba053b1a015f8581c8a894d19b98b07e034237884",
+    "verify.py": "0353fa2b33ba0b3cec8453248cfb9b37c0153f3982e97e5b9e2804dee4b97b6b",
+    "inference.py": "f20194f6dec5a09f3de910a16dc82a6108b7e9dcb4eab38205008fc99d68fe1d",
+    "worker.py": "e26be524e335dfaf9577bb0da6b664aaf638ae24bccf4b074d9ab746bae1ce31",
+    "report.py": "5cdd902418697fc3421c80fe690cfd662420e8f00cf4391c8a6e5eadd3e1b122",
+    "run.py": "2ec702460c7e4bdaf57ed029786c4f5887cb8aaec1f7f7f8ca002f2efeaf0606",
+    "plot.py": "b61ad44022a79ccbb19b74722fbfeafa8fcc3ebf8eba276e1b72db462e6b4a44",
+    "test_numerical.py": "72a814147fbcb1f6da144d6c300e7669bdbbfd6dfe2453fa1cad51b922a4ad51"
+  },
+  "reused_source_hashes": {
+    "experiments/m4/feedback/protocol.json": "b66087592810be35fa74372ad07172359897ceb40653abdf420b3c3fa1a4fd99",
+    "experiments/m4/feedback/contract.py": "4a35587c9c848a9c19586ab8e0aa28a1b5fcfe02c1b22e4fc7b0d46479dcb5ce",
+    "experiments/m4/feedback/secretion.py": "65b4d4ced59024238b8bf11ec2c0a0196472c2dc12904678159b0a51383a5ce7",
+    "experiments/m4/feedback/coupled.py": "5f774ab7c0767fe278239a9f4457aec2ee0ab9c02de917e391d4eb83ed6d2280",
+    "experiments/m4/feedback_observation/protocol.json": "69143f23b24e225753ada55a3d43ff2a39414635a624263db9e4f83c2d3ef98d",
+    "experiments/m4/kinetic_inlet/native.py": "aaa6a921643bf6ec82fde84d53193c8ab9c9cdbe1b69de634089f652cb4b14dd",
+    "experiments/m4/kinetic_inlet/protocol.json": "ac2754f1718bcad7977d3332685abc8bb9a281056e5475d78ab7d7364b9df3dc",
+    "experiments/m4/kinetic_inlet/forcing.py": "b26fd2fd87aa47da328d24b2cbe56d8e3be45f9b4caf2c3c453f89acb07fddd1",
+    "experiments/m4/c_peptide/model.py": "f46453669c17d98c4dc90eec6613641d32e222c2a3dd012709ca30e6868673ae",
+    "experiments/m4/paired_kinetics/oracle.py": "4262e65df8501ac7ea067513fe1148c1d6ca94c6df8dfbe71506f375d29538df",
+    "experiments/m4/paired_kinetics/common.py": "0d55ab114cf6381e2837670dd2b17b50a7109a0643bce756f2bd31d06209a12d",
+    "experiments/m4/paired_observation/run.py": "a342e45ab3fc5218033d244d870bd2c9cd8a12099a5053b66f250b2c4b761f84",
+    "experiments/m4/paired_observation/contract.py": "eb422ce11a75840082801f8321fd10c7236509f71b7792ab83032e061b5f386d"
+  },
+  "checks": {
+    "root_locked_sync": "passed",
+    "native_locked_sync": "passed",
+    "native_numerical_tests": {
+      "status": "passed",
+      "count": 6
+    },
+    "artifact_tests": {
+      "status": "passed",
+      "count": 21,
+      "without_site_packages": true
+    },
+    "repository_checks": {
+      "status": "passed",
+      "root_test_count": 370,
+      "lint": "passed",
+      "strict_documentation_build": "passed",
+      "command": "uv run --locked python scripts/check.py",
+      "log": "results/m4-joint-identifiability/repository-check.log",
+      "log_sha256": "04fa8383f7830cbb3a9b82c39bf73fd476f1534ce057fff2ea584673653a2958"
+    },
+    "standard_library_report_reconstruction": "byte_identical",
+    "figure_reconstruction": "byte_identical",
+    "repeat_numeric_files": 40,
+    "source_snapshots": "22 current files match archived source exactly",
+    "remote_ci": "configured_not_executed",
+    "figure_visual_review": "passed: PNG rendering inspected; labels and panels legible",
+    "artifact_test_source_sha256": "c8d2acb5403926a79f81ab62231ac6ed815dc211b16894349afdecaee1d6fa88"
+  },
+  "deviations": [
+    "BC-011/2 is a pre-fit numerical-derivative amendment, not post-result tuning.",
+    "No failed scientific cases or changes to bounds, noise, matrix or acceptance limits.",
+    "An ad hoc inspection invoked system Python 3.9 and failed to import datetime.UTC; rerun in the already locked Python 3.12 tooling environment. No experiment was executed with Python 3.9.",
+    "Initial full repository check found the new CI job missing from the prepared inactive branch-protection policy. The policy was aligned locally; no server-side setting changed. Numerical code and experiment evidence unchanged."
+  ],
+  "report": {
+    "schema": "bc011-joint-recovery/1",
+    "protocol": "BC-011/2",
+    "claim": "conditional_synthetic_local_sensitivity_and_parameter_recovery",
+    "passed": true,
+    "gates": {
+      "forward_verification": true,
+      "sensitivity_refinement": true,
+      "fresh_process_repeat": true,
+      "all_fits_completed": true,
+      "noiseless_active_recovery": true
+    },
+    "analyses": 36,
+    "fit_starts": 72,
+    "repeat_artifact_differences": 0,
+    "verification": {
+      "passed": true,
+      "checks": {
+        "truth/fasting_derivative": {
+          "passed": true,
+          "value": 4.28316271339213e-11,
+          "limit": 1e-07,
+          "criterion": "baseline_derivative_error"
+        },
+        "truth/fit/output": {
+          "passed": true,
+          "value": 9.621770118428685e-07,
+          "limit": 0.001,
+          "criterion": "solver_scaled_output_error"
+        },
+        "truth/fit/insulin_pmol_kg": {
+          "passed": true,
+          "value": 1.0231815394945443e-12,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "truth/fit/cpeptide_pmol_kg": {
+          "passed": true,
+          "value": 2.2737367544323206e-13,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "truth/fit/paired_pancreatic_ledgers_pmol_kg": {
+          "passed": true,
+          "value": 0.0,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "truth/reference/output": {
+          "passed": true,
+          "value": 0.0,
+          "limit": 0.001,
+          "criterion": "solver_scaled_output_error"
+        },
+        "truth/reference/insulin_pmol_kg": {
+          "passed": true,
+          "value": 4.320099833421409e-12,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "truth/reference/cpeptide_pmol_kg": {
+          "passed": true,
+          "value": 1.0231815394945443e-12,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "truth/reference/paired_pancreatic_ledgers_pmol_kg": {
+          "passed": true,
+          "value": 0.0,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "truth/independent/output": {
+          "passed": true,
+          "value": 3.2961906981654465e-08,
+          "limit": 0.001,
+          "criterion": "solver_scaled_output_error"
+        },
+        "truth/independent/insulin_pmol_kg": {
+          "passed": true,
+          "value": 3.865352482534945e-12,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "truth/independent/cpeptide_pmol_kg": {
+          "passed": true,
+          "value": 9.094947017729282e-13,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "truth/independent/paired_pancreatic_ledgers_pmol_kg": {
+          "passed": true,
+          "value": 0.0,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "lower_corner/fasting_derivative": {
+          "passed": true,
+          "value": 3.848832363928523e-11,
+          "limit": 1e-07,
+          "criterion": "baseline_derivative_error"
+        },
+        "lower_corner/fit/output": {
+          "passed": true,
+          "value": 9.243188022386069e-08,
+          "limit": 0.001,
+          "criterion": "solver_scaled_output_error"
+        },
+        "lower_corner/fit/insulin_pmol_kg": {
+          "passed": true,
+          "value": 3.979039320256561e-13,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "lower_corner/fit/cpeptide_pmol_kg": {
+          "passed": true,
+          "value": 1.7053025658242404e-13,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "lower_corner/fit/paired_pancreatic_ledgers_pmol_kg": {
+          "passed": true,
+          "value": 0.0,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "lower_corner/reference/output": {
+          "passed": true,
+          "value": 0.0,
+          "limit": 0.001,
+          "criterion": "solver_scaled_output_error"
+        },
+        "lower_corner/reference/insulin_pmol_kg": {
+          "passed": true,
+          "value": 3.467448550509289e-12,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "lower_corner/reference/cpeptide_pmol_kg": {
+          "passed": true,
+          "value": 2.2737367544323206e-13,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "lower_corner/reference/paired_pancreatic_ledgers_pmol_kg": {
+          "passed": true,
+          "value": 0.0,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "lower_corner/independent/output": {
+          "passed": true,
+          "value": 7.615062713739463e-09,
+          "limit": 0.001,
+          "criterion": "solver_scaled_output_error"
+        },
+        "lower_corner/independent/insulin_pmol_kg": {
+          "passed": true,
+          "value": 4.320099833421409e-12,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "lower_corner/independent/cpeptide_pmol_kg": {
+          "passed": true,
+          "value": 3.410605131648481e-13,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "lower_corner/independent/paired_pancreatic_ledgers_pmol_kg": {
+          "passed": true,
+          "value": 0.0,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "upper_corner/fasting_derivative": {
+          "passed": true,
+          "value": 6.424771825663811e-11,
+          "limit": 1e-07,
+          "criterion": "baseline_derivative_error"
+        },
+        "upper_corner/fit/output": {
+          "passed": true,
+          "value": 8.769558595152678e-07,
+          "limit": 0.001,
+          "criterion": "solver_scaled_output_error"
+        },
+        "upper_corner/fit/insulin_pmol_kg": {
+          "passed": true,
+          "value": 9.094947017729282e-13,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "upper_corner/fit/cpeptide_pmol_kg": {
+          "passed": true,
+          "value": 7.958078640513122e-13,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "upper_corner/fit/paired_pancreatic_ledgers_pmol_kg": {
+          "passed": true,
+          "value": 0.0,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "upper_corner/reference/output": {
+          "passed": true,
+          "value": 0.0,
+          "limit": 0.001,
+          "criterion": "solver_scaled_output_error"
+        },
+        "upper_corner/reference/insulin_pmol_kg": {
+          "passed": true,
+          "value": 3.637978807091713e-12,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "upper_corner/reference/cpeptide_pmol_kg": {
+          "passed": true,
+          "value": 1.2505552149377763e-12,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "upper_corner/reference/paired_pancreatic_ledgers_pmol_kg": {
+          "passed": true,
+          "value": 0.0,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "upper_corner/independent/output": {
+          "passed": true,
+          "value": 2.5329294809732044e-08,
+          "limit": 0.001,
+          "criterion": "solver_scaled_output_error"
+        },
+        "upper_corner/independent/insulin_pmol_kg": {
+          "passed": true,
+          "value": 3.637978807091713e-12,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "upper_corner/independent/cpeptide_pmol_kg": {
+          "passed": true,
+          "value": 7.958078640513122e-13,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "upper_corner/independent/paired_pancreatic_ledgers_pmol_kg": {
+          "passed": true,
+          "value": 0.0,
+          "limit": 1e-06,
+          "criterion": "mass_balance_error_pmol_kg"
+        },
+        "original_BC008_GI": {
+          "passed": true,
+          "value": 5.106016942590941e-10,
+          "limit": 0.001,
+          "criterion": "parent_GI_scaled_error"
+        },
+        "gain_beta_K_symmetry/0.5": {
+          "passed": true,
+          "value": 0.0,
+          "limit": 1e-06,
+          "criterion": "exact_symmetry_scaled_error"
+        },
+        "gain_beta_K_symmetry/2.0": {
+          "passed": true,
+          "value": 0.0,
+          "limit": 1e-06,
+          "criterion": "exact_symmetry_scaled_error"
+        },
+        "passive_k3/0.5": {
+          "passed": true,
+          "value": 2.0586981008818838e-10,
+          "limit": 1e-05,
+          "criterion": "passive_GI_scaled_error"
+        },
+        "passive_k3/1.5": {
+          "passed": true,
+          "value": 9.823963864619145e-11,
+          "limit": 1e-05,
+          "criterion": "passive_GI_scaled_error"
+        },
+        "passive_k3/equation_locality": {
+          "passed": true,
+          "value": 0.0,
+          "limit": 0.0
+        },
+        "independent_cpeptide": {
+          "passed": true,
+          "value": 0.0006219937113079515,
+          "limit": 0.01,
+          "criterion": "cp_oracle_error_pmol_l"
+        }
+      },
+      "details": {
+        "truth": {
+          "theta": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "derived_Sb_pmol_kg_min": 0.7741402585078987,
+          "fasting_derivative_native_units_per_min": 4.28316271339213e-11,
+          "initial_observations": [
+            138.56,
+            100.25,
+            227.28721623837308
+          ],
+          "nfev": {
+            "fit": 3892,
+            "reference": 12748,
+            "independent": 6289
+          }
+        },
+        "lower_corner": {
+          "theta": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "derived_Sb_pmol_kg_min": 0.15482805170587666,
+          "fasting_derivative_native_units_per_min": 3.848832363928523e-11,
+          "initial_observations": [
+            138.56,
+            100.25,
+            90.91488649787237
+          ],
+          "nfev": {
+            "fit": 3940,
+            "reference": 12820,
+            "independent": 6211
+          }
+        },
+        "upper_corner": {
+          "theta": [
+            1.5,
+            1.5,
+            1.5
+          ],
+          "derived_Sb_pmol_kg_min": 1.3934524653099198,
+          "fasting_derivative_native_units_per_min": 6.424771825663811e-11,
+          "initial_observations": [
+            138.56,
+            100.25,
+            272.74465948520645
+          ],
+          "nfev": {
+            "fit": 3940,
+            "reference": 12820,
+            "independent": 6307
+          }
+        },
+        "exact_symmetry": {
+          "operation": "gain times scale; beta and K divided by scale; all else identical",
+          "scaled_output_errors": {
+            "0.5": 0.0,
+            "2.0": 0.0
+          },
+          "interpretation": "Exact redundancy removed from inference by fixing beta and K"
+        },
+        "passive_k3": [
+          {
+            "k3_scale": 0.5,
+            "GI_scaled_error": 2.0586981008818838e-10
+          },
+          {
+            "k3_scale": 1.5,
+            "GI_scaled_error": 9.823963864619145e-11
+          }
+        ],
+        "cpeptide_oracle": {
+          "method": "Independent six-state affine forcing matrix exponential",
+          "comparison": "monolithic reference Q1 versus sampled-source propagation",
+          "refinement": [
+            {
+              "source_step_min": 0.25,
+              "error_pmol_l": 0.00994922582662985
+            },
+            {
+              "source_step_min": 0.125,
+              "error_pmol_l": 0.0024879923726125403
+            },
+            {
+              "source_step_min": 0.0625,
+              "error_pmol_l": 0.0006219937113079515
+            }
+          ],
+          "error_includes": "piecewise-linear source interpolation and ODE error"
+        }
+      },
+      "scope": "Forward gates; derivative refinement and recovery checked separately"
+    },
+    "sensitivity_checks": {
+      "jacobian_relative_refinement_error": 5.882194002905806e-07,
+      "jacobian_solver_relative_error": 8.130014009820986e-06
+    },
+    "local_sensitivity": [
+      {
+        "regime": "known_kinetics",
+        "modality": "G",
+        "step": 10,
+        "declared_parameters": [
+          0
+        ],
+        "active_parameters": [
+          0
+        ],
+        "singular_values": [
+          13.935386028846496
+        ],
+        "right_vectors": [
+          [
+            1.0
+          ]
+        ],
+        "rank": 1,
+        "condition_number": 1.0,
+        "unobservable": [],
+        "k3_numerical_leakage_max": 0.0,
+        "jacobian_refinement_discrepancy_norm": 8.502151005151203e-06,
+        "directions_above_numerical_discrepancy": 1,
+        "rank_resolved_under_checked_refinements": true
+      },
+      {
+        "regime": "known_kinetics",
+        "modality": "G",
+        "step": 30,
+        "declared_parameters": [
+          0
+        ],
+        "active_parameters": [
+          0
+        ],
+        "singular_values": [
+          8.200955892267944
+        ],
+        "right_vectors": [
+          [
+            1.0
+          ]
+        ],
+        "rank": 1,
+        "condition_number": 1.0,
+        "unobservable": [],
+        "k3_numerical_leakage_max": 0.0,
+        "jacobian_refinement_discrepancy_norm": 5.426895250541398e-06,
+        "directions_above_numerical_discrepancy": 1,
+        "rank_resolved_under_checked_refinements": true
+      },
+      {
+        "regime": "known_kinetics",
+        "modality": "GI",
+        "step": 10,
+        "declared_parameters": [
+          0
+        ],
+        "active_parameters": [
+          0
+        ],
+        "singular_values": [
+          28.142393281775025
+        ],
+        "right_vectors": [
+          [
+            1.0
+          ]
+        ],
+        "rank": 1,
+        "condition_number": 1.0,
+        "unobservable": [],
+        "k3_numerical_leakage_max": 0.0,
+        "jacobian_refinement_discrepancy_norm": 3.363941188244512e-05,
+        "directions_above_numerical_discrepancy": 1,
+        "rank_resolved_under_checked_refinements": true
+      },
+      {
+        "regime": "known_kinetics",
+        "modality": "GI",
+        "step": 30,
+        "declared_parameters": [
+          0
+        ],
+        "active_parameters": [
+          0
+        ],
+        "singular_values": [
+          16.56408889037815
+        ],
+        "right_vectors": [
+          [
+            1.0
+          ]
+        ],
+        "rank": 1,
+        "condition_number": 1.0,
+        "unobservable": [],
+        "k3_numerical_leakage_max": 0.0,
+        "jacobian_refinement_discrepancy_norm": 2.0693803015889616e-05,
+        "directions_above_numerical_discrepancy": 1,
+        "rank_resolved_under_checked_refinements": true
+      },
+      {
+        "regime": "known_kinetics",
+        "modality": "GIC",
+        "step": 10,
+        "declared_parameters": [
+          0
+        ],
+        "active_parameters": [
+          0
+        ],
+        "singular_values": [
+          62.99968036690404
+        ],
+        "right_vectors": [
+          [
+            1.0
+          ]
+        ],
+        "rank": 1,
+        "condition_number": 1.0,
+        "unobservable": [],
+        "k3_numerical_leakage_max": 0.0,
+        "jacobian_refinement_discrepancy_norm": 7.78055168210609e-05,
+        "directions_above_numerical_discrepancy": 1,
+        "rank_resolved_under_checked_refinements": true
+      },
+      {
+        "regime": "known_kinetics",
+        "modality": "GIC",
+        "step": 30,
+        "declared_parameters": [
+          0
+        ],
+        "active_parameters": [
+          0
+        ],
+        "singular_values": [
+          36.84673054632148
+        ],
+        "right_vectors": [
+          [
+            1.0
+          ]
+        ],
+        "rank": 1,
+        "condition_number": 1.0,
+        "unobservable": [],
+        "k3_numerical_leakage_max": 0.0,
+        "jacobian_refinement_discrepancy_norm": 4.578683914871406e-05,
+        "directions_above_numerical_discrepancy": 1,
+        "rank_resolved_under_checked_refinements": true
+      },
+      {
+        "regime": "unknown_clearance",
+        "modality": "G",
+        "step": 10,
+        "declared_parameters": [
+          0,
+          1,
+          2
+        ],
+        "active_parameters": [
+          0,
+          1
+        ],
+        "singular_values": [
+          14.985934485953468,
+          0.23930222450205768,
+          0.0
+        ],
+        "right_vectors": [
+          [
+            -0.929879146999696,
+            0.3678651546084756,
+            -0.0
+          ],
+          [
+            0.3678651546084756,
+            0.929879146999696,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "rank": 2,
+        "condition_number": null,
+        "unobservable": [
+          "k3_scale"
+        ],
+        "k3_numerical_leakage_max": 1.602273869139026e-09,
+        "jacobian_refinement_discrepancy_norm": 7.992107193807438e-05,
+        "directions_above_numerical_discrepancy": 2,
+        "rank_resolved_under_checked_refinements": true
+      },
+      {
+        "regime": "unknown_clearance",
+        "modality": "G",
+        "step": 30,
+        "declared_parameters": [
+          0,
+          1,
+          2
+        ],
+        "active_parameters": [
+          0,
+          1
+        ],
+        "singular_values": [
+          8.822151127196665,
+          0.14323717723672805,
+          0.0
+        ],
+        "right_vectors": [
+          [
+            -0.929567604549474,
+            0.3686516900438038,
+            -0.0
+          ],
+          [
+            0.3686516900438038,
+            0.929567604549474,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "rank": 2,
+        "condition_number": null,
+        "unobservable": [
+          "k3_scale"
+        ],
+        "k3_numerical_leakage_max": 1.602273869139026e-09,
+        "jacobian_refinement_discrepancy_norm": 4.725151107922747e-05,
+        "directions_above_numerical_discrepancy": 2,
+        "rank_resolved_under_checked_refinements": true
+      },
+      {
+        "regime": "unknown_clearance",
+        "modality": "GI",
+        "step": 10,
+        "declared_parameters": [
+          0,
+          1,
+          2
+        ],
+        "active_parameters": [
+          0,
+          1
+        ],
+        "singular_values": [
+          30.250709722922707,
+          1.2222711395384558,
+          0.0
+        ],
+        "right_vectors": [
+          [
+            -0.930186981853893,
+            0.3670860645537299,
+            -0.0
+          ],
+          [
+            -0.3670860645537299,
+            -0.930186981853893,
+            -0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "rank": 2,
+        "condition_number": null,
+        "unobservable": [
+          "k3_scale"
+        ],
+        "k3_numerical_leakage_max": 6.087041981572838e-08,
+        "jacobian_refinement_discrepancy_norm": 0.0005842169635713577,
+        "directions_above_numerical_discrepancy": 2,
+        "rank_resolved_under_checked_refinements": true
+      },
+      {
+        "regime": "unknown_clearance",
+        "modality": "GI",
+        "step": 30,
+        "declared_parameters": [
+          0,
+          1,
+          2
+        ],
+        "active_parameters": [
+          0,
+          1
+        ],
+        "singular_values": [
+          17.781773063837814,
+          0.7149951489074944,
+          0.0
+        ],
+        "right_vectors": [
+          [
+            -0.9314056749989119,
+            0.36398278610371293,
+            -0.0
+          ],
+          [
+            -0.36398278610371293,
+            -0.9314056749989119,
+            -0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "rank": 2,
+        "condition_number": null,
+        "unobservable": [
+          "k3_scale"
+        ],
+        "k3_numerical_leakage_max": 6.087041981572838e-08,
+        "jacobian_refinement_discrepancy_norm": 0.0003801807339964432,
+        "directions_above_numerical_discrepancy": 2,
+        "rank_resolved_under_checked_refinements": true
+      },
+      {
+        "regime": "unknown_clearance",
+        "modality": "GIC",
+        "step": 10,
+        "declared_parameters": [
+          0,
+          1,
+          2
+        ],
+        "active_parameters": [
+          0,
+          1,
+          2
+        ],
+        "singular_values": [
+          135.05874964378668,
+          54.594592268360465,
+          11.84054287330498
+        ],
+        "right_vectors": [
+          [
+            -0.2704330350274866,
+            -0.5597401203482313,
+            0.7832987752054579
+          ],
+          [
+            -0.9391071849963196,
+            0.3325329400502902,
+            -0.08659987800106134
+          ],
+          [
+            -0.21199921852240586,
+            -0.7590209756350992,
+            -0.6155838609741416
+          ]
+        ],
+        "rank": 3,
+        "condition_number": 11.406465994754559,
+        "unobservable": [],
+        "k3_numerical_leakage_max": 0.0,
+        "jacobian_refinement_discrepancy_norm": 0.0010997153743980605,
+        "directions_above_numerical_discrepancy": 3,
+        "rank_resolved_under_checked_refinements": true
+      },
+      {
+        "regime": "unknown_clearance",
+        "modality": "GIC",
+        "step": 30,
+        "declared_parameters": [
+          0,
+          1,
+          2
+        ],
+        "active_parameters": [
+          0,
+          1,
+          2
+        ],
+        "singular_values": [
+          79.65955911322588,
+          32.880175036286644,
+          7.246708162636455
+        ],
+        "right_vectors": [
+          [
+            -0.24862826462408436,
+            -0.5708441312536113,
+            0.7825094017603406
+          ],
+          [
+            -0.943761006769829,
+            0.3245509880578985,
+            -0.06310165014831606
+          ],
+          [
+            -0.21794299284632884,
+            -0.7541907145834876,
+            -0.6194329809634238
+          ]
+        ],
+        "rank": 3,
+        "condition_number": 10.992516508936466,
+        "unobservable": [],
+        "k3_numerical_leakage_max": 0.0,
+        "jacobian_refinement_discrepancy_norm": 0.0007950451245964051,
+        "directions_above_numerical_discrepancy": 3,
+        "rank_resolved_under_checked_refinements": true
+      }
+    ],
+    "cases": [
+      {
+        "id": "known_kinetics-G-10-noiseless",
+        "regime": "known_kinetics",
+        "modality": "G",
+        "step": 10,
+        "data": "noiseless",
+        "active_parameters": [
+          0
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.0000000062618415,
+              null,
+              null
+            ],
+            "relative_errors": [
+              6.261841489774156e-09,
+              null,
+              null
+            ],
+            "max_active_relative_error": 6.261841489774156e-09,
+            "objective": 1.3087148833612922e-15,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 6
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.0000000062438883,
+              null,
+              null
+            ],
+            "relative_errors": [
+              6.243888295287547e-09,
+              null,
+              null
+            ],
+            "max_active_relative_error": 6.243888295287547e-09,
+            "objective": 1.3086517673504674e-15,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 6
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.0000000062438883,
+            null,
+            null
+          ],
+          "relative_errors": [
+            6.243888295287547e-09,
+            null,
+            null
+          ],
+          "max_active_relative_error": 6.243888295287547e-09,
+          "objective": 1.3086517673504674e-15,
+          "bound_hits": [],
+          "optimizer_status": 1,
+          "nfev": 6
+        },
+        "start_max_absolute_disagreement": 1.795319448660848e-11,
+        "noiseless_recovered": true
+      },
+      {
+        "id": "known_kinetics-G-10-noise_117",
+        "regime": "known_kinetics",
+        "modality": "G",
+        "step": 10,
+        "data": "noise_117",
+        "active_parameters": [
+          0
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              0.8756852854804993,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.12431471451950071,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.12431471451950071,
+            "objective": 14.084467332991652,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 5
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              0.8756853661530619,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.12431463384693808,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.12431463384693808,
+            "objective": 14.08446733314201,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 6
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            0.8756852854804993,
+            null,
+            null
+          ],
+          "relative_errors": [
+            0.12431471451950071,
+            null,
+            null
+          ],
+          "max_active_relative_error": 0.12431471451950071,
+          "objective": 14.084467332991652,
+          "bound_hits": [],
+          "optimizer_status": 2,
+          "nfev": 5
+        },
+        "start_max_absolute_disagreement": 8.067256263011302e-08,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "known_kinetics-G-10-noise_221",
+        "regime": "known_kinetics",
+        "modality": "G",
+        "step": 10,
+        "data": "noise_221",
+        "active_parameters": [
+          0
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              0.9912914697240355,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.008708530275964521,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.008708530275964521,
+            "objective": 22.6815510202428,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 6
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              0.9912916518932225,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.008708348106777453,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.008708348106777453,
+            "objective": 22.681551020245948,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 6
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            0.9912914697240355,
+            null,
+            null
+          ],
+          "relative_errors": [
+            0.008708530275964521,
+            null,
+            null
+          ],
+          "max_active_relative_error": 0.008708530275964521,
+          "objective": 22.6815510202428,
+          "bound_hits": [],
+          "optimizer_status": 2,
+          "nfev": 6
+        },
+        "start_max_absolute_disagreement": 1.8216918706848162e-07,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "known_kinetics-G-30-noiseless",
+        "regime": "known_kinetics",
+        "modality": "G",
+        "step": 30,
+        "data": "noiseless",
+        "active_parameters": [
+          0
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.000000006202096,
+              null,
+              null
+            ],
+            "relative_errors": [
+              6.202095947926978e-09,
+              null,
+              null
+            ],
+            "max_active_relative_error": 6.202095947926978e-09,
+            "objective": 4.987172709759942e-16,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 6
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.0000000060651053,
+              null,
+              null
+            ],
+            "relative_errors": [
+              6.065105306873875e-09,
+              null,
+              null
+            ],
+            "max_active_relative_error": 6.065105306873875e-09,
+            "objective": 4.974553069317084e-16,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 6
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.0000000060651053,
+            null,
+            null
+          ],
+          "relative_errors": [
+            6.065105306873875e-09,
+            null,
+            null
+          ],
+          "max_active_relative_error": 6.065105306873875e-09,
+          "objective": 4.974553069317084e-16,
+          "bound_hits": [],
+          "optimizer_status": 1,
+          "nfev": 6
+        },
+        "start_max_absolute_disagreement": 1.36990641053103e-10,
+        "noiseless_recovered": true
+      },
+      {
+        "id": "known_kinetics-G-30-noise_117",
+        "regime": "known_kinetics",
+        "modality": "G",
+        "step": 30,
+        "data": "noise_117",
+        "active_parameters": [
+          0
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              0.8964574473572949,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.10354255264270507,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.10354255264270507,
+            "objective": 1.2843975486664638,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 7
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              0.8964579549564575,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.10354204504354247,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.10354204504354247,
+            "objective": 1.2843975488109662,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 6
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            0.8964574473572949,
+            null,
+            null
+          ],
+          "relative_errors": [
+            0.10354255264270507,
+            null,
+            null
+          ],
+          "max_active_relative_error": 0.10354255264270507,
+          "objective": 1.2843975486664638,
+          "bound_hits": [],
+          "optimizer_status": 2,
+          "nfev": 7
+        },
+        "start_max_absolute_disagreement": 5.075991625913545e-07,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "known_kinetics-G-30-noise_221",
+        "regime": "known_kinetics",
+        "modality": "G",
+        "step": 30,
+        "data": "noise_221",
+        "active_parameters": [
+          0
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.1817577701356892,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.18175777013568917,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.18175777013568917,
+            "objective": 6.705145882546678,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 7
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.18176186242212,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.18176186242212,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.18176186242212,
+            "objective": 6.7051458824029995,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 7
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.18176186242212,
+            null,
+            null
+          ],
+          "relative_errors": [
+            0.18176186242212,
+            null,
+            null
+          ],
+          "max_active_relative_error": 0.18176186242212,
+          "objective": 6.7051458824029995,
+          "bound_hits": [],
+          "optimizer_status": 2,
+          "nfev": 7
+        },
+        "start_max_absolute_disagreement": 4.092286430834591e-06,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "known_kinetics-GI-10-noiseless",
+        "regime": "known_kinetics",
+        "modality": "GI",
+        "step": 10,
+        "data": "noiseless",
+        "active_parameters": [
+          0
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.0000000085982408,
+              null,
+              null
+            ],
+            "relative_errors": [
+              8.598240786028555e-09,
+              null,
+              null
+            ],
+            "max_active_relative_error": 8.598240786028555e-09,
+            "objective": 2.300297443504677e-13,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 7
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.000000008642607,
+              null,
+              null
+            ],
+            "relative_errors": [
+              8.642607074449415e-09,
+              null,
+              null
+            ],
+            "max_active_relative_error": 8.642607074449415e-09,
+            "objective": 2.2999076486875326e-13,
+            "bound_hits": [],
+            "optimizer_status": 3,
+            "nfev": 19
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.000000008642607,
+            null,
+            null
+          ],
+          "relative_errors": [
+            8.642607074449415e-09,
+            null,
+            null
+          ],
+          "max_active_relative_error": 8.642607074449415e-09,
+          "objective": 2.2999076486875326e-13,
+          "bound_hits": [],
+          "optimizer_status": 3,
+          "nfev": 19
+        },
+        "start_max_absolute_disagreement": 4.4366288420860656e-11,
+        "noiseless_recovered": true
+      },
+      {
+        "id": "known_kinetics-GI-10-noise_117",
+        "regime": "known_kinetics",
+        "modality": "GI",
+        "step": 10,
+        "data": "noise_117",
+        "active_parameters": [
+          0
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              0.9144647665573575,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.08553523344264247,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.08553523344264247,
+            "objective": 39.62513392920842,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 11
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              0.9144683883091753,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.08553161169082468,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.08553161169082468,
+            "objective": 39.625134211593014,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 8
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            0.9144647665573575,
+            null,
+            null
+          ],
+          "relative_errors": [
+            0.08553523344264247,
+            null,
+            null
+          ],
+          "max_active_relative_error": 0.08553523344264247,
+          "objective": 39.62513392920842,
+          "bound_hits": [],
+          "optimizer_status": 2,
+          "nfev": 11
+        },
+        "start_max_absolute_disagreement": 3.6217518177839025e-06,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "known_kinetics-GI-10-noise_221",
+        "regime": "known_kinetics",
+        "modality": "GI",
+        "step": 10,
+        "data": "noise_221",
+        "active_parameters": [
+          0
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.0167675488916272,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.016767548891627237,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.016767548891627237,
+            "objective": 58.34871995801659,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 6
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.0167674260416855,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.016767426041685463,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.016767426041685463,
+            "objective": 58.34871983773034,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 6
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.0167674260416855,
+            null,
+            null
+          ],
+          "relative_errors": [
+            0.016767426041685463,
+            null,
+            null
+          ],
+          "max_active_relative_error": 0.016767426041685463,
+          "objective": 58.34871983773034,
+          "bound_hits": [],
+          "optimizer_status": 2,
+          "nfev": 6
+        },
+        "start_max_absolute_disagreement": 1.2284994177491626e-07,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "known_kinetics-GI-30-noiseless",
+        "regime": "known_kinetics",
+        "modality": "GI",
+        "step": 30,
+        "data": "noiseless",
+        "active_parameters": [
+          0
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.000000013362703,
+              null,
+              null
+            ],
+            "relative_errors": [
+              1.3362702944164084e-08,
+              null,
+              null
+            ],
+            "max_active_relative_error": 1.3362702944164084e-08,
+            "objective": 1.609437419959014e-13,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 7
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.000000013367571,
+              null,
+              null
+            ],
+            "relative_errors": [
+              1.336757105008246e-08,
+              null,
+              null
+            ],
+            "max_active_relative_error": 1.336757105008246e-08,
+            "objective": 1.6094959044156089e-13,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 7
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.000000013362703,
+            null,
+            null
+          ],
+          "relative_errors": [
+            1.3362702944164084e-08,
+            null,
+            null
+          ],
+          "max_active_relative_error": 1.3362702944164084e-08,
+          "objective": 1.609437419959014e-13,
+          "bound_hits": [],
+          "optimizer_status": 1,
+          "nfev": 7
+        },
+        "start_max_absolute_disagreement": 4.868105918376386e-12,
+        "noiseless_recovered": true
+      },
+      {
+        "id": "known_kinetics-GI-30-noise_117",
+        "regime": "known_kinetics",
+        "modality": "GI",
+        "step": 30,
+        "data": "noise_117",
+        "active_parameters": [
+          0
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              0.9621584297500606,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.037841570249939394,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.037841570249939394,
+            "objective": 10.439205899119608,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 9
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              0.9621597644258586,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.0378402355741414,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.0378402355741414,
+            "objective": 10.439205810977944,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 12
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            0.9621597644258586,
+            null,
+            null
+          ],
+          "relative_errors": [
+            0.0378402355741414,
+            null,
+            null
+          ],
+          "max_active_relative_error": 0.0378402355741414,
+          "objective": 10.439205810977944,
+          "bound_hits": [],
+          "optimizer_status": 2,
+          "nfev": 12
+        },
+        "start_max_absolute_disagreement": 1.3346757979926238e-06,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "known_kinetics-GI-30-noise_221",
+        "regime": "known_kinetics",
+        "modality": "GI",
+        "step": 30,
+        "data": "noise_221",
+        "active_parameters": [
+          0
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.066095087374205,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.066095087374205,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.066095087374205,
+            "objective": 18.288681544213407,
+            "bound_hits": [],
+            "optimizer_status": 3,
+            "nfev": 14
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.0660962907071658,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.06609629070716583,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.06609629070716583,
+            "objective": 18.288681643471488,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 8
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.066095087374205,
+            null,
+            null
+          ],
+          "relative_errors": [
+            0.066095087374205,
+            null,
+            null
+          ],
+          "max_active_relative_error": 0.066095087374205,
+          "objective": 18.288681544213407,
+          "bound_hits": [],
+          "optimizer_status": 3,
+          "nfev": 14
+        },
+        "start_max_absolute_disagreement": 1.2033329608307497e-06,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "known_kinetics-GIC-10-noiseless",
+        "regime": "known_kinetics",
+        "modality": "GIC",
+        "step": 10,
+        "data": "noiseless",
+        "active_parameters": [
+          0
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.0000000085509955,
+              null,
+              null
+            ],
+            "relative_errors": [
+              8.550995467260236e-09,
+              null,
+              null
+            ],
+            "max_active_relative_error": 8.550995467260236e-09,
+            "objective": 8.487193372058924e-13,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 7
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.0000000085541922,
+              null,
+              null
+            ],
+            "relative_errors": [
+              8.554192243437342e-09,
+              null,
+              null
+            ],
+            "max_active_relative_error": 8.554192243437342e-09,
+            "objective": 8.48791885051225e-13,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 7
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.0000000085509955,
+            null,
+            null
+          ],
+          "relative_errors": [
+            8.550995467260236e-09,
+            null,
+            null
+          ],
+          "max_active_relative_error": 8.550995467260236e-09,
+          "objective": 8.487193372058924e-13,
+          "bound_hits": [],
+          "optimizer_status": 1,
+          "nfev": 7
+        },
+        "start_max_absolute_disagreement": 3.1967761771056757e-12,
+        "noiseless_recovered": true
+      },
+      {
+        "id": "known_kinetics-GIC-10-noise_117",
+        "regime": "known_kinetics",
+        "modality": "GIC",
+        "step": 10,
+        "data": "noise_117",
+        "active_parameters": [
+          0
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.0055320822360962,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.005532082236096247,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.005532082236096247,
+            "objective": 82.24018130127999,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 9
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.0055358883328929,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.005535888332892869,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.005535888332892869,
+            "objective": 82.24018413900437,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 8
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.0055320822360962,
+            null,
+            null
+          ],
+          "relative_errors": [
+            0.005532082236096247,
+            null,
+            null
+          ],
+          "max_active_relative_error": 0.005532082236096247,
+          "objective": 82.24018130127999,
+          "bound_hits": [],
+          "optimizer_status": 2,
+          "nfev": 9
+        },
+        "start_max_absolute_disagreement": 3.806096796621361e-06,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "known_kinetics-GIC-10-noise_221",
+        "regime": "known_kinetics",
+        "modality": "GIC",
+        "step": 10,
+        "data": "noise_221",
+        "active_parameters": [
+          0
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              0.9968483041898967,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.0031516958101033277,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.0031516958101033277,
+            "objective": 87.39795815497543,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 6
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              0.9968486848889475,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.0031513151110524884,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.0031513151110524884,
+            "objective": 87.3979579187883,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 6
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            0.9968486848889475,
+            null,
+            null
+          ],
+          "relative_errors": [
+            0.0031513151110524884,
+            null,
+            null
+          ],
+          "max_active_relative_error": 0.0031513151110524884,
+          "objective": 87.3979579187883,
+          "bound_hits": [],
+          "optimizer_status": 2,
+          "nfev": 6
+        },
+        "start_max_absolute_disagreement": 3.806990508392616e-07,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "known_kinetics-GIC-30-noiseless",
+        "regime": "known_kinetics",
+        "modality": "GIC",
+        "step": 30,
+        "data": "noiseless",
+        "active_parameters": [
+          0
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.0000000139594807,
+              null,
+              null
+            ],
+            "relative_errors": [
+              1.3959480682501635e-08,
+              null,
+              null
+            ],
+            "max_active_relative_error": 1.3959480682501635e-08,
+            "objective": 5.886436368623258e-13,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 7
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.0000000139631053,
+              null,
+              null
+            ],
+            "relative_errors": [
+              1.3963105338632431e-08,
+              null,
+              null
+            ],
+            "max_active_relative_error": 1.3963105338632431e-08,
+            "objective": 5.886419604209678e-13,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 7
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.0000000139631053,
+            null,
+            null
+          ],
+          "relative_errors": [
+            1.3963105338632431e-08,
+            null,
+            null
+          ],
+          "max_active_relative_error": 1.3963105338632431e-08,
+          "objective": 5.886419604209678e-13,
+          "bound_hits": [],
+          "optimizer_status": 1,
+          "nfev": 7
+        },
+        "start_max_absolute_disagreement": 3.624656130796211e-12,
+        "noiseless_recovered": true
+      },
+      {
+        "id": "known_kinetics-GIC-30-noise_117",
+        "regime": "known_kinetics",
+        "modality": "GIC",
+        "step": 30,
+        "data": "noise_117",
+        "active_parameters": [
+          0
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.035754550414265,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.035754550414264896,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.035754550414264896,
+            "objective": 28.037674441584443,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 10
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.0357664617334967,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.035766461733496735,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.035766461733496735,
+            "objective": 28.037676886529322,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 9
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.035754550414265,
+            null,
+            null
+          ],
+          "relative_errors": [
+            0.035754550414264896,
+            null,
+            null
+          ],
+          "max_active_relative_error": 0.035754550414264896,
+          "objective": 28.037674441584443,
+          "bound_hits": [],
+          "optimizer_status": 2,
+          "nfev": 10
+        },
+        "start_max_absolute_disagreement": 1.1911319231838746e-05,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "known_kinetics-GIC-30-noise_221",
+        "regime": "known_kinetics",
+        "modality": "GIC",
+        "step": 30,
+        "data": "noise_221",
+        "active_parameters": [
+          0
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              0.9554000276312873,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.044599972368712715,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.044599972368712715,
+            "objective": 26.835579275057725,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 8
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              0.955404216338658,
+              null,
+              null
+            ],
+            "relative_errors": [
+              0.04459578366134198,
+              null,
+              null
+            ],
+            "max_active_relative_error": 0.04459578366134198,
+            "objective": 26.835579264921694,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 7
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            0.955404216338658,
+            null,
+            null
+          ],
+          "relative_errors": [
+            0.04459578366134198,
+            null,
+            null
+          ],
+          "max_active_relative_error": 0.04459578366134198,
+          "objective": 26.835579264921694,
+          "bound_hits": [],
+          "optimizer_status": 2,
+          "nfev": 7
+        },
+        "start_max_absolute_disagreement": 4.188707370733624e-06,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "unknown_clearance-G-10-noiseless",
+        "regime": "unknown_clearance",
+        "modality": "G",
+        "step": 10,
+        "data": "noiseless",
+        "active_parameters": [
+          0,
+          1
+        ],
+        "unobservable": [
+          "k3_scale"
+        ],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.0000000472217667,
+              1.0000001036049455,
+              null
+            ],
+            "relative_errors": [
+              4.722176671911882e-08,
+              1.0360494551164834e-07,
+              null
+            ],
+            "max_active_relative_error": 1.0360494551164834e-07,
+            "objective": 5.970701261869501e-16,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 10
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.0000000474367265,
+              1.0000001040759239,
+              null
+            ],
+            "relative_errors": [
+              4.743672654683451e-08,
+              1.0407592387906561e-07,
+              null
+            ],
+            "max_active_relative_error": 1.0407592387906561e-07,
+            "objective": 5.972769350149025e-16,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 9
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.0000000472217667,
+            1.0000001036049455,
+            null
+          ],
+          "relative_errors": [
+            4.722176671911882e-08,
+            1.0360494551164834e-07,
+            null
+          ],
+          "max_active_relative_error": 1.0360494551164834e-07,
+          "objective": 5.970701261869501e-16,
+          "bound_hits": [],
+          "optimizer_status": 1,
+          "nfev": 10
+        },
+        "start_max_absolute_disagreement": 4.709783674172741e-10,
+        "noiseless_recovered": true
+      },
+      {
+        "id": "unknown_clearance-G-10-noise_117",
+        "regime": "unknown_clearance",
+        "modality": "G",
+        "step": 10,
+        "data": "noise_117",
+        "active_parameters": [
+          0,
+          1
+        ],
+        "unobservable": [
+          "k3_scale"
+        ],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              0.7034289744557646,
+              0.5000000000044584,
+              null
+            ],
+            "relative_errors": [
+              0.2965710255442354,
+              0.49999999999554157,
+              null
+            ],
+            "max_active_relative_error": 0.49999999999554157,
+            "objective": 14.038645360162409,
+            "bound_hits": [
+              1
+            ],
+            "optimizer_status": 2,
+            "nfev": 14
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              0.7034289744375682,
+              0.5000000004055489,
+              null
+            ],
+            "relative_errors": [
+              0.29657102556243176,
+              0.49999999959445107,
+              null
+            ],
+            "max_active_relative_error": 0.49999999959445107,
+            "objective": 14.038645360214469,
+            "bound_hits": [
+              1
+            ],
+            "optimizer_status": 2,
+            "nfev": 14
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            0.7034289744557646,
+            0.5000000000044584,
+            null
+          ],
+          "relative_errors": [
+            0.2965710255442354,
+            0.49999999999554157,
+            null
+          ],
+          "max_active_relative_error": 0.49999999999554157,
+          "objective": 14.038645360162409,
+          "bound_hits": [
+            1
+          ],
+          "optimizer_status": 2,
+          "nfev": 14
+        },
+        "start_max_absolute_disagreement": 4.0109049415093523e-10,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "unknown_clearance-G-10-noise_221",
+        "regime": "unknown_clearance",
+        "modality": "G",
+        "step": 10,
+        "data": "noise_221",
+        "active_parameters": [
+          0,
+          1
+        ],
+        "unobservable": [
+          "k3_scale"
+        ],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.188134447552887,
+              1.4999999999999625,
+              null
+            ],
+            "relative_errors": [
+              0.188134447552887,
+              0.4999999999999625,
+              null
+            ],
+            "max_active_relative_error": 0.4999999999999625,
+            "objective": 22.482487410860355,
+            "bound_hits": [
+              1
+            ],
+            "optimizer_status": 2,
+            "nfev": 11
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.1881345863591473,
+              1.4999999999999938,
+              null
+            ],
+            "relative_errors": [
+              0.18813458635914726,
+              0.4999999999999938,
+              null
+            ],
+            "max_active_relative_error": 0.4999999999999938,
+            "objective": 22.48248741098543,
+            "bound_hits": [
+              1
+            ],
+            "optimizer_status": 2,
+            "nfev": 10
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.188134447552887,
+            1.4999999999999625,
+            null
+          ],
+          "relative_errors": [
+            0.188134447552887,
+            0.4999999999999625,
+            null
+          ],
+          "max_active_relative_error": 0.4999999999999625,
+          "objective": 22.482487410860355,
+          "bound_hits": [
+            1
+          ],
+          "optimizer_status": 2,
+          "nfev": 11
+        },
+        "start_max_absolute_disagreement": 1.388062602636353e-07,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "unknown_clearance-G-30-noiseless",
+        "regime": "unknown_clearance",
+        "modality": "G",
+        "step": 30,
+        "data": "noiseless",
+        "active_parameters": [
+          0,
+          1
+        ],
+        "unobservable": [
+          "k3_scale"
+        ],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.0000000496232422,
+              1.0000001098474463,
+              null
+            ],
+            "relative_errors": [
+              4.962324218205083e-08,
+              1.0984744625019971e-07,
+              null
+            ],
+            "max_active_relative_error": 1.0984744625019971e-07,
+            "objective": 2.0956714979526862e-16,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 10
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.0000000498714339,
+              1.0000001104361036,
+              null
+            ],
+            "relative_errors": [
+              4.9871433871473414e-08,
+              1.1043610359529055e-07,
+              null
+            ],
+            "max_active_relative_error": 1.1043610359529055e-07,
+            "objective": 2.0959843651350282e-16,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 9
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.0000000496232422,
+            1.0000001098474463,
+            null
+          ],
+          "relative_errors": [
+            4.962324218205083e-08,
+            1.0984744625019971e-07,
+            null
+          ],
+          "max_active_relative_error": 1.0984744625019971e-07,
+          "objective": 2.0956714979526862e-16,
+          "bound_hits": [],
+          "optimizer_status": 1,
+          "nfev": 10
+        },
+        "start_max_absolute_disagreement": 5.886573450908372e-10,
+        "noiseless_recovered": true
+      },
+      {
+        "id": "unknown_clearance-G-30-noise_117",
+        "regime": "unknown_clearance",
+        "modality": "G",
+        "step": 30,
+        "data": "noise_117",
+        "active_parameters": [
+          0,
+          1
+        ],
+        "unobservable": [
+          "k3_scale"
+        ],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              0.8263300535930194,
+              0.8019436850090358,
+              null
+            ],
+            "relative_errors": [
+              0.17366994640698064,
+              0.1980563149909642,
+              null
+            ],
+            "max_active_relative_error": 0.1980563149909642,
+            "objective": 1.2834983320455944,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 10
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              0.826342551257985,
+              0.8019790738760848,
+              null
+            ],
+            "relative_errors": [
+              0.17365744874201505,
+              0.1980209261239152,
+              null
+            ],
+            "max_active_relative_error": 0.1980209261239152,
+            "objective": 1.2834983322138842,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 11
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            0.8263300535930194,
+            0.8019436850090358,
+            null
+          ],
+          "relative_errors": [
+            0.17366994640698064,
+            0.1980563149909642,
+            null
+          ],
+          "max_active_relative_error": 0.1980563149909642,
+          "objective": 1.2834983320455944,
+          "bound_hits": [],
+          "optimizer_status": 2,
+          "nfev": 10
+        },
+        "start_max_absolute_disagreement": 3.538886704901323e-05,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "unknown_clearance-G-30-noise_221",
+        "regime": "unknown_clearance",
+        "modality": "G",
+        "step": 30,
+        "data": "noise_221",
+        "active_parameters": [
+          0,
+          1
+        ],
+        "unobservable": [
+          "k3_scale"
+        ],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.4191025602319076,
+              1.4999999999999964,
+              null
+            ],
+            "relative_errors": [
+              0.4191025602319076,
+              0.49999999999999645,
+              null
+            ],
+            "max_active_relative_error": 0.49999999999999645,
+            "objective": 6.575792760758395,
+            "bound_hits": [
+              1
+            ],
+            "optimizer_status": 2,
+            "nfev": 12
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.4191026209052042,
+              1.5,
+              null
+            ],
+            "relative_errors": [
+              0.4191026209052042,
+              0.5,
+              null
+            ],
+            "max_active_relative_error": 0.5,
+            "objective": 6.575792769239915,
+            "bound_hits": [
+              1
+            ],
+            "optimizer_status": 2,
+            "nfev": 10
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.4191025602319076,
+            1.4999999999999964,
+            null
+          ],
+          "relative_errors": [
+            0.4191025602319076,
+            0.49999999999999645,
+            null
+          ],
+          "max_active_relative_error": 0.49999999999999645,
+          "objective": 6.575792760758395,
+          "bound_hits": [
+            1
+          ],
+          "optimizer_status": 2,
+          "nfev": 12
+        },
+        "start_max_absolute_disagreement": 6.067329660908172e-08,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "unknown_clearance-GI-10-noiseless",
+        "regime": "unknown_clearance",
+        "modality": "GI",
+        "step": 10,
+        "data": "noiseless",
+        "active_parameters": [
+          0,
+          1
+        ],
+        "unobservable": [
+          "k3_scale"
+        ],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.0000000137317404,
+              1.0000000130287112,
+              null
+            ],
+            "relative_errors": [
+              1.3731740411415672e-08,
+              1.3028711220997025e-08,
+              null
+            ],
+            "max_active_relative_error": 1.3731740411415672e-08,
+            "objective": 2.296937987436601e-13,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 9
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.0000000137317977,
+              1.0000000130265465,
+              null
+            ],
+            "relative_errors": [
+              1.3731797698923742e-08,
+              1.302654650814361e-08,
+              null
+            ],
+            "max_active_relative_error": 1.3731797698923742e-08,
+            "objective": 2.297030506828829e-13,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 9
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.0000000137317404,
+            1.0000000130287112,
+            null
+          ],
+          "relative_errors": [
+            1.3731740411415672e-08,
+            1.3028711220997025e-08,
+            null
+          ],
+          "max_active_relative_error": 1.3731740411415672e-08,
+          "objective": 2.296937987436601e-13,
+          "bound_hits": [],
+          "optimizer_status": 1,
+          "nfev": 9
+        },
+        "start_max_absolute_disagreement": 2.1647128534141302e-12,
+        "noiseless_recovered": true
+      },
+      {
+        "id": "unknown_clearance-GI-10-noise_117",
+        "regime": "unknown_clearance",
+        "modality": "GI",
+        "step": 10,
+        "data": "noise_117",
+        "active_parameters": [
+          0,
+          1
+        ],
+        "unobservable": [
+          "k3_scale"
+        ],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.096502372349632,
+              1.4999999994455395,
+              null
+            ],
+            "relative_errors": [
+              0.0965023723496321,
+              0.4999999994455395,
+              null
+            ],
+            "max_active_relative_error": 0.4999999994455395,
+            "objective": 37.562413599922685,
+            "bound_hits": [
+              1
+            ],
+            "optimizer_status": 4,
+            "nfev": 17
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.0965019293810334,
+              1.4999999978748073,
+              null
+            ],
+            "relative_errors": [
+              0.09650192938103341,
+              0.4999999978748073,
+              null
+            ],
+            "max_active_relative_error": 0.4999999978748073,
+            "objective": 37.56241321760595,
+            "bound_hits": [
+              1
+            ],
+            "optimizer_status": 2,
+            "nfev": 17
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.0965019293810334,
+            1.4999999978748073,
+            null
+          ],
+          "relative_errors": [
+            0.09650192938103341,
+            0.4999999978748073,
+            null
+          ],
+          "max_active_relative_error": 0.4999999978748073,
+          "objective": 37.56241321760595,
+          "bound_hits": [
+            1
+          ],
+          "optimizer_status": 2,
+          "nfev": 17
+        },
+        "start_max_absolute_disagreement": 4.4296859869064065e-07,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "unknown_clearance-GI-10-noise_221",
+        "regime": "unknown_clearance",
+        "modality": "GI",
+        "step": 10,
+        "data": "noise_221",
+        "active_parameters": [
+          0,
+          1
+        ],
+        "unobservable": [
+          "k3_scale"
+        ],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.2182611361291575,
+              1.4999999998137181,
+              null
+            ],
+            "relative_errors": [
+              0.21826113612915754,
+              0.4999999998137181,
+              null
+            ],
+            "max_active_relative_error": 0.4999999998137181,
+            "objective": 57.378803180672016,
+            "bound_hits": [
+              1
+            ],
+            "optimizer_status": 4,
+            "nfev": 17
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.2182615212182215,
+              1.4999999997051567,
+              null
+            ],
+            "relative_errors": [
+              0.2182615212182215,
+              0.49999999970515674,
+              null
+            ],
+            "max_active_relative_error": 0.49999999970515674,
+            "objective": 57.37880301574785,
+            "bound_hits": [
+              1
+            ],
+            "optimizer_status": 2,
+            "nfev": 12
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.2182615212182215,
+            1.4999999997051567,
+            null
+          ],
+          "relative_errors": [
+            0.2182615212182215,
+            0.49999999970515674,
+            null
+          ],
+          "max_active_relative_error": 0.49999999970515674,
+          "objective": 57.37880301574785,
+          "bound_hits": [
+            1
+          ],
+          "optimizer_status": 2,
+          "nfev": 12
+        },
+        "start_max_absolute_disagreement": 3.850890639700566e-07,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "unknown_clearance-GI-30-noiseless",
+        "regime": "unknown_clearance",
+        "modality": "GI",
+        "step": 30,
+        "data": "noiseless",
+        "active_parameters": [
+          0,
+          1
+        ],
+        "unobservable": [
+          "k3_scale"
+        ],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              0.9999999797467508,
+              0.9999999138248744,
+              null
+            ],
+            "relative_errors": [
+              2.0253249188861844e-08,
+              8.61751255909482e-08,
+              null
+            ],
+            "max_active_relative_error": 8.61751255909482e-08,
+            "objective": 1.56508459002631e-13,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 9
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              0.9999999797433531,
+              0.9999999138128864,
+              null
+            ],
+            "relative_errors": [
+              2.0256646915406407e-08,
+              8.61871135571235e-08,
+              null
+            ],
+            "max_active_relative_error": 8.61871135571235e-08,
+            "objective": 1.565001292209599e-13,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 9
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            0.9999999797433531,
+            0.9999999138128864,
+            null
+          ],
+          "relative_errors": [
+            2.0256646915406407e-08,
+            8.61871135571235e-08,
+            null
+          ],
+          "max_active_relative_error": 8.61871135571235e-08,
+          "objective": 1.565001292209599e-13,
+          "bound_hits": [],
+          "optimizer_status": 1,
+          "nfev": 9
+        },
+        "start_max_absolute_disagreement": 1.1987966175297515e-11,
+        "noiseless_recovered": true
+      },
+      {
+        "id": "unknown_clearance-GI-30-noise_117",
+        "regime": "unknown_clearance",
+        "modality": "GI",
+        "step": 30,
+        "data": "noise_117",
+        "active_parameters": [
+          0,
+          1
+        ],
+        "unobservable": [
+          "k3_scale"
+        ],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.1540995297148067,
+              1.5,
+              null
+            ],
+            "relative_errors": [
+              0.15409952971480667,
+              0.5,
+              null
+            ],
+            "max_active_relative_error": 0.5,
+            "objective": 9.087285950884102,
+            "bound_hits": [
+              1
+            ],
+            "optimizer_status": 2,
+            "nfev": 12
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.1540978730406453,
+              1.499999999999085,
+              null
+            ],
+            "relative_errors": [
+              0.15409787304064526,
+              0.49999999999908495,
+              null
+            ],
+            "max_active_relative_error": 0.49999999999908495,
+            "objective": 9.087286043202077,
+            "bound_hits": [
+              1
+            ],
+            "optimizer_status": 2,
+            "nfev": 10
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.1540995297148067,
+            1.5,
+            null
+          ],
+          "relative_errors": [
+            0.15409952971480667,
+            0.5,
+            null
+          ],
+          "max_active_relative_error": 0.5,
+          "objective": 9.087285950884102,
+          "bound_hits": [
+            1
+          ],
+          "optimizer_status": 2,
+          "nfev": 12
+        },
+        "start_max_absolute_disagreement": 1.65667416140991e-06,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "unknown_clearance-GI-30-noise_221",
+        "regime": "unknown_clearance",
+        "modality": "GI",
+        "step": 30,
+        "data": "noise_221",
+        "active_parameters": [
+          0,
+          1
+        ],
+        "unobservable": [
+          "k3_scale"
+        ],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.277527192161786,
+              1.4999999999999998,
+              null
+            ],
+            "relative_errors": [
+              0.2775271921617859,
+              0.4999999999999998,
+              null
+            ],
+            "max_active_relative_error": 0.4999999999999998,
+            "objective": 17.70394774910313,
+            "bound_hits": [
+              1
+            ],
+            "optimizer_status": 3,
+            "nfev": 10
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.2775284665110875,
+              1.4999999993867972,
+              null
+            ],
+            "relative_errors": [
+              0.27752846651108753,
+              0.4999999993867972,
+              null
+            ],
+            "max_active_relative_error": 0.4999999993867972,
+            "objective": 17.70394749685085,
+            "bound_hits": [
+              1
+            ],
+            "optimizer_status": 3,
+            "nfev": 20
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.2775284665110875,
+            1.4999999993867972,
+            null
+          ],
+          "relative_errors": [
+            0.27752846651108753,
+            0.4999999993867972,
+            null
+          ],
+          "max_active_relative_error": 0.4999999993867972,
+          "objective": 17.70394749685085,
+          "bound_hits": [
+            1
+          ],
+          "optimizer_status": 3,
+          "nfev": 20
+        },
+        "start_max_absolute_disagreement": 1.274349301638722e-06,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "unknown_clearance-GIC-10-noiseless",
+        "regime": "unknown_clearance",
+        "modality": "GIC",
+        "step": 10,
+        "data": "noiseless",
+        "active_parameters": [
+          0,
+          1,
+          2
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.0000000126158652,
+              1.0000000048539068,
+              1.0000000069657238
+            ],
+            "relative_errors": [
+              1.2615865241372148e-08,
+              4.8539068320252454e-09,
+              6.965723775564925e-09
+            ],
+            "max_active_relative_error": 1.2615865241372148e-08,
+            "objective": 7.663187518131696e-13,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 8
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.0000000126171027,
+              1.0000000048497275,
+              1.00000000696337
+            ],
+            "relative_errors": [
+              1.2617102695955396e-08,
+              4.8497275084713465e-09,
+              6.9633701027527195e-09
+            ],
+            "max_active_relative_error": 1.2617102695955396e-08,
+            "objective": 7.663198780221656e-13,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 10
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.0000000126158652,
+            1.0000000048539068,
+            1.0000000069657238
+          ],
+          "relative_errors": [
+            1.2615865241372148e-08,
+            4.8539068320252454e-09,
+            6.965723775564925e-09
+          ],
+          "max_active_relative_error": 1.2615865241372148e-08,
+          "objective": 7.663187518131696e-13,
+          "bound_hits": [],
+          "optimizer_status": 1,
+          "nfev": 8
+        },
+        "start_max_absolute_disagreement": 4.179323553898939e-12,
+        "noiseless_recovered": true
+      },
+      {
+        "id": "unknown_clearance-GIC-10-noise_117",
+        "regime": "unknown_clearance",
+        "modality": "GIC",
+        "step": 10,
+        "data": "noise_117",
+        "active_parameters": [
+          0,
+          1,
+          2
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.0111679693389921,
+              1.012748523305467,
+              1.0127337591781533
+            ],
+            "relative_errors": [
+              0.011167969338992112,
+              0.012748523305466941,
+              0.012733759178153337
+            ],
+            "max_active_relative_error": 0.012748523305466941,
+            "objective": 82.14379386849824,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 17
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.011163297702798,
+              1.0127257223472343,
+              1.0127158147116022
+            ],
+            "relative_errors": [
+              0.011163297702798003,
+              0.012725722347234347,
+              0.012715814711602214
+            ],
+            "max_active_relative_error": 0.012725722347234347,
+            "objective": 82.14379223235458,
+            "bound_hits": [],
+            "optimizer_status": 3,
+            "nfev": 17
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.011163297702798,
+            1.0127257223472343,
+            1.0127158147116022
+          ],
+          "relative_errors": [
+            0.011163297702798003,
+            0.012725722347234347,
+            0.012715814711602214
+          ],
+          "max_active_relative_error": 0.012725722347234347,
+          "objective": 82.14379223235458,
+          "bound_hits": [],
+          "optimizer_status": 3,
+          "nfev": 17
+        },
+        "start_max_absolute_disagreement": 2.280095823259387e-05,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "unknown_clearance-GIC-10-noise_221",
+        "regime": "unknown_clearance",
+        "modality": "GIC",
+        "step": 10,
+        "data": "noise_221",
+        "active_parameters": [
+          0,
+          1,
+          2
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.023370413888286,
+              1.062476965513303,
+              1.0608873448418563
+            ],
+            "relative_errors": [
+              0.02337041388828598,
+              0.06247696551330306,
+              0.06088734484185632
+            ],
+            "max_active_relative_error": 0.06247696551330306,
+            "objective": 85.62623297479229,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 8
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.023369907151431,
+              1.0624760405714335,
+              1.0608865210440501
+            ],
+            "relative_errors": [
+              0.023369907151431057,
+              0.06247604057143352,
+              0.060886521044050124
+            ],
+            "max_active_relative_error": 0.06247604057143352,
+            "objective": 85.6262329985735,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 8
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.023370413888286,
+            1.062476965513303,
+            1.0608873448418563
+          ],
+          "relative_errors": [
+            0.02337041388828598,
+            0.06247696551330306,
+            0.06088734484185632
+          ],
+          "max_active_relative_error": 0.06247696551330306,
+          "objective": 85.62623297479229,
+          "bound_hits": [],
+          "optimizer_status": 2,
+          "nfev": 8
+        },
+        "start_max_absolute_disagreement": 9.249418695400635e-07,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "unknown_clearance-GIC-30-noiseless",
+        "regime": "unknown_clearance",
+        "modality": "GIC",
+        "step": 30,
+        "data": "noiseless",
+        "active_parameters": [
+          0,
+          1,
+          2
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.000000019569312,
+              1.0000000096196082,
+              1.000000011313082
+            ],
+            "relative_errors": [
+              1.9569311948686163e-08,
+              9.619608221100862e-09,
+              1.1313082026731536e-08
+            ],
+            "max_active_relative_error": 1.9569311948686163e-08,
+            "objective": 5.433353647337562e-13,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 8
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.0000000195654033,
+              1.000000009624947,
+              1.0000000113137497
+            ],
+            "relative_errors": [
+              1.9565403297505668e-08,
+              9.624947061581679e-09,
+              1.1313749714858545e-08
+            ],
+            "max_active_relative_error": 1.9565403297505668e-08,
+            "objective": 5.432980421900675e-13,
+            "bound_hits": [],
+            "optimizer_status": 1,
+            "nfev": 8
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.0000000195654033,
+            1.000000009624947,
+            1.0000000113137497
+          ],
+          "relative_errors": [
+            1.9565403297505668e-08,
+            9.624947061581679e-09,
+            1.1313749714858545e-08
+          ],
+          "max_active_relative_error": 1.9565403297505668e-08,
+          "objective": 5.432980421900675e-13,
+          "bound_hits": [],
+          "optimizer_status": 1,
+          "nfev": 8
+        },
+        "start_max_absolute_disagreement": 5.338840480817453e-12,
+        "noiseless_recovered": true
+      },
+      {
+        "id": "unknown_clearance-GIC-30-noise_117",
+        "regime": "unknown_clearance",
+        "modality": "GIC",
+        "step": 30,
+        "data": "noise_117",
+        "active_parameters": [
+          0,
+          1,
+          2
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              1.032624946461084,
+              0.9119290479529331,
+              0.9532559012331819
+            ],
+            "relative_errors": [
+              0.03262494646108394,
+              0.08807095204706694,
+              0.046744098766818065
+            ],
+            "max_active_relative_error": 0.08807095204706694,
+            "objective": 25.34569315772335,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 7
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              1.032624081574572,
+              0.9119242758516719,
+              0.9532520065734524
+            ],
+            "relative_errors": [
+              0.03262408157457197,
+              0.0880757241483281,
+              0.04674799342654756
+            ],
+            "max_active_relative_error": 0.0880757241483281,
+            "objective": 25.345693143723995,
+            "bound_hits": [],
+            "optimizer_status": 3,
+            "nfev": 13
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            1.032624081574572,
+            0.9119242758516719,
+            0.9532520065734524
+          ],
+          "relative_errors": [
+            0.03262408157457197,
+            0.0880757241483281,
+            0.04674799342654756
+          ],
+          "max_active_relative_error": 0.0880757241483281,
+          "objective": 25.345693143723995,
+          "bound_hits": [],
+          "optimizer_status": 3,
+          "nfev": 13
+        },
+        "start_max_absolute_disagreement": 4.7721012611523506e-06,
+        "noiseless_recovered": null
+      },
+      {
+        "id": "unknown_clearance-GIC-30-noise_221",
+        "regime": "unknown_clearance",
+        "modality": "GIC",
+        "step": 30,
+        "data": "noise_221",
+        "active_parameters": [
+          0,
+          1,
+          2
+        ],
+        "unobservable": [],
+        "fits": [
+          {
+            "status": "completed",
+            "estimates": [
+              0.9339243091545646,
+              0.8381760443904659,
+              0.8886667689188218
+            ],
+            "relative_errors": [
+              0.06607569084543541,
+              0.1618239556095341,
+              0.11133323108117821
+            ],
+            "max_active_relative_error": 0.1618239556095341,
+            "objective": 22.581241620935664,
+            "bound_hits": [],
+            "optimizer_status": 3,
+            "nfev": 13
+          },
+          {
+            "status": "completed",
+            "estimates": [
+              0.9339233007677784,
+              0.8381729479149731,
+              0.8886639187066833
+            ],
+            "relative_errors": [
+              0.06607669923222159,
+              0.1618270520850269,
+              0.11133608129331674
+            ],
+            "max_active_relative_error": 0.1618270520850269,
+            "objective": 22.581242796680332,
+            "bound_hits": [],
+            "optimizer_status": 2,
+            "nfev": 7
+          }
+        ],
+        "best": {
+          "status": "completed",
+          "estimates": [
+            0.9339243091545646,
+            0.8381760443904659,
+            0.8886667689188218
+          ],
+          "relative_errors": [
+            0.06607569084543541,
+            0.1618239556095341,
+            0.11133323108117821
+          ],
+          "max_active_relative_error": 0.1618239556095341,
+          "objective": 22.581241620935664,
+          "bound_hits": [],
+          "optimizer_status": 3,
+          "nfev": 13
+        },
+        "start_max_absolute_disagreement": 3.096475492792017e-06,
+        "noiseless_recovered": null
+      }
+    ],
+    "limits": "finite-difference local rank and bounded multistart recovery; no profile likelihood, global uniqueness proof, confidence intervals or human identifiability"
+  }
+}

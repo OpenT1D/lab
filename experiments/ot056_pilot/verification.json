@@ -1,0 +1,154 @@
+{
+  "schema": "ot056-technical-verification/2",
+  "date": "2026-10-18",
+  "status": "internal_synthetic_technical_complete",
+  "technical_complete": true,
+  "full_goal_complete": false,
+  "verified_code_commit": "1e2b9abb570835a278640e43cbc2e2dce57fdebd",
+  "controlled_handoffs_merged_at": "aa0784267af6d58d9e31722bdc6ef66af11b168e",
+  "scope": "Internal synthetic software acceptance of both tasks, CLI/GUI, same-estimator notebooks and archive readers; human pilot and product decision remain open",
+  "consumed_controlled_origins": {
+    "ot053_dossier": "cd10cb07577e6fb9183934f3b59fce974bf944e4",
+    "ot053_handoff": "4f38f01a3d3f96319155e83b9ede52bd595fb521",
+    "ot054_core": "23e1bc12bc52b2443dca4f6157c474df1e9188f8",
+    "ot054_core_handoff": "a8a85fe112d481933ccda344bf366adee87f431f",
+    "ot054_complete_gui": "099f01a113aa244571d04ff7b1964f7e293dc276",
+    "ot055_backend": "328a3630352298e574e83650df387a546a773c23",
+    "ot055_gui": "8bfbbb3379ae763944b2221efc053ef855a305b4",
+    "ot055_library_fix": "55c55196a488c2f946ac3d2fa43e6b71f70d266e",
+    "ot055_final_handoff": "874439178869e80dbbf4d4d2f021f17f210f84b6"
+  },
+  "source_checks": {
+    "ot053_dossier_files_checked_at_adoption": 15,
+    "ot054_core_files_checked_at_adoption": 14,
+    "ot054_gui_files_checked_at_adoption": 32,
+    "ot055_final_files_checked_against_origin_and_current": 55,
+    "ot055_receipt_sha256": "c9b0ed8f2c42a2891476a5ca7c8aa17185f2a72c96a95c6b64486e034653366f",
+    "unchanged_estimator_sha256": "3fb9b732607f6595b51b9552c13e14545e2e71d859486e3194d47e62e84e02a4",
+    "shared_core_extension": "Decision 0069 required_times_min admission in plan.py/analysis.py; no change to estimator arithmetic or uncertainty",
+    "pilot_sources_sha256": {
+      "experiments/ot056_pilot/__main__.py": "84575630c07831b4f9f438bc501f42733f75b61e0ac16503f3da857d134b7cf7",
+      "experiments/ot056_pilot/cases.py": "40ea2bc30d6ed4337be89ac623bee837640c67af9d475a8a9924e171ff25bc90",
+      "experiments/ot056_pilot/leakage.py": "7bf8d0539373ad1100b54b2db494edea143ec000a517422a8e0a92132fd72ee1",
+      "experiments/ot056_pilot/notebook.py": "fa6701b74f7818a7004d86ed822f8791f1a2ee95aeed7a1e1d6384039e69a7f5",
+      "experiments/ot056_pilot/preflight.py": "4d20c2440da90738b96559bf108c31bd9d64ac8bf0b7d6229c25e0a86e3d7692",
+      "experiments/ot056_pilot/references.py": "aed7dedb693dd9114f60646d0683544ec98e410ecf12322d3817508d54f4ff5c",
+      "experiments/ot056_pilot/rehearsal.py": "14b99ade257752e2e700809f3c4a0456de77c8d44227e7461c4b55b3f70a3cb1",
+      "experiments/ot056_pilot/sampling.py": "30ec961e0f7b5fcc87467a6cf56b40d6c9624af347c0247b47d48b6bf1e3bb44",
+      "experiments/ot056_pilot/technical.py": "b72828857c9d4b4712c2202e9f3ec37578da9f38d990349251d6bb7e8bd6286b",
+      "experiments/ot056_pilot/same-estimator.ipynb": "759a4e409fde450541d72c661c93d1da1eae3b62f9a362887082c5ba9a180fb1",
+      "experiments/ot056_pilot/same-estimator-sampling.ipynb": "27f9c45d71febad04caadbed8460922de07c655d3dca35bdbe508260388dd5af"
+    }
+  },
+  "retained_scientific_archive": {
+    "path": "results/ot056-final-fc602",
+    "manifest_sha256": "2a82eadb89a0df9dc5e71dc95189ece0622fc5d200419d269c88a32ab13b5771",
+    "generation_code_commit": "fc602cc5e2226a731f341c4da80675a301be0051",
+    "verified_after_final_controlled_handoff": true,
+    "final_reader_output": "results/ot056-final-after-handoff-check",
+    "task1_native_notebook_cases": 11,
+    "task2_native_notebook_cases": 11,
+    "original_output_path_removed": true,
+    "only_fixed_installed_notebooks_execute": true,
+    "task1_plans_reports_markdown_attempts_byte_equal": true,
+    "task2_child_plans_reports_markdown_attempts_byte_equal": true,
+    "task2_comparison_markdown_byte_equal": true,
+    "task2_scientific_json_equal": "Only top-level native execution journal excluded; original full native JSON/journal retained and reconstructed exactly",
+    "per_case_planned_people_visits_variants_and_draws_verified": true,
+    "registered_tasks_ready": {
+      "mmtt-sampling": true,
+      "mmtt-sensitivity": true
+    }
+  },
+  "scientific_software_controls": {
+    "independent_analytic_profiles": 4,
+    "task1_profile_checks": 4,
+    "task2_full_and_subset_profile_checks": 16,
+    "total_and_paired_change_tolerance_pmol": 1e-07,
+    "separate_cpeptide_auc_tolerance_pmol_min_l": 1e-07,
+    "negative_terminal_rate_tolerance_pmol_min": 1e-07,
+    "main_cases_cover_consistent_assumption_dependent_and_insufficient_conclusions": true,
+    "information_loss_case": "Every required variant increases with full/five/four times and decreases with three",
+    "omitted_invalid_and_extreme_evaluation_cells": "All reduced native attempts/reports equal unpoisoned inputs; invalid full reference retained as unavailable, never zero",
+    "missing_requested_interior_time": "Full/five affected visit blocked before estimator/perturbations; four/three known result and unaffected visit retained",
+    "invalid_units_missing_endpoints_duplicates_low_cpeptide_and_glucose_context": "Expected refusals/failures and complete planned denominators retained; no clipping or automatic weight/BSA/glucose normalization"
+  },
+  "reproducibility_and_forgery_controls": {
+    "relocation_without_original_outputs": true,
+    "fresh_process_native_repeats_both_tasks": true,
+    "resealed_canonical_case_snapshot_and_trap_changes_refused": true,
+    "resealed_coverage_and_invented_human_product_claims_refused": true,
+    "archived_python_or_notebooks_executed_by_reader": false
+  },
+  "checks": {
+    "locked_sync": {
+      "command": "uv sync --locked",
+      "passed": true
+    },
+    "locked_repository": {
+      "command": "uv run --locked python scripts/check.py",
+      "passed": true,
+      "tests": 1390,
+      "skipped": 13,
+      "test_seconds": 367.361,
+      "strict_documentation": true,
+      "includes_final_library_fix": true,
+      "code_commit": "1e2b9abb570835a278640e43cbc2e2dce57fdebd"
+    },
+    "actual_public_two_task_cli_and_final_reader": {
+      "passed": true,
+      "cases": 22,
+      "stdlib_only": "python -S"
+    },
+    "separate_locked_source_model_reference": {
+      "command": "experiments/m4/beta_cell/runtime/.venv/bin/python -m unittest experiments.observation_analysis.test_numerical -v",
+      "passed": true,
+      "tests": 1,
+      "scope": "Previously executed in this checkout; estimator hash remains unchanged; analytical/ODE refinement and retained negative-rate control only"
+    },
+    "final_acceptance_documentation": {
+      "command": ".venv/bin/python -m sphinx -E -a -W --keep-going -b html -c docs . /private/tmp/ot056-final-acceptance-docs",
+      "passed": true,
+      "scope": "Final acceptance wording, merged handoff records and current roadmap"
+    }
+  },
+  "gui_evidence": {
+    "adopted_gui_http_frontend_and_process_regressions_in_final_locked_suite": true,
+    "controlled_producer_browser_receipts": {
+      "task1": "experiments/gui/observation_verification.json",
+      "task2": "experiments/mmtt_sampling/verification.json"
+    },
+    "producer_task1_display_cells": 252,
+    "producer_task2_display_cells": 324,
+    "scope": "Producer browser evidence verified by source identity; final combined checkout reruns HTTP/frontend/process tests; no independent human session claimed"
+  },
+  "retained_logs": {
+    "directory": "results/ot056-final-verification-logs",
+    "sha256": {
+      "sync.log": "198efd21d33b7dc566cb4471ff3dbfb88bbba63a3eb87de58a37d4d2c05a9858",
+      "locked-check.log": "de65f56f11d7992e805bcecfcdd8e41e5454bcab94055703ed23d99d41fdd8dc",
+      "native-chain.log": "30d0731d3698bdbc53a5ed75de8fbd9edbe2c87e3993c65313b2ae496fc8aea3",
+      "final-reader.log": "03e1c30e480f1c386b234b422ead3fcf176fd65322daaea3d88b54a97131277b",
+      "source-model.log": "802b48debae8e64fba12afca7cb51029f059906b8bebb7fe919b5182e27f8b95",
+      "acceptance-docs.log": "ddeb68d5e00a40772c5c29386d4c69b41a2a2c1c2d2fd09ca4ddc7eff824c6b7"
+    }
+  },
+  "human_pilot": {
+    "status": "open",
+    "sessions": 0,
+    "independent_researcher_observations": 0,
+    "product_decision": null,
+    "comparator_expert_qualified": false,
+    "licensed_vendor_exports_verified": false,
+    "independent_reviewer_confirmed": false
+  },
+  "remaining_technical": [],
+  "remaining_external": [
+    "Six intended researchers across at least two teams, participation and prior experience confirmed",
+    "Domain reviewer independent of implementation and session coaching; frozen answer-key assessment",
+    "Experienced comparator user qualifies actual current workflow and both notebooks",
+    "Authorized installed comparator access, exact versions, endpoint comparability and demonstrated export/reopening",
+    "Actual comparative sessions, first-report independent scoring, timing/effort evidence and product decision"
+  ],
+  "evidence_limit": "No human usability, vendor equivalence, empirical T1D validity, clinical sampling recommendation or product-value claim"
+}

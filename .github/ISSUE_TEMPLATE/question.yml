@@ -1,0 +1,15 @@
+name: Project question
+description: Ask about the project, documentation or contribution workflow.
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        OpenT1D is at the foundation stage. Please keep questions about the
+        project and do not include personal health records or dosing requests.
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: Include the page or workflow you are referring to and what is unclear.
+    validations:
+      required: true

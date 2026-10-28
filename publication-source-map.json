@@ -1,0 +1,143 @@
+{
+  "schema": "opent1d.publication-source-map/1",
+  "private_source_revision": "b052d1780ee6a7e9bbb7584fa71b63aab2669fab",
+  "scope": "Source preparation only. Historical originals remain in the private development archive.",
+  "placeholders": {
+    "WORKTREES/": "Local managed-worktree parent, with the non-personal worktree name retained.",
+    "REPOSITORY": "Primary local checkout root.",
+    "USER_HOME": "Local user home."
+  },
+  "identity_policy": "Recorded historical hashes, commit IDs, results and scientific protocols are retained. They identify private originals, not redacted bytes. The mapping below records the changed file identities; no re-execution or historical hash match is asserted. Two complete upstream native parameter rows are withheld from historical receipt copies; only their original fragment hashes remain. No substitute parameter values are invented.",
+  "files": [
+    {
+      "path": "docs/research/ot031-execution-plan.md",
+      "private_original_sha256": "890cb70048db52a75d6e9d47bd0b8caacbf3fee513cee4b6ee8cb401bf55cfbd",
+      "published_sha256": "b6e33167808a6ae4ab126d362f83999026de0aa131f94114befcea63cf1744a8",
+      "redactions": {
+        "local-worktree-root": 1
+      },
+      "role": "location-redacted historical record; not original execution bytes"
+    },
+    {
+      "path": "experiments/c1/g2p2c-security-verification.json",
+      "private_original_sha256": "9d9c48754d11938c072faa5b63a0628bfa64d8feb94e832e9762fd7a77a0361a",
+      "published_sha256": "e4b5e1169459501b06285250b49c3bedba298a84be9ad1cd305c3dfcc2ed931d",
+      "redactions": {
+        "primary-checkout-root": 3
+      },
+      "role": "location-redacted historical record; not original execution bytes"
+    },
+    {
+      "path": "experiments/durable_archives/verification.json",
+      "private_original_sha256": "1d3182cb9891d9861e113b1a1c0c66020a8654c6089ac794846337364cdb3e5d",
+      "published_sha256": "97b4192f0d78ff64e82fc30cec1af7828b48719002fbe65d0aa9540044c5eb36",
+      "redactions": {
+        "local-worktree-root": 16,
+        "primary-checkout-root": 3,
+        "local-user-home": 8
+      },
+      "role": "location-redacted historical record; not original execution bytes"
+    },
+    {
+      "path": "experiments/gui/verification.json",
+      "private_original_sha256": "dcb78a32612fef81f7ad6b08739d79a1d4952e4c342a9398fdaada3c5f4502ab",
+      "published_sha256": "5d825a607e008415947e8ab241569c7f0323141547f8006a71d76e8a33bbf741",
+      "redactions": {
+        "local-worktree-root": 4
+      },
+      "role": "location-redacted historical record; not original execution bytes"
+    },
+    {
+      "path": "experiments/gui/workspace_verification.json",
+      "private_original_sha256": "648dbf655e178582947ac3291b216383107329f2c509c981a86fde47f77e1094",
+      "published_sha256": "57011b0f1f741782263e4cf23de43120ddda2303cb87e31001b8cb600b972574",
+      "redactions": {
+        "local-worktree-root": 32,
+        "primary-checkout-root": 2
+      },
+      "role": "location-redacted historical record; not original execution bytes"
+    },
+    {
+      "path": "experiments/integration/ot029_ot030.json",
+      "private_original_sha256": "2f87cc58f963dde37370956a4e8ebebf1ac66bea3243e50e3331778739c9abbe",
+      "published_sha256": "0a3aa01d40cd035df62ab20b90b5cd39fc6f6abdde9ded0694957bdbdcf68340",
+      "redactions": {
+        "local-worktree-root": 28
+      },
+      "role": "location-redacted historical record; not original execution bytes"
+    },
+    {
+      "path": "experiments/integration/ot032-midpoint-v1-probe.source.txt",
+      "private_original_sha256": "2ce670fa0de81f8d4ab9760457953a997972fabd37888002cc66c3490eb35737",
+      "published_sha256": "5b149a63e554d5325ab5d56b5803e20f0fd97fc83af78e7ed1b7cf875b0132dc",
+      "redactions": {
+        "local-worktree-root": 2
+      },
+      "role": "location-redacted historical record; not original execution bytes"
+    },
+    {
+      "path": "experiments/integration/ot032-midpoint-v2-probe.source.txt",
+      "private_original_sha256": "e877d8eac9829fe8181b86eca9fc3856a8f348f174162e442bb16f3c52d2e76a",
+      "published_sha256": "f03c3e2dcf104a159e7158add625627ddcd230fa652370135a8987333954eb1f",
+      "redactions": {
+        "local-worktree-root": 2
+      },
+      "role": "location-redacted historical record; not original execution bytes"
+    },
+    {
+      "path": "experiments/integration/ot032-ot037-verification.json",
+      "private_original_sha256": "0269ec4034616014a80b95edda50afaccf14a61c3253f714f6d68615b22f93b4",
+      "published_sha256": "cfde1cde259a8f511efb151aaa005607b0877b34e3f855d7f58c9d642628ea8c",
+      "redactions": {
+        "local-worktree-root": 52,
+        "local-user-home": 3
+      },
+      "role": "location-redacted historical record; not original execution bytes"
+    },
+    {
+      "path": "experiments/m4/comparison/execution.json",
+      "private_original_sha256": "05ab1bc94bf61469f16028f0ac445094858c6b8c4a24f281366d1643a0d73efa",
+      "published_sha256": "67a0e0e8264f7d85c8ab5e6ae8a4607cbf6062fda2124b6a96170aa3c3cf269b",
+      "redactions": {
+        "local-worktree-root": 11
+      },
+      "role": "location-redacted historical record; not original execution bytes"
+    },
+    {
+      "path": "experiments/m4/secure_study/verification.json",
+      "private_original_sha256": "6a426584a650b56df6d550d4aa3693cb0843e80595681afa1905bc4920405f9d",
+      "published_sha256": "a84e25233365260ae36d41de6027b7a7dafceacc1a545a32112390437f63bb54",
+      "redactions": {
+        "local-worktree-root": 5
+      },
+      "role": "location-redacted historical record; not original execution bytes"
+    },
+    {
+      "path": "experiments/usability/verification.json",
+      "private_original_sha256": "638cd6200f7ae1736696506e92f6fe39e5d32f3b72075729bfe79a0fb637da1b",
+      "published_sha256": "06dffff82275f398e86631cd9571cb6dc6dfcbd487e12589249386a5319ece1b",
+      "redactions": {
+        "primary-checkout-root": 1
+      },
+      "role": "location-redacted historical record; not original execution bytes"
+    },
+    {
+      "path": "experiments/m4/profile_likelihood/execution.json",
+      "private_original_sha256": "3b978a1f733380a1044352738664482e89e9e094eda56df86a2d1ceee8c19365",
+      "published_sha256": "7a41fa531358987d1b0ffc7893ccfe7d9edcf1eac47c6c25c047beaf53f9bc5d",
+      "redactions": {
+        "upstream-native-parameter-fragment": 1
+      },
+      "role": "Historical receipt with an upstream parameter-table fragment withheld; not original execution bytes"
+    },
+    {
+      "path": "experiments/m4/volume_sensitivity/execution.json",
+      "private_original_sha256": "ee16b582d1a44ea27f8ef39d9cfd6dd14e4aa5d7d2362d2b34f7a89e9a46e536",
+      "published_sha256": "c9ce783c0ddb31e627f0fbeacff819f42902edbaa432d781d013efc93c2edd87",
+      "redactions": {
+        "upstream-native-parameter-fragment": 1
+      },
+      "role": "Historical receipt with an upstream parameter-table fragment withheld; not original execution bytes"
+    }
+  ]
+}

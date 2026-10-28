@@ -1,0 +1,14 @@
+{
+  "schema": "opent1d.windows-runtime-lock/1",
+  "implementation": "CPython",
+  "version": "3.12.15",
+  "architecture": "amd64",
+  "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261021/cpython-3.12.15%2B20261021-x86_64-pc-windows-msvc-install_only_stripped.tar.gz",
+  "sha256": "aac5d331fc3307343f95928fdbea4583f0d53973d08c7e1d081884fbd229a0e1",
+  "release_page": "https://github.com/astral-sh/python-build-standalone/releases/tag/20261021",
+  "license_file": "LICENSE.txt",
+  "nsis_version": "3.13",
+  "provider": "Astral python-build-standalone",
+  "archive_format": "tar.gz",
+  "archive_prefix": "python/"
+}

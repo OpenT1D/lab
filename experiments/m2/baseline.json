@@ -1,0 +1,28 @@
+{
+  "schema": "opent1d.m2-cambridge-baseline/1",
+  "origin": "Previously retained PR14 Mac committed verification (f53714d) and exact-head Linux CI 34750713445 (5d3a890); reference/101/lt1_mpc/A only; no automatic enrollment",
+  "environments": {
+    "darwin/arm64": {
+      "trace_sha256": "6bd91394a0fc726392285eb8758f3c112a0a81a448854ac559804f971d31f1ec",
+      "native_sha256": "e66d7aad06f6bf38d56823dd4b16c51d8a6b83e512b28a49e8de4ae7dd678e2e",
+      "context": {
+        "node": "v22.22.2",
+        "upstream_revision": "9a6092065bd821f88691cd8d03b0550acd665573",
+        "source_sha256": "5590167a4d97195e7df9af5361a76be5309fb11d78e32f68be231cf6952a7c09",
+        "settings_sha256": "70bdafb0ba6b47bf1050d8fd5395a425b601db214e69e1d510ea5aa217681038",
+        "lock_sha256": "44ad7ba062a7d67032d91fcc9e0fa2aa3910b3856dce76bee5ba32093c1a150e"
+      }
+    },
+    "linux/x64": {
+      "trace_sha256": "6bd91394a0fc726392285eb8758f3c112a0a81a448854ac559804f971d31f1ec",
+      "native_sha256": "e66d7aad06f6bf38d56823dd4b16c51d8a6b83e512b28a49e8de4ae7dd678e2e",
+      "context": {
+        "node": "v22.22.2",
+        "upstream_revision": "9a6092065bd821f88691cd8d03b0550acd665573",
+        "source_sha256": "5590167a4d97195e7df9af5361a76be5309fb11d78e32f68be231cf6952a7c09",
+        "settings_sha256": "70bdafb0ba6b47bf1050d8fd5395a425b601db214e69e1d510ea5aa217681038",
+        "lock_sha256": "44ad7ba062a7d67032d91fcc9e0fa2aa3910b3856dce76bee5ba32093c1a150e"
+      }
+    }
+  }
+}

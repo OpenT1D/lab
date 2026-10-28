@@ -1,0 +1,56 @@
+{
+  "schema": "bc012-protocol/1",
+  "id": "BC-012/1",
+  "specified_date": "2026-09-22",
+  "base_commit": "959d1d165c48b97d98e5b205130ae2ca0c799057",
+  "parent_protocol": "BC-011/2",
+  "claim": "conditional_synthetic_observation_volume_misspecification_and_recovery",
+  "question": "Does joint G/I/C-peptide parameter separation survive a wrong or estimated central C-peptide observation volume, under all other BC-011 conditions?",
+  "runtime": {"project": "experiments/m0/simglucose", "python": "3.12", "numpy": "1.26.4", "scipy": "1.13.1"},
+  "model": {
+    "parameter_names": ["evoked_gain", "m4_scale", "k3_scale", "volume_scale"],
+    "truth": [1, 1, 1, 1],
+    "lower": [0.5, 0.5, 0.5, 0.5],
+    "upper": [1.5, 1.5, 1.5, 1.5],
+    "volume_l_kg": 0.0655,
+    "mapping": "Run unchanged BC011 at theta[0:3]; C=Q1/(0.0655*volume_scale). Volume changes observation concentration only, never amount states, source, initial amounts, ledgers or G/I. Rate multipliers retain BC011 meaning; dimensional Cp clearance is k3*Vp.",
+    "unchanged": "BC011 horizon240min, 30g gastric load, exact basal G/I and SC input, equilibrium reconditioning, source/baseline assumptions, fixed exchange/action/hepatic parameters, equimolar appearance and native profile"
+  },
+  "observation": {
+    "source": "Fresh unchanged BC011 observation generation at true volume1; preserve all reference/noise/data arrays exactly",
+    "sample_steps_min": [10, 30],
+    "data_cases": ["noiseless", "noise_117", "noise_221"],
+    "synthetic_sd": [5, 10, 30],
+    "modalities": {"GI": [0, 1], "GIC": [0, 1, 2]},
+    "noise": "Unchanged BC011 independent additive engineering noise; common realizations and nested schedules; basal G/I exact, basal Cp observed; not empirical assay errors"
+  },
+  "inference": {
+    "regimes": ["known_rates", "estimated_rates"],
+    "volume_arms": {"correct": 1.0, "low": 0.8, "high": 1.2, "estimated": null},
+    "control": "One GI control per regime/schedule/data; no duplication across volume arms. GI has no volume estimate; k3 also unobservable when removal rates unknown.",
+    "starts": [[0.7, 1.25, 0.8, 0.8], [1.3, 0.75, 1.2, 1.2]],
+    "optimizer": "Inherit BC011 bounded weighted least squares, absolute log-coordinate central differences and bounded one-sided three-point differences, step0.001, max_nfev60, tolerances1e-8, two starts",
+    "objective": "sum(((predicted-observed)/fixed channel SD)^2); report per-channel sums, bias, bound hits, all starts and best completed start without a fit-quality clinical threshold",
+    "sensitivity": "Weighted log-parameter Jacobians at theta(first3)=1 and volume anchor0.8,1,1.2 with BC011 difference/solver refinement; estimated-volume arm at truth1; select exact design columns/rows, impose only proven absent GI k3/V columns zero and retain numerical leakage",
+    "noiseless_recovery": "Correct and estimated-volume GIC and GI observable parameters must recover within1%; fixed-wrong volume fits have no truth-recovery gate. All optimizer/model failures remain failures, inaccurate completed noisy/wrong-volume estimates remain findings.",
+    "interpretation": "Local ranks with per-design numerical discrepancy, not global/practical identifiability proof. Two noise realizations do not define coverage; bounds do not close uncertainty intervals. No new profiles or human inference.",
+    "total_analyses": 60,
+    "total_starts": 120
+  },
+  "criteria": {
+    "correct_volume_parent_error": 0,
+    "volume_state_error": 0,
+    "volume_GI_error": 0,
+    "volume_scaling_relative_error": 1e-12,
+    "analytic_log_volume_scaled_error": 0.0001,
+    "basal_product_relative_error": 1e-10,
+    "solver_scaled_output_error": 0.001,
+    "jacobian_relative_refinement_error": 0.01,
+    "jacobian_solver_relative_error": 0.01,
+    "noiseless_active_parameter_relative_error": 0.01,
+    "repeat_artifact_differences": 0
+  },
+  "verification": "Execute unchanged BC011 forward gates; compare V1 wrapper to parent at truth and bound corners; unchanged amounts/ledgers/GI and inverse concentration scaling at V0.5,0.8,1.2,1.5; analytic log-volume derivative and basal Sb/(k3 V) identity; parent fit/reference/independent solver errors after volume scaling; same fresh observations; full matrix repeated in new process",
+  "failure_policy": "Freeze before fitting, never tune bounds/noise/criteria to results. Save every start including partial/failure, inputs, identity, residuals and estimates. Reject incomplete/nonfinite/invalid solver outputs before fitting. No successful complete-matrix report if required files, repeats, numerical gates or correct/estimated-volume noiseless recovery fail.",
+  "excluded": ["new dynamics or modification of historical references", "empirical volume uncertainty distribution", "free appearance ratio or Cp exchange rates", "physical population model of volume-rate covariance", "human data", "clinical schedule or treatment efficacy", "global uniqueness or confidence intervals"]
+}

@@ -1,0 +1,49 @@
+{
+  "audit_date": "2026-10-18",
+  "repository": "https://github.com/kstier/isr.deconv",
+  "commit": "320497e33cbdff2cc7f7d9f0c370080ab5a00229",
+  "version": "0.0.2",
+  "license": "GPL-3.0-or-later",
+  "files": {
+    "DESCRIPTION": {
+      "sha256": "ffd081b12f306a7fad52d88923cd9b550a1947772778150d6cc4ce0caa37a883",
+      "url": "https://raw.githubusercontent.com/kstier/isr.deconv/320497e33cbdff2cc7f7d9f0c370080ab5a00229/DESCRIPTION"
+    },
+    "LICENSE.md": {
+      "sha256": "585e25ef8f5946a52bf2aed68d5becfc38be94a8663aa01c1b31d88aa57f1de3",
+      "url": "https://raw.githubusercontent.com/kstier/isr.deconv/320497e33cbdff2cc7f7d9f0c370080ab5a00229/LICENSE.md"
+    },
+    "R/isr.deconv.R": {
+      "sha256": "b72bf1b23c85f9f6a79003d9c6fa9140ec2e94938f54628351361f22e32765d6",
+      "url": "https://raw.githubusercontent.com/kstier/isr.deconv/320497e33cbdff2cc7f7d9f0c370080ab5a00229/R/isr.deconv.R"
+    },
+    "R/isr.volume.R": {
+      "sha256": "de24d66bbf3f64e2873f0eb42c56beefedfca3dd07c14bfa39e82ccb88143e6c",
+      "url": "https://raw.githubusercontent.com/kstier/isr.deconv/320497e33cbdff2cc7f7d9f0c370080ab5a00229/R/isr.volume.R"
+    },
+    "R/isr.longHL.R": {
+      "sha256": "6c91e90d1721a2c0a6146957b4e0992274f209194b3b6ec2de8b83186ccb275a",
+      "url": "https://raw.githubusercontent.com/kstier/isr.deconv/320497e33cbdff2cc7f7d9f0c370080ab5a00229/R/isr.longHL.R"
+    },
+    "R/isr.shortHL.R": {
+      "sha256": "044d909a3c3d6c81ab3ec3ed0902cf7f420630157f666126f58fd885b841ff3f",
+      "url": "https://raw.githubusercontent.com/kstier/isr.deconv/320497e33cbdff2cc7f7d9f0c370080ab5a00229/R/isr.shortHL.R"
+    },
+    "R/isr.fraction.R": {
+      "sha256": "ce441cf59c228f50dc0bd917910c8ae9294b3a3b1d6c22d44ceb1fddbffdf88f",
+      "url": "https://raw.githubusercontent.com/kstier/isr.deconv/320497e33cbdff2cc7f7d9f0c370080ab5a00229/R/isr.fraction.R"
+    }
+  },
+  "older_indexed_commit": "ee2cd76a5e4ae43b8e014d8fbf8a641775d29fbc",
+  "older_indexed_volume_sha256": "bc92269197eab99b45da026b567ff6a95067b160628855730ddcb52f5e2a21f5",
+  "runtime_executed": true,
+  "runtime_limitation": "Native Rscript absent; WebAssembly source-function controls do not establish full-package, spline, plotting or native-build behavior.",
+  "source_tree_tests_directory_present": false,
+  "runtime_scope": "Unmodified isr.deconv linear path and isr.volume source functions, WebR 0.6.0 / R 4.6.0; no installed full package or spline execution.",
+  "native_rscript_executed": false,
+  "native_rscript_checked_paths": [
+    "/opt/homebrew/bin/Rscript",
+    "/usr/local/bin/Rscript",
+    "/Library/Frameworks/R.framework/Resources/bin/Rscript"
+  ]
+}

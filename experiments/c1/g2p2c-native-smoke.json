@@ -1,0 +1,26 @@
+{
+  "schema": "opent1d.c1.g2p2c-native-smoke-plan/1",
+  "source_commit": "37f7b7e161e9c1e7b702c8eebdc5cc7eb4f81d70",
+  "simglucose_commit": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc",
+  "training_plan_sha256": "61a54b5fa67661418e480d8846d3a81b2eb06dbcf76c29a8c841cb413368fc4e",
+  "actor_sampling_seed": 24,
+  "cases": [
+    {
+      "profile": "adult#001",
+      "seed": 101,
+      "condition": "D",
+      "output_directory": "results/c1-g2p2c-native-smoke-adult001-d101"
+    },
+    {
+      "profile": "adult#002",
+      "seed": 101,
+      "condition": "D",
+      "output_directory": "results/c1-g2p2c-native-smoke-adult002-d101"
+    }
+  ],
+  "planned_intervals_per_case": 960,
+  "expected_masked_command_intervals": 10,
+  "acceptance": "complete 960 native intervals, ten profile-basal fallback commands and bounded finite actions",
+  "efficacy_metrics_authorized": false,
+  "comparative_matrix_authorized": false
+}

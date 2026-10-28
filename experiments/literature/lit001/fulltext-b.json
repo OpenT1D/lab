@@ -1,0 +1,800 @@
+{
+  "schema_version": 1,
+  "review_id": "lit001-fulltext-b",
+  "source_screening_file": "experiments/literature/lit001/screening-b.json",
+  "source_input_sha256": "5e3c81102cd1c808f7346b678a377388e7e0d3280d0f548f1676f14fe81b97c0",
+  "scope": "Eight primary candidates and six unresolved records from screening shard B; bounded eligibility and reconstructibility review, not complete numerical extraction or risk-of-bias assessment.",
+  "decision_policy": {
+    "primary": "Target eligibility verified in full article or an explicitly identified primary regulatory full report. Unknown concentration remains explicit and prevents concentration-specific pooling.",
+    "background": "Model ancestry or context that does not establish an eligible separately interpretable lispro cohort.",
+    "excluded": "A verified feature is outside the primary question.",
+    "unresolved": "Original access or an essential eligibility/formulation/source-linkage condition remains unverified; strong abstract/registry signals are retained without promotion."
+  },
+  "retention_note": "Downloaded public sources are temporary external files outside the repository. Hashes identify exact retrieved bodies; paths are local audit provenance, not portable release artifacts. No article or participant-level source data copied into version control.",
+  "counts": {
+    "unresolved": 8,
+    "primary": 3,
+    "background": 2,
+    "excluded": 1
+  },
+  "records": [
+    {
+      "key": "PMID:22564116",
+      "source_index": 350,
+      "title": "A 12-wk follow-up study to evaluate the effects of mixing insulin lispro and insulin glargine in young individuals with type 1 diabetes.",
+      "doi": "10.1111/j.1399-5448.2012.00867.x",
+      "previous_decision": "primary_candidate",
+      "decision": "unresolved",
+      "reviewed_material": "abstract_only",
+      "reason": "The abstract reports SC lispro PK, but original full text was not retrieved and a mean age does not establish an all-adult population.",
+      "facts": {
+        "population": "Ten young people with T1D; mean age 21.9 ± 3.8 years; age range and minimum age unverified.",
+        "intervention": "Separate versus mixed lispro/glargine injections; conventional separate-lispro condition potentially relevant.",
+        "concentration": "Not verified.",
+        "pk_output": "Lispro-specific radioimmunoassay and 0–240-minute concentration measurements reported in abstract."
+      },
+      "reconstructible_fixed_reference": "Not ready: exact dosing, basal overlap, adult eligibility and original tables/curves need verification.",
+      "faggionato_cohort_relationship": "No source establishes overlap or independence from the Profil 116-person cohort.",
+      "remaining_uncertainties": [
+        "Original Wiley paper not retrieved after attempted PDF access returned HTTP 403.",
+        "Adult eligibility, lispro concentration and exact PK administration schedule remain unresolved."
+      ],
+      "primary_sources_reviewed": [
+        {
+          "url": "https://pubmed.ncbi.nlm.nih.gov/22564116/",
+          "location": "Abstract",
+          "kind": "abstract"
+        }
+      ],
+      "access_attempts": [
+        {
+          "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/j.1399-5448.2012.00867.x",
+          "status": "request_failed",
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ],
+      "reviewer": "Codex /root/roadmap_review; single AI reviewer, no independent human review",
+      "reviewed_at": "2026-09-19T22:49:10Z"
+    },
+    {
+      "key": "PMID:22920798",
+      "source_index": 361,
+      "title": "Pharmacokinetics and postprandial glycemic excursions following insulin lispro delivered by intradermal microneedle or subcutaneous infusion.",
+      "doi": "10.1177/193229681200600403",
+      "previous_decision": "primary_candidate",
+      "decision": "primary",
+      "reviewed_material": "full_text",
+      "reason": "Full Methods confirms adult T1D participants and an independently reported conventional Humalog SC comparison with measured lispro PK.",
+      "facts": {
+        "population": "22 participants completed; eligibility 18–55 years with T1D; actual ages 23–55.",
+        "intervention": "Humalog abdominal SC pump boluses versus intradermal delivery, individualized optimal dose and ±30%, breakfast and lunch; IV Humulin regular supplied basal insulin.",
+        "concentration": "Not located in the inspected full article; do not infer U100 from brand or date.",
+        "pk_output": "Six-hour serum lispro profiles, specific non-cross-reactive LisPro RIA LPI-16K; PK Table 3, variability Table 4, Figure 2.",
+        "trial_id": "NCT01120444"
+      },
+      "reconstructible_fixed_reference": "Aggregate SC reference plausible from Figure 2 and PK tables. Reproduction must choose one dose/meal condition and preserve individualized doses, dose normalization and basal assay specificity; no machine-readable curves extracted.",
+      "faggionato_cohort_relationship": "NCT01120444 differs from the three trials used by Faggionato; this establishes a different trial, not person-level independence.",
+      "remaining_uncertainties": [
+        "Concentration unresolved.",
+        "Per-subject dose/input series not retrieved."
+      ],
+      "primary_sources_reviewed": [
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3440143/",
+          "location": "Materials and Methods: Subjects, Study Design and Procedures, Sample Analysis; Results; Tables 3–4; Figure 2",
+          "kind": "journal_full_text"
+        }
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3440143/fullTextXML",
+          "status": "request_failed",
+          "error": "HTTP Error 500: "
+        },
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3440143/?report=xml",
+          "status": 200,
+          "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3440143/?report=xml",
+          "content_type": "text/html; charset=utf-8",
+          "sha256": "294200df668883a2a61d6e16763502407fa02e433e3c7d383ad92280906dbdb8",
+          "bytes": 221046,
+          "local_raw": "/private/tmp/opent1d-lit001-fulltext-b/pmc-361.raw",
+          "interpretation": "Source body retrieved; evidence scope identified in primary_sources_reviewed, not inferred from HTTP status.",
+          "article_body_verified": true,
+          "verification_note": "Article title, clinical Methods and decision-relevant text inspected locally; not inferred from HTTP status."
+        }
+      ],
+      "reviewer": "Codex /root/roadmap_review; single AI reviewer, no independent human review",
+      "reviewed_at": "2026-09-19T22:49:10Z"
+    },
+    {
+      "key": "PMID:25898950",
+      "source_index": 460,
+      "title": "Exercise effects on postprandial glucose metabolism in type 1 diabetes: a triple-tracer approach.",
+      "doi": "10.1152/ajpendo.00014.2015",
+      "previous_decision": "unresolved",
+      "decision": "unresolved",
+      "reviewed_material": "full_text",
+      "reason": "The primary study includes adult T1D insulin measurements, but the insulin analogue and a separable conventional-lispro group are not identified in the inspected Methods.",
+      "facts": {
+        "population": "Eligibility 18–65 years, T1D using CSII; 18 recruited, one failed C-peptide criterion and one withdrew; 16 studied.",
+        "intervention": "Customary individualized pump bolus before a 75 g glucose mixed meal; unchanged basal pump rates; exercise 120–195 minutes at 50% maximal oxygen consumption.",
+        "concentration": "Molecule and concentration not verified.",
+        "pk_output": "Plasma insulin measured with a two-site DxI immunoenzymatic assay alongside glucose tracer fluxes."
+      },
+      "reconstructible_fixed_reference": "Not a ready lispro reference: individualized pump inputs and analogue breakdown required; glucose-flux validation is the primary objective.",
+      "faggionato_cohort_relationship": "Mayo study; no relationship to Faggionato established. Do not infer equivalence to Frank 2018 exercise data solely from similar protocols.",
+      "remaining_uncertainties": [
+        "No lispro-specific arm verified.",
+        "Registry identifier not located in the inspected paper; no claim that none exists."
+      ],
+      "primary_sources_reviewed": [
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4469811/",
+          "location": "Materials and Methods: eligibility, Experimental Protocol, Study Visit and Analytical Techniques",
+          "kind": "journal_full_text"
+        }
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC4469811/fullTextXML",
+          "status": "request_failed",
+          "error": "HTTP Error 500: "
+        },
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4469811/?report=xml",
+          "status": 200,
+          "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4469811/?report=xml",
+          "content_type": "text/html; charset=utf-8",
+          "sha256": "119935e6476927063b73cdbd3bbb01815b68bad5b3819769fbabff7f7bf2e21e",
+          "bytes": 211505,
+          "local_raw": "/private/tmp/opent1d-lit001-fulltext-b/pmc-460.raw",
+          "interpretation": "Source body retrieved; evidence scope identified in primary_sources_reviewed, not inferred from HTTP status.",
+          "article_body_verified": true,
+          "verification_note": "Article title, clinical Methods and decision-relevant text inspected locally; not inferred from HTTP status."
+        }
+      ],
+      "reviewer": "Codex /root/roadmap_review; single AI reviewer, no independent human review",
+      "reviewed_at": "2026-09-19T22:49:10Z"
+    },
+    {
+      "key": "PMID:26343364",
+      "source_index": 474,
+      "title": "Real-time estimation of plasma insulin concentration from continuous glucose monitor measurements.",
+      "doi": "10.1080/10255842.2015.1077234",
+      "previous_decision": "unresolved",
+      "decision": "unresolved",
+      "reviewed_material": "full_text_and_original_data_paper",
+      "reason": "Author manuscript and its Rossetti source confirm a human insulin-estimation dataset, but neither inspected text identifies the insulin analogue or confirms an exclusively adult lispro subgroup.",
+      "facts": {
+        "population": "12 pump-treated people with T1D; 9 women, age 41.8 ± 7.3 years; mean age alone does not prove all-adult eligibility.",
+        "intervention": "Four 40 g/100 g mixed-meal sessions in Rossetti 2012; model estimates plasma insulin from CGM using a Hovorka-derived model and extended Kalman filtering.",
+        "concentration": "Insulin molecule and concentration not located in either inspected Methods section.",
+        "pk_output": "Human plasma insulin measurements used to assess the estimator; this is an estimator study, not a lispro-specific absorption model."
+      },
+      "reconstructible_fixed_reference": "Not ready: source molecule, individual dosing/insulin measurements and estimator versus physiological-model scope must be resolved.",
+      "faggionato_cohort_relationship": "Rossetti 2012 Valencia dataset is the stated original source; no overlap with Profil established.",
+      "remaining_uncertainties": [
+        "Lispro use and product concentration unresolved.",
+        "Minimum age not located.",
+        "Institutional author PDF has a 2017 manuscript header whereas bibliographic publication is 2015; retained as author version."
+      ],
+      "primary_sources_reviewed": [
+        {
+          "url": "https://riunet.upv.es/bitstream/handle/10251/66699/de%20Pereda%2C%20Diego%20et%20al.%20-%20Real-time%20estimation%20of%20plasma%20insulin.pdf?isAllowed=y&sequence=4",
+          "location": "Author manuscript section 3.2 (PDF page 8), original-study citation",
+          "kind": "institutional_author_manuscript"
+        },
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3482847/",
+          "location": "Rossetti 2012 Subjects and Methods, clinical population and four-meal design",
+          "kind": "journal_full_text"
+        }
+      ],
+      "access_attempts": [
+        {
+          "url": "https://riunet.upv.es/bitstream/handle/10251/66699/de%20Pereda%2C%20Diego%20et%20al.%20-%20Real-time%20estimation%20of%20plasma%20insulin.pdf?isAllowed=y&sequence=4",
+          "status": 200,
+          "final_url": "https://riunet.upv.es/server/api/core/bitstreams/312e0be1-57aa-417a-8aaa-37c41fbbb3be/content",
+          "content_type": "application/pdf;charset=UTF-8",
+          "sha256": "30c0a66aad63aecc2aba391c854fb9bb37b6facd53aa87b12db492535016726b",
+          "bytes": 336475,
+          "local_raw": "/private/tmp/opent1d-lit001-fulltext-b/474.raw",
+          "interpretation": "Source body retrieved; evidence scope identified in primary_sources_reviewed, not inferred from HTTP status."
+        },
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3482847/?report=xml",
+          "status": 200,
+          "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3482847/?report=xml",
+          "content_type": "text/html; charset=utf-8",
+          "sha256": "73d10c7e25b21e58a92878219dfe929d70773f98be2a1feb5346f387bb94bb49",
+          "bytes": 182989,
+          "local_raw": "/private/tmp/opent1d-lit001-fulltext-b/source-474.raw",
+          "interpretation": "Source body retrieved; evidence scope identified in primary_sources_reviewed, not inferred from HTTP status.",
+          "article_body_verified": true,
+          "verification_note": "Article title, clinical Methods and decision-relevant text inspected locally; not inferred from HTTP status."
+        }
+      ],
+      "reviewer": "Codex /root/roadmap_review; single AI reviewer, no independent human review",
+      "reviewed_at": "2026-09-19T22:49:10Z"
+    },
+    {
+      "key": "PMID:27411698",
+      "source_index": 524,
+      "title": "Insulin Injection Into Lipohypertrophic Tissue: Blunted and More Variable Insulin Absorption and Action and Impaired Postprandial Glucose Control.",
+      "doi": "10.2337/dc16-0610",
+      "previous_decision": "primary_candidate",
+      "decision": "unresolved",
+      "reviewed_material": "abstract_and_registry",
+      "reason": "Adult T1D SC lispro PK eligibility is supported, but concentration and original full-text details remain unresolved after publisher access failed.",
+      "facts": {
+        "population": "Paper abstract: 13 people with T1D. Registry eligibility 18–64 years.",
+        "intervention": "0.15 U/kg SC lispro into lipohypertrophic versus normal abdominal tissue; four clamp and two meal injections reported in abstract.",
+        "concentration": "Not verified in retrieved registry or abstract.",
+        "pk_output": "Registry prespecifies insulin AUC0–4h; abstract reports blunted and more variable insulin absorption.",
+        "trial_id": "NCT02221323; DBC-14LIPOINJ01; EudraCT 2014-003144-12"
+      },
+      "reconstructible_fixed_reference": "Potential normal-tissue reference and absorption-variability evidence, but not ready until original protocol, assay and concentration are verified.",
+      "faggionato_cohort_relationship": "Different trial identifier from Faggionato; same Profil institution does not establish participant overlap or independence.",
+      "remaining_uncertainties": [
+        "Original journal full text not retrieved (attempted publisher PDF returned HTTP 403).",
+        "ClinicalTrials.gov eligibility free-text appears misplaced (PK endpoints); only structured age field used.",
+        "Concentration, assay and per-arm sample accounting unresolved."
+      ],
+      "primary_sources_reviewed": [
+        {
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27411698/",
+          "location": "Abstract",
+          "kind": "abstract"
+        },
+        {
+          "url": "https://clinicaltrials.gov/study/NCT02221323",
+          "location": "API v2 protocolSection: identificationModule, eligibilityModule structured age, outcomesModule",
+          "kind": "trial_registry"
+        }
+      ],
+      "access_attempts": [
+        {
+          "url": "https://care.diabetesjournals.org/content/diacare/39/9/1486.full.pdf",
+          "status": "request_failed",
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "url": "https://clinicaltrials.gov/api/v2/studies/NCT02221323",
+          "status": 200,
+          "final_url": "https://clinicaltrials.gov/api/v2/studies/NCT02221323",
+          "content_type": "application/json",
+          "sha256": "f0988f6a9947a21670d6a04fdee81d49d77c3d0adc22b1ce4d2593047cfd5c12",
+          "bytes": 4411,
+          "local_raw": "/private/tmp/opent1d-lit001-fulltext-b/trial-524.raw",
+          "interpretation": "Source body retrieved; evidence scope identified in primary_sources_reviewed, not inferred from HTTP status."
+        }
+      ],
+      "reviewer": "Codex /root/roadmap_review; single AI reviewer, no independent human review",
+      "reviewed_at": "2026-09-19T22:49:10Z"
+    },
+    {
+      "key": "PMID:27824066",
+      "source_index": 535,
+      "title": "A Novel Insulin/Glucose Model after a Mixed-Meal Test in Patients with Type 1 Diabetes on Insulin Pump Therapy.",
+      "doi": "10.1038/srep36029",
+      "previous_decision": "unresolved",
+      "decision": "unresolved",
+      "reviewed_material": "full_text_supplement_and_registries",
+      "reason": "Full paper, supplement and linked registries establish adult T1D SC fast-analogue studies, but do not identify an eligible separable conventional-lispro cohort.",
+      "facts": {
+        "population": "Ten C-peptide-negative adults with T1D using CSII, seven men and three women; eligibility 18–65 years.",
+        "intervention": "Usual fast analogue via pump before 292 or 600 kcal mixed meals; basal maintained; separate insulin-clamp session.",
+        "concentration": "Specific analogue and concentration not established. ELISA calibration recognizes lispro, aspart and glulisine; assay recognition does not establish treatment assignment.",
+        "pk_output": "300-minute serum insulin curves and GLUKINSLOOP2 model with insulin residence/kinetic parameters.",
+        "trial_id": "NCT01800734 and NCT02003274"
+      },
+      "reconstructible_fixed_reference": "Generic mixed-meal model reference potentially reconstructible from equations and supplement; a lispro-specific reference cannot yet be justified.",
+      "faggionato_cohort_relationship": "Verona trials have different identifiers from Faggionato; participant-level independence not demonstrated.",
+      "remaining_uncertainties": [
+        "Analogue allocation and concentration remain unresolved after inspecting article, supplement and registries.",
+        "No separable lispro curve verified."
+      ],
+      "primary_sources_reviewed": [
+        {
+          "url": "https://www.nature.com/articles/srep36029",
+          "location": "Methods: Subjects, Study design, Analytical procedures; model results",
+          "kind": "journal_full_text"
+        },
+        {
+          "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fsrep36029/MediaObjects/41598_2016_BFsrep36029_MOESM1_ESM.pdf",
+          "location": "Supplementary equations, tables and figure text; no analogue allocation located",
+          "kind": "journal_supplement"
+        },
+        {
+          "url": "https://clinicaltrials.gov/study/NCT01800734",
+          "location": "API v2 armsInterventionsModule, eligibilityModule",
+          "kind": "trial_registry"
+        },
+        {
+          "url": "https://clinicaltrials.gov/study/NCT02003274",
+          "location": "API v2 armsInterventionsModule, eligibilityModule, referencesModule (PMID27824066)",
+          "kind": "trial_registry"
+        }
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.nature.com/articles/srep36029",
+          "status": 200,
+          "final_url": "https://www.nature.com/articles/srep36029?error=cookies_not_supported&code=ca36e1a9-c12f-48fa-9af1-c00ea532429b",
+          "content_type": "text/html; charset=utf-8",
+          "sha256": "ef4dab384094679e3af7a899e02c1f8cb852037d4a2ecf0f4cd072216a0a4715",
+          "bytes": 483030,
+          "local_raw": "/private/tmp/opent1d-lit001-fulltext-b/535.raw",
+          "interpretation": "Source body retrieved; evidence scope identified in primary_sources_reviewed, not inferred from HTTP status."
+        },
+        {
+          "url": "https://clinicaltrials.gov/api/v2/studies/NCT01800734",
+          "status": 200,
+          "final_url": "https://clinicaltrials.gov/api/v2/studies/NCT01800734",
+          "content_type": "application/json",
+          "sha256": "4b522a74dc3c3c27b3b28fea169b959b47a8153bcc1a2766f1002375ef78ee11",
+          "bytes": 17098,
+          "local_raw": "/private/tmp/opent1d-lit001-fulltext-b/trial-535a.raw",
+          "interpretation": "Source body retrieved; evidence scope identified in primary_sources_reviewed, not inferred from HTTP status."
+        },
+        {
+          "url": "https://clinicaltrials.gov/api/v2/studies/NCT02003274",
+          "status": 200,
+          "final_url": "https://clinicaltrials.gov/api/v2/studies/NCT02003274",
+          "content_type": "application/json",
+          "sha256": "0f5afc849d30070d20e6e17bcfdb002be54a56221c3444c88bb797fd4ff8d8a9",
+          "bytes": 25880,
+          "local_raw": "/private/tmp/opent1d-lit001-fulltext-b/trial-535b.raw",
+          "interpretation": "Source body retrieved; evidence scope identified in primary_sources_reviewed, not inferred from HTTP status."
+        },
+        {
+          "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fsrep36029/MediaObjects/41598_2016_BFsrep36029_MOESM1_ESM.pdf",
+          "status": 200,
+          "final_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fsrep36029/MediaObjects/41598_2016_BFsrep36029_MOESM1_ESM.pdf",
+          "content_type": "application/pdf",
+          "sha256": "4f790e97aa6b0eaee4813f75da90851cd2d76f7d9ec9ba863b92ea889a90a3c4",
+          "bytes": 2495422,
+          "local_raw": "/private/tmp/opent1d-lit001-fulltext-b/supp-535.raw",
+          "interpretation": "Source body retrieved; evidence scope identified in primary_sources_reviewed, not inferred from HTTP status."
+        }
+      ],
+      "reviewer": "Codex /root/roadmap_review; single AI reviewer, no independent human review",
+      "reviewed_at": "2026-09-19T22:49:10Z"
+    },
+    {
+      "key": "PMID:27987252",
+      "source_index": 540,
+      "title": "Similar pharmacokinetics and pharmacodynamics of rapid-acting insulin lispro products SAR342434 and US- and EU-approved Humalog in subjects with type 1 diabetes.",
+      "doi": "10.1111/dom.12856",
+      "previous_decision": "primary_candidate",
+      "decision": "primary",
+      "reviewed_material": "abstract_registry_and_full_regulatory_report",
+      "reason": "Original journal full text remains unretrieved, but the complete primary EMA assessment report directly verifies the exact study, conventional Humalog U100 arms, assay, dose, population and PK outputs.",
+      "facts": {
+        "population": "Registry eligibility 18–65 years with T1D. Journal abstract reports 30 men randomized, 28 completing; EMA gives 29 evaluable PK profiles per treatment.",
+        "intervention": "Single 0.3 U/kg SC dose in fasting three-way crossover: SAR342434, US Humalog and EU Humalog.",
+        "concentration": "US and EU Humalog 100 U/mL explicitly verified in EMA report.",
+        "pk_output": "12-hour plasma lispro via LC-MS/MS, validated range 100–8000 pg/mL; EMA Figure 4 mean profiles and Table 5 bioavailability.",
+        "trial_id": "NCT02273258; PDY12704"
+      },
+      "reconstructible_fixed_reference": "Plausible fixed-dose-per-weight aggregate comparison from EMA Figure 4/Table 5; needs defined body weight, dosing schedule, assay units and curve extraction before numerical reproduction.",
+      "faggionato_cohort_relationship": "Different trial identifier from all three Faggionato trials; no participant-level independence claim.",
+      "remaining_uncertainties": [
+        "Journal full text not retrieved after Wiley HTTP 403; regulatory report is explicitly the full-text evidence source.",
+        "Aggregate curves not digitized; no individual data obtained."
+      ],
+      "primary_sources_reviewed": [
+        {
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27987252/",
+          "location": "Abstract",
+          "kind": "abstract"
+        },
+        {
+          "url": "https://clinicaltrials.gov/study/NCT02273258",
+          "location": "API v2 identificationModule, armsInterventionsModule, eligibilityModule, outcomesModule",
+          "kind": "trial_registry"
+        },
+        {
+          "url": "https://www.ema.europa.eu/en/documents/assessment-report/insulin-lispro-sanofi-epar-public-assessment-report_en.pdf",
+          "location": "EMA/351195/2017, section 2.4.2, pages 30–32; Figure 4, Table 5",
+          "kind": "regulatory_full_report"
+        }
+      ],
+      "access_attempts": [
+        {
+          "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/dom.12856",
+          "status": "request_failed",
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "url": "https://clinicaltrials.gov/api/v2/studies/NCT02273258",
+          "status": 200,
+          "final_url": "https://clinicaltrials.gov/api/v2/studies/NCT02273258",
+          "content_type": "application/json",
+          "sha256": "491e4482ca284e6befd772ee09715462b3ee94989bb20a55f97ea85b7153a7d1",
+          "bytes": 8954,
+          "local_raw": "/private/tmp/opent1d-lit001-fulltext-b/trial-540.raw",
+          "interpretation": "Source body retrieved; evidence scope identified in primary_sources_reviewed, not inferred from HTTP status."
+        },
+        {
+          "url": "https://www.ema.europa.eu/en/documents/assessment-report/insulin-lispro-sanofi-epar-public-assessment-report_en.pdf",
+          "status": 200,
+          "final_url": "https://www.ema.europa.eu/en/documents/assessment-report/insulin-lispro-sanofi-epar-public-assessment-report_en.pdf",
+          "content_type": "application/pdf",
+          "sha256": "c5c5a7d8fb8ace5c3862c7896b210e624b59b7b23d090acc0e45deee66914beb",
+          "bytes": 3273613,
+          "local_raw": "/private/tmp/opent1d-lit001-fulltext-b/ema-540.raw",
+          "interpretation": "Source body retrieved; evidence scope identified in primary_sources_reviewed, not inferred from HTTP status."
+        }
+      ],
+      "reviewer": "Codex /root/roadmap_review; single AI reviewer, no independent human review",
+      "reviewed_at": "2026-09-19T22:49:10Z"
+    },
+    {
+      "key": "PMID:28394405",
+      "source_index": 554,
+      "title": "Modeling Pharmacokinetic Profiles of Insulin Regimens to Enhance Understanding of Subcutaneous Insulin Regimens.",
+      "doi": "10.1002/jcph.899",
+      "previous_decision": "unresolved",
+      "decision": "background",
+      "reviewed_material": "full_text",
+      "reason": "The lispro population model was trained on healthy volunteers, not the target adult T1D population; secondary T1D profile overlays are useful ancestry evidence but do not make the training cohort T1D.",
+      "facts": {
+        "population": "Table 1 lispro training cohort: eight healthy participants, 21–28 years. Sixteen clinical studies across multiple insulin products overall.",
+        "intervention": "Conventional Humalog U100 training; Figure 3C overlays predictions against external T1D lispro 0.15 U/kg three times daily with NPH 0.4 U/kg.",
+        "concentration": "Training lispro explicitly 100 U/mL.",
+        "pk_output": "Population one-compartment apparent clearance/volume model with absorption delay and zero/first-order components; Table 2 parameters."
+      },
+      "reconstructible_fixed_reference": "Published parameters and supplemental equations make a bounded healthy-volunteer synthetic reference plausible. T1D Figure 3C depends on Jacobs 1997 (Diabetes Care 20:1279–1286), which requires its own protocol/eligibility check.",
+      "faggionato_cohort_relationship": "Training lispro source is Howey 1994 healthy-volunteer work; secondary T1D source is Jacobs 1997, not the stated Profil 116-person lineage. No person-level overlap analysis performed.",
+      "remaining_uncertainties": [
+        "Supplemental equations noted but not separately retrieved in this check.",
+        "External T1D original study not fully assessed here.",
+        "Combined-insulin visualization uses a common concentration convention and cannot establish molecule-specific assay equivalence."
+      ],
+      "primary_sources_reviewed": [
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5573917/",
+          "location": "Methods and Table 1; Table 2; Figure 3C and external-validation description; references 12 and 18",
+          "kind": "journal_full_text"
+        }
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5573917/fullTextXML",
+          "status": 200,
+          "final_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5573917/fullTextXML",
+          "content_type": "application/xml",
+          "sha256": "39751e423cffceec6b8d48cee5dc71f7c3587d9a3098ab7ae258cd22fc8bdd17",
+          "bytes": 96232,
+          "local_raw": "/private/tmp/opent1d-lit001-fulltext-b/554.raw",
+          "interpretation": "Source body retrieved; evidence scope identified in primary_sources_reviewed, not inferred from HTTP status."
+        }
+      ],
+      "reviewer": "Codex /root/roadmap_review; single AI reviewer, no independent human review",
+      "reviewed_at": "2026-09-19T22:49:10Z"
+    },
+    {
+      "key": "PMID:28654314",
+      "source_index": 566,
+      "title": "Cross-Validation of a Glucose-Insulin-Glucagon Pharmacodynamics Model for Simulation Using Data From Patients With Type 1 Diabetes.",
+      "doi": "10.1177/1932296817693254",
+      "previous_decision": "unresolved",
+      "decision": "excluded",
+      "reviewed_material": "full_text",
+      "reason": "The primary clinical insulin input is NovoRapid insulin aspart, so this study does not provide conventional-lispro evidence.",
+      "facts": {
+        "population": "Eight pump-treated C-peptide-negative people with T1D; ages 19–64 years.",
+        "intervention": "SC NovoRapid bolus to induce low glucose, followed by saline or glucagon on four visits; basal insulin continued.",
+        "concentration": "Aspart product; concentration not extracted because molecule excludes primary eligibility.",
+        "pk_output": "Serum insulin and a fitted two-state aspart PK model; fitted basal concentration varied by visit."
+      },
+      "reconstructible_fixed_reference": "Potential aspart/model-ancestry example only; not a lispro reproduction target.",
+      "faggionato_cohort_relationship": "Different molecule and clinical protocol from Faggionato; no overlap claim needed for lispro synthesis.",
+      "remaining_uncertainties": [
+        "Excluded on verified molecule, not on the paper title."
+      ],
+      "primary_sources_reviewed": [
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5951032/",
+          "location": "Methods: Data Collection, Insulin Pharmacokinetic Model and Model Fitting",
+          "kind": "journal_full_text"
+        }
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5951032/fullTextXML",
+          "status": "request_failed",
+          "error": "HTTP Error 500: "
+        },
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5951032/?report=xml",
+          "status": 200,
+          "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5951032/?report=xml",
+          "content_type": "text/html; charset=utf-8",
+          "sha256": "a949b0e5a840f1f58643a8edd29bd33c40a97b5f2552409a8ec08abdac4f23d9",
+          "bytes": 227147,
+          "local_raw": "/private/tmp/opent1d-lit001-fulltext-b/pmc-566.raw",
+          "interpretation": "Source body retrieved; evidence scope identified in primary_sources_reviewed, not inferred from HTTP status.",
+          "article_body_verified": true,
+          "verification_note": "Article title, clinical Methods and decision-relevant text inspected locally; not inferred from HTTP status."
+        }
+      ],
+      "reviewer": "Codex /root/roadmap_review; single AI reviewer, no independent human review",
+      "reviewed_at": "2026-09-19T22:49:10Z"
+    },
+    {
+      "key": "PMID:29923294",
+      "source_index": 604,
+      "title": "Ultra-rapid BioChaperone Lispro improves postprandial blood glucose excursions vs insulin lispro in a 14-day crossover treatment study in people with type 1 diabetes.",
+      "doi": "10.1111/dom.13442",
+      "previous_decision": "primary_candidate",
+      "decision": "unresolved",
+      "reviewed_material": "abstract_and_registry",
+      "reason": "A highly matching registry verifies adult T1D Humalog U100 and measured PK, but original journal full-text access remains unresolved and exact article-to-trial linkage needs full-paper confirmation.",
+      "facts": {
+        "population": "Abstract: 35 participants completed; registry eligibility 18–64 years, T1D on multiple daily injections.",
+        "intervention": "Two 14-day crossover periods of BioChaperone Lispro versus conventional Humalog; individualized doses at meal-relative times −15, 0 or +15 minutes.",
+        "concentration": "Registry official title explicitly identifies comparator Humalog U100.",
+        "pk_output": "Serum lispro AUC0–30min, AUC0–6h, Cmax and Tmax listed in registry.",
+        "trial_id": "NCT02528396; BC3-CT013 (matching design/title; no publication PMID in retrieved registry)"
+      },
+      "reconstructible_fixed_reference": "Useful conventional-control PK candidate; individualized repeated dosing and meal timing make a single fixed reference less direct. Full protocol/assay and article linkage must be verified first.",
+      "faggionato_cohort_relationship": "NCT02528396 differs from Faggionato BioChaperone trial NCT02344992; do not merge these trials or assume participant independence.",
+      "remaining_uncertainties": [
+        "Original Wiley full text not retrieved (HTTP 403).",
+        "Assay, per-PK-arm sample accounting and exact linkage to this publication unverified in full text."
+      ],
+      "primary_sources_reviewed": [
+        {
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29923294/",
+          "location": "Abstract",
+          "kind": "abstract"
+        },
+        {
+          "url": "https://clinicaltrials.gov/study/NCT02528396",
+          "location": "API v2 identificationModule, eligibilityModule, armsInterventionsModule, outcomesModule",
+          "kind": "trial_registry"
+        }
+      ],
+      "access_attempts": [
+        {
+          "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/dom.13442",
+          "status": "request_failed",
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "url": "https://clinicaltrials.gov/api/v2/studies/NCT02528396",
+          "status": 200,
+          "final_url": "https://clinicaltrials.gov/api/v2/studies/NCT02528396",
+          "content_type": "application/json",
+          "sha256": "19fa82e4123ae79f3fccbb4283d88be3547623542d30d866c2123754c3b762f4",
+          "bytes": 7892,
+          "local_raw": "/private/tmp/opent1d-lit001-fulltext-b/trial-604.raw",
+          "interpretation": "Source body retrieved; evidence scope identified in primary_sources_reviewed, not inferred from HTTP status."
+        }
+      ],
+      "reviewer": "Codex /root/roadmap_review; single AI reviewer, no independent human review",
+      "reviewed_at": "2026-09-19T22:49:10Z"
+    },
+    {
+      "key": "PMID:29989928",
+      "source_index": 608,
+      "title": "Modeling Subcutaneous Absorption of Fast-Acting Insulin in Type 1 Diabetes.",
+      "doi": "10.1109/tbme.2017.2784101",
+      "previous_decision": "primary_candidate",
+      "decision": "unresolved",
+      "reviewed_material": "abstract_and_secondary_full_text_lineage",
+      "reason": "This is a relevant primary lispro model, but its original full text was not retrieved: DOI response was empty and the attempted institutional repository request returned HTTP 403.",
+      "facts": {
+        "population": "Abstract reports 116 people with T1D and measured insulin profiles.",
+        "intervention": "Fast-acting lispro SC data reused in subsequent Faggionato analysis.",
+        "concentration": "Must retain per-original-trial formulation verification; no single blanket concentration established from this abstract.",
+        "pk_output": "Primary absorption/distribution model and population parameters; exact original equations not verified from this paper in this check."
+      },
+      "reconstructible_fixed_reference": "Original-paper reproduction not unlocked by an abstract. A reproduction of Faggionato published equations must be labeled as that later reference, not as a verified original Schiavon reproduction.",
+      "faggionato_cohort_relationship": "Confirmed shared 116-person Profil data lineage via Faggionato; not independent validation of Faggionato. Trials NCT01235039, NCT02146651 and NCT02344992.",
+      "remaining_uncertainties": [
+        "Original equations, parameter table and fitting protocol remain unverified from the original article.",
+        "No claim that all possible lawful sources were exhausted."
+      ],
+      "primary_sources_reviewed": [
+        {
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29989928/",
+          "location": "Abstract",
+          "kind": "abstract"
+        },
+        {
+          "url": "https://mdpi-res.com/d_attachment/metabolites/metabolites-11-00235/article_deploy/metabolites-11-00235.pdf",
+          "location": "Locally preserved publisher PDF pp2–3, section2.1, and reference12; source traced via existing sources.json",
+          "kind": "secondary_lineage_source"
+        }
+      ],
+      "access_attempts": [
+        {
+          "url": "https://doi.org/10.1109/TBME.2017.2784101",
+          "status": 202,
+          "final_url": "https://ieeexplore.ieee.org/document/8214251/",
+          "content_type": "text/html; charset=UTF-8",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "local_raw": "/private/tmp/opent1d-lit001-fulltext-b/608.raw",
+          "interpretation": "Empty response, not a retrieved paper."
+        },
+        {
+          "url": "https://www.research.unipd.it/handle/11577/3255823?mode=complete",
+          "status": "request_failed",
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8069884/",
+          "status": "challenge_response",
+          "interpretation": "Web open exposed recaptcha rather than article; not counted as full-text access."
+        },
+        {
+          "url": "https://mdpi-res.com/d_attachment/metabolites/metabolites-11-00235/article_deploy/metabolites-11-00235.pdf",
+          "status": "existing_local_source_reviewed",
+          "sha256": "4587ea88d98cb6f1dca6a73444aca42602eb62ebf39cccedad11412db80f300d",
+          "bytes": 1859975,
+          "local_raw": "/private/tmp/opent1d-lit001-sources/faggionato-2021.pdf",
+          "interpretation": "Existing source retrieved by the root reviewer; this reviewer read locally extracted section2.1 and reference12, verifying 116-person data lineage."
+        }
+      ],
+      "reviewer": "Codex /root/roadmap_review; single AI reviewer, no independent human review",
+      "reviewed_at": "2026-09-19T22:49:10Z"
+    },
+    {
+      "key": "PMID:30392154",
+      "source_index": 619,
+      "title": "Modeling the acute effects of exercise on insulin kinetics in type 1 diabetes.",
+      "doi": "10.1007/s10928-018-9611-z",
+      "previous_decision": "unresolved",
+      "decision": "background",
+      "reviewed_material": "full_text",
+      "reason": "This is useful mechanistic exercise modeling, but it intentionally pools lispro and aspart with identical assumed kinetics and does not report a separately reconstructible lispro cohort.",
+      "facts": {
+        "population": "Mayo resting cohort: 19 enrolled, 13 using aspart and six lispro; two missing-data exclusions leave 17. Exercise cohort: 14, two rapid-absorption outliers excluded, leaving 12.",
+        "intervention": "Individualized meal pump boluses, recorded basal/correction inputs; exercise cohort uses four 15-minute bouts at 50% maximal oxygen consumption.",
+        "concentration": "Lispro/aspart concentration and exercise-group analogue allocation not located.",
+        "pk_output": "Three-domain mechanistic PK predictions compared with pooled plasma-insulin means; parameters taken from literature, not fitted to these mean curves."
+      },
+      "reconstructible_fixed_reference": "Equations/parameters support a generic mechanism reproduction, but averaged pump input, mixed formulations and outlier selection must be preserved; not a product-specific lispro validation.",
+      "faggionato_cohort_relationship": "Mayo secondary datasets, resting source previously published and exercise source described as unpublished; no relation to Profil demonstrated. Similar exercise protocol does not prove overlap with PMID25898950.",
+      "remaining_uncertainties": [
+        "Adult eligibility range not established from the reported mean ages alone.",
+        "No separate lispro reference curve or exact concentration verified."
+      ],
+      "primary_sources_reviewed": [
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8237803/",
+          "location": "Inputs and parameters; Table 1; Human subjects data; Table 2; resting/exercise cohorts; Simulation, input, and data considerations; Figure 5",
+          "kind": "journal_full_text"
+        }
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8237803/fullTextXML",
+          "status": "request_failed",
+          "error": "HTTP Error 500: "
+        },
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8237803/?report=xml",
+          "status": 200,
+          "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8237803/?report=xml",
+          "content_type": "text/html; charset=utf-8",
+          "sha256": "7f94ba6f7d0c8faabd9d38bcd37f2a7fa15807821b0b6e86d3124a8a361f3871",
+          "bytes": 282853,
+          "local_raw": "/private/tmp/opent1d-lit001-fulltext-b/pmc-619.raw",
+          "interpretation": "Source body retrieved; evidence scope identified in primary_sources_reviewed, not inferred from HTTP status.",
+          "article_body_verified": true,
+          "verification_note": "Article title, clinical Methods and decision-relevant text inspected locally; not inferred from HTTP status."
+        },
+        {
+          "url": "https://escholarship.org/content/qt18s8m9f2/qt18s8m9f2_noSplash_da79ce3bd6bdb3ce171d38a9419e9625.pdf?t=q6z2j9",
+          "status": "request_failed",
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ],
+      "reviewer": "Codex /root/roadmap_review; single AI reviewer, no independent human review",
+      "reviewed_at": "2026-09-19T22:49:10Z"
+    },
+    {
+      "key": "PMID:30620643",
+      "source_index": 627,
+      "title": "Insulin Bolus Administration in Insulin Pump Therapy: Effect of Bolus Delivery Speed on Insulin Absorption from Subcutaneous Tissue.",
+      "doi": "10.1089/dia.2018.0295",
+      "previous_decision": "primary_candidate",
+      "decision": "unresolved",
+      "reviewed_material": "abstract_and_institutional_metadata",
+      "reason": "The abstract provides relevant SC lispro absorption data, but adult-only eligibility, concentration and original full-text protocol remain unresolved.",
+      "facts": {
+        "population": "20 C-peptide-negative participants with T1D reported; minimum age not verified.",
+        "intervention": "15 U lispro (Eli Lilly) pump bolus over 30 seconds versus 10 minutes after overnight fasting.",
+        "concentration": "Not verified.",
+        "pk_output": "Plasma insulin profiles and absorption timing/peak comparisons reported in abstract."
+      },
+      "reconstructible_fixed_reference": "Potential clean delivery-speed reference; exact infusion input and initial conditions could be reconstructed after full-text/age/concentration verification.",
+      "faggionato_cohort_relationship": "Graz source; no overlap or person-level independence from Faggionato established.",
+      "remaining_uncertainties": [
+        "Publisher DOI request returned HTTP 403; institutional publication page retrieved as metadata, not a full-text copy.",
+        "Trial registry identifier not located in sources checked; not evidence that no registry exists."
+      ],
+      "primary_sources_reviewed": [
+        {
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30620643/",
+          "location": "Abstract",
+          "kind": "abstract"
+        },
+        {
+          "url": "https://ris.medunigraz.at/en/publications/insulin-bolus-administration-in-insulin-pump-therapy-effect-of-bo-2/",
+          "location": "Institutional publication record; no full text retrieved",
+          "kind": "institutional_metadata"
+        }
+      ],
+      "access_attempts": [
+        {
+          "url": "https://doi.org/10.1089/dia.2018.0295",
+          "status": "request_failed",
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "url": "https://ris.medunigraz.at/en/publications/insulin-bolus-administration-in-insulin-pump-therapy-effect-of-bo-2/",
+          "status": 200,
+          "final_url": "https://ris.medunigraz.at/en/publications/insulin-bolus-administration-in-insulin-pump-therapy-effect-of-bo-2/",
+          "content_type": "text/html;charset=UTF-8",
+          "sha256": "5c3094dc3edba8915b2f345ad44307b33726b3f67718db50a3450af9373563d7",
+          "bytes": 37969,
+          "local_raw": "/private/tmp/opent1d-lit001-fulltext-b/institution-627.raw",
+          "interpretation": "Source body retrieved; evidence scope identified in primary_sources_reviewed, not inferred from HTTP status."
+        }
+      ],
+      "reviewer": "Codex /root/roadmap_review; single AI reviewer, no independent human review",
+      "reviewed_at": "2026-09-19T22:49:10Z"
+    },
+    {
+      "key": "PMID:31816193",
+      "source_index": 666,
+      "title": "Ultra-Rapid Lispro results in accelerated insulin lispro absorption and faster early insulin action in comparison with Humalog<sup>®</sup> in Japanese patients with type 1 diabetes.",
+      "doi": "10.1111/jdi.13195",
+      "previous_decision": "primary_candidate",
+      "decision": "primary",
+      "reviewed_material": "full_text",
+      "reason": "Full Methods verifies adults with T1D and a conventional Humalog U100 15 U SC arm with explicitly measured free-lispro PK.",
+      "facts": {
+        "population": "Japanese adults with T1D, eligibility ≥18 years; 31 randomized, 30 completed; withdrawal occurred before conventional lispro treatment.",
+        "intervention": "Single 15 U SC lispro versus URLi crossover after ≥8-hour fast; IV glulisine run-in; up to 10-hour clamp.",
+        "concentration": "Both formulations 100 U/mL, 3 mL cartridges/prefilled pens.",
+        "pk_output": "Free serum lispro by validated ELISA, lower limit 50 pg/mL (8.6 pmol/L); early samples every five minutes; Figure 2 and PK tables.",
+        "trial_id": "NCT03407118"
+      },
+      "reconstructible_fixed_reference": "Strong fixed-dose aggregate reference candidate: dose, concentration and sampling are explicit. Curve digitization, assay/units and baseline rules still need a separate preregistered extraction before reproduction.",
+      "faggionato_cohort_relationship": "NCT03407118 is a different Japanese trial from Faggionato’s three Profil trials; person-level independence not separately proven.",
+      "remaining_uncertainties": [
+        "No individual data or machine-readable concentration series retrieved.",
+        "PK estimates already inspected and cannot later be represented as an untouched holdout."
+      ],
+      "primary_sources_reviewed": [
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7232298/",
+          "location": "Methods: Patients, Study design, Study treatments, Bioanalytical methods; Results; Figure 2; Clinical Trial Registry",
+          "kind": "journal_full_text"
+        }
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7232298/fullTextXML",
+          "status": 200,
+          "final_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7232298/fullTextXML",
+          "content_type": "application/xml",
+          "sha256": "585602769cdce28f85ab35a968ac57520562ec2bc7e5478713cba204381abbc2",
+          "bytes": 71542,
+          "local_raw": "/private/tmp/opent1d-lit001-fulltext-b/666.raw",
+          "interpretation": "Source body retrieved; evidence scope identified in primary_sources_reviewed, not inferred from HTTP status."
+        }
+      ],
+      "reviewer": "Codex /root/roadmap_review; single AI reviewer, no independent human review",
+      "reviewed_at": "2026-09-19T22:49:10Z"
+    }
+  ]
+}

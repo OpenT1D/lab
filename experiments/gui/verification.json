@@ -1,0 +1,435 @@
+{
+  "browser_final_evidence": {
+    "async_selection": {
+      "actual_browser_delayed_figure_did_not_replace_selection": true,
+      "actual_browser_delayed_report_did_not_replace_selection": true,
+      "pending_new_figure_hides_previous_figure": true
+    },
+    "cancellation": {
+      "button_clicked": true,
+      "cleanup_forced": false,
+      "exit_code": 1,
+      "job": "job-69c43bf628c148308b60fdedad3926e8",
+      "live_start_identity_matches": [],
+      "observed_process_count": 6,
+      "remaining_owned_processes": [],
+      "state": "cancelled"
+    },
+    "controlled_frontend_checks": {
+      "checks_passed": 8,
+      "exit_code": 0,
+      "harness": {
+        "path": "/private/tmp/opent1d-gui-acceptance-20261004/frontend-async/check-display-report.mjs",
+        "sha256": "7a5ef7f123dbb4984cbbb40610c76f7aace2fcdbb754f8ef13af9b4eab47c4df"
+      },
+      "node_version": "v22.22.2",
+      "receipt": {
+        "path": "/private/tmp/opent1d-gui-acceptance-20261004/frontend-async/frontend-async-receipt.json",
+        "sha256": "bd5faa4aa36362e665ca22761ccae2131762adc5526f001eaa2d30cb9072379f"
+      },
+      "reported_outcome": "Controlled checks pass: recorded and changed badges, stale report/figure responses, both stale errors, newest same-ID response, pending figure hidden",
+      "scope": "Controlled Node VM with deferred replies and stub DOM; actual browser evidence is separately bound.",
+      "stdout": {
+        "path": "/private/tmp/opent1d-gui-acceptance-20261004/frontend-async/output.log",
+        "sha256": "999470eb625621783639b1e7db1ffc02cc41f3b0e443f109545107ac22f904c6"
+      }
+    },
+    "derived_report_change": {
+      "browser_primary_badge": "Acceptance unverified",
+      "browser_verification_badge": "Archive changed",
+      "derived_original_bytes_restored": true,
+      "job": "job-06a6229744364a0d8f98715f5337b6f9",
+      "only_derived_json_changed": true,
+      "sealed_source_archive_changed": false
+    },
+    "downloaded_bytes": {
+      "report.json": {
+        "byte_exact": true,
+        "bytes": 2938601,
+        "sha256": "9dd8f1e9a9d217bb511fc951d7294e368b21250325ee5029062567547fcd680a"
+      },
+      "report.md": {
+        "byte_exact": true,
+        "bytes": 3076,
+        "sha256": "695338aa44e226cb8c2cbdb6a871a883f32f903e746eadcdb1ae3a656102b39d"
+      }
+    },
+    "failed_reconstruction": {
+      "accepted_denominators": [
+        0,
+        0,
+        0
+      ],
+      "browser_primary_badge": "Failed / incomplete",
+      "browser_verification_badge": "Verified reconstruction",
+      "job": "job-c513b9765204482ea7fc1dae6c713668",
+      "planned_denominators": [
+        2,
+        2,
+        1
+      ],
+      "study_job": "job-2c85191023444c6d91f36c64494b6b31"
+    },
+    "ignored_screenshots_sha256": {
+      "output/playwright/failed-verified-study.png": "0fc64caa341b3d0030a21de9495c47b3b9c0fbe81635a146685f43a363c4d9cc",
+      "output/playwright/verified-study-final.png": "b172417aa4d3a344500359f6984659068820eb2d31ff9a0a704ac288bf39e20c",
+      "output/playwright/verified-study-mobile.png": "5d6054fb82a794fbfa27158e1996207d0567e0e3c5b5538e341a52a983d48cf6"
+    },
+    "keyboard_skip": {
+      "first_target": "Skip to study configuration",
+      "following_target": {
+        "class": "source-id",
+        "label": "Source ID",
+        "tag": "INPUT"
+      },
+      "passed": true,
+      "receipt": {
+        "path": "/private/tmp/opent1d-gui-acceptance-20261004/keyboard-proof.json",
+        "sha256": "2c878f494d6164425ede995545c196723926505e19a079bc76dfda2dcbb2af98"
+      },
+      "sequence": [
+        "reload",
+        "Tab",
+        "Enter",
+        "Tab"
+      ]
+    },
+    "mobile": {
+      "document_width": 390,
+      "history_accessible": true,
+      "history_display": "flex",
+      "viewport_width": 390
+    },
+    "passed": true,
+    "receipt": {
+      "path": "/private/tmp/opent1d-gui-acceptance-20261004/browser-edge-proof.json",
+      "sha256": "a5f516c409c18791f079d193c0740e79693780d426607640a01f88a43fbd1ef6"
+    },
+    "restart": {
+      "after_primary_badge": "Numerically accepted",
+      "after_verification_badge": "Verified reconstruction",
+      "before_primary_badge": "Acceptance unverified",
+      "before_verification_badge": "Previously verified; recheck files",
+      "exit_code": 0,
+      "fresh_reconstruction_job": "job-06a6229744364a0d8f98715f5337b6f9",
+      "manager_lock_released": true,
+      "same_port_restarted": true
+    },
+    "sealed_original_archive_inventories": {
+      "job-2c85191023444c6d91f36c64494b6b31": "2c2a5836a5268d3d4244844807ff2222039bbda042ba9e1653e8de80bfdb9daa",
+      "job-ab02849a802d4368852883187a38d3c4": "57f7c694e4d1df2d28f4e6311456bd6a2eba34359c54f3d40e7ca3984c2d241e"
+    },
+    "sealed_original_archives_unchanged": true,
+    "server_shutdown": {
+      "cleanup_forced": false,
+      "exit_code": 1,
+      "job": "job-22909ca4223e4fdca3e88327005aefa0",
+      "live_start_identity_matches": [],
+      "observed_process_count": 7,
+      "remaining_owned_processes": [],
+      "signal": "SIGHUP",
+      "state": "cancelled"
+    }
+  },
+  "gui_cli_scientific_parity": {
+    "administrative_exceptions": {
+      "execution_ledgers": [
+        "duration_seconds",
+        "argv archive/checkout/coordinator paths (normalized)"
+      ],
+      "native_identity": [
+        "patient_file",
+        "parameter_file"
+      ],
+      "plan": [
+        "archive_original_path (normalized)",
+        "coordinator_executable (normalized)",
+        "historical_manifest_sha256 (separately validated seal)"
+      ],
+      "provenance": [
+        "checkout_path (normalized)",
+        "git_head",
+        "git_dirty"
+      ],
+      "runtime_receipt": [
+        "executable"
+      ],
+      "whole_archive_byte_comparison": [
+        "manifest/seal hashes, logs and administrative records; validated by the authoritative reader instead"
+      ]
+    },
+    "all_three_saved_derived_artifacts_reproduced_per_archive": true,
+    "archive_inventories_unchanged": {
+      "cli": true,
+      "gui": true
+    },
+    "archives": {
+      "cli": {
+        "files": 619,
+        "manifest_sha256": "1b2bbf4a410bf4ccdb1238d11e1ccc10f5ae07c96f4ecdb1935a0b7cc2d431e9",
+        "path": "/private/tmp/opent1d-gui-acceptance-20261004/cli-parity"
+      },
+      "gui": {
+        "files": 619,
+        "manifest_sha256": "03b0391067b2b969380efda7aac4bf094bcc26162c04c79cedf9457a90af40d1",
+        "path": "WORKTREES/gui-integration/OpenT1D/results/gui/job-ab02849a802d4368852883187a38d3c4/archive"
+      }
+    },
+    "baseline_probes_equal": 2,
+    "config_sha256": "183c2b44e8087a9018f9726b9d53259ed72253f0102f3659137de0fe5f73f190",
+    "configuration_source_unchanged": true,
+    "controls_gates_curves_pair_metrics_ancestry_equal": true,
+    "denominators": {
+      "accepted_pairs": 1,
+      "accepted_source_scenarios": 6,
+      "accepted_sources": 2,
+      "pairs": 1,
+      "source_scenarios": 6,
+      "sources": 2
+    },
+    "frozen_reader_source_files_unchanged": 101,
+    "independent_stdlib_reconstruction_exits": [
+      0,
+      0
+    ],
+    "receipt": {
+      "path": "/private/tmp/opent1d-gui-acceptance-20261004/gui-cli-scientific-parity.json",
+      "sha256": "cd1fdcfc8576e9867e05de978757429d55b2e633e47a69a4c0fa6692147a1453"
+    },
+    "runtime_attestations_equal": 12,
+    "scientific_files_byte_identical": 330,
+    "scientific_native_identity_checks": 8,
+    "source_order": [
+      "dalla_man",
+      "ultradian"
+    ],
+    "worker_ledgers_equal": 10
+  },
+  "gui_jobs": {
+    "cancelled": {
+      "cleanup_forced": false,
+      "command_log_sha256": "4cec6c5cf64d46a1adee3a74213fc943fb4e07e4708aed57511e0e05868a8bb6",
+      "denominators": {
+        "accepted_pairs": 0,
+        "accepted_source_scenarios": 0,
+        "accepted_sources": 0,
+        "pairs": 1,
+        "source_scenarios": 6,
+        "sources": 2
+      },
+      "derived_sha256": {
+        "figure.svg": "2a2cc60363905bb58f2368100495ebae8734b9d2263d9b769b787568174d13d3",
+        "report.json": "90f17b21913bd352152773571cbb57f86bee9e217f470893ef445f8772a2ffdd",
+        "report.md": "cd53979e1601297f2c912b729a1f32924baffd2cd3659ce911584f152e89afc3"
+      },
+      "exit_code": 1,
+      "id": "job-69c43bf628c148308b60fdedad3926e8",
+      "native_archive": "WORKTREES/gui-integration/OpenT1D/results/gui/job-69c43bf628c148308b60fdedad3926e8/archive",
+      "native_manifest_sha256": "49caedefc6c7062c230472648c314b09a1f4c9e98d48081a41116e4ebd9dfa00",
+      "native_passed": false,
+      "native_status": "interrupted",
+      "operation": "run",
+      "report_completeness": "failed",
+      "state": "cancelled"
+    },
+    "failed": {
+      "cleanup_forced": false,
+      "command_log_sha256": "680970469d924c68a2a0e37f61af32c8f10820cc3013d3f17e188740ff38fbfb",
+      "denominators": {
+        "accepted_pairs": 0,
+        "accepted_source_scenarios": 0,
+        "accepted_sources": 0,
+        "pairs": 1,
+        "source_scenarios": 2,
+        "sources": 2
+      },
+      "derived_sha256": {
+        "figure.svg": "a877000bfb95583f8faaf37d99ccd9ffea5fc5519951dd0d865d02d91430db8b",
+        "report.json": "409ba27c7a46e7e489a35382265938d07e8ce3dc100db83a96aa403fb2c71691",
+        "report.md": "9187d01f740f1789b1cafb9784deefa955325fdd45a1ccb9f898c75e5a1edcf8"
+      },
+      "exit_code": 1,
+      "id": "job-2c85191023444c6d91f36c64494b6b31",
+      "native_archive": "WORKTREES/gui-integration/OpenT1D/results/gui/job-2c85191023444c6d91f36c64494b6b31/archive",
+      "native_manifest_sha256": "59e41ea9173eeb2b6f0e514823be18b4d01cd5938034cca54ab47568e0c956cd",
+      "native_passed": false,
+      "native_status": "failed",
+      "operation": "run",
+      "report_completeness": "failed",
+      "state": "failed"
+    },
+    "failed_reconstruction": {
+      "all_three_reconstruction_bytes_equal": true,
+      "cleanup_forced": false,
+      "command_log_sha256": "5b63b0499ae8890fbfe963cad462fd8777ce94abbf2df389f440aa4b728701a9",
+      "derived_sha256": {
+        "figure.svg": "a877000bfb95583f8faaf37d99ccd9ffea5fc5519951dd0d865d02d91430db8b",
+        "report.json": "409ba27c7a46e7e489a35382265938d07e8ce3dc100db83a96aa403fb2c71691",
+        "report.md": "9187d01f740f1789b1cafb9784deefa955325fdd45a1ccb9f898c75e5a1edcf8"
+      },
+      "exit_code": 0,
+      "id": "job-c513b9765204482ea7fc1dae6c713668",
+      "operation": "reconstruct",
+      "reconstruction_verified_when_completed": true,
+      "report_completeness": "failed",
+      "source_job": "job-2c85191023444c6d91f36c64494b6b31",
+      "source_scientific_failure_retained": true,
+      "state": "completed"
+    },
+    "positive": {
+      "cleanup_forced": false,
+      "command_log_sha256": "32592e09663bccf51d81339209290eef1c04bbf2b350ff542297496b51c60d4e",
+      "denominators": {
+        "accepted_pairs": 1,
+        "accepted_source_scenarios": 6,
+        "accepted_sources": 2,
+        "pairs": 1,
+        "source_scenarios": 6,
+        "sources": 2
+      },
+      "derived_sha256": {
+        "figure.svg": "b81370e05df242498b23ee3cbb0d070e309ed4b32a4e898cab2e125e506bcb70",
+        "report.json": "9dd8f1e9a9d217bb511fc951d7294e368b21250325ee5029062567547fcd680a",
+        "report.md": "695338aa44e226cb8c2cbdb6a871a883f32f903e746eadcdb1ae3a656102b39d"
+      },
+      "exit_code": 0,
+      "id": "job-ab02849a802d4368852883187a38d3c4",
+      "native_archive": "WORKTREES/gui-integration/OpenT1D/results/gui/job-ab02849a802d4368852883187a38d3c4/archive",
+      "native_manifest_sha256": "03b0391067b2b969380efda7aac4bf094bcc26162c04c79cedf9457a90af40d1",
+      "native_passed": true,
+      "native_status": "completed",
+      "operation": "run",
+      "report_completeness": "complete",
+      "state": "completed"
+    }
+  },
+  "limitations": [
+    "macOS arm64/CPU internal verification only; prepared Linux CI was not executed and CUDA equivalence is not claimed.",
+    "Hosted repository jobs remain blocked by account billing/spending; no remote branch-protection or billing change was made.",
+    "Trusted local candidate Python is executed without an adversarial sandbox.",
+    "Descendant polling observes live ownership and OS start identities; saved PIDs confer no authority and uncatchable server kills cannot guarantee cleanup.",
+    "Independent GUI researcher exercise, independent human reproduction, biological/clinical validity and public release remain open.",
+    "Current verification requires native reconstruction; a retained restart marker represents recorded prior verification only.",
+    "Dependency maintenance is scoped; historical native locks retain their recorded dependencies and not every repository advisory is claimed resolved."
+  ],
+  "maintained_runtime_and_tooling": {
+    "c1": {
+      "accepted_native_attempts": 4,
+      "accepted_profiles": 2,
+      "cross_version_numeric_equality": false,
+      "exact_same_runtime_native_repeat": true,
+      "historical_training_requalified": false,
+      "native_manifest_sha256": "5fe0ec8faff47f899e6b2880ef836279eed3bf6c6449500188ef6187951a8bc7",
+      "native_report_sha256": "950dc1c4500eaf7e4b1ff0f910584b69e7749c6b97a1163cf0b8875176f38033",
+      "runtime_torch": "2.13.0",
+      "verification_record": {
+        "path": "experiments/c1/g2p2c-security-verification.json",
+        "sha256": "9d9c48754d11938c072faa5b63a0628bfa64d8feb94e832e9762fd7a77a0361a"
+      }
+    },
+    "catalogue": {
+      "complete_primary_verified": true,
+      "cross_task_comparison_refused": true,
+      "failed_archive_verified_but_incomplete": true,
+      "index_exit": 0,
+      "receipt": {
+        "path": "/private/tmp/opent1d-gui-acceptance-20261004/catalogue-native/acceptance-receipt.json",
+        "sha256": "f9e3ecbd8f64bd9a5468896d0d528f22b15ebee101af2875353e41fc81c25290"
+      },
+      "source_archive_inventories_unchanged": true,
+      "verify_allow_failed_exit": 0
+    },
+    "historical_readers": {
+      "accepted_reconstruction_commands": 9,
+      "historical_dependency_installation": false,
+      "receipt": {
+        "path": "/private/tmp/opent1d-security-acceptance-20261004/tooling/summary.json",
+        "sha256": "b0a508e6f7fa85a1dcabc2508e9fbcd36a51211a635e63b2505a2c415fce68b1"
+      },
+      "secure_successor_reader_receipt": {
+        "path": "/private/tmp/opent1d-security-acceptance-20261004/tooling/secure-successor-proof-v2/summary.json",
+        "sha256": "71658b66e0b5b9d9fcd72411c7fb4e61764b546f7c1d51702ed0789601ad65f8"
+      }
+    },
+    "native": {
+      "historical_M4_protocol_source_and_lock_bytes_preserved": true,
+      "historical_scientific_files_byte_identical": 330,
+      "inherited_numerical_tests_passed": 12,
+      "numpy": "1.26.4",
+      "protocol": "M4-STUDY-SECURE/1",
+      "receipt": {
+        "path": "/private/tmp/opent1d-security-acceptance-20261004/native/acceptance-receipt.json",
+        "sha256": "820a7dba67869dab24aba8fc2d4dd4414de7d98364e0c5e800f6d7cfe8708231"
+      },
+      "scipy": "1.13.1",
+      "setuptools": "84.0.0",
+      "urllib3": "2.8.0",
+      "verification_record": {
+        "path": "experiments/m4/secure_study/verification.json",
+        "sha256": "6a426584a650b56df6d550d4aa3693cb0843e80595681afa1905bc4920405f9d"
+      }
+    },
+    "root": {
+      "checks_receipt": {
+        "path": "/private/tmp/opent1d-security-acceptance-20261004/tooling/checks-summary.json",
+        "sha256": "1b85b53fd9ed8fbe3cea6b3a5c324fc492f377f53dc4aa7fbe4161d4289e3530"
+      },
+      "other_locked_package_blocks_unchanged": 61,
+      "root_lock_sha256": "d94ae2c899c72e67e77574c28c71c1b628b1929cd22438f4b95755b58e1ac03c",
+      "urllib3": "2.8.0"
+    }
+  },
+  "repository_checks": {
+    "command": "uv run --locked python scripts/check.py",
+    "exit_code": 0,
+    "gui_tests_passed": 27,
+    "lint_format_metadata_navigation_documentation_build_passed": true,
+    "retained_log": {
+      "path": "/private/tmp/opent1d-gui-acceptance-20261004/repository-check-final.log",
+      "sha256": "875c478db76e4ab18044817b4fac3c1cc9533939d07af486e18eb09fe1742150"
+    },
+    "skipped_reason": "13 checkpoint tests require their separate locked C1 PyTorch runtime; the C1 record separately reports 13 passing tests in each maintained environment.",
+    "tests_run": 1037,
+    "tests_skipped": 13
+  },
+  "schema": "opent1d.local-gui-verification/1",
+  "scope": "Internal local GUI/runtime, synthetic numerical parity and artifact verification",
+  "status": "passed_bounded_local_verification",
+  "task": "m4-study-secure",
+  "tested_implementations": {
+    "browser_final_revision": "5dffa589ebfbed571f72580bfdade3758757dba9",
+    "browser_final_source_files_sha256": {
+      "experiments/gui/static/app.js": "45e25e82dce87e76dd626277661f663549a159e27ef934f4c3216d650b859103"
+    },
+    "gui_native_parity_revision": "d2a41cc0d9751eaa3b073f40d57fd37394d29b15",
+    "gui_native_parity_source_files_sha256": {
+      "experiments/gui/__init__.py": "4dd3b4b70cc6e030ffb9edfd80debaa389113396506b24ee2848245a0ce9408d",
+      "experiments/gui/__main__.py": "6b6b16d67af994f2bca772f73113a59bc137abd684e487f4f242ed1a795363f2",
+      "experiments/gui/contract.json": "63d45c22d16d55678b5bbb6295ba314ddf64d137ad0a9493c64cb8f5982c2b46",
+      "experiments/gui/ownership.py": "9296b2a71a434a9a0aebb4165d9e27d3093b4e41db5d5ee26589e957c31f99e1",
+      "experiments/gui/server.py": "48b86e4f07aff3188309298b546efc3612c3d6e4c5fd8d6e3e802d06b4e624f2",
+      "experiments/gui/service.py": "bfb279598cf27c678fc32439203d7a536c58198aabc15df1afd47f51d591c5e4",
+      "experiments/gui/static/app.css": "7ad0615474b03eb6ce82976b1eeb52cc9aca21a8b8d9c4a32560e93bb3a9ab6f",
+      "experiments/gui/static/app.js": "1839f53a3bf2c8b06ef310bd3b58c315dceaf1b63b738dacbd11d340e6890677",
+      "experiments/gui/static/icon.svg": "d8f0606495f2dcbc75b03bc2181db1bd896a78b71f61d10230fe11e34bb201cc",
+      "experiments/gui/static/index.html": "6010e2b8617a5fc1ca899f8bfed253e3e7d90eafac7e914d365e22b99bee9769"
+    },
+    "main_retained_revision": "9e7348e56fc3ec5b9ed404423b6cb6a2eeb51a4b",
+    "receipt_scope": "These are actual tested source versions, not the later receipt commit or whole final HEAD.",
+    "repository_check_gui_source_files_sha256": {
+      "experiments/gui/__init__.py": "4dd3b4b70cc6e030ffb9edfd80debaa389113396506b24ee2848245a0ce9408d",
+      "experiments/gui/__main__.py": "f5df34c938dc515d00b88cc02126758835218fc4a78a46a5c9a24ff559b1e107",
+      "experiments/gui/contract.json": "63d45c22d16d55678b5bbb6295ba314ddf64d137ad0a9493c64cb8f5982c2b46",
+      "experiments/gui/locking.py": "c535a174bbef2621050ce37516d9b6f0b233e322ac7f9415658cfd77548b30e6",
+      "experiments/gui/ownership.py": "9296b2a71a434a9a0aebb4165d9e27d3093b4e41db5d5ee26589e957c31f99e1",
+      "experiments/gui/server.py": "1f76ae9a18ee41f8bcf7baa4b4a936c1eed3f3cda5963d24433c082dba235763",
+      "experiments/gui/service.py": "ffd9710400be3a5fff5f3921348cd575c73dfa814aaefe4e8e5347e2843be981",
+      "experiments/gui/static/app.css": "7ad0615474b03eb6ce82976b1eeb52cc9aca21a8b8d9c4a32560e93bb3a9ab6f",
+      "experiments/gui/static/app.js": "9d274b0adcab880ebdce2a253d830c7064f79d8cbc37b6635d8b9e6c213191e7",
+      "experiments/gui/static/icon.svg": "d8f0606495f2dcbc75b03bc2181db1bd896a78b71f61d10230fe11e34bb201cc",
+      "experiments/gui/static/index.html": "6010e2b8617a5fc1ca899f8bfed253e3e7d90eafac7e914d365e22b99bee9769"
+    },
+    "repository_check_revision": "12d6426f4445b2dbef683b65de0aff11d80aebb3"
+  },
+  "verification_date": "2026-10-04"
+}

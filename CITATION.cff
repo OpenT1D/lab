@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: >-
+  If you use OpenT1D, cite this repository and identify the exact commit or
+  release. Also cite the upstream models, methods and datasets used.
+type: software
+title: 'OpenT1D: an open, modular virtual laboratory for type 1 diabetes research'
+authors:
+  - given-names: Matthias
+    family-names: van der Galiën
+repository-code: 'https://github.com/OpenT1D/lab'
+license: Apache-2.0
+abstract: >-
+  OpenT1D provides development-stage computational research workflows for
+  synthetic simulation, forecasting, secretion and meal-test analysis, with
+  explicit provenance, failure accounting and reconstructible reports.
+  Bounded workflows are internally verified; independent researcher
+  acceptance, human-data evaluation and biological validity remain open.
+  No versioned software release has been published.
+keywords:
+  - type 1 diabetes
+  - computational modeling
+  - reproducible research
+  - simulation
+  - digital twin

@@ -1,0 +1,198 @@
+{
+  "schema": "m4-ultradian-execution/1",
+  "date": "2026-09-28",
+  "base_commit": "fad2a4c7f8c5c54fab52829a428505c3c2c4ff7a",
+  "branch": "codex/m4-ultradian-secretion",
+  "scope": "complete published f1 response shape, synthetic amplitude and host route; not full ultradian physiology or human validity",
+  "model_id": "ultradian-f1-basal-normalized/1",
+  "source_sha256": "27e128148a21bb5ba2234e64956fc17f7dbed2daf0d4244ec6a51dbc5e6f1f26",
+  "declaration_sha256": "d4d0274962fe16da6ffa66358e0b03c6cc88b29db750ea8e611d2c0075e413b9",
+  "source_register_sha256": "bb7179ac024900025ce00f332e4538ba6d897972f8190691dfee40fe431b3705",
+  "artifacts": {
+    "reference": "results/m4-ultradian-secretion/bc008-reference",
+    "equations": "results/m4-ultradian-secretion/equations.json",
+    "feedback": "results/m4-ultradian-secretion/feedback",
+    "reconstructed": "results/m4-ultradian-secretion/reconstructed.json",
+    "versioned": false
+  },
+  "reference": {
+    "passed": true,
+    "report_sha256": "5ab6fd91378e2e16de1e4dfad6dd02896a9bfb00ac4390c2659f3156e7da6104",
+    "manifest_sha256": "06fda4332125a62e668ce3139d5d475a18b1d6909efec829fcb0120b3fd3c742"
+  },
+  "equation_verification": {
+    "report_sha256": "41cb9811d9df473cd96400ce9874bdcecc587dc567b3dbe607ce436d07ad353d",
+    "passed": true,
+    "max_error_pmol_kg_min": 1.7763568394002505e-15,
+    "repeat_byte_identical": true
+  },
+  "feedback": {
+    "passed": true,
+    "report_sha256": "90dc9d04f4cd9a4884b4bfc1f5df07ce5e507ae0e9b9b806c8552133188bc82a",
+    "manifest_sha256": "29327ecc869d3bc2228171bdbd276f77f3878746ebdbeefaa272c264fb8411ce",
+    "run_git_head": "fad2a4c7f8c5c54fab52829a428505c3c2c4ff7a",
+    "run_git_dirty": true,
+    "primary_case_count": 8,
+    "repeat_case_count": 8,
+    "metrics": {
+      "glucose_solver_error_mg_dl": 2.725738691657222e-08,
+      "insulin_solver_error_pmol_l": 5.49995743084622e-12,
+      "source_solver_error_pmol_kg_min": 1.61393121089759e-12,
+      "insulin_mass_error_pmol_kg": 1.6072476682893466e-11,
+      "glucose_mass_error_mg_kg": 3.6669374661735255e-08,
+      "negative_amount_tolerance": 0.0,
+      "fasting_glucose_drift_mg_dl": 1.4519528251204721e-10,
+      "fasting_insulin_drift_pmol_l": 2.9772563680801376e-10,
+      "basal_control_glucose_error_mg_dl": 0.0,
+      "basal_control_insulin_error_pmol_l": 0.0,
+      "repeat_error": 0.0
+    },
+    "scenarios": {
+      "fasting": {
+        "candidate": {
+          "metrics": {
+            "insulin_mass_error_pmol_kg": 1.3500311979441904e-11,
+            "glucose_mass_error_mg_kg": 2.887645678129047e-11,
+            "negative_amount_tolerance": 0
+          },
+          "outcomes": {
+            "auc_above_initial_mg_min_dl": 2.6124439500563312e-08,
+            "peak_mg_dl": 138.5600000001452,
+            "nadir_mg_dl": 138.56,
+            "final_mg_dl": 138.5600000001452
+          },
+          "pancreatic_amount_pmol_kg": 185.7936620405894,
+          "liver_arrival_pmol_kg": 185.7936620405824,
+          "peak_plasma_insulin_pmol_l": 100.25,
+          "final_plasma_insulin_pmol_l": 100.24999999970227
+        },
+        "host_constant_basal": {
+          "metrics": {
+            "insulin_mass_error_pmol_kg": 1.6072476682893466e-11,
+            "glucose_mass_error_mg_kg": 2.879119165299926e-11,
+            "negative_amount_tolerance": 0
+          },
+          "outcomes": {
+            "auc_above_initial_mg_min_dl": 3.039092888457162e-08,
+            "peak_mg_dl": 138.5600000001798,
+            "nadir_mg_dl": 138.56,
+            "final_mg_dl": 138.5600000001798
+          },
+          "pancreatic_amount_pmol_kg": 185.7936620400134,
+          "liver_arrival_pmol_kg": 185.7936620400134,
+          "peak_plasma_insulin_pmol_l": 100.25,
+          "final_plasma_insulin_pmol_l": 100.24999999959903
+        },
+        "bc008_reference": {
+          "auc_above_initial_mg_min_dl": 1.4157620853438857e-08,
+          "peak_mg_dl": 138.56000000010576,
+          "nadir_mg_dl": 138.56,
+          "final_mg_dl": 138.56000000005938
+        },
+        "glucose_contrast_vs_bc008": {
+          "auc_above_initial_mg_min_dl": 1.1966818647124455e-08,
+          "peak_mg_dl": 3.944933268940076e-11,
+          "nadir_mg_dl": 0.0,
+          "final_mg_dl": 8.58335624798201e-11
+        },
+        "glucose_contrast_vs_basal_control": {
+          "auc_above_initial_mg_min_dl": -4.2664893840083096e-09,
+          "peak_mg_dl": -3.458922037680168e-11,
+          "nadir_mg_dl": 0.0,
+          "final_mg_dl": -3.458922037680168e-11
+        }
+      },
+      "gastric_load_30g": {
+        "candidate": {
+          "metrics": {
+            "insulin_mass_error_pmol_kg": 1.3812950783176348e-11,
+            "glucose_mass_error_mg_kg": 1.4495071809506044e-12,
+            "negative_amount_tolerance": 0
+          },
+          "outcomes": {
+            "auc_above_initial_mg_min_dl": 6087.737095279755,
+            "peak_mg_dl": 170.79997338973223,
+            "nadir_mg_dl": 138.56,
+            "final_mg_dl": 167.83388743416538
+          },
+          "pancreatic_amount_pmol_kg": 377.3820094406828,
+          "liver_arrival_pmol_kg": 375.50211267237404,
+          "peak_plasma_insulin_pmol_l": 134.49005719672041,
+          "final_plasma_insulin_pmol_l": 130.3160842744333
+        },
+        "host_constant_basal": {
+          "metrics": {
+            "insulin_mass_error_pmol_kg": 1.6072476682893466e-11,
+            "glucose_mass_error_mg_kg": 1.59409604266747e-08,
+            "negative_amount_tolerance": 0
+          },
+          "outcomes": {
+            "auc_above_initial_mg_min_dl": 7578.453624138482,
+            "peak_mg_dl": 183.20113314385586,
+            "nadir_mg_dl": 138.56,
+            "final_mg_dl": 183.20113314385586
+          },
+          "pancreatic_amount_pmol_kg": 185.7936620400134,
+          "liver_arrival_pmol_kg": 185.7936620400134,
+          "peak_plasma_insulin_pmol_l": 100.25,
+          "final_plasma_insulin_pmol_l": 100.24999999959903
+        },
+        "bc008_reference": {
+          "auc_above_initial_mg_min_dl": 3378.0908810037245,
+          "peak_mg_dl": 166.81890862519475,
+          "nadir_mg_dl": 138.56,
+          "final_mg_dl": 147.74672260388456
+        },
+        "glucose_contrast_vs_bc008": {
+          "auc_above_initial_mg_min_dl": 2709.64621427603,
+          "peak_mg_dl": 3.9810647645374786,
+          "nadir_mg_dl": 0.0,
+          "final_mg_dl": 20.087164830280813
+        },
+        "glucose_contrast_vs_basal_control": {
+          "auc_above_initial_mg_min_dl": -1490.7165288587275,
+          "peak_mg_dl": -12.401159754123626,
+          "nadir_mg_dl": 0.0,
+          "final_mg_dl": -15.36724570969048
+        }
+      }
+    }
+  },
+  "reconstruction": {
+    "python_no_site_packages": true,
+    "candidate_not_executed": true,
+    "byte_identical": true
+  },
+  "tests": {
+    "root_equation_tests": {
+      "count": 5,
+      "passed": true
+    },
+    "scientific_host_portal_tests": {
+      "count": 3,
+      "passed": true
+    },
+    "repository_check": {
+      "command": "uv run --locked python scripts/check.py",
+      "passed": true,
+      "root_test_count": 741,
+      "strict_documentation_build": true
+    },
+    "locked_sync": {
+      "root": true,
+      "simglucose": true
+    }
+  },
+  "unchanged": [
+    "BC-008 protocol and implementation",
+    "M4-CAUSAL/1 protocol and implementation",
+    "root/scientific runtime locks"
+  ],
+  "limitations": [
+    "Sourced response component, not full six-state physiology or its chaos/oscillations",
+    "Published mU/min amplitude replaced by synthetic host molar basal normalization",
+    "Plasma-production law assigned to pancreatic/portal inlet as an exploratory composition",
+    "No prehepatic human calibration, residual T1D or anatomical mass evidence",
+    "No human observations, biological review or insulin-dose optimization"
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "added_lock_package": {
+    "dependencies": [
+      {
+        "name": "gymnasium"
+      },
+      {
+        "name": "numpy"
+      },
+      {
+        "name": "scipy"
+      }
+    ],
+    "name": "glucosim",
+    "source": {
+      "git": "https://github.com/HassDhia/glucosim?rev=6422a91d533125a8feb4f2e8737aecd67fec95c9#6422a91d533125a8feb4f2e8737aecd67fec95c9"
+    },
+    "version": "0.1.2"
+  },
+  "added_packages": {
+    "glucosim": "0.1.2"
+  },
+  "base_commit": "e77c9d79408b662e285401fc018534a4619fa055",
+  "baseline_sha256": {
+    "m0": "df1baf9bb878055d296f651b1e6bce2f0a85e273c8367ea0d2564e8d1e7c8f0d",
+    "m1": "8e84fec115fc9a3812c17e018910ce1b023f735eb09aa0b8838ab792e66331fb"
+  },
+  "current_lock_sha256": "13d254dcebe8d1ab54c3140cdc07152d719a68477a1378d7fe77fc1568612aa9",
+  "evidence": "docs/research/runtime-baseline-extension.md",
+  "historical_lock_sha256": "634d5849a1cc4ae37f4f00c12c713f168cffa93a43d5a22b571b0c41478fc95c",
+  "id": "glucosim-6422a91/1",
+  "introduced_commit": "d6e97db6ae9f0885a15f8ad1b8ea3a488956e98c",
+  "m0_packages": {
+    "Farama-Notifications": "0.0.6",
+    "certifi": "2026.7.22",
+    "charset-normalizer": "3.5.1",
+    "cloudpickle": "3.1.2",
+    "contourpy": "1.3.3",
+    "cycler": "0.12.1",
+    "dill": "0.4.1",
+    "fonttools": "4.65.0",
+    "glucosim": "0.1.2",
+    "gym": "0.9.4",
+    "gymnasium": "0.29.1",
+    "idna": "3.19",
+    "kiwisolver": "1.5.1",
+    "matplotlib": "3.9.4",
+    "multiprocess": "0.70.19",
+    "numpy": "1.26.4",
+    "packaging": "26.3",
+    "pandas": "2.2.3",
+    "pathos": "0.3.5",
+    "pillow": "12.3.0",
+    "pox": "0.3.7",
+    "ppft": "1.7.8",
+    "pyglet": "2.1.16",
+    "pyparsing": "3.3.2",
+    "python-dateutil": "2.9.0.post0",
+    "pytz": "2026.3.post1",
+    "requests": "2.34.2",
+    "scipy": "1.13.1",
+    "setuptools": "80.9.0",
+    "simglucose": "0.2.11",
+    "six": "1.17.0",
+    "typing_extensions": "4.16.0",
+    "tzdata": "2026.4",
+    "urllib3": "2.7.0"
+  },
+  "packages": {
+    "Farama-Notifications": "0.0.6",
+    "autocommand": "2.2.2",
+    "backports.tarfile": "1.2.0",
+    "certifi": "2026.7.22",
+    "charset-normalizer": "3.5.1",
+    "cloudpickle": "3.1.2",
+    "contourpy": "1.3.3",
+    "cycler": "0.12.1",
+    "dill": "0.4.1",
+    "fonttools": "4.65.0",
+    "glucosim": "0.1.2",
+    "gym": "0.9.4",
+    "gymnasium": "0.29.1",
+    "idna": "3.19",
+    "importlib_metadata": "8.0.0",
+    "inflect": "7.3.1",
+    "jaraco.collections": "5.1.0",
+    "jaraco.context": "5.3.0",
+    "jaraco.functools": "4.0.1",
+    "jaraco.text": "3.12.1",
+    "kiwisolver": "1.5.1",
+    "matplotlib": "3.9.4",
+    "more-itertools": "10.3.0",
+    "multiprocess": "0.70.19",
+    "numpy": "1.26.4",
+    "packaging": "26.3",
+    "pandas": "2.2.3",
+    "pathos": "0.3.5",
+    "pillow": "12.3.0",
+    "platformdirs": "4.2.2",
+    "pox": "0.3.7",
+    "ppft": "1.7.8",
+    "pyglet": "2.1.16",
+    "pyparsing": "3.3.2",
+    "python-dateutil": "2.9.0.post0",
+    "pytz": "2026.3.post1",
+    "requests": "2.34.2",
+    "scipy": "1.13.1",
+    "setuptools": "80.9.0",
+    "simglucose": "0.2.11",
+    "six": "1.17.0",
+    "tomli": "2.0.1",
+    "typeguard": "4.3.0",
+    "typing_extensions": "4.16.0",
+    "tzdata": "2026.4",
+    "urllib3": "2.7.0",
+    "wheel": "0.45.1",
+    "zipp": "3.19.2"
+  },
+  "schema": "opent1d.runtime-extension/1",
+  "scope": "Exact historical outputs with one additional pinned controller package; no changed model, solver, numerical tolerance or clinical claim."
+}

@@ -1,0 +1,1219 @@
+{
+  "schema": "bc008-feedback-execution/1",
+  "status": "completed_bounded_synthetic_feedback",
+  "base_commit": "663e137",
+  "branch": "codex/beta-cell-reference",
+  "worktree": "/private/tmp/opent1d-beta-cell-reference",
+  "run_path": "results/m4-feedback/reference-02",
+  "manifest": {
+    "schema": "bc008-feedback/1",
+    "status": "completed",
+    "started_utc": "2026-09-20T17:26:49.418039+00:00",
+    "files": {
+      "fasting/constant_basal-coarse.json": "241c843b03ac38253d0d1af29c99d3c65ff252353c2524a2786dfdabcc1f0b22",
+      "fasting/constant_basal-reference.json": "775e50149e9a7a557127f661aedce36d64e98b1cb85c2fb5c0b2152d2e25557f",
+      "fasting/constant_basal-tight.json": "dea2bdbc35deaed53a4778210525880adc0e7b65413feabd6e3bac335be5942e",
+      "fasting/equal-arrival-coarse.json": "b652e17bcbe4c14c2d3f47f137ccd8051e81b63934781def65610d7caf1f7abb",
+      "fasting/equal-arrival-reference.json": "5960a9ca1496c6748ac87d81dcfaf462599136e4f13aa0693939e9cb3a6e49a9",
+      "fasting/equal-arrival-tight.json": "4e182b9b461b3c2e14e6afcefc744d595b9a6c44f06e568bab6530c8367107b4",
+      "fasting/feedback_full-coarse.json": "c67b70eb898c6427dbd46378fcdc004e37ff9e380eae43ef3212bef37c4acb3f",
+      "fasting/feedback_full-reference.json": "d8545bf4daa7e78c5edc051e9eee8b0df7e3212f33af50478939ff6c1822c0d9",
+      "fasting/feedback_full-tight.json": "c1d622b96a50080b0bd7103d5128d5296a3e82c1584c2a5a93a49892b73f36bc",
+      "fasting/feedback_half-coarse.json": "44cf3d439cb8268d20c8e9c604b96b9d50b138f834fbb6d5381bd3eefe2d5a15",
+      "fasting/feedback_half-reference.json": "188b2f9c7bcaafb2d0396f7ae02815808b7a746bd550a0a0a4a85736ee430c95",
+      "fasting/feedback_half-tight.json": "1ab3c656d33abf11b4e5141b8582ede452082a9aa53749bb510a9f2b9da91d8b",
+      "fasting/feedback_quarter-coarse.json": "b1f2b837063076a4cdf0b13a5fa3f4d0bf838577e259ae4d82864135a9fc7dba",
+      "fasting/feedback_quarter-reference.json": "f1bc780be680c71b51212890e3331c875ce0dd6e7e674d99be453af61bf2dfd5",
+      "fasting/feedback_quarter-tight.json": "c93e4f32381e6ef14c16cc860f5216eb187187ffbe086ba150cbee6c37923adb",
+      "fasting/native-class.json": "db2351d9ab6317a9db8fa00e4c264648d944fcfe33ce05b252b5ef09907ebab3",
+      "fasting/native-padded.json": "fd794dbc73073e7c62d5b7ff225507290888e58c580f00df39d8cd4059c999a3",
+      "fasting/native_zero-coarse.json": "748cdcc717bc629a5ce87911a4c974a71e3f2dec141d9a02170e5a78b7f94f8f",
+      "fasting/native_zero-reference.json": "d8741c327c4fe1c3056f86931768c12384a72a9b94f4ce71d84aa743b247e5ed",
+      "fasting/native_zero-tight.json": "7438401d789a0910d3719f1f36449f711ebf2febc1f4a521d35e63ca8c2fee86",
+      "fasting/replay-0.0625.json": "13b5b7ffc0ff249c127a326b1d08ad92f3403d481fe02c765e87656e7edfee7d",
+      "fasting/replay-0.125.json": "38e500093f310815d9485e01f6f8abd607114226d84a61435b86678bf888792f",
+      "fasting/replay-0.25.json": "180659da76761651a6445d23f74ed8476b93d5ca3df7e2d44944f8d2211f15c2",
+      "figure.svg": "f958c31de98f11c0ed23a1d086d9e3e7ed89747261d6c477a2c98c012e7875b8",
+      "gastric_load_30g/constant_basal-coarse.json": "9bae219a64d95e4d81c1f1dbaa2c6fb4a03e56f32c96c1b786efc3a621659cc5",
+      "gastric_load_30g/constant_basal-reference.json": "fe8e5a0f71cc8c2b87e35f4c8c07db6f5cfdedb9ebe2b0cdb4fae2de851be890",
+      "gastric_load_30g/constant_basal-tight.json": "27da1a52e31bb6b5b3c882407e8a42dd39e9d08793ab6b8515bb48568a2f95c0",
+      "gastric_load_30g/equal-arrival-coarse.json": "a69779aa85b3de61fb84e30b0f33d2fa0d98192503f3616ce1679ab04dc05810",
+      "gastric_load_30g/equal-arrival-reference.json": "4bd9cb212ba09921395111f429b0a14b48b22222fd8a5301280cc7940df6d03f",
+      "gastric_load_30g/equal-arrival-tight.json": "97d5b6eacb801f515357e845cf7523b4c6726db0d8b1cf9de2b844c9386e7f90",
+      "gastric_load_30g/feedback_full-coarse.json": "eb239c55c809aed531edca7a0e7bb0e89e359095fd4eb5a7b67653c4da234284",
+      "gastric_load_30g/feedback_full-reference.json": "b345804a20e3130958f770e5cd0b3bec10ede283b13cb3006da0451f6098fc6d",
+      "gastric_load_30g/feedback_full-tight.json": "b61206356dae619b505521767143dfc4597c1037c25a5c3ef6c83f74378dbf90",
+      "gastric_load_30g/feedback_half-coarse.json": "f14d98c0430213a3117911241f457165584d8fcc51ff1f667ecca9de76db37e9",
+      "gastric_load_30g/feedback_half-reference.json": "8602a72945ee760921d90fec608e2c182967bd97912aad7157a702896cdebcce",
+      "gastric_load_30g/feedback_half-tight.json": "43259992761c39bb3d5e519dd99eb8de9c45910614a275344c66d9397d622da4",
+      "gastric_load_30g/feedback_quarter-coarse.json": "03657da57880e7494f2e181eeabec2e46b37f756d7bc4ac086741a948ec8951c",
+      "gastric_load_30g/feedback_quarter-reference.json": "8570def5d2068dc2a4cccebc4b089e910584ee55bad5ca06171a91c459ee729b",
+      "gastric_load_30g/feedback_quarter-tight.json": "bf88ae27f6105532ceed24ca9103ae6273d49f43a8fc18a34784bf1a49897e3a",
+      "gastric_load_30g/native-class.json": "fa6ffa06036c6f6062321d582d278d6d6af8abec77cc2b067a71205c28dc09a7",
+      "gastric_load_30g/native-padded.json": "0d45f09f21404d3765328d33153b8a5d3be5cd4b82b5f7acc05ef5111fc78ce0",
+      "gastric_load_30g/native_zero-coarse.json": "d18e6384d6b52f1273227f7c43ff4307cc75a6a98adf1ba46ea75ca1cdc3a9ab",
+      "gastric_load_30g/native_zero-reference.json": "d445dc026f07091d611f581b125e0e40e91b3d3ffe5b2228eb30aba4fb2e1493",
+      "gastric_load_30g/native_zero-tight.json": "d16b000304975d872f8428e12c0b4be56430325599fc226df9789f83bd5a1685",
+      "gastric_load_30g/replay-0.0625.json": "fc6bbdf22bcf3afe7e9bebc7d9c05f76b7e0fed247bbc458862352f71c4508df",
+      "gastric_load_30g/replay-0.125.json": "3f97e9e6e6ad8a8a9c2bb2cc4460867bbac707bfeda95831bdae750b03b4e963",
+      "gastric_load_30g/replay-0.25.json": "91a436aa48b169d8c6aa88842e8d5ac2a75c8be8b035a3a7e52e1d5d8db071a0",
+      "native.json": "ca7193f293bc6ffbc8c9c603f22208fa336ba80efc20e3db3fee3d847b3ebcc2",
+      "plot.log": "96e81d4dac07c48ddf18be305c9644be68075b046f3afe27596aacffee2759ed",
+      "preflight.json": "e8fa151113178dc900654b02c0b5c90a25d4bc9fa97782460f620b524d4a7501",
+      "probe.json": "ee1504da512ad0915e2221dee1d636242a18cfd0b053da655fd24d4185a58e2e",
+      "protocol.json": "b66087592810be35fa74372ad07172359897ceb40653abdf420b3c3fa1a4fd99",
+      "pyproject.toml": "107d7792bf6e99575e6b30f3639376059d5f9323bc8dedfd09c82824613c8cd5",
+      "repeat/fasting/constant_basal-coarse.json": "241c843b03ac38253d0d1af29c99d3c65ff252353c2524a2786dfdabcc1f0b22",
+      "repeat/fasting/constant_basal-reference.json": "775e50149e9a7a557127f661aedce36d64e98b1cb85c2fb5c0b2152d2e25557f",
+      "repeat/fasting/constant_basal-tight.json": "dea2bdbc35deaed53a4778210525880adc0e7b65413feabd6e3bac335be5942e",
+      "repeat/fasting/equal-arrival-coarse.json": "b652e17bcbe4c14c2d3f47f137ccd8051e81b63934781def65610d7caf1f7abb",
+      "repeat/fasting/equal-arrival-reference.json": "5960a9ca1496c6748ac87d81dcfaf462599136e4f13aa0693939e9cb3a6e49a9",
+      "repeat/fasting/equal-arrival-tight.json": "4e182b9b461b3c2e14e6afcefc744d595b9a6c44f06e568bab6530c8367107b4",
+      "repeat/fasting/feedback_full-coarse.json": "c67b70eb898c6427dbd46378fcdc004e37ff9e380eae43ef3212bef37c4acb3f",
+      "repeat/fasting/feedback_full-reference.json": "d8545bf4daa7e78c5edc051e9eee8b0df7e3212f33af50478939ff6c1822c0d9",
+      "repeat/fasting/feedback_full-tight.json": "c1d622b96a50080b0bd7103d5128d5296a3e82c1584c2a5a93a49892b73f36bc",
+      "repeat/fasting/feedback_half-coarse.json": "44cf3d439cb8268d20c8e9c604b96b9d50b138f834fbb6d5381bd3eefe2d5a15",
+      "repeat/fasting/feedback_half-reference.json": "188b2f9c7bcaafb2d0396f7ae02815808b7a746bd550a0a0a4a85736ee430c95",
+      "repeat/fasting/feedback_half-tight.json": "1ab3c656d33abf11b4e5141b8582ede452082a9aa53749bb510a9f2b9da91d8b",
+      "repeat/fasting/feedback_quarter-coarse.json": "b1f2b837063076a4cdf0b13a5fa3f4d0bf838577e259ae4d82864135a9fc7dba",
+      "repeat/fasting/feedback_quarter-reference.json": "f1bc780be680c71b51212890e3331c875ce0dd6e7e674d99be453af61bf2dfd5",
+      "repeat/fasting/feedback_quarter-tight.json": "c93e4f32381e6ef14c16cc860f5216eb187187ffbe086ba150cbee6c37923adb",
+      "repeat/fasting/native-class.json": "db2351d9ab6317a9db8fa00e4c264648d944fcfe33ce05b252b5ef09907ebab3",
+      "repeat/fasting/native-padded.json": "fd794dbc73073e7c62d5b7ff225507290888e58c580f00df39d8cd4059c999a3",
+      "repeat/fasting/native_zero-coarse.json": "748cdcc717bc629a5ce87911a4c974a71e3f2dec141d9a02170e5a78b7f94f8f",
+      "repeat/fasting/native_zero-reference.json": "d8741c327c4fe1c3056f86931768c12384a72a9b94f4ce71d84aa743b247e5ed",
+      "repeat/fasting/native_zero-tight.json": "7438401d789a0910d3719f1f36449f711ebf2febc1f4a521d35e63ca8c2fee86",
+      "repeat/fasting/replay-0.0625.json": "13b5b7ffc0ff249c127a326b1d08ad92f3403d481fe02c765e87656e7edfee7d",
+      "repeat/fasting/replay-0.125.json": "38e500093f310815d9485e01f6f8abd607114226d84a61435b86678bf888792f",
+      "repeat/fasting/replay-0.25.json": "180659da76761651a6445d23f74ed8476b93d5ca3df7e2d44944f8d2211f15c2",
+      "repeat/gastric_load_30g/constant_basal-coarse.json": "9bae219a64d95e4d81c1f1dbaa2c6fb4a03e56f32c96c1b786efc3a621659cc5",
+      "repeat/gastric_load_30g/constant_basal-reference.json": "fe8e5a0f71cc8c2b87e35f4c8c07db6f5cfdedb9ebe2b0cdb4fae2de851be890",
+      "repeat/gastric_load_30g/constant_basal-tight.json": "27da1a52e31bb6b5b3c882407e8a42dd39e9d08793ab6b8515bb48568a2f95c0",
+      "repeat/gastric_load_30g/equal-arrival-coarse.json": "a69779aa85b3de61fb84e30b0f33d2fa0d98192503f3616ce1679ab04dc05810",
+      "repeat/gastric_load_30g/equal-arrival-reference.json": "4bd9cb212ba09921395111f429b0a14b48b22222fd8a5301280cc7940df6d03f",
+      "repeat/gastric_load_30g/equal-arrival-tight.json": "97d5b6eacb801f515357e845cf7523b4c6726db0d8b1cf9de2b844c9386e7f90",
+      "repeat/gastric_load_30g/feedback_full-coarse.json": "eb239c55c809aed531edca7a0e7bb0e89e359095fd4eb5a7b67653c4da234284",
+      "repeat/gastric_load_30g/feedback_full-reference.json": "b345804a20e3130958f770e5cd0b3bec10ede283b13cb3006da0451f6098fc6d",
+      "repeat/gastric_load_30g/feedback_full-tight.json": "b61206356dae619b505521767143dfc4597c1037c25a5c3ef6c83f74378dbf90",
+      "repeat/gastric_load_30g/feedback_half-coarse.json": "f14d98c0430213a3117911241f457165584d8fcc51ff1f667ecca9de76db37e9",
+      "repeat/gastric_load_30g/feedback_half-reference.json": "8602a72945ee760921d90fec608e2c182967bd97912aad7157a702896cdebcce",
+      "repeat/gastric_load_30g/feedback_half-tight.json": "43259992761c39bb3d5e519dd99eb8de9c45910614a275344c66d9397d622da4",
+      "repeat/gastric_load_30g/feedback_quarter-coarse.json": "03657da57880e7494f2e181eeabec2e46b37f756d7bc4ac086741a948ec8951c",
+      "repeat/gastric_load_30g/feedback_quarter-reference.json": "8570def5d2068dc2a4cccebc4b089e910584ee55bad5ca06171a91c459ee729b",
+      "repeat/gastric_load_30g/feedback_quarter-tight.json": "bf88ae27f6105532ceed24ca9103ae6273d49f43a8fc18a34784bf1a49897e3a",
+      "repeat/gastric_load_30g/native-class.json": "fa6ffa06036c6f6062321d582d278d6d6af8abec77cc2b067a71205c28dc09a7",
+      "repeat/gastric_load_30g/native-padded.json": "0d45f09f21404d3765328d33153b8a5d3be5cd4b82b5f7acc05ef5111fc78ce0",
+      "repeat/gastric_load_30g/native_zero-coarse.json": "d18e6384d6b52f1273227f7c43ff4307cc75a6a98adf1ba46ea75ca1cdc3a9ab",
+      "repeat/gastric_load_30g/native_zero-reference.json": "d445dc026f07091d611f581b125e0e40e91b3d3ffe5b2228eb30aba4fb2e1493",
+      "repeat/gastric_load_30g/native_zero-tight.json": "d16b000304975d872f8428e12c0b4be56430325599fc226df9789f83bd5a1685",
+      "repeat/gastric_load_30g/replay-0.0625.json": "fc6bbdf22bcf3afe7e9bebc7d9c05f76b7e0fed247bbc458862352f71c4508df",
+      "repeat/gastric_load_30g/replay-0.125.json": "3f97e9e6e6ad8a8a9c2bb2cc4460867bbac707bfeda95831bdae750b03b4e963",
+      "repeat/gastric_load_30g/replay-0.25.json": "91a436aa48b169d8c6aa88842e8d5ac2a75c8be8b035a3a7e52e1d5d8db071a0",
+      "repeat/native.json": "ca7193f293bc6ffbc8c9c603f22208fa336ba80efc20e3db3fee3d847b3ebcc2",
+      "repeat/preflight.json": "e8fa151113178dc900654b02c0b5c90a25d4bc9fa97782460f620b524d4a7501",
+      "repeat/probe.json": "ee1504da512ad0915e2221dee1d636242a18cfd0b053da655fd24d4185a58e2e",
+      "repeat/protocol.json": "b66087592810be35fa74372ad07172359897ceb40653abdf420b3c3fa1a4fd99",
+      "repeat/source-assessment.json": "e25ed7b3317d798168480d03e7edcd363ce2e90977d74c230435400ed6addf30",
+      "repeat/source-cases.json": "d2dadc23f6e0855b27a83fa94f215c43af933bd929e56a3edb743a0374726af9",
+      "repeat/source-reference.json": "47c1b7df2320b7672309ccb8a4fd6896d3dde0d44a0b619c4f7213cedee0c1dd",
+      "repeat.log": "1ff5ac76d0c895c7da235ec48c7097cc6017caa543115a402c8ab961436b2c97",
+      "report.json": "5ab6fd91378e2e16de1e4dfad6dd02896a9bfb00ac4390c2659f3156e7da6104",
+      "source-assessment.json": "e25ed7b3317d798168480d03e7edcd363ce2e90977d74c230435400ed6addf30",
+      "source-cases.json": "d2dadc23f6e0855b27a83fa94f215c43af933bd929e56a3edb743a0374726af9",
+      "source-common.py": "eba2aa4ef561285f9b4eaf1320175f18bf91d321f3058306de7adc9601f3f048",
+      "source-contract.py": "4a35587c9c848a9c19586ab8e0aa28a1b5fcfe02c1b22e4fc7b0d46479dcb5ce",
+      "source-coupled.py": "5f774ab7c0767fe278239a9f4457aec2ee0ab9c02de917e391d4eb83ed6d2280",
+      "source-experiments__m4__kinetic_inlet__forcing.py": "b26fd2fd87aa47da328d24b2cbe56d8e3be45f9b4caf2c3c453f89acb07fddd1",
+      "source-experiments__m4__kinetic_inlet__native.py": "aaa6a921643bf6ec82fde84d53193c8ab9c9cdbe1b69de634089f652cb4b14dd",
+      "source-experiments__m4__kinetic_inlet__protocol.json": "ac2754f1718bcad7977d3332685abc8bb9a281056e5475d78ab7d7364b9df3dc",
+      "source-experiments__m4__paired_kinetics__common.py": "0d55ab114cf6381e2837670dd2b17b50a7109a0643bce756f2bd31d06209a12d",
+      "source-experiments__m4__paired_kinetics__report.py": "1826c8248c02347b381b3943c7c04f949a5867dd4e701b4ada1100830e5749fd",
+      "source-experiments__m4__paired_observation__contract.py": "eb422ce11a75840082801f8321fd10c7236509f71b7792ab83032e061b5f386d",
+      "source-experiments__m4__paired_observation__run.py": "a342e45ab3fc5218033d244d870bd2c9cd8a12099a5053b66f250b2c4b761f84",
+      "source-plot.py": "4b1aa7761ae64f7a77a17ed799028fa0a7c940bdf838f0f9aff1ba4fed455ba9",
+      "source-preflight.py": "17c19c1c0dff4e707ab503b86ea03f99fb073db6a3bef02079d1f7337f3ebce4",
+      "source-reference.json": "47c1b7df2320b7672309ccb8a4fd6896d3dde0d44a0b619c4f7213cedee0c1dd",
+      "source-report.py": "01c53866918c11850cb006a5ccc10e856f8faa0b55a27bf325d83bc64292742c",
+      "source-run.py": "f998adc420bd0fc24f02d63cba84f87b0ef9d9cfc881d9220d361ff4bbdecc48",
+      "source-secretion.py": "65b4d4ced59024238b8bf11ec2c0a0196472c2dc12904678159b0a51383a5ce7",
+      "source-source_oracle.py": "b721c4576ca28e2856b41388ace512556f963fa1617c391bc1581f9dec3155b1",
+      "source-test_numerical.py": "3746dfa5c108e1f4a80f7e0b096b95ac01d3c551e589aac82e1690625e799c49",
+      "source-verify_source.py": "16aa9677fc63daa827895587c65eb8c247c2e77579e3c9aedc866ca7e799f0a2",
+      "source-worker.py": "0a28f5df61341e419342c08bb4ad1d0b4c1f86ae56945f7ecf81ab079cb899cf",
+      "sources.json": "2a2b1f8a98ceaf2fd64120f8c73cd8e58d8703999f773eaeba76f2d444f89aed",
+      "uv.lock": "634d5849a1cc4ae37f4f00c12c713f168cffa93a43d5a22b571b0c41478fc95c",
+      "worker.log": "1ff5ac76d0c895c7da235ec48c7097cc6017caa543115a402c8ab961436b2c97"
+    },
+    "commands": [
+      [
+        "uv",
+        "run",
+        "--locked",
+        "--project",
+        "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose",
+        "python",
+        "-m",
+        "experiments.m4.feedback.worker",
+        "/private/tmp/opent1d-beta-cell-reference/results/m4-feedback/reference-02"
+      ],
+      [
+        "uv",
+        "run",
+        "--locked",
+        "--project",
+        "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose",
+        "python",
+        "-m",
+        "experiments.m4.feedback.worker",
+        "/private/tmp/opent1d-beta-cell-reference/results/m4-feedback/reference-02/repeat"
+      ],
+      [
+        "uv",
+        "run",
+        "--locked",
+        "--project",
+        "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose",
+        "python",
+        "-m",
+        "experiments.m4.feedback.plot",
+        "/private/tmp/opent1d-beta-cell-reference/results/m4-feedback/reference-02",
+        "--output",
+        "/private/tmp/opent1d-beta-cell-reference/results/m4-feedback/reference-02/figure.svg",
+        "--allow-pending"
+      ]
+    ],
+    "git_head": "663e1379edf6ee6f483e5876d2d823be1a148e61",
+    "git_dirty": true,
+    "finished_utc": "2026-09-20T17:28:58.855660+00:00"
+  },
+  "report": {
+    "schema": "bc008-feedback/1",
+    "protocol": "BC-008/2",
+    "claim": "exploratory_synthetic_feedback_not_human_or_therapy_evidence",
+    "passed": true,
+    "checks": {
+      "zero_extension_derivative_error": {
+        "value": 0.0,
+        "limit": 0.0,
+        "passed": true
+      },
+      "same_solver_zero_extension_state_error": {
+        "value": 0.0,
+        "limit": 0.0,
+        "passed": true
+      },
+      "native_class_glucose_error_mg_dl": {
+        "value": 7.549537343554449e-08,
+        "limit": 0.05,
+        "passed": true
+      },
+      "native_class_insulin_error_pmol_l": {
+        "value": 5.3543703223826435e-12,
+        "limit": 0.01,
+        "passed": true
+      },
+      "secretion_closed_form_error_pmol_kg": {
+        "value": 1.0174101561233329e-09,
+        "limit": 1e-07,
+        "passed": true
+      },
+      "basal_derivative_change_max_native_units_per_min": {
+        "value": 1.2049250486256824e-12,
+        "limit": 1e-08,
+        "passed": true
+      },
+      "glucose_solver_error_mg_dl": {
+        "value": 4.135658491615478e-08,
+        "limit": 0.01,
+        "passed": true
+      },
+      "insulin_solver_error_pmol_l": {
+        "value": 1.3753662665590219e-06,
+        "limit": 0.01,
+        "passed": true
+      },
+      "source_solver_error_pmol_kg_min": {
+        "value": 2.3654040193221704e-07,
+        "limit": 1e-05,
+        "passed": true
+      },
+      "insulin_mass_error_pmol_kg": {
+        "value": 3.348077370901592e-11,
+        "limit": 1e-06,
+        "passed": true
+      },
+      "glucose_mass_error_mg_kg": {
+        "value": 3.6669374661735255e-08,
+        "limit": 1e-05,
+        "passed": true
+      },
+      "negative_amount_tolerance": {
+        "value": 0.0,
+        "limit": 1e-08,
+        "passed": true
+      },
+      "fasting_glucose_drift_mg_dl": {
+        "value": 1.7980233472158259e-10,
+        "limit": 0.01,
+        "passed": true
+      },
+      "fasting_insulin_drift_pmol_l": {
+        "value": 4.0097924939945913e-10,
+        "limit": 0.01,
+        "passed": true
+      },
+      "basal_control_glucose_error_mg_dl": {
+        "value": 2.878974326179186e-11,
+        "limit": 0.01,
+        "passed": true
+      },
+      "fine_replay_glucose_error_mg_dl": {
+        "value": 1.655987872587425e-06,
+        "limit": 0.01,
+        "passed": true
+      },
+      "fine_replay_insulin_error_pmol_l": {
+        "value": 0.0001405082895834515,
+        "limit": 0.01,
+        "passed": true
+      },
+      "equal_arrival_relative_error": {
+        "value": 6.409635355949837e-14,
+        "limit": 1e-10,
+        "passed": true
+      },
+      "repeat_error": {
+        "value": 0.0,
+        "limit": 0.0,
+        "passed": true
+      },
+      "secretion_rate_closed_form_error_pmol_kg_min": {
+        "value": 1.7763568394002505e-14,
+        "limit": 1e-07,
+        "passed": true
+      }
+    },
+    "repeat_changed_files": [],
+    "scenarios": {
+      "fasting": {
+        "primary": {
+          "native_zero": {
+            "coarse": {
+              "insulin_mass_error": 1.2079226507921703e-12,
+              "glucose_mass_error": 3.581135388230905e-12,
+              "negative": 0,
+              "quadrature_bound": 1.818932138241723e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 2.652867436836459e-08,
+                "peak_mg_dl": 138.56000000015436,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 138.56000000015436
+              },
+              "pancreatic_amount_pmol_kg": 0.0,
+              "liver_arrival_pmol_kg": 0.0
+            },
+            "tight": {
+              "insulin_mass_error": 5.5564441936439835e-12,
+              "glucose_mass_error": 1.6825651982799172e-11,
+              "negative": 0,
+              "quadrature_bound": 1.5159873356646957e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 2.6988004719896708e-08,
+                "peak_mg_dl": 138.56000000015706,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 138.56000000015706
+              },
+              "pancreatic_amount_pmol_kg": 0.0,
+              "liver_arrival_pmol_kg": 0.0
+            },
+            "reference": {
+              "insulin_mass_error": 2.2382096176443156e-11,
+              "glucose_mass_error": 1.8758328224066645e-11,
+              "negative": 0,
+              "quadrature_bound": 1.36438860209824e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 2.6963952848291228e-08,
+                "peak_mg_dl": 138.56000000015501,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 138.56000000015501
+              },
+              "pancreatic_amount_pmol_kg": 0.0,
+              "liver_arrival_pmol_kg": 0.0
+            }
+          },
+          "constant_basal": {
+            "coarse": {
+              "insulin_mass_error": 1.9468870959826745e-12,
+              "glucose_mass_error": 3.296918293926865e-12,
+              "negative": 0,
+              "quadrature_bound": 1.818871915214272e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 2.9791763722641917e-08,
+                "peak_mg_dl": 138.56000000018022,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 138.56000000018022
+              },
+              "pancreatic_amount_pmol_kg": 185.79366203999956,
+              "liver_arrival_pmol_kg": 185.79366203999956
+            },
+            "tight": {
+              "insulin_mass_error": 3.737454790098127e-12,
+              "glucose_mass_error": 1.5916157281026244e-11,
+              "negative": 0,
+              "quadrature_bound": 1.8187507206140785e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 3.004080895152583e-08,
+                "peak_mg_dl": 138.56000000018318,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 138.56000000018318
+              },
+              "pancreatic_amount_pmol_kg": 185.7936620399969,
+              "liver_arrival_pmol_kg": 185.7936620399969
+            },
+            "reference": {
+              "insulin_mass_error": 1.6072476682893466e-11,
+              "glucose_mass_error": 2.879119165299926e-11,
+              "negative": 0,
+              "quadrature_bound": 1.8188294246947067e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 3.039092888457162e-08,
+                "peak_mg_dl": 138.5600000001798,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 138.5600000001798
+              },
+              "pancreatic_amount_pmol_kg": 185.7936620400134,
+              "liver_arrival_pmol_kg": 185.7936620400134
+            }
+          },
+          "feedback_quarter": {
+            "coarse": {
+              "insulin_mass_error": 1.0800249583553523e-12,
+              "glucose_mass_error": 3.126388037344441e-12,
+              "negative": 0,
+              "quadrature_bound": 1.8190819741993345e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 2.4737637716043537e-08,
+                "peak_mg_dl": 138.56000000013165,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 138.56000000013165
+              },
+              "pancreatic_amount_pmol_kg": 185.79366204069515,
+              "liver_arrival_pmol_kg": 185.79366204068808
+            },
+            "tight": {
+              "insulin_mass_error": 1.06439301816863e-11,
+              "glucose_mass_error": 9.72022462519817e-12,
+              "negative": 0,
+              "quadrature_bound": 1.8190986671536016e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 2.494161321919819e-08,
+                "peak_mg_dl": 138.56000000013222,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 138.56000000013222
+              },
+              "pancreatic_amount_pmol_kg": 185.79366204069956,
+              "liver_arrival_pmol_kg": 185.79366204069217
+            },
+            "reference": {
+              "insulin_mass_error": 2.034994395216927e-11,
+              "glucose_mass_error": 2.0804691303055733e-11,
+              "negative": 0,
+              "quadrature_bound": 1.8187899843766246e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 2.5014429638758884e-08,
+                "peak_mg_dl": 138.56000000013748,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 138.56000000013748
+              },
+              "pancreatic_amount_pmol_kg": 185.79366204069476,
+              "liver_arrival_pmol_kg": 185.7936620406874
+            }
+          },
+          "feedback_half": {
+            "coarse": {
+              "insulin_mass_error": 1.4637180356658064e-12,
+              "glucose_mass_error": 4.206412995699793e-12,
+              "negative": 0,
+              "quadrature_bound": 1.8187670109555047e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 2.0458379879073618e-08,
+                "peak_mg_dl": 138.5600000001073,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 138.56000000009638
+              },
+              "pancreatic_amount_pmol_kg": 185.7936620411711,
+              "liver_arrival_pmol_kg": 185.79366204116047
+            },
+            "tight": {
+              "insulin_mass_error": 5.9117155615240335e-12,
+              "glucose_mass_error": 1.2306600183364935e-11,
+              "negative": 0,
+              "quadrature_bound": 1.8187787347613718e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 2.067731230681602e-08,
+                "peak_mg_dl": 138.5600000001072,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 138.5600000000969
+              },
+              "pancreatic_amount_pmol_kg": 185.79366204118043,
+              "liver_arrival_pmol_kg": 185.79366204116974
+            },
+            "reference": {
+              "insulin_mass_error": 3.2528646443097387e-11,
+              "glucose_mass_error": 1.2391865311656147e-11,
+              "negative": 0,
+              "quadrature_bound": 1.8185999776468103e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 2.0651086174439115e-08,
+                "peak_mg_dl": 138.5600000001071,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 138.56000000009996
+              },
+              "pancreatic_amount_pmol_kg": 185.79366204118384,
+              "liver_arrival_pmol_kg": 185.79366204117392
+            }
+          },
+          "feedback_full": {
+            "coarse": {
+              "insulin_mass_error": 1.5063505998114124e-12,
+              "glucose_mass_error": 3.694822225952521e-12,
+              "negative": 0,
+              "quadrature_bound": 1.818747903669783e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 1.3725419023558061e-08,
+                "peak_mg_dl": 138.56000000010596,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 138.56000000005548
+              },
+              "pancreatic_amount_pmol_kg": 185.79366204169008,
+              "liver_arrival_pmol_kg": 185.7936620416778
+            },
+            "tight": {
+              "insulin_mass_error": 5.272227099339943e-12,
+              "glucose_mass_error": 1.5063505998114124e-11,
+              "negative": 0,
+              "quadrature_bound": 1.818929130330451e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 1.4070806741983688e-08,
+                "peak_mg_dl": 138.5600000001059,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 138.56000000005494
+              },
+              "pancreatic_amount_pmol_kg": 185.79366204172442,
+              "liver_arrival_pmol_kg": 185.79366204171134
+            },
+            "reference": {
+              "insulin_mass_error": 9.9333874459262e-12,
+              "glucose_mass_error": 1.750777300912887e-11,
+              "negative": 0,
+              "quadrature_bound": 1.8188689721028473e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 1.4157620853438857e-08,
+                "peak_mg_dl": 138.56000000010576,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 138.56000000005938
+              },
+              "pancreatic_amount_pmol_kg": 185.79366204172172,
+              "liver_arrival_pmol_kg": 185.79366204170984
+            }
+          }
+        },
+        "replays": [
+          {
+            "step_min": 0.25,
+            "amount_pmol_kg": 185.7936620417081,
+            "glucose_error_mg_dl": 2.968014769256893e-14,
+            "insulin_error_pmol_l": 3.235269076968365e-13,
+            "insulin_mass_error": 1.06439301816863e-11,
+            "glucose_mass_error": 1.745092959026806e-11,
+            "negative": 0,
+            "quadrature_bound": 1.8188689721028473e-11,
+            "outcomes": {
+              "auc_above_initial_mg_min_dl": 1.4157620853438857e-08,
+              "peak_mg_dl": 138.56000000010576,
+              "nadir_mg_dl": 138.56,
+              "final_mg_dl": 138.56000000005938
+            },
+            "pancreatic_amount_pmol_kg": 0.0,
+            "liver_arrival_pmol_kg": 185.79366204170975
+          },
+          {
+            "step_min": 0.125,
+            "amount_pmol_kg": 185.7936620417082,
+            "glucose_error_mg_dl": 2.968014769256893e-14,
+            "insulin_error_pmol_l": 1.1323441769389276e-13,
+            "insulin_mass_error": 1.0629719326971099e-11,
+            "glucose_mass_error": 1.750777300912887e-11,
+            "negative": 0,
+            "quadrature_bound": 1.5159873356648418e-11,
+            "outcomes": {
+              "auc_above_initial_mg_min_dl": 1.4157606642584142e-08,
+              "peak_mg_dl": 138.56000000010576,
+              "nadir_mg_dl": 138.56,
+              "final_mg_dl": 138.56000000005938
+            },
+            "pancreatic_amount_pmol_kg": 0.0,
+            "liver_arrival_pmol_kg": 185.7936620417098
+          },
+          {
+            "step_min": 0.0625,
+            "amount_pmol_kg": 185.7936620417082,
+            "glucose_error_mg_dl": 2.968014769256893e-14,
+            "insulin_error_pmol_l": 4.852903615452547e-14,
+            "insulin_mass_error": 1.0615508472255897e-11,
+            "glucose_mass_error": 1.7564616427989677e-11,
+            "negative": 0,
+            "quadrature_bound": 1.364388602098356e-11,
+            "outcomes": {
+              "auc_above_initial_mg_min_dl": 1.41576137480115e-08,
+              "peak_mg_dl": 138.56000000010576,
+              "nadir_mg_dl": 138.56,
+              "final_mg_dl": 138.56000000005938
+            },
+            "pancreatic_amount_pmol_kg": 0.0,
+            "liver_arrival_pmol_kg": 185.79366204170987
+          }
+        ],
+        "equal_arrival": {
+          "coarse": {
+            "insulin_mass_error": 8.384404281969182e-13,
+            "glucose_mass_error": 4.433786671143025e-12,
+            "negative": 0,
+            "quadrature_bound": 1.818871742547523e-11,
+            "outcomes": {
+              "auc_above_initial_mg_min_dl": 1.6597752505731478e-08,
+              "peak_mg_dl": 138.56000000010755,
+              "nadir_mg_dl": 138.56,
+              "final_mg_dl": 138.5600000000555
+            },
+            "pancreatic_amount_pmol_kg": 0.0,
+            "liver_arrival_pmol_kg": 185.79366204171023
+          },
+          "tight": {
+            "insulin_mass_error": 9.492850949754938e-12,
+            "glucose_mass_error": 1.4267698134062812e-11,
+            "negative": 0,
+            "quadrature_bound": 1.818783282472139e-11,
+            "outcomes": {
+              "auc_above_initial_mg_min_dl": 1.686988326810024e-08,
+              "peak_mg_dl": 138.56000000010746,
+              "nadir_mg_dl": 138.56,
+              "final_mg_dl": 138.56000000005704
+            },
+            "pancreatic_amount_pmol_kg": 0.0,
+            "liver_arrival_pmol_kg": 185.79366204170526
+          },
+          "reference": {
+            "insulin_mass_error": 8.768097359279636e-12,
+            "glucose_mass_error": 3.0752289603697136e-11,
+            "negative": 0,
+            "quadrature_bound": 1.818811320468027e-11,
+            "outcomes": {
+              "auc_above_initial_mg_min_dl": 1.7362204118853697e-08,
+              "peak_mg_dl": 138.5600000001074,
+              "nadir_mg_dl": 138.56,
+              "final_mg_dl": 138.56000000005935
+            },
+            "pancreatic_amount_pmol_kg": 0.0,
+            "liver_arrival_pmol_kg": 185.79366204169628
+          }
+        },
+        "contrasts": {
+          "feedback_quarter": {
+            "auc_above_initial_mg_min_dl": {
+              "contrast": -5.376499245812738e-09,
+              "numerical_uncertainty": 3.2237323921435745e-10,
+              "ratio": 16.677870839761958,
+              "classification": "resolved"
+            },
+            "peak_mg_dl": {
+              "contrast": -4.231992534187157e-11,
+              "numerical_uncertainty": 8.640199666842818e-12,
+              "ratio": 4.8980263157894735,
+              "classification": "unresolved"
+            },
+            "nadir_mg_dl": {
+              "contrast": 0.0,
+              "numerical_uncertainty": 2.220446049250313e-16,
+              "ratio": 0.0,
+              "classification": "zero"
+            },
+            "final_mg_dl": {
+              "contrast": -4.231992534187157e-11,
+              "numerical_uncertainty": 8.640199666842818e-12,
+              "ratio": 4.8980263157894735,
+              "classification": "unresolved"
+            }
+          },
+          "feedback_half": {
+            "auc_above_initial_mg_min_dl": {
+              "contrast": -9.739842710132507e-09,
+              "numerical_uncertainty": 4.064588665642077e-10,
+              "ratio": 23.962677435144396,
+              "classification": "resolved"
+            },
+            "peak_mg_dl": {
+              "contrast": -7.270273272297345e-11,
+              "numerical_uncertainty": 3.268496584496461e-12,
+              "ratio": 22.243478260869566,
+              "classification": "resolved"
+            },
+            "nadir_mg_dl": {
+              "contrast": 0.0,
+              "numerical_uncertainty": 2.220446049250313e-16,
+              "ratio": 0.0,
+              "classification": "zero"
+            },
+            "final_mg_dl": {
+              "contrast": -7.983658179000486e-11,
+              "numerical_uncertainty": 6.45172804070171e-12,
+              "ratio": 12.374449339207048,
+              "classification": "resolved"
+            }
+          },
+          "feedback_full": {
+            "auc_above_initial_mg_min_dl": {
+              "contrast": -1.6233308031132765e-08,
+              "numerical_uncertainty": 2.6330582159062033e-10,
+              "ratio": 61.65191461802089,
+              "classification": "resolved"
+            },
+            "peak_mg_dl": {
+              "contrast": -7.403855306620244e-11,
+              "numerical_uncertainty": 3.240074875066057e-12,
+              "ratio": 22.850877192982455,
+              "classification": "resolved"
+            },
+            "nadir_mg_dl": {
+              "contrast": 0.0,
+              "numerical_uncertainty": 2.220446049250313e-16,
+              "ratio": 0.0,
+              "classification": "zero"
+            },
+            "final_mg_dl": {
+              "contrast": -1.2042278285662178e-10,
+              "numerical_uncertainty": 7.815970093361102e-12,
+              "ratio": 15.407272727272728,
+              "classification": "resolved"
+            }
+          },
+          "equal_arrival_timing": {
+            "auc_above_initial_mg_min_dl": {
+              "contrast": -3.20458326541484e-09,
+              "numerical_uncertainty": 4.055067392982892e-10,
+              "ratio": 7.902663395829683,
+              "classification": "unresolved"
+            },
+            "peak_mg_dl": {
+              "contrast": -1.6484591469634324e-12,
+              "numerical_uncertainty": 8.526512829121202e-14,
+              "ratio": 19.333333333333332,
+              "classification": "resolved"
+            },
+            "nadir_mg_dl": {
+              "contrast": 0.0,
+              "numerical_uncertainty": 2.220446049250313e-16,
+              "ratio": 0.0,
+              "classification": "zero"
+            },
+            "final_mg_dl": {
+              "contrast": 2.842170943040401e-14,
+              "numerical_uncertainty": 2.1316282072803006e-12,
+              "ratio": 0.013333333333333334,
+              "classification": "unresolved"
+            }
+          }
+        },
+        "transferred_minus_parent_amount_pmol_kg": -1.6484591469634324e-12
+      },
+      "gastric_load_30g": {
+        "primary": {
+          "native_zero": {
+            "coarse": {
+              "insulin_mass_error": 1.0942358130705543e-12,
+              "glucose_mass_error": 3.522443709294048e-07,
+              "negative": 0,
+              "quadrature_bound": 1.5217648151100297e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 7578.453621224545,
+                "peak_mg_dl": 183.2011330762382,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 183.2011330762382
+              },
+              "pancreatic_amount_pmol_kg": 0.0,
+              "liver_arrival_pmol_kg": 0.0
+            },
+            "tight": {
+              "insulin_mass_error": 5.5280224842135794e-12,
+              "glucose_mass_error": 3.666900348468782e-08,
+              "negative": 0,
+              "quadrature_bound": 1.363448271677454e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 7578.453623538025,
+                "peak_mg_dl": 183.20113312984287,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 183.20113312984287
+              },
+              "pancreatic_amount_pmol_kg": 0.0,
+              "liver_arrival_pmol_kg": 0.0
+            },
+            "reference": {
+              "insulin_mass_error": 2.2382096176443156e-11,
+              "glucose_mass_error": 1.5941344093731158e-08,
+              "negative": 0,
+              "quadrature_bound": 1.2273049740263282e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 7578.453624134858,
+                "peak_mg_dl": 183.20113314382706,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 183.20113314382706
+              },
+              "pancreatic_amount_pmol_kg": 0.0,
+              "liver_arrival_pmol_kg": 0.0
+            }
+          },
+          "constant_basal": {
+            "coarse": {
+              "insulin_mass_error": 2.0463630789890885e-12,
+              "glucose_mass_error": 3.522447091289494e-07,
+              "negative": 0,
+              "quadrature_bound": 1.6359529628591048e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 7578.45362122824,
+                "peak_mg_dl": 183.2011330762672,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 183.2011330762672
+              },
+              "pancreatic_amount_pmol_kg": 185.79366203999956,
+              "liver_arrival_pmol_kg": 185.79366203999956
+            },
+            "tight": {
+              "insulin_mass_error": 3.694822225952521e-12,
+              "glucose_mass_error": 3.6669374661735255e-08,
+              "negative": 0,
+              "quadrature_bound": 1.635952962492559e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 7578.453623541675,
+                "peak_mg_dl": 183.20113312987152,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 183.20113312987152
+              },
+              "pancreatic_amount_pmol_kg": 185.7936620399969,
+              "liver_arrival_pmol_kg": 185.7936620399969
+            },
+            "reference": {
+              "insulin_mass_error": 1.6072476682893466e-11,
+              "glucose_mass_error": 1.59409604266747e-08,
+              "negative": 0,
+              "quadrature_bound": 1.6358870862404095e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 7578.453624138482,
+                "peak_mg_dl": 183.20113314385586,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 183.20113314385586
+              },
+              "pancreatic_amount_pmol_kg": 185.7936620400134,
+              "liver_arrival_pmol_kg": 185.7936620400134
+            }
+          },
+          "feedback_quarter": {
+            "coarse": {
+              "insulin_mass_error": 1.6768808563938364e-12,
+              "glucose_mass_error": 6.858812184873386e-09,
+              "negative": 0,
+              "quadrature_bound": 1.6542198691164045e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 6211.404317601838,
+                "peak_mg_dl": 170.41056643781556,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 169.11361561013433
+              },
+              "pancreatic_amount_pmol_kg": 362.15490907681306,
+              "liver_arrival_pmol_kg": 360.5537538607785
+            },
+            "tight": {
+              "insulin_mass_error": 3.453237695794087e-12,
+              "glucose_mass_error": 9.851341964406402e-12,
+              "negative": 0,
+              "quadrature_bound": 1.6542198719137755e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 6211.404270151517,
+                "peak_mg_dl": 170.41056643785285,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 169.11361472283753
+              },
+              "pancreatic_amount_pmol_kg": 362.154916481954,
+              "liver_arrival_pmol_kg": 360.55376146897163
+            },
+            "reference": {
+              "insulin_mass_error": 1.361399881716352e-11,
+              "glucose_mass_error": 1.2505552149377763e-12,
+              "negative": 0,
+              "quadrature_bound": 1.6542198719193832e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 6211.404268661765,
+                "peak_mg_dl": 170.41056643785245,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 169.11361471649533
+              },
+              "pancreatic_amount_pmol_kg": 362.15491650494675,
+              "liver_arrival_pmol_kg": 360.55376149422295
+            }
+          },
+          "feedback_half": {
+            "coarse": {
+              "insulin_mass_error": 1.1368683772161603e-12,
+              "glucose_mass_error": 6.369178962017941e-09,
+              "negative": 0,
+              "quadrature_bound": 1.668149072944653e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 5088.444849506049,
+                "peak_mg_dl": 168.85411307477526,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 159.2068484136969
+              },
+              "pancreatic_amount_pmol_kg": 483.89566496892235,
+              "liver_arrival_pmol_kg": 481.7252500846771
+            },
+            "tight": {
+              "insulin_mass_error": 4.078515303262975e-12,
+              "glucose_mass_error": 9.311773574438575e-12,
+              "negative": 0,
+              "quadrature_bound": 1.6681490676041536e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 5088.445019044397,
+                "peak_mg_dl": 168.8541130748317,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 159.2068497777758
+              },
+              "pancreatic_amount_pmol_kg": 483.8956937881992,
+              "liver_arrival_pmol_kg": 481.7252777246563
+            },
+            "reference": {
+              "insulin_mass_error": 1.2704504115390591e-11,
+              "glucose_mass_error": 1.1652900866465643e-12,
+              "negative": 0,
+              "quadrature_bound": 1.6681490676696224e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 5088.445013981283,
+                "peak_mg_dl": 168.85411307483145,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 159.20684975473435
+              },
+              "pancreatic_amount_pmol_kg": 483.8956945409859,
+              "liver_arrival_pmol_kg": 481.725278467854
+            }
+          },
+          "feedback_full": {
+            "coarse": {
+              "insulin_mass_error": 1.7905676941154525e-12,
+              "glucose_mass_error": 6.145807418533877e-09,
+              "negative": 0,
+              "quadrature_bound": 1.7695145336417554e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 3378.0907118434943,
+                "peak_mg_dl": 166.8189086251867,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 147.74672198803563
+              },
+              "pancreatic_amount_pmol_kg": 617.5166302088853,
+              "liver_arrival_pmol_kg": 615.8017265739246
+            },
+            "tight": {
+              "insulin_mass_error": 5.9401372709544376e-12,
+              "glucose_mass_error": 7.410960733977845e-12,
+              "negative": 0,
+              "quadrature_bound": 1.7695145176518895e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 3378.0908787313983,
+                "peak_mg_dl": 166.81890862519478,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 147.74672260859438
+              },
+              "pancreatic_amount_pmol_kg": 617.5166063569274,
+              "liver_arrival_pmol_kg": 615.8017047025361
+            },
+            "reference": {
+              "insulin_mass_error": 1.3500311979441904e-11,
+              "glucose_mass_error": 1.8189894035458565e-12,
+              "negative": 0,
+              "quadrature_bound": 1.769514517467438e-11,
+              "outcomes": {
+                "auc_above_initial_mg_min_dl": 3378.0908810037245,
+                "peak_mg_dl": 166.81890862519475,
+                "nadir_mg_dl": 138.56,
+                "final_mg_dl": 147.74672260388456
+              },
+              "pancreatic_amount_pmol_kg": 617.5166063247348,
+              "liver_arrival_pmol_kg": 615.801704683503
+            }
+          }
+        },
+        "replays": [
+          {
+            "step_min": 0.25,
+            "amount_pmol_kg": 615.8017331415192,
+            "glucose_error_mg_dl": 2.6503185277159307e-05,
+            "insulin_error_pmol_l": 0.0022482973742395567,
+            "insulin_mass_error": 1.332978172285948e-11,
+            "glucose_mass_error": 9.166001291305292e-13,
+            "negative": 0,
+            "quadrature_bound": 1.7695143091609247e-11,
+            "outcomes": {
+              "auc_above_initial_mg_min_dl": 3378.090808073334,
+              "peak_mg_dl": 166.81889487436118,
+              "nadir_mg_dl": 138.56,
+              "final_mg_dl": 147.74672527596084
+            },
+            "pancreatic_amount_pmol_kg": 0.0,
+            "liver_arrival_pmol_kg": 615.801733141519
+          },
+          {
+            "step_min": 0.125,
+            "amount_pmol_kg": 615.8017114341203,
+            "glucose_error_mg_dl": 6.62432038490537e-06,
+            "insulin_error_pmol_l": 0.0005620413886156926,
+            "insulin_mass_error": 1.0828671292983927e-11,
+            "glucose_mass_error": 1.3642420526593924e-12,
+            "negative": 0,
+            "quadrature_bound": 1.4748789665673665e-11,
+            "outcomes": {
+              "auc_above_initial_mg_min_dl": 3378.090862269504,
+              "peak_mg_dl": 166.81890518982527,
+              "nadir_mg_dl": 138.56,
+              "final_mg_dl": 147.74672327078696
+            },
+            "pancreatic_amount_pmol_kg": 0.0,
+            "liver_arrival_pmol_kg": 615.8017114341201
+          },
+          {
+            "step_min": 0.0625,
+            "amount_pmol_kg": 615.8017064007312,
+            "glucose_error_mg_dl": 1.655987872587425e-06,
+            "insulin_error_pmol_l": 0.0001405082895834515,
+            "insulin_mass_error": 1.7536194718559273e-11,
+            "glucose_mass_error": 7.389644451905042e-13,
+            "negative": 0,
+            "quadrature_bound": 1.3273783903547545e-11,
+            "outcomes": {
+              "auc_above_initial_mg_min_dl": 3378.0908759821655,
+              "peak_mg_dl": 166.81890776649854,
+              "nadir_mg_dl": 138.56,
+              "final_mg_dl": 147.74672276979427
+            },
+            "pancreatic_amount_pmol_kg": 0.0,
+            "liver_arrival_pmol_kg": 615.8017064007327
+          }
+        ],
+        "equal_arrival": {
+          "coarse": {
+            "insulin_mass_error": 6.281197784119286e-12,
+            "glucose_mass_error": 7.38615568707246e-09,
+            "negative": 0,
+            "quadrature_bound": 1.6975489311138778e-11,
+            "outcomes": {
+              "auc_above_initial_mg_min_dl": 4020.074871905352,
+              "peak_mg_dl": 166.4399709248763,
+              "nadir_mg_dl": 138.56,
+              "final_mg_dl": 150.07775222305054
+            },
+            "pancreatic_amount_pmol_kg": 0.0,
+            "liver_arrival_pmol_kg": 615.8017064007269
+          },
+          "tight": {
+            "insulin_mass_error": 1.730882104311604e-11,
+            "glucose_mass_error": 5.044853423896711e-12,
+            "negative": 0,
+            "quadrature_bound": 1.6975489311002303e-11,
+            "outcomes": {
+              "auc_above_initial_mg_min_dl": 4020.0748719104276,
+              "peak_mg_dl": 166.43997092495914,
+              "nadir_mg_dl": 138.56,
+              "final_mg_dl": 150.07775222297175
+            },
+            "pancreatic_amount_pmol_kg": 0.0,
+            "liver_arrival_pmol_kg": 615.8017064007392
+          },
+          "reference": {
+            "insulin_mass_error": 3.348077370901592e-11,
+            "glucose_mass_error": 1.4210854715202004e-12,
+            "negative": 0,
+            "quadrature_bound": 1.697548931100213e-11,
+            "outcomes": {
+              "auc_above_initial_mg_min_dl": 4020.0748719104263,
+              "peak_mg_dl": 166.43997092495897,
+              "nadir_mg_dl": 138.56,
+              "final_mg_dl": 150.07775222297153
+            },
+            "pancreatic_amount_pmol_kg": 0.0,
+            "liver_arrival_pmol_kg": 615.801706400705
+          }
+        },
+        "contrasts": {
+          "feedback_quarter": {
+            "auc_above_initial_mg_min_dl": {
+              "contrast": -1367.0493554767172,
+              "numerical_uncertainty": 5.185031477594748e-05,
+              "ratio": 26365304.846921954,
+              "classification": "resolved"
+            },
+            "peak_mg_dl": {
+              "contrast": -12.790566706003403,
+              "numerical_uncertainty": 6.755175263606361e-08,
+              "ratio": 189344705.45735255,
+              "classification": "resolved"
+            },
+            "nadir_mg_dl": {
+              "contrast": 0.0,
+              "numerical_uncertainty": 2.220446049250313e-16,
+              "ratio": 0.0,
+              "classification": "zero"
+            },
+            "final_mg_dl": {
+              "contrast": -14.087518427360521,
+              "numerical_uncertainty": 9.612276414827647e-07,
+              "ratio": 14655756.679686699,
+              "classification": "resolved"
+            }
+          },
+          "feedback_half": {
+            "auc_above_initial_mg_min_dl": {
+              "contrast": -2490.0086101571987,
+              "numerical_uncertainty": 0.00016156499259523116,
+              "ratio": 15411807.781871524,
+              "classification": "resolved"
+            },
+            "peak_mg_dl": {
+              "contrast": -14.34702006902441,
+              "numerical_uncertainty": 6.753245429536037e-08,
+              "ratio": 212446300.3562138,
+              "classification": "resolved"
+            },
+            "nadir_mg_dl": {
+              "contrast": 0.0,
+              "numerical_uncertainty": 2.220446049250313e-16,
+              "ratio": 0.0,
+              "classification": "zero"
+            },
+            "final_mg_dl": {
+              "contrast": -23.994283389121506,
+              "numerical_uncertainty": 1.2734488166188385e-06,
+              "ratio": 18841969.206763446,
+              "classification": "resolved"
+            }
+          },
+          "feedback_full": {
+            "auc_above_initial_mg_min_dl": {
+              "contrast": -4200.362743134758,
+              "numerical_uncertainty": 0.00016624998806946678,
+              "ratio": 25265341.621436123,
+              "classification": "resolved"
+            },
+            "peak_mg_dl": {
+              "contrast": -16.382224518661104,
+              "numerical_uncertainty": 1.3750833574022181e-05,
+              "ratio": 1191362.28581881,
+              "classification": "resolved"
+            },
+            "nadir_mg_dl": {
+              "contrast": 0.0,
+              "numerical_uncertainty": 2.220446049250313e-16,
+              "ratio": 0.0,
+              "classification": "zero"
+            },
+            "final_mg_dl": {
+              "contrast": -35.45441053997129,
+              "numerical_uncertainty": 2.672076277576707e-06,
+              "ratio": 13268487.44457427,
+              "classification": "resolved"
+            }
+          },
+          "equal_arrival_timing": {
+            "auc_above_initial_mg_min_dl": {
+              "contrast": -641.9839909067018,
+              "numerical_uncertainty": 0.00016915515607252019,
+              "ratio": 3795237.4956366713,
+              "classification": "resolved"
+            },
+            "peak_mg_dl": {
+              "contrast": 0.378937700235781,
+              "numerical_uncertainty": 1.3750833574022181e-05,
+              "ratio": 27557.434841743925,
+              "classification": "resolved"
+            },
+            "nadir_mg_dl": {
+              "contrast": 0.0,
+              "numerical_uncertainty": 2.220446049250313e-16,
+              "ratio": 0.0,
+              "classification": "zero"
+            },
+            "final_mg_dl": {
+              "contrast": -2.331029619086962,
+              "numerical_uncertainty": 2.672076277576707e-06,
+              "ratio": 872366.4210667524,
+              "classification": "resolved"
+            }
+          }
+        },
+        "transferred_minus_parent_amount_pmol_kg": 1.7172282014144002e-06
+      }
+    },
+    "limitations": [
+      "BC001 modification or arbitrary replay into its IVGTT reduction",
+      "full 2007 model reproduction",
+      "time-varying hepatic extraction or direct portal EGP restoration",
+      "clinical insulin reduction",
+      "cell count, transplant site or treatment efficacy",
+      "human validation or external domain review",
+      "C-peptide extension",
+      "controller development"
+    ],
+    "effect_classification": "Valid only when all controls pass; unresolved effects are retained"
+  },
+  "verification": {
+    "source_fixture_specified_before_execution": true,
+    "fresh_process_repeat": "Every required numerical JSON file is byte-identical",
+    "report_standard_library_reconstruction": "byte-identical with python -S",
+    "figure_reconstruction": "byte-identical SVG; PNG visually inspected",
+    "source_only_first_run": "results/m4-bc008-source-first",
+    "prior_complete_run": "results/m4-feedback/reference-01",
+    "scientific_failures": [],
+    "criteria_or_parameter_changes_after_execution": false,
+    "remote_ci": "configured, not run",
+    "locked_syncs": {
+      "root": "passed",
+      "native_runtime": "passed"
+    },
+    "repository_checks": {
+      "status": "passed",
+      "unit_tests": 329,
+      "strict_documentation_build": "passed",
+      "log_sha256": "d501d5ab18325910253f53f71759becf34078310421ca1679623c9bd69cb6ed8"
+    },
+    "numerical_tests": {
+      "status": "passed",
+      "tests": 7,
+      "log_sha256": "2aae2eef0f1e6f28412e61184b6ed9591d8e94b827a9a1a71a48f3f61a6e09b4"
+    },
+    "source_snapshot_comparison": "all current source and reused files equal the archived snapshots",
+    "runtime_snapshot_comparison": "uv.lock and pyproject.toml equal unchanged native runtime snapshots",
+    "repeated_numerical_files": 51,
+    "prior_execution_comparison": "all 51 numerical files identical to reference-01",
+    "report_sha256": "5ab6fd91378e2e16de1e4dfad6dd02896a9bfb00ac4390c2659f3156e7da6104",
+    "figure_sha256": "f958c31de98f11c0ed23a1d086d9e3e7ed89747261d6c477a2c98c012e7875b8",
+    "prior_repository_checks": {
+      "attempts": [
+        "results/m4-feedback/repository-check-01.log",
+        "results/m4-feedback/repository-check-02.log"
+      ],
+      "failure": "Prepared local branch-protection policy initially omitted the newly added CI job; corrected without changing model or numerical criteria"
+    }
+  },
+  "remaining": [
+    "Population-specific interpretation and calibration",
+    "Fixed hepatic extraction and absent direct portal EGP action",
+    "Independent authorized observations and domain review",
+    "Full source cohort reproduction",
+    "C-peptide coupling boundary and therapy mechanism not implemented"
+  ]
+}

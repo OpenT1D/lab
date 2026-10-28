@@ -1,0 +1,69 @@
+{
+  "schema_version": "lit001.numerical_review/1",
+  "reviewed_utc": "2026-09-19T22:59:30.785849+00:00",
+  "reviewer": {
+    "agent": "method_review",
+    "role": "separate_AI_review_of_parent_authored_implementation",
+    "human_review": false,
+    "independent_empirical_validation": false
+  },
+  "scope": "Source-to-parameter/equation check and read-only review of bounded deterministic synthetic bolus implementation, report reconstruction and test adequacy; no review of population simulation or clinical prediction accuracy.",
+  "checked_files_sha256": {
+    "experiments/literature/lit001/runtime/model.py": "2249c437354c926de2a26a8ee6e7fcf666058f407ca244586907806f178decc2",
+    "experiments/literature/lit001/runtime/run.py": "bdab50e5b99b4566360b70650fd41367ce15120e7d27a0b69dcf9addde937936",
+    "experiments/literature/lit001/runtime/report.py": "bcab9630fdba36f14399b44d5e989183a3e9c2672dc3c4a2e3e07bf2125014e8",
+    "experiments/literature/lit001/runtime/test_model.py": "2c293bcc88188bbf27dab40865a25dc7cbe089db8e75ee4b353bfcde43bf6397",
+    "experiments/literature/lit001/reference-protocol.json": "99f1484b085dae946c22b9ad6517edbd57726d8faecc4c4682198f7ebc78f904",
+    "experiments/literature/lit001/parameters.json": "a86c944f3070c87907c54f9204e6fa64ce6a5bc467f3695645f4333da1a4005e",
+    "results/lit001/reference-02/report.json": "313ed92c36a22f3119deedab1b8e7f2d5c359f3f124d7d033c2f859ea5f188b4",
+    "results/lit001/reference-02/manifest.json": "8318168a47d96faa2631302cbe43a38cd460795bce6c54ca7493f3cbb3852645"
+  },
+  "source_check": {
+    "doi": "10.3390/metabo11040235",
+    "url": "https://doi.org/10.3390/metabo11040235",
+    "pdf_sha256": "4587ea88d98cb6f1dca6a73444aca42602eb62ebf39cccedad11412db80f300d",
+    "material": "Full journal PDF pages5 and12 rendered and visually inspected; equations/rate meanings/Figure3 and Table2 independently compared with parameter JSON and code.",
+    "source_interpretations_retained": [
+      "Eq3 printed ka1(t) treated as per-person constant, consistent with figure and surrounding definitions.",
+      "Mass states and dose normalized to mU/kg so division by L/kg produces mU/L.",
+      "kd=ka2+alpha; fixed effects at eta=0 and zero BMI deviation are not an arithmetic mean person.",
+      "Delayed bolus jump and zero prior history are declared synthetic choices, not recovered experimental initial conditions."
+    ]
+  },
+  "review_result": {
+    "material_issues_found": [],
+    "conclusion": "No material discrepancy found for the declared fixed-parameter synthetic example.",
+    "code_findings": [
+      "Closed form agrees algebraically with the triangular three-state ODE.",
+      "Numerical solver starts at exact tau and input jump; pending-input bookkeeping preserves dose accounting before tau.",
+      "Rates, volume, delay and concentration conversion agree with checked source and explicit normalization.",
+      "Sampled peak and trapezoidal AUC are labelled as grid-derived numerical summaries.",
+      "Distinct-rate limitation of the closed form is explicit; no arbitrary-parameter robustness or empirical-validation claim inferred."
+    ],
+    "tests_assessment": "Inspected tests meaningfully cover independent matrix-exponential agreement, delayed event, complete mass accounting, zero input, fixed-parameter linear scaling, positivity, tight solvers and invalid inputs. Adequate for this bounded reference; tests were not rerun by this reviewer. Parent-reported passes are not counted as a new reviewer test execution."
+  },
+  "additional_executed_check": {
+    "command": "experiments/literature/lit001/runtime/.venv/bin/python - (inline Python from repository root)",
+    "python_body": "import sys,json\nimport numpy as np\nfrom scipy.integrate import quad\nsys.path.insert(0,'experiments/literature/lit001/runtime')\nfrom model import Parameters,analytic\np=Parameters.from_record(json.load(open('experiments/literature/lit001/parameters.json')))\nd=200\nfinite_auc,err=quad(lambda t:float(analytic(np.array([t]),d,p)[0,2]/p.volume),0,600,points=[p.tau],epsabs=1e-8)\nend=analytic(np.array([600.0]),d,p)[0]\nexpected_total=d/(p.volume*p.ke)\nremaining_auc=(d-end[3])/(p.volume*p.ke)\nassert abs(finite_auc+remaining_auc-expected_total)<1e-7\nreport=json.load(open('results/lit001/reference-02/report.json'))\nprint({'finite_auc':finite_auc,'total_auc':expected_total,'tail_auc':remaining_auc,'stored_auc':report['trapezoid_auc_mU_min_per_L']})",
+    "formula": "Integral_0^600 y(t)dt + [SC1(600)+SC2(600)+plasma(600)]/(V_I*k_e) = dose/(V_I*k_e). All remaining insulin eventually passes the sole systemic elimination process under this fixed linear model.",
+    "independence_limit": "Adaptive quadrature uses the implemented analytic concentration function; the expected complete AUC is derived independently from dose, volume and clearance. This complements solver checks, but is not a separate empirical model validation or second independent implementation.",
+    "dose_mU_per_kg": 200,
+    "volume_L_per_kg": 0.135,
+    "ke_per_min": 0.113,
+    "horizon_min": 600,
+    "finite_auc_quad_mU_min_per_L": 13097.169919999122,
+    "tail_auc_from_remaining_mass_mU_min_per_L": 13.285668332573493,
+    "expected_complete_auc_mU_min_per_L": 13110.455588331693,
+    "stored_trapezoid_auc_mU_min_per_L": 13097.168625590342,
+    "auc_invariant_absolute_error_mU_min_per_L": 1.8189894035458565e-12,
+    "assertion_limit_mU_min_per_L": 1e-07,
+    "result": "passed",
+    "stored_trapezoid_interpretation": "Difference from adaptive quadrature is about0.00129441mU*min/L, consistent with the finite0.25min trapezoid grid; no empirical accuracy tolerance implied."
+  },
+  "exposure_and_limits": [
+    "Review occurred after source selection and numerical implementation; all inspected sources/results are exposed evidence.",
+    "Original participant data, individual fitted vectors, full covariates and prior insulin histories were not acquired.",
+    "No published cohort figure, between-person variability or patient prediction has been independently reproduced.",
+    "No numerical code changed during this review."
+  ]
+}

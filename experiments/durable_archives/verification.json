@@ -1,0 +1,674 @@
+{
+  "schema": "opent1d.durable-archive-verification/1",
+  "date": "2026-10-04",
+  "roadmap_item": "OT-041",
+  "status": "implemented_and_internally_verified_locally",
+  "native_candidate_revision": "887cb329b362067055b3d296d2f7a589e5c0a8aa",
+  "final_code_revision": "d9ad693846411c8724d5b42a453202c75cb28125",
+  "published_main_baseline": "6e339cc1d01109c27787e45f11e9ddca72793041",
+  "scope": "Internal software, native synthetic, separate-agent and actual browser verification; no independent human usability, authentic execution, biological or clinical claim",
+  "platform": {
+    "system": "Darwin",
+    "machine": "arm64",
+    "python": "3.12.13",
+    "linux_native_execution": "not_verified",
+    "windows": "unsupported"
+  },
+  "source_identity": {
+    "scientific_file_count": 112,
+    "scientific_sources_unchanged_from_native_candidate_and_main": true,
+    "scientific_sources": {
+      "docs/research/m4-configurable-study-protocol.md": "e2e8debf8c92377cc25c1e613925d5622da507850d6d294bb85c71c32e32e949",
+      "docs/research/m4-secure-runtime-protocol.md": "e712c5b0cdc58003f7cd538eb37145693986514c1f4ffbedfce400d1f31ed1d6",
+      "docs/research/m4-source-comparison-protocol.md": "79d8a4db8d2cb4eb3f782af51ff72afe651674a1d3f46fd91f9796293ec6eb0b",
+      "experiments/integration/ot032-midpoint-v1-probe.json": "72439980082acebfe0bf7894fb28dea223640939821a2d25260c8cf6bfd75ffc",
+      "experiments/integration/ot032-midpoint-v1-probe.source.txt": "2ce670fa0de81f8d4ab9760457953a997972fabd37888002cc66c3490eb35737",
+      "experiments/m0/simglucose/pyproject.toml": "6bbb5f49e74bd7df2e11ab39f69754a99ce1e4ef3736573943e3a75118c28007",
+      "experiments/m0/simglucose/recording.py": "4d8195fb662296e77735357ec7df734afb9a4589f68eef521d57332690c40e0e",
+      "experiments/m0/simglucose/uv.lock": "13d254dcebe8d1ab54c3140cdc07152d719a68477a1378d7fe77fc1568612aa9",
+      "experiments/m0/simglucose_secure/pyproject.toml": "f83108dd9e6d2c8db1a3abf48574dae828de2033b380190306b0de37b6f5fe27",
+      "experiments/m0/simglucose_secure/uv.lock": "cabe2652c61cdc9f9d8d90447175ac9c36e55939a4c39f0085c12861c6834207",
+      "experiments/m1/adapter.py": "a0fe84e4474ac83df51aa844bec4f2fd174f73465fcec3d579dffa628da0cabf",
+      "experiments/m1/artifacts.py": "e7896d603e8953f9c11a58ddad116eb12494d170cdce06a02a6d53dc04548e79",
+      "experiments/m1/contracts.py": "408a8086116c4db8b387fedd929ab2bfae46740ad1d94e1745e20d4a7ba9f70f",
+      "experiments/m1/control.py": "ad00f7512818eb20fc4a0f99e4a85ba97b6c78dafaa681aefff2be9e8d2d1cdf",
+      "experiments/m1/metrics.py": "2aa937e5bd3805508d81040a046ec8e0395869a73a1af1943c57b513fb1c21b4",
+      "experiments/m1/runtime.py": "357f755233d614a66cb44d2dfbec8a166113f29f3b7289cd7dd5d371984ea52a",
+      "experiments/m1/simulation.py": "0384df020d7b4fc64dfef103cac1ee746b91326c42113ef76c5b146f653d3a83",
+      "experiments/m1/validation.py": "1610424acc91cb149a5f3eb163ea982de800194d5b9590493ab2f9515cabbd4e",
+      "experiments/m4/beta_cell/runtime/pyproject.toml": "7c69b6f63a48d72f927c0253b68492de1ac60700d0549744de1207709732d3c5",
+      "experiments/m4/beta_cell/runtime/uv.lock": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04",
+      "experiments/m4/c_peptide/model.py": "f46453669c17d98c4dc90eec6613641d32e222c2a3dd012709ca30e6868673ae",
+      "experiments/m4/c_peptide/reference.py": "29efbcdd7065387f0089ff8704916fee48cd24237529137a5350e8886559c992",
+      "experiments/m4/causal_secretion/__init__.py": "6db6f93b4815189225e12b98b0c1656147bd0ad75d609e57b065b0120fe4df72",
+      "experiments/m4/causal_secretion/common.py": "791c88bce5f757842f297ae1549fc6b3e66372964c4ca4645ff3c8d004fc100f",
+      "experiments/m4/causal_secretion/coupled.py": "4064ac6ef0adad98164dc1b3b559c385f3e87a76971a6fd457aa4a896460a3d6",
+      "experiments/m4/causal_secretion/example_model.py": "2d65b88bfe858682fc0d05d24e404bad4f16166da4c4a94f916d76c5ba560215",
+      "experiments/m4/causal_secretion/protocol.json": "b0a4e01475e95d6ddf785ce5764f89b2684569f6092f321ddb746290f9763739",
+      "experiments/m4/causal_secretion/report.py": "6eccf6cd21cf16e69a8627c6ac85011cc57308c3e3972f2a29c38d37f5b78ebd",
+      "experiments/m4/causal_secretion/run.py": "2de9d13c11f19a0f09e1a059dc69bf3be2d0e3197704d73a722251b58a792fb0",
+      "experiments/m4/causal_secretion/worker.py": "bf20898548665ee27b171cc252305740a3765225c71eac5053d69f4add7b90ec",
+      "experiments/m4/comparison/__init__.py": "e548dcb3219130a78416dfa37e50a2f4f985bf02a41acbc8ddc1f62027ce4d77",
+      "experiments/m4/comparison/__main__.py": "1210220f33024933cf280499af5a07e5a7b019599d06823855d1b720382df53d",
+      "experiments/m4/comparison/analysis.py": "ec5fff11bdfac25e583e1097f5b8410587616734e1d3e90092e0a669bf49b32b",
+      "experiments/m4/comparison/common.py": "2f01b94815246db70d1e807a309dd54c17ec935134cdaa25d61b57ff9352f9a0",
+      "experiments/m4/comparison/protocol.json": "1769545288eb65d72757a9330034abad5800c0fac75dc2ca105c801a2014282c",
+      "experiments/m4/comparison/report.py": "3215dad1d8f4eac4edc127c8d26b18a8d230752e6cebace4471faf2b6b8b4b43",
+      "experiments/m4/comparison/run.py": "a5d543608d82a43ad60ad6d47552eef68f30727d6b686a0c01eeaa28aa58bd20",
+      "experiments/m4/feedback/common.py": "eba2aa4ef561285f9b4eaf1320175f18bf91d321f3058306de7adc9601f3f048",
+      "experiments/m4/feedback/contract.py": "4a35587c9c848a9c19586ab8e0aa28a1b5fcfe02c1b22e4fc7b0d46479dcb5ce",
+      "experiments/m4/feedback/coupled.py": "5f774ab7c0767fe278239a9f4457aec2ee0ab9c02de917e391d4eb83ed6d2280",
+      "experiments/m4/feedback/plot.py": "4b1aa7761ae64f7a77a17ed799028fa0a7c940bdf838f0f9aff1ba4fed455ba9",
+      "experiments/m4/feedback/preflight.py": "17c19c1c0dff4e707ab503b86ea03f99fb073db6a3bef02079d1f7337f3ebce4",
+      "experiments/m4/feedback/protocol.json": "b66087592810be35fa74372ad07172359897ceb40653abdf420b3c3fa1a4fd99",
+      "experiments/m4/feedback/report.py": "01c53866918c11850cb006a5ccc10e856f8faa0b55a27bf325d83bc64292742c",
+      "experiments/m4/feedback/run.py": "f998adc420bd0fc24f02d63cba84f87b0ef9d9cfc881d9220d361ff4bbdecc48",
+      "experiments/m4/feedback/secretion.py": "65b4d4ced59024238b8bf11ec2c0a0196472c2dc12904678159b0a51383a5ce7",
+      "experiments/m4/feedback/source-cases.json": "d2dadc23f6e0855b27a83fa94f215c43af933bd929e56a3edb743a0374726af9",
+      "experiments/m4/feedback/source_oracle.py": "b721c4576ca28e2856b41388ace512556f963fa1617c391bc1581f9dec3155b1",
+      "experiments/m4/feedback/sources.json": "2a2b1f8a98ceaf2fd64120f8c73cd8e58d8703999f773eaeba76f2d444f89aed",
+      "experiments/m4/feedback/test_numerical.py": "3746dfa5c108e1f4a80f7e0b096b95ac01d3c551e589aac82e1690625e799c49",
+      "experiments/m4/feedback/verify_source.py": "16aa9677fc63daa827895587c65eb8c247c2e77579e3c9aedc866ca7e799f0a2",
+      "experiments/m4/feedback/worker.py": "0a28f5df61341e419342c08bb4ad1d0b4c1f86ae56945f7ecf81ab079cb899cf",
+      "experiments/m4/feedback_observation/adapter.py": "6f2c62de4f58e7aca1c94dee2192b964387508f81889511b32eee317f1ba5a54",
+      "experiments/m4/feedback_observation/common.py": "f1a56a203fe24092a2d4ea46ec2fafeaf68457a48a5a23d2f2e6d76bc2be018e",
+      "experiments/m4/feedback_observation/protocol.json": "69143f23b24e225753ada55a3d43ff2a39414635a624263db9e4f83c2d3ef98d",
+      "experiments/m4/feedback_observation/report.py": "46d1e6caaee23c713d56a4fc7119ddb2ece069bf9da58833935713815b0491c9",
+      "experiments/m4/feedback_observation/worker.py": "2737bf6f8992277acb47615c5af74d72175b1f4815e8b4387a778280cb5ba088",
+      "experiments/m4/hepatic/common.py": "7a8eb6deeee8728710b5ee20948bfa134ca531426fa68fd2b9ade476f6a59f78",
+      "experiments/m4/hepatic/model.py": "c804adeea6a376ad9dfc92b50e6eda741eca2152bcc9597a56a7661c7fd429c6",
+      "experiments/m4/hepatic/report.py": "aa47df99aa03886104bdb7d01f16b3168d0f1bf08618e88d80a1012a581fb0cd",
+      "experiments/m4/initial_load/__init__.py": "57796be0d46f3f62f6e19af82f852d8936978ee66514e82fbf59ec5479798f57",
+      "experiments/m4/initial_load/__main__.py": "c68c1efcdd44e66cfbed7fb177d1c3ce976ee3602e4580cd760361bb90d4e4ec",
+      "experiments/m4/initial_load/analysis.py": "a1a7ebc64a805adf4f622bbda2f3a2971c9527f0d911903aca49e8046b42a2a6",
+      "experiments/m4/initial_load/common.py": "bad46e61f6d8f153237835a24db98612c9476f04dfebb6c0bad3db96c8faabfb",
+      "experiments/m4/initial_load/process.py": "e2510de67cfc45493e57bafe32cf854b5d669405d9de6a19fab7888eb502523f",
+      "experiments/m4/initial_load/protocol-v1.json": "818da02e79164f0e09197e403770f9d881dd996772d133fe75127b7651156324",
+      "experiments/m4/initial_load/protocol.json": "d2ed95617dd22db1e8204da6b35a2b28119ef4e4f67f8ca64f80395917cf6eb2",
+      "experiments/m4/initial_load/report.py": "02dcadb4500b0853be5d7b9f66751f8d9738a173dfeb00594aba4d577e7d32ab",
+      "experiments/m4/initial_load/run.py": "051a8c070a211f54d873cd08c747b1b4b11f3dd8128da278d299fe32826c5c34",
+      "experiments/m4/initial_load/test_numerical.py": "181914330600e2630928b59746ab183409421a5c978f79f629d1fefc2972392f",
+      "experiments/m4/initial_load/worker.py": "32cd4868373550be0622966f35494e3ff8c0e464e26fc8185f78e6d77ddeb998",
+      "experiments/m4/kinetic_inlet/forcing.py": "b26fd2fd87aa47da328d24b2cbe56d8e3be45f9b4caf2c3c453f89acb07fddd1",
+      "experiments/m4/kinetic_inlet/native.py": "aaa6a921643bf6ec82fde84d53193c8ab9c9cdbe1b69de634089f652cb4b14dd",
+      "experiments/m4/kinetic_inlet/oracle.py": "67c80ba4dafacc515f9d98cade58f2bc9b1f6daf95747acbe22625f99720155d",
+      "experiments/m4/kinetic_inlet/protocol.json": "ac2754f1718bcad7977d3332685abc8bb9a281056e5475d78ab7d7364b9df3dc",
+      "experiments/m4/paired_kinetics/common.py": "0d55ab114cf6381e2837670dd2b17b50a7109a0643bce756f2bd31d06209a12d",
+      "experiments/m4/paired_kinetics/oracle.py": "4262e65df8501ac7ea067513fe1148c1d6ca94c6df8dfbe71506f375d29538df",
+      "experiments/m4/paired_kinetics/report.py": "1826c8248c02347b381b3943c7c04f949a5867dd4e701b4ada1100830e5749fd",
+      "experiments/m4/paired_observation/contract.py": "eb422ce11a75840082801f8321fd10c7236509f71b7792ab83032e061b5f386d",
+      "experiments/m4/paired_observation/run.py": "a342e45ab3fc5218033d244d870bd2c9cd8a12099a5053b66f250b2c4b761f84",
+      "experiments/m4/researcher_workflow/__init__.py": "c69d309b198ce4aca5e5c97f17a441b455c4a7241585b7f764f6cd7fa4e0dbbf",
+      "experiments/m4/researcher_workflow/common.py": "44078af630ec7ce9588b17489f0d927380b5dcb023d0aef0833977624bed39a2",
+      "experiments/m4/researcher_workflow/observation.py": "1f388bdd4303467f9d869e4a7d5c5d927d44034e7550758685b1cde0c14480bf",
+      "experiments/m4/researcher_workflow/process.py": "4118daa9fa3a5c472f23cd668441f6a248e2ca112aa663634c1607f54b96d14c",
+      "experiments/m4/researcher_workflow/protocol.json": "f6a8a22036cc63b1a9770eec8b31932ff4761dbd9000846d6438721e86e62cf0",
+      "experiments/m4/researcher_workflow/report.py": "e9a3e5dacef7902253296a3f0f7025cec5d55edfabb034cd645b92d2e0f99e5d",
+      "experiments/m4/researcher_workflow/run.py": "c397e518c2e60f114734f832c34c4cca47c4dd580da428d58546b2940a980152",
+      "experiments/m4/researcher_workflow/test_numerical.py": "d8bb59d33467438ca532938ecfed61f84c3a12222eb200bf12bf1f49b24595d4",
+      "experiments/m4/researcher_workflow/worker.py": "b3861fc44e38b591b4d5822d4ad927876644d6f5921133adfdd806d0505e6f94",
+      "experiments/m4/secure_study/__init__.py": "d9bec3bca5671b5833dda6a170e2c3d59d19b1e0a0e2d7c7853ce203d04a9314",
+      "experiments/m4/secure_study/__main__.py": "ebfd82162664090f28661c51279794e1ab9a80aca1edd666e146048028357207",
+      "experiments/m4/secure_study/adapter.py": "2985a704beabc234a4ef25e02706a7b5f8d5213d93f4d6380645e56aa97caf0b",
+      "experiments/m4/secure_study/common.py": "a4318d0f7bcd0bbe9fdabfd70b6a27ba342162dc9eec616c525e3a83907ae52a",
+      "experiments/m4/secure_study/compat.py": "2ccb3945449975631cbe3355bfa721e8470d4a2e6a74e13542f95c7657aa734e",
+      "experiments/m4/secure_study/protocol.json": "bee2e2315653a0ac7584545c50372f05c6342158f30b9744ca9be77b4ec2ef63",
+      "experiments/m4/secure_study/reference.py": "09cc89e5c0dd90c0eda3831444efd033c6677641e1780a722256601e2e1a156f",
+      "experiments/m4/secure_study/report.py": "b9610d87ded18d8fe916167b919f007e5bac1b9ea143433cf209746fbf685ceb",
+      "experiments/m4/secure_study/run.py": "54a68c4e29fbbc062be6a9bbcdff1fcbc5c337ddf9af17bc4b558a2fa2249a54",
+      "experiments/m4/secure_study/runtime.py": "e647f2929f93f7eff041e5d91942807551f2f3a16f3b0e55d16d87d256495a80",
+      "experiments/m4/secure_study/test_numerical.py": "cc48914fa7e12345e6ec3a6336a85842ce29aef115d874571431aa2493da2080",
+      "experiments/m4/secure_study/worker.py": "e18c2d73d95512dd3aa8fc7f47466698823782de44a0bec9cdac8ae0e1eb0ca4",
+      "experiments/maintained_campaigns/__init__.py": "8f65c15d74cfc0bd0f2559ae94c8e233f5ba2750fb206154fd3acbf1d11a97c1",
+      "experiments/maintained_campaigns/__main__.py": "7feb5b1a0cf9b5cbf6e41f161e42009b6908b5bda9c39ef8742afe6142254441",
+      "experiments/maintained_campaigns/common.py": "2ce817e847f3f49e1dcb566c00ff4332f859a5d28ec9bc2f24729c4bf7c0a0f6",
+      "experiments/maintained_campaigns/native.py": "353a54e51ba1a453bc2bdc0b3385cfa598b5cee46f54a80d1d5d3b9bdbfac0ba",
+      "experiments/maintained_campaigns/process.py": "dd059a80f33a7e2f0a0c478ca1b3b939603e1290e9fc612c652a0ccbc70cf1d7",
+      "experiments/maintained_campaigns/protocol.json": "846e73854e4bbd91b28ed2adc3d98b5d994f818b033565a81b07093aa070afaf",
+      "experiments/maintained_campaigns/report.py": "424ec0bd81cec9878a4eb0fe050cec5823db71a202f242c1850762cdabf0ff44",
+      "experiments/maintained_campaigns/run.py": "d66ec9789cb198d60b930550a0e32ff02282b8f516b9ba3e198120ed8ffa4283",
+      "experiments/maintained_campaigns/runtime.py": "104c4017fbf82270bba0af5f44cb74ae16362ddf45697bc713c6c734018dfe8c",
+      "pyproject.toml": "e4af0618d9a65625486fd760f76471c75876f20060ddaf75905505d231a557b6",
+      "uv.lock": "d94ae2c899c72e67e77574c28c71c1b628b1929cd22438f4b95755b58e1ac03c"
+    },
+    "full_reader_tracked_count": 1000,
+    "archive_cli_unchanged_after_native_candidate": true,
+    "final_gui_delta": "Clear stale availability errors and show pending export before publication; numerical sources and archive CLI unchanged"
+  },
+  "native_acceptance": {
+    "accepted_slots": 1,
+    "accepted_source_scenarios": 2,
+    "attempts": 2,
+    "campaign": "WORKTREES/durable-archive-native-proof/OpenT1D/results/ot041-native/campaign",
+    "cancel_boundary": {
+      "first_attempt_sealed": true,
+      "first_native_accepted": true,
+      "first_native_manifest_sha256": "cce6f98dabf8f39698d3daeab5ae40b5a165921ca8b1bdffd95ea5f0456f34df",
+      "leader_pid": 43040,
+      "observed_monotonic": 153395.123581458,
+      "owned_at_cancel": [
+        {
+          "command": "WORKTREES/durable-archive-native-proof/OpenT1D/.venv/bin/python -B -E -s -S -m experiments.maintained_campaigns run --config REPOSITORY/results/durable-archive-verification/native-campaign-config.json --output WORKTREES/durable-archive-native-proof/OpenT1D/results/ot041-native/campaign",
+          "pgid": 43040,
+          "pid": 43040,
+          "ppid": 43030,
+          "started_at": "Sun Oct 4 15:48:25 2026"
+        },
+        {
+          "command": "WORKTREES/durable-archive-native-proof/OpenT1D/experiments/m0/simglucose_secure/.venv/bin/python -B -E -s -m experiments.m4.secure_study.worker WORKTREES/durable-archive-native-proof/OpenT1D/results/ot041-native/campaign/sessions/session-0001/attempts/fasting--r002/archive/historical --kind baseline",
+          "pgid": 47594,
+          "pid": 47594,
+          "ppid": 47591,
+          "started_at": "Sun Oct 4 15:53:31 2026"
+        },
+        {
+          "command": "WORKTREES/durable-archive-native-proof/OpenT1D/.venv/bin/python -B -S -m experiments.m4.secure_study.reference --output WORKTREES/durable-archive-native-proof/OpenT1D/results/ot041-native/campaign/sessions/session-0001/attempts/fasting--r002/archive/historical --timeout-seconds 600",
+          "pgid": 47591,
+          "pid": 47591,
+          "ppid": 47583,
+          "started_at": "Sun Oct 4 15:53:31 2026"
+        },
+        {
+          "command": "WORKTREES/durable-archive-native-proof/OpenT1D/.venv/bin/python -B -E -s -S -m experiments.m4.secure_study run --config WORKTREES/durable-archive-native-proof/OpenT1D/results/ot041-native/campaign/frozen/fasting/config.json --output WORKTREES/durable-archive-native-proof/OpenT1D/results/ot041-native/campaign/sessions/session-0001/attempts/fasting--r002/archive",
+          "pgid": 47583,
+          "pid": 47583,
+          "ppid": 43040,
+          "started_at": "Sun Oct 4 15:53:31 2026"
+        }
+      ],
+      "second_historical_status": "started",
+      "second_reference_state": {
+        "attempts": [
+          {
+            "argv": [
+              "WORKTREES/durable-archive-native-proof/OpenT1D/.venv/bin/python",
+              "-B",
+              "-S",
+              "-m",
+              "experiments.m4.secure_study.reference",
+              "--output",
+              "WORKTREES/durable-archive-native-proof/OpenT1D/results/ot041-native/campaign/sessions/session-0001/attempts/fasting--r002/archive/historical",
+              "--timeout-seconds",
+              "600"
+            ],
+            "error_type": null,
+            "exit_code": null,
+            "stage": "historical",
+            "status": "started",
+            "timeout_seconds": 600
+          }
+        ],
+        "error_type": null,
+        "stage": "historical",
+        "status": "started"
+      },
+      "signal": 15
+    },
+    "execution_revision": "887cb329b362067055b3d296d2f7a589e5c0a8aa",
+    "execution_root": "WORKTREES/durable-archive-native-proof/OpenT1D",
+    "first_study": "WORKTREES/durable-archive-native-proof/OpenT1D/results/ot041-native/campaign/sessions/session-0001/attempts/fasting--r001/archive",
+    "forced_by_acceptance_driver": false,
+    "limitations": "Internal software evidence only; no biological or independent usability claim",
+    "native_exit_code": 1,
+    "no_observed_survivors": true,
+    "planned_slots": 2,
+    "planned_source_scenarios": 4,
+    "schema": "opent1d.ot041-native-acceptance/1",
+    "status": "interrupted"
+  },
+  "process_cleanup": {
+    "forced_by_acceptance_driver": false,
+    "no_observed_survivors": true,
+    "observed_identities": 25,
+    "survivors": []
+  },
+  "relocation": {
+    "original_execution_removed": {
+      "checked_at": "2026-10-04T14:03:20.433163+00:00",
+      "original_checkout_exists": false,
+      "original_native_campaign_exists": false,
+      "original_numerical_environment_exists": false,
+      "managed_worktree_archived": true
+    },
+    "retained_reader_checkout": "WORKTREES/durable-archive-reader/OpenT1D",
+    "retained_gui_reader_checkout": "WORKTREES/durable-archive-gui-reader/OpenT1D",
+    "retained_store": "USER_HOME/Documents/OpenT1D-archives/2026-10-04-ot041",
+    "all_four_original_and_restored_packages_reconstructed": true,
+    "native_and_report_bytes_identical": true,
+    "partial_status_and_denominators_unchanged": true,
+    "all_original_packages_and_reader_unchanged": true,
+    "model_execution_dispatched_by_reconstruction": false,
+    "refused_real_package_copy_cases": [
+      "additional-native-file",
+      "changed-native-byte",
+      "duplicate-manifest-key",
+      "existing-restore-destination",
+      "hardlinked-native-file",
+      "manifest-parent-traversal",
+      "missing-native-file",
+      "overlapping-restore-destination",
+      "restore-into-tooling-checkout",
+      "symlink-native-file",
+      "unregistered-reader-task",
+      "wrong-recorded-reader-revision",
+      "wrong-trusted-checkout-head"
+    ],
+    "no_rejected_outputs_or_owned_staging": true,
+    "final_gui_package_independently_reconstructed": true
+  },
+  "packages": {
+    "native-study": {
+      "path": "USER_HOME/Documents/OpenT1D-archives/2026-10-04-ot041/native-study",
+      "manifest_sha256": "1131f313d8c00718e2e84a7dfe2dc28f62b18eed04894442911ebb374406c435",
+      "task": "m4-study-secure",
+      "reader_revision": "887cb329b362067055b3d296d2f7a589e5c0a8aa",
+      "recorded_complete": true,
+      "report_artifacts": {
+        "figure.svg": {
+          "sha256": "b17d1da2d79029f14b370559279c3fd4e7dd044fbb682d68dcd9fbd93fac248a",
+          "size": 191950
+        },
+        "report.json": {
+          "sha256": "ac42874afbd253960f2a6ba3188f1f4d3dff606cce92656a5b8ed52b4d0bb0e5",
+          "size": 1014082
+        },
+        "report.md": {
+          "sha256": "7b768f26157a4d233cc9281600e61d5b1f1831a8eecb8f2cccd803713339a83b",
+          "size": 2478
+        }
+      }
+    },
+    "native-campaign": {
+      "path": "USER_HOME/Documents/OpenT1D-archives/2026-10-04-ot041/native-campaign",
+      "manifest_sha256": "74875ab9e9303bfc2ef4d714c987aa2d48d9b556f66ab5a1c6a583c8264487c8",
+      "task": "maintained-campaign",
+      "reader_revision": "887cb329b362067055b3d296d2f7a589e5c0a8aa",
+      "recorded_complete": false,
+      "report_artifacts": {
+        "report.json": {
+          "sha256": "4ea07b2736caa2597e0149448384ed241624e92dea014d77d225ddfc6ed872fe",
+          "size": 7154
+        },
+        "report.md": {
+          "sha256": "dfe9426e1849b863806893ad25db916784d4d870d50172eec2c4c73d7acf9be3",
+          "size": 1245
+        }
+      }
+    },
+    "restored-study": {
+      "path": "USER_HOME/Documents/OpenT1D-archives/2026-10-04-ot041/restored-study",
+      "manifest_sha256": "1131f313d8c00718e2e84a7dfe2dc28f62b18eed04894442911ebb374406c435",
+      "task": "m4-study-secure",
+      "reader_revision": "887cb329b362067055b3d296d2f7a589e5c0a8aa",
+      "recorded_complete": true,
+      "report_artifacts": {
+        "figure.svg": {
+          "sha256": "b17d1da2d79029f14b370559279c3fd4e7dd044fbb682d68dcd9fbd93fac248a",
+          "size": 191950
+        },
+        "report.json": {
+          "sha256": "ac42874afbd253960f2a6ba3188f1f4d3dff606cce92656a5b8ed52b4d0bb0e5",
+          "size": 1014082
+        },
+        "report.md": {
+          "sha256": "7b768f26157a4d233cc9281600e61d5b1f1831a8eecb8f2cccd803713339a83b",
+          "size": 2478
+        }
+      }
+    },
+    "restored-campaign": {
+      "path": "USER_HOME/Documents/OpenT1D-archives/2026-10-04-ot041/restored-campaign",
+      "manifest_sha256": "74875ab9e9303bfc2ef4d714c987aa2d48d9b556f66ab5a1c6a583c8264487c8",
+      "task": "maintained-campaign",
+      "reader_revision": "887cb329b362067055b3d296d2f7a589e5c0a8aa",
+      "recorded_complete": false,
+      "report_artifacts": {
+        "report.json": {
+          "sha256": "4ea07b2736caa2597e0149448384ed241624e92dea014d77d225ddfc6ed872fe",
+          "size": 7154
+        },
+        "report.md": {
+          "sha256": "dfe9426e1849b863806893ad25db916784d4d870d50172eec2c4c73d7acf9be3",
+          "size": 1245
+        }
+      }
+    },
+    "package-c56f5fdca3ea41e8b5c213b6f29ab8c1": {
+      "path": "USER_HOME/Documents/OpenT1D-archives/2026-10-04-ot041/package-c56f5fdca3ea41e8b5c213b6f29ab8c1",
+      "manifest_sha256": "4cc1026aeb23ffea8473378f89902b7f4770ea0b05890d76c81cdc9072bd65ed",
+      "task": "m4-study-secure",
+      "reader_revision": "887cb329b362067055b3d296d2f7a589e5c0a8aa",
+      "recorded_complete": true,
+      "report_artifacts": {
+        "figure.svg": {
+          "sha256": "b17d1da2d79029f14b370559279c3fd4e7dd044fbb682d68dcd9fbd93fac248a",
+          "size": 191950
+        },
+        "report.json": {
+          "sha256": "ac42874afbd253960f2a6ba3188f1f4d3dff606cce92656a5b8ed52b4d0bb0e5",
+          "size": 1014082
+        },
+        "report.md": {
+          "sha256": "7b768f26157a4d233cc9281600e61d5b1f1831a8eecb8f2cccd803713339a83b",
+          "size": 2478
+        }
+      }
+    },
+    "package-71eb6ffc5a0945a4984506771caad4c3": {
+      "path": "USER_HOME/Documents/OpenT1D-archives/2026-10-04-ot041/package-71eb6ffc5a0945a4984506771caad4c3",
+      "manifest_sha256": "3edd273e9b87bc492236315e2ca52f6aee39cb523fb0a2018aa84e51a3afc5fd",
+      "task": "m4-study-secure",
+      "reader_revision": "d9ad693846411c8724d5b42a453202c75cb28125",
+      "recorded_complete": true,
+      "report_artifacts": {
+        "figure.svg": {
+          "sha256": "b17d1da2d79029f14b370559279c3fd4e7dd044fbb682d68dcd9fbd93fac248a",
+          "size": 191950
+        },
+        "report.json": {
+          "sha256": "ac42874afbd253960f2a6ba3188f1f4d3dff606cce92656a5b8ed52b4d0bb0e5",
+          "size": 1014082
+        },
+        "report.md": {
+          "sha256": "7b768f26157a4d233cc9281600e61d5b1f1831a8eecb8f2cccd803713339a83b",
+          "size": 2478
+        }
+      }
+    }
+  },
+  "browser_acceptance": {
+    "schema": "opent1d.ot041-browser-acceptance/1",
+    "native_candidate": "887cb329b362067055b3d296d2f7a589e5c0a8aa",
+    "final_gui_candidate": "d9ad693846411c8724d5b42a453202c75cb28125",
+    "actual_headed_browser": true,
+    "initial_gui_export_native_inventory_unchanged": true,
+    "restored_partial_campaign_registered_and_reconstructed_after_original_removed": true,
+    "partial_campaign_accepted_slots": 1,
+    "partial_campaign_planned_slots": 2,
+    "partial_campaign_accepted_source_scenarios": 2,
+    "partial_campaign_planned_source_scenarios": 4,
+    "native_campaign_downloads_byte_identical": true,
+    "cached_report_tamper_download_refused_and_reconstruction_withdrawn": true,
+    "explicit_reconstruction_after_cache_refusal_passed": true,
+    "restart_live_verification_withdrawn_to_recorded": true,
+    "older_reader_mismatch_explicit_with_integrity_separate": true,
+    "fresh_export_pending_quiet_and_busy_controls_disabled": true,
+    "final_gui_export_and_explicit_reconstruction_passed": true,
+    "final_gui_package": "USER_HOME/Documents/OpenT1D-archives/2026-10-04-ot041/package-71eb6ffc5a0945a4984506771caad4c3",
+    "final_gui_package_identity": "3edd273e9b87bc492236315e2ca52f6aee39cb523fb0a2018aa84e51a3afc5fd",
+    "final_gui_native_inventory_unchanged": true,
+    "final_gui_downloads": {
+      "report.json": {
+        "sha256": "ac42874afbd253960f2a6ba3188f1f4d3dff606cce92656a5b8ed52b4d0bb0e5",
+        "size": 1014082
+      },
+      "report.md": {
+        "sha256": "7b768f26157a4d233cc9281600e61d5b1f1831a8eecb8f2cccd803713339a83b",
+        "size": 2478
+      },
+      "figure.svg": {
+        "sha256": "b17d1da2d79029f14b370559279c3fd4e7dd044fbb682d68dcd9fbd93fac248a",
+        "size": 191950
+      }
+    },
+    "no_numerical_models_dispatched_by_browser": true,
+    "scope": "Internal browser/software verification, no independent human use or model-validity claim",
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "document_width": 390,
+      "horizontal_overflow": false,
+      "durable_navigation_visible": true,
+      "measurement_log": "output/playwright/mobile-layout.log",
+      "screenshot": "output/playwright/.playwright-cli/page-2026-10-04T14-15-23-505Z.png"
+    }
+  },
+  "checks": {
+    "intermediate_full_repository": {
+      "candidate": "a55e5d0283eadfd5e3076c7962e65c93e9b8dfb5",
+      "command": "uv run --locked python scripts/check.py",
+      "exit_code": 0,
+      "tests": 1164,
+      "existing_skips": 13,
+      "log": "candidate-repository-check.log"
+    },
+    "archive_cli_focused": {
+      "tests": 24,
+      "exit_code": 0,
+      "log": "final-cli-focused-check.log"
+    },
+    "final_gui_focused": {
+      "tests": 16,
+      "exit_code": 0,
+      "log": "availability-gui-focused-check.log"
+    },
+    "final_repository": {
+      "status": "passed",
+      "candidate": "90c0d3cf959a8189bb0abb518b6f28856cf0b99f",
+      "command": "uv run --locked python scripts/check.py",
+      "exit_code": 0,
+      "tests": 1167,
+      "existing_skips": 13,
+      "test_seconds": 174.557,
+      "lint_format_metadata_navigation_and_documentation_build": "passed",
+      "log": "final-repository-check.log",
+      "postcheck_changes": "Only this verification metadata and acceptance prose; scientific and archive/GUI control bytes unchanged"
+    },
+    "final_tooling_sync": {
+      "command": "uv sync --locked",
+      "exit_code": 0,
+      "log": "final-tooling-sync.log"
+    }
+  },
+  "raw_evidence": {
+    "root": "REPOSITORY/results/durable-archive-verification",
+    "files": {
+      "native-acceptance-result.json": {
+        "sha256": "57d597a4c849881cdadc4cf3e1ec17dbfbc2f6e0a6c74b885375ca410f63b7cd",
+        "size": 4308
+      },
+      "cancel-boundary.json": {
+        "sha256": "2a39b854f609ad2638ab59e977de366168a9ad241ddf74b63df39768c28ba449",
+        "size": 3269
+      },
+      "process-cleanup.json": {
+        "sha256": "0a2f91796547bb26b47f0309f85ec78e3abf79e476bd0357caebfc969e04b83f",
+        "size": 124
+      },
+      "owned-process-observations.json": {
+        "sha256": "c465ace9fdfa8b767ed5b2376d085918cd7a98062988dec69afd40a37b5c826c",
+        "size": 10550
+      },
+      "native-campaign-config.json": {
+        "sha256": "e4be07b5dac91c242850d887a8f0e05f37d9f1380d2532d86ca27d7aff80ec83",
+        "size": 314
+      },
+      "native-study-config.json": {
+        "sha256": "ee04b4b7269a2dc15116a60a8875db73aa9e1a9dbd354754035421b66e2c76a2",
+        "size": 834
+      },
+      "native-first-study-inventory.json": {
+        "sha256": "06f7c911513aeb4768535ceaa00d83e10de6d7af5c3104200af335d434ba8fcb",
+        "size": 83527
+      },
+      "native-campaign-inventory.json": {
+        "sha256": "9e9bc7bb97ba783cdf2858e77d44fb7b6ba3239a9ca34d684346df50d71e798f",
+        "size": 196385
+      },
+      "native-run-argv.json": {
+        "sha256": "9e2fd82e72596f0cde2dce7481428eaa5d5c3342b1a8aa4381f37673085cc5ae",
+        "size": 654
+      },
+      "native-run-stdout.log": {
+        "sha256": "d778c9a4b456502cc4bccc1ab5bb9eb1ba172bce6eb4e4faf3563b3b37e6c548",
+        "size": 4962
+      },
+      "native-run-stderr.log": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size": 0
+      },
+      "original-execution-removed.json": {
+        "sha256": "46796ca7cf4c11b5391f8433bb03e7d74f347ed1b1d982580eb39de46d3e70d4",
+        "size": 223
+      },
+      "preserved-package-receipts.json": {
+        "sha256": "6d97c01bec03d8e373f16bc236e0b310a62b65006e7a6dc77dd49d827d375a18",
+        "size": 3762
+      },
+      "pre-removal-preservation.json": {
+        "sha256": "fdd0284fc237ffd334140c9572e57a3bd34390eded2bc18add722dad13ee7649",
+        "size": 315
+      },
+      "frozen-candidate.json": {
+        "sha256": "97b0f9150a548921d57be39c3b82c78b2beef1542bed225128054e759afc5080",
+        "size": 179238
+      },
+      "final-code-freeze.json": {
+        "sha256": "0230ec4c3ca30c874a11b22592b5cb13aa5146570a560b1f82fc60217ce6c3b4",
+        "size": 179176
+      },
+      "independent-acceptance.json": {
+        "sha256": "d3cde853df186b82a27be2d765af679ab78a0394e1ffedc0a4a5d7519b035a19",
+        "size": 28224
+      },
+      "independent-final-source-review.json": {
+        "sha256": "e5276d096f587b8da36d82db5517b60620f922610746dfb5389972a99509d805",
+        "size": 770
+      },
+      "independent-final-gui-acceptance.json": {
+        "sha256": "a71b0c8132aca95a613bf84ccd2f5c7813478ebeb7ac00567850168fd02732d2",
+        "size": 3145
+      },
+      "browser-acceptance.json": {
+        "sha256": "081276a386039e7d999028747606d3783477b02d0a74ad183082806ad01420bc",
+        "size": 2168
+      },
+      "gui-reader-mismatch-pointer.json": {
+        "sha256": "97ca2191974415b1304b86408f31db54880218c3c095f5d511e3262acd053d4e",
+        "size": 1252
+      },
+      "gui-cached-tamper-withdrawal.json": {
+        "sha256": "a0ac3dece34cfd25ae2d33810bb638ff098337ba125f6883ebb22b0807fde12e",
+        "size": 1239
+      },
+      "gui-campaign-reverified-pointer.json": {
+        "sha256": "60596707f6f81118f8d1817bfbec46490e2ba3c777e16b19a40add9ac5d5a67c",
+        "size": 1264
+      },
+      "gui-final-reconstructed-pointer.json": {
+        "sha256": "26d5230173b88befb583db9b5a9cf9700b2d7f6b058d63b45003d13d9b0439f8",
+        "size": 1835
+      },
+      "output/playwright/mobile-layout.log": {
+        "sha256": "fc5eeb664bd4686b0a8c6223722711f82c59741088755b4cfba261ef0f17adc6",
+        "size": 473
+      },
+      "output/playwright/.playwright-cli/page-2026-10-04T14-15-23-505Z.png": {
+        "sha256": "0df613ba79b58981add524523a6acc9f3c253559b92157b2597b971ac2dc74d8",
+        "size": 68945
+      },
+      "candidate-repository-check.log": {
+        "sha256": "9f70ae2df9b8fffa960948751fa87b858cccbe9dde6912305d211bbbdd8b3efe",
+        "size": 255120
+      },
+      "final-cli-focused-check.log": {
+        "sha256": "ada2b1fb293c77fc616dd3510a81a0d859e63aa15ca45b54d89903191e4570c7",
+        "size": 4656
+      },
+      "availability-gui-focused-check.log": {
+        "sha256": "4c9c06fdddf516636b59799af20a485cc5d71faf48d82f1f6235d495821f03b9",
+        "size": 3276
+      },
+      "final-repository-check.log": {
+        "sha256": "a7448dd335766ecd34a65a8ccaf5e472bf58fb5dc70c52a78f907a1d5ced30a0",
+        "size": 255988
+      },
+      "final-tooling-sync.log": {
+        "sha256": "595f307ef8e68381d8b0bd17f71d06187c31cd9318d9bbb6827da0c903e3bcd5",
+        "size": 141
+      },
+      "final-documentation-source-identity.json": {
+        "sha256": "26f702abb6abd35cb4209648286e6013e7b849d166b6ae461becaa50f337936f",
+        "size": 3737
+      }
+    },
+    "retention": "Ignored primary repository results outside disposable implementation worktrees; native packages separately retained outside all checkouts. One local store is not a redundant backup."
+  },
+  "remaining": {
+    "hosted_ci": "not_run_actions_minutes_exhausted",
+    "main_publication": "completed_user_requested_main_integration",
+    "independent_human_gui_use": "open",
+    "m3_gui": "proposed_separate_increment",
+    "old_missing_ignored_raw_artifacts": "not_recovered",
+    "redistribution_rights": "not_established_by_packaging"
+  },
+  "main_integration": {
+    "schema": "opent1d.ot041-main-integration/1",
+    "date": "2026-10-04",
+    "user_requested": true,
+    "method": "fast-forward",
+    "old_main": "6e339cc1d01109c27787e45f11e9ddca72793041",
+    "accepted_feature_revision": "89c31857ae75d565363ee309b0cb983bbeb81350",
+    "tested_clean_main_revision": "89c31857ae75d565363ee309b0cb983bbeb81350",
+    "scientific_file_count": 112,
+    "archive_gui_control_file_count": 22,
+    "scientific_and_control_bytes_unchanged": true,
+    "retained_packages_and_compatible_readers_available_and_unchanged": true,
+    "main_reconstruct": {
+      "task": "maintained-campaign",
+      "exit_code": 0,
+      "complete": false,
+      "reconstruction_verified": true,
+      "reader_revision": "887cb329b362067055b3d296d2f7a589e5c0a8aa",
+      "report_artifacts": {
+        "report.json": {
+          "sha256": "4ea07b2736caa2597e0149448384ed241624e92dea014d77d225ddfc6ed872fe",
+          "size": 7154
+        },
+        "report.md": {
+          "sha256": "dfe9426e1849b863806893ad25db916784d4d870d50172eec2c4c73d7acf9be3",
+          "size": 1245
+        }
+      }
+    },
+    "locked_repository_check": {
+      "command": "uv run --locked python scripts/check.py",
+      "exit_code": 0,
+      "tests": 1167,
+      "existing_skips": 13,
+      "test_seconds": 175.439,
+      "lint_format_metadata_navigation_and_documentation_build": "passed"
+    },
+    "tooling_sync": {
+      "command": "uv sync --locked",
+      "exit_code": 0
+    },
+    "raw_evidence_root": "REPOSITORY/results/durable-archive-publication",
+    "receipts": {
+      "pre-integration.json": {
+        "sha256": "3c9a9f8bf7619a0f633070ca89e0d120f56ff47fcb137f16bae24e460279224b",
+        "size": 256
+      },
+      "tooling-sync.log": {
+        "sha256": "0c1563ed1ef1bc0e70d5bc543a8aebb7ff980b3bf3f2fcc4aee00797b518f017",
+        "size": 141
+      },
+      "main-repository-check.log": {
+        "sha256": "bf34582d758e3612373faaba5767a0e118d1d73400da02706266bd15af062ea6",
+        "size": 255892
+      },
+      "independent-source-audit.json": {
+        "sha256": "178792ca2c021768cee6d3f8029ae8acf9abc3515e150978e7d96aa29c95d2d6",
+        "size": 3721
+      },
+      "main-publication-audit.json": {
+        "sha256": "d7663fbdcbaa9711053e3abe05fed75e4fe48eabbcdb3db04aa36b8c4949066f",
+        "size": 42045
+      }
+    },
+    "postcheck_changes": "Main integration evidence prose and metadata only; scientific and archive/GUI control bytes unchanged.",
+    "hosted_verification": "No manual hosted dispatch; Actions minutes exhausted; no hosted pass claimed.",
+    "billing_and_repository_protection_changes": false,
+    "scope": "Internal main transfer/source/storage verification; no numerical campaign rerun, independent human use or scientific validity claim."
+  }
+}

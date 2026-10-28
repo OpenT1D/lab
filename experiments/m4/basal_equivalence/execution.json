@@ -1,0 +1,89 @@
+{
+  "schema": "m4-basal-equivalence-execution/1",
+  "date": "2026-09-27",
+  "base_commit": "07abe0f",
+  "protocol_sha256": "fdfe359061d45c787b43b5b26a4235b92f34086e588a734ec60371453719b426",
+  "bc008_reference": {
+    "protocol": "BC-008/2",
+    "manifest_sha256": "770a214a3e50b002c9b8f355ec502005fad645fc931773468b8f0c6c4afdeff2",
+    "passed": true
+  },
+  "report_sha256": "1789cb63c03d35dce0858b717f8c5932527342ecf30a94015f967192e5c443d2",
+  "passed": true,
+  "target_auc_mg_min_dl": 3378.0908810037245,
+  "native_basal_sc_rate_pmol_kg_min": 1.2386244136,
+  "models": {
+    "reference_adapter": {
+      "model_id": "bc008-equation-adapter-example/1",
+      "source_sha256": "2d65b88bfe858682fc0d05d24e404bad4f16166da4c4a94f916d76c5ba560215",
+      "status": "matched",
+      "tested_count": 5,
+      "endpoint_auc_mg_min_dl": [
+        3674.890892472114,
+        3085.2382148569523
+      ],
+      "reference_grid_confirmation": null,
+      "solution": {
+        "sc_factor_of_native_basal": 0.75,
+        "sc_rate_pmol_kg_min": 0.9289683101999999,
+        "change_from_075_native_basal_pmol_kg_min": 0.0,
+        "reference_solver_auc_mg_min_dl": 3378.0908810037245,
+        "target_residual_mg_min_dl": 0.0,
+        "fasting_final_glucose_mg_dl": 138.56000000005938
+      }
+    },
+    "synthetic_variant": {
+      "model_id": "bc008-equation-adapter-synthetic-variant/1",
+      "source_sha256": "2d65b88bfe858682fc0d05d24e404bad4f16166da4c4a94f916d76c5ba560215",
+      "status": "unbracketed",
+      "tested_count": 5,
+      "endpoint_auc_mg_min_dl": [
+        4607.38491530245,
+        3968.6850378017657
+      ],
+      "reference_grid_confirmation": [
+        {
+          "factor": 0.5,
+          "reference_auc_mg_min_dl": 4607.384905314301
+        },
+        {
+          "factor": 0.625,
+          "reference_auc_mg_min_dl": 4446.003737211713
+        },
+        {
+          "factor": 0.75,
+          "reference_auc_mg_min_dl": 4285.753195975468
+        },
+        {
+          "factor": 0.875,
+          "reference_auc_mg_min_dl": 4126.644041023263
+        },
+        {
+          "factor": 1.0,
+          "reference_auc_mg_min_dl": 3968.685047612255
+        }
+      ],
+      "solution": null
+    }
+  },
+  "metrics": {
+    "glucose_solver_error_mg_dl": 8.163637407402316e-08,
+    "insulin_solver_error_pmol_l": 2.4893075212289565e-06,
+    "auc_solver_error_mg_min_dl": 9.98814903141465e-06,
+    "insulin_mass_error_pmol_kg": 1.9895196601282805e-11,
+    "glucose_mass_error_mg_kg": 3.6669374661735255e-08,
+    "negative_amount_tolerance": 0.0,
+    "anchor_adapter_glucose_error_mg_dl": 0.0,
+    "anchor_basal_control_glucose_error_mg_dl": 0.0,
+    "repeat_error": 0.0
+  },
+  "artifact_checks": {
+    "source_free_reconstruction_byte_identical": true,
+    "source_snapshots_match_current_implementation": true,
+    "resealed_auc_change_rejected": true,
+    "injected_model_failure_retained": true,
+    "failed_primary_attempt_count": 1,
+    "failure_report_has_no_model_equivalence": true
+  },
+  "scope": "One invented meal-AUC target and fixed SC step from matched initial states; no clinical dose or human validation"
+}

@@ -1,0 +1,395 @@
+{
+  "artifacts": {
+    "base": "results/integration",
+    "versioned": false
+  },
+  "base_commit": "a0a10da6f32c4d525946a39e5f53891577b519b1",
+  "claim": "internal_synthetic_software_verification_only",
+  "date": "2026-10-02",
+  "execution_commit": "e90fc9a540f5f695cd5504eb94a94700af9f8ec8",
+  "execution_git_dirty": false,
+  "integration_review": {
+    "baseline_files_unchanged_outside_shared_docs_and_ci": 754,
+    "branch_files_byte_unchanged": 42,
+    "kind": "separate_agent_review",
+    "source_tip_ancestry_preserved": true
+  },
+  "limitations": [
+    "Synthetic software verification, not human or treatment evidence.",
+    "Local checks completed; hosted CI was not executed for this integration.",
+    "Unrelated historical native campaigns were not rerun.",
+    "Hashes record saved artifact consistency, not authenticated execution."
+  ],
+  "m3": {
+    "candidate_outputs_independently_recomputed": false,
+    "evaluation_refit": false,
+    "fresh_process_traces_identical": true,
+    "human_evaluation": false,
+    "independent_reconstruction": true,
+    "kind": "synthetic",
+    "methods": {
+      "ridge": {
+        "paired_targets": 1516,
+        "planned_people": 2,
+        "reference_predictions_checked": 1550
+      },
+      "trend": {
+        "paired_targets": 1516,
+        "planned_people": 2,
+        "reference_predictions_checked": 1550
+      }
+    },
+    "model_scaler_values_unchanged": true,
+    "native_donor_model_sha256": "69a740307816a96938f7e88c8230fc00d3a61e3b8c183941ff8aab8b678d4367",
+    "original_inputs_removed": true,
+    "report_sha256": {
+      "ridge": {
+        "report.json": "fce6be671aef175ad9c40d19ff279721225b5b9c1c394e7b410c5b5c771dc40b",
+        "report.md": "7fb6563c6284c7de09dffc8862e85ce35e8d76b4ac92e2fbd5905e9e4b5c011a"
+      },
+      "trend": {
+        "report.json": "540ef3d78386daf8f7c61167481800e8c1cdbf61ca6436866dff855cb0de7f35",
+        "report.md": "9b7ec55f90973fbd08af1144163a9845d8f8fd6624426e432c8a4733c0d84cfb"
+      }
+    },
+    "ridge_adapter_source_sha256": "66c348d117f1f3d586f3ff2ea897d98bec3877895aa209ce3b3f2cde61339d13",
+    "verification_sha256": "5750fe0aa23388bb8e85695b38e29dc7effec604be6cf2f203faba4d8a8ec088",
+    "worked_examples_reference_checked": true
+  },
+  "m4": {
+    "numerical_test_log_sha256": "0a6a2cb5ea9be8b828e9f60aaec76d94d0560a3326846d5b6ba6023a1f44e600",
+    "numerical_tests_passed": 5,
+    "reference": {
+      "criteria_count": 20,
+      "manifest_sha256": "9d74e9d35ed255fc0c74ffc980e46094431347e7f25ba7166e0a4d1cfe5b8e9c",
+      "passed_criteria": 20,
+      "path": "results/integration/m4/dalla-man/reference",
+      "repeat_changed_files": [],
+      "report_sha256": "5ab6fd91378e2e16de1e4dfad6dd02896a9bfb00ac4390c2659f3156e7da6104",
+      "runtime": {
+        "numpy": "1.26.4",
+        "python": "3.12.13",
+        "scipy": "1.13.1"
+      },
+      "source_and_lock_snapshots_match_checkout": true,
+      "status": "completed",
+      "trajectory_counts": {
+        "primary": {
+          "attempted": 44,
+          "completed": 44,
+          "failed": 0
+        },
+        "repeat": {
+          "attempted": 44,
+          "completed": 44,
+          "failed": 0
+        }
+      }
+    },
+    "runs": {
+      "dalla-man": {
+        "accepted_observation_cases": 6,
+        "case_accounting": {
+          "primary": {
+            "fasting--bc008_reference": "completed",
+            "fasting--candidate": "completed",
+            "fasting--host_constant_basal": "completed",
+            "gastric_load_30g--bc008_reference": "completed",
+            "gastric_load_30g--candidate": "completed",
+            "gastric_load_30g--host_constant_basal": "completed"
+          },
+          "repeat": {
+            "fasting--bc008_reference": "completed",
+            "fasting--candidate": "completed",
+            "fasting--host_constant_basal": "completed",
+            "gastric_load_30g--bc008_reference": "completed",
+            "gastric_load_30g--candidate": "completed",
+            "gastric_load_30g--host_constant_basal": "completed"
+          }
+        },
+        "causal_attempts": {
+          "primary": {
+            "attempted": 8,
+            "completed": 8,
+            "failed": 0
+          },
+          "repeat": {
+            "attempted": 8,
+            "completed": 8,
+            "failed": 0
+          }
+        },
+        "causal_manifest_sha256": "be887040b90aac6b7f80f49647e2cb8016080d1bdc8d619506ab8f0e73b16d73",
+        "manifest_sha256": "818b88e812a34f241d14f5b2033e0c0081d02cf2a5b44d0ccfa65a54ad885dce",
+        "model_id": "bc008-equation-adapter-example/1",
+        "model_source_sha256": "2d65b88bfe858682fc0d05d24e404bad4f16166da4c4a94f916d76c5ba560215",
+        "observation_attempts": {
+          "primary": {
+            "attempted": 6,
+            "completed": 6,
+            "failed": 0
+          },
+          "repeat": {
+            "attempted": 6,
+            "completed": 6,
+            "failed": 0
+          }
+        },
+        "observation_checks": {
+          "coarsening_error_ratio": {
+            "limit": 0.6,
+            "passed": true,
+            "value": 0.1994057503325491
+          },
+          "equilibrium_drift_pmol_l": {
+            "limit": 1e-07,
+            "passed": true,
+            "value": 2.1934738470008597e-09
+          },
+          "finest_coarsening_error_pmol_l": {
+            "limit": 0.05,
+            "passed": true,
+            "value": 0.02985165604994222
+          },
+          "input_error_pmol_kg": {
+            "limit": 1e-07,
+            "passed": true,
+            "value": 4.547473508864641e-12
+          },
+          "mass_error_pmol_kg": {
+            "limit": 1e-07,
+            "passed": true,
+            "value": 5.9543481256696396e-12
+          },
+          "negative_tolerance_pmol_kg": {
+            "limit": 1e-09,
+            "passed": true,
+            "value": 0.0
+          },
+          "oracle_concentration_error_pmol_l": {
+            "limit": 1e-05,
+            "passed": true,
+            "value": 2.5867009975877235e-10
+          },
+          "parent_dose_relative_error": {
+            "limit": 0.0001,
+            "passed": true,
+            "value": 1.6277853875713776e-07
+          },
+          "parent_source_solver_error_pmol_l": {
+            "limit": 0.01,
+            "passed": true,
+            "value": 5.13832446813467e-07
+          },
+          "repeat_artifact_differences": {
+            "limit": 0,
+            "passed": true,
+            "value": 0
+          },
+          "scale_ambiguity_error_pmol_l": {
+            "limit": 1e-07,
+            "passed": true,
+            "value": 0.0
+          },
+          "solver_concentration_error_pmol_l": {
+            "limit": 1e-05,
+            "passed": true,
+            "value": 2.585073800482929e-10
+          },
+          "zero_state_error": {
+            "limit": 0,
+            "passed": true,
+            "value": 0.0
+          }
+        },
+        "observer_lock_sha256": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04",
+        "observer_runtime": {
+          "numpy": "2.2.6",
+          "python": "3.12.13",
+          "scipy": "1.15.3"
+        },
+        "passed": true,
+        "path": "results/integration/m4/dalla-man",
+        "reconstruction_byte_equal": {
+          "figure.svg": true,
+          "report.json": true,
+          "report.md": true
+        },
+        "reference_manifest_sha256": "9d74e9d35ed255fc0c74ffc980e46094431347e7f25ba7166e0a4d1cfe5b8e9c",
+        "repeat_changed": [],
+        "report_sha256": {
+          "figure.svg": "eebbfc6a694fe6bd17ee377a1998523f85c8b7b95ee51df6a49598a162853cb7",
+          "report.json": "a97ee5c92702d57cb2fa3b24f9d3afe3553dcab5b3137ce16a974ee815437957",
+          "report.md": "7f1fb617d10cb402f68359291360e39397aa4e43e4924bffafa0be93c41cf1b5"
+        },
+        "source_reference_subtree_identical": true
+      },
+      "ultradian": {
+        "accepted_observation_cases": 6,
+        "case_accounting": {
+          "primary": {
+            "fasting--bc008_reference": "completed",
+            "fasting--candidate": "completed",
+            "fasting--host_constant_basal": "completed",
+            "gastric_load_30g--bc008_reference": "completed",
+            "gastric_load_30g--candidate": "completed",
+            "gastric_load_30g--host_constant_basal": "completed"
+          },
+          "repeat": {
+            "fasting--bc008_reference": "completed",
+            "fasting--candidate": "completed",
+            "fasting--host_constant_basal": "completed",
+            "gastric_load_30g--bc008_reference": "completed",
+            "gastric_load_30g--candidate": "completed",
+            "gastric_load_30g--host_constant_basal": "completed"
+          }
+        },
+        "causal_attempts": {
+          "primary": {
+            "attempted": 8,
+            "completed": 8,
+            "failed": 0
+          },
+          "repeat": {
+            "attempted": 8,
+            "completed": 8,
+            "failed": 0
+          }
+        },
+        "causal_manifest_sha256": "e97c4de22c5bbb5a6f3246be7669c96dc20f15e3ae0164b718ae88925cefc260",
+        "manifest_sha256": "11d5170970af7583e89e2d7d955d9dfe2a2370a3bdf5e2cc2c76d3e684e0b34a",
+        "model_id": "ultradian-f1-basal-normalized/1",
+        "model_source_sha256": "27e128148a21bb5ba2234e64956fc17f7dbed2daf0d4244ec6a51dbc5e6f1f26",
+        "observation_attempts": {
+          "primary": {
+            "attempted": 6,
+            "completed": 6,
+            "failed": 0
+          },
+          "repeat": {
+            "attempted": 6,
+            "completed": 6,
+            "failed": 0
+          }
+        },
+        "observation_checks": {
+          "coarsening_error_ratio": {
+            "limit": 0.6,
+            "passed": true,
+            "value": 0.1994057503325491
+          },
+          "equilibrium_drift_pmol_l": {
+            "limit": 1e-07,
+            "passed": true,
+            "value": 2.1934738470008597e-09
+          },
+          "finest_coarsening_error_pmol_l": {
+            "limit": 0.05,
+            "passed": true,
+            "value": 0.02985165604994222
+          },
+          "input_error_pmol_kg": {
+            "limit": 1e-07,
+            "passed": true,
+            "value": 5.6843418860808015e-12
+          },
+          "mass_error_pmol_kg": {
+            "limit": 1e-07,
+            "passed": true,
+            "value": 5.9543481256696396e-12
+          },
+          "negative_tolerance_pmol_kg": {
+            "limit": 1e-09,
+            "passed": true,
+            "value": 0.0
+          },
+          "oracle_concentration_error_pmol_l": {
+            "limit": 1e-05,
+            "passed": true,
+            "value": 2.5867009975877235e-10
+          },
+          "parent_dose_relative_error": {
+            "limit": 0.0001,
+            "passed": true,
+            "value": 1.6277853875713776e-07
+          },
+          "parent_source_solver_error_pmol_l": {
+            "limit": 0.01,
+            "passed": true,
+            "value": 5.13832446813467e-07
+          },
+          "repeat_artifact_differences": {
+            "limit": 0,
+            "passed": true,
+            "value": 0
+          },
+          "scale_ambiguity_error_pmol_l": {
+            "limit": 1e-07,
+            "passed": true,
+            "value": 0.0
+          },
+          "solver_concentration_error_pmol_l": {
+            "limit": 1e-05,
+            "passed": true,
+            "value": 2.585073800482929e-10
+          },
+          "zero_state_error": {
+            "limit": 0,
+            "passed": true,
+            "value": 0.0
+          }
+        },
+        "observer_lock_sha256": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04",
+        "observer_runtime": {
+          "numpy": "2.2.6",
+          "python": "3.12.13",
+          "scipy": "1.15.3"
+        },
+        "passed": true,
+        "path": "results/integration/m4/ultradian",
+        "reconstruction_byte_equal": {
+          "figure.svg": true,
+          "report.json": true,
+          "report.md": true
+        },
+        "reference_manifest_sha256": "9d74e9d35ed255fc0c74ffc980e46094431347e7f25ba7166e0a4d1cfe5b8e9c",
+        "repeat_changed": [],
+        "report_sha256": {
+          "figure.svg": "6b3705544ef9808d33439619be16156f44efaa90cd0a2159083670a3caa0179b",
+          "report.json": "fd38f82cd8adf01bff2455342d38cc2a0830e2ee85fc20a992e43117e0255cc2",
+          "report.md": "01ab7917f53c76963745212b72652c8b479ddf9342db0bc7bb3014ae0d9ff636"
+        },
+        "source_reference_subtree_identical": true
+      }
+    },
+    "verification_summary_sha256": "b3eb7ec4cd8480c0fdba505270c0d8aba6059148eb62994bab26c328208dc87d"
+  },
+  "m5": {
+    "comparison_status": "complete",
+    "development_eligible_count": 20,
+    "evaluation_eligible_count": 7,
+    "manifest_sha256": "765ec50fe92f219405930ea8b65ab174759ea1713f54f7469cbc56a334296909",
+    "paired_count": 7,
+    "path": "results/integration/m5",
+    "reconstructed_report_equal": true,
+    "report_sha256": {
+      "report.json": "80753013e6b897d733db8481e3e3c7201f4d0863fbf2cf0c33e1f5e38c89f999",
+      "report.md": "cf219ff81f66d88fc1b8aa59a04b17e3a3dce0723e9fcef66dccf8f0c0696907"
+    },
+    "roster_count": 32
+  },
+  "repository_checks": {
+    "commands": [
+      "uv sync --locked",
+      "uv run --locked python scripts/check.py"
+    ],
+    "documentation_build_passed": true,
+    "tests_passed": 826
+  },
+  "schema": "researcher-workflow-integration/1",
+  "source_tips": {
+    "m3": "9b65a83a8860e3397bb9ba2bee7c44bee4a4fbd2",
+    "m4": "35345280bd6894704c5870a2e5ca89998a4a554f",
+    "m5": "e21e1cb837d8f0da96bbf7a5d615b0a83160ff5a"
+  }
+}

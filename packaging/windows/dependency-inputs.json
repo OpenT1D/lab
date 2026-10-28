@@ -1,0 +1,73 @@
+{
+  "build_tools": [
+    {
+      "name": "setuptools",
+      "sha256": "51a52592b3b99e102b609654876bd65f19f999935166d1352678931132b0c670",
+      "url": "https://files.pythonhosted.org/packages/95/9c/c510029fc6ef33a6275cd2c5d3cecd6613dfd6aa401d57c54f1c18852ccf/setuptools-84.0.0-py3-none-any.whl",
+      "version": "84.0.0"
+    },
+    {
+      "name": "wheel",
+      "sha256": "55c570405f142630c6b9f72fe09d9b67cf1477fcf543ae5b8dcb1f5b7377da81",
+      "url": "https://files.pythonhosted.org/packages/7d/cd/d7460c9a869b16c3dd4e1e403cce337df165368c71d6af229a74699622ce/wheel-0.43.0-py3-none-any.whl",
+      "version": "0.43.0"
+    },
+    {
+      "name": "hatchling",
+      "sha256": "08ecf7548fb48205e7f213d70c71e67b8271b7242093dc3f1da578b42c734a2c",
+      "url": "https://files.pythonhosted.org/packages/5f/80/91f51f439c05d4ec4623c22928ce16a938d6d793bf709477830823497859/hatchling-1.32.4-py3-none-any.whl",
+      "version": "1.32.4"
+    },
+    {
+      "name": "packaging",
+      "sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c",
+      "url": "https://files.pythonhosted.org/packages/63/34/ba1c580383c9eada3711951fef0795c80b829a078d72188184bcab9dd527/packaging-26.3-py3-none-any.whl",
+      "version": "26.3"
+    },
+    {
+      "name": "pathspec",
+      "sha256": "a00ce642f577bf7f473932318056212bc4f8bfdf53128c78bbd5af0b9b20b189",
+      "url": "https://files.pythonhosted.org/packages/f1/d9/7fb5aa316bc299258e68c73ba3bddbc499654a07f151cba08f6153988714/pathspec-1.1.1-py3-none-any.whl",
+      "version": "1.1.1"
+    },
+    {
+      "name": "pluggy",
+      "sha256": "7dd7b0d8832ba3cb632c306926ded123429211b83641b35dc5c41ad2d34f9bec",
+      "url": "https://files.pythonhosted.org/packages/40/9e/2b38731e0fc536806f16490e1a12d7f0dc2a1235aa8cc07bcc75416a7daa/pluggy-1.7.0-py3-none-any.whl",
+      "version": "1.7.0"
+    },
+    {
+      "name": "trove-classifiers",
+      "sha256": "8b1ff4f9c191b1040b71c37f1e445ab99732911e3cd91de52838453a854d7a17",
+      "url": "https://files.pythonhosted.org/packages/30/81/0da8afb52a71d0a4f2bd3152357b1a441e393b286374802b9d3addab4ab5/trove_classifiers-2026.9.21.13-py3-none-any.whl",
+      "version": "2026.9.21.13"
+    }
+  ],
+  "redistributed_sources": [
+    "certifi",
+    "docutils",
+    "pathspec",
+    "yamllint"
+  ],
+  "runtime_build_sources": {
+    "sha256": "e82909cfa3a7bf9f3ec655b8c565d67bd7fc2126aa4d8ee67c6348d8f70d036c",
+    "url": "https://codeload.github.com/astral-sh/python-build-standalone/tar.gz/20261021"
+  },
+  "schema": "opent1d.windows-dependency-inputs/1",
+  "vcs": {
+    "glucosim": {
+      "backend": "hatchling.build",
+      "commit": "6422a91d533125a8feb4f2e8737aecd67fec95c9",
+      "repository": "https://github.com/HassDhia/glucosim",
+      "sha256": "09b6364c42020918261489b40deeaf1ae1aa00f98854220cf34c8fb35af9160d",
+      "url": "https://codeload.github.com/HassDhia/glucosim/tar.gz/6422a91d533125a8feb4f2e8737aecd67fec95c9"
+    },
+    "simglucose": {
+      "backend": "setuptools.build_meta",
+      "commit": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc",
+      "repository": "https://github.com/jxx123/simglucose",
+      "sha256": "f8338e41ab2ec345a7a406bb613a1db07d5e263db75fb77ff5f67fac562d3d69",
+      "url": "https://codeload.github.com/jxx123/simglucose/tar.gz/a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc"
+    }
+  }
+}

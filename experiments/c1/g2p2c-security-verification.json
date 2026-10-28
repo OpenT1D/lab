@@ -1,0 +1,174 @@
+{
+  "checks": [
+    {
+      "command": "uv sync --locked --project experiments/c1/g2p2c_policy_source",
+      "exit_code": 0,
+      "log": "Tool result observed; no persisted install log"
+    },
+    {
+      "command": "uv sync --locked --project experiments/c1/g2p2c_training_source",
+      "exit_code": 0,
+      "log": "Tool result observed; no persisted install log"
+    },
+    {
+      "command": "experiments/c1/g2p2c_policy_source/.venv/bin/python -B -m unittest tests.test_c1_g2p2c_checkpoint -v",
+      "exit_code": 0,
+      "log_sha256": "bf7c15098d09636e87e640c0e75b389908a8e26f838432ec49d434bc6c0131cd",
+      "tests": 13
+    },
+    {
+      "command": "experiments/c1/g2p2c_training_source/.venv/bin/python -B -m unittest tests.test_c1_g2p2c_checkpoint -v",
+      "exit_code": 0,
+      "log_sha256": "63f5063da35db7a0977c8af5a45309c02239c61b400dd6e165356ed7c13d7467",
+      "tests": 13
+    },
+    {
+      "actual_deadline_worker_and_group_reaped": true,
+      "command": "REPOSITORY/.venv/bin/python -B -m unittest tests.test_c1_g2p2c_security_runtime tests.test_c1_g2p2c_training_run tests.test_c1_g2p2c_trained_preflight tests.test_c1_g2p2c_native_smoke -v",
+      "exit_code": 0,
+      "log_sha256": "86d845aa9f3c1ad94beeabe099f5791a423722f7c61960c09c731b982f2c8029",
+      "new_stdlib_tests": 7,
+      "tests": 15
+    },
+    {
+      "command": "experiments/c1/g2p2c_policy_source/.venv/bin/python -B -m experiments.c1.g2p2c_actor_source_probe --source /private/tmp/opent1d-security-g2p2c-source-20261004 --output /private/tmp/opent1d-c1-security-acceptance-20261004/policy-actor-v2-probe.json",
+      "exact_source_state_and_action_parity": true,
+      "exit_code": 0,
+      "frames": 16,
+      "fresh_process_report_byte_exact": true,
+      "report_sha256": "8f1a2c1cc2d126b243efeb41dd71cb99bae5825030da818566516ec62cc58537"
+    },
+    {
+      "check": "Ruff lint and format; local guide Markdown lint",
+      "exit_code": 0,
+      "ruff_log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    }
+  ],
+  "date": "2026-10-04",
+  "eligible_m1_comparator": false,
+  "historical_records_unchanged": [
+    "experiments/c1/evidence-index.json",
+    "experiments/c1/g2p2c-training.json",
+    "experiments/c1/g2p2c-native-smoke.json",
+    "docs/research/c1-g2p2c-training-freeze.md",
+    "docs/research/c1-g2p2c-native-smoke-plan.md"
+  ],
+  "historical_training_requalified": false,
+  "limitations": [
+    "Full training not repeated; historical Torch2.2 method results retain their original runtime.",
+    "Only CPU/macOSarm64 native execution verified; universal Linux/Windows/CUDA dependency resolution is not native verification.",
+    "Declared trusted checkpoints only; deserialization is not an adversarial sandbox.",
+    "New-runtime source/intake and repeat gates pass; cross-version native numeric equality is false and explicitly described.",
+    "No efficacy scoring, matched development matrix, comparator qualification, independent human reproduction or clinical validity claimed."
+  ],
+  "native_evidence": {
+    "accepted_native_attempts": 4,
+    "accepted_profiles": 2,
+    "archive": "/private/tmp/opent1d-c1-security-acceptance-20261004/native-v2",
+    "caller_rng_preserved": true,
+    "command": "experiments/c1/g2p2c_training_source/.venv/bin/python -B -m experiments.c1.g2p2c_security_runtime run --source /private/tmp/opent1d-security-g2p2c-source-20261004 --historical-root REPOSITORY --output /private/tmp/opent1d-c1-security-acceptance-20261004/native-v2",
+    "console_sha256": "07963659e2b652aa7d08bef7abaaa72b85199fc06cef0c8ee3bcc1f5311c7382",
+    "exit_code": 0,
+    "git_dirty": false,
+    "implementation_files": 61,
+    "manifest_sha256": "5fe0ec8faff47f899e6b2880ef836279eed3bf6c6449500188ef6187951a8bc7",
+    "missing_cgm_basal_intervals_per_attempt": 10,
+    "native_endpoint_min": 2880,
+    "native_intervals_per_attempt": 960,
+    "new_runtime_repeat_initial_trace_report_byte_exact": true,
+    "old_new_comparison": {
+      "adult#001": {
+        "initial_exact": true,
+        "trace": {
+          "changed_values_by_field": {
+            "basal_u_min": 400,
+            "controller_cgm_mg_dl": 353,
+            "delivered_u_min": 1,
+            "glucose_mg_dl": 354,
+            "raw_cgm_mg_dl": 354
+          },
+          "exact": false,
+          "max_absolute_difference_by_field": {
+            "basal_u_min": 2.810177734402508e-07,
+            "controller_cgm_mg_dl": 0.0001947732041855943,
+            "delivered_u_min": 8.333333333318538e-06,
+            "glucose_mg_dl": 0.00019522896131718426,
+            "raw_cgm_mg_dl": 0.00019522866949728268
+          },
+          "rows": 960
+        }
+      },
+      "adult#002": {
+        "initial_exact": true,
+        "trace": {
+          "changed_values_by_field": {
+            "basal_u_min": 143
+          },
+          "exact": false,
+          "max_absolute_difference_by_field": {
+            "basal_u_min": 1.0539865255565495e-07
+          },
+          "rows": 960
+        }
+      }
+    },
+    "passed": true,
+    "plan_sha256": "6542a16e5039542791271a1a1074ebda9f66446fbe844dea4ea0d4c7c6a28d51",
+    "planned_native_attempts": 4,
+    "planned_profiles": 2,
+    "platform": "macOS26.5.2 arm64 CPU",
+    "reconstruction": {
+      "command": "REPOSITORY/.venv/bin/python -B -S -m experiments.c1.g2p2c_security_runtime reconstruct --archive /private/tmp/opent1d-c1-security-acceptance-20261004/native-v2 --output /private/tmp/opent1d-c1-security-acceptance-20261004/native-v2-reconstructed.json",
+      "console_sha256": "da8e14e36c7399f1772648b66c5687dd324968e31965e1c01f9219d9b4d4adc3",
+      "exit_code": 0,
+      "report_byte_exact": true,
+      "report_sha256": "950dc1c4500eaf7e4b1ff0f910584b69e7749c6b97a1163cf0b8875176f38033",
+      "stdlib_only": true
+    },
+    "report_sha256": "950dc1c4500eaf7e4b1ff0f910584b69e7749c6b97a1163cf0b8875176f38033",
+    "revision": "11a2213b6517ab36c62bbad7edc93b24fe8a2cb4",
+    "runtime": {
+      "core_versions": {
+        "gym": "0.9.4",
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "pathos": "0.3.5",
+        "python-dateutil": "2.9.0.post0",
+        "scipy": "1.13.1",
+        "simglucose": "0.2.11"
+      },
+      "policy_lock_sha256": "5a9d743129f059011d742e6583fb6d507d1e391aaad6aebc1be3442698bede29",
+      "python": "3.12.13",
+      "torch": "2.13.0",
+      "training_lock_sha256": "7f07312dc7077aebf106aecb0e1800d55272287b050aafd32c684341dbd2b0e7"
+    },
+    "source_forward_outputs_per_state": 7,
+    "synthetic_commands_per_profile": 741,
+    "trained_source_intake_forward_states_per_profile": 16
+  },
+  "preserved_initial_failure": {
+    "archive": "/private/tmp/opent1d-c1-security-acceptance-20261004/native",
+    "cause": "The loader refused Torch2.13's own lazily registered inference classes; no checkpoint or numerical criterion changed in the correction.",
+    "console_sha256": "1bb87fca84feecebc805ca1293876a1922545a7c1a476f2819226183cf44563c",
+    "exit_code": 1,
+    "failed_attempts": 4,
+    "manifest_sha256": "fb12216f3251fca09505e081c320084b8ce4aefa1f4ea07361344b814970288c",
+    "native_simulations_started": 0,
+    "passed": false,
+    "planned_attempts": 4,
+    "report_sha256": "54636671bd98df9966c8928baad4629034a516dbcda107e5b7bc66aaebd01e8e",
+    "revision": "ca05dd6a58ea1aa29cccedceb34b6d9fd86814e7",
+    "stdlib_reconstruction_exit_code": 0
+  },
+  "protocol_freeze_revision": "912161384f314f32e38c874e8e35947e1bb1c341",
+  "protocol_sha256": "eac14c224ee17d28152a9cb752254d943184c6981f4cbd9d473ae03f424dc478",
+  "repository_checks": "Parent integration owns mandatory combined checks",
+  "runtime_files_sha256": {
+    "experiments/c1/g2p2c_policy_source/pyproject.toml": "f5325efe4c48b717df080be153c722cee75d70aa0454cd653063dd0c9cbb3412",
+    "experiments/c1/g2p2c_policy_source/uv.lock": "5a9d743129f059011d742e6583fb6d507d1e391aaad6aebc1be3442698bede29",
+    "experiments/c1/g2p2c_training_source/pyproject.toml": "a22e62a2e2c4dd6f536abc0cf0f6ea0692f1470c3a5559148c11ff44c3e3acec",
+    "experiments/c1/g2p2c_training_source/uv.lock": "7f07312dc7077aebf106aecb0e1800d55272287b050aafd32c684341dbd2b0e7"
+  },
+  "schema": "opent1d.c1.g2p2c-security-verification/1",
+  "status": "passed_bounded_local_verification"
+}

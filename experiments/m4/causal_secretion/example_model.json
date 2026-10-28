@@ -1,0 +1,14 @@
+{
+  "schema": "m4-causal-model/1",
+  "model_id": "bc008-equation-adapter-example/1",
+  "source_sha256": "2d65b88bfe858682fc0d05d24e404bad4f16166da4c4a94f916d76c5ba560215",
+  "ancestry": "Dalla Man et al. 2007 equations 23-26 as already implemented in BC-008; independently written single-file adapter",
+  "rights_basis": "OpenT1D original adapter example; cited model equations remain attributed to their source",
+  "dependencies": "Python standard library only; host uses the locked BC-008 simglucose environment",
+  "parameters": {
+    "alpha_per_min": 0.05,
+    "beta_pmol_kg_min_per_mg_dl": 0.11,
+    "K_pmol_kg_per_mg_dl": 2.3
+  },
+  "output_unit": "pmol/(kg min)"
+}

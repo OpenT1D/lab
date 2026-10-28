@@ -1,0 +1,99 @@
+name: Windows installer candidate
+
+'on':
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-installer-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-and-verify-payload:
+    if: github.event.repository.private
+    name: Build installer and verify native Windows payload
+    runs-on: windows-2025
+    # Three native smoke stages allow 30 minutes each, plus build and reader checks.
+    timeout-minutes: 120
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+      - name: Obtain locked private build tools
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $runtime = Get-Content packaging/windows/runtime-lock.json -Raw | ConvertFrom-Json
+          $compiler = Get-Content packaging/windows/compiler-lock.json -Raw | ConvertFrom-Json
+          $archive = Join-Path $env:RUNNER_TEMP 'python.tar.gz'
+          Invoke-WebRequest -Uri $runtime.url -OutFile $archive
+          if ((Get-FileHash $archive -Algorithm SHA256).Hash.ToLower() -ne $runtime.sha256) {
+            throw 'Locked Python runtime hash mismatch'
+          }
+          tar -xzf $archive -C $env:RUNNER_TEMP
+          if ($LASTEXITCODE -ne 0) { throw 'Portable Python extraction failed' }
+          $archive = Join-Path $env:RUNNER_TEMP 'nsis.zip'
+          Invoke-WebRequest -Uri $compiler.url -OutFile $archive
+          if ((Get-FileHash $archive -Algorithm SHA256).Hash.ToLower() -ne $compiler.sha256) {
+            throw 'Locked NSIS compiler hash mismatch'
+          }
+          Expand-Archive -Path $archive -DestinationPath (Join-Path $env:RUNNER_TEMP 'nsis')
+      - name: Build from the clean revision
+        run: |
+          $python = Join-Path $env:RUNNER_TEMP 'python/python.exe'
+          $compiler = Join-Path $env:RUNNER_TEMP 'nsis/nsis-3.13/makensis.exe'
+          $archive = Join-Path $env:RUNNER_TEMP 'python.tar.gz'
+          & $python -B scripts/build_windows_installer.py --output results/windows-package `
+            --runtime-archive $archive --makensis $compiler
+          if ($LASTEXITCODE -ne 0) { throw 'Installer build failed' }
+      - name: Verify packaged workflows without Git or Python on PATH
+        run: |
+          $python = (Resolve-Path 'results/windows-package/payload/runtime/python.exe').Path
+          $source = (Resolve-Path 'results/windows-package/payload/app').Path
+          & $python -B scripts/windows_smoke.py --python $python --source $source `
+            --output results/windows-package/native-evidence
+          if ($LASTEXITCODE -ne 0) { throw 'Native Windows payload verification failed' }
+      - name: Verify native Windows process and installation ownership
+        run: |
+          $python = (Resolve-Path 'results/windows-package/payload/runtime/python.exe').Path
+          $source = (Resolve-Path 'results/windows-package/payload/app').Path
+          $log = Join-Path (Get-Location) 'results/windows-package/native-primitives.log'
+          Push-Location $source
+          try {
+            & $python -B -E -s -m unittest discover -s "$source/tests" `
+              -p test_windows_primitives.py -v 2>&1 | Tee-Object -FilePath $log
+            if ($LASTEXITCODE -ne 0) { throw 'Native Windows ownership checks failed' }
+          } finally { Pop-Location }
+      - name: Verify native scientific worker portability
+        run: |
+          $python = (Resolve-Path 'results/windows-package/payload/runtime/python.exe').Path
+          $source = (Resolve-Path 'results/windows-package/payload/app').Path
+          $log = Join-Path (Get-Location) 'results/windows-package/native-scientific-portability.log'
+          Push-Location $source
+          try {
+            & $python -B -E -s -m unittest tests.test_windows_scientific_portability -v 2>&1 |
+              Tee-Object -FilePath $log
+            if ($LASTEXITCODE -ne 0) { throw 'Native scientific worker checks failed' }
+          } finally { Pop-Location }
+      - name: Preserve candidate and actual evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: windows-installer-${{ github.sha }}
+          path: |
+            results/windows-package/*.exe
+            results/windows-package/*.sha256
+            results/windows-package/build-result.json
+            results/windows-package/payload/package-manifest.json
+            results/windows-package/native-evidence/
+            results/windows-package/native-primitives.log
+            results/windows-package/native-scientific-portability.log
+          if-no-files-found: warn
+          retention-days: 14
+          # A hosted runner is not a clean Windows 11 machine or an independent user.

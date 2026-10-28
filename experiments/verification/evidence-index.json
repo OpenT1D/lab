@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "local_store": "results/verification-archive in the maintained main checkout; outside Git",
+  "scope": "Internal IV-001 development evidence; no independent reproduction or biological validation",
+  "archives": [
+    {
+      "directory": "pr18-ci-attempt1",
+      "origin": "pr18-ci-attempt1; internal synthetic verification evidence including retained failures",
+      "archive_sha256": "94b45e94d2fb717eb495eb76349d79c698d9bfeb1200cf89eee56d0e67459e74",
+      "inventory_sha256": "f5fa14b2e832e0af330f08895b5cbdeac51c2b8f99f5a9eda4495cafcb9104a0",
+      "file_count": 453
+    },
+    {
+      "directory": "pr18-local",
+      "origin": "pr18-local; internal synthetic verification evidence including retained failures",
+      "archive_sha256": "037d05b41ab1783c09a5e2a656505ae88a267e7f5cd5053c00ab1dc6bccb37d1",
+      "inventory_sha256": "652ad4fa6b1d38a2403614b4220aaa67525c4119caab8fc353dbf34c319752d3",
+      "file_count": 7
+    },
+    {
+      "directory": "pr18-ci-final",
+      "origin": "pr18-ci-final; internal synthetic verification evidence including retained failures",
+      "archive_sha256": "8a2cd80b6ab1c8d22439df27c79dec5087194a4f4ac8bd2eec64f5dd79a2a11d",
+      "inventory_sha256": "4aabe15418002af4ec39b7062f665b4986a15ee15a219e4673b74d31c1e8f805",
+      "file_count": 1216
+    },
+    {
+      "directory": "pr18-main",
+      "origin": "pr18-main; internal synthetic verification evidence including retained failures",
+      "archive_sha256": "7736f94563b42081d015c2313555259b7f364ce4439e9df15474be17c99b9edb",
+      "inventory_sha256": "018940442364730ed34fdf1d27be4708cf37f96ac212496a4be9476a86c04c8e",
+      "file_count": 1215
+    },
+    {
+      "directory": "numerics-development-v1",
+      "origin": "numerics-development-v1; internal synthetic verification evidence including retained failures",
+      "archive_sha256": "d1d453f6e4427711d8c34bee59bb79a26f22d6d2e62025b399da52d37f3c2a65",
+      "inventory_sha256": "bf35f09224bf5cf93ed39824510743e97b51fe388db283e6e21aa051e7aabbd5",
+      "file_count": 4063
+    },
+    {
+      "directory": "numerics-final-local",
+      "origin": "numerics-final-local; internal synthetic verification evidence including retained failures",
+      "archive_sha256": "dda06d99aa282425edca03aa646fff8cbed0cb15f8e549928a61ea93bbc146d7",
+      "inventory_sha256": "1e4fe90d44ddb38632df464f5fb6916d782b8849978a2f6978574066109faa61",
+      "file_count": 533
+    },
+    {
+      "directory": "pr19-ci",
+      "origin": "Exact PR19 commit; all six CI jobs passed, including 80 numerical cases",
+      "archive_sha256": "7e413969c3aedbb3f378c923950b05b4826e98b03c566adee6667ca98fac2aea",
+      "inventory_sha256": "4c62eb13795d4210df8049556020b2fa1d60a052d125ceaf259fe80a8799079c",
+      "file_count": 3254
+    },
+    {
+      "directory": "fault-discovery-v1",
+      "origin": "Targeted timing and package-provenance discovery; synthetic format fixtures only",
+      "archive_sha256": "6348e308660282317482c1b5f7c8e84360169b2eb279654fef0087e68c579cc4",
+      "inventory_sha256": "d62584701a7c2ab4278c26ef491950c657fd50e4b36baeb36bb8f37f4d56963f",
+      "file_count": 180
+    },
+    {
+      "directory": "faults-local-v1",
+      "origin": "Seven controlled source mutations and native M2 regression after the package-provenance fix",
+      "archive_sha256": "87d418b89f8ffd07d71354892bae66d8553ad2d0fad9cff9b1c3957e3249c1f7",
+      "inventory_sha256": "edc8ca89ea01041783cee9487fb74d15d580321c6bfb269c7f1195428e5f3910",
+      "file_count": 1103
+    },
+    {
+      "directory": "pr19-main",
+      "origin": "pr19-main; internal native/software evidence including retained development errors and CI attempts",
+      "archive_sha256": "7e1167329a250980ba836ef2c94b07a067cce29e2c4df95fab93e70ab2984611",
+      "inventory_sha256": "8dc252bab8683d9bc3e15a6656c1b1e8e66bea2f62455c6c1c17c3cc36d8ced9",
+      "file_count": 3253
+    },
+    {
+      "directory": "pr20-supplement",
+      "origin": "pr20-supplement; internal native/software evidence including retained development errors and CI attempts",
+      "archive_sha256": "a29e6a1d35191d1806f13bc8842073a416115b5a55d8d262f6e27f6b68325550",
+      "inventory_sha256": "7d75c2c57498a268f889e724948f5297746f617715465c99a1611cac07805fab",
+      "file_count": 12
+    },
+    {
+      "directory": "pr20-ci",
+      "origin": "pr20-ci; internal native/software evidence including retained development errors and CI attempts",
+      "archive_sha256": "4f598a163a51722f38f3f6b015b2ffbd7bdb43bc4322212885375e0e69c7c3c8",
+      "inventory_sha256": "267e2ce796627e0bfe98d1854855c76352ad081b31242cf0622f71e2744618b8",
+      "file_count": 4172
+    },
+    {
+      "directory": "pr20-main-attempt1",
+      "origin": "pr20-main-attempt1; internal native/software evidence including retained development errors and CI attempts",
+      "archive_sha256": "2138fb6ea63769ca78a3867d3a8c84b0f30c7ca8ee15f6f8966fccc962b2f3a4",
+      "inventory_sha256": "aed3ae51fbde71bed0da134535e72195b808e43d21b6754d7cc5306efc98d2d3",
+      "file_count": 4172
+    },
+    {
+      "directory": "pr20-main-final",
+      "origin": "pr20-main-final; internal native/software evidence including retained development errors and CI attempts",
+      "archive_sha256": "4b8e1e68992b4332c747d13d3d7c1500cb381145377938558922b4972e799e84",
+      "inventory_sha256": "8e2554751b93b8c90a75f6067cf321877b4b6cc518059cdefdf4f3ec1e0a5f91",
+      "file_count": 2
+    },
+    {
+      "directory": "robust-development-v1",
+      "origin": "robust-development-v1; internal native/software evidence including retained development errors and CI attempts",
+      "archive_sha256": "424188680d37dab2fbfa47636d3ed1755a65b8b66aac23a5351a60d91b720b0b",
+      "inventory_sha256": "c14a3e68d89b72158be977afcecc80c97cb2a1233f7dbd68dd1db93aaaef6421",
+      "file_count": 5004
+    },
+    {
+      "directory": "robust-final-local",
+      "origin": "robust-final-local; internal native/software evidence including retained development errors and CI attempts",
+      "archive_sha256": "bdb97729b5cbc4aecd666fc1ba42f0a864e0bd6c8b03bc171a7f11c1f21c9bbc",
+      "inventory_sha256": "0d63cddc31e892ee60d63215bf97235140db6e48217688fe91611c4948e7fd72",
+      "file_count": 4611
+    }
+  ]
+}

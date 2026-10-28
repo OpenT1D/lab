@@ -1,0 +1,52 @@
+{
+  "schema": "ot053-analytical-feasibility/1",
+  "scope": "invented analytical controls; no upstream R execution or human analysis",
+  "upstream_runtime_executed": false,
+  "equilibrium": {
+    "k1_min_inverse": 0.037,
+    "k2_min_inverse": 0.031,
+    "k3_min_inverse": 0.052,
+    "volume_l": 4.585,
+    "concentration_pmol_l": 200.0,
+    "secretion_pmol_min": 47.684,
+    "total_secretion_0_120_pmol": 5722.08,
+    "cpeptide_auc_0_120_pmol_min_l": 24000.0
+  },
+  "exponential_quadrature_controls": [
+    {
+      "times_min": [
+        0,
+        15,
+        30,
+        60,
+        90,
+        120
+      ],
+      "max_absolute_relative_rate_error": 0.04532655010323496,
+      "last_midpoint_relative_rate_error": -0.04532655010323496
+    },
+    {
+      "times_min": [
+        0,
+        30,
+        60,
+        90,
+        120
+      ],
+      "max_absolute_relative_rate_error": 0.04774611994735505,
+      "last_midpoint_relative_rate_error": -0.04774611994735505
+    },
+    {
+      "times_min": [
+        0,
+        60,
+        120
+      ],
+      "max_absolute_relative_rate_error": 0.16873807147512998,
+      "last_midpoint_relative_rate_error": -0.16873807147512998
+    }
+  ],
+  "one_minute_grid_max_absolute_relative_rate_error": 5.55625713054094e-05,
+  "inspected_upstream_commit": "320497e33cbdff2cc7f7d9f0c370080ab5a00229",
+  "probe_sha256": "69f480c990974fcbef0d150d860edc3e319b1b3944dd9d72257cfc1ae38e56f8"
+}

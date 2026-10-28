@@ -1,0 +1,40 @@
+{
+  "schema": "m4-ultradian-source-register/1",
+  "inspected_date": "2026-09-28",
+  "primary": {
+    "title": "Delay-induced uncertainty for a paradigmatic glucose-insulin model",
+    "authors": ["Bhargav Karamched", "George Hripcsak", "David Albers", "William Ott"],
+    "year": 2021,
+    "journal": "Chaos 31(2), 023142",
+    "doi": "10.1063/5.0027682",
+    "url": "https://doi.org/10.1063/5.0027682",
+    "author_pdf_url": "https://www.math.fsu.edu/~karamche/DIU_chaos.pdf",
+    "author_pdf_sha256": "18b49c1defc8a53572099a22b75905c0d3204d7f9759e0e72a2e73df0e18da71",
+    "equation_locator": "Section II, printed p. 023142-3 / PDF page 4, unnumbered f1(G); destination in Eq. 1a, printed p. 023142-2",
+    "parameter_locator": "Table I, printed p. 023142-12 / PDF page 13: Rm=209 mU/min, a1=6.6, C1=300 mg/L, Vg=10 L",
+    "visual_check": "Equation and Table I pages rendered from downloaded author PDF and visually inspected",
+    "rights": "Paper states copyright 2021 Author(s), published under license by AIP Publishing. No broader asset redistribution grant inferred. PDF inspected temporarily outside version control; no source software or data imported."
+  },
+  "ancestry": {
+    "title": "Computer model for mechanisms underlying ultradian oscillations of insulin and glucose",
+    "authors": ["Jeppe Sturis", "Kenneth S. Polonsky", "Erik Mosekilde", "Eve Van Cauter"],
+    "year": 1991,
+    "doi": "10.1152/ajpendo.1991.260.5.E801",
+    "url": "https://doi.org/10.1152/ajpendo.1991.260.5.E801",
+    "scope": "Ancestry identified by the inspected 2021 primary paper; original 1991 parameter/formulation parity is not claimed."
+  },
+  "implemented_scope": {
+    "original": "f1(Gamount)=Rm/(1+exp(-Gamount/(Vg*C1)+a1)) in mU/min; Gamount in mg, Vg in L, C1 in mg/L",
+    "ported": "r(g)=1/(1+exp(a1-10*g/C1)); Spo=Sb*r(g)/r(h); Zdot=0",
+    "shape_parameters": {"a1": 6.6, "C1_mg_l": 300.0},
+    "amplitude": "Host-declared synthetic Sb fixes effective Rm in pmol/(kg min); published 209 mU/min is not converted or reused as a person-specific pancreatic molar rate",
+    "route": "Original f1 enters the plasma-insulin equation. Assigning its normalized shape to the host pancreatic/portal inlet is an explicit hybrid coupling hypothesis, not a verified prehepatic human rate.",
+    "state": "No source-owned physiological state in f1; required Z remains the unused host basal bookkeeping rate",
+    "excluded": ["full six-state ultradian glucose/insulin/delay physiology", "chaos or oscillation reproduction", "human calibration", "anatomical beta-cell mass", "therapy effect", "insulin-dose optimization"]
+  },
+  "screen": [
+    {"candidate": "Mari 2002 multiple-meal method", "verdict": "incompatible", "reason": "Full-trace fitted potentiation; previous decision 0050 retained"},
+    {"candidate": "Topp et al. 2000 beta-cell mass/insulin/glucose model, doi:10.1006/jtbi.2000.2150", "verdict": "not_selected", "reason": "Three-state full model includes slow beta-cell mass dynamics; its complete source scope needs separate equilibrium, state and scale work. Screening only, no primary equation reproduction claimed."},
+    {"candidate": "Karamched et al. 2021 ultradian f1 component", "verdict": "selected_for_synthetic_component_intake", "reason": "Complete algebraic current-glucose secretion response with a distinct saturating structure and no fitted time trajectory; explicit amplitude and route adaptation"}
+  ]
+}

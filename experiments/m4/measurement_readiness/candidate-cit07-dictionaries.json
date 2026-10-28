@@ -1,0 +1,50 @@
+{
+  "schema": "bc015-candidate/1",
+  "id": "cit07-v2-public-dictionaries",
+  "population": "islet_transplant_t1d",
+  "release": "CIT-07/08-v2",
+  "access": "request_required",
+  "source_url": "https://repository.niddk.nih.gov/study/92",
+  "evidence": {
+    "same_visit_dynamic_gic": {
+      "finding": "unknown",
+      "basis": "dictionary",
+      "url": "https://test.repository.niddk.nih.gov/api/entity/v1/study/documents/download/file/67507"
+    },
+    "early_and_late_cpeptide": {
+      "finding": "contradicted",
+      "basis": "protocol",
+      "url": "https://repository.niddk.nih.gov/public/study_document/Documentation/CIT-07_Protocol_Version_8.0_20Aug12.pdf"
+    },
+    "stimulus_route_dose_clock": {
+      "finding": "supported",
+      "basis": "protocol",
+      "url": "https://repository.niddk.nih.gov/public/study_document/Documentation/CIT-07_Protocol_Version_8.0_20Aug12.pdf"
+    },
+    "exogenous_insulin_timing": {
+      "finding": "partial",
+      "basis": "protocol",
+      "url": "https://repository.niddk.nih.gov/public/study_document/Documentation/CIT-07_Protocol_Version_8.0_20Aug12.pdf"
+    },
+    "assay_units_matrix_limits_precision": {
+      "finding": "partial",
+      "basis": "dictionary",
+      "url": "https://test.repository.niddk.nih.gov/api/entity/v1/study/documents/download/file/67500"
+    },
+    "renal_and_body_mass_context": {
+      "finding": "partial",
+      "basis": "dictionary",
+      "url": "https://test.repository.niddk.nih.gov/api/entity/v1/study/documents/download/file/67510"
+    },
+    "population_and_graft_route": {
+      "finding": "supported",
+      "basis": "protocol",
+      "url": "https://repository.niddk.nih.gov/public/study_document/Documentation/CIT-07_Protocol_Version_8.0_20Aug12.pdf"
+    },
+    "participant_disjoint_allocation": {
+      "finding": "partial",
+      "basis": "dictionary",
+      "url": "https://test.repository.niddk.nih.gov/api/entity/v1/study/documents/download/file/67507"
+    }
+  }
+}

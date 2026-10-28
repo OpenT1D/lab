@@ -1,0 +1,1231 @@
+{
+  "schema": "bc009-execution/1",
+  "status": "completed_synthetic_structure_comparison",
+  "base_commit": "c6cb206",
+  "run_path": "results/m4-hepatic/reference-01",
+  "manifest": {
+    "schema": "bc009-hepatic/1",
+    "status": "completed",
+    "started_utc": "2026-09-22T12:22:15.957149+00:00",
+    "files": {
+      "cases/fasting--constant_basal--both--coarse.json": "7a1291a3b546d2d1fcdb7b8c9772fbd7141f63df7fc90ac979ca9bfa0a810e9b",
+      "cases/fasting--constant_basal--both--reference.json": "9cd70c6b1d896945d22f5c9199a48d7bff856b70ba3fe983c687bb3baa104470",
+      "cases/fasting--constant_basal--both--tight.json": "9d7e6c91f314cad5603f8d3d591963680d1ca621f047ccbd325873b22e2b8256",
+      "cases/fasting--constant_basal--extraction--coarse.json": "436a170300a0bb9940ad1c6c512c578444b71754f6fbc704cedd38d53031bfa3",
+      "cases/fasting--constant_basal--extraction--reference.json": "7dbf7a8891b36afc24af1fdfadc7df1d8ad22477bb7ac127c8dc77a2a774c610",
+      "cases/fasting--constant_basal--extraction--tight.json": "632a1cc9756d2fc9a95785eb63a72d21055712ef780d203a94cfaa5f53486f41",
+      "cases/fasting--constant_basal--fixed--coarse.json": "895f89ea5d9b2234ae5ae2503ed7267b4ad4f59451ebfd556e52b5371f5d5ddd",
+      "cases/fasting--constant_basal--fixed--reference.json": "d19a3ce01299d702008f8fbe341032e762da15b1a2405083563ba28ee977143e",
+      "cases/fasting--constant_basal--fixed--tight.json": "d284860fb87b6e0b7242484bb1a20727c3c02c6e946b0db082f36f58e5e0f0e9",
+      "cases/fasting--constant_basal--portal--coarse.json": "b8d093b899b1873e7ed03cb1d04fe95b9d287b9541def72ce4b4e6404cbce977",
+      "cases/fasting--constant_basal--portal--reference.json": "d3ab30fbfffde43f5f08329b61187aa3c36216175eae7e34847692babb8753ff",
+      "cases/fasting--constant_basal--portal--tight.json": "36a0f46969ef12d31d2cfcbed4678fb95e6cc7184e4c795ea467d24f85e60920",
+      "cases/fasting--feedback_full--both--coarse.json": "7667f8bfdd705e8fae87796f15fe030c720b395eb25ae2d7350551d63f92f6b1",
+      "cases/fasting--feedback_full--both--reference.json": "12672d2f537f6a7a5d77dcf05f4daf079e57a2898458d1a026d426390e01fb8d",
+      "cases/fasting--feedback_full--both--tight.json": "aa1175bd2df5ad983201369e9038d7a711f53e51aca659f1fc92ec15e6cbf51d",
+      "cases/fasting--feedback_full--extraction--coarse.json": "c7b5694c3272ee9f6024fb3649e249fbec6ebb4d2353ca420a5ba8388f6615e6",
+      "cases/fasting--feedback_full--extraction--reference.json": "a7b0d485479f37526d975bf386e7311f52ae08bc072cc925d23c99940b8ba174",
+      "cases/fasting--feedback_full--extraction--tight.json": "bf9549fff6352fe7344f9be5068fbce76bc3f0b564fab7025b274e6845b0b08e",
+      "cases/fasting--feedback_full--fixed--coarse.json": "636e9455ad6a968b8ecbd96cbfdcb0f8374725b0a192f3950524a4872f1161df",
+      "cases/fasting--feedback_full--fixed--reference.json": "36b2bc8164719fb757e37e1f2c8441f60d8f05fc2dd4427f0dec28de13fe8c12",
+      "cases/fasting--feedback_full--fixed--tight.json": "c1b02c41497bd7d2a837ff45e911776bd91865f49d957027f83abf1da978ddfd",
+      "cases/fasting--feedback_full--portal--coarse.json": "03e3176434e7e2ab17d53a62d49215c1377e14bdf0802dab017811cdb47b642e",
+      "cases/fasting--feedback_full--portal--reference.json": "92cfd382802bf2f2e9ffac51cb2e4b8b8300121feac714d86796c66f379716db",
+      "cases/fasting--feedback_full--portal--tight.json": "7c138ac2b77c96afa2b83ab79818b934f18069199ca3486dde40c2df7029ec0b",
+      "cases/fasting--native_zero--both--coarse.json": "53306fe7079f534ce901d412b2059e1f5a271775f3f1c6613c67b5a9a602a0f7",
+      "cases/fasting--native_zero--both--reference.json": "c99642ee80e82de4f1acd97fac3f28cbab6b2e032fe05a19815879dede27f859",
+      "cases/fasting--native_zero--both--tight.json": "08c5e83fb564bb290ec37b59a8ce1737aa6298592b2ea4de31851cdb99b983a7",
+      "cases/fasting--native_zero--extraction--coarse.json": "5e70242967778600f0b295b2892e12ec1bdb89f6ac02407c62af457318e4ca68",
+      "cases/fasting--native_zero--extraction--reference.json": "586b7a04baebbfaeda6be4a7236395a3c9aa4e75e3d38b2fecad7637694573e6",
+      "cases/fasting--native_zero--extraction--tight.json": "14d5eb51d629be6d6cfda771695ee5bbf13b4d1b2a1e92f96320625b90cad1ad",
+      "cases/fasting--native_zero--fixed--coarse.json": "80a333867ea1fa29fd3060497a0f8173c5a856bb6e845c39f225e9da8bf4c1a7",
+      "cases/fasting--native_zero--fixed--reference.json": "1229e6d216f51601ccd1fd89c06a6dc0e6b279448eb5675df2621f8b7e28e653",
+      "cases/fasting--native_zero--fixed--tight.json": "59a09b4d4e89205c0060a882c1dad136b34c2d763947217debf54e21193f8c72",
+      "cases/fasting--native_zero--portal--coarse.json": "cedf83479324c37a878f1f90f5987bc18b5b97508be7aafa9eec131ca90f5c89",
+      "cases/fasting--native_zero--portal--reference.json": "8837ccac7a5b193422443d8948e411de510b7a2d19d66b308cd35ced87bb3396",
+      "cases/fasting--native_zero--portal--tight.json": "ee2c2a7f8b272560e342a09452848045b0555e5d17f46e6ce60907d3bcfa0b67",
+      "cases/gastric_load_30g--constant_basal--both--coarse.json": "7c5a0c1646beb849ddb21adcb73382597210681c25797ea5a86728974d767799",
+      "cases/gastric_load_30g--constant_basal--both--reference.json": "e08421d2173ec6c3e680aedd82101f60ecd85465aa7a07a6769d9e2046b4b27d",
+      "cases/gastric_load_30g--constant_basal--both--tight.json": "64f8f89a1ab884b9cf4c7ff523dcfb407c52c7c8bf6da1e3da7b14077fa9ef8c",
+      "cases/gastric_load_30g--constant_basal--extraction--coarse.json": "ab654bfdf27e0c8e88239bcfabfd6184cfe62b39be0f07cd6550eda320df1db0",
+      "cases/gastric_load_30g--constant_basal--extraction--reference.json": "b2f28436c0f69e443658be87d70c30916a72ca46bec91d2fb0356274e532fddc",
+      "cases/gastric_load_30g--constant_basal--extraction--tight.json": "5fc10c5da20b343f1b6b79ff4cfb1aa27ae0e50c8f5e423f6a754a1f2e4c4c7f",
+      "cases/gastric_load_30g--constant_basal--fixed--coarse.json": "d306c7f4ff022697d442b14b90f6bd394c3eeb309e3fb1b44cf8dea4f738bd89",
+      "cases/gastric_load_30g--constant_basal--fixed--reference.json": "97b57e462ac7b5fc842430e03fbe41a2003904e314b4e68ea9044f6ec0f05162",
+      "cases/gastric_load_30g--constant_basal--fixed--tight.json": "517f55daed2dcb87e387349c0c2f4a3a9aeb8ac9837455d5f1f645520a9f2c4c",
+      "cases/gastric_load_30g--constant_basal--portal--coarse.json": "40453b36e248373a29223b907d36f287a415aa66598e2d974dd6a9b4316f0b92",
+      "cases/gastric_load_30g--constant_basal--portal--reference.json": "fe1aa4fc5d97520d633e1c3f236796754345651a6db0ea0e9a264f0fbbec4518",
+      "cases/gastric_load_30g--constant_basal--portal--tight.json": "196f938d98c0e261672b4cd66ecae01e60931a032732544285f5ffa4f076170a",
+      "cases/gastric_load_30g--feedback_full--both--coarse.json": "15e38ffc64fb973fe07eafeb6be7eee24aec2801e64783974f9e283bd6015d77",
+      "cases/gastric_load_30g--feedback_full--both--reference.json": "960bbbdabd74c09bd431e0c973c880fe6f251eafc464fd1376a75664266c20e5",
+      "cases/gastric_load_30g--feedback_full--both--tight.json": "2222c4f90107059c0b7cc1ad1949515eb03ce205f9588a32a3f2c01b38f8bfd9",
+      "cases/gastric_load_30g--feedback_full--extraction--coarse.json": "76e30498329a012742c2997cebe5fb4dd03ac324e362bb9e9db585887f627c04",
+      "cases/gastric_load_30g--feedback_full--extraction--reference.json": "117f5e9de44145d35b65458aee8cf6deb03d97f0901d91f3e42c5a7e6c8a71db",
+      "cases/gastric_load_30g--feedback_full--extraction--tight.json": "e03277fe5cc7106de20ca46a5c8b3bcf495f40b218855953c181e3ef66e668a4",
+      "cases/gastric_load_30g--feedback_full--fixed--coarse.json": "a6b8e913b298fda2b7c2df8d7206ce22ef2fc3178feff5920b2e02c9091c4300",
+      "cases/gastric_load_30g--feedback_full--fixed--reference.json": "31434cbc2ab08f4ee077136f0317b4d2ee02d6f6194ccd7cb3140d807b3d52fc",
+      "cases/gastric_load_30g--feedback_full--fixed--tight.json": "ce8f0a62f517c28c980a12acab3d8a978fc620ac75c172698d3e9696a20efa01",
+      "cases/gastric_load_30g--feedback_full--portal--coarse.json": "7f81976b2320c218db1415a10b87c4fe3a0249480b6b0f211e5b1f041f26791c",
+      "cases/gastric_load_30g--feedback_full--portal--reference.json": "8a7650c00764b23591626fc2b52b0086768e5bc42856e14c6442dbf3e6e7862f",
+      "cases/gastric_load_30g--feedback_full--portal--tight.json": "94c1c407f55186ff88a57d90428d261c671d2a1cb5a6f028ef4823d667261bfc",
+      "cases/gastric_load_30g--native_zero--both--coarse.json": "a4eca6d29a3c24b08c5ee9c26d7bd6e323a8a3619d767c5052f997a64b1e3eb4",
+      "cases/gastric_load_30g--native_zero--both--reference.json": "c0dfa933ffd71b78894dceb42133c46c80076d53cf16c0dbe4a404ffdf68501c",
+      "cases/gastric_load_30g--native_zero--both--tight.json": "b866f2bff0754100c569951cf259c35d83843f0f3d7ddb529d0e7e42421ea2d9",
+      "cases/gastric_load_30g--native_zero--extraction--coarse.json": "f717858aaa285621e516486dff06e59d51f8b41bd36edeffd44f45852431070b",
+      "cases/gastric_load_30g--native_zero--extraction--reference.json": "9a7b89afd2e1cb6d2b3f346ef858ab884cb05b4136af43a260f25e4d6d992f23",
+      "cases/gastric_load_30g--native_zero--extraction--tight.json": "71a80ed4907d2fac1704cd2c318de6dbb00ef46d6f37e113d1e316f81f6a87c3",
+      "cases/gastric_load_30g--native_zero--fixed--coarse.json": "ca09f824bf38f19ed4c55f9b4b3c265ef48dd307ffb177a6a577835284cc2a8e",
+      "cases/gastric_load_30g--native_zero--fixed--reference.json": "01021ffed41797f0f9a6b34a3bb4ff8490152eac6366a4b55adb9c44ddffca19",
+      "cases/gastric_load_30g--native_zero--fixed--tight.json": "8cf2e6b22c99ffa71cc5f91218f0ae8873b266a597b82925c224d2f9c38a3ee6",
+      "cases/gastric_load_30g--native_zero--portal--coarse.json": "4bb50330082ae3c9c22e6c8618b03bb211780a120ead88439d841ed467968cbf",
+      "cases/gastric_load_30g--native_zero--portal--reference.json": "bf1200913f14099141612fa63b45074dcde51814a8cf7ac9d8985a070049b000",
+      "cases/gastric_load_30g--native_zero--portal--tight.json": "44950188819570dac3aba876394a19ac1c59a827de0099eb3e772645a9d09b77",
+      "figure.svg": "dc364ccb35d8c2a2bdc4e9a603033b6bbe516f05e4c27ebce970bbf396f3b698",
+      "native.json": "86befe2b49a12d9fadf681fa578682439aea5e52b0fa1dfafb09cb24bf8c4985",
+      "parent/fasting--constant_basal.json": "a8c9247716f55c1c3b29e42684e323e004764de4d6061c3916763b3dd4f52a4e",
+      "parent/fasting--feedback_full.json": "a7f1e6d658c1facb2832cace91b886f0e2312348e850d2ebe881772e909407f6",
+      "parent/fasting--native_zero.json": "3f760a77f355f15ac11a85374c827ddb64856ed52bba67c673faaf9455f8066f",
+      "parent/gastric_load_30g--constant_basal.json": "1c261452adbbcb28f6036f922a6d4f815e66d91fd539fb2808052e6cdb39109f",
+      "parent/gastric_load_30g--feedback_full.json": "5c9d4375d6ff14d1150033637c9f1e1592d8cf1dc40a13b4891c4c9ba8bfd562",
+      "parent/gastric_load_30g--native_zero.json": "9e4732a1e8fa7c503bd9f0a2b2c0b23b36737c947108ff2e8c02df73864716cb",
+      "parent.json": "b66087592810be35fa74372ad07172359897ceb40653abdf420b3c3fa1a4fd99",
+      "plot.log": "96e81d4dac07c48ddf18be305c9644be68075b046f3afe27596aacffee2759ed",
+      "preflight.json": "6b611525a9a9130d23908569d0241b0731f39bee0cb91bc1f2193132904d41dd",
+      "protocol.json": "acc5bda3dd397968d392f04e6dac1bd98218ef4bcddc68aac0354c476621d212",
+      "pyproject.toml": "107d7792bf6e99575e6b30f3639376059d5f9323bc8dedfd09c82824613c8cd5",
+      "repeat/cases/fasting--constant_basal--both--coarse.json": "7a1291a3b546d2d1fcdb7b8c9772fbd7141f63df7fc90ac979ca9bfa0a810e9b",
+      "repeat/cases/fasting--constant_basal--both--reference.json": "9cd70c6b1d896945d22f5c9199a48d7bff856b70ba3fe983c687bb3baa104470",
+      "repeat/cases/fasting--constant_basal--both--tight.json": "9d7e6c91f314cad5603f8d3d591963680d1ca621f047ccbd325873b22e2b8256",
+      "repeat/cases/fasting--constant_basal--extraction--coarse.json": "436a170300a0bb9940ad1c6c512c578444b71754f6fbc704cedd38d53031bfa3",
+      "repeat/cases/fasting--constant_basal--extraction--reference.json": "7dbf7a8891b36afc24af1fdfadc7df1d8ad22477bb7ac127c8dc77a2a774c610",
+      "repeat/cases/fasting--constant_basal--extraction--tight.json": "632a1cc9756d2fc9a95785eb63a72d21055712ef780d203a94cfaa5f53486f41",
+      "repeat/cases/fasting--constant_basal--fixed--coarse.json": "895f89ea5d9b2234ae5ae2503ed7267b4ad4f59451ebfd556e52b5371f5d5ddd",
+      "repeat/cases/fasting--constant_basal--fixed--reference.json": "d19a3ce01299d702008f8fbe341032e762da15b1a2405083563ba28ee977143e",
+      "repeat/cases/fasting--constant_basal--fixed--tight.json": "d284860fb87b6e0b7242484bb1a20727c3c02c6e946b0db082f36f58e5e0f0e9",
+      "repeat/cases/fasting--constant_basal--portal--coarse.json": "b8d093b899b1873e7ed03cb1d04fe95b9d287b9541def72ce4b4e6404cbce977",
+      "repeat/cases/fasting--constant_basal--portal--reference.json": "d3ab30fbfffde43f5f08329b61187aa3c36216175eae7e34847692babb8753ff",
+      "repeat/cases/fasting--constant_basal--portal--tight.json": "36a0f46969ef12d31d2cfcbed4678fb95e6cc7184e4c795ea467d24f85e60920",
+      "repeat/cases/fasting--feedback_full--both--coarse.json": "7667f8bfdd705e8fae87796f15fe030c720b395eb25ae2d7350551d63f92f6b1",
+      "repeat/cases/fasting--feedback_full--both--reference.json": "12672d2f537f6a7a5d77dcf05f4daf079e57a2898458d1a026d426390e01fb8d",
+      "repeat/cases/fasting--feedback_full--both--tight.json": "aa1175bd2df5ad983201369e9038d7a711f53e51aca659f1fc92ec15e6cbf51d",
+      "repeat/cases/fasting--feedback_full--extraction--coarse.json": "c7b5694c3272ee9f6024fb3649e249fbec6ebb4d2353ca420a5ba8388f6615e6",
+      "repeat/cases/fasting--feedback_full--extraction--reference.json": "a7b0d485479f37526d975bf386e7311f52ae08bc072cc925d23c99940b8ba174",
+      "repeat/cases/fasting--feedback_full--extraction--tight.json": "bf9549fff6352fe7344f9be5068fbce76bc3f0b564fab7025b274e6845b0b08e",
+      "repeat/cases/fasting--feedback_full--fixed--coarse.json": "636e9455ad6a968b8ecbd96cbfdcb0f8374725b0a192f3950524a4872f1161df",
+      "repeat/cases/fasting--feedback_full--fixed--reference.json": "36b2bc8164719fb757e37e1f2c8441f60d8f05fc2dd4427f0dec28de13fe8c12",
+      "repeat/cases/fasting--feedback_full--fixed--tight.json": "c1b02c41497bd7d2a837ff45e911776bd91865f49d957027f83abf1da978ddfd",
+      "repeat/cases/fasting--feedback_full--portal--coarse.json": "03e3176434e7e2ab17d53a62d49215c1377e14bdf0802dab017811cdb47b642e",
+      "repeat/cases/fasting--feedback_full--portal--reference.json": "92cfd382802bf2f2e9ffac51cb2e4b8b8300121feac714d86796c66f379716db",
+      "repeat/cases/fasting--feedback_full--portal--tight.json": "7c138ac2b77c96afa2b83ab79818b934f18069199ca3486dde40c2df7029ec0b",
+      "repeat/cases/fasting--native_zero--both--coarse.json": "53306fe7079f534ce901d412b2059e1f5a271775f3f1c6613c67b5a9a602a0f7",
+      "repeat/cases/fasting--native_zero--both--reference.json": "c99642ee80e82de4f1acd97fac3f28cbab6b2e032fe05a19815879dede27f859",
+      "repeat/cases/fasting--native_zero--both--tight.json": "08c5e83fb564bb290ec37b59a8ce1737aa6298592b2ea4de31851cdb99b983a7",
+      "repeat/cases/fasting--native_zero--extraction--coarse.json": "5e70242967778600f0b295b2892e12ec1bdb89f6ac02407c62af457318e4ca68",
+      "repeat/cases/fasting--native_zero--extraction--reference.json": "586b7a04baebbfaeda6be4a7236395a3c9aa4e75e3d38b2fecad7637694573e6",
+      "repeat/cases/fasting--native_zero--extraction--tight.json": "14d5eb51d629be6d6cfda771695ee5bbf13b4d1b2a1e92f96320625b90cad1ad",
+      "repeat/cases/fasting--native_zero--fixed--coarse.json": "80a333867ea1fa29fd3060497a0f8173c5a856bb6e845c39f225e9da8bf4c1a7",
+      "repeat/cases/fasting--native_zero--fixed--reference.json": "1229e6d216f51601ccd1fd89c06a6dc0e6b279448eb5675df2621f8b7e28e653",
+      "repeat/cases/fasting--native_zero--fixed--tight.json": "59a09b4d4e89205c0060a882c1dad136b34c2d763947217debf54e21193f8c72",
+      "repeat/cases/fasting--native_zero--portal--coarse.json": "cedf83479324c37a878f1f90f5987bc18b5b97508be7aafa9eec131ca90f5c89",
+      "repeat/cases/fasting--native_zero--portal--reference.json": "8837ccac7a5b193422443d8948e411de510b7a2d19d66b308cd35ced87bb3396",
+      "repeat/cases/fasting--native_zero--portal--tight.json": "ee2c2a7f8b272560e342a09452848045b0555e5d17f46e6ce60907d3bcfa0b67",
+      "repeat/cases/gastric_load_30g--constant_basal--both--coarse.json": "7c5a0c1646beb849ddb21adcb73382597210681c25797ea5a86728974d767799",
+      "repeat/cases/gastric_load_30g--constant_basal--both--reference.json": "e08421d2173ec6c3e680aedd82101f60ecd85465aa7a07a6769d9e2046b4b27d",
+      "repeat/cases/gastric_load_30g--constant_basal--both--tight.json": "64f8f89a1ab884b9cf4c7ff523dcfb407c52c7c8bf6da1e3da7b14077fa9ef8c",
+      "repeat/cases/gastric_load_30g--constant_basal--extraction--coarse.json": "ab654bfdf27e0c8e88239bcfabfd6184cfe62b39be0f07cd6550eda320df1db0",
+      "repeat/cases/gastric_load_30g--constant_basal--extraction--reference.json": "b2f28436c0f69e443658be87d70c30916a72ca46bec91d2fb0356274e532fddc",
+      "repeat/cases/gastric_load_30g--constant_basal--extraction--tight.json": "5fc10c5da20b343f1b6b79ff4cfb1aa27ae0e50c8f5e423f6a754a1f2e4c4c7f",
+      "repeat/cases/gastric_load_30g--constant_basal--fixed--coarse.json": "d306c7f4ff022697d442b14b90f6bd394c3eeb309e3fb1b44cf8dea4f738bd89",
+      "repeat/cases/gastric_load_30g--constant_basal--fixed--reference.json": "97b57e462ac7b5fc842430e03fbe41a2003904e314b4e68ea9044f6ec0f05162",
+      "repeat/cases/gastric_load_30g--constant_basal--fixed--tight.json": "517f55daed2dcb87e387349c0c2f4a3a9aeb8ac9837455d5f1f645520a9f2c4c",
+      "repeat/cases/gastric_load_30g--constant_basal--portal--coarse.json": "40453b36e248373a29223b907d36f287a415aa66598e2d974dd6a9b4316f0b92",
+      "repeat/cases/gastric_load_30g--constant_basal--portal--reference.json": "fe1aa4fc5d97520d633e1c3f236796754345651a6db0ea0e9a264f0fbbec4518",
+      "repeat/cases/gastric_load_30g--constant_basal--portal--tight.json": "196f938d98c0e261672b4cd66ecae01e60931a032732544285f5ffa4f076170a",
+      "repeat/cases/gastric_load_30g--feedback_full--both--coarse.json": "15e38ffc64fb973fe07eafeb6be7eee24aec2801e64783974f9e283bd6015d77",
+      "repeat/cases/gastric_load_30g--feedback_full--both--reference.json": "960bbbdabd74c09bd431e0c973c880fe6f251eafc464fd1376a75664266c20e5",
+      "repeat/cases/gastric_load_30g--feedback_full--both--tight.json": "2222c4f90107059c0b7cc1ad1949515eb03ce205f9588a32a3f2c01b38f8bfd9",
+      "repeat/cases/gastric_load_30g--feedback_full--extraction--coarse.json": "76e30498329a012742c2997cebe5fb4dd03ac324e362bb9e9db585887f627c04",
+      "repeat/cases/gastric_load_30g--feedback_full--extraction--reference.json": "117f5e9de44145d35b65458aee8cf6deb03d97f0901d91f3e42c5a7e6c8a71db",
+      "repeat/cases/gastric_load_30g--feedback_full--extraction--tight.json": "e03277fe5cc7106de20ca46a5c8b3bcf495f40b218855953c181e3ef66e668a4",
+      "repeat/cases/gastric_load_30g--feedback_full--fixed--coarse.json": "a6b8e913b298fda2b7c2df8d7206ce22ef2fc3178feff5920b2e02c9091c4300",
+      "repeat/cases/gastric_load_30g--feedback_full--fixed--reference.json": "31434cbc2ab08f4ee077136f0317b4d2ee02d6f6194ccd7cb3140d807b3d52fc",
+      "repeat/cases/gastric_load_30g--feedback_full--fixed--tight.json": "ce8f0a62f517c28c980a12acab3d8a978fc620ac75c172698d3e9696a20efa01",
+      "repeat/cases/gastric_load_30g--feedback_full--portal--coarse.json": "7f81976b2320c218db1415a10b87c4fe3a0249480b6b0f211e5b1f041f26791c",
+      "repeat/cases/gastric_load_30g--feedback_full--portal--reference.json": "8a7650c00764b23591626fc2b52b0086768e5bc42856e14c6442dbf3e6e7862f",
+      "repeat/cases/gastric_load_30g--feedback_full--portal--tight.json": "94c1c407f55186ff88a57d90428d261c671d2a1cb5a6f028ef4823d667261bfc",
+      "repeat/cases/gastric_load_30g--native_zero--both--coarse.json": "a4eca6d29a3c24b08c5ee9c26d7bd6e323a8a3619d767c5052f997a64b1e3eb4",
+      "repeat/cases/gastric_load_30g--native_zero--both--reference.json": "c0dfa933ffd71b78894dceb42133c46c80076d53cf16c0dbe4a404ffdf68501c",
+      "repeat/cases/gastric_load_30g--native_zero--both--tight.json": "b866f2bff0754100c569951cf259c35d83843f0f3d7ddb529d0e7e42421ea2d9",
+      "repeat/cases/gastric_load_30g--native_zero--extraction--coarse.json": "f717858aaa285621e516486dff06e59d51f8b41bd36edeffd44f45852431070b",
+      "repeat/cases/gastric_load_30g--native_zero--extraction--reference.json": "9a7b89afd2e1cb6d2b3f346ef858ab884cb05b4136af43a260f25e4d6d992f23",
+      "repeat/cases/gastric_load_30g--native_zero--extraction--tight.json": "71a80ed4907d2fac1704cd2c318de6dbb00ef46d6f37e113d1e316f81f6a87c3",
+      "repeat/cases/gastric_load_30g--native_zero--fixed--coarse.json": "ca09f824bf38f19ed4c55f9b4b3c265ef48dd307ffb177a6a577835284cc2a8e",
+      "repeat/cases/gastric_load_30g--native_zero--fixed--reference.json": "01021ffed41797f0f9a6b34a3bb4ff8490152eac6366a4b55adb9c44ddffca19",
+      "repeat/cases/gastric_load_30g--native_zero--fixed--tight.json": "8cf2e6b22c99ffa71cc5f91218f0ae8873b266a597b82925c224d2f9c38a3ee6",
+      "repeat/cases/gastric_load_30g--native_zero--portal--coarse.json": "4bb50330082ae3c9c22e6c8618b03bb211780a120ead88439d841ed467968cbf",
+      "repeat/cases/gastric_load_30g--native_zero--portal--reference.json": "bf1200913f14099141612fa63b45074dcde51814a8cf7ac9d8985a070049b000",
+      "repeat/cases/gastric_load_30g--native_zero--portal--tight.json": "44950188819570dac3aba876394a19ac1c59a827de0099eb3e772645a9d09b77",
+      "repeat/native.json": "86befe2b49a12d9fadf681fa578682439aea5e52b0fa1dfafb09cb24bf8c4985",
+      "repeat/parent/fasting--constant_basal.json": "a8c9247716f55c1c3b29e42684e323e004764de4d6061c3916763b3dd4f52a4e",
+      "repeat/parent/fasting--feedback_full.json": "a7f1e6d658c1facb2832cace91b886f0e2312348e850d2ebe881772e909407f6",
+      "repeat/parent/fasting--native_zero.json": "3f760a77f355f15ac11a85374c827ddb64856ed52bba67c673faaf9455f8066f",
+      "repeat/parent/gastric_load_30g--constant_basal.json": "1c261452adbbcb28f6036f922a6d4f815e66d91fd539fb2808052e6cdb39109f",
+      "repeat/parent/gastric_load_30g--feedback_full.json": "5c9d4375d6ff14d1150033637c9f1e1592d8cf1dc40a13b4891c4c9ba8bfd562",
+      "repeat/parent/gastric_load_30g--native_zero.json": "9e4732a1e8fa7c503bd9f0a2b2c0b23b36737c947108ff2e8c02df73864716cb",
+      "repeat/parent.json": "b66087592810be35fa74372ad07172359897ceb40653abdf420b3c3fa1a4fd99",
+      "repeat/preflight.json": "6b611525a9a9130d23908569d0241b0731f39bee0cb91bc1f2193132904d41dd",
+      "repeat/protocol.json": "acc5bda3dd397968d392f04e6dac1bd98218ef4bcddc68aac0354c476621d212",
+      "repeat/source-check/protocol.json": "b66087592810be35fa74372ad07172359897ceb40653abdf420b3c3fa1a4fd99",
+      "repeat/source-check/source-assessment.json": "e25ed7b3317d798168480d03e7edcd363ce2e90977d74c230435400ed6addf30",
+      "repeat/source-check/source-cases.json": "d2dadc23f6e0855b27a83fa94f215c43af933bd929e56a3edb743a0374726af9",
+      "repeat/source-check/source-reference.json": "47c1b7df2320b7672309ccb8a4fd6896d3dde0d44a0b619c4f7213cedee0c1dd",
+      "repeat.log": "822eb811e224dc899eb2cf760e18e7960fd70950d087b3f42930dddee78729b3",
+      "report.json": "c0d783054823fc77b1810d87b4c2dd52726af614131c0cab7544fa485261f278",
+      "source-check/protocol.json": "b66087592810be35fa74372ad07172359897ceb40653abdf420b3c3fa1a4fd99",
+      "source-check/source-assessment.json": "e25ed7b3317d798168480d03e7edcd363ce2e90977d74c230435400ed6addf30",
+      "source-check/source-cases.json": "d2dadc23f6e0855b27a83fa94f215c43af933bd929e56a3edb743a0374726af9",
+      "source-check/source-reference.json": "47c1b7df2320b7672309ccb8a4fd6896d3dde0d44a0b619c4f7213cedee0c1dd",
+      "source-common.py": "7a8eb6deeee8728710b5ee20948bfa134ca531426fa68fd2b9ade476f6a59f78",
+      "source-experiments__m4__feedback__common.py": "eba2aa4ef561285f9b4eaf1320175f18bf91d321f3058306de7adc9601f3f048",
+      "source-experiments__m4__feedback__contract.py": "4a35587c9c848a9c19586ab8e0aa28a1b5fcfe02c1b22e4fc7b0d46479dcb5ce",
+      "source-experiments__m4__feedback__coupled.py": "5f774ab7c0767fe278239a9f4457aec2ee0ab9c02de917e391d4eb83ed6d2280",
+      "source-experiments__m4__feedback__preflight.py": "17c19c1c0dff4e707ab503b86ea03f99fb073db6a3bef02079d1f7337f3ebce4",
+      "source-experiments__m4__feedback__report.py": "01c53866918c11850cb006a5ccc10e856f8faa0b55a27bf325d83bc64292742c",
+      "source-experiments__m4__feedback__secretion.py": "65b4d4ced59024238b8bf11ec2c0a0196472c2dc12904678159b0a51383a5ce7",
+      "source-experiments__m4__feedback__source-cases.json": "d2dadc23f6e0855b27a83fa94f215c43af933bd929e56a3edb743a0374726af9",
+      "source-experiments__m4__feedback__source_oracle.py": "b721c4576ca28e2856b41388ace512556f963fa1617c391bc1581f9dec3155b1",
+      "source-experiments__m4__feedback__verify_source.py": "16aa9677fc63daa827895587c65eb8c247c2e77579e3c9aedc866ca7e799f0a2",
+      "source-experiments__m4__kinetic_inlet__forcing.py": "b26fd2fd87aa47da328d24b2cbe56d8e3be45f9b4caf2c3c453f89acb07fddd1",
+      "source-experiments__m4__kinetic_inlet__native.py": "aaa6a921643bf6ec82fde84d53193c8ab9c9cdbe1b69de634089f652cb4b14dd",
+      "source-experiments__m4__kinetic_inlet__protocol.json": "ac2754f1718bcad7977d3332685abc8bb9a281056e5475d78ab7d7364b9df3dc",
+      "source-experiments__m4__paired_kinetics__common.py": "0d55ab114cf6381e2837670dd2b17b50a7109a0643bce756f2bd31d06209a12d",
+      "source-experiments__m4__paired_kinetics__report.py": "1826c8248c02347b381b3943c7c04f949a5867dd4e701b4ada1100830e5749fd",
+      "source-experiments__m4__paired_observation__contract.py": "eb422ce11a75840082801f8321fd10c7236509f71b7792ab83032e061b5f386d",
+      "source-experiments__m4__paired_observation__run.py": "a342e45ab3fc5218033d244d870bd2c9cd8a12099a5053b66f250b2c4b761f84",
+      "source-model.py": "c804adeea6a376ad9dfc92b50e6eda741eca2152bcc9597a56a7661c7fd429c6",
+      "source-numerical.py": "55807ef525386c73771958641e1cc4aa2a9da431a13527f28064c93082d61812",
+      "source-plot.py": "7cdc8ffe761907bef1a4df460f30cce71e6b5fff13944ce591506391434a0deb",
+      "source-report.py": "62e96dd1399e1598dccb307a9766374cfce2d38ec9b9e4c79c58892f85c15665",
+      "source-run.py": "999b4df2ac3049d8f2ffd5b06dc9fa2258a96578b6a6372e894489d300ffb51e",
+      "source-test_numerical.py": "182aab35ebb52d1147a77482222d95c3130b1b304ce1e292bbd172351f97e8d7",
+      "source-worker.py": "d4fff98b172cbe8d14a607f294335d9558bea251abb2cb13da523a05482548bf",
+      "sources.json": "e543fd6000118954da29847454c789c615ff9f07ec46609cc7a8e5d9d0ade023",
+      "uv.lock": "634d5849a1cc4ae37f4f00c12c713f168cffa93a43d5a22b571b0c41478fc95c",
+      "worker.log": "822eb811e224dc899eb2cf760e18e7960fd70950d087b3f42930dddee78729b3"
+    },
+    "commands": [
+      [
+        "uv",
+        "run",
+        "--locked",
+        "--project",
+        "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose",
+        "python",
+        "-m",
+        "experiments.m4.hepatic.worker",
+        "/private/tmp/opent1d-beta-cell-reference/results/m4-hepatic/reference-01"
+      ],
+      [
+        "uv",
+        "run",
+        "--locked",
+        "--project",
+        "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose",
+        "python",
+        "-m",
+        "experiments.m4.hepatic.worker",
+        "/private/tmp/opent1d-beta-cell-reference/results/m4-hepatic/reference-01/repeat"
+      ],
+      [
+        "uv",
+        "run",
+        "--locked",
+        "--project",
+        "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose",
+        "python",
+        "-m",
+        "experiments.m4.hepatic.plot",
+        "/private/tmp/opent1d-beta-cell-reference/results/m4-hepatic/reference-01",
+        "--output",
+        "/private/tmp/opent1d-beta-cell-reference/results/m4-hepatic/reference-01/figure.svg",
+        "--allow-pending"
+      ]
+    ],
+    "git_head": "c6cb2066e5889cdfc55099a65eec54529f97fb1b",
+    "git_dirty": true,
+    "finished_utc": "2026-09-22T12:26:34.859713+00:00"
+  },
+  "manifest_sha256": "73f5b8a7f143969788122544a50d5982f25ee4a92c1fc5fcb025ddee28ed1a56",
+  "report": {
+    "schema": "bc009-hepatic/1",
+    "protocol": "BC-009/1",
+    "claim": "synthetic_structure_sensitivity_not_biological_validation",
+    "passed": true,
+    "source_checks": {
+      "rate_error_pmol_kg_min": 1.7763568394002505e-14,
+      "mass_error_pmol_kg": 1.0174101561233329e-09,
+      "passed": true
+    },
+    "checks": {
+      "disabled_rhs_error": {
+        "value": 0.0,
+        "limit": 0,
+        "passed": true
+      },
+      "disabled_reference_state_error": {
+        "value": 0.0,
+        "limit": 0,
+        "passed": true
+      },
+      "stationary_derivative_change": {
+        "value": 0.0,
+        "limit": 1e-08,
+        "passed": true
+      },
+      "literal_equation_error": {
+        "value": 3.552713678800501e-15,
+        "limit": 1e-12,
+        "passed": true
+      },
+      "source_stage_error": {
+        "value": 8.881784197001252e-16,
+        "limit": 1e-12,
+        "passed": true
+      },
+      "insulin_mass_error_pmol_kg": {
+        "value": 2.2382096176443156e-11,
+        "limit": 1e-06,
+        "passed": true
+      },
+      "glucose_mass_error_mg_kg": {
+        "value": 3.6669374661735255e-08,
+        "limit": 1e-05,
+        "passed": true
+      },
+      "glucose_solver_error_mg_dl": {
+        "value": 1.5103770086473864e-07,
+        "limit": 0.01,
+        "passed": true
+      },
+      "insulin_solver_error_pmol_l": {
+        "value": 4.597180830016998e-06,
+        "limit": 0.01,
+        "passed": true
+      },
+      "source_solver_error_pmol_kg_min": {
+        "value": 5.093328949712372e-07,
+        "limit": 1e-05,
+        "passed": true
+      },
+      "fasting_glucose_drift_mg_dl": {
+        "value": 1.7980233472158259e-10,
+        "limit": 0.01,
+        "passed": true
+      },
+      "fasting_insulin_drift_pmol_l": {
+        "value": 4.0097924939945913e-10,
+        "limit": 0.01,
+        "passed": true
+      },
+      "constant_control_glucose_error_mg_dl": {
+        "value": 0.0,
+        "limit": 0.01,
+        "passed": true
+      },
+      "zero_control_state_error": {
+        "value": 0.0,
+        "limit": 0,
+        "passed": true
+      },
+      "negative_amount_tolerance": {
+        "value": 0.0,
+        "limit": 1e-08,
+        "passed": true
+      },
+      "repeat_artifact_differences": {
+        "value": 0,
+        "limit": 0,
+        "passed": true
+      }
+    },
+    "expected_cases": 24,
+    "completed_cases": 24,
+    "failures": {},
+    "contrasts": {
+      "fasting": {
+        "within_variant": {
+          "fixed": {
+            "auc_above_initial_mg_min_dl": {
+              "value": -1.6233308031132765e-08,
+              "uncertainty": 2.6330582159062033e-10,
+              "ratio": 61.65191461802089,
+              "classification": "resolved"
+            },
+            "peak_mg_dl": {
+              "value": -7.403855306620244e-11,
+              "uncertainty": 3.240074875066057e-12,
+              "ratio": 22.850877192982455,
+              "classification": "resolved"
+            },
+            "nadir_mg_dl": {
+              "value": 0.0,
+              "uncertainty": 2.220446049250313e-16,
+              "ratio": 0.0,
+              "classification": "zero"
+            },
+            "final_mg_dl": {
+              "value": -1.2042278285662178e-10,
+              "uncertainty": 7.815970093361102e-12,
+              "ratio": 15.407272727272728,
+              "classification": "resolved"
+            },
+            "final_insulin_pmol_l": {
+              "value": 1.9454660105111543e-10,
+              "uncertainty": 6.139089236967266e-12,
+              "ratio": 31.689814814814813,
+              "classification": "resolved"
+            },
+            "insulin_auc_above_initial_pmol_min_l": {
+              "value": 5.368891464740955e-08,
+              "uncertainty": 9.014904378545907e-10,
+              "ratio": 59.55572282627972,
+              "classification": "resolved"
+            },
+            "EGP_integral_mg_kg": {
+              "value": 6.320988177321851e-11,
+              "uncertainty": 1.1823431123048067e-11,
+              "ratio": 5.346153846153846,
+              "classification": "unresolved"
+            },
+            "hepatic_loss_pmol_kg": {
+              "value": 1.4034640116733499e-09,
+              "uncertainty": 1.8133050616597757e-11,
+              "ratio": 77.39811912225706,
+              "classification": "resolved"
+            }
+          },
+          "extraction": {
+            "auc_above_initial_mg_min_dl": {
+              "value": -1.77909527110387e-08,
+              "uncertainty": 8.454748012809432e-11,
+              "ratio": 210.42558198167913,
+              "classification": "resolved"
+            },
+            "peak_mg_dl": {
+              "value": -7.440803528879769e-11,
+              "uncertainty": 3.268496584496461e-12,
+              "ratio": 22.765217391304347,
+              "classification": "resolved"
+            },
+            "nadir_mg_dl": {
+              "value": 0.0,
+              "uncertainty": 2.220446049250313e-16,
+              "ratio": 0.0,
+              "classification": "zero"
+            },
+            "final_mg_dl": {
+              "value": -1.2676082405960187e-10,
+              "uncertainty": 8.469669410260394e-12,
+              "ratio": 14.966442953020135,
+              "classification": "resolved"
+            },
+            "final_insulin_pmol_l": {
+              "value": 1.9700507891684538e-10,
+              "uncertainty": 1.0317080523236655e-11,
+              "ratio": 19.09504132231405,
+              "classification": "resolved"
+            },
+            "insulin_auc_above_initial_pmol_min_l": {
+              "value": 5.646041500995125e-08,
+              "uncertainty": 1.0917950987732183e-09,
+              "ratio": 51.713380169403834,
+              "classification": "resolved"
+            },
+            "EGP_integral_mg_kg": {
+              "value": 6.764366844436154e-11,
+              "uncertainty": 1.375610736431554e-11,
+              "ratio": 4.917355371900826,
+              "classification": "unresolved"
+            },
+            "hepatic_loss_pmol_kg": {
+              "value": 1.2326495379966218e-09,
+              "uncertainty": 1.3699263945454732e-11,
+              "ratio": 89.97925311203319,
+              "classification": "resolved"
+            }
+          },
+          "portal": {
+            "auc_above_initial_mg_min_dl": {
+              "value": -1.9119262617550703e-08,
+              "uncertainty": 2.4000712528504664e-10,
+              "ratio": 79.66122920243946,
+              "classification": "resolved"
+            },
+            "peak_mg_dl": {
+              "value": -8.472511581203435e-11,
+              "uncertainty": 3.296918293926865e-12,
+              "ratio": 25.698275862068964,
+              "classification": "resolved"
+            },
+            "nadir_mg_dl": {
+              "value": 0.0,
+              "uncertainty": 2.220446049250313e-16,
+              "ratio": 0.0,
+              "classification": "zero"
+            },
+            "final_mg_dl": {
+              "value": -1.2735767995764036e-10,
+              "uncertainty": 8.01492205937393e-12,
+              "ratio": 15.890070921985815,
+              "classification": "resolved"
+            },
+            "final_insulin_pmol_l": {
+              "value": 1.6981971384666394e-10,
+              "uncertainty": 2.7142732506035827e-12,
+              "ratio": 62.56544502617801,
+              "classification": "resolved"
+            },
+            "insulin_auc_above_initial_pmol_min_l": {
+              "value": 4.375876727635841e-08,
+              "uncertainty": 6.959623988223029e-10,
+              "ratio": 62.87518887572998,
+              "classification": "resolved"
+            },
+            "EGP_integral_mg_kg": {
+              "value": -7.082689990056679e-11,
+              "uncertainty": 4.320099833421409e-12,
+              "ratio": 16.394736842105264,
+              "classification": "resolved"
+            },
+            "hepatic_loss_pmol_kg": {
+              "value": 1.1323777471261565e-09,
+              "uncertainty": 2.1827872842550278e-11,
+              "ratio": 51.877604166666664,
+              "classification": "resolved"
+            }
+          },
+          "both": {
+            "auc_above_initial_mg_min_dl": {
+              "value": -2.0052084437338635e-08,
+              "uncertainty": 8.985523436422227e-11,
+              "ratio": 223.1598924561126,
+              "classification": "resolved"
+            },
+            "peak_mg_dl": {
+              "value": -8.503775461576879e-11,
+              "uncertainty": 3.183231456205249e-12,
+              "ratio": 26.714285714285715,
+              "classification": "resolved"
+            },
+            "nadir_mg_dl": {
+              "value": 0.0,
+              "uncertainty": 2.220446049250313e-16,
+              "ratio": 0.0,
+              "classification": "zero"
+            },
+            "final_mg_dl": {
+              "value": -1.326156962022651e-10,
+              "uncertainty": 6.394884621840902e-12,
+              "ratio": 20.73777777777778,
+              "classification": "resolved"
+            },
+            "final_insulin_pmol_l": {
+              "value": 1.738129640216357e-10,
+              "uncertainty": 1.3642420526593924e-12,
+              "ratio": 127.40625,
+              "classification": "resolved"
+            },
+            "insulin_auc_above_initial_pmol_min_l": {
+              "value": 4.7278781778459233e-08,
+              "uncertainty": 1.3998366910072946e-09,
+              "ratio": 33.77449818409772,
+              "classification": "resolved"
+            },
+            "EGP_integral_mg_kg": {
+              "value": -6.014033715473488e-11,
+              "uncertainty": 4.774847184307873e-12,
+              "ratio": 12.595238095238095,
+              "classification": "resolved"
+            },
+            "hepatic_loss_pmol_kg": {
+              "value": 1.0266489880450536e-09,
+              "uncertainty": 1.574562702444382e-11,
+              "ratio": 65.20216606498195,
+              "classification": "resolved"
+            }
+          }
+        },
+        "change_vs_fixed": {
+          "extraction": {
+            "auc_above_initial_mg_min_dl": {
+              "value": -1.557644679905934e-09,
+              "uncertainty": 3.276099391769094e-10,
+              "ratio": 4.754570889452794,
+              "classification": "unresolved"
+            },
+            "peak_mg_dl": {
+              "value": -3.694822225952521e-13,
+              "uncertainty": 1.1368683772161603e-13,
+              "ratio": 3.25,
+              "classification": "unresolved"
+            },
+            "nadir_mg_dl": {
+              "value": 0.0,
+              "uncertainty": 2.220446049250313e-16,
+              "ratio": 0.0,
+              "classification": "zero"
+            },
+            "final_mg_dl": {
+              "value": -6.338041202980094e-12,
+              "uncertainty": 6.536993168992922e-13,
+              "ratio": 9.695652173913043,
+              "classification": "unresolved"
+            },
+            "final_insulin_pmol_l": {
+              "value": 2.4584778657299466e-12,
+              "uncertainty": 1.0743406164692715e-11,
+              "ratio": 0.22883597883597884,
+              "classification": "unresolved"
+            },
+            "insulin_auc_above_initial_pmol_min_l": {
+              "value": 2.771500362541701e-09,
+              "uncertainty": 9.617586727017624e-10,
+              "ratio": 2.8817004111395548,
+              "classification": "unresolved"
+            },
+            "EGP_integral_mg_kg": {
+              "value": 4.433786671143025e-12,
+              "uncertainty": 4.774847184307873e-12,
+              "ratio": 0.9285714285714286,
+              "classification": "unresolved"
+            },
+            "hepatic_loss_pmol_kg": {
+              "value": -1.7081447367672808e-10,
+              "uncertainty": 1.9042545318370685e-11,
+              "ratio": 8.970149253731343,
+              "classification": "unresolved"
+            }
+          },
+          "portal": {
+            "auc_above_initial_mg_min_dl": {
+              "value": -2.885954586417938e-09,
+              "uncertainty": 8.765255188336596e-11,
+              "ratio": 32.92493514915694,
+              "classification": "resolved"
+            },
+            "peak_mg_dl": {
+              "value": -1.0686562745831907e-11,
+              "uncertainty": 5.684341886080802e-14,
+              "ratio": 188.0,
+              "classification": "resolved"
+            },
+            "nadir_mg_dl": {
+              "value": 0.0,
+              "uncertainty": 2.220446049250313e-16,
+              "ratio": 0.0,
+              "classification": "zero"
+            },
+            "final_mg_dl": {
+              "value": -6.934897101018578e-12,
+              "uncertainty": 8.526512829121202e-13,
+              "ratio": 8.133333333333333,
+              "classification": "unresolved"
+            },
+            "final_insulin_pmol_l": {
+              "value": -2.4726887204451486e-11,
+              "uncertainty": 3.424815986363683e-12,
+              "ratio": 7.219917012448133,
+              "classification": "unresolved"
+            },
+            "insulin_auc_above_initial_pmol_min_l": {
+              "value": -9.930147371051135e-09,
+              "uncertainty": 2.0552803903228778e-10,
+              "ratio": 48.31529273478419,
+              "classification": "resolved"
+            },
+            "EGP_integral_mg_kg": {
+              "value": -1.340367816737853e-10,
+              "uncertainty": 7.503331289626658e-12,
+              "ratio": 17.863636363636363,
+              "classification": "resolved"
+            },
+            "hepatic_loss_pmol_kg": {
+              "value": -2.710862645471934e-10,
+              "uncertainty": 1.688249540165998e-11,
+              "ratio": 16.05723905723906,
+              "classification": "resolved"
+            }
+          },
+          "both": {
+            "auc_above_initial_mg_min_dl": {
+              "value": -3.8187764062058704e-09,
+              "uncertainty": 3.531610559548426e-10,
+              "ratio": 10.81312999215339,
+              "classification": "resolved"
+            },
+            "peak_mg_dl": {
+              "value": -1.0999201549566351e-11,
+              "uncertainty": 5.684341886080802e-14,
+              "ratio": 193.5,
+              "classification": "resolved"
+            },
+            "nadir_mg_dl": {
+              "value": 0.0,
+              "uncertainty": 2.220446049250313e-16,
+              "ratio": 0.0,
+              "classification": "zero"
+            },
+            "final_mg_dl": {
+              "value": -1.2192913345643319e-11,
+              "uncertainty": 2.3874235921539366e-12,
+              "ratio": 5.107142857142857,
+              "classification": "unresolved"
+            },
+            "final_insulin_pmol_l": {
+              "value": -2.0733637029479723e-11,
+              "uncertainty": 7.503331289626658e-12,
+              "ratio": 2.7632575757575757,
+              "classification": "unresolved"
+            },
+            "insulin_auc_above_initial_pmol_min_l": {
+              "value": -6.4101328689503134e-09,
+              "uncertainty": 1.1349108319791412e-09,
+              "ratio": 5.64813788742491,
+              "classification": "unresolved"
+            },
+            "EGP_integral_mg_kg": {
+              "value": -1.233502189279534e-10,
+              "uncertainty": 7.048583938740194e-12,
+              "ratio": 17.5,
+              "classification": "resolved"
+            },
+            "hepatic_loss_pmol_kg": {
+              "value": -3.7681502362829633e-10,
+              "uncertainty": 1.836042429204099e-11,
+              "ratio": 20.523219814241486,
+              "classification": "resolved"
+            }
+          }
+        },
+        "interaction": {
+          "auc_above_initial_mg_min_dl": {
+            "value": 6.248228601180017e-10,
+            "uncertainty": 1.1290524071227992e-10,
+            "ratio": 5.534046570169918,
+            "classification": "unresolved"
+          },
+          "peak_mg_dl": {
+            "value": 5.684341886080802e-14,
+            "uncertainty": 1.4210854715202004e-13,
+            "ratio": 0.4,
+            "classification": "unresolved"
+          },
+          "nadir_mg_dl": {
+            "value": 0.0,
+            "uncertainty": 2.220446049250313e-16,
+            "ratio": 0.0,
+            "classification": "zero"
+          },
+          "final_mg_dl": {
+            "value": 1.0800249583553523e-12,
+            "uncertainty": 2.2737367544323206e-12,
+            "ratio": 0.475,
+            "classification": "unresolved"
+          },
+          "final_insulin_pmol_l": {
+            "value": 1.5347723092418164e-12,
+            "uncertainty": 1.1127099242003169e-11,
+            "ratio": 0.13793103448275862,
+            "classification": "unresolved"
+          },
+          "insulin_auc_above_initial_pmol_min_l": {
+            "value": 7.485141395591199e-10,
+            "uncertainty": 5.13569631266364e-10,
+            "ratio": 1.4574735225551168,
+            "classification": "unresolved"
+          },
+          "EGP_integral_mg_kg": {
+            "value": 6.252776074688882e-12,
+            "uncertainty": 2.9558577807620168e-12,
+            "ratio": 2.1153846153846154,
+            "classification": "unresolved"
+          },
+          "hepatic_loss_pmol_kg": {
+            "value": 6.508571459562518e-11,
+            "uncertainty": 1.892885848064907e-11,
+            "ratio": 3.4384384384384385,
+            "classification": "unresolved"
+          }
+        }
+      },
+      "gastric_load_30g": {
+        "within_variant": {
+          "fixed": {
+            "auc_above_initial_mg_min_dl": {
+              "value": -4200.362743134758,
+              "uncertainty": 0.00016624998806946678,
+              "ratio": 25265341.621436123,
+              "classification": "resolved"
+            },
+            "peak_mg_dl": {
+              "value": -16.382224518661104,
+              "uncertainty": 6.758060067113547e-08,
+              "ratio": 242410164.3958628,
+              "classification": "resolved"
+            },
+            "nadir_mg_dl": {
+              "value": 0.0,
+              "uncertainty": 2.220446049250313e-16,
+              "ratio": 0.0,
+              "classification": "zero"
+            },
+            "final_mg_dl": {
+              "value": -35.45441053997129,
+              "uncertainty": 5.482602887241228e-07,
+              "ratio": 64667113.90401553,
+              "classification": "resolved"
+            },
+            "final_insulin_pmol_l": {
+              "value": 29.506657164604263,
+              "uncertainty": 3.855983487710546e-05,
+              "ratio": 765217.4149252793,
+              "classification": "resolved"
+            },
+            "insulin_auc_above_initial_pmol_min_l": {
+              "value": 13686.520119521048,
+              "uncertainty": 0.0003429044481890742,
+              "ratio": 39913509.99323997,
+              "classification": "resolved"
+            },
+            "EGP_integral_mg_kg": {
+              "value": 15.284326659028409,
+              "uncertainty": 4.435648861544905e-07,
+              "ratio": 34457927.43320306,
+              "classification": "resolved"
+            },
+            "hepatic_loss_pmol_kg": {
+              "value": 357.5440097572595,
+              "uncertainty": 1.2067323552855669e-05,
+              "ratio": 29629106.088951148,
+              "classification": "resolved"
+            }
+          },
+          "extraction": {
+            "auc_above_initial_mg_min_dl": {
+              "value": -5221.486215550531,
+              "uncertainty": 0.0017049200523615582,
+              "ratio": 3062598.863986628,
+              "classification": "resolved"
+            },
+            "peak_mg_dl": {
+              "value": -17.406771301458065,
+              "uncertainty": 6.783139383514936e-08,
+              "ratio": 256618216.39345556,
+              "classification": "resolved"
+            },
+            "nadir_mg_dl": {
+              "value": -3.1742440569508688,
+              "uncertainty": 7.859963034206885e-06,
+              "ratio": 403849.7437120794,
+              "classification": "resolved"
+            },
+            "final_mg_dl": {
+              "value": -39.15789803547514,
+              "uncertainty": 1.12759784087757e-06,
+              "ratio": 34726829.56274545,
+              "classification": "resolved"
+            },
+            "final_insulin_pmol_l": {
+              "value": 17.529844072182,
+              "uncertainty": 1.1316852365439445e-05,
+              "ratio": 1549003.5131779595,
+              "classification": "resolved"
+            },
+            "insulin_auc_above_initial_pmol_min_l": {
+              "value": 14980.283263317975,
+              "uncertainty": 0.0008006692260096315,
+              "ratio": 18709702.804460943,
+              "classification": "resolved"
+            },
+            "EGP_integral_mg_kg": {
+              "value": 18.07702872763889,
+              "uncertainty": 3.7112618542778364e-06,
+              "ratio": 4870857.793772261,
+              "classification": "resolved"
+            },
+            "hepatic_loss_pmol_kg": {
+              "value": 257.6785460439991,
+              "uncertainty": 1.3237539803867548e-05,
+              "ratio": 19465742.869284097,
+              "classification": "resolved"
+            }
+          },
+          "portal": {
+            "auc_above_initial_mg_min_dl": {
+              "value": -4921.112733763586,
+              "uncertainty": 0.00014831677799520548,
+              "ratio": 33179744.060531486,
+              "classification": "resolved"
+            },
+            "peak_mg_dl": {
+              "value": -19.81851109152484,
+              "uncertainty": 8.206407642319391e-08,
+              "ratio": 241500446.42339385,
+              "classification": "resolved"
+            },
+            "nadir_mg_dl": {
+              "value": 0.0,
+              "uncertainty": 2.220446049250313e-16,
+              "ratio": 0.0,
+              "classification": "zero"
+            },
+            "final_mg_dl": {
+              "value": -35.82974861919817,
+              "uncertainty": 8.159349249581282e-07,
+              "ratio": 43912507.63170465,
+              "classification": "resolved"
+            },
+            "final_insulin_pmol_l": {
+              "value": 26.570579733863042,
+              "uncertainty": 2.9708045076404233e-05,
+              "ratio": 894390.0436911233,
+              "classification": "resolved"
+            },
+            "insulin_auc_above_initial_pmol_min_l": {
+              "value": 11081.497199464577,
+              "uncertainty": 9.291680362366606e-05,
+              "ratio": 119262574.33851397,
+              "classification": "resolved"
+            },
+            "EGP_integral_mg_kg": {
+              "value": -17.98602218116116,
+              "uncertainty": 1.4843582789580978e-06,
+              "ratio": 12117035.64841901,
+              "classification": "resolved"
+            },
+            "hepatic_loss_pmol_kg": {
+              "value": 289.71162726209633,
+              "uncertainty": 4.8443948230669776e-06,
+              "ratio": 59803471.402167924,
+              "classification": "resolved"
+            }
+          },
+          "both": {
+            "auc_above_initial_mg_min_dl": {
+              "value": -5586.709459628002,
+              "uncertainty": 0.0002128130854543997,
+              "ratio": 26251719.661407232,
+              "classification": "resolved"
+            },
+            "peak_mg_dl": {
+              "value": -20.496008557593086,
+              "uncertainty": 7.529934009653516e-08,
+              "ratio": 272193734.1192741,
+              "classification": "resolved"
+            },
+            "nadir_mg_dl": {
+              "value": -2.661906724007565,
+              "uncertainty": 6.594785020297422e-07,
+              "ratio": 4036381.346495377,
+              "classification": "resolved"
+            },
+            "final_mg_dl": {
+              "value": -37.59109146017411,
+              "uncertainty": 1.962588385140407e-07,
+              "ratio": 191538336.53960395,
+              "classification": "resolved"
+            },
+            "final_insulin_pmol_l": {
+              "value": 23.006463153549547,
+              "uncertainty": 3.139235928983908e-07,
+              "ratio": 73286824.16359882,
+              "classification": "resolved"
+            },
+            "insulin_auc_above_initial_pmol_min_l": {
+              "value": 12420.404131117879,
+              "uncertainty": 4.9617250624578446e-05,
+              "ratio": 250324312.1045747,
+              "classification": "resolved"
+            },
+            "EGP_integral_mg_kg": {
+              "value": -9.453804594005874,
+              "uncertainty": 7.995162718543725e-07,
+              "ratio": 11824405.489683183,
+              "classification": "resolved"
+            },
+            "hepatic_loss_pmol_kg": {
+              "value": 221.10126672186027,
+              "uncertainty": 2.059680980437406e-06,
+              "ratio": 107347336.22432436,
+              "classification": "resolved"
+            }
+          }
+        },
+        "change_vs_fixed": {
+          "extraction": {
+            "auc_above_initial_mg_min_dl": {
+              "value": -1021.123472415773,
+              "uncertainty": 0.001871170040431025,
+              "ratio": 545713.8850836649,
+              "classification": "resolved"
+            },
+            "peak_mg_dl": {
+              "value": -1.0245467827969605,
+              "uncertainty": 2.5079316401388496e-10,
+              "ratio": 4085226113.819583,
+              "classification": "resolved"
+            },
+            "nadir_mg_dl": {
+              "value": -3.1742440569508688,
+              "uncertainty": 7.859963034206885e-06,
+              "ratio": 403849.7437120794,
+              "classification": "resolved"
+            },
+            "final_mg_dl": {
+              "value": -3.7034874955038504,
+              "uncertainty": 1.6758581296016928e-06,
+              "ratio": 2209905.1405885243,
+              "classification": "resolved"
+            },
+            "final_insulin_pmol_l": {
+              "value": -11.976813092422262,
+              "uncertainty": 2.7242982511666014e-05,
+              "ratio": 439629.2912236588,
+              "classification": "resolved"
+            },
+            "insulin_auc_above_initial_pmol_min_l": {
+              "value": 1293.7631437969267,
+              "uncertainty": 0.0011435736741987057,
+              "ratio": 1131333.4444354516,
+              "classification": "resolved"
+            },
+            "EGP_integral_mg_kg": {
+              "value": 2.792702068610481,
+              "uncertainty": 4.154826740432327e-06,
+              "ratio": 672158.490132344,
+              "classification": "resolved"
+            },
+            "hepatic_loss_pmol_kg": {
+              "value": -99.8654637132604,
+              "uncertainty": 1.1702162510118796e-06,
+              "ratio": 85339323.93000633,
+              "classification": "resolved"
+            }
+          },
+          "portal": {
+            "auc_above_initial_mg_min_dl": {
+              "value": -720.7499906288285,
+              "uncertainty": 1.7933210074261297e-05,
+              "ratio": 40190796.16221568,
+              "classification": "resolved"
+            },
+            "peak_mg_dl": {
+              "value": -3.436286572863736,
+              "uncertainty": 1.4483475752058439e-08,
+              "ratio": 237255658.21970323,
+              "classification": "resolved"
+            },
+            "nadir_mg_dl": {
+              "value": 0.0,
+              "uncertainty": 2.220446049250313e-16,
+              "ratio": 0.0,
+              "classification": "zero"
+            },
+            "final_mg_dl": {
+              "value": -0.37533807922687856,
+              "uncertainty": 2.6767463623400545e-07,
+              "ratio": 1402217.5746930016,
+              "classification": "resolved"
+            },
+            "final_insulin_pmol_l": {
+              "value": -2.9360774307412214,
+              "uncertainty": 8.851789800701226e-06,
+              "ratio": 331693.0809302125,
+              "classification": "resolved"
+            },
+            "insulin_auc_above_initial_pmol_min_l": {
+              "value": -2605.022920056472,
+              "uncertainty": 0.0002499876445654081,
+              "ratio": 10420606.68472309,
+              "classification": "resolved"
+            },
+            "EGP_integral_mg_kg": {
+              "value": -33.27034884018957,
+              "uncertainty": 1.9279231651125883e-06,
+              "ratio": 17257092.73182919,
+              "classification": "resolved"
+            },
+            "hepatic_loss_pmol_kg": {
+              "value": -67.83238249516319,
+              "uncertainty": 7.222928729788691e-06,
+              "ratio": 9391257.346263148,
+              "classification": "resolved"
+            }
+          },
+          "both": {
+            "auc_above_initial_mg_min_dl": {
+              "value": -1386.3467164932445,
+              "uncertainty": 0.0003790630735238665,
+              "ratio": 3657298.252782614,
+              "classification": "resolved"
+            },
+            "peak_mg_dl": {
+              "value": -4.113784038931982,
+              "uncertainty": 7.71873942539969e-09,
+              "ratio": 532960605.63917315,
+              "classification": "resolved"
+            },
+            "nadir_mg_dl": {
+              "value": -2.661906724007565,
+              "uncertainty": 6.594785020297422e-07,
+              "ratio": 4036381.346495377,
+              "classification": "resolved"
+            },
+            "final_mg_dl": {
+              "value": -2.1366809202028207,
+              "uncertainty": 3.520014502100821e-07,
+              "ratio": 6070091.242316199,
+              "classification": "resolved"
+            },
+            "final_insulin_pmol_l": {
+              "value": -6.500194011054717,
+              "uncertainty": 3.887375847000385e-05,
+              "ratio": 167212.90317401287,
+              "classification": "resolved"
+            },
+            "insulin_auc_above_initial_pmol_min_l": {
+              "value": -1266.1159884031695,
+              "uncertainty": 0.0003925216988136526,
+              "ratio": 3225594.8963582027,
+              "classification": "resolved"
+            },
+            "EGP_integral_mg_kg": {
+              "value": -24.738131253034283,
+              "uncertainty": 1.243081158008863e-06,
+              "ratio": 19900656.601262636,
+              "classification": "resolved"
+            },
+            "hepatic_loss_pmol_kg": {
+              "value": -136.44274303539925,
+              "uncertainty": 1.0007642572418263e-05,
+              "ratio": 13633854.531480234,
+              "classification": "resolved"
+            }
+          }
+        },
+        "interaction": {
+          "auc_above_initial_mg_min_dl": {
+            "value": 355.52674655135706,
+            "uncertainty": 0.0015100401769814198,
+            "ratio": 235441.9120569741,
+            "classification": "resolved"
+          },
+          "peak_mg_dl": {
+            "value": 0.34704931672871453,
+            "uncertainty": 7.015529490672634e-09,
+            "ratio": 49468727.512317844,
+            "classification": "resolved"
+          },
+          "nadir_mg_dl": {
+            "value": 0.5123373329433036,
+            "uncertainty": 7.200484532177143e-06,
+            "ratio": 71153.17457509946,
+            "classification": "resolved"
+          },
+          "final_mg_dl": {
+            "value": 1.9421446545279082,
+            "uncertainty": 1.0561820431576052e-06,
+            "ratio": 1838835.1393682028,
+            "classification": "resolved"
+          },
+          "final_insulin_pmol_l": {
+            "value": 8.412696512108766,
+            "uncertainty": 2.7789861576366093e-06,
+            "ratio": 3027253.838235506,
+            "classification": "resolved"
+          },
+          "insulin_auc_above_initial_pmol_min_l": {
+            "value": 45.14378785637564,
+            "uncertainty": 0.0010010396199504612,
+            "ratio": 45096.90421504963,
+            "classification": "resolved"
+          },
+          "EGP_integral_mg_kg": {
+            "value": 5.739515518544806,
+            "uncertainty": 4.839668747536052e-06,
+            "ratio": 1185931.4796011357,
+            "classification": "resolved"
+          },
+          "hepatic_loss_pmol_kg": {
+            "value": 31.255103173024338,
+            "uncertainty": 3.954930093641451e-06,
+            "ratio": 7902820.639807214,
+            "classification": "resolved"
+          }
+        }
+      }
+    },
+    "repeat_changed_files": [],
+    "limitations": [
+      "BC-008 modification",
+      "clinical treatment efficacy",
+      "graft drainage prediction",
+      "new C-peptide observation coupling",
+      "human fitting or validation",
+      "counterregulatory hormones or pulsatility",
+      "claim of superior physiology",
+      "unverified author-code or patient-data import"
+    ]
+  },
+  "baseline_mismatch": {
+    "HE_native": 0.6,
+    "HE_literal": 0.6235661361416001,
+    "m3_literal_per_min": 0.2558644017868221,
+    "liver_derivative_shift_pmol_kg_min": -0.1260064272583392,
+    "glucose_derivative_shift_mg_dl_min": -0.04996017958991238,
+    "implied_published_Sb_pmol_kg_min": 1.5493421052631589,
+    "native_unused_m5": 0.027345,
+    "HEb": 0.6,
+    "m6_effective": 0.6235338638583999,
+    "kp1_effective": 4.827089561230601,
+    "m5": 0.0304,
+    "kp4": 0.0618
+  },
+  "checks": {
+    "root_and_native_locked_syncs": "passed",
+    "native_numerical_tests": {
+      "status": "passed",
+      "count": 8,
+      "log_sha256": "d9e34ad5ce2725806ccdee1cb2927ce096ea69462d322906e563856f616fc0fc"
+    },
+    "new_root_tests": 9,
+    "repository_checks": {
+      "status": "passed",
+      "unit_tests": 338,
+      "strict_documentation_build": "passed",
+      "log_sha256": "8002473f522cf9316bfab673a988750d76f45ec3383678ef3566c77250e505f5"
+    },
+    "simulator_free_report_reconstruction": "byte-identical with python -S",
+    "figure_reconstruction": "byte-identical SVG; PNG visually inspected",
+    "archived_BC008_report_reconstruction": "byte-identical",
+    "execution_source_snapshots": {
+      "common.py": "7a8eb6deeee8728710b5ee20948bfa134ca531426fa68fd2b9ade476f6a59f78",
+      "model.py": "c804adeea6a376ad9dfc92b50e6eda741eca2152bcc9597a56a7661c7fd429c6",
+      "numerical.py": "55807ef525386c73771958641e1cc4aa2a9da431a13527f28064c93082d61812",
+      "worker.py": "d4fff98b172cbe8d14a607f294335d9558bea251abb2cb13da523a05482548bf",
+      "run.py": "999b4df2ac3049d8f2ffd5b06dc9fa2258a96578b6a6372e894489d300ffb51e",
+      "plot.py": "7cdc8ffe761907bef1a4df460f30cce71e6b5fff13944ce591506391434a0deb",
+      "test_numerical.py": "182aab35ebb52d1147a77482222d95c3130b1b304ce1e292bbd172351f97e8d7"
+    },
+    "unchanged_reused_source_snapshots": true,
+    "report_post_execution_change": {
+      "description": "Lint-only import whitespace and local key-to-metric_name rename in assess_source; AST equivalence verified after that rename; final report and SVG reconstruct byte-identically",
+      "final_source_sha256": "aa47df99aa03886104bdb7d01f16b3168d0f1bf08618e88d80a1012a581fb0cd"
+    },
+    "root_test_source_sha256": "97a1db8685da08f751348665249a36a29ddbb246c794be0514ffa635401af274",
+    "remote_CI": "configured; not executed here",
+    "root_locked_sync_log_sha256": "00a2cc3cc271e6a1eb80a9fc675ebaecbef3e3f4e353f35469ab5d4599d396b9"
+  },
+  "failed_scientific_attempts": [],
+  "limits": "No participant/cohort reproduction, parameter fitting, independent observations, external domain review, therapy inference, outreach or remote publication"
+}

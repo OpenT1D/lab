@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="opent1d-token" content="__SESSION_TOKEN__">
+  <meta name="opent1d-profile" content="__APPLICATION_PROFILE__">
+  <title>OpenT1D · Local experiment workspace</title>
+  <link rel="icon" type="image/svg+xml" href="/icon.svg">
+  <link rel="stylesheet" href="/app.css">
+  <link rel="stylesheet" href="/workspace.css">
+  <script src="/workspace.js" defer></script>
+  <script src="/ux.js" defer></script>
+  <script src="/draft.js" defer></script>
+  <script src="/app.js" defer></script>
+  <script src="/observations.js" defer></script>
+  <script src="/sampling.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" id="workspace-skip" href="#overview-title">Skip to workspace content</a>
+  <header class="simple-header">
+    <a class="brand" id="workspace-brand" href="#overview" aria-label="OpenT1D home">OpenT1D</a>
+    <nav class="workspace-nav" id="workspace-navigation" aria-label="Workspace">
+      <button class="nav-item selected" id="open-overview" aria-current="page">Start</button>
+      <button class="nav-item" id="open-library">Results</button>
+      <details id="workspace-more" class="more-menu"><summary>More</summary><div class="more-items"><button class="nav-item" id="open-campaigns">Repeat experiments</button><button class="nav-item" id="open-durable">Export / open archives</button></div></details>
+    </nav>
+  </header>
+  <div id="history" hidden></div>
+  <main id="workspace-main">
+    <span id="workspace-location" hidden>Start</span>
+    <div class="page">
+      <div id="notice" class="notice" role="alert" hidden></div>
+      <section id="workspace-operation" class="workspace-operation" aria-label="Current local operation" hidden>
+        <span class="spinner" aria-hidden="true"></span><div class="status-live" role="status" aria-live="polite" aria-atomic="true"><strong id="workspace-operation-title"></strong><p id="workspace-operation-detail"></p></div><button id="workspace-operation-open" type="button" class="button secondary">View operation <span aria-hidden="true">→</span></button>
+      </section>
+      <section id="overview-panel" class="workspace-view simple-start" aria-labelledby="overview-title">
+        <h1 id="overview-title" tabindex="-1">A virtual lab for type 1 diabetes research</h1>
+        <p class="start-intro">Run computer models with the same inputs, compare their results and keep a record of each experiment.</p>
+        <div class="start-choice-heading"><h2>What would you like to investigate?</h2><p>Try a supplied example with invented data.</p></div>
+        <div class="start-choices">
+          <article class="start-choice" aria-labelledby="forecast-question">
+            <p class="choice-topic">Glucose forecasts</p>
+            <h3 id="forecast-question">Which model predicts glucose more accurately 30 minutes ahead?</h3>
+            <p class="choice-description">Give models the same invented glucose history and compare forecasts with later values.</p>
+            <p class="choice-output"><strong>Explore:</strong> forecast errors and how many predictions could be scored.</p>
+            <button type="button" class="button secondary choice-action" id="open-m3">Explore glucose forecasts <span aria-hidden="true">→</span></button>
+          </article>
+          <article class="start-choice" aria-labelledby="secretion-question">
+            <p class="choice-topic">Insulin secretion</p>
+            <h3 id="secretion-question">How do models differ in their insulin release?</h3>
+            <p class="choice-description">Compare models with 0, 15 or 30 g of carbohydrate in the stomach at the start.</p>
+            <p class="choice-output"><strong>Explore:</strong> glucose and insulin curves over four simulated hours.</p>
+            <button type="button" class="button secondary choice-action" id="new-study">Explore insulin secretion <span aria-hidden="true">→</span></button>
+          </article>
+          <article class="start-choice" aria-labelledby="observation-question">
+            <p class="choice-topic">Paired meal-test analysis</p>
+            <h3 id="observation-question">Does a secretion-change conclusion depend on the assumptions?</h3>
+            <p class="choice-description">Analyze two invented glucose and C-peptide tests over the same measured 0–120 minutes.</p>
+            <p class="choice-output"><strong>Explore:</strong> total-secretion changes, uncertainty and all incomplete results.</p>
+            <button type="button" class="button secondary choice-action" id="open-observations">Explore paired meal tests <span aria-hidden="true">→</span></button>
+
+          </article>
+          <article class="start-choice" aria-labelledby="sampling-question">
+            <p class="choice-topic">MMTT measurement times</p>
+            <h3 id="sampling-question">What information is lost when fewer samples are analyzed?</h3>
+            <p class="choice-description">Keep the same two invented visits and 0–120-minute window; refit each actual-time subset.</p>
+            <p class="choice-output"><strong>Explore:</strong> endpoint differences, paired conclusions and every failed calculation.</p>
+            <button type="button" class="button secondary choice-action" id="open-sampling">Explore fewer measurement times <span aria-hidden="true">→</span></button>
+          </article>
+        </div>
+        <p class="simple-scope">The examples use invented data. Results describe those examples; performance in people needs separate research.</p>
+        <details class="simple-options recent-work"><summary>Recent work</summary><div id="overview-history"></div></details>
+      </section>
+      <section id="observations-panel" class="workspace-view" aria-labelledby="observations-title" hidden>
+        <div class="page-heading"><div><div class="eyebrow">RETROSPECTIVE OBSERVATION ANALYSIS</div><h1 id="observations-title" tabindex="-1">Analyze paired meal tests</h1><p>Compare a paired secretion conclusion across explicitly frozen assumptions.</p></div><span class="scope-tag">Invented observations only</span></div>
+        <p class="experiment-context">Whole-body total endogenous secretion, including basal, over measured <strong>0–120 minutes</strong>. Change is follow-up minus baseline in pmol. C-peptide AUC and glucose context remain separate.</p>
+        <div id="obs-notice" class="notice" role="alert" hidden></div>
+        <section class="card obs-input-card" aria-labelledby="obs-input-title">
+          <h2 id="obs-input-title">1. Choose observations</h2>
+          <div class="obs-example-row"><label>Example to prepare<select id="obs-case"></select></label><button id="obs-example" class="button secondary" type="button">Prepare example</button></div>
+          <details class="simple-options"><summary>Use your own synthetic CSV and metadata</summary>
+            <p class="field-note">Select files inside this checkout. Metadata declares participant/visit linkage, assay limits and context. CSV uses minutes, mmol/L glucose and nmol/L C-peptide. Human declarations are refused.</p>
+            <form id="obs-input-form"><label>Observation metadata (.json)<div class="path-row"><input id="obs-package" type="text" placeholder="inputs/meal-tests/package.json" required><button class="browse-button" data-obs-browse="package" type="button">Browse</button></div></label><label>Observation table (.csv)<div class="path-row"><input id="obs-csv" type="text" placeholder="inputs/meal-tests/observations.csv" required><button class="browse-button" data-obs-browse="csv" type="button">Browse</button></div></label><label>Starting assumptions (.json)<div class="path-row"><input id="obs-settings-path" type="text" placeholder="inputs/meal-tests/settings.json" required><button class="browse-button" data-obs-browse="settings" type="button">Browse</button></div></label><button id="obs-inspect" class="button secondary" type="submit">Inspect observations and assumptions</button></form>
+          </details>
+          <div id="obs-validation" class="obs-validation" aria-live="polite"></div>
+        </section>
+        <form id="obs-plan-form" class="card obs-plan-card" novalidate hidden>
+          <h2>2. Review and freeze the plan</h2>
+          <label class="obs-name">Analysis name <span class="field-note">Optional; helps you recognize this plan and its results.</span><input id="obs-display-name" type="text" maxlength="120" placeholder="Give this analysis a name"></label>
+          <p id="obs-settings-summary" class="obs-scope"></p>
+          <details id="obs-settings-details" class="simple-options obs-settings"><summary>Review or change assumptions</summary>
+          <p class="field-note">One fixed-kinetic two-compartment method, exact interval integration and no automatic weight, BSA or glucose normalization. Factor 1 means initial compartment equilibrium; other inventory factors are declared stresses.</p>
+          <div class="obs-order"><label>Baseline visit ID<select id="obs-baseline"></select></label><label>Follow-up visit ID<select id="obs-followup"></select></label></div>
+          <div id="obs-variants" class="obs-variants"></div>
+          <fieldset class="obs-noise"><legend>Conditional synthetic measurement uncertainty</legend><p class="field-note">Invented Gaussian controls, not measured assay precision or a human uncertainty distribution. One offset is shared across both visits; every draw recalculates initialization.</p><div class="obs-fields"><label>Draws<input id="obs-draws" type="number" min="32" max="1024" step="1" required></label><label>Frozen seed<input id="obs-seed" type="number" min="0" max="9007199254740991" step="1" required></label><label>Independent SD (pmol/L)<input id="obs-independent-sd" type="number" min="0" step="any" required></label><label>Shared paired offset SD (pmol/L)<input id="obs-shared-sd" type="number" min="0" step="any" required></label></div></fieldset>
+          </details>
+          <p id="obs-plan-state" class="field-note" role="status">Review assumptions before freezing.</p>
+          <div id="obs-form-error" class="notice" role="alert" hidden></div>
+          <div class="form-actions"><button id="obs-edit-plan" class="button subtle" type="button" hidden>Edit as new plan</button><button id="obs-freeze" class="button secondary" type="submit">Validate and freeze plan</button><button id="obs-run" class="button primary" type="button" disabled>Run paired analysis</button></div>
+          <p class="field-note">A freeze preserves the exact input bytes and these settings before evaluation. Editing creates a new plan. Failed observations and variants remain explicit; nothing is silently imputed or clipped.</p>
+        </form>
+        <div class="result-actions obs-operation"><button id="obs-cancel" class="button subtle" type="button" disabled>Cancel operation</button></div>
+        <section class="card obs-saved" aria-labelledby="obs-saved-title"><h2 id="obs-saved-title">Saved plans and analyses</h2><div class="obs-example-row"><label>Frozen plan<select id="obs-saved-plan"><option value="">Choose a saved plan</option></select></label><button id="obs-use-plan" class="button secondary" type="button" disabled>Use frozen plan</button></div><div id="obs-analysis-list" class="library-list"><p class="quiet">No paired analyses have run in this workspace.</p></div></section>
+        <section id="obs-result-panel" class="card" aria-labelledby="obs-result-title" hidden><div class="section-heading"><h2 id="obs-result-title" tabindex="-1">Paired analysis</h2><span id="obs-execution" class="status neutral"></span></div><p id="obs-result-detail" class="field-note"></p><div class="result-actions"><button id="obs-reconstruct" class="button secondary" type="button">Check saved analysis</button><button id="obs-download-md" class="button subtle" type="button">Download report</button><button id="obs-download-json" class="button subtle" type="button">Download full JSON</button></div><div id="obs-report"></div></section>
+      </section>
+      <section id="sampling-panel" class="workspace-view" aria-labelledby="sampling-title" hidden>
+        <div class="page-heading"><div><div class="eyebrow">RETROSPECTIVE OBSERVATION ANALYSIS</div><h1 id="sampling-title" tabindex="-1">Compare fewer measurement times</h1><p>Compare full and reduced raw observations under the same frozen assumptions.</p></div><span class="scope-tag">Invented observations only</span></div>
+        <p class="experiment-context">Whole-body total endogenous secretion, including basal, over measured <strong>0–120 minutes</strong>. Change is follow-up minus baseline in pmol. C-peptide AUC and glucose context remain separate.</p>
+        <div id="sam-notice" class="notice" role="alert" hidden></div>
+        <section class="card obs-input-card" aria-labelledby="sam-input-title">
+          <h2 id="sam-input-title">1. Choose observations</h2>
+          <div class="obs-example-row"><label>Example to prepare<select id="sam-case"></select></label><button id="sam-example" class="button secondary" type="button">Prepare example</button></div>
+          <details class="simple-options"><summary>Use your own synthetic CSV and metadata</summary>
+            <p class="field-note">Select files inside this checkout. Metadata declares participant/visit linkage, assay limits and context. CSV uses minutes, mmol/L glucose and nmol/L C-peptide. Human declarations are refused.</p>
+            <form id="sam-input-form"><label>Observation metadata (.json)<div class="path-row"><input id="sam-package" type="text" placeholder="inputs/meal-tests/package.json" required><button class="browse-button" data-sam-browse="package" type="button">Browse</button></div></label><label>Observation table (.csv)<div class="path-row"><input id="sam-csv" type="text" placeholder="inputs/meal-tests/observations.csv" required><button class="browse-button" data-sam-browse="csv" type="button">Browse</button></div></label><label>Starting assumptions (.json)<div class="path-row"><input id="sam-settings-path" type="text" placeholder="inputs/meal-tests/settings.json" required><button class="browse-button" data-sam-browse="settings" type="button">Browse</button></div></label><label>Sampling design (.json)<div class="path-row"><input id="sam-design" type="text" required><button class="browse-button" data-sam-browse="design" type="button">Browse</button></div></label><label>Sealed development-only import directory<input id="sam-development_import" type="text" required></label><button id="sam-inspect" class="button secondary" type="submit">Inspect observations and assumptions</button></form>
+          </details>
+          <div id="sam-validation" class="obs-validation" aria-live="polite"></div>
+        </section>
+        <form id="sam-plan-form" class="card obs-plan-card" novalidate hidden>
+          <h2>2. Review and freeze the plan</h2>
+          <label class="obs-name">Analysis name <span class="field-note">Optional; helps you recognize this plan and its results.</span><input id="sam-display-name" type="text" maxlength="120" placeholder="Give this analysis a name"></label>
+          <p id="sam-settings-summary" class="obs-scope"></p>
+          <details id="sam-settings-details" class="simple-options obs-settings"><summary>Review or change assumptions</summary>
+          <p class="field-note">One fixed-kinetic two-compartment method, exact interval integration and no automatic weight, BSA or glucose normalization. Factor 1 means initial compartment equilibrium; other inventory factors are declared stresses.</p>
+          <div class="obs-order"><label>Baseline visit ID<select id="sam-baseline"></select></label><label>Follow-up visit ID<select id="sam-followup"></select></label></div>
+          <div id="sam-design-review"></div><div id="sam-variants" class="obs-variants"></div>
+          <fieldset class="obs-noise"><legend>Conditional synthetic measurement uncertainty</legend><p class="field-note">Invented Gaussian controls, not measured assay precision or a human uncertainty distribution. One offset is shared across both visits; every draw recalculates initialization.</p><div class="obs-fields"><label>Draws<input id="sam-draws" type="number" min="32" max="1024" step="1" required></label><label>Frozen seed<input id="sam-seed" type="number" min="0" max="9007199254740991" step="1" required></label><label>Independent SD (pmol/L)<input id="sam-independent-sd" type="number" min="0" step="any" required></label><label>Shared paired offset SD (pmol/L)<input id="sam-shared-sd" type="number" min="0" step="any" required></label></div></fieldset>
+          </details>
+          <p id="sam-plan-state" class="field-note" role="status">Review assumptions before freezing.</p>
+          <div id="sam-form-error" class="notice" role="alert" hidden></div>
+          <div class="form-actions"><button id="sam-edit-plan" class="button subtle" type="button" hidden>Edit as new plan</button><button id="sam-freeze" class="button secondary" type="submit">Validate and freeze plan</button><button id="sam-run" class="button primary" type="button" disabled>Run sampling comparison</button></div>
+          <p class="field-note">A freeze preserves the exact input bytes and these settings before evaluation. Editing creates a new plan. Failed observations and variants remain explicit; nothing is silently imputed or clipped.</p>
+        </form>
+        <div class="result-actions obs-operation"><button id="sam-cancel" class="button subtle" type="button" disabled>Cancel operation</button></div>
+        <section class="card obs-saved" aria-labelledby="sam-saved-title"><h2 id="sam-saved-title">Saved plans and analyses</h2><div class="obs-example-row"><label>Frozen plan<select id="sam-saved-plan"><option value="">Choose a saved plan</option></select></label><button id="sam-use-plan" class="button secondary" type="button" disabled>Use frozen plan</button></div><div id="sam-analysis-list" class="library-list"><p class="quiet">No paired analyses have run in this workspace.</p></div></section>
+        <section id="sam-result-panel" class="card" aria-labelledby="sam-result-title" hidden><div class="section-heading"><h2 id="sam-result-title" tabindex="-1">Sampling comparison</h2><span id="sam-execution" class="status neutral"></span></div><p id="sam-result-detail" class="field-note"></p><div class="result-actions"><button id="sam-reconstruct" class="button secondary" type="button">Check saved analysis</button><button id="sam-download-md" class="button subtle" type="button">Download report</button><button id="sam-download-json" class="button subtle" type="button">Download full JSON</button></div><div id="sam-report"></div></section>
+      </section>
+      <section id="m4-panel" class="workspace-view" aria-labelledby="m4-title" hidden>
+      <div class="page-heading"><div><div class="eyebrow">M4 · SECRETION SOURCES</div><h1 id="m4-title" tabindex="-1">Compare insulin secretion</h1><p>Choose the starting conditions, then check setup.</p></div><span class="scope-tag">Synthetic inputs</span></div>
+      <div class="experiment-context"><p id="study-summary" class="study-summary">Two supplied models are selected.</p><p class="field-note">Synthetic inputs · reference profile <strong>adult#001</strong> · 240 simulated minutes (model time, not computer execution time)</p></div>
+      <div class="workspace-grid">
+        <form id="study-form" class="card configuration">
+          <section id="study-draft" class="form-section" hidden><p id="study-draft-note" class="field-note" role="status"></p><button id="reset-study-draft" type="button" class="button subtle">Reset to supplied examples</button></section>
+          <section class="form-section"><h2>Starting conditions</h2><div class="scenarios">
+            <label class="scenario"><input type="checkbox" name="scenario" value="fasting" checked><span class="scenario-amount">0<span> g</span></span><strong>Fasting</strong><small>No initial load</small></label>
+            <label class="scenario"><input type="checkbox" name="scenario" value="gastric_load_15g" checked><span class="scenario-amount">15<span> g</span></span><strong>15 g load</strong><small>Initial solid load</small></label>
+            <label class="scenario"><input type="checkbox" name="scenario" value="gastric_load_30g" checked><span class="scenario-amount">30<span> g</span></span><strong>30 g load</strong><small>Initial solid load</small></label>
+          </div><p class="field-note">These are starting conditions. No meal events are added during the run.</p></section>
+
+          <details class="simple-options model-options"><summary>Options</summary><p class="field-note">The supplied examples are selected. Review files here to use your own models.</p><section class="form-section"><div class="section-heading"><h3>Models</h3><span id="source-count">2 sources</span></div><div id="sources"></div><button type="button" class="button subtle add-source" id="add-source">＋ Add source</button><p class="field-note">Python model is the calculation code (.py). Model declaration is its matching JSON file: it identifies the code, ancestry, units and interface. Use the supplied pair together. Selected code runs with your permissions.</p></section>
+          <details class="advanced"><summary>Execution budgets <span>Advanced</span></summary><div class="budget-fields"><label>Stage budget, seconds<input id="stage-budget" type="number" min="1" max="1800" value="600" required></label><label>Whole-source budget, seconds<input id="source-budget" type="number" min="1" max="10800" value="3600" required></label></div></details>
+                <div class="study-context"><span><strong>adult#001</strong> reference profile</span><span><strong>240 min</strong> observation window</span><span><strong>0 / 15 / 30 g</strong> initial gastric loads</span></div>
+      <ol class="steps" aria-label="Study workflow"><li class="current" id="step-config"><span>1</span>Configure</li><li id="step-check"><span>2</span>Check setup</li><li id="step-run"><span>3</span>Run study</li><li id="step-review"><span>4</span>Review evidence</li></ol>
+</details>
+          <div class="form-actions"><button type="submit" class="button primary" id="check-study">Check setup</button><button type="button" class="button primary" id="run-study" disabled hidden>Run experiment</button></div>
+        </form>
+        <details id="study-status" class="simple-options"><summary>Status and setup</summary>
+        <div class="right-column">
+          <section class="card readiness" aria-labelledby="readiness-title"><div class="card-heading compact"><h2 id="readiness-title">Execution readiness</h2><span id="readiness-badge" class="status neutral">Not checked</span></div><div class="readiness-body"><div id="readiness-icon" class="readiness-icon" aria-hidden="true">○</div><h3 id="readiness-heading">Check before you run</h3><p id="readiness-detail">Validate the sources and check the locked environments required by this study.</p><button class="button primary" id="install-task" type="button" hidden>Install task environments</button><div id="runtime-details" class="runtime-details"></div></div></section>
+          <section class="card activity" aria-labelledby="activity-title"><div class="card-heading compact"><h2 id="activity-title">Local execution</h2><span id="activity-badge" class="status neutral">Idle</span></div><div class="activity-body"><p id="activity-detail">Your configuration is checked before any model executes.</p><p id="activity-elapsed" class="field-note" hidden></p><div id="active-indicator" class="active-indicator" hidden><span class="spinner"></span><span>Operation in progress</span></div><button class="button danger" id="cancel-job" type="button" hidden>Cancel operation</button><p class="quiet small" id="job-reference"></p></div></section>
+          <div class="evidence-note"><span aria-hidden="true">◇</span><p>Execution, numerical acceptance and verified reconstruction are shown separately. Synthetic outcomes do not establish treatment benefit.</p></div>
+        </div>
+        </details>
+      </div>
+      <section id="results" class="card results" tabindex="-1" hidden><div class="card-heading"><div><div class="eyebrow">SAVED EVIDENCE</div><h2>Study results</h2></div><div class="result-badges"><span id="report-status" class="status neutral"></span><span id="verification-status" class="status neutral">Reconstruction not requested</span></div></div><section id="study-evidence-summary" class="evidence-summary" aria-label="Study result summary">Review execution, numerical acceptance and the saved-analysis check separately below.</section><div id="denominators" class="metric-grid"></div><div class="figure-container"><img id="study-figure" alt="Glucose, insulin and C-peptide trajectories for accepted sources and selected initial loads" hidden></div><details id="study-graph-data" class="simple-options graph-data"><summary>Read graph data</summary><button id="study-load-graph-data" type="button" class="button secondary">Load saved graph values</button><div id="study-graph-values" class="graph-values"></div></details><div class="source-table-wrap"><table><caption class="visually-hidden">Recorded source outcomes</caption><thead><tr><th scope="col">Source</th><th scope="col">Ancestry</th><th scope="col">Execution</th><th scope="col">Numerical acceptance</th></tr></thead><tbody id="source-results"></tbody></table></div><div class="result-actions"><button type="button" class="button secondary" id="reconstruct-study">Check saved analysis</button><button type="button" class="button subtle" id="download-markdown">Download report</button><button type="button" class="button subtle" id="download-json">Download JSON</button></div><details class="limitations"><summary>Evidence scope and limitations</summary><ul id="report-limitations"></ul></details></section>
+      </section>
+      <section id="m3-panel" class="card m3-panel workspace-view" aria-labelledby="m3-title" hidden>
+        <div class="card-heading"><div><div class="eyebrow">M3 · FROZEN PREDICTORS</div><h1 id="m3-title" tabindex="-1">Compare glucose forecasts</h1><p>Choose an example or use your own synthetic files.</p><p class="visible-scope">Synthetic observations only. This comparison does not establish prediction quality in people.</p></div><span class="scope-tag">Synthetic inputs</span></div>
+        <div id="m3-notice" class="notice" role="alert" hidden></div>
+        <details id="m3-input-picker" class="simple-options" open><summary>Choose inputs</summary>        <div class="m3-intake"><button id="m3-fixture" type="button" class="button primary">Prepare an example</button><p class="field-note">Prepares synthetic inputs. No predictor runs yet.</p><div id="m3-inputs" class="m3-inputs"></div></div>
+</details>
+        <details class="simple-options"><summary>Use your own synthetic files</summary>
+        <form id="m3-inspect-form" class="archive-form"><label>Allowed input root<select id="m3-root" required></select></label><label>Relative configuration file<div class="path-row"><input id="m3-path" type="text" placeholder="results/my-example/comparison.json" required><button id="m3-browse" type="button" class="browse-button">Browse</button></div></label><button id="m3-inspect" type="submit" class="button secondary">Inspect configuration metadata</button></form>
+        <p class="field-note m3-note">Choose a synthetic configuration in an allowed folder. Inspection checks configuration and declaration identities. It does not open observation contents or import predictor code.</p>
+        </details>
+        <form id="m3-form" class="m3-form" hidden>
+          <details class="simple-options"><summary>Options and input details</summary>          <div class="m3-intake-fields"><label>Workflow<select id="m3-task"><option value="m3-compare">Compare frozen predictors</option><option value="m3-forecast">Forecast against persistence</option></select></label><label>Budget per participant worker, seconds<input id="m3-timeout" type="number" min="1" max="1800" value="120" required></label></div>
+          <p id="m3-input-summary" class="field-note">Inspect a synthetic configuration to see its full planned roster and frozen predictors.</p></details><div id="m3-candidates" class="m3-candidates"></div>
+          <p class="field-note">Selected local Python runs with your permissions.</p>
+          <div class="m3-readiness"><span id="m3-readiness" class="status neutral">Configuration not checked</span><details class="simple-options"><summary>Configuration details</summary><p id="m3-readiness-detail" class="field-note">Freeze and check explicitly before running. Preparation copies synthetic observation bytes and records that access; it does not fit a model.</p><p id="m3-configuration-reference" class="quiet small"></p></details></div>
+          <div class="form-actions m3-actions"><button id="m3-check" type="submit" class="button primary" disabled>Check setup</button><button id="m3-run" type="button" class="button primary" disabled hidden>Run experiment</button></div>
+        </form>
+        <section id="m3-activity" class="m3-activity" aria-labelledby="m3-activity-title" hidden><div class="section-heading"><h3 id="m3-activity-title">M3 operation</h3><span id="m3-activity-status" class="status neutral">Idle</span></div><p id="m3-activity-detail" class="field-note">No predictor executes until you choose Run.</p><p id="m3-retention-receipt" class="field-note durable-path" hidden></p><button id="m3-cancel" class="button danger" type="button" hidden>Cancel M3 operation</button></section>
+        <details class="simple-options"><summary>Previous runs</summary>        <div class="m3-saved-heading"><h3>Saved forecasts and comparisons</h3><p class="field-note">All failures and cancelled attempts remain visible. A restart shows recorded evidence; request reconstruction to verify a snapshot again.</p></div><div id="m3-list" class="library-list"><p class="quiet">No M3 workflows started yet.</p></div>
+</details>
+        <section id="m3-detail" class="m3-detail" aria-labelledby="m3-detail-title" hidden>
+          <div class="section-heading"><h3 id="m3-detail-title"></h3><span id="m3-execution-status" class="status neutral"></span></div><div class="result-badges"><span id="m3-verification-status" class="status neutral"></span><span id="m3-cohort-status" class="status neutral"></span><span id="m3-seal-status" class="status neutral"></span></div><p id="m3-detail-scope" class="field-note"></p><p id="m3-detail-error" class="notice" hidden></p>
+          <details class="m3-progress"><summary>Observed progress and retained attempt</summary><pre id="m3-progress"></pre></details>
+          <div class="result-actions"><button id="m3-reconstruct" type="button" class="button secondary" disabled>Check saved analysis</button><button id="m3-export" type="button" class="button subtle" disabled>Export durable archive</button><button id="m3-retain" type="button" class="button subtle" disabled>Retain raw evidence</button></div><p id="m3-retention-detail" class="field-note">Raw retention preserves available files outside this checkout with an inventory and receipt. It does not promise a reconstructible or verified package.</p>
+          <section id="m3-results" hidden>
+            <section id="m3-evidence-summary" class="evidence-summary" aria-label="Forecast result summary">Review execution, data coverage and the saved-analysis check separately below.</section>
+            <div id="m3-denominators" class="metric-grid"></div><p id="m3-analysis-scope" class="field-note"></p><h4>Forecast errors on matched targets</h4><div class="source-table-wrap"><table><caption class="visually-hidden">Native equal-participant forecast error metrics in mg/dL</caption><thead><tr><th scope="col">Method</th><th scope="col">MAE (mg/dL)</th><th scope="col">RMSE (mg/dL)</th><th scope="col">Bias (mg/dL)</th></tr></thead><tbody id="m3-errors"></tbody></table></div>
+            <h4>Pairwise error differences</h4><div id="m3-contrasts" class="m3-roster"></div><h4>All planned participants</h4><div id="m3-people" class="m3-roster"></div><h4>Models and retained attempts</h4><div id="m3-candidate-results" class="m3-roster"></div>
+            <div class="result-actions"><button id="m3-download-markdown" class="button subtle" type="button">Download native report</button><button id="m3-download-json" class="button subtle" type="button">Download native JSON</button></div><details class="m3-native"><summary>Original native Markdown report</summary><pre id="m3-markdown"></pre></details><details class="m3-native"><summary>Original native JSON report</summary><pre id="m3-json"></pre></details>
+            <p class="field-note">Reconstruction verifies saved causal windows, persistence and analysis arithmetic. It does not independently rerun an arbitrary predictor. Known synthetic examples do not establish performance in people.</p>
+          </section>
+        </section>
+      </section>
+      <section id="archive-library" class="card archive-library workspace-view" aria-labelledby="library-title" hidden>
+        <div class="card-heading"><div><div class="eyebrow">EXPLICIT LOCAL ARCHIVES</div><h1 id="library-title" tabindex="-1">Results</h1><p>Open a saved experiment.</p></div><span class="scope-tag">Read-only sources</span></div>
+        <div id="library-notice" class="notice" role="alert" hidden></div>
+        <section class="own-results" aria-labelledby="own-results-title"><h2 id="own-results-title">Your experiments</h2><div id="own-results-list" class="own-result-list own-results-list"><p class="quiet">Loading your experiments…</p></div></section>
+        <details class="simple-options"><summary>Add saved results</summary>
+        <form id="archive-form" class="archive-form">
+          <label>Folder<div class="path-row"><input id="archive-path" type="text" placeholder="results/my-study"><button id="archive-browse" type="button" class="browse-button">Browse</button></div></label>
+          <label>Experiment type<select id="archive-task"><option value="m4-study-secure">Maintained M4 study</option><option value="m4-study">Historical M4 study</option><option value="m4-compare">M4 source comparison</option><option value="m4-secretion">M4 secretion</option><option value="m3-forecast">M3 forecast</option><option value="m3-compare">M3 comparison</option><option value="p1-controller">P1 controller</option><option value="m5-prognosis">M5 prognosis</option><option value="mmtt-sensitivity">Paired meal-test sensitivity</option><option value="mmtt-sampling">Fewer measurement times</option></select></label>
+          <details class="simple-options"><summary>Options</summary>          <label>Archive root<select id="archive-root" required></select></label>
+          <label>Local tags, comma separated<input id="archive-tags" type="text" maxlength="2064" placeholder="pilot, repeat"></label>
+</details>
+          <button id="archive-register" type="submit" class="button primary">Add results</button>
+        </form>
+        <p class="field-note archive-scope">Add an archive from a folder explicitly enabled at server startup. Added archives remain read-only. Metadata and recorded status do not establish native verification or numerical acceptance.</p>
+        </details>
+        <div class="library-section-heading"><h2>Added archives</h2><p class="field-note">Read-only results from the folders you have registered.</p></div><div class="library-filters"><label>Experiment type<select id="library-task-filter"><option value="">All ten workflows</option></select></label><label>Search<input id="library-search" type="search" placeholder="Search registered archives"></label></div>
+        <label class="field-note"><input id="library-show-hidden" type="checkbox"> Show hidden references</label>
+        <div id="library-list" class="library-list"><p class="quiet">No directories registered yet.</p></div>
+        <section id="library-detail" class="library-detail" hidden aria-labelledby="library-detail-title">
+          <div class="section-heading"><h3 id="library-detail-title" tabindex="-1"></h3><span id="library-metadata-status" class="status neutral"></span></div>
+          <p id="library-metadata-summary" class="quiet"></p><p id="library-location" class="field-note"></p><button id="archive-visibility" type="button" class="button subtle" aria-describedby="library-visibility-scope">Hide reference</button><p id="library-visibility-scope" class="field-note">Hide only this local reference; archive files are kept. Enable Show hidden references to restore it. Hidden references still count toward the 128-reference limit.</p><p id="library-error" class="notice" hidden></p>
+          <div class="result-badges"><span id="library-recorded-status" class="status neutral"></span><span id="library-digest-status" class="status neutral"></span><span id="library-verification-status" class="status neutral"></span><span id="library-completeness" class="status neutral"></span><span id="library-freshness" class="status neutral"></span></div>
+          <p id="library-digest-scope" class="field-note"></p><details class="library-digests"><summary>Recorded digest diagnostics</summary><div id="library-digest-diagnostics" class="m3-roster"></div></details><p id="library-reader-scope" class="field-note"></p><button id="archive-verify" type="button" class="button secondary" aria-describedby="archive-verify-reason">Check saved analysis</button><p id="archive-verify-reason" class="field-note" hidden></p><button id="archive-view-operation" type="button" class="button subtle" hidden>View operation</button>
+          <section id="library-results" class="library-results" hidden>
+            <section id="library-evidence-summary" class="evidence-summary" aria-label="Archive result summary">Review the recorded result and saved-analysis check separately below.</section>
+            <h3>Checked report snapshot</h3><span id="library-acceptance" class="status neutral"></span>
+            <p class="field-note">The worker verified the source snapshot at the recorded time. Its files have not been fully rechecked since that worker. Recheck explicitly after editing an archive.</p>
+            <div id="library-m4-results">
+            <div id="library-denominators" class="metric-grid"></div><div class="figure-container"><img id="library-figure" alt="Saved synthetic M4 glucose, insulin and C-peptide trajectories" hidden></div><details id="library-graph-data" class="simple-options graph-data"><summary>Read graph data</summary><button id="library-load-graph-data" type="button" class="button secondary">Load saved graph values</button><div id="library-graph-values" class="graph-values"></div></details>
+            <div class="source-table-wrap"><table><caption class="visually-hidden">Reconstructed source outcomes</caption><thead><tr><th scope="col">Source</th><th scope="col">Ancestry</th><th scope="col">Execution</th><th scope="col">Numerical acceptance</th></tr></thead><tbody id="library-source-results"></tbody></table></div>
+            <details class="limitations"><summary>Evidence scope and limitations</summary><ul id="library-limitations"></ul></details>
+            </div>
+            <div id="library-m3-results" hidden>
+              <div id="library-m3-denominators" class="metric-grid"></div><p id="library-m3-analysis-scope" class="field-note"></p>
+              <h4>Forecast errors on matched targets</h4><div class="source-table-wrap"><table><caption class="visually-hidden">Native equal-participant forecast error metrics in mg/dL</caption><thead><tr><th scope="col">Method</th><th scope="col">MAE (mg/dL)</th><th scope="col">RMSE (mg/dL)</th><th scope="col">Bias (mg/dL)</th></tr></thead><tbody id="library-m3-errors"></tbody></table></div>
+              <h4>Pairwise error differences</h4><div id="library-m3-contrasts" class="m3-roster"></div>
+              <h4>All planned participants</h4><div id="library-m3-people" class="m3-roster"></div>
+              <h4>Models and retained attempts</h4><div id="library-m3-candidate-results" class="m3-roster"></div>
+              <details class="m3-native"><summary>Original native JSON report</summary><pre id="library-m3-json"></pre></details>
+              <p class="field-note">Reconstruction verifies saved causal windows, persistence and analysis arithmetic. It does not rerun an arbitrary predictor. Cohort coverage does not establish prediction quality in people.</p>
+            </div>
+            <div id="library-observation-results" hidden></div>
+            <div id="library-m5-results" hidden>
+              <div id="library-m5-denominators" class="metric-grid"></div><p id="library-m5-analysis-scope" class="field-note"></p>
+              <h4>Full baseline and same-participant paired errors</h4>
+              <div class="source-table-wrap"><table><caption>Native mean absolute errors in reported insulin U/day</caption><thead><tr><th scope="col">Metric and evaluation support</th><th scope="col">U/day</th></tr></thead><tbody id="library-m5-errors"></tbody></table></div>
+              <h4>All 32 planned invented participants</h4><div id="library-m5-people" class="m3-roster"></div>
+              <h4>Eligible evaluation participants: both prediction attempts</h4><div id="library-m5-attempts" class="m3-roster"></div>
+              <h4>Frozen source and supplier-declared provenance</h4><div id="library-m5-declaration" class="m3-roster"></div>
+              <details class="m3-native"><summary>Original native JSON report</summary><pre id="library-m5-json"></pre></details>
+              <p class="field-note">Reconstruction checks retained artifacts without importing the candidate or refitting. Rights and training history are self-attested. This synthetic comparison establishes no human prognostic performance or treatment effect.</p>
+            </div>
+            <div class="result-actions"><button id="library-download-markdown" class="button subtle" type="button">Download report</button><button id="library-download-json" class="button subtle" type="button">Download JSON</button><button id="library-download-svg" class="button subtle" type="button">Download SVG</button></div>
+          </section>
+        </section>
+      </section>
+      <section id="campaigns-panel" class="card campaigns-panel workspace-view" aria-labelledby="campaigns-title" hidden>
+        <div class="card-heading"><div><div class="eyebrow">MAINTAINED M4 · RETAINED ATTEMPTS</div><h1 id="campaigns-title" tabindex="-1">Repeat experiments</h1><p>Repeat an insulin-secretion study with the same settings. Every attempt is retained.</p></div><span class="scope-tag">Synthetic studies</span></div>
+        <div id="campaign-notice" class="notice" role="alert" hidden></div>
+        <form id="campaign-form" class="campaign-form">
+          <div class="campaign-repeat-entry"><label>Study to repeat<select id="campaign-study-choice"><option value="">Choose a saved study</option></select></label><button id="campaign-use-study" type="button" class="button secondary" disabled>Use this study</button></div>
+          <div class="campaign-repeat-settings"><label>Repetitions per study<input id="campaign-repeats" type="number" min="1" max="8" value="1" required></label></div>
+          <details class="simple-options campaign-options"><summary>Study configurations and execution limit</summary>
+          <div class="campaign-intake"><button type="button" class="button subtle" data-workspace-go="m4">Configure study <span aria-hidden="true">→</span></button><label>New cell ID<input id="campaign-cell-id" type="text" value="cell_1" pattern="[a-z]([a-z0-9_]|-){0,63}" maxlength="64" required></label><button id="campaign-add-cell" type="button" class="button secondary">＋ Add current study as cell</button></div>
+          <p class="field-note">For a different configuration, choose models and starting conditions in Insulin secretion, then return here to add it as a study cell. Adding a cell captures independent source bytes and settings. Later changes to the study form do not alter that cell.</p>
+          <div id="campaign-cells" class="campaign-cells"><p class="quiet">Add the first study cell to build a matrix.</p></div>
+          <div class="budget-fields"><label>Execution limit per study attempt, seconds<input id="campaign-budget" type="number" min="1" max="10800" value="3600" required></label></div>
+          <p class="field-note">Cells run in the displayed order, then in ascending repetition number. The outer deadline preserves each study's stage and whole-source budgets. Cleanup time is recorded separately.</p>
+          </details>
+          <div id="campaign-plan" class="campaign-plan"></div>
+          <div class="campaign-readiness"><span id="campaign-readiness" class="status neutral">Campaign not checked</span><p id="campaign-readiness-detail" class="quiet">Check the frozen matrix before starting numerical work.</p><p id="campaign-config-reference" class="quiet small"></p></div>
+          <div class="form-actions campaign-actions"><button id="campaign-check" type="submit" class="button secondary">Check campaign</button><button id="campaign-install" type="button" class="button subtle">Install task environments</button><button id="campaign-run" type="button" class="button primary" disabled>Run campaign ↗</button></div>
+          <p id="campaign-setup-note" class="field-note">Installation is explicit. After installation, check the campaign again. Editing, replacing or reordering cells creates a new frozen matrix.</p>
+        </form>
+        <div class="campaign-saved-heading"><h3>Saved campaigns in this workspace</h3><p class="quiet">A restart restores recorded evidence. Reconstruct explicitly to verify the saved snapshot again.</p></div>
+        <div id="campaign-list" class="library-list"><p class="quiet">No campaigns started yet.</p></div>
+        <section id="campaign-detail" class="campaign-detail" hidden aria-labelledby="campaign-detail-title">
+          <section id="campaign-evidence-summary" class="evidence-summary" aria-label="Repeated experiment summary">Review completed attempts, planned coverage and the saved-analysis check separately below.</section>
+          <div class="section-heading"><h3 id="campaign-detail-title"></h3><span id="campaign-process-status" class="status neutral"></span></div>
+          <div class="result-badges"><span id="campaign-coverage-status" class="status neutral"></span><span id="campaign-verification-status" class="status neutral"></span></div>
+          <p id="campaign-detail-scope" class="field-note"></p><p id="campaign-detail-error" class="notice" hidden></p>
+          <div class="result-actions"><button id="campaign-check-saved" type="button" class="button secondary">Check for resume</button><button id="campaign-resume" type="button" class="button secondary" disabled>Resume remaining slots</button><button id="campaign-reconstruct" type="button" class="button secondary">Check saved analysis</button></div>
+          <p class="field-note">Resume appends a new immutable session and skips accepted slots. Failed and interrupted attempts remain visible. An unsealed session requires a fresh campaign; it is not repaired automatically.</p>
+          <section id="campaign-results" hidden>
+            <div id="campaign-denominators" class="metric-grid"></div><p id="campaign-interpretation" class="field-note"></p>
+            <h4>Complete cell / repetition roster</h4><div id="campaign-slots" class="campaign-slots"></div>
+            <h4>Immutable sessions</h4><div id="campaign-sessions" class="campaign-sessions"></div>
+            <div class="result-actions"><button id="campaign-download-markdown" type="button" class="button subtle">Download report</button><button id="campaign-download-json" type="button" class="button subtle">Download JSON</button></div>
+            <details class="limitations"><summary>Campaign scope and limitations</summary><p id="campaign-limitations"></p></details>
+          </section>
+        </section>
+      </section>
+      <section id="durable-panel" class="card archive-library workspace-view" aria-labelledby="durable-title" hidden>
+        <div class="card-heading"><div><div class="eyebrow">KEEP THE COMPLETE EXPERIMENT</div><h1 id="durable-title" tabindex="-1">Export / open archives</h1><p>Keep a complete experiment outside this checkout, or open a saved package for read-only review.</p></div><span class="scope-tag">Synthetic M3 / maintained M4</span></div>
+        <div id="durable-notice" class="notice" role="alert" hidden></div>
+        <div class="section-heading"><h3>Export a complete archive</h3><span id="durable-store-status" class="status neutral">Export folder not configured</span></div>
+        <p id="durable-store-path" class="quiet durable-path"></p><p id="durable-store-detail" class="field-note">Choose an archive folder outside this checkout when starting the interface.</p>
+        <form id="durable-export-form" class="archive-form"><label>Saved experiment<select id="durable-source" required><option value="">Choose a finished experiment</option></select></label><button id="durable-export" class="button secondary" type="submit" disabled>Export complete archive</button></form>
+        <p class="field-note">Export first verifies native reconstruction, including failed or incomplete experiments. Existing packages are never overwritten. Keep a separate backup of the configured export folder.</p>
+        <h3>Open a saved package</h3>
+        <form id="durable-register-form" class="archive-form"><label>Allowed archive root<select id="durable-root" required></select></label><label>Relative package directory<div class="path-row"><input id="durable-path" type="text" placeholder="package-…"><button id="durable-browse" type="button" class="browse-button">Browse</button></div></label><button id="durable-register" class="button secondary" type="submit">Open and check package bytes</button></form>
+        <p class="field-note">Registration checks the complete package without running its saved code. A registered package stays read-only; it does not become a resumable campaign.</p>
+        <div id="durable-list" class="library-list"><p class="quiet">No durable packages registered.</p></div>
+        <section id="durable-detail" class="campaign-detail" aria-labelledby="durable-detail-title" hidden>
+          <section id="durable-evidence-summary" class="evidence-summary" aria-label="Saved package summary">Review package integrity, saved analysis and completeness separately below.</section>
+          <div class="section-heading"><h3 id="durable-detail-title">Saved package</h3><span id="durable-availability" class="status neutral"></span></div>
+          <p id="durable-directory" class="quiet durable-path"></p>
+          <div class="result-badges"><span id="durable-integrity" class="status neutral"></span><span id="durable-reconstruction" class="status neutral"></span><span id="durable-completeness" class="status neutral"></span></div>
+          <p id="durable-scope" class="field-note"></p><p id="durable-error" class="notice" hidden></p>
+          <div class="result-actions"><button id="durable-verify" type="button" class="button secondary">Recheck package bytes</button><button id="durable-reconstruct" type="button" class="button secondary">Check saved analysis</button></div>
+          <details class="limitations"><summary>Reader identity</summary><p id="durable-reader" class="quiet durable-path"></p><p class="field-note">Reconstruction uses this interface's current clean checkout. A different recorded revision needs an explicitly trusted compatible checkout through the CLI. Preserved reader files are data and are never selected for execution automatically.</p></details>
+          <section id="durable-results" hidden><h4>Native report snapshot</h4><p id="durable-native-counts" class="field-note"></p><ul id="durable-native-roster" class="durable-roster"></ul><div class="result-actions"><button id="durable-download-markdown" type="button" class="button subtle">Download native report</button><button id="durable-download-json" type="button" class="button subtle">Download native JSON</button><button id="durable-download-svg" type="button" class="button subtle" hidden>Download figure</button></div></section>
+        </section>
+      </section>
+
+    </div>
+  </main>
+  <dialog id="file-dialog" aria-labelledby="file-dialog-title"><div class="dialog-heading"><h2 id="file-dialog-title">Select a local file</h2><button type="button" id="close-dialog" class="icon-button" aria-label="Close file selector">×</button></div><div class="file-navigation"><button type="button" class="button subtle" id="directory-up">↑ Parent</button><span id="file-directory"></span></div><p class="field-note">Files are selected from this checkout. Symlinks and hidden paths are excluded.</p><div id="file-list" class="file-list"></div></dialog>
+  <dialog id="archive-dialog" aria-labelledby="archive-dialog-title"><div class="dialog-heading"><h2 id="archive-dialog-title">Choose an archive directory</h2><button type="button" id="archive-close-dialog" class="icon-button" aria-label="Close archive selector">×</button></div><div class="file-navigation"><button id="archive-directory-up" type="button" class="button subtle">↑ Parent</button><span id="archive-directory"></span></div><p class="field-note">One directory is listed at a time. No archives are discovered or registered automatically.</p><div id="archive-directories" class="file-list"></div><div class="result-actions"><button id="archive-select-directory" type="button" class="button primary">Select this directory</button></div></dialog>
+  <dialog id="durable-dialog" aria-labelledby="durable-dialog-title"><div class="dialog-heading"><h2 id="durable-dialog-title">Choose a durable package directory</h2><button id="durable-close-dialog" type="button" class="icon-button" aria-label="Close durable package selector">×</button></div><div class="file-navigation"><button id="durable-directory-up" type="button" class="button subtle">↑ Parent</button><span id="durable-browse-directory"></span></div><p class="field-note">Only the explicitly allowed archive roots are available.</p><div id="durable-directories" class="file-list"></div><div class="result-actions"><button id="durable-select-directory" type="button" class="button primary">Select this directory</button></div></dialog>
+  <dialog id="m3-dialog" aria-labelledby="m3-dialog-title"><div class="dialog-heading"><h2 id="m3-dialog-title">Select a synthetic M3 configuration</h2><button id="m3-close-dialog" type="button" class="icon-button" aria-label="Close M3 configuration selector">×</button></div><div class="file-navigation"><button id="m3-directory-up" type="button" class="button subtle">↑ Parent</button><span id="m3-directory"></span></div><p class="field-note">Only explicitly allowed input roots are available. Symlinks and unsafe paths are refused.</p><div id="m3-files" class="file-list"></div></dialog>
+  <dialog id="obs-file-dialog" aria-labelledby="obs-file-dialog-title"><div class="dialog-heading"><h2 id="obs-file-dialog-title">Select observation input</h2><button id="obs-file-close" type="button" class="icon-button" aria-label="Close observation file selector">×</button></div><div class="file-navigation"><button id="obs-file-up" class="button subtle" type="button">↑ Parent</button><span id="obs-file-directory"></span></div><p class="field-note">Only this checkout is available. Hidden paths and symlinks are refused; at most 256 entries are listed. You may enter a file path directly.</p><div id="obs-file-list" class="file-list"></div></dialog>
+  <dialog id="sam-file-dialog" aria-labelledby="sam-file-dialog-title"><div class="dialog-heading"><h2 id="sam-file-dialog-title">Select sampling input</h2><button id="sam-file-close" type="button" class="icon-button" aria-label="Close sampling file selector">×</button></div><div class="file-navigation"><button id="sam-file-up" class="button subtle" type="button">↑ Parent</button><span id="sam-file-directory"></span></div><p class="field-note">Only this checkout is available. Hidden paths and symlinks are refused; at most 256 entries are listed. You may enter a file path directly.</p><div id="sam-file-list" class="file-list"></div></dialog>
+</body>
+</html>

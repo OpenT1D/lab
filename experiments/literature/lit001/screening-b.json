@@ -1,0 +1,2368 @@
+[
+  {
+    "key": "PMID:22226252",
+    "source_index": 336,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22226254",
+    "source_index": 337,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22242803",
+    "source_index": 338,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22266599",
+    "source_index": 339,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22267935",
+    "source_index": 340,
+    "decision": "background",
+    "reason": "Review/overview retained for original-source tracing or formulation/kinetic context; not primary model or adult T1D kinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22291471",
+    "source_index": 341,
+    "decision": "background",
+    "reason": "Review/overview retained for original-source tracing or formulation/kinetic context; not primary model or adult T1D kinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22321739",
+    "source_index": 342,
+    "decision": "background",
+    "reason": "Review/overview retained for original-source tracing or formulation/kinetic context; not primary model or adult T1D kinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22369975",
+    "source_index": 343,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22396172",
+    "source_index": 344,
+    "decision": "excluded",
+    "reason": "Different molecule/hormone, pulmonary route or co-formulation biochemistry outside conventional-lispro subcutaneous kinetics in adults with T1D.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22413830",
+    "source_index": 345,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22417321",
+    "source_index": 346,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22440045",
+    "source_index": 347,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22444446",
+    "source_index": 348,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22538135",
+    "source_index": 349,
+    "decision": "excluded",
+    "reason": "Protein/analytical biology, alternate-route disposition or a non-kinetic outcome; no eligible adult T1D subcutaneous lispro kinetic comparison established.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22564116",
+    "source_index": 350,
+    "decision": "primary_candidate",
+    "reason": "Separate versus mixed lispro/glargine SC injections with serum-lispro PK during a mixed-meal test in 10 T1D participants (mean age 21.9 years); conventional separate-injection data potentially eligible.",
+    "reviewed_material": "title_abstract",
+    "next_action": "Retrieve full text; verify participant age range, dose/concentration, assay and separate-injection arm; distinguish repeated clinical follow-up from PK visits."
+  },
+  {
+    "key": "PMID:22583390",
+    "source_index": 351,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22649374",
+    "source_index": 352,
+    "decision": "excluded",
+    "reason": "Protein/analytical biology, alternate-route disposition or a non-kinetic outcome; no eligible adult T1D subcutaneous lispro kinetic comparison established.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22649410",
+    "source_index": 353,
+    "decision": "excluded",
+    "reason": "Protein/analytical biology, alternate-route disposition or a non-kinetic outcome; no eligible adult T1D subcutaneous lispro kinetic comparison established.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22652304",
+    "source_index": 354,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22688340",
+    "source_index": 355,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22768892",
+    "source_index": 356,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22768893",
+    "source_index": 357,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22784848",
+    "source_index": 358,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22843207",
+    "source_index": 359,
+    "decision": "background",
+    "reason": "Review/overview retained for original-source tracing or formulation/kinetic context; not primary model or adult T1D kinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22850684",
+    "source_index": 360,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22920798",
+    "source_index": 361,
+    "decision": "primary_candidate",
+    "reason": "Lispro SC comparator versus intradermal delivery in 22 T1D subjects, several doses and two standardized meals; six-hour PK with intravenous basal regular insulin described.",
+    "reviewed_material": "title_abstract",
+    "next_action": "Retrieve full text; verify adult ages, conventional-lispro concentration, dose histories, meal-period overlap and assay separation from IV regular insulin."
+  },
+  {
+    "key": "PMID:22920803",
+    "source_index": 362,
+    "decision": "background",
+    "reason": "Review/overview retained for original-source tracing or formulation/kinetic context; not primary model or adult T1D kinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:22957436",
+    "source_index": 363,
+    "decision": "excluded",
+    "reason": "Different molecule/hormone, pulmonary route or co-formulation biochemistry outside conventional-lispro subcutaneous kinetics in adults with T1D.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23003329",
+    "source_index": 364,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23008265",
+    "source_index": 365,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23043164",
+    "source_index": 366,
+    "decision": "background",
+    "reason": "Lispro kinetic study in healthy volunteers or T2D rather than the target adult T1D population; retain as indirect evidence only.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:23043233",
+    "source_index": 367,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23063040",
+    "source_index": 368,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23074525",
+    "source_index": 369,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23110609",
+    "source_index": 370,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23134485",
+    "source_index": 371,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23148201",
+    "source_index": 372,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23179373",
+    "source_index": 373,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23193217",
+    "source_index": 374,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23193300",
+    "source_index": 375,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23243636",
+    "source_index": 376,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23259764",
+    "source_index": 377,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23260831",
+    "source_index": 378,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23282162",
+    "source_index": 379,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23366528",
+    "source_index": 380,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23389397",
+    "source_index": 381,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23404296",
+    "source_index": 382,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23404300",
+    "source_index": 383,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23448197",
+    "source_index": 384,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23448393",
+    "source_index": 385,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23451796",
+    "source_index": 386,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23456735",
+    "source_index": 387,
+    "decision": "excluded",
+    "reason": "Protein/analytical biology, alternate-route disposition or a non-kinetic outcome; no eligible adult T1D subcutaneous lispro kinetic comparison established.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23517449",
+    "source_index": 388,
+    "decision": "background",
+    "reason": "Lispro intradermal versus subcutaneous pharmacokinetics in children/adolescents; adult T1D primary scope not established.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:23602044",
+    "source_index": 389,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23620200",
+    "source_index": 390,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23659762",
+    "source_index": 391,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23747725",
+    "source_index": 392,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23810201",
+    "source_index": 393,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23848178",
+    "source_index": 394,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23886838",
+    "source_index": 395,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23911175",
+    "source_index": 396,
+    "decision": "background",
+    "reason": "Generic physiological model, model-extension or identifiability ancestry; useful for comparison, but not established here as a primary conventional-lispro kinetic study.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:23941279",
+    "source_index": 397,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23945606",
+    "source_index": 398,
+    "decision": "background",
+    "reason": "Generic physiological model, model-extension or identifiability ancestry; useful for comparison, but not established here as a primary conventional-lispro kinetic study.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:23948625",
+    "source_index": 399,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23949559",
+    "source_index": 400,
+    "decision": "excluded",
+    "reason": "Protein/analytical biology, alternate-route disposition or a non-kinetic outcome; no eligible adult T1D subcutaneous lispro kinetic comparison established.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23959960",
+    "source_index": 401,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23967077",
+    "source_index": 402,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:23997930",
+    "source_index": 403,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24026542",
+    "source_index": 404,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24026961",
+    "source_index": 405,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24118819",
+    "source_index": 406,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24126552",
+    "source_index": 407,
+    "decision": "background",
+    "reason": "Review/overview retained for original-source tracing or formulation/kinetic context; not primary model or adult T1D kinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24236961",
+    "source_index": 408,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24237387",
+    "source_index": 409,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24277609",
+    "source_index": 410,
+    "decision": "excluded",
+    "reason": "Protein/analytical biology, alternate-route disposition or a non-kinetic outcome; no eligible adult T1D subcutaneous lispro kinetic comparison established.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24319120",
+    "source_index": 411,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24351176",
+    "source_index": 412,
+    "decision": "excluded",
+    "reason": "Different molecule/hormone, pulmonary route or co-formulation biochemistry outside conventional-lispro subcutaneous kinetics in adults with T1D.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24351183",
+    "source_index": 413,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24354899",
+    "source_index": 414,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24405540",
+    "source_index": 415,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24447074",
+    "source_index": 416,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24458650",
+    "source_index": 417,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24507950",
+    "source_index": 418,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24558019",
+    "source_index": 419,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24622798",
+    "source_index": 420,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24673155",
+    "source_index": 421,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24708696",
+    "source_index": 422,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24719911",
+    "source_index": 423,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24735100",
+    "source_index": 424,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24769252",
+    "source_index": 425,
+    "decision": "background",
+    "reason": "Lispro-containing numerical glucose/insulin model; retain for model ancestry, with simulated results distinct from human pharmacokinetic evidence.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:24801544",
+    "source_index": 426,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24803925",
+    "source_index": 427,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24826038",
+    "source_index": 428,
+    "decision": "background",
+    "reason": "Review/overview retained for original-source tracing or formulation/kinetic context; not primary model or adult T1D kinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24835122",
+    "source_index": 429,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24843668",
+    "source_index": 430,
+    "decision": "background",
+    "reason": "Lispro kinetic study in healthy volunteers or T2D rather than the target adult T1D population; retain as indirect evidence only.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:24855159",
+    "source_index": 431,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24855160",
+    "source_index": 432,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24876535",
+    "source_index": 433,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:24876617",
+    "source_index": 434,
+    "decision": "background",
+    "reason": "Generic physiological model, model-extension or identifiability ancestry; useful for comparison, but not established here as a primary conventional-lispro kinetic study.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:24993826",
+    "source_index": 435,
+    "decision": "excluded",
+    "reason": "Protein/analytical biology, alternate-route disposition or a non-kinetic outcome; no eligible adult T1D subcutaneous lispro kinetic comparison established.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25041605",
+    "source_index": 436,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25092225",
+    "source_index": 437,
+    "decision": "background",
+    "reason": "Lispro kinetic study in healthy volunteers or T2D rather than the target adult T1D population; retain as indirect evidence only.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:25126390",
+    "source_index": 438,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25126403",
+    "source_index": 439,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25136065",
+    "source_index": 440,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25139882",
+    "source_index": 441,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25267863",
+    "source_index": 442,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25274393",
+    "source_index": 443,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25282010",
+    "source_index": 444,
+    "decision": "background",
+    "reason": "Review/overview retained for original-source tracing or formulation/kinetic context; not primary model or adult T1D kinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25305134",
+    "source_index": 445,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25313261",
+    "source_index": 446,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25339419",
+    "source_index": 447,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25345658",
+    "source_index": 448,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25483869",
+    "source_index": 449,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25534788",
+    "source_index": 450,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25565404",
+    "source_index": 451,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25581159",
+    "source_index": 452,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25600304",
+    "source_index": 453,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25607337",
+    "source_index": 454,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25697600",
+    "source_index": 455,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25697717",
+    "source_index": 456,
+    "decision": "background",
+    "reason": "Lispro kinetic study in healthy volunteers or T2D rather than the target adult T1D population; retain as indirect evidence only.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:25773366",
+    "source_index": 457,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25856045",
+    "source_index": 458,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25883166",
+    "source_index": 459,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25898950",
+    "source_index": 460,
+    "decision": "unresolved",
+    "reason": "Exercise/triple-tracer study in 16 T1D pump users measures plasma insulin and reports increased insulin concentration despite unchanged pump rate; insulin formulation/age eligibility absent from abstract.",
+    "reviewed_material": "title_abstract",
+    "next_action": "Inspect full text for insulin molecule, concentration, adult ages and usable plasma-insulin time series; retain as primary only if conventional lispro data are separable."
+  },
+  {
+    "key": "PMID:25901023",
+    "source_index": 461,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:25962621",
+    "source_index": 462,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26134836",
+    "source_index": 463,
+    "decision": "background",
+    "reason": "Lispro-containing numerical glucose/insulin model; retain for model ancestry, with simulated results distinct from human pharmacokinetic evidence.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:26136850",
+    "source_index": 464,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26144370",
+    "source_index": 465,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26184417",
+    "source_index": 466,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26270205",
+    "source_index": 467,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26285951",
+    "source_index": 468,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26293127",
+    "source_index": 469,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26308506",
+    "source_index": 470,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26313215",
+    "source_index": 471,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26331364",
+    "source_index": 472,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26334077",
+    "source_index": 473,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26343364",
+    "source_index": 474,
+    "decision": "unresolved",
+    "reason": "Hovorka-based insulin estimator compared against plasma insulin in 12 T1D pump users during four mixed-meal studies; formulation and age details not stated in abstract.",
+    "reviewed_material": "title_abstract",
+    "next_action": "Inspect full text for conventional-lispro use/adult population and whether reusable insulin kinetic data or equations add primary evidence; otherwise classify model ancestry background."
+  },
+  {
+    "key": "PMID:26350081",
+    "source_index": 475,
+    "decision": "background",
+    "reason": "Review/overview retained for original-source tracing or formulation/kinetic context; not primary model or adult T1D kinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26358287",
+    "source_index": 476,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26379428",
+    "source_index": 477,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26432775",
+    "source_index": 478,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26468135",
+    "source_index": 479,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26510389",
+    "source_index": 480,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26546085",
+    "source_index": 481,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26568812",
+    "source_index": 482,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26583784",
+    "source_index": 483,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:2662610",
+    "source_index": 484,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26646072",
+    "source_index": 485,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26652453",
+    "source_index": 486,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26656289",
+    "source_index": 487,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26656958",
+    "source_index": 488,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26721524",
+    "source_index": 489,
+    "decision": "excluded",
+    "reason": "Protein/analytical biology, alternate-route disposition or a non-kinetic outcome; no eligible adult T1D subcutaneous lispro kinetic comparison established.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26727843",
+    "source_index": 490,
+    "decision": "background",
+    "reason": "Secondary review/reanalysis useful for locating original lispro pharmacokinetic or comparator studies; not an independent primary cohort.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:26736768",
+    "source_index": 491,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26736985",
+    "source_index": 492,
+    "decision": "background",
+    "reason": "Generic physiological model, model-extension or identifiability ancestry; useful for comparison, but not established here as a primary conventional-lispro kinetic study.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:26798030",
+    "source_index": 493,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26803356",
+    "source_index": 494,
+    "decision": "excluded",
+    "reason": "T2D with liver cirrhosis study reports glucose/clinical response; target T1D lispro kinetic evidence not established in abstract.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:26819233",
+    "source_index": 495,
+    "decision": "background",
+    "reason": "Lispro-containing numerical glucose/insulin model; retain for model ancestry, with simulated results distinct from human pharmacokinetic evidence.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:26820201",
+    "source_index": 496,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26870815",
+    "source_index": 497,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26880726",
+    "source_index": 498,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26882484",
+    "source_index": 499,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26902790",
+    "source_index": 500,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26924774",
+    "source_index": 501,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26930674",
+    "source_index": 502,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26933827",
+    "source_index": 503,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26934128",
+    "source_index": 504,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26938444",
+    "source_index": 505,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:26965765",
+    "source_index": 506,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27026683",
+    "source_index": 507,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27050468",
+    "source_index": 508,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27073901",
+    "source_index": 509,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27119580",
+    "source_index": 510,
+    "decision": "background",
+    "reason": "Lispro kinetic study in healthy volunteers or T2D rather than the target adult T1D population; retain as indirect evidence only.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:27126300",
+    "source_index": 511,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27175938",
+    "source_index": 512,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27179011",
+    "source_index": 513,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27186563",
+    "source_index": 514,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27217788",
+    "source_index": 515,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27226198",
+    "source_index": 516,
+    "decision": "excluded",
+    "reason": "Protein/analytical biology, alternate-route disposition or a non-kinetic outcome; no eligible adult T1D subcutaneous lispro kinetic comparison established.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:27265390",
+    "source_index": 517,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27267431",
+    "source_index": 518,
+    "decision": "background",
+    "reason": "Lispro kinetic study in healthy volunteers or T2D rather than the target adult T1D population; retain as indirect evidence only.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:27280852",
+    "source_index": 519,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27287376",
+    "source_index": 520,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27356188",
+    "source_index": 521,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27371341",
+    "source_index": 522,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27402243",
+    "source_index": 523,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27411698",
+    "source_index": 524,
+    "decision": "primary_candidate",
+    "reason": "Crossover SC lispro 0.15 U/kg in 13 T1D participants compares lipohypertrophic with normal tissue, with repeated clamp injections and meal tests.",
+    "reviewed_material": "title_abstract",
+    "next_action": "Retrieve full text; verify adult eligibility, injection visits/site definition, lispro assay, within-person repeats and normal-tissue reference curves."
+  },
+  {
+    "key": "PMID:27448377",
+    "source_index": 525,
+    "decision": "excluded",
+    "reason": "Different molecule/hormone, pulmonary route or co-formulation biochemistry outside conventional-lispro subcutaneous kinetics in adults with T1D.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27482825",
+    "source_index": 526,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27490410",
+    "source_index": 527,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27506126",
+    "source_index": 528,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27517679",
+    "source_index": 529,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27528391",
+    "source_index": 530,
+    "decision": "background",
+    "reason": "Animal PEG-lispro absorption/clearance comparison; indirect modified-formulation evidence, not conventional-lispro human validation.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27532627",
+    "source_index": 531,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27553192",
+    "source_index": 532,
+    "decision": "excluded",
+    "reason": "Protein/analytical biology, alternate-route disposition or a non-kinetic outcome; no eligible adult T1D subcutaneous lispro kinetic comparison established.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27553852",
+    "source_index": 533,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27820140",
+    "source_index": 534,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27824066",
+    "source_index": 535,
+    "decision": "unresolved",
+    "reason": "GLUKINSLOOP 2.0 characterizes glucose and insulin dynamics across repeated mixed-meal tests in T1D pump users; insulin formulation and adult eligibility are not given in abstract.",
+    "reviewed_material": "title_abstract",
+    "next_action": "Inspect full text for age, formulation, insulin assay, PK equations, dose records and cohort overlap with insulin-estimation publications."
+  },
+  {
+    "key": "PMID:27835037",
+    "source_index": 536,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27878566",
+    "source_index": 537,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27908250",
+    "source_index": 538,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27974167",
+    "source_index": 539,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:27987252",
+    "source_index": 540,
+    "decision": "primary_candidate",
+    "reason": "Adult male T1D randomized crossover clamp compares SAR342434, US Humalog and EU Humalog at 0.3 U/kg, fasting; 30 randomized and 28 completing all periods.",
+    "reviewed_material": "title_abstract",
+    "next_action": "Retrieve full text and supplements; verify SC route and concentration, assay, timing, period-specific curves and cohort relation to other biosimilar reports."
+  },
+  {
+    "key": "PMID:27989651",
+    "source_index": 541,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28007370",
+    "source_index": 542,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28035286",
+    "source_index": 543,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28052468",
+    "source_index": 544,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28092515",
+    "source_index": 545,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28113240",
+    "source_index": 546,
+    "decision": "excluded",
+    "reason": "Abstract specifies insulin aspart delivery and CGM-based model fitting; no conventional-lispro concentration data.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:28133990",
+    "source_index": 547,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28161977",
+    "source_index": 548,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28230457",
+    "source_index": 549,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28253305",
+    "source_index": 550,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28296467",
+    "source_index": 551,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28322429",
+    "source_index": 552,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28345762",
+    "source_index": 553,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28394405",
+    "source_index": 554,
+    "decision": "unresolved",
+    "reason": "Population PK model includes lispro among multiple formulations and uses published clinical data; abstract does not establish adult T1D source cohorts or separable lispro evidence.",
+    "reviewed_material": "title_abstract",
+    "next_action": "Trace lispro source studies and model specification in full text; decide primary candidate versus secondary/model background using population and formulation details."
+  },
+  {
+    "key": "PMID:28432898",
+    "source_index": 555,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28474383",
+    "source_index": 556,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28475455",
+    "source_index": 557,
+    "decision": "background",
+    "reason": "Review/overview retained for original-source tracing or formulation/kinetic context; not primary model or adult T1D kinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28479661",
+    "source_index": 558,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28484424",
+    "source_index": 559,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28541131",
+    "source_index": 560,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28569076",
+    "source_index": 561,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28576743",
+    "source_index": 562,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28585879",
+    "source_index": 563,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28617434",
+    "source_index": 564,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28636773",
+    "source_index": 565,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28654314",
+    "source_index": 566,
+    "decision": "unresolved",
+    "reason": "SC insulin/glucagon PK models fitted to measured concentrations across four visits in eight T1D participants; insulin molecule and ages not stated in abstract.",
+    "reviewed_material": "title_abstract",
+    "next_action": "Inspect full text for insulin identity, adult eligibility and recoverable insulin-specific equations/data; retain conventional lispro only if established."
+  },
+  {
+    "key": "PMID:28672010",
+    "source_index": 567,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28679886",
+    "source_index": 568,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28688482",
+    "source_index": 569,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28700249",
+    "source_index": 570,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28702259",
+    "source_index": 571,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28736738",
+    "source_index": 572,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28745091",
+    "source_index": 573,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28751575",
+    "source_index": 574,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28762200",
+    "source_index": 575,
+    "decision": "background",
+    "reason": "In vitro lispro/other-insulin hexamer dissociation kinetics provide mechanistic context, not in vivo absorption validation.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:28831695",
+    "source_index": 576,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28847172",
+    "source_index": 577,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28863751",
+    "source_index": 578,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28871565",
+    "source_index": 579,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28880659",
+    "source_index": 580,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28887173",
+    "source_index": 581,
+    "decision": "excluded",
+    "reason": "Protein/analytical biology, alternate-route disposition or a non-kinetic outcome; no eligible adult T1D subcutaneous lispro kinetic comparison established.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28922582",
+    "source_index": 582,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:28981324",
+    "source_index": 583,
+    "decision": "background",
+    "reason": "Swine catheter tissue-response and insulin absorption study; indirect mechanistic evidence with animal applicability limits.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:29060152",
+    "source_index": 584,
+    "decision": "background",
+    "reason": "Generic physiological model, model-extension or identifiability ancestry; useful for comparison, but not established here as a primary conventional-lispro kinetic study.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:29155123",
+    "source_index": 585,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:29159123",
+    "source_index": 586,
+    "decision": "background",
+    "reason": "T1D PK study includes premixed protamine/lispro; no separable conventional-lispro-only arm in the abstract, so retain as adjacent formulation context.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:29174479",
+    "source_index": 587,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:29278712",
+    "source_index": 588,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:29303370",
+    "source_index": 589,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:29359575",
+    "source_index": 590,
+    "decision": "excluded",
+    "reason": "Pump safety/occlusion study; abstract references earlier PK work but the present study is not a PK comparison.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:29382312",
+    "source_index": 591,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:29384554",
+    "source_index": 592,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:29437465",
+    "source_index": 593,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:29451021",
+    "source_index": 594,
+    "decision": "background",
+    "reason": "Generic physiological model, model-extension or identifiability ancestry; useful for comparison, but not established here as a primary conventional-lispro kinetic study.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:29502804",
+    "source_index": 595,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:29527311",
+    "source_index": 596,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:29535954",
+    "source_index": 597,
+    "decision": "background",
+    "reason": "Concentrated-insulin overview retained for formulation distinctions and original-source tracing, not primary adult T1D kinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:29536605",
+    "source_index": 598,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:29668697",
+    "source_index": 599,
+    "decision": "background",
+    "reason": "Secondary review/reanalysis useful for locating original lispro pharmacokinetic or comparator studies; not an independent primary cohort.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:29702445",
+    "source_index": 600,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:29743341",
+    "source_index": 601,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:29753586",
+    "source_index": 602,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:29789227",
+    "source_index": 603,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:29923294",
+    "source_index": 604,
+    "decision": "primary_candidate",
+    "reason": "BioChaperone versus conventional lispro in T1D includes PK at mealtime mixed-meal tests, with 35 participants completing both treatment periods.",
+    "reviewed_material": "title_abstract",
+    "next_action": "Retrieve full text; verify adults, conventional formulation/concentration and doses; retain conventional-lispro PK separately from accelerated product and clinical endpoints."
+  },
+  {
+    "key": "PMID:29928940",
+    "source_index": 605,
+    "decision": "excluded",
+    "reason": "Different molecule/hormone, pulmonary route or co-formulation biochemistry outside conventional-lispro subcutaneous kinetics in adults with T1D.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:29937359",
+    "source_index": 606,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:29967934",
+    "source_index": 607,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:29989928",
+    "source_index": 608,
+    "decision": "primary_candidate",
+    "reason": "Three SC absorption models compared using frequently sampled plasma-insulin data after a single injection in 116 T1D subjects; candidate model includes an absorption delay.",
+    "reviewed_material": "title_abstract",
+    "next_action": "Retrieve full text/supplements; confirm lispro/adult cohort constituents and overlap with later population model; extract equations, fixed systemic kinetics and individual-parameter availability."
+  },
+  {
+    "key": "PMID:30059173",
+    "source_index": 609,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30095007",
+    "source_index": 610,
+    "decision": "background",
+    "reason": "Generic physiological model, model-extension or identifiability ancestry; useful for comparison, but not established here as a primary conventional-lispro kinetic study.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:30114722",
+    "source_index": 611,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30129485",
+    "source_index": 612,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30184209",
+    "source_index": 613,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30271868",
+    "source_index": 614,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30295083",
+    "source_index": 615,
+    "decision": "background",
+    "reason": "Review/overview retained for original-source tracing or formulation/kinetic context; not primary model or adult T1D kinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30298989",
+    "source_index": 616,
+    "decision": "excluded",
+    "reason": "Protein/analytical biology, alternate-route disposition or a non-kinetic outcome; no eligible adult T1D subcutaneous lispro kinetic comparison established.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30307056",
+    "source_index": 617,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30327359",
+    "source_index": 618,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30392154",
+    "source_index": 619,
+    "decision": "unresolved",
+    "reason": "Exercise insulin-kinetics model compares resting/exercising T1D pump cohorts with insulin concentrations; abstract omits molecule and age details and has missing formula-rendered counts.",
+    "reviewed_material": "title_abstract",
+    "next_action": "Inspect full text for conventional-lispro source cohorts, age ranges, dose/assay and overlap with triple-tracer studies; distinguish indirect exercise mechanism evidence."
+  },
+  {
+    "key": "PMID:30403576",
+    "source_index": 620,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30431245",
+    "source_index": 621,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30467929",
+    "source_index": 622,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30537756",
+    "source_index": 623,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30541218",
+    "source_index": 624,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30565407",
+    "source_index": 625,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:30583034",
+    "source_index": 626,
+    "decision": "background",
+    "reason": "Concentrated-insulin overview retained for formulation distinctions and original-source tracing, not primary adult T1D kinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30620643",
+    "source_index": 627,
+    "decision": "primary_candidate",
+    "reason": "Twenty C-peptide-negative T1D subjects received 15 U SC lispro through two pumps over 30 seconds or 10 minutes in randomized clamp visits.",
+    "reviewed_material": "title_abstract",
+    "next_action": "Retrieve full text; verify adults, assay and sampling, infusion start/end convention, concentrations and complete kinetic reference traces."
+  },
+  {
+    "key": "PMID:30622653",
+    "source_index": 628,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30670068",
+    "source_index": 629,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30673191",
+    "source_index": 630,
+    "decision": "excluded",
+    "reason": "Protein/analytical biology, alternate-route disposition or a non-kinetic outcome; no eligible adult T1D subcutaneous lispro kinetic comparison established.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30679914",
+    "source_index": 631,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30730036",
+    "source_index": 632,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30785311",
+    "source_index": 633,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30828929",
+    "source_index": 634,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30839227",
+    "source_index": 635,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30895514",
+    "source_index": 636,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30922295",
+    "source_index": 637,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30924380",
+    "source_index": 638,
+    "decision": "background",
+    "reason": "Lispro-specific serum/plasma assay validation; directly useful for observation semantics and cross-reactivity, but not a target-population kinetic cohort.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:30931606",
+    "source_index": 639,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30946685",
+    "source_index": 640,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30950005",
+    "source_index": 641,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30952269",
+    "source_index": 642,
+    "decision": "excluded",
+    "reason": "Protein/analytical biology, alternate-route disposition or a non-kinetic outcome; no eligible adult T1D subcutaneous lispro kinetic comparison established.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30955140",
+    "source_index": 643,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:30956666",
+    "source_index": 644,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31047902",
+    "source_index": 645,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31111423",
+    "source_index": 646,
+    "decision": "background",
+    "reason": "Secondary review/reanalysis useful for locating original lispro pharmacokinetic or comparator studies; not an independent primary cohort.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:31121275",
+    "source_index": 647,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31150327",
+    "source_index": 648,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31155179",
+    "source_index": 649,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31178632",
+    "source_index": 650,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31182337",
+    "source_index": 651,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31199682",
+    "source_index": 652,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31268224",
+    "source_index": 653,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31275884",
+    "source_index": 654,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31345576",
+    "source_index": 655,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31385938",
+    "source_index": 656,
+    "decision": "background",
+    "reason": "Secondary review/reanalysis useful for locating original lispro pharmacokinetic or comparator studies; not an independent primary cohort.",
+    "reviewed_material": "title_abstract"
+  },
+  {
+    "key": "PMID:31507338",
+    "source_index": 657,
+    "decision": "excluded",
+    "reason": "Economic, policy, implementation or preference study rather than subcutaneous lispro kinetics.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31523270",
+    "source_index": 658,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31530663",
+    "source_index": 659,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31610222",
+    "source_index": 660,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31613996",
+    "source_index": 661,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31688066",
+    "source_index": 662,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31696598",
+    "source_index": 663,
+    "decision": "excluded",
+    "reason": "Different insulin molecule/formulation, hormone or route without an eligible conventional-lispro subcutaneous kinetic comparison established by the inspected material.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31764128",
+    "source_index": 664,
+    "decision": "background",
+    "reason": "Review/overview retained for original-source tracing or formulation/kinetic context; not primary model or adult T1D kinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31773053",
+    "source_index": 665,
+    "decision": "excluded",
+    "reason": "Animal, cellular, transplantation or non-insulin mechanism study outside the adult T1D conventional-lispro kinetic question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31816193",
+    "source_index": 666,
+    "decision": "primary_candidate",
+    "reason": "31 Japanese T1D participants received single SC 15-U URLi and Humalog doses in a crossover clamp with PK outcomes.",
+    "reviewed_material": "title_abstract",
+    "next_action": "Retrieve full text; verify adults, U100/formulation, sampling/assay, baseline handling and conventional-Humalog arm independently of URLi."
+  },
+  {
+    "key": "PMID:31853984",
+    "source_index": 667,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31888933",
+    "source_index": 668,
+    "decision": "excluded",
+    "reason": "Clinical glycemic management, treatment use, complications or other outcomes rather than the target lispro kinetic data/model question.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31902063",
+    "source_index": 669,
+    "decision": "background",
+    "reason": "Review/overview retained for original-source tracing or formulation/kinetic context; not primary model or adult T1D kinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31930670",
+    "source_index": 670,
+    "decision": "background",
+    "reason": "Review/overview retained for original-source tracing or formulation/kinetic context; not primary model or adult T1D kinetic evidence.",
+    "reviewed_material": "title"
+  },
+  {
+    "key": "PMID:31931478",
+    "source_index": 671,
+    "decision": "excluded",
+    "reason": "Glucose sensing/prediction, insulin-action or controller study; title/abstract does not present the target conventional-lispro subcutaneous pharmacokinetic evidence.",
+    "reviewed_material": "title"
+  }
+]

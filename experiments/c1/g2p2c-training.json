@@ -1,0 +1,39 @@
+{
+  "schema": "opent1d.c1.g2p2c-training-plan/1",
+  "source_commit": "37f7b7e161e9c1e7b702c8eebdc5cc7eb4f81d70",
+  "simglucose_commit": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc",
+  "sensor": "Dexcom",
+  "sample_minutes": 3,
+  "pump": "Insulet",
+  "device": "cpu",
+  "policy_features": "12 past CGM/command pairs; no meal, carb or time-of-day feature",
+  "feature_history_steps": 12,
+  "calibration_steps": 12,
+  "max_test_episode_steps": 480,
+  "max_training_episode_steps": 4800,
+  "planning_horizon_steps": 10,
+  "n_step": 256,
+  "training_workers": 16,
+  "testing_workers": 1,
+  "source_interaction_stop_threshold": 800000,
+  "expected_completed_interactions": 802816,
+  "expected_final_rollout": 195,
+  "checkpoint_selection": "last scheduled actor only; no internal-test or M1-outcome ranking",
+  "max_full_training_attempts_per_profile": 1,
+  "profiles": [
+    {
+      "name": "adult#001",
+      "source_patient_id": 20,
+      "seed": 17,
+      "output_directory": "results/c1-g2p2c-training-adult001"
+    },
+    {
+      "name": "adult#002",
+      "source_patient_id": 21,
+      "seed": 17,
+      "output_directory": "results/c1-g2p2c-training-adult002"
+    }
+  ],
+  "evaluation_matrix_authorized": false,
+  "comparator_eligible": false
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "m4-researcher-protocol/1",
+  "id": "M4-RESEARCHER/1",
+  "specified_date": "2026-10-02",
+  "question": "How does a supplied causal secretion response change synthetic glucose, insulin and forward C-peptide observations under identical fasting and gastric-load conditions?",
+  "claim": "bounded_synthetic_model_composition_and_numerical_verification",
+  "parent": "Unchanged M4-CAUSAL/1 with its complete passing BC-008/2 reference",
+  "observer_settings": "Exact frozen BC-010/1 numerical, kinetic and observation-boundary settings reused on six new cases; this composition does not execute the historical BC-010 24-case study",
+  "scenarios": ["fasting", "gastric_load_30g"],
+  "modes": ["candidate", "host_constant_basal", "bc008_reference"],
+  "boundary": {
+    "input": "Archived total pancreatic appearance, source_rates column 0 in pmol/(kg min)",
+    "appearance_ratio": 1,
+    "time": "0 to 240 elapsed minutes; 0.25-minute archived sampling and piecewise-linear forcing",
+    "initial": "Q1=Sb/k3; Q2=k1*Q1/k2; eliminated and delivered ledgers start at zero",
+    "ownership": "One-way observation; no added basal, SC input, hepatic extraction, portal delay, molecular conversion or second body-weight division; parent trajectories remain unchanged"
+  },
+  "verification": {
+    "native": "Original M4-CAUSAL/1 and BC-008/2 criteria must pass unchanged",
+    "observer": "All BC-010/1 criteria, two ODE solvers, matrix-exponential oracle, mass/input conservation, positivity, equilibrium, parent-solver propagation, 0.5/1-minute coarsening, liver-inlet fault and conditional scale ambiguity",
+    "repetition": "All six observation case files byte-identical in a fresh process; worker metadata equal after removing only the primary/repeat label",
+    "reconstruction": "All three report artifacts reconstructed using the standard library without importing supplied source or numerical runtimes",
+    "parent_identity": "Reference archive manifest bytes identical to the copy retained by causal execution; all parent hashes unchanged across observation workers"
+  },
+  "failure_policy": "Never overwrite an output directory. Preserve stage, commands, logs and planned six-case accounting for each observation process. Missing, failed or interrupted stages never yield accepted complete-workflow contrasts.",
+  "excluded": [
+    "human observations, calibration or clinical predictive quality",
+    "treatment benefit, insulin dosing or beta-cell mass inference",
+    "a general model host or universal module API",
+    "proof of callback purity or independent rights verification",
+    "continuous-source convergence below the archived 0.25-minute grid",
+    "independent researcher usability or completed M4 acceptance"
+  ]
+}

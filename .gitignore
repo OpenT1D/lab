@@ -1,0 +1,32 @@
+# Local environments and caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.uv-cache/
+
+# Generated documentation and experiment outputs
+_build/
+build/
+dist/
+*.egg-info/
+results/
+output/playwright/
+.playwright-cli/
+
+# Private working data: public fixtures need an explicit home and provenance
+data/private/
+data/raw/
+.env
+.env.*
+!.env.example
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Isolated Node reference tooling
+node_modules/

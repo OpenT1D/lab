@@ -1,0 +1,54 @@
+{
+  "schema": "bc010-protocol/1",
+  "id": "BC-010/1",
+  "base_commit": "9393fb1",
+  "specified_date": "2026-09-22",
+  "claim": "synthetic_forward_observation_not_human_validation",
+  "question": "Can pancreatic appearance from the verified feedback experiment drive a separate C-peptide observation branch without changing glucose/insulin or adding insulin-specific transit and removal?",
+  "parent": "BC-009/1 completed and passing, with BC-008/2 source",
+  "cases": "all 24 parent cases; no selection by C-peptide outcome",
+  "boundary": {
+    "signal": "Spo pancreatic appearance, source_rates column0",
+    "units": "pmol/(kg min)",
+    "appearance_ratio": 1,
+    "baseline": "total source already contains basal release; no additional basal or SC input",
+    "time": "unchanged 0..240 elapsed min from parent stimulus, output every0.25min",
+    "transfer": "continuous piecewise-linear interpolant of archived rate samples; no extrapolation",
+    "initial": "Q1=Sb/k3; Q2=k1*Q1/k2; elimination and input ledgers zero",
+    "ownership": "one-way observation; C-peptide owns distribution/removal; no insulin portal delay, HE factor, mass conversion or second body-weight division"
+  },
+  "cpeptide": {"model": "polonsky1986-forward-cpeptide/1", "profile": "t1d_mean", "parameters": {"k1": 0.037, "k2": 0.031, "k3": 0.052, "volume_l_kg": 0.0655}, "doi": "10.1172/JCI112308", "locators": "pp98-100 equimolar working assumption, process scheme and bolus response; p103 Table I nominal T1D means; inherited unchanged BC-003 implementation"},
+  "runtime": {"project": "experiments/m4/beta_cell/runtime", "python": "3.12", "numpy": "2.2.6", "scipy": "1.15.3"},
+  "solvers": [
+    {"name": "tight", "method": "RK45", "rtol": 1e-9, "atol": 1e-11, "max_step": 0.25},
+    {"name": "reference", "method": "DOP853", "rtol": 1e-11, "atol": 1e-13, "max_step": 0.125}
+  ],
+  "diagnostics": {
+    "source_sampling_steps_min": [1, 0.5, 0.25],
+    "sampling_scope": "coarsening against the finest available parent grid, not proof of continuous-source convergence below0.25min",
+    "parent_solver": "propagate tight parent Spo at0.25min and compare with reference parent Spo",
+    "wrong_boundary": "post-portal liver arrival S; named fault comparator, never a valid observation inlet",
+    "appearance_volume_scales": [0.5, 2],
+    "scale_scope": "scale only C-peptide appearance, both initial amounts and volume together; exact forward-observation ambiguity conditional on saved glucose/insulin, not a full coupled capacity transformation",
+    "outputs": "C-peptide baseline, peak/time, final, signed AUC; concentration differences from wrong boundary, source-solver and sampling changes; scale ambiguity",
+    "fitting": "none; no deconvolution, noise model, human identifiability claim or joint parameter recovery"
+  },
+  "criteria": {
+    "oracle_concentration_error_pmol_l": 1e-5,
+    "solver_concentration_error_pmol_l": 1e-5,
+    "mass_error_pmol_kg": 1e-7,
+    "input_error_pmol_kg": 1e-7,
+    "negative_tolerance_pmol_kg": 1e-9,
+    "equilibrium_drift_pmol_l": 1e-7,
+    "zero_state_error": 0,
+    "parent_source_solver_error_pmol_l": 0.01,
+    "finest_coarsening_error_pmol_l": 0.05,
+    "coarsening_error_ratio": 0.6,
+    "sampling_ratio_floor_pmol_l": 1e-8,
+    "parent_dose_relative_error": 0.0001,
+    "scale_ambiguity_error_pmol_l": 1e-7,
+    "repeat_artifact_differences": 0
+  },
+  "failure_policy": "retain every attempted case and failure; no shortened output or failing parent accepted; no accepted complete-matrix contrasts if evidence is incomplete; never overwrite",
+  "excluded": ["changes to parent physiology or existing C-peptide reference", "human/cohort reproduction", "clinical C-peptide prediction", "C-peptide bioactivity feedback", "graft drainage/processing model", "parameter calibration or deconvolution", "claim that added observations identify hepatic action", "treatment efficacy or cell counts"]
+}

@@ -1,0 +1,6 @@
+{
+  "schema": "ot027-native-rehearsal-intent/1",
+  "kind": "synthetic",
+  "source": "invented",
+  "clock": "days_since_first_infusion"
+}

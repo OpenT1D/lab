@@ -1,0 +1,24 @@
+# Maintained execution runtime; historical M0/M4 project files remain frozen.
+[project]
+name = "opent1d-maintained-simglucose-runtime"
+version = "1.0.0"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "simglucose",
+    "numpy==1.26.4",
+    "scipy==1.13.1",
+    "pandas==2.2.3",
+    "matplotlib==3.9.4",
+    "setuptools==84.0.0",
+    "urllib3==2.8.0",
+    "glucosim",
+]
+
+[tool.uv]
+package = false
+required-version = ">=0.11.16"
+build-constraint-dependencies = ["setuptools==84.0.0", "wheel==0.43.0"]
+
+[tool.uv.sources]
+simglucose = { git = "https://github.com/jxx123/simglucose", rev = "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc" }
+glucosim = { git = "https://github.com/HassDhia/glucosim", rev = "6422a91d533125a8feb4f2e8737aecd67fec95c9" }

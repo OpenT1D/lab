@@ -1,0 +1,858 @@
+{
+  "schema": "opent1d.publication-security/1",
+  "reviewed_on": "2026-10-25",
+  "scope": "Source checkout; synthetic standard-library MMTT tasks and patched root tooling. No bundled native runtime.",
+  "allowed_install_projects": [
+    ".",
+    "experiments/c1/g2p2c_source",
+    "experiments/m3/runtime"
+  ],
+  "blocked_historical_projects": [
+    "experiments/c1/g2p2c_policy_source",
+    "experiments/c1/g2p2c_training_source",
+    "experiments/literature/lit001/runtime",
+    "experiments/m0/simglucose",
+    "experiments/m0/simglucose_secure",
+    "experiments/m4/beta_cell/runtime"
+  ],
+  "policy": "In a publication snapshot, task-directed installation refuses every project outside the reviewed allowlist before launching any installer. Historical locks remain unchanged, not patched or dismissed. Direct manual uv commands are outside this supported route.",
+  "advisories": [
+    {
+      "id": "GHSA-6q48-6c7w-9gw2",
+      "url": "https://github.com/advisories/GHSA-6q48-6c7w-9gw2",
+      "package": "certifi",
+      "severity": "critical",
+      "summary": "certifi bundles emSign root CAs with compromised intermediate CA keys",
+      "affected_range": ">= 2019.03.09, < 2026.10.18",
+      "first_patched": "2026.10.18",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks.",
+      "recorded_on_2026_10_25": {
+        "affected_range": ">= 2019.03.09, < 2026.10.19",
+        "first_patched": "2026.10.19"
+      },
+      "metadata_rechecked_on": "2026-10-28",
+      "upstream_updated_at": "2026-10-26T16:02:13Z"
+    },
+    {
+      "id": "GHSA-567q-5qvw-pf92",
+      "url": "https://github.com/advisories/GHSA-567q-5qvw-pf92",
+      "package": "filelock",
+      "severity": "low",
+      "summary": "filelock: On Windows an oplock on a soft lock's marker holds SoftFileLock.acquire() past its timeout and blocks the stale break",
+      "affected_range": ">= 3.22.0, <= 4.2.0",
+      "first_patched": "4.2.1",
+      "base_manifests": [
+        "experiments/c1/g2p2c_policy_source/uv.lock",
+        "experiments/c1/g2p2c_training_source/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-9vhv-jxww-xfm5",
+      "url": "https://github.com/advisories/GHSA-9vhv-jxww-xfm5",
+      "package": "filelock",
+      "severity": "low",
+      "summary": "filelock: ReadWriteLock on Windows acts on SQLite side files another local user places beside its database",
+      "affected_range": ">= 3.20.4, <= 4.2.0",
+      "first_patched": "4.2.1",
+      "base_manifests": [
+        "experiments/c1/g2p2c_policy_source/uv.lock",
+        "experiments/c1/g2p2c_training_source/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-v4x8-3wr5-3wq8",
+      "url": "https://github.com/advisories/GHSA-v4x8-3wr5-3wq8",
+      "package": "filelock",
+      "severity": "high",
+      "summary": "filelock ReadWriteLock: SQLite reopens the lock database by name, so a planted symlink or journal file makes the lock user's process overwrite or unlink its own files",
+      "affected_range": ">= 3.20.4, <= 4.2.0",
+      "first_patched": "4.2.1",
+      "base_manifests": [
+        "experiments/c1/g2p2c_policy_source/uv.lock",
+        "experiments/c1/g2p2c_training_source/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-22hg-r758-rrw9",
+      "url": "https://github.com/advisories/GHSA-22hg-r758-rrw9",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: Infinite loop in MIC n_frames when the embedded TIFF",
+      "affected_range": ">= 7.2.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-24rc-8hj2-v98c",
+      "url": "https://github.com/advisories/GHSA-24rc-8hj2-v98c",
+      "package": "pillow",
+      "severity": "medium",
+      "summary": "Pillow: BMP RLE decoder memory-amplification DoS via unbounded delta escape / absolute mode",
+      "affected_range": ">= 9.1.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-254f-3936-288h",
+      "url": "https://github.com/advisories/GHSA-254f-3936-288h",
+      "package": "pillow",
+      "severity": "medium",
+      "summary": "Pillow: PdfParser can recurse without limit in get_value() and linearize_page_tree()",
+      "affected_range": ">= 5.1.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-27h8-gf7j-v5hc",
+      "url": "https://github.com/advisories/GHSA-27h8-gf7j-v5hc",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: NULL dereference in ImagingExpand via rank filters on zero-size images",
+      "affected_range": "<= 12.3.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-332p-7hrc-92wf",
+      "url": "https://github.com/advisories/GHSA-332p-7hrc-92wf",
+      "package": "pillow",
+      "severity": "critical",
+      "summary": "Pillow: Heap buffer overflow in _tiffWriteProc when saving TIFF to BytesIO",
+      "affected_range": ">= 2.0.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-3j72-p6qg-6xp7",
+      "url": "https://github.com/advisories/GHSA-3j72-p6qg-6xp7",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: TarIO negative size field causes infinite CPU-spin loop",
+      "affected_range": "< 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-4558-3h8r-v8xp",
+      "url": "https://github.com/advisories/GHSA-4558-3h8r-v8xp",
+      "package": "pillow",
+      "severity": "medium",
+      "summary": "Pillow: P;2L and P;4L decoders may read 1 to 3 bytes past the passed buffer size",
+      "affected_range": "<= 12.3.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-462x-pgg6-55fp",
+      "url": "https://github.com/advisories/GHSA-462x-pgg6-55fp",
+      "package": "pillow",
+      "severity": "medium",
+      "summary": "Pillow tiled-TIFF decoder reads past tile buffer in copy4 (Unpack.c:1290)",
+      "affected_range": ">= 8.2.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-4rm8-3hmm-39fg",
+      "url": "https://github.com/advisories/GHSA-4rm8-3hmm-39fg",
+      "package": "pillow",
+      "severity": "medium",
+      "summary": "Pillow: Reachable undefined behavior in native integer operations, potentially leading to denial of service or logic integrity compromise",
+      "affected_range": "< 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-4rr5-89j8-mwwm",
+      "url": "https://github.com/advisories/GHSA-4rr5-89j8-mwwm",
+      "package": "pillow",
+      "severity": "medium",
+      "summary": "Pillow: Heap use-after-free when encoding TIFF to an in-memory buffer",
+      "affected_range": ">= 11.3.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-58r4-6rv3-gfh8",
+      "url": "https://github.com/advisories/GHSA-58r4-6rv3-gfh8",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: Out-of-bounds access in _imagingmorph on a zero-width image",
+      "affected_range": "<= 12.3.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-5x8w-8jj5-q52h",
+      "url": "https://github.com/advisories/GHSA-5x8w-8jj5-q52h",
+      "package": "pillow",
+      "severity": "critical",
+      "summary": "Pillow: Heap buffer overflow in FlashPix (FPX) JPEG decoding leads to code execution",
+      "affected_range": "<= 12.3.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-5xm2-6676-qcp9",
+      "url": "https://github.com/advisories/GHSA-5xm2-6676-qcp9",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: APNG background disposal allocates full canvas before decompression bomb check",
+      "affected_range": ">= 8.1.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-654x-cwwv-5j9c",
+      "url": "https://github.com/advisories/GHSA-654x-cwwv-5j9c",
+      "package": "pillow",
+      "severity": "medium",
+      "summary": "Pillow: Arrow export leaks stale heap memory when PILLOW_ALIGNMENT > 1",
+      "affected_range": ">= 11.2.1, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-65qm-jvmh-6pqg",
+      "url": "https://github.com/advisories/GHSA-65qm-jvmh-6pqg",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: GIF seek keeps rejected size after DecompressionBombError, allowing DoS",
+      "affected_range": ">= 9.2.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-74r2-7ff9-mjj2",
+      "url": "https://github.com/advisories/GHSA-74r2-7ff9-mjj2",
+      "package": "pillow",
+      "severity": "medium",
+      "summary": "Pillow: Quadratic GIF comment concatenation allows DoS in Image.open()",
+      "affected_range": ">= 5.4.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-78g4-xqwv-q3g8",
+      "url": "https://github.com/advisories/GHSA-78g4-xqwv-q3g8",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: Bundled libopenjp2 2.5.4 in all wheels since 11.1.0 carries OSV-2025-219 heap-buffer-overflow write reachable from Image.open().load()",
+      "affected_range": ">= 11.1.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-7mwm-ghpf-9vrm",
+      "url": "https://github.com/advisories/GHSA-7mwm-ghpf-9vrm",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: Double free in ImagingScaleAffine on calloc failure via Image.transform",
+      "affected_range": "<= 12.3.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-8g5g-8vmr-9782",
+      "url": "https://github.com/advisories/GHSA-8g5g-8vmr-9782",
+      "package": "pillow",
+      "severity": "critical",
+      "summary": "Pillow: Heap buffer overflow in ImagingJpegDecode",
+      "affected_range": "<= 12.3.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-9v9v-9qvf-h2hj",
+      "url": "https://github.com/advisories/GHSA-9v9v-9qvf-h2hj",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: Heap over-read in WMF/EMF rendering via 16-bit dimension truncation (Windows builds)",
+      "affected_range": "< 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-c6hw-5grf-ff96",
+      "url": "https://github.com/advisories/GHSA-c6hw-5grf-ff96",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: OOB read in TiffDecode.c tile and RGBA paths leaks heap memory into pixels",
+      "affected_range": ">= 8.1.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-cp9v-662q-vvx9",
+      "url": "https://github.com/advisories/GHSA-cp9v-662q-vvx9",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: NULL pointer dereference in Image.merge via an unvalidated band 0",
+      "affected_range": ">= 12.0.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-f2g6-542v-9j58",
+      "url": "https://github.com/advisories/GHSA-f2g6-542v-9j58",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: Infinite loop in PdfParser.rewrite_pages on page tree Parent cycle",
+      "affected_range": ">= 5.1.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-fc9g-5qg7-mf45",
+      "url": "https://github.com/advisories/GHSA-fc9g-5qg7-mf45",
+      "package": "pillow",
+      "severity": "medium",
+      "summary": "Pillow: Quadratic GIF comment copying during save",
+      "affected_range": ">= 9.2.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-g4qv-2jxx-769h",
+      "url": "https://github.com/advisories/GHSA-g4qv-2jxx-769h",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: PNG eXIf chunk makes EXIF parsing run in quadratic time",
+      "affected_range": ">= 11.0.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-g7cr-3p24-7wf7",
+      "url": "https://github.com/advisories/GHSA-g7cr-3p24-7wf7",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: Heap buffer overflow writing JPEG comment after ICC profile fills buffer",
+      "affected_range": ">= 9.4.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-g842-9rc4-69pw",
+      "url": "https://github.com/advisories/GHSA-g842-9rc4-69pw",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: Decompression bomb check bypass in SpiderImagePlugin.seek() leads to unbounded allocation DoS",
+      "affected_range": "< 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-gg2r-wvfm-q9rx",
+      "url": "https://github.com/advisories/GHSA-gg2r-wvfm-q9rx",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: MSP RLE decoder expands a tiny file into unbounded memory",
+      "affected_range": ">= 4.1.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-j4m9-6w36-pw47",
+      "url": "https://github.com/advisories/GHSA-j4m9-6w36-pw47",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: Invalid free in FreeType glyph rendering when a stroker is active",
+      "affected_range": ">= 10.0.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-jg86-v3jv-hrpm",
+      "url": "https://github.com/advisories/GHSA-jg86-v3jv-hrpm",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: Quadratic-time DoS in PDF save_all (PdfParser.next_object_id)",
+      "affected_range": ">= 5.1.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-mrfp-p49p-3hf2",
+      "url": "https://github.com/advisories/GHSA-mrfp-p49p-3hf2",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow PDF append accepts malformed shared page-tree DAG causing resource exhaustion",
+      "affected_range": ">= 5.1.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-p4wg-p73j-c528",
+      "url": "https://github.com/advisories/GHSA-p4wg-p73j-c528",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: Unbounded recursion parsing a PDF page tree or trailer chain (incomplete fix for CVE-2026-42310)",
+      "affected_range": ">= 5.1.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-p8hx-v2p6-rp84",
+      "url": "https://github.com/advisories/GHSA-p8hx-v2p6-rp84",
+      "package": "pillow",
+      "severity": "medium",
+      "summary": "Pillow: Decompression-bomb protection bypass via multi-frame seek() in MPO and DCX (MpoImageFile.seek / DcxImageFile.seek)",
+      "affected_range": "< 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-pchr-8j38-3x4p",
+      "url": "https://github.com/advisories/GHSA-pchr-8j38-3x4p",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: TIFF encoder ColorMap plane-size mismatch causes a heap out-of-bounds read",
+      "affected_range": "<= 12.3.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-q45j-58j2-45rg",
+      "url": "https://github.com/advisories/GHSA-q45j-58j2-45rg",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: TiffDecode returns uninitialized memory as pixels for short JPEG strips",
+      "affected_range": ">= 5.3.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-rfgq-q3w2-pmv2",
+      "url": "https://github.com/advisories/GHSA-rfgq-q3w2-pmv2",
+      "package": "pillow",
+      "severity": "medium",
+      "summary": "Pillow: Image.quantize() with empty palette leaks uninitialized stack memory",
+      "affected_range": ">= 9.1.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-v9pv-5gc8-w2m6",
+      "url": "https://github.com/advisories/GHSA-v9pv-5gc8-w2m6",
+      "package": "pillow",
+      "severity": "critical",
+      "summary": "Pillow multi-frame loaders can reuse stale native image storage after mode transitions",
+      "affected_range": ">= 11.0.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-vx6w-vv9f-6gvg",
+      "url": "https://github.com/advisories/GHSA-vx6w-vv9f-6gvg",
+      "package": "pillow",
+      "severity": "medium",
+      "summary": "Pillow: EPS load(scale) lets Ghostscript render past the decompression bomb limit",
+      "affected_range": ">= 2.3.0, <= 12.3.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-w889-685w-c8fh",
+      "url": "https://github.com/advisories/GHSA-w889-685w-c8fh",
+      "package": "pillow",
+      "severity": "critical",
+      "summary": "Pillow: Argument Injection in Ghostscript call, potentially leading into RCE",
+      "affected_range": ">= 2.6.0, < 13.0.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-xgh8-jp6q-p5x8",
+      "url": "https://github.com/advisories/GHSA-xgh8-jp6q-p5x8",
+      "package": "pillow",
+      "severity": "medium",
+      "summary": "Pillow: ReDoS in XbmImagePlugin: 512-byte file stalls Image.open() for minutes",
+      "affected_range": "<= 12.3.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-xvh5-g6gv-559v",
+      "url": "https://github.com/advisories/GHSA-xvh5-g6gv-559v",
+      "package": "pillow",
+      "severity": "high",
+      "summary": "Pillow: Memory disclosure and segfault in libtiff encoder via crafted TIFF tags",
+      "affected_range": "<= 12.3.0",
+      "first_patched": "13.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/literature/lit001/runtime/uv.lock",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "experiments/m4/beta_cell/runtime/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-h35f-9h28-mq5c",
+      "url": "https://github.com/advisories/GHSA-h35f-9h28-mq5c",
+      "package": "setuptools",
+      "severity": "medium",
+      "summary": "setuptools: MANIFEST.in exclusion bypass in sdist via Unicode normalization collision (NFC/NFD) on macOS APFS/HFS+",
+      "affected_range": "< 83.0.0",
+      "first_patched": "83.0.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_training_source/pyproject.toml",
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/m0/simglucose/pyproject.toml",
+        "experiments/m0/simglucose/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-xmj3-9gf7-h52w",
+      "url": "https://github.com/advisories/GHSA-xmj3-9gf7-h52w",
+      "package": "setuptools",
+      "severity": "low",
+      "summary": "setuptools: Windows path escape via namespace_packages.txt during legacy wheel installation  Description",
+      "affected_range": ">= 38.2.2, < 84.1.0",
+      "first_patched": "84.1.0",
+      "base_manifests": [
+        "experiments/c1/g2p2c_policy_source/uv.lock",
+        "experiments/c1/g2p2c_training_source/pyproject.toml",
+        "experiments/c1/g2p2c_training_source/uv.lock",
+        "experiments/m0/simglucose/pyproject.toml",
+        "experiments/m0/simglucose/uv.lock",
+        "experiments/m0/simglucose_secure/pyproject.toml",
+        "experiments/m0/simglucose_secure/uv.lock",
+        "uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-8988-9cw3-xx77",
+      "url": "https://github.com/advisories/GHSA-8988-9cw3-xx77",
+      "package": "urllib3",
+      "severity": "high",
+      "summary": "urllib3: HTTPS proxy TLS configuration may be ignored or overridden",
+      "affected_range": ">= 1.26.0, < 2.8.0",
+      "first_patched": "2.8.0",
+      "base_manifests": [
+        "experiments/m0/simglucose/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-gh4c-6fx4-qh6g",
+      "url": "https://github.com/advisories/GHSA-gh4c-6fx4-qh6g",
+      "package": "urllib3",
+      "severity": "medium",
+      "summary": "urllib3: Chunked Deflate streaming can enter an infinite loop",
+      "affected_range": ">= 2.6.2, < 2.8.0",
+      "first_patched": "2.8.0",
+      "base_manifests": [
+        "experiments/m0/simglucose/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    },
+    {
+      "id": "GHSA-vxq7-64xx-v4gw",
+      "url": "https://github.com/advisories/GHSA-vxq7-64xx-v4gw",
+      "package": "urllib3",
+      "severity": "high",
+      "summary": "urllib3: HTTPResponse.stream()/read_chunked() buffers an unbounded chunk-size line into memory",
+      "affected_range": ">= 1.10.3, < 2.8.0",
+      "first_patched": "2.8.0",
+      "base_manifests": [
+        "experiments/m0/simglucose/uv.lock"
+      ],
+      "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
+    }
+  ],
+  "native_bundle_policy": "Private internal installer builds only. Public source snapshots refuse Windows staging/building before output or runtime access; the manual Windows workflow is private-repository-only. Integration does not patch frozen native locks or build inputs."
+}

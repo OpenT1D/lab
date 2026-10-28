@@ -1,0 +1,224 @@
+{
+  "schema": "bc008-feedback-protocol/1",
+  "id": "BC-008/2",
+  "status": "specified_not_executed",
+  "base_commit": "ac1e63f",
+  "question": "Does a declared glucose-responsive liver input change simulated plasma glucose relative to controls with the same basal plasma insulin, within one pinned synthetic metabolic route?",
+  "claim": "exploratory_synthetic_feedback_not_human_or_therapy_evidence",
+  "source": {
+    "doi": "10.1109/TBME.2007.893506",
+    "equations": "23-26, p1745; Table I p1743 normal column",
+    "model": "dallaman2007-static-dynamic-portal/1",
+    "parameters": {
+      "alpha_per_min": 0.05,
+      "beta_pmol_kg_min_per_mg_dl": 0.11,
+      "K_pmol_kg_per_mg_dl": 2.3,
+      "gamma_per_min": 0.5
+    },
+    "threshold": "initial native plasma glucose, x[3]/Vg; engineering adaptation of h=Gb",
+    "baseline": "engineering replacement below, not published healthy Sb",
+    "equality_policy": "use continuous max at beta*(G-h)=-Sb"
+  },
+  "upstream": {
+    "revision": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc",
+    "patient_file_sha256": "7ad1302fbf064805e2294bbcffd482e55448e37e48b63e629a1ed7f11c701547",
+    "parameter_file_sha256": "662f3b684d160fdf485edd1d7196dd1cd85c14b53650b030fdb86aaa05bb2e50",
+    "profile": "adult#001"
+  },
+  "runtime": {
+    "project": "experiments/m0/simglucose",
+    "numpy": "1.26.4",
+    "scipy": "1.13.1",
+    "python": "3.12"
+  },
+  "state_order": [
+    "native_0_to_12",
+    "Z_pmol_kg_min",
+    "P_pmol_kg",
+    "integrated_sc_input",
+    "integrated_pancreatic_input",
+    "integrated_liver_arrival",
+    "hepatic_loss",
+    "peripheral_loss"
+  ],
+  "boundary": {
+    "plasma_glucose": "x[3]/Vg in mg/dL",
+    "glucose_rate": "native dx[3]/Vg at the same RHS evaluation",
+    "pancreatic_rate": "Spo=Z+gain*K*max(Gdot,0)",
+    "static_target": "max(Sb+gain*beta*(G-h),0)",
+    "Z_dot": "alpha*(static_target-Z)",
+    "P_dot": "Spo-gamma*P",
+    "liver_input": "S=gamma*P added to guarded dx[9] only",
+    "units": "min, mg/dL, pmol/kg, pmol/(kg min)",
+    "portal_egp_term": "not added; native has no direct portal insulin action",
+    "hepatic_extraction": "native fixed m30 only",
+    "cpeptide": "excluded from first feedback experiment; no implicit reuse of insulin transit"
+  },
+  "basal_replacement": {
+    "fraction": 0.25,
+    "u0": "native u2ss in pmol/(kg min)",
+    "u_sc": "(1-fraction)*u0",
+    "Sb": "fraction*u0*(m1+m30)/m1",
+    "initial_Ip": "unchanged",
+    "initial_Il": "native Il + fraction*u0/m1",
+    "initial_sc_depots": "(1-fraction)*native depots",
+    "initial_Z": "Sb",
+    "initial_P": "Sb/gamma",
+    "other_native_states": "unchanged",
+    "not_a_claim": "replacement fraction is a prescribed experiment design; no estimate of insulin need or functional cell fraction"
+  },
+  "cases": [
+    {
+      "id": "native_zero",
+      "fraction": 0,
+      "gain": 0,
+      "mode": "native"
+    },
+    {
+      "id": "constant_basal",
+      "fraction": 0.25,
+      "gain": 0,
+      "mode": "constant"
+    },
+    {
+      "id": "feedback_quarter",
+      "fraction": 0.25,
+      "gain": 0.25,
+      "mode": "feedback"
+    },
+    {
+      "id": "feedback_half",
+      "fraction": 0.25,
+      "gain": 0.5,
+      "mode": "feedback"
+    },
+    {
+      "id": "feedback_full",
+      "fraction": 0.25,
+      "gain": 1.0,
+      "mode": "feedback"
+    }
+  ],
+  "derived_controls": [
+    {
+      "id": "prescribed_replay",
+      "parent": "feedback_full",
+      "input": "replay archived liver-arrival S(t) on the identical native initial state and SC schedule; no responsive secretion states in this replay",
+      "purpose": "closure and causal-boundary verification"
+    },
+    {
+      "id": "equal_arrival_constant",
+      "parent": "feedback_full",
+      "input": "constant archived integral(S)/horizon; same initial native states and SC schedule as parent; explicitly a dose-and-initial-state matched diagnostic, not its own steady basal state",
+      "purpose": "timing versus amount; not prospective prediction"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "fasting",
+      "stomach_solid_mg": 0
+    },
+    {
+      "id": "gastric_load_30g",
+      "stomach_solid_mg": 30000
+    }
+  ],
+  "input_semantics": "single initial gastric solid load at t=0, not native announce-meal rate; last_Qsto=load, last_foodtaken=0, Action.CHO=0 throughout, constant SC basal, no bolus/controller/pump/sensor",
+  "horizon_min": 240,
+  "sample_step_min": 0.25,
+  "glucose_envelope_mg_dl": [
+    40,
+    500
+  ],
+  "solvers": [
+    {
+      "name": "coarse",
+      "method": "RK45",
+      "rtol": 1e-07,
+      "atol": 1e-09,
+      "max_step": 0.5
+    },
+    {
+      "name": "tight",
+      "method": "RK45",
+      "rtol": 1e-09,
+      "atol": 1e-11,
+      "max_step": 0.125
+    },
+    {
+      "name": "reference",
+      "method": "DOP853",
+      "rtol": 1e-11,
+      "atol": 1e-13,
+      "max_step": 0.0625
+    }
+  ],
+  "integration": "monolithic native+Z+P+ledgers; no sensor derivative, finite-difference glucose or sequential stale feedback; same-state derivative has no instantaneous dependence on S",
+  "refinement": {
+    "replay_sample_steps_min": [
+      0.25,
+      0.125,
+      0.0625
+    ],
+    "comparison_output_step_min": 0.25,
+    "refine_source": "save feedback_full S at all refinement grids from the reference solve",
+    "transfer": "piecewise linear and split at knots; report each trapezoidal amount; record sampling separately from solver error"
+  },
+  "criteria": {
+    "zero_extension_derivative_error": 0.0,
+    "same_solver_zero_extension_state_error": 0.0,
+    "native_class_glucose_error_mg_dl": 0.05,
+    "native_class_insulin_error_pmol_l": 0.01,
+    "secretion_closed_form_error_pmol_kg": 1e-07,
+    "basal_derivative_change_max_native_units_per_min": 1e-08,
+    "glucose_solver_error_mg_dl": 0.01,
+    "insulin_solver_error_pmol_l": 0.01,
+    "source_solver_error_pmol_kg_min": 1e-05,
+    "insulin_mass_error_pmol_kg": 1e-06,
+    "glucose_mass_error_mg_kg": 1e-05,
+    "negative_amount_tolerance": 1e-08,
+    "fasting_glucose_drift_mg_dl": 0.01,
+    "fasting_insulin_drift_pmol_l": 0.01,
+    "basal_control_glucose_error_mg_dl": 0.01,
+    "fine_replay_glucose_error_mg_dl": 0.01,
+    "fine_replay_insulin_error_pmol_l": 0.01,
+    "equal_arrival_relative_error": 1e-10,
+    "repeat_error": 0.0,
+    "effect_to_numerical_uncertainty_ratio_min": 10,
+    "secretion_rate_closed_form_error_pmol_kg_min": 1e-07
+  },
+  "preflight_criteria": {
+    "native_derivative_locality_error": 1e-12,
+    "baseline_derivative_change": 1e-08,
+    "baseline_glucose_concentration_change": 0.0,
+    "baseline_plasma_insulin_change": 0.0,
+    "insulin_inventory_derivative_balance": 1e-10,
+    "rhs_equivalence_error": 1e-12,
+    "zero_extension_error": 0.0
+  },
+  "failure_policy": "preserve every attempt; reject incomplete/nonfinite solver output; terminate on glucose envelope exit or negative mass beyond tolerance; signed native insulin-action state x[6] may be negative; no clipping to conceal failure; do not summarize a shortened run as a completed 240-minute case; no post-result tuning",
+  "outcomes": [
+    "G(t), plasma insulin, Spo(t), S(t), Z,P and every native state",
+    "baseline-relative plasma glucose AUC 0-240 using signed trapezoids",
+    "sampled glucose peak/nadir and final glucose",
+    "integrals of SC input, pancreatic input, liver arrival and losses",
+    "all failures and switches; solver/replay sensitivity",
+    "paired contrasts versus constant_basal; equal-amount timing diagnostic"
+  ],
+  "identifiability": "no fitting or human recovery; gain is exactly confounded with common scaling of beta and K; basal fraction affects initialization independently; evaluate no unique human capacity from glucose alone",
+  "go_no_go": "preflight is necessary only; implement separate secretion closed-form/reference tests before coupling; classify effects unresolved if <10 times the largest absolute contrast change under refinement; no required effect direction or magnitude; failed controls prevent accepting scenario contrasts",
+  "excluded": [
+    "BC001 modification or arbitrary replay into its IVGTT reduction",
+    "full 2007 model reproduction",
+    "time-varying hepatic extraction or direct portal EGP restoration",
+    "clinical insulin reduction",
+    "cell count, transplant site or treatment efficacy",
+    "human validation or external domain review",
+    "C-peptide extension",
+    "controller development"
+  ],
+  "protocol_history": {
+    "previous_id": "BC-008/1",
+    "change": "Separate rate-state Z closed-form tolerance from mass-state P tolerance; both remain 1e-7 in their own units. No feedback execution has occurred and preflight criteria are unchanged."
+  }
+}

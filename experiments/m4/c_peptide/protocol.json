@@ -1,0 +1,69 @@
+{
+  "schema": "bc003-protocol/1",
+  "id": "BC-003/1",
+  "specified_before_implementation": true,
+  "base_commit": "751e701",
+  "model": "polonsky1986-forward-cpeptide/1",
+  "question": "Can a declared C-peptide appearance rate be propagated to plasma concentration with independently checked kinetics, and what can noiseless synthetic observations identify?",
+  "source": {
+    "doi": "10.1172/JCI112308",
+    "url": "https://www.jci.org/articles/view/112308/files/pdf",
+    "pdf_sha256": "f6b13cffc7ca9fc628372edb174e8a4e6e4ea6746dda10334a2578348a9f2fae",
+    "equations": "p99 two-compartment scheme and process definitions; p100 unnumbered biexponential bolus equation",
+    "parameters": "p103 Table I, printed group-mean K1/K2/K3 and distribution volume; mean parameters are nominal profiles, not an averaged participant trajectory",
+    "stimulus": "p99 constant infusion: 3 then 30 pmol/(kg min), 120 min each",
+    "reviewed": "2026-09-20",
+    "rights": "public primary article inspected locally; original equation implementation and factual parameter transcription; no author code or article redistribution"
+  },
+  "units": {"time": "min", "amounts": "pmol/kg", "appearance": "pmol/(kg min)", "volume": "L/kg", "concentration": "pmol/L", "rates": "1/min"},
+  "state_order": ["central", "peripheral", "eliminated", "delivered_since_start"],
+  "profiles": {
+    "normal_mean": {"k1": 0.057, "k2": 0.054, "k3": 0.060, "volume_l_kg": 0.0655},
+    "t1d_mean": {"k1": 0.037, "k2": 0.031, "k3": 0.052, "volume_l_kg": 0.0655}
+  },
+  "cases": [
+    {"name": "bolus", "input": {"edges": [0, 180], "left": [0], "right": [0]}, "initial": {"kind": "bolus", "dose_pmol_kg": 100}, "evidence": "published analytical equation, synthetic normalized dose; not original 50 nmol cohort decay"},
+    {"name": "step", "input": {"edges": [0, 120, 240], "left": [3, 30], "right": [3, 30]}, "initial": {"kind": "zero"}, "evidence": "published infusion schedule replay using nominal mean coefficients; no measured cohort curve comparison"},
+    {"name": "basal_pulse", "input": {"edges": [0, 10, 30, 240], "left": [1.5, 10.5, 1.5], "right": [1.5, 10.5, 1.5]}, "initial": {"kind": "equilibrium", "basal_q_pmol_kg_min": 1.5}, "evidence": "entirely synthetic baseline and added secretion pulse"},
+    {"name": "zero", "input": {"edges": [0, 240], "left": [0], "right": [0]}, "initial": {"kind": "zero"}, "evidence": "numerical zero-input limit"}
+  ],
+  "sample_step_min": 0.5,
+  "solvers": [
+    {"name": "coarse", "method": "RK45", "rtol": 1e-5, "atol": 1e-7, "max_step": 2.0},
+    {"name": "tight", "method": "RK45", "rtol": 1e-9, "atol": 1e-11, "max_step": 0.25},
+    {"name": "reference", "method": "DOP853", "rtol": 1e-11, "atol": 1e-13, "max_step": 0.125}
+  ],
+  "identifiability": {
+    "profile": "t1d_mean",
+    "dose_pmol_kg": 100,
+    "source": "p99 post-bolus times, applied to synthetic noise-free observations only",
+    "times_min": [2,3,4,5,6,7,8,9,10,11,14,17,20,25,30,35,40,45,50,55,60,70,80,90,100,110,120,140,160,180],
+    "early_times_min": [2,3,4,5,7,10],
+    "sparse_times_min": [2,60,180],
+    "finite_difference_steps": [0.0001,0.00001],
+    "rank_relative_threshold": 1e-8,
+    "parameter_order": ["k1","k2","k3","volume_l_kg"],
+    "recovery_start_factors": [[0.5,2,0.7,1.5],[1.8,0.6,1.5,0.8]],
+    "bound_factors": [0.1,10],
+    "confounding_factors": [0.5,2],
+    "fitting": "log-parameter least squares on noiseless independently generated bolus concentrations; fixed known dose; no clinical estimation or general secretion deconvolution"
+  },
+  "criteria": {
+    "max_concentration_error_pmol_l": 1e-5,
+    "max_mass_balance_error_pmol_kg": 1e-7,
+    "max_input_amount_error_pmol_kg": 1e-7,
+    "negative_state_tolerance_pmol_kg": 1e-9,
+    "repeat_state_error": 0,
+    "max_equilibrium_state_error_pmol_kg": 1e-8,
+    "max_one_compartment_error_pmol_l": 1e-5,
+    "max_unit_conversion_relative_error": 1e-12,
+    "max_synthetic_recovery_relative_error": 1e-4,
+    "max_synthetic_fit_error_pmol_l": 1e-6,
+    "max_scale_confounding_error_pmol_l": 1e-8,
+    "max_sensitivity_refinement_relative_error": 1e-5
+  },
+  "runtime": "experiments/m4/beta_cell/runtime/uv.lock",
+  "reused_input": "experiments/m4/kinetic_inlet/forcing.py (unchanged finite rate/interpolation implementation)",
+  "excluded_claims": ["reproduction of patient/cohort observations", "human parameter identifiability", "validated T1D or transplant prediction", "general secretion reconstruction from C-peptide", "resolution of BC-001 initialization or secretion scale", "glucose feedback or therapy effects"],
+  "failure_policy": "preserve attempted inputs, sources, settings and errors; reject incomplete solves and altered/nonfinal archives; never overwrite runs"
+}

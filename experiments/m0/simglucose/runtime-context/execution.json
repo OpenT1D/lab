@@ -1,0 +1,462 @@
+{
+  "schema": "opent1d.runtime-extension-execution/1",
+  "recorded_utc": "2026-10-02T15:13:37.529259+00:00",
+  "status": "known_failure_fix_verified_pending_remaining_ci",
+  "base_commit": "e77c9d79408b662e285401fc018534a4619fa055",
+  "execution_commit": "0d9048a4d4aba370ae9e5547a6543c0cfaa93899",
+  "native_execution_worktree_clean": true,
+  "review_sha256": "d746bf0ac3eb71dd1f8142b2a2a3ffcfff9b44d28743c7237f5b5ce472ea7d40",
+  "runtime_checker_sha256": "52cc9ded6310664bf306fb208c9c05cb17b7781134913e18d0a43a47c02f2d9e",
+  "unchanged_historical_baseline_sha256": {
+    "m0": "df1baf9bb878055d296f651b1e6bce2f0a85e273c8367ea0d2564e8d1e7c8f0d",
+    "m1": "8e84fec115fc9a3812c17e018910ce1b023f735eb09aa0b8838ab792e66331fb"
+  },
+  "unchanged_current_lock_sha256": "13d254dcebe8d1ab54c3140cdc07152d719a68477a1378d7fe77fc1568612aa9",
+  "preservation": {
+    "original_experiment_files_unchanged": 463,
+    "inventory": "protected-original-experiment-files.json",
+    "inventory_sha256": "bc6e4de5ea40d6a4c846958af2b24721b605628a05dd4eaa4fb5a2a4e2bb3cb9",
+    "changed_existing_experiment_files": [
+      "experiments/m0/simglucose/run.py",
+      "experiments/m1/historical.py"
+    ],
+    "simulation_equations_controllers_protocols_numerical_criteria_and_current_locks_changed": false
+  },
+  "checks": {
+    "repository": {
+      "passed": true,
+      "tests": 838,
+      "log": "logs/opent1d-runtime-fix-check.log",
+      "log_sha256": "70fc97113921b084cc9cd4ac28cc82389d0a8a07c04f6d66486b82f6942c5612",
+      "documentation_build_passed": true
+    },
+    "m0_native": {
+      "passed": true,
+      "tests": 11,
+      "log": "logs/opent1d-runtime-fix-m0-tests.log",
+      "log_sha256": "099c760a98f9108741a08cc4e563ffbd0b60ec5c703ee583d5acb80bd81287c5"
+    },
+    "m1_native": {
+      "passed": true,
+      "tests": 12,
+      "log": "logs/opent1d-runtime-fix-m1-native-tests.log",
+      "log_sha256": "beaa9d1fbd0d14e6a001420806fc75a7870d4b822b34eb9d6d18657a5d037c56"
+    },
+    "volume_native": {
+      "passed": true,
+      "tests": 7,
+      "log": "logs/opent1d-runtime-fix-volume-tests.log",
+      "log_sha256": "b8a01c5118a00e93ce0bd39a4bde11fccb4201267330d2791253192c93a84450"
+    },
+    "m2_native": {
+      "passed": true,
+      "tests": 13,
+      "log": "logs/opent1d-runtime-fix-m2-native-tests.log",
+      "log_sha256": "8c06a5bb604d55e39a1210ca4773254326648887df21658a29e8846c79987391"
+    }
+  },
+  "mac": {
+    "platform": "Darwin/arm64",
+    "m0": {
+      "executions": 2,
+      "within_process_reset_byte_exact": true,
+      "fresh_process_byte_exact": true,
+      "historical_output_sha256": "e4eeaaf4e67d4bfe155413799d5258a417919b4d249361171ab514ece325fb85",
+      "manifest_sha256": {
+        "mac-m0-first": "6a3b21cb6775ff008442f0ddbdf9dc5782d8b4ceec16f7fbc9f126f40266f10b",
+        "mac-m0-fresh": "48e8b4d5b5a30169a750dcccec22c823f48b7be9ce2196ec4cb6c952a4541606"
+      }
+    },
+    "m1": {
+      "scheduled": 32,
+      "status_counts": {
+        "completed": 28,
+        "terminated": 4
+      },
+      "verification": {
+        "schema": "opent1d.verification/2",
+        "status": "completed",
+        "replay": [
+          {
+            "id": "adult#001-101-basal_bolus-D",
+            "trace_sha256": "013b3eb8b018a4f68860a654c30cc4ee4321633803246b63a63be350abdf977d",
+            "exact": true
+          },
+          {
+            "id": "adult#001-101-pid-D",
+            "trace_sha256": "682061b8a8820457c1cd419fae405a1148b44a8558de4f68ed93eebc3dbb3787",
+            "exact": true
+          },
+          {
+            "id": "adult#001-102-pid-D",
+            "trace_sha256": "83def2b4fff62c3bc6831b4771ae0118ad58b679812415a1c08ec65f9841796e",
+            "exact": true
+          }
+        ],
+        "tolerance_applied": false,
+        "historical": {
+          "matched": true,
+          "collection": "mac",
+          "origin": {
+            "archive_sha256": "4720e0a6b7ebfd275b8b410d57a31ce6ff1f0aa1030c879c285c54834cb3fe16",
+            "directory": "2026-09-13-mac-implementation",
+            "file_count": 804,
+            "inventory_sha256": "3389adcf6459587eab42bc415c7706292a0e6f9bd01bc0f6656da5c65b4583ce",
+            "origin": "Mac empty-cache installation and development demonstration, implementation 1aba011; includes earlier development/failure evidence"
+          },
+          "cases": 32,
+          "tolerance_applied": false,
+          "runtime_extension": {
+            "id": "glucosim-6422a91/1",
+            "review_sha256": "d746bf0ac3eb71dd1f8142b2a2a3ffcfff9b44d28743c7237f5b5ce472ea7d40",
+            "checker_sha256": "52cc9ded6310664bf306fb208c9c05cb17b7781134913e18d0a43a47c02f2d9e",
+            "historical_lock_sha256": "634d5849a1cc4ae37f4f00c12c713f168cffa93a43d5a22b571b0c41478fc95c",
+            "actual_lock_sha256": "13d254dcebe8d1ab54c3140cdc07152d719a68477a1378d7fe77fc1568612aa9",
+            "added_packages": {
+              "glucosim": "0.1.2"
+            }
+          },
+          "baseline_sha256": "8e84fec115fc9a3812c17e018910ce1b023f735eb09aa0b8838ab792e66331fb"
+        },
+        "report_exact_without_site_packages": true,
+        "report_sha256": "61acb555111fb99a57c3d61ec0eb148e373756bdb8e38aed9519a7f65f1b0fc1"
+      },
+      "verification_sha256": "62f1b0d8df62b3b2ab5c82c669bb3b1fa1c201fbcc2c3411cd84700e1a47fd22"
+    },
+    "m2": {
+      "scheduled": 40,
+      "status_counts": {
+        "completed": 36,
+        "terminated": 4
+      },
+      "verification": {
+        "status": "completed",
+        "historical": {
+          "m1_historical_collection": {
+            "matched": true,
+            "collection": "mac",
+            "origin": {
+              "archive_sha256": "4720e0a6b7ebfd275b8b410d57a31ce6ff1f0aa1030c879c285c54834cb3fe16",
+              "directory": "2026-09-13-mac-implementation",
+              "file_count": 804,
+              "inventory_sha256": "3389adcf6459587eab42bc415c7706292a0e6f9bd01bc0f6656da5c65b4583ce",
+              "origin": "Mac empty-cache installation and development demonstration, implementation 1aba011; includes earlier development/failure evidence"
+            },
+            "cases": 32,
+            "tolerance_applied": false,
+            "runtime_extension": {
+              "id": "glucosim-6422a91/1",
+              "review_sha256": "d746bf0ac3eb71dd1f8142b2a2a3ffcfff9b44d28743c7237f5b5ce472ea7d40",
+              "checker_sha256": "52cc9ded6310664bf306fb208c9c05cb17b7781134913e18d0a43a47c02f2d9e",
+              "historical_lock_sha256": "634d5849a1cc4ae37f4f00c12c713f168cffa93a43d5a22b571b0c41478fc95c",
+              "actual_lock_sha256": "13d254dcebe8d1ab54c3140cdc07152d719a68477a1378d7fe77fc1568612aa9",
+              "added_packages": {
+                "glucosim": "0.1.2"
+              }
+            }
+          },
+          "cambridge_historical_output": {
+            "trace_sha256": "6bd91394a0fc726392285eb8758f3c112a0a81a448854ac559804f971d31f1ec",
+            "native_sha256": "e66d7aad06f6bf38d56823dd4b16c51d8a6b83e512b28a49e8de4ae7dd678e2e",
+            "context": {
+              "node": "v22.22.2",
+              "upstream_revision": "9a6092065bd821f88691cd8d03b0550acd665573",
+              "source_sha256": "5590167a4d97195e7df9af5361a76be5309fb11d78e32f68be231cf6952a7c09",
+              "settings_sha256": "70bdafb0ba6b47bf1050d8fd5395a425b601db214e69e1d510ea5aa217681038",
+              "lock_sha256": "44ad7ba062a7d67032d91fcc9e0fa2aa3910b3856dce76bee5ba32093c1a150e"
+            }
+          },
+          "scheduled": 40,
+          "tolerance_applied": false
+        },
+        "simulator_free_exact_reconstruction": true,
+        "report_sha256": "9971e2395ff040006899edec7f28b73854afa1c20a5776e14b6afb1476f4cd51",
+        "scheduled": 40
+      },
+      "verification_sha256": "b49259f599caafcf0911cdc09628eaa92341ecdfd76efbc77fb10fb011a71eed",
+      "process_verification": {
+        "status": "completed",
+        "exact_process_replay": true,
+        "simulator_free_reconstruction": true,
+        "catchable_signals": [
+          "SIGINT",
+          "SIGTERM"
+        ],
+        "deadline": true,
+        "trace_sha256": "6bd91394a0fc726392285eb8758f3c112a0a81a448854ac559804f971d31f1ec",
+        "metrics": {
+          "version": "ot014-plasma-point/1",
+          "glucose": {
+            "observed_minutes": 1440,
+            "mean_mg_dl": 135.39194449601405,
+            "sd_mg_dl": 35.46650194492707,
+            "cv_percent": 26.19542992527979,
+            "in_range_percent": 85.34722222222223,
+            "below_70_percent": 0.0,
+            "below_54_percent": 0.0,
+            "above_180_percent": 14.652777777777779,
+            "above_250_percent": 0.0
+          },
+          "sensor": {
+            "observed_minutes": 1440,
+            "mean_mg_dl": 135.3919855264306,
+            "sd_mg_dl": 35.46647515635059,
+            "cv_percent": 26.195402200839272,
+            "in_range_percent": 85.06944444444444,
+            "below_70_percent": 0.0,
+            "below_54_percent": 0.0,
+            "above_180_percent": 14.930555555555555,
+            "above_250_percent": 0.0
+          },
+          "scheduled_minutes": 1440,
+          "observed_minutes": 1440,
+          "missing_minutes": 0,
+          "delivered_insulin_u": 17.27499999999989
+        }
+      },
+      "process_verification_sha256": "276b51c28c31e21cf422985fef8af7714f6f330c1f0a387ade483058402dff2e"
+    },
+    "volume": {
+      "started_utc": "2026-10-02T15:01:28.503329+00:00",
+      "finished_utc": "2026-10-02T15:10:52.331451+00:00",
+      "analyses_per_execution": 60,
+      "fit_starts_per_execution": 120,
+      "fresh_process_repeat_artifact_differences": 0,
+      "gates": {
+        "forward_verification": true,
+        "sensitivity_refinement": true,
+        "fresh_process_repeat": true,
+        "all_fits_completed": true,
+        "noiseless_eligible_recovery": true
+      },
+      "report_sha256": "d1a58b6560cffa535bae4edac8520e4f8d7c32f6a260912114550035fc5239d2",
+      "figure_sha256": "fda2e11c1018e2cd504d267fad23c76c959f49d68085d0e08aab5aa794335e6d",
+      "simulator_free_json_and_figure_bytes_exact": true
+    }
+  },
+  "linux": {
+    "kind": "new checker verification of retained original CI execution; no fresh candidate Linux simulation",
+    "ci_run_url": "https://github.com/OpenT1D/OpenT1D/actions/runs/37014981209",
+    "execution_commit": "e77c9d79408b662e285401fc018534a4619fa055",
+    "m0": {
+      "historical": {
+        "matched": true,
+        "platform_key": "Linux/x86_64",
+        "output_sha256": "36b5a4e2fd1deec879504c5145bf035b1c22136d3627d809acf2ffc33d9b00ba",
+        "runtime_extension": {
+          "id": "glucosim-6422a91/1",
+          "review_sha256": "d746bf0ac3eb71dd1f8142b2a2a3ffcfff9b44d28743c7237f5b5ce472ea7d40",
+          "checker_sha256": "52cc9ded6310664bf306fb208c9c05cb17b7781134913e18d0a43a47c02f2d9e",
+          "historical_lock_sha256": "634d5849a1cc4ae37f4f00c12c713f168cffa93a43d5a22b571b0c41478fc95c",
+          "actual_lock_sha256": "13d254dcebe8d1ab54c3140cdc07152d719a68477a1378d7fe77fc1568612aa9",
+          "added_packages": {
+            "glucosim": "0.1.2"
+          }
+        }
+      },
+      "reset": {
+        "exact_numeric_replay": true,
+        "max_absolute_by_column": {
+          "BG": 0.0,
+          "CGM": 0.0,
+          "CHO": 0.0,
+          "insulin": 0.0,
+          "LBGI": 0.0,
+          "HBGI": 0.0,
+          "Risk": 0.0
+        },
+        "tolerance_applied": false
+      }
+    },
+    "m1_m2": {
+      "m1": {
+        "matched": true,
+        "collection": "linux_final",
+        "origin": {
+          "archive_sha256": "339b291d97df58bddaa3fdc2849a799934aa679e2083752c7a4b7a74edec0d74",
+          "directory": "2026-09-13-final-pr11",
+          "file_count": 389,
+          "inventory_sha256": "b04c881014926e2c38d46b25cd05a5ff2823fb8cad5711e5e6443e0e6a92efe4",
+          "origin": "Exact PR head ec89c53faff961c5ae1d12c937347431957e85b0; successful CI run 34747741677"
+        },
+        "cases": 32,
+        "tolerance_applied": false,
+        "runtime_extension": {
+          "id": "glucosim-6422a91/1",
+          "review_sha256": "d746bf0ac3eb71dd1f8142b2a2a3ffcfff9b44d28743c7237f5b5ce472ea7d40",
+          "checker_sha256": "52cc9ded6310664bf306fb208c9c05cb17b7781134913e18d0a43a47c02f2d9e",
+          "historical_lock_sha256": "634d5849a1cc4ae37f4f00c12c713f168cffa93a43d5a22b571b0c41478fc95c",
+          "actual_lock_sha256": "13d254dcebe8d1ab54c3140cdc07152d719a68477a1378d7fe77fc1568612aa9",
+          "added_packages": {
+            "glucosim": "0.1.2"
+          }
+        },
+        "baseline_sha256": "8e84fec115fc9a3812c17e018910ce1b023f735eb09aa0b8838ab792e66331fb"
+      },
+      "m2": {
+        "m1_historical_collection": {
+          "matched": true,
+          "collection": "linux_final",
+          "origin": {
+            "archive_sha256": "339b291d97df58bddaa3fdc2849a799934aa679e2083752c7a4b7a74edec0d74",
+            "directory": "2026-09-13-final-pr11",
+            "file_count": 389,
+            "inventory_sha256": "b04c881014926e2c38d46b25cd05a5ff2823fb8cad5711e5e6443e0e6a92efe4",
+            "origin": "Exact PR head ec89c53faff961c5ae1d12c937347431957e85b0; successful CI run 34747741677"
+          },
+          "cases": 32,
+          "tolerance_applied": false,
+          "runtime_extension": {
+            "id": "glucosim-6422a91/1",
+            "review_sha256": "d746bf0ac3eb71dd1f8142b2a2a3ffcfff9b44d28743c7237f5b5ce472ea7d40",
+            "checker_sha256": "52cc9ded6310664bf306fb208c9c05cb17b7781134913e18d0a43a47c02f2d9e",
+            "historical_lock_sha256": "634d5849a1cc4ae37f4f00c12c713f168cffa93a43d5a22b571b0c41478fc95c",
+            "actual_lock_sha256": "13d254dcebe8d1ab54c3140cdc07152d719a68477a1378d7fe77fc1568612aa9",
+            "added_packages": {
+              "glucosim": "0.1.2"
+            }
+          }
+        },
+        "cambridge_historical_output": {
+          "trace_sha256": "6bd91394a0fc726392285eb8758f3c112a0a81a448854ac559804f971d31f1ec",
+          "native_sha256": "e66d7aad06f6bf38d56823dd4b16c51d8a6b83e512b28a49e8de4ae7dd678e2e",
+          "context": {
+            "node": "v22.22.2",
+            "upstream_revision": "9a6092065bd821f88691cd8d03b0550acd665573",
+            "source_sha256": "5590167a4d97195e7df9af5361a76be5309fb11d78e32f68be231cf6952a7c09",
+            "settings_sha256": "70bdafb0ba6b47bf1050d8fd5395a425b601db214e69e1d510ea5aa217681038",
+            "lock_sha256": "44ad7ba062a7d67032d91fcc9e0fa2aa3910b3856dce76bee5ba32093c1a150e"
+          }
+        },
+        "scheduled": 40,
+        "tolerance_applied": false
+      }
+    },
+    "cross_process": {
+      "source": "Independent M1 and M2 jobs in CI run 37014981209; saved execution at e77c9d7",
+      "cases": 32,
+      "exact_initial_and_trace_sha256": true,
+      "tolerance_applied": false,
+      "new_candidate_execution": false
+    },
+    "reports": {
+      "m1": {
+        "original_source_simulator_free_report_byte_exact": true,
+        "serialized_report_content_except_current_analysis_identity_exact": true,
+        "changed_analysis_source": [
+          "experiments/m1/historical.py"
+        ],
+        "historical_analysis_sha256": "ada5e3567d230d615a719386f3b6581999bed37ace34ff859d0a6c1044b7744b",
+        "current_analysis_sha256": "975580630bebb936d331d3179fb31290270d655791ab86aadbd3d5d19fcfc164",
+        "no_observed_artifact_changed": true
+      },
+      "m2": {
+        "original_source_simulator_free_report_byte_exact": true,
+        "serialized_report_content_except_current_analysis_identity_exact": true,
+        "changed_analysis_source": [
+          "experiments/m1/historical.py"
+        ],
+        "historical_analysis_sha256": "ada5e3567d230d615a719386f3b6581999bed37ace34ff859d0a6c1044b7744b",
+        "current_analysis_sha256": "975580630bebb936d331d3179fb31290270d655791ab86aadbd3d5d19fcfc164",
+        "no_observed_artifact_changed": true
+      }
+    },
+    "interrupted_volume": {
+      "primary_cases": 60,
+      "repeat_attempt_artifacts": 36,
+      "completed_repeat_cases_byte_exact": 34,
+      "unfinished_repeat_attempts": [
+        {
+          "id": "estimated_rates-correct-30-noise_117",
+          "status": "partial",
+          "completed_fit_starts": 1,
+          "retained_fits_exact_prefix": true
+        },
+        {
+          "id": "estimated_rates-correct-30-noise_221",
+          "status": "started",
+          "completed_fit_starts": 0,
+          "retained_fits_exact_prefix": true
+        }
+      ],
+      "primary_gates_passed": true,
+      "campaign_completed": false,
+      "cause": "GitHub annotation: The job has exceeded the maximum execution time of 30m0s",
+      "candidate_operational_deadline_minutes": 90
+    },
+    "latest_ci_snapshot": {
+      "status": "in_progress",
+      "open_job": "Conditional beta-cell likelihood profiles",
+      "job_id": 110863523055,
+      "snapshot_sha256": "d355fba42e2706df2c1df7472cc4f01ee6e2a0e1727608bef644abde2a81a73a"
+    }
+  },
+  "retained_failed_attempts": [
+    {
+      "path": "mac-m1",
+      "cause": "Author CLI selected root tooling environment; NumPy absent; all 32 scheduled failures retained; corrected separate native project execution at mac-m1-native"
+    },
+    {
+      "path": "linux-m2-verified",
+      "cause": "Current historical check passed; verification failed because the original saved report binds the previous checker source. Original-source reconstruction remains byte exact; fresh candidate Mac M2 verification passed."
+    }
+  ],
+  "internal_review": {
+    "type": "independent internal agent review",
+    "agent": "/root/integration_review",
+    "execution_commit": "0d9048a4d4aba370ae9e5547a6543c0cfaa93899",
+    "actionable_findings": [],
+    "scope": [
+      "code diff and contracts",
+      "archived lock and original baseline identity",
+      "whole package inventories and negative historical contexts",
+      "volume timeout annotation and preserved artifacts"
+    ],
+    "no_native_campaigns_by_reviewer": true,
+    "independent_human_review_claimed": false
+  },
+  "security": {
+    "retrieved_date": "2026-10-02",
+    "source_snapshot": "logs/opent1d-security-alerts.json",
+    "source_sha256": "a05b3f9b5f7be12138c8b34389a49caaea9da10271c917bfb275a6d43f494cfd",
+    "original_alerts": [
+      {
+        "number": 1,
+        "manifest": "experiments/m0/simglucose/pyproject.toml",
+        "state": "open",
+        "severity": "medium",
+        "advisory": "GHSA-h35f-9h28-mq5c"
+      },
+      {
+        "number": 2,
+        "manifest": "experiments/m0/simglucose/uv.lock",
+        "state": "open",
+        "severity": "medium",
+        "advisory": "GHSA-h35f-9h28-mq5c"
+      }
+    ],
+    "expanded_open_alert_entries": 46,
+    "severity_counts": {
+      "critical": 4,
+      "high": 4,
+      "medium": 18,
+      "low": 20
+    },
+    "dependency_upgrade_performed": false,
+    "effect_on_baseline_failure": "none identified; advisory concerns sdist exclusion rather than runtime lock identity"
+  },
+  "remaining": [
+    "Inspect final result and any relevant failure from the original likelihood-profile CI job.",
+    "Fresh hosted Linux execution of this candidate remains unperformed; push and merge require explicit authorization."
+  ],
+  "scope": "Internal synthetic software and numerical verification; no independent human or biological validity claim.",
+  "artifact_archive": {
+    "path": "results/ci-runtime-fix-20261002.tar.gz",
+    "sha256": "1a44c708adc4f680d433f97f6e8ca121e3dfecbd59e93c794433b5c2439cb2d9",
+    "bytes": 33511728,
+    "inventory_path": "results/ci-runtime-fix/artifact-inventory.json",
+    "inventory_sha256": "e70070c7bbd33ddeac4da2e0203b4e2cd07b0029663f4bfa72c33ab89866bbde",
+    "retained_files": 2987,
+    "availability": "Local ignored archive; not a hosted release or versioned raw simulation dataset."
+  }
+}

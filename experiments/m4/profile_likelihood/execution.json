@@ -1,0 +1,2208 @@
+{
+  "schema": "bc013-execution/1",
+  "date": "2026-09-22",
+  "protocol": "BC-013/1",
+  "base_commit": "da5adbf41f370c6211db586537e101582436e28f",
+  "git_dirty_during_execution": true,
+  "claim": "conditional_synthetic_bounded_nuisance_reoptimized_objective_profiles",
+  "archive": "results/m4-profile-likelihood/reference-01",
+  "started_utc": "2026-09-22T16:36:25.965750+00:00",
+  "finished_utc": "2026-09-22T18:49:06.625010+00:00",
+  "elapsed_minutes": 132.67765433333335,
+  "commands": [
+    [
+      "uv",
+      "run",
+      "--locked",
+      "--project",
+      "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose",
+      "python",
+      "-m",
+      "experiments.m4.profile_likelihood.worker",
+      "/private/tmp/opent1d-beta-cell-reference/results/m4-profile-likelihood/reference-01",
+      "/private/tmp/opent1d-beta-cell-reference/results/m4-profile-likelihood/reference-01"
+    ],
+    [
+      "uv",
+      "run",
+      "--locked",
+      "--project",
+      "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose",
+      "python",
+      "-m",
+      "experiments.m4.profile_likelihood.worker",
+      "/private/tmp/opent1d-beta-cell-reference/results/m4-profile-likelihood/reference-01",
+      "/private/tmp/opent1d-beta-cell-reference/results/m4-profile-likelihood/reference-01/repeat"
+    ],
+    [
+      "uv",
+      "run",
+      "--locked",
+      "--project",
+      "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose",
+      "python",
+      "-m",
+      "experiments.m4.profile_likelihood.plot",
+      "/private/tmp/opent1d-beta-cell-reference/results/m4-profile-likelihood/reference-01",
+      "--output",
+      "/private/tmp/opent1d-beta-cell-reference/results/m4-profile-likelihood/reference-01/figure.svg",
+      "--allow-pending"
+    ]
+  ],
+  "runtime_and_native_identity": {
+    "runtime": {
+      "python": "3.12.13",
+      "numpy": "1.26.4",
+      "scipy": "1.13.1"
+    },
+    "native": {
+      "upstream_revision": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc",
+      "package_version": "0.2.11",
+      "profile": "adult#001",
+      "patient_file_sha256": "7ad1302fbf064805e2294bbcffd482e55448e37e48b63e629a1ed7f11c701547",
+      "parameter_file_sha256": "662f3b684d160fdf485edd1d7196dd1cd85c14b53650b030fdb86aaa05bb2e50",
+      "patient_file": "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose/.venv/lib/python3.12/site-packages/simglucose/patient/t1dpatient.py",
+      "parameter_file": "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose/.venv/lib/python3.12/site-packages/simglucose/params/vpatient_params.csv",
+      "body_weight_kg": 102.32,
+      "kinetic_parameters": {
+        "BW": 102.32,
+        "Vi": 0.054906,
+        "m1": 0.15446,
+        "m2": 0.225027424083,
+        "m30": 0.23169,
+        "m4": 0.090010969633
+      },
+      "runtime": {
+        "python": "3.12.13",
+        "numpy": "1.26.4",
+        "scipy": "1.13.1"
+      }
+    },
+    "parameters": {"publication_omitted": true, "reason": "Upstream native parameter-table fragment; separate table provenance unresolved. Original is retained privately.", "private_original_fragment_sha256": "8018f25b1b9676860fc91b34ba214fecd226e31af787133374c0862b22dcf6c5"}
+  },
+  "hashes": {
+    "protocol.json": "9bd2af2594a5cc415c058f9a6e750cb6b310c3cd13c6dee580a8914df4a49418",
+    "parent-volume.json": "c20ff84d3b266734af753a1b2bcdaad9b7936cdff25787bcdc75a3fd31aea70c",
+    "parent-joint.json": "ebad643ffb59534c37fc5d3fa29d7c19ea5701b23e35e249ad6aa44ed2f507e8",
+    "manifest.json": "9e1d58f4fb16fd0a883eb7aedabfd7574e2a606e783755286145a8c3e970339e",
+    "report.json": "284850a21f5eeeb362532d26e8b7d3bb8c6113f1fad62518e148bd01ed8ec285",
+    "observations.json": "3b6784ca194b61d459519fe6584b5edaf7630d4e2759b7009fac29e8bf2e5dd0",
+    "figure.svg": "43455a9146c1d09c2c5592db4fad2fe4d12bb68295f0a84b841c26f6ad3d1e0e",
+    "uv.lock": "634d5849a1cc4ae37f4f00c12c713f168cffa93a43d5a22b571b0c41478fc95c",
+    "pyproject.toml": "107d7792bf6e99575e6b30f3639376059d5f9323bc8dedfd09c82824613c8cd5"
+  },
+  "source_hashes": {
+    "common.py": "a0c8d5a6ee91a44358e26a9b3f4f1f4386729023e9c78c5f7f233b5ee9b2ac2c",
+    "optimizer.py": "99278bd15a6dd9b8da5eedef0f7f0bad7fe6ac086eaffc71cb9ca2eadb5569a0",
+    "verify.py": "a560c1664326f7bdc459b5679899ffafa40b27ee491d5b8a3c17037e443134a4",
+    "profiles.py": "6aa2b32f25abe8871dd68128c3493da83bab7a24d32196683e23a06e1e70fa09",
+    "worker.py": "b9ee38016a8c168fa21fb6503d183118479813e3ca0383d7f9875fc9409eba2b",
+    "report.py": "21fc894cada001a1c536ad9edeb9aeda90fe108dd2e16099831583d113a30507",
+    "run.py": "57e9b329a04b60c9f4e7f112270040b300998808a3d5cdef1e5cabc507b6fd3a",
+    "plot.py": "1d1e2bb94f1779cefc6ef7e2c5926081dcc5d24073725fb6317d34d51a3c23db",
+    "test_numerical.py": "064c93eb98de81733f2a20232be01b7407db06bf18080cbfaae95984d5887c95"
+  },
+  "reused_source_hashes": {
+    "experiments/m4/volume_sensitivity/protocol.json": "c20ff84d3b266734af753a1b2bcdaad9b7936cdff25787bcdc75a3fd31aea70c",
+    "experiments/m4/volume_sensitivity/common.py": "277fe6b230f53d7a65c234a0c6d3e969e50cb664ce1bb5146fa31ca5a738ce99",
+    "experiments/m4/volume_sensitivity/model.py": "f4bd5e976ba0bce59d554db09172360866060fda8835f85ab0cd15c285ca2d4d",
+    "experiments/m4/volume_sensitivity/verify.py": "a872ed8c30a93c2c058d736ca4bd3144f9a2553a1ec8b562cc10ba70cbbcf03d",
+    "experiments/m4/volume_sensitivity/inference.py": "ea627618e3631625f6fa014bb4f141057b8d4e4c0aa21a8d79d11b63c895a363",
+    "experiments/m4/volume_sensitivity/worker.py": "5bfb8169bd6ef2c982004263322c75ca0a1462e4f885cf0aa538ef8dccbd41db",
+    "experiments/m4/volume_sensitivity/report.py": "539a930dc6435572cc92f81ea12b277fec958eea8480afde798f1235c24a5f76",
+    "experiments/m4/volume_sensitivity/run.py": "a87c626052e2ecc296d1893a27e53f278fb3c2e97a5702a4ed62c1ea01904aec",
+    "experiments/m4/volume_sensitivity/plot.py": "74c9e87161a6f454a3dd331d98ad19195dd8a61816d6d6b3f9204f5d22978f26",
+    "experiments/m4/volume_sensitivity/test_numerical.py": "21f2eabd167e548fca5a0c042dacd8427283bffa6816a6ca4a806a9325f593aa",
+    "experiments/m4/joint_identifiability/protocol.json": "ebad643ffb59534c37fc5d3fa29d7c19ea5701b23e35e249ad6aa44ed2f507e8",
+    "experiments/m4/joint_identifiability/common.py": "058a959f44f56cbe8beb7531ef350230c51f6b989f877bb1a96977c09f51cdd2",
+    "experiments/m4/joint_identifiability/model.py": "ef5d4392f4642c50cd78675ba053b1a015f8581c8a894d19b98b07e034237884",
+    "experiments/m4/joint_identifiability/verify.py": "0353fa2b33ba0b3cec8453248cfb9b37c0153f3982e97e5b9e2804dee4b97b6b",
+    "experiments/m4/joint_identifiability/inference.py": "f20194f6dec5a09f3de910a16dc82a6108b7e9dcb4eab38205008fc99d68fe1d",
+    "experiments/m4/joint_identifiability/worker.py": "e26be524e335dfaf9577bb0da6b664aaf638ae24bccf4b074d9ab746bae1ce31",
+    "experiments/m4/joint_identifiability/report.py": "5cdd902418697fc3421c80fe690cfd662420e8f00cf4391c8a6e5eadd3e1b122",
+    "experiments/m4/joint_identifiability/run.py": "2ec702460c7e4bdaf57ed029786c4f5887cb8aaec1f7f7f8ca002f2efeaf0606",
+    "experiments/m4/joint_identifiability/plot.py": "b61ad44022a79ccbb19b74722fbfeafa8fcc3ebf8eba276e1b72db462e6b4a44",
+    "experiments/m4/joint_identifiability/test_numerical.py": "72a814147fbcb1f6da144d6c300e7669bdbbfd6dfe2453fa1cad51b922a4ad51",
+    "experiments/m4/feedback/protocol.json": "b66087592810be35fa74372ad07172359897ceb40653abdf420b3c3fa1a4fd99",
+    "experiments/m4/feedback/contract.py": "4a35587c9c848a9c19586ab8e0aa28a1b5fcfe02c1b22e4fc7b0d46479dcb5ce",
+    "experiments/m4/feedback/secretion.py": "65b4d4ced59024238b8bf11ec2c0a0196472c2dc12904678159b0a51383a5ce7",
+    "experiments/m4/feedback/coupled.py": "5f774ab7c0767fe278239a9f4457aec2ee0ab9c02de917e391d4eb83ed6d2280",
+    "experiments/m4/feedback_observation/protocol.json": "69143f23b24e225753ada55a3d43ff2a39414635a624263db9e4f83c2d3ef98d",
+    "experiments/m4/kinetic_inlet/native.py": "aaa6a921643bf6ec82fde84d53193c8ab9c9cdbe1b69de634089f652cb4b14dd",
+    "experiments/m4/kinetic_inlet/protocol.json": "ac2754f1718bcad7977d3332685abc8bb9a281056e5475d78ab7d7364b9df3dc",
+    "experiments/m4/kinetic_inlet/forcing.py": "b26fd2fd87aa47da328d24b2cbe56d8e3be45f9b4caf2c3c453f89acb07fddd1",
+    "experiments/m4/c_peptide/model.py": "f46453669c17d98c4dc90eec6613641d32e222c2a3dd012709ca30e6868673ae",
+    "experiments/m4/paired_kinetics/oracle.py": "4262e65df8501ac7ea067513fe1148c1d6ca94c6df8dfbe71506f375d29538df",
+    "experiments/m4/paired_kinetics/common.py": "0d55ab114cf6381e2837670dd2b17b50a7109a0643bce756f2bd31d06209a12d",
+    "experiments/m4/paired_observation/run.py": "a342e45ab3fc5218033d244d870bd2c9cd8a12099a5053b66f250b2c4b761f84",
+    "experiments/m4/paired_observation/contract.py": "eb422ce11a75840082801f8321fd10c7236509f71b7792ab83032e061b5f386d"
+  },
+  "checks": {
+    "root_locked_sync": "passed",
+    "native_locked_sync": "passed",
+    "locks_changed": false,
+    "native_numerical_tests": {
+      "status": "passed",
+      "count": 12
+    },
+    "artifact_tests": {
+      "status": "passed",
+      "count": 23,
+      "without_site_packages": true,
+      "source_sha256": "8cefaab4bc56b0b93c95d40b5851319a62250cec800e0362c8b8ac7df663fa6a"
+    },
+    "repository_checks": {
+      "status": "passed",
+      "root_test_count": 419,
+      "lint": "passed",
+      "strict_documentation_build": "passed",
+      "command": "uv run --locked python scripts/check.py",
+      "log": "results/m4-profile-likelihood/repository-check.log",
+      "log_sha256": "6d4cfc11aeeef1b272427238814e2fff93f209f83bca79df78b663f9bff76867"
+    },
+    "standard_library_report_reconstruction": "byte_identical",
+    "figure_reconstruction": "byte_identical",
+    "repeat_numeric_files": 12,
+    "source_snapshots_matching_current": 42,
+    "bc012_observations": "byte_identical",
+    "remote_ci": "configured_not_executed",
+    "figure_visual_review": "passed: rendered PNG inspected; all twelve panels, labels, contour lines and interest-bound markers are legible",
+    "ci_timeout_minutes": 240,
+    "standard_library_reconstruction_command": ".venv/bin/python -S -m experiments.m4.profile_likelihood.report results/m4-profile-likelihood/reference-01 --output results/m4-profile-likelihood/reconstructed.json",
+    "figure_reconstruction_command": "experiments/m0/simglucose/.venv/bin/python -m experiments.m4.profile_likelihood.plot results/m4-profile-likelihood/reference-01 --output results/m4-profile-likelihood/reconstructed.svg",
+    "final_repository_check": {
+      "status": "passed",
+      "command": "uv run --locked python scripts/check.py",
+      "root_test_count": 419,
+      "scope": "Final source, execution record, figure, roadmap, documentation, navigation and local workflow/protection policy",
+      "log": "results/m4-profile-likelihood/final-repository-check.log",
+      "log_sha256": "788a0b0982a664abdb5f7bef135711b54867711334b65c195ca16c27041b6f20",
+      "lint": "passed",
+      "strict_documentation_build": "passed"
+    }
+  },
+  "gates": {
+    "forward_and_oracle_verification": true,
+    "fresh_process_repeat": true,
+    "all_fits_completed": true,
+    "noiseless_baseline_recovery": true,
+    "baseline_reference_agreement": true,
+    "parent_comparator_agreement": true,
+    "profile_checks": true
+  },
+  "analyses": 9,
+  "profiles": 27,
+  "fit_starts_per_execution": 1364,
+  "profile_points_per_execution": 504,
+  "reference_checks_per_execution": 148,
+  "crossings": 47,
+  "interest_bound_limited_regions": 4,
+  "curves_with_nuisance_bounds_at_crossings": 6,
+  "all_sampled_topologies_single_component": true,
+  "repeat_artifact_differences": 0,
+  "failed_starts": [],
+  "maximum_reference_objective_error": 1.838669598441811e-05,
+  "maximum_reference_at_fit_best_error": 1.804862901622073e-05,
+  "maximum_reference_delta_q_error": 2.0214692227682463e-05,
+  "minimum_delta_q": -4.924011172136034e-07,
+  "maximum_crossing_width": 0.00390625,
+  "maximum_parent_comparator_objective_difference": 5.383550458759601e-07,
+  "noiseless_baseline_max_parameter_relative_error": 8.622922942347344e-08,
+  "baselines": [
+    {
+      "case": "free_volume-noiseless",
+      "fit_best": {
+        "evaluated_parameters": [
+          1.0000000167280345,
+          1.0000000066710597,
+          1.0000000148837693,
+          0.9999999939256516
+        ],
+        "estimates": [
+          1.0000000167280345,
+          1.0000000066710597,
+          1.0000000148837693,
+          0.9999999939256516
+        ],
+        "objective": 5.416984534470877e-13,
+        "bound_hits": []
+      },
+      "reference_best": {
+        "evaluated_parameters": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "estimates": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "objective": 0.0,
+        "bound_hits": []
+      },
+      "parent_comparator_objective_difference": 6.048835645169953e-17,
+      "noiseless_recovered": true,
+      "gates": {
+        "all_fits_completed": true,
+        "noiseless_baseline_recovery": true,
+        "baseline_reference_agreement": true,
+        "parent_comparator_agreement": true,
+        "profiles": true
+      }
+    },
+    {
+      "case": "free_volume-noise_117",
+      "fit_best": {
+        "evaluated_parameters": [
+          0.9226961639775217,
+          0.7959152661223239,
+          1.0996220946109818,
+          0.7778774978635541
+        ],
+        "estimates": [
+          0.9226961639775217,
+          0.7959152661223239,
+          1.0996220946109818,
+          0.7778774978635541
+        ],
+        "objective": 23.028091205359722,
+        "bound_hits": []
+      },
+      "reference_best": {
+        "evaluated_parameters": [
+          0.9226716861051779,
+          0.7958862691804203,
+          1.099644302992188,
+          0.7778390230902174
+        ],
+        "estimates": [
+          0.9226716861051779,
+          0.7958862691804203,
+          1.099644302992188,
+          0.7778390230902174
+        ],
+        "objective": 23.02808937736347,
+        "bound_hits": []
+      },
+      "parent_comparator_objective_difference": 5.383550458759601e-07,
+      "noiseless_recovered": null,
+      "gates": {
+        "all_fits_completed": true,
+        "noiseless_baseline_recovery": true,
+        "baseline_reference_agreement": true,
+        "parent_comparator_agreement": true,
+        "profiles": true
+      }
+    },
+    {
+      "case": "free_volume-noise_221",
+      "fit_best": {
+        "evaluated_parameters": [
+          1.0382095703629544,
+          0.9446206200900074,
+          0.7664698433537295,
+          1.2727669441742748
+        ],
+        "estimates": [
+          1.0382095703629544,
+          0.9446206200900074,
+          0.7664698433537295,
+          1.2727669441742748
+        ],
+        "objective": 20.43295549953311,
+        "bound_hits": []
+      },
+      "reference_best": {
+        "evaluated_parameters": [
+          1.0382140937114306,
+          0.9446161621676732,
+          0.7664533106044188,
+          1.2727884506353317
+        ],
+        "estimates": [
+          1.0382140937114306,
+          0.9446161621676732,
+          0.7664533106044188,
+          1.2727884506353317
+        ],
+        "objective": 20.432955676374846,
+        "bound_hits": []
+      },
+      "parent_comparator_objective_difference": 3.1679668666129146e-08,
+      "noiseless_recovered": null,
+      "gates": {
+        "all_fits_completed": true,
+        "noiseless_baseline_recovery": true,
+        "baseline_reference_agreement": true,
+        "parent_comparator_agreement": true,
+        "profiles": true
+      }
+    },
+    {
+      "case": "fixed_volume-noiseless",
+      "fit_best": {
+        "evaluated_parameters": [
+          1.0000000195228145,
+          1.0000000097186323,
+          1.0000000113356198,
+          1.0
+        ],
+        "estimates": [
+          1.0000000195228145,
+          1.0000000097186323,
+          1.0000000113356198,
+          null
+        ],
+        "objective": 5.432077582507212e-13,
+        "bound_hits": []
+      },
+      "reference_best": {
+        "evaluated_parameters": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "estimates": [
+          1.0,
+          1.0,
+          1.0,
+          null
+        ],
+        "objective": 0.0,
+        "bound_hits": []
+      },
+      "parent_comparator_objective_difference": null,
+      "noiseless_recovered": true,
+      "gates": {
+        "all_fits_completed": true,
+        "noiseless_baseline_recovery": true,
+        "baseline_reference_agreement": true,
+        "parent_comparator_agreement": true,
+        "profiles": true
+      }
+    },
+    {
+      "case": "fixed_volume-noise_117",
+      "fit_best": {
+        "evaluated_parameters": [
+          1.032623960401004,
+          0.911923854204003,
+          0.9532516475337883,
+          1.0
+        ],
+        "estimates": [
+          1.032623960401004,
+          0.911923854204003,
+          0.9532516475337883,
+          null
+        ],
+        "objective": 25.345693143262807,
+        "bound_hits": []
+      },
+      "reference_best": {
+        "evaluated_parameters": [
+          1.032623950465593,
+          0.9119254034361685,
+          0.9532529140207363,
+          1.0
+        ],
+        "estimates": [
+          1.032623950465593,
+          0.9119254034361685,
+          0.9532529140207363,
+          null
+        ],
+        "objective": 25.345694375992842,
+        "bound_hits": []
+      },
+      "parent_comparator_objective_difference": null,
+      "noiseless_recovered": null,
+      "gates": {
+        "all_fits_completed": true,
+        "noiseless_baseline_recovery": true,
+        "baseline_reference_agreement": true,
+        "parent_comparator_agreement": true,
+        "profiles": true
+      }
+    },
+    {
+      "case": "fixed_volume-noise_221",
+      "fit_best": {
+        "evaluated_parameters": [
+          0.9339236517514764,
+          0.8381734372255593,
+          0.8886643084742255,
+          1.0
+        ],
+        "estimates": [
+          0.9339236517514764,
+          0.8381734372255593,
+          0.8886643084742255,
+          null
+        ],
+        "objective": 22.58124222455496,
+        "bound_hits": []
+      },
+      "reference_best": {
+        "evaluated_parameters": [
+          0.9339238629470422,
+          0.8381727018128404,
+          0.8886638734627739,
+          1.0
+        ],
+        "estimates": [
+          0.9339238629470422,
+          0.8381727018128404,
+          0.8886638734627739,
+          null
+        ],
+        "objective": 22.58124291121924,
+        "bound_hits": []
+      },
+      "parent_comparator_objective_difference": null,
+      "noiseless_recovered": null,
+      "gates": {
+        "all_fits_completed": true,
+        "noiseless_baseline_recovery": true,
+        "baseline_reference_agreement": true,
+        "parent_comparator_agreement": true,
+        "profiles": true
+      }
+    },
+    {
+      "case": "GI-noiseless",
+      "fit_best": {
+        "evaluated_parameters": [
+          0.999999979742278,
+          0.9999999138090206,
+          1.0,
+          1.0
+        ],
+        "estimates": [
+          0.999999979742278,
+          0.9999999138090206,
+          null,
+          null
+        ],
+        "objective": 1.5650950122209094e-13,
+        "bound_hits": []
+      },
+      "reference_best": {
+        "evaluated_parameters": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "estimates": [
+          1.0,
+          1.0,
+          null,
+          null
+        ],
+        "objective": 0.0,
+        "bound_hits": []
+      },
+      "parent_comparator_objective_difference": null,
+      "noiseless_recovered": true,
+      "gates": {
+        "all_fits_completed": true,
+        "noiseless_baseline_recovery": true,
+        "baseline_reference_agreement": true,
+        "parent_comparator_agreement": true,
+        "profiles": true
+      }
+    },
+    {
+      "case": "GI-noise_117",
+      "fit_best": {
+        "evaluated_parameters": [
+          1.154099529481802,
+          1.5,
+          1.0,
+          1.0
+        ],
+        "estimates": [
+          1.154099529481802,
+          1.5,
+          null,
+          null
+        ],
+        "objective": 9.087285951935097,
+        "bound_hits": [
+          1
+        ]
+      },
+      "reference_best": {
+        "evaluated_parameters": [
+          1.154099231273445,
+          1.4999999999999725,
+          1.0,
+          1.0
+        ],
+        "estimates": [
+          1.154099231273445,
+          1.4999999999999725,
+          null,
+          null
+        ],
+        "objective": 9.087285933865145,
+        "bound_hits": [
+          1
+        ]
+      },
+      "parent_comparator_objective_difference": null,
+      "noiseless_recovered": null,
+      "gates": {
+        "all_fits_completed": true,
+        "noiseless_baseline_recovery": true,
+        "baseline_reference_agreement": true,
+        "parent_comparator_agreement": true,
+        "profiles": true
+      }
+    },
+    {
+      "case": "GI-noise_221",
+      "fit_best": {
+        "evaluated_parameters": [
+          1.2775267883502222,
+          1.4999999999978968,
+          1.0,
+          1.0
+        ],
+        "estimates": [
+          1.2775267883502222,
+          1.4999999999978968,
+          null,
+          null
+        ],
+        "objective": 17.703947772008544,
+        "bound_hits": [
+          1
+        ]
+      },
+      "reference_best": {
+        "evaluated_parameters": [
+          1.2775302128256916,
+          1.4999999999993343,
+          1.0,
+          1.0
+        ],
+        "estimates": [
+          1.2775302128256916,
+          1.4999999999993343,
+          null,
+          null
+        ],
+        "objective": 17.70394800861433,
+        "bound_hits": [
+          1
+        ]
+      },
+      "parent_comparator_objective_difference": null,
+      "noiseless_recovered": null,
+      "gates": {
+        "all_fits_completed": true,
+        "noiseless_baseline_recovery": true,
+        "baseline_reference_agreement": true,
+        "parent_comparator_agreement": true,
+        "profiles": true
+      }
+    }
+  ],
+  "curves": [
+    {
+      "case": "free_volume-noiseless",
+      "parameter": "evoked_gain",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.84375,
+          0.84765625
+        ],
+        [
+          1.19921875,
+          1.203125
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.84375,
+              0.84765625
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.19921875,
+              1.203125
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 3.334180664762807e-14,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 298.9980304375804,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "free_volume-noiseless",
+      "parameter": "m4_scale",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.7734375,
+          0.77734375
+        ],
+        [
+          1.33984375,
+          1.34375
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.7734375,
+              0.77734375
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.33984375,
+              1.34375
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 1.9481173492436783e-15,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 560.9662769638325,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "free_volume-noiseless",
+      "parameter": "k3_scale",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.7734375,
+          0.77734375
+        ],
+        [
+          1.31640625,
+          1.3203125
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.7734375,
+              0.77734375
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.31640625,
+              1.3203125
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 1.323348010978739e-14,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 3112.8082675710752,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "free_volume-noiseless",
+      "parameter": "volume_scale",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.69921875,
+          0.703125
+        ],
+        [
+          1.4140625,
+          1.41796875
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.69921875,
+              0.703125
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.4140625,
+              1.41796875
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 1.4866129922338468e-15,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 4717.290583685772,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "free_volume-noise_117",
+      "parameter": "evoked_gain",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.7890625,
+          0.79296875
+        ],
+        [
+          1.0859375,
+          1.08984375
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.7890625,
+              0.79296875
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.0859375,
+              1.08984375
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 0.963610345559271,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 501.33201629943454,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "free_volume-noise_117",
+      "parameter": "m4_scale",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.625,
+          0.62890625
+        ],
+        [
+          1.03515625,
+          1.0390625
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.625,
+              0.62890625
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.03515625,
+              1.0390625
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 2.9013901157353246,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 1375.2842031282996,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "free_volume-noise_117",
+      "parameter": "k3_scale",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.86328125,
+          0.8671875
+        ],
+        [
+          1.41796875,
+          1.421875
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.86328125,
+              0.8671875
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.41796875,
+              1.421875
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 0.5917082477047231,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 4286.933627831801,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "free_volume-noise_117",
+      "parameter": "volume_scale",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.5546875,
+          0.55859375
+        ],
+        [
+          1.07421875,
+          1.078125
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.5546875,
+              0.55859375
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.07421875,
+              1.078125
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 2.3176019466795097,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 1446.5672605576035,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "free_volume-noise_221",
+      "parameter": "evoked_gain",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.8828125,
+          0.88671875
+        ],
+        [
+          1.19921875,
+          1.203125
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.8828125,
+              0.88671875
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.19921875,
+              1.203125
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 0.20693700426465256,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [
+        {
+          "value": 1.19921875,
+          "nuisance_bound_hits": [
+            3
+          ],
+          "nuisance_vector": [
+            1.19921875,
+            1.1810726315624942,
+            0.788354763673405,
+            1.5
+          ]
+        },
+        {
+          "value": 1.203125,
+          "nuisance_bound_hits": [
+            3
+          ],
+          "nuisance_vector": [
+            1.203125,
+            1.1890629994530617,
+            0.7931806627889227,
+            1.5
+          ]
+        }
+      ],
+      "maximum_sampled_slice_minus_profile_delta_q": 336.5131679919341,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "free_volume-noise_221",
+      "parameter": "m4_scale",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.734375,
+          0.73828125
+        ],
+        [
+          1.25,
+          1.25390625
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.734375,
+              0.73828125
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.25,
+              1.25390625
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 0.1689471935932687,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [
+        {
+          "value": 1.25,
+          "nuisance_bound_hits": [
+            3
+          ],
+          "nuisance_vector": [
+            1.1750186275542003,
+            1.25,
+            0.820059136407094,
+            1.5
+          ]
+        },
+        {
+          "value": 1.25390625,
+          "nuisance_bound_hits": [
+            3
+          ],
+          "nuisance_vector": [
+            1.1761466145040238,
+            1.25390625,
+            0.8222734089825267,
+            1.5
+          ]
+        }
+      ],
+      "maximum_sampled_slice_minus_profile_delta_q": 662.6525829599071,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "free_volume-noise_221",
+      "parameter": "k3_scale",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.6015625,
+          0.60546875
+        ],
+        [
+          0.98828125,
+          0.9921875
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.6015625,
+              0.60546875
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              0.98828125,
+              0.9921875
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 4.075539971046947,
+      "generating_value_within_nominal_contour": false,
+      "crossing_endpoint_nuisance_bounds": [
+        {
+          "value": 0.6015625,
+          "nuisance_bound_hits": [
+            3
+          ],
+          "nuisance_vector": [
+            1.0766840971404745,
+            0.8746284802899033,
+            0.6015625,
+            1.5
+          ]
+        },
+        {
+          "value": 0.60546875,
+          "nuisance_bound_hits": [
+            3
+          ],
+          "nuisance_vector": [
+            1.0783005113350366,
+            0.8810346652025122,
+            0.60546875,
+            1.5
+          ]
+        }
+      ],
+      "maximum_sampled_slice_minus_profile_delta_q": 914.8320395166738,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "free_volume-noise_221",
+      "parameter": "volume_scale",
+      "grid_points": 15,
+      "reference_points": 4,
+      "crossing_brackets": [
+        [
+          0.91796875,
+          0.921875
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.91796875,
+              0.921875
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "value": 1.5,
+            "kind": "bound_limited"
+          },
+          "closed_within_bounds": false
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 2.148286825942371,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 10569.64044952011,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "fixed_volume-noiseless",
+      "parameter": "evoked_gain",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.921875,
+          0.92578125
+        ],
+        [
+          1.0898437554907914,
+          1.0937500048807036
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.921875,
+              0.92578125
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.0898437554907914,
+              1.0937500048807036
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 2.1722227913131071e-13,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 216.47063598078745,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "fixed_volume-noiseless",
+      "parameter": "m4_scale",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.8203125,
+          0.82421875
+        ],
+        [
+          1.23828125,
+          1.2421875
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.8203125,
+              0.82421875
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.23828125,
+              1.2421875
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 8.704190593088367e-15,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 537.1505567280185,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "fixed_volume-noiseless",
+      "parameter": "k3_scale",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.8515625,
+          0.85546875
+        ],
+        [
+          1.1953125,
+          1.19921875
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.8515625,
+              0.85546875
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.1953125,
+              1.19921875
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 1.7500854917525998e-14,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 3020.0924795641567,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "fixed_volume-noise_117",
+      "parameter": "evoked_gain",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.9609375,
+          0.96484375
+        ],
+        [
+          1.1134529950501255,
+          1.1163397462875941
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.9609375,
+              0.96484375
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.1134529950501255,
+              1.1163397462875941
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 0.7607859616725676,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 202.77441216150316,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "fixed_volume-noise_117",
+      "parameter": "m4_scale",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.75390625,
+          0.7578125
+        ],
+        [
+          1.1171875,
+          1.12109375
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.75390625,
+              0.7578125
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.1171875,
+              1.12109375
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 0.8229444080307609,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 793.9276186223949,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "fixed_volume-noise_117",
+      "parameter": "k3_scale",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.8203125,
+          0.82421875
+        ],
+        [
+          1.12109375,
+          1.125
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.8203125,
+              0.82421875
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.12109375,
+              1.125
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 0.34904316253700785,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 2380.475558094716,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "fixed_volume-noise_221",
+      "parameter": "evoked_gain",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.8671875,
+          0.87109375
+        ],
+        [
+          1.0078125,
+          1.01171875
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.8671875,
+              0.87109375
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.0078125,
+              1.01171875
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 3.0541578508724925,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 321.4600952277067,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "fixed_volume-noise_221",
+      "parameter": "m4_scale",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.69140625,
+          0.6953125
+        ],
+        [
+          1.02734375,
+          1.03125
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.69140625,
+              0.6953125
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.02734375,
+              1.03125
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 2.841466086554167,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 1092.0393624860621,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "fixed_volume-noise_221",
+      "parameter": "k3_scale",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.76171875,
+          0.765625
+        ],
+        [
+          1.05078125,
+          1.0546875
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.76171875,
+              0.765625
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.05078125,
+              1.0546875
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 1.9403420510527631,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 1617.5992334204102,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "GI-noiseless",
+      "parameter": "evoked_gain",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.7109375,
+          0.71484375
+        ],
+        [
+          1.3359375,
+          1.33984375
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.7109375,
+              0.71484375
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.3359375,
+              1.33984375
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 1.65362851589605e-15,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [
+        {
+          "value": 0.7109375,
+          "nuisance_bound_hits": [
+            1
+          ],
+          "nuisance_vector": [
+            0.7109375,
+            0.500000000013536,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "value": 0.71484375,
+          "nuisance_bound_hits": [
+            1
+          ],
+          "nuisance_vector": [
+            0.71484375,
+            0.5000000000038507,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "value": 1.3359375,
+          "nuisance_bound_hits": [
+            1
+          ],
+          "nuisance_vector": [
+            1.3359375,
+            1.5,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "value": 1.33984375,
+          "nuisance_bound_hits": [
+            1
+          ],
+          "nuisance_vector": [
+            1.33984375,
+            1.5,
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "maximum_sampled_slice_minus_profile_delta_q": 46.25483581070771,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "GI-noiseless",
+      "parameter": "m4_scale",
+      "grid_points": 10,
+      "reference_points": 2,
+      "crossing_brackets": [],
+      "sampled_regions": [
+        {
+          "lower": {
+            "value": 0.5,
+            "kind": "bound_limited"
+          },
+          "upper": {
+            "value": 1.5,
+            "kind": "bound_limited"
+          },
+          "closed_within_bounds": false
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 4.434143752188698e-15,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 15.598244726071611,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "GI-noise_117",
+      "parameter": "evoked_gain",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.75390625,
+          0.7578125
+        ],
+        [
+          1.30078125,
+          1.3046875
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.75390625,
+              0.7578125
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.30078125,
+              1.3046875
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 0.9530649600306411,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [
+        {
+          "value": 1.30078125,
+          "nuisance_bound_hits": [
+            1
+          ],
+          "nuisance_vector": [
+            1.30078125,
+            1.4999999999999234,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "value": 1.3046875,
+          "nuisance_bound_hits": [
+            1
+          ],
+          "nuisance_vector": [
+            1.3046875,
+            1.4999999999999525,
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "maximum_sampled_slice_minus_profile_delta_q": 60.82507673237582,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "GI-noise_117",
+      "parameter": "m4_scale",
+      "grid_points": 9,
+      "reference_points": 2,
+      "crossing_brackets": [],
+      "sampled_regions": [
+        {
+          "lower": {
+            "value": 0.5,
+            "kind": "bound_limited"
+          },
+          "upper": {
+            "value": 1.5,
+            "kind": "bound_limited"
+          },
+          "closed_within_bounds": false
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 1.351919875054831,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 50.36438730102222,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "GI-noise_221",
+      "parameter": "evoked_gain",
+      "grid_points": 20,
+      "reference_points": 6,
+      "crossing_brackets": [
+        [
+          0.78515625,
+          0.7890625
+        ],
+        [
+          1.41796875,
+          1.421875
+        ]
+      ],
+      "sampled_regions": [
+        {
+          "lower": {
+            "bracket": [
+              0.78515625,
+              0.7890625
+            ],
+            "kind": "contour_bracket"
+          },
+          "upper": {
+            "bracket": [
+              1.41796875,
+              1.421875
+            ],
+            "kind": "contour_bracket"
+          },
+          "closed_within_bounds": true
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 0.851944631909042,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [
+        {
+          "value": 0.78515625,
+          "nuisance_bound_hits": [
+            1
+          ],
+          "nuisance_vector": [
+            0.78515625,
+            0.5000000000000001,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "value": 0.7890625,
+          "nuisance_bound_hits": [
+            1
+          ],
+          "nuisance_vector": [
+            0.7890625,
+            0.5000000000000001,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "value": 1.41796875,
+          "nuisance_bound_hits": [
+            1
+          ],
+          "nuisance_vector": [
+            1.41796875,
+            1.49999999985,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "value": 1.421875,
+          "nuisance_bound_hits": [
+            1
+          ],
+          "nuisance_vector": [
+            1.421875,
+            1.4999999999999738,
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "maximum_sampled_slice_minus_profile_delta_q": 89.52897133825162,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    },
+    {
+      "case": "GI-noise_221",
+      "parameter": "m4_scale",
+      "grid_points": 10,
+      "reference_points": 2,
+      "crossing_brackets": [],
+      "sampled_regions": [
+        {
+          "lower": {
+            "value": 0.5,
+            "kind": "bound_limited"
+          },
+          "upper": {
+            "value": 1.5,
+            "kind": "bound_limited"
+          },
+          "closed_within_bounds": false
+        }
+      ],
+      "sampled_topology": {
+        "coarse_components": 1,
+        "fine_components": 1,
+        "final_components": 1,
+        "untested_components_not_excluded": true
+      },
+      "generating_value_delta_q": 0.5847338385893863,
+      "generating_value_within_nominal_contour": true,
+      "crossing_endpoint_nuisance_bounds": [],
+      "maximum_sampled_slice_minus_profile_delta_q": 54.1714749277864,
+      "gates": {
+        "all_fits_completed": true,
+        "not_below_unrestricted_minimum": true,
+        "not_above_feasible_slice": true,
+        "reference_objective_agreement": true,
+        "reference_contour_side_agreement": true,
+        "reference_not_above_feasible_candidate": true
+      }
+    }
+  ],
+  "limits": [
+    "Nominal asymptotic pointwise one-parameter chi-square(1)95% reference contour under declared Gaussian SDs; not joint coverage, finite-sample/human confidence or coverage with active boundaries.",
+    "Interest bounds and active nuisance bounds are engineering limits; classify bound-limited endpoints and annotate nuisance-bound hits. Do not extrapolate or force closed intervals.",
+    "new dynamics or physiology",
+    "human data or independent empirical validation",
+    "10min schedule comparison",
+    "new noise realizations or coverage simulation",
+    "unknown SD or residual-rescaled likelihood",
+    "global uniqueness or proof no hidden profile components",
+    "claims of finite-sample/human confidence or therapy effect",
+    "unbounded extrapolation"
+  ]
+}

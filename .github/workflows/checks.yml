@@ -1,0 +1,1033 @@
+name: Repository checks
+
+'on':
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      historical_native:
+        description: 'Private archive only: run frozen native locks with known advisories'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: repository-checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  repository-checks:
+    outputs:
+      native_enabled: ${{ steps.scope.outputs.native_enabled }}
+    name: Repository checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Select source-publication verification scope
+        id: scope
+        env:
+          PRIVATE_REPOSITORY: ${{ github.event.repository.private }}
+          HISTORICAL_REQUESTED: ${{ github.event_name == 'workflow_dispatch' && inputs.historical_native }}
+        run: python3 scripts/publication_ci_scope.py >> "$GITHUB_OUTPUT"
+      - name: Set up uv
+        uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4  # v10.1.0
+        with:
+          version: '0.11.16'
+          enable-cache: false
+      - name: Install locked repository tooling
+        run: uv sync --locked
+      - name: Check repository and build documentation
+        run: uv run --locked python scripts/check.py
+
+      - name: Verify paired boundary preflight and reconstruction
+        run: |
+          uv run --locked python -m experiments.m4.paired_observation.run \
+            --output results/m4-paired/ci-reference
+          uv run --locked python -S -m experiments.m4.paired_observation.run \
+            --reconstruct results/m4-paired/ci-reference \
+            --output results/m4-paired/reconstructed.json
+          cmp results/m4-paired/ci-reference/preflight.json results/m4-paired/reconstructed.json
+      - name: Verify standalone beta-cell reference and reconstruction
+        if: steps.scope.outputs.native_enabled == 'true'
+        run: |
+          uv sync --locked --project experiments/m4/beta_cell/runtime
+          uv run --locked --project experiments/m4/beta_cell/runtime \
+            python experiments/m4/beta_cell/runtime/test_model.py
+          uv run --locked --project experiments/m4/beta_cell/runtime \
+            python experiments/m4/beta_cell/runtime/run.py --output results/m4/ci-reference
+          uv run --locked python -S experiments/m4/beta_cell/runtime/report.py \
+            results/m4/ci-reference --output results/m4/reconstructed.json
+          cmp results/m4/ci-reference/report.json results/m4/reconstructed.json
+      - name: Verify forward C-peptide reference and reconstruct its report
+        if: steps.scope.outputs.native_enabled == 'true'
+        run: |
+          uv run --locked --project experiments/m4/beta_cell/runtime \
+            python -m unittest discover -s experiments/m4/c_peptide -p test_model.py -v
+          uv run --locked --project experiments/m4/beta_cell/runtime \
+            python -m experiments.m4.c_peptide.run --output results/m4-cpeptide/ci-reference
+          uv run --locked python -S -m experiments.m4.c_peptide.report \
+            results/m4-cpeptide/ci-reference --output results/m4-cpeptide/reconstructed.json
+          cmp results/m4-cpeptide/ci-reference/report.json results/m4-cpeptide/reconstructed.json
+      - name: Verify native insulin inlet and reconstruct its report
+        if: steps.scope.outputs.native_enabled == 'true'
+        run: |
+          uv sync --locked --project experiments/m0/simglucose
+          uv run --locked --project experiments/m0/simglucose \
+            python -m unittest discover -s experiments/m4/kinetic_inlet -p test_native.py -v
+          uv run --locked --project experiments/m0/simglucose \
+            python -m experiments.m4.kinetic_inlet.run \
+            --secretion-run results/m4/ci-reference --output results/m4-inlet/ci-reference
+          uv run --locked python -S -m experiments.m4.kinetic_inlet.report \
+            results/m4-inlet/ci-reference --output results/m4-inlet/reconstructed.json
+          cmp results/m4-inlet/ci-reference/report.json results/m4-inlet/reconstructed.json
+      - name: Check paired baseline states against native insulin derivatives
+        if: steps.scope.outputs.native_enabled == 'true'
+        run: >-
+          uv run --locked --project experiments/m0/simglucose
+          python -m experiments.m4.paired_observation.native_probe
+          results/m4-paired/ci-reference --output results/m4-paired/native-probe.json
+      - name: Verify paired kinetic execution and reconstruction
+        if: steps.scope.outputs.native_enabled == 'true'
+        run: |
+          uv run --locked --project experiments/m0/simglucose \
+            python -m unittest experiments.m4.paired_kinetics.test_insulin -v
+          uv run --locked --project experiments/m4/beta_cell/runtime \
+            python -m unittest experiments.m4.paired_kinetics.test_cpeptide -v
+          uv run --locked python -m experiments.m4.paired_kinetics.run \
+            --boundary-run results/m4-paired/ci-reference \
+            --output results/m4-paired-kinetics/ci-reference
+          uv run --locked python -S -m experiments.m4.paired_kinetics.report \
+            results/m4-paired-kinetics/ci-reference \
+            --output results/m4-paired-kinetics/reconstructed.json
+          cmp results/m4-paired-kinetics/ci-reference/report.json results/m4-paired-kinetics/reconstructed.json
+      - name: Verify secretion source audit and reconstruction
+        if: steps.scope.outputs.native_enabled == 'true'
+        run: |
+          uv run --locked --project experiments/m4/beta_cell/runtime \
+            python -m unittest experiments.m4.source_audit.test_numerical -v
+          uv run --locked python -m experiments.m4.source_audit.run \
+            --output results/m4-source-audit/ci-reference
+          uv run --locked python -S -m experiments.m4.source_audit.run \
+            --reconstruct results/m4-source-audit/ci-reference \
+            --output results/m4-source-audit/reconstructed.json
+          cmp results/m4-source-audit/ci-reference/report.json results/m4-source-audit/reconstructed.json
+      - name: Verify prescribed glucose to paired kinetic chain
+        if: steps.scope.outputs.native_enabled == 'true'
+        run: |
+          uv run --locked python -m experiments.m4.chain.run \
+            --output results/m4-chain/ci-reference
+          uv run --locked python -S -m experiments.m4.chain.report \
+            results/m4-chain/ci-reference --output results/m4-chain/reconstructed.json
+          cmp results/m4-chain/ci-reference/report.json results/m4-chain/reconstructed.json
+      - name: Verify feedback specification preflight without coupled trajectories
+        if: steps.scope.outputs.native_enabled == 'true'
+        run: |
+          uv run --locked python -m experiments.m4.feedback.preflight \
+            --output results/m4-feedback-preflight/ci-reference
+          uv run --locked python -S -m experiments.m4.feedback.preflight \
+            --reconstruct results/m4-feedback-preflight/ci-reference \
+            --output results/m4-feedback-preflight/reconstructed.json
+          cmp results/m4-feedback-preflight/ci-reference/report.json results/m4-feedback-preflight/reconstructed.json
+      - name: Preserve beta-cell numerical evidence including failures
+        if: always() && steps.scope.outputs.native_enabled == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m4-beta-cell
+          path: |
+            results/m4/
+            results/m4-inlet/
+            results/m4-cpeptide/
+            results/m4-paired/
+            results/m4-paired-kinetics/
+            results/m4-source-audit/ci-reference/
+            results/m4-source-audit/reconstructed.json
+            results/m4-chain/
+            results/m4-feedback-preflight/ci-reference/
+            results/m4-feedback-preflight/reconstructed.json
+          if-no-files-found: warn
+          retention-days: 14
+
+  beta-cell-feedback:
+    needs: repository-checks
+    if: needs.repository-checks.outputs.native_enabled == 'true'
+    name: Bounded beta-cell glucose feedback
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+        with:
+          version: '0.11.16'
+          enable-cache: false
+      - name: Install locked tooling and native runtime
+        run: |
+          uv sync --locked
+          uv sync --locked --project experiments/m0/simglucose
+      - name: Verify source, coupled boundary and terminal failures
+        run: >-
+          uv run --locked --project experiments/m0/simglucose
+          python -m unittest experiments.m4.feedback.test_numerical -v
+      - name: Execute frozen feedback matrix and fresh-process repeat
+        run: >-
+          uv run --locked python -m experiments.m4.feedback.run
+          --output results/m4-feedback/ci-reference
+      - name: Reconstruct without numerical packages
+        run: |
+          uv run --locked python -S -m experiments.m4.feedback.report \
+            results/m4-feedback/ci-reference --output results/m4-feedback/reconstructed.json
+          cmp results/m4-feedback/ci-reference/report.json results/m4-feedback/reconstructed.json
+      - name: Verify hepatic relations, conservation and terminal extraction failure
+        run: >-
+          uv run --locked --project experiments/m0/simglucose
+          python -m unittest experiments.m4.hepatic.test_numerical -v
+      - name: Execute and reconstruct the hepatic structural comparison
+        run: |
+          uv run --locked python -m experiments.m4.hepatic.run \
+            --output results/m4-hepatic/ci-reference
+          uv run --locked python -S -m experiments.m4.hepatic.report \
+            results/m4-hepatic/ci-reference --output results/m4-hepatic/reconstructed.json
+          cmp results/m4-hepatic/ci-reference/report.json results/m4-hepatic/reconstructed.json
+      - name: Verify the separate C-peptide observation runtime
+        run: |
+          uv sync --locked --project experiments/m4/beta_cell/runtime
+          uv run --locked --project experiments/m4/beta_cell/runtime \
+            python -m unittest experiments.m4.feedback_observation.test_numerical -v
+      - name: Verify configured researcher C-peptide numerics
+        run: >-
+          uv run --locked --project experiments/m4/beta_cell/runtime
+          python -m unittest experiments.m4.researcher_workflow.test_numerical -v
+      - name: Observe the checked feedback source and reconstruct the report
+        run: |
+          uv run --locked python -m experiments.m4.feedback_observation.run \
+            --source results/m4-hepatic/ci-reference --output results/m4-feedback-observation/ci-reference
+          uv run --locked python -S -m experiments.m4.feedback_observation.report \
+            results/m4-feedback-observation/ci-reference --output results/m4-feedback-observation/reconstructed.json
+          cmp results/m4-feedback-observation/ci-reference/report.json \
+            results/m4-feedback-observation/reconstructed.json
+      - name: Run configured M4 through the local entry and reconstruct all reports
+        run: >-
+          uv run --locked python -S -m experiments.workflow_acceptance
+          --task m4-secretion
+          --m4-reference results/m4-feedback/ci-reference
+          --output results/m4-researcher-entry/ci-acceptance
+      - name: Compare frozen M4 sources through the local entry and reconstruct
+        run: |
+          uv run --locked python -S -m experiments.workflows run m4-compare \
+            --config experiments/m4/comparison/example.json \
+            --reference results/m4-feedback/ci-reference \
+            --output results/m4-comparison/ci-reference
+          uv run --locked python -S -m experiments.workflows reconstruct m4-compare \
+            --archive results/m4-comparison/ci-reference \
+            --output results/m4-comparison/ci-reconstructed
+          cmp results/m4-comparison/ci-reference/report.json results/m4-comparison/ci-reconstructed/report.json
+          cmp results/m4-comparison/ci-reference/report.md results/m4-comparison/ci-reconstructed/report.md
+          cmp results/m4-comparison/ci-reference/figure.svg results/m4-comparison/ci-reconstructed/figure.svg
+      - name: Preserve feedback evidence including failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m4-feedback
+          path: |
+            results/m4-feedback/
+            results/m4-hepatic/
+            results/m4-feedback-observation/
+            results/m4-researcher-entry/
+            results/m4-comparison/
+          if-no-files-found: warn
+          retention-days: 14
+
+  configurable-study-tools:
+    needs: repository-checks
+    if: needs.repository-checks.outputs.native_enabled == 'true'
+    name: Configurable M4 study and local research tools
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Set up uv
+        uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4  # v10.1.0
+        with:
+          version: '0.11.16'
+          enable-cache: false
+      - name: Install locked tooling and task-directed numerical environments
+        run: |
+          uv sync --locked
+          uv run --locked python -S -m experiments.setup plan m4-study \
+            --output results/m4-study-tools/setup-plan
+          uv run --locked python -S -m experiments.setup install \
+            --plan results/m4-study-tools/setup-plan --output results/m4-study-tools/setup-install
+          uv run --locked python -S -m experiments.setup check \
+            --plan results/m4-study-tools/setup-plan --output results/m4-study-tools/setup-check
+      - name: Verify midpoint numerics and inherited terminal gates
+        run: >-
+          uv run --locked --project experiments/m0/simglucose
+          python -m unittest experiments.m4.initial_load.test_numerical -v
+      - name: Prepare the explicit fasting campaign and catalogue pointers
+        run: |
+          uv run --locked python -S - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path.cwd()
+          output = root / "results/m4-study-tools"
+          inputs = output / "inputs"
+          inputs.mkdir(parents=True)
+          example = root / "experiments/m4/initial_load/example.json"
+          config = json.loads(example.read_text())
+          for source in config["sources"]:
+              for key in ("model", "declaration"):
+                  source[key] = str((example.parent / source[key]).resolve())
+          config["scenarios"] = ["fasting"]
+          (inputs / "study.json").write_text(json.dumps(config, indent=2) + "\n")
+          campaign = {
+              "schema": "opent1d.local-campaign-config/1",
+              "task": "m4-study",
+              "cells": [{"id": "fasting", "config": "study.json"}],
+              "repeats": 2,
+              "timeout_seconds": 1200,
+          }
+          (inputs / "campaign.json").write_text(json.dumps(campaign, indent=2) + "\n")
+          entries = [{"id": "full-study", "archive": "study"}]
+          for repeat in (1, 2):
+              entries.append({
+                  "id": f"fasting-repeat-{repeat}",
+                  "archive": f"campaign/sessions/session-0001/attempts/fasting--r{repeat:03d}/archive",
+              })
+          request = {
+              "schema": "opent1d.catalogue-request/1",
+              "entries": [
+                  {"id": item["id"], "task": "m4-study", "archive": str(output / item["archive"]), "tags": ["ci"]}
+                  for item in entries
+              ],
+          }
+          (inputs / "catalogue.json").write_text(json.dumps(request, indent=2) + "\n")
+          PY
+      - name: Run the full configurable study through the local entry
+        run: >-
+          uv run --locked python -S -m experiments.workflows run m4-study
+          --config experiments/m4/initial_load/example.json --output results/m4-study-tools/study
+      - name: Reconstruct the study without numerical packages
+        run: |
+          uv run --locked python -S -m experiments.workflows reconstruct m4-study \
+            --archive results/m4-study-tools/study --output results/m4-study-tools/study-reconstructed
+          cmp results/m4-study-tools/study/report.json results/m4-study-tools/study-reconstructed/report.json
+          cmp results/m4-study-tools/study/report.md results/m4-study-tools/study-reconstructed/report.md
+          cmp results/m4-study-tools/study/figure.svg results/m4-study-tools/study-reconstructed/figure.svg
+      - name: Execute both campaign repetitions and verify accepted-slot reuse
+        run: |
+          uv run --locked python -S -m experiments.campaigns check \
+            --config results/m4-study-tools/inputs/campaign.json
+          uv run --locked python -S -m experiments.campaigns run \
+            --config results/m4-study-tools/inputs/campaign.json --output results/m4-study-tools/campaign
+          uv run --locked python -S -m experiments.campaigns resume \
+            --campaign results/m4-study-tools/campaign
+          uv run --locked python -S -m experiments.campaigns reconstruct \
+            --campaign results/m4-study-tools/campaign --output results/m4-study-tools/campaign-reconstructed
+          cmp results/m4-study-tools/campaign/sessions/session-0002/report.json \
+            results/m4-study-tools/campaign-reconstructed/report.json
+          cmp results/m4-study-tools/campaign/sessions/session-0002/report.md \
+            results/m4-study-tools/campaign-reconstructed/report.md
+          uv run --locked python -S - <<'PY'
+          import json
+          from pathlib import Path
+
+          campaign = Path("results/m4-study-tools/campaign")
+          report = json.loads((campaign / "sessions/session-0002/report.json").read_text())
+          assert report["passed"] and report["accepted_slots"] == report["planned_slots"] == 2
+          assert report["accepted_source_scenarios"] == report["planned_source_scenarios"] == 4
+          assert [session["scheduled_slots"] for session in report["sessions"]] == [2, 0]
+          assert all(len(slot["attempts"]) == 1 for slot in report["slots"])
+          PY
+      - name: Index and verify native archives and compare the two exact repeats
+        run: |
+          uv run --locked python -S -m experiments.catalogue index \
+            --config results/m4-study-tools/inputs/catalogue.json --output results/m4-study-tools/catalogue
+          uv run --locked python -S -m experiments.catalogue verify \
+            --catalogue results/m4-study-tools/catalogue --output results/m4-study-tools/catalogue-verified
+          uv run --locked python -S -m experiments.catalogue list \
+            --catalogue results/m4-study-tools/catalogue-verified --task m4-study --tag ci
+          uv run --locked python -S -m experiments.catalogue compare \
+            --catalogue results/m4-study-tools/catalogue-verified \
+            --left fasting-repeat-1 --right fasting-repeat-2
+      - name: Preserve study, setup, campaign and catalogue evidence including failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m4-study-tools
+          path: results/m4-study-tools/
+          if-no-files-found: warn
+          retention-days: 14
+
+  maintained-m4-study:
+    needs: repository-checks
+    if: needs.repository-checks.outputs.native_enabled == 'true'
+    name: Maintained M4 numerical study
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Set up uv
+        uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4  # v10.1.0
+        with:
+          version: '0.11.16'
+          enable-cache: false
+      - name: Install the maintained task's locked numerical environments
+        run: |
+          uv sync --locked
+          uv run --locked python -S -m experiments.setup plan m4-study-secure \
+            --output results/m4-maintained-ci/setup-plan
+          uv run --locked python -S -m experiments.setup install \
+            --plan results/m4-maintained-ci/setup-plan --output results/m4-maintained-ci/setup-install
+          uv run --locked python -S -m experiments.setup check \
+            --plan results/m4-maintained-ci/setup-plan --output results/m4-maintained-ci/setup-check
+      - name: Check inherited feedback, causal source and three-load numerics
+        run: >-
+          uv run --locked --project experiments/m0/simglucose_secure
+          python -B -m experiments.m4.secure_study.test_numerical
+      - name: Run all three loads with a fresh maintained reference
+        run: >-
+          uv run --locked python -S -m experiments.workflows run m4-study-secure
+          --config experiments/m4/secure_study/example.json --output results/m4-maintained-ci/study
+      - name: Reconstruct without numerical packages and compare every report
+        run: |
+          uv run --locked python -S -m experiments.workflows reconstruct m4-study-secure \
+            --archive results/m4-maintained-ci/study --output results/m4-maintained-ci/reconstructed
+          cmp results/m4-maintained-ci/study/report.json results/m4-maintained-ci/reconstructed/report.json
+          cmp results/m4-maintained-ci/study/report.md results/m4-maintained-ci/reconstructed/report.md
+          cmp results/m4-maintained-ci/study/figure.svg results/m4-maintained-ci/reconstructed/figure.svg
+          uv run --locked python -S - <<'PY'
+          import json
+          from pathlib import Path
+
+          report = json.loads(Path("results/m4-maintained-ci/reconstructed/report.json").read_text())
+          assert report["schema"] == "m4-secure-study-report/1" and report["passed"]
+          assert report["configuration"]["scenarios"] == ["fasting", "gastric_load_15g", "gastric_load_30g"]
+          assert report["reference"]["accepted"] and report["common_controls"]["passed"]
+          assert report["denominators"] == {
+              "sources": 2, "accepted_sources": 2,
+              "source_scenarios": 6, "accepted_source_scenarios": 6,
+              "pairs": 1, "accepted_pairs": 1,
+          }
+          PY
+      - name: Preserve maintained numerical evidence including failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m4-maintained-ci
+          path: results/m4-maintained-ci/
+          if-no-files-found: warn
+          retention-days: 14
+
+  c1-patched-checkpoint-boundary:
+    needs: repository-checks
+    if: needs.repository-checks.outputs.native_enabled == 'true'
+    name: Patched C1 checkpoint and synthetic actor boundary
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Select the temporary actor-source directory at runtime
+        run: printf '%s\n' "G2P2C_SOURCE=$RUNNER_TEMP/g2p2c-source" >> "$GITHUB_ENV"
+      - name: Set up uv
+        uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4  # v10.1.0
+        with:
+          version: '0.11.16'
+          enable-cache: false
+      - name: Install both patched C1 locked runtimes
+        run: |
+          uv sync --locked --project experiments/c1/g2p2c_policy_source
+          uv sync --locked --project experiments/c1/g2p2c_training_source
+      - name: Fetch the pinned public actor source without trained weights
+        run: |
+          git init "$G2P2C_SOURCE"
+          git -C "$G2P2C_SOURCE" remote add origin https://github.com/RL4H/G2P2C.git
+          git -C "$G2P2C_SOURCE" fetch --depth 1 origin 37f7b7e161e9c1e7b702c8eebdc5cc7eb4f81d70
+          git -C "$G2P2C_SOURCE" checkout --detach FETCH_HEAD
+          test "$(git -C "$G2P2C_SOURCE" rev-parse HEAD)" = 37f7b7e161e9c1e7b702c8eebdc5cc7eb4f81d70
+      - name: Refuse unsafe checkpoints in the policy runtime
+        run: |
+          mkdir -p results/c1-checkpoint-ci
+          uv run --locked --project experiments/c1/g2p2c_policy_source \
+            python -B -m unittest tests.test_c1_g2p2c_checkpoint -v \
+            2>&1 | tee results/c1-checkpoint-ci/policy-checkpoint.log
+      - name: Refuse unsafe checkpoints in the training runtime
+        run: |
+          uv run --locked --project experiments/c1/g2p2c_training_source \
+            python -B -m unittest tests.test_c1_g2p2c_checkpoint -v \
+            2>&1 | tee results/c1-checkpoint-ci/training-checkpoint.log
+      # The trusted historical checkpoint/attempt/native bundles are local inputs,
+      # so CI checks random initialization, not the full trained native gate.
+      - name: Check synthetic source actor parity and fresh-process repeats
+        run: |
+          uv run --locked --project experiments/c1/g2p2c_policy_source \
+            python -B -m experiments.c1.g2p2c_actor_source_probe \
+            --source "$G2P2C_SOURCE" --output results/c1-checkpoint-ci/policy-primary.json
+          uv run --locked --project experiments/c1/g2p2c_policy_source \
+            python -B -m experiments.c1.g2p2c_actor_source_probe \
+            --source "$G2P2C_SOURCE" --output results/c1-checkpoint-ci/policy-repeat.json
+          uv run --locked --project experiments/c1/g2p2c_training_source \
+            python -B -m experiments.c1.g2p2c_actor_source_probe \
+            --source "$G2P2C_SOURCE" --output results/c1-checkpoint-ci/training-primary.json
+          uv run --locked --project experiments/c1/g2p2c_training_source \
+            python -B -m experiments.c1.g2p2c_actor_source_probe \
+            --source "$G2P2C_SOURCE" --output results/c1-checkpoint-ci/training-repeat.json
+          cmp results/c1-checkpoint-ci/policy-primary.json results/c1-checkpoint-ci/policy-repeat.json
+          cmp results/c1-checkpoint-ci/training-primary.json results/c1-checkpoint-ci/training-repeat.json
+          cmp results/c1-checkpoint-ci/policy-primary.json results/c1-checkpoint-ci/training-primary.json
+      - name: Preserve checkpoint and synthetic actor evidence including failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: c1-checkpoint-ci
+          path: results/c1-checkpoint-ci/
+          if-no-files-found: warn
+          retention-days: 14
+
+  beta-cell-joint-identifiability:
+    needs: repository-checks
+    if: needs.repository-checks.outputs.native_enabled == 'true'
+    name: Conditional beta-cell parameter recovery
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+        with:
+          version: '0.11.16'
+          enable-cache: false
+      - name: Install unchanged locks and verify joint numerical model
+        run: |
+          uv sync --locked
+          uv sync --locked --project experiments/m0/simglucose
+          uv run --locked --project experiments/m0/simglucose \
+            python -m unittest experiments.m4.joint_identifiability.test_numerical -v
+      - name: Execute frozen synthetic recovery and repeat
+        run: >-
+          uv run --locked python -m experiments.m4.joint_identifiability.run
+          --output results/m4-joint-identifiability/ci-reference
+      - name: Reconstruct without numerical libraries
+        run: |
+          uv run --locked python -S -m experiments.m4.joint_identifiability.report \
+            results/m4-joint-identifiability/ci-reference \
+            --output results/m4-joint-identifiability/reconstructed.json
+          cmp results/m4-joint-identifiability/ci-reference/report.json \
+            results/m4-joint-identifiability/reconstructed.json
+      - name: Preserve every recovery attempt including failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m4-joint-identifiability
+          path: results/m4-joint-identifiability/
+          if-no-files-found: warn
+          retention-days: 14
+
+  cpeptide-volume-sensitivity:
+    needs: repository-checks
+    if: needs.repository-checks.outputs.native_enabled == 'true'
+    name: C-peptide volume sensitivity
+    runs-on: ubuntu-24.04
+    # Run 37014981209 retained 60 primary / 36 repeat attempts at the 30m limit.
+    # The repeat has 34 complete cases and two unfinished attempts.
+    # Retain the full frozen matrix and fresh-process repeat; allow runner variance.
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+        with:
+          version: '0.11.16'
+          enable-cache: false
+      - name: Install unchanged locks and verify the volume observation boundary
+        run: |
+          uv sync --locked
+          uv sync --locked --project experiments/m0/simglucose
+          uv run --locked --project experiments/m0/simglucose \
+            python -m unittest experiments.m4.volume_sensitivity.test_numerical -v
+      - name: Execute the frozen volume comparison and fresh-process repeat
+        run: >-
+          uv run --locked python -m experiments.m4.volume_sensitivity.run
+          --output results/m4-volume-sensitivity/ci
+      - name: Reconstruct the report without numerical libraries and reproduce the figure
+        run: |
+          uv run --locked python -S -m experiments.m4.volume_sensitivity.report \
+            results/m4-volume-sensitivity/ci \
+            --output results/m4-volume-sensitivity/reconstructed.json
+          cmp results/m4-volume-sensitivity/ci/report.json \
+            results/m4-volume-sensitivity/reconstructed.json
+          uv run --locked --project experiments/m0/simglucose \
+            python -m experiments.m4.volume_sensitivity.plot \
+            results/m4-volume-sensitivity/ci \
+            --output results/m4-volume-sensitivity/reconstructed.svg
+          cmp results/m4-volume-sensitivity/ci/figure.svg \
+            results/m4-volume-sensitivity/reconstructed.svg
+      - name: Preserve every volume comparison attempt including failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m4-volume-sensitivity
+          path: results/m4-volume-sensitivity/
+          if-no-files-found: warn
+          retention-days: 14
+
+  beta-cell-likelihood-profiles:
+    needs: repository-checks
+    if: needs.repository-checks.outputs.native_enabled == 'true'
+    name: Conditional beta-cell likelihood profiles
+    # Preserve all nine cases, 27 profiles and the full fresh-process repeat.
+    # The private two-CPU Linux job timed out during the primary execution;
+    # macOS arm64 matches the platform of the complete 133-minute reference.
+    runs-on: macos-14
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+        with:
+          version: '0.11.16'
+          enable-cache: false
+      - name: Install unchanged locks and verify independent profiling oracles
+        run: |
+          uv sync --locked
+          uv sync --locked --project experiments/m0/simglucose
+          uv run --locked --project experiments/m0/simglucose \
+            python -m unittest experiments.m4.profile_likelihood.test_numerical -v
+      - name: Execute the frozen conditional profiles and fresh-process repeat
+        run: >-
+          uv run --locked python -m experiments.m4.profile_likelihood.run
+          --output results/m4-profile-likelihood/ci
+      - name: Reconstruct the report without numerical libraries and reproduce the figure
+        run: |
+          uv run --locked python -S -m experiments.m4.profile_likelihood.report \
+            results/m4-profile-likelihood/ci \
+            --output results/m4-profile-likelihood/reconstructed.json
+          cmp results/m4-profile-likelihood/ci/report.json \
+            results/m4-profile-likelihood/reconstructed.json
+          uv run --locked --project experiments/m0/simglucose \
+            python -m experiments.m4.profile_likelihood.plot \
+            results/m4-profile-likelihood/ci \
+            --output results/m4-profile-likelihood/reconstructed.svg
+          cmp results/m4-profile-likelihood/ci/figure.svg \
+            results/m4-profile-likelihood/reconstructed.svg
+      - name: Preserve every profile attempt including failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m4-profile-likelihood
+          path: results/m4-profile-likelihood/
+          if-no-files-found: warn
+          retention-days: 14
+
+  simglucose-reference:
+    needs: repository-checks
+    if: needs.repository-checks.outputs.native_enabled == 'true'
+    name: simglucose reference
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+        with:
+          version: '0.11.16'
+          python-version: '3.12.13'
+          enable-cache: false
+      - name: Install isolated reference environment
+        run: uv sync --locked --project experiments/m0/simglucose
+      - name: Check recorder failure modes
+        run: >-
+          uv run --locked --project experiments/m0/simglucose
+          python -m unittest discover -s experiments/m0/simglucose -v
+      - name: Check historical baseline, fresh processes and native reset
+        run: |
+          uv run --locked --project experiments/m0/simglucose python experiments/m0/simglucose/run.py \
+            --output results/m0/simglucose-1
+          uv run --locked --project experiments/m0/simglucose python experiments/m0/simglucose/run.py \
+            --output results/m0/simglucose-2
+          uv run --locked --project experiments/m0/simglucose python experiments/m0/simglucose/run.py \
+            --compare 'results/m0/simglucose-1/first/adolescent#001.csv' \
+            'results/m0/simglucose-2/first/adolescent#001.csv'
+      - name: Verify development-only native feasibility
+        run: >-
+          uv run --locked --project experiments/m0/simglucose
+          python experiments/m0/simglucose/development.py --output results/m0/development
+      - name: Verify M1 native adapter and information boundary
+        run: >-
+          uv run --locked --project experiments/m0/simglucose
+          python -m unittest discover -s experiments/m1 -p test_native.py -v
+      - name: Preserve reference evidence including failed runs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: simglucose-reference
+          path: results/m0/
+          if-no-files-found: warn
+          retention-days: 14
+
+  lt1-reference:
+    needs: repository-checks
+    if: needs.repository-checks.outputs.native_enabled == 'true'
+    name: LT1 Cambridge reference
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.22.2'
+      - name: Install isolated TypeScript toolchain
+        run: npm --prefix experiments/m0/lt1 ci --ignore-scripts --no-audit --no-fund
+      - name: Verify pinned native source
+        run: node experiments/m0/lt1/setup.mjs
+      - name: Check recorder failure modes
+        run: npm --prefix experiments/m0/lt1 test
+      - name: Check historical baseline, fresh processes and native reset
+        shell: bash
+        run: |
+          npm --prefix experiments/m0/lt1 run reference -- --output ../../../results/m0/lt1-1 \
+            2>&1 | tee results/m0/lt1-console.log
+          npm --prefix experiments/m0/lt1 run reference -- --output ../../../results/m0/lt1-2 \
+            2>&1 | tee -a results/m0/lt1-console.log
+          npm --prefix experiments/m0/lt1 run reference -- \
+            --compare ../../../results/m0/lt1-1/first/native.jsonl ../../../results/m0/lt1-2/first/native.jsonl \
+            2>&1 | tee -a results/m0/lt1-console.log
+      - name: Verify M2 native host boundary feasibility
+        run: >-
+          TS_NODE_PROJECT=experiments/m0/lt1/tsconfig.json node
+          --loader ./experiments/m0/lt1/node_modules/ts-node/esm.mjs
+          experiments/m2/probe.mjs results/m2-host-probe
+      - name: Preserve evidence including failed runs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: lt1-reference
+          path: |
+            results/m0/lt1-1/
+            results/m0/lt1-2/
+            results/m0/lt1-console.log
+            results/m2-host-probe/
+          if-no-files-found: warn
+          retention-days: 14
+
+  m1-demonstration:
+    needs: repository-checks
+    if: needs.repository-checks.outputs.native_enabled == 'true'
+    name: M1 demonstration
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+        with:
+          version: '0.11.16'
+          python-version: '3.12.13'
+          enable-cache: false
+      - name: Install isolated locked runtime
+        run: uv sync --locked --project experiments/m0/simglucose
+      - name: Run development demonstration
+        run: >-
+          uv run --locked --project experiments/m0/simglucose
+          python -m experiments.m1 demo --output results/m1/demo
+      - name: Verify fresh processes and simulator-free report reconstruction
+        run: >-
+          uv run --locked --project experiments/m0/simglucose
+          python -m experiments.m1.verify --study results/m1/demo --output results/m1/verification
+      - name: Preserve complete and failed demonstration artifacts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m1-demonstration
+          path: results/m1/
+          if-no-files-found: warn
+          retention-days: 14
+
+  m2-cambridge:
+    needs: repository-checks
+    if: needs.repository-checks.outputs.native_enabled == 'true'
+    name: M2 Cambridge integration
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+        with:
+          version: '0.11.16'
+          enable-cache: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.22.2'
+      - name: Install locked tooling and verify native source
+        run: |
+          uv sync --locked
+          npm --prefix experiments/m0/lt1 ci --ignore-scripts --no-audit --no-fund
+          node experiments/m0/lt1/setup.mjs
+      - name: Verify native equivalence, reset, historical output and information
+        run: >-
+          TS_NODE_PROJECT=experiments/m0/lt1/tsconfig.json node
+          --loader ./experiments/m0/lt1/node_modules/ts-node/esm.mjs
+          --test experiments/m2/test-native.mjs
+      - name: Verify new processes, cancellation and simulator-free reconstruction
+        run: uv run --locked python -m experiments.m2.verify --output results/m2/verification
+      - name: Run and verify the complete M2 development study
+        run: |
+          uv sync --locked --project experiments/m0/simglucose
+          uv run --locked python -m experiments.m2 demo --output results/m2/development --workers 2
+          uv run --locked python -m experiments.m2 verify-study \
+            --study results/m2/development --output results/m2/development-verification
+      - name: Preserve M2 evidence including failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m2-cambridge
+          path: results/m2/
+          if-no-files-found: warn
+          retention-days: 14
+
+  internal-verification:
+    needs: repository-checks
+    if: needs.repository-checks.outputs.native_enabled == 'true'
+    name: Internal numerical verification
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+        with:
+          version: '0.11.16'
+          enable-cache: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.22.2'
+      - name: Install locked isolated environments
+        run: |
+          uv sync --locked
+          uv sync --locked --project experiments/m0/simglucose
+          npm --prefix experiments/m0/lt1 ci --ignore-scripts --no-audit --no-fund
+          node experiments/m0/lt1/setup.mjs
+      - name: Verify exact references, replay, lifecycle and artifact rejection
+        run: uv run --locked python -m experiments.verification.verify --output results/verification/native
+      - name: Detect the seven selected implementation faults
+        run: uv run --locked python -m experiments.verification.mutations --output results/verification/mutations
+      - name: Run pilot and freeze the prespecified signal limits
+        run: |
+          uv run --locked python -m experiments.verification.campaign pilot --output results/verification/pilot
+          uv run --locked python -m experiments.verification.campaign freeze \
+            --study results/verification/pilot --criteria experiments/verification/criteria.json \
+            --output results/verification/thresholds.json
+      - name: Run complete numerical and initialization matrix
+        run: |
+          uv run --locked python -m experiments.verification.campaign numerical \
+            --thresholds results/verification/thresholds.json --output results/verification/numerical
+          uv run --locked python -S -m experiments.verification.campaign report \
+            --study results/verification/numerical --output results/verification/reconstructed.json
+          cmp results/verification/numerical/report.json results/verification/reconstructed.json
+      - name: Preserve internal verification including failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: internal-verification
+          path: results/verification/
+          if-no-files-found: warn
+          retention-days: 14
+
+  internal-robustness:
+    needs: repository-checks
+    if: needs.repository-checks.outputs.native_enabled == 'true'
+    name: Internal robustness verification
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+        with:
+          version: '0.11.16'
+          enable-cache: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.22.2'
+      - name: Install locked isolated environments
+        run: |
+          uv sync --locked
+          uv sync --locked --project experiments/m0/simglucose
+          npm --prefix experiments/m0/lt1 ci --ignore-scripts --no-audit --no-fund
+          node experiments/m0/lt1/setup.mjs
+      - name: Freeze native parameters and all one-factor cases
+        run: uv run --locked python -m experiments.verification.robustness freeze --output results/robustness/plan
+      - name: Execute the complete frozen robustness matrix
+        run: >-
+          uv run --locked python -m experiments.verification.robustness run
+          --plan results/robustness/plan --output results/robustness/matrix
+      - name: Verify native baselines, new processes, sensor auditing and reconstruction
+        run: >-
+          uv run --locked python -m experiments.verification.verify_robustness
+          --study results/robustness/matrix --output results/robustness/verification
+      - name: Preserve robustness evidence including failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: internal-robustness
+          path: results/robustness/
+          if-no-files-found: warn
+          retention-days: 14
+
+  m3-forecast:
+    needs: repository-checks
+    if: needs.repository-checks.outputs.native_enabled == 'true'
+    name: M3 causal forecasting
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+        with:
+          version: '0.11.16'
+          enable-cache: false
+      - name: Install separate locked tooling and estimator
+        run: |
+          uv sync --locked
+          uv sync --locked --project experiments/m3/runtime
+      - name: Verify native estimator, weighting and development-only fitting
+        run: >-
+          uv run --locked --project experiments/m3/runtime python -m unittest discover
+          -s experiments/m3 -p test_native.py -v
+      - name: Freeze, execute and reconstruct synthetic forecasts
+        run: uv run --locked python -m experiments.m3.verify --output results/m3/verification
+      - name: Verify the separate AZT1D study and access boundaries
+        run: |
+          uv run --locked --project experiments/m3/runtime python -m unittest discover \
+            -s experiments/m3/azt1d -p test_native.py -v
+          uv run --locked python -m experiments.m3.azt1d.verify --output results/m3/azt1d-verification
+      - name: Verify frozen-model transfer without external refitting
+        run: uv run --locked python -m experiments.m3.external.verify --output results/m3/external-verification
+      - name: Verify researcher forecast intake and source-free reconstruction
+        run: >-
+          uv run --locked python -m experiments.m3.researcher verify
+          --output results/m3/researcher-verification
+      - name: Verify synthetic PhysioCGM-format preparation without evaluation
+        run: |
+          uv run --locked python -m experiments.m3.physiocgm fixture --output results/m3/physiocgm-fixture
+          uv run --locked python -m experiments.m3.physiocgm prepare \
+            --request results/m3/physiocgm-fixture/request.json --output results/m3/physiocgm-converted
+          uv run --locked python -S -m experiments.m3.physiocgm verify --bundle results/m3/physiocgm-converted
+      - name: Preserve synthetic M3 evidence including failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-forecast
+          path: results/m3/
+          if-no-files-found: warn
+          retention-days: 14
+
+  lit002-absorption:
+    needs: repository-checks
+    if: needs.repository-checks.outputs.native_enabled == 'true'
+    name: LIT-002 absorption verification
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+        with:
+          version: '0.11.16'
+          enable-cache: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.22.2'
+      - name: Install the existing locked native and plotting environments
+        run: |
+          uv sync --locked
+          uv sync --locked --project experiments/literature/lit001/runtime
+          npm --prefix experiments/m0/lt1 ci --ignore-scripts --no-audit --no-fund
+          node experiments/m0/lt1/setup.mjs
+      - name: Reconstruct recorded literature screening from a clean output path
+        run: |
+          uv run --locked python -m experiments.literature.lit001.compile \
+            --output results/lit002/screening-reconstructed.json
+          cmp results/lit002/screening-reconstructed.json experiments/literature/lit001/screening-final.json
+      - name: Verify the separate published-equation reference
+        run: >-
+          uv run --locked --project experiments/literature/lit001/runtime python
+          -m unittest discover -s experiments/literature/lit001/runtime
+          -p test_model.py -v
+      - name: Verify the unchanged native baseline and absorption boundary
+        env:
+          TS_NODE_PROJECT: experiments/m0/lt1/tsconfig.json
+        run: >-
+          node --loader ./experiments/m0/lt1/node_modules/ts-node/esm.mjs
+          --test experiments/literature/lit002/native/test-native.mjs
+      - name: Execute all frozen synthetic cases and refinements
+        run: uv run --locked python -m experiments.literature.lit002 run --output results/lit002/study
+      - name: Reconstruct without native or scientific runtime imports
+        run: |
+          uv run --locked python -S -m experiments.literature.lit002 report \
+            --study results/lit002/study --output results/lit002/reconstructed
+          cmp results/lit002/study/report/report.json results/lit002/reconstructed/report.json
+      - name: Render the sealed synthetic results
+        run: >-
+          uv run --locked --project experiments/literature/lit001/runtime python
+          experiments/literature/lit002/plot.py --study results/lit002/study
+          --output results/lit002/figures
+      - name: Preserve complete evidence including failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: lit002-absorption
+          path: results/lit002/
+          if-no-files-found: warn
+          retention-days: 14

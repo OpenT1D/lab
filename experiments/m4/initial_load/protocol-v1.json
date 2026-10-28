@@ -1,0 +1,406 @@
+{
+  "schema": "m4-initial-load-protocol/1",
+  "id": "M4-STUDY/1",
+  "specified_date": "2026-10-03",
+  "question": "How does descriptive separation between the same frozen secretion sources change across predeclared synthetic initial gastric loads?",
+  "claim": "bounded_configurable_synthetic_initial_load_composition_and_numerical_verification",
+  "guidance": "docs/research/m4-configurable-study-protocol.md",
+  "configuration": {
+    "schema": "m4-initial-load-config/1",
+    "keys": [
+      "schema",
+      "sources",
+      "scenarios",
+      "timeout_seconds",
+      "source_timeout_seconds"
+    ],
+    "sources": {
+      "keys": [
+        "id",
+        "model",
+        "declaration"
+      ],
+      "minimum": 2,
+      "maximum": 8,
+      "id_pattern": "[a-z][a-z0-9_-]{0,63}",
+      "reserved_ids": [
+        "native_zero",
+        "host_constant_basal",
+        "bc008_reference"
+      ],
+      "order": "declared list order, sequential supervised source execution",
+      "paths": "regular local files; relative paths resolve against config directory; metadata checking never imports source"
+    },
+    "scenarios": {
+      "type": "ordered nonempty subset of distinct supported fixed scenario IDs",
+      "minimum": 1,
+      "maximum": 3
+    },
+    "timeout_seconds": {
+      "minimum": 1,
+      "maximum": 1800,
+      "default_example": 600,
+      "scope": "per numerical/reference stage; reference generation and its repeats are separately supervised"
+    },
+    "source_timeout_seconds": {
+      "minimum": 1,
+      "maximum": 10800,
+      "default_example": 3600,
+      "scope": "entire source across every selected load, numerical/refinement stage, observation stage, fresh-process repeats and verification; never reset per load or stage"
+    },
+    "unsupported": "Reject extra keys, repeated/unknown scenarios, arbitrary load/timing/profile/horizon/grid/unit/runtime/state settings before callback execution"
+  },
+  "scenarios": [
+    {
+      "id": "fasting",
+      "initial_gastric_solid_mg": 0
+    },
+    {
+      "id": "gastric_load_15g",
+      "initial_gastric_solid_mg": 15000
+    },
+    {
+      "id": "gastric_load_30g",
+      "initial_gastric_solid_mg": 30000
+    }
+  ],
+  "conditions": {
+    "profile": "adult#001",
+    "upstream": {
+      "revision": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc",
+      "patient_file_sha256": "7ad1302fbf064805e2294bbcffd482e55448e37e48b63e629a1ed7f11c701547",
+      "parameter_file_sha256": "662f3b684d160fdf485edd1d7196dd1cd85c14b53650b030fdb86aaa05bb2e50",
+      "profile": "adult#001"
+    },
+    "horizon_min": 240,
+    "sample_step_min": 0.25,
+    "sample_count": 961,
+    "initial_load_semantics": "Only native initial x[0] and last_Qsto equal the selected gastric solid mg; last_foodtaken=0 and Action.CHO=0 throughout; not an announced meal, bolus, controller or timed intervention",
+    "basal_replacement": {
+      "fraction": 0.25,
+      "u0": "native u2ss in pmol/(kg min)",
+      "u_sc": "(1-fraction)*u0",
+      "Sb": "fraction*u0*(m1+m30)/m1",
+      "initial_Ip": "unchanged",
+      "initial_Il": "native Il + fraction*u0/m1",
+      "initial_sc_depots": "(1-fraction)*native depots",
+      "initial_Z": "Sb",
+      "initial_P": "Sb/gamma",
+      "other_native_states": "unchanged",
+      "not_a_claim": "replacement fraction is a prescribed experiment design; no estimate of insulin need or functional cell fraction"
+    },
+    "fixed_sc_schedule": "unchanged 75% native SC basal throughout; no candidate/controller override",
+    "native_boundary": {
+      "plasma_glucose": "x[3]/Vg in mg/dL",
+      "glucose_rate": "native dx[3]/Vg at the same RHS evaluation",
+      "pancreatic_rate": "Spo=Z+gain*K*max(Gdot,0)",
+      "static_target": "max(Sb+gain*beta*(G-h),0)",
+      "Z_dot": "alpha*(static_target-Z)",
+      "P_dot": "Spo-gamma*P",
+      "liver_input": "S=gamma*P added to guarded dx[9] only",
+      "units": "min, mg/dL, pmol/kg, pmol/(kg min)",
+      "portal_egp_term": "not added; native has no direct portal insulin action",
+      "hepatic_extraction": "native fixed m30 only",
+      "cpeptide": "excluded from first feedback experiment; no implicit reuse of insulin transit"
+    },
+    "native_state_order": [
+      "native_0_to_12",
+      "Z_pmol_kg_min",
+      "P_pmol_kg",
+      "integrated_sc_input",
+      "integrated_pancreatic_input",
+      "integrated_liver_arrival",
+      "hepatic_loss",
+      "peripheral_loss"
+    ],
+    "protocol_files_sha256": {
+      "experiments/m4/feedback/protocol.json": "b66087592810be35fa74372ad07172359897ceb40653abdf420b3c3fa1a4fd99",
+      "experiments/m4/causal_secretion/protocol.json": "b0a4e01475e95d6ddf785ce5764f89b2684569f6092f321ddb746290f9763739",
+      "experiments/m4/researcher_workflow/protocol.json": "f6a8a22036cc63b1a9770eec8b31932ff4761dbd9000846d6438721e86e62cf0",
+      "experiments/m4/feedback_observation/protocol.json": "69143f23b24e225753ada55a3d43ff2a39414635a624263db9e4f83c2d3ef98d",
+      "experiments/m4/comparison/protocol.json": "1769545288eb65d72757a9330034abad5800c0fac75dc2ca105c801a2014282c"
+    },
+    "runtime_files_sha256": {
+      "experiments/m0/simglucose/pyproject.toml": "6bbb5f49e74bd7df2e11ab39f69754a99ce1e4ef3736573943e3a75118c28007",
+      "experiments/m0/simglucose/uv.lock": "13d254dcebe8d1ab54c3140cdc07152d719a68477a1378d7fe77fc1568612aa9",
+      "experiments/m4/beta_cell/runtime/pyproject.toml": "7c69b6f63a48d72f927c0253b68492de1ac60700d0549744de1207709732d3c5",
+      "experiments/m4/beta_cell/runtime/uv.lock": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04"
+    },
+    "freeze": "Raw config/model/declaration bytes and hashes, numeric source parameters, this protocol, guidance, all implementation/helper source inventory and numerical project/lock bytes archived before supplied callback execution; changed identities reject dispatch"
+  },
+  "source_contract": {
+    "declaration_schema": "m4-causal-model/1",
+    "state_count": 1,
+    "units": {
+      "state_count": 1,
+      "state_unit": "pmol/(kg min)",
+      "input_time_unit": "min",
+      "input_glucose_unit": "mg/dL",
+      "input_glucose_rate_unit": "mg/(dL min)",
+      "output_state_derivative_unit": "pmol/(kg min^2)",
+      "output_pancreatic_rate_unit": "pmol/(kg min)",
+      "initial_state": "host-owned Z(0)=Sb",
+      "portal": "host-owned Pdot=Spo-gamma*P, P(0)=Sb/gamma",
+      "liver": "host-owned S=gamma*P into guarded native liver state only",
+      "basal": "host-owned BC-008 fraction 0.25 SC replacement and matched plasma insulin",
+      "causality": "only current time, native same-stage G and Gdot, current Z, Sb, h and declared numeric parameters",
+      "model_purity": "no mutable hidden state or future glucose; adaptive solver may evaluate time repeatedly or out of order"
+    },
+    "max_rate_pmol_kg_min": 1000.0,
+    "max_abs_state_derivative_pmol_kg_min2": 1000.0,
+    "source_equilibrium_tolerance": 1e-12,
+    "preflight": "unchanged M4-CAUSAL/1 equilibrium and repeated out-of-order evaluation checks; a hash or these probes do not prove arbitrary callback purity or biological applicability"
+  },
+  "reference": {
+    "historical_baseline": "Generate or use internally retained unchanged complete BC-008/2 archive; verify original source analytic checks, native preflight, full archive/runtime/source identities and reconstruction before new scenario solves",
+    "scenario_tracks": [
+      "native_zero",
+      "host_constant_basal",
+      "bc008_reference"
+    ],
+    "native_zero": "fraction=0, gain=0, original native state and original SC basal; also zero-extension/padded same-solver check and unmodified native class diagnostic",
+    "host_constant_basal": "fraction=0.25, gain=0 with matched plasma insulin, basal liver inventory/SC depots, Z=Sb and P=Sb/gamma; independent original feedback equations",
+    "bc008_reference": "fraction=0.25, gain=1 using original BC-008 feedback equations, newly solved for every selected initial load",
+    "identity": "The same scenario-specific controls/reference identity is supplied to each source. A reference from another load or altered initial/basal/grid/locks cannot support comparison",
+    "historical_anchor_parity": "For selected fasting/30g, compare original BC-008 native_zero/constant_basal/feedback_full and native diagnostic numeric artifacts against new same-equation/same-solver runs; maximum numeric discrepancy must be zero"
+  },
+  "numerical": {
+    "runtime": {
+      "project": "experiments/m0/simglucose",
+      "numpy": "1.26.4",
+      "scipy": "1.13.1",
+      "python": "3.12"
+    },
+    "solvers": [
+      {
+        "name": "coarse",
+        "method": "RK45",
+        "rtol": 1e-07,
+        "atol": 1e-09,
+        "max_step": 0.5
+      },
+      {
+        "name": "tight",
+        "method": "RK45",
+        "rtol": 1e-09,
+        "atol": 1e-11,
+        "max_step": 0.125
+      },
+      {
+        "name": "reference",
+        "method": "DOP853",
+        "rtol": 1e-11,
+        "atol": 1e-13,
+        "max_step": 0.0625
+      }
+    ],
+    "glucose_envelope_mg_dl": [
+      40,
+      500
+    ],
+    "source_modes": [
+      "candidate",
+      "host_constant_basal"
+    ],
+    "integration": "monolithic native+Z+P+ledgers; no sensor derivative, finite-difference glucose or sequential stale feedback; same-state derivative has no instantaneous dependence on S",
+    "refinement": {
+      "solver": "Both coarse-versus-reference and tight-versus-reference must meet frozen glucose, insulin and source tolerances; every solver preserves complete-grid/conservation/domain evidence",
+      "replay_sample_steps_min": [
+        0.25,
+        0.125,
+        0.0625
+      ],
+      "replay": "Archive liver-arrival from dense reference source and replay with unchanged independent original feedback forcing integrator, piecewise linear split at knots; fine replay glucose/insulin closure required for each active reference and candidate",
+      "comparison_output_step_min": 0.25,
+      "source_sampling_limit": "Observer uses archived 0.25min pancreatic source; coarsening is not continuous-source convergence below this grid"
+    },
+    "criteria": {
+      "zero_extension_derivative_error": 0.0,
+      "same_solver_zero_extension_state_error": 0.0,
+      "native_class_glucose_error_mg_dl": 0.05,
+      "native_class_insulin_error_pmol_l": 0.01,
+      "basal_derivative_change_max_native_units_per_min": 1e-08,
+      "glucose_solver_error_mg_dl": 0.01,
+      "insulin_solver_error_pmol_l": 0.01,
+      "source_solver_error_pmol_kg_min": 1e-05,
+      "insulin_mass_error_pmol_kg": 1e-06,
+      "glucose_mass_error_mg_kg": 1e-05,
+      "negative_amount_tolerance": 1e-08,
+      "fasting_glucose_drift_mg_dl": 0.01,
+      "fasting_insulin_drift_pmol_l": 0.01,
+      "basal_control_glucose_error_mg_dl": 0.01,
+      "fine_replay_glucose_error_mg_dl": 0.01,
+      "fine_replay_insulin_error_pmol_l": 0.01,
+      "repeat_error": 0.0,
+      "basal_control_insulin_error_pmol_l": 0.01,
+      "historical_anchor_max_numeric_difference": 0.0,
+      "common_control_max_numeric_difference": 0.0
+    },
+    "preflight_criteria": {
+      "native_derivative_locality_error": 1e-12,
+      "baseline_derivative_change": 1e-08,
+      "baseline_glucose_concentration_change": 0.0,
+      "baseline_plasma_insulin_change": 0.0,
+      "insulin_inventory_derivative_balance": 1e-10,
+      "rhs_equivalence_error": 1e-12,
+      "zero_extension_error": 0.0
+    },
+    "inventory": "20 state columns: native0..12,Z,P and integrated SC/pancreatic/liver-arrival/hepatic-loss/peripheral-loss; independent native glucose flux quadrature, exact initial and zero ledgers; do not use balance residual as flux definition",
+    "positivity": "Same inherited physical states excluding signed native insulin-action index6; terminal envelope/negative-amount events; no clipping or shortened-run acceptance"
+  },
+  "observer": {
+    "protocol": "BC-010/1",
+    "protocol_file_sha256": "69143f23b24e225753ada55a3d43ff2a39414635a624263db9e4f83c2d3ef98d",
+    "runtime": {
+      "project": "experiments/m4/beta_cell/runtime",
+      "python": "3.12",
+      "numpy": "2.2.6",
+      "scipy": "1.15.3"
+    },
+    "solvers": [
+      {
+        "name": "tight",
+        "method": "RK45",
+        "rtol": 1e-09,
+        "atol": 1e-11,
+        "max_step": 0.25
+      },
+      {
+        "name": "reference",
+        "method": "DOP853",
+        "rtol": 1e-11,
+        "atol": 1e-13,
+        "max_step": 0.125
+      }
+    ],
+    "cpeptide": {
+      "model": "polonsky1986-forward-cpeptide/1",
+      "profile": "t1d_mean",
+      "parameters": {
+        "k1": 0.037,
+        "k2": 0.031,
+        "k3": 0.052,
+        "volume_l_kg": 0.0655
+      },
+      "doi": "10.1172/JCI112308",
+      "locators": "pp98-100 equimolar working assumption, process scheme and bolus response; p103 Table I nominal T1D means; inherited unchanged BC-003 implementation"
+    },
+    "boundary": {
+      "signal": "Spo pancreatic appearance, source_rates column0",
+      "units": "pmol/(kg min)",
+      "appearance_ratio": 1,
+      "baseline": "total source already contains basal release; no additional basal or SC input",
+      "time": "unchanged 0..240 elapsed min from parent stimulus, output every0.25min",
+      "transfer": "continuous piecewise-linear interpolant of archived rate samples; no extrapolation",
+      "initial": "Q1=Sb/k3; Q2=k1*Q1/k2; elimination and input ledgers zero",
+      "ownership": "one-way observation; C-peptide owns distribution/removal; no insulin portal delay, HE factor, mass conversion or second body-weight division"
+    },
+    "unit_chain": "pancreatic appearance pmol/(kg min) -> central/peripheral amounts pmol/kg -> divide by volume L/kg -> central concentration pmol/L; no second body-weight conversion",
+    "tracks": [
+      "candidate",
+      "host_constant_basal",
+      "bc008_reference"
+    ],
+    "diagnostics": {
+      "source_sampling_steps_min": [
+        1,
+        0.5,
+        0.25
+      ],
+      "sampling_scope": "coarsening against the finest available parent grid, not proof of continuous-source convergence below0.25min",
+      "parent_solver": "propagate tight parent Spo at0.25min and compare with reference parent Spo",
+      "wrong_boundary": "post-portal liver arrival S; named fault comparator, never a valid observation inlet",
+      "appearance_volume_scales": [
+        0.5,
+        2
+      ],
+      "scale_scope": "scale only C-peptide appearance, both initial amounts and volume together; exact forward-observation ambiguity conditional on saved glucose/insulin, not a full coupled capacity transformation",
+      "outputs": "C-peptide baseline, peak/time, final, signed AUC; concentration differences from wrong boundary, source-solver and sampling changes; scale ambiguity",
+      "fitting": "none; no deconvolution, noise model, human identifiability claim or joint parameter recovery"
+    },
+    "criteria": {
+      "oracle_concentration_error_pmol_l": 1e-05,
+      "solver_concentration_error_pmol_l": 1e-05,
+      "mass_error_pmol_kg": 1e-07,
+      "input_error_pmol_kg": 1e-07,
+      "negative_tolerance_pmol_kg": 1e-09,
+      "equilibrium_drift_pmol_l": 1e-07,
+      "zero_state_error": 0,
+      "parent_source_solver_error_pmol_l": 0.01,
+      "finest_coarsening_error_pmol_l": 0.05,
+      "coarsening_error_ratio": 0.6,
+      "sampling_ratio_floor_pmol_l": 1e-08,
+      "parent_dose_relative_error": 0.0001,
+      "scale_ambiguity_error_pmol_l": 1e-07,
+      "repeat_artifact_differences": 0
+    },
+    "checks": "Same passive two-solver matrix-exponential oracle, input/mass conservation, positivity, basal equilibrium, parent-tight propagation, 0.5/1-minute coarsening, liver-input fault and appearance/volume-scale ambiguity; no observer feedback or SC/hepatic/transit duplication"
+  },
+  "acceptance": {
+    "source": "Entire selected-load source workflow must complete and pass every numerical/refinement/observer/fresh-process repeat gate. A passing scenario prefix of a failed source is not accepted pair support",
+    "reference": "All selected scenario-specific native/control/feedback reference cases, diagnostics and repeats must pass before dependent accepted source comparisons",
+    "repeat": "All complete numeric case artifacts byte-identical in fresh worker processes; worker metadata equal after removing only primary/repeat label",
+    "common_controls": "Across accepted source children, exact complete scenario/grid/basal/native/runtime/control/reference equality; disagreement makes overall study fail and pair metrics null",
+    "overall": "Every frozen source/load cell and required control/reference must pass; preserve independent accepted pairs when another source fails but overall remains failed"
+  },
+  "comparison": {
+    "support": "every unordered source pair in roster order, all selected scenarios; both complete sources accepted and common conditions/controls verified",
+    "direction": "left minus right",
+    "signals": {
+      "glucose": "mg/dL",
+      "insulin": "pmol/L",
+      "cpeptide": "pmol/L"
+    },
+    "grid": "all exact961 saved samples at0..240min; no shortening, resampling, dropping samples or interpolation between mismatched grids",
+    "metrics": {
+      "signed_auc_difference": "signed trapezoidal integral of left_i-right_i over complete240min; signal unit times min",
+      "signed_time_mean_difference": "signed_auc_difference/240; signal unit",
+      "maximum_absolute_pointwise_difference": "maximum abs(left_i-right_i); signal unit"
+    },
+    "ineligible": "null metrics with explicit full-source/reference/identity/condition/grid/control reason",
+    "interpretation": "separate descriptive trajectory differences per load; no pooled ranking, winner, accuracy claim, tuning or required effect direction/magnitude"
+  },
+  "process_and_failures": {
+    "ordinary_source_failure": "retain all selected source/load cells and stage/error evidence; continue later frozen sources; partial trajectories remain diagnostic",
+    "reference_failure": "retain full source/load denominator with explicit dependent not_attempted/failed reasons; no accepted dependent pairs",
+    "global_interruption": "SIGINT/SIGTERM/SIGHUP cause owned numerical group termination and reaping before failure archive seal; later sources not_attempted",
+    "deadline": "finite stage plus entire-source budgets; kill/reap owned numerical sessions; caller campaign deadline remains separate and never rewrites native settings",
+    "output": "fresh nonoverlapping directory; no symlink inputs/archive entries; never rewrite historical archives; do not silently discard failed/unattempted cells"
+  },
+  "archive_and_reconstruction": {
+    "artifacts": [
+      "report.json",
+      "report.md",
+      "figure.svg"
+    ],
+    "report_required_keys": [
+      "schema",
+      "protocol",
+      "passed",
+      "configuration",
+      "scenarios",
+      "sources",
+      "pairs"
+    ],
+    "reader": "standard-library report.reconstruct(archive,write_to=None,allow_failed=False); verify every archived file identity, frozen config/source/protocol/runtime/helper binding, state/roster, numerical semantics, controls/grid, repeats and contrast arithmetic before writing a fresh output",
+    "saved_reports": "Existing saved derived bytes must match recomputed reports; output must be fresh/separate; no silent repair of altered reports",
+    "failed_archive": "explicit --allow-failed preserves passed=false, full planned denominators, unattempted/failed/missing-evidence reasons and null unsupported pairs",
+    "limit": "Artifact reconstruction establishes archive/report consistency; does not import or replay callback, require original external source paths, independently reproduce arbitrary model execution or establish rights/model validity"
+  },
+  "internal_verification": {
+    "native_example": "both existing Dalla Man adapter and ultradian response component, all three loads, all numerical gates and exact fresh-process repeats",
+    "historical_candidate_parity": "Separate required acceptance evidence comparing fasting/30g candidate/control and observer numeric outputs from unchanged M4-RESEARCHER/1 against new same-source/same-solver outputs for both example structures; does not inject unselected scenarios into user configurations",
+    "negative": "invalid/unsupported config refusal before callback execution; failing source retains roster and accepted independent support; shortened/mismatched/tampered evidence rejects; deadline/interruption process cleanup and failed reconstruction",
+    "repository": "locked tooling sync/check plus appropriate locked numerical tests; record only checks actually completed, revisions/hashes/commands and remaining limits in separate execution receipt"
+  },
+  "excluded": [
+    "human observations, empirical calibration or clinical predictive quality",
+    "arbitrary loads, meal timing events, announcements or controllers",
+    "parameter tuning, source-quality ranking or automatic winner",
+    "new secretion states or physiological mechanisms",
+    "insulin dosing/need, beta-cell mass, engraftment/immune/graft survival or treatment-effect inference",
+    "full ultradian engine reproduction",
+    "proof of arbitrary trusted callback purity/rights or independent user usability",
+    "changes to source-hashed historical packages, locks, protocols, archives or readers"
+  ]
+}

@@ -1,0 +1,13 @@
+# Isolated CPU actor-inference probe, not a trained controller package.
+[project]
+name = "opent1d-c1-g2p2c-policy-source"
+version = "0.0.0"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "numpy==1.26.4",
+  "torch==2.13.0",
+]
+
+[tool.uv]
+package = false
+required-version = ">=0.11.16"

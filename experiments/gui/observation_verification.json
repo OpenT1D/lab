@@ -1,0 +1,177 @@
+{
+  "schema": "opent1d.ot054-integration-verification/1",
+  "date": "2026-10-18",
+  "status": "bounded_synthetic_task1_verified",
+  "scope": "Complete synthetic Task 1 CLI/GUI and shared core within OT-053 narrow boundary",
+  "integration_code_commit": "3e13a738fd1db7c4a7297a9c558d208e0cf65d81",
+  "core_commit": "23e1bc12bc52b2443dca4f6157c474df1e9188f8",
+  "controlled_core_handoff_commit": "a8a85fe",
+  "core_hashes_unchanged": true,
+  "implementation_sha256": {
+    "experiments/gui/__init__.py": "4dd3b4b70cc6e030ffb9edfd80debaa389113396506b24ee2848245a0ce9408d",
+    "experiments/gui/__main__.py": "e06dd74911391137021c6c3062e9db51ea00550cad570232a4d8f863165fcf59",
+    "experiments/gui/campaign_worker.py": "35acddefedc39356f6cdf65570ba1e9270451183f5a099ac9916e8914c5ca5c2",
+    "experiments/gui/campaigns.py": "bc085d01373a5e76f74a1bfdee660a456d77b1a3979ae0225760a44525691f93",
+    "experiments/gui/contract.json": "001108f619817126ec3eb6ed95218998aff2ae8eaf960a9b7c60bf926e65236b",
+    "experiments/gui/durable.py": "f66b5938404a10bbb96facbedcc7d6f5cc22af6e8d54e8544a2aa7ade89665c0",
+    "experiments/gui/durable_worker.py": "187645983c0ae11b6e9cf3abe3c689ed22590ee3554ec78921d722aaae9305f8",
+    "experiments/gui/forensic.py": "223579515d8cb408231dc0e34a4087a47a3b8b36b30f59607d21772094c8caf2",
+    "experiments/gui/library.py": "1c494663c1b74a8c111e3e05c9d1bdcabc4c01e515541be4a6b38703d6b5b526",
+    "experiments/gui/library_m5.py": "f069a3ddcbf2d19557e526096086cd60359c5f00389e2ba7cb810858708971d6",
+    "experiments/gui/library_observations.py": "60d350e586f4a98f45bfd06b03cf10efcf2e38a1496686cf44c3cb07c0388456",
+    "experiments/gui/library_paths.py": "d54b56462c987210ff3c66e8971c0886a7912016e4107526a28f6e7e4d977d0a",
+    "experiments/gui/library_worker.py": "03e205ac9bad16218cfb5c661eb370f8b034660bd286c99a069f78c1536391ec",
+    "experiments/gui/locking.py": "c535a174bbef2621050ce37516d9b6f0b233e322ac7f9415658cfd77548b30e6",
+    "experiments/gui/m3.py": "7f39057b6520cc76748cc6b298203ec78299ad6449e21e4a2140c21dbd8f9f9b",
+    "experiments/gui/m3_worker.py": "a61a2164c67db29be686a6cab2b59c856ee1bbd93a0d5d48e5cc679a59fe7cc2",
+    "experiments/gui/observations.py": "53ca86f81ebdb489d055665ac92a67f84d4487835b6d08b25ec170a9167ae6a5",
+    "experiments/gui/ownership.py": "9296b2a71a434a9a0aebb4165d9e27d3093b4e41db5d5ee26589e957c31f99e1",
+    "experiments/gui/server.py": "760d7906a55733db49a95a4b110410a4b2194f4f93c9d26f6b63cf671fdfa343",
+    "experiments/gui/service.py": "3522587d1576f41cd30c294b97127cfdd61a087c1cb064e7139cfc5283e759db",
+    "experiments/gui/static/app.css": "fddbd5b4d42f21746af8b460785640f178a24cff00d1dc73f7334f514b63abb1",
+    "experiments/gui/static/app.js": "73e0bac1f4d9661d6991152936c86bc47144cef28d9f7f017dea199ea1071662",
+    "experiments/gui/static/draft.js": "81a8d6ae1685f20cf06981d53217dfb2ebe3255e4bb0fa028a80f0281607911c",
+    "experiments/gui/static/index.html": "80cb103ebc6c2fbb12680931dc45ca14ce22bccd7c1da8a7da999144356d61cd",
+    "experiments/gui/static/observations.js": "4868a5e3dd8a1b5aab4a7c676e5d46181e2ffb30f1ae1a4cb584f63b81da37c5",
+    "experiments/gui/static/ux.js": "de4f0b8fa4af92e29f443c8f519d74c287ad5fedf62bb11f909e90e6ab7a59fb",
+    "experiments/gui/static/workspace.css": "a38afce70948a397f1a8f442017343dcef1e7d45541b7a35500c2db94b29b064",
+    "experiments/gui/static/workspace.js": "46275046df2437e8bf13c1b926c7dff759575fff4e846861cfb6f916bd104db0",
+    "tests/gui_observation_frontend.mjs": "21acc72df97c8b10244f85fa2359c775d6db3475911ae13ee2053f834b0ae50b",
+    "tests/test_gui_m3_library.py": "4d79f47e2d8ec5f0a9018b32bde1405589067aae4c4964a58a445d2a389a2dc3",
+    "tests/test_gui_observation_frontend.py": "89f78e5fc550cc49a55831656bc95c40935405c5c67aef9cb06f309746db4465",
+    "tests/test_gui_observations.py": "3ebd7ae51c128f3a28daab726a63b6fa52d86db85c54784c8bac46ebe45456e2"
+  },
+  "core_verification": "experiments/observation_analysis/core-verification.json",
+  "guide": "docs/observation-analysis.md",
+  "completion_record": "docs/research/ot054-verification.md",
+  "browser": {
+    "status": "passed",
+    "compared_display_cells": 252,
+    "cases": [
+      {
+        "case": "increase",
+        "entry": "obs-study-91ef4dd83080474bb6c3cef8f69d618b",
+        "classification": "consistent within investigated assumptions",
+        "complete_cohort": true,
+        "report_sha256": "779f5eb97e9e7b0334f36e660d3ed4c206bce11369ffdee1e091ac41e799ec02"
+      },
+      {
+        "case": "dependent",
+        "entry": "obs-study-515d126932b1432aa78e3cd798e6075e",
+        "classification": "assumption-dependent",
+        "complete_cohort": true,
+        "report_sha256": "72d3d53d4753ffd3742f9cc3947f45af30ea6687608d85d8888747665b704438"
+      },
+      {
+        "case": "unresolved",
+        "entry": "obs-study-7a95d7e689584875a6e0928bf31f1ce3",
+        "classification": "insufficiently determined",
+        "complete_cohort": true,
+        "report_sha256": "f8309e124db4bf2c8fe96672f99a1fcab50c1af8f41c8afc5900befba74c8e64"
+      },
+      {
+        "case": "censored",
+        "entry": "obs-study-47341f94d2574da987d09c65d440130b",
+        "classification": "insufficiently determined",
+        "complete_cohort": false,
+        "report_sha256": "3bf24b8fc3b807d53d3192acd1152a6039e7af7a844186e52a0bbdda048db463"
+      }
+    ],
+    "json_download_byte_equal": true,
+    "markdown_download_byte_equal": true,
+    "mobile": {
+      "viewport_px": 390,
+      "page_width_px": 390,
+      "seed_edit_disables_run": true
+    },
+    "archive_library_censored_reconstruction_and_display": "passed",
+    "expanded_context_retained_across_reconstruction": true,
+    "manual_selection_retained_after_saved_check": true,
+    "console_errors": 0,
+    "console_warnings": 0,
+    "desktop_viewport_px": [
+      1280,
+      900
+    ]
+  },
+  "local_browser_artifacts_sha256": {
+    "output/playwright/ot054-browser-verification.json": "419100484d135d51fda291cf57dbc4cb257bb639db05b0afea2f1f78a7860b7e",
+    "output/playwright/ot054-dependent-dom.txt": "bdd7238681c98c612643e411861c90357121bb4f5fd377d95997c9c9f1067fee",
+    "output/playwright/ot054-unresolved-dom.txt": "a4e46e5dbc747f0282088afd8992b8f311acdda4ee89819841ee0fb28df99a7a",
+    "output/playwright/ot054-censored-dom.txt": "10fdffb78423815ed59be0e39e710119de805b5cebcd738cce9117539c69c45b",
+    "output/playwright/ot054-increase-dom.txt": "252235e9957e2508802959af1bdfddc198bd839cecd4a74406c259e191695b97",
+    "output/playwright/ot054-mobile-audit.txt": "01bf1fe97f69ba7c524eb5ddf7a1b19f1e4d4eb877925c305ad758ef18cc7257",
+    "output/playwright/ot054-censored-checked.txt": "7a218166aa811a058c3500e2a4d7c9682c12e4238239a3d9a2fba1b2a9740e2b",
+    "output/playwright/ot054-library-verified.txt": "f69c8fe218a411a0f56cbe77eef5d2a2dd4e2ce426f61a42a8cd0c3fdd96e1f2",
+    "output/playwright/ot054-selection-retained.txt": "3f227df95d9fae46286ae8ee7357a09d93511c7ea7345fb0c9c977077ad560c7",
+    "output/playwright/.playwright-cli/element-2026-10-18T11-55-25-495Z.png": "4168c52f7e7fe3e7d13e03ac9c7a8b23517f78a04d486f491c78a4f0b0a16fdc",
+    "output/playwright/.playwright-cli/page-2026-10-18T11-48-56-597Z.png": "8babb22228c993cf5b10cb191008740be40a045418080766860f83fe91daa6c6"
+  },
+  "checks": [
+    {
+      "command": "uv sync --locked",
+      "status": "passed"
+    },
+    {
+      "command": "uv run --locked python scripts/check.py",
+      "status": "passed",
+      "tests": 1320,
+      "skipped": 13,
+      "skip_reason": "Separate locked C1 PyTorch runtime absent; OT-054 checks do not require it",
+      "documentation_build": "passed with warnings treated as errors",
+      "test_seconds": 266.806
+    },
+    {
+      "command": "uv run --locked --project experiments/m4/beta_cell/runtime python -m unittest experiments.observation_analysis.test_numerical -v",
+      "status": "passed",
+      "tests": 1
+    },
+    {
+      "command": "uv run --locked python -m unittest tests.test_gui_observation_frontend tests.test_gui_archive_frontend tests.test_gui_workspace_frontend -v",
+      "status": "passed",
+      "tests": 5,
+      "scope": "Final GUI selection/cancellation changes, shipped JavaScript and HTML semantics"
+    },
+    {
+      "command": "uv run --locked python -m sphinx -E -a -W --keep-going -b html -c docs . /private/tmp/ot054-final-acceptance-docs",
+      "status": "passed",
+      "scope": "Final acceptance wording and roadmap/handoff documentation"
+    }
+  ],
+  "acceptance": {
+    "local_csv_original_bytes_units_linkage_and_all_visits": "passed",
+    "frozen_attributed_method_endpoint_variants_and_error_rules": "passed",
+    "paired_change_uncertainty_three_way_classification": "passed",
+    "complete_roster_and_failed_draw_denominators": "passed",
+    "independent_numeric_reference_and_selected_failures": "passed",
+    "real_cli_common_entry_and_catalogue": "passed",
+    "original_report_reconstruction_repeat_relocation_and_forgery_rejection": "passed",
+    "real_gui_import_freeze_run_and_incomplete_reconstruction": "passed",
+    "owned_cancellation_eight_people_and_process_cleanup": "passed",
+    "gui_archive_library_complete_and_censored_snapshots": "passed",
+    "browser_four_controls_252_display_cells_and_original_downloads": "passed",
+    "frozen_core_and_mask_before_evaluate_contract_for_ot055": "passed",
+    "final_locked_repository_checks": "passed"
+  },
+  "human_execution_authorized": false,
+  "empirical_t1d_validity_established": false,
+  "independent_usability_established": false,
+  "comparative_researcher_value_established": false,
+  "unadopted_routes": [
+    "native R full package",
+    "spline interpolation",
+    "empirical kinetic or assay distributions"
+  ],
+  "full_goal_complete": true,
+  "local_check_logs_sha256": {
+    "/private/tmp/ot054-integrated-final-check.log": "c8765d34f9fdab19996ab4153d57e3936bab375356c26b1b3e83f9ce1a90cbde",
+    "/private/tmp/ot054-final-source-parity.log": "cbc4489b0f24ab1c7bbc1e1abde5cff3299c543f327699295d5064b77cbfe3fd",
+    "/private/tmp/ot054-final-selection-check.log": "d5ad8eb1f371643e2123d426cb1bf392c1a0dfc26d14416fc56fdc0c9c9aff7c",
+    "/private/tmp/ot054-acceptance-docs.log": "c3f9f396c2d2d06e8eef7e5a997b6e66ee8b466ae893ea3f2fc6d0eb812aaeb4"
+  },
+  "cleanup": {
+    "verification_browser_closed": true,
+    "local_gui_server_stopped_cleanly": true,
+    "remaining_owned_jobs": false
+  }
+}

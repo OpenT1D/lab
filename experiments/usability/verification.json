@@ -1,0 +1,326 @@
+{
+  "schema": "opent1d.usability-verification/1",
+  "verified_date": "2026-10-11",
+  "implementation_revision": "bd96d50cce473a3746fc1fc193f43dd556361c45",
+  "packet_id": "packet-07668656af934f058718d11842819974",
+  "scope": "internal macOS technical preparation; no human observations",
+  "repository": {
+    "uv_sync_locked": true,
+    "full_check_exit": 0,
+    "tests": 1280,
+    "skipped_existing_c1_runtime_tests": 13,
+    "duration_seconds": 220.221,
+    "warning_as_error_documentation": true
+  },
+  "focused": {
+    "packet_tests": 10,
+    "actual_worksheet_controlled_checks": 19,
+    "bash_syntax": true,
+    "shellcheck": true,
+    "powershell_syntax": true,
+    "powershell_version": "7.6.6",
+    "stubbed_wsl_cases": 8
+  },
+  "packet": {
+    "protected_files": 908,
+    "source_bundle_clean_revision": true,
+    "native_reference_roles": [
+      "completed",
+      "interrupted"
+    ],
+    "exact_original_artifacts": 6
+  },
+  "receiving_installation": {
+    "host": "macOS arm64",
+    "fresh_checkout": true,
+    "existing_prerequisites": [
+      "git",
+      "curl",
+      "uv"
+    ],
+    "ready": true,
+    "models_executed_during_setup": false,
+    "clean_operating_system_test": false
+  },
+  "browser": {
+    "host": "macOS",
+    "engine": "Chromium",
+    "standalone_preview": "loopback static HTTP; file navigation blocked by automation tool",
+    "form_width_css_pixels": 390,
+    "export_restore": true,
+    "invalid_import_preserves_current_record": true,
+    "foreign_restore_refused": true,
+    "explicit_retest_has_empty_outcomes": true,
+    "original_retest_parent_preserved": true,
+    "filled_test_values_are_qa_only": true,
+    "javascript_errors_observed": 0,
+    "favicon_404_observed": true
+  },
+  "existing_protected_source_files": 487,
+  "existing_protected_files_changed": [],
+  "human_sessions": 0,
+  "human_observed_fixes": 0,
+  "human_retests": 0,
+  "open": [
+    "actual Windows/WSL host installation/networking/lifecycle",
+    "Windows PowerShell 5.1 execution",
+    "direct standalone file opening on Windows",
+    "uv download bootstrap on a host without uv",
+    "actual handoff rights review",
+    "human usability/interpretation and retest",
+    "hosted verification and public release",
+    "empirical/biological/clinical acceptance"
+  ],
+  "detailed_evidence": [
+    {
+      "path": "results/usability/http-native-verification.json",
+      "sha256": "aa00313728d959b6f45ff8bbd7158b8b47c8c3973434735aeae80b5dbea94b96"
+    },
+    {
+      "path": "results/usability/http-boundaries.json",
+      "sha256": "a43b75388b76aac13c917d9631b93135073437ef09a856560c4a29a204d59f2f"
+    },
+    {
+      "path": "results/usability/protected-source-check.json",
+      "sha256": "101f91060bbebb6644a7334ed9cf364309ab2382645d1854bc055ee69d16581b"
+    },
+    {
+      "path": "results/usability/fresh-native-receiving.json",
+      "sha256": "75c55610eada58feb266290ff11694ce1d3ab30bdf336ef2ff62ab50c833a59f"
+    },
+    {
+      "path": "results/usability/receiving-cancellation.json",
+      "sha256": "3737e6fca0873c9ac30a9dc34e5aa1e6f756f5b4896e6ca15fe43c0a924ac127"
+    },
+    {
+      "path": "results/usability/cleanup.json",
+      "sha256": "4425437263d2a0519ca2a1f81c8999ae20ed0d34ef9a132df927ac581f7ae35f"
+    },
+    {
+      "path": "results/usability/preservation.json",
+      "sha256": "04e3d1e214c6295874b84e011c4c235fc53cadbd4654db9fae9f768e201c2420"
+    }
+  ],
+  "receiving_native_experiment": {
+    "scope": "actual fresh receiving-checkout GUI native experiment, internal macOS only",
+    "job": "job-0682f2b5131f40658df422d6063b5945",
+    "status": "completed",
+    "passed": true,
+    "denominators": {
+      "accepted_pairs": 1,
+      "accepted_source_scenarios": 6,
+      "accepted_sources": 2,
+      "pairs": 1,
+      "source_scenarios": 6,
+      "sources": 2
+    },
+    "saved_analysis_job": "job-597314c9ed304b3dafb060829af82430",
+    "saved_analysis_state": "completed",
+    "artifact_sha256": {
+      "report.json": "e87ef4fd2eee41125865169090ccffc7e8b845b9a7e02b6af97d75df99ddab02",
+      "report.md": "695338aa44e226cb8c2cbdb6a871a883f32f903e746eadcdb1ae3a656102b39d",
+      "figure.svg": "b81370e05df242498b23ee3cbb0d070e309ed4b32a4e898cab2e125e506bcb70"
+    },
+    "human_session": false,
+    "reconstructed_artifacts_byte_identical": true
+  },
+  "receiving_cancellation": {
+    "scope": "actual separate native run cancelled in received GUI; internal macOS only",
+    "job": "job-8b66b41cfc5c4f8f89de04162161e91e",
+    "state": "cancelled",
+    "completed_original_job_preserved": true,
+    "human_session": false,
+    "native_status": "interrupted",
+    "passed": false,
+    "denominators": {
+      "accepted_pairs": 0,
+      "accepted_source_scenarios": 0,
+      "accepted_sources": 0,
+      "pairs": 1,
+      "source_scenarios": 6,
+      "sources": 2
+    },
+    "remaining_owned_processes": 0,
+    "saved_analysis_state": "completed"
+  },
+  "cleanup": {
+    "received_server_graceful_stop": true,
+    "manager_lock_reacquired_after_stop": true,
+    "remaining_owned_processes": 0,
+    "scope": "macOS receiving GUI, not Windows"
+  },
+  "preservation": {
+    "packet_id": "packet-07668656af934f058718d11842819974",
+    "implementation_commit": "bd96d50cce473a3746fc1fc193f43dd556361c45",
+    "source_and_preserved_inventories_identical": true,
+    "zip_path": "REPOSITORY/results/usability/20261011/OpenT1D-testpakket-bd96d50.zip",
+    "zip_bytes": 68826290,
+    "zip_sha256": "e5ec04fd08e20e94846da1221c436cc6028678954948935bdf50faf827d1b070",
+    "zip_payload_byte_identical": true,
+    "human_observations_in_packet": 0,
+    "external_transfer_occurred": false
+  },
+  "evidence_store": "primary ignored results/usability/20261011/internal-evidence",
+  "preserved_evidence": [
+    {
+      "file": "browser-qa/console-2026-10-11T19-59-55-687Z.log",
+      "sha256": "46c9fbd5d9c36f5804e6a3f6a4ab3d3cdf21adb45d3ff33c6b27b4b2288f6ea3"
+    },
+    {
+      "file": "browser-qa/console-2026-10-11T20-08-31-320Z.log",
+      "sha256": "2d66ff5d90cdc958b759016df905258e34e44a74208b321de2143303bd00c5e4"
+    },
+    {
+      "file": "browser-qa/opent1d-session-920b6a30-7451-4bb6-a652-dab97dcd6fb5-1791748840740.json",
+      "sha256": "f38456946fc014fae16da11c93bc12ad2554fa82e1396034a41d1fb6ed3e547a"
+    },
+    {
+      "file": "browser-qa/opent1d-session-cb3c750e-df54-4d0e-b90b-de71cece67d0-1791749300902.json",
+      "sha256": "1c7ee4aa1c9829c8812747589443e4f5c32b74b7d4d6c31f979e3e183c984917"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T19-59-55-824Z.yml",
+      "sha256": "dc1cb7c12da62042bee8f5d666e264f6ef5b715456361a05c657117362f4f910"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T20-00-35-918Z.yml",
+      "sha256": "161a66ec49844850081d4ea14918b7235517cf46f259307956b46268e62a8183"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T20-00-41-301Z.yml",
+      "sha256": "1963055f2b6bb234a7e5c6106952d0b90dea898ef93c40ea3206bfd633f33d58"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T20-02-13-453Z.yml",
+      "sha256": "ee1ef8d31cb1119bae0cfb51859c5220aa780985992e6862258281c5003f5d89"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T20-04-57-856Z.yml",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T20-05-00-640Z.yml",
+      "sha256": "b205a1881ad39e35f1bbef52b0f2f5dd704a69aadbe8eab3850a28b78546de0d"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T20-06-07-047Z.yml",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T20-06-10-644Z.yml",
+      "sha256": "a65ab857c2ac60f26e0809ea6ed88e66ced0562a39758207933eafcc283fa45c"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T20-06-13-569Z.yml",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T20-06-16-657Z.yml",
+      "sha256": "b29f98fa4ec0f1d7be0e0b7ced13b25c443d46a6b5301fc51da5992132c4381d"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T20-06-19-262Z.yml",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T20-06-22-150Z.yml",
+      "sha256": "0c22de76f9a6e7ef88422def265ee0e0cc90a6ff58fd4393f6d2e97d9089fd48"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T20-08-21-482Z.yml",
+      "sha256": "faec5eda45987ecf9d6bc342402f3c0db36266616e8fd2e3d6e2dacef9e3b5e2"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T20-08-31-370Z.yml",
+      "sha256": "72078ee2d9d96b6e6c28d58a0df449bc38dbe1d150fe4d58e3b6e2bf387ba176"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T20-11-07-875Z.yml",
+      "sha256": "37c8732ce8ffc7a41a238691ac83b00aa15e136c3f61e05849b08444181a425c"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T20-12-31-875Z.yml",
+      "sha256": "9419bac6f5e276419d5fc14a42cfa4ba7db385e4ad79dac08e7ca44425bf2772"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T20-14-07-761Z.yml",
+      "sha256": "db4e00b36283110ee1a3ea329a1a9184102d9a5bab41fe6cb26330d657504447"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T20-15-21-523Z.yml",
+      "sha256": "5409f5cb51719c348e9aae4720ada0981edc01b69f61eff88eae7caa6b8f9372"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T20-17-06-847Z.yml",
+      "sha256": "278ea0251347a379eeebefa3953b18d1aff307b1fa14fe412d06bb76ec8ef5bb"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T20-18-29-854Z.yml",
+      "sha256": "6c41a3afcf0be272f1f8424bea7e75fc58700254d1d2a229924edce521374b84"
+    },
+    {
+      "file": "browser-qa/page-2026-10-11T20-18-59-784Z.yml",
+      "sha256": "d45bde75bbf9b3857af9e973b87412d442d0f3bf6a1c79a25ad5c8c3cf23099a"
+    },
+    {
+      "file": "cleanup.json",
+      "sha256": "4425437263d2a0519ca2a1f81c8999ae20ed0d34ef9a132df927ac581f7ae35f"
+    },
+    {
+      "file": "fresh-native-receiving.json",
+      "sha256": "75c55610eada58feb266290ff11694ce1d3ab30bdf336ef2ff62ab50c833a59f"
+    },
+    {
+      "file": "http-boundaries.json",
+      "sha256": "a43b75388b76aac13c917d9631b93135073437ef09a856560c4a29a204d59f2f"
+    },
+    {
+      "file": "http-native-verification.json",
+      "sha256": "aa00313728d959b6f45ff8bbd7158b8b47c8c3973434735aeae80b5dbea94b96"
+    },
+    {
+      "file": "opent1d-usability-final-check-20261011.log",
+      "sha256": "107153781d86c5ec1f97c26d78f3c412a5299ac42e373cbe00ce28775a404be8"
+    },
+    {
+      "file": "opent1d-usability-final-install-20261011.log",
+      "sha256": "60e9a4f55adbe631f946b48be26f23bc7df4dec784b0fd6e1de9267091645d88"
+    },
+    {
+      "file": "opent1d-usability-final-prepare-20261011.log",
+      "sha256": "432a5b4e230ff13f84c57216c8dda914532d6ff47ad70244bbb5f5d0d1e1e557"
+    },
+    {
+      "file": "opent1d-usability-start-20261011.log",
+      "sha256": "c3d1f4301bff85fa424ec04aeb4c5d9b65c3f1c782b9d851e06536eea035581c"
+    },
+    {
+      "file": "powershell-controlled-probe.ps1",
+      "sha256": "4827c8b7590b31761014df0d581bfb8ad171d3f97d3d8b76bd4c6d2da5bf0533"
+    },
+    {
+      "file": "powershell-controlled.json",
+      "sha256": "57c64353184d3280b4916083bd76745643fd39503ebc273be504c99a5fd120fb"
+    },
+    {
+      "file": "preservation.json",
+      "sha256": "04e3d1e214c6295874b84e011c4c235fc53cadbd4654db9fae9f768e201c2420"
+    },
+    {
+      "file": "protected-source-check.json",
+      "sha256": "101f91060bbebb6644a7334ed9cf364309ab2382645d1854bc055ee69d16581b"
+    },
+    {
+      "file": "receiving-cancellation.json",
+      "sha256": "3737e6fca0873c9ac30a9dc34e5aa1e6f756f5b4896e6ca15fe43c0a924ac127"
+    },
+    {
+      "file": "usability-library-complete.png",
+      "sha256": "dd1f4f48c9c3680009ce50eafbdb4a3cb9f4739cb5cf16a3f12ae7ac72a8bd89"
+    },
+    {
+      "file": "usability-observations-390.png",
+      "sha256": "3ad936b8be3dc2c34c97068883f5adba010181b7efaf80991e79b0f201f14d34"
+    }
+  ]
+}

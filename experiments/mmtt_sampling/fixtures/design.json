@@ -1,0 +1,20 @@
+{
+  "schema": "opent1d.mmtt-sampling-design/1",
+  "scope": "synthetic-preparation",
+  "window_minutes": [0, 120],
+  "allocation": {
+    "invented-development-01": "development",
+    "invented-development-02": "development",
+    "invented-evaluation-01": "evaluation",
+    "invented-evaluation-low": "evaluation",
+    "invented-evaluation-failure": "evaluation"
+  },
+  "selection_participants": ["invented-development-01", "invented-development-02"],
+  "selection_rationale": "Engineering fixtures only: nested subsets of invented development visit times exercise loss of interior measurements. These are not empirically optimized or clinically approved schedules.",
+  "full_times_minutes": [0, 15, 30, 60, 90, 120],
+  "subsets": {
+    "five-times": [0, 30, 60, 90, 120],
+    "four-times": [0, 30, 60, 120],
+    "three-times": [0, 60, 120]
+  }
+}

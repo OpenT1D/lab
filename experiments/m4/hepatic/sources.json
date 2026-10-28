@@ -1,0 +1,56 @@
+{
+  "schema": "bc009-source-assessment/1",
+  "review_date": "2026-09-22",
+  "review_kind": "internal primary-source and implementation assessment; no external expert review",
+  "sources": [
+    {
+      "id": "dallaman2007",
+      "doi": "10.1109/TBME.2007.893506",
+      "url": "https://isbgroup.eu/files/Dalla%20Man%202007.pdf",
+      "pdf_sha256": "8780106c17434f6b553856c5bc0414c9a4fe1b5e8296b640aaa8c15d31b5eedc",
+      "access": "Full public paper reread online; existing local copy pp1742-1744 rendered and visually inspected",
+      "locators": "Eq3 p1742; Table I normal column and eq4-9 p1743; eq10-12 p1744; discussion p1747 and references22-23 p1748",
+      "numerical_parameters": {"m5_min_kg_pmol": 0.0304, "m6": 0.6471, "HEb": 0.6, "kp4_mg_pmol_min": 0.0618},
+      "scope": "Normal mean model and smaller T2D extension; coefficients do not establish residual-T1D or graft calibration",
+      "asset_use": "Original equation implementation only; PDF, figures, table and participant data not redistributed"
+    },
+    {
+      "id": "meier2005",
+      "doi": "10.2337/diabetes.54.6.1649",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/15919785/",
+      "access": "Primary abstract read; publisher page returned abstract; full methods not claimed inspected",
+      "scope": "Five nondiabetic humans; hepatic/arterialized sampling and splanchnic flow during basal and glucose infusion",
+      "assessment": "Pulse-dependent removal and nonsignificant fractional-extraction difference do not establish a universal negative linear HE-versus-smooth-S law or BC009 coefficient validity"
+    },
+    {
+      "id": "edgerton2006",
+      "doi": "10.1172/JCI27073",
+      "url": "https://www.jci.org/articles/view/27073",
+      "access": "Full primary HTML, results/discussion/methods read",
+      "scope": "Portal/peripheral/head insulin comparisons in overnight-fasted dogs; animal mechanism evidence, not human kp4 calibration",
+      "assessment": "Supports relevance of liver versus peripheral exposure; does not identify a graft site model or quantify BC009 human effects"
+    },
+    {
+      "id": "toffolo2006",
+      "doi": "10.1152/ajpendo.00473.2004",
+      "url": "https://www.research.unipd.it/retrieve/e14fb267-8bf5-3de1-e053-1705fe0ac030/E169.pdf",
+      "access": "Full primary PDF accessed; abstract, model identification and kinetic-assumption discussion read",
+      "locators": "E169 abstract; E170-E171 model identification; E172 discussion",
+      "scope": "20 healthy subjects, IM-IVGTT; population C-peptide kinetics, individual insulin kinetics informed by exogenous-insulin decay",
+      "assessment": "Illustrates measurement separation needed for extraction; no raw paired series or reuse license established"
+    }
+  ],
+  "native": {
+    "source": "Installed simglucose a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc verified through unchanged load guard",
+    "profile": "adult#001",
+    "unused_m5": 0.027345,
+    "verdict": "Stored parameter is unused in original derivative; individual ancestry of this coefficient not established; retain original native m30 and all native constants"
+  },
+  "additional_access": [
+    "GIM PMC and Dalla Man 2008 labelled oral model PMC returned browser challenges; no new full-text assessment claimed from those pages",
+    "Basu 2006 related cohort erratum DOI10.2337/db06-er09 located in institutional bibliography; content retrieval failed; no correction content inferred and no cohort numbers used for BC009 calibration",
+    "Targeted Dalla Man 2007 correction search did not identify a linked correction in retrieved results; not an exhaustive absence claim"
+  ],
+  "data_and_code": "No participant records, restricted assets or author software imported. Existing human-data catalogues do not establish authorized access. Original native dependency and code license retained.",
+  "contact": "none"
+}

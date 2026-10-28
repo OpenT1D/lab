@@ -1,0 +1,84 @@
+{
+  "schema": "opent1d.durable-archive-contract/1",
+  "package_schema": "opent1d.durable-archive/1",
+  "result_schema": "opent1d.durable-archive-result/1",
+  "tasks": [
+    "m4-study-secure",
+    "maintained-campaign",
+    "m3-forecast",
+    "m3-compare"
+  ],
+  "layout": [
+    "manifest.json",
+    "archive/",
+    "reader/",
+    "evidence/"
+  ],
+  "limits": {
+    "manifest_bytes": 8388608,
+    "files": 50000,
+    "entries": 100000,
+    "file_bytes": 268435456,
+    "total_bytes": 2147483648,
+    "operation_seconds": 900,
+    "reader_timeout_seconds": [
+      1,
+      1800
+    ],
+    "reader_default_seconds": 120
+  },
+  "commands": {
+    "export": [
+      "--task",
+      "--archive",
+      "--checkout",
+      "--revision",
+      "--output"
+    ],
+    "verify": [
+      "--package"
+    ],
+    "restore": [
+      "--package",
+      "--output"
+    ],
+    "reconstruct": [
+      "--package",
+      "--checkout",
+      "--revision",
+      "--output"
+    ]
+  },
+  "result_fields": [
+    "schema",
+    "operation",
+    "status",
+    "task",
+    "package_identity",
+    "integrity_verified",
+    "reconstruction_verified",
+    "complete",
+    "reader_revision"
+  ],
+  "reader_trust": "explicit clean checkout at recorded full Git revision; full tracked bytes equal Git objects and preserved reader inventory; package snapshots never executed",
+  "native_bytes": "all original files and empty directories, unchanged paths and provenance, failed/interrupted/unattempted history retained",
+  "restore": "fresh destination only; no automatic execute/install/repair/resume or saved-PID adoption",
+  "gui_operations": [
+    "durable_export",
+    "durable_register",
+    "durable_verify",
+    "durable_reconstruct"
+  ],
+  "gui_store": "explicit existing canonical startup root outside current checkout; new opaque children only; registration by allowed root ID and relative directory",
+  "evidence_scope": "integrity, reconstruction and numerical completeness are separate; hashes do not authenticate execution; unavailable historical artifacts are not recovered",
+  "m3_readers": {
+    "m3-forecast": "experiments.m3.researcher report --study; evaluation.complete_cohort",
+    "m3-compare": "experiments.m3.comparison reconstruct --study; common.complete_cohort",
+    "saved_reports": "any present original top-level JSON/Markdown must byte-match authoritative evidence at export"
+  },
+  "forensic_retention": {
+    "schema": "opent1d.m3-forensic-retention/1",
+    "operation": "durable_forensic",
+    "scope": "separate exact raw archive and prepared synthetic configuration copy; no verified durable package, reconstruction, completeness or process authority"
+  }
+}

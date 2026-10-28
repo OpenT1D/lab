@@ -1,0 +1,38 @@
+{
+  "schema": "m4-kinetic-inlet-protocol/1",
+  "id": "BC-002/1",
+  "specified_before_implementation": true,
+  "base_commit": "615bed7",
+  "claim": "synthetic_incremental_insulin_kinetics_only",
+  "upstream": {"revision": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc", "patient_file_sha256": "7ad1302fbf064805e2294bbcffd482e55448e37e48b63e629a1ed7f11c701547", "parameter_file_sha256": "662f3b684d160fdf485edd1d7196dd1cd85c14b53650b030fdb86aaa05bb2e50", "profile": "adult#001"},
+  "runtime": "experiments/m0/simglucose/uv.lock",
+  "units": {"time": "min", "Ip,Il,cumulative_input,hepatic_loss,peripheral_loss": "pmol/kg", "input": "pmol/(kg min)", "plasma_insulin": "pmol/L"},
+  "initial_state": [0, 0, 0, 0, 0],
+  "state_order": ["Ip", "Il", "hepatic_loss", "peripheral_loss", "cumulative_input"],
+  "added_basal_pmol_kg_min": 0,
+  "basal_interpretation": "zero incremental forcing; not total fasting endogenous secretion",
+  "horizon_min": 100.0,
+  "sample_step_min": 0.25,
+  "additional_sample_times_min": [5.3, 15.7],
+  "primary_cases": [
+    {"name": "zero", "edges": [0, 100], "left": [0], "right": [0]},
+    {"name": "constant", "edges": [0, 100], "left": [1], "right": [1]},
+    {"name": "pulse", "edges": [0, 5.3, 15.7, 100], "left": [0, 2, 0], "right": [0, 2, 0]},
+    {"name": "ramp", "edges": [0, 20, 100], "left": [0, 2], "right": [2, 0]}
+  ],
+  "routes": ["liver", "peripheral"],
+  "trace_bridge": {"source_protocol": "BC-001/1", "source_model": "pedersen-cobelli-2013-reduced/1", "field": "secretion_ug_per_min", "molar_mass_g_mol": 5808.0, "mass_source": "FDA Humulin R 2018 label section 11 page 6; Pedersen author convention", "body_weight_source": "adult#001 native virtual profile", "gains": [0, 0.5, 1, 2], "interpretation": "nominal wholebody mass interpretation of evoked output; uncalibrated synthetic amplitude; not total endogenous secretion"},
+  "interpolation": "source trace piecewise linear; no extrapolation; exact integral over each interval",
+  "communication_intervals_min": [2.0, 1.0, 0.5, 0.25, 0.125],
+  "communication_rule": "interval-average constant transfer preserving each interval integral; compare with continuous piecewise-linear input",
+  "solvers": [
+    {"name": "coarse", "method": "RK45", "rtol": 1e-5, "atol": 1e-7, "max_step": 2.0},
+    {"name": "tight", "method": "RK45", "rtol": 1e-9, "atol": 1e-11, "max_step": 0.25},
+    {"name": "reference", "method": "DOP853", "rtol": 1e-11, "atol": 1e-13, "max_step": 0.125}
+  ],
+  "criteria": {"native_zero_derivative_error": 0.0, "native_zero_trajectory_error": 0.0, "max_insulin_state_error_pmol_kg": 1e-7, "max_plasma_error_pmol_l": 1e-6, "max_mass_balance_error_pmol_kg": 1e-8, "negative_state_tolerance_pmol_kg": 1e-9, "repeat_state_error": 0.0, "conversion_relative_error": 1e-12, "max_communication_amount_error_pmol_kg": 1e-8, "fine_communication_plasma_error_pmol_l": 0.01, "fine_to_coarse_communication_error_ratio": 0.35, "numerical_error_fraction_of_route_contrast": 0.01},
+  "native_zero_extension": {"horizon_min": 60, "sample_step_min": 1, "action": "native basal pump, no meals, no added secretion; compare all 13 states and reset"},
+  "baseline_comparison": "no added secretion, plus constant input with identical integrated evoked amount; route comparisons at identical input",
+  "failure_policy": "reject wrong pin/files/units/grids/negative or nonfinite input; retain started/failed/calculated/completed states and archived artifacts; never overwrite attempts",
+  "excluded_claims": ["glucose effect", "reduced exogenous insulin requirement", "physiological basal secretion", "T1D or graft calibration", "therapy efficacy", "resolution of BC001 source initialization discrepancy"]
+}

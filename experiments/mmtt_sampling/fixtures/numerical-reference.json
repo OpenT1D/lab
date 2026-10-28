@@ -1,0 +1,116 @@
+{
+  "schema": "opent1d.mmtt-sampling-numerical-vectors/1",
+  "status": "prepared independent acceptance vectors; not executed through OT-054 estimator",
+  "scope": "manufactured linear concentration curves only; no patient or sampling-equivalence claim",
+  "source": "Decision 0067; existing two-compartment source equations; independently integrated closed-form manufactured linear concentration",
+  "kinetics": {
+    "k1_per_min": "0.04",
+    "k2_per_min": "0.05",
+    "k3_per_min": "0.06",
+    "volume_l": "3",
+    "initial_state": "equilibrium from each retained C(0); whole-body amounts"
+  },
+  "kinetics_scope": "Explicit engineering constants; not individual T1D estimates or an uncertainty distribution",
+  "times_minutes": [
+    0,
+    15,
+    30,
+    60,
+    90,
+    120
+  ],
+  "endpoint_window_minutes": [
+    0,
+    120
+  ],
+  "absolute_software_tolerance_pmol": "0.0000001",
+  "tolerance_scope": "Floating-point software agreement only; not an empirical acceptance margin",
+  "derivation": {
+    "concentration": "C(t)=a+b*t in pmol/L",
+    "peripheral_amount": "Q2(t)=k1*V*((a+b*t)/k2-b/k2^2+b*exp(-k2*t)/k2^2)",
+    "rate": "q(t)=V*(b+k3*(a+b*t)+(k1*b/k2)*(1-exp(-k2*t)))",
+    "total": "S=V*(b*T+k3*(a*T+b*T^2/2)+(k1*b/k2)*(T-(1-exp(-k2*T))/k2))",
+    "auc": "a*T+b*T^2/2"
+  },
+  "cases": [
+    {
+      "id": "constant",
+      "baseline_cpeptide_pmol_l": [
+        "200",
+        "200",
+        "200",
+        "200",
+        "200",
+        "200"
+      ],
+      "expected_total_pmol": "4320.00000000000000000000000000000000000000000000000000000000",
+      "expected_cpeptide_auc_pmol_min_l": "24000",
+      "all_subsets_preserve_same_piecewise_linear_curve": true,
+      "followup_cpeptide_pmol_l": [
+        "300",
+        "300",
+        "300",
+        "300",
+        "300",
+        "300"
+      ],
+      "expected_followup_total_pmol": "6480.00000000000000000000000000000000000000000000000000000000",
+      "expected_paired_change_pmol": "2160.00000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "constant-low",
+      "baseline_cpeptide_pmol_l": [
+        "25",
+        "25",
+        "25",
+        "25",
+        "25",
+        "25"
+      ],
+      "expected_total_pmol": "540.000000000000000000000000000000000000000000000000000000000",
+      "expected_cpeptide_auc_pmol_min_l": "3000",
+      "all_subsets_preserve_same_piecewise_linear_curve": true,
+      "followup_cpeptide_pmol_l": [
+        "30",
+        "30",
+        "30",
+        "30",
+        "30",
+        "30"
+      ],
+      "expected_followup_total_pmol": "648.000000000000000000000000000000000000000000000000000000000",
+      "expected_paired_change_pmol": "108.000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "linear-rise",
+      "baseline_cpeptide_pmol_l": [
+        "200",
+        "215",
+        "230",
+        "260",
+        "290",
+        "320"
+      ],
+      "expected_total_pmol": "6216.11898010447998520430616803667920005879231102010562936243",
+      "expected_cpeptide_auc_pmol_min_l": "31200",
+      "all_subsets_preserve_same_piecewise_linear_curve": true
+    },
+    {
+      "id": "linear-fall-negative-rate",
+      "baseline_cpeptide_pmol_l": [
+        "200.0",
+        "177.5",
+        "155.0",
+        "110.0",
+        "65.0",
+        "20.0"
+      ],
+      "expected_total_pmol": "1475.82152984328002219354074794498119991181153346984155595633",
+      "expected_cpeptide_auc_pmol_min_l": "13200.0",
+      "all_subsets_preserve_same_piecewise_linear_curve": true,
+      "expected_terminal_rate_pmol_min": "-4.49107649216400110967703739724905999559057667349207779781685",
+      "required_behavior": "Retain negative-rate diagnostic or explicit failed attempt; never silently clip to zero",
+      "endpoint_role": "Formal unclipped source-model integral; accepted status is subject to the shared method diagnostics"
+    }
+  ]
+}

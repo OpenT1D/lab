@@ -1,0 +1,30 @@
+{
+  "schema": "m4-ultradian-basal-plan/1",
+  "id": "M4-ULTRADIAN-BASAL/1",
+  "date": "2026-09-29",
+  "question": "Does the frozen synthetic SC-equivalence workflow accept the distinct ultradian f1 response, and what glucose-shape diagnostics accompany its search?",
+  "search_protocol_file_sha256": "fdfe359061d45c787b43b5b26a4235b92f34086e588a734ec60371453719b426",
+  "causal_protocol_file_sha256": "b0a4e01475e95d6ddf785ce5764f89b2684569f6092f321ddb746290f9763739",
+  "bc008_protocol_file_sha256": "b66087592810be35fa74372ad07172359897ceb40653abdf420b3c3fa1a4fd99",
+  "sources": {
+    "reference_adapter": {
+      "model_id": "bc008-equation-adapter-example/1",
+      "source_sha256": "2d65b88bfe858682fc0d05d24e404bad4f16166da4c4a94f916d76c5ba560215",
+      "declaration_sha256": "f43cf983496cd6e271e46301db77f1bd09e5e5742befc5a466bd48228fc373aa"
+    },
+    "synthetic_variant": {
+      "model_id": "ultradian-f1-basal-normalized/1",
+      "source_sha256": "27e128148a21bb5ba2234e64956fc17f7dbed2daf0d4244ec6a51dbc5e6f1f26",
+      "declaration_sha256": "d4d0274962fe16da6ffa66358e0b03c6cc88b29db750ea8e611d2c0075e413b9"
+    }
+  },
+  "search": "Unchanged M4-BASAL-EQUIVALENCE/1, 50–100% native SC domain, BC-008 240-minute 30 g meal-AUC target; retain every attempt and no-solution conclusion",
+  "additional_diagnostics": {
+    "search_trajectories": ["baseline-relative AUC", "peak", "nadir", "final glucose"],
+    "fasting": "Fresh unchanged M4-CAUSAL/1 run of the ultradian source at the fixed 75% SC starting factor, independent of the search conclusion; no fasting estimate at an unsolved rate",
+    "matched_rate": "Report fasting and meal shape at a confirmed solution only when the frozen search supplies one",
+    "anchor_parity": "Require exact equality of candidate states and source rates between the two workflows at the shared 75% tight-solver meal case"
+  },
+  "verification": "Existing protocol limits, source/basal/purity checks, solver agreement, mass balances, fresh-process repetition, standard-library reconstruction and exact shared-anchor parity; no criterion or shape tuning",
+  "scope": "Source-component software compatibility and descriptive synthetic outcomes; no full-engine reproduction, prehepatic human calibration or clinical insulin requirement"
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "opent1d.c1-feedback-target-alignment/1",
+  "source_report_sha256": "a2fc313c38ad17012856c7b4e26ad5cb96f6c057606855b7be24c575f4b99fd6",
+  "new_setting_attempts_per_feedback_method": 1,
+  "cumulative_setting_attempts_per_feedback_method": 2,
+  "profiles": ["adult#001", "adult#002"],
+  "seeds": [101, 102],
+  "conditions": ["A", "B", "C", "D"],
+  "candidate_settings": {
+    "target_mg_dl": 140,
+    "low_cutoff_mg_dl": 90,
+    "kp_u_h_per_mg_dl": 0.004,
+    "ki_u_h_per_mg_dl_min": 0.00002,
+    "rise_gain_u_h_per_mg_dl_min": 0.05,
+    "max_rise_mg_dl_min": 2,
+    "max_fresh_gap_min": 6,
+    "max_abs_integral_mg_dl_min": 600,
+    "max_up_correction_step_u_h": 0.2,
+    "max_total_u_h": 4
+  }
+}

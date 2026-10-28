@@ -1,0 +1,83 @@
+{
+  "required_status_checks": {
+    "strict": true,
+    "contexts": [],
+    "checks": [
+      {
+        "context": "Repository checks",
+        "app_id": 15368
+      },
+      {
+        "context": "simglucose reference",
+        "app_id": 15368
+      },
+      {
+        "context": "LT1 Cambridge reference",
+        "app_id": 15368
+      },
+      {
+        "context": "M1 demonstration",
+        "app_id": 15368
+      },
+      {
+        "context": "M2 Cambridge integration",
+        "app_id": 15368
+      },
+      {
+        "context": "Internal numerical verification",
+        "app_id": 15368
+      },
+      {
+        "context": "Internal robustness verification",
+        "app_id": 15368
+      },
+      {
+        "context": "M3 causal forecasting",
+        "app_id": 15368
+      },
+      {
+        "context": "LIT-002 absorption verification",
+        "app_id": 15368
+      },
+      {
+        "context": "Bounded beta-cell glucose feedback",
+        "app_id": 15368
+      },
+      {
+        "context": "Configurable M4 study and local research tools",
+        "app_id": 15368
+      },
+      {
+        "context": "Maintained M4 numerical study",
+        "app_id": 15368
+      },
+      {
+        "context": "Patched C1 checkpoint and synthetic actor boundary",
+        "app_id": 15368
+      },
+      {
+        "context": "Conditional beta-cell parameter recovery",
+        "app_id": 15368
+      },
+      {
+        "context": "C-peptide volume sensitivity",
+        "app_id": 15368
+      },
+      {
+        "context": "Conditional beta-cell likelihood profiles",
+        "app_id": 15368
+      }
+    ]
+  },
+  "enforce_admins": true,
+  "required_pull_request_reviews": {
+    "dismiss_stale_reviews": true,
+    "require_code_owner_reviews": false,
+    "required_approving_review_count": 0,
+    "require_last_push_approval": false
+  },
+  "restrictions": null,
+  "allow_force_pushes": false,
+  "allow_deletions": false,
+  "required_conversation_resolution": true
+}

@@ -1,0 +1,583 @@
+{
+  "schema": "bc007-execution/1",
+  "status": "completed_synthetic_chain",
+  "base_commit": "f96fe29",
+  "worktree": "/private/tmp/opent1d-beta-cell-reference",
+  "branch": "codex/beta-cell-reference",
+  "run_path": "results/m4-chain/reference-02",
+  "manifest": {
+    "schema": "bc007-run/1",
+    "implementation": "bc007-glucose-secretion-kinetics/1",
+    "status": "completed",
+    "parent_python": "3.12.13",
+    "started_utc": "2026-09-20T16:38:50.880102+00:00",
+    "files": {
+      "boundary.json": "00938c5e5a4b8536b40ced817bb07b883a6401bd96dd651a747664d74279f405",
+      "cpeptide/basal_only.json": "5f98ffe2c6345dddd6388b098486fdd9d4bedc97542e1a3cf2445ce85ef85a89",
+      "cpeptide/full_increment.json": "18ae02b9136a57a16c55b4804b9d670099c1d58d3669d3191037edc8b166bd63",
+      "cpeptide/full_synthetic_total.json": "d70dd48741301fd85ac31242c8f74660b62e4f0f9ef3942ea52078f27772960d",
+      "cpeptide/half_increment.json": "29bdb5cbfdda23ae6af20fefa739fdeea1fb7c65bf9ac2ce48701c38c9d96f97",
+      "cpeptide/matched_constant_increment.json": "095f7d545ad5ae80ebc8e391286c7408c8b2d79f0d43ff7145006840c1352dc1",
+      "cpeptide/refinement.json": "76b2f339df8128277734f0ebbd92e7abc6598dfae5c84cf48589540ae72fb1a4",
+      "cpeptide/worker.json": "a647aea9f19fbda73b99c3b9014df4c4cf2fa1a30082e5cc956d47529cb16617",
+      "cpeptide/zero_increment.json": "13204eac513e7a124bf580476e3269f8d9ea178e292b031b3186b92f2230b282",
+      "cpeptide-pyproject.toml": "7c69b6f63a48d72f927c0253b68492de1ac60700d0549744de1207709732d3c5",
+      "cpeptide-uv.lock": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04",
+      "cpeptide.log": "7940df2d48fd2179b1106bdc6442cdc5614dc451a23c7cf60099e21f10c1ce5a",
+      "figure.svg": "f5af2ca2198e1ffb5abb18da8dfedc7ee1f09d024017b95552a4afd3fabb63d6",
+      "insulin/basal_only.json": "4390ba4550385d5515b677f681c3ce93ea24fcd6d89d807bf68c521e015de813",
+      "insulin/full_increment.json": "c7824332aae8b5ab18767a923e773fde7cb2bc2e72bae7fbc979e5c61a7f90a6",
+      "insulin/full_synthetic_total.json": "1a4f1562997033abb789bd4287ea5071531b59cf5caa1b8ad4c3a0552713cfaa",
+      "insulin/half_increment.json": "932f8748e10df4d8deef6cd676ad447df37ce2abbfa67f957ebeb4367a2aafd3",
+      "insulin/matched_constant_increment.json": "f67cbe0fc18412dde149dcea5837017b7e794c35f0eeb05c05e0e34d8c7095fb",
+      "insulin/refinement.json": "ddfbf1707e9a50a768ac58d50549a585c5b8b50d18c62126d52dafa3ae72bbf8",
+      "insulin/worker.json": "d4083e46f492735a30a8cc8d0153207cf6edae4d4f9c57294e103cd3840cb22d",
+      "insulin/zero_increment.json": "f3f91fba8e01f42a4f47974a243b69611859771837166eccf291020b3cf522df",
+      "insulin-pyproject.toml": "107d7792bf6e99575e6b30f3639376059d5f9323bc8dedfd09c82824613c8cd5",
+      "insulin-uv.lock": "634d5849a1cc4ae37f4f00c12c713f168cffa93a43d5a22b571b0c41478fc95c",
+      "insulin.log": "21a05ac6aff336514ec786b2766c1149064a522e3ec81b231654348d13becf33",
+      "plot.log": "7940df2d48fd2179b1106bdc6442cdc5614dc451a23c7cf60099e21f10c1ce5a",
+      "protocol.json": "cc1db93a6b91889a4e375049fafd1c44ea6240fa7f5c2673f0b98ec7d8f86097",
+      "report.json": "23a567df19249ce0c164efa3afc36ba0ace908f3662501ec95ccc10cc90372c3",
+      "sampling.log": "7940df2d48fd2179b1106bdc6442cdc5614dc451a23c7cf60099e21f10c1ce5a",
+      "secretion/figure.svg": "b0f0f6592067201ea1eed67edf55de605cdf89ca2e1e2044c7ae0fe4508dab04",
+      "secretion/input.csv": "719eb311ebc3f2e0bf134f84448807263fb985d6a3a5d57e32851552ea393bab",
+      "secretion/manifest.json": "9428e5e8c4256242bb96b9b25e98241494be8d828d4f844d2e610cbc3576ba7f",
+      "secretion/protocol.json": "4fd9ece0b4c80149e69fcec2c7de6e4ef80cf5a14744df857f4d16aeada10bff",
+      "secretion/reference-functions.csv": "037929b600e22a73c5d2919fdc15198de99ddcc874dbc28448a4384f9a4d58da",
+      "secretion/report.json": "749e7b3cb6edb0fbbadd58cfb25c2e12662605d4c91038b3e2293b832f956aac",
+      "secretion/source-model.py": "b7dfe90b8ffa3ccd97062749207ea5e7f6910c0526bc819f962db9c66ce55544",
+      "secretion/source-plot.py": "c450cbf5440eaaeee3a03b461bbc8103193894f799457ed369022ba41875f464",
+      "secretion/source-pyproject.toml": "7c69b6f63a48d72f927c0253b68492de1ac60700d0549744de1207709732d3c5",
+      "secretion/source-report.py": "23783f5604cd04819db1fb7b8b398dc23c1b4bc0106ec0a06b4ef64e2ccf5fe2",
+      "secretion/source-run.py": "546fa22a5b51f9b485791d0587e33ee5ecc24342e064d557240827d786a2f10f",
+      "secretion/source-test_model.py": "2f8306c1d41801a42a07eb8ae2c00c57cc36f2b5d51fe339fde996de260ded64",
+      "secretion/source-uv.lock": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04",
+      "secretion/source-verify.py": "01acfaee26644f71c30f2d150dbf156d21eada3de08a7afff44499bb2f726ff8",
+      "secretion/trace.csv": "bcee7ada217011f41b96f9d2a380ea65641509b74f22fdc155967675e802696a",
+      "secretion/verification.json": "a8b392024ca46b52f2ef1458d4cac2b3d92f8ae1d81612580f36fa70b03e59cf",
+      "secretion.log": "8a46f0d857ffe31fa7798895aabc3e91c3e6e228863904bd5c23fa0a1520633a",
+      "source-common.py": "5e8c831b9a6c73bd95b07df2a58ac878e9d30b202043182c3c7b877ba432a961",
+      "source-experiments__m4__beta_cell__runtime__model.py": "b7dfe90b8ffa3ccd97062749207ea5e7f6910c0526bc819f962db9c66ce55544",
+      "source-experiments__m4__beta_cell__runtime__report.py": "23783f5604cd04819db1fb7b8b398dc23c1b4bc0106ec0a06b4ef64e2ccf5fe2",
+      "source-experiments__m4__c_peptide__model.py": "f46453669c17d98c4dc90eec6613641d32e222c2a3dd012709ca30e6868673ae",
+      "source-experiments__m4__kinetic_inlet__forcing.py": "b26fd2fd87aa47da328d24b2cbe56d8e3be45f9b4caf2c3c453f89acb07fddd1",
+      "source-experiments__m4__kinetic_inlet__native.py": "aaa6a921643bf6ec82fde84d53193c8ab9c9cdbe1b69de634089f652cb4b14dd",
+      "source-experiments__m4__kinetic_inlet__oracle.py": "67c80ba4dafacc515f9d98cade58f2bc9b1f6daf95747acbe22625f99720155d",
+      "source-experiments__m4__kinetic_inlet__protocol.json": "ac2754f1718bcad7977d3332685abc8bb9a281056e5475d78ab7d7364b9df3dc",
+      "source-experiments__m4__paired_kinetics__common.py": "0d55ab114cf6381e2837670dd2b17b50a7109a0643bce756f2bd31d06209a12d",
+      "source-experiments__m4__paired_kinetics__insulin.py": "cbde74d4dce6f20f39e706d51b8bf477d098b1a5aca212be6d532e31ae8d56e0",
+      "source-experiments__m4__paired_kinetics__oracle.py": "4262e65df8501ac7ea067513fe1148c1d6ca94c6df8dfbe71506f375d29538df",
+      "source-experiments__m4__paired_kinetics__report.py": "1826c8248c02347b381b3943c7c04f949a5867dd4e701b4ada1100830e5749fd",
+      "source-experiments__m4__paired_observation__contract.py": "eb422ce11a75840082801f8321fd10c7236509f71b7792ab83032e061b5f386d",
+      "source-experiments__m4__paired_observation__run.py": "a342e45ab3fc5218033d244d870bd2c9cd8a12099a5053b66f250b2c4b761f84",
+      "source-plot.py": "090c9eb73305ca9c3bba1c0b0ed92b7d7a9be45a067e7d886f378d569a6d8afb",
+      "source-report.py": "3064eda15166d5760ffc2a8eb74c78206602c84eb2adfd899484546157b96786",
+      "source-run.py": "97337412a9ebd9caba96b19d4f335683392a9c46ef5d996f73401a6c359ca58a",
+      "source-samples.json": "824053fe275c26e3ceef2e7a00f5861619882204bada0c7950e07083b91690ae",
+      "source-source.py": "945708467ab251fe5c862fe39b3439a2d3bf1ed7489845e605e6de798114b797",
+      "source-worker.py": "0344d67c8e5e0fb4f25ed9e0d370aea9fe61331db1881792a53377515bf93cab"
+    },
+    "commands": [
+      [
+        "uv",
+        "run",
+        "--locked",
+        "--project",
+        "/private/tmp/opent1d-beta-cell-reference/experiments/m4/beta_cell/runtime",
+        "python",
+        "/private/tmp/opent1d-beta-cell-reference/experiments/m4/beta_cell/runtime/run.py",
+        "--output",
+        "/private/tmp/opent1d-beta-cell-reference/results/m4-chain/reference-02/secretion"
+      ],
+      [
+        "uv",
+        "run",
+        "--locked",
+        "--project",
+        "/private/tmp/opent1d-beta-cell-reference/experiments/m4/beta_cell/runtime",
+        "python",
+        "-m",
+        "experiments.m4.chain.source",
+        "/private/tmp/opent1d-beta-cell-reference/results/m4-chain/reference-02"
+      ],
+      [
+        "uv",
+        "run",
+        "--locked",
+        "--project",
+        "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose",
+        "python",
+        "-m",
+        "experiments.m4.chain.worker",
+        "/private/tmp/opent1d-beta-cell-reference/results/m4-chain/reference-02",
+        "--branch",
+        "insulin"
+      ],
+      [
+        "uv",
+        "run",
+        "--locked",
+        "--project",
+        "/private/tmp/opent1d-beta-cell-reference/experiments/m4/beta_cell/runtime",
+        "python",
+        "-m",
+        "experiments.m4.chain.worker",
+        "/private/tmp/opent1d-beta-cell-reference/results/m4-chain/reference-02",
+        "--branch",
+        "cpeptide"
+      ],
+      [
+        "uv",
+        "run",
+        "--locked",
+        "--project",
+        "/private/tmp/opent1d-beta-cell-reference/experiments/m4/beta_cell/runtime",
+        "python",
+        "-m",
+        "experiments.m4.chain.plot",
+        "/private/tmp/opent1d-beta-cell-reference/results/m4-chain/reference-02",
+        "--output",
+        "/private/tmp/opent1d-beta-cell-reference/results/m4-chain/reference-02/figure.svg",
+        "--allow-pending"
+      ]
+    ],
+    "git_head": "f96fe293f7f2d7fa1ab1c39ec78a4c0aa9f55215",
+    "git_dirty": true,
+    "finished_utc": "2026-09-20T16:39:18.194997+00:00"
+  },
+  "report": {
+    "schema": "bc007-report/1",
+    "implementation": "bc007-glucose-secretion-kinetics/1",
+    "protocol": "BC-007/1",
+    "source_manifest_sha256": "9428e5e8c4256242bb96b9b25e98241494be8d828d4f844d2e610cbc3576ba7f",
+    "source_interpolant_amounts_ug": [
+      215.54949578016124,
+      215.54929855836403,
+      215.5492489886465
+    ],
+    "transfer_metrics": {
+      "source_nested_sample_error_ug_min": 0.0,
+      "source_integral_refinement_relative_error": 2.2996933538404668e-07,
+      "conversion_relative_error": 2.2173699410021717e-16,
+      "equal_amount_error_pmol_kg": 0.0,
+      "paired_input_error": 0.0
+    },
+    "branches": {
+      "insulin": {
+        "metadata": {
+          "schema": "bc007-worker/1",
+          "implementation": "bc007-glucose-secretion-kinetics/1",
+          "branch": "insulin",
+          "status": "completed",
+          "runtime": {
+            "python": "3.12.13",
+            "numpy": "1.26.4",
+            "scipy": "1.13.1"
+          },
+          "native_identity": {
+            "upstream_revision": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc",
+            "package_version": "0.2.11",
+            "profile": "adult#001",
+            "patient_file_sha256": "7ad1302fbf064805e2294bbcffd482e55448e37e48b63e629a1ed7f11c701547",
+            "parameter_file_sha256": "662f3b684d160fdf485edd1d7196dd1cd85c14b53650b030fdb86aaa05bb2e50",
+            "patient_file": "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose/.venv/lib/python3.12/site-packages/simglucose/patient/t1dpatient.py",
+            "parameter_file": "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose/.venv/lib/python3.12/site-packages/simglucose/params/vpatient_params.csv",
+            "body_weight_kg": 102.32,
+            "kinetic_parameters": {
+              "BW": 102.32,
+              "Vi": 0.054906,
+              "m1": 0.15446,
+              "m2": 0.225027424083,
+              "m30": 0.23169,
+              "m4": 0.090010969633
+            }
+          },
+          "volume_l_kg": 0.054906,
+          "state_order": [
+            "Ip",
+            "Il",
+            "hepatic_loss",
+            "peripheral_loss",
+            "input"
+          ]
+        },
+        "cases": {
+          "zero_increment": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 0.0,
+              "solver_concentration_error_pmol_l": 0.0,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 0,
+              "input_error_pmol_kg": 0,
+              "negative_tolerance_pmol_kg": 0,
+              "legacy_zero_initial_error": 0.0
+            },
+            "passed": true,
+            "initial_concentration_pmol_l": 0.0,
+            "peak_sampled_concentration_pmol_l": 0.0,
+            "final_concentration_pmol_l": 0.0,
+            "delivered_pmol_kg": 0.0
+          },
+          "half_increment": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 2.5579538487363607e-13,
+              "solver_concentration_error_pmol_l": 1.5237583533123298e-08,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 4.263256414560601e-13,
+              "input_error_pmol_kg": 2.8421709430404007e-13,
+              "negative_tolerance_pmol_kg": 0,
+              "legacy_zero_initial_error": 0.0
+            },
+            "passed": true,
+            "initial_concentration_pmol_l": 0.0,
+            "peak_sampled_concentration_pmol_l": 117.51993889000308,
+            "final_concentration_pmol_l": 6.458413764643299,
+            "delivered_pmol_kg": 181.35514313464924
+          },
+          "full_increment": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 5.115907697472721e-13,
+              "solver_concentration_error_pmol_l": 3.047545824046352e-08,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 8.526512829121202e-13,
+              "input_error_pmol_kg": 5.684341886080801e-13,
+              "negative_tolerance_pmol_kg": 0,
+              "legacy_zero_initial_error": 0.0
+            },
+            "passed": true,
+            "initial_concentration_pmol_l": 0.0,
+            "peak_sampled_concentration_pmol_l": 235.03987778000615,
+            "final_concentration_pmol_l": 12.916827529286598,
+            "delivered_pmol_kg": 362.7102862692985
+          },
+          "full_synthetic_total": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 7.958078640513122e-13,
+              "solver_concentration_error_pmol_l": 3.043974086985379e-08,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 9.983125437429408e-13,
+              "input_error_pmol_kg": 5.684341886080801e-13,
+              "negative_tolerance_pmol_kg": 0
+            },
+            "passed": true,
+            "initial_concentration_pmol_l": 48.56193640241637,
+            "peak_sampled_concentration_pmol_l": 283.6018141824225,
+            "final_concentration_pmol_l": 61.47876393170297,
+            "delivered_pmol_kg": 512.7102862692985
+          },
+          "basal_only": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 1.5916157281026244e-12,
+              "solver_concentration_error_pmol_l": 0.0,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 9.627854069549358e-13,
+              "input_error_pmol_kg": 2.842170943040401e-14,
+              "negative_tolerance_pmol_kg": 0,
+              "equilibrium_error_pmol_kg": 0.0
+            },
+            "passed": true,
+            "initial_concentration_pmol_l": 48.56193640241637,
+            "peak_sampled_concentration_pmol_l": 48.56193640241637,
+            "final_concentration_pmol_l": 48.56193640241637,
+            "delivered_pmol_kg": 149.99999999999997
+          },
+          "matched_constant_increment": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 9.237055564881302e-13,
+              "solver_concentration_error_pmol_l": 1.0000718183616145e-08,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 3.581135388230905e-12,
+              "input_error_pmol_kg": 3.637978807091713e-12,
+              "negative_tolerance_pmol_kg": 0,
+              "legacy_zero_initial_error": 0.0
+            },
+            "passed": true,
+            "initial_concentration_pmol_l": 0.0,
+            "peak_sampled_concentration_pmol_l": 117.42607499547081,
+            "final_concentration_pmol_l": 117.42607499547081,
+            "delivered_pmol_kg": 362.7102862692946
+          }
+        },
+        "metrics": {
+          "superposition_error_pmol_kg": 1.0231815394945443e-12,
+          "gain_linearity_error_pmol_kg": 0.0,
+          "fine_sampling_error_pmol_l": 0.0022964021950964025,
+          "sampling_error_ratio": 0.2001062413891743
+        },
+        "sampling_errors_to_finest_pmol_l": [
+          0.01147591488978233,
+          0.0022964021950964025
+        ],
+        "matched_constant_max_concentration_contrast_pmol_l": 118.61132894265668,
+        "passed": true
+      },
+      "cpeptide": {
+        "metadata": {
+          "schema": "bc007-worker/1",
+          "implementation": "bc007-glucose-secretion-kinetics/1",
+          "branch": "cpeptide",
+          "status": "completed",
+          "runtime": {
+            "python": "3.12.13",
+            "numpy": "2.2.6",
+            "scipy": "1.15.3"
+          },
+          "volume_l_kg": 0.0655,
+          "state_order": [
+            "central",
+            "peripheral",
+            "eliminated",
+            "input"
+          ]
+        },
+        "cases": {
+          "zero_increment": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 0.0,
+              "solver_concentration_error_pmol_l": 0.0,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 0,
+              "input_error_pmol_kg": 0,
+              "negative_tolerance_pmol_kg": 0
+            },
+            "passed": true,
+            "initial_concentration_pmol_l": 0.0,
+            "peak_sampled_concentration_pmol_l": 0.0,
+            "final_concentration_pmol_l": 0.0,
+            "delivered_pmol_kg": 0.0
+          },
+          "half_increment": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 2.5579538487363607e-13,
+              "solver_concentration_error_pmol_l": 3.011670641456455e-10,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 2.8421709430404007e-13,
+              "input_error_pmol_kg": 2.8421709430404007e-13,
+              "negative_tolerance_pmol_kg": 0
+            },
+            "passed": true,
+            "initial_concentration_pmol_l": 0.0,
+            "peak_sampled_concentration_pmol_l": 644.3232944348904,
+            "final_concentration_pmol_l": 214.97353113213188,
+            "delivered_pmol_kg": 181.35514313464924
+          },
+          "full_increment": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 5.115907697472721e-13,
+              "solver_concentration_error_pmol_l": 5.896419908738969e-10,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 5.684341886080801e-13,
+              "input_error_pmol_kg": 5.684341886080801e-13,
+              "negative_tolerance_pmol_kg": 0
+            },
+            "passed": true,
+            "initial_concentration_pmol_l": 0.0,
+            "peak_sampled_concentration_pmol_l": 1288.6465888697808,
+            "final_concentration_pmol_l": 429.94706226426376,
+            "delivered_pmol_kg": 362.7102862692985
+          },
+          "full_synthetic_total": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 7.389644451905042e-13,
+              "solver_concentration_error_pmol_l": 8.471188127558202e-10,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 1.2363443602225743e-12,
+              "input_error_pmol_kg": 5.684341886080801e-13,
+              "negative_tolerance_pmol_kg": 0
+            },
+            "passed": true,
+            "initial_concentration_pmol_l": 440.39929536112743,
+            "peak_sampled_concentration_pmol_l": 1729.0458842309083,
+            "final_concentration_pmol_l": 870.3463576253915,
+            "delivered_pmol_kg": 512.7102862692985
+          },
+          "basal_only": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 2.2595258997171186e-12,
+              "solver_concentration_error_pmol_l": 0.0,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 2.2879476091475226e-12,
+              "input_error_pmol_kg": 2.842170943040401e-14,
+              "negative_tolerance_pmol_kg": 0,
+              "equilibrium_error_pmol_kg": 0.0
+            },
+            "passed": true,
+            "initial_concentration_pmol_l": 440.39929536112743,
+            "peak_sampled_concentration_pmol_l": 440.39929536112743,
+            "final_concentration_pmol_l": 440.39929536112743,
+            "delivered_pmol_kg": 149.99999999999997
+          },
+          "matched_constant_increment": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 9.237055564881302e-13,
+              "solver_concentration_error_pmol_l": 4.932576823665917e-10,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 3.808509063674137e-12,
+              "input_error_pmol_kg": 3.637978807091713e-12,
+              "negative_tolerance_pmol_kg": 0
+            },
+            "passed": true,
+            "initial_concentration_pmol_l": 0.0,
+            "peak_sampled_concentration_pmol_l": 930.448137380975,
+            "final_concentration_pmol_l": 930.448137380975,
+            "delivered_pmol_kg": 362.7102862692946
+          }
+        },
+        "metrics": {
+          "superposition_error_pmol_kg": 1.8474111129762605e-13,
+          "gain_linearity_error_pmol_kg": 0.0,
+          "fine_sampling_error_pmol_l": 0.009595042219335393,
+          "sampling_error_ratio": 0.20003805067472907
+        },
+        "sampling_errors_to_finest_pmol_l": [
+          0.04796608538711151,
+          0.009595042219335393
+        ],
+        "matched_constant_max_concentration_contrast_pmol_l": 584.3012680021076,
+        "passed": true
+      }
+    },
+    "passed": true,
+    "claim": "synthetic_prescribed_glucose_to_paired_kinetics",
+    "limitations": [
+      "glucose feedback",
+      "change to BC001 initialization or reduced equations",
+      "human or graft calibration",
+      "endogenous basal estimate",
+      "source observation multiplier 0.5",
+      "therapy effects",
+      "human identifiability",
+      "OT026 completion"
+    ]
+  },
+  "checks": {
+    "root_and_two_scientific_locked_syncs": "passed",
+    "new_root_tests": 13,
+    "existing_scientific_tests": {
+      "insulin": {
+        "count": 7,
+        "status": "passed",
+        "log_sha256": "0df7e23a9cc81a173ec0692169b9d021a75db64a2c7c106d608fe3d65e51a777"
+      },
+      "cpeptide": {
+        "count": 3,
+        "status": "passed",
+        "log_sha256": "bb9147a0e9ccdc73e7b1aef03d7bcd3402e28a00ce2538ffc596ba7c5f2c68f3"
+      }
+    },
+    "test_source_sha256": "6861f4f9a4fbf13d2760785d39a1be0a06bda47dc5cfaf6346417b3a50de5a85",
+    "bc001_verification": "passed in each fresh chain execution",
+    "fresh_process_repeat": {
+      "byte_identical_artifact_count": 62,
+      "byte_identical_artifacts": [
+        "boundary.json",
+        "cpeptide/basal_only.json",
+        "cpeptide/full_increment.json",
+        "cpeptide/full_synthetic_total.json",
+        "cpeptide/half_increment.json",
+        "cpeptide/matched_constant_increment.json",
+        "cpeptide/refinement.json",
+        "cpeptide/worker.json",
+        "cpeptide/zero_increment.json",
+        "cpeptide-pyproject.toml",
+        "cpeptide-uv.lock",
+        "cpeptide.log",
+        "figure.svg",
+        "insulin/basal_only.json",
+        "insulin/full_increment.json",
+        "insulin/full_synthetic_total.json",
+        "insulin/half_increment.json",
+        "insulin/matched_constant_increment.json",
+        "insulin/refinement.json",
+        "insulin/worker.json",
+        "insulin/zero_increment.json",
+        "insulin-pyproject.toml",
+        "insulin-uv.lock",
+        "insulin.log",
+        "plot.log",
+        "protocol.json",
+        "sampling.log",
+        "secretion/figure.svg",
+        "secretion/input.csv",
+        "secretion/protocol.json",
+        "secretion/reference-functions.csv",
+        "secretion/report.json",
+        "secretion/source-model.py",
+        "secretion/source-plot.py",
+        "secretion/source-pyproject.toml",
+        "secretion/source-report.py",
+        "secretion/source-run.py",
+        "secretion/source-test_model.py",
+        "secretion/source-uv.lock",
+        "secretion/source-verify.py",
+        "secretion/trace.csv",
+        "secretion/verification.json",
+        "secretion.log",
+        "source-common.py",
+        "source-experiments__m4__beta_cell__runtime__model.py",
+        "source-experiments__m4__beta_cell__runtime__report.py",
+        "source-experiments__m4__c_peptide__model.py",
+        "source-experiments__m4__kinetic_inlet__forcing.py",
+        "source-experiments__m4__kinetic_inlet__native.py",
+        "source-experiments__m4__kinetic_inlet__oracle.py",
+        "source-experiments__m4__kinetic_inlet__protocol.json",
+        "source-experiments__m4__paired_kinetics__common.py",
+        "source-experiments__m4__paired_kinetics__insulin.py",
+        "source-experiments__m4__paired_kinetics__oracle.py",
+        "source-experiments__m4__paired_kinetics__report.py",
+        "source-experiments__m4__paired_observation__contract.py",
+        "source-experiments__m4__paired_observation__run.py",
+        "source-plot.py",
+        "source-report.py",
+        "source-run.py",
+        "source-source.py",
+        "source-worker.py"
+      ],
+      "normalized_equal_artifacts": [
+        "report.json",
+        "source-samples.json"
+      ],
+      "excluded_metadata": "Top-level and BC001 manifests have run-specific timestamps and command paths; compare report and source-samples after removing only the actual parent source-manifest SHA256. All numerical values remain compared.",
+      "reference_manifest_sha256": "359aa3c26322a2270734fc809de14633e1c89c808243c5682ad6b04505c4fc0e",
+      "repeat_manifest_sha256": "d8ca7b67ec404d4b9349357fbdb326d32b4d568052c187d1c68463afbf59d303",
+      "source_and_lock_snapshots": "match live implementation"
+    },
+    "standard_library_reconstruction": {
+      "result": "byte-identical with python -S",
+      "sha256": "23a567df19249ce0c164efa3afc36ba0ace908f3662501ec95ccc10cc90372c3"
+    },
+    "artifact_only_figure_reconstruction": {
+      "result": "byte-identical SVG",
+      "sha256": "f5af2ca2198e1ffb5abb18da8dfedc7ee1f09d024017b95552a4afd3fabb63d6",
+      "visual_review": "completed"
+    },
+    "repository_checks": {
+      "status": "passed",
+      "unit_tests": 305,
+      "strict_documentation_build": "passed",
+      "log_sha256": "b3f24bfc592140f03bd8da5e41b7109edfee8649885e4b7e387ef99c9e1d9b47"
+    },
+    "remote_ci": "not run",
+    "development_checks": {
+      "first_documentation_build": "failed only because execution.json was not yet written; completed evidence record and reran full check successfully",
+      "system_python_comparison": "first ad-hoc comparison used macOS Python 3.9 and failed to import datetime.UTC; rerun in declared uv Python 3.12 runtime passed"
+    }
+  },
+  "failed_scientific_attempts": [],
+  "threshold_amendments": [],
+  "superseded_completed_run": {
+    "path": "results/m4-chain/reference-01",
+    "reason": "missing finer-state error changed from KeyError to descriptive ValueError; no scientific calculation or criterion changed"
+  },
+  "limitations": [
+    "glucose feedback",
+    "change to BC001 initialization or reduced equations",
+    "human or graft calibration",
+    "endogenous basal estimate",
+    "source observation multiplier 0.5",
+    "therapy effects",
+    "human identifiability",
+    "OT026 completion"
+  ]
+}

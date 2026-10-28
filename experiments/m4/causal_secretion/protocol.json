@@ -1,0 +1,50 @@
+{
+  "schema": "m4-causal-secretion-protocol/1",
+  "id": "M4-CAUSAL/1",
+  "reference_id": "BC-008/2",
+  "reference_protocol_file_sha256": "b66087592810be35fa74372ad07172359897ceb40653abdf420b3c3fa1a4fd99",
+  "question": "Can a supplied one-state pancreatic secretion model be evaluated causally in the unchanged BC-008 synthetic fasting and gastric-load tasks?",
+  "claim": "synthetic_causal_interface_and_numerical_comparison_only",
+  "model_contract": {
+    "state_count": 1,
+    "state_unit": "pmol/(kg min)",
+    "input_time_unit": "min",
+    "input_glucose_unit": "mg/dL",
+    "input_glucose_rate_unit": "mg/(dL min)",
+    "output_state_derivative_unit": "pmol/(kg min^2)",
+    "output_pancreatic_rate_unit": "pmol/(kg min)",
+    "initial_state": "host-owned Z(0)=Sb",
+    "portal": "host-owned Pdot=Spo-gamma*P, P(0)=Sb/gamma",
+    "liver": "host-owned S=gamma*P into guarded native liver state only",
+    "basal": "host-owned BC-008 fraction 0.25 SC replacement and matched plasma insulin",
+    "causality": "only current time, native same-stage G and Gdot, current Z, Sb, h and declared numeric parameters",
+    "model_purity": "no mutable hidden state or future glucose; adaptive solver may evaluate time repeatedly or out of order"
+  },
+  "cases": ["candidate", "host_constant_basal"],
+  "scenarios": ["fasting", "gastric_load_30g"],
+  "solvers": ["tight", "reference"],
+  "max_rate_pmol_kg_min": 1000.0,
+  "max_abs_state_derivative_pmol_kg_min2": 1000.0,
+  "source_equilibrium_tolerance": 1e-12,
+  "criteria": {
+    "glucose_solver_error_mg_dl": 0.01,
+    "insulin_solver_error_pmol_l": 0.01,
+    "source_solver_error_pmol_kg_min": 1e-05,
+    "insulin_mass_error_pmol_kg": 1e-06,
+    "glucose_mass_error_mg_kg": 1e-05,
+    "negative_amount_tolerance": 1e-08,
+    "fasting_glucose_drift_mg_dl": 0.01,
+    "fasting_insulin_drift_pmol_l": 0.01,
+    "basal_control_glucose_error_mg_dl": 0.01,
+    "basal_control_insulin_error_pmol_l": 0.01,
+    "repeat_error": 0.0
+  },
+  "excluded": [
+    "human observations or biological calibration",
+    "therapy or insulin-need inference",
+    "controller or pump actions beyond fixed basal",
+    "C-peptide observation and BC-007 prescribed-glucose model compatibility",
+    "arbitrary multi-state sources, discontinuities or delays",
+    "new portal EGP or hepatic extraction mechanisms"
+  ]
+}

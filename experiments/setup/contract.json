@@ -1,0 +1,29 @@
+{
+  "schema": "opent1d.task-setup-contract/1",
+  "plan_schema": "opent1d.task-setup-plan/1",
+  "receipt_schema": "opent1d.task-setup-receipt/1",
+  "tasks": [
+    "p1-controller",
+    "m3-forecast",
+    "m3-compare",
+    "m4-secretion",
+    "m4-compare",
+    "m4-study",
+    "m4-study-secure",
+    "m5-prognosis",
+    "mmtt-sensitivity",
+    "mmtt-sampling"
+  ],
+  "projects": [
+    ".",
+    "experiments/m0/simglucose",
+    "experiments/m0/simglucose_secure",
+    "experiments/m4/beta_cell/runtime"
+  ],
+  "python": "CPython 3.12",
+  "planning": "bind exact existing pyproject.toml, uv.lock and Python selector; no installation or model execution",
+  "checking": "installed interpreter/distribution metadata plus explicit read-only offline uv sync --locked --check; no candidate imports",
+  "installation": "only explicit install operation; uv sync --locked for each frozen project; sanitized selectors; identity check before and after; root tooling separate from numerical projects",
+  "limitations": "setup readiness does not establish model behavior, numerical acceptance, source rights or scientific validity; no unlocked dependencies or implicit installation from run",
+  "public_snapshot": "publication-snapshot.json activates publication-security.json allowlist; reject excluded project installation before any installer or output creation; read-only inspection remains available"
+}

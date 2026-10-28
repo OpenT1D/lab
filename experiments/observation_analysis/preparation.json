@@ -1,0 +1,62 @@
+{
+  "schema": "opent1d.ot054-preparation/1",
+  "date": "2026-10-18",
+  "status": "partial_preparation",
+  "planning_commit": "07b9913",
+  "implementation_commit": "f4d719d",
+  "scope": "Synthetic CSV import, immutable original bytes and replayable import validation only",
+  "checks": [
+    {
+      "command": "uv sync --locked",
+      "result": "passed"
+    },
+    {
+      "command": "uv run --locked python scripts/check.py",
+      "result": "passed",
+      "tests": 1294,
+      "skipped": 13,
+      "documentation_build": "passed",
+      "scope_note": "Complete final six import tests and current documentation; separate lint checks also cover the available-CSV retention correction."
+    },
+    {
+      "command": ".venv/bin/python -m unittest tests.test_observation_import -v",
+      "result": "passed",
+      "tests": 6,
+      "skipped": 0
+    },
+    {
+      "command": ".venv/bin/python -B -S -m experiments.observation_analysis example/import/verify-import",
+      "result": "passed",
+      "scope_note": "Three separate CLI invocations on invented inputs; example_created, valid and verified statuses."
+    },
+    {
+      "command": "ruff check/format, pymarkdown, yamllint and warning-as-error Sphinx build on current files",
+      "result": "passed"
+    }
+  ],
+  "dependency": {
+    "package": "OT-053",
+    "branch": "codex/ot-053-mmtt-feasibility",
+    "state": "Feasibility dossier reported drafted; controlled handoff commit not yet available",
+    "required_before_estimation_choices": [
+      "controlled technical scope/source handoff",
+      "reviewed method and kinetic conventions",
+      "permitted synthetic variants and uncertainty procedure"
+    ]
+  },
+  "remaining_acceptance": [
+    "versioned method-specific analysis plan and frozen source identity",
+    "source-faithful estimator and paired total-secretion endpoint",
+    "justified variants, conditional uncertainty and interpretation rules",
+    "numerical source parity and independent reference checks",
+    "full attempts, boundaries, failure and participant reporting",
+    "reconstruction and complete local task/user/report-reader integration",
+    "controlled shared-core transfer commit for OT-055"
+  ],
+  "ot055_ready": false,
+  "human_usability_evidence": false,
+  "empirical_t1d_validity_evidence": false,
+  "goal_complete": false,
+  "record_scope": "Historical importer-only preparation at f17172c; superseded by core-verification.json",
+  "superseded_by": "experiments/observation_analysis/core-verification.json"
+}

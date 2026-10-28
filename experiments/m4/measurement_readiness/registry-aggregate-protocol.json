@@ -1,0 +1,28 @@
+{
+  "schema": "bc015-registry-aggregate-protocol/1",
+  "id": "BC-015-P3",
+  "source": {
+    "url": "https://clinicaltrials.gov/api/v2/studies/NCT01817959",
+    "nct_id": "NCT01817959",
+    "snapshot_sha256": "8fc0882a095628215af1ef588f0b3fa1d08e62c7cd28bd04fb873cff91d054b5",
+    "access": "public registry record; aggregate published results only"
+  },
+  "question": "Does this alternate islet-transplant registry result provide a directly usable participant-linked IV glucose/insulin/C-peptide observation series?",
+  "required_outcome_title_prefixes": {
+    "glucose": "Basal (Fasting) and 0 to 120 Min Time Course of Glucose Derived From the Mixed Meal Tolerance Test (MMTT) in Efficacy Population 1",
+    "insulin": "Basal (Fasting) and 0 to 120 Min Time Course of Insulin Derived From the MMTT in Efficacy Population 1",
+    "c_peptide": "Basal (Fasting) and 0 to 120 Min Time Course of C-peptide (Non-normalized) Derived From the MMTT in Efficacy Population 1"
+  },
+  "expected_units": {
+    "glucose": "mg/dL",
+    "insulin": "µU/mL",
+    "c_peptide": "ng/mL"
+  },
+  "expected_visit_labels": [
+    "day 75 - Transplant 1",
+    "day 75 - Transplant 2",
+    "day 365 - Last transplant"
+  ],
+  "expected_sample_labels": ["Basal", "15 min", "30 min", "60 min", "90 min", "120 min"],
+  "acceptance": "Report published aggregate coverage and exact label/count mismatches; never infer participant linkage, individual joint observations, treatment effects, IVGTT compatibility or access rights from aggregate result classes."
+}

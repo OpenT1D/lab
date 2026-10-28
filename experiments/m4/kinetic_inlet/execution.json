@@ -1,0 +1,2172 @@
+{
+  "schema": "bc002-execution-record/1",
+  "date": "2026-09-20",
+  "base_git_commit": "615bed7",
+  "branch": "codex/beta-cell-reference",
+  "evidence_scope": "synthetic incremental insulin kinetics; no glucose feedback or human/therapy assessment",
+  "source_version_note": "Each run archives its actual source files. Recorded git HEAD is the starting commit; implementation edits were uncommitted during the runs. Final reference-04 source snapshots match all eight delivered Python files exactly. Earlier repeated numerical/report artifacts are byte-identical; source formatting and a unittest import regression were subsequently corrected.",
+  "input": {
+    "run": "results/m4/reference-04",
+    "protocol": "BC-001/1",
+    "manifest_sha256": "cf954c0fe98e60b687f46e83e34e1d94fc3c431e7778ba54b545ea8a5138c707",
+    "claim": "synthetic declining IVGTT, printed initialization; inherited source discrepancy unresolved"
+  },
+  "original_attempt": {
+    "path": "results/m4-inlet/reference-01",
+    "protocol": "BC-002/1",
+    "status": "failed",
+    "manifest_sha256": "ee2e5d7a29c98d41fb35e8be075d8f40ee93caf1a720bae2a9323135708a0cd6",
+    "verification_sha256": "9ee85266dbebaef6d33034640f218c54577a627c3bdc092288980ff03e34d175",
+    "failed_checks": [
+      "communication_refinement"
+    ],
+    "verification": {
+      "schema": "m4-kinetic-inlet-verification/1",
+      "protocol": "BC-002/1",
+      "passed": false,
+      "checks": {
+        "native_zero_extension": {
+          "passed": true,
+          "derivative_max_error": 0.0,
+          "trajectory_max_error": 0.0,
+          "fresh_max_error": 0.0,
+          "reset_max_error": 0.0,
+          "samples": 61,
+          "states_per_sample": 13,
+          "basal_action_u_min": 0.02112267499992533,
+          "guarded_probes": 30,
+          "solver_successful": true,
+          "derivative_tolerance": 0.0,
+          "trajectory_tolerance": 0.0
+        },
+        "primary_oracle_agreement": {
+          "passed": true,
+          "max_insulin_state_error_pmol_kg": 2.04869854414369e-09,
+          "max_plasma_error_pmol_l": 2.6968928027736747e-08,
+          "state_tolerance_pmol_kg": 1e-07,
+          "plasma_tolerance_pmol_l": 1e-06,
+          "compared_methods": [
+            "tight",
+            "reference"
+          ],
+          "oracle": "independent augmented matrix exponential, explicit piecewise-linear input"
+        },
+        "primary_mass_balance": {
+          "passed": true,
+          "max_error_pmol_kg": 7.673861546209082e-13,
+          "tolerance_pmol_kg": 1e-08
+        },
+        "primary_input_integrals": {
+          "passed": true,
+          "max_error_pmol_kg": 2.5579538487363607e-13,
+          "tolerance_pmol_kg": 1e-08,
+          "expected_integrals_pmol_kg": {
+            "zero": 0.0,
+            "constant": 100.0,
+            "pulse": 20.8,
+            "ramp": 100.0
+          }
+        },
+        "conversion_anchor": {
+          "passed": true,
+          "relative_error": 0.0,
+          "tolerance": 1e-12,
+          "source_microgram_per_min": 5.808,
+          "expected_pmol_per_min": 1000.0,
+          "converted_pmol_kg_min": 9.773260359655982,
+          "body_weight_kg": 102.32,
+          "scope": "scalar 5.808 microgram = 1000 pmol anchor; source-row conversion checked by importer"
+        },
+        "source_oracle_agreement": {
+          "passed": true,
+          "max_insulin_state_error_pmol_kg": 2.4494326567037206e-09,
+          "max_plasma_error_pmol_l": 3.061916889286246e-08,
+          "state_tolerance_pmol_kg": 1e-07,
+          "plasma_tolerance_pmol_l": 1e-06,
+          "compared_methods": [
+            "tight",
+            "reference"
+          ],
+          "oracle": "independent augmented matrix exponential, explicit piecewise-linear input"
+        },
+        "source_mass_balance": {
+          "passed": true,
+          "max_error_pmol_kg": 7.958078640513122e-13,
+          "tolerance_pmol_kg": 1e-08
+        },
+        "communication_amount": {
+          "passed": true,
+          "max_error_pmol_kg": 2.5011104298755527e-12,
+          "tolerance_pmol_kg": 1e-08
+        },
+        "communication_refinement": {
+          "passed": false,
+          "routes": {
+            "liver": {
+              "finest_error_pmol_l": 0.0026722348892271016,
+              "fine_to_coarse_error_ratio": 0.003566076314585655
+            },
+            "peripheral": {
+              "finest_error_pmol_l": 0.011495100552870832,
+              "fine_to_coarse_error_ratio": 0.002660385546924688
+            }
+          },
+          "finest_tolerance_pmol_l": 0.01,
+          "ratio_tolerance": 0.35
+        },
+        "equal_area_baseline": {
+          "passed": true,
+          "max_amount_error_pmol_kg": 3.637978807091713e-12,
+          "total_input_pmol_kg": 362.71028626929825,
+          "tolerance_pmol_kg": 1e-08
+        },
+        "gain_linearity": {
+          "passed": true,
+          "max_state_error_pmol_kg": 0.0,
+          "tolerance_pmol_kg": 1e-07,
+          "scope": "fixed linear kinetic block; synthetic input gain, not a treatment model"
+        },
+        "zero_gain": {
+          "passed": true,
+          "max_absolute_state_pmol_kg": 0.0,
+          "tolerance": 0.0
+        },
+        "positivity": {
+          "passed": true,
+          "minimum_state_pmol_kg": 0.0,
+          "negative_tolerance_pmol_kg": 1e-09
+        },
+        "repeatability": {
+          "passed": true,
+          "max_absolute_state_error": 0.0,
+          "tolerance": 0.0,
+          "repeated_cases": "pulse and source replay, both routes"
+        },
+        "route_contrast_resolution": {
+          "passed": true,
+          "max_route_contrast_pmol_l": 361.81091797220046,
+          "max_numerical_error_pmol_l": 0.011495100552870832,
+          "solver_oracle_error_pmol_l": 3.061916889286246e-08,
+          "finest_communication_error_pmol_l": 0.011495100552870832,
+          "numerical_error_fraction": 3.177101624598861e-05,
+          "maximum_fraction": 0.01,
+          "interpretation": "numerical resolution only; neither route is clinically validated"
+        }
+      },
+      "primary_cases": {
+        "zero__liver": {
+          "route": "liver",
+          "input": {
+            "edges": [
+              0.0,
+              100.0
+            ],
+            "left": [
+              0.0
+            ],
+            "right": [
+              0.0
+            ],
+            "units": "pmol/(kg min)"
+          },
+          "expected_integral_pmol_kg": 0.0,
+          "methods": {
+            "coarse": {
+              "max_insulin_state_error_pmol_kg": 0.0,
+              "max_plasma_error_pmol_l": 0.0,
+              "max_ledger_state_error_pmol_kg": 0.0,
+              "max_mass_balance_error_pmol_kg": 0.0,
+              "max_input_integral_error_pmol_kg": 0.0,
+              "oracle_mass_balance_error_pmol_kg": 0.0,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 0.0,
+              "final_hepatic_loss_pmol_kg": 0.0,
+              "final_peripheral_loss_pmol_kg": 0.0,
+              "final_inventory_pmol_kg": 0.0,
+              "sampled_peak_plasma_pmol_l": 0.0,
+              "plasma_auc_pmol_min_l": 0.0
+            },
+            "tight": {
+              "max_insulin_state_error_pmol_kg": 0.0,
+              "max_plasma_error_pmol_l": 0.0,
+              "max_ledger_state_error_pmol_kg": 0.0,
+              "max_mass_balance_error_pmol_kg": 0.0,
+              "max_input_integral_error_pmol_kg": 0.0,
+              "oracle_mass_balance_error_pmol_kg": 0.0,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 0.0,
+              "final_hepatic_loss_pmol_kg": 0.0,
+              "final_peripheral_loss_pmol_kg": 0.0,
+              "final_inventory_pmol_kg": 0.0,
+              "sampled_peak_plasma_pmol_l": 0.0,
+              "plasma_auc_pmol_min_l": 0.0
+            },
+            "reference": {
+              "max_insulin_state_error_pmol_kg": 0.0,
+              "max_plasma_error_pmol_l": 0.0,
+              "max_ledger_state_error_pmol_kg": 0.0,
+              "max_mass_balance_error_pmol_kg": 0.0,
+              "max_input_integral_error_pmol_kg": 0.0,
+              "oracle_mass_balance_error_pmol_kg": 0.0,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 0.0,
+              "final_hepatic_loss_pmol_kg": 0.0,
+              "final_peripheral_loss_pmol_kg": 0.0,
+              "final_inventory_pmol_kg": 0.0,
+              "sampled_peak_plasma_pmol_l": 0.0,
+              "plasma_auc_pmol_min_l": 0.0
+            }
+          },
+          "tight_reference_plasma_error_pmol_l": 0.0
+        },
+        "zero__peripheral": {
+          "route": "peripheral",
+          "input": {
+            "edges": [
+              0.0,
+              100.0
+            ],
+            "left": [
+              0.0
+            ],
+            "right": [
+              0.0
+            ],
+            "units": "pmol/(kg min)"
+          },
+          "expected_integral_pmol_kg": 0.0,
+          "methods": {
+            "coarse": {
+              "max_insulin_state_error_pmol_kg": 0.0,
+              "max_plasma_error_pmol_l": 0.0,
+              "max_ledger_state_error_pmol_kg": 0.0,
+              "max_mass_balance_error_pmol_kg": 0.0,
+              "max_input_integral_error_pmol_kg": 0.0,
+              "oracle_mass_balance_error_pmol_kg": 0.0,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 0.0,
+              "final_hepatic_loss_pmol_kg": 0.0,
+              "final_peripheral_loss_pmol_kg": 0.0,
+              "final_inventory_pmol_kg": 0.0,
+              "sampled_peak_plasma_pmol_l": 0.0,
+              "plasma_auc_pmol_min_l": 0.0
+            },
+            "tight": {
+              "max_insulin_state_error_pmol_kg": 0.0,
+              "max_plasma_error_pmol_l": 0.0,
+              "max_ledger_state_error_pmol_kg": 0.0,
+              "max_mass_balance_error_pmol_kg": 0.0,
+              "max_input_integral_error_pmol_kg": 0.0,
+              "oracle_mass_balance_error_pmol_kg": 0.0,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 0.0,
+              "final_hepatic_loss_pmol_kg": 0.0,
+              "final_peripheral_loss_pmol_kg": 0.0,
+              "final_inventory_pmol_kg": 0.0,
+              "sampled_peak_plasma_pmol_l": 0.0,
+              "plasma_auc_pmol_min_l": 0.0
+            },
+            "reference": {
+              "max_insulin_state_error_pmol_kg": 0.0,
+              "max_plasma_error_pmol_l": 0.0,
+              "max_ledger_state_error_pmol_kg": 0.0,
+              "max_mass_balance_error_pmol_kg": 0.0,
+              "max_input_integral_error_pmol_kg": 0.0,
+              "oracle_mass_balance_error_pmol_kg": 0.0,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 0.0,
+              "final_hepatic_loss_pmol_kg": 0.0,
+              "final_peripheral_loss_pmol_kg": 0.0,
+              "final_inventory_pmol_kg": 0.0,
+              "sampled_peak_plasma_pmol_l": 0.0,
+              "plasma_auc_pmol_min_l": 0.0
+            }
+          },
+          "tight_reference_plasma_error_pmol_l": 0.0
+        },
+        "constant__liver": {
+          "route": "liver",
+          "input": {
+            "edges": [
+              0.0,
+              100.0
+            ],
+            "left": [
+              1.0
+            ],
+            "right": [
+              1.0
+            ],
+            "units": "pmol/(kg min)"
+          },
+          "expected_integral_pmol_kg": 100.0,
+          "methods": {
+            "coarse": {
+              "max_insulin_state_error_pmol_kg": 4.990698981632846e-06,
+              "max_plasma_error_pmol_l": 5.72790687539923e-05,
+              "max_ledger_state_error_pmol_kg": 2.3292739230740267e-06,
+              "max_mass_balance_error_pmol_kg": 2.842170943040401e-14,
+              "max_input_integral_error_pmol_kg": 1.4210854715202004e-14,
+              "oracle_mass_balance_error_pmol_kg": 2.7000623958883807e-13,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 99.99999999999999,
+              "final_hepatic_loss_pmol_kg": 79.88801504638195,
+              "final_peripheral_loss_pmol_kg": 14.708890240093957,
+              "final_inventory_pmol_kg": 5.403094713524087,
+              "sampled_peak_plasma_pmol_l": 32.37461948015534,
+              "plasma_auc_pmol_min_l": 2976.2178016320504
+            },
+            "tight": {
+              "max_insulin_state_error_pmol_kg": 2.3930724069032294e-10,
+              "max_plasma_error_pmol_l": 2.9041756837177686e-09,
+              "max_ledger_state_error_pmol_kg": 1.1474288186263948e-10,
+              "max_mass_balance_error_pmol_kg": 5.684341886080802e-14,
+              "max_input_integral_error_pmol_kg": 1.4210854715202004e-14,
+              "oracle_mass_balance_error_pmol_kg": 2.7000623958883807e-13,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 99.99999999999999,
+              "final_hepatic_loss_pmol_kg": 79.8880150463732,
+              "final_peripheral_loss_pmol_kg": 14.708890240090533,
+              "final_inventory_pmol_kg": 5.403094713536291,
+              "sampled_peak_plasma_pmol_l": 32.37461948026655,
+              "plasma_auc_pmol_min_l": 2976.2176932955485
+            },
+            "reference": {
+              "max_insulin_state_error_pmol_kg": 3.552713678800501e-15,
+              "max_plasma_error_pmol_l": 6.47053815393673e-14,
+              "max_ledger_state_error_pmol_kg": 4.121147867408581e-13,
+              "max_mass_balance_error_pmol_kg": 2.842170943040401e-14,
+              "max_input_integral_error_pmol_kg": 1.4210854715202004e-14,
+              "oracle_mass_balance_error_pmol_kg": 2.7000623958883807e-13,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 100.00000000000001,
+              "final_hepatic_loss_pmol_kg": 79.88801504637318,
+              "final_peripheral_loss_pmol_kg": 14.708890240090529,
+              "final_inventory_pmol_kg": 5.403094713536291,
+              "sampled_peak_plasma_pmol_l": 32.374619480266546,
+              "plasma_auc_pmol_min_l": 2976.217693289964
+            }
+          },
+          "tight_reference_plasma_error_pmol_l": 2.904167595545076e-09
+        },
+        "constant__peripheral": {
+          "route": "peripheral",
+          "input": {
+            "edges": [
+              0.0,
+              100.0
+            ],
+            "left": [
+              1.0
+            ],
+            "right": [
+              1.0
+            ],
+            "units": "pmol/(kg min)"
+          },
+          "expected_integral_pmol_kg": 100.0,
+          "methods": {
+            "coarse": {
+              "max_insulin_state_error_pmol_kg": 5.554989447542624e-06,
+              "max_plasma_error_pmol_l": 8.171491478791333e-05,
+              "max_ledger_state_error_pmol_kg": 1.974207664456884e-06,
+              "max_mass_balance_error_pmol_kg": 1.4210854715202004e-14,
+              "max_input_integral_error_pmol_kg": 1.4210854715202004e-14,
+              "oracle_mass_balance_error_pmol_kg": 3.410605131648481e-13,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 99.99999999999999,
+              "final_hepatic_loss_pmol_kg": 55.15833840047503,
+              "final_peripheral_loss_pmol_kg": 37.808092338136056,
+              "final_inventory_pmol_kg": 7.033569261388911,
+              "sampled_peak_plasma_pmol_l": 80.93655368503399,
+              "plasma_auc_pmol_min_l": 7650.048019656966
+            },
+            "tight": {
+              "max_insulin_state_error_pmol_kg": 3.519182723010772e-10,
+              "max_plasma_error_pmol_l": 4.7373478921959295e-09,
+              "max_ledger_state_error_pmol_kg": 1.4031886763632428e-10,
+              "max_mass_balance_error_pmol_kg": 7.105427357601002e-14,
+              "max_input_integral_error_pmol_kg": 1.4210854715202004e-14,
+              "oracle_mass_balance_error_pmol_kg": 3.410605131648481e-13,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 99.99999999999999,
+              "final_hepatic_loss_pmol_kg": 55.15833840046212,
+              "final_peripheral_loss_pmol_kg": 37.80809233813104,
+              "final_inventory_pmol_kg": 7.033569261406898,
+              "sampled_peak_plasma_pmol_l": 80.93655368519791,
+              "plasma_auc_pmol_min_l": 7650.048239363094
+            },
+            "reference": {
+              "max_insulin_state_error_pmol_kg": 7.105427357601002e-15,
+              "max_plasma_error_pmol_l": 1.294107630787346e-13,
+              "max_ledger_state_error_pmol_kg": 2.3447910280083306e-13,
+              "max_mass_balance_error_pmol_kg": 5.684341886080802e-14,
+              "max_input_integral_error_pmol_kg": 1.4210854715202004e-14,
+              "oracle_mass_balance_error_pmol_kg": 3.410605131648481e-13,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 100.00000000000001,
+              "final_hepatic_loss_pmol_kg": 55.1583384004621,
+              "final_peripheral_loss_pmol_kg": 37.80809233813103,
+              "final_inventory_pmol_kg": 7.033569261406898,
+              "sampled_peak_plasma_pmol_l": 80.93655368519791,
+              "plasma_auc_pmol_min_l": 7650.048239389942
+            }
+          },
+          "tight_reference_plasma_error_pmol_l": 4.7373478921959295e-09
+        },
+        "pulse__liver": {
+          "route": "liver",
+          "input": {
+            "edges": [
+              0.0,
+              5.3,
+              15.7,
+              100.0
+            ],
+            "left": [
+              0.0,
+              2.0,
+              0.0
+            ],
+            "right": [
+              0.0,
+              2.0,
+              0.0
+            ],
+            "units": "pmol/(kg min)"
+          },
+          "expected_integral_pmol_kg": 20.8,
+          "methods": {
+            "coarse": {
+              "max_insulin_state_error_pmol_kg": 2.2250966583037268e-05,
+              "max_plasma_error_pmol_l": 0.00026942354951056923,
+              "max_ledger_state_error_pmol_kg": 9.815030292514848e-06,
+              "max_mass_balance_error_pmol_kg": 7.105427357601002e-15,
+              "max_input_integral_error_pmol_kg": 1.7763568394002505e-15,
+              "oracle_mass_balance_error_pmol_kg": 2.1316282072803006e-14,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 20.799999999999997,
+              "final_hepatic_loss_pmol_kg": 17.471992328692792,
+              "final_peripheral_loss_pmol_kg": 3.3279970154345015,
+              "final_inventory_pmol_kg": 1.0655872701628237e-05,
+              "sampled_peak_plasma_pmol_l": 48.22672834893221,
+              "plasma_auc_pmol_min_l": 673.3911050543222
+            },
+            "tight": {
+              "max_insulin_state_error_pmol_kg": 1.9740049594929587e-09,
+              "max_plasma_error_pmol_l": 2.3705140053854905e-08,
+              "max_ledger_state_error_pmol_kg": 8.772360615694197e-10,
+              "max_mass_balance_error_pmol_kg": 1.0658141036401503e-14,
+              "max_input_integral_error_pmol_kg": 1.7763568394002505e-15,
+              "oracle_mass_balance_error_pmol_kg": 2.1316282072803006e-14,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 20.799999999999997,
+              "final_hepatic_loss_pmol_kg": 17.471992328834308,
+              "final_peripheral_loss_pmol_kg": 3.327997015489555,
+              "final_inventory_pmol_kg": 1.0655676129160933e-05,
+              "sampled_peak_plasma_pmol_l": 48.22657215486126,
+              "plasma_auc_pmol_min_l": 673.3912596244791
+            },
+            "reference": {
+              "max_insulin_state_error_pmol_kg": 3.552713678800501e-15,
+              "max_plasma_error_pmol_l": 4.852903615452547e-14,
+              "max_ledger_state_error_pmol_kg": 4.263256414560601e-14,
+              "max_mass_balance_error_pmol_kg": 4.973799150320701e-14,
+              "max_input_integral_error_pmol_kg": 3.552713678800501e-15,
+              "oracle_mass_balance_error_pmol_kg": 2.1316282072803006e-14,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 20.8,
+              "final_hepatic_loss_pmol_kg": 17.471992328834276,
+              "final_peripheral_loss_pmol_kg": 3.327997015489562,
+              "final_inventory_pmol_kg": 1.0655676125010565e-05,
+              "sampled_peak_plasma_pmol_l": 48.22657215657642,
+              "plasma_auc_pmol_min_l": 673.3912596589598
+            }
+          },
+          "tight_reference_plasma_error_pmol_l": 2.3705180494718368e-08
+        },
+        "pulse__peripheral": {
+          "route": "peripheral",
+          "input": {
+            "edges": [
+              0.0,
+              5.3,
+              15.7,
+              100.0
+            ],
+            "left": [
+              0.0,
+              2.0,
+              0.0
+            ],
+            "right": [
+              0.0,
+              2.0,
+              0.0
+            ],
+            "units": "pmol/(kg min)"
+          },
+          "expected_integral_pmol_kg": 20.8,
+          "methods": {
+            "coarse": {
+              "max_insulin_state_error_pmol_kg": 2.2928547147138545e-05,
+              "max_plasma_error_pmol_l": 0.00029848763077201676,
+              "max_ledger_state_error_pmol_kg": 9.426722489713768e-06,
+              "max_mass_balance_error_pmol_kg": 1.0658141036401503e-14,
+              "max_input_integral_error_pmol_kg": 1.7763568394002505e-15,
+              "oracle_mass_balance_error_pmol_kg": 2.1316282072803006e-14,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 20.799999999999997,
+              "final_hepatic_loss_pmol_kg": 12.479988807901861,
+              "final_peripheral_loss_pmol_kg": 8.31999564564445,
+              "final_inventory_pmol_kg": 1.554645369205713e-05,
+              "sampled_peak_plasma_pmol_l": 136.51620001537069,
+              "plasma_auc_pmol_min_l": 1683.4816457501192
+            },
+            "tight": {
+              "max_insulin_state_error_pmol_kg": 2.04869854414369e-09,
+              "max_plasma_error_pmol_l": 2.6968928027736747e-08,
+              "max_ledger_state_error_pmol_kg": 8.324532174697197e-10,
+              "max_mass_balance_error_pmol_kg": 7.105427357601002e-15,
+              "max_input_integral_error_pmol_kg": 1.7763568394002505e-15,
+              "oracle_mass_balance_error_pmol_kg": 2.1316282072803006e-14,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 20.799999999999997,
+              "final_hepatic_loss_pmol_kg": 12.479988808113577,
+              "final_peripheral_loss_pmol_kg": 8.319995645726815,
+              "final_inventory_pmol_kg": 1.5546159608147333e-05,
+              "sampled_peak_plasma_pmol_l": 136.51628278376552,
+              "plasma_auc_pmol_min_l": 1683.4812976546953
+            },
+            "reference": {
+              "max_insulin_state_error_pmol_kg": 5.329070518200751e-15,
+              "max_plasma_error_pmol_l": 9.705807230905094e-14,
+              "max_ledger_state_error_pmol_kg": 3.375077994860476e-14,
+              "max_mass_balance_error_pmol_kg": 2.4868995751603507e-14,
+              "max_input_integral_error_pmol_kg": 3.552713678800501e-15,
+              "oracle_mass_balance_error_pmol_kg": 2.1316282072803006e-14,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 20.8,
+              "final_hepatic_loss_pmol_kg": 12.479988808113593,
+              "final_peripheral_loss_pmol_kg": 8.319995645726822,
+              "final_inventory_pmol_kg": 1.5546159602029523e-05,
+              "sampled_peak_plasma_pmol_l": 136.51628278861006,
+              "plasma_auc_pmol_min_l": 1683.4812976218948
+            }
+          },
+          "tight_reference_plasma_error_pmol_l": 2.696891185139136e-08
+        },
+        "ramp__liver": {
+          "route": "liver",
+          "input": {
+            "edges": [
+              0.0,
+              20.0,
+              100.0
+            ],
+            "left": [
+              0.0,
+              2.0
+            ],
+            "right": [
+              2.0,
+              0.0
+            ],
+            "units": "pmol/(kg min)"
+          },
+          "expected_integral_pmol_kg": 100.0,
+          "methods": {
+            "coarse": {
+              "max_insulin_state_error_pmol_kg": 2.0429928264675823e-05,
+              "max_plasma_error_pmol_l": 0.00024250136020196152,
+              "max_ledger_state_error_pmol_kg": 9.172271933977072e-06,
+              "max_mass_balance_error_pmol_kg": 5.684341886080802e-14,
+              "max_input_integral_error_pmol_kg": 2.842170943040401e-14,
+              "oracle_mass_balance_error_pmol_kg": 7.673861546209082e-13,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 100.00000000000001,
+              "final_hepatic_loss_pmol_kg": 83.41214475680312,
+              "final_peripheral_loss_pmol_kg": 15.78557242919755,
+              "final_inventory_pmol_kg": 0.8022828139993236,
+              "sampled_peak_plasma_pmol_l": 56.53735229414418,
+              "plasma_auc_pmol_min_l": 3194.070738659889
+            },
+            "tight": {
+              "max_insulin_state_error_pmol_kg": 1.1790746157203102e-09,
+              "max_plasma_error_pmol_l": 1.3829036346910889e-08,
+              "max_ledger_state_error_pmol_kg": 5.34850386202379e-10,
+              "max_mass_balance_error_pmol_kg": 1.8474111129762605e-13,
+              "max_input_integral_error_pmol_kg": 2.5579538487363607e-13,
+              "oracle_mass_balance_error_pmol_kg": 7.673861546209082e-13,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 99.99999999999974,
+              "final_hepatic_loss_pmol_kg": 83.41214475666611,
+              "final_peripheral_loss_pmol_kg": 15.785572429144285,
+              "final_inventory_pmol_kg": 0.8022828141895066,
+              "sampled_peak_plasma_pmol_l": 56.53732424940581,
+              "plasma_auc_pmol_min_l": 3194.0704283439795
+            },
+            "reference": {
+              "max_insulin_state_error_pmol_kg": 6.217248937900877e-15,
+              "max_plasma_error_pmol_l": 8.896989961663002e-14,
+              "max_ledger_state_error_pmol_kg": 7.958078640513122e-13,
+              "max_mass_balance_error_pmol_kg": 1.1368683772161603e-13,
+              "max_input_integral_error_pmol_kg": 1.4210854715202004e-14,
+              "oracle_mass_balance_error_pmol_kg": 7.673861546209082e-13,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 99.99999999999999,
+              "final_hepatic_loss_pmol_kg": 83.41214475666617,
+              "final_peripheral_loss_pmol_kg": 15.785572429144281,
+              "final_inventory_pmol_kg": 0.8022828141895034,
+              "sampled_peak_plasma_pmol_l": 56.537324249217136,
+              "plasma_auc_pmol_min_l": 3194.070428300328
+            }
+          },
+          "tight_reference_plasma_error_pmol_l": 1.3828979729702042e-08
+        },
+        "ramp__peripheral": {
+          "route": "peripheral",
+          "input": {
+            "edges": [
+              0.0,
+              20.0,
+              100.0
+            ],
+            "left": [
+              0.0,
+              2.0
+            ],
+            "right": [
+              2.0,
+              0.0
+            ],
+            "units": "pmol/(kg min)"
+          },
+          "expected_integral_pmol_kg": 100.0,
+          "methods": {
+            "coarse": {
+              "max_insulin_state_error_pmol_kg": 2.1609931764476897e-05,
+              "max_plasma_error_pmol_l": 0.0002887106245054208,
+              "max_ledger_state_error_pmol_kg": 8.641175350376784e-06,
+              "max_mass_balance_error_pmol_kg": 2.842170943040401e-14,
+              "max_input_integral_error_pmol_kg": 4.263256414560601e-14,
+              "oracle_mass_balance_error_pmol_kg": 2.4158453015843406e-13,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 100.00000000000003,
+              "final_hepatic_loss_pmol_kg": 59.19589660962331,
+              "final_peripheral_loss_pmol_kg": 39.67289976286021,
+              "final_inventory_pmol_kg": 1.1312036275164905,
+              "sampled_peak_plasma_pmol_l": 142.83875074217138,
+              "plasma_auc_pmol_min_l": 8027.458805570026
+            },
+            "tight": {
+              "max_insulin_state_error_pmol_kg": 1.1871468252877548e-09,
+              "max_plasma_error_pmol_l": 1.6215136261074676e-08,
+              "max_ledger_state_error_pmol_kg": 4.630145156170329e-10,
+              "max_mass_balance_error_pmol_kg": 1.2789769243681803e-13,
+              "max_input_integral_error_pmol_kg": 1.5631940186722204e-13,
+              "oracle_mass_balance_error_pmol_kg": 2.4158453015843406e-13,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 100.00000000000014,
+              "final_hepatic_loss_pmol_kg": 59.19589660942262,
+              "final_peripheral_loss_pmol_kg": 39.67289976278215,
+              "final_inventory_pmol_kg": 1.1312036277952648,
+              "sampled_peak_plasma_pmol_l": 142.8387803112902,
+              "plasma_auc_pmol_min_l": 8027.459242581312
+            },
+            "reference": {
+              "max_insulin_state_error_pmol_kg": 1.3322676295501878e-14,
+              "max_plasma_error_pmol_l": 1.294107630787346e-13,
+              "max_ledger_state_error_pmol_kg": 7.958078640513122e-13,
+              "max_mass_balance_error_pmol_kg": 1.2789769243681803e-13,
+              "max_input_integral_error_pmol_kg": 1.4210854715202004e-14,
+              "oracle_mass_balance_error_pmol_kg": 2.4158453015843406e-13,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 99.99999999999999,
+              "final_hepatic_loss_pmol_kg": 59.19589660942254,
+              "final_peripheral_loss_pmol_kg": 39.672899762782066,
+              "final_inventory_pmol_kg": 1.1312036277952617,
+              "sampled_peak_plasma_pmol_l": 142.83878031344514,
+              "plasma_auc_pmol_min_l": 8027.45924261856
+            }
+          },
+          "tight_reference_plasma_error_pmol_l": 1.621518479011083e-08
+        }
+      },
+      "source_replay": {
+        "liver": {
+          "methods": {
+            "coarse": {
+              "max_insulin_state_error_pmol_kg": 6.462158363973458e-09,
+              "max_plasma_error_pmol_l": 7.829441501042201e-08,
+              "max_ledger_state_error_pmol_kg": 2.8523152728610057e-09,
+              "max_mass_balance_error_pmol_kg": 3.979039320256561e-13,
+              "max_input_integral_error_pmol_kg": 3.410605131648481e-13,
+              "oracle_mass_balance_error_pmol_kg": 3.410605131648481e-13,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 362.71028626929836,
+              "final_hepatic_loss_pmol_kg": 303.3009488053341,
+              "final_peripheral_loss_pmol_kg": 57.56897748694078,
+              "final_inventory_pmol_kg": 1.8403599770231835,
+              "sampled_peak_plasma_pmol_l": 235.03987778813874,
+              "plasma_auc_pmol_min_l": 11648.582170576246
+            },
+            "tight": {
+              "max_insulin_state_error_pmol_kg": 2.4494326567037206e-09,
+              "max_plasma_error_pmol_l": 3.047542588777276e-08,
+              "max_ledger_state_error_pmol_kg": 1.0572236419648107e-09,
+              "max_mass_balance_error_pmol_kg": 3.410605131648481e-13,
+              "max_input_integral_error_pmol_kg": 3.410605131648481e-13,
+              "oracle_mass_balance_error_pmol_kg": 3.410605131648481e-13,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 362.71028626929836,
+              "final_hepatic_loss_pmol_kg": 303.3009488053343,
+              "final_peripheral_loss_pmol_kg": 57.568977486940774,
+              "final_inventory_pmol_kg": 1.8403599770231835,
+              "sampled_peak_plasma_pmol_l": 235.03987778811256,
+              "plasma_auc_pmol_min_l": 11648.582170929425
+            },
+            "reference": {
+              "max_insulin_state_error_pmol_kg": 3.907985046680551e-14,
+              "max_plasma_error_pmol_l": 2.2646883538778552e-13,
+              "max_ledger_state_error_pmol_kg": 4.547473508864641e-13,
+              "max_mass_balance_error_pmol_kg": 7.958078640513122e-13,
+              "max_input_integral_error_pmol_kg": 5.684341886080801e-13,
+              "oracle_mass_balance_error_pmol_kg": 3.410605131648481e-13,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 362.7102862692985,
+              "final_hepatic_loss_pmol_kg": 303.30094880537666,
+              "final_peripheral_loss_pmol_kg": 57.56897748693563,
+              "final_inventory_pmol_kg": 1.8403599769858063,
+              "sampled_peak_plasma_pmol_l": 235.0398777800062,
+              "plasma_auc_pmol_min_l": 11648.582170501568
+            }
+          }
+        },
+        "peripheral": {
+          "methods": {
+            "coarse": {
+              "max_insulin_state_error_pmol_kg": 6.262821039548783e-09,
+              "max_plasma_error_pmol_l": 8.16966426756613e-08,
+              "max_ledger_state_error_pmol_kg": 2.574692847812088e-09,
+              "max_mass_balance_error_pmol_kg": 5.115907697472721e-13,
+              "max_input_integral_error_pmol_kg": 3.410605131648481e-13,
+              "oracle_mass_balance_error_pmol_kg": 4.547473508864641e-13,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 362.71028626929836,
+              "final_hepatic_loss_pmol_kg": 215.88366557650733,
+              "final_peripheral_loss_pmol_kg": 144.335733887577,
+              "final_inventory_pmol_kg": 2.4908868052137043,
+              "sampled_peak_plasma_pmol_l": 592.7720429076473,
+              "plasma_auc_pmol_min_l": 29205.068903028718
+            },
+            "tight": {
+              "max_insulin_state_error_pmol_kg": 2.4377744267667367e-09,
+              "max_plasma_error_pmol_l": 3.061916889286246e-08,
+              "max_ledger_state_error_pmol_kg": 1.0461480570711501e-09,
+              "max_mass_balance_error_pmol_kg": 3.410605131648481e-13,
+              "max_input_integral_error_pmol_kg": 3.410605131648481e-13,
+              "oracle_mass_balance_error_pmol_kg": 4.547473508864641e-13,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 362.71028626929836,
+              "final_hepatic_loss_pmol_kg": 215.88366557650744,
+              "final_peripheral_loss_pmol_kg": 144.33573388757705,
+              "final_inventory_pmol_kg": 2.4908868052137043,
+              "sampled_peak_plasma_pmol_l": 592.772042907588,
+              "plasma_auc_pmol_min_l": 29205.068902633713
+            },
+            "reference": {
+              "max_insulin_state_error_pmol_kg": 2.1316282072803006e-14,
+              "max_plasma_error_pmol_l": 3.8823228923620375e-13,
+              "max_ledger_state_error_pmol_kg": 5.684341886080801e-13,
+              "max_mass_balance_error_pmol_kg": 4.547473508864641e-13,
+              "max_input_integral_error_pmol_kg": 5.684341886080801e-13,
+              "oracle_mass_balance_error_pmol_kg": 4.547473508864641e-13,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 362.7102862692985,
+              "final_hepatic_loss_pmol_kg": 215.8836655764888,
+              "final_peripheral_loss_pmol_kg": 144.33573388759132,
+              "final_inventory_pmol_kg": 2.4908868052184374,
+              "sampled_peak_plasma_pmol_l": 592.7720429209643,
+              "plasma_auc_pmol_min_l": 29205.068903112435
+            }
+          }
+        }
+      },
+      "communication": {
+        "liver": {
+          "intervals": [
+            {
+              "interval_min": 2.0,
+              "max_plasma_error_pmol_l": 0.7493487669619854,
+              "max_interval_amount_error_pmol_kg": 0.0,
+              "final_input_error_pmol_kg": 2.5011104298755527e-12
+            },
+            {
+              "interval_min": 1.0,
+              "max_plasma_error_pmol_l": 0.1836760118496343,
+              "max_interval_amount_error_pmol_kg": 0.0,
+              "final_input_error_pmol_kg": 1.1937117960769683e-12
+            },
+            {
+              "interval_min": 0.5,
+              "max_plasma_error_pmol_l": 0.042772110739170394,
+              "max_interval_amount_error_pmol_kg": 0.0,
+              "final_input_error_pmol_kg": 9.663381206337363e-13
+            },
+            {
+              "interval_min": 0.25,
+              "max_plasma_error_pmol_l": 0.010684232005822166,
+              "max_interval_amount_error_pmol_kg": 0.0,
+              "final_input_error_pmol_kg": 3.979039320256561e-13
+            },
+            {
+              "interval_min": 0.125,
+              "max_plasma_error_pmol_l": 0.0026722348892271016,
+              "max_interval_amount_error_pmol_kg": 1.1102230246251565e-16,
+              "final_input_error_pmol_kg": 2.8421709430404007e-13
+            }
+          ],
+          "fine_to_coarse_error_ratio": 0.003566076314585655,
+          "refinement_passed": true
+        },
+        "peripheral": {
+          "intervals": [
+            {
+              "interval_min": 2.0,
+              "max_plasma_error_pmol_l": 4.320840100097056,
+              "max_interval_amount_error_pmol_kg": 0.0,
+              "final_input_error_pmol_kg": 2.5011104298755527e-12
+            },
+            {
+              "interval_min": 1.0,
+              "max_plasma_error_pmol_l": 1.113901464783076,
+              "max_interval_amount_error_pmol_kg": 0.0,
+              "final_input_error_pmol_kg": 1.1937117960769683e-12
+            },
+            {
+              "interval_min": 0.5,
+              "max_plasma_error_pmol_l": 0.2791790628144275,
+              "max_interval_amount_error_pmol_kg": 0.0,
+              "final_input_error_pmol_kg": 9.663381206337363e-13
+            },
+            {
+              "interval_min": 0.25,
+              "max_plasma_error_pmol_l": 0.04535360081861428,
+              "max_interval_amount_error_pmol_kg": 0.0,
+              "final_input_error_pmol_kg": 3.979039320256561e-13
+            },
+            {
+              "interval_min": 0.125,
+              "max_plasma_error_pmol_l": 0.011495100552870832,
+              "max_interval_amount_error_pmol_kg": 1.1102230246251565e-16,
+              "final_input_error_pmol_kg": 2.8421709430404007e-13
+            }
+          ],
+          "fine_to_coarse_error_ratio": 0.002660385546924688,
+          "refinement_passed": false
+        }
+      },
+      "baseline_comparison": {
+        "liver": {
+          "dynamic": {
+            "max_insulin_state_error_pmol_kg": 3.907985046680551e-14,
+            "max_plasma_error_pmol_l": 2.2646883538778552e-13,
+            "max_ledger_state_error_pmol_kg": 4.547473508864641e-13,
+            "max_mass_balance_error_pmol_kg": 7.958078640513122e-13,
+            "max_input_integral_error_pmol_kg": 5.684341886080801e-13,
+            "oracle_mass_balance_error_pmol_kg": 3.410605131648481e-13,
+            "minimum_state_pmol_kg": 0.0,
+            "final_input_pmol_kg": 362.7102862692985,
+            "final_hepatic_loss_pmol_kg": 303.30094880537666,
+            "final_peripheral_loss_pmol_kg": 57.56897748693563,
+            "final_inventory_pmol_kg": 1.8403599769858063,
+            "sampled_peak_plasma_pmol_l": 235.0398777800062,
+            "plasma_auc_pmol_min_l": 11648.582170501568
+          },
+          "equal_area_constant": {
+            "max_insulin_state_error_pmol_kg": 2.6645352591003757e-14,
+            "max_plasma_error_pmol_l": 2.74997871542311e-13,
+            "max_ledger_state_error_pmol_kg": 9.237055564881302e-13,
+            "max_mass_balance_error_pmol_kg": 3.581135388230905e-12,
+            "max_input_integral_error_pmol_kg": 3.637978807091713e-12,
+            "oracle_mass_balance_error_pmol_kg": 3.126388037344441e-12,
+            "minimum_state_pmol_kg": 0.0,
+            "final_input_pmol_kg": 362.7102862692946,
+            "final_hepatic_loss_pmol_kg": 289.7620480695601,
+            "final_peripheral_loss_pmol_kg": 53.350657896869315,
+            "final_inventory_pmol_kg": 19.597580302868803,
+            "sampled_peak_plasma_pmol_l": 117.42607499547081,
+            "plasma_auc_pmol_min_l": 10795.047715329532
+          },
+          "zero_max_absolute_state_pmol_kg": 0.0,
+          "dynamic_constant_max_plasma_difference_pmol_l": 118.61132894265671
+        },
+        "peripheral": {
+          "dynamic": {
+            "max_insulin_state_error_pmol_kg": 2.1316282072803006e-14,
+            "max_plasma_error_pmol_l": 3.8823228923620375e-13,
+            "max_ledger_state_error_pmol_kg": 5.684341886080801e-13,
+            "max_mass_balance_error_pmol_kg": 4.547473508864641e-13,
+            "max_input_integral_error_pmol_kg": 5.684341886080801e-13,
+            "oracle_mass_balance_error_pmol_kg": 4.547473508864641e-13,
+            "minimum_state_pmol_kg": 0.0,
+            "final_input_pmol_kg": 362.7102862692985,
+            "final_hepatic_loss_pmol_kg": 215.8836655764888,
+            "final_peripheral_loss_pmol_kg": 144.33573388759132,
+            "final_inventory_pmol_kg": 2.4908868052184374,
+            "sampled_peak_plasma_pmol_l": 592.7720429209643,
+            "plasma_auc_pmol_min_l": 29205.068903112435
+          },
+          "equal_area_constant": {
+            "max_insulin_state_error_pmol_kg": 3.197442310920451e-14,
+            "max_plasma_error_pmol_l": 5.823484338543057e-13,
+            "max_ledger_state_error_pmol_kg": 9.237055564881302e-13,
+            "max_mass_balance_error_pmol_kg": 3.865352482534945e-12,
+            "max_input_integral_error_pmol_kg": 3.637978807091713e-12,
+            "oracle_mass_balance_error_pmol_kg": 2.5579538487363607e-12,
+            "minimum_state_pmol_kg": 0.0,
+            "final_input_pmol_kg": 362.7102862692946,
+            "final_hepatic_loss_pmol_kg": 200.0649671137045,
+            "final_peripheral_loss_pmol_kg": 137.13383995259565,
+            "final_inventory_pmol_kg": 25.511479202998324,
+            "sampled_peak_plasma_pmol_l": 293.56520556808556,
+            "plasma_auc_pmol_min_l": 27747.51186883067
+          },
+          "zero_max_absolute_state_pmol_kg": 0.0,
+          "dynamic_constant_max_plasma_difference_pmol_l": 301.4846867624815
+        }
+      },
+      "gains": {
+        "liver": [
+          {
+            "gain": 0.0,
+            "max_state_scaling_error_pmol_kg": 0.0,
+            "final_input_pmol_kg": 0.0,
+            "sampled_peak_plasma_pmol_l": 0.0
+          },
+          {
+            "gain": 0.5,
+            "max_state_scaling_error_pmol_kg": 0.0,
+            "final_input_pmol_kg": 181.35514313464924,
+            "sampled_peak_plasma_pmol_l": 117.5199388900031
+          },
+          {
+            "gain": 1.0,
+            "max_state_scaling_error_pmol_kg": 0.0,
+            "final_input_pmol_kg": 362.7102862692985,
+            "sampled_peak_plasma_pmol_l": 235.0398777800062
+          },
+          {
+            "gain": 2.0,
+            "max_state_scaling_error_pmol_kg": 0.0,
+            "final_input_pmol_kg": 725.420572538597,
+            "sampled_peak_plasma_pmol_l": 470.0797555600124
+          }
+        ],
+        "peripheral": [
+          {
+            "gain": 0.0,
+            "max_state_scaling_error_pmol_kg": 0.0,
+            "final_input_pmol_kg": 0.0,
+            "sampled_peak_plasma_pmol_l": 0.0
+          },
+          {
+            "gain": 0.5,
+            "max_state_scaling_error_pmol_kg": 0.0,
+            "final_input_pmol_kg": 181.35514313464924,
+            "sampled_peak_plasma_pmol_l": 296.38602146048214
+          },
+          {
+            "gain": 1.0,
+            "max_state_scaling_error_pmol_kg": 0.0,
+            "final_input_pmol_kg": 362.7102862692985,
+            "sampled_peak_plasma_pmol_l": 592.7720429209643
+          },
+          {
+            "gain": 2.0,
+            "max_state_scaling_error_pmol_kg": 0.0,
+            "final_input_pmol_kg": 725.420572538597,
+            "sampled_peak_plasma_pmol_l": 1185.5440858419286
+          }
+        ]
+      },
+      "source_integral_pmol_kg": 362.71028626929825,
+      "evidence_scope": "synthetic incremental insulin kinetics and numerical transfer only",
+      "human_validation": "not performed",
+      "glucose_control_evaluation": "not performed"
+    }
+  },
+  "completed_attempt": {
+    "path": "results/m4-inlet/reference-04",
+    "protocol": "BC-002/2",
+    "manifest": {
+      "schema": "bc002-run/1",
+      "status": "completed",
+      "started_utc": "2026-09-20T00:37:48.584697+00:00",
+      "files": {
+        "bc001/figure.svg": "b0f0f6592067201ea1eed67edf55de605cdf89ca2e1e2044c7ae0fe4508dab04",
+        "bc001/input.csv": "719eb311ebc3f2e0bf134f84448807263fb985d6a3a5d57e32851552ea393bab",
+        "bc001/manifest.json": "cf954c0fe98e60b687f46e83e34e1d94fc3c431e7778ba54b545ea8a5138c707",
+        "bc001/protocol.json": "4fd9ece0b4c80149e69fcec2c7de6e4ef80cf5a14744df857f4d16aeada10bff",
+        "bc001/reference-functions.csv": "037929b600e22a73c5d2919fdc15198de99ddcc874dbc28448a4384f9a4d58da",
+        "bc001/report.json": "749e7b3cb6edb0fbbadd58cfb25c2e12662605d4c91038b3e2293b832f956aac",
+        "bc001/source-model.py": "b7dfe90b8ffa3ccd97062749207ea5e7f6910c0526bc819f962db9c66ce55544",
+        "bc001/source-plot.py": "c450cbf5440eaaeee3a03b461bbc8103193894f799457ed369022ba41875f464",
+        "bc001/source-pyproject.toml": "7c69b6f63a48d72f927c0253b68492de1ac60700d0549744de1207709732d3c5",
+        "bc001/source-report.py": "23783f5604cd04819db1fb7b8b398dc23c1b4bc0106ec0a06b4ef64e2ccf5fe2",
+        "bc001/source-run.py": "546fa22a5b51f9b485791d0587e33ee5ecc24342e064d557240827d786a2f10f",
+        "bc001/source-test_model.py": "2f8306c1d41801a42a07eb8ae2c00c57cc36f2b5d51fe339fde996de260ded64",
+        "bc001/source-uv.lock": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04",
+        "bc001/source-verify.py": "01acfaee26644f71c30f2d150dbf156d21eada3de08a7afff44499bb2f726ff8",
+        "bc001/trace.csv": "bcee7ada217011f41b96f9d2a380ea65641509b74f22fdc155967675e802696a",
+        "bc001/verification.json": "a8b392024ca46b52f2ef1458d4cac2b3d92f8ae1d81612580f36fa70b03e59cf",
+        "figure.svg": "8583ce87942c06ab53231ee76b20ea7aebaa92c88ba646197bd6f945ae0d0016",
+        "matched-constant-liver.csv": "decd95b3b9daf02926313e97374bbebecddaf55cc10160365cf9cec8c192d6f3",
+        "native-identity.json": "73159bc2435740e93fe928e1b1c61cdcd339a87fe4b20885f062c3fbd5795fb8",
+        "native-pyproject.toml": "107d7792bf6e99575e6b30f3639376059d5f9323bc8dedfd09c82824613c8cd5",
+        "native-uv.lock": "634d5849a1cc4ae37f4f00c12c713f168cffa93a43d5a22b571b0c41478fc95c",
+        "protocol.json": "8c1676cee90f6a96dfa9c88a8dada196419b33a84cd69fcdc2a449f8c3441348",
+        "report.json": "5ec120a85f238d5bb4078488fa19f2e09fac618b994f0c05c24900edf2ced67b",
+        "source-forcing.json": "24d8fd009ff72398ab86bed601e50d7c479cf39e7d8cbb773e954647359d597c",
+        "source-forcing.py": "b26fd2fd87aa47da328d24b2cbe56d8e3be45f9b4caf2c3c453f89acb07fddd1",
+        "source-input.csv": "6f0c47cbae09f3bcece8edcdbab3d682bbca2337ec51e19f88783f17e0183647",
+        "source-liver.csv": "264cd888049abc1d45187adaa5d4a2b4081ec3433947a5e9a815c2a7842b4de7",
+        "source-native.py": "aaa6a921643bf6ec82fde84d53193c8ab9c9cdbe1b69de634089f652cb4b14dd",
+        "source-oracle.py": "67c80ba4dafacc515f9d98cade58f2bc9b1f6daf95747acbe22625f99720155d",
+        "source-peripheral.csv": "3ab7e88f81e748442e63adbb84657830aa3a20d8f1fb66ee353781e8330a6466",
+        "source-plot.py": "e0db28437abd7af9f8862516d3e7d84024162c6014a5f0a9f8efade2de8b5a1f",
+        "source-report.py": "c1e9ed22195529df545b16529d8100e4ba7b5ea4a8db2e556c260b3f509df1bb",
+        "source-run.py": "18177c4c0bd9d0348252916a0628af8b859c16085fb37ad2c54bad9fce6bf1a1",
+        "source-test_native.py": "b5a3ee45529a5cd9666e2ab20abb5b6d90818ee63892c16350aaab5945d5b266",
+        "source-verify.py": "6724aaa037f109f60873c8dbacb7e7243c36d2b666c8d12594be3f816c567171",
+        "verification.json": "df2a70f4924aa3fd6d74c708f03b2f2c1801024f54b0abe0300350c3951f6c9c",
+        "zero-liver.csv": "a882953c1cf50aff75b95f1af85ed2f3883707c252fc3140341ffdb4e831b518"
+      },
+      "runtime": {
+        "python": "3.12.13",
+        "numpy": "1.26.4",
+        "scipy": "1.13.1"
+      },
+      "git_head": "615bed7530bbd98fadddda1c5e19053dca9b9e2f",
+      "git_branch": "codex/beta-cell-reference",
+      "phase": "verification",
+      "finished_utc": "2026-09-20T00:37:59.598465+00:00"
+    },
+    "manifest_sha256": "637fe32ebf6428f5f458557372856f0c3579ad8c94ca1e768c2e5ba194e1348d",
+    "report": {
+      "schema": "bc002-report/1",
+      "protocol": "BC-002/2",
+      "claim": "synthetic_incremental_insulin_kinetics_only",
+      "passed": true,
+      "cases": {
+        "source-liver": {
+          "peak_incremental_plasma_pmol_l": 235.0398777800062,
+          "trapezoid_plasma_auc_pmol_min_l": 11648.582170501568,
+          "final_input_pmol_kg": 362.7102862692985,
+          "max_mass_balance_error_pmol_kg": 7.958078640513122e-13,
+          "max_oracle_plasma_error_pmol_l": 2.2737367544323206e-13,
+          "max_oracle_state_error_pmol_kg": 3.907985046680551e-14,
+          "minimum_amount_pmol_kg": 0.0,
+          "passed": true
+        },
+        "source-peripheral": {
+          "peak_incremental_plasma_pmol_l": 592.7720429209643,
+          "trapezoid_plasma_auc_pmol_min_l": 29205.068903112435,
+          "final_input_pmol_kg": 362.7102862692985,
+          "max_mass_balance_error_pmol_kg": 4.547473508864641e-13,
+          "max_oracle_plasma_error_pmol_l": 4.547473508864641e-13,
+          "max_oracle_state_error_pmol_kg": 2.1316282072803006e-14,
+          "minimum_amount_pmol_kg": 0.0,
+          "passed": true
+        },
+        "matched-constant-liver": {
+          "peak_incremental_plasma_pmol_l": 117.42607499547081,
+          "trapezoid_plasma_auc_pmol_min_l": 10795.047715329534,
+          "final_input_pmol_kg": 362.7102862692946,
+          "max_mass_balance_error_pmol_kg": 3.581135388230905e-12,
+          "max_oracle_plasma_error_pmol_l": 2.8421709430404007e-13,
+          "max_oracle_state_error_pmol_kg": 2.6645352591003757e-14,
+          "minimum_amount_pmol_kg": 0.0,
+          "passed": true
+        },
+        "zero-liver": {
+          "peak_incremental_plasma_pmol_l": 0.0,
+          "trapezoid_plasma_auc_pmol_min_l": 0.0,
+          "final_input_pmol_kg": 0.0,
+          "max_mass_balance_error_pmol_kg": 0.0,
+          "max_oracle_plasma_error_pmol_l": 0.0,
+          "max_oracle_state_error_pmol_kg": 0.0,
+          "minimum_amount_pmol_kg": 0.0,
+          "passed": true
+        }
+      },
+      "source_input_amount_pmol_kg": 362.71028626929825,
+      "input_amount_comparison_error_pmol_kg": 3.637978807091713e-12,
+      "maximum_route_contrast_pmol_l": 361.81091797220046,
+      "numerical_error_fraction_of_route_contrast": 7.835675818047861e-06,
+      "verification": {
+        "schema": "m4-kinetic-inlet-verification/1",
+        "protocol": "BC-002/2",
+        "passed": true,
+        "checks": {
+          "native_zero_extension": {
+            "passed": true,
+            "derivative_max_error": 0.0,
+            "trajectory_max_error": 0.0,
+            "fresh_max_error": 0.0,
+            "reset_max_error": 0.0,
+            "samples": 61,
+            "states_per_sample": 13,
+            "basal_action_u_min": 0.02112267499992533,
+            "guarded_probes": 30,
+            "solver_successful": true,
+            "derivative_tolerance": 0.0,
+            "trajectory_tolerance": 0.0
+          },
+          "primary_oracle_agreement": {
+            "passed": true,
+            "max_insulin_state_error_pmol_kg": 2.04869854414369e-09,
+            "max_plasma_error_pmol_l": 2.6968928027736747e-08,
+            "state_tolerance_pmol_kg": 1e-07,
+            "plasma_tolerance_pmol_l": 1e-06,
+            "compared_methods": [
+              "tight",
+              "reference"
+            ],
+            "oracle": "independent augmented matrix exponential, explicit piecewise-linear input"
+          },
+          "primary_mass_balance": {
+            "passed": true,
+            "max_error_pmol_kg": 7.673861546209082e-13,
+            "tolerance_pmol_kg": 1e-08
+          },
+          "primary_input_integrals": {
+            "passed": true,
+            "max_error_pmol_kg": 2.5579538487363607e-13,
+            "tolerance_pmol_kg": 1e-08,
+            "expected_integrals_pmol_kg": {
+              "zero": 0.0,
+              "constant": 100.0,
+              "pulse": 20.8,
+              "ramp": 100.0
+            }
+          },
+          "conversion_anchor": {
+            "passed": true,
+            "relative_error": 0.0,
+            "tolerance": 1e-12,
+            "source_microgram_per_min": 5.808,
+            "expected_pmol_per_min": 1000.0,
+            "converted_pmol_kg_min": 9.773260359655982,
+            "body_weight_kg": 102.32,
+            "scope": "scalar 5.808 microgram = 1000 pmol anchor; source-row conversion checked by importer"
+          },
+          "source_oracle_agreement": {
+            "passed": true,
+            "max_insulin_state_error_pmol_kg": 2.4494326567037206e-09,
+            "max_plasma_error_pmol_l": 3.061916889286246e-08,
+            "state_tolerance_pmol_kg": 1e-07,
+            "plasma_tolerance_pmol_l": 1e-06,
+            "compared_methods": [
+              "tight",
+              "reference"
+            ],
+            "oracle": "independent augmented matrix exponential, explicit piecewise-linear input"
+          },
+          "source_mass_balance": {
+            "passed": true,
+            "max_error_pmol_kg": 7.958078640513122e-13,
+            "tolerance_pmol_kg": 1e-08
+          },
+          "communication_amount": {
+            "passed": true,
+            "max_error_pmol_kg": 2.5011104298755527e-12,
+            "tolerance_pmol_kg": 1e-08
+          },
+          "communication_refinement": {
+            "passed": true,
+            "routes": {
+              "liver": {
+                "finest_error_pmol_l": 0.0006681323090372669,
+                "fine_to_coarse_error_ratio": 0.0008916172795559713
+              },
+              "peripheral": {
+                "finest_error_pmol_l": 0.002835033060660469,
+                "fine_to_coarse_error_ratio": 0.0006561300568833333
+              }
+            },
+            "finest_tolerance_pmol_l": 0.01,
+            "ratio_tolerance": 0.35
+          },
+          "equal_area_baseline": {
+            "passed": true,
+            "max_amount_error_pmol_kg": 3.637978807091713e-12,
+            "total_input_pmol_kg": 362.71028626929825,
+            "tolerance_pmol_kg": 1e-08
+          },
+          "gain_linearity": {
+            "passed": true,
+            "max_state_error_pmol_kg": 0.0,
+            "tolerance_pmol_kg": 1e-07,
+            "scope": "fixed linear kinetic block; synthetic input gain, not a treatment model"
+          },
+          "zero_gain": {
+            "passed": true,
+            "max_absolute_state_pmol_kg": 0.0,
+            "tolerance": 0.0
+          },
+          "positivity": {
+            "passed": true,
+            "minimum_state_pmol_kg": 0.0,
+            "negative_tolerance_pmol_kg": 1e-09
+          },
+          "repeatability": {
+            "passed": true,
+            "max_absolute_state_error": 0.0,
+            "tolerance": 0.0,
+            "repeated_cases": "pulse and source replay, both routes"
+          },
+          "route_contrast_resolution": {
+            "passed": true,
+            "max_route_contrast_pmol_l": 361.81091797220046,
+            "max_numerical_error_pmol_l": 0.002835033060660469,
+            "solver_oracle_error_pmol_l": 3.061916889286246e-08,
+            "finest_communication_error_pmol_l": 0.002835033060660469,
+            "numerical_error_fraction": 7.835675818047861e-06,
+            "maximum_fraction": 0.01,
+            "interpretation": "numerical resolution only; neither route is clinically validated"
+          }
+        },
+        "primary_cases": {
+          "zero__liver": {
+            "route": "liver",
+            "input": {
+              "edges": [
+                0.0,
+                100.0
+              ],
+              "left": [
+                0.0
+              ],
+              "right": [
+                0.0
+              ],
+              "units": "pmol/(kg min)"
+            },
+            "expected_integral_pmol_kg": 0.0,
+            "methods": {
+              "coarse": {
+                "max_insulin_state_error_pmol_kg": 0.0,
+                "max_plasma_error_pmol_l": 0.0,
+                "max_ledger_state_error_pmol_kg": 0.0,
+                "max_mass_balance_error_pmol_kg": 0.0,
+                "max_input_integral_error_pmol_kg": 0.0,
+                "oracle_mass_balance_error_pmol_kg": 0.0,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 0.0,
+                "final_hepatic_loss_pmol_kg": 0.0,
+                "final_peripheral_loss_pmol_kg": 0.0,
+                "final_inventory_pmol_kg": 0.0,
+                "sampled_peak_plasma_pmol_l": 0.0,
+                "plasma_auc_pmol_min_l": 0.0
+              },
+              "tight": {
+                "max_insulin_state_error_pmol_kg": 0.0,
+                "max_plasma_error_pmol_l": 0.0,
+                "max_ledger_state_error_pmol_kg": 0.0,
+                "max_mass_balance_error_pmol_kg": 0.0,
+                "max_input_integral_error_pmol_kg": 0.0,
+                "oracle_mass_balance_error_pmol_kg": 0.0,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 0.0,
+                "final_hepatic_loss_pmol_kg": 0.0,
+                "final_peripheral_loss_pmol_kg": 0.0,
+                "final_inventory_pmol_kg": 0.0,
+                "sampled_peak_plasma_pmol_l": 0.0,
+                "plasma_auc_pmol_min_l": 0.0
+              },
+              "reference": {
+                "max_insulin_state_error_pmol_kg": 0.0,
+                "max_plasma_error_pmol_l": 0.0,
+                "max_ledger_state_error_pmol_kg": 0.0,
+                "max_mass_balance_error_pmol_kg": 0.0,
+                "max_input_integral_error_pmol_kg": 0.0,
+                "oracle_mass_balance_error_pmol_kg": 0.0,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 0.0,
+                "final_hepatic_loss_pmol_kg": 0.0,
+                "final_peripheral_loss_pmol_kg": 0.0,
+                "final_inventory_pmol_kg": 0.0,
+                "sampled_peak_plasma_pmol_l": 0.0,
+                "plasma_auc_pmol_min_l": 0.0
+              }
+            },
+            "tight_reference_plasma_error_pmol_l": 0.0
+          },
+          "zero__peripheral": {
+            "route": "peripheral",
+            "input": {
+              "edges": [
+                0.0,
+                100.0
+              ],
+              "left": [
+                0.0
+              ],
+              "right": [
+                0.0
+              ],
+              "units": "pmol/(kg min)"
+            },
+            "expected_integral_pmol_kg": 0.0,
+            "methods": {
+              "coarse": {
+                "max_insulin_state_error_pmol_kg": 0.0,
+                "max_plasma_error_pmol_l": 0.0,
+                "max_ledger_state_error_pmol_kg": 0.0,
+                "max_mass_balance_error_pmol_kg": 0.0,
+                "max_input_integral_error_pmol_kg": 0.0,
+                "oracle_mass_balance_error_pmol_kg": 0.0,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 0.0,
+                "final_hepatic_loss_pmol_kg": 0.0,
+                "final_peripheral_loss_pmol_kg": 0.0,
+                "final_inventory_pmol_kg": 0.0,
+                "sampled_peak_plasma_pmol_l": 0.0,
+                "plasma_auc_pmol_min_l": 0.0
+              },
+              "tight": {
+                "max_insulin_state_error_pmol_kg": 0.0,
+                "max_plasma_error_pmol_l": 0.0,
+                "max_ledger_state_error_pmol_kg": 0.0,
+                "max_mass_balance_error_pmol_kg": 0.0,
+                "max_input_integral_error_pmol_kg": 0.0,
+                "oracle_mass_balance_error_pmol_kg": 0.0,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 0.0,
+                "final_hepatic_loss_pmol_kg": 0.0,
+                "final_peripheral_loss_pmol_kg": 0.0,
+                "final_inventory_pmol_kg": 0.0,
+                "sampled_peak_plasma_pmol_l": 0.0,
+                "plasma_auc_pmol_min_l": 0.0
+              },
+              "reference": {
+                "max_insulin_state_error_pmol_kg": 0.0,
+                "max_plasma_error_pmol_l": 0.0,
+                "max_ledger_state_error_pmol_kg": 0.0,
+                "max_mass_balance_error_pmol_kg": 0.0,
+                "max_input_integral_error_pmol_kg": 0.0,
+                "oracle_mass_balance_error_pmol_kg": 0.0,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 0.0,
+                "final_hepatic_loss_pmol_kg": 0.0,
+                "final_peripheral_loss_pmol_kg": 0.0,
+                "final_inventory_pmol_kg": 0.0,
+                "sampled_peak_plasma_pmol_l": 0.0,
+                "plasma_auc_pmol_min_l": 0.0
+              }
+            },
+            "tight_reference_plasma_error_pmol_l": 0.0
+          },
+          "constant__liver": {
+            "route": "liver",
+            "input": {
+              "edges": [
+                0.0,
+                100.0
+              ],
+              "left": [
+                1.0
+              ],
+              "right": [
+                1.0
+              ],
+              "units": "pmol/(kg min)"
+            },
+            "expected_integral_pmol_kg": 100.0,
+            "methods": {
+              "coarse": {
+                "max_insulin_state_error_pmol_kg": 4.990698981632846e-06,
+                "max_plasma_error_pmol_l": 5.72790687539923e-05,
+                "max_ledger_state_error_pmol_kg": 2.3292739230740267e-06,
+                "max_mass_balance_error_pmol_kg": 2.842170943040401e-14,
+                "max_input_integral_error_pmol_kg": 1.4210854715202004e-14,
+                "oracle_mass_balance_error_pmol_kg": 2.7000623958883807e-13,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 99.99999999999999,
+                "final_hepatic_loss_pmol_kg": 79.88801504638195,
+                "final_peripheral_loss_pmol_kg": 14.708890240093957,
+                "final_inventory_pmol_kg": 5.403094713524087,
+                "sampled_peak_plasma_pmol_l": 32.37461948015534,
+                "plasma_auc_pmol_min_l": 2976.2178016320504
+              },
+              "tight": {
+                "max_insulin_state_error_pmol_kg": 2.3930724069032294e-10,
+                "max_plasma_error_pmol_l": 2.9041756837177686e-09,
+                "max_ledger_state_error_pmol_kg": 1.1474288186263948e-10,
+                "max_mass_balance_error_pmol_kg": 5.684341886080802e-14,
+                "max_input_integral_error_pmol_kg": 1.4210854715202004e-14,
+                "oracle_mass_balance_error_pmol_kg": 2.7000623958883807e-13,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 99.99999999999999,
+                "final_hepatic_loss_pmol_kg": 79.8880150463732,
+                "final_peripheral_loss_pmol_kg": 14.708890240090533,
+                "final_inventory_pmol_kg": 5.403094713536291,
+                "sampled_peak_plasma_pmol_l": 32.37461948026655,
+                "plasma_auc_pmol_min_l": 2976.2176932955485
+              },
+              "reference": {
+                "max_insulin_state_error_pmol_kg": 3.552713678800501e-15,
+                "max_plasma_error_pmol_l": 6.47053815393673e-14,
+                "max_ledger_state_error_pmol_kg": 4.121147867408581e-13,
+                "max_mass_balance_error_pmol_kg": 2.842170943040401e-14,
+                "max_input_integral_error_pmol_kg": 1.4210854715202004e-14,
+                "oracle_mass_balance_error_pmol_kg": 2.7000623958883807e-13,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 100.00000000000001,
+                "final_hepatic_loss_pmol_kg": 79.88801504637318,
+                "final_peripheral_loss_pmol_kg": 14.708890240090529,
+                "final_inventory_pmol_kg": 5.403094713536291,
+                "sampled_peak_plasma_pmol_l": 32.374619480266546,
+                "plasma_auc_pmol_min_l": 2976.217693289964
+              }
+            },
+            "tight_reference_plasma_error_pmol_l": 2.904167595545076e-09
+          },
+          "constant__peripheral": {
+            "route": "peripheral",
+            "input": {
+              "edges": [
+                0.0,
+                100.0
+              ],
+              "left": [
+                1.0
+              ],
+              "right": [
+                1.0
+              ],
+              "units": "pmol/(kg min)"
+            },
+            "expected_integral_pmol_kg": 100.0,
+            "methods": {
+              "coarse": {
+                "max_insulin_state_error_pmol_kg": 5.554989447542624e-06,
+                "max_plasma_error_pmol_l": 8.171491478791333e-05,
+                "max_ledger_state_error_pmol_kg": 1.974207664456884e-06,
+                "max_mass_balance_error_pmol_kg": 1.4210854715202004e-14,
+                "max_input_integral_error_pmol_kg": 1.4210854715202004e-14,
+                "oracle_mass_balance_error_pmol_kg": 3.410605131648481e-13,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 99.99999999999999,
+                "final_hepatic_loss_pmol_kg": 55.15833840047503,
+                "final_peripheral_loss_pmol_kg": 37.808092338136056,
+                "final_inventory_pmol_kg": 7.033569261388911,
+                "sampled_peak_plasma_pmol_l": 80.93655368503399,
+                "plasma_auc_pmol_min_l": 7650.048019656966
+              },
+              "tight": {
+                "max_insulin_state_error_pmol_kg": 3.519182723010772e-10,
+                "max_plasma_error_pmol_l": 4.7373478921959295e-09,
+                "max_ledger_state_error_pmol_kg": 1.4031886763632428e-10,
+                "max_mass_balance_error_pmol_kg": 7.105427357601002e-14,
+                "max_input_integral_error_pmol_kg": 1.4210854715202004e-14,
+                "oracle_mass_balance_error_pmol_kg": 3.410605131648481e-13,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 99.99999999999999,
+                "final_hepatic_loss_pmol_kg": 55.15833840046212,
+                "final_peripheral_loss_pmol_kg": 37.80809233813104,
+                "final_inventory_pmol_kg": 7.033569261406898,
+                "sampled_peak_plasma_pmol_l": 80.93655368519791,
+                "plasma_auc_pmol_min_l": 7650.048239363094
+              },
+              "reference": {
+                "max_insulin_state_error_pmol_kg": 7.105427357601002e-15,
+                "max_plasma_error_pmol_l": 1.294107630787346e-13,
+                "max_ledger_state_error_pmol_kg": 2.3447910280083306e-13,
+                "max_mass_balance_error_pmol_kg": 5.684341886080802e-14,
+                "max_input_integral_error_pmol_kg": 1.4210854715202004e-14,
+                "oracle_mass_balance_error_pmol_kg": 3.410605131648481e-13,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 100.00000000000001,
+                "final_hepatic_loss_pmol_kg": 55.1583384004621,
+                "final_peripheral_loss_pmol_kg": 37.80809233813103,
+                "final_inventory_pmol_kg": 7.033569261406898,
+                "sampled_peak_plasma_pmol_l": 80.93655368519791,
+                "plasma_auc_pmol_min_l": 7650.048239389942
+              }
+            },
+            "tight_reference_plasma_error_pmol_l": 4.7373478921959295e-09
+          },
+          "pulse__liver": {
+            "route": "liver",
+            "input": {
+              "edges": [
+                0.0,
+                5.3,
+                15.7,
+                100.0
+              ],
+              "left": [
+                0.0,
+                2.0,
+                0.0
+              ],
+              "right": [
+                0.0,
+                2.0,
+                0.0
+              ],
+              "units": "pmol/(kg min)"
+            },
+            "expected_integral_pmol_kg": 20.8,
+            "methods": {
+              "coarse": {
+                "max_insulin_state_error_pmol_kg": 2.2250966583037268e-05,
+                "max_plasma_error_pmol_l": 0.00026942354951056923,
+                "max_ledger_state_error_pmol_kg": 9.815030292514848e-06,
+                "max_mass_balance_error_pmol_kg": 7.105427357601002e-15,
+                "max_input_integral_error_pmol_kg": 1.7763568394002505e-15,
+                "oracle_mass_balance_error_pmol_kg": 2.1316282072803006e-14,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 20.799999999999997,
+                "final_hepatic_loss_pmol_kg": 17.471992328692792,
+                "final_peripheral_loss_pmol_kg": 3.3279970154345015,
+                "final_inventory_pmol_kg": 1.0655872701628237e-05,
+                "sampled_peak_plasma_pmol_l": 48.22672834893221,
+                "plasma_auc_pmol_min_l": 673.3911050543222
+              },
+              "tight": {
+                "max_insulin_state_error_pmol_kg": 1.9740049594929587e-09,
+                "max_plasma_error_pmol_l": 2.3705140053854905e-08,
+                "max_ledger_state_error_pmol_kg": 8.772360615694197e-10,
+                "max_mass_balance_error_pmol_kg": 1.0658141036401503e-14,
+                "max_input_integral_error_pmol_kg": 1.7763568394002505e-15,
+                "oracle_mass_balance_error_pmol_kg": 2.1316282072803006e-14,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 20.799999999999997,
+                "final_hepatic_loss_pmol_kg": 17.471992328834308,
+                "final_peripheral_loss_pmol_kg": 3.327997015489555,
+                "final_inventory_pmol_kg": 1.0655676129160933e-05,
+                "sampled_peak_plasma_pmol_l": 48.22657215486126,
+                "plasma_auc_pmol_min_l": 673.3912596244791
+              },
+              "reference": {
+                "max_insulin_state_error_pmol_kg": 3.552713678800501e-15,
+                "max_plasma_error_pmol_l": 4.852903615452547e-14,
+                "max_ledger_state_error_pmol_kg": 4.263256414560601e-14,
+                "max_mass_balance_error_pmol_kg": 4.973799150320701e-14,
+                "max_input_integral_error_pmol_kg": 3.552713678800501e-15,
+                "oracle_mass_balance_error_pmol_kg": 2.1316282072803006e-14,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 20.8,
+                "final_hepatic_loss_pmol_kg": 17.471992328834276,
+                "final_peripheral_loss_pmol_kg": 3.327997015489562,
+                "final_inventory_pmol_kg": 1.0655676125010565e-05,
+                "sampled_peak_plasma_pmol_l": 48.22657215657642,
+                "plasma_auc_pmol_min_l": 673.3912596589598
+              }
+            },
+            "tight_reference_plasma_error_pmol_l": 2.3705180494718368e-08
+          },
+          "pulse__peripheral": {
+            "route": "peripheral",
+            "input": {
+              "edges": [
+                0.0,
+                5.3,
+                15.7,
+                100.0
+              ],
+              "left": [
+                0.0,
+                2.0,
+                0.0
+              ],
+              "right": [
+                0.0,
+                2.0,
+                0.0
+              ],
+              "units": "pmol/(kg min)"
+            },
+            "expected_integral_pmol_kg": 20.8,
+            "methods": {
+              "coarse": {
+                "max_insulin_state_error_pmol_kg": 2.2928547147138545e-05,
+                "max_plasma_error_pmol_l": 0.00029848763077201676,
+                "max_ledger_state_error_pmol_kg": 9.426722489713768e-06,
+                "max_mass_balance_error_pmol_kg": 1.0658141036401503e-14,
+                "max_input_integral_error_pmol_kg": 1.7763568394002505e-15,
+                "oracle_mass_balance_error_pmol_kg": 2.1316282072803006e-14,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 20.799999999999997,
+                "final_hepatic_loss_pmol_kg": 12.479988807901861,
+                "final_peripheral_loss_pmol_kg": 8.31999564564445,
+                "final_inventory_pmol_kg": 1.554645369205713e-05,
+                "sampled_peak_plasma_pmol_l": 136.51620001537069,
+                "plasma_auc_pmol_min_l": 1683.4816457501192
+              },
+              "tight": {
+                "max_insulin_state_error_pmol_kg": 2.04869854414369e-09,
+                "max_plasma_error_pmol_l": 2.6968928027736747e-08,
+                "max_ledger_state_error_pmol_kg": 8.324532174697197e-10,
+                "max_mass_balance_error_pmol_kg": 7.105427357601002e-15,
+                "max_input_integral_error_pmol_kg": 1.7763568394002505e-15,
+                "oracle_mass_balance_error_pmol_kg": 2.1316282072803006e-14,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 20.799999999999997,
+                "final_hepatic_loss_pmol_kg": 12.479988808113577,
+                "final_peripheral_loss_pmol_kg": 8.319995645726815,
+                "final_inventory_pmol_kg": 1.5546159608147333e-05,
+                "sampled_peak_plasma_pmol_l": 136.51628278376552,
+                "plasma_auc_pmol_min_l": 1683.4812976546953
+              },
+              "reference": {
+                "max_insulin_state_error_pmol_kg": 5.329070518200751e-15,
+                "max_plasma_error_pmol_l": 9.705807230905094e-14,
+                "max_ledger_state_error_pmol_kg": 3.375077994860476e-14,
+                "max_mass_balance_error_pmol_kg": 2.4868995751603507e-14,
+                "max_input_integral_error_pmol_kg": 3.552713678800501e-15,
+                "oracle_mass_balance_error_pmol_kg": 2.1316282072803006e-14,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 20.8,
+                "final_hepatic_loss_pmol_kg": 12.479988808113593,
+                "final_peripheral_loss_pmol_kg": 8.319995645726822,
+                "final_inventory_pmol_kg": 1.5546159602029523e-05,
+                "sampled_peak_plasma_pmol_l": 136.51628278861006,
+                "plasma_auc_pmol_min_l": 1683.4812976218948
+              }
+            },
+            "tight_reference_plasma_error_pmol_l": 2.696891185139136e-08
+          },
+          "ramp__liver": {
+            "route": "liver",
+            "input": {
+              "edges": [
+                0.0,
+                20.0,
+                100.0
+              ],
+              "left": [
+                0.0,
+                2.0
+              ],
+              "right": [
+                2.0,
+                0.0
+              ],
+              "units": "pmol/(kg min)"
+            },
+            "expected_integral_pmol_kg": 100.0,
+            "methods": {
+              "coarse": {
+                "max_insulin_state_error_pmol_kg": 2.0429928264675823e-05,
+                "max_plasma_error_pmol_l": 0.00024250136020196152,
+                "max_ledger_state_error_pmol_kg": 9.172271933977072e-06,
+                "max_mass_balance_error_pmol_kg": 5.684341886080802e-14,
+                "max_input_integral_error_pmol_kg": 2.842170943040401e-14,
+                "oracle_mass_balance_error_pmol_kg": 7.673861546209082e-13,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 100.00000000000001,
+                "final_hepatic_loss_pmol_kg": 83.41214475680312,
+                "final_peripheral_loss_pmol_kg": 15.78557242919755,
+                "final_inventory_pmol_kg": 0.8022828139993236,
+                "sampled_peak_plasma_pmol_l": 56.53735229414418,
+                "plasma_auc_pmol_min_l": 3194.070738659889
+              },
+              "tight": {
+                "max_insulin_state_error_pmol_kg": 1.1790746157203102e-09,
+                "max_plasma_error_pmol_l": 1.3829036346910889e-08,
+                "max_ledger_state_error_pmol_kg": 5.34850386202379e-10,
+                "max_mass_balance_error_pmol_kg": 1.8474111129762605e-13,
+                "max_input_integral_error_pmol_kg": 2.5579538487363607e-13,
+                "oracle_mass_balance_error_pmol_kg": 7.673861546209082e-13,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 99.99999999999974,
+                "final_hepatic_loss_pmol_kg": 83.41214475666611,
+                "final_peripheral_loss_pmol_kg": 15.785572429144285,
+                "final_inventory_pmol_kg": 0.8022828141895066,
+                "sampled_peak_plasma_pmol_l": 56.53732424940581,
+                "plasma_auc_pmol_min_l": 3194.0704283439795
+              },
+              "reference": {
+                "max_insulin_state_error_pmol_kg": 6.217248937900877e-15,
+                "max_plasma_error_pmol_l": 8.896989961663002e-14,
+                "max_ledger_state_error_pmol_kg": 7.958078640513122e-13,
+                "max_mass_balance_error_pmol_kg": 1.1368683772161603e-13,
+                "max_input_integral_error_pmol_kg": 1.4210854715202004e-14,
+                "oracle_mass_balance_error_pmol_kg": 7.673861546209082e-13,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 99.99999999999999,
+                "final_hepatic_loss_pmol_kg": 83.41214475666617,
+                "final_peripheral_loss_pmol_kg": 15.785572429144281,
+                "final_inventory_pmol_kg": 0.8022828141895034,
+                "sampled_peak_plasma_pmol_l": 56.537324249217136,
+                "plasma_auc_pmol_min_l": 3194.070428300328
+              }
+            },
+            "tight_reference_plasma_error_pmol_l": 1.3828979729702042e-08
+          },
+          "ramp__peripheral": {
+            "route": "peripheral",
+            "input": {
+              "edges": [
+                0.0,
+                20.0,
+                100.0
+              ],
+              "left": [
+                0.0,
+                2.0
+              ],
+              "right": [
+                2.0,
+                0.0
+              ],
+              "units": "pmol/(kg min)"
+            },
+            "expected_integral_pmol_kg": 100.0,
+            "methods": {
+              "coarse": {
+                "max_insulin_state_error_pmol_kg": 2.1609931764476897e-05,
+                "max_plasma_error_pmol_l": 0.0002887106245054208,
+                "max_ledger_state_error_pmol_kg": 8.641175350376784e-06,
+                "max_mass_balance_error_pmol_kg": 2.842170943040401e-14,
+                "max_input_integral_error_pmol_kg": 4.263256414560601e-14,
+                "oracle_mass_balance_error_pmol_kg": 2.4158453015843406e-13,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 100.00000000000003,
+                "final_hepatic_loss_pmol_kg": 59.19589660962331,
+                "final_peripheral_loss_pmol_kg": 39.67289976286021,
+                "final_inventory_pmol_kg": 1.1312036275164905,
+                "sampled_peak_plasma_pmol_l": 142.83875074217138,
+                "plasma_auc_pmol_min_l": 8027.458805570026
+              },
+              "tight": {
+                "max_insulin_state_error_pmol_kg": 1.1871468252877548e-09,
+                "max_plasma_error_pmol_l": 1.6215136261074676e-08,
+                "max_ledger_state_error_pmol_kg": 4.630145156170329e-10,
+                "max_mass_balance_error_pmol_kg": 1.2789769243681803e-13,
+                "max_input_integral_error_pmol_kg": 1.5631940186722204e-13,
+                "oracle_mass_balance_error_pmol_kg": 2.4158453015843406e-13,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 100.00000000000014,
+                "final_hepatic_loss_pmol_kg": 59.19589660942262,
+                "final_peripheral_loss_pmol_kg": 39.67289976278215,
+                "final_inventory_pmol_kg": 1.1312036277952648,
+                "sampled_peak_plasma_pmol_l": 142.8387803112902,
+                "plasma_auc_pmol_min_l": 8027.459242581312
+              },
+              "reference": {
+                "max_insulin_state_error_pmol_kg": 1.3322676295501878e-14,
+                "max_plasma_error_pmol_l": 1.294107630787346e-13,
+                "max_ledger_state_error_pmol_kg": 7.958078640513122e-13,
+                "max_mass_balance_error_pmol_kg": 1.2789769243681803e-13,
+                "max_input_integral_error_pmol_kg": 1.4210854715202004e-14,
+                "oracle_mass_balance_error_pmol_kg": 2.4158453015843406e-13,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 99.99999999999999,
+                "final_hepatic_loss_pmol_kg": 59.19589660942254,
+                "final_peripheral_loss_pmol_kg": 39.672899762782066,
+                "final_inventory_pmol_kg": 1.1312036277952617,
+                "sampled_peak_plasma_pmol_l": 142.83878031344514,
+                "plasma_auc_pmol_min_l": 8027.45924261856
+              }
+            },
+            "tight_reference_plasma_error_pmol_l": 1.621518479011083e-08
+          }
+        },
+        "source_replay": {
+          "liver": {
+            "methods": {
+              "coarse": {
+                "max_insulin_state_error_pmol_kg": 6.462158363973458e-09,
+                "max_plasma_error_pmol_l": 7.829441501042201e-08,
+                "max_ledger_state_error_pmol_kg": 2.8523152728610057e-09,
+                "max_mass_balance_error_pmol_kg": 3.979039320256561e-13,
+                "max_input_integral_error_pmol_kg": 3.410605131648481e-13,
+                "oracle_mass_balance_error_pmol_kg": 3.410605131648481e-13,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 362.71028626929836,
+                "final_hepatic_loss_pmol_kg": 303.3009488053341,
+                "final_peripheral_loss_pmol_kg": 57.56897748694078,
+                "final_inventory_pmol_kg": 1.8403599770231835,
+                "sampled_peak_plasma_pmol_l": 235.03987778813874,
+                "plasma_auc_pmol_min_l": 11648.582170576246
+              },
+              "tight": {
+                "max_insulin_state_error_pmol_kg": 2.4494326567037206e-09,
+                "max_plasma_error_pmol_l": 3.047542588777276e-08,
+                "max_ledger_state_error_pmol_kg": 1.0572236419648107e-09,
+                "max_mass_balance_error_pmol_kg": 3.410605131648481e-13,
+                "max_input_integral_error_pmol_kg": 3.410605131648481e-13,
+                "oracle_mass_balance_error_pmol_kg": 3.410605131648481e-13,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 362.71028626929836,
+                "final_hepatic_loss_pmol_kg": 303.3009488053343,
+                "final_peripheral_loss_pmol_kg": 57.568977486940774,
+                "final_inventory_pmol_kg": 1.8403599770231835,
+                "sampled_peak_plasma_pmol_l": 235.03987778811256,
+                "plasma_auc_pmol_min_l": 11648.582170929425
+              },
+              "reference": {
+                "max_insulin_state_error_pmol_kg": 3.907985046680551e-14,
+                "max_plasma_error_pmol_l": 2.2646883538778552e-13,
+                "max_ledger_state_error_pmol_kg": 4.547473508864641e-13,
+                "max_mass_balance_error_pmol_kg": 7.958078640513122e-13,
+                "max_input_integral_error_pmol_kg": 5.684341886080801e-13,
+                "oracle_mass_balance_error_pmol_kg": 3.410605131648481e-13,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 362.7102862692985,
+                "final_hepatic_loss_pmol_kg": 303.30094880537666,
+                "final_peripheral_loss_pmol_kg": 57.56897748693563,
+                "final_inventory_pmol_kg": 1.8403599769858063,
+                "sampled_peak_plasma_pmol_l": 235.0398777800062,
+                "plasma_auc_pmol_min_l": 11648.582170501568
+              }
+            }
+          },
+          "peripheral": {
+            "methods": {
+              "coarse": {
+                "max_insulin_state_error_pmol_kg": 6.262821039548783e-09,
+                "max_plasma_error_pmol_l": 8.16966426756613e-08,
+                "max_ledger_state_error_pmol_kg": 2.574692847812088e-09,
+                "max_mass_balance_error_pmol_kg": 5.115907697472721e-13,
+                "max_input_integral_error_pmol_kg": 3.410605131648481e-13,
+                "oracle_mass_balance_error_pmol_kg": 4.547473508864641e-13,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 362.71028626929836,
+                "final_hepatic_loss_pmol_kg": 215.88366557650733,
+                "final_peripheral_loss_pmol_kg": 144.335733887577,
+                "final_inventory_pmol_kg": 2.4908868052137043,
+                "sampled_peak_plasma_pmol_l": 592.7720429076473,
+                "plasma_auc_pmol_min_l": 29205.068903028718
+              },
+              "tight": {
+                "max_insulin_state_error_pmol_kg": 2.4377744267667367e-09,
+                "max_plasma_error_pmol_l": 3.061916889286246e-08,
+                "max_ledger_state_error_pmol_kg": 1.0461480570711501e-09,
+                "max_mass_balance_error_pmol_kg": 3.410605131648481e-13,
+                "max_input_integral_error_pmol_kg": 3.410605131648481e-13,
+                "oracle_mass_balance_error_pmol_kg": 4.547473508864641e-13,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 362.71028626929836,
+                "final_hepatic_loss_pmol_kg": 215.88366557650744,
+                "final_peripheral_loss_pmol_kg": 144.33573388757705,
+                "final_inventory_pmol_kg": 2.4908868052137043,
+                "sampled_peak_plasma_pmol_l": 592.772042907588,
+                "plasma_auc_pmol_min_l": 29205.068902633713
+              },
+              "reference": {
+                "max_insulin_state_error_pmol_kg": 2.1316282072803006e-14,
+                "max_plasma_error_pmol_l": 3.8823228923620375e-13,
+                "max_ledger_state_error_pmol_kg": 5.684341886080801e-13,
+                "max_mass_balance_error_pmol_kg": 4.547473508864641e-13,
+                "max_input_integral_error_pmol_kg": 5.684341886080801e-13,
+                "oracle_mass_balance_error_pmol_kg": 4.547473508864641e-13,
+                "minimum_state_pmol_kg": 0.0,
+                "final_input_pmol_kg": 362.7102862692985,
+                "final_hepatic_loss_pmol_kg": 215.8836655764888,
+                "final_peripheral_loss_pmol_kg": 144.33573388759132,
+                "final_inventory_pmol_kg": 2.4908868052184374,
+                "sampled_peak_plasma_pmol_l": 592.7720429209643,
+                "plasma_auc_pmol_min_l": 29205.068903112435
+              }
+            }
+          }
+        },
+        "communication": {
+          "liver": {
+            "intervals": [
+              {
+                "interval_min": 2.0,
+                "max_plasma_error_pmol_l": 0.7493487669619854,
+                "max_interval_amount_error_pmol_kg": 0.0,
+                "final_input_error_pmol_kg": 2.5011104298755527e-12
+              },
+              {
+                "interval_min": 1.0,
+                "max_plasma_error_pmol_l": 0.1836760118496343,
+                "max_interval_amount_error_pmol_kg": 0.0,
+                "final_input_error_pmol_kg": 1.1937117960769683e-12
+              },
+              {
+                "interval_min": 0.5,
+                "max_plasma_error_pmol_l": 0.042772110739170394,
+                "max_interval_amount_error_pmol_kg": 0.0,
+                "final_input_error_pmol_kg": 9.663381206337363e-13
+              },
+              {
+                "interval_min": 0.25,
+                "max_plasma_error_pmol_l": 0.010684232005822166,
+                "max_interval_amount_error_pmol_kg": 0.0,
+                "final_input_error_pmol_kg": 3.979039320256561e-13
+              },
+              {
+                "interval_min": 0.125,
+                "max_plasma_error_pmol_l": 0.0026722348892271016,
+                "max_interval_amount_error_pmol_kg": 1.1102230246251565e-16,
+                "final_input_error_pmol_kg": 2.8421709430404007e-13
+              },
+              {
+                "interval_min": 0.0625,
+                "max_plasma_error_pmol_l": 0.0006681323090372669,
+                "max_interval_amount_error_pmol_kg": 5.551115123125783e-17,
+                "final_input_error_pmol_kg": 2.2737367544323206e-13
+              }
+            ],
+            "fine_to_coarse_error_ratio": 0.0008916172795559713,
+            "refinement_passed": true
+          },
+          "peripheral": {
+            "intervals": [
+              {
+                "interval_min": 2.0,
+                "max_plasma_error_pmol_l": 4.320840100097056,
+                "max_interval_amount_error_pmol_kg": 0.0,
+                "final_input_error_pmol_kg": 2.5011104298755527e-12
+              },
+              {
+                "interval_min": 1.0,
+                "max_plasma_error_pmol_l": 1.113901464783076,
+                "max_interval_amount_error_pmol_kg": 0.0,
+                "final_input_error_pmol_kg": 1.1937117960769683e-12
+              },
+              {
+                "interval_min": 0.5,
+                "max_plasma_error_pmol_l": 0.2791790628144275,
+                "max_interval_amount_error_pmol_kg": 0.0,
+                "final_input_error_pmol_kg": 9.663381206337363e-13
+              },
+              {
+                "interval_min": 0.25,
+                "max_plasma_error_pmol_l": 0.04535360081861428,
+                "max_interval_amount_error_pmol_kg": 0.0,
+                "final_input_error_pmol_kg": 3.979039320256561e-13
+              },
+              {
+                "interval_min": 0.125,
+                "max_plasma_error_pmol_l": 0.011495100552870832,
+                "max_interval_amount_error_pmol_kg": 1.1102230246251565e-16,
+                "final_input_error_pmol_kg": 2.8421709430404007e-13
+              },
+              {
+                "interval_min": 0.0625,
+                "max_plasma_error_pmol_l": 0.002835033060660469,
+                "max_interval_amount_error_pmol_kg": 5.551115123125783e-17,
+                "final_input_error_pmol_kg": 2.2737367544323206e-13
+              }
+            ],
+            "fine_to_coarse_error_ratio": 0.0006561300568833333,
+            "refinement_passed": true
+          }
+        },
+        "baseline_comparison": {
+          "liver": {
+            "dynamic": {
+              "max_insulin_state_error_pmol_kg": 3.907985046680551e-14,
+              "max_plasma_error_pmol_l": 2.2646883538778552e-13,
+              "max_ledger_state_error_pmol_kg": 4.547473508864641e-13,
+              "max_mass_balance_error_pmol_kg": 7.958078640513122e-13,
+              "max_input_integral_error_pmol_kg": 5.684341886080801e-13,
+              "oracle_mass_balance_error_pmol_kg": 3.410605131648481e-13,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 362.7102862692985,
+              "final_hepatic_loss_pmol_kg": 303.30094880537666,
+              "final_peripheral_loss_pmol_kg": 57.56897748693563,
+              "final_inventory_pmol_kg": 1.8403599769858063,
+              "sampled_peak_plasma_pmol_l": 235.0398777800062,
+              "plasma_auc_pmol_min_l": 11648.582170501568
+            },
+            "equal_area_constant": {
+              "max_insulin_state_error_pmol_kg": 2.6645352591003757e-14,
+              "max_plasma_error_pmol_l": 2.74997871542311e-13,
+              "max_ledger_state_error_pmol_kg": 9.237055564881302e-13,
+              "max_mass_balance_error_pmol_kg": 3.581135388230905e-12,
+              "max_input_integral_error_pmol_kg": 3.637978807091713e-12,
+              "oracle_mass_balance_error_pmol_kg": 3.126388037344441e-12,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 362.7102862692946,
+              "final_hepatic_loss_pmol_kg": 289.7620480695601,
+              "final_peripheral_loss_pmol_kg": 53.350657896869315,
+              "final_inventory_pmol_kg": 19.597580302868803,
+              "sampled_peak_plasma_pmol_l": 117.42607499547081,
+              "plasma_auc_pmol_min_l": 10795.047715329532
+            },
+            "zero_max_absolute_state_pmol_kg": 0.0,
+            "dynamic_constant_max_plasma_difference_pmol_l": 118.61132894265671
+          },
+          "peripheral": {
+            "dynamic": {
+              "max_insulin_state_error_pmol_kg": 2.1316282072803006e-14,
+              "max_plasma_error_pmol_l": 3.8823228923620375e-13,
+              "max_ledger_state_error_pmol_kg": 5.684341886080801e-13,
+              "max_mass_balance_error_pmol_kg": 4.547473508864641e-13,
+              "max_input_integral_error_pmol_kg": 5.684341886080801e-13,
+              "oracle_mass_balance_error_pmol_kg": 4.547473508864641e-13,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 362.7102862692985,
+              "final_hepatic_loss_pmol_kg": 215.8836655764888,
+              "final_peripheral_loss_pmol_kg": 144.33573388759132,
+              "final_inventory_pmol_kg": 2.4908868052184374,
+              "sampled_peak_plasma_pmol_l": 592.7720429209643,
+              "plasma_auc_pmol_min_l": 29205.068903112435
+            },
+            "equal_area_constant": {
+              "max_insulin_state_error_pmol_kg": 3.197442310920451e-14,
+              "max_plasma_error_pmol_l": 5.823484338543057e-13,
+              "max_ledger_state_error_pmol_kg": 9.237055564881302e-13,
+              "max_mass_balance_error_pmol_kg": 3.865352482534945e-12,
+              "max_input_integral_error_pmol_kg": 3.637978807091713e-12,
+              "oracle_mass_balance_error_pmol_kg": 2.5579538487363607e-12,
+              "minimum_state_pmol_kg": 0.0,
+              "final_input_pmol_kg": 362.7102862692946,
+              "final_hepatic_loss_pmol_kg": 200.0649671137045,
+              "final_peripheral_loss_pmol_kg": 137.13383995259565,
+              "final_inventory_pmol_kg": 25.511479202998324,
+              "sampled_peak_plasma_pmol_l": 293.56520556808556,
+              "plasma_auc_pmol_min_l": 27747.51186883067
+            },
+            "zero_max_absolute_state_pmol_kg": 0.0,
+            "dynamic_constant_max_plasma_difference_pmol_l": 301.4846867624815
+          }
+        },
+        "gains": {
+          "liver": [
+            {
+              "gain": 0.0,
+              "max_state_scaling_error_pmol_kg": 0.0,
+              "final_input_pmol_kg": 0.0,
+              "sampled_peak_plasma_pmol_l": 0.0
+            },
+            {
+              "gain": 0.5,
+              "max_state_scaling_error_pmol_kg": 0.0,
+              "final_input_pmol_kg": 181.35514313464924,
+              "sampled_peak_plasma_pmol_l": 117.5199388900031
+            },
+            {
+              "gain": 1.0,
+              "max_state_scaling_error_pmol_kg": 0.0,
+              "final_input_pmol_kg": 362.7102862692985,
+              "sampled_peak_plasma_pmol_l": 235.0398777800062
+            },
+            {
+              "gain": 2.0,
+              "max_state_scaling_error_pmol_kg": 0.0,
+              "final_input_pmol_kg": 725.420572538597,
+              "sampled_peak_plasma_pmol_l": 470.0797555600124
+            }
+          ],
+          "peripheral": [
+            {
+              "gain": 0.0,
+              "max_state_scaling_error_pmol_kg": 0.0,
+              "final_input_pmol_kg": 0.0,
+              "sampled_peak_plasma_pmol_l": 0.0
+            },
+            {
+              "gain": 0.5,
+              "max_state_scaling_error_pmol_kg": 0.0,
+              "final_input_pmol_kg": 181.35514313464924,
+              "sampled_peak_plasma_pmol_l": 296.38602146048214
+            },
+            {
+              "gain": 1.0,
+              "max_state_scaling_error_pmol_kg": 0.0,
+              "final_input_pmol_kg": 362.7102862692985,
+              "sampled_peak_plasma_pmol_l": 592.7720429209643
+            },
+            {
+              "gain": 2.0,
+              "max_state_scaling_error_pmol_kg": 0.0,
+              "final_input_pmol_kg": 725.420572538597,
+              "sampled_peak_plasma_pmol_l": 1185.5440858419286
+            }
+          ]
+        },
+        "source_integral_pmol_kg": 362.71028626929825,
+        "evidence_scope": "synthetic incremental insulin kinetics and numerical transfer only",
+        "error_sampling": "maxima over the prespecified 0.25 min output grid plus 5.3 and 15.7 min; not continuous-time error bounds",
+        "human_validation": "not performed",
+        "glucose_control_evaluation": "not performed"
+      },
+      "limitations": [
+        "glucose effect",
+        "reduced exogenous insulin requirement",
+        "physiological basal secretion",
+        "T1D or graft calibration",
+        "therapy efficacy",
+        "resolution of BC001 source initialization discrepancy"
+      ]
+    }
+  },
+  "fresh_process_repetition": {
+    "path": "results/m4-inlet/repeat-01",
+    "manifest_sha256": "2ab5f41da60047f43db6bef5d87be401d57e37594753615fe7af104b0ed37d51",
+    "byte_identical_artifacts": [
+      "source-input.csv",
+      "source-forcing.json",
+      "source-liver.csv",
+      "source-peripheral.csv",
+      "matched-constant-liver.csv",
+      "zero-liver.csv",
+      "verification.json",
+      "report.json",
+      "figure.svg"
+    ],
+    "final_comparison": "All nine listed artifacts also byte-identical between reference-03 and final reference-04."
+  },
+  "checks": {
+    "root_sync": {
+      "command": "uv sync --locked",
+      "result": "passed"
+    },
+    "repository": {
+      "command": "uv run --locked python scripts/check.py",
+      "result": "passed",
+      "tests": 233,
+      "includes_new_artifact_tests": 32,
+      "lint_navigation_sphinx": "passed"
+    },
+    "native_sync": {
+      "command": "uv sync --locked --project experiments/m0/simglucose",
+      "result": "passed"
+    },
+    "native": {
+      "command": "uv run --locked --project experiments/m0/simglucose python -m unittest discover -s experiments/m4/kinetic_inlet -p test_native.py -v",
+      "result": "passed",
+      "tests": 26,
+      "discovery_issue": "Initial discovery exposed duplicate class identity from fallback test imports; corrected to absolute package imports. Both discovery and module commands then passed all 26 tests."
+    },
+    "json_reconstruction": {
+      "commands": [
+        ".venv/bin/python -S -m experiments.m4.kinetic_inlet.report results/m4-inlet/reference-04 --output results/m4-inlet/reconstructed-04.json",
+        "/usr/bin/python3 -S -m experiments.m4.kinetic_inlet.report results/m4-inlet/reference-04 --output results/m4-inlet/reconstructed-system-04.json"
+      ],
+      "result": "both byte-identical to archived report.json"
+    },
+    "figure_reconstruction": {
+      "command": "uv run --locked --project experiments/m0/simglucose python -m experiments.m4.kinetic_inlet.plot results/m4-inlet/reference-04 --output results/m4-inlet/reconstructed-04.svg",
+      "result": "byte-identical to archived figure.svg; PNG visually inspected"
+    }
+  },
+  "figure": {
+    "path": "docs/research/figures/m4-kinetic-inlet.svg",
+    "sha256": "8583ce87942c06ab53231ee76b20ea7aebaa92c88ba646197bd6f945ae0d0016"
+  },
+  "limitations": [
+    "glucose effect",
+    "reduced exogenous insulin requirement",
+    "physiological basal secretion",
+    "T1D or graft calibration",
+    "therapy efficacy",
+    "resolution of BC001 source initialization discrepancy",
+    "Sampled maxima at 403 reporting points are not continuous-time bounds.",
+    "BC-002/2 is a disclosed numerical refinement after BC-002/1 failure, not an independent validation.",
+    "No domain review, real-data fitting, C-peptide observation model, transplant mechanism or patient-data access."
+  ]
+}

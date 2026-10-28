@@ -1,0 +1,245 @@
+{
+  "schema": "lit001-targeted-tracing/1",
+  "seed": "PMID:40263185",
+  "reason": "Independent exclusion audit detected an additional lispro diffusion model behind an antibody-focused title; targeted third round required by protocol.",
+  "manifest": {
+    "finished_utc": "2026-09-19T22:56:17.304058+00:00",
+    "status": [
+      {
+        "seed_pmid": "40263185",
+        "direction": "references",
+        "round": 3,
+        "status": "completed",
+        "count": 24,
+        "api_version": "6.9"
+      },
+      {
+        "seed_pmid": "40263185",
+        "direction": "citations",
+        "round": 3,
+        "status": "completed",
+        "count": 2,
+        "api_version": "6.9"
+      }
+    ],
+    "requests": [
+      {
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/MED/40263185/references?format=json&pageSize=1000&page=1",
+        "time_utc": "2026-09-19T22:56:16.544108+00:00",
+        "file": "40263185-references-1.json",
+        "sha256": "96b4061849ed101fb43027acba6164a04b8439127e7686a761bb2b8ae5810ad0",
+        "status": "retrieved"
+      },
+      {
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/MED/40263185/citations?format=json&pageSize=1000&page=1",
+        "time_utc": "2026-09-19T22:56:17.204777+00:00",
+        "file": "40263185-citations-1.json",
+        "sha256": "08a85d3001e374b5f6df5d94793561151da53a51a75b169f9ce28e10574cff22",
+        "status": "retrieved"
+      }
+    ]
+  },
+  "counts": {
+    "excluded": 13,
+    "already_recorded": 2,
+    "background": 11
+  },
+  "records": [
+    {
+      "key": "PMID:33954956",
+      "title": "Estimation of Clearance and Bioavailability of Therapeutic Monoclonal Antibodies from Only Subcutaneous Injection Data in Humans Based on Comprehensive Analysis of Clinical Data.",
+      "decision": "excluded",
+      "reason": "Different drug, population or process; title does not present conventional-lispro kinetic evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:24815672",
+      "title": "Pharmacokinetics of olanzapine long-acting injection: the clinical perspective.",
+      "decision": "excluded",
+      "reason": "Different drug, population or process; title does not present conventional-lispro kinetic evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:31304367",
+      "title": "Evaluating digital medicine ingestion data from seriously mentally ill patients with a Bayesian Hybrid Model.",
+      "decision": "excluded",
+      "reason": "Different drug, population or process; title does not present conventional-lispro kinetic evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:25122564",
+      "title": "Pharmacokinetic modeling of the subcutaneous absorption of therapeutic proteins.",
+      "decision": "already_recorded",
+      "reason": "Already in the main search or declared tracing; retain source edge without another record.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:28734646",
+      "title": "Quantitative prediction of therapeutic antibody pharmacokinetics after intravenous and subcutaneous injection in human.",
+      "decision": "excluded",
+      "reason": "Different drug, population or process; title does not present conventional-lispro kinetic evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:33017199",
+      "title": "Modeling drug transport within the viable skin - a review.",
+      "decision": "background",
+      "reason": "General transport, identifiability or pharmacometric method; retained as background, not empirical lispro evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:11369080",
+      "title": "Modeling transdermal drug release.",
+      "decision": "background",
+      "reason": "General transport, identifiability or pharmacometric method; retained as background, not empirical lispro evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:9232529",
+      "title": "Development of a cell culture system to study antibody convection in tumors.",
+      "decision": "excluded",
+      "reason": "Different drug, population or process; title does not present conventional-lispro kinetic evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:24167277",
+      "title": "Combining two strategies to improve perfusion and drug delivery in solid tumors.",
+      "decision": "excluded",
+      "reason": "Different drug, population or process; title does not present conventional-lispro kinetic evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:9741910",
+      "title": "Antibody transport in cultured tumor cell layers.",
+      "decision": "excluded",
+      "reason": "Different drug, population or process; title does not present conventional-lispro kinetic evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:8899849",
+      "title": "A novel extravascular input function for the assessment of drug absorption in bioavailability studies.",
+      "decision": "background",
+      "reason": "General transport, identifiability or pharmacometric method; retained as background, not empirical lispro evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18359921",
+      "title": "A note on population analysis of dissolution-absorption models using the inverse Gaussian function.",
+      "decision": "background",
+      "reason": "General transport, identifiability or pharmacometric method; retained as background, not empirical lispro evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:32779124",
+      "title": "Simple Approach to Accurately Predict Pharmacokinetics of Therapeutic Monoclonal Antibodies after Subcutaneous Injection in Humans.",
+      "decision": "excluded",
+      "reason": "Different drug, population or process; title does not present conventional-lispro kinetic evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:34773608",
+      "title": "Comparison of Pharmacokinetics and Pharmacodynamics of Inhaled Technosphere Insulin and Subcutaneous Insulin Lispro in the Treatment of Type 1 Diabetes Mellitus.",
+      "decision": "already_recorded",
+      "reason": "Already in the main search or declared tracing; retain source edge without another record.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:33606280",
+      "title": "Modeling Complex Pharmacokinetics of Long-Acting Injectable Products Using Convolution-Based Models With Nonparametric Input Functions.",
+      "decision": "excluded",
+      "reason": "Different drug, population or process; title does not present conventional-lispro kinetic evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15992045",
+      "title": "The drug delivery and biomaterial attributes of the ATRIGEL technology in the treatment of periodontal disease.",
+      "decision": "excluded",
+      "reason": "Different drug, population or process; title does not present conventional-lispro kinetic evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17653836",
+      "title": "Implementation of a transit compartment model for describing drug absorption in pharmacokinetic studies.",
+      "decision": "background",
+      "reason": "General transport, identifiability or pharmacometric method; retained as background, not empirical lispro evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:26626991",
+      "title": "A first-in-human phase 1 study of ACE910, a novel factor VIII-mimetic bispecific antibody, in healthy subjects.",
+      "decision": "excluded",
+      "reason": "Different drug, population or process; title does not present conventional-lispro kinetic evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21722103",
+      "title": "Spatial anisotropy analyses of subcutaneous tissue layer: potential insights into its biomechanical characteristics.",
+      "decision": "background",
+      "reason": "General transport, identifiability or pharmacometric method; retained as background, not empirical lispro evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:27994553",
+      "title": "Parameter Identifiability of Fundamental Pharmacodynamic Models.",
+      "decision": "background",
+      "reason": "General transport, identifiability or pharmacometric method; retained as background, not empirical lispro evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:13907269",
+      "title": "Rate of release of medicaments from ointment bases containing drugs in suspension.",
+      "decision": "background",
+      "reason": "General transport, identifiability or pharmacometric method; retained as background, not empirical lispro evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12425474",
+      "title": "A dispersion model for cellular signal transduction cascades.",
+      "decision": "excluded",
+      "reason": "Different drug, population or process; title does not present conventional-lispro kinetic evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:11253612",
+      "title": "A whole-body physiologically based pharmacokinetic model incorporating dispersion concepts: short and long time characteristics.",
+      "decision": "background",
+      "reason": "General transport, identifiability or pharmacometric method; retained as background, not empirical lispro evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:3783446",
+      "title": "A dispersion model of hepatic elimination: 1. Formulation of the model and bolus considerations.",
+      "decision": "background",
+      "reason": "General transport, identifiability or pharmacometric method; retained as background, not empirical lispro evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:42251864",
+      "title": "Pharmacokinetic modeling and quantitative prediction of subcutaneous absorption of antibody-based therapeutics - An update.",
+      "decision": "excluded",
+      "reason": "Different drug, population or process; title does not present conventional-lispro kinetic evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:41091236",
+      "title": "Scoping review of the role of pharmacometrics in model-informed drug development.",
+      "decision": "background",
+      "reason": "General transport, identifiability or pharmacometric method; retained as background, not empirical lispro evidence.",
+      "reviewed_material": "title"
+    }
+  ],
+  "publisher_reference_check": "Publisher preview lists35references; index supplies24matchedreferences. All35publisher titles inspected; nonindexed entries are general methods, diffusion/statistics books and software or therapeutic-antibody modeling, not additional conventional-lispro clinical sources. Grant2022 is already PMID34773608 in the main search.",
+  "model_followup": {
+    "key": "PMID:40263185",
+    "decision": "unresolved",
+    "original_source": "https://link.springer.com/article/10.1007/s10928-025-09973-8",
+    "material": "Publisher abstract, references, appendix and public supplementary code; main article subscription preview only.",
+    "primary_source_dependency": "Publisher reference17 is Grant2022 PMID34773608; this is model reuse rather than an independent lispro cohort.",
+    "supplement_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1007%2Fs10928-025-09973-8/MediaObjects/10928_2025_9973_MOESM1_ESM.zip",
+    "supplement_sha256": "d1851bacbd152b83395f9f6163ac1594959b9dd1865510ba5a394f3e8b806a84",
+    "supplement_assessment": "README and Fortran model inspected without execution. Supplied example fits olanzapine20mg, not lispro. It needs ADAPT5 includes/runtime; no lispro-fitted parameter set verified. Mainarticle access and lispro-specific quantitative extraction remain unresolved. No code or data from the ZIP redistributed.",
+    "feasibility": "Useful additional structural comparator; not a complete lispro reference from inspected assets. Does not change selected synthetic Faggionato case."
+  },
+  "stopping_rule": "Grant clinical source already screened in shardC. Other indexed and publisher-preview references did not expose a new essential lispro-specific equation/data dependency. Stop targeted third round with unresolved original article retained.",
+  "reviewer": "Root AI-assisted internal review; no independent human review."
+}

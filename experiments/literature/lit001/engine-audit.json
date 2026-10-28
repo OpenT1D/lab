@@ -1,0 +1,435 @@
+{
+  "schema": "opent1d.literature.engine-audit/1",
+  "audit_id": "LIT-001-L5",
+  "version": "1.0",
+  "date": "2026-09-20",
+  "status": "source_audit_completed",
+  "scope": "Pinned patient insulin pathways, delivery boundaries, parameter provenance, initialization and controller separation; no engine mutation or execution.",
+  "document": "docs/research/lit001-engine-audit.md",
+  "engines": [
+    {
+      "id": "simglucose",
+      "repository": "https://github.com/jxx123/simglucose",
+      "revision": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc",
+      "package_version": "0.2.11",
+      "source_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "ddfd0daee4b3569977580f2d4fc52ffc953c88db7b97f81abecfe2c003e10c75",
+          "line_count": 19,
+          "source_url": "https://github.com/jxx123/simglucose/blob/a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc/LICENSE",
+          "inspected_ranges": []
+        },
+        {
+          "path": "README.md",
+          "sha256": "4215b27992a99c18a7b31602ef5f7424b7381291ddb42ef65cb1a7c2ab594afc",
+          "line_count": 450,
+          "source_url": "https://github.com/jxx123/simglucose/blob/a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc/README.md",
+          "inspected_ranges": [
+            [
+              9,
+              9
+            ]
+          ]
+        },
+        {
+          "path": "definitions_of_vpatient_parameters.md",
+          "sha256": "c9f3038ca7a63d10c1293581d1a2356766fe30520a00853507b99ad21d985933",
+          "line_count": 96,
+          "source_url": "https://github.com/jxx123/simglucose/blob/a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc/definitions_of_vpatient_parameters.md",
+          "inspected_ranges": [
+            [
+              3,
+              8
+            ],
+            [
+              24,
+              57
+            ]
+          ]
+        },
+        {
+          "path": "setup.py",
+          "sha256": "278ab0fb6a0ed855e205da5a51bd3a6ea6087f4d6bcca825b9cc668bf0033dca",
+          "line_count": 25,
+          "source_url": "https://github.com/jxx123/simglucose/blob/a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc/setup.py",
+          "inspected_ranges": [
+            [
+              3,
+              10
+            ]
+          ]
+        },
+        {
+          "path": "simglucose/actuator/pump.py",
+          "sha256": "54dc4ec98f34ae600dacd1edd2e43fc2701512eb0824ce33acb07f3f756a9719",
+          "line_count": 43,
+          "source_url": "https://github.com/jxx123/simglucose/blob/a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc/simglucose/actuator/pump.py",
+          "inspected_ranges": [
+            [
+              23,
+              39
+            ]
+          ]
+        },
+        {
+          "path": "simglucose/controller/basal_bolus_ctrller.py",
+          "sha256": "84df934e8370cb6ed97d55fc48f7afa42b80511d048b0d306f982fbafaf1e89d",
+          "line_count": 83,
+          "source_url": "https://github.com/jxx123/simglucose/blob/a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc/simglucose/controller/basal_bolus_ctrller.py",
+          "inspected_ranges": [
+            [
+              34,
+              64
+            ],
+            [
+              64,
+              80
+            ]
+          ]
+        },
+        {
+          "path": "simglucose/params/vpatient_params.csv",
+          "sha256": "662f3b684d160fdf485edd1d7196dd1cd85c14b53650b030fdb86aaa05bb2e50",
+          "line_count": 31,
+          "source_url": "https://github.com/jxx123/simglucose/blob/a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc/simglucose/params/vpatient_params.csv",
+          "inspected_ranges": [
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "path": "simglucose/patient/t1dpatient.py",
+          "sha256": "7ad1302fbf064805e2294bbcffd482e55448e37e48b63e629a1ed7f11c701547",
+          "line_count": 328,
+          "source_url": "https://github.com/jxx123/simglucose/blob/a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc/simglucose/patient/t1dpatient.py",
+          "inspected_ranges": [
+            [
+              40,
+              64
+            ],
+            [
+              114,
+              119
+            ],
+            [
+              172,
+              199
+            ],
+            [
+              205,
+              220
+            ],
+            [
+              247,
+              285
+            ]
+          ]
+        },
+        {
+          "path": "simglucose/simulation/env.py",
+          "sha256": "8c5d16b66df270b22b13cd64f8e059efe0a5f7c732f8673f36af0170d5d0d199",
+          "line_count": 187,
+          "source_url": "https://github.com/jxx123/simglucose/blob/a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc/simglucose/simulation/env.py",
+          "inspected_ranges": [
+            [
+              48,
+              81
+            ]
+          ]
+        }
+      ],
+      "checkout_clean": true
+    },
+    {
+      "id": "lt1-cambridge",
+      "repository": "https://github.com/hpeuscher/loopinsight1",
+      "revision": "9a6092065bd821f88691cd8d03b0550acd665573",
+      "package_version": "2.1.0",
+      "source_files": [
+        {
+          "path": "LICENSE.md",
+          "sha256": "5b786cd1552015d73f9a6e294c4a78fbee89801c998345cfe226e36d624962eb",
+          "line_count": 21,
+          "source_url": "https://github.com/hpeuscher/loopinsight1/blob/9a6092065bd821f88691cd8d03b0550acd665573/LICENSE.md",
+          "inspected_ranges": []
+        },
+        {
+          "path": "examples/MPC/IFAC_EDT_2025_Hauser/scripts/ReferenceScenario.ts",
+          "sha256": "0f83faca10d32d345b3385b398329e180e41f667632d86bcfc96cd15779beb83",
+          "line_count": 68,
+          "source_url": "https://github.com/hpeuscher/loopinsight1/blob/9a6092065bd821f88691cd8d03b0550acd665573/examples/MPC/IFAC_EDT_2025_Hauser/scripts/ReferenceScenario.ts",
+          "inspected_ranges": [
+            [
+              19,
+              48
+            ]
+          ]
+        },
+        {
+          "path": "package.json",
+          "sha256": "f4abfb7fd13d21f64cbc683dcfb7b59f8eeb952ff561e6c3ac4f13aed689349d",
+          "line_count": 67,
+          "source_url": "https://github.com/hpeuscher/loopinsight1/blob/9a6092065bd821f88691cd8d03b0550acd665573/package.json",
+          "inspected_ranges": [
+            [
+              1,
+              13
+            ]
+          ]
+        },
+        {
+          "path": "src/core/AbstractODEPatient.ts",
+          "sha256": "ee350f796809e96c58a5b3f5925babf1b7125b453c9c9ad5d63b368a1e77f4ab",
+          "line_count": 293,
+          "source_url": "https://github.com/hpeuscher/loopinsight1/blob/9a6092065bd821f88691cd8d03b0550acd665573/src/core/AbstractODEPatient.ts",
+          "inspected_ranges": [
+            [
+              177,
+              258
+            ]
+          ]
+        },
+        {
+          "path": "src/core/Simulator.ts",
+          "sha256": "8859ac9297ecb0a6d49672639ad1942009f3b00f07f973cceb6de9b6dce3d563",
+          "line_count": 464,
+          "source_url": "https://github.com/hpeuscher/loopinsight1/blob/9a6092065bd821f88691cd8d03b0550acd665573/src/core/Simulator.ts",
+          "inspected_ranges": [
+            [
+              48,
+              52
+            ],
+            [
+              179,
+              250
+            ],
+            [
+              319,
+              341
+            ]
+          ]
+        },
+        {
+          "path": "src/core/actuators/StaticInsulinPump.ts",
+          "sha256": "a74af3bad723e0538614cb4d74219bf622dd17df2138029b3e07493be0fe5993",
+          "line_count": 144,
+          "source_url": "https://github.com/hpeuscher/loopinsight1/blob/9a6092065bd821f88691cd8d03b0550acd665573/src/core/actuators/StaticInsulinPump.ts",
+          "inspected_ranges": [
+            [
+              67,
+              93
+            ]
+          ]
+        },
+        {
+          "path": "src/core/controllers/MPC_Hovorka2004.ts",
+          "sha256": "3559367729613890d2250a73e8a635fd27d1a1bb33f60614bfafbc776f19eeee",
+          "line_count": 454,
+          "source_url": "https://github.com/hpeuscher/loopinsight1/blob/9a6092065bd821f88691cd8d03b0550acd665573/src/core/controllers/MPC_Hovorka2004.ts",
+          "inspected_ranges": [
+            [
+              49,
+              120
+            ],
+            [
+              232,
+              249
+            ]
+          ]
+        },
+        {
+          "path": "src/core/models/Cambridge.ts",
+          "sha256": "aa9b72e27e7bc947a9bd77123137dc24fd0e06383214daf94bcf2f5ceee8efad",
+          "line_count": 418,
+          "source_url": "https://github.com/hpeuscher/loopinsight1/blob/9a6092065bd821f88691cd8d03b0550acd665573/src/core/models/Cambridge.ts",
+          "inspected_ranges": [
+            [
+              27,
+              43
+            ],
+            [
+              91,
+              117
+            ],
+            [
+              124,
+              128
+            ],
+            [
+              154,
+              162
+            ],
+            [
+              187,
+              218
+            ],
+            [
+              227,
+              238
+            ]
+          ]
+        },
+        {
+          "path": "src/core/solvers/SolverRK1_2.ts",
+          "sha256": "60bdb42df3217e85fe00952cbab764e30a2150f7d60988062b95584e92aeb190",
+          "line_count": 95,
+          "source_url": "https://github.com/hpeuscher/loopinsight1/blob/9a6092065bd821f88691cd8d03b0550acd665573/src/core/solvers/SolverRK1_2.ts",
+          "inspected_ranges": [
+            [
+              20,
+              69
+            ]
+          ]
+        },
+        {
+          "path": "src/types/Signals.ts",
+          "sha256": "6d826685e5bd3ead18efc41d6a5b11da8ba330a89a8535ee22e6eb8e9fab977c",
+          "line_count": 170,
+          "source_url": "https://github.com/hpeuscher/loopinsight1/blob/9a6092065bd821f88691cd8d03b0550acd665573/src/types/Signals.ts",
+          "inspected_ranges": [
+            [
+              43,
+              64
+            ]
+          ]
+        }
+      ],
+      "checkout_clean": true
+    }
+  ],
+  "source_to_engine": [
+    {
+      "id": "SG-SC",
+      "engine": "simglucose",
+      "classification": "verified_code_mapping",
+      "source": "simglucose/patient/t1dpatient.py",
+      "lines": [
+        114,
+        199
+      ],
+      "input": "6000 * delivered_U_per_min / BW_kg in pmol/kg/min",
+      "states": {
+        "x[10]": "S1, pmol/kg",
+        "x[11]": "S2, pmol/kg"
+      },
+      "equations_nonnegative_region": [
+        "dS1 = input - (ka1 + kd)*S1",
+        "dS2 = kd*S1 - ka2*S2",
+        "appearance = ka1*S1 + ka2*S2"
+      ],
+      "observation": "appearance is an audit alias, not an exported native signal",
+      "separate_local_degradation": false
+    },
+    {
+      "id": "SG-SYSTEMIC",
+      "engine": "simglucose",
+      "classification": "verified_code_mapping",
+      "source": "simglucose/patient/t1dpatient.py",
+      "lines": [
+        172,
+        199
+      ],
+      "states": {
+        "x[5]": "Ip, pmol/kg",
+        "x[9]": "Il, pmol/kg"
+      },
+      "equations_nonnegative_region": [
+        "dIp = -(m2 + m4)*Ip + m1*Il + appearance",
+        "dIl = -(m1 + m30)*Il + m2*Ip",
+        "plasma_insulin_pmol_per_L = Ip / Vi"
+      ],
+      "irreversible_losses": [
+        "m4*Ip",
+        "m30*Il"
+      ],
+      "distribution_volume": "Vi in L/kg",
+      "endogenous_secretion_input": false
+    },
+    {
+      "id": "LT1-SC-SYSTEMIC",
+      "engine": "lt1-cambridge",
+      "classification": "verified_code_mapping",
+      "source": "src/core/models/Cambridge.ts",
+      "lines": [
+        124,
+        162
+      ],
+      "input": "1000 * delivered_U_per_h / 60 in mU/min",
+      "states": {
+        "S1": "mU",
+        "S2": "mU",
+        "I": "mU/L"
+      },
+      "equations": [
+        "dS1 = input - S1/tmaxI",
+        "dS2 = (S1-S2)/tmaxI",
+        "appearance = S2/tmaxI",
+        "dI = appearance/(VI*BW) - ke*I"
+      ],
+      "distribution_volume": "VI*BW in L",
+      "irreversible_loss": "ke*I in concentration/time",
+      "separate_local_degradation": false,
+      "endogenous_secretion_input": false
+    },
+    {
+      "id": "PARAMETER-NAME-COLLISION",
+      "classification": "documented_difference",
+      "mapping_refs": [
+        "SG-SC",
+        "LT1-SC-SYSTEMIC"
+      ],
+      "finding": "simglucose ka1/ka2 control subcutaneous appearance; Cambridge ka1/ka2/ka3 control insulin-action deactivation. Values are not interchangeable by name."
+    },
+    {
+      "id": "LT1-CONTROLLER",
+      "engine": "lt1-cambridge",
+      "classification": "verified_code_mapping",
+      "source": "src/core/controllers/MPC_Hovorka2004.ts",
+      "lines": [
+        49,
+        120
+      ],
+      "finding": "MPC owns a separate Cambridge predictor, EKF and forward Euler solver; subject physiology remains the Simulator patient. Predictor reset uses a five-minute solver step."
+    },
+    {
+      "id": "PARAMETER-PROVENANCE",
+      "classification": "unresolved",
+      "finding": "Engine-level ancestry is documented; original study/table/estimation ancestry is not independently verified for each parameter or profile. simglucose glossary describes inferred definitions and contains dimension inconsistencies."
+    },
+    {
+      "id": "LISPRO-IDENTITY",
+      "classification": "unresolved",
+      "finding": "No conventional-lispro product or concentration identity found in the inspected patient modules. Generic short-acting-insulin comments are insufficient for a product-specific claim."
+    },
+    {
+      "id": "SC-SPECIAL-CASE",
+      "classification": "algebraic_inference",
+      "finding": "With consistent unit normalization, the simglucose SC equations become Cambridge serial SC equations when ka1=0 and kd=ka2=1/tmaxI. This is not an assertion about pinned parameters or full-system equivalence."
+    }
+  ],
+  "rights": {
+    "simglucose": "Upstream MIT declaration verified; independent parameter-asset chain of title unresolved.",
+    "lt1-cambridge": "Upstream MIT declaration verified; parameter-by-parameter experimental attribution unresolved."
+  },
+  "checks_completed": [
+    "Exact Git pins verified",
+    "Both source checkouts clean",
+    "All inventoried SHA-256 hashes recomputed",
+    "All inventoried source ranges checked against file lengths",
+    "Insulin dimensions and displayed balance identities inspected",
+    "Audit JSON parsed"
+  ],
+  "not_performed": [
+    "Native simulation",
+    "Numerical convergence",
+    "Published-figure reproduction",
+    "Assay or formulation conversion validation",
+    "Independent parameter-origin review",
+    "Independent human reproduction"
+  ],
+  "decision": "Retain both native engines unchanged; use the standalone literature reference to resolve kinetic specification and evidence gaps before any separately evaluated coupling.",
+  "upstream_parameter_tables_redistributed": false
+}

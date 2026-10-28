@@ -1,0 +1,286 @@
+{
+  "schema_version": "1.0",
+  "work_package": "LIT-001",
+  "extracted_on": "2026-09-20",
+  "source_id": "faggionato2021",
+  "source_doi": "10.3390/metabo11040235",
+  "source_pdf_sha256": "4587ea88d98cb6f1dca6a73444aca42602eb62ebf39cccedad11412db80f300d",
+  "source_license": "CC-BY-4.0",
+  "attribution": "Edoardo Faggionato, Michele Schiavon and Chiara Dalla Man, Metabolites 2021, 11(4), 235. DOI 10.3390/metabo11040235. Structured transcription and interpretation by OpenT1D; source paper unchanged.",
+  "model_id": "faggionato2021-model11",
+  "model_status": "published_equation_specification_with_explicit_interpretations; exact_cohort_reconstruction_incomplete",
+  "locations": {
+    "structural": "PDF p5, Eq(3), Figure3; p6 section2.3",
+    "population": "PDF p9, Eq(12)-(13)",
+    "parameter_values": "PDF p12, Table2",
+    "measurement_error": "PDF p6, Eq(7)"
+  },
+  "deterministic_parameters": {
+    "tau": {
+      "value": 5.62,
+      "unit": "min",
+      "rse_percent": 7.5,
+      "statistic": "estimated_population_fixed_effect",
+      "meaning": "Subject-specific delay of the administered input",
+      "source_location": "Table2, PDF p12"
+    },
+    "V_I": {
+      "value": 0.135,
+      "unit": "L/kg",
+      "rse_percent": 3.58,
+      "statistic": "estimated_population_fixed_effect",
+      "meaning": "Plasma insulin distribution volume normalized by body weight",
+      "source_location": "Table2, PDF p12"
+    },
+    "alpha": {
+      "value": 0.0155,
+      "unit": "1/min",
+      "rse_percent": 10.5,
+      "statistic": "estimated_population_fixed_effect",
+      "meaning": "Positive difference k_d-k_a2 introduced to resolve exchangeable rates",
+      "source_location": "Table2, PDF p12"
+    },
+    "k_a1": {
+      "value": 0.000134,
+      "unit": "1/min",
+      "rse_percent": 36.9,
+      "statistic": "estimated_population_fixed_effect",
+      "meaning": "Transfer from first subcutaneous compartment directly to plasma",
+      "source_location": "Table2, PDF p12"
+    },
+    "k_a2": {
+      "value": 0.0128,
+      "unit": "1/min",
+      "rse_percent": 3.43,
+      "statistic": "estimated_population_fixed_effect",
+      "meaning": "Transfer from second subcutaneous compartment to plasma",
+      "source_location": "Table2, PDF p12"
+    },
+    "k_e": {
+      "value": 0.113,
+      "unit": "1/min",
+      "rse_percent": 3.33,
+      "statistic": "estimated_population_fixed_effect",
+      "meaning": "Systemic fractional insulin elimination",
+      "source_location": "Table2, PDF p12"
+    }
+  },
+  "derived_parameters": {
+    "k_d": {
+      "expression": "k_a2 + alpha",
+      "reference_value": 0.0283,
+      "unit": "1/min",
+      "source_location": "Figure3, PDF p5; section2.3, PDF p6",
+      "note": "Derived at zero random effects and zero BMI deviation; do not add independently sampled marginal rates."
+    }
+  },
+  "state_order": [
+    "I_sc1",
+    "I_sc2",
+    "I_p"
+  ],
+  "state_units": "mU/kg",
+  "input_unit": "mU/(kg*min)",
+  "output_unit": "mU/L",
+  "time_unit": "min",
+  "normalization_status": "OpenT1D dimensional interpretation: source calls states masses but V_I is L/kg and output is microU/mL; all masses and input are normalized consistently by body weight. 1 mU/L = 1 microU/mL.",
+  "equations": {
+    "dI_sc1_dt": "-(k_a1+k_d)*I_sc1+u(t-tau)",
+    "dI_sc2_dt": "k_d*I_sc1-k_a2*I_sc2",
+    "dI_p_dt": "-k_e*I_p+k_a1*I_sc1+k_a2*I_sc2",
+    "output": "I_p/V_I",
+    "system_matrix": [
+      [
+        -0.028434,
+        0,
+        0
+      ],
+      [
+        0.0283,
+        -0.0128,
+        0
+      ],
+      [
+        0.000134,
+        0.0128,
+        -0.113
+      ]
+    ],
+    "matrix_note": "Numerical matrix for reference fixed effects only; rows follow state_order."
+  },
+  "source_notation_issues": [
+    {
+      "location": "Eq(3), plasma derivative, PDF p5",
+      "printed": "k_a1(t)*I_sc1(t)",
+      "interpretation": "Treat k_a1 as time-constant for a fixed individual, consistent with surrounding rate-constant definition, Figure3 and Eq(12).",
+      "status": "explicit_interpretation; no_author_confirmation_or_formal_correction_located"
+    },
+    {
+      "location": "Table3 header, PDF p13",
+      "printed": "Q2 over the column described as third quartile (75%) in caption",
+      "interpretation": "Store that column as q75 according to caption; Table3 is not an individual parameter vector."
+    }
+  ],
+  "variability": {
+    "parameter_order": [
+      "tau",
+      "V_I",
+      "alpha",
+      "k_a1",
+      "k_a2",
+      "k_e"
+    ],
+    "random_effect_distribution": "eta ~ Normal(0, Omega)",
+    "transformation": "parameter_i=population_i*exp(eta_i), except k_a2=population_k_a2*exp(beta_BMI_k_a2*delta_BMI+eta_k_a2)",
+    "covariate": {
+      "name": "BMI",
+      "unit": "kg/m^2",
+      "deviation_definition": "delta_BMI=BMI-cohort_mean_BMI",
+      "cohort_mean_BMI": null,
+      "missing_status": "Numeric cohort mean not located in checked full text or Table2; no value inferred from mean weight/height.",
+      "coefficient": -0.0865,
+      "coefficient_unit": "m^2/kg",
+      "rse_percent": 13.6
+    },
+    "random_effect_sd": {
+      "omega_tau": {
+        "value": 0.731,
+        "rse_percent": 8.81,
+        "unit": "1",
+        "statistic": "standard_deviation_of_log_scale_random_effect"
+      },
+      "omega_V_I": {
+        "value": 0.319,
+        "rse_percent": 7.17,
+        "unit": "1",
+        "statistic": "standard_deviation_of_log_scale_random_effect"
+      },
+      "omega_alpha": {
+        "value": 1.02,
+        "rse_percent": 7.98,
+        "unit": "1",
+        "statistic": "standard_deviation_of_log_scale_random_effect"
+      },
+      "omega_k_a1": {
+        "value": 1.86,
+        "rse_percent": 11.8,
+        "unit": "1",
+        "statistic": "standard_deviation_of_log_scale_random_effect"
+      },
+      "omega_k_a2": {
+        "value": 0.322,
+        "rse_percent": 7.23,
+        "unit": "1",
+        "statistic": "standard_deviation_of_log_scale_random_effect"
+      },
+      "omega_k_e": {
+        "value": 0.303,
+        "rse_percent": 6.51,
+        "unit": "1",
+        "statistic": "standard_deviation_of_log_scale_random_effect"
+      }
+    },
+    "nonzero_correlations": [
+      {
+        "parameters": [
+          "V_I",
+          "k_a2"
+        ],
+        "value": 0.681,
+        "rse_percent": 8.19
+      },
+      {
+        "parameters": [
+          "V_I",
+          "k_e"
+        ],
+        "value": -0.579,
+        "rse_percent": 11.1
+      },
+      {
+        "parameters": [
+          "k_a2",
+          "k_e"
+        ],
+        "value": -0.506,
+        "rse_percent": 14.0
+      }
+    ],
+    "covariance_rule": "Omega_ii=omega_i^2; Omega_ij=omega_i*omega_j*rho_ij for the three listed symmetric pairs; remaining off-diagonal entries zero.",
+    "limits": [
+      "Between-person model; each person contributed one analyzed lispro administration.",
+      "Not a within-person or day-to-day variability model.",
+      "Original covariates and fitted individual vectors not recovered."
+    ]
+  },
+  "measurement_error": {
+    "expression": "v(t)=sqrt(a_study^2+b_study^2*y(t)^2)*e(t); e(t)~Normal(0,1)",
+    "parameters": {
+      "a_study1": {
+        "value": 1.96,
+        "unit": "microU/mL",
+        "rse_percent": 8.85,
+        "statistic": "estimated_measurement_error_parameter"
+      },
+      "b_study1": {
+        "value": 0.0773,
+        "unit": "1",
+        "rse_percent": 7.66,
+        "statistic": "estimated_measurement_error_parameter"
+      },
+      "a_study2": {
+        "value": 2.33,
+        "unit": "microU/mL",
+        "rse_percent": 5.47,
+        "statistic": "estimated_measurement_error_parameter"
+      },
+      "b_study2": {
+        "value": 0.0516,
+        "unit": "1",
+        "rse_percent": 5.79,
+        "statistic": "estimated_measurement_error_parameter"
+      },
+      "a_study3": {
+        "value": 2.77,
+        "unit": "microU/mL",
+        "rse_percent": 5.17,
+        "statistic": "estimated_measurement_error_parameter"
+      },
+      "b_study3": {
+        "value": 0.0559,
+        "unit": "1",
+        "rse_percent": 5.76,
+        "statistic": "estimated_measurement_error_parameter"
+      }
+    },
+    "use_in_deterministic_example": false,
+    "exclusions": "Observed below-quantification measurements and very unreliable insulin-assay measurements discarded by authors; no attempt to reconstruct individual omissions."
+  },
+  "initial_state_reported": null,
+  "input_history_reported": null,
+  "missing_for_exact_result": [
+    "Original subject-specific parameters and covariates",
+    "Numerical cohort-mean BMI",
+    "Explicit initial states/prior insulin history and exact input representation",
+    "Original empirical observations and omitted-observation mask",
+    "Original simulation/draw and visual-predictive-check configuration"
+  ],
+  "permitted_synthetic_case": {
+    "label": "OpenT1D synthetic zero-covariate-deviation single-bolus example",
+    "parameter_choice": "Six fixed effects, eta_i=0, delta_BMI=0; not an arithmetic mean person or cohort-average response",
+    "dose": 0.2,
+    "dose_unit": "U/kg",
+    "dose_mU_per_kg": 200.0,
+    "dose_time_min": 0.0,
+    "delayed_state_jump_time_min": 5.62,
+    "delayed_jump": "I_sc1(tau+)=I_sc1(tau-)+200",
+    "initial_state": [
+      0,
+      0,
+      0
+    ],
+    "pre_dose_history": "u(t)=0 for t<0",
+    "assumption_status": "All initialization and impulse choices are explicit synthetic assumptions; not recovered clinical initial conditions.",
+    "clinical_or_published_curve_claim": false
+  }
+}

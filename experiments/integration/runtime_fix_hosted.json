@@ -1,0 +1,290 @@
+{
+  "schema": "opent1d.runtime-fix-hosted/1",
+  "recorded_utc": "2026-10-03T14:00:55.598159+00:00",
+  "status": "hosted_candidate_verification_completed",
+  "scope": "Internal automated verification of the complete runtime fix and preserved researcher-entry/M3-comparison contributions. This records the completed candidate execution; it is not a claim about a later publication commit.",
+  "source_commit": "e4b631de436f1bec9acf49a9887a237a6bfeafbb",
+  "run": {
+    "id": 37117782673,
+    "url": "https://github.com/OpenT1D/OpenT1D/actions/runs/37117782673",
+    "created_utc": "2026-10-03T10:51:39Z",
+    "updated_utc": "2026-10-03T13:50:37Z",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "id": 111187826968,
+        "name": "Repository checks",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 111187827009,
+        "name": "Internal numerical verification",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 111187827020,
+        "name": "C-peptide volume sensitivity",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 111187827035,
+        "name": "LT1 Cambridge reference",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 111187827039,
+        "name": "M3 causal forecasting",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 111187827041,
+        "name": "Bounded beta-cell glucose feedback",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 111187827042,
+        "name": "M1 demonstration",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 111187827045,
+        "name": "LIT-002 absorption verification",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 111187827046,
+        "name": "Conditional beta-cell parameter recovery",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 111187827070,
+        "name": "Conditional beta-cell likelihood profiles",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 111187827085,
+        "name": "simglucose reference",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 111187827108,
+        "name": "Internal robustness verification",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 111187827131,
+        "name": "M2 Cambridge integration",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "repository_checks": {
+    "tests": 878,
+    "documentation_build_passed": true,
+    "actual_ci_log_verified": true
+  },
+  "historical_runtime": {
+    "simglucose_fresh_executions": 2,
+    "original_linux_baseline_matched": true,
+    "exact_reset": true,
+    "m1_scheduled": 32,
+    "m1_case_status_counts": {
+      "completed": 28,
+      "terminated": 4
+    },
+    "m1_historical_collection": "linux_final",
+    "m1_replays_byte_exact": 3,
+    "m1_report_without_site_packages_byte_exact": true,
+    "m2_scheduled": 40,
+    "m2_case_status_counts": {
+      "completed": 36,
+      "terminated": 4
+    },
+    "m2_historical_and_lifecycle_checks_passed": true,
+    "m2_simulator_free_reconstruction_byte_exact": true,
+    "numerical_tolerance_added": false
+  },
+  "volume_sensitivity": {
+    "archive": "results/runtime-fix-main-delivery-20261003/candidate/artifacts/11272955173-m4-volume-sensitivity.zip",
+    "archive_sha256": "3122094404c76e5d07b68b0075fc205ce7ad14522bcd931513be1938a192a236",
+    "execution_commit": "e4b631de436f1bec9acf49a9887a237a6bfeafbb",
+    "git_dirty": false,
+    "started_utc": "2026-10-03T10:52:05.353810+00:00",
+    "finished_utc": "2026-10-03T11:10:02.586407+00:00",
+    "elapsed_minutes": 17.953876616666665,
+    "passed": true,
+    "gates": {
+      "forward_verification": true,
+      "sensitivity_refinement": true,
+      "fresh_process_repeat": true,
+      "all_fits_completed": true,
+      "noiseless_eligible_recovery": true
+    },
+    "analyses": 60,
+    "fit_starts": 120,
+    "repeat_artifact_differences": 0,
+    "manifest_sha256": "2868d000630f9e2ffbf960eda5b3acad0fa7c5fb306ac1f8b12a6b87f8bb01ce",
+    "report_sha256": "deeb83b8a961fa41cf0ce085740086fabb0600ba4c645a613f4292a5bbb057a4"
+  },
+  "likelihood_profiles": {
+    "runner_labels": [
+      "macos-14"
+    ],
+    "execution_commit": "e4b631de436f1bec9acf49a9887a237a6bfeafbb",
+    "git_dirty": false,
+    "started_utc": "2026-10-03T10:52:00.456439+00:00",
+    "finished_utc": "2026-10-03T13:50:26.986257+00:00",
+    "elapsed_minutes": 178.44216363333334,
+    "runtime": {
+      "python": "3.12.13",
+      "numpy": "1.26.4",
+      "scipy": "1.13.1"
+    },
+    "native_upstream_revision": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc",
+    "gates": {
+      "forward_and_oracle_verification": true,
+      "fresh_process_repeat": true,
+      "all_fits_completed": true,
+      "noiseless_baseline_recovery": true,
+      "baseline_reference_agreement": true,
+      "parent_comparator_agreement": true,
+      "profile_checks": true
+    },
+    "cases_per_process": 9,
+    "profiles_per_process": 27,
+    "fit_starts_per_process": 1364,
+    "repeat_artifact_differences": 0,
+    "case_files_primary_repeat_byte_exact": 9,
+    "source_snapshots_matching_current": 42,
+    "report_and_figure_reconstruction_byte_exact": true,
+    "protocol_sha256": "9bd2af2594a5cc415c058f9a6e750cb6b310c3cd13c6dee580a8914df4a49418",
+    "manifest_sha256": "673fc536750eb5549d8ff87d81e2fc91f427522cb66ce1dd137408ab802bd72a",
+    "report_sha256": "284850a21f5eeeb362532d26e8b7d3bb8c6113f1fad62518e148bd01ed8ec285",
+    "figure_sha256": "43455a9146c1d09c2c5592db4fad2fe4d12bb68295f0a84b841c26f6ad3d1e0e"
+  },
+  "evidence": {
+    "availability": "Synthetic CI artifacts retained as local ignored ZIP archives and in the linked GitHub run; raw simulations are not versioned here.",
+    "artifacts": [
+      {
+        "id": 11274913148,
+        "name": "m4-profile-likelihood",
+        "bytes": 2729902,
+        "sha256": "e5703c9c5ba5b2669a43d92be3239208913f187784575b6aab196957c0295ede",
+        "local_path": "results/runtime-fix-main-delivery-20261003/candidate/artifacts/11274913148-m4-profile-likelihood.zip"
+      },
+      {
+        "id": 11273140359,
+        "name": "m4-feedback",
+        "bytes": 113649440,
+        "sha256": "9e6381f46d3883c3cba024ed79a44860d4ee1445bc8b032b2217099eb456b797",
+        "local_path": "results/runtime-fix-main-delivery-20261003/candidate/artifacts/11273140359-m4-feedback.zip"
+      },
+      {
+        "id": 11273035068,
+        "name": "internal-robustness",
+        "bytes": 81795996,
+        "sha256": "5cd9d9e7b679de79ac8ebc6df1a65122620dc08684ee0ac90a36bcac4470e577",
+        "local_path": "results/runtime-fix-main-delivery-20261003/candidate/artifacts/11273035068-internal-robustness.zip"
+      },
+      {
+        "id": 11272955173,
+        "name": "m4-volume-sensitivity",
+        "bytes": 1273704,
+        "sha256": "3122094404c76e5d07b68b0075fc205ce7ad14522bcd931513be1938a192a236",
+        "local_path": "results/runtime-fix-main-delivery-20261003/candidate/artifacts/11272955173-m4-volume-sensitivity.zip"
+      },
+      {
+        "id": 11272547232,
+        "name": "internal-verification",
+        "bytes": 68469273,
+        "sha256": "89d588ed770caeea08e13cbf2fdcfc37f0921fe05851e6e3a5305fbe2de09540",
+        "local_path": "results/runtime-fix-main-delivery-20261003/candidate/artifacts/11272547232-internal-verification.zip"
+      },
+      {
+        "id": 11272426455,
+        "name": "m3-forecast",
+        "bytes": 2066057,
+        "sha256": "b114cb8aa2b5ba45343ef878c9cce32a3992d6491ac52d092bb6764053e58673",
+        "local_path": "results/runtime-fix-main-delivery-20261003/candidate/artifacts/11272426455-m3-forecast.zip"
+      },
+      {
+        "id": 11272391598,
+        "name": "lt1-reference",
+        "bytes": 2194030,
+        "sha256": "4a7d3eba6b9656bfd2a9504380b9c42265673c2845bdf5c463fb3f6cc5bae3d6",
+        "local_path": "results/runtime-fix-main-delivery-20261003/candidate/artifacts/11272391598-lt1-reference.zip"
+      },
+      {
+        "id": 11272342699,
+        "name": "m4-joint-identifiability",
+        "bytes": 565181,
+        "sha256": "a24e1177c1a163eef92a67aac5bfe3453fddb8b02c09255a8c0da29a2a29d984",
+        "local_path": "results/runtime-fix-main-delivery-20261003/candidate/artifacts/11272342699-m4-joint-identifiability.zip"
+      },
+      {
+        "id": 11272278016,
+        "name": "simglucose-reference",
+        "bytes": 424665,
+        "sha256": "78c02f9c30ee0dc3553d3c3a5f515237f4e960a550bca5a932b35f775983b821",
+        "local_path": "results/runtime-fix-main-delivery-20261003/candidate/artifacts/11272278016-simglucose-reference.zip"
+      },
+      {
+        "id": 11272159351,
+        "name": "m2-cambridge",
+        "bytes": 10133210,
+        "sha256": "3fe8d81ea1990ff34a09b28b88b29f0b231c8f60530415b9d642e3cf46f250fe",
+        "local_path": "results/runtime-fix-main-delivery-20261003/candidate/artifacts/11272159351-m2-cambridge.zip"
+      },
+      {
+        "id": 11272063104,
+        "name": "lit002-absorption",
+        "bytes": 2526738,
+        "sha256": "46cf017f6c57a90d239c7f5a8c7430b8da83daf4375f15ff7e0b93aacd0728e0",
+        "local_path": "results/runtime-fix-main-delivery-20261003/candidate/artifacts/11272063104-lit002-absorption.zip"
+      },
+      {
+        "id": 11272002135,
+        "name": "m1-demonstration",
+        "bytes": 3277483,
+        "sha256": "a0e49596f7859738daa82b8374242591c93f42db94522555c6b8c5546ce64215",
+        "local_path": "results/runtime-fix-main-delivery-20261003/candidate/artifacts/11272002135-m1-demonstration.zip"
+      },
+      {
+        "id": 11271753866,
+        "name": "m4-beta-cell",
+        "bytes": 2903083,
+        "sha256": "657971408dbf86aaa5832bc4f271f8ae78763f04813ebe112c32ca0ea8251a8b",
+        "local_path": "results/runtime-fix-main-delivery-20261003/candidate/artifacts/11271753866-m4-beta-cell.zip"
+      }
+    ],
+    "run_snapshot_sha256": "8cf0e060fe881800db59762ef771a98c371afa77226473ddd1db25c82ead83c2",
+    "profile_job_sha256": "2f67e730a15fa81a16294b96a6682cf5fa68b30ce4b240d80b2232e657593428",
+    "logs_archive_sha256": "40c22298422f4b8426abb03c4b85e89c119164b39b7a33bc3ca0a99afd6265dd"
+  },
+  "limits": [
+    "The original interrupted Linux volume and profile executions remain preserved with their original outcomes.",
+    "The completed likelihood-profile campaign is on macos-14; it does not turn the original partial Linux profile execution into an accepted campaign.",
+    "Resource scheduling changes preserve all scientific inputs, starts, protocols, references and acceptance thresholds; the full cause of platform timing differences remains unmeasured.",
+    "No independent human usability, biological validity, human-data evaluation or treatment result is established.",
+    "Previously recorded dependency alerts retain their separate assessment; no dependency upgrade or security clearance is claimed."
+  ],
+  "publication_documentation": {
+    "markdown_json_navigation_and_build_passed": true,
+    "log_sha256": "8fb7d40a2acca010b1fcc67403099c507e1f91caf3f0451528351f57f614b88d",
+    "scientific_sources_unchanged_from_tested_candidate": true
+  }
+}

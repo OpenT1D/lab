@@ -1,0 +1,15 @@
+{% extends "!page.html" %}
+
+{# Keep the inherited Furo UI English while the document root identifies the
+   article language. The wrapper preserves the theme's full-height layout. #}
+{% block body %}
+  {% if language != "en" %}<div lang="en" style="height: 100%;">{% endif %}
+  {{ super() }}
+  {% if language != "en" %}</div>{% endif %}
+{% endblock %}
+
+{% block content %}
+  {% if language != "en" %}<div lang="{{ language }}">{% endif %}
+  {{ super() }}
+  {% if language != "en" %}</div>{% endif %}
+{% endblock %}

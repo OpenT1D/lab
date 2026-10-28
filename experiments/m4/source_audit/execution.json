@@ -1,0 +1,184 @@
+{
+  "schema": "bc006-execution/1",
+  "status": "completed_internal_source_audit",
+  "base_commit": "bb4ac19",
+  "manifest": {
+    "implementation": "bc006-source-audit/1",
+    "status": "completed",
+    "started_utc": "2026-09-20T10:45:49.864734+00:00",
+    "files": {
+      "bc001-model.py": "b7dfe90b8ffa3ccd97062749207ea5e7f6910c0526bc819f962db9c66ce55544",
+      "bc001-pyproject.toml": "7c69b6f63a48d72f927c0253b68492de1ac60700d0549744de1207709732d3c5",
+      "bc001-uv.lock": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04",
+      "numerical.json": "1aca3a6b8fc0e05d2b6e778cc9320f7eee0dd4a9b3ad4f12f4c33df1d3c08b27",
+      "numerical.log": "7940df2d48fd2179b1106bdc6442cdc5614dc451a23c7cf60099e21f10c1ce5a",
+      "protocol.json": "d59d6238983494bbf56705208f15a75d1a6d2b3dec69e78d273d151d16a7561c",
+      "report.json": "4b80cad57346fd68eb809ab2e6cd56b2227e45308e3c7b0c2efb01defda5cad9",
+      "source-audit.py": "0e1ce7d1fc025fa7b6e89610ff5bb20ff21d6ef84e2b63e0a270ebad06b113d8",
+      "source-numerical.py": "d737b2f9a5e666c4b35751238236111043e5b066afd2f8135ba87470242177c5",
+      "source-run.py": "fdc5d3650283200b2bbb3e1fefec4d03a129a493aa34f27a0e051d2e6630f44d",
+      "sources.json": "c1d5dd26150bc7a8773e5091e3d3ede4165d77598ebd3fcb380b07c25f531b05"
+    },
+    "git_head": "bb4ac19ad59dfb00cb818731ae102c9bcdbc8d44",
+    "git_dirty": true,
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--project",
+      "/private/tmp/opent1d-beta-cell-reference/experiments/m4/beta_cell/runtime",
+      "python",
+      "-m",
+      "experiments.m4.source_audit.numerical",
+      "/private/tmp/opent1d-beta-cell-reference/results/m4-source-audit/reference-02"
+    ],
+    "finished_utc": "2026-09-20T10:45:51.402080+00:00"
+  },
+  "report": {
+    "schema": "bc006-report/1",
+    "implementation": "bc006-source-audit/1",
+    "calculations": {
+      "pools": {
+        "caption_basal_equilibrium": {
+          "docked_ug": 322.05882352941177,
+          "pre_bolus_recruited_ug": 96.03898237103434,
+          "printed_qss_ug": 0.15465214552501502,
+          "finite_fusion_delivered_limit_ug": 95.88433022550932,
+          "pre_to_qss_factor": 621.0
+        },
+        "author_seed_exact_threshold": {
+          "docked_ug": 311.0,
+          "pre_bolus_recruited_ug": 92.73953579050254,
+          "printed_qss_ug": 0.1493390270378463,
+          "finite_fusion_delivered_limit_ug": 92.5901967634647,
+          "pre_to_qss_factor": 621.0
+        },
+        "author_glucose_continuum_equilibrium": {
+          "docked_ug": 312.60713392868905,
+          "pre_bolus_recruited_ug": 93.21877969564657,
+          "printed_qss_ug": 0.1501107563536982,
+          "finite_fusion_delivered_limit_ug": 93.06866893929288,
+          "pre_to_qss_factor": 621.0
+        }
+      },
+      "author_explicit_x0_ug": 92.7,
+      "seed_pre_bolus_minus_explicit_ug": 0.039535790502540635,
+      "seed_is_not_continuum_equilibrium_residual_ug_min": 0.128570714295126,
+      "algebraic_post_bolus_y_ug_min": 0.9588433022550932,
+      "source_reduced_y0_ug_min": 0.0,
+      "scale": {
+        "pmol_per_ug_insulin": 172.1763085399449,
+        "author_basal_pmol_min": 99.86225895316804,
+        "exact_pmol_l_per_ug_at_author_volume": 43.044077134986225,
+        "rounded_conversion_relative_error": -0.0010239999999999139,
+        "coded_cp_pmol_l_min_per_ug_min": 21.5,
+        "coded_to_unscaled_molar_volume_ratio": 0.49948800000000004
+      },
+      "chain_rule": [
+        {
+          "glucose_mmol_l": 6.0,
+          "docked_ug": 311.0,
+          "retained_ug_min2": 0.0030069880784804074,
+          "omitted_ug_min2": -0.007147526401364017,
+          "full_product_derivative_ug_min2": -0.00414053832288361,
+          "finite_difference_ug_min2": -0.004140538321789622,
+          "relative_error": 2.6421389256737994e-10
+        },
+        {
+          "glucose_mmol_l": 8.0,
+          "docked_ug": 311.0,
+          "retained_ug_min2": 0.09926794374406467,
+          "omitted_ug_min2": -0.019115504969399705,
+          "full_product_derivative_ug_min2": 0.08015243877466496,
+          "finite_difference_ug_min2": 0.08015243877446121,
+          "relative_error": 2.542077118416208e-12
+        },
+        {
+          "glucose_mmol_l": 12.0,
+          "docked_ug": 311.0,
+          "retained_ug_min2": 0.3574443544922589,
+          "omitted_ug_min2": -0.002790441431217926,
+          "full_product_derivative_ug_min2": 0.354653913061041,
+          "finite_difference_ug_min2": 0.35465391306055416,
+          "relative_error": 1.3727018916521782e-12
+        }
+      ],
+      "verdict": "pre-bolus pool is a candidate explanation, not an author-confirmed correction; basal and observation scale are source-specific, not calibrated T1D quantities"
+    },
+    "contrasts": {
+      "author_explicit": {
+        "initial_secretion_difference_ug_min": 57.37811566977449,
+        "analytical_cumulative_secretion_difference_ug": 92.54534785447498
+      },
+      "pre_bolus_hypothesis": {
+        "initial_secretion_difference_ug_min": 59.448284739815776,
+        "analytical_cumulative_secretion_difference_ug": 95.88433022550932
+      }
+    },
+    "numerical_metrics": {
+      "burst_state_error_ug": 7.31725513514192e-11,
+      "burst_mass_error_ug": 6.661338147750939e-16,
+      "reduced_initial_difference_error_ug": 1.1368683772161603e-13,
+      "solver_state_error_ug": 1.2079084399374551e-08,
+      "chain_rule_relative_error": 2.6421389256737994e-10,
+      "repeat_absolute_error": 0.0
+    },
+    "passed": true,
+    "external_review": "not_performed",
+    "excluded": [
+      "author XPPAUT execution",
+      "new secretion or glucose-feedback module",
+      "empirical basal or body-size calibration",
+      "joint human identifiability",
+      "T1D or transplant validation",
+      "external domain review",
+      "outreach or patient-data access"
+    ]
+  },
+  "source_record_sha256": "c1d5dd26150bc7a8773e5091e3d3ede4165d77598ebd3fcb380b07c25f531b05",
+  "checks": {
+    "scientific_runtime_sync": "passed",
+    "root_tests": 9,
+    "separate_numerical_tests": 3,
+    "root_tests_log_sha256": "478b8a57de8468f10d150320e75ea37d5746a9e8d52eaaf92f7c88a9bd4a65d5",
+    "numerical_tests_log_sha256": "ab36023afca079a5a19d31e571c6af1d927a86e5804818b54989a86af16c39eb",
+    "test_source_hashes": {
+      "root": "be2c1aec98db5ea0ae809b9ecc8c681911f5b53f73e6bcea45ddd22cadab67fa",
+      "numerical": "f4b66e175df4fcdf2432278aa72eb760dbc8f5180a00b62c1ef900fe99df83e6"
+    },
+    "fresh_process_repeat": {
+      "identical_artifacts": 11,
+      "excluded": "manifest timestamps and command output paths",
+      "manifest_sha256": "c43d75c0d5f0512fade8c86e25a986bdb1c8e923630a100dc2ebfdcff2c50d2f"
+    },
+    "standard_library_reconstruction": "byte-identical with python -S",
+    "source_and_lock_snapshot_comparison": "match live files",
+    "root_sync": "passed",
+    "repository_checks": {
+      "status": "passed",
+      "unit_tests": 292,
+      "strict_documentation_build": "passed",
+      "log_sha256": "88996c2784a34bc93d3e5a037a0e1eef947f7668d998d5c3145ddb673d273ac7"
+    },
+    "remote_ci": "not run"
+  },
+  "failed_scientific_attempts": [],
+  "threshold_amendments": [],
+  "development_test_correction": "Initial mocked worker-failure test also intercepted Git metadata subprocesses; isolated that test mock, reran successfully. No model or criterion changed.",
+  "limitations": [
+    "No author-confirmed erratum or recovered saved warmup state",
+    "No empirical scale/basal calibration",
+    "No external review or contact",
+    "No cohort input or participant data accessed",
+    "BC001 through BC005 remain unchanged"
+  ],
+  "run_path": "results/m4-source-audit/reference-02",
+  "superseded_completed_runs": {
+    "paths": [
+      "results/m4-source-audit/reference-01",
+      "results/m4-source-audit/repeat-01"
+    ],
+    "reason": "corrected factual source line locators only",
+    "numerical_report_unchanged": true
+  }
+}

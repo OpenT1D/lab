@@ -1,0 +1,4682 @@
+[
+  {
+    "key": "UNMATCHED:cf4a5042c31b3c4c",
+    "first_round": 1,
+    "record": {
+      "title": "Update: insulin lispro: a new, rapidly acting analogue",
+      "authorString": "Jameson",
+      "pubYear": 1999,
+      "citedOrder": 1,
+      "match": "N"
+    }
+  },
+  {
+    "key": "PMID:1914797",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "1914797",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Comparison of subcutaneous soluble human insulin and insulin analogues (AspB9, GluB27; AspB10; AspB28) on meal-related plasma glucose excursions in type I diabetic subjects.",
+      "authorString": "Kang S, Creagh FM, Peters JR, Brange J, Volund A, Owens DR.",
+      "journalAbbreviation": "Diabetes Care",
+      "issue": "7",
+      "pubYear": 1991,
+      "volume": "14",
+      "pageInfo": "571-577",
+      "citedOrder": 2,
+      "match": "Y",
+      "essn": "1935-5548",
+      "issn": "0149-5992"
+    }
+  },
+  {
+    "key": "PMID:1797506",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "1797506",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Subcutaneous insulin absorption explained by insulin's physicochemical properties. Evidence from absorption studies of soluble human insulin and insulin analogues in humans.",
+      "authorString": "Kang S, Brange J, Burch A, Volund A, Owens DR.",
+      "journalAbbreviation": "Diabetes Care",
+      "issue": "11",
+      "pubYear": 1991,
+      "volume": "14",
+      "pageInfo": "942-948",
+      "citedOrder": 3,
+      "match": "Y",
+      "essn": "1935-5548",
+      "issn": "0149-5992"
+    }
+  },
+  {
+    "key": "PMID:4908935",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "4908935",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Absorption of injected insulin. A clinical-pharmacological study.",
+      "authorString": "Binder C.",
+      "journalAbbreviation": "Acta Pharmacol Toxicol (Copenh)",
+      "pubYear": 1969,
+      "volume": "27 Suppl 2",
+      "pageInfo": "1-84",
+      "citedOrder": 4,
+      "match": "Y",
+      "issn": "0001-6683"
+    }
+  },
+  {
+    "key": "PMID:6444267",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "6444267",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Alterations in insulin absorption and in blood glucose control associated with varying insulin injection sites in diabetic patients.",
+      "authorString": "Koivisto VA, Felig P.",
+      "journalAbbreviation": "Ann Intern Med",
+      "issue": "1",
+      "pubYear": 1980,
+      "volume": "92",
+      "pageInfo": "59-61",
+      "citedOrder": 5,
+      "match": "Y",
+      "essn": "1539-3704",
+      "issn": "0003-4819"
+    }
+  },
+  {
+    "key": "PMID:6765510",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "6765510",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Absorption kinetics and biologic effects of subcutaneously injected insulin preparations.",
+      "authorString": "Berger M, Cuppers HJ, Hegner H, Jorgens V, Berchtold P.",
+      "journalAbbreviation": "Diabetes Care",
+      "issue": "2",
+      "pubYear": 1982,
+      "volume": "5",
+      "pageInfo": "77-91",
+      "citedOrder": 6,
+      "match": "Y",
+      "essn": "1935-5548",
+      "issn": "0149-5992"
+    }
+  },
+  {
+    "key": "PMID:10837910",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "10837910",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Models of subcutaneous insulin kinetics. A critical review.",
+      "authorString": "Nucci G, Cobelli C.",
+      "journalAbbreviation": "Comput Methods Programs Biomed",
+      "issue": "3",
+      "pubYear": 2000,
+      "volume": "62",
+      "pageInfo": "249-257",
+      "citedOrder": 7,
+      "match": "Y",
+      "essn": "1872-7565",
+      "issn": "0169-2607"
+    }
+  },
+  {
+    "key": "UNMATCHED:999db90b8aaad66d",
+    "first_round": 1,
+    "record": {
+      "authorString": "AUTHOR UNKNOWN",
+      "pubYear": 0,
+      "doi": "10.2337/diabetes.32.4.331",
+      "citedOrder": 8,
+      "match": "N"
+    }
+  },
+  {
+    "key": "PMID:6370771",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "6370771",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Insulin responses to varying profiles of subcutaneous insulin infusion: kinetic modelling studies.",
+      "authorString": "Kraegen EW, Chisholm DJ.",
+      "journalAbbreviation": "Diabetologia",
+      "issue": "3",
+      "pubYear": 1984,
+      "volume": "26",
+      "pageInfo": "208-213",
+      "citedOrder": 9,
+      "match": "Y",
+      "essn": "1432-0428",
+      "issn": "0012-186X"
+    }
+  },
+  {
+    "key": "PMID:8572205",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "8572205",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "A model for multiple subcutaneous insulin injections developed from individual diabetic patient data.",
+      "authorString": "Puckett WR, Lightfoot EN.",
+      "journalAbbreviation": "Am J Physiol",
+      "issue": "6 Pt 1",
+      "pubYear": 1995,
+      "volume": "269",
+      "pageInfo": "E1115-24",
+      "citedOrder": 10,
+      "match": "Y",
+      "essn": "2163-5773",
+      "issn": "0002-9513"
+    }
+  },
+  {
+    "key": "PMID:2693012",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "2693012",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Computer simulation of plasma insulin and glucose dynamics after subcutaneous insulin injection.",
+      "authorString": "Berger M, Rodbard D.",
+      "journalAbbreviation": "Diabetes Care",
+      "issue": "10",
+      "pubYear": 1989,
+      "volume": "12",
+      "pageInfo": "725-736",
+      "citedOrder": 11,
+      "match": "Y",
+      "essn": "1935-5548",
+      "issn": "0149-5992"
+    }
+  },
+  {
+    "key": "PMID:8218870",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "8218870",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Pharmacokinetic model for the absorption of subcutaneously injected soluble insulin and monomeric insulin analogues.",
+      "authorString": "Trajanoski Z, Wach P, Kotanko P, Ott A, Skraba F.",
+      "journalAbbreviation": "Biomed Tech (Berl)",
+      "issue": "9",
+      "pubYear": 1993,
+      "volume": "38",
+      "pageInfo": "224-231",
+      "citedOrder": 12,
+      "match": "Y",
+      "essn": "1862-278X",
+      "issn": "0013-5585"
+    }
+  },
+  {
+    "key": "PMID:2654357",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "2654357",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Modeling absorption kinetics of subcutaneous injected soluble insulin.",
+      "authorString": "Mosekilde E, Jensen KS, Binder C, Pramming S, Thorsteinsson B.",
+      "journalAbbreviation": "J Pharmacokinet Biopharm",
+      "issue": "1",
+      "pubYear": 1989,
+      "volume": "17",
+      "pageInfo": "67-87",
+      "citedOrder": 14,
+      "match": "Y",
+      "issn": "0090-466X"
+    }
+  },
+  {
+    "key": "UNMATCHED:44df8054cd7d1f50",
+    "first_round": 1,
+    "record": {
+      "authorString": "Carson",
+      "pubYear": 1983,
+      "citedOrder": 15,
+      "match": "N"
+    }
+  },
+  {
+    "key": "PMID:6376015",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "6376015",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Insulin pharmacokinetics.",
+      "authorString": "Binder C, Lauritzen T, Faber O, Pramming S.",
+      "journalAbbreviation": "Diabetes Care",
+      "issue": "2",
+      "pubYear": 1984,
+      "volume": "7",
+      "pageInfo": "188-199",
+      "citedOrder": 17,
+      "match": "Y",
+      "essn": "1935-5548",
+      "issn": "0149-5992"
+    }
+  },
+  {
+    "key": "UNMATCHED:6c14dceb1234d51f",
+    "first_round": 1,
+    "record": {
+      "authorString": "Owens",
+      "pubYear": 1986,
+      "citedOrder": 18,
+      "match": "N"
+    }
+  },
+  {
+    "key": "PMID:6745083",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "6745083",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Alternative approaches to estimation of population pharmacokinetic parameters: comparison with the nonlinear mixed-effect model.",
+      "authorString": "Steimer JL, Mallet A, Golmard JL, Boisvieux JF.",
+      "journalAbbreviation": "Drug Metab Rev",
+      "issue": "1-2",
+      "pubYear": 1984,
+      "volume": "15",
+      "pageInfo": "265-292",
+      "citedOrder": 19,
+      "match": "Y",
+      "essn": "1097-9883",
+      "issn": "0360-2532"
+    }
+  },
+  {
+    "key": "UNMATCHED:59f964e08f0fcae0",
+    "first_round": 1,
+    "record": {
+      "authorString": "AUTHOR UNKNOWN",
+      "pubYear": 0,
+      "doi": "10.1016/B978-012160245-1/50006-4",
+      "citedOrder": 20,
+      "match": "N"
+    }
+  },
+  {
+    "key": "UNMATCHED:ae8e961ff3489de7",
+    "first_round": 1,
+    "record": {
+      "title": "The iterative two-stage population approach to IVGTT minimal modeling: improved precision with reduced sampling. Intravenous glucose tolerance test",
+      "authorString": "Vicini",
+      "journalAbbreviation": "Am. J. Physiol.",
+      "issue": "1",
+      "pubYear": 2001,
+      "volume": "280",
+      "pageInfo": "E179-",
+      "citedOrder": 21,
+      "match": "N"
+    }
+  },
+  {
+    "key": "UNMATCHED:f3ae9ab1e62e3f83",
+    "first_round": 1,
+    "record": {
+      "authorString": "AUTHOR UNKNOWN",
+      "pubYear": 0,
+      "doi": "10.1109/TAC.1974.1100705",
+      "citedOrder": 22,
+      "match": "N"
+    }
+  },
+  {
+    "key": "UNMATCHED:e062a27ff3e9855c",
+    "first_round": 1,
+    "record": {
+      "authorString": "AUTHOR UNKNOWN",
+      "pubYear": 0,
+      "doi": "10.1214/aos/1176344136",
+      "citedOrder": 23,
+      "match": "N"
+    }
+  },
+  {
+    "key": "PMID:1873991",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "1873991",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "A pharmacodynamic approach to optimizing insulin therapy.",
+      "authorString": "Berger MP, Rodbard D.",
+      "journalAbbreviation": "Comput Methods Programs Biomed",
+      "issue": "4",
+      "pubYear": 1991,
+      "volume": "34",
+      "pageInfo": "241-253",
+      "citedOrder": 24,
+      "match": "Y",
+      "essn": "1872-7565",
+      "issn": "0169-2607"
+    }
+  },
+  {
+    "key": "PMID:3881645",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "3881645",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Influence of concentration on the kinetics of SC-infused insulin. Comparison between square-wave SC infusion and bolus SC injection.",
+      "authorString": "Murat A, Slama G.",
+      "journalAbbreviation": "Metabolism",
+      "issue": "2",
+      "pubYear": 1985,
+      "volume": "34",
+      "pageInfo": "120-123",
+      "citedOrder": 25,
+      "match": "Y",
+      "essn": "1532-8600",
+      "issn": "0026-0495"
+    }
+  },
+  {
+    "key": "PMID:4796692",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "4796692",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "A comparative study on the metabolism of human insulin and porcine proinsulin in man.",
+      "authorString": "Sonksen PH, Tompkins CV, Srivastava MC, Nabarro JD.",
+      "journalAbbreviation": "Clin Sci Mol Med",
+      "issue": "5",
+      "pubYear": 1973,
+      "volume": "45",
+      "pageInfo": "633-654",
+      "citedOrder": 26,
+      "match": "Y",
+      "issn": "0301-0538"
+    }
+  },
+  {
+    "key": "PMID:517648",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "517648",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Hepatic uptake of insulin in man.",
+      "authorString": "Tranberg KG.",
+      "journalAbbreviation": "Am J Physiol",
+      "issue": "6",
+      "pubYear": 1979,
+      "volume": "237",
+      "pageInfo": "E509-18",
+      "citedOrder": 27,
+      "match": "Y",
+      "essn": "2163-5773",
+      "issn": "0002-9513"
+    }
+  },
+  {
+    "key": "PMID:6344651",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "6344651",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Splanchnic and renal metabolism of insulin in human subjects: a dose-response study.",
+      "authorString": "Ferrannini E, Wahren J, Faber OK, Felig P, Binder C, DeFronzo RA.",
+      "journalAbbreviation": "Am J Physiol",
+      "issue": "6",
+      "pubYear": 1983,
+      "volume": "244",
+      "pageInfo": "E517-27",
+      "citedOrder": 28,
+      "match": "Y",
+      "essn": "2163-5773",
+      "issn": "0002-9513"
+    }
+  },
+  {
+    "key": "UNMATCHED:0f07f347148c3e6c",
+    "first_round": 1,
+    "record": {
+      "title": "The kinetics of insulin metabolism in diabetes mellitus",
+      "authorString": "Frost",
+      "journalAbbreviation": "Postgrad. Med. J.",
+      "pubYear": 1973,
+      "volume": "49",
+      "pageInfo": "",
+      "citedOrder": 29,
+      "match": "N"
+    }
+  },
+  {
+    "key": "PMID:11978650",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "11978650",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Direct evidence for insulin-induced capillary recruitment in skin of healthy subjects during physiological hyperinsulinemia.",
+      "authorString": "Serne EH, IJzerman RG, Gans RO, Nijveldt R, De Vries G, Evertz R, Donker AJ, Stehouwer CD.",
+      "journalAbbreviation": "Diabetes",
+      "issue": "5",
+      "pubYear": 2002,
+      "volume": "51",
+      "pageInfo": "1515-1522",
+      "citedOrder": 30,
+      "match": "Y",
+      "essn": "1939-327X",
+      "issn": "1939-327X"
+    }
+  },
+  {
+    "key": "PMID:488572",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "488572",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Absorption kinetics of subcutaneously injected insulin. Evidence for degradation at the injection site.",
+      "authorString": "Berger M, Halban PA, Girardier L, Seydoux J, Offord RE, Renold AE.",
+      "journalAbbreviation": "Diabetologia",
+      "issue": "2",
+      "pubYear": 1979,
+      "volume": "17",
+      "pageInfo": "97-99",
+      "citedOrder": 31,
+      "match": "Y",
+      "essn": "1432-0428",
+      "issn": "0012-186X"
+    }
+  },
+  {
+    "key": "PMID:510140",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "510140",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Accelerated insulin degradation: an alternate mechanism for insulin resistance.",
+      "authorString": "Kitabchi AE, Stentz FB, Cole C, Duckworth WC.",
+      "journalAbbreviation": "Diabetes Care",
+      "issue": "5",
+      "pubYear": 1979,
+      "volume": "2",
+      "pageInfo": "414-417",
+      "citedOrder": 32,
+      "match": "Y",
+      "essn": "1935-5548",
+      "issn": "0149-5992"
+    }
+  },
+  {
+    "key": "PMID:1797487",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "1797487",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Absorption kinetics and action profiles of subcutaneously administered insulin analogues (AspB9GluB27, AspB10, AspB28) in healthy subjects.",
+      "authorString": "Kang S, Brange J, Burch A, Volund A, Owens DR.",
+      "journalAbbreviation": "Diabetes Care",
+      "issue": "11",
+      "pubYear": 1991,
+      "volume": "14",
+      "pageInfo": "1057-1065",
+      "citedOrder": 33,
+      "match": "Y",
+      "essn": "1935-5548",
+      "issn": "0149-5992"
+    }
+  },
+  {
+    "key": "PMID:499686",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "499686",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Variation in 125I-insulin absorption and blood glucose concentration.",
+      "authorString": "Lauritzen T, Faber OK, Binder C.",
+      "journalAbbreviation": "Diabetologia",
+      "issue": "5",
+      "pubYear": 1979,
+      "volume": "17",
+      "pageInfo": "291-295",
+      "citedOrder": 34,
+      "match": "Y",
+      "essn": "1432-0428",
+      "issn": "0012-186X"
+    }
+  },
+  {
+    "key": "PMID:3909370",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "3909370",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Diffusion and polymerization determines the insulin absorption from subcutaneous tissue in diabetic patients.",
+      "authorString": "Hildebrandt P, Sejrsen P, Nielsen SL, Birch K, Sestoft L.",
+      "journalAbbreviation": "Scand J Clin Lab Invest",
+      "issue": "8",
+      "pubYear": 1985,
+      "volume": "45",
+      "pageInfo": "685-690",
+      "citedOrder": 35,
+      "match": "Y",
+      "essn": "1502-7686",
+      "issn": "0036-5513"
+    }
+  },
+  {
+    "key": "PMID:6409773",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "6409773",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Clinical factors influencing the absorption of 125I-NPH insulin in diabetic patients.",
+      "authorString": "Kolendorf K, Bojsen J, Deckert T.",
+      "journalAbbreviation": "Horm Metab Res",
+      "issue": "6",
+      "pubYear": 1983,
+      "volume": "15",
+      "pageInfo": "274-278",
+      "citedOrder": 36,
+      "match": "Y",
+      "essn": "1439-4286",
+      "issn": "0018-5043"
+    }
+  },
+  {
+    "key": "PMID:41943733",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "41943733",
+      "citationType": "discussion; journal article",
+      "title": "Recent Advances in Modeling and Prediction of Blood Glucose in Type 1 Diabetes.",
+      "authorString": "Deng Y, Kong Y, Wang X, Li H.",
+      "journalAbbreviation": "Dela J Public Health",
+      "pubYear": 2026,
+      "volume": "12",
+      "issue": "1",
+      "pageInfo": "46-53",
+      "citedByCount": 0
+    }
+  },
+  {
+    "key": "PMID:41102316",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "41102316",
+      "citationType": "research-article; journal article",
+      "title": "Generalized multi task learning framework for glucose forecasting and hypoglycemia detection using simulation to reality.",
+      "authorString": "Hwang M, Rachim VP, Yoo J, Lee Y, Park SM.",
+      "journalAbbreviation": "NPJ Digit Med",
+      "pubYear": 2025,
+      "volume": "8",
+      "issue": "1",
+      "pageInfo": "612",
+      "citedByCount": 2
+    }
+  },
+  {
+    "key": "PMID:39696373",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "39696373",
+      "citationType": "research-article; journal article",
+      "title": "A prior-knowledge-guided dynamic attention mechanism to predict nocturnal hypoglycemic events in type 1 diabetes.",
+      "authorString": "Yu X, Yang Z, Wang X, Sun X, Shen R, Li H, Zhang M.",
+      "journalAbbreviation": "BMC Med Inform Decis Mak",
+      "pubYear": 2024,
+      "volume": "24",
+      "issue": "1",
+      "pageInfo": "378",
+      "citedByCount": 0
+    }
+  },
+  {
+    "key": "PMID:38956183",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "38956183",
+      "citationType": "research-article; journal article",
+      "title": "An automatic deep reinforcement learning bolus calculator for automated insulin delivery systems.",
+      "authorString": "Ahmad S, Beneyto A, Zhu T, Contreras I, Georgiou P, Vehi J.",
+      "journalAbbreviation": "Sci Rep",
+      "pubYear": 2024,
+      "volume": "14",
+      "issue": "1",
+      "pageInfo": "15245",
+      "citedByCount": 5
+    }
+  },
+  {
+    "key": "PMID:37543512",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "37543512",
+      "citationType": "research support, non-u.s. gov't; research-article; randomized controlled trial; journal article; research support, n.i.h., extramural",
+      "title": "Integrating metabolic expenditure information from wearable fitness sensors into an AI-augmented automated insulin delivery system: a randomised clinical trial.",
+      "authorString": "Jacobs PG, Resalat N, Hilts W, Young GM, Leitschuh J, Pinsonault J, El Youssef J, Branigan D, Gabo V, Eom J, Ramsey K, Dodier R, Mosquera-Lopez C, Wilson LM, Castle JR.",
+      "journalAbbreviation": "Lancet Digit Health",
+      "pubYear": 2023,
+      "volume": "5",
+      "issue": "9",
+      "pageInfo": "e607-e617",
+      "citedByCount": 31
+    }
+  },
+  {
+    "key": "PMID:37434362",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "37434362",
+      "citationType": "research support, non-u.s. gov't; validation study; review-article; review; journal article",
+      "title": "Development and Validation of Binary Classifiers to Predict Nocturnal Hypoglycemia in Adults With Type 1 Diabetes.",
+      "authorString": "Afentakis I, Unsworth R, Herrero P, Oliver N, Reddy M, Georgiou P.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2025,
+      "volume": "19",
+      "issue": "1",
+      "pageInfo": "153-160",
+      "citedByCount": 8
+    }
+  },
+  {
+    "key": "PMID:36462903",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "36462903",
+      "citationType": "journal article",
+      "title": "Bolus Insulin calculation without meal information. A reinforcement learning approach.",
+      "authorString": "Ahmad S, Beneyto A, Contreras I, Vehi J.",
+      "journalAbbreviation": "Artif Intell Med",
+      "pubYear": 2022,
+      "volume": "134",
+      "pageInfo": "102436",
+      "citedByCount": 4
+    }
+  },
+  {
+    "key": "PMID:36387535",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "36387535",
+      "citationType": "research-article; journal article",
+      "title": "A hypoglycemia early alarm method for patients with type 1 diabetes based on multi-dimensional sequential pattern mining.",
+      "authorString": "Ma N, Yu X, Yang T, Zhao Y, Li H.",
+      "journalAbbreviation": "Heliyon",
+      "pubYear": 2022,
+      "volume": "8",
+      "issue": "11",
+      "pageInfo": "e11372",
+      "citedByCount": 5
+    }
+  },
+  {
+    "key": "PMID:35698923",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "35698923",
+      "citationType": "journal article",
+      "title": "Practical constraint definition in safety schemes for artificial pancreas systems.",
+      "authorString": "Rodríguez-Sarmiento DL, León-Vargas F, Garelli F.",
+      "journalAbbreviation": "Int J Artif Organs",
+      "pubYear": 2022,
+      "volume": "45",
+      "issue": "6",
+      "pageInfo": "535-542",
+      "citedByCount": 2
+    }
+  },
+  {
+    "key": "PMID:35055576",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "35055576",
+      "citationType": "research support, non-u.s. gov't; research-article; journal article",
+      "title": "Examining Type 1 Diabetes Mathematical Models Using Experimental Data.",
+      "authorString": "Al Ali H, Daneshkhah A, Boutayeb A, Mukandavire Z.",
+      "journalAbbreviation": "Int J Environ Res Public Health",
+      "pubYear": 2022,
+      "volume": "19",
+      "issue": "2",
+      "pageInfo": "737",
+      "citedByCount": 4
+    }
+  },
+  {
+    "key": "PMID:34450712",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "34450712",
+      "citationType": "research-article; journal article",
+      "title": "Using Absorption Models for Insulin and Carbohydrates and Deep Leaning to Improve Glucose Level Predictions.",
+      "authorString": "Martínez-Delgado L, Munoz-Organero M, Queipo-Alvarez P.",
+      "journalAbbreviation": "Sensors (Basel)",
+      "pubYear": 2021,
+      "volume": "21",
+      "issue": "16",
+      "pageInfo": "5273",
+      "citedByCount": 8
+    }
+  },
+  {
+    "key": "PMID:34300672",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "34300672",
+      "citationType": "research-article; journal article",
+      "title": "Learning Carbohydrate Digestion and Insulin Absorption Curves Using Blood Glucose Level Prediction and Deep Learning Models.",
+      "authorString": "Muñoz-Organero M, Queipo-Álvarez P, García Gutiérrez B.",
+      "journalAbbreviation": "Sensors (Basel)",
+      "pubYear": 2021,
+      "volume": "21",
+      "issue": "14",
+      "pageInfo": "4926",
+      "citedByCount": 6
+    }
+  },
+  {
+    "key": "PMID:34412843",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "34412843",
+      "citationType": "research support, non-u.s. gov't; systematic review; journal article",
+      "title": "Data-based algorithms and models using diabetics real data for blood glucose and hypoglycaemia prediction - A systematic literature review.",
+      "authorString": "Felizardo V, Garcia NM, Pombo N, Megdiche I.",
+      "journalAbbreviation": "Artif Intell Med",
+      "pubYear": 2021,
+      "volume": "118",
+      "pageInfo": "102120",
+      "citedByCount": 41
+    }
+  },
+  {
+    "key": "PMID:33763974",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "33763974",
+      "citationType": "research support, non-u.s. gov't; systematic review; review-article; journal article",
+      "title": "Hypoglycaemia detection and prediction techniques: A systematic review on the latest developments.",
+      "authorString": "Diouri O, Cigler M, Vettoretti M, Mader JK, Choudhary P, Renard E, HYPO-RESOLVE Consortium.",
+      "journalAbbreviation": "Diabetes Metab Res Rev",
+      "pubYear": 2021,
+      "volume": "37",
+      "issue": "7",
+      "pageInfo": "e3449",
+      "citedByCount": 25
+    }
+  },
+  {
+    "key": "PMID:33726723",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "33726723",
+      "citationType": "research-article; research support, u.s. gov't, non-p.h.s.; journal article",
+      "title": "Stacked LSTM based deep recurrent neural network with kalman smoothing for blood glucose prediction.",
+      "authorString": "Rabby MF, Tu Y, Hossen MI, Lee I, Maida AS, Hei X.",
+      "journalAbbreviation": "BMC Med Inform Decis Mak",
+      "pubYear": 2021,
+      "volume": "21",
+      "issue": "1",
+      "pageInfo": "101",
+      "citedByCount": 52
+    }
+  },
+  {
+    "key": "PMID:31027048",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "31027048",
+      "citationType": "research support, u.s. gov't, non-p.h.s.; journal article",
+      "title": "Data-Driven Robust Control for a Closed-Loop Artificial Pancreas.",
+      "authorString": "Paoletti N, Liu KS, Chen H, Smolka SA, Lin S.",
+      "journalAbbreviation": "IEEE/ACM Trans Comput Biol Bioinform",
+      "pubYear": 2020,
+      "volume": "17",
+      "issue": "6",
+      "pageInfo": "1981-1993",
+      "citedByCount": 1
+    }
+  },
+  {
+    "key": "PPR:PPR224270",
+    "first_round": 1,
+    "record": {
+      "source": "PPR",
+      "id": "PPR224270",
+      "citationType": "preprint",
+      "title": "Control of Blood Glucose Level for Type 1 Diabetes Mellitus using Improved Hovorka Equations: Comparison between Clinical and In-Silico Works",
+      "authorString": "Mohd Sohadi N, Som AM, Mohd Nor NS, Mohd Yusof NF, Ali SA, Pacana NDA.",
+      "pubYear": 2020,
+      "citedByCount": 0
+    }
+  },
+  {
+    "key": "PMID:32517068",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "32517068",
+      "citationType": "review-article; review; journal article",
+      "title": "Artificial Intelligence in Decision Support Systems for Type 1 Diabetes.",
+      "authorString": "Tyler NS, Jacobs PG.",
+      "journalAbbreviation": "Sensors (Basel)",
+      "pubYear": 2020,
+      "volume": "20",
+      "issue": "11",
+      "pageInfo": "E3214",
+      "citedByCount": 53
+    }
+  },
+  {
+    "key": "PMID:32204318",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "32204318",
+      "citationType": "research-article; journal article",
+      "title": "Prediction of Nocturnal Hypoglycemia in Adults with Type 1 Diabetes under Multiple Daily Injections Using Continuous Glucose Monitoring and Physical Activity Monitor.",
+      "authorString": "Bertachi A, Viñals C, Biagi L, Contreras I, Vehí J, Conget I, Giménez M.",
+      "journalAbbreviation": "Sensors (Basel)",
+      "pubYear": 2020,
+      "volume": "20",
+      "issue": "6",
+      "pageInfo": "E1705",
+      "citedByCount": 48
+    }
+  },
+  {
+    "key": "PMID:32399164",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "32399164",
+      "citationType": "research support, non-u.s. gov't; research-article; journal article",
+      "title": "Dynamic Rule-Based Algorithm to Tune Insulin-on-Board Constraints for a Hybrid Artificial Pancreas System.",
+      "authorString": "Bertachi A, Biagi L, Beneyto A, Vehí J.",
+      "journalAbbreviation": "J Healthc Eng",
+      "pubYear": 2020,
+      "volume": "2020",
+      "pageInfo": "1414597",
+      "citedByCount": 9
+    }
+  },
+  {
+    "key": "PMID:31323886",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "31323886",
+      "citationType": "research-article; journal article",
+      "title": "Classification of Postprandial Glycemic Status with Application to Insulin Dosing in Type 1 Diabetes-An In Silico Proof-of-Concept.",
+      "authorString": "Cappon G, Facchinetti A, Sparacino G, Georgiou P, Herrero P.",
+      "journalAbbreviation": "Sensors (Basel)",
+      "pubYear": 2019,
+      "volume": "19",
+      "issue": "14",
+      "pageInfo": "E3168",
+      "citedByCount": 14
+    }
+  },
+  {
+    "key": "PMID:31195880",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "31195880",
+      "citationType": "research support, non-u.s. gov't; journal article",
+      "title": "Prediction and prevention of hypoglycaemic events in type-1 diabetic patients using machine learning.",
+      "authorString": "Vehí J, Contreras I, Oviedo S, Biagi L, Bertachi A.",
+      "journalAbbreviation": "Health Informatics J",
+      "pubYear": 2020,
+      "volume": "26",
+      "issue": "1",
+      "pageInfo": "703-718",
+      "citedByCount": 29
+    }
+  },
+  {
+    "key": "PMID:30693047",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "30693047",
+      "citationType": "research-article; evaluation study; journal article",
+      "title": "Control of Blood Glucose for Type-1 Diabetes by Using Reinforcement Learning with Feedforward Algorithm.",
+      "authorString": "Ngo PD, Wei S, Holubová A, Muzik J, Godtliebsen F.",
+      "journalAbbreviation": "Comput Math Methods Med",
+      "pubYear": 2018,
+      "volume": "2018",
+      "pageInfo": "4091497",
+      "citedByCount": 13
+    }
+  },
+  {
+    "key": "PMID:30522334",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "30522334",
+      "citationType": "editorial",
+      "title": "Subcutaneous Insulin Administration: Sufficient Progress or Ongoing Need?",
+      "authorString": "Pettis RJ, Muchmore D, Heinemann L.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2019,
+      "volume": "13",
+      "issue": "1",
+      "pageInfo": "3-7",
+      "citedByCount": 10
+    }
+  },
+  {
+    "key": "PMID:30069675",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "30069675",
+      "citationType": "journal article",
+      "title": "Neural network-based model predictive control for type 1 diabetic rats on artificial pancreas system.",
+      "authorString": "Bahremand S, Ko HS, Balouchzadeh R, Felix Lee H, Park S, Kwon G.",
+      "journalAbbreviation": "Med Biol Eng Comput",
+      "pubYear": 2019,
+      "volume": "57",
+      "issue": "1",
+      "pageInfo": "177-191",
+      "citedByCount": 11
+    }
+  },
+  {
+    "key": "PMID:30003801",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "30003801",
+      "citationType": "research support, non-u.s. gov't; research-article; review; journal article",
+      "title": "Modeling of Diabetes and Its Clinical Impact.",
+      "authorString": "Fritzen K, Heinemann L, Schnell O.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2018,
+      "volume": "12",
+      "issue": "5",
+      "pageInfo": "976-984",
+      "citedByCount": 14
+    }
+  },
+  {
+    "key": "PMID:29998754",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "29998754",
+      "citationType": "clinical trial; research support, non-u.s. gov't; research-article; journal article",
+      "title": "Artificial Pancreas: Clinical Study in Latin America Without Premeal Insulin Boluses.",
+      "authorString": "Sánchez-Peña R, Colmegna P, Garelli F, De Battista H, García-Violini D, Moscoso-Vásquez M, Rosales N, Fushimi E, Campos-Náñez E, Breton M, Beruto V, Scibona P, Rodriguez C, Giunta J, Simonovich V, Belloso WH, Cherñavvsky D, Grosembacher L.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2018,
+      "volume": "12",
+      "issue": "5",
+      "pageInfo": "914-925",
+      "citedByCount": 8
+    }
+  },
+  {
+    "key": "PMID:29725915",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "29725915",
+      "citationType": "journal article",
+      "title": "Postprandial fuzzy adaptive strategy for a hybrid proportional derivative controller for the artificial pancreas.",
+      "authorString": "Beneyto A, Vehi J.",
+      "journalAbbreviation": "Med Biol Eng Comput",
+      "pubYear": 2018,
+      "volume": "56",
+      "issue": "11",
+      "pageInfo": "1973-1986",
+      "citedByCount": 2
+    }
+  },
+  {
+    "key": "PMID:29608335",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "29608335",
+      "citationType": "research support, non-u.s. gov't; journal article",
+      "title": "Assessment of Mitigation Methods to Reduce the Risk of Hypoglycemia for Announced Exercise in a Uni-hormonal Artificial Pancreas.",
+      "authorString": "Bertachi A, Beneyto A, Ramkissoon CM, Vehí J.",
+      "journalAbbreviation": "Diabetes Technol Ther",
+      "pubYear": 2018,
+      "volume": "20",
+      "issue": "4",
+      "pageInfo": "285-295",
+      "citedByCount": 10
+    }
+  },
+  {
+    "key": "PMID:29650309",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "29650309",
+      "citationType": "journal article",
+      "title": "Open-loop glucose control: Automatic IOB-based super-bolus feature for commercial insulin pumps.",
+      "authorString": "Rosales N, De Battista H, Vehí J, Garelli F.",
+      "journalAbbreviation": "Comput Methods Programs Biomed",
+      "pubYear": 2018,
+      "volume": "159",
+      "pageInfo": "145-158",
+      "citedByCount": 7
+    }
+  },
+  {
+    "key": "PMID:29493359",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "29493359",
+      "citationType": "research support, non-u.s. gov't; research-article; journal article",
+      "title": "Automatic Adaptation of Basal Insulin Using Sensor-Augmented Pump Therapy.",
+      "authorString": "Herrero P, Bondia J, Giménez M, Oliver N, Georgiou P.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2018,
+      "volume": "12",
+      "issue": "2",
+      "pageInfo": "282-294",
+      "citedByCount": 19
+    }
+  },
+  {
+    "key": "PMID:29112978",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "29112978",
+      "citationType": "research-article; journal article",
+      "title": "Personalized blood glucose prediction: A hybrid approach using grammatical evolution and physiological models.",
+      "authorString": "Contreras I, Oviedo S, Vettoretti M, Visentin R, Vehí J.",
+      "journalAbbreviation": "PLoS One",
+      "pubYear": 2017,
+      "volume": "12",
+      "issue": "11",
+      "pageInfo": "e0187754",
+      "citedByCount": 33
+    }
+  },
+  {
+    "key": "PMID:28853168",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "28853168",
+      "citationType": "validation study; journal article",
+      "title": "A Novel Three-Compartmental Model for Artificial Pancreas: Development and Validation.",
+      "authorString": "Piemonte V, Capocelli M, De Santis L, Maurizi AR, Pozzilli P.",
+      "journalAbbreviation": "Artif Organs",
+      "pubYear": 2017,
+      "volume": "41",
+      "issue": "12",
+      "pageInfo": "E326-E336",
+      "citedByCount": 5
+    }
+  },
+  {
+    "key": "PMID:28791547",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "28791547",
+      "citationType": "journal article",
+      "title": "Data Based Prediction of Blood Glucose Concentrations Using Evolutionary Methods.",
+      "authorString": "Hidalgo JI, Colmenar JM, Kronberger G, Winkler SM, Garnica O, Lanchares J.",
+      "journalAbbreviation": "J Med Syst",
+      "pubYear": 2017,
+      "volume": "41",
+      "issue": "9",
+      "pageInfo": "142",
+      "citedByCount": 30
+    }
+  },
+  {
+    "key": "PMID:28728434",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "28728434",
+      "citationType": "research-article; journal article",
+      "title": "Economic Model Predictive Control of Bihormonal Artificial Pancreas System Based on Switching Control and Dynamic R-parameter.",
+      "authorString": "Tang F, Wang Y.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2017,
+      "volume": "11",
+      "issue": "6",
+      "pageInfo": "1112-1123",
+      "citedByCount": 3
+    }
+  },
+  {
+    "key": "PMID:28324962",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "28324962",
+      "citationType": "research-article; journal article",
+      "title": "Design of a dual-hormone model predictive control for artificial pancreas with exercise model.",
+      "authorString": "Resalat N, El Youssef J, Reddy R, Jacobs PG.",
+      "journalAbbreviation": "Annu Int Conf IEEE Eng Med Biol Soc",
+      "pubYear": 2016,
+      "volume": "2016",
+      "pageInfo": "2270-2273",
+      "citedByCount": 17
+    }
+  },
+  {
+    "key": "PMID:27155940",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "27155940",
+      "citationType": "journal article",
+      "title": "Modelling the effect of insulin on the disposal of meal-attributable glucose in type 1 diabetes.",
+      "authorString": "García-García F, Hovorka R, Wilinska ME, Elleri D, Hernando ME.",
+      "journalAbbreviation": "Med Biol Eng Comput",
+      "pubYear": 2017,
+      "volume": "55",
+      "issue": "2",
+      "pageInfo": "271-282",
+      "citedByCount": 2
+    }
+  },
+  {
+    "key": "PMID:26718555",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "26718555",
+      "citationType": "journal article",
+      "title": "A simplification of Cobelli's glucose-insulin model for type 1 diabetes mellitus and its FPGA implementation.",
+      "authorString": "Li P, Yu L, Fang Q, Lee SY.",
+      "journalAbbreviation": "Med Biol Eng Comput",
+      "pubYear": 2016,
+      "volume": "54",
+      "issue": "10",
+      "pageInfo": "1563-1577",
+      "citedByCount": 4
+    }
+  },
+  {
+    "key": "PMID:26438720",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "26438720",
+      "citationType": "research-article; journal article; research support, n.i.h., extramural",
+      "title": "Incorporating an Exercise Detection, Grading, and Hormone Dosing Algorithm Into the Artificial Pancreas Using Accelerometry and Heart Rate.",
+      "authorString": "Jacobs PG, Resalat N, El Youssef J, Reddy R, Branigan D, Preiser N, Condon J, Castle J.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2015,
+      "volume": "9",
+      "issue": "6",
+      "pageInfo": "1175-1184",
+      "citedByCount": 67
+    }
+  },
+  {
+    "key": "PMID:26341131",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "26341131",
+      "citationType": "research support, non-u.s. gov't; research-article; journal article; research support, n.i.h., extramural",
+      "title": "Effect of Repeated Glucagon Doses on Hepatic Glycogen in Type 1 Diabetes: Implications for a Bihormonal Closed-Loop System.",
+      "authorString": "Castle JR, El Youssef J, Bakhtiani PA, Cai Y, Stobbe JM, Branigan D, Ramsey K, Jacobs P, Reddy R, Woods M, Ward WK.",
+      "journalAbbreviation": "Diabetes Care",
+      "pubYear": 2015,
+      "volume": "38",
+      "issue": "11",
+      "pageInfo": "2115-2119",
+      "citedByCount": 29
+    }
+  },
+  {
+    "key": "PMID:25759184",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "25759184",
+      "citationType": "comparative study; research support, non-u.s. gov't; research-article; journal article; research support, n.i.h., extramural",
+      "title": "Pharmacokinetic Model of the Transport of Fast-Acting Insulin From the Subcutaneous and Intradermal Spaces to Blood.",
+      "authorString": "Lv D, Kulkarni SD, Chan A, Keith S, Pettis R, Kovatchev BP, Farhi LS, Breton MD.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2015,
+      "volume": "9",
+      "issue": "4",
+      "pageInfo": "831-840",
+      "citedByCount": 7
+    }
+  },
+  {
+    "key": "PMID:33833847",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "33833847",
+      "citationType": "research-article; journal article",
+      "title": "Estimation of nonlinear differential equation model for glucose-insulin dynamics in type I diabetic patients using generalized smoothing.",
+      "authorString": "Chervoneva I, Freydin B, Hipszer B, Apanasovich TV, Joseph JI.",
+      "journalAbbreviation": "Ann Appl Stat",
+      "pubYear": 2014,
+      "volume": "8",
+      "issue": "2",
+      "pageInfo": "886-904",
+      "citedByCount": 2
+    }
+  },
+  {
+    "key": "PMID:24876584",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "24876584",
+      "citationType": "research-article; journal article",
+      "title": "Predicting Plasma Glucose From Interstitial Glucose Observations Using Bayesian Methods.",
+      "authorString": "Hansen AH, Duun-Henriksen AK, Juhl R, Schmidt S, Nørgaard K, Jørgensen JB, Madsen H.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2014,
+      "volume": "8",
+      "issue": "2",
+      "pageInfo": "321-330",
+      "citedByCount": 3
+    }
+  },
+  {
+    "key": "PMID:24876621",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "24876621",
+      "citationType": "research support, non-u.s. gov't; review-article; review; journal article; research support, n.i.h., extramural",
+      "title": "Can glucose be monitored accurately at the site of subcutaneous insulin delivery?",
+      "authorString": "Ward WK, Castle JR, Jacobs PG, Cargill RS.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2014,
+      "volume": "8",
+      "issue": "3",
+      "pageInfo": "568-574",
+      "citedByCount": 8
+    }
+  },
+  {
+    "key": "PMID:24260042",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "24260042",
+      "citationType": "comparative study; research support, non-u.s. gov't; research-article; journal article",
+      "title": "Systematically in silico comparison of unihormonal and bihormonal artificial pancreas systems.",
+      "authorString": "Gao X, Ning H, Wang Y.",
+      "journalAbbreviation": "Comput Math Methods Med",
+      "pubYear": 2013,
+      "volume": "2013",
+      "pageInfo": "712496",
+      "citedByCount": 3
+    }
+  },
+  {
+    "key": "PMID:29922360",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "29922360",
+      "citationType": "review-article; review; journal article",
+      "title": "Use of Automated Bolus Calculators for Diabetes Management.",
+      "authorString": "Schwartz FL, Marling CR.",
+      "journalAbbreviation": "Eur Endocrinol",
+      "pubYear": 2013,
+      "volume": "9",
+      "issue": "2",
+      "pageInfo": "92-95",
+      "citedByCount": 6
+    }
+  },
+  {
+    "key": "PMID:23864149",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "23864149",
+      "citationType": "research support, non-u.s. gov't; journal article; research support, n.i.h., extramural",
+      "title": "Stochastic Virtual Population of Subjects With Type 1 Diabetes for the Assessment of Closed-Loop Glucose Controllers.",
+      "authorString": "Haidar A, Wilinska ME, Graveston JA, Hovorka R.",
+      "journalAbbreviation": "IEEE Trans Biomed Eng",
+      "pubYear": 2013,
+      "volume": "60",
+      "issue": "12",
+      "pageInfo": "3524-3533",
+      "citedByCount": 41
+    }
+  },
+  {
+    "key": "PMID:23435829",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "23435829",
+      "citationType": "comparative study; research support, non-u.s. gov't; journal article; research support, n.i.h., extramural",
+      "title": "Absorption patterns of meals containing complex carbohydrates in type 1 diabetes.",
+      "authorString": "Elleri D, Allen JM, Harris J, Kumareswaran K, Nodale M, Leelarathna L, Acerini CL, Haidar A, Wilinska ME, Jackson N, Umpleby AM, Evans ML, Dunger DB, Hovorka R.",
+      "journalAbbreviation": "Diabetologia",
+      "pubYear": 2013,
+      "volume": "56",
+      "issue": "5",
+      "pageInfo": "1108-1117",
+      "citedByCount": 33
+    }
+  },
+  {
+    "key": "PMID:23428611",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "23428611",
+      "citationType": "research support, non-u.s. gov't; journal article",
+      "title": "Safety auxiliary feedback element for the artificial pancreas in type 1 diabetes.",
+      "authorString": "Revert A, Garelli F, Pico J, De Battista H, Rossetti P, Vehi J, Bondia J.",
+      "journalAbbreviation": "IEEE Trans Biomed Eng",
+      "pubYear": 2013,
+      "volume": "60",
+      "issue": "8",
+      "pageInfo": "2113-2122",
+      "citedByCount": 22
+    }
+  },
+  {
+    "key": "PMID:24278682",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "24278682",
+      "citationType": "research-article; review; journal article",
+      "title": "Diabetes technology: markers, monitoring, assessment, and control of blood glucose fluctuations in diabetes.",
+      "authorString": "Kovatchev BP.",
+      "journalAbbreviation": "Scientifica (Cairo)",
+      "pubYear": 2012,
+      "volume": "2012",
+      "pageInfo": "283821",
+      "citedByCount": 12
+    }
+  },
+  {
+    "key": "PMID:22080230",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "22080230",
+      "citationType": "clinical trial; research support, non-u.s. gov't; journal article",
+      "title": "Pathophysiology of postprandial hyperglycaemia in women with type 1 diabetes during pregnancy.",
+      "authorString": "Murphy HR, Elleri D, Allen JM, Harris J, Simmons D, Rayman G, Temple RC, Umpleby AM, Dunger DB, Haidar A, Nodale M, Wilinska ME, Hovorka R.",
+      "journalAbbreviation": "Diabetologia",
+      "pubYear": 2012,
+      "volume": "55",
+      "issue": "2",
+      "pageInfo": "282-293",
+      "citedByCount": 84
+    }
+  },
+  {
+    "key": "PMID:22226248",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "22226248",
+      "citationType": "clinical trial; research support, non-u.s. gov't; research-article; journal article; research support, n.i.h., extramural",
+      "title": "A controlled study of the effectiveness of an adaptive closed-loop algorithm to minimize corticosteroid-induced stress hyperglycemia in type 1 diabetes.",
+      "authorString": "El Youssef J, Castle JR, Branigan DL, Massoud RG, Breen ME, Jacobs PG, Bequette BW, Ward WK.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2011,
+      "volume": "5",
+      "issue": "6",
+      "pageInfo": "1312-1326",
+      "citedByCount": 23
+    }
+  },
+  {
+    "key": "PMID:21116725",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "21116725",
+      "citationType": "research support, non-u.s. gov't; journal article",
+      "title": "Optimal design of clinical tests for the identification of physiological models of type 1 diabetes in the presence of model mismatch.",
+      "authorString": "Galvanin F, Barolo M, Macchietto S, Bezzo F.",
+      "journalAbbreviation": "Med Biol Eng Comput",
+      "pubYear": 2011,
+      "volume": "49",
+      "issue": "3",
+      "pageInfo": "263-277",
+      "citedByCount": 14
+    }
+  },
+  {
+    "key": "PMID:20851494",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "20851494",
+      "citationType": "journal article",
+      "title": "Structural identifiability and indistinguishability analyses of the minimal model and a euglycemic hyperinsulinemic clamp model for glucose-insulin dynamics.",
+      "authorString": "Chin SV, Chappell MJ.",
+      "journalAbbreviation": "Comput Methods Programs Biomed",
+      "pubYear": 2011,
+      "volume": "104",
+      "issue": "2",
+      "pageInfo": "120-134",
+      "citedByCount": 10
+    }
+  },
+  {
+    "key": "PMID:20953334",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "20953334",
+      "citationType": "research-article; journal article",
+      "title": "Automatic Detection of Stress States in Type 1 Diabetes Subjects in Ambulatory Conditions.",
+      "authorString": "Finan DA, Zisser H, Jovanovič L, Bevier WC, Seborg DE.",
+      "journalAbbreviation": "Ind Eng Chem Res",
+      "pubYear": 2010,
+      "volume": "49",
+      "issue": "17",
+      "pageInfo": "7843-7848",
+      "citedByCount": 8
+    }
+  },
+  {
+    "key": "PMID:20411597",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "20411597",
+      "citationType": "research support, non-u.s. gov't; journal article",
+      "title": "A discrete-time recurrent neurofuzzy network for black-box modeling of insulin dynamics in diabetic type-1 patients.",
+      "authorString": "González-Olvera MA, Gallardo-Hernández AG, Tang Y, Revilla-Monsalve MC, Islas-Andrade S.",
+      "journalAbbreviation": "Int J Neural Syst",
+      "pubYear": 2010,
+      "volume": "20",
+      "issue": "2",
+      "pageInfo": "149-158",
+      "citedByCount": 10
+    }
+  },
+  {
+    "key": "PMID:20659841",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "20659841",
+      "citationType": "research support, non-u.s. gov't; research-article; journal article; research support, n.i.h., extramural",
+      "title": "Quest for the artificial pancreas: combining technology with treatment.",
+      "authorString": "Harvey RA, Wang Y, Grosman B, Percival MW, Bevier W, Finan DA, Zisser H, Seborg DE, Jovanovic L, Doyle FJ, Dassau E.",
+      "journalAbbreviation": "IEEE Eng Med Biol Mag",
+      "pubYear": 2010,
+      "volume": "29",
+      "issue": "2",
+      "pageInfo": "53-62",
+      "citedByCount": 27
+    }
+  },
+  {
+    "key": "PMID:21572588",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "21572588",
+      "citationType": "research-article; journal article",
+      "title": "MATHEMATICAL MODELS OF SUBCUTANEOUS INJECTION OF INSULIN ANALOGUES: A MINI-REVIEW.",
+      "authorString": "Li J, Johnson JD.",
+      "journalAbbreviation": "Discrete Continuous Dyn Syst Ser B",
+      "pubYear": 2009,
+      "volume": "12",
+      "issue": "2",
+      "pageInfo": "401-414",
+      "citedByCount": 9
+    }
+  },
+  {
+    "key": "PMID:20144413",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "20144413",
+      "citationType": "research support, non-u.s. gov't; research-article; review; journal article",
+      "title": "Glucose clamp algorithms and insulin time-action profiles.",
+      "authorString": "Bequette BW.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2009,
+      "volume": "3",
+      "issue": "5",
+      "pageInfo": "1005-1013",
+      "citedByCount": 24
+    }
+  },
+  {
+    "key": "PMID:20144293",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "20144293",
+      "citationType": "research support, non-u.s. gov't; research-article; evaluation study; journal article",
+      "title": "Safety constraints in an artificial pancreatic beta cell: an implementation of model predictive control with insulin on board.",
+      "authorString": "Ellingsen C, Dassau E, Zisser H, Grosman B, Percival MW, Jovanovic L, Doyle FJ.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2009,
+      "volume": "3",
+      "issue": "3",
+      "pageInfo": "536-544",
+      "citedByCount": 75
+    }
+  },
+  {
+    "key": "PMID:21297886",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "21297886",
+      "citationType": "research support, non-u.s. gov't; research-article; journal article; research support, n.i.h., extramural",
+      "title": "Enhanced modelling of the glucose–insulin system and its applications in insulin therapies.",
+      "authorString": "Wang H, Li J, Kuang Y.",
+      "journalAbbreviation": "J Biol Dyn",
+      "pubYear": 2009,
+      "volume": "3",
+      "issue": "1",
+      "pageInfo": "22-38",
+      "citedByCount": 12
+    }
+  },
+  {
+    "key": "PMID:20936056",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "20936056",
+      "citationType": "research-article; journal article",
+      "title": "Diabetes: Models, Signals, and Control.",
+      "authorString": "Cobelli C, Man CD, Sparacino G, Magni L, De Nicolao G, Kovatchev BP.",
+      "journalAbbreviation": "IEEE Rev Biomed Eng",
+      "pubYear": 2009,
+      "volume": "2",
+      "pageInfo": "54-96",
+      "citedByCount": 212
+    }
+  },
+  {
+    "key": "PMID:19885242",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "19885242",
+      "citationType": "research-article; journal article",
+      "title": "A subcutaneous insulin pharmacokinetic model for computer simulation in a diabetes decision support role: model structure and parameter identification.",
+      "authorString": "Wong J, Chase JG, Hann CE, Shaw GM, Lotz TF, Lin J, Le Compte AJ.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2008,
+      "volume": "2",
+      "issue": "4",
+      "pageInfo": "658-671",
+      "citedByCount": 19
+    }
+  },
+  {
+    "key": "PMID:18477391",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "18477391",
+      "citationType": "research support, non-u.s. gov't; research-article; journal article",
+      "title": "Mathematical modeling and analysis of insulin clearance in vivo.",
+      "authorString": "Koschorreck M, Gilles ED.",
+      "journalAbbreviation": "BMC Syst Biol",
+      "pubYear": 2008,
+      "volume": "2",
+      "pageInfo": "43",
+      "citedByCount": 17
+    }
+  },
+  {
+    "key": "PMID:18334377",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "18334377",
+      "citationType": "research support, non-u.s. gov't; evaluation study; journal article; research support, n.i.h., extramural",
+      "title": "An improved PID switching control strategy for type 1 diabetes.",
+      "authorString": "Marchetti G, Barolo M, Jovanovic L, Zisser H, Seborg DE.",
+      "journalAbbreviation": "IEEE Trans Biomed Eng",
+      "pubYear": 2008,
+      "volume": "55",
+      "issue": "3",
+      "pageInfo": "857-865",
+      "citedByCount": 63
+    }
+  },
+  {
+    "key": "PMID:19190726",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "19190726",
+      "citationType": "research-article; journal article",
+      "title": "A Feedforward-Feedback Glucose Control Strategy for Type 1 Diabetes Mellitus.",
+      "authorString": "Marchetti G, Barolo M, Jovanovič L, Zisser H, Seborg DE.",
+      "journalAbbreviation": "J Process Control",
+      "pubYear": 2008,
+      "volume": "18",
+      "issue": "2",
+      "pageInfo": "149-162",
+      "citedByCount": 27
+    }
+  },
+  {
+    "key": "PMID:19885178",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "19885178",
+      "citationType": "research-article; journal article",
+      "title": "Parameters affecting postprandial blood glucose: effects of blood glucose measurement errors.",
+      "authorString": "Koschinsky T, Heckermann S, Heinemann L.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2008,
+      "volume": "2",
+      "issue": "1",
+      "pageInfo": "58-66",
+      "citedByCount": 5
+    }
+  },
+  {
+    "key": "PMID:18709180",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "18709180",
+      "citationType": "research-article; journal article",
+      "title": "A Run-to-Run Control Strategy to Adjust Basal Insulin Infusion Rates in Type 1 Diabetes.",
+      "authorString": "Palerm CC, Zisser H, Jovanovič L, Doyle FJ.",
+      "journalAbbreviation": "J Process Control",
+      "pubYear": 2008,
+      "volume": "18",
+      "issue": "3-4",
+      "pageInfo": "258-265",
+      "citedByCount": 51
+    }
+  },
+  {
+    "key": "PMID:18088499",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "18088499",
+      "citationType": "research-article; review; research support, u.s. gov't, non-p.h.s.; journal article; research support, n.i.h., extramural",
+      "title": "The future of open- and closed-loop insulin delivery systems.",
+      "authorString": "Farmer TG, Edgar TF, Peppas NA.",
+      "journalAbbreviation": "J Pharm Pharmacol",
+      "pubYear": 2008,
+      "volume": "60",
+      "issue": "1",
+      "pageInfo": "1-13",
+      "citedByCount": 33
+    }
+  },
+  {
+    "key": "PMID:17931052",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "17931052",
+      "citationType": "research support, non-u.s. gov't; journal article; research support, n.i.h., extramural",
+      "title": "Practical issues in the identification of empirical models from simulated type 1 diabetes data.",
+      "authorString": "Finan DA, Zisser H, Jovanovic L, Bevier WC, Seborg DE.",
+      "journalAbbreviation": "Diabetes Technol Ther",
+      "pubYear": 2007,
+      "volume": "9",
+      "issue": "5",
+      "pageInfo": "438-450",
+      "citedByCount": 18
+    }
+  },
+  {
+    "key": "PMID:17572272",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "17572272",
+      "citationType": "review; journal article",
+      "title": "Insulin analogues in the treatment of diabetes in pregnancy.",
+      "authorString": "Singh C, Jovanovic L.",
+      "journalAbbreviation": "Obstet Gynecol Clin North Am",
+      "pubYear": 2007,
+      "volume": "34",
+      "issue": "2",
+      "pageInfo": "275-91, ix",
+      "citedByCount": 13
+    }
+  },
+  {
+    "key": "PMID:19885087",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "19885087",
+      "citationType": "research-article; journal article",
+      "title": "GIM, simulation software of meal glucose-insulin model.",
+      "authorString": "Dalla Man C, Raimondo DM, Rizza RA, Cobelli C.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2007,
+      "volume": "1",
+      "issue": "3",
+      "pageInfo": "323-330",
+      "citedByCount": 88
+    }
+  },
+  {
+    "key": "PMID:17376834",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "17376834",
+      "citationType": "research support, non-u.s. gov't; journal article",
+      "title": "The virtual NOD mouse: applying predictive biosimulation to research in type 1 diabetes.",
+      "authorString": "Zheng Y, Kreuwel HT, Young DL, Shoda LK, Ramanujan S, Gadkar KG, Atkinson MA, Whiting CC.",
+      "journalAbbreviation": "Ann N Y Acad Sci",
+      "pubYear": 2007,
+      "volume": "1103",
+      "pageInfo": "45-62",
+      "citedByCount": 5
+    }
+  },
+  {
+    "key": "PMID:19888383",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "19888383",
+      "citationType": "review-article; journal article",
+      "title": "The artificial pancreas: how sweet engineering will solve bitter problems.",
+      "authorString": "Klonoff DC.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2007,
+      "volume": "1",
+      "issue": "1",
+      "pageInfo": "72-81",
+      "citedByCount": 41
+    }
+  },
+  {
+    "key": "PMID:16867301",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "16867301",
+      "citationType": "journal article",
+      "title": "Glucose dynamics in Type I diabetes: insights from the classic and linear minimal models.",
+      "authorString": "Fernandez M, Villasana M, Streja D.",
+      "journalAbbreviation": "Comput Biol Med",
+      "pubYear": 2007,
+      "volume": "37",
+      "issue": "5",
+      "pageInfo": "611-627",
+      "citedByCount": 4
+    }
+  },
+  {
+    "key": "PMID:16865361",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "16865361",
+      "citationType": "research support, non-u.s. gov't; journal article",
+      "title": "Within-patient variation of the pharmacokinetics of subcutaneously injected biphasic insulin aspart as assessed by compartmental modelling.",
+      "authorString": "Clausen WH, De Gaetano A, Vølund A.",
+      "journalAbbreviation": "Diabetologia",
+      "pubYear": 2006,
+      "volume": "49",
+      "issue": "9",
+      "pageInfo": "2030-2038",
+      "citedByCount": 7
+    }
+  },
+  {
+    "key": "PMID:16804068",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "16804068",
+      "citationType": "journal article; research support, n.i.h., extramural",
+      "title": "Evaluation of the effect of gain on the meal response of an automated closed-loop insulin delivery system.",
+      "authorString": "Panteleon AE, Loutseiko M, Steil GM, Rebrin K.",
+      "journalAbbreviation": "Diabetes",
+      "pubYear": 2006,
+      "volume": "55",
+      "issue": "7",
+      "pageInfo": "1995-2000",
+      "citedByCount": 37
+    }
+  },
+  {
+    "key": "PMID:17947128",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "17947128",
+      "citationType": "journal article; research support, n.i.h., extramural",
+      "title": "An improved PID switching control strategy for type 1 diabetes.",
+      "authorString": "Marchetti G, Barolo M, Jovanovic L, Zisser H, Seborg DE.",
+      "journalAbbreviation": "Conf Proc IEEE Eng Med Biol Soc",
+      "pubYear": 2006,
+      "volume": "2006",
+      "pageInfo": "5041-5044",
+      "citedByCount": 3
+    }
+  },
+  {
+    "key": "UNMATCHED:0cb0e36f694ca4a2",
+    "first_round": 1,
+    "record": {
+      "title": "Closed-loop subcutaneous insulin infusion algorithm with a short-acting insulin analog for long-term clinical application of a wearable artificial endocrine pancreas",
+      "authorString": "shimoda",
+      "journalAbbreviation": "Frontiers Med Biol Eng",
+      "pubYear": 1997,
+      "volume": "8",
+      "pageInfo": "",
+      "citedOrder": 1,
+      "match": "N"
+    }
+  },
+  {
+    "key": "PMID:16366223",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "16366223",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Comprehensive pharmacokinetic model of insulin Glargine and other insulin formulations.",
+      "authorString": "Tarin C, Teufel E, Pico J, Bondia J, Pfleiderer HJ.",
+      "journalAbbreviation": "IEEE Trans Biomed Eng",
+      "issue": "12",
+      "pubYear": 2005,
+      "volume": "52",
+      "pageInfo": "1994-2005",
+      "citedOrder": 3,
+      "match": "Y",
+      "essn": "1558-2531",
+      "issn": "0018-9294"
+    }
+  },
+  {
+    "key": "PMID:19028573",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "19028573",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Absorption kinetics of insulin after subcutaneous administration.",
+      "authorString": "Soeborg T, Rasmussen CH, Mosekilde E, Colding-Jorgensen M.",
+      "journalAbbreviation": "Eur J Pharm Sci",
+      "issue": "1",
+      "pubYear": 2008,
+      "volume": "36",
+      "pageInfo": "78-90",
+      "citedOrder": 4,
+      "match": "Y",
+      "essn": "1879-0720",
+      "issn": "0928-0987"
+    }
+  },
+  {
+    "key": "PMID:24878388",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "24878388",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Insulin aspart pharmacokinetics: an assessment of its variability and underlying mechanisms.",
+      "authorString": "Rasmussen CH, Roge RM, Ma Z, Thomsen M, Thorisdottir RL, Chen JW, Mosekilde E, Colding-Jorgensen M.",
+      "journalAbbreviation": "Eur J Pharm Sci",
+      "pubYear": 2014,
+      "volume": "62",
+      "pageInfo": "65-75",
+      "citedOrder": 5,
+      "match": "Y",
+      "essn": "1879-0720",
+      "issn": "0928-0987"
+    }
+  },
+  {
+    "key": "PMID:16144811",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "16144811",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "A minimal model of insulin secretion and kinetics to assess hepatic insulin extraction.",
+      "authorString": "Toffolo G, Campioni M, Basu R, Rizza RA, Cobelli C.",
+      "journalAbbreviation": "Am J Physiol Endocrinol Metab",
+      "issue": "1",
+      "pubYear": 2005,
+      "volume": "290",
+      "pageInfo": "E169-E176",
+      "citedOrder": 9,
+      "match": "Y",
+      "essn": "1522-1555",
+      "issn": "0193-1849"
+    }
+  },
+  {
+    "key": "PMID:3552526",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "3552526",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "The kinetics of insulin in man. I. General aspects.",
+      "authorString": "Ferrannini E, Cobelli C.",
+      "journalAbbreviation": "Diabetes Metab Rev",
+      "issue": "2",
+      "pubYear": 1987,
+      "volume": "3",
+      "pageInfo": "335-363",
+      "citedOrder": 10,
+      "match": "Y",
+      "issn": "0742-4221"
+    }
+  },
+  {
+    "key": "PMID:2226110",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "2226110",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Monomeric insulins and their experimental and clinical implications.",
+      "authorString": "Brange J, Owens DR, Kang S, Volund A.",
+      "journalAbbreviation": "Diabetes Care",
+      "issue": "9",
+      "pubYear": 1990,
+      "volume": "13",
+      "pageInfo": "923-954",
+      "citedOrder": 12,
+      "match": "Y",
+      "essn": "1935-5548",
+      "issn": "0149-5992"
+    }
+  },
+  {
+    "key": "PMID:24876534",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "24876534",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "The UVA/PADOVA Type 1 Diabetes Simulator: New Features.",
+      "authorString": "Man CD, Micheletto F, Lv D, Breton M, Kovatchev B, Cobelli C.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "issue": "1",
+      "pubYear": 2014,
+      "volume": "8",
+      "pageInfo": "26-34",
+      "citedOrder": 13,
+      "match": "Y",
+      "essn": "1932-2968",
+      "issn": "1932-2968"
+    }
+  },
+  {
+    "key": "UNMATCHED:ccda8c7f18029ceb",
+    "first_round": 1,
+    "record": {
+      "authorString": "AUTHOR UNKNOWN",
+      "pubYear": 0,
+      "doi": "10.1155/2011/427196",
+      "citedOrder": 15,
+      "match": "N"
+    }
+  },
+  {
+    "key": "PMID:11934663",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "11934663",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Partitioning glucose distribution/transport, disposal, and endogenous production during IVGTT.",
+      "authorString": "Hovorka R, Shojaee-Moradie F, Carroll PV, Chassin LJ, Gowrie IJ, Jackson NC, Tudor RS, Umpleby AM, Jones RH.",
+      "journalAbbreviation": "Am J Physiol Endocrinol Metab",
+      "issue": "5",
+      "pubYear": 2002,
+      "volume": "282",
+      "pageInfo": "E992-1007",
+      "citedOrder": 16,
+      "match": "Y",
+      "essn": "1522-1555",
+      "issn": "0193-1849"
+    }
+  },
+  {
+    "key": "UNMATCHED:5536e5a243db55d6",
+    "first_round": 1,
+    "record": {
+      "authorString": "cobelli",
+      "journalAbbreviation": "Introduction to Modeling of Metabolic in Physiology and Medicine",
+      "pubYear": 2008,
+      "citedOrder": 20,
+      "match": "N"
+    }
+  },
+  {
+    "key": "PMID:19671837",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "19671837",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Minimal model assessment of hepatic insulin extraction during an oral test from standard insulin kinetic parameters.",
+      "authorString": "Campioni M, Toffolo G, Basu R, Rizza RA, Cobelli C.",
+      "journalAbbreviation": "Am J Physiol Endocrinol Metab",
+      "issue": "4",
+      "pubYear": 2009,
+      "volume": "297",
+      "pageInfo": "E941-8",
+      "citedOrder": 21,
+      "match": "Y",
+      "essn": "1522-1555",
+      "issn": "0193-1849"
+    }
+  },
+  {
+    "key": "PMID:9550550",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "9550550",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "SAAM II: Simulation, Analysis, and Modeling Software for tracer and pharmacokinetic studies.",
+      "authorString": "Barrett PH, Bell BM, Cobelli C, Golde H, Schumitzky A, Vicini P, Foster DM.",
+      "journalAbbreviation": "Metabolism",
+      "issue": "4",
+      "pubYear": 1998,
+      "volume": "47",
+      "pageInfo": "484-492",
+      "citedOrder": 22,
+      "match": "Y",
+      "essn": "1532-8600",
+      "issn": "0026-0495"
+    }
+  },
+  {
+    "key": "UNMATCHED:51204753ddf5c1fe",
+    "first_round": 1,
+    "record": {
+      "authorString": "AUTHOR UNKNOWN",
+      "pubYear": 0,
+      "doi": "10.1177/0049124104268644",
+      "citedOrder": 23,
+      "match": "N"
+    }
+  },
+  {
+    "key": "PMID:40403633",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "40403633",
+      "citationType": "journal article",
+      "title": "Biophysical simulation of transcutaneous drug delivery for the rational design of hollow microneedle-based insulin infusion.",
+      "authorString": "Mohizin A, Sung B.",
+      "journalAbbreviation": "Comput Biol Med",
+      "pubYear": 2025,
+      "volume": "193",
+      "pageInfo": "110365",
+      "citedByCount": 4
+    }
+  },
+  {
+    "key": "PMID:39155919",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "39155919",
+      "citationType": "research support, non-u.s. gov't; research-article; journal article",
+      "title": "Equivalent Electrical Circuit Approach to Enhance a Transducer for Insulin Bioavailability Assessment.",
+      "authorString": "Mancino F, Nouri H, Moccaldi N, Arpaia P, Kanoun O.",
+      "journalAbbreviation": "IEEE J Transl Eng Health Med",
+      "pubYear": 2024,
+      "volume": "12",
+      "pageInfo": "533-541",
+      "citedByCount": 0
+    }
+  },
+  {
+    "key": "PMID:38887022",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "38887022",
+      "citationType": "research support, non-u.s. gov't; systematic review; review-article; journal article",
+      "title": "Digital Twins in Type 1 Diabetes: A Systematic Review.",
+      "authorString": "Cappon G, Facchinetti A.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2025,
+      "volume": "19",
+      "issue": "6",
+      "pageInfo": "1641-1649",
+      "citedByCount": 10
+    }
+  },
+  {
+    "key": "PMID:37844003",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "37844003",
+      "citationType": "research support, non-u.s. gov't; research-article; journal article",
+      "title": "The Minimally-Invasive Oral Glucose Minimal Model: Estimation of Gastric Retention, Glucose Rate of Appearance, and Insulin Sensitivity From Type 1 Diabetes Data Collected in Real-Life Conditions.",
+      "authorString": "Faggionato E, Schiavon M, Ekhlaspour L, Buckingham BA, Dalla Man C.",
+      "journalAbbreviation": "IEEE Trans Biomed Eng",
+      "pubYear": 2024,
+      "volume": "71",
+      "issue": "3",
+      "pageInfo": "977-986",
+      "citedByCount": 2
+    }
+  },
+  {
+    "key": "PMID:38284154",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "38284154",
+      "citationType": "research support, non-u.s. gov't; meeting-report; journal article",
+      "title": "Short- and Long-Term Effects on Glucose Control of Nonadherence to Insulin Therapy in People With Type 2 Diabetes An <i>In Silico</i> Study.",
+      "authorString": "Visentin R, Cobelli C, Sieber J, Dalla Man C.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2024,
+      "volume": "18",
+      "issue": "2",
+      "pageInfo": "309-317",
+      "citedByCount": 2
+    }
+  },
+  {
+    "key": "PMID:38158565",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "38158565",
+      "citationType": "research support, non-u.s. gov't; research-article; journal article",
+      "title": "drCORRECT: An Algorithm for the Preventive Administration of Postprandial Corrective Insulin Boluses in Type 1 Diabetes Management.",
+      "authorString": "Pellizzari E, Prendin F, Cappon G, Sparacino G, Facchinetti A.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2025,
+      "volume": "19",
+      "issue": "3",
+      "pageInfo": "711-721",
+      "citedByCount": 7
+    }
+  },
+  {
+    "key": "PMID:37946403",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "37946403",
+      "citationType": "research support, u.s. gov't, p.h.s.; research-article; journal article; research support, n.i.h., extramural",
+      "title": "Ketone-Based Alert System for Insulin Pump Failures.",
+      "authorString": "Aiello EM, Laffel LM, Patti ME, Doyle FJ.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2025,
+      "volume": "19",
+      "issue": "3",
+      "pageInfo": "683-691",
+      "citedByCount": 0
+    }
+  },
+  {
+    "key": "PMID:37368794",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "37368794",
+      "citationType": "journal article",
+      "title": "ReplayBG: A Digital Twin-Based Methodology to Identify a Personalized Model From Type 1 Diabetes Data and Simulate Glucose Concentrations to Assess Alternative Therapies.",
+      "authorString": "Cappon G, Vettoretti M, Sparacino G, Favero SD, Facchinetti A.",
+      "journalAbbreviation": "IEEE Trans Biomed Eng",
+      "pubYear": 2023,
+      "volume": "70",
+      "issue": "11",
+      "pageInfo": "3227-3238",
+      "citedByCount": 29
+    }
+  },
+  {
+    "key": "PMID:37195837",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "37195837",
+      "citationType": "journal article",
+      "title": "Individualized Models for Glucose Prediction in Type 1 Diabetes: Comparing Black-Box Approaches to a Physiological White-Box One.",
+      "authorString": "Cappon G, Prendin F, Facchinetti A, Sparacino G, Favero SD.",
+      "journalAbbreviation": "IEEE Trans Biomed Eng",
+      "pubYear": 2023,
+      "volume": "70",
+      "issue": "11",
+      "pageInfo": "3105-3115",
+      "citedByCount": 14
+    }
+  },
+  {
+    "key": "PMID:37898338",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "37898338",
+      "citationType": "research support, non-u.s. gov't; review; journal article",
+      "title": "Emerging drug delivery systems with traditional routes - A roadmap to chronic inflammatory diseases.",
+      "authorString": "Min K, Sahu A, Jeon SH, Tae G.",
+      "journalAbbreviation": "Adv Drug Deliv Rev",
+      "pubYear": 2023,
+      "volume": "203",
+      "pageInfo": "115119",
+      "citedByCount": 9
+    }
+  },
+  {
+    "key": "PMID:37803177",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "37803177",
+      "citationType": "research support, non-u.s. gov't; research-article; journal article",
+      "title": "The importance of interpreting machine learning models for blood glucose prediction in diabetes: an analysis using SHAP.",
+      "authorString": "Prendin F, Pavan J, Cappon G, Del Favero S, Sparacino G, Facchinetti A.",
+      "journalAbbreviation": "Sci Rep",
+      "pubYear": 2023,
+      "volume": "13",
+      "issue": "1",
+      "pageInfo": "16865",
+      "citedByCount": 56
+    }
+  },
+  {
+    "key": "PMID:35118893",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "35118893",
+      "citationType": "journal article",
+      "title": "Clinical Evaluation of a Novel Insulin Immunosensor.",
+      "authorString": "Aiello EM, Pinsker JE, Vargas E, Teymourian H, Tehrani F, Church MM, Laffel LM, Doyle FJ, Patti ME, Wang J, Dassau E.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2023,
+      "volume": "17",
+      "issue": "4",
+      "pageInfo": "1038-1048",
+      "citedByCount": 4
+    }
+  },
+  {
+    "key": "PMID:34032128",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "34032128",
+      "citationType": "research support, non-u.s. gov't; review-article; journal article",
+      "title": "Minimal and Maximal Models to Quantitate Glucose Metabolism: Tools to Measure, to Simulate and to Run in Silico Clinical Trials.",
+      "authorString": "Cobelli C, Dalla Man C.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2022,
+      "volume": "16",
+      "issue": "5",
+      "pageInfo": "1270-1298",
+      "citedByCount": 8
+    }
+  },
+  {
+    "key": "PMID:32746033",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "32746033",
+      "citationType": "research support, non-u.s. gov't; journal article",
+      "title": "Machine-Learning Based Model to Improve Insulin Bolus Calculation in Type 1 Diabetes Therapy.",
+      "authorString": "Noaro G, Cappon G, Vettoretti M, Sparacino G, Favero SD, Facchinetti A.",
+      "journalAbbreviation": "IEEE Trans Biomed Eng",
+      "pubYear": 2021,
+      "volume": "68",
+      "issue": "1",
+      "pageInfo": "247-255",
+      "citedByCount": 30
+    }
+  },
+  {
+    "key": "PMID:32546001",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "32546001",
+      "citationType": "research support, non-u.s. gov't; research-article; journal article; research support, n.i.h., extramural",
+      "title": "Impact of Accelerating Insulin on an Artificial Pancreas System Without Meal Announcement: An In Silico Examination.",
+      "authorString": "Colmegna P, Cengiz E, Garcia-Tirado J, Kraemer K, Breton MD.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2021,
+      "volume": "15",
+      "issue": "4",
+      "pageInfo": "833-841",
+      "citedByCount": 6
+    }
+  },
+  {
+    "key": "PMID:31947429",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "31947429",
+      "citationType": "research support, non-u.s. gov't; journal article",
+      "title": "A Bayesian Framework to Identify Type 1 Diabetes Physiological Models Using Easily Accessible Patient Data.",
+      "authorString": "Cappon G, Facchinetti A, Sparacino G, Favero SD.",
+      "journalAbbreviation": "Annu Int Conf IEEE Eng Med Biol Soc",
+      "pubYear": 2019,
+      "volume": "2019",
+      "pageInfo": "6914-6917",
+      "citedByCount": 6
+    }
+  },
+  {
+    "key": "PMID:30441443",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "30441443",
+      "citationType": "clinical trial; research support, non-u.s. gov't; journal article",
+      "title": "Long-acting Insulin in Diabetes Therapy: In Silico Clinical Trials with the UVA/Padova Type 1 Diabetes Simulator<sup>.</sup>",
+      "authorString": "Visentin R, Schiavon M, Giegerich C, Klabunde T, Man CD, Cobelli C.",
+      "journalAbbreviation": "Annu Int Conf IEEE Eng Med Biol Soc",
+      "pubYear": 2018,
+      "volume": "2018",
+      "pageInfo": "4905-4908",
+      "citedByCount": 2
+    }
+  },
+  {
+    "key": "PMID:15367729",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "15367729",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Population pharmacokinetics II: estimation methods.",
+      "authorString": "Ette EI, Williams PJ.",
+      "journalAbbreviation": "Ann Pharmacother",
+      "issue": "11",
+      "pubYear": 2004,
+      "volume": "38",
+      "pageInfo": "1907-1915",
+      "citedOrder": 1,
+      "match": "Y",
+      "essn": "1542-6270",
+      "issn": "1060-0280"
+    }
+  },
+  {
+    "key": "PMID:27333446",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "27333446",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Improving Efficacy of Inhaled Technosphere Insulin (Afrezza) by Postmeal Dosing: In-silico Clinical Trial with the University of Virginia/Padova Type 1 Diabetes Simulator.",
+      "authorString": "Visentin R, Giegerich C, Jager R, Dahmen R, Boss A, Grant M, Dalla Man C, Cobelli C, Klabunde T.",
+      "journalAbbreviation": "Diabetes Technol Ther",
+      "issue": "9",
+      "pubYear": 2016,
+      "volume": "18",
+      "pageInfo": "574-585",
+      "citedOrder": 7,
+      "match": "Y",
+      "essn": "1557-8593",
+      "issn": "1520-9156"
+    }
+  },
+  {
+    "key": "PMID:16322398",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "16322398",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Impact of insulin antibodies on insulin aspart pharmacokinetics and pharmacodynamics after 12-week treatment with multiple daily injections of biphasic insulin aspart 30 in patients with type 1 diabetes.",
+      "authorString": "Chen JW, Frystyk J, Lauritzen T, Christiansen JS.",
+      "journalAbbreviation": "Eur J Endocrinol",
+      "issue": "6",
+      "pubYear": 2005,
+      "volume": "153",
+      "pageInfo": "907-913",
+      "citedOrder": 8,
+      "match": "Y",
+      "essn": "1479-683X",
+      "issn": "0804-4643"
+    }
+  },
+  {
+    "key": "PMID:20103736",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "20103736",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "IVGTT glucose minimal model covariate selection by nonlinear mixed-effects approach.",
+      "authorString": "Denti P, Bertoldo A, Vicini P, Cobelli C.",
+      "journalAbbreviation": "Am J Physiol Endocrinol Metab",
+      "issue": "5",
+      "pubYear": 2010,
+      "volume": "298",
+      "pageInfo": "E950-60",
+      "citedOrder": 9,
+      "match": "Y",
+      "essn": "1522-1555",
+      "issn": "0193-1849"
+    }
+  },
+  {
+    "key": "PMID:24466182",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "24466182",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Effects of age, gender, BMI, and anatomical site on skin thickness in children and adults with diabetes.",
+      "authorString": "Derraik JG, Rademaker M, Cutfield WS, Pinto TE, Tregurtha S, Faherty A, Peart JM, Drury PL, Hofman PL.",
+      "journalAbbreviation": "PLoS One",
+      "issue": "1",
+      "pubYear": 2014,
+      "volume": "9",
+      "pageInfo": "e86637",
+      "citedOrder": 12,
+      "match": "Y",
+      "essn": "1932-6203",
+      "issn": "1932-6203"
+    }
+  },
+  {
+    "key": "PMID:20138357",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "20138357",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Manual closed-loop insulin delivery in children and adolescents with type 1 diabetes: a phase 2 randomised crossover trial.",
+      "authorString": "Hovorka R, Allen JM, Elleri D, Chassin LJ, Harris J, Xing D, Kollman C, Hovorka T, Larsen AM, Nodale M, De Palma A, Wilinska ME, Acerini CL, Dunger DB.",
+      "journalAbbreviation": "Lancet",
+      "issue": "9716",
+      "pubYear": 2010,
+      "volume": "375",
+      "pageInfo": "743-751",
+      "citedOrder": 14,
+      "match": "Y",
+      "essn": "1474-547X",
+      "issn": "0140-6736"
+    }
+  },
+  {
+    "key": "PMID:3539462",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "3539462",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Effects of physical exercise on insulin absorption in insulin-dependent diabetics. A comparison between human and porcine insulin.",
+      "authorString": "Fernqvist E, Linde B, Ostman J, Gunnarsson R.",
+      "journalAbbreviation": "Clin Physiol",
+      "issue": "6",
+      "pubYear": 1986,
+      "volume": "6",
+      "pageInfo": "489-497",
+      "citedOrder": 15,
+      "match": "Y",
+      "essn": "1365-2281",
+      "issn": "0144-5979"
+    }
+  },
+  {
+    "key": "PMID:27630249",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "27630249",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Regulation Catches Up to Reality.",
+      "authorString": "Edelman SV.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "issue": "1",
+      "pubYear": 2016,
+      "volume": "11",
+      "pageInfo": "160-164",
+      "citedOrder": 17,
+      "match": "Y",
+      "essn": "1932-2968",
+      "issn": "1932-2968"
+    }
+  },
+  {
+    "key": "PMID:32324063",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "32324063",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "The Padova Type 2 Diabetes Simulator from Triple-Tracer Single-Meal Studies: <i>In Silico</i> Trials Also Possible in Rare but Not-So-Rare Individuals.",
+      "authorString": "Visentin R, Cobelli C, Dalla Man C.",
+      "journalAbbreviation": "Diabetes Technol Ther",
+      "issue": "12",
+      "pubYear": 2020,
+      "volume": "22",
+      "pageInfo": "892-903",
+      "citedOrder": 22,
+      "match": "Y",
+      "essn": "1557-8593",
+      "issn": "1520-9156"
+    }
+  },
+  {
+    "key": "PMID:11120672",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "11120672",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "The iterative two-stage population approach to IVGTT minimal modeling: improved precision with reduced sampling. Intravenous glucose tolerance test.",
+      "authorString": "Vicini P, Cobelli C.",
+      "journalAbbreviation": "Am J Physiol Endocrinol Metab",
+      "issue": "1",
+      "pubYear": 2001,
+      "volume": "280",
+      "pageInfo": "E179-86",
+      "citedOrder": 24,
+      "match": "Y",
+      "essn": "1522-1555",
+      "issn": "0193-1849"
+    }
+  },
+  {
+    "key": "PMID:41683841",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "41683841",
+      "citationType": "review-article; review; journal article",
+      "title": "The Transplantation of Pancreatic Islets to Portal Vein: The Influence on Liver Tissue.",
+      "authorString": "Vojtíšková A, Fábryová E, Berková Z, Koblas T, Girman P, Kříž J.",
+      "journalAbbreviation": "Int J Mol Sci",
+      "pubYear": 2026,
+      "volume": "27",
+      "issue": "3",
+      "pageInfo": "1419",
+      "citedByCount": 1
+    }
+  },
+  {
+    "key": "PMID:37743740",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "37743740",
+      "citationType": "research support, non-u.s. gov't; research-article; review; journal article; research support, n.i.h., extramural",
+      "title": "Developing the UVA/Padova Type 1 Diabetes Simulator: Modeling, Validation, Refinements, and Utility.",
+      "authorString": "Cobelli C, Kovatchev B.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2023,
+      "volume": "17",
+      "issue": "6",
+      "pageInfo": "1493-1505",
+      "citedByCount": 26
+    }
+  },
+  {
+    "key": "PMID:37030857",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "37030857",
+      "citationType": "research support, non-u.s. gov't; research-article; journal article; research support, n.i.h., extramural",
+      "title": "Nonlinear Mixed Effects Modeling of Glucagon Kinetics in Healthy Subjects.",
+      "authorString": "Faggionato E, Laurenti MC, Vella A, Man CD.",
+      "journalAbbreviation": "IEEE Trans Biomed Eng",
+      "pubYear": 2023,
+      "volume": "70",
+      "issue": "9",
+      "pageInfo": "2733-2740",
+      "citedByCount": 2
+    }
+  },
+  {
+    "key": "PMID:35533921",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "35533921",
+      "citationType": "review; journal article",
+      "title": "Physiological based pharmacokinetic and biopharmaceutics modelling of subcutaneously administered compounds - An overview of in silico models.",
+      "authorString": "Dubbelboer IR, Sjögren E.",
+      "journalAbbreviation": "Int J Pharm",
+      "pubYear": 2022,
+      "volume": "621",
+      "pageInfo": "121808",
+      "citedByCount": 13
+    }
+  },
+  {
+    "key": "PMID:35475698",
+    "first_round": 1,
+    "record": {
+      "source": "MED",
+      "id": "35475698",
+      "citationType": "journal article",
+      "title": "New Insulins, Biosimilars, and Insulin Therapy.",
+      "authorString": "Danne T, Heinemann L, Bolinder J.",
+      "journalAbbreviation": "Diabetes Technol Ther",
+      "pubYear": 2022,
+      "volume": "24",
+      "issue": "s1",
+      "pageInfo": "S35-S57",
+      "citedByCount": 0
+    }
+  },
+  {
+    "key": "PMID:11815491",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "11815491",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Disturbances in beta-cell function in impaired fasting glycemia.",
+      "authorString": "van Haeften TW, Pimenta W, Mitrakou A, Korytkowski M, Jenssen T, Yki-Jarvinen H, Gerich JE.",
+      "journalAbbreviation": "Diabetes",
+      "pubYear": 2002,
+      "volume": "51 Suppl 1",
+      "pageInfo": "S265-70",
+      "citedOrder": 2,
+      "match": "Y",
+      "essn": "1939-327X",
+      "issn": "1939-327X"
+    }
+  },
+  {
+    "key": "PMID:1863105",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "1863105",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Subcutaneous or intramuscular insulin injections.",
+      "authorString": "Smith CP, Sargent MA, Wilson BP, Price DA.",
+      "journalAbbreviation": "Arch Dis Child",
+      "issue": "7",
+      "pubYear": 1991,
+      "volume": "66",
+      "pageInfo": "879-882",
+      "citedOrder": 4,
+      "match": "Y",
+      "essn": "1468-2044",
+      "issn": "0003-9888"
+    }
+  },
+  {
+    "key": "PMID:2872151",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "2872151",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Prolonged plasma half-life of insulin in patients with a genetic defect of high affinity binding sites.",
+      "authorString": "Dreyer M, Matthaei S, Kuhnau J, Rudiger HW.",
+      "journalAbbreviation": "Horm Metab Res",
+      "issue": "4",
+      "pubYear": 1986,
+      "volume": "18",
+      "pageInfo": "247-249",
+      "citedOrder": 6,
+      "match": "Y",
+      "essn": "1439-4286",
+      "issn": "0018-5043"
+    }
+  },
+  {
+    "key": "PMID:7729308",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "7729308",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Hyperglycemia and microvascular and macrovascular disease in diabetes.",
+      "authorString": "Klein R.",
+      "journalAbbreviation": "Diabetes Care",
+      "issue": "2",
+      "pubYear": 1995,
+      "volume": "18",
+      "pageInfo": "258-268",
+      "citedOrder": 7,
+      "match": "Y",
+      "essn": "1935-5548",
+      "issn": "0149-5992"
+    }
+  },
+  {
+    "key": "PMID:19527957",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "19527957",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Closed-loop control of artificial pancreatic Beta -cell in type 1 diabetes mellitus using model predictive iterative learning control.",
+      "authorString": "Wang Y, Dassau E, Doyle FJ 3rd.",
+      "journalAbbreviation": "IEEE Trans Biomed Eng",
+      "issue": "2",
+      "pubYear": 2009,
+      "volume": "57",
+      "pageInfo": "211-219",
+      "citedOrder": 11,
+      "match": "Y",
+      "essn": "1558-2531",
+      "issn": "0018-9294"
+    }
+  },
+  {
+    "key": "PMID:17926672",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "17926672",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Meal simulation model of the glucose-insulin system.",
+      "authorString": "Dalla Man C, Rizza RA, Cobelli C.",
+      "journalAbbreviation": "IEEE Trans Biomed Eng",
+      "issue": "10",
+      "pubYear": 2007,
+      "volume": "54",
+      "pageInfo": "1740-1749",
+      "citedOrder": 13,
+      "match": "Y",
+      "essn": "1558-2531",
+      "issn": "0018-9294"
+    }
+  },
+  {
+    "key": "PMID:14632713",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "14632713",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Alternative routes of insulin delivery.",
+      "authorString": "Owens DR, Zinman B, Bolli G.",
+      "journalAbbreviation": "Diabet Med",
+      "issue": "11",
+      "pubYear": 2003,
+      "volume": "20",
+      "pageInfo": "886-898",
+      "citedOrder": 14,
+      "match": "Y",
+      "essn": "1464-5491",
+      "issn": "0742-3071"
+    }
+  },
+  {
+    "key": "PMID:16876586",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "16876586",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Hypoglycemia in diabetes: pathophysiological mechanisms and diurnal variation.",
+      "authorString": "Cryer PE.",
+      "journalAbbreviation": "Prog Brain Res",
+      "pubYear": 2006,
+      "volume": "153",
+      "pageInfo": "361-365",
+      "citedOrder": 15,
+      "match": "Y",
+      "essn": "1875-7855",
+      "issn": "0079-6123"
+    }
+  },
+  {
+    "key": "PMID:19846371",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "19846371",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "A gain-scheduling model predictive controller for blood glucose control in type 1 diabetes.",
+      "authorString": "Abu-Rmileh A, Garcia-Gabin W.",
+      "journalAbbreviation": "IEEE Trans Biomed Eng",
+      "issue": "10",
+      "pubYear": 2009,
+      "volume": "57",
+      "pageInfo": "2478-2484",
+      "citedOrder": 17,
+      "match": "Y",
+      "essn": "1558-2531",
+      "issn": "0018-9294"
+    }
+  },
+  {
+    "key": "PMID:8063038",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "8063038",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Effect of insulin concentration, subcutaneous fat thickness and skin temperature on subcutaneous insulin absorption in healthy subjects.",
+      "authorString": "Sindelka G, Heinemann L, Berger M, Frenck W, Chantelau E.",
+      "journalAbbreviation": "Diabetologia",
+      "issue": "4",
+      "pubYear": 1994,
+      "volume": "37",
+      "pageInfo": "377-380",
+      "citedOrder": 19,
+      "match": "Y",
+      "essn": "1432-0428",
+      "issn": "0012-186X"
+    }
+  },
+  {
+    "key": "PMID:2949920",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "2949920",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Human, porcine and bovine ultralente insulin: subcutaneous administration in normal man.",
+      "authorString": "Owens DR, Vora JP, Heding LG, Luzio S, Ryder RE, Atiea J, Hayes TM.",
+      "journalAbbreviation": "Diabet Med",
+      "issue": "4",
+      "pubYear": 1986,
+      "volume": "3",
+      "pageInfo": "326-329",
+      "citedOrder": 2,
+      "match": "Y",
+      "essn": "1464-5491",
+      "issn": "0742-3071"
+    }
+  },
+  {
+    "key": "PMID:1914533",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "1914533",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Subcutaneous absorption of insulin in insulin-dependent diabetic patients. Influence of species, physico-chemical properties of insulin and physiological factors.",
+      "authorString": "Hildebrandt P.",
+      "journalAbbreviation": "Dan Med Bull",
+      "issue": "4",
+      "pubYear": 1991,
+      "volume": "38",
+      "pageInfo": "337-346",
+      "citedOrder": 3,
+      "match": "Y",
+      "essn": "1603-9629",
+      "issn": "0907-8916"
+    }
+  },
+  {
+    "key": "PMID:16734548",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "16734548",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "A novel, model-based insulin and nutrition delivery controller for glycemic regulation in critically ill patients.",
+      "authorString": "Wong XW, Singh-Levett I, Hollingsworth LJ, Shaw GM, Hann CE, Lotz T, Lin J, Wong OS, Chase JG.",
+      "journalAbbreviation": "Diabetes Technol Ther",
+      "issue": "2",
+      "pubYear": 2006,
+      "volume": "8",
+      "pageInfo": "174-190",
+      "citedOrder": 4,
+      "match": "Y",
+      "essn": "1557-8593",
+      "issn": "1520-9156"
+    }
+  },
+  {
+    "key": "PMID:14741069",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "14741069",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Insulin glargine: long-acting basal insulin analog for improved metabolic control.",
+      "authorString": "Gerich JE.",
+      "journalAbbreviation": "Curr Med Res Opin",
+      "issue": "1",
+      "pubYear": 2004,
+      "volume": "20",
+      "pageInfo": "31-37",
+      "citedOrder": 5,
+      "match": "Y",
+      "essn": "1473-4877",
+      "issn": "0300-7995"
+    }
+  },
+  {
+    "key": "PMID:9802742",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "9802742",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Variability of the metabolic effect of soluble insulin and the rapid-acting insulin analog insulin aspart.",
+      "authorString": "Heinemann L, Weyer C, Rauhaus M, Heinrichs S, Heise T.",
+      "journalAbbreviation": "Diabetes Care",
+      "issue": "11",
+      "pubYear": 1998,
+      "volume": "21",
+      "pageInfo": "1910-1914",
+      "citedOrder": 6,
+      "match": "Y",
+      "essn": "1935-5548",
+      "issn": "0149-5992"
+    }
+  },
+  {
+    "key": "PMID:3287182",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "3287182",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Monomeric insulins obtained by protein engineering and their medical implications.",
+      "authorString": "Brange J, Ribel U, Hansen JF, Dodson G, Hansen MT, Havelund S, Melberg SG, Norris F, Norris K, Snel L.",
+      "journalAbbreviation": "Nature",
+      "issue": "6174",
+      "pubYear": 1988,
+      "volume": "333",
+      "pageInfo": "679-682",
+      "citedOrder": 9,
+      "match": "Y",
+      "essn": "1476-4687",
+      "issn": "0028-0836"
+    }
+  },
+  {
+    "key": "PMID:2142052",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "2142052",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "The variability of the absorption of subcutaneously injected insulin: effect of injection technique and relation with brittleness.",
+      "authorString": "de Meijer PH, Lutterman JA, van Lier HJ, van't Laar A.",
+      "journalAbbreviation": "Diabet Med",
+      "issue": "6",
+      "pubYear": 1990,
+      "volume": "7",
+      "pageInfo": "499-505",
+      "citedOrder": 14,
+      "match": "Y",
+      "essn": "1464-5491",
+      "issn": "0742-3071"
+    }
+  },
+  {
+    "key": "PMID:6400706",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "6400706",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "The absorption of subcutaneously injected short-acting soluble insulin: influence of injection technique and concentration.",
+      "authorString": "Hildebrandt P, Sestoft L, Nielsen SL.",
+      "journalAbbreviation": "Diabetes Care",
+      "issue": "5",
+      "pubYear": 1983,
+      "volume": "6",
+      "pageInfo": "459-462",
+      "citedOrder": 15,
+      "match": "Y",
+      "essn": "1935-5548",
+      "issn": "0149-5992"
+    }
+  },
+  {
+    "key": "PMID:6339306",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "6339306",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "The pharmacokinetics of insulin after continuous subcutaneous infusion or bolus subcutaneous injection in diabetic patients.",
+      "authorString": "Kobayashi T, Sawano S, Itoh T, Kosaka K, Hirayama H, Kasuya Y.",
+      "journalAbbreviation": "Diabetes",
+      "issue": "4",
+      "pubYear": 1983,
+      "volume": "32",
+      "pageInfo": "331-336",
+      "citedOrder": 19,
+      "match": "Y",
+      "essn": "1939-327X",
+      "issn": "1939-327X"
+    }
+  },
+  {
+    "key": "PMID:10837704",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "10837704",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Insulin analogs with improved pharmacokinetic profiles.",
+      "authorString": "Brange J, Volund A.",
+      "journalAbbreviation": "Adv Drug Deliv Rev",
+      "issue": "2-3",
+      "pubYear": 1999,
+      "volume": "35",
+      "pageInfo": "307-335",
+      "citedOrder": 20,
+      "match": "Y",
+      "essn": "1872-8294",
+      "issn": "0169-409X"
+    }
+  },
+  {
+    "key": "PMID:8320979",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "8320979",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "AIDA2: a Mk. II automated insulin dosage advisor.",
+      "authorString": "Lehmann ED, Deutsch T.",
+      "journalAbbreviation": "J Biomed Eng",
+      "issue": "3",
+      "pubYear": 1993,
+      "volume": "15",
+      "pageInfo": "201-211",
+      "citedOrder": 21,
+      "match": "Y",
+      "issn": "0141-5425"
+    }
+  },
+  {
+    "key": "PMID:16160867",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "16160867",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Pharmacokinetic and glucodynamic variability: assessment of insulin glargine, NPH insulin and insulin ultralente in healthy volunteers using a euglycaemic clamp technique.",
+      "authorString": "Scholtz HE, Pretorius SG, Wessels DH, Becker RH.",
+      "journalAbbreviation": "Diabetologia",
+      "issue": "10",
+      "pubYear": 2005,
+      "volume": "48",
+      "pageInfo": "1988-1995",
+      "citedOrder": 22,
+      "match": "Y",
+      "essn": "1432-0428",
+      "issn": "0012-186X"
+    }
+  },
+  {
+    "key": "PMID:6765540",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "6765540",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Insulin concentrations and time-action profiles of three different intermediate-acting insulin preparations in nondiabetic volunteers under glucose-controlled glucose infusion technique.",
+      "authorString": "Bottermann P, Gyaram H, Wahl K, Ermler R, Lebender A.",
+      "journalAbbreviation": "Diabetes Care",
+      "pubYear": 1982,
+      "volume": "5 Suppl 2",
+      "pageInfo": "43-52",
+      "citedOrder": 24,
+      "match": "Y",
+      "essn": "1935-5548",
+      "issn": "0149-5992"
+    }
+  },
+  {
+    "key": "PMID:15628821",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "15628821",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Measurement of insulin absorption and insulin action.",
+      "authorString": "Heinemann L, Anderson JH Jr.",
+      "journalAbbreviation": "Diabetes Technol Ther",
+      "issue": "5",
+      "pubYear": 2004,
+      "volume": "6",
+      "pageInfo": "698-718",
+      "citedOrder": 25,
+      "match": "Y",
+      "essn": "1557-8593",
+      "issn": "1520-9156"
+    }
+  },
+  {
+    "key": "PMID:16915542",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "16915542",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Is the frequency of self-monitoring of blood glucose related to long-term metabolic control? Multicenter analysis including 24,500 patients from 191 centers in Germany and Austria.",
+      "authorString": "Schutt M, Kern W, Krause U, Busch P, Dapp A, Grziwotz R, Mayer I, Rosenbauer J, Wagner C, Zimmermann A, Kerner W, Holl RW; DPV Initiative.",
+      "journalAbbreviation": "Exp Clin Endocrinol Diabetes",
+      "issue": "7",
+      "pubYear": 2006,
+      "volume": "114",
+      "pageInfo": "384-388",
+      "citedOrder": 28,
+      "match": "Y",
+      "essn": "1439-3646",
+      "issn": "0947-7349"
+    }
+  },
+  {
+    "key": "PMID:7047113",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "7047113",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Factors influencing the absorption, serum insulin concentration, and blood glucose responses after injections of regular insulin and various insulin mixtures.",
+      "authorString": "Galloway JA, Spradlin CT, Nelson RL, Wentworth SM, Davidson JA, Swarner JL.",
+      "journalAbbreviation": "Diabetes Care",
+      "issue": "3",
+      "pubYear": 1981,
+      "volume": "4",
+      "pageInfo": "366-376",
+      "citedOrder": 29,
+      "match": "Y",
+      "essn": "1935-5548",
+      "issn": "0149-5992"
+    }
+  },
+  {
+    "key": "PMID:10398627",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "10398627",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Frequency of blood glucose monitoring in relation to glycaemic control: observational study with diabetes database.",
+      "authorString": "Evans JM, Newton RW, Ruta DA, MacDonald TM, Stevenson RJ, Morris AD.",
+      "journalAbbreviation": "BMJ",
+      "issue": "7202",
+      "pubYear": 1999,
+      "volume": "319",
+      "pageInfo": "83-86",
+      "citedOrder": 30,
+      "match": "Y",
+      "essn": "1756-1833",
+      "issn": "0959-8138"
+    }
+  },
+  {
+    "key": "PMID:10834424",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "10834424",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Time-action profile of the long-acting insulin analog insulin glargine (HOE901) in comparison with those of NPH insulin and placebo.",
+      "authorString": "Heinemann L, Linkeschova R, Rave K, Hompesch B, Sedlak M, Heise T.",
+      "journalAbbreviation": "Diabetes Care",
+      "issue": "5",
+      "pubYear": 2000,
+      "volume": "23",
+      "pageInfo": "644-649",
+      "citedOrder": 32,
+      "match": "Y",
+      "essn": "1935-5548",
+      "issn": "0149-5992"
+    }
+  },
+  {
+    "key": "PMID:7010077",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "7010077",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "A rise in ambient temperature augments insulin absorption in diabetic patients.",
+      "authorString": "Koivisto VA, Fortney S, Hendler R, Felig P.",
+      "journalAbbreviation": "Metabolism",
+      "issue": "4",
+      "pubYear": 1981,
+      "volume": "30",
+      "pageInfo": "402-405",
+      "citedOrder": 33,
+      "match": "Y",
+      "essn": "1532-8600",
+      "issn": "0026-0495"
+    }
+  },
+  {
+    "key": "PMID:9677952",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "9677952",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "AIDA--a computer-based interactive educational diabetes simulator.",
+      "authorString": "Lehmann ED.",
+      "journalAbbreviation": "Diabetes Educ",
+      "issue": "3",
+      "pubYear": 1998,
+      "volume": "24",
+      "pageInfo": "341-6, 348",
+      "citedOrder": 34,
+      "match": "Y",
+      "essn": "1554-6063",
+      "issn": "0145-7217"
+    }
+  },
+  {
+    "key": "PMID:15603999",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "15603999",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Adaptive bolus-based targeted glucose regulation of hyperglycaemia in critical care.",
+      "authorString": "Chase JG, Shaw GM, Lin J, Doran CV, Hann C, Robertson MB, Browne PM, Lotz T, Wake GC, Broughton B.",
+      "journalAbbreviation": "Med Eng Phys",
+      "issue": "1",
+      "pubYear": 2005,
+      "volume": "27",
+      "pageInfo": "1-11",
+      "citedOrder": 36,
+      "match": "Y",
+      "essn": "1873-4030",
+      "issn": "1350-4533"
+    }
+  },
+  {
+    "key": "PMID:11375381",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "11375381",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Direct comparison of insulin lispro and aspart shows small differences in plasma insulin profiles after subcutaneous injection in type 1 diabetes.",
+      "authorString": "Hedman CA, Lindstrom T, Arnqvist HJ.",
+      "journalAbbreviation": "Diabetes Care",
+      "issue": "6",
+      "pubYear": 2001,
+      "volume": "24",
+      "pageInfo": "1120-1121",
+      "citedOrder": 38,
+      "match": "Y",
+      "essn": "1935-5548",
+      "issn": "0149-5992"
+    }
+  },
+  {
+    "key": "PMID:10841002",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "10841002",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Pharmacokinetics of 125I-labeled insulin glargine (HOE 901) in healthy men: comparison with NPH insulin and the influence of different subcutaneous injection sites.",
+      "authorString": "Owens DR, Coates PA, Luzio SD, Tinbergen JP, Kurzhals R.",
+      "journalAbbreviation": "Diabetes Care",
+      "issue": "6",
+      "pubYear": 2000,
+      "volume": "23",
+      "pageInfo": "813-819",
+      "citedOrder": 39,
+      "match": "Y",
+      "essn": "1935-5548",
+      "issn": "0149-5992"
+    }
+  },
+  {
+    "key": "PMID:1392436",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "1392436",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "The pharmacokinetics of two different concentrations of short-acting insulin, intermediate-acting insulin, and an insulin mixture following subcutaneous injection.",
+      "authorString": "Hubinger A, Weber W, Jung W, Wehmeyer K, Gries FA.",
+      "journalAbbreviation": "Clin Investig",
+      "issue": "7",
+      "pubYear": 1992,
+      "volume": "70",
+      "pageInfo": "621-626",
+      "citedOrder": 40,
+      "match": "Y",
+      "issn": "0941-0198"
+    }
+  },
+  {
+    "key": "PMID:1773708",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "1773708",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "A comparison of the pharmacokinetics and metabolic effects of human regular and NPH insulin mixtures.",
+      "authorString": "Davis SN, Thompson CJ, Brown MD, Home PD, Alberti KG.",
+      "journalAbbreviation": "Diabetes Res Clin Pract",
+      "issue": "1-2",
+      "pubYear": 1991,
+      "volume": "13",
+      "pageInfo": "107-117",
+      "citedOrder": 41,
+      "match": "Y",
+      "essn": "1872-8227",
+      "issn": "0168-8227"
+    }
+  },
+  {
+    "key": "PMID:6799119",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "6799119",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Smoking reduces insulin absorption from subcutaneous tissue.",
+      "authorString": "Klemp P, Staberg B, Madsbad S, Kolendorf K.",
+      "journalAbbreviation": "Br Med J (Clin Res Ed)",
+      "issue": "6311",
+      "pubYear": 1982,
+      "volume": "284",
+      "pageInfo": "237",
+      "citedOrder": 42,
+      "match": "Y",
+      "issn": "0267-0623"
+    }
+  },
+  {
+    "key": "PMID:15803107",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "15803107",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Reproducibility and variability in the action of injected insulin.",
+      "authorString": "Gin H, Hanaire-Broutin H.",
+      "journalAbbreviation": "Diabetes Metab",
+      "issue": "1",
+      "pubYear": 2005,
+      "volume": "31",
+      "pageInfo": "7-13",
+      "citedOrder": 44,
+      "match": "Y",
+      "essn": "1878-1780",
+      "issn": "1262-3636"
+    }
+  },
+  {
+    "key": "PMID:436361",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "436361",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Adipose tissue blood flow and insulin disappearance from subcutaneous tissue.",
+      "authorString": "Kolendorf K, Bojsen J, Nielsen SL.",
+      "journalAbbreviation": "Clin Pharmacol Ther",
+      "issue": "5 Pt 1",
+      "pubYear": 1979,
+      "volume": "25",
+      "pageInfo": "598-604",
+      "citedOrder": 46,
+      "match": "Y",
+      "essn": "1532-6535",
+      "issn": "0009-9236"
+    }
+  },
+  {
+    "key": "PMID:10963823",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "10963823",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Pharmacokinetics and pharmacodynamics of insulin aspart, a rapid-acting analog of human insulin, in healthy Japanese volunteers.",
+      "authorString": "Kaku K, Matsuda M, Urae A, Irie S.",
+      "journalAbbreviation": "Diabetes Res Clin Pract",
+      "issue": "2-3",
+      "pubYear": 2000,
+      "volume": "49",
+      "pageInfo": "119-126",
+      "citedOrder": 47,
+      "match": "Y",
+      "essn": "1872-8227",
+      "issn": "0168-8227"
+    }
+  },
+  {
+    "key": "PMID:1588781",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "1588781",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "A physiological model of glucose-insulin interaction in type 1 diabetes mellitus.",
+      "authorString": "Lehmann ED, Deutsch T.",
+      "journalAbbreviation": "J Biomed Eng",
+      "issue": "3",
+      "pubYear": 1992,
+      "volume": "14",
+      "pageInfo": "235-242",
+      "citedOrder": 49,
+      "match": "Y",
+      "issn": "0141-5425"
+    }
+  },
+  {
+    "key": "PMID:2532097",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "2532097",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Quantitative aspects of subcutaneous insulin absorption.",
+      "authorString": "Furler SM, Kraegen EW.",
+      "journalAbbreviation": "Diabet Med",
+      "issue": "8",
+      "pubYear": 1989,
+      "volume": "6",
+      "pageInfo": "657-665",
+      "citedOrder": 51,
+      "match": "Y",
+      "essn": "1464-5491",
+      "issn": "0742-3071"
+    }
+  },
+  {
+    "key": "PMID:6997118",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "6997118",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Role of zinc in insulin biosynthesis. Some possible zinc-insulin interactions in the pancreatic B-cell.",
+      "authorString": "Emdin SO, Dodson GG, Cutfield JM, Cutfield SM.",
+      "journalAbbreviation": "Diabetologia",
+      "issue": "3",
+      "pubYear": 1980,
+      "volume": "19",
+      "pageInfo": "174-182",
+      "citedOrder": 53,
+      "match": "Y",
+      "essn": "1432-0428",
+      "issn": "0012-186X"
+    }
+  },
+  {
+    "key": "PMID:619237",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "619237",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Effects of leg exercise on insulin absorption in diabetic patients.",
+      "authorString": "Koivisto VA, Felig P.",
+      "journalAbbreviation": "N Engl J Med",
+      "issue": "2",
+      "pubYear": 1978,
+      "volume": "298",
+      "pageInfo": "79-83",
+      "citedOrder": 56,
+      "match": "Y",
+      "essn": "1533-4406",
+      "issn": "0028-4793"
+    }
+  },
+  {
+    "key": "PMID:15823772",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "15823772",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Comparison of pharmacokinetic and pharmacodynamic properties of single-dose oral insulin spray and subcutaneous insulin injection in healthy subjects using the euglycemic clamp technique.",
+      "authorString": "Cernea S, Kidron M, Wohlgelernter J, Modi P, Raz I.",
+      "journalAbbreviation": "Clin Ther",
+      "issue": "12",
+      "pubYear": 2004,
+      "volume": "26",
+      "pageInfo": "2084-2091",
+      "citedOrder": 57,
+      "match": "Y",
+      "essn": "1879-114X",
+      "issn": "0149-2918"
+    }
+  },
+  {
+    "key": "PMID:15721654",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "15721654",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Integral-based parameter identification for long-term dynamic verification of a glucose-insulin system model.",
+      "authorString": "Hann CE, Chase JG, Lin J, Lotz T, Doran CV, Shaw GM.",
+      "journalAbbreviation": "Comput Methods Programs Biomed",
+      "issue": "3",
+      "pubYear": 2005,
+      "volume": "77",
+      "pageInfo": "259-270",
+      "citedOrder": 58,
+      "match": "Y",
+      "essn": "1872-7565",
+      "issn": "0169-2607"
+    }
+  },
+  {
+    "key": "PMID:8187463",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "8187463",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "A probabilistic approach to glucose prediction and insulin dose adjustment: description of metabolic model and pilot evaluation study.",
+      "authorString": "Andreassen S, Benn JJ, Hovorka R, Olesen KG, Carson ER.",
+      "journalAbbreviation": "Comput Methods Programs Biomed",
+      "issue": "3-4",
+      "pubYear": 1994,
+      "volume": "41",
+      "pageInfo": "153-165",
+      "citedOrder": 59,
+      "match": "Y",
+      "essn": "1872-7565",
+      "issn": "0169-2607"
+    }
+  },
+  {
+    "key": "PMID:37854621",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "37854621",
+      "citationType": "research-article; journal article",
+      "title": "In Silico Investigation of the Clinical Translatability of Competitive Clearance Glucose-Responsive Insulins.",
+      "authorString": "Yang JF, Yang S, Gong X, Bakh NA, Zhang G, Wang AB, Cherrington AD, Weiss MA, Strano MS.",
+      "journalAbbreviation": "ACS Pharmacol Transl Sci",
+      "pubYear": 2023,
+      "volume": "6",
+      "issue": "10",
+      "pageInfo": "1382-1395",
+      "citedByCount": 2
+    }
+  },
+  {
+    "key": "PMID:35320591",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "35320591",
+      "citationType": "research support, non-u.s. gov't; journal article",
+      "title": "Modeling of Pharmacokinetic Profiles of Insulin Aspart and Biphasic Insulin Aspart 30/70.",
+      "authorString": "Kulesh VS, Drai RV, Zinnatulina BR, Makarenko IE, Pilyus FG, Khokhlov AL.",
+      "journalAbbreviation": "J Clin Pharmacol",
+      "pubYear": 2022,
+      "volume": "62",
+      "issue": "9",
+      "pageInfo": "1086-1093",
+      "citedByCount": 1
+    }
+  },
+  {
+    "key": "PMID:35343255",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "35343255",
+      "citationType": "research-article; journal article",
+      "title": "Determining Losses in Jet Injection Subcutaneous Insulin Delivery: A Model-Based Approach.",
+      "authorString": "McHugh AD, Chase JG, Knopp JL, Zhou T, Holder-Pearson L.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2023,
+      "volume": "17",
+      "issue": "4",
+      "pageInfo": "1016-1028",
+      "citedByCount": 1
+    }
+  },
+  {
+    "key": "PPR:PPR468080",
+    "first_round": 2,
+    "record": {
+      "source": "PPR",
+      "id": "PPR468080",
+      "citationType": "preprint",
+      "title": "Photoacoustic imaging reveals mechanisms of rapid-acting insulin formulations dynamics at the injection site",
+      "authorString": "Khadria A, Paavola CD, Maslov K, Valenzuela FA, Sperry AE, Cox AL, Cao R, Shi J, Brown-Augsburger PL, Lozano E, Blankenship RL, Majumdar R, Bradley SA, Beals JM, Oladipupo SS, Wang LV.",
+      "pubYear": 2022,
+      "citedByCount": 0
+    }
+  },
+  {
+    "key": "PMID:33462595",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "33462595",
+      "citationType": "journal article",
+      "title": "Numerical Simulation of Insulin Depot Formation in Subcutaneous Tissue Modeled as a Homogeneous Anisotropic Porous Media.",
+      "authorString": "Zedelmair M, Mukherjee A.",
+      "journalAbbreviation": "J Biomech Eng",
+      "pubYear": 2021,
+      "volume": "143",
+      "issue": "5",
+      "pageInfo": "051002",
+      "citedByCount": 0
+    }
+  },
+  {
+    "key": "PPR:PPR189447",
+    "first_round": 2,
+    "record": {
+      "source": "PPR",
+      "id": "PPR189447",
+      "citationType": "preprint",
+      "title": "Delay-Induced Uncertainty in Physiological Systems",
+      "authorString": "Karamched B, Hripcsak G, Albers D, Ott W.",
+      "pubYear": 2020,
+      "citedByCount": 0
+    }
+  },
+  {
+    "key": "PMID:31416537",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "31416537",
+      "citationType": "journal article",
+      "title": "A subcutaneous insulin pharmacokinetic model for insulin Detemir.",
+      "authorString": "van Noorden B, Knopp JL, Chase JG.",
+      "journalAbbreviation": "Comput Methods Programs Biomed",
+      "pubYear": 2019,
+      "volume": "178",
+      "pageInfo": "1-9",
+      "citedByCount": 4
+    }
+  },
+  {
+    "key": "PMID:30369394",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "30369394",
+      "citationType": "research-article; randomized controlled trial; journal article",
+      "title": "Insulin depot absorption modeling and pharmacokinetic simulation with insulin glargine 300 U/mL .",
+      "authorString": "Lindauer K, Becker R.",
+      "journalAbbreviation": "Int J Clin Pharmacol Ther",
+      "pubYear": 2019,
+      "volume": "57",
+      "issue": "1",
+      "pageInfo": "1-10",
+      "citedByCount": 6
+    }
+  },
+  {
+    "key": "PMID:28841775",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "28841775",
+      "citationType": "journal article",
+      "title": "Rational Design of Glucose-Responsive Insulin Using Pharmacokinetic Modeling.",
+      "authorString": "Bakh NA, Bisker G, Lee MA, Gong X, Strano MS.",
+      "journalAbbreviation": "Adv Healthc Mater",
+      "pubYear": 2017,
+      "volume": "6",
+      "issue": "22",
+      "citedByCount": 11
+    }
+  },
+  {
+    "key": "PMID:27580690",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "27580690",
+      "citationType": "journal article",
+      "title": "Incorporating bolus and infusion pharmacokinetics into the ICING insulin model.",
+      "authorString": "Fisk L, Docherty PD, Pretty C, Chase JG.",
+      "journalAbbreviation": "Math Biosci",
+      "pubYear": 2016,
+      "volume": "281",
+      "pageInfo": "1-8",
+      "citedByCount": 2
+    }
+  },
+  {
+    "key": "PMID:26092607",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "26092607",
+      "citationType": "journal article",
+      "title": "Estimation of secondary effect parameters in glycaemic dynamics using accumulating data from a virtual type 1 diabetic patient.",
+      "authorString": "Mansell EJ, Docherty PD, Fisk LM, Chase JG.",
+      "journalAbbreviation": "Math Biosci",
+      "pubYear": 2015,
+      "volume": "266",
+      "pageInfo": "108-117",
+      "citedByCount": 3
+    }
+  },
+  {
+    "key": "PMID:25122564",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "25122564",
+      "citationType": "review; journal article",
+      "title": "Pharmacokinetic modeling of the subcutaneous absorption of therapeutic proteins.",
+      "authorString": "Kagan L.",
+      "journalAbbreviation": "Drug Metab Dispos",
+      "pubYear": 2014,
+      "volume": "42",
+      "issue": "11",
+      "pageInfo": "1890-1905",
+      "citedByCount": 72
+    }
+  },
+  {
+    "key": "PMID:19964316",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "19964316",
+      "citationType": "journal article",
+      "title": "Numerical analysis of a comprehensive in silico subcutaneous insulin absorption compartmental model.",
+      "authorString": "Sebald D, Ruchti T.",
+      "journalAbbreviation": "Annu Int Conf IEEE Eng Med Biol Soc",
+      "pubYear": 2009,
+      "volume": "2009",
+      "pageInfo": "3901-3904",
+      "citedByCount": 0
+    }
+  },
+  {
+    "key": "PMID:11944604",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "11944604",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Insulin glargine: a new long-acting insulin product.",
+      "authorString": "Reinhart L, Panning CA.",
+      "journalAbbreviation": "Am J Health Syst Pharm",
+      "issue": "7",
+      "pubYear": 2002,
+      "volume": "59",
+      "pageInfo": "643-649",
+      "citedOrder": 4,
+      "match": "Y",
+      "essn": "1535-2900",
+      "issn": "1079-2082"
+    }
+  },
+  {
+    "key": "UNMATCHED:1171835f62cc8ed0",
+    "first_round": 2,
+    "record": {
+      "title": "Long-acting insulin analogs",
+      "authorString": "Rosskamp",
+      "journalAbbreviation": "Diabetes Care",
+      "issue": "suppl. 2",
+      "pubYear": 1999,
+      "volume": "22",
+      "pageInfo": "B109-",
+      "citedOrder": 7,
+      "match": "N"
+    }
+  },
+  {
+    "key": "UNMATCHED:42772358684a2cc3",
+    "first_round": 2,
+    "record": {
+      "title": "Glucose metabolism modeling with BPTT-trained Elman nets",
+      "authorString": "Teufel",
+      "pubYear": 0,
+      "volume": "1",
+      "pageInfo": "",
+      "citedOrder": 9,
+      "match": "N"
+    }
+  },
+  {
+    "key": "UNMATCHED:14db71cb358df17d",
+    "first_round": 2,
+    "record": {
+      "authorString": "Höfig",
+      "pubYear": 1996,
+      "citedOrder": 10,
+      "match": "N"
+    }
+  },
+  {
+    "key": "PMID:12904090",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "12904090",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Insulin glargine: an updated review of its use in the management of diabetes mellitus.",
+      "authorString": "Dunn CJ, Plosker GL, Keating GM, McKeage K, Scott LJ.",
+      "journalAbbreviation": "Drugs",
+      "issue": "16",
+      "pubYear": 2003,
+      "volume": "63",
+      "pageInfo": "1743-1778",
+      "citedOrder": 11,
+      "match": "Y",
+      "essn": "1179-1950",
+      "issn": "0012-6667"
+    }
+  },
+  {
+    "key": "UNMATCHED:699a07d3a60f3424",
+    "first_round": 2,
+    "record": {
+      "authorString": "AUTHOR UNKNOWN",
+      "pubYear": 0,
+      "doi": "10.1016/0025-5564(82)90050-5",
+      "citedOrder": 12,
+      "match": "N"
+    }
+  },
+  {
+    "key": "UNMATCHED:f9bf50635f5bc0f0",
+    "first_round": 2,
+    "record": {
+      "title": "Parameter identification of the endogenous glucose metabolism model for diabetes mellitus I patients",
+      "authorString": "Teufel",
+      "pubYear": 0,
+      "citedOrder": 13,
+      "match": "N"
+    }
+  },
+  {
+    "key": "PMID:7616774",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "7616774",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Numerical approximation of mathematical model for absorption of subcutaneously injected insulin.",
+      "authorString": "Wach P, Trajanoski Z, Kotanko P, Skrabal F.",
+      "journalAbbreviation": "Med Biol Eng Comput",
+      "issue": "1",
+      "pubYear": 1995,
+      "volume": "33",
+      "pageInfo": "18-23",
+      "citedOrder": 14,
+      "match": "Y",
+      "essn": "1741-0444",
+      "issn": "0140-0118"
+    }
+  },
+  {
+    "key": "UNMATCHED:b36debf7c5143d0d",
+    "first_round": 2,
+    "record": {
+      "title": "Fick’s first law of diffusion",
+      "authorString": "Fick",
+      "journalAbbreviation": "Ann. Physik",
+      "pubYear": 1855,
+      "volume": "170",
+      "pageInfo": "",
+      "doi": "10.1002/andp.18551700105",
+      "citedOrder": 15,
+      "match": "N"
+    }
+  },
+  {
+    "key": "UNMATCHED:bdd8d1dcd459e1f2",
+    "first_round": 2,
+    "record": {
+      "authorString": "Chen",
+      "pubYear": 1999,
+      "citedOrder": 16,
+      "match": "N"
+    }
+  },
+  {
+    "key": "PMID:12661778",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "12661778",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Biotransformation of insulin glargine after subcutaneous injection in healthy subjects.",
+      "authorString": "Kuerzel GU, Shukla U, Scholtz HE, Pretorius SG, Wessels DH, Venter C, Potgieter MA, Lang AM, Koose T, Bernhardt E.",
+      "journalAbbreviation": "Curr Med Res Opin",
+      "issue": "1",
+      "pubYear": 2003,
+      "volume": "19",
+      "pageInfo": "34-40",
+      "citedOrder": 18,
+      "match": "Y",
+      "essn": "1473-4877",
+      "issn": "0300-7995"
+    }
+  },
+  {
+    "key": "PMID:12931275",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "12931275",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Comparison of the subcutaneous absorption of insulin glargine (Lantus) and NPH insulin in patients with Type 2 diabetes.",
+      "authorString": "Luzio SD, Beck P, Owens DR.",
+      "journalAbbreviation": "Horm Metab Res",
+      "issue": "7",
+      "pubYear": 2003,
+      "volume": "35",
+      "pageInfo": "434-438",
+      "citedOrder": 19,
+      "match": "Y",
+      "essn": "1439-4286",
+      "issn": "0018-5043"
+    }
+  },
+  {
+    "key": "UNMATCHED:63ea956b26b5eb77",
+    "first_round": 2,
+    "record": {
+      "title": "Prospektive Evaluation einer standardisierten Basalratenverteilung für die CSII bei Typ 1 Diabetes über 6 Monate",
+      "authorString": "Wizemann",
+      "pubYear": 2001,
+      "citedOrder": 20,
+      "match": "N"
+    }
+  },
+  {
+    "key": "UNMATCHED:3f584fc023564680",
+    "first_round": 2,
+    "record": {
+      "authorString": "Gessler",
+      "pubYear": 2000,
+      "citedOrder": 21,
+      "match": "N"
+    }
+  },
+  {
+    "key": "UNMATCHED:46e5182fab608884",
+    "first_round": 2,
+    "record": {
+      "authorString": "AUTHOR UNKNOWN",
+      "pubYear": 2005,
+      "citedOrder": 22,
+      "match": "N"
+    }
+  },
+  {
+    "key": "UNMATCHED:9ff9728903af6a60",
+    "first_round": 2,
+    "record": {
+      "title": "Pharmacokinetic model for the absorption of subcutaneously injected insulin Glargine",
+      "authorString": "Tarín",
+      "pubYear": 0,
+      "volume": "1",
+      "pageInfo": "",
+      "citedOrder": 23,
+      "match": "N"
+    }
+  },
+  {
+    "key": "PMID:12795655",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "12795655",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Limitations to subcutaneous insulin administration in type 1 diabetes.",
+      "authorString": "Chen JW, Christiansen JS, Lauritzen T.",
+      "journalAbbreviation": "Diabetes Obes Metab",
+      "issue": "4",
+      "pubYear": 2003,
+      "volume": "5",
+      "pageInfo": "223-233",
+      "citedOrder": 24,
+      "match": "Y",
+      "essn": "1463-1326",
+      "issn": "1462-8902"
+    }
+  },
+  {
+    "key": "PMID:31987985",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "31987985",
+      "citationType": "journal article",
+      "title": "Towards in vitro in vivo correlation for modified release subcutaneously administered insulins.",
+      "authorString": "Bock F, Lin E, Larsen C, Jensen H, Huus K, Larsen SW, Østergaard J.",
+      "journalAbbreviation": "Eur J Pharm Sci",
+      "pubYear": 2020,
+      "volume": "145",
+      "pageInfo": "105239",
+      "citedByCount": 12
+    }
+  },
+  {
+    "key": "PMID:24492795",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "24492795",
+      "citationType": "research support, non-u.s. gov't; journal article",
+      "title": "A Bayesian network for modelling blood glucose concentration and exercise in type 1 diabetes.",
+      "authorString": "Ewings SM, Sahu SK, Valletta JJ, Byrne CD, Chipperfield AJ.",
+      "journalAbbreviation": "Stat Methods Med Res",
+      "pubYear": 2015,
+      "volume": "24",
+      "issue": "3",
+      "pageInfo": "342-372",
+      "citedByCount": 4
+    }
+  },
+  {
+    "key": "PMID:23798995",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "23798995",
+      "citationType": "research support, non-u.s. gov't; research-article; research support, u.s. gov't, non-p.h.s.; journal article; research support, n.i.h., extramural",
+      "title": "Is dynamic autocrine insulin signaling possible? A mathematical model predicts picomolar concentrations of extracellular monomeric insulin within human pancreatic islets.",
+      "authorString": "Wang M, Li J, Lim GE, Johnson JD.",
+      "journalAbbreviation": "PLoS One",
+      "pubYear": 2013,
+      "volume": "8",
+      "issue": "6",
+      "pageInfo": "e64860",
+      "citedByCount": 23
+    }
+  },
+  {
+    "key": "CTX:C7520",
+    "first_round": 2,
+    "record": {
+      "source": "CTX",
+      "id": "C7520",
+      "title": "A new perspective on closed-loop glucose control using a physiology-based pharmacokinetic / pharmacodynamic model kernel",
+      "authorString": "Schaller S, Willmann S, Schaupp L, Pieber T, Schuppert A, Lippert J, Eissing T.",
+      "journalAbbreviation": "IFAC Proceedings Volumes",
+      "pubYear": 2012,
+      "pageInfo": "420-425",
+      "citedByCount": 1
+    }
+  },
+  {
+    "key": "PMID:21703346",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "21703346",
+      "citationType": "research support, non-u.s. gov't; review; journal article",
+      "title": "Bioavailability and variability of biphasic insulin mixtures.",
+      "authorString": "Søeborg T, Rasmussen CH, Mosekilde E, Colding-Jørgensen M.",
+      "journalAbbreviation": "Eur J Pharm Sci",
+      "pubYear": 2012,
+      "volume": "46",
+      "issue": "4",
+      "pageInfo": "198-208",
+      "citedByCount": 12
+    }
+  },
+  {
+    "key": "PMID:20870309",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "20870309",
+      "citationType": "research support, non-u.s. gov't; journal article",
+      "title": "Insulin dosage optimization based on prediction of postprandial glucose excursions under uncertain parameters and food intake.",
+      "authorString": "García-Jaramillo M, Calm R, Bondia J, Tarín C, Vehí J.",
+      "journalAbbreviation": "Comput Methods Programs Biomed",
+      "pubYear": 2012,
+      "volume": "105",
+      "issue": "1",
+      "pageInfo": "61-69",
+      "citedByCount": 10
+    }
+  },
+  {
+    "key": "PMID:20870308",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "20870308",
+      "citationType": "comparative study; research support, non-u.s. gov't; journal article",
+      "title": "Comparison of interval and Monte Carlo simulation for the prediction of postprandial glucose under uncertainty in type 1 diabetes mellitus.",
+      "authorString": "Calm R, García-Jaramillo M, Bondia J, Sainz MA, Vehí J.",
+      "journalAbbreviation": "Comput Methods Programs Biomed",
+      "pubYear": 2011,
+      "volume": "104",
+      "issue": "3",
+      "pageInfo": "325-332",
+      "citedByCount": 10
+    }
+  },
+  {
+    "key": "PMID:20597831",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "20597831",
+      "citationType": "research support, non-u.s. gov't; journal article",
+      "title": "An advisory protocol for rapid- and slow-acting insulin therapy based on a run-to-run methodology.",
+      "authorString": "Campos-Cornejo F, Campos-Delgado DU, Espinoza-Trejo D, Zisser H, Jovanovic L, Doyle FJ, Dassau E.",
+      "journalAbbreviation": "Diabetes Technol Ther",
+      "pubYear": 2010,
+      "volume": "12",
+      "issue": "7",
+      "pageInfo": "555-565",
+      "citedByCount": 4
+    }
+  },
+  {
+    "key": "PMID:21095890",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "21095890",
+      "citationType": "research support, non-u.s. gov't; evaluation study; journal article",
+      "title": "Predictive modeling of glucose metabolism using free-living data of type 1 diabetic patients.",
+      "authorString": "Georga EI, Protopappas VC, Polyzos D, Fotiadis DI.",
+      "journalAbbreviation": "Annu Int Conf IEEE Eng Med Biol Soc",
+      "pubYear": 2010,
+      "volume": "2010",
+      "pageInfo": "589-592",
+      "citedByCount": 1
+    }
+  },
+  {
+    "key": "PMID:20144339",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "20144339",
+      "citationType": "research support, non-u.s. gov't; research-article; journal article",
+      "title": "Computing the risk of postprandial hypo- and hyperglycemia in type 1 diabetes mellitus considering intrapatient variability and other sources of uncertainty.",
+      "authorString": "García-Jaramillo M, Calm R, Bondia J, Tarín C, Vehí J.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2009,
+      "volume": "3",
+      "issue": "4",
+      "pageInfo": "895-902",
+      "citedByCount": 3
+    }
+  },
+  {
+    "key": "PMID:19963637",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "19963637",
+      "citationType": "clinical trial; research support, non-u.s. gov't; journal article",
+      "title": "Gaussian Process modelling of blood glucose response to free-living physical activity data in people with type 1 diabetes.",
+      "authorString": "Valletta JJ, Chipperfield AJ, Byrne CD.",
+      "journalAbbreviation": "Annu Int Conf IEEE Eng Med Biol Soc",
+      "pubYear": 2009,
+      "volume": "2009",
+      "pageInfo": "4913-4916",
+      "citedByCount": 9
+    }
+  },
+  {
+    "key": "PMID:18173967",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "18173967",
+      "citationType": "review; journal article",
+      "title": "Which basal insulin should be used in patients with type 2 diabetes mellitus?",
+      "authorString": "Clore JN, Thurby-Hay L.",
+      "journalAbbreviation": "Curr Diab Rep",
+      "pubYear": 2007,
+      "volume": "7",
+      "issue": "5",
+      "pageInfo": "348-352",
+      "citedByCount": 3
+    }
+  },
+  {
+    "key": "PMID:19885100",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "19885100",
+      "citationType": "research-article; journal article",
+      "title": "Incorporating a generic model of subcutaneous insulin absorption into the AIDA v4 diabetes simulator: 1. a prospective collaborative development plan.",
+      "authorString": "Lehmann ED, Tarín C, Bondia J, Teufel E, Deutsch T.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2007,
+      "volume": "1",
+      "issue": "3",
+      "pageInfo": "423-435",
+      "citedByCount": 7
+    }
+  },
+  {
+    "key": "PMID:18002320",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "18002320",
+      "citationType": "research support, non-u.s. gov't; journal article",
+      "title": "Prediction of glucose excursions under uncertain parameters and food intake in intensive insulin therapy for type 1 diabetes mellitus.",
+      "authorString": "Calm R, García-Jaramillo M, Vehí J, Bondia J, Tarín C, García-Gabín W.",
+      "journalAbbreviation": "Annu Int Conf IEEE Eng Med Biol Soc",
+      "pubYear": 2007,
+      "volume": "2007",
+      "pageInfo": "1770-1773",
+      "citedByCount": 4
+    }
+  },
+  {
+    "key": "UNMATCHED:ce870c0c503e8bf9",
+    "first_round": 2,
+    "record": {
+      "authorString": "Cobelli G.",
+      "journalAbbreviation": "Metab. 16) (",
+      "pubYear": 1987,
+      "pageInfo": "E584-",
+      "citedOrder": 8,
+      "match": "N"
+    }
+  },
+  {
+    "key": "UNMATCHED:7f3a833f2adbdf2b",
+    "first_round": 2,
+    "record": {
+      "authorString": "Cobelli G.",
+      "journalAbbreviation": "Physio. 15) (",
+      "pubYear": 1984,
+      "pageInfo": "R259-",
+      "citedOrder": 9,
+      "match": "N"
+    }
+  },
+  {
+    "key": "PMID:2655689",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "2655689",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "A comparison of three mathematical models to describe the disappearance curves of subcutaneously injected 125I-labelled insulin.",
+      "authorString": "De Meijer PH, Russel FG, Van Lier HJ, Van Ginneken CA.",
+      "journalAbbreviation": "Br J Clin Pharmacol",
+      "issue": "4",
+      "pubYear": 1989,
+      "volume": "27",
+      "pageInfo": "461-467",
+      "citedOrder": 10,
+      "match": "Y",
+      "essn": "1365-2125",
+      "issn": "0306-5251"
+    }
+  },
+  {
+    "key": "PMID:6341148",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "6341148",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Absorption rates of subcutaneously injected insulin in the dog as calculated from the plasma insulin levels by means of a simple mathematical model.",
+      "authorString": "Fischer U, Freyse EJ, Jutzi E, Besch W, Raschke M, Hofer S, Albrecht G.",
+      "journalAbbreviation": "Diabetologia",
+      "issue": "3",
+      "pubYear": 1983,
+      "volume": "24",
+      "pageInfo": "196-201",
+      "citedOrder": 12,
+      "match": "Y",
+      "essn": "1432-0428",
+      "issn": "0012-186X"
+    }
+  },
+  {
+    "key": "PMID:1967767",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "1967767",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Comparison of insulin analogue B9AspB27Glu and soluble human insulin in insulin-treated diabetes.",
+      "authorString": "Kang S, Owens DR, Vora JP, Brange J.",
+      "journalAbbreviation": "Lancet",
+      "issue": "8685",
+      "pubYear": 1990,
+      "volume": "335",
+      "pageInfo": "303-306",
+      "citedOrder": 16,
+      "match": "Y",
+      "essn": "1474-547X",
+      "issn": "0140-6736"
+    }
+  },
+  {
+    "key": "UNMATCHED:cf317dbcf7d6878b",
+    "first_round": 2,
+    "record": {
+      "authorString": "AUTHOR UNKNOWN",
+      "pubYear": 0,
+      "doi": "10.2337/diabetes.32.4.331",
+      "citedOrder": 19,
+      "match": "N"
+    }
+  },
+  {
+    "key": "UNMATCHED:dd7bbb220f8406fb",
+    "first_round": 2,
+    "record": {
+      "authorString": "Sejrsen J. F.",
+      "journalAbbreviation": "Diabetes",
+      "pubYear": 1988,
+      "volume": "37",
+      "pageInfo": "163A-",
+      "citedOrder": 24,
+      "match": "N"
+    }
+  },
+  {
+    "key": "UNMATCHED:a7d3832db7912c8e",
+    "first_round": 2,
+    "record": {
+      "authorString": "AUTHOR UNKNOWN",
+      "pubYear": 0,
+      "doi": "10.2337/diabetes.31.4.346",
+      "citedOrder": 26,
+      "match": "N"
+    }
+  },
+  {
+    "key": "UNMATCHED:52fb80117c765cf5",
+    "first_round": 2,
+    "record": {
+      "authorString": "Robertson D. A.",
+      "journalAbbreviation": "Diabetic Med.",
+      "pubYear": 1992,
+      "volume": "9",
+      "pageInfo": "",
+      "citedOrder": 27,
+      "match": "N"
+    }
+  },
+  {
+    "key": "PMID:4856884",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "4856884",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "A model of the kinetics of insulin in man.",
+      "authorString": "Sherwin RS, Kramer KJ, Tobin JD, Insel PA, Liljenquist JE, Berman M, Andres R.",
+      "journalAbbreviation": "J Clin Invest",
+      "issue": "5",
+      "pubYear": 1974,
+      "volume": "53",
+      "pageInfo": "1481-1492",
+      "citedOrder": 28,
+      "match": "Y",
+      "essn": "1558-8238",
+      "issn": "0021-9738"
+    }
+  },
+  {
+    "key": "PMID:6403173",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "6403173",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Change to U-100 insulin does not appear to affect insulin absorption.",
+      "authorString": "Swift PG, Kennedy JD, Gerlis LS.",
+      "journalAbbreviation": "Br Med J (Clin Res Ed)",
+      "issue": "6370",
+      "pubYear": 1983,
+      "volume": "286",
+      "pageInfo": "1015",
+      "citedOrder": 29,
+      "match": "Y",
+      "issn": "0267-0623"
+    }
+  },
+  {
+    "key": "UNMATCHED:f01097a5c6efe1fa",
+    "first_round": 2,
+    "record": {
+      "authorString": "Vora J. P.",
+      "journalAbbreviation": "DiabetesGare",
+      "pubYear": 1992,
+      "volume": "15",
+      "pageInfo": "",
+      "citedOrder": 30,
+      "match": "N"
+    }
+  },
+  {
+    "key": "PMID:1797482",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "1797482",
+      "citationType": "JOURNAL ARTICLE",
+      "title": "Intravenous insulin infusion to simulate subcutaneous absorption. Bioavailability and metabolic sequelae.",
+      "authorString": "Watanabe RM, Volund A, Bergman RN.",
+      "journalAbbreviation": "Diabetes Care",
+      "issue": "11",
+      "pubYear": 1991,
+      "volume": "14",
+      "pageInfo": "1021-1030",
+      "citedOrder": 31,
+      "match": "Y",
+      "essn": "1935-5548",
+      "issn": "0149-5992"
+    }
+  },
+  {
+    "key": "PMID:32828456",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "32828456",
+      "citationType": "journal article",
+      "title": "Near-optimal insulin treatment for diabetes patients: A machine learning approach.",
+      "authorString": "Shifrin M, Siegelmann H.",
+      "journalAbbreviation": "Artif Intell Med",
+      "pubYear": 2020,
+      "volume": "107",
+      "pageInfo": "101917",
+      "citedByCount": 14
+    }
+  },
+  {
+    "key": "PMID:25537835",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "25537835",
+      "citationType": "comparative study; brief-report; research support, non-u.s. gov't; randomized controlled trial; journal article",
+      "title": "Pharmacokinetics of diluted (U20) insulin aspart compared with standard (U100) in children aged 3-6 years with type 1 diabetes during closed-loop insulin delivery: a randomised clinical trial.",
+      "authorString": "Ruan Y, Elleri D, Allen JM, Tauschmann M, Wilinska ME, Dunger DB, Hovorka R.",
+      "journalAbbreviation": "Diabetologia",
+      "pubYear": 2015,
+      "volume": "58",
+      "issue": "4",
+      "pageInfo": "687-690",
+      "citedByCount": 19
+    }
+  },
+  {
+    "key": "PMID:24876428",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "24876428",
+      "citationType": "clinical trial; research support, non-u.s. gov't; research-article; journal article",
+      "title": "Application of PK/PD modeling and simulation to dosing regimen optimization of high-dose human regular U-500 insulin.",
+      "authorString": "de la Peña A, Ma X, Reddy S, Ovalle F, Bergenstal RM, Jackson JA.",
+      "journalAbbreviation": "J Diabetes Sci Technol",
+      "pubYear": 2014,
+      "volume": "8",
+      "issue": "4",
+      "pageInfo": "821-829",
+      "citedByCount": 26
+    }
+  },
+  {
+    "key": "PMID:21994429",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "21994429",
+      "citationType": "research support, non-u.s. gov't; research-article; randomized controlled trial; journal article",
+      "title": "Pharmacokinetics and pharmacodynamics of high-dose human regular U-500 insulin versus human regular U-100 insulin in healthy obese subjects.",
+      "authorString": "de la Peña A, Riddle M, Morrow LA, Jiang HH, Linnebjerg H, Scott A, Win KM, Hompesch M, Mace KF, Jacobson JG, Jackson JA.",
+      "journalAbbreviation": "Diabetes Care",
+      "pubYear": 2011,
+      "volume": "34",
+      "issue": "12",
+      "pageInfo": "2496-2501",
+      "citedByCount": 85
+    }
+  },
+  {
+    "key": "PMID:20097778",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "20097778",
+      "citationType": "clinical trial; research support, non-u.s. gov't; research-article; journal article",
+      "title": "Glucose levels at the site of subcutaneous insulin administration and their relationship to plasma levels.",
+      "authorString": "Lindpointner S, Korsatko S, Köhler G, Köhler H, Schaller R, Schaupp L, Ellmerer M, Pieber TR, Regittnig W.",
+      "journalAbbreviation": "Diabetes Care",
+      "pubYear": 2010,
+      "volume": "33",
+      "issue": "4",
+      "pageInfo": "833-838",
+      "citedByCount": 19
+    }
+  },
+  {
+    "key": "PMID:19211405",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "19211405",
+      "citationType": "review; journal article",
+      "title": "High-dose insulin therapy: is it time for U-500 insulin?",
+      "authorString": "Lane WS, Cochran EK, Jackson JA, Scism-Bacon JL, Corey IB, Hirsch IB, Skyler JS.",
+      "journalAbbreviation": "Endocr Pract",
+      "pubYear": 2009,
+      "volume": "15",
+      "issue": "1",
+      "pageInfo": "71-79",
+      "citedByCount": 98
+    }
+  },
+  {
+    "key": "PMID:10707011",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "10707011",
+      "citationType": "review; journal article",
+      "title": "Lymphatic transport of proteins after subcutaneous administration.",
+      "authorString": "Porter CJ, Charman SA.",
+      "journalAbbreviation": "J Pharm Sci",
+      "pubYear": 2000,
+      "volume": "89",
+      "issue": "3",
+      "pageInfo": "297-310",
+      "citedByCount": 181
+    }
+  },
+  {
+    "key": "PMID:9735562",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "9735562",
+      "citationType": "research support, non-u.s. gov't; journal article",
+      "title": "Neural predictive controller for insulin delivery using the subcutaneous route.",
+      "authorString": "Trajanoski Z, Wach P.",
+      "journalAbbreviation": "IEEE Trans Biomed Eng",
+      "pubYear": 1998,
+      "volume": "45",
+      "issue": "9",
+      "pageInfo": "1122-1134",
+      "citedByCount": 26
+    }
+  },
+  {
+    "key": "PMID:8894386",
+    "first_round": 2,
+    "record": {
+      "source": "MED",
+      "id": "8894386",
+      "citationType": "research support, non-u.s. gov't; journal article",
+      "title": "Fuzzy filter for state estimation of a glucoregulatory system.",
+      "authorString": "Trajanoski Z, Wach P.",
+      "journalAbbreviation": "Comput Methods Programs Biomed",
+      "pubYear": 1996,
+      "volume": "50",
+      "issue": "3",
+      "pageInfo": "265-273",
+      "citedByCount": 9
+    }
+  }
+]

@@ -1,0 +1,779 @@
+{
+  "ai_assisted_implementation_and_review": true,
+  "baseline_main": "e77c9d79408b662e285401fc018534a4619fa055",
+  "branch": "codex/researcher-tools-plan",
+  "date": "2026-10-02",
+  "final_repository_checks": {
+    "command": "uv run --locked python scripts/check.py",
+    "documentation_build": "passed",
+    "log_sha256": "f66d5a9e7ecc7d8454fb904ccccca1f49e99f3b4df4da8cc0a468bfabfad163e",
+    "source_revision": "a5e2c42d6be2d8afd3ce338c11a28875a24c6032",
+    "tests_passed": 866,
+    "working_tree_changes": "final documentation and evidence only"
+  },
+  "followup": {
+    "changes": [
+      "Reject impossible interrupted coordinator state without global interruption.",
+      "Add a resealed-state regression; 17 focused comparison tests pass.",
+      "Clarify harness limitation wording without changing runtime or check logic; eight focused tests pass."
+    ],
+    "four_route_native_acceptance_not_repeated": "Existing four-route dispatch and numerical sources unchanged; exact earlier execution revision retained.",
+    "original_acceptance_receipt_unchanged": true,
+    "revision": "a5e2c42d6be2d8afd3ce338c11a28875a24c6032"
+  },
+  "hosted_ci_executed": false,
+  "human_evaluation": false,
+  "kind": "internal-synthetic-software-verification",
+  "limitations": [
+    "Local self-run synthetic software verification.",
+    "Independent usability and human/biological evaluation remain open.",
+    "Hashes record consistency, not authenticated execution.",
+    "Arbitrary M3/M5 candidate outputs are not independently reproduced.",
+    "Configured M4 generated its checked BC-008 prerequisite; unrelated M0\u2013M2 and C1 campaigns were not repeated."
+  ],
+  "locks": {
+    "experiments/m0/simglucose/uv.lock": "13d254dcebe8d1ab54c3140cdc07152d719a68477a1378d7fe77fc1568612aa9",
+    "experiments/m3/runtime/uv.lock": "9d46932ab27160656ffb47d53046784c0dc06ff9072a004e38a959a34bff8717",
+    "experiments/m4/beta_cell/runtime/uv.lock": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04",
+    "uv.lock": "a44e7cac7edf13bbc37b71a92b61aa3d7545e85aa88dafe41ed8a78d34b56a35"
+  },
+  "ot029": {
+    "acceptance_sha256": "5654b54241bf085da5d089df02710c17cc95e2a9e6864ca9936c1d148d16dff8",
+    "artifact_directory": "/private/tmp/opent1d-ot029-acceptance-994ad0b",
+    "child_archives_unchanged": true,
+    "commands": [
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "list"
+        ],
+        "exit_code": 0,
+        "label": "entry-list",
+        "stderr": "commands/entry-list.stderr",
+        "stdout": "commands/entry-list.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      },
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "check",
+          "p1-controller",
+          "--source",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/inputs/p1-controller"
+        ],
+        "exit_code": 0,
+        "label": "p1-controller-check",
+        "stderr": "commands/p1-controller-check.stderr",
+        "stdout": "commands/p1-controller-check.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      },
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "run",
+          "p1-controller",
+          "--source",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/inputs/p1-controller",
+          "--output",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/p1-controller"
+        ],
+        "exit_code": 0,
+        "label": "p1-controller-run",
+        "stderr": "commands/p1-controller-run.stderr",
+        "stdout": "commands/p1-controller-run.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      },
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.m3.researcher",
+          "fixture",
+          "--output",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/inputs/m3-forecast"
+        ],
+        "exit_code": 0,
+        "label": "m3-fixture",
+        "stderr": "commands/m3-fixture.stderr",
+        "stdout": "commands/m3-fixture.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      },
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "check",
+          "m3-forecast",
+          "--config",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/inputs/m3-forecast/config.json"
+        ],
+        "exit_code": 0,
+        "label": "m3-forecast-check",
+        "stderr": "commands/m3-forecast-check.stderr",
+        "stdout": "commands/m3-forecast-check.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      },
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "run",
+          "m3-forecast",
+          "--config",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/inputs/m3-forecast/config.json",
+          "--output",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/m3-forecast"
+        ],
+        "exit_code": 0,
+        "label": "m3-forecast-run",
+        "stderr": "commands/m3-forecast-run.stderr",
+        "stdout": "commands/m3-forecast-run.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      },
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "check",
+          "m4-secretion",
+          "--config",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/inputs/m4-secretion/config.json"
+        ],
+        "exit_code": 0,
+        "label": "m4-secretion-check",
+        "stderr": "commands/m4-secretion-check.stderr",
+        "stdout": "commands/m4-secretion-check.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      },
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "run",
+          "m4-secretion",
+          "--config",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/inputs/m4-secretion/config.json",
+          "--output",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/m4-secretion"
+        ],
+        "exit_code": 0,
+        "label": "m4-secretion-run",
+        "stderr": "commands/m4-secretion-run.stderr",
+        "stdout": "commands/m4-secretion-run.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      },
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.m5.researcher_workflow.run",
+          "export-example",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/inputs/m5-prognosis"
+        ],
+        "exit_code": 0,
+        "label": "m5-export",
+        "stderr": "commands/m5-export.stderr",
+        "stdout": "commands/m5-export.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      },
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "check",
+          "m5-prognosis",
+          "--bundle",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/inputs/m5-prognosis"
+        ],
+        "exit_code": 0,
+        "label": "m5-prognosis-check",
+        "stderr": "commands/m5-prognosis-check.stderr",
+        "stdout": "commands/m5-prognosis-check.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      },
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "run",
+          "m5-prognosis",
+          "--bundle",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/inputs/m5-prognosis",
+          "--output",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/m5-prognosis"
+        ],
+        "exit_code": 0,
+        "label": "m5-prognosis-run",
+        "stderr": "commands/m5-prognosis-run.stderr",
+        "stdout": "commands/m5-prognosis-run.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      },
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "check",
+          "m3-forecast",
+          "--config",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/inputs/m3-failed/config.json"
+        ],
+        "exit_code": 0,
+        "label": "m3-failed-check",
+        "stderr": "commands/m3-failed-check.stderr",
+        "stdout": "commands/m3-failed-check.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      },
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "run",
+          "m3-forecast",
+          "--config",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/inputs/m3-failed/config.json",
+          "--output",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/m3-failed",
+          "--timeout",
+          "120"
+        ],
+        "exit_code": 1,
+        "label": "m3-failed-run",
+        "stderr": "commands/m3-failed-run.stderr",
+        "stdout": "commands/m3-failed-run.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      },
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "check",
+          "m3-forecast",
+          "--config",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/inputs/m3-timeout/config.json"
+        ],
+        "exit_code": 0,
+        "label": "m3-timeout-check",
+        "stderr": "commands/m3-timeout-check.stderr",
+        "stdout": "commands/m3-timeout-check.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      },
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "run",
+          "m3-forecast",
+          "--config",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/inputs/m3-timeout/config.json",
+          "--output",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/m3-timeout",
+          "--timeout",
+          "1"
+        ],
+        "exit_code": 1,
+        "label": "m3-timeout-run",
+        "stderr": "commands/m3-timeout-run.stderr",
+        "stdout": "commands/m3-timeout-run.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      },
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "reconstruct",
+          "p1-controller",
+          "--archive",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/p1-controller",
+          "--output",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/p1-controller-reconstructed"
+        ],
+        "exit_code": 0,
+        "label": "p1-controller-reconstruct",
+        "stderr": "commands/p1-controller-reconstruct.stderr",
+        "stdout": "commands/p1-controller-reconstruct.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      },
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "reconstruct",
+          "m3-forecast",
+          "--archive",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/m3-forecast",
+          "--output",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/m3-forecast-reconstructed"
+        ],
+        "exit_code": 0,
+        "label": "m3-forecast-reconstruct",
+        "stderr": "commands/m3-forecast-reconstruct.stderr",
+        "stdout": "commands/m3-forecast-reconstruct.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      },
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "reconstruct",
+          "m4-secretion",
+          "--archive",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/m4-secretion",
+          "--output",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/m4-secretion-reconstructed"
+        ],
+        "exit_code": 0,
+        "label": "m4-secretion-reconstruct",
+        "stderr": "commands/m4-secretion-reconstruct.stderr",
+        "stdout": "commands/m4-secretion-reconstruct.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      },
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "reconstruct",
+          "m5-prognosis",
+          "--archive",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/m5-prognosis"
+        ],
+        "exit_code": 0,
+        "label": "m5-prognosis-reconstruct",
+        "stderr": "commands/m5-prognosis-reconstruct.stderr",
+        "stdout": "commands/m5-prognosis-reconstruct.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      },
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "reconstruct",
+          "m3-forecast",
+          "--archive",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/m3-failed",
+          "--output",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/m3-failed-reconstructed"
+        ],
+        "exit_code": 0,
+        "label": "m3-failed-reconstruct",
+        "stderr": "commands/m3-failed-reconstruct.stderr",
+        "stdout": "commands/m3-failed-reconstruct.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      },
+      {
+        "command": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "reconstruct",
+          "m3-forecast",
+          "--archive",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/m3-timeout",
+          "--output",
+          "/private/tmp/opent1d-ot029-acceptance-994ad0b/m3-timeout-reconstructed"
+        ],
+        "exit_code": 0,
+        "label": "m3-timeout-reconstruct",
+        "stderr": "commands/m3-timeout-reconstruct.stderr",
+        "stdout": "commands/m3-timeout-reconstruct.stdout",
+        "uv_controls": {
+          "UV_NO_SYNC": "1",
+          "UV_OFFLINE": "1",
+          "UV_PYTHON_DOWNLOADS": "never"
+        }
+      }
+    ],
+    "execution_revision": "994ad0bec6a58d31ec357acbe7402dab6cadaa26",
+    "git_dirty": false,
+    "original_synthetic_inputs_removed": true,
+    "tasks": {
+      "m3-failed": {
+        "archive": "m3-failed",
+        "report_hashes": {
+          "report.json": "4dd5da8890c081a914765d4cd992730647484bb099560fa9994f845d7d4615b8",
+          "report.md": "08b4a3d949c0d0463ae69daa0c0252c27e96e6fabf5d7bdf9cca357fffa03c78"
+        },
+        "reports_reconstructed": true
+      },
+      "m3-forecast": {
+        "archive": "m3-forecast",
+        "report_hashes": {
+          "report.json": "aaed361bd43ceb95a1c6bbfbb01ceaabe07b63a2fd4da9d1bde355a62a77ed7b",
+          "report.md": "44d05ee5c0ed0f5319bb4ce063700a61fc74a587a76465a5f844eda3d6ec2e9b"
+        },
+        "reports_reconstructed": true
+      },
+      "m3-timeout": {
+        "archive": "m3-timeout",
+        "report_hashes": {
+          "report.json": "7f2438d739c5e7bded28034be98faa57e4d27bd425d2297766ac8432cd977557",
+          "report.md": "6f673ce8c8ebbbf7f395404c341e05930641614352198769712b107d3c41426e"
+        },
+        "reports_reconstructed": true
+      },
+      "m4-secretion": {
+        "archive": "m4-secretion",
+        "report_hashes": {
+          "figure.svg": "eebbfc6a694fe6bd17ee377a1998523f85c8b7b95ee51df6a49598a162853cb7",
+          "report.json": "12590867358734cc583f9f43f6338155cead619eac5d064f3fdfcbec9ce60916",
+          "report.md": "7f1fb617d10cb402f68359291360e39397aa4e43e4924bffafa0be93c41cf1b5"
+        },
+        "reports_reconstructed": true
+      },
+      "m5-prognosis": {
+        "archive": "m5-prognosis",
+        "report_hashes": {
+          "report.json": "c14a9ca9d8544b1e97c0af94b6a4aa13d709ba4dd3abf2dd2ae3faf1ee2ecf99",
+          "report.md": "f3dbf836af1690a286a5e73367acd17f0e55a2525964624cfb81d762125f2e2c"
+        },
+        "reports_reconstructed": true
+      },
+      "p1-controller": {
+        "archive": "p1-controller",
+        "report_hashes": {
+          "report.json": "fe33d2caa95047ac9feb3a1664a813f0ae6e5cba15404256c096834992ff5918",
+          "report.md": "6ae97f4e3e9d51bfbb413a7470040427d6648fcfed89887e97263be659eb7f57"
+        },
+        "reports_reconstructed": true
+      }
+    }
+  },
+  "ot030": {
+    "acceptance_sha256": "6c212dce1fdf81ab83d9fedf8aac6fd2c93d1e80cac527370c5b11a92c5b23a0",
+    "artifact_directory": "/private/tmp/opent1d-ot030-acceptance-final",
+    "candidate_order": [
+      "invented-bounded-trend",
+      "unchanged-synthetic-donor-ridge"
+    ],
+    "child_archives_unchanged": true,
+    "commands": [
+      {
+        "argv": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-E",
+          "-s",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "check",
+          "m3-compare",
+          "--config",
+          "/private/tmp/opent1d-ot030-acceptance-final/inputs/comparison.json"
+        ],
+        "exit_code": 0,
+        "label": "check"
+      },
+      {
+        "argv": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-E",
+          "-s",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "run",
+          "m3-compare",
+          "--config",
+          "/private/tmp/opent1d-ot030-acceptance-final/inputs/comparison.json",
+          "--output",
+          "/private/tmp/opent1d-ot030-acceptance-final/comparison"
+        ],
+        "exit_code": 0,
+        "label": "comparison"
+      },
+      {
+        "argv": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-E",
+          "-s",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "run",
+          "m3-compare",
+          "--config",
+          "/private/tmp/opent1d-ot030-acceptance-final/inputs/comparison.json",
+          "--output",
+          "/private/tmp/opent1d-ot030-acceptance-final/repeat"
+        ],
+        "exit_code": 0,
+        "label": "repeat"
+      },
+      {
+        "argv": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-E",
+          "-s",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "run",
+          "m3-compare",
+          "--config",
+          "/private/tmp/opent1d-ot030-acceptance-final/inputs/failure-comparison.json",
+          "--output",
+          "/private/tmp/opent1d-ot030-acceptance-final/failed-comparison"
+        ],
+        "exit_code": 1,
+        "label": "failed-comparison"
+      },
+      {
+        "argv": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-E",
+          "-s",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "reconstruct",
+          "m3-compare",
+          "--archive",
+          "/private/tmp/opent1d-ot030-acceptance-final/comparison",
+          "--output",
+          "/private/tmp/opent1d-ot030-acceptance-final/comparison-reconstructed"
+        ],
+        "exit_code": 0,
+        "label": "comparison-reconstruct"
+      },
+      {
+        "argv": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-E",
+          "-s",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "reconstruct",
+          "m3-compare",
+          "--archive",
+          "/private/tmp/opent1d-ot030-acceptance-final/repeat",
+          "--output",
+          "/private/tmp/opent1d-ot030-acceptance-final/repeat-reconstructed"
+        ],
+        "exit_code": 0,
+        "label": "repeat-reconstruct"
+      },
+      {
+        "argv": [
+          "WORKTREES/researcher-tools-plan/OpenT1D/.venv/bin/python",
+          "-B",
+          "-E",
+          "-s",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "reconstruct",
+          "m3-compare",
+          "--archive",
+          "/private/tmp/opent1d-ot030-acceptance-final/failed-comparison",
+          "--output",
+          "/private/tmp/opent1d-ot030-acceptance-final/failed-comparison-reconstructed"
+        ],
+        "exit_code": 0,
+        "label": "failed-comparison-reconstruct"
+      }
+    ],
+    "common_analysis_identical_on_repeat": true,
+    "common_contributing_people": 2,
+    "common_scored": {
+      "external-invented-1": 758,
+      "external-invented-2": 758
+    },
+    "execution_revision": "a5e2c42d6be2d8afd3ce338c11a28875a24c6032",
+    "failed_candidate_retained": true,
+    "failed_common_metrics_null": true,
+    "fresh_process_traces_identical": true,
+    "git_dirty": false,
+    "historical_donor_archive_reconstructs": true,
+    "native_donor_artifacts": "/private/tmp/opent1d-ot030-acceptance-994ad0b/donor-verification",
+    "native_donor_model_sha256": "69a740307816a96938f7e88c8230fc00d3a61e3b8c183941ff8aab8b678d4367",
+    "native_donor_verification_sha256": "5750fe0aa23388bb8e85695b38e29dc7effec604be6cf2f203faba4d8a8ec088",
+    "original_inputs_and_predictors_removed": true,
+    "protocol_sha256": "0c09bff108d1fa9c7f3d7a3f2b49c4eeb460dccae4add6691dae255a9e1c0bfe",
+    "reference_predictions_checked": {
+      "invented-bounded-trend": 1550,
+      "unchanged-synthetic-donor-ridge": 1550
+    },
+    "report_hashes": {
+      "comparison": {
+        "report.json": "79259d81ee9171151cc389aa838ccf541676e64d42dd86062d39e6515d6cf6d1",
+        "report.md": "b229c5f76d42c0f1ead83a4fd7474e389418ea34ae451a56353b246e2673ee14"
+      },
+      "failed-comparison": {
+        "report.json": "7f9bf76cb55a39dbbf9686812a1fac73fe49c6c94c43270c5024a4f33cf1cad6",
+        "report.md": "2e9677419e60ffb9b418c553b952630a48c5dee571a49ddbd6a3bd523e1a083a"
+      },
+      "repeat": {
+        "report.json": "52d5a451ef3b04000ad3f0f425b4e8cfc2ab2dd3bbe2ce801f72973681b9112b",
+        "report.md": "b229c5f76d42c0f1ead83a4fd7474e389418ea34ae451a56353b246e2673ee14"
+      }
+    },
+    "report_reconstruction_byte_identical": true,
+    "verification_script_sha256": "b03aebcd4e84183601b0756d035369e50d76e910fc1170d7bb5f20cc58a4a954"
+  },
+  "preservation": {
+    "baseline_experiment_files_checked": 465,
+    "baseline_experiment_files_unchanged": true,
+    "new_protocol_unchanged_since_freeze": true,
+    "primary_main_clean": true,
+    "runtime_locks_unchanged": true,
+    "unchanged_historical_scientific_protocols": 28,
+    "unchanged_uv_lock_files": 8
+  },
+  "protocol_freeze_revision": "510094a2637d17d078a27df05b825803f12a37c3",
+  "repository_checks": {
+    "clean_revision": "994ad0bec6a58d31ec357acbe7402dab6cadaa26",
+    "command": "uv run --locked python scripts/check.py",
+    "documentation_build": "passed",
+    "log_sha256": "a245f44f7c14e857023e353f0709b9a05bafb455e6bbc29573c75794c13a4758",
+    "tests_passed": 866
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "schema": "ot053-webr-linear-probe/1",
+  "upstream_commit": "320497e33cbdff2cc7f7d9f0c370080ab5a00229",
+  "scope": "unmodified external source functions in WebAssembly R; invented inputs only",
+  "node_version": "v22.22.2",
+  "webr_version": "0.6.0",
+  "r_version": "R version 4.6.0 (2026-04-24)",
+  "native_rscript_executed": false,
+  "full_package_installed": false,
+  "spline_executed": false,
+  "runtime_sha256": {
+    "package.json": "1d753e15a88d16f79f1b111f19e64014647071c8cf0e555a765a850ff48e95c0",
+    "dist/R.js": "162adb529111d739b37ef1b9f889eb7afbe4fb3288f8a58166cd6d0b04fd7376",
+    "dist/R.wasm": "5df459fb222d332e358cf08e4019c0e114398579ed8c62242bfcceeda81222ba",
+    "dist/webr.mjs": "09e640176e49ef4ae084f83fee18979c6700eb32d4dfb2cafb5f189a903ada75",
+    "dist/webr-worker.js": "c64282f5e15b51ef473e26548203313f868208c8988b2c7bdfc22c5730de418b",
+    "dist/libRblas.so": "d831496cc1d1e2748519439a0ea509ba966b56db10d13132db52331a270aac74",
+    "dist/libRlapack.so": "df8ca333754f0dd95715df437f6e6d633e4ffbff0176bcb11c15fe3e5dd4e387"
+  },
+  "runtime_npm_lock_sha256": "5c8a3bc3658de18b91c675abaf7dbc805ac47fa8b5beb7e36fbc27f27aebda38",
+  "probe_sha256": "413b3d3f3028bb14aecf2ccb73d745a74d0b7e4eaf56db7c8fc920d5fea47059",
+  "cases": [
+    {
+      "times_min": [
+        0,
+        15,
+        30,
+        60,
+        90,
+        120
+      ],
+      "midpoints_min": [
+        7.5,
+        22.5,
+        45,
+        75,
+        105
+      ],
+      "rates_pmol_min": [
+        47.65232192761371,
+        47.43757318512574,
+        46.87609174714612,
+        45.90558915497084,
+        45.52266041108195
+      ],
+      "max_absolute_relative_rate_error": 0.0453263062855056
+    },
+    {
+      "times_min": [
+        0,
+        30,
+        60,
+        90,
+        120
+      ],
+      "midpoints_min": [
+        15,
+        45,
+        75,
+        105
+      ],
+      "rates_pmol_min": [
+        47.457472449745495,
+        46.13495690512055,
+        45.613144540553776,
+        45.407295207912526
+      ],
+      "max_absolute_relative_rate_error": 0.047745675532410714
+    },
+    {
+      "times_min": [
+        0,
+        60,
+        120
+      ],
+      "midpoints_min": [
+        30,
+        90
+      ],
+      "rates_pmol_min": [
+        46.224334190574865,
+        39.63789379977993
+      ],
+      "max_absolute_relative_rate_error": 0.16873807147512931
+    }
+  ],
+  "volume_helper_result_ml": 4620.55561974238,
+  "negative_volume_returns_negative_rates": true,
+  "duplicate_times_return_nonfinite": true,
+  "captured_r_warnings": [
+    "collapsing to unique 'x' values",
+    "collapsing to unique 'x' values",
+    "collapsing to unique 'x' values",
+    "collapsing to unique 'x' values",
+    "collapsing to unique 'x' values",
+    "collapsing to unique 'x' values",
+    "collapsing to unique 'x' values"
+  ]
+}

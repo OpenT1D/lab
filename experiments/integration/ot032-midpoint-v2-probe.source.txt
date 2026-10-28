@@ -1,0 +1,50 @@
+import hashlib
+import json
+from pathlib import Path
+import sys
+
+sys.path.insert(0, 'WORKTREES/functional-lab-plan/OpenT1D')
+import numpy as np
+from experiments.m4.causal_secretion import common as causal, coupled as candidate
+from experiments.m4.feedback import coupled as feedback, secretion
+
+root = Path(sys.path[0])
+reference = Path('WORKTREES/m4-source-comparison/OpenT1D/results/m4-comparison/ot031-primary/reference')
+bc, native, probe, report = causal.reference(reference)
+new_protocol=json.loads((root/'experiments/m4/initial_load/protocol.json').read_bytes())
+load_mg=int(sys.argv[1])
+basal, gamma = causal.baseline_context(bc, native, probe)
+task = causal.protocol(json.loads((root/'experiments/m4/causal_secretion/protocol.json').read_bytes()), bc)
+rows = {}
+for identity, model_path, declaration_path in (
+    ('bc008_reference', None, None),
+    ('dalla_man', root/'experiments/m4/causal_secretion/example_model.py', root/'experiments/m4/causal_secretion/example_model.json'),
+    ('ultradian', root/'experiments/m4/ultradian_secretion/model.py', root/'experiments/m4/ultradian_secretion/model.json'),
+):
+    values = {}
+    if model_path:
+        declared=causal.declaration(json.loads(declaration_path.read_bytes()))
+        model=causal.load_model(model_path)
+        causal.preflight(model,basal['Sb_pmol_kg_min'],basal['h_mg_dl'],declared['parameters'],task)
+    for solver in new_protocol['numerical']['solvers']:
+        if model_path:
+            record, _ = candidate.integrate(task,bc,native['parameters'],basal,gamma,load_mg,solver,model,declared['parameters'],'candidate')
+        else:
+            record, _ = feedback.integrate(bc,native['parameters'],basal,secretion.parameters(bc,basal,1),load_mg,solver)
+        values[solver['name']]=record
+        print(identity,solver['name'],record['status'],len(record['times']),flush=True)
+    reference_states=np.asarray(values['reference']['states'])
+    reference_rates=np.asarray(values['reference']['source_rates'])
+    differences={}
+    for name in ('coarse','tight'):
+        states=np.asarray(values[name]['states'])
+        rates=np.asarray(values[name]['source_rates'])
+        differences[name]={
+            'glucose_error_mg_dl':float(np.max(np.abs(states[:,3]-reference_states[:,3]))/native['parameters']['Vg']),
+            'insulin_error_pmol_l':float(np.max(np.abs(states[:,5]-reference_states[:,5]))/native['parameters']['Vi']),
+            'source_error_pmol_kg_min':float(np.max(np.abs(rates-reference_rates))),
+        }
+    rows[identity]={'statuses':{name:value['status'] for name,value in values.items()},'differences':differences}
+    print(json.dumps(rows[identity]),flush=True)
+result={'scope':'independent_development_probe_not_final_new_executor_acceptance','load_mg':load_mg,'protocol_sha256':hashlib.sha256((root/'experiments/m4/initial_load/protocol.json').read_bytes()).hexdigest(),'rows':rows}
+Path(f'/private/tmp/opent1d-ot032-v2-probe-{load_mg}.json').write_text(json.dumps(result,indent=2)+'\n')

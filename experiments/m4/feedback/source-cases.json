@@ -1,0 +1,130 @@
+{
+  "schema": "bc008-source-cases/1",
+  "specified_before_execution": true,
+  "base_commit": "663e137",
+  "sample_step_min": 0.25,
+  "default_basal": 1.1,
+  "default_threshold": 100,
+  "default_gain": 1,
+  "cases": [
+    {
+      "id": "basal",
+      "times": [
+        0,
+        60
+      ],
+      "glucose": [
+        100,
+        100
+      ],
+      "initial": [
+        1.1,
+        2.2
+      ]
+    },
+    {
+      "id": "high_clamp",
+      "times": [
+        0,
+        60
+      ],
+      "glucose": [
+        120,
+        120
+      ],
+      "initial": [
+        1.1,
+        2.2
+      ]
+    },
+    {
+      "id": "rise_fall_floor",
+      "times": [
+        0,
+        20,
+        60
+      ],
+      "glucose": [
+        100,
+        140,
+        60
+      ],
+      "initial": [
+        1.1,
+        2.2
+      ]
+    },
+    {
+      "id": "equal_rates",
+      "times": [
+        0,
+        20,
+        60
+      ],
+      "glucose": [
+        100,
+        140,
+        60
+      ],
+      "initial": [
+        0,
+        3
+      ],
+      "gamma": 0.05
+    },
+    {
+      "id": "washout",
+      "times": [
+        0,
+        60
+      ],
+      "glucose": [
+        40,
+        40
+      ],
+      "initial": [
+        0,
+        3
+      ]
+    },
+    {
+      "id": "zero_gain",
+      "times": [
+        0,
+        20,
+        60
+      ],
+      "glucose": [
+        100,
+        140,
+        60
+      ],
+      "initial": [
+        0,
+        0
+      ],
+      "gain": 0,
+      "basal": 0
+    },
+    {
+      "id": "floor_boundary",
+      "times": [
+        0,
+        60
+      ],
+      "glucose": [
+        90,
+        90
+      ],
+      "initial": [
+        0.7,
+        3
+      ]
+    }
+  ],
+  "initial_ledger_values": [
+    0,
+    0
+  ],
+  "evidence": "synthetic analytic verification, not source cohort reproduction"
+}

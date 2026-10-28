@@ -1,0 +1,114 @@
+{
+  "schema": "bc014-execution/1",
+  "protocol": "BC-014/1",
+  "base_commit": "968fdfa78e8e28ab9bc62e536e8e1380df46cd99",
+  "execution_commit": "e67be2020031e420705740c4e7192f76032cba34",
+  "git_dirty_at_execution_start": false,
+  "archive": "results/m4-coverage/reference-01",
+  "started_utc": "2026-09-24T21:56:06.202649+00:00",
+  "finished_utc": "2026-09-24T22:56:51.969609+00:00",
+  "manifest_status": "completed",
+  "archive_file_count": 703,
+  "numeric_files_per_execution": 322,
+  "hashes": {
+    "protocol.json": "7ebae475d3cf181c6e89e6492486ecc1f653bafcf391d6e9b01da41c19e5c50f",
+    "manifest.json": "00413b3a4e47f5160c28395c7667d5f886085bb09f762a39b757f8d03ba9a2fe",
+    "report.json": "1694c1afba41467a824340b62f1d49fc472fd75d5c8f9c905b07ae1d042d502b",
+    "figure.svg": "1638ddb6acc65a5239a605ed69758a7530d52146777756ad1edea3b703e8d4db",
+    "uv.lock": "634d5849a1cc4ae37f4f00c12c713f168cffa93a43d5a22b571b0c41478fc95c",
+    "pyproject.toml": "107d7792bf6e99575e6b30f3639376059d5f9323bc8dedfd09c82824613c8cd5"
+  },
+  "runtime": {
+    "python": "3.12.13",
+    "numpy": "1.26.4",
+    "scipy": "1.13.1"
+  },
+  "native": {
+    "upstream_revision": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc",
+    "package_version": "0.2.11",
+    "profile": "adult#001",
+    "patient_file_sha256": "7ad1302fbf064805e2294bbcffd482e55448e37e48b63e629a1ed7f11c701547",
+    "parameter_file_sha256": "662f3b684d160fdf485edd1d7196dd1cd85c14b53650b030fdb86aaa05bb2e50"
+  },
+  "gates": {
+    "inherited_numerical_oracles": true,
+    "all_cases_completed": true,
+    "fresh_process_repeat": true
+  },
+  "summary": {
+    "interior/free_volume": {
+      "planned": 64,
+      "completed": 64,
+      "failed": 0,
+      "included": 63,
+      "conservative_rate": 0.984375,
+      "wilson_95": [
+        0.9166589839990573,
+        0.9972364580766624
+      ],
+      "unrestricted_bound_hits": 0,
+      "constrained_nuisance_bound_hits": 0,
+      "reference_refits": 0
+    },
+    "interior/fixed_volume": {
+      "planned": 64,
+      "completed": 64,
+      "failed": 0,
+      "included": 63,
+      "conservative_rate": 0.984375,
+      "wilson_95": [
+        0.9166589839990573,
+        0.9972364580766624
+      ],
+      "unrestricted_bound_hits": 0,
+      "constrained_nuisance_bound_hits": 0,
+      "reference_refits": 0
+    },
+    "interior/GI": {
+      "planned": 64,
+      "completed": 64,
+      "failed": 0,
+      "included": 64,
+      "conservative_rate": 1.0,
+      "wilson_95": [
+        0.9433759402071946,
+        1.0
+      ],
+      "unrestricted_bound_hits": 47,
+      "constrained_nuisance_bound_hits": 0,
+      "reference_refits": 0
+    },
+    "gain_boundary/free_volume": {
+      "planned": 32,
+      "completed": 32,
+      "failed": 0,
+      "included": 30,
+      "conservative_rate": 0.9375,
+      "wilson_95": [
+        0.7985287685584542,
+        0.982689432968359
+      ],
+      "unrestricted_bound_hits": 24,
+      "constrained_nuisance_bound_hits": 1,
+      "reference_refits": 0
+    }
+  },
+  "checks": {
+    "native_locked_sync": "passed",
+    "native_numerical_tests": "3 passed",
+    "root_artifact_tests": "5 passed before assessment",
+    "standard_library_report_reconstruction": "byte_identical",
+    "standard_library_figure_reconstruction": "byte_identical",
+    "figure_xml": "well_formed",
+    "final_repository_check": {
+      "command": "uv run --locked python scripts/check.py",
+      "status": "passed",
+      "tests": 627,
+      "lint": "passed",
+      "strict_documentation_build": "passed",
+      "log": "results/m4-coverage/repository-check.log",
+      "log_sha256": "9f534219e368969955f323dcc41359eddcfc8abfde25220463f158e6197e1b7b"
+    }
+  },
+  "limits": "Conditional synthetic gain-profile inclusion only; no human calibration, global-minimum proof or biological validity claim."
+}

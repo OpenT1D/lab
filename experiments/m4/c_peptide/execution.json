@@ -1,0 +1,398 @@
+{
+  "schema": "bc003-execution/1",
+  "status": "completed_equation_stimulus_reference_synthetic_identifiability",
+  "run_path": "results/m4-cpeptide/reference-02",
+  "base_commit": "751e701",
+  "manifest": {
+    "schema": "bc003-run/1",
+    "status": "completed",
+    "model": "polonsky1986-forward-cpeptide/1",
+    "started_utc": "2026-09-20T08:45:30.975557+00:00",
+    "files": {
+      "figure.svg": "9478fa98d79813648293b5e7913d0b3eb3cac85d6cc32fb07590b0705e67982a",
+      "identifiability.json": "6e5bca37b714fb740ae4b583776a9a0df604e4cd025b82873d1f080a9331b03d",
+      "inputs.json": "e1ec55ee8b4b60919c645a9534c86a58544899815e409fcea406007a33802a2a",
+      "normal_mean--basal_pulse.csv": "75e0066ec87144fe04308f825085214bc6d6b31cd1f21e75bb26f2187f7a7fc5",
+      "normal_mean--bolus.csv": "84f832fa787a3fa42eba2255c5e66c22ba54a762157931734807490292401bff",
+      "normal_mean--step.csv": "10d1822f4c0abcd22be5e2c4e7221a0b6989424e3dc79cf7b1bed8aec74ad25d",
+      "normal_mean--zero.csv": "9c97239af384d633c7a103c9095ec94610d735e1caf4d1168f767e0e96ea3f10",
+      "protocol.json": "763834cd460e1d5702e0b8704edc976e7724bf32a897c7c2c12a120307bc476d",
+      "report.json": "0b66a904865a84d7bf50e2e7a26f4d5f89c9873def8fda0b2389bea0968f10e4",
+      "runtime-pyproject.toml": "7c69b6f63a48d72f927c0253b68492de1ac60700d0549744de1207709732d3c5",
+      "runtime-uv.lock": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04",
+      "source-forcing.py": "b26fd2fd87aa47da328d24b2cbe56d8e3be45f9b4caf2c3c453f89acb07fddd1",
+      "source-identify.py": "0876591db6b1a465e2bdcc4d82948092f99043053fd43dc5f53ae478c1d81171",
+      "source-model.py": "f46453669c17d98c4dc90eec6613641d32e222c2a3dd012709ca30e6868673ae",
+      "source-plot.py": "9d63ed41fde5a9073d21b011c42c6944fd9de13093d33fd0c5b0ebbce2d26411",
+      "source-reference.py": "29efbcdd7065387f0089ff8704916fee48cd24237529137a5350e8886559c992",
+      "source-report.py": "79a85162208a4be2841bf22d94eecf8bc0c82eec46060217ed4d4fb47d6f7f51",
+      "source-run.py": "63b617ba039c9f8b5a8fe0be2738a673bb3a58823dfc2d5ae3a81d57aa1303ac",
+      "source-test_model.py": "9b8bb52ef5d3cfda3221f3c8c022e2edc6b2064983ad2717b20c3e7ef0652ecf",
+      "source-verify.py": "0a6e5965c7e42a401f09e1ae0995bd3fc24bd801392ef4bec9b0c95c0153cff2",
+      "t1d_mean--basal_pulse.csv": "f112355111c15838d6014aa5e8bbf50233d3f46ace27faba713f211a45e21f88",
+      "t1d_mean--bolus.csv": "0331924e9cba28a093f9e27cacfbe744f00bfbeff5bb721493fd96dfcf749399",
+      "t1d_mean--step.csv": "d7ee3d9cfe3de84ba474362fa218b171061280ec4a1a8a4543fc2ee4c09771a4",
+      "t1d_mean--zero.csv": "9c97239af384d633c7a103c9095ec94610d735e1caf4d1168f767e0e96ea3f10",
+      "verification.json": "0fa88a49c802862bcdf31bbb0f8b9a80a4d724fa212968c04233cdac7cec469c"
+    },
+    "runtime": {
+      "matplotlib": "3.9.4",
+      "python": "3.12.13",
+      "numpy": "2.2.6",
+      "scipy": "1.15.3"
+    },
+    "git_head": "751e701bbde2e976dc597751e3124973ab9ba1ac",
+    "git_dirty": true,
+    "finished_utc": "2026-09-20T08:45:32.563075+00:00"
+  },
+  "report_summary": {
+    "schema": "bc003-report/1",
+    "protocol": "BC-003/1",
+    "model": "polonsky1986-forward-cpeptide/1",
+    "passed": true,
+    "cases": {
+      "normal_mean--bolus": {
+        "passed": true,
+        "evidence": "published analytical equation, synthetic normalized dose; not original 50 nmol cohort decay",
+        "sample_count": 361,
+        "peak_sampled_cpeptide_pmol_l": 1526.7175572519084,
+        "initial_cpeptide_pmol_l": 1526.7175572519084,
+        "final_input_pmol_kg": 0.0,
+        "max_mass_error_pmol_kg": 8.526512829121202e-14,
+        "max_input_error_pmol_kg": 0.0,
+        "max_analytical_error_pmol_l": 1.7720140021992847e-08,
+        "max_solver_difference_pmol_l": 1.772036739566829e-08,
+        "max_one_compartment_difference_pmol_l": 274.89906094681214
+      },
+      "normal_mean--step": {
+        "passed": true,
+        "evidence": "published infusion schedule replay using nominal mean coefficients; no measured cohort curve comparison",
+        "sample_count": 481,
+        "peak_sampled_cpeptide_pmol_l": 7275.038355852208,
+        "initial_cpeptide_pmol_l": 0.0,
+        "final_input_pmol_kg": 3960.0,
+        "max_mass_error_pmol_kg": 2.7284841053187847e-12,
+        "max_input_error_pmol_kg": 5.684341886080802e-14,
+        "max_analytical_error_pmol_l": 1.625858203624375e-08,
+        "max_solver_difference_pmol_l": 1.625858203624375e-08,
+        "max_one_compartment_difference_pmol_l": 1437.8056756884607
+      },
+      "normal_mean--basal_pulse": {
+        "passed": true,
+        "evidence": "entirely synthetic baseline and added secretion pulse",
+        "sample_count": 481,
+        "peak_sampled_cpeptide_pmol_l": 1598.6686186716063,
+        "initial_cpeptide_pmol_l": 381.6793893129771,
+        "final_input_pmol_kg": 539.9999999999999,
+        "max_mass_error_pmol_kg": 4.831690603168681e-13,
+        "max_input_error_pmol_kg": 1.1368683772161603e-13,
+        "max_analytical_error_pmol_l": 5.419906301540323e-09,
+        "max_solver_difference_pmol_l": 5.419678927864879e-09,
+        "max_one_compartment_difference_pmol_l": 394.8156082961202
+      },
+      "normal_mean--zero": {
+        "passed": true,
+        "evidence": "numerical zero-input limit",
+        "sample_count": 481,
+        "peak_sampled_cpeptide_pmol_l": 0.0,
+        "initial_cpeptide_pmol_l": 0.0,
+        "final_input_pmol_kg": 0.0,
+        "max_mass_error_pmol_kg": 0.0,
+        "max_input_error_pmol_kg": 0.0,
+        "max_analytical_error_pmol_l": 0.0,
+        "max_solver_difference_pmol_l": 0.0,
+        "max_one_compartment_difference_pmol_l": 0.0
+      },
+      "t1d_mean--bolus": {
+        "passed": true,
+        "evidence": "published analytical equation, synthetic normalized dose; not original 50 nmol cohort decay",
+        "sample_count": 361,
+        "peak_sampled_cpeptide_pmol_l": 1526.7175572519084,
+        "initial_cpeptide_pmol_l": 1526.7175572519084,
+        "final_input_pmol_kg": 0.0,
+        "max_mass_error_pmol_kg": 2.4158453015843406e-13,
+        "max_input_error_pmol_kg": 0.0,
+        "max_analytical_error_pmol_l": 1.6449348549940623e-09,
+        "max_solver_difference_pmol_l": 1.644707481318619e-09,
+        "max_one_compartment_difference_pmol_l": 237.69446331858114
+      },
+      "t1d_mean--step": {
+        "passed": true,
+        "evidence": "published infusion schedule replay using nominal mean coefficients; no measured cohort curve comparison",
+        "sample_count": 481,
+        "peak_sampled_cpeptide_pmol_l": 8059.75238486647,
+        "initial_cpeptide_pmol_l": 0.0,
+        "final_input_pmol_kg": 3960.0,
+        "max_mass_error_pmol_kg": 3.183231456205249e-12,
+        "max_input_error_pmol_kg": 5.684341886080802e-14,
+        "max_analytical_error_pmol_l": 4.246885509928688e-09,
+        "max_solver_difference_pmol_l": 4.247340257279575e-09,
+        "max_one_compartment_difference_pmol_l": 1642.8118362050354
+      },
+      "t1d_mean--basal_pulse": {
+        "passed": true,
+        "evidence": "entirely synthetic baseline and added secretion pulse",
+        "sample_count": 481,
+        "peak_sampled_cpeptide_pmol_l": 1804.047401003042,
+        "initial_cpeptide_pmol_l": 440.39929536112743,
+        "final_input_pmol_kg": 539.9999999999999,
+        "max_mass_error_pmol_kg": 2.4016344468691386e-12,
+        "max_input_error_pmol_kg": 1.1368683772161603e-13,
+        "max_analytical_error_pmol_l": 1.415855876985006e-09,
+        "max_solver_difference_pmol_l": 1.415855876985006e-09,
+        "max_one_compartment_difference_pmol_l": 373.53446161997385
+      },
+      "t1d_mean--zero": {
+        "passed": true,
+        "evidence": "numerical zero-input limit",
+        "sample_count": 481,
+        "peak_sampled_cpeptide_pmol_l": 0.0,
+        "initial_cpeptide_pmol_l": 0.0,
+        "final_input_pmol_kg": 0.0,
+        "max_mass_error_pmol_kg": 0.0,
+        "max_input_error_pmol_kg": 0.0,
+        "max_analytical_error_pmol_l": 0.0,
+        "max_solver_difference_pmol_l": 0.0,
+        "max_one_compartment_difference_pmol_l": 0.0
+      }
+    },
+    "verification": {
+      "schema": "bc003-verification/1",
+      "protocol": "BC-003/1",
+      "passed": true,
+      "checks": {
+        "analytical_agreement": {
+          "value": 1.7720140021992847e-08,
+          "limit": 1e-05,
+          "passed": true
+        },
+        "solver_sensitivity": {
+          "value": 1.7720393430821966e-08,
+          "limit": 1e-05,
+          "passed": true
+        },
+        "mass_balance": {
+          "value": 3.183231456205249e-12,
+          "limit": 1e-07,
+          "passed": true
+        },
+        "input_accounting": {
+          "value": 1.1368683772161603e-13,
+          "limit": 1e-07,
+          "passed": true
+        },
+        "positivity": {
+          "value": 0.0,
+          "limit": 1e-09,
+          "passed": true
+        },
+        "zero_input": {
+          "value": 0.0,
+          "limit": 0,
+          "passed": true
+        },
+        "repeatability": {
+          "value": 0.0,
+          "limit": 0,
+          "passed": true
+        },
+        "equilibrium": {
+          "value": 0.0,
+          "limit": 1e-08,
+          "passed": true
+        },
+        "one_compartment_limit": {
+          "value": 7.958078640513122e-13,
+          "limit": 1e-05,
+          "passed": true
+        },
+        "unit_conversion": {
+          "value": 0.0,
+          "limit": 1e-12,
+          "passed": true
+        },
+        "synthetic_recovery": {
+          "value": 3.574918139293004e-14,
+          "limit": 0.0001,
+          "passed": true
+        },
+        "synthetic_fit": {
+          "value": 5.9685589803848416e-12,
+          "limit": 1e-06,
+          "passed": true
+        },
+        "sensitivity_refinement": {
+          "value": 1.6465113010309805e-09,
+          "limit": 1e-05,
+          "passed": true
+        },
+        "scale_confounding": {
+          "value": 0.0,
+          "limit": 1e-08,
+          "passed": true
+        },
+        "identifiability_ranks": {
+          "value": 0.0,
+          "limit": 0,
+          "passed": true
+        }
+      },
+      "maxima": "sampled at declared output times; no continuous-time or biological bound",
+      "evidence": "numerical checks and noiseless synthetic known-input identifiability only"
+    },
+    "identifiability_reconstruction": {
+      "max_parameter_error": 3.574918139293004e-14,
+      "max_fit_residual_pmol_l": 5.9685589803848416e-12,
+      "sensitivity_refinement_relative_error": 1.6465113010309805e-09,
+      "max_scale_confounding_error_pmol_l": 0.0,
+      "ranks": {
+        "full_known_input": 4,
+        "full_unknown_amplitude": 4,
+        "early_known_input": 4,
+        "sparse_known_input": 3
+      },
+      "passed": true
+    },
+    "evidence": "published equations/stimulus with nominal coefficients; synthetic observations; no cohort reproduction",
+    "limitations": [
+      "reproduction of patient/cohort observations",
+      "human parameter identifiability",
+      "validated T1D or transplant prediction",
+      "general secretion reconstruction from C-peptide",
+      "resolution of BC-001 initialization or secretion scale",
+      "glucose feedback or therapy effects"
+    ]
+  },
+  "identifiability_designs": {
+    "full_known_input": {
+      "singular_values_pmol_l": [
+        3311.0922690397147,
+        756.8922791663252,
+        252.29326000380792,
+        109.334961278818
+      ],
+      "rank": 4,
+      "rows": 30,
+      "columns": 4,
+      "condition_number": 30.28392958951172
+    },
+    "early_known_input": {
+      "singular_values_pmol_l": [
+        2601.5541629948593,
+        317.87335742184297,
+        13.610123652019901,
+        0.16094375415434717
+      ],
+      "rank": 4,
+      "rows": 6,
+      "columns": 4,
+      "condition_number": 16164.368581212135
+    },
+    "sparse_known_input": {
+      "singular_values_pmol_l": [
+        1297.0877424870607,
+        163.19393287601713,
+        29.418221995494083
+      ],
+      "rank": 3,
+      "rows": 3,
+      "columns": 4,
+      "condition_number": null
+    },
+    "full_unknown_amplitude": {
+      "singular_values_pmol_l": [
+        4523.754014259359,
+        780.8722096334607,
+        253.0222081873205,
+        109.38240552097616,
+        1.4510721620189312e-08
+      ],
+      "rank": 4,
+      "rows": 30,
+      "columns": 5,
+      "condition_number": null
+    }
+  },
+  "checks": {
+    "root_uv_sync_locked": "passed",
+    "isolated_uv_sync_locked": "passed",
+    "report_reconstruction": "byte_identical_standard_library_python_minus_S",
+    "figure_reconstruction": "byte_identical_svg",
+    "fresh_process_repeat": {
+      "run": "results/m4-cpeptide/repeat-02",
+      "all_25_deterministic_artifacts_byte_identical": true
+    },
+    "source_snapshots_match_current_files": true,
+    "visual_inspection": "four_panel_figure_checked",
+    "native_tests": {
+      "passed": 15,
+      "log_sha256": "cdfc22dd7863b5445e42a4db4e26f92bf031304a06a96efb2bb49fc884530b38"
+    },
+    "artifact_tests": {
+      "passed": 13
+    },
+    "repository_checks": {
+      "status": "passed",
+      "unit_tests": 246,
+      "strict_documentation_build": "passed",
+      "log_sha256": "d35e5c24f8085d9a15f75091b6b45007afa2b01e82ae2332fe68308d8e59e055"
+    }
+  },
+  "failed_attempts": [
+    {
+      "run_path": "results/m4-cpeptide/reference-01",
+      "manifest": {
+        "schema": "bc003-run/1",
+        "status": "failed",
+        "model": "polonsky1986-forward-cpeptide/1",
+        "started_utc": "2026-09-20T08:43:33.651308+00:00",
+        "files": {
+          "identifiability.json": "6e5bca37b714fb740ae4b583776a9a0df604e4cd025b82873d1f080a9331b03d",
+          "inputs.json": "e1ec55ee8b4b60919c645a9534c86a58544899815e409fcea406007a33802a2a",
+          "normal_mean--basal_pulse.csv": "75e0066ec87144fe04308f825085214bc6d6b31cd1f21e75bb26f2187f7a7fc5",
+          "normal_mean--bolus.csv": "84f832fa787a3fa42eba2255c5e66c22ba54a762157931734807490292401bff",
+          "normal_mean--step.csv": "10d1822f4c0abcd22be5e2c4e7221a0b6989424e3dc79cf7b1bed8aec74ad25d",
+          "normal_mean--zero.csv": "9c97239af384d633c7a103c9095ec94610d735e1caf4d1168f767e0e96ea3f10",
+          "protocol.json": "763834cd460e1d5702e0b8704edc976e7724bf32a897c7c2c12a120307bc476d",
+          "runtime-pyproject.toml": "7c69b6f63a48d72f927c0253b68492de1ac60700d0549744de1207709732d3c5",
+          "runtime-uv.lock": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04",
+          "source-forcing.py": "b26fd2fd87aa47da328d24b2cbe56d8e3be45f9b4caf2c3c453f89acb07fddd1",
+          "source-identify.py": "0876591db6b1a465e2bdcc4d82948092f99043053fd43dc5f53ae478c1d81171",
+          "source-model.py": "f46453669c17d98c4dc90eec6613641d32e222c2a3dd012709ca30e6868673ae",
+          "source-plot.py": "9d63ed41fde5a9073d21b011c42c6944fd9de13093d33fd0c5b0ebbce2d26411",
+          "source-reference.py": "29efbcdd7065387f0089ff8704916fee48cd24237529137a5350e8886559c992",
+          "source-report.py": "44b3c055b3580de5e3be92f48989cf5b6f023bbed097d696fea9f4fc34ae9ade",
+          "source-run.py": "63b617ba039c9f8b5a8fe0be2738a673bb3a58823dfc2d5ae3a81d57aa1303ac",
+          "source-test_model.py": "9b8bb52ef5d3cfda3221f3c8c022e2edc6b2064983ad2717b20c3e7ef0652ecf",
+          "source-verify.py": "0a6e5965c7e42a401f09e1ae0995bd3fc24bd801392ef4bec9b0c95c0153cff2",
+          "t1d_mean--basal_pulse.csv": "f112355111c15838d6014aa5e8bbf50233d3f46ace27faba713f211a45e21f88",
+          "t1d_mean--bolus.csv": "0331924e9cba28a093f9e27cacfbe744f00bfbeff5bb721493fd96dfcf749399",
+          "t1d_mean--step.csv": "d7ee3d9cfe3de84ba474362fa218b171061280ec4a1a8a4543fc2ee4c09771a4",
+          "t1d_mean--zero.csv": "9c97239af384d633c7a103c9095ec94610d735e1caf4d1168f767e0e96ea3f10",
+          "verification.json": "0fa88a49c802862bcdf31bbb0f8b9a80a4d724fa212968c04233cdac7cec469c"
+        },
+        "runtime": {
+          "matplotlib": "3.9.4",
+          "python": "3.12.13",
+          "numpy": "2.2.6",
+          "scipy": "1.15.3"
+        },
+        "git_head": "751e701bbde2e976dc597751e3124973ab9ba1ac",
+        "git_dirty": true,
+        "finished_utc": "2026-09-20T08:43:34.897555+00:00",
+        "error": {
+          "type": "ValueError",
+          "message": "Recorded input disagrees with forcing"
+        }
+      },
+      "reason": "Scientific numerical checks passed; exact equality of interpolated constant input failed because of floating-point roundoff. Reporting identity accepts 1e-14 relative/absolute roundoff; scientific criteria unchanged."
+    }
+  ],
+  "development_failure": "Repeated-rate analytical peripheral return failed the independent limit test; stable discriminant/expm1 formulation corrected it. Native test retained.",
+  "documentation_figure": {
+    "path": "docs/research/figures/m4-cpeptide-reference.svg",
+    "sha256": "9478fa98d79813648293b5e7913d0b3eb3cac85d6cc32fb07590b0705e67982a"
+  },
+  "empirical_evaluation": "not_performed_no_authorized_participant_series",
+  "external_domain_review": "not_performed"
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "ot027-public-dictionaries/1",
+  "study": "CIT-07/08",
+  "catalogue_release": "Version 2",
+  "catalogue_url": "https://test.repository.niddk.nih.gov/study/92",
+  "files": {
+    "patient_status.xlsx": {
+      "url": "https://test.repository.niddk.nih.gov/api/entity/v1/study/documents/download/file/67533",
+      "sha256": "32f0fcc0bdc977903fdbb9632a98158a2b3cb6ca78cab7fd878712dd3380dd66",
+      "table": "PatientStatus",
+      "required_variables": ["ACCESSION", "StudyID", "NumTX", "Numdays2ndTX", "Numdays3rdTX"]
+    },
+    "ieq_infused.xlsx": {
+      "url": "https://test.repository.niddk.nih.gov/api/entity/v1/study/documents/download/file/67517",
+      "sha256": "2f3a6126306c579024954ac4f6beda6a74c9db2de7012952175876388cdc6c0d",
+      "table": "ShareIEQ_Infused",
+      "required_variables": ["ACCESSION", "StudyID", "LotID", "TX", "PostTransplantIEQ"]
+    },
+    "cpeptide.xlsx": {
+      "url": "https://test.repository.niddk.nih.gov/api/entity/v1/study/documents/download/file/67500",
+      "sha256": "2c69eba921640e04c92cb6796f838d3d8267038b3ff0fa07f8107c1abb73d8ae",
+      "table": "Cpeptide_Glucose_Creatinine",
+      "required_variables": ["ACCESSION", "StudyID", "NumDaysInitial", "Flag08", "pstintvst", "pstfinvst", "Fasting_cpeptide", "Stimulated_cpeptide_90", "Fasting_glucose", "Stimulated_glucose_90"]
+    },
+    "insulin.xlsx": {
+      "url": "https://test.repository.niddk.nih.gov/api/entity/v1/study/documents/download/file/67518",
+      "sha256": "5a91969b6520894e98d6b6116431fddc0eac454ea737827f846931a69af9f485",
+      "table": "Insulin",
+      "required_variables": ["ACCESSION", "StudyID", "NumDaysInitial", "Flag08", "pstintvst", "pstfinvst", "Insulin"]
+    },
+    "mean_insulin.xlsx": {
+      "url": "https://test.repository.niddk.nih.gov/api/entity/v1/study/documents/download/file/67530",
+      "sha256": "1110169d35502e44e240a23e96733287534b593f553e8f2ac9b2c1d3500994d6",
+      "table": "Mean_Insulin",
+      "required_variables": ["ACCESSION", "StudyID", "NumDaysInitial", "EndDay", "pstintvst", "pstfinvst", "Mean_Insulin", "Weight", "Ins_kg"]
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schema": "m4-basal-equivalence-protocol/1",
+  "id": "M4-BASAL-EQUIVALENCE/1",
+  "reference_id": "BC-008/2",
+  "reference_protocol_file_sha256": "b66087592810be35fa74372ad07172359897ceb40653abdf420b3c3fa1a4fd99",
+  "question": "Within one frozen synthetic meal task, which constant post-zero SC infusion matches the BC-008 full-feedback glucose AUC for each declared causal source?",
+  "claim": "synthetic_fixed_sc_auc_equivalence_only",
+  "target": {
+    "scenario": "gastric_load_30g",
+    "case": "feedback_full",
+    "solver": "reference",
+    "metric": "auc_above_initial_mg_min_dl",
+    "unit": "mg min/dL"
+  },
+  "ownership": "Keep the 25% replacement source basal, portal state, all native initial states and model parameters fixed. Change only the host SC infusion from t=0; no controller or bolus.",
+  "source_slots": ["reference_adapter", "synthetic_variant"],
+  "sc_rate_multipliers_of_native_u2ss": [0.5, 0.625, 0.75, 0.875, 1.0],
+  "search_solver": "tight",
+  "confirmation_solver": "reference",
+  "max_bisections": 18,
+  "auc_match_tolerance_mg_min_dl": 1.0,
+  "monotonicity_slack_mg_min_dl": 0.1,
+  "max_rate_pmol_kg_min": 1000.0,
+  "max_abs_state_derivative_pmol_kg_min2": 1000.0,
+  "source_equilibrium_tolerance": 1e-12,
+  "criteria": {
+    "glucose_solver_error_mg_dl": 0.01,
+    "insulin_solver_error_pmol_l": 0.01,
+    "auc_solver_error_mg_min_dl": 0.1,
+    "insulin_mass_error_pmol_kg": 1e-06,
+    "glucose_mass_error_mg_kg": 1e-05,
+    "negative_amount_tolerance": 1e-08,
+    "anchor_adapter_glucose_error_mg_dl": 0.01,
+    "anchor_basal_control_glucose_error_mg_dl": 0.01,
+    "repeat_error": 0.0
+  },
+  "no_solution_policy": "Report no_solution with every tested objective and both domain endpoints if no valid bracket or tolerance match exists. Never extrapolate or interpret as a dose.",
+  "excluded": [
+    "clinical insulin dose or treatment recommendation",
+    "biological validity or human insulin requirement",
+    "source rebaselining, controller, bolus or feedback SC policy",
+    "human observations, population calibration or independent review"
+  ]
+}

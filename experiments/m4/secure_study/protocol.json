@@ -1,0 +1,865 @@
+{
+  "acceptance": {
+    "common_controls": "Across accepted source children, exact complete scenario/grid/basal/native/runtime/control/reference equality; disagreement makes overall study fail and pair metrics null",
+    "overall": "Every frozen source/load cell and required control/reference must pass; preserve independent accepted pairs when another source fails but overall remains failed",
+    "reference": "All selected scenario-specific native/control/feedback reference cases, diagnostics and repeats must pass before dependent accepted source comparisons",
+    "repeat": "All complete numeric case artifacts byte-identical in fresh worker processes; worker metadata equal after removing only primary/repeat label",
+    "source": "Entire selected-load source workflow must complete and pass every numerical/refinement/observer/fresh-process repeat gate. A passing scenario prefix of a failed source is not accepted pair support"
+  },
+  "archive_and_reconstruction": {
+    "artifacts": [
+      "report.json",
+      "report.md",
+      "figure.svg"
+    ],
+    "failed_archive": "explicit --allow-failed preserves passed=false, full planned denominators, unattempted/failed/missing-evidence reasons and null unsupported pairs",
+    "limit": "Artifact reconstruction establishes archive/report consistency; does not import or replay callback, require original external source paths, independently reproduce arbitrary model execution or establish rights/model validity",
+    "reader": "standard-library report.reconstruct(archive,write_to=None,allow_failed=False); verify every archived file identity, frozen config/source/protocol/runtime/helper binding, state/roster, numerical semantics, controls/grid, repeats and contrast arithmetic before writing a fresh output",
+    "report_required_keys": [
+      "schema",
+      "protocol",
+      "passed",
+      "configuration",
+      "scenarios",
+      "sources",
+      "pairs"
+    ],
+    "saved_reports": "Existing saved derived bytes must match recomputed reports; output must be fresh/separate; no silent repair of altered reports"
+  },
+  "claim": "bounded_configurable_synthetic_initial_load_composition_and_numerical_verification",
+  "comparison": {
+    "direction": "left minus right",
+    "grid": "all exact961 saved samples at0..240min; no shortening, resampling, dropping samples or interpolation between mismatched grids",
+    "ineligible": "null metrics with explicit full-source/reference/identity/condition/grid/control reason",
+    "interpretation": "separate descriptive trajectory differences per load; no pooled ranking, winner, accuracy claim, tuning or required effect direction/magnitude",
+    "metrics": {
+      "maximum_absolute_pointwise_difference": "maximum abs(left_i-right_i); signal unit",
+      "signed_auc_difference": "signed trapezoidal integral of left_i-right_i over complete240min; signal unit times min",
+      "signed_time_mean_difference": "signed_auc_difference/240; signal unit"
+    },
+    "signals": {
+      "cpeptide": "pmol/L",
+      "glucose": "mg/dL",
+      "insulin": "pmol/L"
+    },
+    "support": "every unordered source pair in roster order, all selected scenarios; both complete sources accepted and common conditions/controls verified"
+  },
+  "conditions": {
+    "basal_replacement": {
+      "Sb": "fraction*u0*(m1+m30)/m1",
+      "fraction": 0.25,
+      "initial_Il": "native Il + fraction*u0/m1",
+      "initial_Ip": "unchanged",
+      "initial_P": "Sb/gamma",
+      "initial_Z": "Sb",
+      "initial_sc_depots": "(1-fraction)*native depots",
+      "not_a_claim": "replacement fraction is a prescribed experiment design; no estimate of insulin need or functional cell fraction",
+      "other_native_states": "unchanged",
+      "u0": "native u2ss in pmol/(kg min)",
+      "u_sc": "(1-fraction)*u0"
+    },
+    "fixed_sc_schedule": "unchanged 75% native SC basal throughout; no candidate/controller override",
+    "freeze": "Raw config/model/declaration bytes and hashes, numeric source parameters, this protocol, guidance, all implementation/helper source inventory and numerical project/lock bytes archived before supplied callback execution; changed identities reject dispatch",
+    "horizon_min": 240,
+    "initial_load_semantics": "Only native initial x[0] and last_Qsto equal the selected gastric solid mg; last_foodtaken=0 and Action.CHO=0 throughout; not an announced meal, bolus, controller or timed intervention",
+    "native_boundary": {
+      "P_dot": "Spo-gamma*P",
+      "Z_dot": "alpha*(static_target-Z)",
+      "cpeptide": "excluded from first feedback experiment; no implicit reuse of insulin transit",
+      "glucose_rate": "native dx[3]/Vg at the same RHS evaluation",
+      "hepatic_extraction": "native fixed m30 only",
+      "liver_input": "S=gamma*P added to guarded dx[9] only",
+      "pancreatic_rate": "Spo=Z+gain*K*max(Gdot,0)",
+      "plasma_glucose": "x[3]/Vg in mg/dL",
+      "portal_egp_term": "not added; native has no direct portal insulin action",
+      "static_target": "max(Sb+gain*beta*(G-h),0)",
+      "units": "min, mg/dL, pmol/kg, pmol/(kg min)"
+    },
+    "native_state_order": [
+      "native_0_to_12",
+      "Z_pmol_kg_min",
+      "P_pmol_kg",
+      "integrated_sc_input",
+      "integrated_pancreatic_input",
+      "integrated_liver_arrival",
+      "hepatic_loss",
+      "peripheral_loss"
+    ],
+    "profile": "adult#001",
+    "protocol_files_sha256": {
+      "experiments/m4/causal_secretion/protocol.json": "b0a4e01475e95d6ddf785ce5764f89b2684569f6092f321ddb746290f9763739",
+      "experiments/m4/comparison/protocol.json": "1769545288eb65d72757a9330034abad5800c0fac75dc2ca105c801a2014282c",
+      "experiments/m4/feedback/protocol.json": "b66087592810be35fa74372ad07172359897ceb40653abdf420b3c3fa1a4fd99",
+      "experiments/m4/feedback_observation/protocol.json": "69143f23b24e225753ada55a3d43ff2a39414635a624263db9e4f83c2d3ef98d",
+      "experiments/m4/researcher_workflow/protocol.json": "f6a8a22036cc63b1a9770eec8b31932ff4761dbd9000846d6438721e86e62cf0"
+    },
+    "runtime_files_sha256": {
+      "experiments/m0/simglucose/pyproject.toml": "6bbb5f49e74bd7df2e11ab39f69754a99ce1e4ef3736573943e3a75118c28007",
+      "experiments/m0/simglucose/uv.lock": "13d254dcebe8d1ab54c3140cdc07152d719a68477a1378d7fe77fc1568612aa9",
+      "experiments/m0/simglucose_secure/pyproject.toml": "f83108dd9e6d2c8db1a3abf48574dae828de2033b380190306b0de37b6f5fe27",
+      "experiments/m0/simglucose_secure/uv.lock": "cabe2652c61cdc9f9d8d90447175ac9c36e55939a4c39f0085c12861c6834207",
+      "experiments/m4/beta_cell/runtime/pyproject.toml": "7c69b6f63a48d72f927c0253b68492de1ac60700d0549744de1207709732d3c5",
+      "experiments/m4/beta_cell/runtime/uv.lock": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04"
+    },
+    "sample_count": 961,
+    "sample_step_min": 0.25,
+    "upstream": {
+      "parameter_file_sha256": "662f3b684d160fdf485edd1d7196dd1cd85c14b53650b030fdb86aaa05bb2e50",
+      "patient_file_sha256": "7ad1302fbf064805e2294bbcffd482e55448e37e48b63e629a1ed7f11c701547",
+      "profile": "adult#001",
+      "revision": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc"
+    }
+  },
+  "configuration": {
+    "keys": [
+      "schema",
+      "sources",
+      "scenarios",
+      "timeout_seconds",
+      "source_timeout_seconds"
+    ],
+    "scenarios": {
+      "maximum": 3,
+      "minimum": 1,
+      "type": "ordered nonempty subset of distinct supported fixed scenario IDs"
+    },
+    "schema": "m4-secure-study-config/1",
+    "source_timeout_seconds": {
+      "default_example": 3600,
+      "maximum": 10800,
+      "minimum": 1,
+      "scope": "entire source across every selected load, numerical/refinement stage, observation stage, fresh-process repeats and verification; never reset per load or stage"
+    },
+    "sources": {
+      "id_pattern": "[a-z][a-z0-9_-]{0,63}",
+      "keys": [
+        "id",
+        "model",
+        "declaration"
+      ],
+      "maximum": 8,
+      "minimum": 2,
+      "order": "declared list order, sequential supervised source execution",
+      "paths": "regular local files; relative paths resolve against config directory; metadata checking never imports source",
+      "reserved_ids": [
+        "native_zero",
+        "host_constant_basal",
+        "bc008_reference"
+      ]
+    },
+    "timeout_seconds": {
+      "default_example": 600,
+      "maximum": 1800,
+      "minimum": 1,
+      "scope": "per numerical/reference stage; reference generation and its repeats are separately supervised"
+    },
+    "unsupported": "Reject extra keys, repeated/unknown scenarios, arbitrary load/timing/profile/horizon/grid/unit/runtime/state settings before callback execution"
+  },
+  "excluded": [
+    "human observations, empirical calibration or clinical predictive quality",
+    "arbitrary loads, meal timing events, announcements or controllers",
+    "parameter tuning, source-quality ranking or automatic winner",
+    "new secretion states or physiological mechanisms",
+    "insulin dosing/need, beta-cell mass, engraftment/immune/graft survival or treatment-effect inference",
+    "full ultradian engine reproduction",
+    "proof of arbitrary trusted callback purity/rights or independent user usability",
+    "changes to source-hashed historical packages, locks, protocols, archives or readers",
+    "claim that dependency maintenance establishes human, biological, clinical or independent reproduction validity"
+  ],
+  "execution": {
+    "adapter": "Explicit single-process startup context binds successor schemas, commands, maintained runtime and source inventory; restores reused module bindings on return. Historical entry points unchanged. Inherited numerical artifact schemas identify scientific formats, not current execution identity. No archived source is imported.",
+    "attestation": "Each numerical stage records actual distributions, locked project hashes, Python and interpreter before numerical execution. Completed stages require matching attestation on reconstruction.",
+    "changed_packages": {
+      "setuptools": {
+        "current": {
+          "source": {
+            "registry": "https://pypi.org/simple"
+          },
+          "version": "84.0.0"
+        },
+        "historical": {
+          "source": {
+            "registry": "https://pypi.org/simple"
+          },
+          "version": "80.9.0"
+        }
+      },
+      "urllib3": {
+        "current": {
+          "source": {
+            "registry": "https://pypi.org/simple"
+          },
+          "version": "2.8.0"
+        },
+        "historical": {
+          "source": {
+            "registry": "https://pypi.org/simple"
+          },
+          "version": "2.7.0"
+        }
+      }
+    },
+    "inherited_scientific_protocol": "BC-008/2",
+    "inherited_study_protocol_sha256": "d2ed95617dd22db1e8204da6b35a2b28119ef4e4f67f8ca64f80395917cf6eb2",
+    "legacy_import_compatibility": {
+      "observed_apis": [
+        "resource_filename(simglucose, regular_relative_resource)",
+        "EntryPoint.parse(name=module:object).load(False)"
+      ],
+      "reason": "Setuptools82 removed pkg_resources; pinned unmodified gym0.9.4/simglucose sources still import these two APIs. No historical setuptools code is copied, no upstream source bytes changed, unsupported APIs fail.",
+      "scope": "Explicit maintained native worker startup only, restored on return; standard-library distribution metadata and entry points",
+      "source": "experiments/m4/secure_study/compat.py"
+    },
+    "module": "experiments.m4.secure_study",
+    "native_project": "experiments/m0/simglucose_secure",
+    "observer_project": "experiments/m4/beta_cell/runtime",
+    "package_records": {
+      "certifi": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "2026.7.22"
+      },
+      "charset-normalizer": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "3.5.1"
+      },
+      "cloudpickle": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "3.1.2"
+      },
+      "contourpy": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "1.3.3"
+      },
+      "cycler": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "0.12.1"
+      },
+      "dill": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "0.4.1"
+      },
+      "farama-notifications": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "0.0.6"
+      },
+      "fonttools": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "4.65.0"
+      },
+      "glucosim": {
+        "source": {
+          "git": "https://github.com/HassDhia/glucosim?rev=6422a91d533125a8feb4f2e8737aecd67fec95c9#6422a91d533125a8feb4f2e8737aecd67fec95c9"
+        },
+        "version": "0.1.2"
+      },
+      "gym": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "0.9.4"
+      },
+      "gymnasium": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "0.29.1"
+      },
+      "idna": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "3.19"
+      },
+      "kiwisolver": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "1.5.1"
+      },
+      "matplotlib": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "3.9.4"
+      },
+      "multiprocess": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "0.70.19"
+      },
+      "numpy": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "1.26.4"
+      },
+      "packaging": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "26.3"
+      },
+      "pandas": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "2.2.3"
+      },
+      "pathos": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "0.3.5"
+      },
+      "pillow": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "12.3.0"
+      },
+      "pox": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "0.3.7"
+      },
+      "ppft": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "1.7.8"
+      },
+      "pyglet": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "2.1.16"
+      },
+      "pyparsing": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "3.3.2"
+      },
+      "python-dateutil": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "2.9.0.post0"
+      },
+      "pytz": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "2026.3.post1"
+      },
+      "requests": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "2.34.2"
+      },
+      "scipy": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "1.13.1"
+      },
+      "setuptools": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "84.0.0"
+      },
+      "simglucose": {
+        "source": {
+          "git": "https://github.com/jxx123/simglucose?rev=a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc#a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc"
+        },
+        "version": "0.2.11"
+      },
+      "six": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "1.17.0"
+      },
+      "typing-extensions": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "4.16.0"
+      },
+      "tzdata": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "2026.4"
+      },
+      "urllib3": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "2.8.0"
+      }
+    },
+    "reference_schema": "m4-secure-reference-run/1",
+    "schema": "m4-secure-execution/1",
+    "task": "m4-study-secure",
+    "unchanged_packages": {
+      "certifi": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "2026.7.22"
+      },
+      "charset-normalizer": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "3.5.1"
+      },
+      "cloudpickle": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "3.1.2"
+      },
+      "contourpy": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "1.3.3"
+      },
+      "cycler": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "0.12.1"
+      },
+      "dill": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "0.4.1"
+      },
+      "farama-notifications": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "0.0.6"
+      },
+      "fonttools": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "4.65.0"
+      },
+      "glucosim": {
+        "source": {
+          "git": "https://github.com/HassDhia/glucosim?rev=6422a91d533125a8feb4f2e8737aecd67fec95c9#6422a91d533125a8feb4f2e8737aecd67fec95c9"
+        },
+        "version": "0.1.2"
+      },
+      "gym": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "0.9.4"
+      },
+      "gymnasium": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "0.29.1"
+      },
+      "idna": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "3.19"
+      },
+      "kiwisolver": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "1.5.1"
+      },
+      "matplotlib": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "3.9.4"
+      },
+      "multiprocess": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "0.70.19"
+      },
+      "numpy": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "1.26.4"
+      },
+      "packaging": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "26.3"
+      },
+      "pandas": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "2.2.3"
+      },
+      "pathos": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "0.3.5"
+      },
+      "pillow": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "12.3.0"
+      },
+      "pox": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "0.3.7"
+      },
+      "ppft": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "1.7.8"
+      },
+      "pyglet": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "2.1.16"
+      },
+      "pyparsing": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "3.3.2"
+      },
+      "python-dateutil": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "2.9.0.post0"
+      },
+      "pytz": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "2026.3.post1"
+      },
+      "requests": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "2.34.2"
+      },
+      "scipy": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "1.13.1"
+      },
+      "simglucose": {
+        "source": {
+          "git": "https://github.com/jxx123/simglucose?rev=a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc#a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc"
+        },
+        "version": "0.2.11"
+      },
+      "six": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "1.17.0"
+      },
+      "typing-extensions": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "4.16.0"
+      },
+      "tzdata": {
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "version": "2026.4"
+      }
+    }
+  },
+  "guidance": "docs/research/m4-secure-runtime-protocol.md",
+  "id": "M4-STUDY-SECURE/1",
+  "internal_verification": {
+    "historical_candidate_parity": "Separate required acceptance evidence comparing fasting/30g candidate/control and observer numeric outputs from unchanged M4-RESEARCHER/1 against new same-source/same-solver outputs for both example structures; does not inject unselected scenarios into user configurations",
+    "native_example": "both existing Dalla Man adapter and ultradian response component, all three loads, all numerical gates and exact fresh-process repeats",
+    "negative": "invalid/unsupported config refusal before callback execution; failing source retains roster and accepted independent support; shortened/mismatched/tampered evidence rejects; deadline/interruption process cleanup and failed reconstruction",
+    "repository": "locked tooling sync/check plus appropriate locked numerical tests; record only checks actually completed, revisions/hashes/commands and remaining limits in separate execution receipt"
+  },
+  "numerical": {
+    "criteria": {
+      "basal_control_glucose_error_mg_dl": 0.01,
+      "basal_control_insulin_error_pmol_l": 0.01,
+      "basal_derivative_change_max_native_units_per_min": 1e-08,
+      "common_control_max_numeric_difference": 0.0,
+      "fasting_glucose_drift_mg_dl": 0.01,
+      "fasting_insulin_drift_pmol_l": 0.01,
+      "fine_replay_glucose_error_mg_dl": 0.01,
+      "fine_replay_insulin_error_pmol_l": 0.01,
+      "glucose_mass_error_mg_kg": 1e-05,
+      "glucose_solver_error_mg_dl": 0.01,
+      "historical_anchor_max_numeric_difference": 0.0,
+      "insulin_mass_error_pmol_kg": 1e-06,
+      "insulin_solver_error_pmol_l": 0.01,
+      "native_class_glucose_error_mg_dl": 0.05,
+      "native_class_insulin_error_pmol_l": 0.01,
+      "negative_amount_tolerance": 1e-08,
+      "repeat_error": 0.0,
+      "same_solver_zero_extension_state_error": 0.0,
+      "source_solver_error_pmol_kg_min": 1e-05,
+      "zero_extension_derivative_error": 0.0
+    },
+    "glucose_envelope_mg_dl": [
+      40,
+      500
+    ],
+    "integration": "monolithic native+Z+P+ledgers; no sensor derivative, finite-difference glucose or sequential stale feedback; same-state derivative has no instantaneous dependence on S",
+    "inventory": "20 state columns: native0..12,Z,P and integrated SC/pancreatic/liver-arrival/hepatic-loss/peripheral-loss; independent native glucose flux quadrature, exact initial and zero ledgers; do not use balance residual as flux definition",
+    "positivity": "Same inherited physical states excluding signed native insulin-action index6; terminal envelope/negative-amount events; no clipping or shortened-run acceptance",
+    "preflight_criteria": {
+      "baseline_derivative_change": 1e-08,
+      "baseline_glucose_concentration_change": 0.0,
+      "baseline_plasma_insulin_change": 0.0,
+      "insulin_inventory_derivative_balance": 1e-10,
+      "native_derivative_locality_error": 1e-12,
+      "rhs_equivalence_error": 1e-12,
+      "zero_extension_error": 0.0
+    },
+    "refinement": {
+      "comparison_output_step_min": 0.25,
+      "replay": "Archive liver-arrival from dense reference source and replay with unchanged independent original feedback forcing integrator, piecewise linear split at knots; fine replay glucose/insulin closure required for each active reference and candidate",
+      "replay_sample_steps_min": [
+        0.25,
+        0.125,
+        0.0625
+      ],
+      "solver": "Both coarse-versus-reference and tight-versus-reference must meet frozen glucose, insulin and source tolerances; every solver preserves complete-grid/conservation/domain evidence",
+      "source_sampling_limit": "Observer uses archived 0.25min pancreatic source; coarsening is not continuous-source convergence below this grid"
+    },
+    "runtime": {
+      "numpy": "1.26.4",
+      "project": "experiments/m0/simglucose_secure",
+      "python": "3.12",
+      "scipy": "1.13.1"
+    },
+    "solvers": [
+      {
+        "atol": 1e-09,
+        "max_step": 0.25,
+        "method": "RK45",
+        "name": "coarse",
+        "rtol": 1e-07
+      },
+      {
+        "atol": 1e-11,
+        "max_step": 0.125,
+        "method": "RK45",
+        "name": "tight",
+        "rtol": 1e-09
+      },
+      {
+        "atol": 1e-13,
+        "max_step": 0.0625,
+        "method": "DOP853",
+        "name": "reference",
+        "rtol": 1e-11
+      }
+    ],
+    "source_modes": [
+      "candidate",
+      "host_constant_basal"
+    ]
+  },
+  "observer": {
+    "boundary": {
+      "appearance_ratio": 1,
+      "baseline": "total source already contains basal release; no additional basal or SC input",
+      "initial": "Q1=Sb/k3; Q2=k1*Q1/k2; elimination and input ledgers zero",
+      "ownership": "one-way observation; C-peptide owns distribution/removal; no insulin portal delay, HE factor, mass conversion or second body-weight division",
+      "signal": "Spo pancreatic appearance, source_rates column0",
+      "time": "unchanged 0..240 elapsed min from parent stimulus, output every0.25min",
+      "transfer": "continuous piecewise-linear interpolant of archived rate samples; no extrapolation",
+      "units": "pmol/(kg min)"
+    },
+    "checks": "Same passive two-solver matrix-exponential oracle, input/mass conservation, positivity, basal equilibrium, parent-tight propagation, 0.5/1-minute coarsening, liver-input fault and appearance/volume-scale ambiguity; no observer feedback or SC/hepatic/transit duplication",
+    "cpeptide": {
+      "doi": "10.1172/JCI112308",
+      "locators": "pp98-100 equimolar working assumption, process scheme and bolus response; p103 Table I nominal T1D means; inherited unchanged BC-003 implementation",
+      "model": "polonsky1986-forward-cpeptide/1",
+      "parameters": {
+        "k1": 0.037,
+        "k2": 0.031,
+        "k3": 0.052,
+        "volume_l_kg": 0.0655
+      },
+      "profile": "t1d_mean"
+    },
+    "criteria": {
+      "coarsening_error_ratio": 0.6,
+      "equilibrium_drift_pmol_l": 1e-07,
+      "finest_coarsening_error_pmol_l": 0.05,
+      "input_error_pmol_kg": 1e-07,
+      "mass_error_pmol_kg": 1e-07,
+      "negative_tolerance_pmol_kg": 1e-09,
+      "oracle_concentration_error_pmol_l": 1e-05,
+      "parent_dose_relative_error": 0.0001,
+      "parent_source_solver_error_pmol_l": 0.01,
+      "repeat_artifact_differences": 0,
+      "sampling_ratio_floor_pmol_l": 1e-08,
+      "scale_ambiguity_error_pmol_l": 1e-07,
+      "solver_concentration_error_pmol_l": 1e-05,
+      "zero_state_error": 0
+    },
+    "diagnostics": {
+      "appearance_volume_scales": [
+        0.5,
+        2
+      ],
+      "fitting": "none; no deconvolution, noise model, human identifiability claim or joint parameter recovery",
+      "outputs": "C-peptide baseline, peak/time, final, signed AUC; concentration differences from wrong boundary, source-solver and sampling changes; scale ambiguity",
+      "parent_solver": "propagate tight parent Spo at0.25min and compare with reference parent Spo",
+      "sampling_scope": "coarsening against the finest available parent grid, not proof of continuous-source convergence below0.25min",
+      "scale_scope": "scale only C-peptide appearance, both initial amounts and volume together; exact forward-observation ambiguity conditional on saved glucose/insulin, not a full coupled capacity transformation",
+      "source_sampling_steps_min": [
+        1,
+        0.5,
+        0.25
+      ],
+      "wrong_boundary": "post-portal liver arrival S; named fault comparator, never a valid observation inlet"
+    },
+    "protocol": "BC-010/1",
+    "protocol_file_sha256": "69143f23b24e225753ada55a3d43ff2a39414635a624263db9e4f83c2d3ef98d",
+    "runtime": {
+      "numpy": "2.2.6",
+      "project": "experiments/m4/beta_cell/runtime",
+      "python": "3.12",
+      "scipy": "1.15.3"
+    },
+    "solvers": [
+      {
+        "atol": 1e-11,
+        "max_step": 0.25,
+        "method": "RK45",
+        "name": "tight",
+        "rtol": 1e-09
+      },
+      {
+        "atol": 1e-13,
+        "max_step": 0.125,
+        "method": "DOP853",
+        "name": "reference",
+        "rtol": 1e-11
+      }
+    ],
+    "tracks": [
+      "candidate",
+      "host_constant_basal",
+      "bc008_reference"
+    ],
+    "unit_chain": "pancreatic appearance pmol/(kg min) -> central/peripheral amounts pmol/kg -> divide by volume L/kg -> central concentration pmol/L; no second body-weight conversion"
+  },
+  "process_and_failures": {
+    "deadline": "finite stage plus entire-source budgets; kill/reap owned numerical sessions; caller campaign deadline remains separate and never rewrites native settings",
+    "global_interruption": "SIGINT/SIGTERM/SIGHUP cause owned numerical group termination and reaping before failure archive seal; later sources not_attempted",
+    "ordinary_source_failure": "retain all selected source/load cells and stage/error evidence; continue later frozen sources; partial trajectories remain diagnostic",
+    "output": "fresh nonoverlapping directory; no symlink inputs/archive entries; never rewrite historical archives; do not silently discard failed/unattempted cells",
+    "reference_failure": "retain full source/load denominator with explicit dependent not_attempted/failed reasons; no accepted dependent pairs"
+  },
+  "protocol_history": {
+    "inherited_id": "M4-STUDY/2",
+    "inherited_sha256": "d2ed95617dd22db1e8204da6b35a2b28119ef4e4f67f8ca64f80395917cf6eb2",
+    "reason": "Maintain HTTP/setup dependencies under explicit successor identity; historical protocols/locks, core versions, engines, math, solvers, criteria, loads and observation unchanged."
+  },
+  "question": "How does descriptive separation between the same frozen secretion sources change across predeclared synthetic initial gastric loads?",
+  "reference": {
+    "bc008_reference": "fraction=0.25, gain=1 using original BC-008 feedback equations, newly solved for every selected initial load",
+    "historical_anchor_parity": "For selected fasting/30g, compare original BC-008 native_zero/constant_basal/feedback_full tight/reference and native diagnostics against new same-equation/same-solver runs; maximum numeric discrepancy must be zero. Coarse is a new refined setting and has no byte-parity claim against original0.5min setting.",
+    "historical_baseline": "Default: owned m4-secure-reference-run/1 execution with unchanged inherited BC-008/2 scientific protocol and criteria, direct maintained locked interpreter, fresh-process repeat and actual runtime receipt. Optional supplied historical BC-008 archive must pass its original reader and source/lock guards; it is inherited evidence rather than a current execution.",
+    "host_constant_basal": "fraction=0.25, gain=0 with matched plasma insulin, basal liver inventory/SC depots, Z=Sb and P=Sb/gamma; independent original feedback equations",
+    "identity": "The same scenario-specific controls/reference identity is supplied to each source. A reference from another load or altered initial/basal/grid/locks cannot support comparison",
+    "native_zero": "fraction=0, gain=0, original native state and original SC basal; also zero-extension/padded same-solver check and unmodified native class diagnostic",
+    "scenario_tracks": [
+      "native_zero",
+      "host_constant_basal",
+      "bc008_reference"
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "fasting",
+      "initial_gastric_solid_mg": 0
+    },
+    {
+      "id": "gastric_load_15g",
+      "initial_gastric_solid_mg": 15000
+    },
+    {
+      "id": "gastric_load_30g",
+      "initial_gastric_solid_mg": 30000
+    }
+  ],
+  "schema": "m4-secure-study-protocol/1",
+  "source_contract": {
+    "declaration_schema": "m4-causal-model/1",
+    "max_abs_state_derivative_pmol_kg_min2": 1000.0,
+    "max_rate_pmol_kg_min": 1000.0,
+    "preflight": "unchanged M4-CAUSAL/1 equilibrium and repeated out-of-order evaluation checks; a hash or these probes do not prove arbitrary callback purity or biological applicability",
+    "source_equilibrium_tolerance": 1e-12,
+    "state_count": 1,
+    "units": {
+      "basal": "host-owned BC-008 fraction 0.25 SC replacement and matched plasma insulin",
+      "causality": "only current time, native same-stage G and Gdot, current Z, Sb, h and declared numeric parameters",
+      "initial_state": "host-owned Z(0)=Sb",
+      "input_glucose_rate_unit": "mg/(dL min)",
+      "input_glucose_unit": "mg/dL",
+      "input_time_unit": "min",
+      "liver": "host-owned S=gamma*P into guarded native liver state only",
+      "model_purity": "no mutable hidden state or future glucose; adaptive solver may evaluate time repeatedly or out of order",
+      "output_pancreatic_rate_unit": "pmol/(kg min)",
+      "output_state_derivative_unit": "pmol/(kg min^2)",
+      "portal": "host-owned Pdot=Spo-gamma*P, P(0)=Sb/gamma",
+      "state_count": 1,
+      "state_unit": "pmol/(kg min)"
+    }
+  },
+  "specified_date": "2026-10-04"
+}

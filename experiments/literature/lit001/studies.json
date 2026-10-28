@@ -1,0 +1,307 @@
+{
+  "schema_version": "1.0",
+  "work_package": "LIT-001",
+  "as_of": "2026-09-20",
+  "studies": [
+    {
+      "study_id": "NCT01235039",
+      "data_lineage_id": "profil-lispro-116",
+      "source_ids": [
+        "faggionato2021",
+        "schiavon2018",
+        "nct01235039",
+        "heinemann2012"
+      ],
+      "model_article_study_number": 1,
+      "source_location": "Faggionato2021 section2.1.1, PDF p3; ethics codes PDF p15",
+      "site": "Profil Institute for Metabolic Research, Neuss, Germany",
+      "sponsor": "Biodel",
+      "sponsor_protocol_id": "VIAject -030J",
+      "population": "T1D",
+      "registry_age_eligibility": {
+        "min": "19 Years",
+        "max": "65 Years",
+        "sex": "ALL"
+      },
+      "adult_primary_scope": "Eligible by registry; individual records not verified",
+      "enrolled_actual": 43,
+      "analyzed_in_model": 42,
+      "completed_count": null,
+      "participant_exclusion_reason": "Not established; do not equate registered enrollment with model analyzed count",
+      "analyzed_visit": "Single conventional-lispro control administration; other formulation visits excluded from this lineage representation",
+      "control_product": "Insulin lispro",
+      "concentration_U_per_mL": 100,
+      "concentration_status": "Explicit100IU/mL in registry lispro intervention",
+      "dose": 12,
+      "dose_unit": "U",
+      "route": "subcutaneous",
+      "conditions": "Overnight fast; injection around noon; euglycemic clamp at about100mg/dL",
+      "sampling_time_min": [
+        0,
+        3,
+        7,
+        10,
+        15,
+        20,
+        25,
+        30,
+        45,
+        60,
+        90,
+        120,
+        150,
+        180,
+        210,
+        240,
+        300,
+        360,
+        420,
+        480
+      ],
+      "observation": "Plasma insulin concentration",
+      "observation_unit": "microU/mL",
+      "assay": "Lispro-specific radioimmunoassay",
+      "quantification_limit": 5,
+      "quantification_limit_unit": "microU/mL",
+      "assay_exclusions": "All below-quantification observations and very unreliable insulin-assay measurements discarded; per-person mask/count unavailable",
+      "population_summary": {
+        "age_years": {
+          "mean": 42,
+          "sd": 11
+        },
+        "weight_kg": {
+          "mean": 74,
+          "sd": 10
+        },
+        "height_cm": {
+          "mean": 175,
+          "sd": 8
+        }
+      },
+      "baseline_and_input_history": null,
+      "independent_validation_of_faggionato": false,
+      "overlap_between_constituent_trials": "No person-level IDs available for cross-trial deduplication; reported total116 retained as authors count, not independently verified uniqueness"
+    },
+    {
+      "study_id": "NCT02146651",
+      "data_lineage_id": "profil-lispro-116",
+      "source_ids": [
+        "faggionato2021",
+        "schiavon2018",
+        "nct02146651"
+      ],
+      "model_article_study_number": 2,
+      "source_location": "Faggionato2021 section2.1.2, PDF p3; ethics codes PDF p15",
+      "site": "Profil Institute for Metabolic Research, Neuss, Germany",
+      "sponsor": "Adocia",
+      "sponsor_protocol_id": "BC3-CT008",
+      "population": "T1D",
+      "registry_age_eligibility": {
+        "min": "18 Years",
+        "max": "64 Years",
+        "sex": "MALE"
+      },
+      "adult_primary_scope": "Eligible by registry; individual records not verified",
+      "enrolled_actual": 38,
+      "analyzed_in_model": 37,
+      "completed_count": null,
+      "participant_exclusion_reason": "Not established; do not equate registered enrollment with model analyzed count",
+      "analyzed_visit": "Single conventional-lispro control administration; other formulation visits excluded from this lineage representation",
+      "control_product": "Humalog",
+      "concentration_U_per_mL": null,
+      "concentration_status": "Not found in retrieved registry or Faggionato methods; no inference from brand",
+      "dose": 0.2,
+      "dose_unit": "U/kg",
+      "route": "subcutaneous",
+      "conditions": "Overnight fast; injection around noon; euglycemic clamp at about100mg/dL",
+      "sampling_time_min": [
+        0,
+        4,
+        8,
+        12,
+        16,
+        20,
+        25,
+        30,
+        35,
+        40,
+        45,
+        50,
+        55,
+        60,
+        70,
+        80,
+        90,
+        105,
+        120,
+        135,
+        150,
+        180,
+        210,
+        240,
+        300,
+        360,
+        420,
+        480,
+        540,
+        600,
+        660,
+        720
+      ],
+      "observation": "Plasma insulin concentration",
+      "observation_unit": "microU/mL",
+      "assay": "Radioimmunoassay for lispro levels; specificity details not given in checked summary",
+      "quantification_limit": 5.5,
+      "quantification_limit_unit": "microU/mL",
+      "assay_exclusions": "All below-quantification observations and very unreliable insulin-assay measurements discarded; per-person mask/count unavailable",
+      "population_summary": {
+        "age_years": {
+          "mean": 47,
+          "sd": 12
+        },
+        "weight_kg": {
+          "mean": 80,
+          "sd": 8
+        },
+        "height_cm": {
+          "mean": 180,
+          "sd": 5
+        }
+      },
+      "baseline_and_input_history": null,
+      "independent_validation_of_faggionato": false,
+      "overlap_between_constituent_trials": "No person-level IDs available for cross-trial deduplication; reported total116 retained as authors count, not independently verified uniqueness"
+    },
+    {
+      "study_id": "NCT02344992",
+      "data_lineage_id": "profil-lispro-116",
+      "source_ids": [
+        "faggionato2021",
+        "schiavon2018",
+        "nct02344992"
+      ],
+      "model_article_study_number": 3,
+      "source_location": "Faggionato2021 section2.1.3, PDF p3; ethics codes PDF p15",
+      "site": "Profil Institute for Metabolic Research, Neuss, Germany",
+      "sponsor": "Adocia",
+      "sponsor_protocol_id": "BC3-CT011",
+      "population": "T1D",
+      "registry_age_eligibility": {
+        "min": "18 Years",
+        "max": "64 Years",
+        "sex": "ALL"
+      },
+      "adult_primary_scope": "Eligible by registry; individual records not verified",
+      "enrolled_actual": 38,
+      "analyzed_in_model": 37,
+      "completed_count": null,
+      "participant_exclusion_reason": "Not established; do not equate registered enrollment with model analyzed count",
+      "analyzed_visit": "Single conventional-lispro control administration; other formulation visits excluded from this lineage representation",
+      "control_product": "Humalog",
+      "concentration_U_per_mL": null,
+      "concentration_status": "Not found in retrieved registry or Faggionato methods; no inference from brand",
+      "dose": 0.2,
+      "dose_unit": "U/kg",
+      "route": "subcutaneous",
+      "conditions": "Overnight fast; injection around noon; standardized meal to avoid hypoglycemia",
+      "sampling_time_min": [
+        0,
+        4,
+        8,
+        12,
+        16,
+        20,
+        25,
+        30,
+        35,
+        40,
+        45,
+        50,
+        55,
+        60,
+        70,
+        80,
+        90,
+        105,
+        120,
+        135,
+        150,
+        180,
+        210,
+        240,
+        270,
+        300,
+        360,
+        420,
+        480
+      ],
+      "observation": "Plasma insulin concentration",
+      "observation_unit": "microU/mL",
+      "assay": "Radioimmunoassay for lispro levels; specificity details not given in checked summary",
+      "quantification_limit": 5.6,
+      "quantification_limit_unit": "microU/mL",
+      "assay_exclusions": "All below-quantification observations and very unreliable insulin-assay measurements discarded; per-person mask/count unavailable",
+      "population_summary": {
+        "age_years": {
+          "mean": 44,
+          "sd": 13
+        },
+        "weight_kg": {
+          "mean": 81,
+          "sd": 10
+        },
+        "height_cm": {
+          "mean": 180,
+          "sd": 8
+        }
+      },
+      "baseline_and_input_history": null,
+      "independent_validation_of_faggionato": false,
+      "overlap_between_constituent_trials": "No person-level IDs available for cross-trial deduplication; reported total116 retained as authors count, not independently verified uniqueness"
+    },
+    {
+      "study_id": "graz-lispro-7",
+      "data_lineage_id": "graz-lispro-7",
+      "source_ids": [
+        "wilinska2005",
+        "wilinska2004thesis"
+      ],
+      "source_location": "Wilinska2005 sectionII.A, journal pp4-5, PDF pp2-3",
+      "site": "University Hospital, University of Graz, Austria",
+      "population": "T1D treated by CSII; nondetectable C-peptide",
+      "enrolled_actual": 7,
+      "analyzed_in_model": 7,
+      "adult_primary_scope": "Unresolved: mean age31.7±14.1 years reported but no range or individual ages; do not assume all≥18",
+      "age_years": {
+        "mean": 31.7,
+        "sd": 14.1
+      },
+      "sex_counts": {
+        "female": 4,
+        "male": 3
+      },
+      "product": "Humalog insulin lispro",
+      "concentration_U_per_mL": null,
+      "route": "subcutaneous abdominal cannula via D-Tron pump",
+      "conditions": "Six overnight-fasted8am starts; one postprandial7pm start; supine12h;40g carbohydrate meal with individual bolus",
+      "bolus_U_summary": {
+        "mean": 5.95,
+        "sd": 2.37
+      },
+      "variable_infusion_U_per_h_summary": {
+        "mean": 0.86,
+        "sd": 0.27
+      },
+      "sampling_interval_min": 30,
+      "observation": "Arterialised venous plasma insulin",
+      "assay": "Iso-Insulin ELISA, Mercodia, intra-assayCV<6%",
+      "error_model": "Authors used zero-mean proportional measurement error, CV6%; not a constant absolute SD",
+      "input_update_min": 15,
+      "exact_input_histories": null,
+      "initial_states": null,
+      "independent_validation": "Different historical study lineage from Profil; not a reserved validation set because its data selected and fitted its own model",
+      "overlap_notes": "2004 thesis and2005 journal describe same study; model numbering differs"
+    }
+  ],
+  "counting_rule": "Count primary studies and treatment arms separately from publications and participant visits. No independent116-person validation added by the2021 reanalysis."
+}

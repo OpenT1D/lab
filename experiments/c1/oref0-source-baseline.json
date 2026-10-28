@@ -1,0 +1,18 @@
+{
+  "schema": "opent1d.c1.oref0-source-baseline/1",
+  "kind": "OpenT1D-owned locked CLI fingerprint, not an upstream example or comparator qualification",
+  "source_commit": "88cf032aa74ff25f69464a7d9cd601ee3940c0b3",
+  "npm_lock_sha256": "a166a36b39a23125517a69492a6e8419296b3f47e74e032af136f2ec42d414a9",
+  "node_version": "v22.22.2",
+  "npm_version": "10.9.7",
+  "source_test_file_sha256": "aa7c7c544111f3737e09b58633f98ababd3a7c78b13ece9eb0f7bf690f1af866",
+  "source_core_tests_passing": 52,
+  "locked_cli_output_sha256": "0706e9660cf1b42a3390599f1acc2e661f418253589d24bea9d11fd881634ec1",
+  "locked_cli_action": {
+    "rate_u_hour": 1,
+    "duration_min": 30,
+    "insulin_req_u": 0
+  },
+  "upstream_committed_example_sha256": "b976801e72fa5930186f9c07675636dd6b0056a777db3cd17710c1d6944282b0",
+  "upstream_committed_example_parity": false
+}

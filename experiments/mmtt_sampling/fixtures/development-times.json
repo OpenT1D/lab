@@ -1,0 +1,50 @@
+[
+  {
+    "participant_id": "invented-development-01",
+    "visit_id": "baseline",
+    "times_minutes": [
+      0,
+      15,
+      30,
+      60,
+      90,
+      120
+    ]
+  },
+  {
+    "participant_id": "invented-development-01",
+    "visit_id": "followup",
+    "times_minutes": [
+      0,
+      15,
+      30,
+      60,
+      90,
+      120
+    ]
+  },
+  {
+    "participant_id": "invented-development-02",
+    "visit_id": "baseline",
+    "times_minutes": [
+      0,
+      15,
+      30,
+      60,
+      90,
+      120
+    ]
+  },
+  {
+    "participant_id": "invented-development-02",
+    "visit_id": "followup",
+    "times_minutes": [
+      0,
+      15,
+      30,
+      60,
+      90,
+      120
+    ]
+  }
+]

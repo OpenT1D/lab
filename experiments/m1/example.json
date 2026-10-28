@@ -1,0 +1,7 @@
+{
+  "schema": "opent1d.simglucose/1",
+  "profile": "adult#001",
+  "seed": 101,
+  "controller": "basal_bolus",
+  "condition": "A"
+}

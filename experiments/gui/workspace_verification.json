@@ -1,0 +1,304 @@
+{
+  "date": "2026-10-04",
+  "final_repository_check": {
+    "command": "uv run --locked python scripts/check.py",
+    "duration_seconds": 156.527,
+    "frozen_sources_unchanged": true,
+    "gui_control_count": 15,
+    "log": {
+      "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/final-repository-check.log",
+      "sha256": "76948219b2d8a81ffcb518ed5c51c15a47a15e88549ca59f72ff61fbb7c0c761"
+    },
+    "passed": true,
+    "scientific_source_count": 112,
+    "scope": "Clean final code/evidence/guide candidate; subsequent check-record commit changes only verification prose and machine metadata.",
+    "skipped": 13,
+    "tested_revision": "394ccb34e48eec5836fa90c3d2b6d9e5d44813c5",
+    "tests": 1127
+  },
+  "goal1": {
+    "accepted_slots": 4,
+    "accepted_source_scenarios": 8,
+    "browser_library": {
+      "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/browser-library-proof.json",
+      "sha256": "4aa7917f228b9a53a570185fa7561c9f6cf04dfab867aa5b6334cd7c0b1c9fb0"
+    },
+    "compatible_reader": {
+      "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal1-compatible-reader.json",
+      "sha256": "72f17e3e53938b47b6b0bdf3130ce29c5f3ed1b3b5b8b145e006ab9b6772b868"
+    },
+    "failed_source_and_deadline": {
+      "assertions": {
+        "deadline": {
+          "accepted_slots": 0,
+          "archive_unchanged": true,
+          "full_roster_retained": true,
+          "passed": true,
+          "planned_source_scenarios": 2,
+          "retained_native_denominators": {
+            "accepted_pairs": 0,
+            "accepted_source_scenarios": 0,
+            "accepted_sources": 0,
+            "pairs": 1,
+            "source_scenarios": 2,
+            "sources": 2
+          },
+          "stdlib_failed_reconstruction_exact": true
+        },
+        "nonfinite": {
+          "accepted_slots": 0,
+          "archive_unchanged": true,
+          "full_roster_retained": true,
+          "passed": true,
+          "planned_source_scenarios": 3,
+          "retained_native_denominators": {
+            "accepted_pairs": 1,
+            "accepted_source_scenarios": 2,
+            "accepted_sources": 2,
+            "pairs": 3,
+            "source_scenarios": 3,
+            "sources": 3
+          },
+          "stdlib_failed_reconstruction_exact": true
+        }
+      },
+      "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/campaign-proof-negative-v2/acceptance.json",
+      "scope": "isolated nonfinite/deadline assertions; no positive campaign phase dispatched here",
+      "sha256": "69b21395411d983aa109d931ef53b30a2bd985902f1acc5a62b136945f874baa"
+    },
+    "final_gui_checks": {
+      "command": "uv run --locked python -m unittest discover -s tests -p 'test*gui*.py' -q",
+      "passed": true,
+      "tests": 50
+    },
+    "intermediate_repository_check": {
+      "command": "uv run --locked python scripts/check.py",
+      "log": {
+        "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal1-repository-check-v2.log",
+        "sha256": "d5618f94ce489592e2ea4990011319531e3236dcb99085721f3e6b5f085c9f8f"
+      },
+      "passed": true,
+      "scope": "Intermediate Goal1 full check; later GUI fixes separately covered by 50 focused tests.",
+      "skipped": 13,
+      "tests": 1087
+    },
+    "library_worker": {
+      "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/library-acceptance.json",
+      "sha256": "53192acf6b9fb3c81745d4cd40b06a6e7f309e4a3f4c4202bc731d8251aafd2b"
+    },
+    "native_control_grid_points": 961,
+    "native_gate": {
+      "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal1-acceptance.json",
+      "sha256": "f5bc0cba8a9de8e06202445269e789ab45b29998f7d4a30bf55d101442f950e8"
+    },
+    "original_evidence_unchanged": true,
+    "passed": true,
+    "planned_slots": 4,
+    "planned_source_scenarios": 8,
+    "retained_attempts": 5,
+    "reviewed_revision": "424431d5737a5127405e0afe20221dca3b1946c5",
+    "scientific_freeze": {
+      "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal1-scientific-freeze-v2.json",
+      "sha256": "b6c594248842dab72d8971351bc374c6e918b92dee3bd024013dd3b681a1e664"
+    },
+    "scientific_freeze_revision": "ffccd405496eccc8c1d26139d8ced7bcfaa9939e",
+    "scientific_source_count": 112,
+    "session_schedule": [
+      4,
+      3,
+      0
+    ],
+    "stdlib_json_markdown_exact": true
+  },
+  "goal2": {
+    "accepted_slots": 2,
+    "accepted_source_scenarios": 4,
+    "browser_campaign": {
+      "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/browser-campaign-proof.json",
+      "sha256": "8ad675983f0e0d5c476731dda1fe43a57169467988838ec73c3eacc13d20dbf7"
+    },
+    "byte_identical_gui_cli_scientific_files": 178,
+    "final_cli_archive_files": 596,
+    "final_gui_archive_files": 1402,
+    "finalization_proof": {
+      "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal2-finalization-proof.json",
+      "sha256": "af916c10437239cb380ea0b81b2e2c9756ea362eea71eb92cdbc4676747b6eca"
+    },
+    "finalization_revision": "492ae87",
+    "forced_cleanup": false,
+    "fresh_cli_campaign": {
+      "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal2-cli-receipt.json",
+      "sha256": "dc8e49582e615b1e0386b86696fc614740c9af5ebba30de4cc1b62b9968a875e"
+    },
+    "full_gui_cli_scientific_report_equal": true,
+    "gui_cli_parity": {
+      "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal2-gui-cli-parity.json",
+      "sha256": "bc7216b958d58b4ef04d5c6082eca348594528c02edbcd715b157d0cb572e795"
+    },
+    "gui_control_count": 15,
+    "native_gate": {
+      "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal2-independent-acceptance.json",
+      "sha256": "ab83244ea5864eb3440f0993aa4623f534722f496e5d3c130404089c99e1c8ed"
+    },
+    "no_observed_owned_process_survived": true,
+    "original_evidence_unchanged": true,
+    "passed": true,
+    "planned_slots": 2,
+    "planned_source_scenarios": 4,
+    "repository_check": {
+      "command": "uv run --locked python scripts/check.py",
+      "duration_seconds": 167.476,
+      "log": {
+        "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal2-repository-check.log",
+        "sha256": "00aa0f463e5b7b640fe1a4e349af4cec22632f186cd0518a969e86b545ff88d5"
+      },
+      "passed": true,
+      "scope": "Clean integrated scientific/GUI candidate; evidence and guide follow-up preserves all112+15 source hashes.",
+      "skipped": 13,
+      "tested_revision": "4e849065386b356c0005676da8a9b44667478dab",
+      "tests": 1127
+    },
+    "resumed_reconstruction": {
+      "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal2-gui-resume-acceptance.json",
+      "sha256": "515135c634ab15a4cd76728bc87cad6bb8de76cb8875f23059a5eefd0252a7b0"
+    },
+    "retained_attempts": 3,
+    "reviewed_revision": "4e849065386b356c0005676da8a9b44667478dab",
+    "scientific_freeze": {
+      "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal2-scientific-freeze.json",
+      "sha256": "ef112366619fa43f90a5eadd9aeecb6cbed6ee2a1c8642c062e218756fc5b9d3"
+    },
+    "scientific_source_count": 112,
+    "session_schedule": [
+      2,
+      1
+    ],
+    "status": "internally_verified",
+    "stdlib_json_markdown_exact": true
+  },
+  "hosted_verification": "not_run_actions_minutes_exhausted",
+  "independent_human_gui_use": "not_performed",
+  "limits": [
+    "Internal synthetic software verification; no biological or clinical validation.",
+    "Process cleanup covers observed descendants identified by OS start identity.",
+    "Source Python is trusted local researcher code.",
+    "Historical protocols, equations and locks retain their original evidence and compatible readers."
+  ],
+  "main_integration": {
+    "date": "2026-10-04",
+    "gui_controls_unchanged": true,
+    "hosted_verification": "pending_actions_minutes_exhausted",
+    "integrated_revision": "9b311fd582d7113f73d258113d157b4c27ecaad6",
+    "method": "fast_forward",
+    "previous_main": "70799f36fa93fc47b66a083dc773ed2af8bb9f9d",
+    "prior_evidence_availability": {
+      "original_integration_worktree_present": false,
+      "prior_raw_receipts_rehashed": false,
+      "references": [
+        {
+          "available_at_publication": false,
+          "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/final-repository-check.log",
+          "recorded_sha256": "76948219b2d8a81ffcb518ed5c51c15a47a15e88549ca59f72ff61fbb7c0c761"
+        },
+        {
+          "available_at_publication": false,
+          "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/browser-library-proof.json",
+          "recorded_sha256": "4aa7917f228b9a53a570185fa7561c9f6cf04dfab867aa5b6334cd7c0b1c9fb0"
+        },
+        {
+          "available_at_publication": false,
+          "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal1-compatible-reader.json",
+          "recorded_sha256": "72f17e3e53938b47b6b0bdf3130ce29c5f3ed1b3b5b8b145e006ab9b6772b868"
+        },
+        {
+          "available_at_publication": false,
+          "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/campaign-proof-negative-v2/acceptance.json",
+          "recorded_sha256": "69b21395411d983aa109d931ef53b30a2bd985902f1acc5a62b136945f874baa"
+        },
+        {
+          "available_at_publication": false,
+          "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal1-repository-check-v2.log",
+          "recorded_sha256": "d5618f94ce489592e2ea4990011319531e3236dcb99085721f3e6b5f085c9f8f"
+        },
+        {
+          "available_at_publication": false,
+          "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/library-acceptance.json",
+          "recorded_sha256": "53192acf6b9fb3c81745d4cd40b06a6e7f309e4a3f4c4202bc731d8251aafd2b"
+        },
+        {
+          "available_at_publication": false,
+          "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal1-acceptance.json",
+          "recorded_sha256": "f5bc0cba8a9de8e06202445269e789ab45b29998f7d4a30bf55d101442f950e8"
+        },
+        {
+          "available_at_publication": false,
+          "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal1-scientific-freeze-v2.json",
+          "recorded_sha256": "b6c594248842dab72d8971351bc374c6e918b92dee3bd024013dd3b681a1e664"
+        },
+        {
+          "available_at_publication": false,
+          "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/browser-campaign-proof.json",
+          "recorded_sha256": "8ad675983f0e0d5c476731dda1fe43a57169467988838ec73c3eacc13d20dbf7"
+        },
+        {
+          "available_at_publication": false,
+          "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal2-finalization-proof.json",
+          "recorded_sha256": "af916c10437239cb380ea0b81b2e2c9756ea362eea71eb92cdbc4676747b6eca"
+        },
+        {
+          "available_at_publication": false,
+          "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal2-cli-receipt.json",
+          "recorded_sha256": "dc8e49582e615b1e0386b86696fc614740c9af5ebba30de4cc1b62b9968a875e"
+        },
+        {
+          "available_at_publication": false,
+          "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal2-gui-cli-parity.json",
+          "recorded_sha256": "bc7216b958d58b4ef04d5c6082eca348594528c02edbcd715b157d0cb572e795"
+        },
+        {
+          "available_at_publication": false,
+          "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal2-independent-acceptance.json",
+          "recorded_sha256": "ab83244ea5864eb3440f0993aa4623f534722f496e5d3c130404089c99e1c8ed"
+        },
+        {
+          "available_at_publication": false,
+          "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal2-repository-check.log",
+          "recorded_sha256": "00aa0f463e5b7b640fe1a4e349af4cec22632f186cd0518a969e86b545ff88d5"
+        },
+        {
+          "available_at_publication": false,
+          "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal2-gui-resume-acceptance.json",
+          "recorded_sha256": "515135c634ab15a4cd76728bc87cad6bb8de76cb8875f23059a5eefd0252a7b0"
+        },
+        {
+          "available_at_publication": false,
+          "path": "WORKTREES/experiment-workspace-integration/OpenT1D/results/experiment-workspace/goal2-scientific-freeze.json",
+          "recorded_sha256": "ef112366619fa43f90a5eadd9aeecb6cbed6ee2a1c8642c062e218756fc5b9d3"
+        }
+      ],
+      "scope": "Historical receipt identities remain recorded; their ignored files are unavailable at the original worktree paths. This publication rechecks current Git/source identity and repository software, without rerunning native numerical campaigns."
+    },
+    "repository_check": {
+      "command": "uv sync --locked; uv run --locked python scripts/check.py",
+      "duration_seconds": 159.204,
+      "log": {
+        "path": "REPOSITORY/results/experiment-workspace-publication/main-check.log",
+        "sha256": "8e280607174bfe1c31ca8347388d1dbee55dae43345557d4004a6e1662afc28d"
+      },
+      "passed": true,
+      "skipped": 13,
+      "tested_revision": "9b311fd582d7113f73d258113d157b4c27ecaad6",
+      "tests": 1127
+    },
+    "scientific_sources_unchanged": true,
+    "scope": "The publication follow-up changes only evidence text and machine metadata; remote main publication is confirmed separately at task completion.",
+    "source_identity": {
+      "path": "REPOSITORY/results/experiment-workspace-publication/source-identity.json",
+      "sha256": "7d56370a10b9370acd7ed09c17eb875c08ec5720f3c43d3f6a3c93185d7f9902"
+    },
+    "user_requested": true
+  },
+  "main_publication": "integrated_into_main_by_user_request",
+  "schema": "opent1d.experiment-workspace-verification/1",
+  "status": "goals1_and2_internally_verified"
+}

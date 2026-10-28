@@ -1,0 +1,10 @@
+{
+  "schema": "m4-initial-load-config/1",
+  "sources": [
+    {"id": "dalla_man", "model": "../causal_secretion/example_model.py", "declaration": "../causal_secretion/example_model.json"},
+    {"id": "ultradian", "model": "../ultradian_secretion/model.py", "declaration": "../ultradian_secretion/model.json"}
+  ],
+  "scenarios": ["fasting", "gastric_load_15g", "gastric_load_30g"],
+  "timeout_seconds": 600,
+  "source_timeout_seconds": 3600
+}

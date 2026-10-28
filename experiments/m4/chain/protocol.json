@@ -1,0 +1,133 @@
+{
+  "schema": "bc007-protocol/1",
+  "id": "BC-007/1",
+  "base_commit": "f96fe29",
+  "specified_before_execution": true,
+  "claim": "synthetic_prescribed_glucose_to_paired_kinetics",
+  "source": {
+    "protocol": "BC-001/1",
+    "model": "pedersen-cobelli-2013-reduced/1",
+    "protocol_sha256": "4fd9ece0b4c80149e69fcec2c7de6e4ef80cf5a14744df857f4d16aeada10bff",
+    "initialization": "unchanged_literal_paper",
+    "field": "secretion_ug_per_min",
+    "primary_sample_step_min": 0.25,
+    "refinement_steps_min": [
+      0.25,
+      0.125,
+      0.0625
+    ]
+  },
+  "boundary": {
+    "protocol_sha256": "00938c5e5a4b8536b40ced817bb07b883a6401bd96dd651a747664d74279f405",
+    "body_weight_kg": 102.32,
+    "insulin_molar_mass_g_mol": 5808.0,
+    "molar_ratio_cpeptide_insulin": 1.0,
+    "route": "liver",
+    "source_interpretation": "uncalibrated_whole_body_evoked_mass",
+    "basal_pmol_min": 153.48,
+    "baseline_policy": "fixed_separate_synthetic_basal_not_scaled_by_evoked_gain",
+    "interpolation": "piecewise_linear_no_extrapolation"
+  },
+  "horizon_min": 100.0,
+  "sample_step_min": 0.25,
+  "cases": [
+    {
+      "id": "zero_increment",
+      "evoked_gain": 0,
+      "basal": false,
+      "shape": "source"
+    },
+    {
+      "id": "half_increment",
+      "evoked_gain": 0.5,
+      "basal": false,
+      "shape": "source"
+    },
+    {
+      "id": "full_increment",
+      "evoked_gain": 1,
+      "basal": false,
+      "shape": "source"
+    },
+    {
+      "id": "full_synthetic_total",
+      "evoked_gain": 1,
+      "basal": true,
+      "shape": "source"
+    },
+    {
+      "id": "basal_only",
+      "evoked_gain": 0,
+      "basal": true,
+      "shape": "source"
+    },
+    {
+      "id": "matched_constant_increment",
+      "evoked_gain": 1,
+      "basal": false,
+      "shape": "equal_amount_constant"
+    }
+  ],
+  "solvers": [
+    {
+      "name": "tight",
+      "method": "RK45",
+      "rtol": 1e-09,
+      "atol": 1e-11,
+      "max_step": 0.25
+    },
+    {
+      "name": "reference",
+      "method": "DOP853",
+      "rtol": 1e-11,
+      "atol": 1e-13,
+      "max_step": 0.125
+    }
+  ],
+  "criteria": {
+    "oracle_state_error_pmol_kg": 1e-07,
+    "solver_concentration_error_pmol_l": 1e-05,
+    "mass_error_pmol_kg": 1e-07,
+    "input_error_pmol_kg": 1e-07,
+    "negative_tolerance_pmol_kg": 1e-09,
+    "superposition_error_pmol_kg": 1e-07,
+    "gain_linearity_error_pmol_kg": 1e-07,
+    "equilibrium_error_pmol_kg": 1e-08,
+    "paired_input_error": 0,
+    "conversion_relative_error": 1e-12,
+    "equal_amount_error_pmol_kg": 1e-10,
+    "source_nested_sample_error_ug_min": 1e-10,
+    "fine_sampling_error_pmol_l": 0.01,
+    "sampling_error_ratio": 0.35,
+    "source_integral_refinement_relative_error": 0.0001,
+    "legacy_zero_initial_error": 0,
+    "repeat_error": 0
+  },
+  "runtime": {
+    "insulin": {
+      "project": "experiments/m0/simglucose",
+      "numpy": "1.26.4",
+      "scipy": "1.13.1"
+    },
+    "cpeptide": {
+      "project": "experiments/m4/beta_cell/runtime",
+      "numpy": "2.2.6",
+      "scipy": "1.15.3"
+    }
+  },
+  "references": [
+    "Pedersen-Cobelli 2013 doi:10.1098/rsfs.2012.0085; BC001 and BC006 scope",
+    "Dalla Man 2007 doi:10.1109/TBME.2007.893506; pinned simglucose BC002/005",
+    "Polonsky 1986 doi:10.1172/JCI112308; BC003/004 nominal kinetics"
+  ],
+  "excluded": [
+    "glucose feedback",
+    "change to BC001 initialization or reduced equations",
+    "human or graft calibration",
+    "endogenous basal estimate",
+    "source observation multiplier 0.5",
+    "therapy effects",
+    "human identifiability",
+    "OT026 completion"
+  ]
+}

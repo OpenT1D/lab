@@ -1,0 +1,28 @@
+{
+  "protocol": "OT-001",
+  "version": "1.0",
+  "scope": "M1 implementation contract; not an executed controller comparison",
+  "upstream_revision": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc",
+  "development_profiles": ["adult#001", "adult#002"],
+  "evaluation_profiles": ["adult#003", "adult#004", "adult#005", "adult#006", "adult#007", "adult#008", "adult#009", "adult#010"],
+  "start": "2024-07-20T00:00:00",
+  "duration_minutes": 2880,
+  "warmup_minutes": 1440,
+  "outer_interval_minutes": 3,
+  "sensor": "Dexcom",
+  "pump": "Insulet",
+  "daily_meals_hours_grams": [[7, 45], [12, 70], [16, 15], [18, 80], [23, 10]],
+  "development_sensor_seeds": [101, 102, 103, 104, 105, 106, 107, 108, 109, 110],
+  "evaluation_sensor_seeds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+  "basal_bolus": {"target": 140, "profile_parameters": "pinned Quest CR/CF and vpatient u2ss/BW; basal = u2ss * BW / 6000 U/min"},
+  "pid": {"P": 0.001, "I": 0.00001, "D": 0.001, "target": 140, "reset": "upstream zero integral and previous observation; no reset at warmup boundary"},
+  "conditions": {
+    "A": {"announcement_fraction": 1.0, "sensor_dropout": null},
+    "B": {"announcement_fraction": 0.0, "sensor_dropout": null},
+    "C": {"announcement_fraction": 0.5, "sensor_dropout": null},
+    "D": {"announcement_fraction": 1.0, "sensor_dropout": {"start_elapsed_minutes": 2160, "end_elapsed_minutes": 2190, "interval": "start-inclusive end-exclusive", "policy": "mask after generation; controller holds last available value; announcements arrive once"}}
+  },
+  "native_glucose_terminal_flags_mg_dL": {"below": 10, "above": 600},
+  "same_environment_adapter_comparison": "exact timestamps, events, native values and status; no tolerance loosening",
+  "cross_platform_comparison": "diagnostic differences only; no universal tolerance established"
+}

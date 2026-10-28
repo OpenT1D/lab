@@ -1,0 +1,456 @@
+{
+  "schema": "bc005-execution/1",
+  "status": "completed_synthetic_paired_kinetics",
+  "base_commit": "c9008d8",
+  "run_path": "results/m4-paired-kinetics/reference-01",
+  "protocol_sha256": "4355754f024f04b080732b5b74b33c83ca71232cf0cfad55a9beb7f82ae656e0",
+  "manifest": {
+    "schema": "bc005-run/1",
+    "implementation": "bc005-paired-kinetics/1",
+    "status": "completed",
+    "started_utc": "2026-09-20T09:31:41.812762+00:00",
+    "parent_python": "3.12.13",
+    "files": {
+      "boundary/manifest.json": "98d152892765f5591bcbc270c496093ae8184bde05e73df960c481e1950ce705",
+      "boundary/preflight.json": "12485036567b0bc8de140f6f752817efd7ac1efc7ff449d648509d8d660cf945",
+      "boundary/protocol.json": "00938c5e5a4b8536b40ced817bb07b883a6401bd96dd651a747664d74279f405",
+      "boundary/root-pyproject.toml": "e4af0618d9a65625486fd760f76471c75876f20060ddaf75905505d231a557b6",
+      "boundary/root-uv.lock": "a44e7cac7edf13bbc37b71a92b61aa3d7545e85aa88dafe41ed8a78d34b56a35",
+      "boundary/source-contract.py": "eb422ce11a75840082801f8321fd10c7236509f71b7792ab83032e061b5f386d",
+      "boundary/source-forcing.py": "b26fd2fd87aa47da328d24b2cbe56d8e3be45f9b4caf2c3c453f89acb07fddd1",
+      "boundary/source-run.py": "a342e45ab3fc5218033d244d870bd2c9cd8a12099a5053b66f250b2c4b761f84",
+      "boundary/source-test.py": "0f54fa4b4a3614f94aaa3d28e545e9729bc4ea5d820a08a23bc1956d43a16334",
+      "cpeptide/basal_only.json": "a7d9144782ce32687b0d7f189a167494cabd76a947ba6e788b4f4ebcbbe90352",
+      "cpeptide/communication.json": "089b72dfb03e589a3e62c7935a69d5ab60fd4fdb4db98db7aee7fec643949f5f",
+      "cpeptide/mass_ramp_increment.json": "553ca0709eba4bf3aecd6abf28c307f103c642e61345b94bd463885672903d60",
+      "cpeptide/pulse_increment.json": "bf1265043bda029508e6c1ae00848ad16d151a4d57e3addc9fc26162ed4eacee",
+      "cpeptide/pulse_synthetic_total.json": "284ba3eb6ed31e001414eb3da1e935966ae9866470b638d2cfb32099bf1f274f",
+      "cpeptide/washout.json": "61a13c09b9fcf4dd21e6e6e5b0f5203e4d7c17d86ef177d864191e94dc05f664",
+      "cpeptide/worker.json": "2ff071d78b40fb12918c4b32fbc4c437bee71c1c59d8ac815f5b2b4ef4941aa7",
+      "cpeptide/zero_increment.json": "ec3768d3c5f3e8b0955642af1c5f097b9d9397c29499d6d67eda4a1c71e6d78f",
+      "cpeptide-pyproject.toml": "7c69b6f63a48d72f927c0253b68492de1ac60700d0549744de1207709732d3c5",
+      "cpeptide-uv.lock": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04",
+      "cpeptide.log": "7940df2d48fd2179b1106bdc6442cdc5614dc451a23c7cf60099e21f10c1ce5a",
+      "figure.svg": "f02243e2c5841f447030c9c0611ab3ce6e31fd358f5151a065f63587a0972c3d",
+      "insulin/basal_only.json": "44ffe71bcb8d5165c64cfab0a87b31e2ed5b84ae5db20b8a5885817117c6d206",
+      "insulin/communication.json": "0b2f97e49fb5dab01158c2f5e460044d4251ad06f8d537f843c8a4e8892e773b",
+      "insulin/mass_ramp_increment.json": "f4b2ae7cc26072e8d98b9758668c514d292133bf0a464439853528279a7b2252",
+      "insulin/pulse_increment.json": "3379a7779e78ee6f416c35232e7ebb7a0add80437aa5f41e1f2248b3f45f5812",
+      "insulin/pulse_synthetic_total.json": "2dbe04d57b370bbbfbdaf18b51876596abf1a28415310ae20f52de18800809d5",
+      "insulin/washout.json": "2a610bdefce8fbaf0e4bb23fc245242ee0018cf7f94c1c9be5b505bfac750a42",
+      "insulin/worker.json": "9f1e46df0036b88ebcfdadb9c44242703d67afefd12192645dc048e786bb5e47",
+      "insulin/zero_increment.json": "f4b06fcdc8a670e637f701995d2406708edc1b64523c8d0e925cdd0727c8d8e6",
+      "insulin-pyproject.toml": "107d7792bf6e99575e6b30f3639376059d5f9323bc8dedfd09c82824613c8cd5",
+      "insulin-uv.lock": "634d5849a1cc4ae37f4f00c12c713f168cffa93a43d5a22b571b0c41478fc95c",
+      "insulin.log": "21a05ac6aff336514ec786b2766c1149064a522e3ec81b231654348d13becf33",
+      "plot.log": "7940df2d48fd2179b1106bdc6442cdc5614dc451a23c7cf60099e21f10c1ce5a",
+      "protocol.json": "4355754f024f04b080732b5b74b33c83ca71232cf0cfad55a9beb7f82ae656e0",
+      "report.json": "4224b8fd8585c07a92cb11be130e51c6ee5b6d9ff0df3720f4cd27acd2f45acc",
+      "source-common.py": "0d55ab114cf6381e2837670dd2b17b50a7109a0643bce756f2bd31d06209a12d",
+      "source-experiments__m4__c_peptide__model.py": "f46453669c17d98c4dc90eec6613641d32e222c2a3dd012709ca30e6868673ae",
+      "source-experiments__m4__c_peptide__reference.py": "29efbcdd7065387f0089ff8704916fee48cd24237529137a5350e8886559c992",
+      "source-experiments__m4__kinetic_inlet__forcing.py": "b26fd2fd87aa47da328d24b2cbe56d8e3be45f9b4caf2c3c453f89acb07fddd1",
+      "source-experiments__m4__kinetic_inlet__native.py": "aaa6a921643bf6ec82fde84d53193c8ab9c9cdbe1b69de634089f652cb4b14dd",
+      "source-experiments__m4__kinetic_inlet__oracle.py": "67c80ba4dafacc515f9d98cade58f2bc9b1f6daf95747acbe22625f99720155d",
+      "source-experiments__m4__kinetic_inlet__protocol.json": "ac2754f1718bcad7977d3332685abc8bb9a281056e5475d78ab7d7364b9df3dc",
+      "source-experiments__m4__paired_observation__contract.py": "eb422ce11a75840082801f8321fd10c7236509f71b7792ab83032e061b5f386d",
+      "source-experiments__m4__paired_observation__run.py": "a342e45ab3fc5218033d244d870bd2c9cd8a12099a5053b66f250b2c4b761f84",
+      "source-insulin.py": "cbde74d4dce6f20f39e706d51b8bf477d098b1a5aca212be6d532e31ae8d56e0",
+      "source-oracle.py": "4262e65df8501ac7ea067513fe1148c1d6ca94c6df8dfbe71506f375d29538df",
+      "source-plot.py": "0296b1e94d296cebd06c511a7be58a76cde36b07df95fbae28a08f759f63fd9e",
+      "source-report.py": "1826c8248c02347b381b3943c7c04f949a5867dd4e701b4ada1100830e5749fd",
+      "source-run.py": "0a9e634cf8c8a42a7067367f17fe8be81b8c6cf43c142e34d56d1c5d1d1b0ef7",
+      "source-test_cpeptide.py": "ec3de08385ae81dc501b38b8c2446014e2ed30329312cc561ae0be75d9c7ff37",
+      "source-test_insulin.py": "bcb303cb5ff90f860d25969f1aab44fb871331e57784068c6e98a19eb970ffa4",
+      "source-worker.py": "16b23fb21a20b6b7d35d3094ebbe9e876f665c6e6fdc02af7701278fc5daff86"
+    },
+    "git_head": "c9008d809caa4685e8c198c6930db2f86a4e815c",
+    "git_dirty": true,
+    "commands": [
+      [
+        "uv",
+        "run",
+        "--locked",
+        "--project",
+        "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose",
+        "python",
+        "-m",
+        "experiments.m4.paired_kinetics.worker",
+        "/private/tmp/opent1d-beta-cell-reference/results/m4-paired-kinetics/reference-01",
+        "--branch",
+        "insulin"
+      ],
+      [
+        "uv",
+        "run",
+        "--locked",
+        "--project",
+        "/private/tmp/opent1d-beta-cell-reference/experiments/m4/beta_cell/runtime",
+        "python",
+        "-m",
+        "experiments.m4.paired_kinetics.worker",
+        "/private/tmp/opent1d-beta-cell-reference/results/m4-paired-kinetics/reference-01",
+        "--branch",
+        "cpeptide"
+      ]
+    ],
+    "finished_utc": "2026-09-20T09:31:49.571069+00:00"
+  },
+  "report": {
+    "schema": "bc005-report/1",
+    "protocol": "BC-005/1",
+    "implementation": "bc005-paired-kinetics/1",
+    "passed": true,
+    "branches": {
+      "insulin": {
+        "metadata": {
+          "schema": "bc005-worker/1",
+          "status": "completed",
+          "implementation": "bc005-paired-kinetics/1",
+          "branch": "insulin",
+          "runtime": {
+            "python": "3.12.13",
+            "numpy": "1.26.4",
+            "scipy": "1.13.1"
+          },
+          "native_identity": {
+            "upstream_revision": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc",
+            "package_version": "0.2.11",
+            "profile": "adult#001",
+            "patient_file_sha256": "7ad1302fbf064805e2294bbcffd482e55448e37e48b63e629a1ed7f11c701547",
+            "parameter_file_sha256": "662f3b684d160fdf485edd1d7196dd1cd85c14b53650b030fdb86aaa05bb2e50",
+            "patient_file": "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose/.venv/lib/python3.12/site-packages/simglucose/patient/t1dpatient.py",
+            "parameter_file": "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose/.venv/lib/python3.12/site-packages/simglucose/params/vpatient_params.csv",
+            "body_weight_kg": 102.32,
+            "kinetic_parameters": {
+              "BW": 102.32,
+              "Vi": 0.054906,
+              "m1": 0.15446,
+              "m2": 0.225027424083,
+              "m30": 0.23169,
+              "m4": 0.090010969633
+            }
+          },
+          "state_order": [
+            "Ip",
+            "Il",
+            "hepatic_loss",
+            "peripheral_loss",
+            "input"
+          ],
+          "volume_l_kg": 0.054906
+        },
+        "cases": {
+          "zero_increment": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 0.0,
+              "concentration_error_pmol_l": 0.0,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 0,
+              "input_error_pmol_kg": 0,
+              "negative_tolerance_pmol_kg": 0,
+              "legacy_zero_initial_error": 0.0
+            },
+            "passed": true,
+            "peak_sampled_concentration_pmol_l": 0.0,
+            "initial_concentration_pmol_l": 0.0,
+            "final_concentration_pmol_l": 0.0,
+            "final_delivered_pmol_kg": 0.0,
+            "coarse_reference_concentration_error_pmol_l": 0.0
+          },
+          "pulse_increment": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 3.126388037344441e-13,
+              "concentration_error_pmol_l": 8.512953816419628e-08,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 5.400124791776761e-13,
+              "input_error_pmol_kg": 4.263256414560601e-14,
+              "negative_tolerance_pmol_kg": 0,
+              "legacy_zero_initial_error": 0.0
+            },
+            "passed": true,
+            "peak_sampled_concentration_pmol_l": 274.73418888057216,
+            "initial_concentration_pmol_l": 0.0,
+            "final_concentration_pmol_l": 8.606571799730652e-13,
+            "final_delivered_pmol_kg": 180.0,
+            "coarse_reference_concentration_error_pmol_l": 0.0008989566420512262
+          },
+          "pulse_synthetic_total": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 1.5916157281026244e-12,
+              "concentration_error_pmol_l": 9.46941258998917e-08,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 1.673328142715036e-12,
+              "input_error_pmol_kg": 1.1368683772161603e-13,
+              "negative_tolerance_pmol_kg": 0
+            },
+            "passed": true,
+            "peak_sampled_concentration_pmol_l": 323.2961252829885,
+            "initial_concentration_pmol_l": 48.56193640241637,
+            "final_concentration_pmol_l": 48.56193640241728,
+            "final_delivered_pmol_kg": 539.9999999999999,
+            "coarse_reference_concentration_error_pmol_l": 0.0011482942562750474
+          },
+          "mass_ramp_increment": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 6.252776074688882e-13,
+              "concentration_error_pmol_l": 9.484272180859686e-10,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 4.547473508864641e-13,
+              "input_error_pmol_kg": 3.979039320256561e-13,
+              "negative_tolerance_pmol_kg": 0,
+              "legacy_zero_initial_error": 0.0
+            },
+            "passed": true,
+            "peak_sampled_concentration_pmol_l": 273.8550578225279,
+            "initial_concentration_pmol_l": 0.0,
+            "final_concentration_pmol_l": 273.8550578225279,
+            "final_delivered_pmol_kg": 293.1978107896798,
+            "coarse_reference_concentration_error_pmol_l": 2.8351342570625123e-05
+          },
+          "basal_only": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 1.404032445861958e-11,
+              "concentration_error_pmol_l": 0.0,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 1.503863700236252e-11,
+              "input_error_pmol_kg": 3.552713678800501e-15,
+              "negative_tolerance_pmol_kg": 0,
+              "equilibrium_error_pmol_kg": 0.0
+            },
+            "passed": true,
+            "peak_sampled_concentration_pmol_l": 48.56193640241637,
+            "initial_concentration_pmol_l": 48.56193640241637,
+            "final_concentration_pmol_l": 48.56193640241637,
+            "final_delivered_pmol_kg": 360.0,
+            "coarse_reference_concentration_error_pmol_l": 8.088172692420913e-15
+          },
+          "washout": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 4.884981308350689e-15,
+              "concentration_error_pmol_l": 5.243877795231481e-09,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 5.329070518200751e-15,
+              "input_error_pmol_kg": 0,
+              "negative_tolerance_pmol_kg": 0
+            },
+            "passed": true,
+            "peak_sampled_concentration_pmol_l": 36.42589152369504,
+            "initial_concentration_pmol_l": 36.42589152369504,
+            "final_concentration_pmol_l": 0.0028312989768511376,
+            "final_delivered_pmol_kg": 0.0,
+            "coarse_reference_concentration_error_pmol_l": 8.289334538903002e-05
+          }
+        },
+        "metrics": {
+          "superposition_error_pmol_kg": 1.2676082405960187e-11,
+          "fine_communication_error_pmol_l": 0.0006595053664387486,
+          "fine_coarse_error_ratio": 0.003345861951599645,
+          "input_error_pmol_kg": 1.0231815394945443e-12
+        },
+        "communication_errors_pmol_l": [
+          0.19711075232002367,
+          0.04256094822571622,
+          0.010530082854197095,
+          0.0026369198241660867,
+          0.0006595053664387486
+        ],
+        "passed": true
+      },
+      "cpeptide": {
+        "metadata": {
+          "schema": "bc005-worker/1",
+          "status": "completed",
+          "implementation": "bc005-paired-kinetics/1",
+          "branch": "cpeptide",
+          "runtime": {
+            "python": "3.12.13",
+            "numpy": "2.2.6",
+            "scipy": "1.15.3"
+          },
+          "state_order": [
+            "central",
+            "peripheral",
+            "eliminated",
+            "input"
+          ],
+          "volume_l_kg": 0.0655
+        },
+        "cases": {
+          "zero_increment": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 0.0,
+              "concentration_error_pmol_l": 0.0,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 0,
+              "input_error_pmol_kg": 0,
+              "negative_tolerance_pmol_kg": 0
+            },
+            "passed": true,
+            "peak_sampled_concentration_pmol_l": 0.0,
+            "initial_concentration_pmol_l": 0.0,
+            "final_concentration_pmol_l": 0.0,
+            "final_delivered_pmol_kg": 0.0,
+            "coarse_reference_concentration_error_pmol_l": 0.0
+          },
+          "pulse_increment": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 3.979039320256561e-13,
+              "concentration_error_pmol_l": 2.9990598638943005e-09,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 5.115907697472721e-13,
+              "input_error_pmol_kg": 7.105427357601002e-15,
+              "negative_tolerance_pmol_kg": 0
+            },
+            "passed": true,
+            "peak_sampled_concentration_pmol_l": 1363.6481056419145,
+            "initial_concentration_pmol_l": 0.0,
+            "final_concentration_pmol_l": 16.24206149287373,
+            "final_delivered_pmol_kg": 180.0,
+            "coarse_reference_concentration_error_pmol_l": 0.00017430088775189278
+          },
+          "pulse_synthetic_total": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 6.821210263296962e-12,
+              "concentration_error_pmol_l": 1.4158784407848591e-09,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 5.329070518200751e-12,
+              "input_error_pmol_kg": 1.1368683772161603e-13,
+              "negative_tolerance_pmol_kg": 0
+            },
+            "passed": true,
+            "peak_sampled_concentration_pmol_l": 1804.047401003042,
+            "initial_concentration_pmol_l": 440.39929536112743,
+            "final_concentration_pmol_l": 456.6413568540011,
+            "final_delivered_pmol_kg": 539.9999999999999,
+            "coarse_reference_concentration_error_pmol_l": 0.00017950894730972344
+          },
+          "mass_ramp_increment": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 6.252776074688882e-13,
+              "concentration_error_pmol_l": 4.3990765229013856e-10,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 3.979039320256561e-13,
+              "input_error_pmol_kg": 3.979039320256561e-13,
+              "negative_tolerance_pmol_kg": 0
+            },
+            "passed": true,
+            "peak_sampled_concentration_pmol_l": 1578.1194576162402,
+            "initial_concentration_pmol_l": 0.0,
+            "final_concentration_pmol_l": 1578.1194576162402,
+            "final_delivered_pmol_kg": 293.1978107896798,
+            "coarse_reference_concentration_error_pmol_l": 1.2632942102077982e-05
+          },
+          "basal_only": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 3.694822225952521e-12,
+              "concentration_error_pmol_l": 1.1368683772161603e-13,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 3.623767952376511e-12,
+              "input_error_pmol_kg": 3.552713678800501e-15,
+              "negative_tolerance_pmol_kg": 0,
+              "equilibrium_error_pmol_kg": 0.0
+            },
+            "passed": true,
+            "peak_sampled_concentration_pmol_l": 440.39929536112743,
+            "initial_concentration_pmol_l": 440.39929536112743,
+            "final_concentration_pmol_l": 440.39929536112743,
+            "final_delivered_pmol_kg": 360.0,
+            "coarse_reference_concentration_error_pmol_l": 0.0
+          },
+          "washout": {
+            "metrics": {
+              "oracle_state_error_pmol_kg": 3.9968028886505635e-15,
+              "concentration_error_pmol_l": 5.1955047558489005e-11,
+              "repeat_error": 0.0,
+              "mass_error_pmol_kg": 3.552713678800501e-15,
+              "input_error_pmol_kg": 0,
+              "negative_tolerance_pmol_kg": 0
+            },
+            "passed": true,
+            "peak_sampled_concentration_pmol_l": 61.06870229007633,
+            "initial_concentration_pmol_l": 61.06870229007633,
+            "final_concentration_pmol_l": 8.518568734909673,
+            "final_delivered_pmol_kg": 0.0,
+            "coarse_reference_concentration_error_pmol_l": 5.856018272503963e-06
+          }
+        },
+        "metrics": {
+          "superposition_error_pmol_kg": 2.5011104298755527e-12,
+          "fine_communication_error_pmol_l": 0.0030085458534962637,
+          "fine_coarse_error_ratio": 0.0025661790654491817,
+          "input_error_pmol_kg": 1.0231815394945443e-12
+        },
+        "communication_errors_pmol_l": [
+          1.1723834451005666,
+          0.301806081061232,
+          0.04813490537068505,
+          0.012034091993278595,
+          0.0030085458534962637
+        ],
+        "passed": true
+      }
+    },
+    "paired_input": "both branches match the same archived BC-004 rates; no shared clearance",
+    "evidence": "synthetic numerical paired kinetics; no glucose trajectory or human validation",
+    "limitations": [
+      "glucose feedback",
+      "BC-001 scale or initialization resolution",
+      "human predictive validity",
+      "joint patient calibration",
+      "therapy or transplant effects",
+      "general inverse secretion estimation"
+    ]
+  },
+  "checks": {
+    "root_uv_sync_locked": "passed",
+    "insulin_uv_sync_locked": "passed",
+    "cpeptide_uv_sync_locked": "passed",
+    "native_insulin_tests": 7,
+    "cpeptide_numerical_tests": 3,
+    "scientific_tests_status": "passed",
+    "log_sha256": {
+      "root-sync.log": "f4aa67c2045a06311bf7b060b48c874f7577ef636123a5a53e18793511cbdcb3",
+      "insulin-sync.log": "a730136d11ee3545f5ac973441f582d7a2c8b9070b4631109709150142e95292",
+      "cpeptide-sync.log": "33fb3b47a60892732b3e9615dcebfaeb96b1a10abcd4605ee5ae33db19c68fc8",
+      "test-insulin.log": "d811f9d66de76a98a2b6716a9cc4b823ee3f438fe0c6faad600bfc3e55b02410",
+      "test-cpeptide.log": "bb9147a0e9ccdc73e7b1aef03d7bcd3402e28a00ce2538ffc596ba7c5f2c68f3"
+    },
+    "fresh_process_repeat": {
+      "run_path": "results/m4-paired-kinetics/repeat-01",
+      "manifest_sha256": "f311a231e9d7685b52ae9d44d88988fc15aec971882759aaaf5351233719e9c7",
+      "identical_deterministic_artifacts": 52,
+      "excluded": "top-level manifest timestamps and command output paths"
+    },
+    "standard_library_reconstruction": {
+      "status": "byte-identical with python -S",
+      "sha256": "4224b8fd8585c07a92cb11be130e51c6ee5b6d9ff0df3720f4cd27acd2f45acc"
+    },
+    "artifact_figure_reconstruction": {
+      "status": "byte-identical",
+      "sha256": "f02243e2c5841f447030c9c0611ab3ce6e31fd358f5151a065f63587a0972c3d"
+    },
+    "visual_figure_inspection": "passed; rendered PNG inspected",
+    "source_and_lock_snapshots_match_current_files": true,
+    "previous_scientific_implementations_and_locks": "unchanged",
+    "repository_checks": {
+      "status": "passed",
+      "unit_tests": 283,
+      "new_paired_artifact_tests": 16,
+      "strict_documentation_build": "passed",
+      "log_sha256": "003438b3b636f54be0d22a1174fc7ec718d5313cf6c2e7e1ee56a7cbfdaad5e2"
+    },
+    "remote_ci": "not_run; workflow added"
+  },
+  "failed_scientific_attempts": [],
+  "threshold_amendments": [],
+  "external_review": "not performed",
+  "human_data": "none accessed or evaluated; no new availability or rights claim",
+  "limitations": [
+    "Synthetic independent nominal profiles, not a paired patient",
+    "No glucose feedback, patient fit, therapy or transplant effect",
+    "No resolution of BC-001 basal/scale/initialization source gaps",
+    "No new human or joint parameter identifiability evidence",
+    "Reconstruction uses saved independent-reference states; rerun required to recompute them"
+  ]
+}

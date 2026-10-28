@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "local_store": "results/m3-archive in the maintained main checkout; outside Git",
+  "scope": "Public documentation and synthetic software evidence only; no human observations or independent reproduction",
+  "archives": [
+    {
+      "directory": "initial-audit-pr23",
+      "origin": "Initial M0/M1/M2/IV archive and native review, public source documentation, draft failures and exact PR23 CI",
+      "archive_sha256": "d684b2a24c4a5d4e08ff410954301b9bb32d7d3fda1b176c34db95e289923e08",
+      "inventory_sha256": "545e3e061997b51a54ba969fbd7676ee4eb5174e6fb18fea27a98f3c1cf0069e",
+      "file_count": 9235
+    },
+    {
+      "directory": "software-local-v1",
+      "origin": "Clean implementation 31b70fa80c3033cad06b90c063f978b8c486b92b; full synthetic execution, exact reconstruction, fresh processes and retained failures",
+      "archive_sha256": "db062df74692a835d2aedc8babb0c039f0dbe627262f2d6df56ac013845e4dfd",
+      "inventory_sha256": "098728c19342019e97136ec5fee6ce3fb102e41dbef8246af4fc5d897bc3d8b8",
+      "file_count": 118
+    }
+  ]
+}

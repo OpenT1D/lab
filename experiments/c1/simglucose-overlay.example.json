@@ -1,0 +1,18 @@
+{
+  "profile": "adult#001",
+  "seed": 101,
+  "condition": "B",
+  "method": "trend_overlay",
+  "settings": {
+    "target_mg_dl": 140,
+    "low_cutoff_mg_dl": 90,
+    "rise_gain_u_h_per_mg_dl_min": 0.12,
+    "max_rise_mg_dl_min": 2,
+    "max_fresh_gap_min": 6,
+    "inventory_half_life_min": 60,
+    "inventory_gain_per_h": 1,
+    "max_extra_u_h": 0.6,
+    "max_extra_step_u_h": 0.2,
+    "max_total_u_h": 4
+  }
+}

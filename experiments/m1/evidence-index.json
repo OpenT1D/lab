@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "local_store": "results/m1-archive in the maintained main checkout; outside Git",
+  "scope": "Public synthetic M1 development evidence; local preservation, not external backup or release",
+  "archives": [
+    {
+      "directory": "2026-09-13-mac-implementation",
+      "origin": "Mac empty-cache installation and development demonstration, implementation 1aba011; includes earlier development/failure evidence",
+      "archive_sha256": "4720e0a6b7ebfd275b8b410d57a31ce6ff1f0aa1030c879c285c54834cb3fe16",
+      "inventory_sha256": "3389adcf6459587eab42bc415c7706292a0e6f9bd01bc0f6656da5c65b4583ce",
+      "file_count": 804
+    },
+    {
+      "directory": "2026-09-13-linux-pr11",
+      "origin": "Linux PR 11 CI run 34747531609, M1 artifacts and full CI log",
+      "archive_sha256": "15ef72f521b544a9afcd04259727258d28e2c84ddce6e98838e727bd06a9993e",
+      "inventory_sha256": "17d3834017473e2a56c3aa9e09f0822a98cdbb38f1cf8f4049cdefc7faa1e481",
+      "file_count": 389
+    },
+    {
+      "directory": "2026-09-13-platform-diagnostic",
+      "origin": "Mac/Linux full trace diagnostic without tolerance; source implementation 1aba011",
+      "archive_sha256": "b2bb76815d517c72a9f9e7316c7dcb39984b41755406b5e753f9d640889b07ac",
+      "inventory_sha256": "79dd2242610808ad0da50e94ee141a42c7d7a01e1da5e9aa4891372769f02c40",
+      "file_count": 1
+    },
+    {
+      "directory": "2026-09-13-final-pr11",
+      "origin": "Exact PR head ec89c53faff961c5ae1d12c937347431957e85b0; successful CI run 34747741677",
+      "archive_sha256": "339b291d97df58bddaa3fdc2849a799934aa679e2083752c7a4b7a74edec0d74",
+      "inventory_sha256": "b04c881014926e2c38d46b25cd05a5ff2823fb8cad5711e5e6443e0e6a92efe4",
+      "file_count": 389
+    },
+    {
+      "directory": "2026-09-13-final-main",
+      "origin": "Final main fafcd5830113a5cc62c2712a6140b89c7065ed05; successful CI run 34747887919",
+      "archive_sha256": "4bbae960ffbdb4a6ed835e153e7218d2c4c1b22d2a7a81029be1496fa3be5aa9",
+      "inventory_sha256": "1a3828ae2670784a1abb7c5917c1ac75abeb50e1664eeb69115ebf9305e114a7",
+      "file_count": 434
+    },
+    {
+      "directory": "2026-09-13-review-historical-diagnostic",
+      "origin": "Pre-review archived Linux comparison and baseline derivation script; no new review trajectories",
+      "archive_sha256": "ccc71e72f520324226b9577033e66f99793c1f91528477174ddacfd6827c2457",
+      "inventory_sha256": "d263784478251833eaf95260cff12e92e91b989c1da2732da5f2cf3ab1303e48",
+      "file_count": 2
+    },
+    {
+      "directory": "2026-09-13-review-mac",
+      "origin": "Clean critical-review implementation 00bce3bf9d0b10d205a7b6477655df058ab686b1; two local demonstrations, historical checks, fresh replays, reconstruction and test logs",
+      "archive_sha256": "f481a2560d9cccbd0abcc027a56aeba6f6f9f839e69c5c081314f96d5ba5c350",
+      "inventory_sha256": "6828aed80fc40600b09a2e519f4c32146ecd5e5be3297ab3e47cc7813a59a2fa",
+      "file_count": 787
+    }
+  ]
+}

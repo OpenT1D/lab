@@ -1,0 +1,25 @@
+# Isolated C1 source-training environment; no simulation package in the root.
+[project]
+name = "opent1d-c1-g2p2c-training-source"
+version = "0.0.0"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "simglucose",
+    "numpy==1.26.4",
+  "torch==2.13.0",
+    "gym==0.9.4",
+    "pandas==2.2.3",
+    "scipy==1.13.1",
+    "matplotlib==3.9.4",
+    "python-decouple==3.4",
+    "pathos>=0.3,<0.4",
+    "setuptools==80.9.0",
+]
+
+[tool.uv]
+package = false
+required-version = ">=0.11.16"
+build-constraint-dependencies = ["setuptools==84.0.0", "wheel==0.43.0"]
+
+[tool.uv.sources]
+simglucose = { git = "https://github.com/jxx123/simglucose", rev = "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc" }

@@ -1,0 +1,192 @@
+{
+  "schema": "bc011-protocol/1",
+  "id": "BC-011/2",
+  "specified_date": "2026-09-22",
+  "base_commit": "b0bd51421b2ecdfc569e2d740f36cdf0402bcbfc",
+  "claim": "conditional_synthetic_local_sensitivity_and_parameter_recovery",
+  "question": "Under fixed physiology and exact basal G/I and SC input, what do dynamic G, G+I and G+I+C-peptide constrain about evoked responsivity, peripheral insulin removal and central C-peptide removal?",
+  "parent_protocol": "BC-008/2 fixed hepatic route; BC-010/1 C-peptide equations and nominal parameters",
+  "runtime": {
+    "project": "experiments/m0/simglucose",
+    "python": "3.12",
+    "numpy": "1.26.4",
+    "scipy": "1.13.1"
+  },
+  "model": {
+    "horizon_min": 240,
+    "load_mg": 30000,
+    "basal_replacement_fraction": 0.25,
+    "output_step_min": 1,
+    "parameter_names": [
+      "evoked_gain",
+      "m4_scale",
+      "k3_scale"
+    ],
+    "truth": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "lower": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "upper": [
+      1.5,
+      1.5,
+      1.5
+    ],
+    "cpeptide": {
+      "k1": 0.037,
+      "k2": 0.031,
+      "k3": 0.052,
+      "volume_l_kg": 0.0655
+    },
+    "conditioning": "Exact nominal basal plasma G and I and constant SC input in every modality; all non-varied parameters and meal known. Gain scales beta and K together, never basal secretion or cell number.",
+    "initialization": "From BC008 nominal basal: keep Ip, SC depots and other native states; Il=((m2+m4)*Ip-Rsc)/m1, Sb=(m1+m30)*Il-m2*Ip, Z=Sb, P=Sb/gamma; Cp Q1=Sb/k3, Q2=k1*Q1/k2. Rsc=ka1*Isc1+ka2*Isc2. Sb is derived, not independently fitted.",
+    "boundary": "Append passive Q1,Q2,removed,delivered Cp states to BC008 RHS. Drive by Spo, equimolar pmol/(kg min), without hepatic removal, SC input or portal transit. Integrate in the native lock; check against independent matrix exponential and historical equations.",
+    "known_fixed": [
+      "m30 and other native parameters",
+      "source alpha,beta/K ratio,gamma",
+      "C-peptide k1,k2,volume",
+      "appearance ratio=1",
+      "gastric input",
+      "baseline G/I and SC input"
+    ],
+    "domain": {
+      "glucose_mg_dl": [
+        40,
+        500
+      ],
+      "negative_amount_tolerance": 1e-08
+    }
+  },
+  "observation": {
+    "columns": [
+      "G_mg_dl",
+      "I_pmol_l",
+      "Cp_pmol_l"
+    ],
+    "modalities": {
+      "G": [
+        0
+      ],
+      "GI": [
+        0,
+        1
+      ],
+      "GIC": [
+        0,
+        1,
+        2
+      ]
+    },
+    "sample_steps_min": [
+      10,
+      30
+    ],
+    "synthetic_sd": [
+      5.0,
+      10.0,
+      30.0
+    ],
+    "noise_seeds": [
+      117,
+      221
+    ],
+    "noise": "Independent additive Gaussian engineering noise, not estimated assay error; same 1-min realization shared across modalities and nested schedules. Basal G/I are exact conditioning values (noise zero at t0); Cp t0 remains observed/noisy. No clipping negative noisy observations.",
+    "data_cases": [
+      "noiseless",
+      "noise_117",
+      "noise_221"
+    ]
+  },
+  "inference": {
+    "regimes": [
+      "known_kinetics",
+      "unknown_clearance"
+    ],
+    "known_kinetics": "fit gain only; m4,k3 fixed at truth",
+    "unknown_clearance": "declare gain,m4,k3 unknown; G/GI optimize gain,m4 only and label k3 unobservable, never an estimate; GIC optimizes all three",
+    "starts": [
+      [
+        0.7,
+        1.25,
+        0.8
+      ],
+      [
+        1.3,
+        0.75,
+        1.2
+      ]
+    ],
+    "optimizer": {
+      "method": "trf",
+      "jac": "absolute-log-central-difference",
+      "max_nfev": 60,
+      "ftol": 1e-08,
+      "xtol": 1e-08,
+      "gtol": 1e-08,
+      "log_step": 0.001
+    },
+    "objective": "sum(((prediction-observation)/channel_SD)^2); optimize natural-log parameters with frozen bounds; store every start and residual",
+    "sensitivity_log_steps": [
+      0.002,
+      0.001
+    ],
+    "svd_relative_cutoff": 1e-06,
+    "recovery_relative_threshold": 0.01,
+    "noisy_reporting": "per-seed estimates, truth error, bound hits, start disagreement and objective; two draws are diagnostics, not uncertainty coverage or success rates",
+    "scope": "finite-difference local rank and bounded multistart recovery; no profile likelihood, global uniqueness proof, confidence intervals or human identifiability"
+  },
+  "solvers": {
+    "fit": {
+      "method": "DOP853",
+      "rtol": 1e-08,
+      "atol": 1e-10,
+      "max_step": 1.0
+    },
+    "reference": {
+      "method": "DOP853",
+      "rtol": 1e-11,
+      "atol": 1e-13,
+      "max_step": 0.25
+    },
+    "independent": {
+      "method": "RK45",
+      "rtol": 1e-10,
+      "atol": 1e-12,
+      "max_step": 0.25
+    }
+  },
+  "criteria": {
+    "solver_scaled_output_error": 0.001,
+    "baseline_derivative_error": 1e-07,
+    "mass_balance_error_pmol_kg": 1e-06,
+    "passive_GI_scaled_error": 1e-05,
+    "cp_oracle_error_pmol_l": 0.01,
+    "parent_GI_scaled_error": 0.001,
+    "jacobian_relative_refinement_error": 0.01,
+    "jacobian_solver_relative_error": 0.01,
+    "exact_symmetry_scaled_error": 1e-06,
+    "repeat_artifact_differences": 0,
+    "noiseless_active_parameter_relative_error": 0.01
+  },
+  "verification": "Reference/fit/independent solvers at truth and both bound corners; fasting derivative at each; nominal comparison with BC008 integrate; Cp matrix-exponential response using source sampling refinement; insulin and Cp mass balances; gain versus beta/K exact symmetry and passive unobservable k3; finite-difference/solver Jacobian refinement; fresh-process repetition of full matrix.",
+  "failure_policy": "Archive each dataset and both starts including optimizer failure. Model/incomplete/nonfinite failure is retained and invalidates that attempt, never replaced with a fabricated residual. A missing matrix, numerical gate or observable noiseless recovery failure makes experiment incomplete/failed. Noisy recovery failure, bound hits and unobservable parameters are findings, not discarded cases.",
+  "excluded": [
+    "human data",
+    "clinical measurement recommendation",
+    "hepatic variant or hepatic-clearance identification",
+    "all-parameter model identification",
+    "CGM observation model",
+    "treatment or cell-count inference",
+    "new author data/code",
+    "post-result bound/noise/threshold tuning"
+  ],
+  "protocol_history": {
+    "previous_id": "BC-011/1",
+    "amendment_before_numerical_fitting": "Replace relative scipy log-coordinate differences (degenerate near log(1)=0) with fixed absolute log steps and bounded one-sided three-point differences. Clarify SD-squared weighting and hepatic-clearance exclusion. No numerical results inspected; bounds, noise, matrix and acceptance criteria unchanged."
+  }
+}

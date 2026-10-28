@@ -1,0 +1,21 @@
+{
+  "fresh_process_exact_json_repeat": true,
+  "refuses_existing_output": true,
+  "refuses_modified_source_before_output": true,
+  "human_data_used": false,
+  "r_runtime_executed": true,
+  "r_execution_scope": "source functions in WebAssembly R only",
+  "native_rscript_executed": false,
+  "webr_fresh_process_exact_json_repeat": true,
+  "webr_selected_invalid_input_behaviors_preserved": true,
+  "repository_checks": {
+    "command": "uv run --locked python scripts/check.py",
+    "passed": true,
+    "tests": 1288,
+    "skipped": 13,
+    "strict_documentation_build": true,
+    "scope": "final full repository check; separate source-function probes; no biological validation",
+    "log_sha256": "0075bbfe7df843e4d1de27e9da9f6ed7cecf635517010f9f7ecf877727de7730"
+  },
+  "fresh_locked_webr_install_exact_json_repeat": true
+}

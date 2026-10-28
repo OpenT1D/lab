@@ -1,0 +1,29 @@
+name: Model, experiment or feature proposal
+description: Propose a concrete research capability or improvement.
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: Research question or user need
+      description: Who needs to do what, and how does it fit the roadmap?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed contribution
+      description: Describe the smallest complete contribution and what should be reused.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Existing models, data and alternatives
+      description: Link original sources, upstream code, relevant licenses and known limitations.
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Evidence and completion criteria
+      description: How could another person verify or reproduce the result?
+    validations:
+      required: true

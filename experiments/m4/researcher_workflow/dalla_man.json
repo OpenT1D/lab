@@ -1,0 +1,6 @@
+{
+  "schema": "m4-researcher-config/1",
+  "model": "../causal_secretion/example_model.py",
+  "declaration": "../causal_secretion/example_model.json",
+  "timeout_seconds": 600
+}

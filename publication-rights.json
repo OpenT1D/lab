@@ -1,0 +1,70 @@
+{
+  "schema": "opent1d.publication-rights/1",
+  "reviewed_on": "2026-10-25",
+  "original_material": {
+    "license": "Apache-2.0",
+    "authority": "Maintainer explicitly confirmed authority to publish original OpenT1D material, including any employer/client rights, in the preparation conversation.",
+    "scope": "Original tracked code, documentation, configuration and synthetic fixtures; excludes third-party materials under their own terms."
+  },
+  "confidential_contact": {
+    "address": "Matthiasvdgalien97@gmail.com",
+    "publication_authorized": true,
+    "ownership_and_receipt": "Confirmed by the maintainer; no assistant test message sent."
+  },
+  "excluded": [
+    "Private development Git objects, author emails, refs and configuration",
+    "Ignored results, private health records, restricted data and paper originals",
+    "Two complete upstream native parameter rows in historical execution receipts; originals retained privately and file/fragment hashes published",
+    "Bundled third-party runtimes, trained weights and full article text"
+  ],
+  "notices": [
+    {
+      "asset": "simglucose",
+      "source": "https://github.com/jxx123/simglucose/blob/a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc/LICENSE",
+      "notice": "LICENSES/simglucose.txt",
+      "sha256": "ddfd0daee4b3569977580f2d4fc52ffc953c88db7b97f81abecfe2c003e10c75",
+      "scope": "Referenced pinned upstream source, installed separately. No native code, parameter table or dataset bundled by this source offering."
+    },
+    {
+      "asset": "GlucoSim",
+      "source": "https://github.com/HassDhia/glucosim/blob/6422a91d533125a8feb4f2e8737aecd67fec95c9/LICENSE",
+      "notice": "LICENSES/GlucoSim.txt",
+      "sha256": "177bc54a2a82bfe1add22145a8e52b7766666acdc221730536fcfbba3a51635a",
+      "scope": "Referenced pinned upstream source, installed separately. No native code, parameter table or dataset bundled by this source offering."
+    },
+    {
+      "asset": "LT1",
+      "source": "https://github.com/hpeuscher/loopinsight1/blob/9a6092065bd821f88691cd8d03b0550acd665573/LICENSE.md",
+      "notice": "LICENSES/LT1.txt",
+      "sha256": "5b786cd1552015d73f9a6e294c4a78fbee89801c998345cfe226e36d624962eb",
+      "scope": "Referenced pinned upstream source, installed separately. No native code, parameter table or dataset bundled by this source offering."
+    },
+    {
+      "asset": "G2P2C",
+      "source": "https://github.com/RL4H/G2P2C/blob/37f7b7e161e9c1e7b702c8eebdc5cc7eb4f81d70/LICENSE.txt",
+      "notice": "LICENSES/G2P2C.txt",
+      "sha256": "b5639b69d968c64b90c38e5f84c301eaf2898ab59d05400b53395c9a19c14dfb",
+      "scope": "Referenced pinned upstream source, installed separately. No native code, parameter table or dataset bundled by this source offering."
+    },
+    {
+      "asset": "OpenAPS",
+      "source": "https://github.com/openaps/oref0/blob/88cf032aa74ff25f69464a7d9cd601ee3940c0b3/LICENSE.txt",
+      "notice": "LICENSES/OpenAPS.txt",
+      "sha256": "5966cdf482e00a7f03459fc3367af609c6fc56e26542ba01d6200e549fb88e02",
+      "scope": "Referenced pinned upstream source, installed separately. No native code, parameter table or dataset bundled by this source offering."
+    },
+    {
+      "asset": "DejaVu",
+      "source": "https://github.com/matplotlib/matplotlib/blob/v3.9.4/lib/matplotlib/mpl-data/fonts/ttf/LICENSE_DEJAVU",
+      "notice": "LICENSES/DejaVu.txt",
+      "sha256": "d75938dec098f06f0ac3c00853065d94f020be1c3c62ef1dc2975ba15b4d9b0e",
+      "scope": "Embedded DejaVu Sans glyph outlines in original generated SVG figures."
+    }
+  ],
+  "limitations": "Source-only review. Separate table provenance, empirical data rights and any bundled distribution require their own clearance. This is not a release or scientific acceptance.",
+  "private_installer_integration": {
+    "date": "2026-10-28",
+    "scope": "Internal integration only. This source-only rights inventory does not clear bundled runtime, parameter-table or transitive asset redistribution.",
+    "public_distribution_cleared": false
+  }
+}

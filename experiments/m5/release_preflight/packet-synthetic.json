@@ -1,0 +1,35 @@
+{
+  "schema": "ot027-synthetic-packet/1",
+  "participants": [{"alias": "SYN001"}, {"alias": "SYN002"}, {"alias": "SYN003"}],
+  "infusions": [
+    {"alias": "SYN001", "day": 0},
+    {"alias": "SYN002", "day": 0},
+    {"alias": "SYN002", "day": 150},
+    {"alias": "SYN003", "day": 0}
+  ],
+  "mmtt": [
+    {"alias": "SYN001", "visit_id": "V1", "day": 75, "challenge": "MMTT", "samples": [
+      {"minute": 0, "c_peptide": "observed", "glucose": "observed"},
+      {"minute": 90, "c_peptide": "observed", "glucose": "observed"}
+    ]},
+    {"alias": "SYN002", "visit_id": "V1", "day": 74, "challenge": "MMTT", "samples": [
+      {"minute": 0, "c_peptide": "observed", "glucose": "observed"},
+      {"minute": 90, "c_peptide": "observed", "glucose": "observed"}
+    ]},
+    {"alias": "SYN003", "visit_id": "V1", "day": 76, "challenge": "MMTT", "samples": [
+      {"minute": 0, "c_peptide": "observed", "glucose": "observed"},
+      {"minute": 90, "c_peptide": "observed", "glucose": "observed"}
+    ]}
+  ],
+  "insulin": [
+    {"alias": "SYN001", "visit_id": "V2", "day": 365,
+      "semantics": "reported_daily_total_u", "diary_days": [359, 360, 361, 362, 363, 364, 365],
+      "mean_summary_available": true, "weight_available": true},
+    {"alias": "SYN002", "visit_id": "V2", "day": 366,
+      "semantics": "reported_daily_total_u", "diary_days": [360, 361, 362, 363, 364, 365, 366],
+      "mean_summary_available": true, "weight_available": false},
+    {"alias": "SYN003", "visit_id": "V2", "day": 364,
+      "semantics": "reported_daily_total_u", "diary_days": [358, 359, 360, 362, 363, 364],
+      "mean_summary_available": true, "weight_available": true}
+  ]
+}

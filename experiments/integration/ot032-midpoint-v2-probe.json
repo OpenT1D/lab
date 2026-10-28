@@ -1,0 +1,148 @@
+{
+  "schema": "opent1d.numerical-development-probe/1",
+  "scope": "independent pure-integrator development probes, not final new-executor acceptance",
+  "protocol_freeze_commit": "a467db29a0ff18e2ab6c50906117fa1560f6bed6",
+  "protocol_id": "M4-STUDY/2",
+  "literal_script_sha256": "e877d8eac9829fe8181b86eca9fc3856a8f348f174162e442bb16f3c52d2e76a",
+  "commands": [
+    "experiments/m0/simglucose/.venv/bin/python -B /private/tmp/opent1d-ot032-v2-probe.py 15000",
+    "experiments/m0/simglucose/.venv/bin/python -B /private/tmp/opent1d-ot032-v2-probe.py 30000"
+  ],
+  "runtime": {
+    "python": "3.12.13",
+    "numpy": "1.26.4",
+    "scipy": "1.13.1",
+    "platform": "macOS-26.5.2-arm64-arm-64bit"
+  },
+  "rows": [
+    {
+      "scope": "independent_development_probe_not_final_new_executor_acceptance",
+      "load_mg": 15000,
+      "protocol_sha256": "d2ed95617dd22db1e8204da6b35a2b28119ef4e4f67f8ca64f80395917cf6eb2",
+      "rows": {
+        "bc008_reference": {
+          "statuses": {
+            "coarse": "completed",
+            "tight": "completed",
+            "reference": "completed"
+          },
+          "differences": {
+            "coarse": {
+              "glucose_error_mg_dl": 3.7387538901626305e-07,
+              "insulin_error_pmol_l": 1.708322042453775e-05,
+              "source_error_pmol_kg_min": 3.180872796271217e-06
+            },
+            "tight": {
+              "glucose_error_mg_dl": 9.026771718479452e-09,
+              "insulin_error_pmol_l": 3.594102799629065e-07,
+              "source_error_pmol_kg_min": 6.208233238602645e-08
+            }
+          }
+        },
+        "dalla_man": {
+          "statuses": {
+            "coarse": "completed",
+            "tight": "completed",
+            "reference": "completed"
+          },
+          "differences": {
+            "coarse": {
+              "glucose_error_mg_dl": 3.7387538901626305e-07,
+              "insulin_error_pmol_l": 1.708322042453775e-05,
+              "source_error_pmol_kg_min": 3.180872796271217e-06
+            },
+            "tight": {
+              "glucose_error_mg_dl": 9.026771718479452e-09,
+              "insulin_error_pmol_l": 3.594102799629065e-07,
+              "source_error_pmol_kg_min": 6.208233238602645e-08
+            }
+          }
+        },
+        "ultradian": {
+          "statuses": {
+            "coarse": "completed",
+            "tight": "completed",
+            "reference": "completed"
+          },
+          "differences": {
+            "coarse": {
+              "glucose_error_mg_dl": 6.125982483746227e-11,
+              "insulin_error_pmol_l": 1.0320508355529084e-10,
+              "source_error_pmol_kg_min": 1.4462764319489452e-11
+            },
+            "tight": {
+              "glucose_error_mg_dl": 4.630103040040753e-12,
+              "insulin_error_pmol_l": 2.6852733338837427e-12,
+              "source_error_pmol_kg_min": 8.296696663023795e-13
+            }
+          }
+        }
+      }
+    },
+    {
+      "scope": "independent_development_probe_not_final_new_executor_acceptance",
+      "load_mg": 30000,
+      "protocol_sha256": "d2ed95617dd22db1e8204da6b35a2b28119ef4e4f67f8ca64f80395917cf6eb2",
+      "rows": {
+        "bc008_reference": {
+          "statuses": {
+            "coarse": "completed",
+            "tight": "completed",
+            "reference": "completed"
+          },
+          "differences": {
+            "coarse": {
+              "glucose_error_mg_dl": 1.0918897161160474e-06,
+              "insulin_error_pmol_l": 3.513786232154104e-05,
+              "source_error_pmol_kg_min": 6.65275422795375e-06
+            },
+            "tight": {
+              "glucose_error_mg_dl": 2.2006226786064463e-08,
+              "insulin_error_pmol_l": 7.083112089142612e-07,
+              "source_error_pmol_kg_min": 1.7063431645425453e-07
+            }
+          }
+        },
+        "dalla_man": {
+          "statuses": {
+            "coarse": "completed",
+            "tight": "completed",
+            "reference": "completed"
+          },
+          "differences": {
+            "coarse": {
+              "glucose_error_mg_dl": 1.0918897161160474e-06,
+              "insulin_error_pmol_l": 3.513786232154104e-05,
+              "source_error_pmol_kg_min": 6.65275422795375e-06
+            },
+            "tight": {
+              "glucose_error_mg_dl": 2.2006226786064463e-08,
+              "insulin_error_pmol_l": 7.083112089142612e-07,
+              "source_error_pmol_kg_min": 1.7063431645425453e-07
+            }
+          }
+        },
+        "ultradian": {
+          "statuses": {
+            "coarse": "completed",
+            "tight": "completed",
+            "reference": "completed"
+          },
+          "differences": {
+            "coarse": {
+              "glucose_error_mg_dl": 1.2248996952723198e-10,
+              "insulin_error_pmol_l": 4.1781882494507944e-10,
+              "source_error_pmol_kg_min": 2.8866353751766383e-11
+            },
+            "tight": {
+              "glucose_error_mg_dl": 9.230525932388937e-12,
+              "insulin_error_pmol_l": 5.49995743084622e-12,
+              "source_error_pmol_kg_min": 1.61393121089759e-12
+            }
+          }
+        }
+      }
+    }
+  ],
+  "conclusion": "Complete961-point outputs at both loads; unchanged source tolerance1e-5 passes with refined0.25min coarse maxstep. Final conservation, observer, parity, repeat and report/archive checks still required."
+}

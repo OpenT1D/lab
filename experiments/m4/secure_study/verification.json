@@ -1,0 +1,236 @@
+{
+  "checks": {
+    "actual_native_import_and_resource_source_guards_exit": 0,
+    "focused_and_historical_boundary_tests": 31,
+    "inherited_native_numerical_tests": 12,
+    "locked_native_sync_exit": 0,
+    "locked_observer_sync_exit": 0,
+    "ruff_exit": 0
+  },
+  "dependency_changes": {
+    "other_package_and_source_identities_unchanged": 32,
+    "setuptools": [
+      "80.9.0",
+      "84.0.0"
+    ],
+    "urllib3": [
+      "2.7.0",
+      "2.8.0"
+    ]
+  },
+  "historical_protocol_source_and_lock_bytes_unchanged": true,
+  "implementation_revision": "7a9ce66b9df4695fe5683cfd3f5051ca4275affa",
+  "limits": [
+    "Internal synthetic numerical/runtime verification only; no human, clinical or independent user/scientific validation",
+    "Development3ea archives retained separately before reader consistency tightening",
+    "Thirty-second whole-source deadline also exhausted the later valid source repeat; both sources are correctly nonaccepted in that case",
+    "Historical source/protocol/lock bytes retained unchanged; historical dependencies were not reinstalled during these maintained runs"
+  ],
+  "negative_verification": {
+    "failed_reconstruction_without_opt_in_refused": true,
+    "no_rejected_reconstruction_output_created": true,
+    "owned_workers_live_after_terminal_cases": 0,
+    "resealed_inherited_scientific_bytes_refused": true,
+    "resealed_old_http_attestation_refused": true,
+    "resistant_callback_reached_deadline_and_interruption": true
+  },
+  "protocol": "M4-STUDY-SECURE/1",
+  "protocol_sha256": "bee2e2315653a0ac7584545c50372f05c6342158f30b9744ca9be77b4ec2ef63",
+  "retained_local_receipt": {
+    "path": "/private/tmp/opent1d-security-acceptance-20261004/native/acceptance-receipt.json",
+    "sha256": "820a7dba67869dab24aba8fc2d4dd4414de7d98364e0c5e800f6d7cfe8708231"
+  },
+  "runs": {
+    "study-deadline-v2": {
+      "all_three_reconstruction_bytes_equal": true,
+      "baseline_execution": {
+        "kind": "verified_historical_evidence",
+        "schema": "bc008-feedback/1",
+        "scientific_protocol": "BC-008/2"
+      },
+      "command": [
+        "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+        "-B",
+        "-S",
+        "-m",
+        "experiments.m4.secure_study",
+        "run",
+        "--config",
+        "/private/tmp/opent1d-security-acceptance-20261004/native/inputs/deadline-config.json",
+        "--output",
+        "/private/tmp/opent1d-security-acceptance-20261004/native/study-deadline-v2",
+        "--reference",
+        "/private/tmp/opent1d-functional-lab-acceptance-20261003/primary-v2/historical"
+      ],
+      "denominators": {
+        "accepted_pairs": 0,
+        "accepted_source_scenarios": 0,
+        "accepted_sources": 0,
+        "pairs": 1,
+        "source_scenarios": 2,
+        "sources": 2
+      },
+      "derived_sha256": {
+        "figure.svg": "a877000bfb95583f8faaf37d99ccd9ffea5fc5519951dd0d865d02d91430db8b",
+        "report.json": "a368908f5656a320cb20fdaa5a972ddc51de72a519214ff46cfc197848e70e7f",
+        "report.md": "0f794e704ec7857748425e4413b63b507d1083fd9eb19a5ebbabafa36140685c"
+      },
+      "elapsed_seconds": 122.50130366699887,
+      "exit_code": 1,
+      "native_manifest_sha256": "3f13369e740a84e7d6a99b217ca857830bfddb4450e3bed582db8a9311dacebd",
+      "passed": false,
+      "source_statuses": {
+        "blocking": "failed",
+        "dalla_man": "failed"
+      },
+      "status": "failed",
+      "stdlib_reconstruction_exit": 0
+    },
+    "study-failure-v2": {
+      "all_three_reconstruction_bytes_equal": true,
+      "baseline_execution": {
+        "kind": "verified_historical_evidence",
+        "schema": "bc008-feedback/1",
+        "scientific_protocol": "BC-008/2"
+      },
+      "command": [
+        "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+        "-B",
+        "-S",
+        "-m",
+        "experiments.m4.secure_study",
+        "run",
+        "--config",
+        "/private/tmp/opent1d-security-acceptance-20261004/native/inputs/failure-config.json",
+        "--output",
+        "/private/tmp/opent1d-security-acceptance-20261004/native/study-failure-v2",
+        "--reference",
+        "/private/tmp/opent1d-functional-lab-acceptance-20261003/primary-v2/historical"
+      ],
+      "denominators": {
+        "accepted_pairs": 1,
+        "accepted_source_scenarios": 2,
+        "accepted_sources": 2,
+        "pairs": 3,
+        "source_scenarios": 3,
+        "sources": 3
+      },
+      "derived_sha256": {
+        "figure.svg": "38b665171c7628d83ed3f64ac09e98203c6fe0d875e7ac969c2002a925145f6c",
+        "report.json": "27073d1f0286d9a8ba4dddd67c0c469384d85d7e980ebcadf675a5d65864eb89",
+        "report.md": "39c14a8800947dc5e27b3e15a71ec9382a74c70aa80386ff55a63b3b2963c3e4"
+      },
+      "elapsed_seconds": 144.8365165830037,
+      "exit_code": 1,
+      "native_manifest_sha256": "2f168038577df18c1b2638c3deb95eadc289996da058de47545000c5cbf43d70",
+      "passed": false,
+      "source_statuses": {
+        "dalla_man": "completed",
+        "negative": "failed",
+        "ultradian": "completed"
+      },
+      "status": "failed",
+      "stdlib_reconstruction_exit": 0
+    },
+    "study-interruption-v2": {
+      "all_three_reconstruction_bytes_equal": true,
+      "baseline_execution": {
+        "kind": "verified_historical_evidence",
+        "schema": "bc008-feedback/1",
+        "scientific_protocol": "BC-008/2"
+      },
+      "command": [
+        "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+        "-B",
+        "-S",
+        "-m",
+        "experiments.m4.secure_study",
+        "run",
+        "--config",
+        "/private/tmp/opent1d-security-acceptance-20261004/native/inputs/interruption-config.json",
+        "--output",
+        "/private/tmp/opent1d-security-acceptance-20261004/native/study-interruption-v2",
+        "--reference",
+        "/private/tmp/opent1d-functional-lab-acceptance-20261003/primary-v2/historical"
+      ],
+      "denominators": {
+        "accepted_pairs": 0,
+        "accepted_source_scenarios": 0,
+        "accepted_sources": 0,
+        "pairs": 1,
+        "source_scenarios": 2,
+        "sources": 2
+      },
+      "derived_sha256": {
+        "figure.svg": "ec595c1f4e4f2a2b3cfecfa78c7025f22cf888ad45ce62948e1453da1e909fe9",
+        "report.json": "be26f328352ef39ff9d08fedd2a5bc11c5caf90f0be8661d9d55c14996a48362",
+        "report.md": "8a76f4c6278cb9f181038719833971fc71f10dd582b20659b8872fe47e8e13e3"
+      },
+      "elapsed_seconds": 64.03054375000647,
+      "exit_code": 1,
+      "native_manifest_sha256": "cb6cc70406047983780e4eb29408bc4672eb5bf883580c9b7715b32d6ed557d0",
+      "passed": false,
+      "source_statuses": {
+        "blocking": "interrupted",
+        "dalla_man": "not_attempted"
+      },
+      "status": "interrupted",
+      "stdlib_reconstruction_exit": 0
+    },
+    "study-primary-v2": {
+      "all_three_reconstruction_bytes_equal": true,
+      "baseline_execution": {
+        "kind": "maintained_owned_execution",
+        "schema": "m4-secure-reference-run/1",
+        "scientific_protocol": "BC-008/2"
+      },
+      "command": [
+        "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+        "-B",
+        "-S",
+        "-m",
+        "experiments.m4.secure_study",
+        "run",
+        "--config",
+        "WORKTREES/security-native-runtime/OpenT1D/experiments/m4/secure_study/example.json",
+        "--output",
+        "/private/tmp/opent1d-security-acceptance-20261004/native/study-primary-v2"
+      ],
+      "denominators": {
+        "accepted_pairs": 1,
+        "accepted_source_scenarios": 6,
+        "accepted_sources": 2,
+        "pairs": 1,
+        "source_scenarios": 6,
+        "sources": 2
+      },
+      "derived_sha256": {
+        "figure.svg": "b81370e05df242498b23ee3cbb0d070e309ed4b32a4e898cab2e125e506bcb70",
+        "report.json": "95ce43781af42af953b53336303e20a9b76760b7585f1d855598384b5465c410",
+        "report.md": "695338aa44e226cb8c2cbdb6a871a883f32f903e746eadcdb1ae3a656102b39d"
+      },
+      "elapsed_seconds": 501.5455486669962,
+      "exit_code": 0,
+      "native_manifest_sha256": "199f29b13561fd875aa01e06a8ece03c89e51d1f8c236567eb488030926daef4",
+      "passed": true,
+      "source_statuses": {
+        "dalla_man": "completed",
+        "ultradian": "completed"
+      },
+      "status": "completed",
+      "stdlib_reconstruction_exit": 0
+    }
+  },
+  "schema": "m4-secure-study-verification/1",
+  "scientific_parity": {
+    "byte_identical_scientific_files": 330,
+    "comparison_archive": "/private/tmp/opent1d-functional-lab-acceptance-20261003/primary-v2",
+    "location_only_provenance_fields": [
+      "patient_file",
+      "parameter_file"
+    ],
+    "native_scientific_identity_checks": 6
+  },
+  "scope": "Internal synthetic runtime migration, numerical parity and artifact verification only",
+  "verification_date": "2026-10-04"
+}

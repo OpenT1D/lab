@@ -1,0 +1,129 @@
+{
+  "schema": "opent1d.catalogue-contract/1",
+  "request_schema": "opent1d.catalogue-request/1",
+  "catalogue_schema": "opent1d.local-catalogue/1",
+  "entry_keys": [
+    "id",
+    "task",
+    "archive",
+    "tags"
+  ],
+  "maximum_entries": 128,
+  "tasks": [
+    "p1-controller",
+    "m3-forecast",
+    "m3-compare",
+    "m4-secretion",
+    "m4-compare",
+    "m4-study",
+    "m4-study-secure",
+    "m5-prognosis",
+    "mmtt-sensitivity",
+    "mmtt-sampling"
+  ],
+  "index_scope": "passive JSON metadata and complete byte inventories; no supplied imports, reconstruction or simulation",
+  "verification_scope": "explicit authoritative standard-library reader; source archive unchanged before and after; report completeness separate from reader success",
+  "comparison_scope": "same-experiment repeat eligibility only; exact task, protocol, conditions, full roster, source/settings/state and scientific implementation identities; both reconstructed complete",
+  "repeat_condition_coverage": "saved Python/platform and task runtime/native conditions required; missing legacy provenance permits metadata/reconstruction but prevents repeat eligibility; only the two native installed-file locations are excluded from scientific identity",
+  "unsupported": "cross-task scores, differing-method comparisons, missing conditions, incomplete or unverified evidence, arbitrary archive modules, archive mutation",
+  "recorded_digest_scope": "Supported schema claims only; no archive rewriting, path-base guessing, authenticity, reconstruction or whole-archive integrity claim",
+  "recorded_digest_statuses": [
+    "matched",
+    "mismatch",
+    "malformed",
+    "unsupported",
+    "unavailable"
+  ],
+  "recorded_digest_schemas": {
+    "opent1d.local-tool-archive/1": {
+      "field": "files",
+      "base_relative_to_manifest": ".",
+      "claim_shape": "sha256_size"
+    },
+    "opent1d.simglucose/1": {
+      "field": "files_sha256",
+      "base_relative_to_manifest": ".",
+      "claim_shape": "sha256"
+    },
+    "opent1d.p1-external-case/1": {
+      "field": "files_sha256",
+      "base_relative_to_manifest": ".",
+      "claim_shape": "sha256"
+    },
+    "opent1d.m3.researcher/1": {
+      "field": "files",
+      "base_relative_to_manifest": ".",
+      "claim_shape": "sha256"
+    },
+    "opent1d.m3.comparison/1": {
+      "field": "files",
+      "base_relative_to_manifest": ".",
+      "claim_shape": "sha256"
+    },
+    "m4-researcher-workflow/1": {
+      "field": "files",
+      "base_relative_to_manifest": ".",
+      "claim_shape": "sha256"
+    },
+    "m4-causal-run/1": {
+      "field": "files",
+      "base_relative_to_manifest": ".",
+      "claim_shape": "sha256"
+    },
+    "m4-source-comparison/1": {
+      "field": "files",
+      "base_relative_to_manifest": ".",
+      "claim_shape": "sha256"
+    },
+    "m4-initial-load-run/1": {
+      "field": "files",
+      "base_relative_to_manifest": ".",
+      "claim_shape": "sha256"
+    },
+    "m4-secure-study-run/1": {
+      "field": "files",
+      "base_relative_to_manifest": ".",
+      "claim_shape": "sha256"
+    },
+    "m4-secure-reference-run/1": {
+      "field": "files",
+      "base_relative_to_manifest": ".",
+      "claim_shape": "sha256"
+    },
+    "m4-initial-load-reference-seal/1": {
+      "field": "files",
+      "base_relative_to_manifest": "reference",
+      "claim_shape": "sha256"
+    },
+    "bc008-feedback/1": {
+      "field": "files",
+      "base_relative_to_manifest": ".",
+      "claim_shape": "sha256"
+    },
+    "bc009-hepatic/1": {
+      "field": "files",
+      "base_relative_to_manifest": ".",
+      "claim_shape": "sha256"
+    },
+    "bc010-feedback-observation/1": {
+      "field": "files",
+      "base_relative_to_manifest": ".",
+      "claim_shape": "sha256"
+    },
+    "m5-researcher-archive/1": {
+      "field": "files",
+      "base_relative_to_manifest": ".",
+      "claim_shape": "sha256"
+    },
+    "opent1d.local-campaign/1": {
+      "field": "files",
+      "base_relative_to_manifest": ".",
+      "claim_shape": "sha256"
+    },
+    "opent1d.maintained-campaign/1": {
+      "field": "files",
+      "base_relative_to_manifest": ".",
+      "claim_shape": "sha256"
+    }
+  }
+}

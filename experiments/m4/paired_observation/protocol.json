@@ -1,0 +1,53 @@
+{
+  "schema": "bc004-boundary-protocol/1",
+  "id": "BC-004/1",
+  "base_commit": "166da30",
+  "specified_before_execution": true,
+  "status": "frozen_synthetic_contract_only",
+  "question": "Can one explicitly scaled secretion signal define consistent insulin and C-peptide inlet requests with separate baseline, distribution and loss ownership?",
+  "evidence_kind": "synthetic_boundary_verification",
+  "body_weight_kg": 102.32,
+  "scale_interpretation": "declared_whole_body_synthetic",
+  "time_unit": "min",
+  "insulin_molar_mass_g_mol": 5808.0,
+  "cpeptide_per_insulin_molar_ratio": 1.0,
+  "appearance_assumption": "equimolar_without_extra_delay_or_hepatic_cp_extraction",
+  "route": "liver",
+  "insulin": {
+    "reference": "BC-002 fixed native adult#001 kinetics; synthetic profile pairing only",
+    "revision": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc",
+    "body_weight_kg": 102.32,
+    "m1": 0.15446,
+    "m2": 0.225027424083,
+    "m30": 0.23169,
+    "m4": 0.090010969633,
+    "volume_l_kg": 0.054906
+  },
+  "cpeptide": {
+    "reference": "BC-003 Polonsky Table I T1D nominal group mean; not the same participant as the virtual insulin profile",
+    "k1": 0.037,
+    "k2": 0.031,
+    "k3": 0.052,
+    "volume_l_kg": 0.0655
+  },
+  "cases": [
+    {"id": "zero_increment", "baseline_mode": "incremental_zero", "basal_pmol_min": 0, "evoked_unit": "pmol/min", "edges_min": [0,240], "left": [0], "right": [0]},
+    {"id": "pulse_increment", "baseline_mode": "incremental_zero", "basal_pmol_min": 0, "evoked_unit": "pmol/min", "edges_min": [0,10,30,240], "left": [0,920.88,0], "right": [0,920.88,0]},
+    {"id": "pulse_synthetic_total", "baseline_mode": "synthetic_equilibrium", "basal_pmol_min": 153.48, "evoked_unit": "pmol/min", "edges_min": [0,10,30,240], "left": [0,920.88,0], "right": [0,920.88,0]},
+    {"id": "mass_ramp_increment", "baseline_mode": "incremental_zero", "basal_pmol_min": 0, "evoked_unit": "ug/min", "edges_min": [0,60], "left": [0], "right": [5.808]}
+  ],
+  "acceptance": {
+    "paired_input_relative_error": 1e-12,
+    "input_accounting_relative_error": 1e-12,
+    "equilibrium_derivative_pmol_kg_min": 1e-10,
+    "repeat_absolute_error": 0,
+    "expected_integrals_pmol_kg": {"zero_increment": 0, "pulse_increment": 180, "pulse_synthetic_total": 540, "mass_ramp_increment": 293.1978107896794}
+  },
+  "source_locations": {
+    "equimolar_and_cp_route": "Polonsky 1986 DOI 10.1172/JCI112308 pp98-99; a working assumption for this synthetic pairing, not graft validation",
+    "insulin_route": "Dalla Man 2007 DOI 10.1109/TBME.2007.893506 Eq3 p1742 and pinned simglucose; BC-002 boundary dossier",
+    "mass_conversion": "BC-002 molar mass 5808 g/mol, FDA Humulin R 2018 section11 p6",
+    "basal": "0 incremental; 153.48 pmol/min total case is an explicitly invented engineering fixture equal to 1.5 pmol/(kg min); no patient inference"
+  },
+  "excluded": ["coupled ODE execution", "human calibration", "BC-001 whole-body scale resolution", "general secretion deconvolution", "glucose feedback", "transplant or therapy effects", "authorization to access patient data"]
+}

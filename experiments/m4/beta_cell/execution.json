@@ -1,0 +1,341 @@
+{
+  "schema": "bc001-execution/1",
+  "status": "completed_synthetic_equation_reference",
+  "run_path": "results/m4/reference-04",
+  "base_commit": "4e32a60",
+  "manifest": {
+    "schema": "m4-beta-cell-run/1",
+    "model_version": "pedersen-cobelli-2013-reduced/1",
+    "status": "completed",
+    "started_utc": "2026-09-20T00:02:33.095616+00:00",
+    "runtime": {
+      "python": "3.12.13",
+      "numpy": "2.2.6",
+      "scipy": "1.15.3",
+      "matplotlib": "3.9.4"
+    },
+    "files": {
+      "input.csv": "719eb311ebc3f2e0bf134f84448807263fb985d6a3a5d57e32851552ea393bab",
+      "protocol.json": "4fd9ece0b4c80149e69fcec2c7de6e4ef80cf5a14744df857f4d16aeada10bff",
+      "reference-functions.csv": "037929b600e22a73c5d2919fdc15198de99ddcc874dbc28448a4384f9a4d58da",
+      "source-model.py": "b7dfe90b8ffa3ccd97062749207ea5e7f6910c0526bc819f962db9c66ce55544",
+      "source-plot.py": "c450cbf5440eaaeee3a03b461bbc8103193894f799457ed369022ba41875f464",
+      "source-pyproject.toml": "7c69b6f63a48d72f927c0253b68492de1ac60700d0549744de1207709732d3c5",
+      "source-report.py": "23783f5604cd04819db1fb7b8b398dc23c1b4bc0106ec0a06b4ef64e2ccf5fe2",
+      "source-run.py": "546fa22a5b51f9b485791d0587e33ee5ecc24342e064d557240827d786a2f10f",
+      "source-test_model.py": "2f8306c1d41801a42a07eb8ae2c00c57cc36f2b5d51fe339fde996de260ded64",
+      "source-uv.lock": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04",
+      "source-verify.py": "01acfaee26644f71c30f2d150dbf156d21eada3de08a7afff44499bb2f726ff8",
+      "trace.csv": "bcee7ada217011f41b96f9d2a380ea65641509b74f22fdc155967675e802696a",
+      "verification.json": "a8b392024ca46b52f2ef1458d4cac2b3d92f8ae1d81612580f36fa70b03e59cf",
+      "figure.svg": "b0f0f6592067201ea1eed67edf55de605cdf89ca2e1e2044c7ae0fe4508dab04",
+      "report.json": "749e7b3cb6edb0fbbadd58cfb25c2e12662605d4c91038b3e2293b832f956aac"
+    },
+    "git_head": "4e32a60099d19d2d49f8eb2a1e44a7c80d54f01a",
+    "git_branch": "codex/beta-cell-reference",
+    "source_identity": "Archived source hashes are authoritative for uncommitted implementation",
+    "finished_utc": "2026-09-20T00:02:43.465137+00:00"
+  },
+  "report": {
+    "schema": "m4-beta-cell-report/1",
+    "protocol": "BC-001/1",
+    "claim": "published_reduced_equations_with_synthetic_post_bolus_input",
+    "passed": true,
+    "time_points": 401,
+    "horizon_min": 100.0,
+    "initial_x_ug": 0.15465214552501502,
+    "initial_y_ug_per_min": 0.0,
+    "sampled_peak_evoked_secretion_ug_per_min": 4.588957191993037,
+    "sampled_peak_time_min": 22.75,
+    "trapezoid_evoked_secretion_auc_ug": 215.54949578016124,
+    "solver_max_absolute_secretion_error_ug_per_min": {
+      "coarse": 7.267217911444135e-06,
+      "tight": 3.1462099592260984e-10
+    },
+    "capacity_max_absolute_error_ug_per_min": 1.7763568394002505e-15,
+    "minimum_state": 0.0,
+    "reference_delay_range_min": [
+      12.050299287950354,
+      12.5
+    ],
+    "verification": {
+      "passed": true,
+      "checks": {
+        "solver_sensitivity": {
+          "passed": true,
+          "tight_reference_max_sr_error_ug_per_min": 3.146209781590414e-10,
+          "coarse_reference_max_sr_error_ug_per_min": 7.267217911515189e-06,
+          "tolerance_ug_per_min": 1e-06,
+          "methods_and_settings": [
+            {
+              "name": "coarse",
+              "method": "RK45",
+              "rtol": 1e-05,
+              "atol": 1e-07,
+              "max_step": 2.0
+            },
+            {
+              "name": "tight",
+              "method": "RK45",
+              "rtol": 1e-09,
+              "atol": 1e-11,
+              "max_step": 0.25
+            },
+            {
+              "name": "reference",
+              "method": "DOP853",
+              "rtol": 1e-11,
+              "atol": 1e-13,
+              "max_step": 0.125
+            }
+          ]
+        },
+        "deterministic_repeat": {
+          "passed": true,
+          "maximum_absolute_state_error": 0.0
+        },
+        "capacity_linearity": {
+          "passed": true,
+          "maximum_absolute_state_error": 2.220446049250313e-15,
+          "scenarios": {
+            "0.0": {
+              "maximum_absolute_state_scaling_error": 0.0,
+              "maximum_secretion_ug_per_min": 0.0
+            },
+            "0.25": {
+              "maximum_absolute_state_scaling_error": 1.7763568394002505e-15,
+              "maximum_secretion_ug_per_min": 1.14723929799826
+            },
+            "0.5": {
+              "maximum_absolute_state_scaling_error": 2.220446049250313e-15,
+              "maximum_secretion_ug_per_min": 2.294478595996519
+            },
+            "1.0": {
+              "maximum_absolute_state_scaling_error": 0.0,
+              "maximum_secretion_ug_per_min": 4.588957191993037
+            }
+          }
+        },
+        "zero_capacity": {
+          "passed": true,
+          "maximum_absolute_state": 0.0
+        },
+        "basal_threshold": {
+          "passed": true,
+          "maximum_absolute_state": 0.0,
+          "meaning": "evoked secretion only; zero is not a claim of no basal insulin in vivo"
+        },
+        "positivity": {
+          "passed": true,
+          "minimum_state": 0.0,
+          "negative_state_tolerance": 1e-09
+        },
+        "constant_forcing_closed_form": {
+          "passed": true,
+          "maximum_absolute_state_errors": {
+            "distinct_rates": 4.440892098500626e-15,
+            "equal_rates": 2.842170943040401e-14,
+            "nearly_equal_rates": 3.907985046680551e-14
+          },
+          "tolerance": 1e-06,
+          "constant_glucose_mmol_l": 10.0,
+          "x0_ug": 1.7
+        },
+        "glucose_conversion": {
+          "passed": true,
+          "mg_dl_per_mmol_l": 18.0,
+          "anchor_90_mg_dl_in_mmol_l": 5.0,
+          "maximum_absolute_state_error": 0.0
+        },
+        "published_algebraic_relationships": {
+          "passed": true,
+          "maximum_independent_expression_error": 3.552713678800501e-15,
+          "minimum_grid_delay_min": 12.050299287950354,
+          "maximum_grid_delay_min": 12.5,
+          "infinite_glucose_delay_min": 12.048894062863795,
+          "infinite_glucose_provision_ug_per_min": 7.72293364377183,
+          "asymptote_absolute_error": 8.881784197001252e-16,
+          "provision_at_10_mmol_l_ug_per_min": 3.793988763603188,
+          "evidence": "reconstructed Figure 2c/d equations; not digitized observations or cohort dynamics"
+        },
+        "initialization": {
+          "passed": true,
+          "d0_ug": 322.05882352941177,
+          "printed_equation_x0_ug": 0.15465214552501502,
+          "y0_ug_per_min": 0.0,
+          "independent_expression_absolute_error": 0.0,
+          "author_code_x0_ug": 92.7,
+          "printed_equation_auc_ug": 215.54949578016124,
+          "author_initialization_auc_ug": 308.2800529849656,
+          "initial_pool_release_closed_form_max_x_error_ug": 9.947598300641403e-14,
+          "exact_continuous_extra_secretion_ug": 92.54534785447498,
+          "maximum_sr_difference_ug_per_min": 57.37811566977449,
+          "interpretation": "unresolved source discrepancy; alternative is sensitivity, not correction"
+        },
+        "capacity_amplitude_confounding": {
+          "passed": true,
+          "maximum_absolute_state_difference": 0.0,
+          "case_a": {
+            "capacity": 1.0,
+            "c": 200.0,
+            "m0": 14.0,
+            "x0_ug": 0.15465214552501502
+          },
+          "case_b": {
+            "capacity": 0.5,
+            "c": 400.0,
+            "m0": 28.0,
+            "nominal_x0_ug": 0.30930429105003004
+          },
+          "conclusion": "exact common-amplitude confounding; no human identifiability estimate"
+        },
+        "invalid_input_rejection": {
+          "passed": true,
+          "rejected": 10,
+          "attempted": 10
+        },
+        "local_sensitivity_finite": {
+          "passed": true,
+          "relative_parameter_step": 0.01
+        }
+      },
+      "sensitivity": {
+        "r": {
+          "minus_auc_ug": 217.62615254795764,
+          "plus_auc_ug": 213.51110420096649,
+          "normalized_central_sensitivity": -0.954548358393771
+        },
+        "p_plus": {
+          "minus_auc_ug": 213.45327190118113,
+          "plus_auc_ug": 217.64455327819803,
+          "normalized_central_sensitivity": 0.9722317748522111
+        },
+        "p_minus": {
+          "minus_auc_ug": 215.55287045543685,
+          "plus_auc_ug": 215.54612121054453,
+          "normalized_central_sensitivity": -0.0015655905080850976
+        },
+        "f": {
+          "minus_auc_ug": 215.54765236823474,
+          "plus_auc_ug": 215.55130274408663,
+          "normalized_central_sensitivity": 0.000846760471110878
+        },
+        "m": {
+          "minus_auc_ug": 215.54731681529336,
+          "plus_auc_ug": 215.55162616791006,
+          "normalized_central_sensitivity": 0.0009996202034952555
+        },
+        "k_m": {
+          "minus_auc_ug": 218.40075555996708,
+          "plus_auc_ug": 212.72531365258592,
+          "normalized_central_sensitivity": -1.3165054937473701
+        },
+        "c": {
+          "minus_auc_ug": 213.65221928495941,
+          "plus_auc_ug": 217.44677227536323,
+          "normalized_central_sensitivity": 0.8802045619892976
+        },
+        "m0": {
+          "minus_auc_ug": 215.29127731756145,
+          "plus_auc_ug": 215.80771424276088,
+          "normalized_central_sensitivity": 0.11979543801070693
+        },
+        "k_phi": {
+          "minus_auc_ug": 217.71109642468878,
+          "plus_auc_ug": 213.4038379790721,
+          "normalized_central_sensitivity": -0.9991344285049123
+        }
+      },
+      "baseline_auc_ug": 215.54949578016124,
+      "evidence_scope": "synthetic numerical and published algebraic equation verification",
+      "human_validation": "not performed",
+      "published_dynamic_figure_reproduction": "not performed"
+    },
+    "empirical_evaluation": "not_performed_no_authorized_dynamic_observations",
+    "published_dynamic_figure_reproduction": "not_performed_missing_glucose_series_and_unresolved_initialization_discrepancy",
+    "theoretical_reference": "Figure 2c/d functions and approximately 12-minute delay; no digitized cohort result"
+  },
+  "checks": {
+    "isolated_uv_sync_locked": "passed",
+    "root_uv_sync_locked": "passed",
+    "native_tests": {
+      "passed": 23,
+      "log_sha256": "1aaeba5c89de1f637de7e705511b5b9fc4d6a94c6cb6a7fe9c971dd10d44c04f"
+    },
+    "artifact_tests": {
+      "passed": 30
+    },
+    "report_reconstruction": "byte_identical_python39_and_python312_no_site_packages",
+    "figure_reconstruction": "byte_identical_svg",
+    "repository_checks": {
+      "status": "passed",
+      "unit_tests": 201,
+      "strict_documentation_build": "passed",
+      "log_sha256": "19ec2eabf10d16ff48840dfba5a60745f800b303d245125c2f6efe4179a33aa7"
+    }
+  },
+  "selected_runner_failure_probes": {
+    "invalid-config": {
+      "passed": true,
+      "error_type": "JSONDecodeError",
+      "preserved_status": "failed"
+    },
+    "incomplete-solve": {
+      "passed": true,
+      "error_type": "RuntimeError",
+      "preserved_status": "failed"
+    },
+    "interrupted": {
+      "passed": true,
+      "error_type": "KeyboardInterrupt",
+      "preserved_status": "failed"
+    },
+    "existing_output_refused": {
+      "passed": true
+    }
+  },
+  "limitations": [
+    "No empirical evaluation or independent human review",
+    "No exact published dynamic cohort reconstruction",
+    "No metabolic or therapy coupling"
+  ],
+  "documentation_figure": {
+    "path": "docs/research/figures/m4-beta-cell-reference.svg",
+    "normalization": "Trailing whitespace removed from generated SVG for version control; geometry unchanged",
+    "sha256": "75f6c0f93b9fdc8da82c122f222f0047e10840faec077f8b60b7f116fa80fae7"
+  },
+  "source_worktree_checks": {
+    "all_72_matched_at_postexecution_check": true,
+    "later_delivery_check_differences": [
+      {
+        "file": ".github/workflows/checks.yml",
+        "observed_sha256": "d46409e5f3d8175a926169f883c594e0c19a4cd31d4b87fc97462eb1661fca8e"
+      },
+      {
+        "file": "CHANGELOG.md",
+        "observed_sha256": "d122109235d6f11f343742c7a836a8f2a28f1fbca042c5c6821cb9fa6616d637"
+      },
+      {
+        "file": "README.md",
+        "observed_sha256": "c8e8f134db735da7bcfdbadc30342d4c4f93bfa99cf45a196d31cd9cd0c4e6c1"
+      },
+      {
+        "file": "ROADMAP.md",
+        "observed_sha256": "e8465f9d29bc5f50482a667a9e081ce9a2c94f83f078c10bb89ae2bdaff11aec"
+      },
+      {
+        "file": "docs/_toc.yml",
+        "observed_sha256": "4c3f76268e264868c70a5ad1be4f7d555b68a8ae0d4a721f721831a2b98b2ccd"
+      },
+      {
+        "file": "docs/decisions/README.md",
+        "observed_sha256": "674459eb64e47428f35fa321cdeaa945a158362b691c01241abd65021f462fe0"
+      },
+      {
+        "file": "docs/index.md",
+        "observed_sha256": "2cde2b0a558aff0bfe006f7de94068d94d788633fa4ed90080ffaf2c3bf68b83"
+      }
+    ],
+    "interpretation": "Concurrent M3 external-transfer additions appeared after the earlier checkpoint. This task did not edit or revert the original worktree and preserves the recorded baseline, without importing those later changes."
+  }
+}

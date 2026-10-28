@@ -1,0 +1,1073 @@
+{
+  "schema_version": "lit001.fulltext_screening/1",
+  "reviewer": {
+    "agent": "method_review",
+    "reviewed_on": "2026-09-20",
+    "type": "AI_fulltext_followup",
+    "human_review": false
+  },
+  "scope": {
+    "source_screening": "experiments/literature/lit001/screening-a.json",
+    "source_screening_sha256": "0d045927d980251833e3d0aa7248bbee0856c79c17d8f7ceb9ae57ba98423de7",
+    "candidate_or_unresolved_count": 24,
+    "counts": {
+      "background": 3,
+      "unresolved": 16,
+      "primary": 5
+    },
+    "method": "Individually reviewed each candidate or unresolved record. Original abstracts/metadata refreshed; direct original full-text access attempted for every record; accessible methods/tables/figure captions reviewed. Selected original/institutional/registry routes followed for eligibility and overlap. Full text unavailable and missing eligibility kept distinct. Not a systematic full-text exhaustive retrieval or human dual review.",
+    "primary_definition": "Eligible adult T1D kinetic evidence group, possibly limited to specified separable controls; does not mean full text accessible, U100-only, independent cohort or valid numerical reference.",
+    "background_definition": "Useful indirect/mixed-population or model ancestry; no eligible direct plasma-lispro kinetic target established.",
+    "unresolved_definition": "Potentially eligible but population, formulation, separability or accessible evidence insufficient; not counted primary.",
+    "download_note": "Public original/source snapshots retained under ignored results/lit001/source-material/a/ with URL/hash manifest; no raw patient dataset acquired and no blanket redistribution license asserted. HTTP200 checked for article versus redirect/challenge content. Wilinska journal PDF retained separately by parent.",
+    "exposure_note": "All source content read here is exposed evidence and cannot subsequently be labelled unseen validation; independent human review unclaimed."
+  },
+  "decisions": [
+    {
+      "decision": "background",
+      "reviewed_material": "institutional_thesis_selected_full_text_and_visual_table_check",
+      "reason": "Thesis supports model ancestry. Chapter 4 is adult T1D but its absorption parameter is fitted to glucose, not plasma insulin; Chapter 5 is a direct lispro kinetic study with unresolved all-adult eligibility.",
+      "measurements_and_conditions": [
+        "Chapter 4 printed pp51–64 (PDF65–78): 12 T1D participants aged21–64; Humalog CSII and meal boluses; plasma insulin sampled every30min. Concentration not located.",
+        "Chapter 4 pp56–60: three-compartment insulin equations; ke=0.1408/min and Vi=0.12L/kg fixed fromref91. Plasma glucose is fitted output. Table4.4 p64 reports individual ka in 10^-2/min; visually checked.",
+        "Chapter 5 pp75–93: seven T1D participants, mean age31.7±14.1 without range. Ten competing models, Model9 selected; distinct manuscript stage from 2005 journal eleven-model account."
+      ],
+      "reference_feasibility": "Declared-model reconstruction possible after unit/source audit; patient-curve reproduction lacks numeric pump histories. Adult chapter4 is not independent plasma-PK validation.",
+      "overlap_and_independence": "Chapter5 matches seven-person Graz journal2005 cohort by protocol/demographics; do not count twice. Chapter4 has a separate12-person protocol, but participant overlap with other Graz publications is unestablished.",
+      "key": "ETH:407545",
+      "input_index": 13,
+      "title": "Modelling of glucose and insulin kinetics to facilitate the development of a wearable artificial pancreas",
+      "doi": null,
+      "source_urls": [
+        "https://openaccess.city.ac.uk/id/eprint/30944/",
+        "https://openaccess.city.ac.uk/id/eprint/30944/1/Wilinska%20thesis%202004%20PDF-A.pdf"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://openaccess.city.ac.uk/id/eprint/30944/",
+          "status": 200,
+          "final_url": "https://openaccess.city.ac.uk/id/eprint/30944/",
+          "content_type": "text/html; charset=utf-8",
+          "bytes": 46139,
+          "sha256": "99d35e9dde21e81f188e4f30a36849f7b3f8b1aea43e81762fc5fbbc4d0d031f",
+          "reviewed_on": "2026-09-20",
+          "outcome": "institutional_record_with_thesis_link"
+        },
+        {
+          "url": "https://openaccess.city.ac.uk/id/eprint/30944/1/Wilinska%20thesis%202004%20PDF-A.pdf",
+          "status": 200,
+          "final_url": "https://openaccess.city.ac.uk/id/eprint/30944/1/Wilinska%20thesis%202004%20PDF-A.pdf",
+          "content_type": "application/pdf",
+          "bytes": 6765933,
+          "sha256": "cd8156aff29bbc5926092a05719c778419218c1b4a9af940b212828c5d378488",
+          "reviewed_on": "2026-09-20",
+          "outcome": "original_full_text_retrieved_and_relevant_sections_reviewed"
+        }
+      ],
+      "primary_evidence_group": null,
+      "full_text_reproduction_claim": false,
+      "next_action": "Retain as indirect/model/assay context; no primary numerical target selected.",
+      "source_version": "City University2004 doctoral thesis; institutional wrapper and165 PDF pages; printed-page numbers differ by14"
+    },
+    {
+      "decision": "unresolved",
+      "reviewed_material": "original_abstract_metadata",
+      "reason": "SC lispro kinetics in T1D confirmed, but publisher routes unavailable and ages/concentration unverified.",
+      "measurements_and_conditions": [
+        "Randomized crossover,10 T1D;5h pump interruption and5h restart; hourly plasma free insulin alongside glucose/metabolites."
+      ],
+      "reference_feasibility": "Potential pump-interruption empirical aggregate; no original curves, exact input histories or adult eligibility acquired.",
+      "overlap_and_independence": "No independent-cohort claim established in this follow-up; check related reports before pooling.",
+      "key": "PMID:10443658",
+      "input_index": 29,
+      "title": "Comparison of metabolic deterioration between insulin analog and regular insulin after a 5-hour interruption of a continuous subcutaneous insulin infusion in type 1 diabetic patients.",
+      "doi": "10.1210/jcem.84.8.5912",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/10443658/"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A10443658+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://doi.org/10.1210/jc.84.8.2673",
+          "error": "HTTP Error 522: <none>",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        },
+        {
+          "url": "https://doi.org/10.1210/jcem.84.8.5912",
+          "error": "HTTP Error 403: Forbidden",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        }
+      ],
+      "primary_evidence_group": null,
+      "full_text_reproduction_claim": false,
+      "next_action": "Resolve stated population/formulation/access uncertainty before primary inclusion; retain in unresolved queue."
+    },
+    {
+      "decision": "unresolved",
+      "reviewed_material": "original_bibliographic_metadata_no_abstract",
+      "reason": "Original article/PDF attempts failed; adult T1D composition, lispro product and endpoints could not be verified from title-only record.",
+      "measurements_and_conditions": [
+        "1999 NDT supplement14(suppl4):5–6; haemodialysis population."
+      ],
+      "reference_feasibility": "No executable reference from reviewed material.",
+      "overlap_and_independence": "Possible precursor/overlap with Czock2003 PMID14703957 because setting and some authors match; unproven, so do not count independent.",
+      "key": "PMID:10463187",
+      "input_index": 30,
+      "title": "Pharmacokinetics and pharmacodynamics of insulin Lispro compared with regular insulin in haemodialysis patients with diabetes mellitus.",
+      "doi": "10.1093/ndt/14.suppl_4.5",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/10463187/"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A10463187+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://doi.org/10.1093/ndt/14.suppl_4.5",
+          "error": "HTTP Error 403: Forbidden",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        },
+        {
+          "url": "https://academic.oup.com/ndt/article-pdf/14/suppl_4/5/13067101/10463187.pdf",
+          "error": "HTTP Error 403: Forbidden",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        }
+      ],
+      "primary_evidence_group": null,
+      "full_text_reproduction_claim": false,
+      "next_action": "Resolve stated population/formulation/access uncertainty before primary inclusion; retain in unresolved queue."
+    },
+    {
+      "decision": "unresolved",
+      "reviewed_material": "original_abstract_metadata",
+      "reason": "Lispro CSII kinetic comparator and T1D established; ages and assay/full protocol remain unverified after publisher access attempt.",
+      "measurements_and_conditions": [
+        "20 C-peptide-negative T1D;24h isoglycemic clamp; lispro CSII0.3U/kg/24h with initial IV insulin tapered."
+      ],
+      "reference_feasibility": "Potential basal steady-state concentration reference; IV contribution and assay require full text, and not interchangeable with single-bolus absorption.",
+      "overlap_and_independence": "No independent-cohort claim established in this follow-up; check related reports before pooling.",
+      "key": "PMID:11118018",
+      "input_index": 40,
+      "title": "Pharmacokinetics and pharmacodynamics of subcutaneous injection of long-acting human insulin analog glargine, NPH insulin, and ultralente human insulin and continuous subcutaneous infusion of insulin lispro.",
+      "doi": "10.2337/diabetes.49.12.2142",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/11118018/"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A11118018+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://doi.org/10.2337/diabetes.49.12.2142",
+          "error": "HTTP Error 403: Forbidden",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        }
+      ],
+      "primary_evidence_group": null,
+      "full_text_reproduction_claim": false,
+      "next_action": "Resolve stated population/formulation/access uncertainty before primary inclusion; retain in unresolved queue."
+    },
+    {
+      "decision": "unresolved",
+      "reviewed_material": "original_abstract_metadata",
+      "reason": "Separate T1D renal/control arms have lispro PK, but ages and full protocol remain unavailable after DOI/PDF attempts.",
+      "measurements_and_conditions": [
+        "12 nephropathy plus12 normal-renal T1D controls;0.2U/kg SC lispro/regular crossover clamp. Free-insulin peak and timing reported separately."
+      ],
+      "reference_feasibility": "Normal-renal control potentially relevant; renal clearance changes must remain separate. No curves/age bounds acquired.",
+      "overlap_and_independence": "No independent-cohort claim established in this follow-up; check related reports before pooling.",
+      "key": "PMID:11347749",
+      "input_index": 43,
+      "title": "Impact of diabetic nephropathy on pharmacodynamic and Pharmacokinetic properties of insulin in type 1 diabetic patients.",
+      "doi": "10.2337/diacare.24.5.886",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/11347749/"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A11347749+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://diabetesjournals.org/care/article-pdf/24/5/886/643937/886.pdf",
+          "error": "HTTP Error 403: Forbidden",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        },
+        {
+          "url": "https://doi.org/10.2337/diacare.24.5.886",
+          "error": "HTTP Error 403: Forbidden",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        }
+      ],
+      "primary_evidence_group": null,
+      "full_text_reproduction_claim": false,
+      "next_action": "Resolve stated population/formulation/access uncertainty before primary inclusion; retain in unresolved queue."
+    },
+    {
+      "decision": "background",
+      "reviewed_material": "original_abstract_and_publisher_section_previews",
+      "reason": "Only two of seven participants have T1D; retrieved results are pooled with five T2D participants and no separable adult-T1D PK was located.",
+      "measurements_and_conditions": [
+        "Meal then30min cycling at50% maximal oxygen uptake; paired abdominal SC lispro/regular; insulin and counterregulatory hormones measured. Publisher preview gives pooled mean age36±5.9."
+      ],
+      "reference_feasibility": "Indirect exercise-context evidence only. Full text unavailable, so existence of separable supplementary results is not ruled out.",
+      "overlap_and_independence": "No independent-cohort claim established in this follow-up; check related reports before pooling.",
+      "key": "PMID:12007726",
+      "input_index": 61,
+      "title": "Glycemic response during exercise after administration of insulin lispro compared with that after administration of regular human insulin.",
+      "doi": "10.1016/s0168-8227(02)00014-1",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/12007726/",
+        "https://www.sciencedirect.com/science/article/abs/pii/S0168822702000141"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A12007726+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://doi.org/10.1016/s0168-8227(02)00014-1",
+          "status": 200,
+          "final_url": "https://linkinghub.elsevier.com/retrieve/pii/S0168822702000141",
+          "content_type": "text/html;charset=UTF-8",
+          "bytes": 2763,
+          "sha256": "34495e6da8e4720c43f1b0706a6d06c2560670343a4e3792243eb464a31d546e",
+          "reviewed_on": "2026-09-20",
+          "outcome": "DOI_redirect_shell_not_full_text"
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0168822702000141",
+          "error": "HTTP Error 403: Forbidden",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0168822702000141",
+          "outcome": "publisher_abstract_and_section_previews_read_via_search_tool_not_full_text",
+          "reviewed_on": "2026-09-20",
+          "method": "web_primary_source_read"
+        }
+      ],
+      "primary_evidence_group": null,
+      "full_text_reproduction_claim": false,
+      "next_action": "Retain as indirect/model/assay context; no primary numerical target selected."
+    },
+    {
+      "decision": "unresolved",
+      "reviewed_material": "original_abstract_metadata",
+      "reason": "Relevant assay-separated lispro measurements in T1D; only mean age available in acquired original material and publisher PDFs inaccessible.",
+      "measurements_and_conditions": [
+        "14 T1D;10U lispro/aspart before breakfast after bedtime intermediate human insulin. Subtraction of human-specific from cross-reactive assays estimates analogue concentrations. Lispro peak40±3min in abstract."
+      ],
+      "reference_feasibility": "Strong assay/observation-model source once full text is obtained. Age22–59 appeared in a third-party indexed copy but was not accepted as verified original full-text evidence.",
+      "overlap_and_independence": "Potential overlap with Hedman2001 direct comparison and later correspondence; compare subjects/protocol before treating as independent.",
+      "key": "PMID:12032113",
+      "input_index": 63,
+      "title": "Use of a novel double-antibody technique to describe the pharmacokinetics of rapid-acting insulin analogs.",
+      "doi": "10.2337/diacare.25.6.1049",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/12032113/"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A12032113+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://care.diabetesjournals.org/content/diacare/25/6/1049.full.pdf",
+          "error": "HTTP Error 403: Forbidden",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        },
+        {
+          "url": "https://doi.org/10.2337/diacare.25.6.1049",
+          "error": "HTTP Error 403: Forbidden",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        }
+      ],
+      "primary_evidence_group": null,
+      "full_text_reproduction_claim": false,
+      "next_action": "Resolve stated population/formulation/access uncertainty before primary inclusion; retain in unresolved queue."
+    },
+    {
+      "decision": "unresolved",
+      "reviewed_material": "original_abstract_and_publisher_abstract_page",
+      "reason": "T1D lispro PK confirmed; mean age36±8 does not verify every participant is ≥18. Publisher page is abstract-only.",
+      "measurements_and_conditions": [
+        "24 T1D; randomized double-blind crossover; individualized prandial lispro/aspart dose before mixed meal. Insulin AUC, peak and half-maximum timings assessed."
+      ],
+      "reference_feasibility": "Potential aggregate meal-PK reference; age bounds, assay and numerical curves unresolved.",
+      "overlap_and_independence": "No independent-cohort claim established in this follow-up; check related reports before pooling.",
+      "key": "PMID:12401756",
+      "input_index": 76,
+      "title": "A direct comparison of insulin aspart and insulin lispro in patients with type 1 diabetes.",
+      "doi": "10.2337/diacare.25.11.2053",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/12401756/",
+        "https://diabetesjournals.org/care/article/25/11/2053/24634/A-Direct-Comparison-of-Insulin-Aspart-and-Insulin"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A12401756+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://doi.org/10.2337/diacare.25.11.2053",
+          "error": "HTTP Error 403: Forbidden",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        },
+        {
+          "url": "https://diabetesjournals.org/care/article/25/11/2053/24634/A-Direct-Comparison-of-Insulin-Aspart-and-Insulin",
+          "outcome": "publisher_abstract_only_purchase_notice",
+          "reviewed_on": "2026-09-20",
+          "method": "web_primary_source_read"
+        }
+      ],
+      "primary_evidence_group": null,
+      "full_text_reproduction_claim": false,
+      "next_action": "Resolve stated population/formulation/access uncertainty before primary inclusion; retain in unresolved queue."
+    },
+    {
+      "decision": "unresolved",
+      "reviewed_material": "original_abstract_and_publisher_abstract_page",
+      "reason": "Seven C-peptide-negative T1D with lispro PK, but adult ages and full source not acquired.",
+      "measurements_and_conditions": [
+        "SC lispro/aspart9.4±1.9U in randomized order, overnight IV normalization; glucose clamp4–5h, total study8h. Abstract distinguishes plasma peak near30min from metabolic effects near2–3h."
+      ],
+      "reference_feasibility": "Potential plasma-concentration comparator; full protocol/age and original curves required.",
+      "overlap_and_independence": "No independent-cohort claim established in this follow-up; check related reports before pooling.",
+      "key": "PMID:12832307",
+      "input_index": 92,
+      "title": "Comparison of insulin aspart and lispro: pharmacokinetic and metabolic effects.",
+      "doi": "10.2337/diacare.26.7.2027",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/12832307/",
+        "https://diabetesjournals.org/care/article/26/7/2027/26717/Comparison-of-Insulin-Aspart-and"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A12832307+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://diabetesjournals.org/care/article-pdf/26/7/2027/655879/dc0703002027.pdf",
+          "error": "HTTP Error 403: Forbidden",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        },
+        {
+          "url": "https://doi.org/10.2337/diacare.26.7.2027",
+          "error": "HTTP Error 403: Forbidden",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        },
+        {
+          "url": "https://diabetesjournals.org/care/article/26/7/2027/26717/Comparison-of-Insulin-Aspart-and",
+          "outcome": "publisher_abstract_only_no_access_notice",
+          "reviewed_on": "2026-09-20",
+          "method": "web_primary_source_read"
+        }
+      ],
+      "primary_evidence_group": null,
+      "full_text_reproduction_claim": false,
+      "next_action": "Resolve stated population/formulation/access uncertainty before primary inclusion; retain in unresolved queue."
+    },
+    {
+      "decision": "unresolved",
+      "reviewed_material": "original_abstract_metadata",
+      "reason": "Conventional lispro-alone control measured alongside premix, but sample size/ages and concentration absent from acquired abstract; DOI access failed.",
+      "measurements_and_conditions": [
+        "Three-way meal crossover; free insulin measured7h; lispro and regular equal doses, premix dose4/3 as large; IV insulin stopped15min after injection."
+      ],
+      "reference_feasibility": "Only lispro-alone arm potentially eligible; exact dose, age and assay/IV carryover need full text.",
+      "overlap_and_independence": "No independent-cohort claim established in this follow-up; check related reports before pooling.",
+      "key": "PMID:14632722",
+      "input_index": 101,
+      "title": "A 75% insulin lispro/25% NPL mixture provides a longer duration of insulin activity compared with insulin lispro alone in patients with Type 1 diabetes.",
+      "doi": "10.1046/j.1464-5491.2003.01100.x",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/14632722/"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A14632722+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://doi.org/10.1046/j.1464-5491.2003.01100.x",
+          "error": "HTTP Error 403: Forbidden",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        }
+      ],
+      "primary_evidence_group": null,
+      "full_text_reproduction_claim": false,
+      "next_action": "Resolve stated population/formulation/access uncertainty before primary inclusion; retain in unresolved queue."
+    },
+    {
+      "decision": "unresolved",
+      "reviewed_material": "original_abstract_and_publisher_abstract",
+      "reason": "SC lispro PK in eight haemodialysis patients, but original abstract does not establish all-adult T1D population. Full-text routes failed.",
+      "measurements_and_conditions": [
+        "Individualized SC doses, crossover lispro/regular; abstract tmax20 vs40min. PubMed indexes T1D and middle age, but indexing does not establish participant eligibility."
+      ],
+      "reference_feasibility": "Renal-context evidence pending population verification; not a normal-clearance parameter source.",
+      "overlap_and_independence": "Potential overlap with Aisenpreis1999 PMID10463187; not confirmed. Publisher and PubMed render concentration units differently, so no numeric concentration extraction accepted.",
+      "key": "PMID:14703957",
+      "input_index": 103,
+      "title": "Pharmacokinetics and pharmacodynamics of lispro-insulin in hemodialysis patients with diabetes mellitus.",
+      "doi": "10.5414/cpp41492",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/14703957/",
+        "https://www.dustri.com/nc/article-response-page.html?artId=1548&doi=10.5414%2FCPP41492"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A14703957+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://doi.org/10.5414/cpp41492",
+          "error": "HTTP Error 302: The HTTP server returned a redirect error that would lead to an infinite loop.\nThe last 30x error message was:\nFound",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        },
+        {
+          "url": "https://www.dustri.com/nc/article-response-page.html?artId=1548&doi=10.5414%2FCPP41492",
+          "error": "HTTP Error 302: The HTTP server returned a redirect error that would lead to an infinite loop.\nThe last 30x error message was:\nFound",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        },
+        {
+          "url": "https://www.dustri.com/nc/article-response-page.html?artId=1548&doi=10.5414%2FCPP41492",
+          "outcome": "publisher_abstract_read_via_search_tool_only",
+          "reviewed_on": "2026-09-20",
+          "method": "web_primary_source_read"
+        }
+      ],
+      "primary_evidence_group": null,
+      "full_text_reproduction_claim": false,
+      "next_action": "Resolve stated population/formulation/access uncertainty before primary inclusion; retain in unresolved queue."
+    },
+    {
+      "decision": "unresolved",
+      "reviewed_material": "journal_formatted_full_text_at_academic_mirror",
+      "reason": "Direct conventional Humalog SC kinetic model in T1D; journal gives mean age31.7±14.1 only, so all-adult eligibility remains unresolved.",
+      "measurements_and_conditions": [
+        "Seven T1D,12h variable CSII/meal boluses; plasma insulin every30min. Eleven models; fast/slow absorption and saturable local degradation considered. Concentration not found."
+      ],
+      "reference_feasibility": "Model ancestry and equation reference; journal model-number/table inconsistency and unit normalization need resolution before execution. Numeric individual input histories missing.",
+      "overlap_and_independence": "Same seven-person protocol as Wilinska thesis Chapter5. Treat as one cohort; thesis has ten models/Model9 versus journal eleven/Model10, not interchangeable numbering.",
+      "key": "PMID:15651559",
+      "input_index": 121,
+      "title": "Insulin kinetics in type-I diabetes: continuous and bolus delivery of rapid acting insulin.",
+      "doi": "10.1109/tbme.2004.839639",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/15651559/",
+        "http://www.stat.yale.edu/~jtc5/diabetes/insulin_kinetics_Hovorka_IEEE-Trans-Biomed_05.pdf"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A15651559+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://doi.org/10.1109/TBME.2004.839639",
+          "status": 202,
+          "final_url": "https://ieeexplore.ieee.org/document/1369583/",
+          "content_type": "text/html; charset=UTF-8",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "reviewed_on": "2026-09-20",
+          "outcome": "empty_response_not_full_text"
+        },
+        {
+          "url": "http://www.stat.yale.edu/~jtc5/diabetes/insulin_kinetics_Hovorka_IEEE-Trans-Biomed_05.pdf",
+          "outcome": "parent_retrieved_academic_mirror_journal_PDF_independently_read_locally",
+          "sha256": "721452565901f86d27cdf64198a8c1a90be0dc2da447a4ab19c70179464b8398",
+          "reviewed_on": "2026-09-20"
+        }
+      ],
+      "primary_evidence_group": null,
+      "full_text_reproduction_claim": false,
+      "next_action": "Resolve stated population/formulation/access uncertainty before primary inclusion; retain in unresolved queue.",
+      "source_version": "IEEE2005 journal-formatted10-page PDF from academic mirror"
+    },
+    {
+      "decision": "unresolved",
+      "reviewed_material": "original_abstract_and_institutional_metadata",
+      "reason": "Controller study actually measures serum insulin; cannot exclude on title. Formulation and ages remain unknown because full text unavailable.",
+      "measurements_and_conditions": [
+        "Six T1D, paired8h fasting MPC experiments using immediate versus30min delayed IV glucose measurements; SC insulin dose and serum insulin analyzed."
+      ],
+      "reference_feasibility": "Potential dynamic PK evidence; original serum curves, dose histories, formulation and age bounds needed.",
+      "overlap_and_independence": "Graz/ADICOL investigator overlap with Wilinska does not establish shared participants. Independence unverified.",
+      "key": "PMID:16409572",
+      "input_index": 152,
+      "title": "On-line adaptive algorithm with glucose prediction capacity for subcutaneous closed loop control of glucose: evaluation under fasting conditions in patients with Type 1 diabetes.",
+      "doi": "10.1111/j.1464-5491.2006.01695.x",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/16409572/",
+        "https://graz.elsevierpure.com/en/publications/on-line-adaptive-algorithm-with-glucose-prediction-capacity-for-s"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A16409572+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://doi.org/10.1111/j.1464-5491.2006.01695.x",
+          "error": "HTTP Error 403: Forbidden",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        },
+        {
+          "url": "https://graz.elsevierpure.com/en/publications/on-line-adaptive-algorithm-with-glucose-prediction-capacity-for-s",
+          "outcome": "institutional_bibliographic_record_no_attachment_in_reviewed_view",
+          "reviewed_on": "2026-09-20",
+          "method": "web_primary_source_read"
+        }
+      ],
+      "primary_evidence_group": null,
+      "full_text_reproduction_claim": false,
+      "next_action": "Resolve stated population/formulation/access uncertainty before primary inclusion; retain in unresolved queue."
+    },
+    {
+      "decision": "primary",
+      "reviewed_material": "PMC_full_text_methods_tables_figures_captions",
+      "reason": "Two explicitly adult T1D subjects with separate conventional SC Humalog control PK; retain control visits only.",
+      "measurements_and_conditions": [
+        "Ages38 and43; U100 control via9mm abdominal catheter;10U fasting and7.5U meal controls, respectively by protocol phase; no basal after bolus. Free insulin sampled to3.5h; one meal75g carbohydrate.",
+        "Do not confuse U50 microneedle doses/routes with U100 controls."
+      ],
+      "reference_feasibility": "Individual plotted control curves can support digitized empirical reconstruction, not raw-data reproduction; sparse early samples and stopping rules limit peak/tail precision.",
+      "overlap_and_independence": "2009 Table1 demographics match first two subjects of Gupta2011 across age/sex/weight/BMI/diabetes duration; probable overlap, not an independent replication. Doses/protocols differ; duplicated measurements not proven.",
+      "key": "PMID:19459760",
+      "input_index": 233,
+      "title": "Minimally invasive insulin delivery in subjects with type 1 diabetes using hollow microneedles.",
+      "doi": "10.1089/dia.2008.0103",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/19459760/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC2779563/"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A19459760+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC2779563/fullTextXML",
+          "error": "HTTP Error 500: ",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        },
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2779563/",
+          "status": 200,
+          "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2779563/",
+          "content_type": "text/html; charset=utf-8",
+          "bytes": 153905,
+          "sha256": "6030538ac64f2cf7100ec65cd78352d842b462b61bf2c8d4c00d64e780a8597a",
+          "reviewed_on": "2026-09-20",
+          "outcome": "original_full_text_retrieved_and_relevant_sections_reviewed"
+        }
+      ],
+      "primary_evidence_group": "conventional_U100_SC",
+      "full_text_reproduction_claim": false,
+      "next_action": "Retain eligible evidence group and limitations; select targets separately before numerical work.",
+      "source_version": "PMC archived journal article"
+    },
+    {
+      "decision": "unresolved",
+      "reviewed_material": "original_abstract_metadata",
+      "reason": "Adult T1D eligibility confirmed but study mixes lispro/aspart and only9 of17 had insulin sampled; lispro-specific kinetic separation unverified without full text.",
+      "measurements_and_conditions": [
+        "17 T1D aged18–53;0.15U/kg pump bolus before liquid meal, local heating on/off. Pooled PK timings reported."
+      ],
+      "reference_feasibility": "Do not treat pooled analogue curve as conventional lispro reference; need formulation of the nine sampled participants and separate arm data.",
+      "overlap_and_independence": "No independent-cohort claim established in this follow-up; check related reports before pooling.",
+      "key": "PMID:19539098",
+      "input_index": 237,
+      "title": "Effect of a local heating device on insulin and glucose pharmacokinetic profiles in an open-label, randomized, two-period, one-way crossover study in patients with type 1 diabetes using continuous subcutaneous insulin infusion.",
+      "doi": "10.1016/j.clinthera.2009.05.010",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/19539098/"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A19539098+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://doi.org/10.1016/j.clinthera.2009.05.010",
+          "status": 200,
+          "final_url": "https://linkinghub.elsevier.com/retrieve/pii/S0149291809001568",
+          "content_type": "text/html;charset=UTF-8",
+          "bytes": 2819,
+          "sha256": "4a6d5873fc839a1d028b2f9b529206dda7b1f9facabf42e14ee6cc3268f724fa",
+          "reviewed_on": "2026-09-20",
+          "outcome": "DOI_redirect_shell_not_full_text"
+        }
+      ],
+      "primary_evidence_group": null,
+      "full_text_reproduction_claim": false,
+      "next_action": "Resolve stated population/formulation/access uncertainty before primary inclusion; retain in unresolved queue."
+    },
+    {
+      "decision": "unresolved",
+      "reviewed_material": "PMC_full_text_and_attempted_original_cohort_report",
+      "reason": "Full text explicitly confirms ten adult T1D and measured plasma insulin; actual delivered formulation not stated in checked article. Original2006 cohort report could not be acquired from publisher.",
+      "measurements_and_conditions": [
+        "About28h closed-loop with meals, plasma insulin/glucose every20min. Two-compartment PK model, individual fits and Table1 parameters; alternative three-compartment PK comparison."
+      ],
+      "reference_feasibility": "Promising declared-model reference once formulation is verified; group curve averages individual fits and cannot be recreated by plugging mean parameters into mean input.",
+      "overlap_and_independence": "Explicit reuse of Steil2006 DOI10.2337/db06-0419; not independent validation. Third-party indexed original suggests lispro but was not used as final verification.",
+      "key": "PMID:20144418",
+      "input_index": 265,
+      "title": "Identification of intraday metabolic profiles during closed-loop glucose control in individuals with type 1 diabetes.",
+      "doi": "10.1177/193229680900300508",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/20144418/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC2769900/"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A20144418+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC2769900/fullTextXML",
+          "error": "HTTP Error 500: ",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        },
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2769900/",
+          "status": 200,
+          "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2769900/",
+          "content_type": "text/html; charset=utf-8",
+          "bytes": 231694,
+          "sha256": "81b519c8f923bf9a5413bd0c2f0f828285bf5b177140dd5d7e4472e98a91138d",
+          "reviewed_on": "2026-09-20",
+          "outcome": "original_full_text_retrieved_and_relevant_sections_reviewed"
+        },
+        {
+          "url": "https://diabetesjournals.org/diabetes/article/55/12/3344/12465/Feasibility-of-Automating-Insulin-Delivery-for-the",
+          "error": "HTTP Error 403: Forbidden",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        }
+      ],
+      "primary_evidence_group": null,
+      "full_text_reproduction_claim": false,
+      "next_action": "Resolve stated population/formulation/access uncertainty before primary inclusion; retain in unresolved queue.",
+      "source_version": "PMC archived journal article"
+    },
+    {
+      "decision": "background",
+      "reviewed_material": "PMC_full_text_methods_table_and_assay_discussion",
+      "reason": "Mixed youth/adult eligibility11–21 with pooled results; no adult subgroup found. Glargine coadministration and assay cross-reactivity also prevent isolated adult-lispro PK interpretation.",
+      "measurements_and_conditions": [
+        "11 T1D,0.2U/kg lispro+0.4U/kg glargine mixed versus separate injections;5h clamp. Iso-insulin ELISA cross-reactivity89% lispro/44% glargine."
+      ],
+      "reference_feasibility": "Useful assay and coadministration limitation evidence; pooled curve is not an adult conventional-lispro reference.",
+      "overlap_and_independence": "No independent-cohort claim established in this follow-up; check related reports before pooling.",
+      "key": "PMID:20150302",
+      "input_index": 269,
+      "title": "Early pharmacokinetic and pharmacodynamic effects of mixing lispro with glargine insulin: results of glucose clamp studies in youth with type 1 diabetes.",
+      "doi": "10.2337/dc09-2118",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/20150302/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC2858163/"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A20150302+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC2858163/fullTextXML",
+          "error": "HTTP Error 500: ",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        },
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2858163/",
+          "status": 200,
+          "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2858163/",
+          "content_type": "text/html; charset=utf-8",
+          "bytes": 130351,
+          "sha256": "58c2608f0f1eb8741acb6a76034018d31e90d9677ad9c898c969858dd3f4dfae",
+          "reviewed_on": "2026-09-20",
+          "outcome": "original_full_text_retrieved_and_relevant_sections_reviewed"
+        }
+      ],
+      "primary_evidence_group": null,
+      "full_text_reproduction_claim": false,
+      "next_action": "Retain as indirect/model/assay context; no primary numerical target selected.",
+      "source_version": "PMC archived journal article"
+    },
+    {
+      "decision": "primary",
+      "reviewed_material": "PMC_author_manuscript_full_text_and_registry",
+      "reason": "Original adult T1D study contains measured lispro and individual kinetic fitting. Keep as a separate mixed-concentration delivery group, not U100-only evidence.",
+      "measurements_and_conditions": [
+        "11 C-peptide-negative adults aged19–71;27h closed-loop and three meals. Humalog U100 and dilutedU10 through two abdominal pumps; dose resolution0.005U. Plasma insulin samples initially10min then30min.",
+        "Bi-exponential per-subject fits estimate tmax/t95%; initial controller assumption33min differs from fitted peak timing."
+      ],
+      "reference_feasibility": "Measured-versus-model curves and kinetic summaries are available; supplement download returned an HTML preparation challenge, not PDF. Exact bolus histories/equations need supplement review before reconstruction.",
+      "overlap_and_independence": "Five slower-kinetic subjects repeated with adjusted controller parameters: paired retesting, not independent participants or validation. Manuscript title differs from final title; DOI/PMID match.",
+      "key": "PMID:20393188",
+      "input_index": 274,
+      "title": "A bihormonal closed-loop artificial pancreas for type 1 diabetes.",
+      "doi": "10.1126/scitranslmed.3000619",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/20393188/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC4242106/",
+        "https://clinicaltrials.gov/api/v2/studies/NCT00811317"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A20393188+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC4242106/fullTextXML",
+          "error": "HTTP Error 500: ",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        },
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4242106/",
+          "status": 200,
+          "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4242106/",
+          "content_type": "text/html; charset=utf-8",
+          "bytes": 176121,
+          "sha256": "0d2a54d95440bb87cbedf9622ace6f85b63c395f73159291994dbd23b5b060f5",
+          "reviewed_on": "2026-09-20",
+          "outcome": "original_full_text_retrieved_and_relevant_sections_reviewed"
+        },
+        {
+          "url": "https://clinicaltrials.gov/api/v2/studies/NCT00811317",
+          "status": 200,
+          "final_url": "https://clinicaltrials.gov/api/v2/studies/NCT00811317",
+          "content_type": "application/json",
+          "bytes": 35205,
+          "sha256": "5c05cec7f1972a085d7242d9a5076e05a03968762c54e4d3ee854f7dddfc0556",
+          "reviewed_on": "2026-09-20",
+          "outcome": "registry_protocol_retrieved_and_reviewed"
+        },
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/instance/4242106/bin/NIHMS511878-supplement-Supplemental_Data.pdf",
+          "status": 200,
+          "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/instance/4242106/bin/NIHMS511878-supplement-Supplemental_Data.pdf",
+          "content_type": "text/html; charset=utf-8",
+          "bytes": 1816,
+          "sha256": "40a6a895b281ecd672f1d95ac4e6cfbf35cd21479d74eb2a2b39bebe57e27d02",
+          "reviewed_on": "2026-09-20",
+          "outcome": "HTML_download_preparation_challenge_not_PDF"
+        }
+      ],
+      "primary_evidence_group": "mixed_U100_U10_pump_delivery",
+      "full_text_reproduction_claim": false,
+      "next_action": "Retain eligible evidence group and limitations; select targets separately before numerical work.",
+      "source_version": "PMC author manuscript; available2014-11-24, final2010 DOI; author title Bi-hormonal Closed-Loop Blood Glucose Control for Type1 Diabetes"
+    },
+    {
+      "decision": "primary",
+      "reviewed_material": "Europe_PMC_XML_and_PMC_full_text",
+      "reason": "Original adult T1D lispro-alone control with measured insulin is eligible; hyaluronidase arm remains separate.",
+      "measurements_and_conditions": [
+        "22 T1D aged18–65;21 paired lispro PK datasets. Individual dose optimized using lispro+hyaluronidase then same lispro-alone dose before60g carbohydrate meal. Abdominal SC Humalog source100U/mL; baseline-subtracted noncompartmental analysis.",
+        "Lispro-alone arithmetic mean tmax49min; fractional exposure39% first hour,22% after2h; total/peak exposures use geometric means."
+      ],
+      "reference_feasibility": "Figure1 control aggregate supports bounded digitization; fixed treatment sequence, dose optimization and rescue glucose constrain interpretation. No patient-level variability distribution can be recovered from group curve.",
+      "overlap_and_independence": "Healthy-volunteer predecessor is distinct population. No proven overlap with later Halozyme reports; check study identity before pooling.",
+      "key": "PMID:21273493",
+      "input_index": 302,
+      "title": "Accelerated insulin pharmacokinetics and improved postprandial glycemic control in patients with type 1 diabetes after coadministration of prandial insulins with hyaluronidase.",
+      "doi": "10.2337/dc10-1892",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/21273493/",
+        "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3041204/fullTextXML",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC3041204/"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A21273493+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3041204/fullTextXML",
+          "status": 200,
+          "final_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3041204/fullTextXML",
+          "content_type": "application/xml",
+          "bytes": 21344,
+          "sha256": "862c837a6a08a5e73b24fecaaabfbcbfdeb6fb60bac7b7e67b9d2a653716c1c4",
+          "reviewed_on": "2026-09-20",
+          "outcome": "original_full_text_retrieved_and_relevant_sections_reviewed"
+        },
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3041204/",
+          "status": 200,
+          "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3041204/",
+          "content_type": "text/html; charset=utf-8",
+          "bytes": 109926,
+          "sha256": "c9ff86e7342fe813ab3f14a1b68daaa2aadec349e652fb10ed64fce4208aa9d2",
+          "reviewed_on": "2026-09-20",
+          "outcome": "original_full_text_retrieved_and_relevant_sections_reviewed"
+        }
+      ],
+      "primary_evidence_group": "conventional_U100_SC",
+      "full_text_reproduction_claim": false,
+      "next_action": "Retain eligible evidence group and limitations; select targets separately before numerical work.",
+      "source_version": "PMC archived journal article"
+    },
+    {
+      "decision": "unresolved",
+      "reviewed_material": "original_abstract_metadata",
+      "reason": "SC conventional lispro PK control in T1D confirmed, but ages and formulation concentration not established from accessible original abstract.",
+      "measurements_and_conditions": [
+        "29 T1D, five-way crossover;0.125U/kg, lispro2min premeal;82g carbohydrate liquid meal; SC8mm needle versus1.5mm intradermal microneedle."
+      ],
+      "reference_feasibility": "Promising SC empirical comparator after full text/age/assay retrieval. Device and intradermal arms remain separate.",
+      "overlap_and_independence": "No independent-cohort claim established in this follow-up; check related reports before pooling.",
+      "key": "PMID:21355716",
+      "input_index": 306,
+      "title": "Microneedle-based intradermal versus subcutaneous administration of regular human insulin or insulin lispro: pharmacokinetics and postprandial glycemic excursions in patients with type 1 diabetes.",
+      "doi": "10.1089/dia.2010.0183",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/21355716/"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A21355716+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://doi.org/10.1089/dia.2010.0183",
+          "error": "HTTP Error 403: Forbidden",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        }
+      ],
+      "primary_evidence_group": null,
+      "full_text_reproduction_claim": false,
+      "next_action": "Resolve stated population/formulation/access uncertainty before primary inclusion; retain in unresolved queue."
+    },
+    {
+      "decision": "primary",
+      "reviewed_material": "PMC_full_text_methods_table_and_individual_figure_captions",
+      "reason": "Mixed-age study has individually identified insulin curves: subjects1,2,4,5 meet≥18 and can be separated. Do not use pooled five-person statistics as adult-only data.",
+      "measurements_and_conditions": [
+        "Ages43,38,11,19,18; adult doses6,10,15,10U from Figure2. SC U100 Humalog via9mm abdominal catheter;75g carbohydrate meal; pumps off45min before visit. Individual free-insulin curves available to2.5h; some studies stopped for hypoglycemia.",
+        "Intradermal U50 arm is separate; ages18/19 meet protocol adult threshold despite authors calling them adolescents."
+      ],
+      "reference_feasibility": "Digitize only eligible individual SC curves with published doses; no valid adult aggregate from reported all-five mean without reanalysis. Tail is truncated.",
+      "overlap_and_independence": "First two demographics match Gupta2009 on multiple characteristics: probable participant overlap. Measurements differ in dose/protocol; independent external validation must not assume distinct cohorts.",
+      "key": "PMID:21355717",
+      "input_index": 307,
+      "title": "Rapid pharmacokinetics of intradermal insulin administered using microneedles in type 1 diabetes subjects.",
+      "doi": "10.1089/dia.2010.0204",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/21355717/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC3131988/"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A21355717+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3131988/fullTextXML",
+          "error": "HTTP Error 500: ",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        },
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3131988/",
+          "status": 200,
+          "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3131988/",
+          "content_type": "text/html; charset=utf-8",
+          "bytes": 147930,
+          "sha256": "7f579ac2718652ea0e9b09ae63724b40d1cc912d6cb6967612a35cfa2aefcd20",
+          "reviewed_on": "2026-09-20",
+          "outcome": "original_full_text_retrieved_and_relevant_sections_reviewed"
+        }
+      ],
+      "primary_evidence_group": "conventional_U100_SC",
+      "full_text_reproduction_claim": false,
+      "next_action": "Retain eligible evidence group and limitations; select targets separately before numerical work.",
+      "source_version": "PMC archived journal article"
+    },
+    {
+      "decision": "unresolved",
+      "reviewed_material": "PMC_full_text_methods_table_and_figure_captions",
+      "reason": "Conventional U100 lispro PK arm verified, but paper reports mean age39±10 only and no adult range/eligibility criterion was located.",
+      "measurements_and_conditions": [
+        "18 T1D; abdominal Humalog U10011.4±3.2U individualized, fixed treatment order before140.3g carbohydrate meal. Fixed IV basal0.2mU/min/kg; lispro-specific assay, baseline-adjusted curves to300min.",
+        "Table1 lispro tmax65.6±34.5min; early half-maximum25.4±7.6min."
+      ],
+      "reference_feasibility": "Original curve and tabulated endpoints feasible for an aggregate reference if adult eligibility established. No between-insulin concentration comparisons across unlike assays.",
+      "overlap_and_independence": "This18-person meal protocol differs from43-person12U VIAject7 trial; shared investigators/formulation family do not prove independence. Check trial identity before reuse.",
+      "key": "PMID:21722583",
+      "input_index": 322,
+      "title": "Reduction of postprandial glycemic excursions in patients with type 1 diabetes: a novel human insulin formulation versus a rapid-acting insulin analog and regular human insulin.",
+      "doi": "10.1177/193229681100500322",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/21722583/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC3192634/"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A21722583+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3192634/fullTextXML",
+          "error": "HTTP Error 500: ",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        },
+        {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3192634/",
+          "status": 200,
+          "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3192634/",
+          "content_type": "text/html; charset=utf-8",
+          "bytes": 137475,
+          "sha256": "fcf7029dfd4da95e407826a9148d789b60c95a8ca08c9f11b1cecf9d39b2db4c",
+          "reviewed_on": "2026-09-20",
+          "outcome": "original_full_text_retrieved_and_relevant_sections_reviewed"
+        }
+      ],
+      "primary_evidence_group": null,
+      "full_text_reproduction_claim": false,
+      "next_action": "Resolve stated population/formulation/access uncertainty before primary inclusion; retain in unresolved queue.",
+      "source_version": "PMC archived journal article"
+    },
+    {
+      "decision": "primary",
+      "reviewed_material": "original_abstract_and_ClinicalTrials_gov_protocol_JSON",
+      "reason": "Original abstract confirms adult T1D PK; matching registry supports12U conventional lispro100IU/mL control. Journal full text remains inaccessible.",
+      "measurements_and_conditions": [
+        "43 T1D aged21–65 in abstract;12U SC three-way euglycemic clamp. RegistryNCT01235039 eligibility19–65 and lispro100IU/mL. Abstract lispro tmax60min."
+      ],
+      "reference_feasibility": "Clinical-origin/eligibility reference supported. Numerical aggregate reconstruction cannot be claimed without original curves/tables.",
+      "overlap_and_independence": "Clinical-origin report for first arm in Profil lispro116 model database (source dossier/studies linkage); not independent from Schiavon2018/Faggionato2021. Registry reports44 enrolled versus43 analyzed in abstract.",
+      "key": "PMID:21981286",
+      "input_index": 328,
+      "title": "U-100, pH-Neutral formulation of VIAject(®) : faster onset of action than insulin lispro in patients with type 1 diabetes.",
+      "doi": "10.1111/j.1463-1326.2011.01516.x",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/21981286/",
+        "https://clinicaltrials.gov/api/v2/studies/NCT01235039"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A21981286+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://doi.org/10.1111/j.1463-1326.2011.01516.x",
+          "error": "HTTP Error 403: Forbidden",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        },
+        {
+          "url": "https://clinicaltrials.gov/api/v2/studies/NCT01235039",
+          "status": 200,
+          "final_url": "https://clinicaltrials.gov/api/v2/studies/NCT01235039",
+          "content_type": "application/json",
+          "bytes": 8725,
+          "sha256": "58a8d2dbbd3284ed452597957b8dc5781318a41c25b06154c76469a4e6f3bd8a",
+          "reviewed_on": "2026-09-20",
+          "outcome": "registry_protocol_retrieved_and_reviewed"
+        }
+      ],
+      "primary_evidence_group": "conventional_U100_SC",
+      "full_text_reproduction_claim": false,
+      "next_action": "Retain eligible evidence group and limitations; select targets separately before numerical work.",
+      "source_version": "Journal abstract plus registry protocol retrieved2026-09-20; registry last update2015-07-29"
+    },
+    {
+      "decision": "unresolved",
+      "reviewed_material": "original_abstract_and_author_thesis_relevant_section",
+      "reason": "Original journal full text unavailable; author thesis section3.3 confirms protocol but does not name insulin formulation or give age bounds.",
+      "measurements_and_conditions": [
+        "12 T1D, mean age34.3±9.1;24 study days, two visits separated≥3weeks. Meals, boluses and exercise temporally separated; insulin sampled10min for first30min after events then30min."
+      ],
+      "reference_feasibility": "Author thesis contains plotted individual study days; formulation/age unresolved, so not a lispro reference. Raw clinical data were not obtained.",
+      "overlap_and_independence": "Author thesis2013 summarizes this same2012 journal study; not independent. Other later modeling papers may reuse24-day dataset.",
+      "key": "PMID:22023376",
+      "input_index": 329,
+      "title": "Effects of everyday life events on glucose, insulin, and glucagon dynamics in continuous subcutaneous insulin infusion-treated type 1 diabetes: collection of clinical data for glucose modeling.",
+      "doi": "10.1089/dia.2011.0101",
+      "source_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/22023376/"
+      ],
+      "access_attempts": [
+        {
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A22023376+AND+SRC%3AMED&format=json&resultType=core",
+          "outcome": "retrieved_original_record_abstract_metadata",
+          "reviewed_on": "2026-09-20"
+        },
+        {
+          "url": "https://doi.org/10.1089/dia.2011.0101",
+          "error": "HTTP Error 403: Forbidden",
+          "reviewed_on": "2026-09-20",
+          "outcome": "access_failed"
+        },
+        {
+          "url": "https://content.ugeskriftet.dk/sites/default/files/scientific_article_files/2018-11/b4746.pdf",
+          "status": 200,
+          "final_url": "https://content.ugeskriftet.dk/sites/default/files/scientific_article_files/2018-11/b4746.pdf",
+          "content_type": "application/pdf",
+          "bytes": 1339498,
+          "sha256": "f695c9f69771daf970167835fc25ad532df9183543f98d76eca4fda9dddfbb5f",
+          "reviewed_on": "2026-09-20",
+          "outcome": "author_thesis_retrieved_relevant_section_reviewed_not_journal_fulltext"
+        }
+      ],
+      "primary_evidence_group": null,
+      "full_text_reproduction_claim": false,
+      "next_action": "Resolve stated population/formulation/access uncertainty before primary inclusion; retain in unresolved queue.",
+      "source_version": "Journal abstract2011-online/2012-issue plus author2013 Danish Medical Journal thesis summary; not full journal article"
+    }
+  ]
+}

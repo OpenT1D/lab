@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "reference": "pinned native tutorial; recorded baseline, not external validation",
+  "source_revision": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc",
+  "evidence_run": "https://github.com/OpenT1D/OpenT1D/actions/runs/34722762371",
+  "environments": {
+    "Darwin/arm64": {
+      "python_version": "3.12.13",
+      "config_sha256": "6c412b06769c552893ec8e9b8136f1244b89ad0ebc8eb3fc275eadf554c898c3",
+      "lock_sha256": "634d5849a1cc4ae37f4f00c12c713f168cffa93a43d5a22b571b0c41478fc95c",
+      "upstream_files_digest": "46d99100b9644abf7ee43793af2942584c1587a480d2c4b8a46170cdc0357d92",
+      "solver": {
+        "method": "dopri5",
+        "rtol": 1e-06,
+        "atol": 1e-12
+      },
+      "output_sha256": [
+        "e4eeaaf4e67d4bfe155413799d5258a417919b4d249361171ab514ece325fb85"
+      ]
+    },
+    "Linux/x86_64": {
+      "python_version": "3.12.13",
+      "config_sha256": "6c412b06769c552893ec8e9b8136f1244b89ad0ebc8eb3fc275eadf554c898c3",
+      "lock_sha256": "634d5849a1cc4ae37f4f00c12c713f168cffa93a43d5a22b571b0c41478fc95c",
+      "upstream_files_digest": "46d99100b9644abf7ee43793af2942584c1587a480d2c4b8a46170cdc0357d92",
+      "solver": {
+        "method": "dopri5",
+        "rtol": 1e-06,
+        "atol": 1e-12
+      },
+      "output_sha256": [
+        "36b5a4e2fd1deec879504c5145bf035b1c22136d3627d809acf2ffc33d9b00ba",
+        "b1e8a16237aeb2574a0503484d6b530d02671bfb7380c5ad105efb9448e06ad9"
+      ]
+    }
+  },
+  "historical_output_origins": {
+    "e4eeaaf4e67d4bfe155413799d5258a417919b4d249361171ab514ece325fb85": "Mac original, archived as 2026-09-13-original-simglucose-mac",
+    "36b5a4e2fd1deec879504c5145bf035b1c22136d3627d809acf2ffc33d9b00ba": "https://github.com/OpenT1D/OpenT1D/actions/runs/34722762371",
+    "b1e8a16237aeb2574a0503484d6b530d02671bfb7380c5ad105efb9448e06ad9": "https://github.com/OpenT1D/OpenT1D/actions/runs/34721218099"
+  }
+}

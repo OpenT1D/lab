@@ -1,0 +1,69 @@
+{
+  "schema": "opent1d.ot054-core-handoff/1",
+  "status": "controlled_core_ready",
+  "core_commit": "23e1bc12bc52b2443dca4f6157c474df1e9188f8",
+  "branch": "codex/ot-054-secretion-analysis",
+  "full_ot054_goal_complete": true,
+  "scope": "Shared synthetic observation-analysis core and complete Task 1 CLI/GUI/catalogue within OT-053 narrow boundary; empirical and independent user-value gates remain open",
+  "feasibility_handoff_commit": "4f38f01a3d3f96319155e83b9ede52bd595fb521",
+  "protocol_sha256": "22ad09a02367e586114544e59859d59e296985de24810340e1d05e4393418aac",
+  "implementation_sha256": {
+    "experiments/observation_analysis/__init__.py": "b40c56243fc8d6b96d7b431e6177f379d9e3e5b2277d9bc6d8c857d30c98e1a7",
+    "experiments/observation_analysis/__main__.py": "5f8c0cf2b55bbc68b177d3ac26bd1864854a6c41d75ea3d1dd5a2535944b87cf",
+    "experiments/observation_analysis/analysis.py": "1fff9a1fd0c1eacbfd99c94d318582daea4a48a32b1c81f71955f67a7f51e42d",
+    "experiments/observation_analysis/estimator.py": "3fb9b732607f6595b51b9552c13e14545e2e71d859486e3194d47e62e84e02a4",
+    "experiments/observation_analysis/fixtures.py": "434431bbab7de4f1c6c91ef64a74ded9e97f707aa9f38523d5330cf5fb5f08df",
+    "experiments/observation_analysis/intake.py": "58d940af77498aaa59490cd1c30f5b134adeca0d738750f0de4cb051e0fde788",
+    "experiments/observation_analysis/observations.py": "e82af2ec866c1c56ca2313185cd5531d3c556b479758f72b244e24ad340f2e59",
+    "experiments/observation_analysis/plan.py": "404e553b294f79f32d661ed385ce4b3e5581daf6977cd4fc3d37871825714cf7",
+    "experiments/observation_analysis/report.py": "e750d6abc7d6b5238b4da6f4c2eab170656a4940d30d904a9f27598afb7e4cd6",
+    "experiments/observation_analysis/run.py": "518b7f37519240848be9b3caa77bb6ea697cfbea6842627ed87099f474c7b374",
+    "experiments/catalogue/storage.py": "12cf4adf488f6dbaa2db4838ad35e5d76f56e531d895abe6bc97ebe6316ca91d",
+    "experiments/m3/researcher/intake.py": "4d57ae53b3364dcebe21fdce4392c2f2ab548107126c4ec32bc55e64aeebc165",
+    "experiments/m3/common.py": "a4621cd060d8c63e26785426bef5153b91ca8f1d51a83292872df37ffe4ea2e0",
+    "experiments/m1/artifacts.py": "e7896d603e8953f9c11a58ddad116eb12494d170cdce06a02a6d53dc04548e79"
+  },
+  "verification": "experiments/observation_analysis/core-verification.json",
+  "canonical_guide": "docs/observation-analysis.md",
+  "contracts": {
+    "observations": "opent1d.observations/1",
+    "settings": "opent1d.observation-analysis-settings/1",
+    "plan": "opent1d.observation-analysis-plan/1",
+    "report": "opent1d.observation-analysis/1",
+    "method": "polonsky1986-fixed-kinetic-linear-concentration-exact/1"
+  },
+  "shared_boundary": {
+    "call": "experiments.observation_analysis.analysis.evaluate(settings, package, csv_raw)",
+    "result": "Complete roster, measured references, shared perturbations and all variant/visit/draw attempts",
+    "report": "experiments.observation_analysis.analysis.report_from_attempts(plan, attempts)",
+    "freeze": "experiments.observation_analysis.plan.freeze(package_path, csv_path, settings_path, output)",
+    "reader": "experiments.observation_analysis.run.reconstruct(archive, output, allow_failed=False)",
+    "general_plugin_api": false
+  },
+  "task2_requirements": [
+    "Consume this controlled commit; do not implement a competing estimator, preprocessing or uncertainty procedure",
+    "Remove actual observations before evaluate/initialization/interpolation and uncertainty; retain measured 0 and 120 endpoints",
+    "Use only retained observations to initialize each visit; never transfer a full-curve state, fitted nuisance, smoothing setting or omitted value",
+    "Freeze separate actual reduced input bytes and full-versus-subset identities before evaluation",
+    "All visits of a participant retain one allocation; synthetic case construction is development control, not held-out empirical evidence",
+    "Use the same whole-body total including basal over 0-120 min, in pmol, and followup minus baseline",
+    "Keep C-peptide AUC and glucose context separate; retain all failed variants/draws and planned denominators",
+    "Keyed perturbations use only person, draw, visit and retained time, permitting matched retained samples without omitted-data access",
+    "Full curve is a reference analysis, not true secretion; no human equivalence margin or clinical sampling recommendation"
+  ],
+  "source_and_integration_notes": [
+    "The six-file planning patch is identical across OT-053-056; do not replay it twice",
+    "OT-053 was adopted as 91bdaa8 and 5ee9691 from original cd10cb0/4f38f01 after all source handoff hashes were checked",
+    "Decision 0068 belongs to this core contract; preserve its scientific conventions during integration",
+    "Production uses root Python standard library; separate existing BC-003 lock is numerical verification only",
+    "No upstream R code/dependency is adopted; native R/full-package/spline adoption remains a separate audit",
+    "Follow source byte identities as well as commit identity; no archived Python is executed"
+  ],
+  "human_execution_authorized": false,
+  "empirical_t1d_validity_established": false,
+  "independent_usability_established": false,
+  "remaining_ot054_goal_acceptance": [],
+  "integration_status": "bounded_synthetic_task1_verified",
+  "integration_code_commit": "3e13a738fd1db7c4a7297a9c558d208e0cf65d81",
+  "integration_verification": "experiments/gui/observation_verification.json"
+}

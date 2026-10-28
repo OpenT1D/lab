@@ -1,0 +1,6 @@
+{
+  "schema": "m4-researcher-config/1",
+  "model": "../ultradian_secretion/model.py",
+  "declaration": "../ultradian_secretion/model.json",
+  "timeout_seconds": 600
+}

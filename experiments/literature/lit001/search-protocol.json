@@ -1,0 +1,66 @@
+{
+  "protocol": "lit001-search/1",
+  "specified_at_utc": "2026-09-19T22:33:15.019861+00:00",
+  "status": "frozen_before_main_search",
+  "scope": "Conventional subcutaneous lispro kinetics in adults with T1D; adjacent model ancestry retained separately.",
+  "publication_date_upper_bound": "2026-09-20",
+  "publication_date_lower_bound": null,
+  "known_material": [
+    "15651559",
+    "29989928",
+    "33921274",
+    "PMC8069884",
+    "21981286",
+    "NCT01235039",
+    "NCT02146651",
+    "NCT02344992"
+  ],
+  "pilot": {
+    "service": "Europe PMC REST",
+    "query_id": "E1",
+    "result_count": 391,
+    "records_inspected": 1,
+    "purpose": "Confirm API access and query translation before main export; no full screening yet."
+  },
+  "queries": [
+    {
+      "id": "P1",
+      "service": "pubmed",
+      "query": "(lispro[Title/Abstract] OR Humalog[Title/Abstract]) AND (kinetic*[Title/Abstract] OR absorption[Title/Abstract] OR pharmacokinetic*[Title/Abstract] OR compartment*[Title/Abstract] OR model*[Title/Abstract])"
+    },
+    {
+      "id": "P2",
+      "service": "pubmed",
+      "query": "(\"type 1 diabetes\"[Title/Abstract] OR \"type I diabetes\"[Title/Abstract] OR \"type-1 diabetes\"[Title/Abstract] OR T1D[Title/Abstract]) AND insulin[Title/Abstract] AND (subcutaneous[Title/Abstract] OR \"continuous infusion\"[Title/Abstract]) AND (model*[Title/Abstract] OR kinetic*[Title/Abstract] OR variability[Title/Abstract])"
+    },
+    {
+      "id": "E1",
+      "service": "europe_pmc",
+      "query": "(TITLE_ABS:lispro OR TITLE_ABS:Humalog) AND (TITLE_ABS:kinetic* OR TITLE_ABS:absorption OR TITLE_ABS:pharmacokinetic* OR TITLE_ABS:compartment* OR TITLE_ABS:model*)"
+    },
+    {
+      "id": "E2",
+      "service": "europe_pmc",
+      "query": "(TITLE_ABS:\"type 1 diabetes\" OR TITLE_ABS:\"type I diabetes\" OR TITLE_ABS:\"type-1 diabetes\" OR TITLE_ABS:T1D) AND TITLE_ABS:insulin AND (TITLE_ABS:subcutaneous OR TITLE_ABS:\"continuous infusion\") AND (TITLE_ABS:model* OR TITLE_ABS:kinetic* OR TITLE_ABS:variability)"
+    }
+  ],
+  "screening": {
+    "stages": [
+      "title_abstract",
+      "full_text_for_candidates"
+    ],
+    "decisions": [
+      "primary",
+      "background",
+      "excluded",
+      "unresolved"
+    ],
+    "deduplication": "PMID, then DOI, then provider accession; preserve provider and query memberships.",
+    "population": "Adults T1D separable; mixed/unclear material is background or unresolved, not presumed eligible.",
+    "unavailable_full_text": "Retain unresolved if plausibly primary; never infer parameters from an abstract.",
+    "numerical_target": "Known development material; no untouched empirical validation claim.",
+    "citation_tracing": "Two documented rounds from included model families; targeted further tracing for new essential ancestry.",
+    "corrections": "Exact source identity and correction/retraction indicators checked at closure."
+  },
+  "date_filter_note": "PubMed explicit 1800-01-01 lower bound spans its relevant historical holdings; Europe PMC uses 0001-01-01. No recent-year restriction."
+}

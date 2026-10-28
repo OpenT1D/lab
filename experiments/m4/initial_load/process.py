@@ -1,0 +1,94 @@
+"""Own each numerical process group through exit and bounded cleanup."""
+
+import json
+import signal
+import subprocess
+import time
+
+from experiments.m4.comparison.run import worker_environment
+from experiments.platform_process import (
+    FORCE_SIGNAL,
+    close_tree,
+    signal_tree,
+    spawn,
+    tree_exists,
+)
+
+from .common import ROOT
+
+GRACE_SECONDS = 10
+
+
+class Control:
+    def __init__(self):
+        self.signal = None
+        self.cancelled_at = None
+        self.active = None
+
+    def stop(self, signum, _frame=None):
+        if self.signal is None:
+            self.signal, self.cancelled_at = int(signum), time.monotonic()
+        self.send(signum)
+
+    def send(self, signum):
+        # Leader exit does not relinquish ownership of same-group descendants.
+        if self.active is not None:
+            signal_tree(self.active, signum)
+
+
+def supervise(args, log_path, timeout, control, *, grace_seconds=GRACE_SECONDS):
+    deadline = time.monotonic() + timeout
+    expired_at = None
+    code, error = None, None
+    with log_path.open("x") as log:
+        log.write(json.dumps({"argv": args, "timeout_seconds": timeout}, sort_keys=True) + "\n")
+        log.flush()
+        control.active = spawn(
+            args,
+            cwd=ROOT,
+            stdout=log,
+            stderr=subprocess.STDOUT,
+            start_new_session=True,
+            env=worker_environment(),
+        )
+        try:
+            if control.signal is not None:
+                control.send(control.signal)
+            while control.active.poll() is None:
+                now = time.monotonic()
+                if control.signal is None and expired_at is None and now >= deadline:
+                    expired_at, error = now, "WorkerDeadline"
+                    control.send(signal.SIGTERM)
+                stopped_at = control.cancelled_at if control.signal is not None else expired_at
+                if stopped_at is not None and now - stopped_at >= grace_seconds:
+                    control.send(FORCE_SIGNAL)
+                time.sleep(0.02)
+            code = control.active.wait()
+            if control.signal is not None:
+                error = "GlobalInterruption"
+            elif code and error is None:
+                error = "WorkerExit"
+        finally:
+            process = control.active
+            try:
+                if tree_exists(process):
+                    if error is None:
+                        error = "UnreapedWorkerGroup"
+                    control.send(signal.SIGTERM)
+                    stopped_at = (
+                        control.cancelled_at
+                        if control.signal is not None
+                        else expired_at
+                        if expired_at is not None
+                        else time.monotonic()
+                    )
+                    while tree_exists(process) and time.monotonic() - stopped_at < grace_seconds:
+                        process.poll()
+                        time.sleep(0.02)
+                    if tree_exists(process):
+                        control.send(FORCE_SIGNAL)
+                process.wait()
+            finally:
+                close_tree(process)
+                control.active = None
+    return code, error

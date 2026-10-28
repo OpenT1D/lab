@@ -1,0 +1,15 @@
+{
+  "common_expected_labels": 17,
+  "common_labels": 18,
+  "finding": "aggregate_mixed_meal_only_not_participant_linked_ivgtt",
+  "group_count_disagreements": 19,
+  "human_execution_authorized": false,
+  "id": "BC-015-P3",
+  "local_report": "results/m4-measurement-readiness/registry-aggregate/report-2.json",
+  "protocol_sha256": "2771872953f8d58425ed43ba715b69c62041dc49186d607f60fc2d7e9e237074",
+  "report_sha256": "d1a25c825206d9e66c2ab1f7e754f9611f07de0d0239137a2e1d0cafd9aaaf1f",
+  "runner_sha256": "bf58c1414c459644e7cfdd4c80ae1fd8284b157471cbc5a963bfc7c26f030c25",
+  "schema": "bc015-registry-aggregate-execution/1",
+  "source_sha256": "8fc0882a095628215af1ef588f0b3fa1d08e62c7cd28bd04fb873cff91d054b5",
+  "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT01817959"
+}

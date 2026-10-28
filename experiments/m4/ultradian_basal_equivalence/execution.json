@@ -1,0 +1,238 @@
+{
+  "schema": "m4-ultradian-basal-execution/1",
+  "date": "2026-09-29",
+  "base_commit": "144f6dbf286475c285d712d8d0335035ca2dfc8b",
+  "branch": "codex/m4-ultradian-basal-equivalence",
+  "plan_file_sha256": "4616ceec436b26a0b10416eb451af7d552c8041f4cb6e5ba92f0d5b9bc6b546e",
+  "plan_canonical_sha256": "2b202a0c0a5513b40a899d164e734ce180056e22e9d0e3c6c35d7e6b399838c9",
+  "report_source_sha256": "39e15d134d605a302013f5c4f2f910cd54abf12b0d02ea749726879506a15ce3",
+  "artifacts": {
+    "base": "results/m4-ultradian-basal-equivalence",
+    "versioned": false
+  },
+  "equation_verification": {
+    "passed": true,
+    "max_error_pmol_kg_min": 1.7763568394002505e-15,
+    "report_sha256": "41cb9811d9df473cd96400ce9874bdcecc587dc567b3dbe607ce436d07ad353d"
+  },
+  "reference": {
+    "passed": true,
+    "manifest_sha256": "b81c0d71c9de7e541e79f91196c998d04545d0dc8a3831bcefac158522f9bc7e",
+    "report_sha256": "5ab6fd91378e2e16de1e4dfad6dd02896a9bfb00ac4390c2659f3156e7da6104",
+    "run_git_head": "144f6dbf286475c285d712d8d0335035ca2dfc8b",
+    "run_git_dirty": true
+  },
+  "search": {
+    "passed": true,
+    "all_solved": false,
+    "report_sha256": "5f521716db1d372359de08ac2f223636b81f97b12e4fb941e3a3d8a154f56820",
+    "manifest_sha256": "051164cf7dcaba1c12f31b6773d9b978f42f64b8198de65d8a2035ff32c33ee4",
+    "target_auc_mg_min_dl": 3378.0908810037245,
+    "native_basal_sc_rate_pmol_kg_min": 1.2386244136,
+    "models": {
+      "reference_adapter": {
+        "model_id": "bc008-equation-adapter-example/1",
+        "source_sha256": "2d65b88bfe858682fc0d05d24e404bad4f16166da4c4a94f916d76c5ba560215",
+        "status": "matched",
+        "history": [
+          {
+            "factor": 0.5,
+            "phase": "grid",
+            "file": "00-grid-tight.json",
+            "auc": 3674.890892472114
+          },
+          {
+            "factor": 0.625,
+            "phase": "grid",
+            "file": "01-grid-tight.json",
+            "auc": 3526.0021302052182
+          },
+          {
+            "factor": 0.75,
+            "phase": "grid",
+            "file": "02-grid-tight.json",
+            "auc": 3378.0908787313983
+          },
+          {
+            "factor": 0.875,
+            "phase": "grid",
+            "file": "03-grid-tight.json",
+            "auc": 3231.1668549359656
+          },
+          {
+            "factor": 1.0,
+            "phase": "grid",
+            "file": "04-grid-tight.json",
+            "auc": 3085.2382148569523
+          }
+        ],
+        "bracket_endpoint_auc_mg_min_dl": [
+          3674.890892472114,
+          3085.2382148569523
+        ],
+        "solution": {
+          "sc_factor_of_native_basal": 0.75,
+          "sc_rate_pmol_kg_min": 0.9289683101999999,
+          "change_from_075_native_basal_pmol_kg_min": 0.0,
+          "reference_solver_auc_mg_min_dl": 3378.0908810037245,
+          "target_residual_mg_min_dl": 0.0,
+          "fasting_final_glucose_mg_dl": 138.56000000005938
+        }
+      },
+      "synthetic_variant": {
+        "model_id": "ultradian-f1-basal-normalized/1",
+        "source_sha256": "27e128148a21bb5ba2234e64956fc17f7dbed2daf0d4244ec6a51dbc5e6f1f26",
+        "status": "unbracketed",
+        "history": [
+          {
+            "factor": 0.5,
+            "phase": "grid",
+            "file": "00-grid-tight.json",
+            "auc": 6445.1225188520275
+          },
+          {
+            "factor": 0.625,
+            "phase": "grid",
+            "file": "01-grid-tight.json",
+            "auc": 6265.882884468896
+          },
+          {
+            "factor": 0.75,
+            "phase": "grid",
+            "file": "02-grid-tight.json",
+            "auc": 6087.7370952797955
+          },
+          {
+            "factor": 0.875,
+            "phase": "grid",
+            "file": "03-grid-tight.json",
+            "auc": 5910.695726101734
+          },
+          {
+            "factor": 1.0,
+            "phase": "grid",
+            "file": "04-grid-tight.json",
+            "auc": 5734.76949327222
+          }
+        ],
+        "bracket_endpoint_auc_mg_min_dl": [
+          6445.1225188520275,
+          5734.76949327222
+        ],
+        "solution": null,
+        "reference_grid_confirmation": [
+          {
+            "factor": 0.5,
+            "reference_auc_mg_min_dl": 6445.122518852024
+          },
+          {
+            "factor": 0.625,
+            "reference_auc_mg_min_dl": 6265.882884468873
+          },
+          {
+            "factor": 0.75,
+            "reference_auc_mg_min_dl": 6087.737095279755
+          },
+          {
+            "factor": 0.875,
+            "reference_auc_mg_min_dl": 5910.695726101789
+          },
+          {
+            "factor": 1.0,
+            "reference_auc_mg_min_dl": 5734.7694932722325
+          }
+        ]
+      }
+    },
+    "metrics": {
+      "glucose_solver_error_mg_dl": 2.2006226786064463e-08,
+      "insulin_solver_error_pmol_l": 7.083112089142612e-07,
+      "auc_solver_error_mg_min_dl": 2.2723261281498708e-06,
+      "insulin_mass_error_pmol_kg": 2.000888343900442e-11,
+      "glucose_mass_error_mg_kg": 3.6669374661735255e-08,
+      "negative_amount_tolerance": 0.0,
+      "anchor_adapter_glucose_error_mg_dl": 0.0,
+      "anchor_basal_control_glucose_error_mg_dl": 0.0,
+      "repeat_error": 0.0
+    },
+    "primary_case_count": 19,
+    "repeat_case_count": 19,
+    "run_git_head": "144f6dbf286475c285d712d8d0335035ca2dfc8b",
+    "run_git_dirty": true
+  },
+  "causal": {
+    "passed": true,
+    "report_sha256": "372104ee314960ef2515e6d297d3bbac96e240124b9408297db83f6c4d6c675e",
+    "manifest_sha256": "4d28a0adf2acc80fa8493d234b99c9ec6891f14e1bc18b0e6b55955da1cab1bc",
+    "metrics": {
+      "glucose_solver_error_mg_dl": 2.725738691657222e-08,
+      "insulin_solver_error_pmol_l": 5.49995743084622e-12,
+      "source_solver_error_pmol_kg_min": 1.61393121089759e-12,
+      "insulin_mass_error_pmol_kg": 1.6072476682893466e-11,
+      "glucose_mass_error_mg_kg": 3.6669374661735255e-08,
+      "negative_amount_tolerance": 0.0,
+      "fasting_glucose_drift_mg_dl": 1.4519528251204721e-10,
+      "fasting_insulin_drift_pmol_l": 2.9772563680801376e-10,
+      "basal_control_glucose_error_mg_dl": 0.0,
+      "basal_control_insulin_error_pmol_l": 0.0,
+      "repeat_error": 0.0
+    },
+    "starting_factor_outcomes": {
+      "sc_factor": 0.75,
+      "fasting": {
+        "auc_above_initial_mg_min_dl": 2.6124439500563312e-08,
+        "peak_mg_dl": 138.5600000001452,
+        "nadir_mg_dl": 138.56,
+        "final_mg_dl": 138.5600000001452
+      },
+      "meal": {
+        "auc_above_initial_mg_min_dl": 6087.737095279755,
+        "peak_mg_dl": 170.79997338973223,
+        "nadir_mg_dl": 138.56,
+        "final_mg_dl": 167.83388743416538
+      }
+    },
+    "primary_case_count": 8,
+    "repeat_case_count": 8,
+    "run_git_head": "144f6dbf286475c285d712d8d0335035ca2dfc8b",
+    "run_git_dirty": true
+  },
+  "diagnostics": {
+    "report_sha256": "9b55eb4845226f22c62098dc9424adc017fd303782a8da81e9449381751150d9",
+    "shared_anchor_exact": true,
+    "parent_reconstruction_byte_identical": true,
+    "diagnostic_reconstruction_byte_identical": true,
+    "python_no_site_packages": true,
+    "models_not_executed": true
+  },
+  "runtime_setup": {
+    "locked_root_sync": true,
+    "locked_simglucose_sync": true
+  },
+  "tests": {
+    "source_identity_tests": 4,
+    "targeted_root_tests": 14,
+    "targeted_root_passed": true,
+    "repository_check": {
+      "command": "uv run --locked python scripts/check.py",
+      "passed": true,
+      "root_test_count": 745,
+      "strict_documentation_build": true
+    }
+  },
+  "unchanged": [
+    "M4-BASAL-EQUIVALENCE/1 and its implementation",
+    "M4-CAUSAL/1 and its implementation",
+    "BC-008/2 and its implementation",
+    "source files and declarations",
+    "source basal, shape, portal transit and initial states",
+    "root/scientific runtime locks"
+  ],
+  "scope": "Source-component software compatibility and descriptive synthetic outcomes; no full-engine reproduction, prehepatic human calibration or clinical insulin requirement",
+  "limitations": [
+    "No ultradian match in the prescribed 50\u2013100% native SC domain; no extrapolated rate",
+    "Fasting diagnostic only at the fixed 75% starting factor; no fasting result at an unsolved rate",
+    "Published response shape with synthetic amplitude and exploratory host pancreatic route",
+    "Not full ultradian physiology, prehepatic human calibration, biological validity or clinical insulin requirement"
+  ]
+}

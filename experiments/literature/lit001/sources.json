@@ -1,0 +1,266 @@
+{
+  "schema_version": "1.0",
+  "work_package": "LIT-001",
+  "sources": [
+    {
+      "source_id": "faggionato2021",
+      "doi": "10.3390/metabo11040235",
+      "title": "Modeling Between-Subject Variability in Subcutaneous Absorption of a Fast-Acting Insulin Analogue by a Nonlinear Mixed Effects Approach",
+      "authors": [
+        "Edoardo Faggionato",
+        "Michele Schiavon",
+        "Chiara Dalla Man"
+      ],
+      "year": 2021,
+      "url": "https://doi.org/10.3390/metabo11040235",
+      "accessed_on": "2026-09-20",
+      "reviewed_material": "full_text_and_visual_equation_table_check",
+      "pmid": "33921274",
+      "pmcid": "PMC8069884",
+      "journal": "Metabolites 11(4),235",
+      "pdf_url": "https://mdpi-res.com/d_attachment/metabolites/metabolites-11-00235/article_deploy/metabolites-11-00235.pdf",
+      "alternative_pdf_url": "https://research.unipd.it/retrieve/e14fb26e-d89d-3de1-e053-1705fe0ac030/metabolites-11-00235.pdf",
+      "pdf_sha256": "4587ea88d98cb6f1dca6a73444aca42602eb62ebf39cccedad11412db80f300d",
+      "pdf_pages": 17,
+      "version": "Publisher version downloaded 2026-09-20; published 2021-04-12",
+      "rights": {
+        "article_license": "CC-BY-4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "verified_at": "PDF p1 copyright statement and Crossref license metadata",
+        "original_data": "Restricted; author access with data-owner permission required, PDF p15 Data Availability",
+        "author_code": "No code or supplementary-code link located in checked PDF; no source code acquired",
+        "redistributed_material": "Attributed structured parameter/equation transcription; no PDF or patient records committed"
+      },
+      "correction_check": {
+        "on": "2026-09-20",
+        "methods": [
+          "DOI + correction erratum web search",
+          "Crossref work metadata",
+          "article reading"
+        ],
+        "result": "No correction/retraction located; Crossref relation empty, update-to absent. Not a guarantee of absence.",
+        "local_metadata_sha256": "1b269c0548330cf364705c8d9b6ef5c74d7505077d253e645dd284cc39be7fd8"
+      },
+      "funding": "MIUR Departments of Excellence and University of Padova SID-Networking Project 2019; PDF p15",
+      "declared_conflicts": "Authors declare no conflict, PDF p15",
+      "data_lineage_id": "profil-lispro-116",
+      "evidence_role": "Model development and internal model assessment; not independent validation of Schiavon2018",
+      "primary_eligibility": "Adult T1D supported by linked trial eligibility; conventional lispro controls; U100 explicit only for study1 in checked registries",
+      "source_issues": [
+        "Eq3 uses k_a1(t) in one term while text/diagram/Eq12 specify a constant rate for each person",
+        "Numeric BMI centering mean not found",
+        "Table3 Q2 column label conflicts with caption third-quartile description"
+      ]
+    },
+    {
+      "source_id": "schiavon2018",
+      "doi": "10.1109/TBME.2017.2784101",
+      "title": "Modeling Subcutaneous Absorption of Fast-Acting Insulin in Type 1 Diabetes",
+      "authors": [
+        "Michele Schiavon",
+        "Chiara Dalla Man",
+        "Claudio Cobelli"
+      ],
+      "year": 2018,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29989928/",
+      "accessed_on": "2026-09-20",
+      "reviewed_material": "title_abstract_metadata",
+      "pmid": "29989928",
+      "journal": "IEEE Transactions on Biomedical Engineering 65(9),2079-2086",
+      "online_publication_date": "2017-12-15",
+      "full_text_status": "Not retrieved: publisher route unavailable, author institution record explicitly has no attachment, focused lawful full-text search found no accessible original",
+      "repository_record": "https://www.research.unipd.it/handle/11577/3255823?mode=complete",
+      "snapshot_sha256": "b3544fdbbc05912ae6101997f82e7d937c512162db31c1b29595919b4d5e1132",
+      "rights": {
+        "article_license": "IEEE terms; no open redistribution license established",
+        "code_data": "No permission inferred from abstract or later article"
+      },
+      "correction_check": {
+        "on": "2026-09-20",
+        "methods": [
+          "DOI + correction erratum web search",
+          "PubMed metadata",
+          "Crossref work metadata"
+        ],
+        "result": "No correction/retraction located; Crossref relation empty, update-to absent. Not a guarantee of absence.",
+        "local_metadata_sha256": "a677d7c404e68a570845edb7c2fa72143ac0849bc5192f6812f1324576f4f2ed"
+      },
+      "data_lineage_id": "profil-lispro-116",
+      "evidence_role": "Earlier structural model and same 116-subject evidence lineage, as described in Faggionato2021",
+      "limits": [
+        "Single-injection development; abstract explicitly requests further testing for variable delivery and multiple doses",
+        "Do not use abstract numerical summaries as a complete individual or population specification"
+      ]
+    },
+    {
+      "source_id": "wilinska2005",
+      "doi": "10.1109/TBME.2004.839639",
+      "title": "Insulin Kinetics in Type-1 Diabetes: Continuous and Bolus Delivery of Rapid Acting Insulin",
+      "authors": [
+        "Malgorzata E Wilinska",
+        "Ludovic J Chassin",
+        "Helga C Schaller",
+        "Lukas Schaupp",
+        "Thomas R Pieber",
+        "Roman Hovorka"
+      ],
+      "year": 2005,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/15651559/",
+      "accessed_on": "2026-09-20",
+      "reviewed_material": "full_text_and_visual_model_table_check",
+      "pmid": "15651559",
+      "journal": "IEEE Transactions on Biomedical Engineering 52(1),3-12",
+      "pdf_url": "http://www.stat.yale.edu/~jtc5/diabetes/insulin_kinetics_Hovorka_IEEE-Trans-Biomed_05.pdf",
+      "pdf_sha256": "721452565901f86d27cdf64198a8c1a90be0dc2da447a4ab19c70179464b8398",
+      "pdf_pages": 10,
+      "version": "Journal-formatted PDF academic mirror, title/DOI/pages checked against PubMed",
+      "retrieval_note": "HTTPS mirror failed certificate verification; public HTTP mirror succeeded without disabling TLS checks",
+      "rights": {
+        "article_license": "Copyright 2005 IEEE, PDF p1; no open article redistribution license established",
+        "redistributed_material": "Bibliographic facts and original short paraphrases; PDF remains outside repository",
+        "code_data": "None acquired; no rights inferred"
+      },
+      "correction_check": {
+        "on": "2026-09-20",
+        "methods": [
+          "DOI + correction erratum web search",
+          "PubMed metadata",
+          "full-text consistency check"
+        ],
+        "result": "No formal correction/retraction located. Crossref request returned429, not checked. Internal model-label inconsistency retained."
+      },
+      "data_lineage_id": "graz-lispro-7",
+      "primary_eligibility": "Conventional Humalog SC pump/bolus T1D confirmed; all-adult eligibility and concentration unresolved from checked original",
+      "funding": "European Commission ADICOL and CLINICIP grants, PDF p1",
+      "source_issues": [
+        "TableIII(a) parameter row labels conflict with TableI/II and discussion; discussion Model10 absorption parameters appear in TableIII(a) row9, while row10 has no absorption-rate entries",
+        "No numeric subject-level input histories or all individual parameter sets located",
+        "Table volume is L/kg while text calls states mU: normalization requires an explicit audit before execution"
+      ],
+      "limits": [
+        "Seven people, mixed fasting/postprandial starts, insulin sampled every30min",
+        "Selected model allows saturable local degradation; do not assume linear superposition",
+        "Authors state fast/slow channels lack immediate physiological interpretation",
+        "Fit quality and MCR plausibility do not identify all mechanisms separately"
+      ]
+    },
+    {
+      "source_id": "wilinska2004thesis",
+      "doi": null,
+      "title": "Modelling of glucose and insulin kinetics to facilitate the development of a wearable artificial pancreas",
+      "authors": [
+        "Malgorzata Elzbieta Wilinska"
+      ],
+      "year": 2004,
+      "url": "https://openaccess.city.ac.uk/id/eprint/30944/",
+      "accessed_on": "2026-09-20",
+      "reviewed_material": "full_text_chapter5_and_selected_visual_pages",
+      "pdf_url": "https://openaccess.city.ac.uk/30944/1/Wilinska%20thesis%202004%20PDF-A.pdf",
+      "pdf_sha256": "cd8156aff29bbc5926092a05719c778419218c1b4a9af940b212828c5d378488",
+      "pdf_pages": 165,
+      "version": "Institutional accepted thesis copy downloaded2026-09-20; page labels differ from earlier web cache",
+      "rights": {
+        "terms": "Repository cover permits attributed unchanged copies for personal research, education or not-for-profit use; not an Apache-2.0 asset",
+        "redistribution": "Not committed"
+      },
+      "data_lineage_id": "graz-lispro-7",
+      "evidence_role": "Version/ancestry cross-check; ten candidate models versus eleven in journal; selected thesis model9 is not journal model9",
+      "eligibility": "Same described seven-person study; original individual age range not located"
+    },
+    {
+      "source_id": "heinemann2012",
+      "doi": "10.1111/j.1463-1326.2011.01516.x",
+      "title": "U-100, pH-Neutral formulation of VIAject: faster onset of action than insulin lispro in patients with type 1 diabetes",
+      "authors": [
+        "Lutz Heinemann",
+        "L Nosek",
+        "F Flacke",
+        "K Albus",
+        "A Krasner",
+        "P Pichotta",
+        "T Heise",
+        "S Steiner"
+      ],
+      "year": 2012,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21981286/",
+      "accessed_on": "2026-09-20",
+      "reviewed_material": "title_abstract",
+      "pmid": "21981286",
+      "snapshot_sha256": "7eee7737a9c73451d69bb3dfc81d4946b89a63701bad45e5c873ccea21f2618b",
+      "data_lineage_id": "profil-lispro-116",
+      "study_id": "NCT01235039",
+      "evidence_role": "Primary clinical origin of first lispro control arm, not independent from later model database",
+      "rights": {
+        "full_text": "Not acquired",
+        "redistribution": "Bibliographic facts and short original paraphrase only"
+      }
+    },
+    {
+      "source_id": "nct01235039",
+      "doi": null,
+      "title": "A Study Evaluating the Bioequivalence of VIAject®7 Compared to VIAject®25 and Comparing the Pharmacokinetic and Pharmacodynamic Properties of VIAject®7 to Insulin Lispro in Subjects With Type 1 Diabetes Mellitus",
+      "authors": [
+        "Biodel"
+      ],
+      "year": null,
+      "url": "https://clinicaltrials.gov/study/NCT01235039",
+      "accessed_on": "2026-09-20",
+      "reviewed_material": "registry_protocol_json",
+      "api_url": "https://clinicaltrials.gov/api/v2/studies/NCT01235039",
+      "snapshot_sha256": "58a8d2dbbd3284ed452597957b8dc5781318a41c25b06154c76469a4e6f3bd8a",
+      "record_last_update": {
+        "date": "2015-07-29",
+        "type": "ESTIMATED"
+      },
+      "evidence_role": "Eligibility, arm and enrolled-count verification; not source of individual PK data",
+      "rights": {
+        "redistribution": "Structured factual metadata only; no participant records"
+      }
+    },
+    {
+      "source_id": "nct02146651",
+      "doi": null,
+      "title": "A Double-blinded, Randomised, Four-period Crossover Euglycemic Clamp Trial Investigating the Dose-response and Dose-exposure Relationship of BioChaperone Insulin Lispro in Three Different Doses in Subjects With Type 1 Diabetes",
+      "authors": [
+        "Adocia"
+      ],
+      "year": null,
+      "url": "https://clinicaltrials.gov/study/NCT02146651",
+      "accessed_on": "2026-09-20",
+      "reviewed_material": "registry_protocol_json",
+      "api_url": "https://clinicaltrials.gov/api/v2/studies/NCT02146651",
+      "snapshot_sha256": "f9ca992569a8f91af874913aebb45b36c2f2b3986ada06b9414277c05c25d24f",
+      "record_last_update": {
+        "date": "2014-12-10",
+        "type": "ESTIMATED"
+      },
+      "evidence_role": "Eligibility, arm and enrolled-count verification; not source of individual PK data",
+      "rights": {
+        "redistribution": "Structured factual metadata only; no participant records"
+      }
+    },
+    {
+      "source_id": "nct02344992",
+      "doi": null,
+      "title": "Blood Glucose Control With BioChaperone Insulin Lispro Compared to Insulin Lispro (Humalog®) After Ingestion of a Standardized Meal",
+      "authors": [
+        "Adocia"
+      ],
+      "year": null,
+      "url": "https://clinicaltrials.gov/study/NCT02344992",
+      "accessed_on": "2026-09-20",
+      "reviewed_material": "registry_protocol_json",
+      "api_url": "https://clinicaltrials.gov/api/v2/studies/NCT02344992",
+      "snapshot_sha256": "c8b0450f79dedb9bb1ab04e630ad15787955dad679378586c1ce716a3c32f9c0",
+      "record_last_update": {
+        "date": "2017-06-01",
+        "type": "ACTUAL"
+      },
+      "evidence_role": "Eligibility, arm and enrolled-count verification; not source of individual PK data",
+      "rights": {
+        "redistribution": "Structured factual metadata only; no participant records"
+      }
+    }
+  ],
+  "source_acquisition_note": "Public source originals retained outside version control. Hashes identify inspected bytes; local transient paths are not a durable archive. Full-text access limitations are recorded per source."
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "opent1d.local-campaign-protocol/1",
+  "id": "LOCAL-CAMPAIGN/1",
+  "task": "m4-study",
+  "configuration_schema": "opent1d.local-campaign-config/1",
+  "cell_count": [1, 32],
+  "repeats": [1, 8],
+  "maximum_slots": 128,
+  "timeout_seconds": [1, 10800],
+  "order": "cell-major, then ascending repetition number",
+  "freeze": "Original campaign and native configurations, standalone source/declaration bytes, parameters, native protocol, implementation and root/native/observer lock and actual runtime identities before dispatch",
+  "session_policy": "Immutable root freeze and append-only numbered sessions. Every new session links the preceding sealed session manifest. Resume verifies all prior sessions and accepted native archives; unsealed sessions cannot be resumed.",
+  "attempt_policy": "Attempt each remaining slot once per explicit run/resume session. Each dispatched attempt has a fresh retained directory and links its previous dispatched attempt manifest. First complete accepted attempt permanently satisfies its slot; later failed, interrupted and unattempted evidence is never erased.",
+  "process_policy": "Sequential supervised native m4-study commands. Outer deadline does not alter native stage budgets. Forward interruption and allow native owner to reap numerical workers before sealing; bounded cleanup fallback. Global interruption stops later dispatch.",
+  "reporting": "Full cell/repetition and source/scenario planned denominators, every attempt and null/missing evidence. Aggregate execution and identity accounting only; no pooled scientific contrasts, source tuning, outcome-driven changes or winner selection.",
+  "reconstruction": "Explicit standard-library native reader and saved campaign identities; no supplied source or numerical runtime execution. Fresh external report directory only. Failed/incomplete evidence requires explicit allow-failed.",
+  "limits": "Trusted local synthetic m4-study configurations only. No automatic installation, human observations, general task dispatch, independent usability, biological validity, treatment result or public release. Hard-killed unsealed sessions remain forensic evidence and require a fresh campaign rather than automatic recovery."
+}

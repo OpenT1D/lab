@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "local_store": "results/m2-archive in the maintained main checkout; outside Git",
+  "scope": "Synthetic M2 software evidence, not independent scientific reproduction",
+  "archives": [
+    {
+      "directory": "pr13-linux",
+      "origin": "pr13-linux; native synthetic software evidence, including retained review failures",
+      "archive_sha256": "1708330ca394f87224458505c4e8ce88ad0abd2edcc063b0bd71b0c647f18460",
+      "inventory_sha256": "7464c9e64b39b3a0bdf6ce00575fa33838525c9174f9efbf430b8ff220be0a1e",
+      "file_count": 441
+    },
+    {
+      "directory": "pr13-local-feasibility",
+      "origin": "pr13-local-feasibility; native synthetic software evidence, including retained review failures",
+      "archive_sha256": "68a1eaef13e2ce67475f61e5f47503547f0a66ad5b1958c9ef668c872d173772",
+      "inventory_sha256": "b38171ac860d5d6000ede25d957b20c862547c4c6aa0764d1d86d1fd319664e7",
+      "file_count": 20
+    },
+    {
+      "directory": "pr14-linux",
+      "origin": "pr14-linux; native synthetic software evidence, including retained review failures",
+      "archive_sha256": "96fad8d15955efc1a53d5666b464d42794997f3a2a4c36696bffe5ebf5fe561d",
+      "inventory_sha256": "f60caf213b530a18477eb4b61316b3cee1f280aca529dce60836570b3a75b2fd",
+      "file_count": 496
+    },
+    {
+      "directory": "pr14-local-review",
+      "origin": "pr14-local-review; native synthetic software evidence, including retained review failures",
+      "archive_sha256": "ae30c5bba587514f1890b92c77f7e828bbf14a05e0133dc6c7a1d9f4360483e8",
+      "inventory_sha256": "d2fd754e030150aa6d30a856d8615c79929c024fdbbafdaf53c118cbce16a673",
+      "file_count": 156
+    },
+    {
+      "directory": "pr15-local-review",
+      "origin": "Diagnostic authoring attempts, including reconstruction failures and missing worker provenance; not accepted clean reproductions",
+      "archive_sha256": "51bdd669ac4be46ffdf3a647cfae3282ef7c2d885ed95f58747baeeb67038d80",
+      "inventory_sha256": "e892220b37340a4d1fc20d8737814ddf04298f294f6bc403ba8865e573b8ad48",
+      "file_count": 1514
+    },
+    {
+      "directory": "pr15-local-verified",
+      "origin": "Final clean 7672d11 development/native verification and separately retained preceding review runs; original M1 Mac collection and Cambridge historical equality",
+      "archive_sha256": "91e362e5650e55195282e983bc7e35402b59082b1f351f6a8fcafaae16b2db01",
+      "inventory_sha256": "109efdded1747a14d4c7d5371d1e5f443993edbbe1d39b0ac464418e95974e99",
+      "file_count": 1554
+    },
+    {
+      "directory": "pr15-linux",
+      "origin": "Exact 7672d11 PR CI 34752424190, all five jobs; includes logs of superseded CI attempts and the final local native suite",
+      "archive_sha256": "7a778f527d77765afb4432ea67681d59416fbbcad7e988e07069e9401aca5c88",
+      "inventory_sha256": "4f7a102ba9a41d76834ef2d1ba50164efd40efca194117d916da8cf977aa7ca4",
+      "file_count": 1221
+    },
+    {
+      "directory": "pr15-main-linux",
+      "origin": "Merged d44ea12 main CI 34753228486, all five jobs and native artifacts",
+      "archive_sha256": "077abb4b52d20a524cfa31081b25d595a61757178f9271cc71cd35d90431dc34",
+      "inventory_sha256": "41c5c17284e89a1b322aea3e608eb63941fd0d3d3fbfa4f7d7c8d90541fad8d2",
+      "file_count": 1214
+    },
+    {
+      "directory": "ot014-frozen-evaluation",
+      "origin": "First frozen 7672d11 OT-014 evaluation: all 648 cases, 264 native terminations, exact reconstruction, validated plan, diagnostic summary and original archive verification",
+      "archive_sha256": "c1b2f09000420740795229c144a4e56e30b2818fe461b0040fc639088cc10ec7",
+      "inventory_sha256": "b24137b26aea74d8aaaf605bfd391262e9b5e884f220f6caa11f5208ad4a40bd",
+      "file_count": 12923
+    }
+  ]
+}

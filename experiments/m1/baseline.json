@@ -1,0 +1,1827 @@
+{
+  "cases": {
+    "adult#001-101-basal_bolus-A": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "A",
+        "controller": "basal_bolus",
+        "profile": "adult#001",
+        "schema": "opent1d.simglucose/1",
+        "seed": 101
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 8.77310657487,
+        "CR_g_U": 10.0,
+        "basal_u_min": 0.02112267499992533,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 101,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#001-101-basal_bolus-B": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "B",
+        "controller": "basal_bolus",
+        "profile": "adult#001",
+        "schema": "opent1d.simglucose/1",
+        "seed": 101
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 8.77310657487,
+        "CR_g_U": 10.0,
+        "basal_u_min": 0.02112267499992533,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 101,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#001-101-basal_bolus-C": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "C",
+        "controller": "basal_bolus",
+        "profile": "adult#001",
+        "schema": "opent1d.simglucose/1",
+        "seed": 101
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 8.77310657487,
+        "CR_g_U": 10.0,
+        "basal_u_min": 0.02112267499992533,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 101,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#001-101-basal_bolus-D": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "D",
+        "controller": "basal_bolus",
+        "profile": "adult#001",
+        "schema": "opent1d.simglucose/1",
+        "seed": 101
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 8.77310657487,
+        "CR_g_U": 10.0,
+        "basal_u_min": 0.02112267499992533,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 101,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#001-101-pid-A": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "A",
+        "controller": "pid",
+        "profile": "adult#001",
+        "schema": "opent1d.simglucose/1",
+        "seed": 101
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 8.77310657487,
+        "CR_g_U": 10.0,
+        "basal_u_min": 0.02112267499992533,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 101,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#001-101-pid-B": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "B",
+        "controller": "pid",
+        "profile": "adult#001",
+        "schema": "opent1d.simglucose/1",
+        "seed": 101
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 8.77310657487,
+        "CR_g_U": 10.0,
+        "basal_u_min": 0.02112267499992533,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 101,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#001-101-pid-C": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "C",
+        "controller": "pid",
+        "profile": "adult#001",
+        "schema": "opent1d.simglucose/1",
+        "seed": 101
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 8.77310657487,
+        "CR_g_U": 10.0,
+        "basal_u_min": 0.02112267499992533,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 101,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#001-101-pid-D": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "D",
+        "controller": "pid",
+        "profile": "adult#001",
+        "schema": "opent1d.simglucose/1",
+        "seed": 101
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 8.77310657487,
+        "CR_g_U": 10.0,
+        "basal_u_min": 0.02112267499992533,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 101,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#001-102-basal_bolus-A": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "A",
+        "controller": "basal_bolus",
+        "profile": "adult#001",
+        "schema": "opent1d.simglucose/1",
+        "seed": 102
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 8.77310657487,
+        "CR_g_U": 10.0,
+        "basal_u_min": 0.02112267499992533,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 102,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#001-102-basal_bolus-B": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "B",
+        "controller": "basal_bolus",
+        "profile": "adult#001",
+        "schema": "opent1d.simglucose/1",
+        "seed": 102
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 8.77310657487,
+        "CR_g_U": 10.0,
+        "basal_u_min": 0.02112267499992533,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 102,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#001-102-basal_bolus-C": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "C",
+        "controller": "basal_bolus",
+        "profile": "adult#001",
+        "schema": "opent1d.simglucose/1",
+        "seed": 102
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 8.77310657487,
+        "CR_g_U": 10.0,
+        "basal_u_min": 0.02112267499992533,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 102,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#001-102-basal_bolus-D": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "D",
+        "controller": "basal_bolus",
+        "profile": "adult#001",
+        "schema": "opent1d.simglucose/1",
+        "seed": 102
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 8.77310657487,
+        "CR_g_U": 10.0,
+        "basal_u_min": 0.02112267499992533,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 102,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#001-102-pid-A": {
+      "completed_rows": 359,
+      "config": {
+        "condition": "A",
+        "controller": "pid",
+        "profile": "adult#001",
+        "schema": "opent1d.simglucose/1",
+        "seed": 102
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 8.77310657487,
+        "CR_g_U": 10.0,
+        "basal_u_min": 0.02112267499992533,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 102,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "terminated"
+    },
+    "adult#001-102-pid-B": {
+      "completed_rows": 359,
+      "config": {
+        "condition": "B",
+        "controller": "pid",
+        "profile": "adult#001",
+        "schema": "opent1d.simglucose/1",
+        "seed": 102
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 8.77310657487,
+        "CR_g_U": 10.0,
+        "basal_u_min": 0.02112267499992533,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 102,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "terminated"
+    },
+    "adult#001-102-pid-C": {
+      "completed_rows": 359,
+      "config": {
+        "condition": "C",
+        "controller": "pid",
+        "profile": "adult#001",
+        "schema": "opent1d.simglucose/1",
+        "seed": 102
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 8.77310657487,
+        "CR_g_U": 10.0,
+        "basal_u_min": 0.02112267499992533,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 102,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "terminated"
+    },
+    "adult#001-102-pid-D": {
+      "completed_rows": 359,
+      "config": {
+        "condition": "D",
+        "controller": "pid",
+        "profile": "adult#001",
+        "schema": "opent1d.simglucose/1",
+        "seed": 102
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 8.77310657487,
+        "CR_g_U": 10.0,
+        "basal_u_min": 0.02112267499992533,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 102,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "terminated"
+    },
+    "adult#002-101-basal_bolus-A": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "A",
+        "controller": "basal_bolus",
+        "profile": "adult#002",
+        "schema": "opent1d.simglucose/1",
+        "seed": 101
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 9.21276345633,
+        "CR_g_U": 8.0,
+        "basal_u_min": 0.022825539499994,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 101,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#002-101-basal_bolus-B": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "B",
+        "controller": "basal_bolus",
+        "profile": "adult#002",
+        "schema": "opent1d.simglucose/1",
+        "seed": 101
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 9.21276345633,
+        "CR_g_U": 8.0,
+        "basal_u_min": 0.022825539499994,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 101,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#002-101-basal_bolus-C": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "C",
+        "controller": "basal_bolus",
+        "profile": "adult#002",
+        "schema": "opent1d.simglucose/1",
+        "seed": 101
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 9.21276345633,
+        "CR_g_U": 8.0,
+        "basal_u_min": 0.022825539499994,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 101,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#002-101-basal_bolus-D": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "D",
+        "controller": "basal_bolus",
+        "profile": "adult#002",
+        "schema": "opent1d.simglucose/1",
+        "seed": 101
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 9.21276345633,
+        "CR_g_U": 8.0,
+        "basal_u_min": 0.022825539499994,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 101,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#002-101-pid-A": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "A",
+        "controller": "pid",
+        "profile": "adult#002",
+        "schema": "opent1d.simglucose/1",
+        "seed": 101
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 9.21276345633,
+        "CR_g_U": 8.0,
+        "basal_u_min": 0.022825539499994,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 101,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#002-101-pid-B": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "B",
+        "controller": "pid",
+        "profile": "adult#002",
+        "schema": "opent1d.simglucose/1",
+        "seed": 101
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 9.21276345633,
+        "CR_g_U": 8.0,
+        "basal_u_min": 0.022825539499994,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 101,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#002-101-pid-C": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "C",
+        "controller": "pid",
+        "profile": "adult#002",
+        "schema": "opent1d.simglucose/1",
+        "seed": 101
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 9.21276345633,
+        "CR_g_U": 8.0,
+        "basal_u_min": 0.022825539499994,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 101,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#002-101-pid-D": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "D",
+        "controller": "pid",
+        "profile": "adult#002",
+        "schema": "opent1d.simglucose/1",
+        "seed": 101
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 9.21276345633,
+        "CR_g_U": 8.0,
+        "basal_u_min": 0.022825539499994,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 101,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#002-102-basal_bolus-A": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "A",
+        "controller": "basal_bolus",
+        "profile": "adult#002",
+        "schema": "opent1d.simglucose/1",
+        "seed": 102
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 9.21276345633,
+        "CR_g_U": 8.0,
+        "basal_u_min": 0.022825539499994,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 102,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#002-102-basal_bolus-B": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "B",
+        "controller": "basal_bolus",
+        "profile": "adult#002",
+        "schema": "opent1d.simglucose/1",
+        "seed": 102
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 9.21276345633,
+        "CR_g_U": 8.0,
+        "basal_u_min": 0.022825539499994,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 102,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#002-102-basal_bolus-C": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "C",
+        "controller": "basal_bolus",
+        "profile": "adult#002",
+        "schema": "opent1d.simglucose/1",
+        "seed": 102
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 9.21276345633,
+        "CR_g_U": 8.0,
+        "basal_u_min": 0.022825539499994,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 102,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#002-102-basal_bolus-D": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "D",
+        "controller": "basal_bolus",
+        "profile": "adult#002",
+        "schema": "opent1d.simglucose/1",
+        "seed": 102
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 9.21276345633,
+        "CR_g_U": 8.0,
+        "basal_u_min": 0.022825539499994,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 102,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#002-102-pid-A": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "A",
+        "controller": "pid",
+        "profile": "adult#002",
+        "schema": "opent1d.simglucose/1",
+        "seed": 102
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 9.21276345633,
+        "CR_g_U": 8.0,
+        "basal_u_min": 0.022825539499994,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 102,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#002-102-pid-B": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "B",
+        "controller": "pid",
+        "profile": "adult#002",
+        "schema": "opent1d.simglucose/1",
+        "seed": 102
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 9.21276345633,
+        "CR_g_U": 8.0,
+        "basal_u_min": 0.022825539499994,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 102,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#002-102-pid-C": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "C",
+        "controller": "pid",
+        "profile": "adult#002",
+        "schema": "opent1d.simglucose/1",
+        "seed": 102
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 9.21276345633,
+        "CR_g_U": 8.0,
+        "basal_u_min": 0.022825539499994,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 102,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    },
+    "adult#002-102-pid-D": {
+      "completed_rows": 960,
+      "config": {
+        "condition": "D",
+        "controller": "pid",
+        "profile": "adult#002",
+        "schema": "opent1d.simglucose/1",
+        "seed": 102
+      },
+      "effective_settings": {
+        "CF_mg_dl_U": 9.21276345633,
+        "CR_g_U": 8.0,
+        "basal_u_min": 0.022825539499994,
+        "controller_target_mg_dl": 140,
+        "patient_random_initialization": false,
+        "patient_seed": null,
+        "pid": {
+          "D": 0.001,
+          "I": 1e-05,
+          "P": 0.001
+        },
+        "pump": "Insulet",
+        "pump_parameters": {
+          "Name": "Insulet",
+          "inc_basal": 0.05,
+          "inc_bolus": 0.05,
+          "max_basal": 30.0,
+          "max_bolus": 30.0,
+          "min_basal": 0.0,
+          "min_bolus": 0.0,
+          "sample_time": 1.0
+        },
+        "sensor": "Dexcom",
+        "sensor_seed": 102,
+        "solver": {
+          "atol": 1e-12,
+          "method": "dopri5",
+          "rtol": 1e-06
+        }
+      },
+      "status": "completed"
+    }
+  },
+  "collections": [
+    {
+      "name": "mac",
+      "origin": {
+        "archive_sha256": "4720e0a6b7ebfd275b8b410d57a31ce6ff1f0aa1030c879c285c54834cb3fe16",
+        "directory": "2026-09-13-mac-implementation",
+        "file_count": 804,
+        "inventory_sha256": "3389adcf6459587eab42bc415c7706292a0e6f9bd01bc0f6656da5c65b4583ce",
+        "origin": "Mac empty-cache installation and development demonstration, implementation 1aba011; includes earlier development/failure evidence"
+      },
+      "outputs_sha256": {
+        "adult#001-101-basal_bolus-A": {
+          "initial_sha256": "103b0adea81b7b727e9c1593814cc0a37fc0a2efe35e1384a0c26dd4207bf34b",
+          "trace_sha256": "9e1d001caa37d99cb9b1ee8d5d856d913432bf2d0edfbfd2bf513a0ceb86270e"
+        },
+        "adult#001-101-basal_bolus-B": {
+          "initial_sha256": "103b0adea81b7b727e9c1593814cc0a37fc0a2efe35e1384a0c26dd4207bf34b",
+          "trace_sha256": "f1d65ee1880c216dd8f338f922e61083ed7d1b6d2ffc21707b5b54eed7cc4402"
+        },
+        "adult#001-101-basal_bolus-C": {
+          "initial_sha256": "103b0adea81b7b727e9c1593814cc0a37fc0a2efe35e1384a0c26dd4207bf34b",
+          "trace_sha256": "526da4112b44eb1db7df2f2dd9f72b455a10a3ebad1e4e270c9ea45189b15d6e"
+        },
+        "adult#001-101-basal_bolus-D": {
+          "initial_sha256": "103b0adea81b7b727e9c1593814cc0a37fc0a2efe35e1384a0c26dd4207bf34b",
+          "trace_sha256": "013b3eb8b018a4f68860a654c30cc4ee4321633803246b63a63be350abdf977d"
+        },
+        "adult#001-101-pid-A": {
+          "initial_sha256": "103b0adea81b7b727e9c1593814cc0a37fc0a2efe35e1384a0c26dd4207bf34b",
+          "trace_sha256": "5ce2624398e1d5f1fe2832ffa7e9154bddb0325c419187f6e553937f168c1c2a"
+        },
+        "adult#001-101-pid-B": {
+          "initial_sha256": "103b0adea81b7b727e9c1593814cc0a37fc0a2efe35e1384a0c26dd4207bf34b",
+          "trace_sha256": "1f67eb93a1ed58d7424e358acdeee879080c0677d44b019328c8333d99b28a7b"
+        },
+        "adult#001-101-pid-C": {
+          "initial_sha256": "103b0adea81b7b727e9c1593814cc0a37fc0a2efe35e1384a0c26dd4207bf34b",
+          "trace_sha256": "a895f68a39596c9616b56667e79baa94d04e405f1ff3b3d6478879e371e507ed"
+        },
+        "adult#001-101-pid-D": {
+          "initial_sha256": "103b0adea81b7b727e9c1593814cc0a37fc0a2efe35e1384a0c26dd4207bf34b",
+          "trace_sha256": "682061b8a8820457c1cd419fae405a1148b44a8558de4f68ed93eebc3dbb3787"
+        },
+        "adult#001-102-basal_bolus-A": {
+          "initial_sha256": "ef2d2ab99b6c82a7aded2e78901ed9617e72b3242ceb62635f152321e21c04cd",
+          "trace_sha256": "ece7c99c174150f1f8bd51b508717e33e4aba50f1c879081120cf5fe461d4416"
+        },
+        "adult#001-102-basal_bolus-B": {
+          "initial_sha256": "ef2d2ab99b6c82a7aded2e78901ed9617e72b3242ceb62635f152321e21c04cd",
+          "trace_sha256": "47c124e5a49686e6d23e30ef4674edc00d507073985dfa9a2cf11c8be8b74f2b"
+        },
+        "adult#001-102-basal_bolus-C": {
+          "initial_sha256": "ef2d2ab99b6c82a7aded2e78901ed9617e72b3242ceb62635f152321e21c04cd",
+          "trace_sha256": "1abfb23f795ce8854defc6bc3949619c7886090eb4cf3586d4c23701a2173cec"
+        },
+        "adult#001-102-basal_bolus-D": {
+          "initial_sha256": "ef2d2ab99b6c82a7aded2e78901ed9617e72b3242ceb62635f152321e21c04cd",
+          "trace_sha256": "7c6bd7bffa59146c0428e762fd929d18eb9f357a72afbd57905402e3bf4edb3e"
+        },
+        "adult#001-102-pid-A": {
+          "initial_sha256": "ef2d2ab99b6c82a7aded2e78901ed9617e72b3242ceb62635f152321e21c04cd",
+          "trace_sha256": "83def2b4fff62c3bc6831b4771ae0118ad58b679812415a1c08ec65f9841796e"
+        },
+        "adult#001-102-pid-B": {
+          "initial_sha256": "ef2d2ab99b6c82a7aded2e78901ed9617e72b3242ceb62635f152321e21c04cd",
+          "trace_sha256": "83def2b4fff62c3bc6831b4771ae0118ad58b679812415a1c08ec65f9841796e"
+        },
+        "adult#001-102-pid-C": {
+          "initial_sha256": "ef2d2ab99b6c82a7aded2e78901ed9617e72b3242ceb62635f152321e21c04cd",
+          "trace_sha256": "83def2b4fff62c3bc6831b4771ae0118ad58b679812415a1c08ec65f9841796e"
+        },
+        "adult#001-102-pid-D": {
+          "initial_sha256": "ef2d2ab99b6c82a7aded2e78901ed9617e72b3242ceb62635f152321e21c04cd",
+          "trace_sha256": "83def2b4fff62c3bc6831b4771ae0118ad58b679812415a1c08ec65f9841796e"
+        },
+        "adult#002-101-basal_bolus-A": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "4e2c136f24e42f1dd4f850479f680295917de78fcb33c100f39cbd72f30b92b0"
+        },
+        "adult#002-101-basal_bolus-B": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "37a2faf8cf33a1a9dbfcf323b43deecb48233df64e7abfb219db55dd568f6274"
+        },
+        "adult#002-101-basal_bolus-C": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "8f7194471a5cad613a146f7fc53267c81ec130a41cbf53d9bca96c7f871bb319"
+        },
+        "adult#002-101-basal_bolus-D": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "706889e7d43549c7baa3eb5105893d3e7e14d87f4cd3d8ea5837f6850aa4c048"
+        },
+        "adult#002-101-pid-A": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "e31a8a26e4501642dcddddc17688b85471586a76da13c35df59e5fe05dc76713"
+        },
+        "adult#002-101-pid-B": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "c9c655a940bd4280c333095290976f5a0d18e297651d87606a44792e10403579"
+        },
+        "adult#002-101-pid-C": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "97368992c54b404cf0bc72d4bc45e939478b61f079fa5c954d1c40979a34a4a7"
+        },
+        "adult#002-101-pid-D": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "201b6fa36b89cde7d7ee009057315ae19bbb13b9c4d9551ec75bb9e74368366b"
+        },
+        "adult#002-102-basal_bolus-A": {
+          "initial_sha256": "ad2a2c06c63245304e48baac34ae6d158ee2f88b4bb52546715317325403d391",
+          "trace_sha256": "2c3b5d36a03f4e1ce02a84e9e2337fe105d653cc677bcaf0f50214454f9a3ccd"
+        },
+        "adult#002-102-basal_bolus-B": {
+          "initial_sha256": "ad2a2c06c63245304e48baac34ae6d158ee2f88b4bb52546715317325403d391",
+          "trace_sha256": "1fe443fca7f8a18e8755f8927e62f0c8f3a3db8aefddfce77f8fcca80e4954b1"
+        },
+        "adult#002-102-basal_bolus-C": {
+          "initial_sha256": "ad2a2c06c63245304e48baac34ae6d158ee2f88b4bb52546715317325403d391",
+          "trace_sha256": "6980e7cd2a07ed010b8932fd968f0347f29898d761dc3db3ee3f8eefa7f65dac"
+        },
+        "adult#002-102-basal_bolus-D": {
+          "initial_sha256": "ad2a2c06c63245304e48baac34ae6d158ee2f88b4bb52546715317325403d391",
+          "trace_sha256": "a6c94209bc04f01674975f0be8b2a10b2e326b417d264187666a50ea8ba4a726"
+        },
+        "adult#002-102-pid-A": {
+          "initial_sha256": "ad2a2c06c63245304e48baac34ae6d158ee2f88b4bb52546715317325403d391",
+          "trace_sha256": "a56fcaa435ab893588324f08e09b87541e78c97f07fe8c1fa48e3b45882ddf10"
+        },
+        "adult#002-102-pid-B": {
+          "initial_sha256": "ad2a2c06c63245304e48baac34ae6d158ee2f88b4bb52546715317325403d391",
+          "trace_sha256": "8a884d96ad31a31a004f38e275e507fec3faa2f88773e414a3a900a1dfef71e5"
+        },
+        "adult#002-102-pid-C": {
+          "initial_sha256": "ad2a2c06c63245304e48baac34ae6d158ee2f88b4bb52546715317325403d391",
+          "trace_sha256": "832aedf031c5fdb45ecb0f8a2d860db3c55d86e3779768492e81d17134c7449e"
+        },
+        "adult#002-102-pid-D": {
+          "initial_sha256": "ad2a2c06c63245304e48baac34ae6d158ee2f88b4bb52546715317325403d391",
+          "trace_sha256": "e39ef34d65651ad906a672a54492673e99a4193b81f808b18522a42d54c18ad7"
+        }
+      }
+    },
+    {
+      "name": "linux_initial",
+      "origin": {
+        "archive_sha256": "15ef72f521b544a9afcd04259727258d28e2c84ddce6e98838e727bd06a9993e",
+        "directory": "2026-09-13-linux-pr11",
+        "file_count": 389,
+        "inventory_sha256": "17d3834017473e2a56c3aa9e09f0822a98cdbb38f1cf8f4049cdefc7faa1e481",
+        "origin": "Linux PR 11 CI run 34747531609, M1 artifacts and full CI log"
+      },
+      "outputs_sha256": {
+        "adult#001-101-basal_bolus-A": {
+          "initial_sha256": "bb9533e2b1b1c5ae8924f0637a9ff435d435b497cd0c2053a8249b8d5b665d18",
+          "trace_sha256": "d2502099db908a52cd21309a69f060137aea001124838a6e5da9c67afa50ea9f"
+        },
+        "adult#001-101-basal_bolus-B": {
+          "initial_sha256": "bb9533e2b1b1c5ae8924f0637a9ff435d435b497cd0c2053a8249b8d5b665d18",
+          "trace_sha256": "c16dc00dcaf48b89999f3ba743b35bca4ae2a2b7d2766b2aedee893b5bf03ceb"
+        },
+        "adult#001-101-basal_bolus-C": {
+          "initial_sha256": "bb9533e2b1b1c5ae8924f0637a9ff435d435b497cd0c2053a8249b8d5b665d18",
+          "trace_sha256": "54dc5cfe03457bbc7da3134ff22b0cdf0c3cfb3e24cd989887ce9780592233aa"
+        },
+        "adult#001-101-basal_bolus-D": {
+          "initial_sha256": "bb9533e2b1b1c5ae8924f0637a9ff435d435b497cd0c2053a8249b8d5b665d18",
+          "trace_sha256": "305b1dc1510da02cbcf314c041e2db9a7d2eb14e422795ebab96f01ce18c3820"
+        },
+        "adult#001-101-pid-A": {
+          "initial_sha256": "bb9533e2b1b1c5ae8924f0637a9ff435d435b497cd0c2053a8249b8d5b665d18",
+          "trace_sha256": "3a9d483fe36ac74f237fc345e9277e3f3b2e8080d017516f6599d7150f41fc98"
+        },
+        "adult#001-101-pid-B": {
+          "initial_sha256": "bb9533e2b1b1c5ae8924f0637a9ff435d435b497cd0c2053a8249b8d5b665d18",
+          "trace_sha256": "5d8ad45662f78c4c7dd0a1b38296056182b463eb35d3174f9b39671d28ec9c49"
+        },
+        "adult#001-101-pid-C": {
+          "initial_sha256": "bb9533e2b1b1c5ae8924f0637a9ff435d435b497cd0c2053a8249b8d5b665d18",
+          "trace_sha256": "53da354997af80c426b9ffd23bc6b4915798ae6745e73749c9ec32d5a61f9b1c"
+        },
+        "adult#001-101-pid-D": {
+          "initial_sha256": "bb9533e2b1b1c5ae8924f0637a9ff435d435b497cd0c2053a8249b8d5b665d18",
+          "trace_sha256": "38a2e924474528d66f70ec08d59e9f72d4c835912d46ef3f9099f9e7c2873ab7"
+        },
+        "adult#001-102-basal_bolus-A": {
+          "initial_sha256": "f782053d05f46434e98a8f7af3c025a30f83c1574c264e6e461f33200b675958",
+          "trace_sha256": "a4e24d4b8fe04dc24e40d7b5146b8742e5a446713e7ebf3ca7f9fd5d18c80506"
+        },
+        "adult#001-102-basal_bolus-B": {
+          "initial_sha256": "f782053d05f46434e98a8f7af3c025a30f83c1574c264e6e461f33200b675958",
+          "trace_sha256": "150be1f907f7abf3bf6d8b2f1e42d0741f1a99b9c2373ab39e953022508a96b5"
+        },
+        "adult#001-102-basal_bolus-C": {
+          "initial_sha256": "f782053d05f46434e98a8f7af3c025a30f83c1574c264e6e461f33200b675958",
+          "trace_sha256": "b390809f0b781e58f760019da958e1671234cc661a5449b1f23196bc843ad61e"
+        },
+        "adult#001-102-basal_bolus-D": {
+          "initial_sha256": "f782053d05f46434e98a8f7af3c025a30f83c1574c264e6e461f33200b675958",
+          "trace_sha256": "c98122319be0b79ebe465c9515d869cd561c6ad6b53f86939cceea67811ddf73"
+        },
+        "adult#001-102-pid-A": {
+          "initial_sha256": "f782053d05f46434e98a8f7af3c025a30f83c1574c264e6e461f33200b675958",
+          "trace_sha256": "c976d2a3a7b0577ff7f313833ce5c423ac8e5da5e11649b37bc9e25c57a97347"
+        },
+        "adult#001-102-pid-B": {
+          "initial_sha256": "f782053d05f46434e98a8f7af3c025a30f83c1574c264e6e461f33200b675958",
+          "trace_sha256": "c976d2a3a7b0577ff7f313833ce5c423ac8e5da5e11649b37bc9e25c57a97347"
+        },
+        "adult#001-102-pid-C": {
+          "initial_sha256": "f782053d05f46434e98a8f7af3c025a30f83c1574c264e6e461f33200b675958",
+          "trace_sha256": "c976d2a3a7b0577ff7f313833ce5c423ac8e5da5e11649b37bc9e25c57a97347"
+        },
+        "adult#001-102-pid-D": {
+          "initial_sha256": "f782053d05f46434e98a8f7af3c025a30f83c1574c264e6e461f33200b675958",
+          "trace_sha256": "c976d2a3a7b0577ff7f313833ce5c423ac8e5da5e11649b37bc9e25c57a97347"
+        },
+        "adult#002-101-basal_bolus-A": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "408021700486476c5c87f32b3f6e45b63e39bfbb368816d8bfb640b3def0b26c"
+        },
+        "adult#002-101-basal_bolus-B": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "fd5f99191cd0dc605fbe8abd15fc41aee7313f75ffe7ddeec68c1fe81a06f3c8"
+        },
+        "adult#002-101-basal_bolus-C": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "2c7f78b10d2fbcc6dd034b672ae0466f3a794811360e8fac84c99da924eaee00"
+        },
+        "adult#002-101-basal_bolus-D": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "bbe9de6ae1ce7c04cfa85e5ef596d59cef8270c208f86b82673733d9039d411b"
+        },
+        "adult#002-101-pid-A": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "3dbcdaa38b68bee17c1a0fa411bcb51b85d005a07af9c6cc22741676059214b6"
+        },
+        "adult#002-101-pid-B": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "d1908352a1b1b2de63978a4a86a0eee30f70fd62224deb3d2ea2c022bc16f55e"
+        },
+        "adult#002-101-pid-C": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "fa5377752a48afdbdcdb22c158a52053feb8038aa13e3f20a2d94ff0f9b084ce"
+        },
+        "adult#002-101-pid-D": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "4300080834f0581fc258c505bc18e22af50eb56f2a99cad03fa78fc2939ac0b8"
+        },
+        "adult#002-102-basal_bolus-A": {
+          "initial_sha256": "a19485c90a1693f278fbb4d01b30bf5681046a4b498713a28e787ad110a43bfb",
+          "trace_sha256": "b4732ab3675fbf3bd3807ecda63165068301ef5e8d949051e22e0894f81ff2eb"
+        },
+        "adult#002-102-basal_bolus-B": {
+          "initial_sha256": "a19485c90a1693f278fbb4d01b30bf5681046a4b498713a28e787ad110a43bfb",
+          "trace_sha256": "ee571b077590d0755ee4a53b3b77ba9a84fe2e17d9b7e26f1a8782d123cb6a0d"
+        },
+        "adult#002-102-basal_bolus-C": {
+          "initial_sha256": "a19485c90a1693f278fbb4d01b30bf5681046a4b498713a28e787ad110a43bfb",
+          "trace_sha256": "1d6bb59837264f9183996a846709458b2cca32d11a47e5c157731c468364bb34"
+        },
+        "adult#002-102-basal_bolus-D": {
+          "initial_sha256": "a19485c90a1693f278fbb4d01b30bf5681046a4b498713a28e787ad110a43bfb",
+          "trace_sha256": "04f029b00557aef17787ea7ab660b84846b4b75145de270b3d363259f87bcd3d"
+        },
+        "adult#002-102-pid-A": {
+          "initial_sha256": "a19485c90a1693f278fbb4d01b30bf5681046a4b498713a28e787ad110a43bfb",
+          "trace_sha256": "42bad6d971404a9f914946c6970aa050bf37ccc1f0b27ee957407fa6d2fa11a6"
+        },
+        "adult#002-102-pid-B": {
+          "initial_sha256": "a19485c90a1693f278fbb4d01b30bf5681046a4b498713a28e787ad110a43bfb",
+          "trace_sha256": "cdd944a01739fc5664df28d3c38ca96985124c040662e26b7dc9acb8a6dc0f90"
+        },
+        "adult#002-102-pid-C": {
+          "initial_sha256": "a19485c90a1693f278fbb4d01b30bf5681046a4b498713a28e787ad110a43bfb",
+          "trace_sha256": "cbeb52f94200ad1b9bd31f2ca43583fa7fbec402a774ced0b1a782905bc1bb82"
+        },
+        "adult#002-102-pid-D": {
+          "initial_sha256": "a19485c90a1693f278fbb4d01b30bf5681046a4b498713a28e787ad110a43bfb",
+          "trace_sha256": "51dd91fc86ecf71d105018e1c59510430867512bf0e5230cd823cd3b49703cb7"
+        }
+      }
+    },
+    {
+      "name": "linux_final",
+      "origin": {
+        "archive_sha256": "339b291d97df58bddaa3fdc2849a799934aa679e2083752c7a4b7a74edec0d74",
+        "directory": "2026-09-13-final-pr11",
+        "file_count": 389,
+        "inventory_sha256": "b04c881014926e2c38d46b25cd05a5ff2823fb8cad5711e5e6443e0e6a92efe4",
+        "origin": "Exact PR head ec89c53faff961c5ae1d12c937347431957e85b0; successful CI run 34747741677"
+      },
+      "outputs_sha256": {
+        "adult#001-101-basal_bolus-A": {
+          "initial_sha256": "bb9533e2b1b1c5ae8924f0637a9ff435d435b497cd0c2053a8249b8d5b665d18",
+          "trace_sha256": "c652149ec429f42fc24298e4f2fc48482d681ceeea256f7b15e22709a30357c0"
+        },
+        "adult#001-101-basal_bolus-B": {
+          "initial_sha256": "bb9533e2b1b1c5ae8924f0637a9ff435d435b497cd0c2053a8249b8d5b665d18",
+          "trace_sha256": "aa1ea6b5d1af80b9c561bdb97e3e17b3d68e6b46e51e61481f026698ec1f1b6c"
+        },
+        "adult#001-101-basal_bolus-C": {
+          "initial_sha256": "bb9533e2b1b1c5ae8924f0637a9ff435d435b497cd0c2053a8249b8d5b665d18",
+          "trace_sha256": "281346f3f72fd225e529df05b3dbdb0d59b99cf4f1c489be42ea4adf3d0a3a0e"
+        },
+        "adult#001-101-basal_bolus-D": {
+          "initial_sha256": "bb9533e2b1b1c5ae8924f0637a9ff435d435b497cd0c2053a8249b8d5b665d18",
+          "trace_sha256": "53c6c0addd9e5f3a0bc6f705ba31bb168d1fbcbac8c94ab6585ac90c5b1e3d1a"
+        },
+        "adult#001-101-pid-A": {
+          "initial_sha256": "bb9533e2b1b1c5ae8924f0637a9ff435d435b497cd0c2053a8249b8d5b665d18",
+          "trace_sha256": "ac6a76025714a296caa1e0c887425535ae8358b3ed3056dd511306c73b55ca5c"
+        },
+        "adult#001-101-pid-B": {
+          "initial_sha256": "bb9533e2b1b1c5ae8924f0637a9ff435d435b497cd0c2053a8249b8d5b665d18",
+          "trace_sha256": "2c3154e101cdc3d3772fd2bdb88b815cc2eb400ff58245df2cdbbb5053c4c531"
+        },
+        "adult#001-101-pid-C": {
+          "initial_sha256": "bb9533e2b1b1c5ae8924f0637a9ff435d435b497cd0c2053a8249b8d5b665d18",
+          "trace_sha256": "a578aa762a921542b4a19120da7a75357c6d637560bf0e05c824c081c58fd1e1"
+        },
+        "adult#001-101-pid-D": {
+          "initial_sha256": "bb9533e2b1b1c5ae8924f0637a9ff435d435b497cd0c2053a8249b8d5b665d18",
+          "trace_sha256": "99addacd44ca0896e7d486467a411af832dd18d5cc1e358b3e9df07052e51417"
+        },
+        "adult#001-102-basal_bolus-A": {
+          "initial_sha256": "ef2d2ab99b6c82a7aded2e78901ed9617e72b3242ceb62635f152321e21c04cd",
+          "trace_sha256": "a193f4246ebf3b087035f9436e0ae3988787e20907943844e718b35758dce247"
+        },
+        "adult#001-102-basal_bolus-B": {
+          "initial_sha256": "ef2d2ab99b6c82a7aded2e78901ed9617e72b3242ceb62635f152321e21c04cd",
+          "trace_sha256": "5a560c40026e7608fab36612a773b1332afb75ecb896dce6b8a99091c4b6c44a"
+        },
+        "adult#001-102-basal_bolus-C": {
+          "initial_sha256": "ef2d2ab99b6c82a7aded2e78901ed9617e72b3242ceb62635f152321e21c04cd",
+          "trace_sha256": "08c52f7b371825296c1b7c460479581c70f68412ebea5867908e2093f5c6e66f"
+        },
+        "adult#001-102-basal_bolus-D": {
+          "initial_sha256": "ef2d2ab99b6c82a7aded2e78901ed9617e72b3242ceb62635f152321e21c04cd",
+          "trace_sha256": "38d409ad7d48b930852bbe442080974d57910294efc4267d0745d1ab641049bd"
+        },
+        "adult#001-102-pid-A": {
+          "initial_sha256": "ef2d2ab99b6c82a7aded2e78901ed9617e72b3242ceb62635f152321e21c04cd",
+          "trace_sha256": "143b99754d02290888b98dc40ddaace5eb137ec1d1c3e198f5d45b7b17694196"
+        },
+        "adult#001-102-pid-B": {
+          "initial_sha256": "ef2d2ab99b6c82a7aded2e78901ed9617e72b3242ceb62635f152321e21c04cd",
+          "trace_sha256": "143b99754d02290888b98dc40ddaace5eb137ec1d1c3e198f5d45b7b17694196"
+        },
+        "adult#001-102-pid-C": {
+          "initial_sha256": "ef2d2ab99b6c82a7aded2e78901ed9617e72b3242ceb62635f152321e21c04cd",
+          "trace_sha256": "143b99754d02290888b98dc40ddaace5eb137ec1d1c3e198f5d45b7b17694196"
+        },
+        "adult#001-102-pid-D": {
+          "initial_sha256": "ef2d2ab99b6c82a7aded2e78901ed9617e72b3242ceb62635f152321e21c04cd",
+          "trace_sha256": "143b99754d02290888b98dc40ddaace5eb137ec1d1c3e198f5d45b7b17694196"
+        },
+        "adult#002-101-basal_bolus-A": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "07b2597b2bd5f7ee58b7cafc6913763c667c365fb88e378cf1b8a5e4da2c7546"
+        },
+        "adult#002-101-basal_bolus-B": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "f7be4182039a789718a11ac550a77568ad7f9edd9ec0066d32c29f1b4faca514"
+        },
+        "adult#002-101-basal_bolus-C": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "78cbdb1ea75c3b0e089ef1b993c1ddcf01db4b120db233f3659ce5a80994711f"
+        },
+        "adult#002-101-basal_bolus-D": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "21607c619a38b6bf5857aff067d3b89a2d95b83f9a3f11ba1774c25534c65286"
+        },
+        "adult#002-101-pid-A": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "952c72d4c254912e87c052df7bf38208656c048c3fd73a9b60a76900bd96a050"
+        },
+        "adult#002-101-pid-B": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "f349c97c5b6b894cb4da35bd8c6d3953636f76f2a229423bf0e2a686580f82eb"
+        },
+        "adult#002-101-pid-C": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "93b6eade55c97522bf83d4a63f4aca3832d84d4fd4822537d877fe53a4bd99ef"
+        },
+        "adult#002-101-pid-D": {
+          "initial_sha256": "9c4bafebcd58c202b86a2f9550cda9660367a4de19738876554e50ded07409c3",
+          "trace_sha256": "ad91a0ea7e7fe2482feb2facdf57bd746f29de9935ec25cff0994c91743b5402"
+        },
+        "adult#002-102-basal_bolus-A": {
+          "initial_sha256": "a19485c90a1693f278fbb4d01b30bf5681046a4b498713a28e787ad110a43bfb",
+          "trace_sha256": "af7b632238d98970d1f422e2c25b628b5191f5d0ab90fdef8aab2ebb470b20f1"
+        },
+        "adult#002-102-basal_bolus-B": {
+          "initial_sha256": "a19485c90a1693f278fbb4d01b30bf5681046a4b498713a28e787ad110a43bfb",
+          "trace_sha256": "47b16df8aae1d954f51eb573083413b78a25c6b419b7b5094ee7b0e62f7b0925"
+        },
+        "adult#002-102-basal_bolus-C": {
+          "initial_sha256": "a19485c90a1693f278fbb4d01b30bf5681046a4b498713a28e787ad110a43bfb",
+          "trace_sha256": "b249a727213529a6337503fbb4bf2fb59d98ef27e1fe5617e1a307652597190b"
+        },
+        "adult#002-102-basal_bolus-D": {
+          "initial_sha256": "a19485c90a1693f278fbb4d01b30bf5681046a4b498713a28e787ad110a43bfb",
+          "trace_sha256": "99737580a77cf1d6edc1a9404c0b9a11742c832ebd5efc9132a10ce0d8e0009b"
+        },
+        "adult#002-102-pid-A": {
+          "initial_sha256": "a19485c90a1693f278fbb4d01b30bf5681046a4b498713a28e787ad110a43bfb",
+          "trace_sha256": "0ad3040ec7e0652a5a8930f66470d3149c5de60e89365bf0de80ab7450447192"
+        },
+        "adult#002-102-pid-B": {
+          "initial_sha256": "a19485c90a1693f278fbb4d01b30bf5681046a4b498713a28e787ad110a43bfb",
+          "trace_sha256": "11c919167bb753c4fe666afc034c2a79a9d0cf5480a2a68c400e2ba76e220cde"
+        },
+        "adult#002-102-pid-C": {
+          "initial_sha256": "a19485c90a1693f278fbb4d01b30bf5681046a4b498713a28e787ad110a43bfb",
+          "trace_sha256": "3ba2a3aa487877851eb5a9e58a2bc791e91e304cc57e6445e5b4183b28b8c7fe"
+        },
+        "adult#002-102-pid-D": {
+          "initial_sha256": "a19485c90a1693f278fbb4d01b30bf5681046a4b498713a28e787ad110a43bfb",
+          "trace_sha256": "513e191b92b63c9012a663c2a231ae35870652e4301cda839721df552186df5a"
+        }
+      }
+    }
+  ],
+  "schema": "opent1d.m1-baseline/1",
+  "scope": "32 development cases; exact complete output collections independently retained before the critical review; no tolerance or automatic enrollment",
+  "shared": {
+    "lock_sha256": "634d5849a1cc4ae37f4f00c12c713f168cffa93a43d5a22b571b0c41478fc95c",
+    "packages": {
+      "Farama-Notifications": "0.0.6",
+      "autocommand": "2.2.2",
+      "backports.tarfile": "1.2.0",
+      "certifi": "2026.7.22",
+      "charset-normalizer": "3.5.1",
+      "cloudpickle": "3.1.2",
+      "contourpy": "1.3.3",
+      "cycler": "0.12.1",
+      "dill": "0.4.1",
+      "fonttools": "4.65.0",
+      "gym": "0.9.4",
+      "gymnasium": "0.29.1",
+      "idna": "3.19",
+      "importlib_metadata": "8.0.0",
+      "inflect": "7.3.1",
+      "jaraco.collections": "5.1.0",
+      "jaraco.context": "5.3.0",
+      "jaraco.functools": "4.0.1",
+      "jaraco.text": "3.12.1",
+      "kiwisolver": "1.5.1",
+      "matplotlib": "3.9.4",
+      "more-itertools": "10.3.0",
+      "multiprocess": "0.70.19",
+      "numpy": "1.26.4",
+      "packaging": "26.3",
+      "pandas": "2.2.3",
+      "pathos": "0.3.5",
+      "pillow": "12.3.0",
+      "platformdirs": "4.2.2",
+      "pox": "0.3.7",
+      "ppft": "1.7.8",
+      "pyglet": "2.1.16",
+      "pyparsing": "3.3.2",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2026.3.post1",
+      "requests": "2.34.2",
+      "scipy": "1.13.1",
+      "setuptools": "80.9.0",
+      "simglucose": "0.2.11",
+      "six": "1.17.0",
+      "tomli": "2.0.1",
+      "typeguard": "4.3.0",
+      "typing_extensions": "4.16.0",
+      "tzdata": "2026.4",
+      "urllib3": "2.7.0",
+      "wheel": "0.45.1",
+      "zipp": "3.19.2"
+    },
+    "protocol_sha256": "6aab9c5268ef0bb10cd01a4b6fd0bb91edc7db3375b5ff987bf745e06678de3d",
+    "upstream_files_digest": "46d99100b9644abf7ee43793af2942584c1587a480d2c4b8a46170cdc0357d92",
+    "upstream_revision": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc"
+  }
+}

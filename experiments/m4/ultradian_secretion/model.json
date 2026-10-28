@@ -1,0 +1,13 @@
+{
+  "schema": "m4-causal-model/1",
+  "model_id": "ultradian-f1-basal-normalized/1",
+  "source_sha256": "27e128148a21bb5ba2234e64956fc17f7dbed2daf0d4244ec6a51dbc5e6f1f26",
+  "ancestry": "Karamched, Hripcsak, Albers and Ott 2021, doi:10.1063/5.0027682, section II f1(G) and Table I; Sturis 1991 ancestry. Complete stateless sigmoid response component with explicit synthetic basal amplitude and host pancreatic route, not the full ultradian physiology.",
+  "rights_basis": "Original OpenT1D equation implementation under Apache-2.0; no published code, figure, paper or data copied. The scientific response law remains attributed to its primary source.",
+  "dependencies": "Python standard library math only; host runs in the unchanged locked BC-008 simglucose environment",
+  "parameters": {
+    "a1": 6.6,
+    "C1_mg_l": 300.0
+  },
+  "output_unit": "pmol/(kg min)"
+}

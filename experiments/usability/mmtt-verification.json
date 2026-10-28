@@ -1,0 +1,190 @@
+{
+  "schema": "opent1d.mmtt-beginner-verification/1",
+  "date": "2026-10-22",
+  "base_main": "9d418dc9cb0dbdcc0471b55dac6269e40802d1f0",
+  "branch": "codex/windows-mmtt-test-package",
+  "implementation_commit": "c96729618bca8a499886d38cb58318817ce12e6a",
+  "scope": "internal macOS technical checks; no human or Windows execution",
+  "host": "macOS-26.5.2-arm64-arm-64bit",
+  "packet": {
+    "packet_id": "packet-5ca549b1776b438e9d4e4e55e8a21554",
+    "implementation_revision": "c96729618bca8a499886d38cb58318817ce12e6a",
+    "protected_files": 919,
+    "zip": "OpenT1D-Windows-MMTT-c967296-nl.zip",
+    "zip_bytes": 69315062,
+    "zip_sha256": "9907be4018ba64dd89a219c97493f1a54cfc7a47e4f4dae29199a92acd20d339",
+    "extracted_payload_identical": true,
+    "participant_results": "not_recorded",
+    "human_feedback_included": false,
+    "retest_parent_and_blank_outcomes_verified": true
+  },
+  "checks": {
+    "uv_sync_locked": true,
+    "repository_check_exit": 0,
+    "tests": 1395,
+    "existing_skips": 13,
+    "test_seconds": 441.846,
+    "strict_documentation_build": true,
+    "packet_unit_tests": 12,
+    "worksheet_contract_checks": 24,
+    "bash_syntax": true,
+    "javascript_syntax": true,
+    "fresh_receiving_install_check_start": true,
+    "existing_git_curl_uv": true,
+    "clean_os_image": false,
+    "setup_ready": true,
+    "setup_executed_models": false,
+    "gui_restart_and_closed_ports": true,
+    "fixed_http_routes_checked": 9,
+    "feedback_static_preview": true,
+    "direct_file_navigation": "blocked by browser automation; not verified",
+    "feedback_export_restore_refusal_retest": true,
+    "feedback_width_css_pixels": 390,
+    "evidence_followup_documentation_checks": true
+  },
+  "native": [
+    {
+      "task": "observation",
+      "execution_status": "completed",
+      "coverage": {
+        "complete_cohort": true,
+        "complete_people": 1,
+        "completed_variant_pairs": 3,
+        "planned_people": 1,
+        "planned_variant_pairs": 3,
+        "planned_visits": 2
+      },
+      "archive": "results/gui/observations/archives/obs-study-17239eb6759a4a378175e8b7c1331207/archive",
+      "artifacts": {
+        "report.json": "6165fce17fce451952a909977cb096332c6f7495107d98f3deef55f3747965ff",
+        "report.md": "94ee9bfc0c0233ba67ae25c6b7359ef16be73ff3b83d4dbee864cec79ee50823"
+      },
+      "native_reconstructions_before_and_after_restart": [
+        {
+          "job": "job-c1c6fce6b8c54751b67a1f743794f3d2",
+          "equal_artifacts": [
+            "report.json",
+            "report.md"
+          ]
+        },
+        {
+          "job": "job-215c04019d764f6eab11606d1df19df3",
+          "equal_artifacts": [
+            "report.json",
+            "report.md"
+          ]
+        }
+      ],
+      "downloads_equal_original": true
+    },
+    {
+      "task": "sampling",
+      "execution_status": "completed",
+      "coverage": {
+        "attempted_draw_pairs": 7680,
+        "complete_cohort": true,
+        "completed_draw_pairs": 7680,
+        "completed_pair_points": 60,
+        "completed_variant_pairs": 60,
+        "completed_visit_points": 120,
+        "failed_draw_pairs": 0,
+        "failed_pair_points": 0,
+        "failed_visit_points": 0,
+        "not_attempted_draw_pairs": 0,
+        "not_attempted_pair_points": 0,
+        "not_attempted_visit_points": 0,
+        "planned_draw_pairs": 7680,
+        "planned_people": 5,
+        "planned_schedules": 4,
+        "planned_variant_pairs": 60,
+        "planned_visit_points": 120,
+        "planned_visits_per_schedule": 10,
+        "unavailable_draw_pairs": 0,
+        "unavailable_pair_points": 0,
+        "unavailable_variant_pairs": 0,
+        "unavailable_visit_points": 0
+      },
+      "archive": "results/gui/sampling/archives/sam-study-a61797164d454bf6b4c76dd2133fd15a/archive",
+      "artifacts": {
+        "report.json": "734d608b02bb3b80a010e98aad732edade42268849449d15db327e4fdc49b9df",
+        "report.md": "aa153e12100e17dfb0c5415ba61e4038444beb9fef09831615dd7ba7aa2ad3e7"
+      },
+      "native_reconstructions_before_and_after_restart": [
+        {
+          "job": "job-e33da43767164891b602c5c15ff6b7db",
+          "equal_artifacts": [
+            "report.json",
+            "report.md",
+            "studies/full/report.json",
+            "studies/full/report.md",
+            "studies/four-times/report.json",
+            "studies/four-times/report.md",
+            "studies/five-times/report.json",
+            "studies/five-times/report.md",
+            "studies/three-times/report.json",
+            "studies/three-times/report.md"
+          ]
+        },
+        {
+          "job": "job-239c98dda95e4d3f91b0e2b2a044933d",
+          "equal_artifacts": [
+            "report.json",
+            "report.md",
+            "studies/full/report.json",
+            "studies/full/report.md",
+            "studies/four-times/report.json",
+            "studies/four-times/report.md",
+            "studies/five-times/report.json",
+            "studies/five-times/report.md",
+            "studies/three-times/report.json",
+            "studies/three-times/report.md"
+          ]
+        }
+      ],
+      "downloads_equal_original": true
+    }
+  ],
+  "participant_sessions": 0,
+  "human_retests": 0,
+  "windows_host_checked": false,
+  "external_transfer": false,
+  "pushed_or_merged": false,
+  "remaining": [
+    "actual Windows/WSL and Windows PowerShell installation, localhost, execution and lifecycle",
+    "direct standalone file opening on tester browser",
+    "missing-uv bootstrap",
+    "actual handoff rights review",
+    "human comprehension, assistance and retests",
+    "OT-056 comparative researcher pilot and empirical acceptance"
+  ],
+  "evidence": [
+    {
+      "path": "results/usability/20261022/repository-check.log",
+      "sha256": "4dc2893ef79657d589b8e8940156bf0103d9150a1586d2d0556d82f0832e1edf"
+    },
+    {
+      "path": "results/usability/20261022/prepare.json",
+      "sha256": "891fa4938e11fb466b723105cd2b4f16f5acf6518e372e2614ad54182abb81fe"
+    },
+    {
+      "path": "results/usability/20261022/install.log",
+      "sha256": "c78d2ae4c3a1c9307e43693761de324220f0ecff7c3f1fd40a0f818b8db5aac8"
+    },
+    {
+      "path": "results/usability/20261022/check.json",
+      "sha256": "7d46fdaecab730b3acf111fe73d3b02cf37e749007c144ead350822cc6eec1a1"
+    },
+    {
+      "path": "results/usability/20261022/native-checks.json",
+      "sha256": "82dd47501f8bdd2a19a91ca4a0beb43ab8df671798675b1ba5a227f8f50435a6"
+    },
+    {
+      "path": "results/usability/20261022/preservation.json",
+      "sha256": "5397e27ee71cb37a0c48d066ee7c601dede4c8dcac05dd76ba099ec9c3d77d8b"
+    },
+    {
+      "path": "results/usability/20261022/final-documentation-check.log",
+      "sha256": "6d44a39439bedc3fceab05880bd2719f1a49291c3fce062fbf9ed444ee94099f"
+    }
+  ]
+}

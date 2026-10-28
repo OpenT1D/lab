@@ -1,0 +1,17 @@
+{
+  "schema": "bc006-protocol/1",
+  "id": "BC-006/1",
+  "base_commit": "bb4ac19",
+  "specified_before_numerical_execution": true,
+  "claim": "source_reconciliation_hypotheses_not_an_erratum_or_model_revision",
+  "parameters": {"r": 0.08, "p_plus": 0.003, "p_minus": 0.01, "f": 6.2, "m": 0.62, "k_m": 10.0, "n": 4.0, "c": 200.0, "m0": 14.0, "k_phi": 7.22, "g_b": 5.0},
+  "source_values": {"author_glucose_basal_mmol_l": 4.9127222, "author_threshold_mg_dl": 90.0, "author_k_phi_mg_dl": 130.0, "glucose_mg_dl_per_mmol_l": 18.0, "g_max_mmol_l": 17.2, "tau_min": 30.0, "author_docked_seed_ug": 311.0, "author_x0_ug": 92.7, "author_basal_ug_min": 0.58, "author_cp_volume_l": 4.0, "insulin_molar_mass_g_mol": 5808.0, "author_cp_conversion": 43.0, "author_cp_extra_scale": 0.5},
+  "diagnostics": ["printed_vs_pre_bolus_inventory_same_D", "author_seed_vs_continuum_basal_equilibrium", "isolated_fast_pool_mass_balance", "initial_condition_difference_in_unchanged_BC001", "molar_conversion_and_observation_scale", "product_rule_term_in_change_of_variables"],
+  "burst": {"h0_ug": 1.0, "horizon_min": 10.0, "step_min": 0.01, "assumption": "isolated initial pool; no replenishment; unpriming is a separate returned-inventory ledger"},
+  "reduced_comparison": {"horizon_min": 100.0, "step_min": 0.25, "g_b_mmol_l": 5.0, "capacity": 1.0, "assumption": "same BC001 synthetic input and dynamics, change only initial X; no preferred biological initialization selected"},
+  "solvers": [{"name": "tight", "method": "RK45", "rtol": 1e-9, "atol": 1e-11, "max_step": 0.25}, {"name": "reference", "method": "DOP853", "rtol": 1e-11, "atol": 1e-13, "max_step": 0.125}],
+  "criteria": {"burst_state_error_ug": 1e-8, "burst_mass_error_ug": 1e-10, "reduced_initial_difference_error_ug": 1e-7, "solver_state_error_ug": 1e-6, "chain_rule_relative_error": 1e-7, "repeat_absolute_error": 0.0},
+  "source_reconciliation_policy": "Report discrepancies regardless of numerical pass. Agreement with one decimal is evidence for a candidate explanation, not author intent or corrected publication. Do not fit parameters to 92.7.",
+  "excluded": ["author XPPAUT execution", "new secretion or glucose-feedback module", "empirical basal or body-size calibration", "joint human identifiability", "T1D or transplant validation", "external domain review", "outreach or patient-data access"],
+  "runtime": "unchanged experiments/m4/beta_cell/runtime; Python 3.12, NumPy 2.2.6, SciPy 1.15.3"
+}

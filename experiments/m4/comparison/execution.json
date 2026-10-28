@@ -1,0 +1,1285 @@
+{
+  "schema": "m4-source-comparison-execution/1",
+  "date": "2026-10-03",
+  "branch": "codex/m4-source-comparison",
+  "package": "OT-031",
+  "kind": "internal-synthetic-software-verification",
+  "status": "bounded_internal_software_verification_complete",
+  "ai_assisted_implementation_and_review": true,
+  "human_evaluation": false,
+  "independent_human_execution": false,
+  "protocol": {
+    "id": "M4-COMPARISON/1",
+    "freeze_commit": "1fab1e0feabc3f099fb43121fed5eaa1759c8804",
+    "machine_file": "experiments/m4/comparison/protocol.json",
+    "machine_file_sha256": "1769545288eb65d72757a9330034abad5800c0fac75dc2ca105c801a2014282c",
+    "guidance_file": "docs/research/m4-source-comparison-protocol.md",
+    "guidance_file_sha256": "79d8a4db8d2cb4eb3f782af51ff72afe651674a1d3f46fd91f9796293ec6eb0b"
+  },
+  "implementation_commit": "945cd033184a7be88fad077ea971b71369988294",
+  "artifacts": {
+    "base": "results/m4-comparison",
+    "versioned": false,
+    "console_log_preserved": false,
+    "console_log_scope": "No outer coordinator console log file was retained; sealed supervised child logs are retained."
+  },
+  "primary": {
+    "path": "results/m4-comparison/ot031-primary",
+    "command": [
+      ".venv/bin/python",
+      "-B",
+      "-S",
+      "-m",
+      "experiments.m4.comparison",
+      "run",
+      "--config",
+      "experiments/m4/comparison/example.json",
+      "--output",
+      "results/m4-comparison/ot031-primary"
+    ],
+    "exit_code": 0,
+    "status": "completed",
+    "passed": true,
+    "planned_sources": 2,
+    "accepted_sources": 2,
+    "planned_source_scenarios": 4,
+    "accepted_source_scenarios": 4,
+    "common_controls": "matched",
+    "accepted_pairs": 1,
+    "horizon_min": 240,
+    "sample_step_min": 0.25,
+    "samples_per_trajectory": 961,
+    "manifest_sha256": "3009129ca2aa56f0006330b8f98a02b41d6556e1168eb95b8064a4a4b8670cc1",
+    "plan_sha256": "1a4aecaac02b2ba10dd9bd5555a326b6d5e16a12585361f468fe87f49e8a53c2",
+    "state_sha256": "60c2b072ebcc1d072189f7ff45ef5e8156cc25db1fb9935a04d0aa45cf5e15b9",
+    "config_sha256": "76c7d6ca3b342ea17c5041d30355578042d55e2af38912e07a856c20f32a7606",
+    "report_hashes": {
+      "report.json": "68fbbab66ed3a5ea693e83ac882391a42c75f128ffa58e6db3b28988cc2e406a",
+      "report.md": "4137825e4750419c00ec114ccbddd996ca7628a958b7cee2aca718b12ba2b01a",
+      "figure.svg": "b326cfb22ca48a2db44209e1c3e3cb02bf014dacc1f58a2dd17cef065b4fe1ae"
+    },
+    "reference_manifest_sha256": "ff55074dd31d43dec73c1e2ceca25682ebbcb1b93a72db2a645de0aacf8746ad",
+    "reference_report_sha256": "5ab6fd91378e2e16de1e4dfad6dd02896a9bfb00ac4390c2659f3156e7da6104",
+    "reference_checks": {
+      "basal_control_glucose_error_mg_dl": {
+        "limit": 0.01,
+        "passed": true,
+        "value": 2.878974326179186e-11
+      },
+      "basal_derivative_change_max_native_units_per_min": {
+        "limit": 1e-8,
+        "passed": true,
+        "value": 1.2049250486256824e-12
+      },
+      "equal_arrival_relative_error": {
+        "limit": 1e-10,
+        "passed": true,
+        "value": 6.409635355949837e-14
+      },
+      "fasting_glucose_drift_mg_dl": {
+        "limit": 0.01,
+        "passed": true,
+        "value": 1.7980233472158259e-10
+      },
+      "fasting_insulin_drift_pmol_l": {
+        "limit": 0.01,
+        "passed": true,
+        "value": 4.0097924939945913e-10
+      },
+      "fine_replay_glucose_error_mg_dl": {
+        "limit": 0.01,
+        "passed": true,
+        "value": 0.000001655987872587425
+      },
+      "fine_replay_insulin_error_pmol_l": {
+        "limit": 0.01,
+        "passed": true,
+        "value": 0.0001405082895834515
+      },
+      "glucose_mass_error_mg_kg": {
+        "limit": 0.00001,
+        "passed": true,
+        "value": 3.6669374661735255e-8
+      },
+      "glucose_solver_error_mg_dl": {
+        "limit": 0.01,
+        "passed": true,
+        "value": 4.135658491615478e-8
+      },
+      "insulin_mass_error_pmol_kg": {
+        "limit": 0.000001,
+        "passed": true,
+        "value": 3.348077370901592e-11
+      },
+      "insulin_solver_error_pmol_l": {
+        "limit": 0.01,
+        "passed": true,
+        "value": 0.0000013753662665590219
+      },
+      "native_class_glucose_error_mg_dl": {
+        "limit": 0.05,
+        "passed": true,
+        "value": 7.549537343554449e-8
+      },
+      "native_class_insulin_error_pmol_l": {
+        "limit": 0.01,
+        "passed": true,
+        "value": 5.3543703223826435e-12
+      },
+      "negative_amount_tolerance": {
+        "limit": 1e-8,
+        "passed": true,
+        "value": 0
+      },
+      "repeat_error": {
+        "limit": 0,
+        "passed": true,
+        "value": 0
+      },
+      "same_solver_zero_extension_state_error": {
+        "limit": 0,
+        "passed": true,
+        "value": 0
+      },
+      "secretion_closed_form_error_pmol_kg": {
+        "limit": 1e-7,
+        "passed": true,
+        "value": 1.0174101561233329e-9
+      },
+      "secretion_rate_closed_form_error_pmol_kg_min": {
+        "limit": 1e-7,
+        "passed": true,
+        "value": 1.7763568394002505e-14
+      },
+      "source_solver_error_pmol_kg_min": {
+        "limit": 0.00001,
+        "passed": true,
+        "value": 2.3654040193221704e-7
+      },
+      "zero_extension_derivative_error": {
+        "limit": 0,
+        "passed": true,
+        "value": 0
+      }
+    },
+    "source_inventory": {
+      "docs/research/m4-source-comparison-protocol.md": "79d8a4db8d2cb4eb3f782af51ff72afe651674a1d3f46fd91f9796293ec6eb0b",
+      "experiments/m0/simglucose/pyproject.toml": "6bbb5f49e74bd7df2e11ab39f69754a99ce1e4ef3736573943e3a75118c28007",
+      "experiments/m0/simglucose/recording.py": "4d8195fb662296e77735357ec7df734afb9a4589f68eef521d57332690c40e0e",
+      "experiments/m0/simglucose/uv.lock": "13d254dcebe8d1ab54c3140cdc07152d719a68477a1378d7fe77fc1568612aa9",
+      "experiments/m1/artifacts.py": "e7896d603e8953f9c11a58ddad116eb12494d170cdce06a02a6d53dc04548e79",
+      "experiments/m1/contracts.py": "408a8086116c4db8b387fedd929ab2bfae46740ad1d94e1745e20d4a7ba9f70f",
+      "experiments/m1/metrics.py": "2aa937e5bd3805508d81040a046ec8e0395869a73a1af1943c57b513fb1c21b4",
+      "experiments/m1/validation.py": "1610424acc91cb149a5f3eb163ea982de800194d5b9590493ab2f9515cabbd4e",
+      "experiments/m4/beta_cell/runtime/pyproject.toml": "7c69b6f63a48d72f927c0253b68492de1ac60700d0549744de1207709732d3c5",
+      "experiments/m4/beta_cell/runtime/uv.lock": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04",
+      "experiments/m4/c_peptide/model.py": "f46453669c17d98c4dc90eec6613641d32e222c2a3dd012709ca30e6868673ae",
+      "experiments/m4/c_peptide/reference.py": "29efbcdd7065387f0089ff8704916fee48cd24237529137a5350e8886559c992",
+      "experiments/m4/causal_secretion/common.py": "791c88bce5f757842f297ae1549fc6b3e66372964c4ca4645ff3c8d004fc100f",
+      "experiments/m4/causal_secretion/coupled.py": "4064ac6ef0adad98164dc1b3b559c385f3e87a76971a6fd457aa4a896460a3d6",
+      "experiments/m4/causal_secretion/protocol.json": "b0a4e01475e95d6ddf785ce5764f89b2684569f6092f321ddb746290f9763739",
+      "experiments/m4/causal_secretion/report.py": "6eccf6cd21cf16e69a8627c6ac85011cc57308c3e3972f2a29c38d37f5b78ebd",
+      "experiments/m4/causal_secretion/run.py": "2de9d13c11f19a0f09e1a059dc69bf3be2d0e3197704d73a722251b58a792fb0",
+      "experiments/m4/causal_secretion/worker.py": "bf20898548665ee27b171cc252305740a3765225c71eac5053d69f4add7b90ec",
+      "experiments/m4/comparison/__init__.py": "e548dcb3219130a78416dfa37e50a2f4f985bf02a41acbc8ddc1f62027ce4d77",
+      "experiments/m4/comparison/__main__.py": "1210220f33024933cf280499af5a07e5a7b019599d06823855d1b720382df53d",
+      "experiments/m4/comparison/analysis.py": "ec5fff11bdfac25e583e1097f5b8410587616734e1d3e90092e0a669bf49b32b",
+      "experiments/m4/comparison/common.py": "2f01b94815246db70d1e807a309dd54c17ec935134cdaa25d61b57ff9352f9a0",
+      "experiments/m4/comparison/protocol.json": "1769545288eb65d72757a9330034abad5800c0fac75dc2ca105c801a2014282c",
+      "experiments/m4/comparison/report.py": "3215dad1d8f4eac4edc127c8d26b18a8d230752e6cebace4471faf2b6b8b4b43",
+      "experiments/m4/comparison/run.py": "a5d543608d82a43ad60ad6d47552eef68f30727d6b686a0c01eeaa28aa58bd20",
+      "experiments/m4/feedback/common.py": "eba2aa4ef561285f9b4eaf1320175f18bf91d321f3058306de7adc9601f3f048",
+      "experiments/m4/feedback/contract.py": "4a35587c9c848a9c19586ab8e0aa28a1b5fcfe02c1b22e4fc7b0d46479dcb5ce",
+      "experiments/m4/feedback/coupled.py": "5f774ab7c0767fe278239a9f4457aec2ee0ab9c02de917e391d4eb83ed6d2280",
+      "experiments/m4/feedback/plot.py": "4b1aa7761ae64f7a77a17ed799028fa0a7c940bdf838f0f9aff1ba4fed455ba9",
+      "experiments/m4/feedback/preflight.py": "17c19c1c0dff4e707ab503b86ea03f99fb073db6a3bef02079d1f7337f3ebce4",
+      "experiments/m4/feedback/protocol.json": "b66087592810be35fa74372ad07172359897ceb40653abdf420b3c3fa1a4fd99",
+      "experiments/m4/feedback/report.py": "01c53866918c11850cb006a5ccc10e856f8faa0b55a27bf325d83bc64292742c",
+      "experiments/m4/feedback/run.py": "f998adc420bd0fc24f02d63cba84f87b0ef9d9cfc881d9220d361ff4bbdecc48",
+      "experiments/m4/feedback/secretion.py": "65b4d4ced59024238b8bf11ec2c0a0196472c2dc12904678159b0a51383a5ce7",
+      "experiments/m4/feedback/source-cases.json": "d2dadc23f6e0855b27a83fa94f215c43af933bd929e56a3edb743a0374726af9",
+      "experiments/m4/feedback/source_oracle.py": "b721c4576ca28e2856b41388ace512556f963fa1617c391bc1581f9dec3155b1",
+      "experiments/m4/feedback/sources.json": "2a2b1f8a98ceaf2fd64120f8c73cd8e58d8703999f773eaeba76f2d444f89aed",
+      "experiments/m4/feedback/test_numerical.py": "3746dfa5c108e1f4a80f7e0b096b95ac01d3c551e589aac82e1690625e799c49",
+      "experiments/m4/feedback/verify_source.py": "16aa9677fc63daa827895587c65eb8c247c2e77579e3c9aedc866ca7e799f0a2",
+      "experiments/m4/feedback/worker.py": "0a28f5df61341e419342c08bb4ad1d0b4c1f86ae56945f7ecf81ab079cb899cf",
+      "experiments/m4/feedback_observation/adapter.py": "6f2c62de4f58e7aca1c94dee2192b964387508f81889511b32eee317f1ba5a54",
+      "experiments/m4/feedback_observation/common.py": "f1a56a203fe24092a2d4ea46ec2fafeaf68457a48a5a23d2f2e6d76bc2be018e",
+      "experiments/m4/feedback_observation/protocol.json": "69143f23b24e225753ada55a3d43ff2a39414635a624263db9e4f83c2d3ef98d",
+      "experiments/m4/feedback_observation/report.py": "46d1e6caaee23c713d56a4fc7119ddb2ece069bf9da58833935713815b0491c9",
+      "experiments/m4/feedback_observation/worker.py": "2737bf6f8992277acb47615c5af74d72175b1f4815e8b4387a778280cb5ba088",
+      "experiments/m4/kinetic_inlet/forcing.py": "b26fd2fd87aa47da328d24b2cbe56d8e3be45f9b4caf2c3c453f89acb07fddd1",
+      "experiments/m4/kinetic_inlet/native.py": "aaa6a921643bf6ec82fde84d53193c8ab9c9cdbe1b69de634089f652cb4b14dd",
+      "experiments/m4/kinetic_inlet/protocol.json": "ac2754f1718bcad7977d3332685abc8bb9a281056e5475d78ab7d7364b9df3dc",
+      "experiments/m4/paired_kinetics/common.py": "0d55ab114cf6381e2837670dd2b17b50a7109a0643bce756f2bd31d06209a12d",
+      "experiments/m4/paired_kinetics/oracle.py": "4262e65df8501ac7ea067513fe1148c1d6ca94c6df8dfbe71506f375d29538df",
+      "experiments/m4/paired_kinetics/report.py": "1826c8248c02347b381b3943c7c04f949a5867dd4e701b4ada1100830e5749fd",
+      "experiments/m4/paired_observation/contract.py": "eb422ce11a75840082801f8321fd10c7236509f71b7792ab83032e061b5f386d",
+      "experiments/m4/paired_observation/run.py": "a342e45ab3fc5218033d244d870bd2c9cd8a12099a5053b66f250b2c4b761f84",
+      "experiments/m4/researcher_workflow/__init__.py": "c69d309b198ce4aca5e5c97f17a441b455c4a7241585b7f764f6cd7fa4e0dbbf",
+      "experiments/m4/researcher_workflow/common.py": "44078af630ec7ce9588b17489f0d927380b5dcb023d0aef0833977624bed39a2",
+      "experiments/m4/researcher_workflow/observation.py": "1f388bdd4303467f9d869e4a7d5c5d927d44034e7550758685b1cde0c14480bf",
+      "experiments/m4/researcher_workflow/process.py": "4118daa9fa3a5c472f23cd668441f6a248e2ca112aa663634c1607f54b96d14c",
+      "experiments/m4/researcher_workflow/protocol.json": "f6a8a22036cc63b1a9770eec8b31932ff4761dbd9000846d6438721e86e62cf0",
+      "experiments/m4/researcher_workflow/report.py": "e9a3e5dacef7902253296a3f0f7025cec5d55edfabb034cd645b92d2e0f99e5d",
+      "experiments/m4/researcher_workflow/run.py": "c397e518c2e60f114734f832c34c4cca47c4dd580da428d58546b2940a980152",
+      "experiments/m4/researcher_workflow/test_numerical.py": "d8bb59d33467438ca532938ecfed61f84c3a12222eb200bf12bf1f49b24595d4",
+      "experiments/m4/researcher_workflow/worker.py": "b3861fc44e38b591b4d5822d4ad927876644d6f5921133adfdd806d0505e6f94"
+    },
+    "runtime_files_sha256": {
+      "experiments/m0/simglucose/pyproject.toml": "6bbb5f49e74bd7df2e11ab39f69754a99ce1e4ef3736573943e3a75118c28007",
+      "experiments/m0/simglucose/uv.lock": "13d254dcebe8d1ab54c3140cdc07152d719a68477a1378d7fe77fc1568612aa9",
+      "experiments/m4/beta_cell/runtime/pyproject.toml": "7c69b6f63a48d72f927c0253b68492de1ac60700d0549744de1207709732d3c5",
+      "experiments/m4/beta_cell/runtime/uv.lock": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04"
+    },
+    "protocol_files_sha256": {
+      "experiments/m4/causal_secretion/protocol.json": "b0a4e01475e95d6ddf785ce5764f89b2684569f6092f321ddb746290f9763739",
+      "experiments/m4/feedback/protocol.json": "b66087592810be35fa74372ad07172359897ceb40653abdf420b3c3fa1a4fd99",
+      "experiments/m4/feedback_observation/protocol.json": "69143f23b24e225753ada55a3d43ff2a39414635a624263db9e4f83c2d3ef98d",
+      "experiments/m4/researcher_workflow/protocol.json": "f6a8a22036cc63b1a9770eec8b31932ff4761dbd9000846d6438721e86e62cf0"
+    },
+    "provenance": {
+      "git_dirty": false,
+      "git_head": "945cd033184a7be88fad077ea971b71369988294",
+      "platform": "macOS-26.5.2-arm64-arm-64bit",
+      "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+      "sources": {
+        "docs/research/m4-source-comparison-protocol.md": "79d8a4db8d2cb4eb3f782af51ff72afe651674a1d3f46fd91f9796293ec6eb0b",
+        "experiments/m0/simglucose/pyproject.toml": "6bbb5f49e74bd7df2e11ab39f69754a99ce1e4ef3736573943e3a75118c28007",
+        "experiments/m0/simglucose/recording.py": "4d8195fb662296e77735357ec7df734afb9a4589f68eef521d57332690c40e0e",
+        "experiments/m0/simglucose/uv.lock": "13d254dcebe8d1ab54c3140cdc07152d719a68477a1378d7fe77fc1568612aa9",
+        "experiments/m1/artifacts.py": "e7896d603e8953f9c11a58ddad116eb12494d170cdce06a02a6d53dc04548e79",
+        "experiments/m1/contracts.py": "408a8086116c4db8b387fedd929ab2bfae46740ad1d94e1745e20d4a7ba9f70f",
+        "experiments/m1/metrics.py": "2aa937e5bd3805508d81040a046ec8e0395869a73a1af1943c57b513fb1c21b4",
+        "experiments/m1/validation.py": "1610424acc91cb149a5f3eb163ea982de800194d5b9590493ab2f9515cabbd4e",
+        "experiments/m4/beta_cell/runtime/pyproject.toml": "7c69b6f63a48d72f927c0253b68492de1ac60700d0549744de1207709732d3c5",
+        "experiments/m4/beta_cell/runtime/uv.lock": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04",
+        "experiments/m4/c_peptide/model.py": "f46453669c17d98c4dc90eec6613641d32e222c2a3dd012709ca30e6868673ae",
+        "experiments/m4/c_peptide/reference.py": "29efbcdd7065387f0089ff8704916fee48cd24237529137a5350e8886559c992",
+        "experiments/m4/causal_secretion/common.py": "791c88bce5f757842f297ae1549fc6b3e66372964c4ca4645ff3c8d004fc100f",
+        "experiments/m4/causal_secretion/coupled.py": "4064ac6ef0adad98164dc1b3b559c385f3e87a76971a6fd457aa4a896460a3d6",
+        "experiments/m4/causal_secretion/protocol.json": "b0a4e01475e95d6ddf785ce5764f89b2684569f6092f321ddb746290f9763739",
+        "experiments/m4/causal_secretion/report.py": "6eccf6cd21cf16e69a8627c6ac85011cc57308c3e3972f2a29c38d37f5b78ebd",
+        "experiments/m4/causal_secretion/run.py": "2de9d13c11f19a0f09e1a059dc69bf3be2d0e3197704d73a722251b58a792fb0",
+        "experiments/m4/causal_secretion/worker.py": "bf20898548665ee27b171cc252305740a3765225c71eac5053d69f4add7b90ec",
+        "experiments/m4/comparison/__init__.py": "e548dcb3219130a78416dfa37e50a2f4f985bf02a41acbc8ddc1f62027ce4d77",
+        "experiments/m4/comparison/__main__.py": "1210220f33024933cf280499af5a07e5a7b019599d06823855d1b720382df53d",
+        "experiments/m4/comparison/analysis.py": "ec5fff11bdfac25e583e1097f5b8410587616734e1d3e90092e0a669bf49b32b",
+        "experiments/m4/comparison/common.py": "2f01b94815246db70d1e807a309dd54c17ec935134cdaa25d61b57ff9352f9a0",
+        "experiments/m4/comparison/protocol.json": "1769545288eb65d72757a9330034abad5800c0fac75dc2ca105c801a2014282c",
+        "experiments/m4/comparison/report.py": "3215dad1d8f4eac4edc127c8d26b18a8d230752e6cebace4471faf2b6b8b4b43",
+        "experiments/m4/comparison/run.py": "a5d543608d82a43ad60ad6d47552eef68f30727d6b686a0c01eeaa28aa58bd20",
+        "experiments/m4/feedback/common.py": "eba2aa4ef561285f9b4eaf1320175f18bf91d321f3058306de7adc9601f3f048",
+        "experiments/m4/feedback/contract.py": "4a35587c9c848a9c19586ab8e0aa28a1b5fcfe02c1b22e4fc7b0d46479dcb5ce",
+        "experiments/m4/feedback/coupled.py": "5f774ab7c0767fe278239a9f4457aec2ee0ab9c02de917e391d4eb83ed6d2280",
+        "experiments/m4/feedback/plot.py": "4b1aa7761ae64f7a77a17ed799028fa0a7c940bdf838f0f9aff1ba4fed455ba9",
+        "experiments/m4/feedback/preflight.py": "17c19c1c0dff4e707ab503b86ea03f99fb073db6a3bef02079d1f7337f3ebce4",
+        "experiments/m4/feedback/protocol.json": "b66087592810be35fa74372ad07172359897ceb40653abdf420b3c3fa1a4fd99",
+        "experiments/m4/feedback/report.py": "01c53866918c11850cb006a5ccc10e856f8faa0b55a27bf325d83bc64292742c",
+        "experiments/m4/feedback/run.py": "f998adc420bd0fc24f02d63cba84f87b0ef9d9cfc881d9220d361ff4bbdecc48",
+        "experiments/m4/feedback/secretion.py": "65b4d4ced59024238b8bf11ec2c0a0196472c2dc12904678159b0a51383a5ce7",
+        "experiments/m4/feedback/source-cases.json": "d2dadc23f6e0855b27a83fa94f215c43af933bd929e56a3edb743a0374726af9",
+        "experiments/m4/feedback/source_oracle.py": "b721c4576ca28e2856b41388ace512556f963fa1617c391bc1581f9dec3155b1",
+        "experiments/m4/feedback/sources.json": "2a2b1f8a98ceaf2fd64120f8c73cd8e58d8703999f773eaeba76f2d444f89aed",
+        "experiments/m4/feedback/test_numerical.py": "3746dfa5c108e1f4a80f7e0b096b95ac01d3c551e589aac82e1690625e799c49",
+        "experiments/m4/feedback/verify_source.py": "16aa9677fc63daa827895587c65eb8c247c2e77579e3c9aedc866ca7e799f0a2",
+        "experiments/m4/feedback/worker.py": "0a28f5df61341e419342c08bb4ad1d0b4c1f86ae56945f7ecf81ab079cb899cf",
+        "experiments/m4/feedback_observation/adapter.py": "6f2c62de4f58e7aca1c94dee2192b964387508f81889511b32eee317f1ba5a54",
+        "experiments/m4/feedback_observation/common.py": "f1a56a203fe24092a2d4ea46ec2fafeaf68457a48a5a23d2f2e6d76bc2be018e",
+        "experiments/m4/feedback_observation/protocol.json": "69143f23b24e225753ada55a3d43ff2a39414635a624263db9e4f83c2d3ef98d",
+        "experiments/m4/feedback_observation/report.py": "46d1e6caaee23c713d56a4fc7119ddb2ece069bf9da58833935713815b0491c9",
+        "experiments/m4/feedback_observation/worker.py": "2737bf6f8992277acb47615c5af74d72175b1f4815e8b4387a778280cb5ba088",
+        "experiments/m4/kinetic_inlet/forcing.py": "b26fd2fd87aa47da328d24b2cbe56d8e3be45f9b4caf2c3c453f89acb07fddd1",
+        "experiments/m4/kinetic_inlet/native.py": "aaa6a921643bf6ec82fde84d53193c8ab9c9cdbe1b69de634089f652cb4b14dd",
+        "experiments/m4/kinetic_inlet/protocol.json": "ac2754f1718bcad7977d3332685abc8bb9a281056e5475d78ab7d7364b9df3dc",
+        "experiments/m4/paired_kinetics/common.py": "0d55ab114cf6381e2837670dd2b17b50a7109a0643bce756f2bd31d06209a12d",
+        "experiments/m4/paired_kinetics/oracle.py": "4262e65df8501ac7ea067513fe1148c1d6ca94c6df8dfbe71506f375d29538df",
+        "experiments/m4/paired_kinetics/report.py": "1826c8248c02347b381b3943c7c04f949a5867dd4e701b4ada1100830e5749fd",
+        "experiments/m4/paired_observation/contract.py": "eb422ce11a75840082801f8321fd10c7236509f71b7792ab83032e061b5f386d",
+        "experiments/m4/paired_observation/run.py": "a342e45ab3fc5218033d244d870bd2c9cd8a12099a5053b66f250b2c4b761f84",
+        "experiments/m4/researcher_workflow/__init__.py": "c69d309b198ce4aca5e5c97f17a441b455c4a7241585b7f764f6cd7fa4e0dbbf",
+        "experiments/m4/researcher_workflow/common.py": "44078af630ec7ce9588b17489f0d927380b5dcb023d0aef0833977624bed39a2",
+        "experiments/m4/researcher_workflow/observation.py": "1f388bdd4303467f9d869e4a7d5c5d927d44034e7550758685b1cde0c14480bf",
+        "experiments/m4/researcher_workflow/process.py": "4118daa9fa3a5c472f23cd668441f6a248e2ca112aa663634c1607f54b96d14c",
+        "experiments/m4/researcher_workflow/protocol.json": "f6a8a22036cc63b1a9770eec8b31932ff4761dbd9000846d6438721e86e62cf0",
+        "experiments/m4/researcher_workflow/report.py": "e9a3e5dacef7902253296a3f0f7025cec5d55edfabb034cd645b92d2e0f99e5d",
+        "experiments/m4/researcher_workflow/run.py": "c397e518c2e60f114734f832c34c4cca47c4dd580da428d58546b2940a980152",
+        "experiments/m4/researcher_workflow/test_numerical.py": "d8bb59d33467438ca532938ecfed61f84c3a12222eb200bf12bf1f49b24595d4",
+        "experiments/m4/researcher_workflow/worker.py": "b3861fc44e38b591b4d5822d4ad927876644d6f5921133adfdd806d0505e6f94"
+      }
+    },
+    "sources": {
+      "dalla_man": {
+        "model": {
+          "ancestry": "Dalla Man et al. 2007 equations 23-26 as already implemented in BC-008; independently written single-file adapter",
+          "dependencies": "Python standard library only; host uses the locked BC-008 simglucose environment",
+          "model_id": "bc008-equation-adapter-example/1",
+          "output_unit": "pmol/(kg min)",
+          "parameters": {
+            "K_pmol_kg_per_mg_dl": 2.3,
+            "alpha_per_min": 0.05,
+            "beta_pmol_kg_min_per_mg_dl": 0.11
+          },
+          "rights_basis": "OpenT1D original adapter example; cited model equations remain attributed to their source",
+          "schema": "m4-causal-model/1",
+          "source_sha256": "2d65b88bfe858682fc0d05d24e404bad4f16166da4c4a94f916d76c5ba560215"
+        },
+        "manifest_sha256": "5110e1483f89022dad87917ad28244ca65d9afe2e6adcc4a2850517a8692af47",
+        "report_hashes": {
+          "report.json": "44a25cdca53e7f05880332fe6c2c87d84c18bcaca0acd1331f4fa21e5e23cc87",
+          "report.md": "7f1fb617d10cb402f68359291360e39397aa4e43e4924bffafa0be93c41cf1b5",
+          "figure.svg": "eebbfc6a694fe6bd17ee377a1998523f85c8b7b95ee51df6a49598a162853cb7"
+        },
+        "reference_manifest_sha256": "ff55074dd31d43dec73c1e2ceca25682ebbcb1b93a72db2a645de0aacf8746ad",
+        "causal_manifest_sha256": "bd5a52ced12ed154978e16d7e8dd3961db941eb2b5f30663036c6d566c7a9853",
+        "passed": true,
+        "accepted_observation_cases": 6,
+        "repeat_changed": [],
+        "causal_checks": {
+          "basal_control_glucose_error_mg_dl": 0,
+          "basal_control_insulin_error_pmol_l": 0,
+          "fasting_glucose_drift_mg_dl": 1.057503662286231e-10,
+          "fasting_insulin_drift_pmol_l": 2.56281839932049e-10,
+          "glucose_mass_error_mg_kg": 3.6669374661735255e-8,
+          "glucose_solver_error_mg_dl": 2.725738691657222e-8,
+          "insulin_mass_error_pmol_kg": 1.6072476682893466e-11,
+          "insulin_solver_error_pmol_l": 7.083112089142612e-7,
+          "negative_amount_tolerance": 0,
+          "repeat_error": 0,
+          "source_solver_error_pmol_kg_min": 1.7063431645425453e-7
+        },
+        "observation_checks": {
+          "coarsening_error_ratio": {
+            "limit": 0.6,
+            "passed": true,
+            "value": 0.1994057503325491
+          },
+          "equilibrium_drift_pmol_l": {
+            "limit": 1e-7,
+            "passed": true,
+            "value": 2.1934738470008597e-9
+          },
+          "finest_coarsening_error_pmol_l": {
+            "limit": 0.05,
+            "passed": true,
+            "value": 0.02985165604994222
+          },
+          "input_error_pmol_kg": {
+            "limit": 1e-7,
+            "passed": true,
+            "value": 4.547473508864641e-12
+          },
+          "mass_error_pmol_kg": {
+            "limit": 1e-7,
+            "passed": true,
+            "value": 5.9543481256696396e-12
+          },
+          "negative_tolerance_pmol_kg": {
+            "limit": 1e-9,
+            "passed": true,
+            "value": 0
+          },
+          "oracle_concentration_error_pmol_l": {
+            "limit": 0.00001,
+            "passed": true,
+            "value": 2.5867009975877235e-10
+          },
+          "parent_dose_relative_error": {
+            "limit": 0.0001,
+            "passed": true,
+            "value": 1.6277853875713776e-7
+          },
+          "parent_source_solver_error_pmol_l": {
+            "limit": 0.01,
+            "passed": true,
+            "value": 5.13832446813467e-7
+          },
+          "repeat_artifact_differences": {
+            "limit": 0,
+            "passed": true,
+            "value": 0
+          },
+          "scale_ambiguity_error_pmol_l": {
+            "limit": 1e-7,
+            "passed": true,
+            "value": 0
+          },
+          "solver_concentration_error_pmol_l": {
+            "limit": 0.00001,
+            "passed": true,
+            "value": 2.585073800482929e-10
+          },
+          "zero_state_error": {
+            "limit": 0,
+            "passed": true,
+            "value": 0
+          }
+        },
+        "meal_maximum_absolute_candidate_contrast": {
+          "bc008_reference": {
+            "cpeptide_pmol_l": 0,
+            "glucose_mg_dl": 0,
+            "insulin_pmol_l": 0
+          },
+          "host_constant_basal": {
+            "cpeptide_pmol_l": 675.6411987434294,
+            "glucose_mg_dl": 35.45441053997129,
+            "insulin_pmol_l": 90.04583407938271
+          }
+        },
+        "cases": {
+          "primary": {
+            "causal_count": 8,
+            "causal_statuses": [
+              "completed"
+            ],
+            "causal_runtime": {
+              "python": "3.12.13",
+              "numpy": "1.26.4",
+              "scipy": "1.13.1"
+            },
+            "observation_count": 6,
+            "observation_statuses": [
+              "completed"
+            ],
+            "observation_runtime": {
+              "python": "3.12.13",
+              "numpy": "2.2.6",
+              "scipy": "1.15.3"
+            }
+          },
+          "repeat": {
+            "causal_count": 8,
+            "causal_statuses": [
+              "completed"
+            ],
+            "causal_runtime": {
+              "python": "3.12.13",
+              "numpy": "1.26.4",
+              "scipy": "1.13.1"
+            },
+            "observation_count": 6,
+            "observation_statuses": [
+              "completed"
+            ],
+            "observation_runtime": {
+              "python": "3.12.13",
+              "numpy": "2.2.6",
+              "scipy": "1.15.3"
+            }
+          }
+        }
+      },
+      "ultradian": {
+        "model": {
+          "ancestry": "Karamched, Hripcsak, Albers and Ott 2021, doi:10.1063/5.0027682, section II f1(G) and Table I; Sturis 1991 ancestry. Complete stateless sigmoid response component with explicit synthetic basal amplitude and host pancreatic route, not the full ultradian physiology.",
+          "dependencies": "Python standard library math only; host runs in the unchanged locked BC-008 simglucose environment",
+          "model_id": "ultradian-f1-basal-normalized/1",
+          "output_unit": "pmol/(kg min)",
+          "parameters": {
+            "C1_mg_l": 300,
+            "a1": 6.6
+          },
+          "rights_basis": "Original OpenT1D equation implementation under Apache-2.0; no published code, figure, paper or data copied. The scientific response law remains attributed to its primary source.",
+          "schema": "m4-causal-model/1",
+          "source_sha256": "27e128148a21bb5ba2234e64956fc17f7dbed2daf0d4244ec6a51dbc5e6f1f26"
+        },
+        "manifest_sha256": "1da96d570120df90ca4e42287e576fcdc5ae39c77335434e22472fe5ce3afbe7",
+        "report_hashes": {
+          "report.json": "9654976a26b57ce3268e50fbeda245482262c64ef4275e8ea5b0ae8de278b84e",
+          "report.md": "01ab7917f53c76963745212b72652c8b479ddf9342db0bc7bb3014ae0d9ff636",
+          "figure.svg": "6b3705544ef9808d33439619be16156f44efaa90cd0a2159083670a3caa0179b"
+        },
+        "reference_manifest_sha256": "ff55074dd31d43dec73c1e2ceca25682ebbcb1b93a72db2a645de0aacf8746ad",
+        "causal_manifest_sha256": "ed543ffa13e6e213b2ff2012668d9811a5e1e124311aea6ac54122eeda69250d",
+        "passed": true,
+        "accepted_observation_cases": 6,
+        "repeat_changed": [],
+        "causal_checks": {
+          "basal_control_glucose_error_mg_dl": 0,
+          "basal_control_insulin_error_pmol_l": 0,
+          "fasting_glucose_drift_mg_dl": 1.4519528251204721e-10,
+          "fasting_insulin_drift_pmol_l": 2.9772563680801376e-10,
+          "glucose_mass_error_mg_kg": 3.6669374661735255e-8,
+          "glucose_solver_error_mg_dl": 2.725738691657222e-8,
+          "insulin_mass_error_pmol_kg": 1.6072476682893466e-11,
+          "insulin_solver_error_pmol_l": 5.49995743084622e-12,
+          "negative_amount_tolerance": 0,
+          "repeat_error": 0,
+          "source_solver_error_pmol_kg_min": 1.61393121089759e-12
+        },
+        "observation_checks": {
+          "coarsening_error_ratio": {
+            "limit": 0.6,
+            "passed": true,
+            "value": 0.1994057503325491
+          },
+          "equilibrium_drift_pmol_l": {
+            "limit": 1e-7,
+            "passed": true,
+            "value": 2.1934738470008597e-9
+          },
+          "finest_coarsening_error_pmol_l": {
+            "limit": 0.05,
+            "passed": true,
+            "value": 0.02985165604994222
+          },
+          "input_error_pmol_kg": {
+            "limit": 1e-7,
+            "passed": true,
+            "value": 5.6843418860808015e-12
+          },
+          "mass_error_pmol_kg": {
+            "limit": 1e-7,
+            "passed": true,
+            "value": 5.9543481256696396e-12
+          },
+          "negative_tolerance_pmol_kg": {
+            "limit": 1e-9,
+            "passed": true,
+            "value": 0
+          },
+          "oracle_concentration_error_pmol_l": {
+            "limit": 0.00001,
+            "passed": true,
+            "value": 2.5867009975877235e-10
+          },
+          "parent_dose_relative_error": {
+            "limit": 0.0001,
+            "passed": true,
+            "value": 1.6277853875713776e-7
+          },
+          "parent_source_solver_error_pmol_l": {
+            "limit": 0.01,
+            "passed": true,
+            "value": 5.13832446813467e-7
+          },
+          "repeat_artifact_differences": {
+            "limit": 0,
+            "passed": true,
+            "value": 0
+          },
+          "scale_ambiguity_error_pmol_l": {
+            "limit": 1e-7,
+            "passed": true,
+            "value": 0
+          },
+          "solver_concentration_error_pmol_l": {
+            "limit": 0.00001,
+            "passed": true,
+            "value": 2.585073800482929e-10
+          },
+          "zero_state_error": {
+            "limit": 0,
+            "passed": true,
+            "value": 0
+          }
+        },
+        "meal_maximum_absolute_candidate_contrast": {
+          "bc008_reference": {
+            "cpeptide_pmol_l": 429.4268929675439,
+            "glucose_mg_dl": 20.307282353351468,
+            "insulin_pmol_l": 68.42970262382674
+          },
+          "host_constant_basal": {
+            "cpeptide_pmol_l": 253.03946944842605,
+            "glucose_mg_dl": 15.36724570969048,
+            "insulin_pmol_l": 34.24005719701957
+          }
+        },
+        "cases": {
+          "primary": {
+            "causal_count": 8,
+            "causal_statuses": [
+              "completed"
+            ],
+            "causal_runtime": {
+              "python": "3.12.13",
+              "numpy": "1.26.4",
+              "scipy": "1.13.1"
+            },
+            "observation_count": 6,
+            "observation_statuses": [
+              "completed"
+            ],
+            "observation_runtime": {
+              "python": "3.12.13",
+              "numpy": "2.2.6",
+              "scipy": "1.15.3"
+            }
+          },
+          "repeat": {
+            "causal_count": 8,
+            "causal_statuses": [
+              "completed"
+            ],
+            "causal_runtime": {
+              "python": "3.12.13",
+              "numpy": "1.26.4",
+              "scipy": "1.13.1"
+            },
+            "observation_count": 6,
+            "observation_statuses": [
+              "completed"
+            ],
+            "observation_runtime": {
+              "python": "3.12.13",
+              "numpy": "2.2.6",
+              "scipy": "1.15.3"
+            }
+          }
+        }
+      }
+    },
+    "supervised_commands": [
+      {
+        "label": "reference",
+        "argv": [
+          "WORKTREES/m4-source-comparison/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.m4.comparison.run",
+          "--worker",
+          "--output",
+          "WORKTREES/m4-source-comparison/OpenT1D/results/m4-comparison/ot031-primary/reference"
+        ],
+        "timeout_seconds": 600,
+        "log": "results/m4-comparison/ot031-primary/logs/reference.log",
+        "log_sha256": "368a285aab7558e3a9ac15ef97ca53024332e8b2be02634c2309b4165724e47d"
+      },
+      {
+        "label": "dalla_man",
+        "argv": [
+          "WORKTREES/m4-source-comparison/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.m4.comparison.run",
+          "--worker",
+          "--output",
+          "WORKTREES/m4-source-comparison/OpenT1D/results/m4-comparison/ot031-primary/children/dalla_man",
+          "--config",
+          "WORKTREES/m4-source-comparison/OpenT1D/results/m4-comparison/ot031-primary/frozen/dalla_man/config.json",
+          "--reference",
+          "WORKTREES/m4-source-comparison/OpenT1D/results/m4-comparison/ot031-primary/reference"
+        ],
+        "timeout_seconds": 3600,
+        "log": "results/m4-comparison/ot031-primary/logs/dalla_man.log",
+        "log_sha256": "90eaeceef6ae5f2593124a44386f56fcf2cca1a21cc0f60ffea984a2c5dbf4e1"
+      },
+      {
+        "label": "ultradian",
+        "argv": [
+          "WORKTREES/m4-source-comparison/OpenT1D/.venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.m4.comparison.run",
+          "--worker",
+          "--output",
+          "WORKTREES/m4-source-comparison/OpenT1D/results/m4-comparison/ot031-primary/children/ultradian",
+          "--config",
+          "WORKTREES/m4-source-comparison/OpenT1D/results/m4-comparison/ot031-primary/frozen/ultradian/config.json",
+          "--reference",
+          "WORKTREES/m4-source-comparison/OpenT1D/results/m4-comparison/ot031-primary/reference"
+        ],
+        "timeout_seconds": 3600,
+        "log": "results/m4-comparison/ot031-primary/logs/ultradian.log",
+        "log_sha256": "8a8ada415053c9487105bd3ae32c780908b1dae0cc32d0a980c303df16d44428"
+      }
+    ],
+    "direct_pair": {
+      "accepted": true,
+      "left": "dalla_man",
+      "null_reason": null,
+      "right": "ultradian",
+      "scenarios": {
+        "fasting": {
+          "accepted": true,
+          "null_reason": null,
+          "signals": {
+            "cpeptide_pmol_l": {
+              "auc_unit": "pmol/L min",
+              "metrics": {
+                "maximum_absolute_pointwise_difference": 1.954646222657175e-9,
+                "signed_auc_difference": 2.954017830347766e-7,
+                "signed_time_mean_difference": 1.2308407626449025e-9
+              },
+              "unit": "pmol/L"
+            },
+            "glucose_mg_dl": {
+              "auc_unit": "mg/dL min",
+              "metrics": {
+                "maximum_absolute_pointwise_difference": 8.58335624798201e-11,
+                "signed_auc_difference": -1.1966740487423522e-8,
+                "signed_time_mean_difference": -4.986141869759801e-11
+              },
+              "unit": "mg/dL"
+            },
+            "insulin_pmol_l": {
+              "auc_unit": "pmol/L min",
+              "metrics": {
+                "maximum_absolute_pointwise_difference": 4.5078252242092276e-10,
+                "signed_auc_difference": 3.552849214827347e-8,
+                "signed_time_mean_difference": 1.4803538395113946e-10
+              },
+              "unit": "pmol/L"
+            }
+          }
+        },
+        "gastric_load_30g": {
+          "accepted": true,
+          "null_reason": null,
+          "signals": {
+            "cpeptide_pmol_l": {
+              "auc_unit": "pmol/L min",
+              "metrics": {
+                "maximum_absolute_pointwise_difference": 429.4268929675439,
+                "signed_auc_difference": 65973.79282532417,
+                "signed_time_mean_difference": 274.8908034388507
+              },
+              "unit": "pmol/L"
+            },
+            "glucose_mg_dl": {
+              "auc_unit": "mg/dL min",
+              "metrics": {
+                "maximum_absolute_pointwise_difference": 20.307282353351468,
+                "signed_auc_difference": -2709.6462142760297,
+                "signed_time_mean_difference": -11.290192559483456
+              },
+              "unit": "mg/dL"
+            },
+            "insulin_pmol_l": {
+              "auc_unit": "pmol/L min",
+              "metrics": {
+                "maximum_absolute_pointwise_difference": 68.42970262382674,
+                "signed_auc_difference": 7788.143836763232,
+                "signed_time_mean_difference": 32.4505993198468
+              },
+              "unit": "pmol/L"
+            }
+          }
+        }
+      }
+    },
+    "source_free_reconstruction": {
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "-S",
+        "-m",
+        "experiments.m4.comparison",
+        "reconstruct",
+        "--archive",
+        "results/m4-comparison/ot031-primary",
+        "--output",
+        "results/m4-comparison/ot031-primary-reconstructed"
+      ],
+      "exit_code": 0,
+      "path": "results/m4-comparison/ot031-primary-reconstructed",
+      "report_hashes": {
+        "report.json": "68fbbab66ed3a5ea693e83ac882391a42c75f128ffa58e6db3b28988cc2e406a",
+        "report.md": "4137825e4750419c00ec114ccbddd996ca7628a958b7cee2aca718b12ba2b01a",
+        "figure.svg": "b326cfb22ca48a2db44209e1c3e3cb02bf014dacc1f58a2dd17cef065b4fe1ae"
+      },
+      "byte_equal": {
+        "report.json": true,
+        "report.md": true,
+        "figure.svg": true
+      },
+      "numerical_runtime_or_supplied_source_executed": false
+    }
+  },
+  "independent_agent_review": {
+    "scope": "Read-only implementation/contract and primary artifact review by an additional AI agent; not independent human reproduction or domain review.",
+    "native_reader_command": [
+      ".venv/bin/python",
+      "-B",
+      "-S",
+      "-"
+    ],
+    "stdin_script_preserved": false,
+    "actual_checks": [
+      "Standard-library comparison reconstruction accepted the complete primary archive and existing three report bytes.",
+      "Read-only raw worker inspection confirmed eight completed causal cases in each primary/repeat process for both sources and the recorded isolated runtime versions.",
+      "Independently recomputed signed trapezoidal AUC, signed time mean and maximum absolute difference from saved candidate trajectories for all six scenario/signal contrasts; matched report metrics.",
+      "All four saved common reference/control trajectories matched exactly across the two accepted sources.",
+      "Dalla Man candidate glucose, insulin and C-peptide contrast against BC-008 was exactly zero at saved times.",
+      "Diff from planning baseline 4ab905f to implementation 945cd03 contained no edits to existing numerical packages, source declarations or numerical runtime locks.",
+      "Outer launcher repeat: all 56 saved native causal/observer case files, full direct pairs, shared controls and source scenario summaries matched the primary exactly; all three reconstructed report bytes matched.",
+      "Failed three-source roster and deadline archive reconstructed through native standard-library readers with allow_failed; all six reconstructed artifacts matched. Failure kept the valid pair and deadline returned null support.",
+      "Recorded blocking callback PID 44953 remained absent on independent follow-up.",
+      "Common-entry failed reconstruction retained failed report completeness while child exit code was zero; report artifacts matched exactly.",
+      "Full repository log hash, 906-test success and documentation build success checked."
+    ],
+    "blocking_findings_remaining": []
+  },
+  "scoped_dependency_triage": {
+    "date": "2026-10-03",
+    "open_critical_records": 4,
+    "open_high_records": 4,
+    "unique_advisories": 3,
+    "selected_m4_exploit_path_identified": false,
+    "locks_changed": false,
+    "disposition": "Selected local M4 code does not use the optional C1 PyTorch checkpoint loaders or identified urllib3 network/proxy APIs; no demonstrated selected-path exploit route. Advisories remain open; this is a scoped read-only callsite assessment, not remediation or security certification.",
+    "plan": "docs/research/ot031-execution-plan.md"
+  },
+  "limitations": [
+    "Internal synthetic execution and AI-assisted review; independent researcher usability remains open.",
+    "No human observations, calibration, biological ranking, clinical predictive quality, treatment benefit or completed M4 biological acceptance.",
+    "Ultradian component with explicit synthetic basal normalization and host pancreatic route; not reproduction of the full ultradian engine.",
+    "Saved-grid C-peptide checks do not prove continuous-source convergence below 0.25 minutes.",
+    "Hash and artifact consistency do not independently authenticate arbitrary supplied callback behavior, purity or rights.",
+    "Unrelated historical M0-M2/C1 numerical campaigns were not rerun for this increment.",
+    "The outer launcher repeat and operational probes record dirty documentation/evidence working trees; clean primary revision and unchanged frozen code/runtime inventory remain explicit.",
+    "Native interruption campaign was not separately executed; interruption semantics have meaningful automated-test evidence.",
+    "The shared 30-second deadline also expired for the subsequent ultradian workflow; its zero support is not successful model acceptance under that budget.",
+    "Hosted CI was not executed; local checks do not establish model validity."
+  ],
+  "entry_commit": "b3cfaeee989f0ec33ae3bf5e58c3c33004ef7d46",
+  "acceptance": {
+    "launcher_repeat": {
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "-S",
+        "-m",
+        "experiments.workflows",
+        "run",
+        "m4-compare",
+        "--config",
+        "experiments/m4/comparison/example.json",
+        "--reference",
+        "results/m4-comparison/ot031-primary/reference",
+        "--output",
+        "results/m4-comparison/ot031-entry-repeat"
+      ],
+      "exit_code": 0,
+      "path": "results/m4-comparison/ot031-entry-repeat",
+      "passed": true,
+      "status": "completed",
+      "accepted_sources": 2,
+      "planned_sources": 2,
+      "accepted_source_scenarios": 4,
+      "common_controls": "matched",
+      "manifest_sha256": "bc2e4c036cf456028b84b5bbe15b70a40d614704c029a77f400d85919446a406",
+      "report_hashes": {
+        "report.json": "d065882c80d97c8b4b8509298f92f997ed83b3425335e0192ee3b84d4834acb5",
+        "report.md": "32c2fa7b2825555f266bb8002236f54c8933d55e606edfa9fcc165247ee2479e",
+        "figure.svg": "b326cfb22ca48a2db44209e1c3e3cb02bf014dacc1f58a2dd17cef065b4fe1ae"
+      },
+      "source_revision": "b3cfaeee989f0ec33ae3bf5e58c3c33004ef7d46",
+      "git_dirty": true,
+      "source_inventory_identical_to_primary": true,
+      "native_case_file_count": 56,
+      "changed_native_case_files": [],
+      "direct_pairs_identical_to_primary": true,
+      "common_controls_identical_to_primary": true,
+      "source_scenarios_identical_to_primary": true,
+      "reference_manifest_sha256": "ff55074dd31d43dec73c1e2ceca25682ebbcb1b93a72db2a645de0aacf8746ad",
+      "reconstruction": {
+        "command": [
+          ".venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.workflows",
+          "reconstruct",
+          "m4-compare",
+          "--archive",
+          "results/m4-comparison/ot031-entry-repeat",
+          "--output",
+          "results/m4-comparison/ot031-entry-repeat-reconstructed"
+        ],
+        "exit_code": 0,
+        "path": "results/m4-comparison/ot031-entry-repeat-reconstructed",
+        "report_hashes": {
+          "report.json": "d065882c80d97c8b4b8509298f92f997ed83b3425335e0192ee3b84d4834acb5",
+          "report.md": "32c2fa7b2825555f266bb8002236f54c8933d55e606edfa9fcc165247ee2479e",
+          "figure.svg": "b326cfb22ca48a2db44209e1c3e3cb02bf014dacc1f58a2dd17cef065b4fe1ae"
+        },
+        "byte_equal": {
+          "report.json": true,
+          "report.md": true,
+          "figure.svg": true
+        }
+      },
+      "console_logs": {
+        "results/m4-comparison/ot031-entry-repeat-console.jsonl": "c78f3d527503c0e51d8df82d1b23fcb7fe0c061af65a6c306c002b7783f597d2",
+        "results/m4-comparison/ot031-entry-repeat-reconstructed-console.jsonl": "3c327f9ca5c9f53ad6ff471bd3e133581ec1c31fac204cd39dc3982f9143b6a7"
+      },
+      "dirty_checkout_context": "Concurrent README, CONTRIBUTING, ROADMAP, CHANGELOG and execution-receipt drafts; numerical/comparison source inventory unchanged from clean primary. Recorded dirty metadata is retained."
+    },
+    "failed_source_roster": {
+      "path": "results/m4-comparison/ot031-failure",
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "-m",
+        "experiments.m4.comparison",
+        "run",
+        "--config",
+        "results/m4-comparison/ot031-inputs/failure.json",
+        "--output",
+        "results/m4-comparison/ot031-failure",
+        "--reference",
+        "results/m4-comparison/ot031-primary/reference"
+      ],
+      "exit_code": 1,
+      "source_order": [
+        "invalid_negative",
+        "dalla_man",
+        "ultradian"
+      ],
+      "ordinary_failure_followed_by_later_sources": true,
+      "failed_source_observation_cases_not_attempted": 12,
+      "accepted_pair_identical_to_primary": true,
+      "accepted_source_scenarios": 4,
+      "artifacts": {
+        "figure.svg": {
+          "reconstructed_equal": true,
+          "sha256": "aaa4fbf6257a35fc6291c1bcbb68daaaa6c0d05948bc263642ce7c903134119e"
+        },
+        "report.json": {
+          "reconstructed_equal": true,
+          "sha256": "0e1638a2836ff8f1dadcb9abd953830d85b6fc94fb76d09dabdc62a8c25a4900"
+        },
+        "report.md": {
+          "reconstructed_equal": true,
+          "sha256": "68e5ba1e8f82ea294278c07ac4d4c378a63063dc176f6bd87e2c6eb7ca02aaa0"
+        }
+      },
+      "manifest_sha256": "f208473d4c8905f08dd1c7793f1a5bb393cf2c5dffcb8911bd76d7ee0652bc6a",
+      "pairs": [
+        {
+          "accepted": false,
+          "left": "invalid_negative",
+          "null_reason": "invalid_negative: entire source workflow did not complete and pass",
+          "right": "dalla_man"
+        },
+        {
+          "accepted": false,
+          "left": "invalid_negative",
+          "null_reason": "invalid_negative: entire source workflow did not complete and pass",
+          "right": "ultradian"
+        },
+        {
+          "accepted": true,
+          "left": "dalla_man",
+          "null_reason": null,
+          "right": "ultradian"
+        }
+      ],
+      "passed": false,
+      "planned_source_scenarios": 6,
+      "provenance": {
+        "git_dirty": true,
+        "git_head": "945cd033184a7be88fad077ea971b71369988294"
+      },
+      "state": {
+        "interruption_signal": null,
+        "reference": {
+          "error_type": null,
+          "exit_code": 0,
+          "manifest_sha256": "ff55074dd31d43dec73c1e2ceca25682ebbcb1b93a72db2a645de0aacf8746ad",
+          "status": "completed"
+        },
+        "sources": {
+          "dalla_man": {
+            "error_type": null,
+            "exit_code": 0,
+            "manifest_sha256": "181a788a2eba8750308d06c490db8645e23b9ef02a6d879de9b5f65957552494",
+            "status": "completed"
+          },
+          "invalid_negative": {
+            "error_type": "WorkerExit",
+            "exit_code": 1,
+            "manifest_sha256": "8a471730de6846edef522d159cc33add31f7c161705c9b5dd3d9bedd68917cf4",
+            "status": "failed"
+          },
+          "ultradian": {
+            "error_type": null,
+            "exit_code": 0,
+            "manifest_sha256": "8afda339c11782504f8e0022cea6aac8f39f7a26070e324540b0179e5243c372",
+            "status": "completed"
+          }
+        },
+        "status": "failed"
+      },
+      "reconstruction": {
+        "command": [
+          ".venv/bin/python",
+          "-B",
+          "-S",
+          "-m",
+          "experiments.m4.comparison",
+          "reconstruct",
+          "--archive",
+          "results/m4-comparison/ot031-failure",
+          "--output",
+          "results/m4-comparison/ot031-failure-reconstructed",
+          "--allow-failed"
+        ],
+        "exit_code": 0,
+        "path": "results/m4-comparison/ot031-failure-reconstructed",
+        "all_three_byte_equal": true
+      }
+    },
+    "source_deadline": {
+      "path": "results/m4-comparison/ot031-deadline",
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "-m",
+        "experiments.m4.comparison",
+        "run",
+        "--config",
+        "results/m4-comparison/ot031-inputs/deadline.json",
+        "--output",
+        "results/m4-comparison/ot031-deadline",
+        "--reference",
+        "results/m4-comparison/ot031-primary/reference"
+      ],
+      "exit_code": 1,
+      "source_budget_seconds": 30,
+      "accepted_source_scenarios": 0,
+      "artifacts": {
+        "figure.svg": {
+          "reconstructed_equal": true,
+          "sha256": "26a64e90a4000970e059426d2582310c3832ba64f9319e8d4d5c1457174d5ddd"
+        },
+        "report.json": {
+          "reconstructed_equal": true,
+          "sha256": "23c4495405936aae51c73fb24af8f6cdc3dd391b49e27bfe7305c9adfc6ac248"
+        },
+        "report.md": {
+          "reconstructed_equal": true,
+          "sha256": "8a1b9d62b95a3161c27bceb60b0cc3f389062e6fa58990f49e7cf5c6a2106d68"
+        }
+      },
+      "manifest_sha256": "f1a39f0128c08154fdbd8d34b756ef2635e18d7c4a92712cba27d3ab399f5ccf",
+      "pairs": [
+        {
+          "accepted": false,
+          "left": "blocking",
+          "null_reason": "blocking: entire source workflow did not complete and pass",
+          "right": "ultradian"
+        }
+      ],
+      "passed": false,
+      "planned_source_scenarios": 4,
+      "provenance": {
+        "git_dirty": true,
+        "git_head": "945cd033184a7be88fad077ea971b71369988294"
+      },
+      "state": {
+        "interruption_signal": null,
+        "reference": {
+          "error_type": null,
+          "exit_code": 0,
+          "manifest_sha256": "ff55074dd31d43dec73c1e2ceca25682ebbcb1b93a72db2a645de0aacf8746ad",
+          "status": "completed"
+        },
+        "sources": {
+          "blocking": {
+            "error_type": "WorkerDeadline",
+            "exit_code": 1,
+            "manifest_sha256": "7d10a2e6549992d638cbca31210a97f5a5043552091784f879bb1a819beb0ebb",
+            "status": "failed"
+          },
+          "ultradian": {
+            "error_type": "WorkerDeadline",
+            "exit_code": 1,
+            "manifest_sha256": "be0957cfd807e1ecfaea4bb3168bbd9e4010b42e871bce5a04aa8b956c8a2809",
+            "status": "failed"
+          }
+        },
+        "status": "failed"
+      },
+      "cleanup": {
+        "alive": false,
+        "callback_marker_reached": true,
+        "pid": 44953,
+        "remaining_deadline_workers": []
+      },
+      "callback_pid_absence_independently_rechecked": true,
+      "limitations": [
+        "The shared 30-second source budget also expired for the subsequent ultradian workflow; this run verifies failure retention and cleanup, not complete ultradian acceptance under that budget."
+      ],
+      "reconstruction": {
+        "command": [
+          ".venv/bin/python",
+          "-B",
+          "-m",
+          "experiments.m4.comparison",
+          "reconstruct",
+          "--archive",
+          "results/m4-comparison/ot031-deadline",
+          "--output",
+          "results/m4-comparison/ot031-deadline-reconstructed",
+          "--allow-failed"
+        ],
+        "exit_code": 0,
+        "path": "results/m4-comparison/ot031-deadline-reconstructed",
+        "all_three_byte_equal": true
+      }
+    },
+    "failed_common_entry_reconstruction": {
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "-S",
+        "-m",
+        "experiments.workflows",
+        "reconstruct",
+        "m4-compare",
+        "--archive",
+        "results/m4-comparison/ot031-failure",
+        "--allow-failed",
+        "--output",
+        "results/m4-comparison/ot031-failure-entry-reconstructed"
+      ],
+      "exit_code": 0,
+      "path": "results/m4-comparison/ot031-failure-entry-reconstructed",
+      "console": "results/m4-comparison/ot031-failure-entry-reconstructed-console.jsonl",
+      "console_sha256": "53da61a54d21806fb11c1327081332ef32f9fd5a3b3c2eb43a432656a8891d3f",
+      "entry_receipt": {
+        "child_exit_code": 0,
+        "forwarded_signal": null,
+        "observation_path_issues": [],
+        "operation": "reconstruct",
+        "report": "WORKTREES/m4-source-comparison/OpenT1D/results/m4-comparison/ot031-failure-entry-reconstructed/report.md",
+        "report_completeness": "failed",
+        "report_status_scope": "native_reader_verified",
+        "schema": "opent1d.workflow-entry/1",
+        "task": "m4-compare"
+      },
+      "report_hashes": {
+        "report.json": "0e1638a2836ff8f1dadcb9abd953830d85b6fc94fb76d09dabdc62a8c25a4900",
+        "report.md": "68e5ba1e8f82ea294278c07ac4d4c378a63063dc176f6bd87e2c6eb7ca02aaa0",
+        "figure.svg": "aaa4fbf6257a35fc6291c1bcbb68daaaa6c0d05948bc263642ce7c903134119e"
+      },
+      "all_three_byte_equal": true
+    },
+    "global_interruption": {
+      "status": "verified_by_meaningful_automated_tests",
+      "native_interruption_campaign_executed": false,
+      "scope": "Coordinator signal, unattempted-tail, final-boundary and interrupted-completed-child tests; separate-session supervisor cleanup tested with a real worker. Native deadline additionally observed callback worker termination.",
+      "tests": [
+        "test_global_signal_preserves_interrupted_and_unattempted_source_roster",
+        "test_final_boundary_signal_reconciles_global_state_without_dropping_completed_sources",
+        "test_signal_during_reference_verification_does_not_dispatch_next_source",
+        "test_interrupted_completed_child_never_becomes_accepted",
+        "test_deadline_allows_supervisor_to_reap_its_separate_worker_session"
+      ]
+    },
+    "operational_receipt": {
+      "path": "results/m4-comparison/ot031-operational-verification.json",
+      "sha256": "8e2bc7e361e3115e7f6983bed0a8b4d4c69af009e142a50fc4505f55b0401763",
+      "checked_utc": "2026-10-03T17:54:48.195684+00:00",
+      "versioned": false
+    }
+  },
+  "checks": {
+    "setup": {
+      "command": [
+        "uv",
+        "sync",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "console_log_preserved": false
+    },
+    "focused_core": {
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_m4_comparison_run",
+        "tests.test_m4_comparison_report",
+        "-v"
+      ],
+      "exit_code": 0,
+      "tests_passed": 24,
+      "duration_seconds": 3.293,
+      "console_log_preserved": false
+    },
+    "focused_entry": {
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_workflow_entry",
+        "tests.test_m4_comparison_entry",
+        "-v"
+      ],
+      "exit_code": 0,
+      "tests_passed": 19,
+      "new_tests": 4,
+      "duration_seconds": 0.574,
+      "console_log_preserved": false
+    },
+    "inherited_numerical": {
+      "command": [
+        "experiments/m4/beta_cell/runtime/.venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "experiments.m4.researcher_workflow.test_numerical",
+        "-v"
+      ],
+      "exit_code": 0,
+      "tests_passed": 5,
+      "duration_seconds": 1.203,
+      "console_log_preserved": false
+    },
+    "full_repository": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "scripts/check.py"
+      ],
+      "exit_code": 0,
+      "source_revision": "b3cfaeee989f0ec33ae3bf5e58c3c33004ef7d46",
+      "new_comparison_tests_included": 28,
+      "log": "results/m4-comparison/ot031-repository-check.log",
+      "log_sha256": "cdcc9f6a9ef254f13fbffffbc540b28bb65c1725bccabcbbbaabd6ce187c7de8",
+      "tests_passed": 906,
+      "duration_seconds": 92.979,
+      "documentation_build": "passed",
+      "working_tree_context": "Concurrent documentation/status/evidence drafts; code source inventory unchanged. Final documentation and receipt updates follow this run and need focused final validation.",
+      "passed_checks": [
+        "Ruff lint",
+        "Ruff format",
+        "Markdown",
+        "YAML",
+        "CFF",
+        "navigation",
+        "906 root tests",
+        "Sphinx documentation build"
+      ]
+    },
+    "visual_qa": {
+      "status": "passed",
+      "scope": "Parent inspected the six SVG panels, axes/units, legend and source-status text in the browser; local server stopped and tab closed."
+    },
+    "hosted_ci": {
+      "status": "not_run",
+      "result": null
+    }
+  },
+  "final_documentation_validation": {
+    "status": "passed",
+    "exit_code": 0,
+    "command": ["uv", "run", "--locked", "python", "-"],
+    "scope": "scripts.check helpers scanned all public Markdown, checked modified YAML, explicit navigation and receipt JSON, then rebuilt Sphinx with warnings as errors after final evidence/status prose updates.",
+    "log": "results/m4-comparison/ot031-final-documentation-check.log",
+    "log_sha256": "e0e4b21d6e10b8d001b3189c7dfb5f1d1f7171441fb3f40a5cdabc80d07652e9",
+    "receipt_completion": "This completion field was filled after the successful checks; numerical and comparison implementation files remained unchanged."
+  }
+}

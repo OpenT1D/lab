@@ -1,0 +1,6 @@
+{
+  "schema": "ot027-synthetic-intent/1",
+  "data_kind": "synthetic",
+  "clock": "days_since_first_infusion",
+  "source": "invented"
+}

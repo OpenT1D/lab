@@ -1,0 +1,515 @@
+{
+  "schema": "opent1d.profile-ci-followup/1",
+  "recorded_utc": "2026-10-02T20:34:43.539478+00:00",
+  "status": "operational_fix_native_verified_pending_hosted_validation",
+  "original_run": 37014981209,
+  "original_job": 110863523055,
+  "original_commit": "e77c9d79408b662e285401fc018534a4619fa055",
+  "original_conclusion": "cancelled",
+  "annotation": "The job has exceeded the maximum execution time of 4h0m0s",
+  "original_artifact": {
+    "id": 11242569418,
+    "name": "m4-profile-likelihood",
+    "zip_sha256": "c95da2597cf2a1f932eecd8240c8ac7ebf91a94b2d78f96474e58b646e0860c4",
+    "retained_directory": "results/ci-runtime-fix-profile/linux-profile-interrupted",
+    "initial_inventory_sha256": "ae512a61e211ce0589f7183099f810050c5cffa3fbe7a838f89816dfa3eff179"
+  },
+  "original_manifest_status": "started",
+  "original_manifest_sha256": "7478ea6be3f435ca9a8acc1e5d9f603afd31dcfe39ffda92356a1e484a50fde0",
+  "protocol_sha256": "9bd2af2594a5cc415c058f9a6e750cb6b310c3cd13c6dee580a8914df4a49418",
+  "protocol_canonical_sha256": "365b69343943e70175693aaa0abc14dd998c4a304dbce33b1760e2879c9167b6",
+  "source_snapshots_and_current_lock_match": true,
+  "forward_and_profile_oracles_passed": true,
+  "case_status_counts": {
+    "partial": 3,
+    "completed": 2,
+    "not_started": 4
+  },
+  "cases": [
+    {
+      "id": "free_volume-noiseless",
+      "design": "free_volume",
+      "data": "noiseless",
+      "state": "partial",
+      "sha256": "be84cf5a4b8934786ebf021e955ae7c9ed4b119f8a6feaf2bd60c6e9b8c4ab8b",
+      "retained_fit_status_counts": {
+        "completed": 186
+      },
+      "profiles": [
+        {
+          "parameter": 0,
+          "points": 20,
+          "crossings": 2,
+          "reference_checks": 6
+        },
+        {
+          "parameter": 1,
+          "points": 20,
+          "crossings": 2,
+          "reference_checks": 6
+        },
+        {
+          "parameter": 2,
+          "points": 20,
+          "crossings": 2,
+          "reference_checks": 6
+        },
+        {
+          "parameter": 3,
+          "points": 11,
+          "crossings": 1,
+          "reference_checks": 0
+        }
+      ]
+    },
+    {
+      "id": "free_volume-noise_117",
+      "design": "free_volume",
+      "data": "noise_117",
+      "state": "completed",
+      "sha256": "d675de7d2178ce771261594e81c06f2dfd29c5773515fd19976476cad5a836a3",
+      "retained_fit_status_counts": {
+        "completed": 216
+      },
+      "profiles": [
+        {
+          "parameter": 0,
+          "points": 20,
+          "crossings": 2,
+          "reference_checks": 6
+        },
+        {
+          "parameter": 1,
+          "points": 20,
+          "crossings": 2,
+          "reference_checks": 6
+        },
+        {
+          "parameter": 2,
+          "points": 20,
+          "crossings": 2,
+          "reference_checks": 6
+        },
+        {
+          "parameter": 3,
+          "points": 20,
+          "crossings": 2,
+          "reference_checks": 6
+        }
+      ],
+      "reconstructed_gates": {
+        "all_fits_completed": true,
+        "noiseless_baseline_recovery": true,
+        "baseline_reference_agreement": true,
+        "parent_comparator_agreement": true,
+        "profiles": true
+      }
+    },
+    {
+      "id": "free_volume-noise_221",
+      "design": "free_volume",
+      "data": "noise_221",
+      "state": "completed",
+      "sha256": "0eea854214f9381a77435fdb97ba12760f14c4c2f0183af132954da01e50b299",
+      "retained_fit_status_counts": {
+        "completed": 202
+      },
+      "profiles": [
+        {
+          "parameter": 0,
+          "points": 20,
+          "crossings": 2,
+          "reference_checks": 6
+        },
+        {
+          "parameter": 1,
+          "points": 20,
+          "crossings": 2,
+          "reference_checks": 6
+        },
+        {
+          "parameter": 2,
+          "points": 20,
+          "crossings": 2,
+          "reference_checks": 6
+        },
+        {
+          "parameter": 3,
+          "points": 15,
+          "crossings": 1,
+          "reference_checks": 4
+        }
+      ],
+      "reconstructed_gates": {
+        "all_fits_completed": true,
+        "noiseless_baseline_recovery": true,
+        "baseline_reference_agreement": true,
+        "parent_comparator_agreement": true,
+        "profiles": true
+      }
+    },
+    {
+      "id": "fixed_volume-noiseless",
+      "design": "fixed_volume",
+      "data": "noiseless",
+      "state": "partial",
+      "sha256": "e3f74b893507cebae069fce4b81de1d6d52647ff90b2515678b273575f06cd5a",
+      "retained_fit_status_counts": {
+        "completed": 92
+      },
+      "profiles": [
+        {
+          "parameter": 0,
+          "points": 20,
+          "crossings": 2,
+          "reference_checks": 6
+        },
+        {
+          "parameter": 1,
+          "points": 17,
+          "crossings": 2,
+          "reference_checks": 0
+        }
+      ]
+    },
+    {
+      "id": "fixed_volume-noise_117",
+      "design": "fixed_volume",
+      "data": "noise_117",
+      "state": "partial",
+      "sha256": "a6cf411f33c0e4edddac8f0e66c64484de1db85242f07b200a99c774e6ab6fd7",
+      "retained_fit_status_counts": {
+        "completed": 152
+      },
+      "profiles": [
+        {
+          "parameter": 0,
+          "points": 20,
+          "crossings": 2,
+          "reference_checks": 6
+        },
+        {
+          "parameter": 1,
+          "points": 20,
+          "crossings": 2,
+          "reference_checks": 6
+        },
+        {
+          "parameter": 2,
+          "points": 20,
+          "crossings": 2,
+          "reference_checks": 1
+        }
+      ]
+    },
+    {
+      "id": "fixed_volume-noise_221",
+      "design": "fixed_volume",
+      "data": "noise_221",
+      "state": "not_started"
+    },
+    {
+      "id": "GI-noiseless",
+      "design": "GI",
+      "data": "noiseless",
+      "state": "not_started"
+    },
+    {
+      "id": "GI-noise_117",
+      "design": "GI",
+      "data": "noise_117",
+      "state": "not_started"
+    },
+    {
+      "id": "GI-noise_221",
+      "design": "GI",
+      "data": "noise_221",
+      "state": "not_started"
+    }
+  ],
+  "repeat_started": false,
+  "accepted_campaign": false,
+  "operation": {
+    "runner_before": "ubuntu-24.04",
+    "runner_after": "macos-14",
+    "timeout_minutes_before": 240,
+    "timeout_minutes_after": 360,
+    "repository_is_private": true,
+    "documented_private_runner_cpus_before": 2,
+    "documented_private_runner_cpus_after": 3,
+    "runner_reference": "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+    "existing_worker_processes": 3,
+    "scientific_driver_changed": false,
+    "model_protocol_solver_starts_and_numerical_acceptance_changed": false,
+    "earlier_complete_mac_elapsed_minutes": 132.67765433333335,
+    "earlier_execution": "experiments/m4/profile_likelihood/execution.json",
+    "fresh_hosted_execution_claimed": false
+  },
+  "limits": [
+    "The timeout is established by the job annotation; the full cause of the Linux/Mac performance difference is not measured.",
+    "The two complete primary cases pass their reconstructed gates; the incomplete Linux campaign remains unaccepted.",
+    "The new hosted runner and deadline still require execution after explicit push authorization.",
+    "No biological or human validity is established."
+  ],
+  "checks": {
+    "locked_repository": {
+      "passed": true,
+      "tests": 838,
+      "documentation_build_passed": true,
+      "log_sha256": "7bc64c1771bfb87cdef2ca2fcc98a066eba6d6143c7d1a7de11461f38247f54a"
+    },
+    "native_profile_oracles": {
+      "passed": true,
+      "tests": 12,
+      "log_sha256": "0be3db48d7d1678f295198192e0bdf37ebb53aaca21ea3374c994afd35fd5ec2"
+    },
+    "final_evidence_documentation": {
+      "changed_markdown_passed": true,
+      "navigation_passed": true,
+      "json_parsed": true,
+      "documentation_build_passed": true,
+      "log_sha256": "62ddcd89a3677b60d312edcd9c53d1730489bc95f1fd34277fd3961d3d1f3d28",
+      "code_unchanged_since_locked_838_test_run": true,
+      "scope": "The c2137cc evidence update before concurrent local-main integration; this historical verification stage is retained."
+    },
+    "locked_repository_with_current_main": {
+      "execution_commit": "99084307923b2cbd3b18a422489d0530631329a9",
+      "git_dirty": false,
+      "passed": true,
+      "tests": 878,
+      "tests_elapsed_seconds": 82.989,
+      "locked_sync_passed": true,
+      "documentation_build_passed": true,
+      "log_sha256": "bb7a66702b72478b171a9c28c212b36337b4566f8619cc18ac28a3ee759f4428",
+      "scope": "Combined fix and researcher-entry/comparison source at clean integration commit; no scientific source changed."
+    },
+    "final_integration_documentation": {
+      "changed_markdown_passed": true,
+      "navigation_passed": true,
+      "json_parsed": true,
+      "documentation_build_passed": true,
+      "log_sha256": "3a1e850fe20320bc2b67417f1a3098966638c3fbfb4fc9541f26cd7002d11eaf",
+      "initial_helper_attempt": "The first targeted helper invocation omitted its Markdown-list argument and failed before navigation/build; the corrected invocation passed. Both logs are retained.",
+      "code_unchanged_since_locked_878_test_run": true
+    }
+  },
+  "independent_internal_review": {
+    "read_only": true,
+    "no_actionable_findings": true,
+    "scope": "CI resource choice, immutable interrupted Linux evidence, protocol/source/lock binding and both complete case gates",
+    "independent_human_reproduction_claimed": false,
+    "primary_native": {
+      "no_actionable_findings": true,
+      "cases": 9,
+      "profiles": 27,
+      "sampled_points": 504,
+      "reference_checks": 148,
+      "completed_fit_starts": 1364,
+      "source_snapshots": 42,
+      "frozen_source_archive_file_blobs": 812,
+      "scope": "Independent stdlib primary gates, immutable source/protocol/lock identity and exact frozen archive blobs; full repeat/archive review follows."
+    },
+    "full_campaign_and_archive": {
+      "type": "independent internal agent review",
+      "agent": "/root/integration_review",
+      "read_only": true,
+      "no_actionable_findings": true,
+      "native_simulations_started_by_reviewer": false,
+      "gates_passed": 7,
+      "numerical_artifacts_primary_repeat_byte_exact": 12,
+      "cases_per_process": 9,
+      "profiles_per_process": 27,
+      "completed_starts_per_process": 1364,
+      "report_and_figure_reconstruction_byte_exact": true,
+      "source_snapshots": 42,
+      "frozen_source_file_blobs": 812,
+      "inventoried_evidence_files": 156,
+      "inventory_and_archive_hashes_match": true,
+      "original_linux_artifacts_and_diagnosis_unchanged": true,
+      "independent_human_or_hosted_verification_claimed": false
+    },
+    "current_main_compatibility": {
+      "type": "independent internal agent review",
+      "agent": "/root/integration_review",
+      "read_only": true,
+      "reviewed_commit": "99084307923b2cbd3b18a422489d0530631329a9",
+      "no_actionable_findings": true,
+      "main_nonshared_contributions_byte_and_mode_exact": 29,
+      "main_files_outside_shared_and_fix_paths_byte_and_mode_exact": 822,
+      "native_historical_files_byte_exact": 271,
+      "locked_repository_tests": 878,
+      "documentation_build_passed": true,
+      "primary_main_untouched": true,
+      "reviewer_started_native_or_hosted_campaigns": false,
+      "scope": "Preserved local-main contributions, documentation conflict resolution, workflow coexistence and runtime/passive-check compatibility."
+    }
+  },
+  "initial_diagnosis": {
+    "recorded_utc": "2026-10-02T18:11:27.268565+00:00",
+    "source_commit": "547db14bccdf5a21f7ce005afcac7f6fcadd9439",
+    "sha256": "c142be6faf34d496a3dea3ba6da59c4101995163f3b1673b67d3bf35328c110b",
+    "retained_path": "results/ci-runtime-fix-profile/profile-ci-initial.json"
+  },
+  "fresh_mac": {
+    "accepted_campaign": true,
+    "archive": "results/ci-runtime-fix-profile/mac-profile-full",
+    "execution_commit": "547db14bccdf5a21f7ce005afcac7f6fcadd9439",
+    "git_dirty": false,
+    "started_utc": "2026-10-02T18:18:57.825275+00:00",
+    "finished_utc": "2026-10-02T20:33:25.346403+00:00",
+    "elapsed_minutes": 134.45868546666668,
+    "manifest_sha256": "bbdf09e060b03a1dc3366df7a09d4760ed7da042663e10bee4b4dfae41d8f688",
+    "protocol_sha256": "9bd2af2594a5cc415c058f9a6e750cb6b310c3cd13c6dee580a8914df4a49418",
+    "source_snapshots_matching_current": 42,
+    "native_lock_and_project_bytes_exact": true,
+    "platform": {
+      "system": "Darwin",
+      "machine": "arm64",
+      "release": "25.5.0",
+      "macos": "26.5.2"
+    },
+    "runtime": {
+      "python": "3.12.13",
+      "numpy": "1.26.4",
+      "scipy": "1.13.1"
+    },
+    "native_upstream_revision": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc",
+    "executions": [
+      {
+        "cases": 9,
+        "profiles": 27,
+        "sampled_points": 504,
+        "reference_checks": 148,
+        "fit_status_counts": {
+          "completed": 1364
+        }
+      },
+      {
+        "cases": 9,
+        "profiles": 27,
+        "sampled_points": 504,
+        "reference_checks": 148,
+        "fit_status_counts": {
+          "completed": 1364
+        }
+      }
+    ],
+    "gates": {
+      "forward_and_oracle_verification": true,
+      "fresh_process_repeat": true,
+      "all_fits_completed": true,
+      "noiseless_baseline_recovery": true,
+      "baseline_reference_agreement": true,
+      "parent_comparator_agreement": true,
+      "profile_checks": true
+    },
+    "repeat_artifact_differences": 0,
+    "report_sha256": "284850a21f5eeeb362532d26e8b7d3bb8c6113f1fad62518e148bd01ed8ec285",
+    "figure_sha256": "43455a9146c1d09c2c5592db4fad2fe4d12bb68295f0a84b841c26f6ad3d1e0e",
+    "report_without_site_packages_byte_exact": true,
+    "figure_reconstruction_without_simulation_byte_exact": true,
+    "frozen_source_archive": "results/ci-runtime-fix-profile/source-547db14.tar",
+    "frozen_source_archive_sha256": "c20fab567680c02d13f687b5ef7afb9d86c9555fa84027036180580c7738d00a",
+    "full_hosted_candidate_campaign_claimed": false,
+    "biological_or_human_validity_claimed": false,
+    "report_log_sha256": "2da222706982e0cf58345a76d311e577b29ca05cb0eaa8fa6807445f8c0feb60",
+    "figure_log_sha256": "30fae7403169572780aa9d74f2f8d615e4d2467dd0114d539d894b2323f5b545",
+    "execution_log_sha256": "b1235068ba0e1a9cd523a2c6364363b71661dd43777174f341986587b51b7e09",
+    "capture_tool_sha256": "9ecf7de05668cf81d39065bb069d237baed6aadfdaca859b3c1bbe5c68af5fc1"
+  },
+  "original_workflow": {
+    "status": "completed",
+    "conclusion": "failure",
+    "job_conclusion_counts": {
+      "failure": 3,
+      "success": 8,
+      "cancelled": 2
+    },
+    "snapshot_sha256": "56a49f137dd219472d8cecd3cc1026a9b3aa20e5056b88731eda57a2e0afd1ed"
+  },
+  "remaining": [
+    "Fresh hosted execution of the candidate, including the macos-14 profile job, requires explicit push/dispatch authorization.",
+    "Push and merge require explicit authorization; no independent human or biological validity is established."
+  ],
+  "retained_stage_records": {
+    "initial_diagnosis_sha256": "c142be6faf34d496a3dea3ba6da59c4101995163f3b1673b67d3bf35328c110b",
+    "primary_gate_check_sha256": "9570f2f0478aea7a94af7a538e16db5e9e891ad0d1e18fa5f4e1046826ed8707",
+    "complete_repeat_prefix_check_sha256": "d33daf22a75f464f1b4802c743405bc05b501b8feddf0be3819326a7647134cc"
+  },
+  "artifact_archive": {
+    "path": "results/ci-runtime-fix-profile-20261002.tar.gz",
+    "sha256": "37bf40eb1946d63278c57c96dad4514d384c468ed67e6a64d8f55a71836289ba",
+    "bytes": 6808299,
+    "inventory_path": "results/ci-runtime-fix-profile/artifact-inventory.json",
+    "inventory_sha256": "c22de6c4a1f429e833413c379a95baa120f914b4f7a4f55cfcc508968c5b3050",
+    "retained_files": 156,
+    "native_record_snapshot": "ci-runtime-fix-profile/profile-ci-native-verified.json",
+    "native_record_snapshot_sha256": "2b359e5575cecee59bcefc0c1b5e4fa96e21e2837982089cd451d5d68fc6475f",
+    "record_snapshot_scope": "Native verification before independent full archive audit; the later audit is recorded in this versioned receipt.",
+    "availability": "Local ignored archive; not a hosted release or versioned raw simulation dataset.",
+    "primary_backup": {
+      "location": "primary checkout",
+      "path": "results/ci-runtime-fix-profile/ci-runtime-fix-profile-20261002.tar.gz",
+      "sha256": "37bf40eb1946d63278c57c96dad4514d384c468ed67e6a64d8f55a71836289ba",
+      "bytes": 6808299
+    }
+  },
+  "finalized_utc": "2026-10-02T21:00:12.351253+00:00",
+  "current_main_integration": {
+    "local_main_base": "ed0ffd91dafbbd06a752bea54fb3b90335ffeb67",
+    "github_main_observed": "e77c9d79408b662e285401fc018534a4619fa055",
+    "integration_commit": "99084307923b2cbd3b18a422489d0530631329a9",
+    "primary_main_modified_by_this_fix": false,
+    "prior_reviewed_fix_commit": "c2137cc",
+    "native_historical_files_byte_exact_at_integration": 271,
+    "native_source_identity_scope": "All tracked experiments/m0, m1, m2 and m4 files at 9908430 compared with c2137cc; later receipt metadata is recorded separately.",
+    "main_task_entry_and_comparison_preserved": true,
+    "shared_conflicts_resolved": [
+      "CHANGELOG.md",
+      "docs/_toc.yml",
+      "docs/decisions/README.md"
+    ],
+    "runtime_decision_renumbered_from": "0055-reviewed-runtime-extension",
+    "runtime_decision_renumbered_to": "0056-reviewed-runtime-extension",
+    "renumbering_scope": "Current filename, title and navigation only; frozen source archives retain their original bytes and execution identities.",
+    "evidence": {
+      "locked_sync": {
+        "path": "results/ci-runtime-fix-integration/locked-sync.log",
+        "sha256": "d268e3fd71fb97ecd6f7a386f2176b8dfd26756bd1df46bd901c02ab7afff0e0",
+        "bytes": 141
+      },
+      "locked_repository": {
+        "path": "results/ci-runtime-fix-integration/locked-repository.log",
+        "sha256": "bb7a66702b72478b171a9c28c212b36337b4566f8619cc18ac28a3ee759f4428",
+        "bytes": 197689
+      },
+      "source_identity": {
+        "path": "results/ci-runtime-fix-integration/source-identity.json",
+        "sha256": "eeae739a589ee13444916c2cc918c044595fe1b004f36ca3c3bd2ab64923de99",
+        "bytes": 350
+      },
+      "final_documentation": {
+        "path": "results/ci-runtime-fix-integration/final-documentation.log",
+        "sha256": "3a1e850fe20320bc2b67417f1a3098966638c3fbfb4fc9541f26cd7002d11eaf",
+        "bytes": 45270
+      },
+      "initial_documentation_helper_attempt": {
+        "path": "results/ci-runtime-fix-integration/documentation-helper-initial-attempt.log",
+        "sha256": "a576d2bfff7cdcb8833dc333805248c26a92a858e58db29187d820a3fed152a1",
+        "bytes": 238
+      }
+    },
+    "prior_final_receipt_backup": {
+      "location": "primary checkout",
+      "path": "results/ci-runtime-fix-profile/profile-ci-final-receipt.json",
+      "sha256": "d0411d951743b3bac4b79597e117b0d6113235c6e2c333b7e85d3671c10785aa"
+    },
+    "hosted_execution_claimed": false,
+    "evidence_backup": {
+      "location": "primary checkout",
+      "directory": "results/ci-runtime-fix-integration",
+      "files": 5,
+      "all_files_byte_exact": true
+    }
+  }
+}

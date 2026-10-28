@@ -1,0 +1,2645 @@
+{
+  "baseline_revision": "d9991c115e795c2977177349805619df15981598",
+  "campaign_verification": {
+    "path": "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2-acceptance-receipt.json",
+    "record": {
+      "commands": [
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-E",
+            "-s",
+            "-S",
+            "-m",
+            "experiments.campaigns",
+            "check",
+            "--config",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign.json"
+          ],
+          "duration_seconds": 0.33683791699877474,
+          "exit_code": 0,
+          "log_sha256": "28b4005b5433cb02ce9a50932a443693e43fbe4940c99b880547ca0e075cefb3",
+          "name": "campaign-check"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-E",
+            "-s",
+            "-S",
+            "-m",
+            "experiments.campaigns",
+            "run",
+            "--config",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign.json",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2"
+          ],
+          "duration_seconds": 527.3058848749934,
+          "exit_code": 1,
+          "log_sha256": "110bf6e2eae334dfeeb6fb6ba66f9732c470ed8e97d60428282b0ccab4044f3e",
+          "name": "campaign-interrupted-run"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-E",
+            "-s",
+            "-S",
+            "-m",
+            "experiments.campaigns",
+            "reconstruct",
+            "--campaign",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2-rejected-incomplete"
+          ],
+          "duration_seconds": 6.071746333996998,
+          "exit_code": 2,
+          "log_sha256": "6dff4a2908ddd56778706a782c13547d7641302da18018a358cf403f32242ee0",
+          "name": "campaign-failed-no-opt-in"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-E",
+            "-s",
+            "-S",
+            "-m",
+            "experiments.campaigns",
+            "reconstruct",
+            "--campaign",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2-interrupted-reconstructed",
+            "--allow-failed"
+          ],
+          "duration_seconds": 5.859515250005643,
+          "exit_code": 0,
+          "log_sha256": "110bf6e2eae334dfeeb6fb6ba66f9732c470ed8e97d60428282b0ccab4044f3e",
+          "name": "campaign-interrupted-reconstruct"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-E",
+            "-s",
+            "-S",
+            "-m",
+            "experiments.campaigns",
+            "resume",
+            "--campaign",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2"
+          ],
+          "duration_seconds": 865.9034162919997,
+          "exit_code": 0,
+          "log_sha256": "182030547e7e1da555d85c619445d2a1d86c90d0c742260b7b3aea94ebab68bb",
+          "name": "campaign-resume"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-E",
+            "-s",
+            "-S",
+            "-m",
+            "experiments.campaigns",
+            "resume",
+            "--campaign",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2"
+          ],
+          "duration_seconds": 36.75503074999142,
+          "exit_code": 0,
+          "log_sha256": "87db6362097c91d836b916d8d7066163ee7b1c2c6a70e4e5ad230cbf019c06a0",
+          "name": "campaign-no-op-resume"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-E",
+            "-s",
+            "-S",
+            "-m",
+            "experiments.campaigns",
+            "reconstruct",
+            "--campaign",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2-final-reconstructed"
+          ],
+          "duration_seconds": 18.333116708003217,
+          "exit_code": 0,
+          "log_sha256": "87db6362097c91d836b916d8d7066163ee7b1c2c6a70e4e5ad230cbf019c06a0",
+          "name": "campaign-final-reconstruct"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-E",
+            "-s",
+            "-S",
+            "-m",
+            "experiments.campaigns",
+            "resume",
+            "--campaign",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2-tampered-frozen-input"
+          ],
+          "duration_seconds": 0.05520670799887739,
+          "exit_code": 2,
+          "log_sha256": "a921cde2f4628988d263005db3959d7caab3d5b017f83202ff39135b90e2ee18",
+          "name": "campaign-tamper-frozen-input"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-E",
+            "-s",
+            "-S",
+            "-m",
+            "experiments.campaigns",
+            "resume",
+            "--campaign",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2-tampered-accepted-output"
+          ],
+          "duration_seconds": 0.33869674999732524,
+          "exit_code": 2,
+          "log_sha256": "2fd7a9bc07e45e3aff192b2201085f3b64d64e54e5bcd96e0c669eb20b40cc85",
+          "name": "campaign-tamper-accepted-output"
+        }
+      ],
+      "config_sha256": "725d47f315285b2baa153c95766cb9a92c70353d3b041029df1078730034e221",
+      "controller_sha256": "e4aa5cf3eb1b6e1aa916e0502591e81b555fb99860e67a4ddc48ed6976aa6a5b",
+      "coordinator_pid": 57063,
+      "findings": {
+        "final_cleanup": {
+          "no_live_scoped_processes": true,
+          "remaining": []
+        },
+        "final_counts": {
+          "accepted_slots": 4,
+          "accepted_source_scenarios": 8,
+          "planned_slots": 4,
+          "planned_source_scenarios": 8,
+          "retained_attempts": 5,
+          "session_count": 3,
+          "session_scheduled_slots": [
+            4,
+            3,
+            0
+          ]
+        },
+        "frozen_implementation": {
+          "all_current_source_hashes_match_frozen": true,
+          "campaign_manifest_sha256": "07a0a259e5c02e30376a2548486acee6bb4762cea6a3e7ee5ce9e343cab7f327",
+          "protocols": {
+            "fasting": "M4-STUDY/2",
+            "midpoint": "M4-STUDY/2"
+          },
+          "source_file_count": 98
+        },
+        "interrupted": {
+          "accepted_slots": 1,
+          "accepted_source_scenarios": 2,
+          "planned_slots": 4,
+          "planned_source_scenarios": 8
+        },
+        "interrupted_cleanup": {
+          "no_live_scoped_processes": true,
+          "remaining": []
+        },
+        "native_archives": {
+          "sessions/session-0001/attempts/fasting--r001": {
+            "accepted": true,
+            "git_head": "160c4e0bf34042ec66a30630878fc09d311a50a0",
+            "native_manifest_sha256": "489a7623f88b606882ae53b8120e72a19188c9e091f54abe4d4996b6e7b1a3b1",
+            "source_count": 86
+          },
+          "sessions/session-0001/attempts/fasting--r002": {
+            "accepted": false,
+            "git_head": "160c4e0bf34042ec66a30630878fc09d311a50a0",
+            "native_manifest_sha256": "10a80ffc51a4e50b5e2d59a84f654baf5f601e04d1174e429cc36e9366a23837",
+            "source_count": 86
+          },
+          "sessions/session-0002/attempts/fasting--r002": {
+            "accepted": true,
+            "git_head": "160c4e0bf34042ec66a30630878fc09d311a50a0",
+            "native_manifest_sha256": "47c278180cb2163b03c0b8373a3f410bc5cc7a30f8ac7f727f4f95018c346367",
+            "source_count": 86
+          },
+          "sessions/session-0002/attempts/midpoint--r001": {
+            "accepted": true,
+            "git_head": "160c4e0bf34042ec66a30630878fc09d311a50a0",
+            "native_manifest_sha256": "11e4431cce56c98216a1051e3f2ec208ba50adbac10b73f502cf87bd477fb5d0",
+            "source_count": 86
+          },
+          "sessions/session-0002/attempts/midpoint--r002": {
+            "accepted": true,
+            "git_head": "dbf6f6b33b952db8b7a51d2db41a4a520970bb90",
+            "native_manifest_sha256": "264acfedd61bf80afd715388f5db9c82915e33021a3b8d623f5aad4e979fedd1",
+            "source_count": 86
+          }
+        },
+        "no_op_resume": {
+          "exact_final_reports": {
+            "report.json": "ab5ef9b4d2a8022d1da7d1325366e4c144ad8789002ece4d63f986d8dc18cc0d",
+            "report.md": "2e235ffaf871cbb82c9c9a34d10652bc953fea76aa9d1c47ab1488e609398e14"
+          },
+          "new_session": 3,
+          "prior_manifests_and_reports_unchanged": {
+            "manifest.json": "07a0a259e5c02e30376a2548486acee6bb4762cea6a3e7ee5ce9e343cab7f327",
+            "sessions/session-0001/attempts/fasting--r001/archive/historical/manifest.json": "ec5ab1c95b4ade52900a4d8da33df46c7d37e07210464fa86d19cc21422a7790",
+            "sessions/session-0001/attempts/fasting--r001/archive/historical/report.json": "5ab6fd91378e2e16de1e4dfad6dd02896a9bfb00ac4390c2659f3156e7da6104",
+            "sessions/session-0001/attempts/fasting--r001/archive/manifest.json": "489a7623f88b606882ae53b8120e72a19188c9e091f54abe4d4996b6e7b1a3b1",
+            "sessions/session-0001/attempts/fasting--r001/archive/report.json": "f3be954d3e1297104e66059e0b6cfb13683e6d444a8c0341d0bb66af1161b4ca",
+            "sessions/session-0001/attempts/fasting--r001/manifest.json": "8253cbcdcbc1bfa398d321cd8ed9f3f97c03b336bd84c480998b546f3fc1c5a3",
+            "sessions/session-0001/attempts/fasting--r002/archive/historical/manifest.json": "9b89ad8d8433aa33ac6024989a49a31f678ad81b18eb103684537aa079760d29",
+            "sessions/session-0001/attempts/fasting--r002/archive/historical/report.json": "5ab6fd91378e2e16de1e4dfad6dd02896a9bfb00ac4390c2659f3156e7da6104",
+            "sessions/session-0001/attempts/fasting--r002/archive/manifest.json": "10a80ffc51a4e50b5e2d59a84f654baf5f601e04d1174e429cc36e9366a23837",
+            "sessions/session-0001/attempts/fasting--r002/archive/report.json": "20d2f7fb1e0dcebaed914fffe3d56d06fc944ba390f8fec780ed02310c4547da",
+            "sessions/session-0001/attempts/fasting--r002/manifest.json": "d8b1f40af8b98f115e75eb53645764fc2409b8e55e1881eb707df7bbd233ce48",
+            "sessions/session-0001/manifest.json": "902f03f558a296613d855ab6fbb50a4c4a3cdd7c4c8bd9c3325a4d711dbc9e18",
+            "sessions/session-0001/report.json": "f7376eb1ac4634414830963a04585ffa17cca34a6dcd023ac38269433148c8fb",
+            "sessions/session-0002/attempts/fasting--r002/archive/historical/manifest.json": "7a65a9388a92d8a878f228b9ccb8a15d028c113d7eb0435db90c22d7c7267c0f",
+            "sessions/session-0002/attempts/fasting--r002/archive/historical/report.json": "5ab6fd91378e2e16de1e4dfad6dd02896a9bfb00ac4390c2659f3156e7da6104",
+            "sessions/session-0002/attempts/fasting--r002/archive/manifest.json": "47c278180cb2163b03c0b8373a3f410bc5cc7a30f8ac7f727f4f95018c346367",
+            "sessions/session-0002/attempts/fasting--r002/archive/report.json": "3473686a7195579ab170f556d90b07dd2b238281fc9506d9f7d7c5dd974e1c08",
+            "sessions/session-0002/attempts/fasting--r002/manifest.json": "8f8b375aa952dd0ed4cde48a2a4ac9112dd63036e3b462e70d39f2f0c680c6be",
+            "sessions/session-0002/attempts/midpoint--r001/archive/historical/manifest.json": "7822271e346ffd39c2e5a2a08b083b42cb66c716ac89a1ced1f3882cfa1dd2d9",
+            "sessions/session-0002/attempts/midpoint--r001/archive/historical/report.json": "5ab6fd91378e2e16de1e4dfad6dd02896a9bfb00ac4390c2659f3156e7da6104",
+            "sessions/session-0002/attempts/midpoint--r001/archive/manifest.json": "11e4431cce56c98216a1051e3f2ec208ba50adbac10b73f502cf87bd477fb5d0",
+            "sessions/session-0002/attempts/midpoint--r001/archive/report.json": "3fd0f316362e8bde07169d6765197f4a53ee4fb8dea44bf63e6efa83b777c2f2",
+            "sessions/session-0002/attempts/midpoint--r001/manifest.json": "cd584e1107f91bd5807b195a082df226bf5e8b20a78795ee4c9cd49dbeca7340",
+            "sessions/session-0002/attempts/midpoint--r002/archive/historical/manifest.json": "1f17e003edff5e8f2205af386b7ef7b556f03ee4d9248017c2ed7e5cc41cb2a4",
+            "sessions/session-0002/attempts/midpoint--r002/archive/historical/report.json": "5ab6fd91378e2e16de1e4dfad6dd02896a9bfb00ac4390c2659f3156e7da6104",
+            "sessions/session-0002/attempts/midpoint--r002/archive/manifest.json": "264acfedd61bf80afd715388f5db9c82915e33021a3b8d623f5aad4e979fedd1",
+            "sessions/session-0002/attempts/midpoint--r002/archive/report.json": "eba79c1fc54a904a0c9b313073e4928ba71aa3dacf6e9b25b69c36bdb3c804fc",
+            "sessions/session-0002/attempts/midpoint--r002/manifest.json": "dfe4c7545f5fc9a0bcec4fd96cec11090727e7cfc757c01cfce4c765ef4b9e4a",
+            "sessions/session-0002/manifest.json": "7e0c741ca0ac0454d79c4ac003d45503e865b21404570998d7f754e4ac1ff8cc",
+            "sessions/session-0002/report.json": "db290878a5c6a5c7de303f09b4e1dca5fdb3e5799ba996e6d915e24d30dcac67"
+          },
+          "scheduled_slots": 0
+        },
+        "resumed": {
+          "accepted_slots": 4,
+          "accepted_source_scenarios": 8,
+          "first_attempt_hashes_unchanged": {
+            "manifest.json": "07a0a259e5c02e30376a2548486acee6bb4762cea6a3e7ee5ce9e343cab7f327",
+            "sessions/session-0001/attempts/fasting--r001/archive/manifest.json": "489a7623f88b606882ae53b8120e72a19188c9e091f54abe4d4996b6e7b1a3b1",
+            "sessions/session-0001/attempts/fasting--r001/manifest.json": "8253cbcdcbc1bfa398d321cd8ed9f3f97c03b336bd84c480998b546f3fc1c5a3",
+            "sessions/session-0001/manifest.json": "902f03f558a296613d855ab6fbb50a4c4a3cdd7c4c8bd9c3325a4d711dbc9e18",
+            "sessions/session-0001/report.json": "f7376eb1ac4634414830963a04585ffa17cca34a6dcd023ac38269433148c8fb",
+            "sessions/session-0001/report.md": "c04e5448c2fb983aff0b7e2c9852a0785f150946ffcf4828f93f53ff8db2a97e"
+          },
+          "planned_slots": 4,
+          "retained_attempts": 5,
+          "retry_link_verified": true
+        },
+        "tamper_accepted-output": {
+          "clone": "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2-tampered-accepted-output",
+          "rejected_before_session_creation": true,
+          "tampered_relative_path": "sessions/session-0001/attempts/fasting--r001/archive/config.json"
+        },
+        "tamper_frozen-input": {
+          "clone": "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2-tampered-frozen-input",
+          "rejected_before_session_creation": true,
+          "tampered_relative_path": "frozen/fasting/sources/dalla_man/model.py"
+        }
+      },
+      "finished_utc": "2026-10-03T20:51:28.918077+00:00",
+      "git_dirty": false,
+      "git_dirty_at_finish": false,
+      "git_head": "160c4e0bf34042ec66a30630878fc09d311a50a0",
+      "git_head_at_finish": "dbf6f6b33b952db8b7a51d2db41a4a520970bb90",
+      "interruption": {
+        "owned_processes_before_signal": [
+          {
+            "argv": "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python -B -E -s -S -m experiments.campaigns run --config /private/tmp/opent1d-functional-lab-acceptance-20261003/campaign.json --output /private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2",
+            "pgid": 57063,
+            "pid": 57063,
+            "ppid": 57020,
+            "state": "Ss"
+          },
+          {
+            "argv": "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python -B -E -s -S -m experiments.m4.initial_load run --config /private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2/frozen/fasting/config.json --output /private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2/sessions/session-0001/attempts/fasting--r002/archive",
+            "pgid": 69875,
+            "pid": 69875,
+            "ppid": 57063,
+            "state": "Ss"
+          },
+          {
+            "argv": "WORKTREES/functional-lab-plan/OpenT1D/experiments/m0/simglucose/.venv/bin/python -B -E -s -m experiments.m4.initial_load.worker /private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2/sessions/session-0001/attempts/fasting--r002/archive --kind source --label primary --source dalla_man",
+            "pgid": 72285,
+            "pid": 72285,
+            "ppid": 69875,
+            "state": "Rs"
+          }
+        ],
+        "recipient": "campaign_coordinator_only",
+        "recipient_pid": 57063,
+        "signal": 15,
+        "target_active_native_workers": [
+          {
+            "argv": "WORKTREES/functional-lab-plan/OpenT1D/experiments/m0/simglucose/.venv/bin/python -B -E -s -m experiments.m4.initial_load.worker /private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2/sessions/session-0001/attempts/fasting--r002/archive --kind source --label primary --source dalla_man",
+            "pgid": 72285,
+            "pid": 72285,
+            "ppid": 69875,
+            "state": "Rs"
+          }
+        ]
+      },
+      "passed": true,
+      "schema": "opent1d.ot033-native-acceptance/1",
+      "started_utc": "2026-10-03T20:27:06.706832+00:00"
+    },
+    "sha256": "b7501591991816ca2b20215e1ec673adb98c48d7109052e2ca6edc3a34a2b876"
+  },
+  "catalogue_development_failure": {
+    "path": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance/failure-summary.json",
+    "record": {
+      "all_original_inventories_unchanged": true,
+      "different_selected_keys": [
+        "logs/dalla_man-source-primary.log",
+        "logs/dalla_man-source-repeat.log",
+        "logs/ultradian-source-primary.log",
+        "logs/ultradian-source-repeat.log"
+      ],
+      "fixed_commit": "f8799db",
+      "git_head": "dbf6f6b33b952db8b7a51d2db41a4a520970bb90",
+      "index_exit": 0,
+      "root_cause": "scientific_files substring selected four diagnostic source-worker logs carrying per-run output paths",
+      "same_condition_compare_exit": 1,
+      "schema": "opent1d.ot034-local-acceptance-failure/1",
+      "verified_native_archives": 11,
+      "verify_exit": 0
+    },
+    "sha256": "e67793ff5dc0d3cd93cd2f2dd5baa8926ddf0ecf30e14c9df33ca3de84f8dd6d"
+  },
+  "catalogue_verification": {
+    "path": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/summary.json",
+    "record": {
+      "all_original_inventories_unchanged": true,
+      "catalogue_manifest": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/verified/manifest.json",
+      "catalogue_report": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/verified/report.md",
+      "catalogue_source_sha256": {
+        "experiments/catalogue/__init__.py": "bfa2dfb82b61ee7613911a8961d153bbdb28d1b6a063eba1de4f0a89e615e9c0",
+        "experiments/catalogue/__main__.py": "ecd816c64697df0a36679b22bb3242d4c4e4c86450cd337a231bd285484e9a5e",
+        "experiments/catalogue/contract.json": "285190685f8aa72afa57e86f48425811f3ac2920075e303183c903240e8078ff",
+        "experiments/catalogue/core.py": "dcb0d0ff2b7ca1cb6658047417d1e5c89156b53051909bb55d533c2a0a65049c",
+        "experiments/catalogue/formats.py": "fe48fbd74fdf3c4a658bfcb09c9e45facb8e287233bc478771081f417d53a483",
+        "experiments/catalogue/storage.py": "12cf4adf488f6dbaa2db4838ad35e5d76f56e531d895abe6bc97ebe6316ca91d"
+      },
+      "checkout": "WORKTREES/functional-lab-plan/OpenT1D",
+      "commands": [
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.catalogue",
+            "index",
+            "--config",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/request.json",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/indexed"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "name": "index",
+          "stderr": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/index.stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/index.stdout.json",
+          "stdout_sha256": "48b596e09c9d41ef1928addea0397e49d442e7f6ccb395f85c2372cbe892f592"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.catalogue",
+            "verify",
+            "--catalogue",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/indexed",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/verified",
+            "--allow-failed"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "name": "verify",
+          "stderr": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/verify.stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/verify.stdout.json",
+          "stdout_sha256": "fde72a28089eded2e6fc983fdb14ebc65386e211c247ecbef77a7b5fb57912fd"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.catalogue",
+            "compare",
+            "--catalogue",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/verified",
+            "--left",
+            "fasting-repeat-one",
+            "--right",
+            "fasting-repeat-two"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "name": "same-condition",
+          "stderr": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/same-condition.stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/same-condition.stdout.json",
+          "stdout_sha256": "91764441a8a88fab62cac3c159f8efe6cf920ea7e5f7f4a553f46119df8ce4c4"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.catalogue",
+            "compare",
+            "--catalogue",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/verified",
+            "--left",
+            "fasting-repeat-one",
+            "--right",
+            "midpoint"
+          ],
+          "exit_code": 1,
+          "expected_exit_code": 1,
+          "name": "different-load",
+          "stderr": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/different-load.stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/different-load.stdout.json",
+          "stdout_sha256": "d550472c8ad2a7a4695e3fb6eeef6d3c0fa95b1905ee108e8edad42018f73e3b"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.catalogue",
+            "compare",
+            "--catalogue",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/verified",
+            "--left",
+            "secretion-comparison",
+            "--right",
+            "three-load-study"
+          ],
+          "exit_code": 1,
+          "expected_exit_code": 1,
+          "name": "cross-task",
+          "stderr": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/cross-task.stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/cross-task.stdout.json",
+          "stdout_sha256": "787a8fdcd22c0ffd7069686d02fe36db96d5cbb255a8707bf78a1f0eecd89508"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.catalogue",
+            "compare",
+            "--catalogue",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/indexed",
+            "--left",
+            "fasting-repeat-one",
+            "--right",
+            "fasting-repeat-two"
+          ],
+          "exit_code": 1,
+          "expected_exit_code": 1,
+          "name": "unverified",
+          "stderr": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/unverified.stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/unverified.stdout.json",
+          "stdout_sha256": "0119c91bf8e37cdbd292ad2f3ba4de1ae7c8af62451839b50b422fad7f576145"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.catalogue",
+            "compare",
+            "--catalogue",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/verified",
+            "--left",
+            "three-load-study",
+            "--right",
+            "failed-study"
+          ],
+          "exit_code": 1,
+          "expected_exit_code": 1,
+          "name": "failed",
+          "stderr": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/failed.stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/failed.stdout.json",
+          "stdout_sha256": "cd38aabc860296091a0c55131e89e851939e2d8630577931636f6e918b221d84"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.catalogue",
+            "list",
+            "--catalogue",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/verified",
+            "--task",
+            "m4-study"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "name": "filter-task",
+          "stderr": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/filter-task.stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/filter-task.stdout.json",
+          "stdout_sha256": "5f1da2efbd5bd5cff678dbaefefe488cd0a16ab01e3384971be713abee69b48d"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.catalogue",
+            "list",
+            "--catalogue",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/verified",
+            "--protocol",
+            "M4-STUDY/2"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "name": "filter-protocol",
+          "stderr": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/filter-protocol.stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/filter-protocol.stdout.json",
+          "stdout_sha256": "5f1da2efbd5bd5cff678dbaefefe488cd0a16ab01e3384971be713abee69b48d"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.catalogue",
+            "list",
+            "--catalogue",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/verified",
+            "--model",
+            "bc008-equation-adapter-example/1"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "name": "filter-model",
+          "stderr": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/filter-model.stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/filter-model.stdout.json",
+          "stdout_sha256": "468a73e67ea6339ede77e731d67c610f458ddaeab261559983d757db045375b5"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.catalogue",
+            "list",
+            "--catalogue",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/verified",
+            "--status",
+            "failed"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "name": "filter-status",
+          "stderr": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/filter-status.stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/filter-status.stdout.json",
+          "stdout_sha256": "52b63e9d3aceb58d1aba1e711d9b2d1937adcb3e4bebc4b8481a04c0ec319db4"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.catalogue",
+            "list",
+            "--catalogue",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/verified",
+            "--tag",
+            "same-condition"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "name": "filter-tag",
+          "stderr": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/filter-tag.stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/filter-tag.stdout.json",
+          "stdout_sha256": "39080746347bf3de208bcf05c744e064082a204604542ef5f58343db153b29df"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.catalogue",
+            "index",
+            "--config",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/changed-request.json",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/changed-index"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "name": "changed-index",
+          "stderr": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/changed-index.stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/changed-index.stdout.json",
+          "stdout_sha256": "dafce535323a8e994dd7e5ad44e8de5eb1573d1dbfd4036d3ff9512a2120c2e7"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.catalogue",
+            "verify",
+            "--catalogue",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/changed-index",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/changed-verify"
+          ],
+          "exit_code": 1,
+          "expected_exit_code": 1,
+          "name": "changed-verify",
+          "stderr": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/changed-verify.stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/changed-verify.stdout.json",
+          "stdout_sha256": "5895e62d4e7b50ec02d4c9c49b6e75fdb8997e4c712927d2e8379f004d61b977"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.catalogue",
+            "index",
+            "--config",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/forged-request.json",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/rewritten-index"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "name": "rewritten-index",
+          "stderr": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/rewritten-index.stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/rewritten-index.stdout.json",
+          "stdout_sha256": "c64baf60ef841404c0a7b36748d35381c4794948e72230f2da61973092670485"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.catalogue",
+            "verify",
+            "--catalogue",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/rewritten-index",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/rewritten-verify"
+          ],
+          "exit_code": 1,
+          "expected_exit_code": 1,
+          "name": "rewritten-verify",
+          "stderr": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/rewritten-verify.stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/rewritten-verify.stdout.json",
+          "stdout_sha256": "c634441424ae82e99dcfd208b2042bb0f406afd6e39bfe41f2cc473b08ab5925"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.catalogue",
+            "index",
+            "--config",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/forged-forecast-request.json",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/forged-forecast-index"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "name": "forged-forecast-index",
+          "stderr": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/forged-forecast-index.stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/forged-forecast-index.stdout.json",
+          "stdout_sha256": "3c540affa12703e4297effa4bd1118602da399a722422ab889c90e66e68505f4"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.catalogue",
+            "compare",
+            "--catalogue",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/forged-catalogue",
+            "--left",
+            "tampered",
+            "--right",
+            "healthy"
+          ],
+          "exit_code": 1,
+          "expected_exit_code": 1,
+          "name": "forged-receipt",
+          "stderr": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/forged-receipt.stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout": "/private/tmp/opent1d-functional-lab-acceptance-20261003/catalogue-acceptance-v2/forged-receipt.stdout.json",
+          "stdout_sha256": "6789f5fe4aeab94b26dd3bc683bfdb389f6be16a7aa4787d938c032db9ee10cc"
+        }
+      ],
+      "comparisons": {
+        "cross-task": {
+          "eligible": false,
+          "left": "secretion-comparison",
+          "metrics": null,
+          "native_readers_revalidated": false,
+          "reasons": [
+            "different tasks"
+          ],
+          "right": "three-load-study",
+          "schema": "opent1d.local-catalogue/1",
+          "scope": "same_experiment_repeat_only"
+        },
+        "different-load": {
+          "eligible": false,
+          "left": "fasting-repeat-one",
+          "metrics": null,
+          "native_readers_revalidated": false,
+          "reasons": [
+            "different configuration_sha256",
+            "different conditions_sha256"
+          ],
+          "right": "midpoint",
+          "schema": "opent1d.local-catalogue/1",
+          "scope": "same_experiment_repeat_only"
+        },
+        "failed": {
+          "eligible": false,
+          "left": "three-load-study",
+          "metrics": null,
+          "native_readers_revalidated": false,
+          "reasons": [
+            "failed-study: experiment incomplete or failed",
+            "failed-study: saved repeat conditions incomplete",
+            "failed-study: saved runtime/native conditions unavailable: ValueError"
+          ],
+          "right": "failed-study",
+          "schema": "opent1d.local-catalogue/1",
+          "scope": "same_experiment_repeat_only"
+        },
+        "same-condition": {
+          "eligible": true,
+          "left": "fasting-repeat-one",
+          "metrics": null,
+          "native_readers_revalidated": true,
+          "reasons": [],
+          "right": "fasting-repeat-two",
+          "schema": "opent1d.local-catalogue/1",
+          "scope": "same_experiment_repeat_only"
+        },
+        "unverified": {
+          "eligible": false,
+          "left": "fasting-repeat-one",
+          "metrics": null,
+          "native_readers_revalidated": false,
+          "reasons": [
+            "fasting-repeat-one: reconstruction not verified",
+            "fasting-repeat-two: reconstruction not verified"
+          ],
+          "right": "fasting-repeat-two",
+          "schema": "opent1d.local-catalogue/1",
+          "scope": "same_experiment_repeat_only"
+        }
+      },
+      "entries": [
+        {
+          "id": "p1",
+          "inventory_sha256_after": "663cac1b5d363e09a7adb147e6d93a510f2960cf1ed6a13311e5ae59d441f542",
+          "inventory_sha256_before": "663cac1b5d363e09a7adb147e6d93a510f2960cf1ed6a13311e5ae59d441f542",
+          "metadata_status": "metadata_read",
+          "recorded_status": "completed",
+          "repeat_condition_coverage": {
+            "complete": true,
+            "reasons": []
+          },
+          "source_manifest": "/private/tmp/opent1d-ot029-acceptance-994ad0b/p1-controller/manifest.json",
+          "source_report": "/private/tmp/opent1d-ot029-acceptance-994ad0b/p1-controller/report/report.json",
+          "task": "p1-controller",
+          "verification": {
+            "complete": true,
+            "error": null,
+            "reader_exit_code": 0,
+            "source_archive_sha256": "b81b870cc68eeec7160ee570d375c8bc2102c7485440d3e8fa83cedee192e2b8",
+            "status": "verified_reconstruction"
+          }
+        },
+        {
+          "id": "forecast",
+          "inventory_sha256_after": "8956a8f39e8f6ce90e67349e71726df8366f5d31c2abf6ad023312b707d47426",
+          "inventory_sha256_before": "8956a8f39e8f6ce90e67349e71726df8366f5d31c2abf6ad023312b707d47426",
+          "metadata_status": "metadata_read",
+          "recorded_status": "complete",
+          "repeat_condition_coverage": {
+            "complete": true,
+            "reasons": []
+          },
+          "source_manifest": "/private/tmp/opent1d-ot029-acceptance-994ad0b/m3-forecast/manifest.json",
+          "source_report": "/private/tmp/opent1d-ot029-acceptance-994ad0b/m3-forecast/report.json",
+          "task": "m3-forecast",
+          "verification": {
+            "complete": true,
+            "error": null,
+            "reader_exit_code": 0,
+            "source_archive_sha256": "4613e28b86d814c9d23cf62d701b0c0e8e0f61aeed239a66279641f2a17f5ff2",
+            "status": "verified_reconstruction"
+          }
+        },
+        {
+          "id": "forecast-comparison",
+          "inventory_sha256_after": "8f4c84f84686b0a539ae62f1fad1da079aa0e62b61d67caef2504db8b5bfb8db",
+          "inventory_sha256_before": "8f4c84f84686b0a539ae62f1fad1da079aa0e62b61d67caef2504db8b5bfb8db",
+          "metadata_status": "metadata_read",
+          "recorded_status": "complete",
+          "repeat_condition_coverage": {
+            "complete": true,
+            "reasons": []
+          },
+          "source_manifest": "/private/tmp/opent1d-ot030-acceptance-final/comparison/manifest.json",
+          "source_report": "/private/tmp/opent1d-ot030-acceptance-final/comparison/report.json",
+          "task": "m3-compare",
+          "verification": {
+            "complete": true,
+            "error": null,
+            "reader_exit_code": 0,
+            "source_archive_sha256": "2aae1c2bdbe23e391d903c38afde155c596e3a351fa61c46e6421d497f551239",
+            "status": "verified_reconstruction"
+          }
+        },
+        {
+          "id": "secretion",
+          "inventory_sha256_after": "b5584a17cf9c46f2bf1d5653b069fbcd96f4ba6542d86257cb88c12b600eb56c",
+          "inventory_sha256_before": "b5584a17cf9c46f2bf1d5653b069fbcd96f4ba6542d86257cb88c12b600eb56c",
+          "metadata_status": "metadata_read",
+          "recorded_status": "complete",
+          "repeat_condition_coverage": {
+            "complete": false,
+            "reasons": [
+              "legacy secretion archive does not record execution platform"
+            ]
+          },
+          "source_manifest": "/private/tmp/opent1d-ot029-acceptance-994ad0b/m4-secretion/manifest.json",
+          "source_report": "/private/tmp/opent1d-ot029-acceptance-994ad0b/m4-secretion/report.json",
+          "task": "m4-secretion",
+          "verification": {
+            "complete": true,
+            "error": null,
+            "reader_exit_code": 0,
+            "source_archive_sha256": "874dab9c32d69c7583679ee08c4a7e464c830d9885262039c669276d20538e2f",
+            "status": "verified_reconstruction"
+          }
+        },
+        {
+          "id": "secretion-comparison",
+          "inventory_sha256_after": "64ffeaf20115d40a53bfde4225ad8377a0173eb929d1aa14d4872b2f4df31c00",
+          "inventory_sha256_before": "64ffeaf20115d40a53bfde4225ad8377a0173eb929d1aa14d4872b2f4df31c00",
+          "metadata_status": "metadata_read",
+          "recorded_status": "complete",
+          "repeat_condition_coverage": {
+            "complete": true,
+            "reasons": []
+          },
+          "source_manifest": "WORKTREES/m4-source-comparison/OpenT1D/results/m4-comparison/ot031-primary/manifest.json",
+          "source_report": "WORKTREES/m4-source-comparison/OpenT1D/results/m4-comparison/ot031-primary/report.json",
+          "task": "m4-compare",
+          "verification": {
+            "complete": true,
+            "error": null,
+            "reader_exit_code": 0,
+            "source_archive_sha256": "e421083aa470b139ce36300b9ab563a7881495261754e027e75da08ac9dbe6a0",
+            "status": "verified_reconstruction"
+          }
+        },
+        {
+          "id": "prognosis",
+          "inventory_sha256_after": "ae28e9894e3929c0fb850d85165e23f873fb45a2e3fc4f47168b22b1cc3798c5",
+          "inventory_sha256_before": "ae28e9894e3929c0fb850d85165e23f873fb45a2e3fc4f47168b22b1cc3798c5",
+          "metadata_status": "metadata_read",
+          "recorded_status": "complete",
+          "repeat_condition_coverage": {
+            "complete": false,
+            "reasons": [
+              "legacy prognostic archive does not record execution platform"
+            ]
+          },
+          "source_manifest": "/private/tmp/opent1d-ot029-acceptance-994ad0b/m5-prognosis/manifest.json",
+          "source_report": "/private/tmp/opent1d-ot029-acceptance-994ad0b/m5-prognosis/report.json",
+          "task": "m5-prognosis",
+          "verification": {
+            "complete": true,
+            "error": null,
+            "reader_exit_code": 0,
+            "source_archive_sha256": "820b24778c100b7e082a754f2d444ba77d75b5184f5797e1d086d9e3c3de8f48",
+            "status": "verified_reconstruction"
+          }
+        },
+        {
+          "id": "three-load-study",
+          "inventory_sha256_after": "6648118565e63f37b608ae4bd5556c1d32c314b978ef82f33ef74255a75e8e0e",
+          "inventory_sha256_before": "6648118565e63f37b608ae4bd5556c1d32c314b978ef82f33ef74255a75e8e0e",
+          "metadata_status": "metadata_read",
+          "recorded_status": "complete",
+          "repeat_condition_coverage": {
+            "complete": true,
+            "reasons": []
+          },
+          "source_manifest": "/private/tmp/opent1d-functional-lab-acceptance-20261003/primary-v2/manifest.json",
+          "source_report": "/private/tmp/opent1d-functional-lab-acceptance-20261003/primary-v2/report.json",
+          "task": "m4-study",
+          "verification": {
+            "complete": true,
+            "error": null,
+            "reader_exit_code": 0,
+            "source_archive_sha256": "2323d7d3c7ec4c0ba3349b3f37c65b36619cd71b763946523fc66a30c271e28c",
+            "status": "verified_reconstruction"
+          }
+        },
+        {
+          "id": "failed-study",
+          "inventory_sha256_after": "ed3eb53f484636e286c00d873c8414f37206693d4af0fdcdb3590a6f6e0a2b82",
+          "inventory_sha256_before": "ed3eb53f484636e286c00d873c8414f37206693d4af0fdcdb3590a6f6e0a2b82",
+          "metadata_status": "metadata_read",
+          "recorded_status": "failed",
+          "repeat_condition_coverage": {
+            "complete": false,
+            "reasons": [
+              "saved runtime/native conditions unavailable: ValueError"
+            ]
+          },
+          "source_manifest": "/private/tmp/opent1d-functional-lab-acceptance-20261003/nonfinite-run-v2/manifest.json",
+          "source_report": "/private/tmp/opent1d-functional-lab-acceptance-20261003/nonfinite-run-v2/report.json",
+          "task": "m4-study",
+          "verification": {
+            "complete": false,
+            "error": null,
+            "reader_exit_code": 0,
+            "source_archive_sha256": "23e46eb40678d25ab852a2f6090f04f29a05456f8c4f765369796f55cfe0c2a4",
+            "status": "verified_reconstruction"
+          }
+        },
+        {
+          "id": "fasting-repeat-one",
+          "inventory_sha256_after": "b381005a100e376ee0b215e7e5fbe801c3aeb5bae31d8440d74a0e196d01c12b",
+          "inventory_sha256_before": "b381005a100e376ee0b215e7e5fbe801c3aeb5bae31d8440d74a0e196d01c12b",
+          "metadata_status": "metadata_read",
+          "recorded_status": "complete",
+          "repeat_condition_coverage": {
+            "complete": true,
+            "reasons": []
+          },
+          "source_manifest": "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2/sessions/session-0001/attempts/fasting--r001/archive/manifest.json",
+          "source_report": "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2/sessions/session-0001/attempts/fasting--r001/archive/report.json",
+          "task": "m4-study",
+          "verification": {
+            "complete": true,
+            "error": null,
+            "reader_exit_code": 0,
+            "source_archive_sha256": "a328c3b27e2ed5333e689a0d1f79dcfe06e59206f428f77b974a86ff502d16cd",
+            "status": "verified_reconstruction"
+          }
+        },
+        {
+          "id": "fasting-repeat-two",
+          "inventory_sha256_after": "bb16ef856d57344462c5eed34cdd245a99e1110261f510b72d0c31c15032aaf2",
+          "inventory_sha256_before": "bb16ef856d57344462c5eed34cdd245a99e1110261f510b72d0c31c15032aaf2",
+          "metadata_status": "metadata_read",
+          "recorded_status": "complete",
+          "repeat_condition_coverage": {
+            "complete": true,
+            "reasons": []
+          },
+          "source_manifest": "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2/sessions/session-0002/attempts/fasting--r002/archive/manifest.json",
+          "source_report": "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2/sessions/session-0002/attempts/fasting--r002/archive/report.json",
+          "task": "m4-study",
+          "verification": {
+            "complete": true,
+            "error": null,
+            "reader_exit_code": 0,
+            "source_archive_sha256": "a860aa069ef1098ed60b6c9e5e7683f00b4079f6de3053fc31a982ae9138f1dd",
+            "status": "verified_reconstruction"
+          }
+        },
+        {
+          "id": "midpoint",
+          "inventory_sha256_after": "ca365f843a95a66a05a156508b42ef44b23329e92329eca57293785a6490e7da",
+          "inventory_sha256_before": "ca365f843a95a66a05a156508b42ef44b23329e92329eca57293785a6490e7da",
+          "metadata_status": "metadata_read",
+          "recorded_status": "complete",
+          "repeat_condition_coverage": {
+            "complete": true,
+            "reasons": []
+          },
+          "source_manifest": "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2/sessions/session-0002/attempts/midpoint--r001/archive/manifest.json",
+          "source_report": "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-v2/sessions/session-0002/attempts/midpoint--r001/archive/report.json",
+          "task": "m4-study",
+          "verification": {
+            "complete": true,
+            "error": null,
+            "reader_exit_code": 0,
+            "source_archive_sha256": "9ba94e661429d87a6265e5948a2391a33deda698a3878487d678077b94af8aac",
+            "status": "verified_reconstruction"
+          }
+        }
+      ],
+      "filters": {
+        "model": {
+          "ids": [
+            "secretion",
+            "secretion-comparison",
+            "three-load-study",
+            "failed-study",
+            "fasting-repeat-one",
+            "fasting-repeat-two",
+            "midpoint"
+          ],
+          "value": "bc008-equation-adapter-example/1"
+        },
+        "protocol": {
+          "ids": [
+            "three-load-study",
+            "failed-study",
+            "fasting-repeat-one",
+            "fasting-repeat-two",
+            "midpoint"
+          ],
+          "value": "M4-STUDY/2"
+        },
+        "status": {
+          "ids": [
+            "failed-study"
+          ],
+          "value": "failed"
+        },
+        "tag": {
+          "ids": [
+            "fasting-repeat-one",
+            "fasting-repeat-two"
+          ],
+          "value": "same-condition"
+        },
+        "task": {
+          "ids": [
+            "three-load-study",
+            "failed-study",
+            "fasting-repeat-one",
+            "fasting-repeat-two",
+            "midpoint"
+          ],
+          "value": "m4-study"
+        }
+      },
+      "git_head_end": "a25ecf62a1b24ab7de5e1185c5c36d2dab8f5f6c",
+      "git_head_start": "a25ecf62a1b24ab7de5e1185c5c36d2dab8f5f6c",
+      "schema": "opent1d.ot034-local-acceptance/1",
+      "supported_tasks": [
+        "m3-compare",
+        "m3-forecast",
+        "m4-compare",
+        "m4-secretion",
+        "m4-study",
+        "m5-prognosis",
+        "p1-controller"
+      ],
+      "tamper": {
+        "changed_after_index": {
+          "complete": false,
+          "error": "ValueError: Source archive changed since indexing",
+          "reader_exit_code": null,
+          "source_archive_sha256": "820b24778c100b7e082a754f2d444ba77d75b5184f5797e1d086d9e3c3de8f48",
+          "status": "failed"
+        },
+        "forged_verification_receipt": {
+          "eligible": false,
+          "left": "tampered",
+          "metrics": null,
+          "native_readers_revalidated": false,
+          "reasons": [
+            "tampered: current native reconstruction failed or incomplete"
+          ],
+          "right": "healthy",
+          "schema": "opent1d.local-catalogue/1",
+          "scope": "same_experiment_repeat_only"
+        },
+        "rewritten_hashes_native_rejected": {
+          "complete": false,
+          "error": "ValueError: Authoritative reconstruction failed",
+          "reader_exit_code": 1,
+          "source_archive_sha256": "2dd802b4a55d5ea7b7d5845897ddb1e2271b534e4813ca11453033309e3d7fea",
+          "status": "failed"
+        }
+      }
+    },
+    "sha256": "b97809f72d21bd370416fca20546bb93c0733660ec9847714c642fc6a36e2a45"
+  },
+  "date": "2026-10-03",
+  "development_campaign": {
+    "controlled_stop": {
+      "path": "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-development-stop.json",
+      "record": {
+        "reason": "Parent requested stop before native implementation identity correction; no resume against amended implementation",
+        "recipient": "campaign_coordinator_only",
+        "recipient_pid": 55752,
+        "schema": "opent1d.ot033-development-stop/1",
+        "signal": 15,
+        "source_revision": "64adc1692e51aa9b34c92a0eea5595bcd9c80c29",
+        "utc": "2026-10-03T20:23:52.887179+00:00"
+      },
+      "sha256": "0729ecc0448f6575c1cb0001c42f0e38dc6fc5d93a255f5c2726baf08b41a973"
+    },
+    "receipt": {
+      "path": "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign-acceptance-receipt.json",
+      "record": {
+        "commands": [
+          {
+            "argv": [
+              "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+              "-B",
+              "-E",
+              "-s",
+              "-S",
+              "-m",
+              "experiments.campaigns",
+              "check",
+              "--config",
+              "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign.json"
+            ],
+            "duration_seconds": 0.2999395840015495,
+            "exit_code": 0,
+            "log_sha256": "28b4005b5433cb02ce9a50932a443693e43fbe4940c99b880547ca0e075cefb3",
+            "name": "campaign-check"
+          },
+          {
+            "argv": [
+              "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+              "-B",
+              "-E",
+              "-s",
+              "-S",
+              "-m",
+              "experiments.campaigns",
+              "run",
+              "--config",
+              "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign.json",
+              "--output",
+              "/private/tmp/opent1d-functional-lab-acceptance-20261003/campaign"
+            ],
+            "duration_seconds": 76.15372679100255,
+            "exit_code": 1,
+            "log_sha256": "4a990e9960bebebf924ddd4f4462986b4a4c9abd6a1e3ba94c8c5b25f1f8573c",
+            "name": "campaign-interrupted-run"
+          }
+        ],
+        "config_sha256": "725d47f315285b2baa153c95766cb9a92c70353d3b041029df1078730034e221",
+        "coordinator_pid": 55752,
+        "error": "",
+        "error_type": "AssertionError",
+        "findings": {},
+        "finished_utc": "2026-10-03T20:23:53.933654+00:00",
+        "git_dirty": false,
+        "git_head": "64adc1692e51aa9b34c92a0eea5595bcd9c80c29",
+        "passed": false,
+        "schema": "opent1d.ot033-native-acceptance/1",
+        "started_utc": "2026-10-03T20:22:37.448533+00:00"
+      },
+      "sha256": "a4b4ebf7249af8b204eb3e1eeb25bec600ae7dcf1fce7cdd9747eda4ce53eda9"
+    },
+    "scope": "Early controlled stop before the planned first-accepted/second-active event; retained interrupted development campaign, never resumed after the source change."
+  },
+  "development_record": {
+    "path": "/private/tmp/opent1d-functional-lab-acceptance-20261003/development-record.json",
+    "record": {
+      "candidate": "64adc1692e51aa9b34c92a0eea5595bcd9c80c29",
+      "failed_native_runs": {
+        "nonfinite-run": {
+          "denominators": {
+            "accepted_pairs": 0,
+            "accepted_source_scenarios": 0,
+            "accepted_sources": 0,
+            "pairs": 3,
+            "source_scenarios": 9,
+            "sources": 3
+          },
+          "failure": "Full native identity comparison rejected differing installed patient_file/parameter_file paths from the reused old worktree reference.",
+          "manifest_sha256": "bfee00c3d02cc71f3b8933737584b83d451117de8c5cecf6060701839320fa9c",
+          "passed": false,
+          "reference_execution": {
+            "attempts": [
+              {
+                "argv": [
+                  "WORKTREES/functional-lab-plan/OpenT1D/experiments/m0/simglucose/.venv/bin/python",
+                  "-B",
+                  "-E",
+                  "-s",
+                  "-m",
+                  "experiments.m4.initial_load.worker",
+                  "/private/tmp/opent1d-functional-lab-acceptance-20261003/nonfinite-run",
+                  "--kind",
+                  "reference",
+                  "--label",
+                  "primary"
+                ],
+                "error_type": "WorkerExit",
+                "exit_code": 1,
+                "stage": "reference_primary",
+                "status": "failed",
+                "timeout_seconds": 600
+              }
+            ],
+            "error_type": "WorkerExit",
+            "stage": "reference_primary",
+            "status": "failed"
+          },
+          "report_sha256": "751ca99c185a5c97e4dfc874b8570bb947325556b01db04ac2c0987822ad683f",
+          "source_callbacks_attempted": false,
+          "status": "failed"
+        },
+        "primary": {
+          "denominators": {
+            "accepted_pairs": 0,
+            "accepted_source_scenarios": 0,
+            "accepted_sources": 0,
+            "pairs": 1,
+            "source_scenarios": 6,
+            "sources": 2
+          },
+          "failure": "Full native identity comparison rejected differing installed patient_file/parameter_file paths from the reused old worktree reference.",
+          "manifest_sha256": "e9ad91963a2ed3fa170719f44ee95a292a91433c7a6796eddf37105d4e8535f6",
+          "passed": false,
+          "reference_execution": {
+            "attempts": [
+              {
+                "argv": [
+                  "WORKTREES/functional-lab-plan/OpenT1D/experiments/m0/simglucose/.venv/bin/python",
+                  "-B",
+                  "-E",
+                  "-s",
+                  "-m",
+                  "experiments.m4.initial_load.worker",
+                  "/private/tmp/opent1d-functional-lab-acceptance-20261003/primary",
+                  "--kind",
+                  "reference",
+                  "--label",
+                  "primary"
+                ],
+                "error_type": "WorkerExit",
+                "exit_code": 1,
+                "stage": "reference_primary",
+                "status": "failed",
+                "timeout_seconds": 600
+              }
+            ],
+            "error_type": "WorkerExit",
+            "stage": "reference_primary",
+            "status": "failed"
+          },
+          "report_sha256": "7bb8fde2890feab82ccf0b65b9e48261ca311aa6beee916dd4a55b1696597ab7",
+          "source_callbacks_attempted": false,
+          "status": "failed"
+        }
+      },
+      "improved_candidate": "160c4e0bf34042ec66a30630878fc09d311a50a0",
+      "native_numerical_tests": {
+        "count": 3,
+        "log_sha256": "dd88968d5384af6d243546a3343bd57412849c07c4a3b8ae54e27a7b1d8091ab",
+        "passed": true
+      },
+      "repository_checks": {
+        "duration_seconds": 106.161,
+        "log_sha256": "09a29f79e57ab3c336602c88286386ba1f9a681294e2d0398fbe8385e43c39e3",
+        "passed": true,
+        "root_tests": 960
+      },
+      "resolution": "Preserve both native installation locations as provenance; compare every scientific identity field, complete parameters and runtime exactly. Two relocation regression tests added. Original protocols/equations/locks unchanged.",
+      "schema": "opent1d.functional-development-record/1"
+    },
+    "sha256": "c6ab357702868b0be635e04c8c0883a8c93c0183bb7a2a0673db8148b55d2990"
+  },
+  "final_implementation_revision": "a25ecf62a1b24ab7de5e1185c5c36d2dab8f5f6c",
+  "integration_branch": "codex/functional-lab-plan",
+  "limitations": [
+    "Internal macOS arm64 verification only",
+    "Hosted CI and server-side protection unverified",
+    "Independent researcher use unverified",
+    "Known synthetic material is not blind evaluation",
+    "No human-data or biological/treatment acceptance",
+    "No GUI or new model type, main merge, push or public release"
+  ],
+  "main_merge_or_push_performed": false,
+  "repository_checks": {
+    "commands": [
+      {
+        "argv": [
+          "uv",
+          "sync",
+          "--locked"
+        ],
+        "exit_code": 0,
+        "log": "/private/tmp/opent1d-functional-lab-acceptance-20261003/final-sync.log",
+        "log_sha256": "79a0a06258cb5e1d984b8be47b0d47fa0be9ab9a0f883834e2501fc9de0465eb"
+      },
+      {
+        "argv": [
+          "uv",
+          "run",
+          "--locked",
+          "python",
+          "scripts/check.py"
+        ],
+        "exit_code": 0,
+        "log": "/private/tmp/opent1d-functional-lab-acceptance-20261003/final-repository-check.log",
+        "log_sha256": "479ecb9d6eaed4cf5979f9409ccc99e53760d662a36dcec4afa29bb1ad2199c7"
+      }
+    ],
+    "root_test_duration_seconds": 105.72,
+    "root_tests": 964,
+    "ruff_lint_format_markdown_yaml_citation_navigation": "passed",
+    "scope": "Final source and public documentation checked before adding these actual result metadata to the receipt; no implementation/scientific files changed afterward.",
+    "status": "passed",
+    "strict_documentation_build": "passed"
+  },
+  "schema": "opent1d.ot032-ot037-verification/1",
+  "scientific_verification": {
+    "path": "/private/tmp/opent1d-functional-lab-acceptance-20261003/scientific-verification-summary.json",
+    "record": {
+      "actual_deadline_cleanup": {
+        "blocking_source": {
+          "attempts": [
+            {
+              "argv": [
+                "WORKTREES/functional-lab-plan/OpenT1D/experiments/m0/simglucose/.venv/bin/python",
+                "-B",
+                "-E",
+                "-s",
+                "-m",
+                "experiments.m4.initial_load.worker",
+                "/private/tmp/opent1d-functional-lab-acceptance-20261003/blocking-run-v2",
+                "--kind",
+                "source",
+                "--label",
+                "primary",
+                "--source",
+                "blocking"
+              ],
+              "error_type": "WorkerDeadline",
+              "exit_code": -9,
+              "stage": "source_primary",
+              "status": "failed",
+              "timeout_seconds": 14.40559716700227
+            }
+          ],
+          "duration_seconds": 25.08789183299814,
+          "error_type": "WorkerDeadline",
+          "stage": "source_primary",
+          "status": "failed"
+        },
+        "contract": {
+          "cleanup_grace_seconds": 10,
+          "observed_total_seconds": 25.08789183299814,
+          "whole_source_seconds": 15
+        },
+        "denominators": {
+          "accepted_pairs": 0,
+          "accepted_source_scenarios": 0,
+          "accepted_sources": 0,
+          "pairs": 3,
+          "source_scenarios": 3,
+          "sources": 3
+        },
+        "manifest_sha256": "c7c89c368e349c9c66afbfb59d4be68922c8547c308c37268442ed819a37c86d",
+        "passed": true,
+        "report_passed": false,
+        "report_sha256": "81f89636c48d6ef6340b66b0856afb3b612d4a6d845bdc780233372d6ed2b4b8",
+        "schema": "opent1d.functional-deadline-review/1",
+        "scope": "Callback recorded its actual PID and ignored SIGTERM; native owner enforced the whole-source deadline and reaped it after bounded SIGKILL fallback. The other sources also have deliberately insufficient 15-second budgets; their failures remain visible.",
+        "state_status": "failed",
+        "worker_exists": false,
+        "worker_group_exists": false,
+        "worker_pid": 72501
+      },
+      "archives": {
+        "blocking-run-v2": {
+          "artifacts": {
+            "figure.svg": {
+              "reconstruction_byte_equal": true,
+              "sha256": "05dcf8c39bb0dd6dfc571dc49d1e6c618c0401849ee46cf287c658d98b442ee7"
+            },
+            "report.json": {
+              "reconstruction_byte_equal": true,
+              "sha256": "81f89636c48d6ef6340b66b0856afb3b612d4a6d845bdc780233372d6ed2b4b8"
+            },
+            "report.md": {
+              "reconstruction_byte_equal": true,
+              "sha256": "edbff5ab02d162212d7bd99135ed353b91a54326156db8c510cc4f1fd82152eb"
+            }
+          },
+          "denominators": {
+            "accepted_pairs": 0,
+            "accepted_source_scenarios": 0,
+            "accepted_sources": 0,
+            "pairs": 3,
+            "source_scenarios": 3,
+            "sources": 3
+          },
+          "manifest_sha256": "c7c89c368e349c9c66afbfb59d4be68922c8547c308c37268442ed819a37c86d",
+          "passed": false,
+          "path": "/private/tmp/opent1d-functional-lab-acceptance-20261003/blocking-run-v2",
+          "reference_accepted": true,
+          "source_outcomes": {
+            "blocking": {
+              "duration_seconds": 25.08789183299814,
+              "error_type": "WorkerDeadline",
+              "status": "failed"
+            },
+            "dalla_man": {
+              "duration_seconds": 15.106213999999454,
+              "error_type": "WorkerDeadline",
+              "status": "failed"
+            },
+            "ultradian": {
+              "duration_seconds": 15.069431791998795,
+              "error_type": "WorkerDeadline",
+              "status": "failed"
+            }
+          },
+          "status": "failed"
+        },
+        "nonfinite-run-v2": {
+          "artifacts": {
+            "figure.svg": {
+              "reconstruction_byte_equal": true,
+              "sha256": "281a97cd29a075866912303026c9f5443a51ffbba70179bd33a51690f8d0bf3d"
+            },
+            "report.json": {
+              "reconstruction_byte_equal": true,
+              "sha256": "84f4ae9c4cf88c625d9f8d38323b9f0e1ec61e747d619f07ca90867fd5415477"
+            },
+            "report.md": {
+              "reconstruction_byte_equal": true,
+              "sha256": "909c46e04278560a0134e63d3798829fef044a60ae65f1a072e219d016f41d06"
+            }
+          },
+          "denominators": {
+            "accepted_pairs": 1,
+            "accepted_source_scenarios": 6,
+            "accepted_sources": 2,
+            "pairs": 3,
+            "source_scenarios": 9,
+            "sources": 3
+          },
+          "manifest_sha256": "c65e3393b578325576356286092f0ef4e0cebbe7a253e29c67cf4991e4e121e0",
+          "passed": false,
+          "path": "/private/tmp/opent1d-functional-lab-acceptance-20261003/nonfinite-run-v2",
+          "reference_accepted": true,
+          "source_outcomes": {
+            "dalla_man": {
+              "duration_seconds": 131.80908020801144,
+              "error_type": null,
+              "status": "completed"
+            },
+            "nonfinite": {
+              "duration_seconds": 3.056724915993982,
+              "error_type": "WorkerExit",
+              "status": "failed"
+            },
+            "ultradian": {
+              "duration_seconds": 114.92553824999777,
+              "error_type": null,
+              "status": "completed"
+            }
+          },
+          "status": "failed"
+        },
+        "primary-v2": {
+          "artifacts": {
+            "figure.svg": {
+              "reconstruction_byte_equal": true,
+              "sha256": "1ec808c8a1a041bc2aab52caa4200811d462d7f33f8664265526b6400303556c"
+            },
+            "report.json": {
+              "reconstruction_byte_equal": true,
+              "sha256": "b192b45fab5edbdd4d0b8a1a72e65cb6a90817df2f66f3fe86ca0c28726faf02"
+            },
+            "report.md": {
+              "reconstruction_byte_equal": true,
+              "sha256": "b3ef184c2798c284405a7da1b986a2aec67f8e0184d3c2fab1a678292fc54139"
+            }
+          },
+          "denominators": {
+            "accepted_pairs": 1,
+            "accepted_source_scenarios": 6,
+            "accepted_sources": 2,
+            "pairs": 1,
+            "source_scenarios": 6,
+            "sources": 2
+          },
+          "manifest_sha256": "9431850fa12966a25a3e9c19b388a528cf583045472abfdc902d6aaaeeb70da7",
+          "passed": true,
+          "path": "/private/tmp/opent1d-functional-lab-acceptance-20261003/primary-v2",
+          "reference_accepted": true,
+          "source_outcomes": {
+            "dalla_man": {
+              "duration_seconds": 132.49371337500634,
+              "error_type": null,
+              "status": "completed"
+            },
+            "ultradian": {
+              "duration_seconds": 116.19848516699858,
+              "error_type": null,
+              "status": "completed"
+            }
+          },
+          "status": "completed"
+        }
+      },
+      "baseline_revision": "d9991c115e795c2977177349805619df15981598",
+      "commands": [
+        {
+          "argv": [
+            ".venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.workflows",
+            "run",
+            "m4-study",
+            "--config",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/all-loads.json",
+            "--reference",
+            "WORKTREES/m4-source-comparison/OpenT1D/results/m4-comparison/ot031-primary/reference",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/primary-v2"
+          ],
+          "exit_code": 0,
+          "log": "primary-v2-entry.log",
+          "log_sha256": "77386b2cd59afe960e17627923d311eaf2cf968dd50d9a60813eb6b0ee1c7aa1"
+        },
+        {
+          "argv": [
+            ".venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.workflows",
+            "run",
+            "m4-study",
+            "--config",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/nonfinite.json",
+            "--reference",
+            "WORKTREES/m4-source-comparison/OpenT1D/results/m4-comparison/ot031-primary/reference",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/nonfinite-run-v2"
+          ],
+          "exit_code": 1,
+          "log": "nonfinite-v2-entry.log",
+          "log_sha256": "816a21767664d76e9a5b16c6a3b3c51e3d7ea3e132559dd2b440b294a375ca7b"
+        },
+        {
+          "argv": [
+            ".venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.workflows",
+            "run",
+            "m4-study",
+            "--config",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/blocking.json",
+            "--reference",
+            "WORKTREES/m4-source-comparison/OpenT1D/results/m4-comparison/ot031-primary/reference",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/blocking-run-v2"
+          ],
+          "exit_code": 1,
+          "log": "blocking-v2-entry.log",
+          "log_sha256": "b354989a3efc408b847b54faff08b8afccd4b1e6f44fc4320bb9d723c668af17"
+        },
+        {
+          "argv": [
+            ".venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.workflows",
+            "reconstruct",
+            "m4-study",
+            "--archive",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/primary-v2",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/primary-v2-reconstructed"
+          ],
+          "byte_equal": {
+            "figure.svg": true,
+            "report.json": true,
+            "report.md": true
+          },
+          "exit_code": 0,
+          "log": "primary-v2-reconstruct.log",
+          "log_sha256": "5ae8ef3c5ce8d659879bf18543ba33aed83c79032e1cd262a11bba36172a5464"
+        },
+        {
+          "argv": [
+            ".venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.workflows",
+            "reconstruct",
+            "m4-study",
+            "--archive",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/nonfinite-run-v2",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/nonfinite-v2-reconstructed",
+            "--allow-failed"
+          ],
+          "byte_equal": {
+            "figure.svg": true,
+            "report.json": true,
+            "report.md": true
+          },
+          "exit_code": 0,
+          "log": "nonfinite-v2-reconstruct.log",
+          "log_sha256": "cb330104bce5681f3e9760579c19c8029fed64ce7e6eba47206b34abeb7bff79"
+        },
+        {
+          "argv": [
+            ".venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.workflows",
+            "reconstruct",
+            "m4-study",
+            "--archive",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/blocking-run-v2",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/blocking-v2-reconstructed",
+            "--allow-failed"
+          ],
+          "byte_equal": {
+            "figure.svg": true,
+            "report.json": true,
+            "report.md": true
+          },
+          "exit_code": 0,
+          "log": "blocking-v2-reconstruct.log",
+          "log_sha256": "9a6c9470d5b069e3d3a0b7f1101553bc2937431c63751cdb6b23b97cbf1d22d3"
+        }
+      ],
+      "date": "2026-10-03",
+      "git_dirty_at_primary_freeze": false,
+      "historical_parity": {
+        "byte_equal_case_count": 0,
+        "counts": {
+          "child_causal": 32,
+          "child_observer": 24,
+          "common_reference": 24,
+          "native_class": 4,
+          "native_padded": 4
+        },
+        "maximum_absolute_numeric_difference": 0.0,
+        "numeric_case_count": 88,
+        "numeric_representation_difference_count": 8,
+        "numeric_values_compared": 3118394,
+        "passed": true,
+        "payload_equal_case_count": 88
+      },
+      "historical_parity_command": {
+        "argv": [
+          ".venv/bin/python",
+          "-B",
+          "-S",
+          "/private/tmp/opent1d-ot032-historical-parity.py",
+          "--old",
+          "WORKTREES/m4-source-comparison/OpenT1D/results/m4-comparison/ot031-primary",
+          "--new",
+          "/private/tmp/opent1d-functional-lab-acceptance-20261003/primary-v2",
+          "--output",
+          "/private/tmp/opent1d-functional-lab-acceptance-20261003/ot032-historical-numeric-parity.json"
+        ],
+        "cwd": "WORKTREES/functional-lab-plan/OpenT1D",
+        "exit_code": 0,
+        "script_sha256": "2acedd0dfe683d95256bfee711683f50639ce70ab2e3e7f2558d68d75c1fd8f7"
+      },
+      "historical_parity_representation_scope": "New JSON sorting changes raw bytes; observer schema differs. Eight common-reference gain values encode old1.0 versus new1 with exact finite numeric equality. Booleans remain distinct. Coarse is excluded.",
+      "independent_primary_review": {
+        "common_control_cases_verified": 6,
+        "native_identity_records_verified": 6,
+        "numerical_and_observer_checks_verified": 86,
+        "pair_metrics_independently_recomputed": 9
+      },
+      "limits": [
+        "Synthetic adult#001, fixed basal engineering replacement and SC input; initial loads only, no timed meals or physiological personalization.",
+        "Ultradian source is the existing isolated response component, not the complete engine.",
+        "Numerical conservation/refinement/repeat/parity and archive reconstruction are internal software evidence, not independent biological or human validation.",
+        "No empirical calibration, treatment mechanism, dosing recommendation, ranking or source winner.",
+        "Outer start/end timestamps were not separately recorded; sealed native source durations are retained.",
+        "General catalogue/campaign/setup acceptance is separate from this scientific section."
+      ],
+      "numerical_maxima_and_criteria": {
+        "basal_control_glucose_error_mg_dl": {
+          "criterion_limit": 0.01,
+          "maximum": 2.878974326179186e-11,
+          "owner_of_maximum": "reference"
+        },
+        "basal_control_insulin_error_pmol_l": {
+          "criterion_limit": 0.01,
+          "maximum": 6.643625049554537e-11,
+          "owner_of_maximum": "reference"
+        },
+        "basal_derivative_change_max_native_units_per_min": {
+          "criterion_limit": 1e-08,
+          "maximum": 1.2049250486256824e-12,
+          "owner_of_maximum": "reference"
+        },
+        "coarsening_error_ratio": {
+          "criterion_limit": 0.6,
+          "maximum": 0.1994057503325491,
+          "owner_of_maximum": "dalla_man observer"
+        },
+        "common_control_max_numeric_difference": {
+          "criterion_limit": 0.0,
+          "maximum": 0.0,
+          "owner_of_maximum": "reference"
+        },
+        "equilibrium_drift_pmol_l": {
+          "criterion_limit": 1e-07,
+          "maximum": 2.1934738470008597e-09,
+          "owner_of_maximum": "dalla_man observer"
+        },
+        "fasting_glucose_drift_mg_dl": {
+          "criterion_limit": 0.01,
+          "maximum": 1.7980233472158259e-10,
+          "owner_of_maximum": "reference"
+        },
+        "fasting_insulin_drift_pmol_l": {
+          "criterion_limit": 0.01,
+          "maximum": 4.0097924939945913e-10,
+          "owner_of_maximum": "reference"
+        },
+        "fine_replay_glucose_error_mg_dl": {
+          "criterion_limit": 0.01,
+          "maximum": 1.655987872587425e-06,
+          "owner_of_maximum": "reference"
+        },
+        "fine_replay_insulin_error_pmol_l": {
+          "criterion_limit": 0.01,
+          "maximum": 0.0001405082895834515,
+          "owner_of_maximum": "reference"
+        },
+        "finest_coarsening_error_pmol_l": {
+          "criterion_limit": 0.05,
+          "maximum": 0.02985165604994222,
+          "owner_of_maximum": "dalla_man observer"
+        },
+        "glucose_mass_error_mg_kg": {
+          "criterion_limit": 1e-05,
+          "maximum": 1.6677215767145524e-07,
+          "owner_of_maximum": "reference"
+        },
+        "glucose_solver_error_mg_dl": {
+          "criterion_limit": 0.01,
+          "maximum": 1.0918897161160474e-06,
+          "owner_of_maximum": "reference"
+        },
+        "historical_anchor_max_numeric_difference": {
+          "criterion_limit": 0.0,
+          "maximum": 0.0,
+          "owner_of_maximum": "reference"
+        },
+        "input_error_pmol_kg": {
+          "criterion_limit": 1e-07,
+          "maximum": 5.6843418860808015e-12,
+          "owner_of_maximum": "ultradian observer"
+        },
+        "insulin_mass_error_pmol_kg": {
+          "criterion_limit": 1e-06,
+          "maximum": 2.2382096176443156e-11,
+          "owner_of_maximum": "reference"
+        },
+        "insulin_solver_error_pmol_l": {
+          "criterion_limit": 0.01,
+          "maximum": 3.513786232154104e-05,
+          "owner_of_maximum": "reference"
+        },
+        "mass_error_pmol_kg": {
+          "criterion_limit": 1e-07,
+          "maximum": 5.9543481256696396e-12,
+          "owner_of_maximum": "dalla_man observer"
+        },
+        "native_class_glucose_error_mg_dl": {
+          "criterion_limit": 0.05,
+          "maximum": 7.549537343554449e-08,
+          "owner_of_maximum": "reference"
+        },
+        "native_class_insulin_error_pmol_l": {
+          "criterion_limit": 0.01,
+          "maximum": 5.3543703223826435e-12,
+          "owner_of_maximum": "reference"
+        },
+        "negative_amount_tolerance": {
+          "criterion_limit": 1e-08,
+          "maximum": 0.0,
+          "owner_of_maximum": "reference"
+        },
+        "negative_tolerance_pmol_kg": {
+          "criterion_limit": 1e-09,
+          "maximum": 0.0,
+          "owner_of_maximum": "dalla_man observer"
+        },
+        "oracle_concentration_error_pmol_l": {
+          "criterion_limit": 1e-05,
+          "maximum": 2.5867009975877235e-10,
+          "owner_of_maximum": "dalla_man observer"
+        },
+        "parent_dose_relative_error": {
+          "criterion_limit": 0.0001,
+          "maximum": 1.6277853875713776e-07,
+          "owner_of_maximum": "dalla_man observer"
+        },
+        "parent_source_solver_error_pmol_l": {
+          "criterion_limit": 0.01,
+          "maximum": 5.13832446813467e-07,
+          "owner_of_maximum": "dalla_man observer"
+        },
+        "repeat_artifact_differences": {
+          "criterion_limit": 0,
+          "maximum": 0.0,
+          "owner_of_maximum": "dalla_man observer"
+        },
+        "repeat_error": {
+          "criterion_limit": 0.0,
+          "maximum": 0.0,
+          "owner_of_maximum": "reference"
+        },
+        "same_solver_zero_extension_state_error": {
+          "criterion_limit": 0.0,
+          "maximum": 0.0,
+          "owner_of_maximum": "reference"
+        },
+        "scale_ambiguity_error_pmol_l": {
+          "criterion_limit": 1e-07,
+          "maximum": 0.0,
+          "owner_of_maximum": "dalla_man observer"
+        },
+        "solver_concentration_error_pmol_l": {
+          "criterion_limit": 1e-05,
+          "maximum": 2.585073800482929e-10,
+          "owner_of_maximum": "dalla_man observer"
+        },
+        "source_solver_error_pmol_kg_min": {
+          "criterion_limit": 1e-05,
+          "maximum": 6.65275422795375e-06,
+          "owner_of_maximum": "reference"
+        },
+        "zero_extension_derivative_error": {
+          "criterion_limit": 0.0,
+          "maximum": 0.0,
+          "owner_of_maximum": "reference"
+        },
+        "zero_state_error": {
+          "criterion_limit": 0,
+          "maximum": 0.0,
+          "owner_of_maximum": "dalla_man observer"
+        }
+      },
+      "outer_command_provenance": "Exact commands and completion exit codes transcribed from this task tool calls; stdout/stderr logs retained. The outer start/end times were not separately recorded; native source durations remain in sealed state.",
+      "protocol": {
+        "canonical_sha256": "ee9ecd421645c3acf11857037e2304fe10b0931c7c9f7cb6301659219d2d60cb",
+        "id": "M4-STUDY/2",
+        "prior_raw_sha256": "818da02e79164f0e09197e403770f9d881dd996772d133fe75127b7651156324",
+        "raw_sha256": "d2ed95617dd22db1e8204da6b35a2b28119ef4e4f67f8ca64f80395917cf6eb2",
+        "selected_coarse_maximum_step_min": 0.25,
+        "source_refinement_criterion_pmol_kg_min": 1e-05
+      },
+      "receipts": {
+        "deadline-review.json": {
+          "path": "/private/tmp/opent1d-functional-lab-acceptance-20261003/deadline-review.json",
+          "sha256": "f52e6532d6c20a8e39df3401bc91129825069080638a5deaf581636942dce24c"
+        },
+        "development-record.json": {
+          "path": "/private/tmp/opent1d-functional-lab-acceptance-20261003/development-record.json",
+          "sha256": "c6ab357702868b0be635e04c8c0883a8c93c0183bb7a2a0673db8148b55d2990"
+        },
+        "ot032-historical-numeric-parity.json": {
+          "path": "/private/tmp/opent1d-functional-lab-acceptance-20261003/ot032-historical-numeric-parity.json",
+          "sha256": "fac662aa8ec4aadfb503d26dc37daea5b2b1b2ee02bec9741dad6c73f7ac29a0"
+        },
+        "ot032-historical-parity.json": {
+          "path": "/private/tmp/opent1d-functional-lab-acceptance-20261003/ot032-historical-parity.json",
+          "sha256": "77d135ee3cfad2bcd4988adbe78b204785f08a92486baf78ea28d81834457802"
+        },
+        "ot032-independent-primary-review.json": {
+          "path": "/private/tmp/opent1d-functional-lab-acceptance-20261003/ot032-independent-primary-review.json",
+          "sha256": "d5c9720efc67e18422d4c34e76baafaa796d22a0476716aae1be0ae5fe20629b"
+        },
+        "outer-command-receipt.json": {
+          "path": "/private/tmp/opent1d-functional-lab-acceptance-20261003/outer-command-receipt.json",
+          "sha256": "23d80d5519faf604e379302be89819b3c7802a1fbaabc97ff316b4306ca2a1cf"
+        }
+      },
+      "schema": "ot032-scientific-verification-summary/1",
+      "scientific_implementation_commit": "160c4e0bf34042ec66a30630878fc09d311a50a0",
+      "source_inventory": {
+        "files": 86,
+        "historical_files_changed": [],
+        "native_and_observer_lock_pairs_preserved": true,
+        "new_files": 14,
+        "preserved_historical_files": 72
+      },
+      "tests": {
+        "numerical": {
+          "count": 3,
+          "log": "numerical-v2-tests.log",
+          "log_sha256": "ff1e8544947ad47c6cfacc61073db69385499e71b4757cb495d8725897ebf925",
+          "seconds": 7.239
+        },
+        "portability_and_archive_unit_tests": {
+          "count": 21,
+          "output_scope": "Observed tool output; no focused persisted test log",
+          "passed": true
+        }
+      }
+    },
+    "sha256": "de58f917107108ae28cdee5316299ace5d6a617d7b45dc4cfce2e6e436fe197b"
+  },
+  "scope": [
+    "OT-032",
+    "OT-033",
+    "OT-034",
+    "OT-037"
+  ],
+  "setup_current_verification": {
+    "path": "/private/tmp/opent1d-functional-lab-acceptance-20261003/setup-current-v3-summary.json",
+    "record": {
+      "commands": [
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.setup",
+            "plan",
+            "m4-study",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/setup-plan-v3"
+          ],
+          "exit_code": 0,
+          "projects": [
+            ".",
+            "experiments/m0/simglucose",
+            "experiments/m4/beta_cell/runtime"
+          ],
+          "ready": null,
+          "receipt": "/private/tmp/opent1d-functional-lab-acceptance-20261003/setup-plan-v3",
+          "scope": "run"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.setup",
+            "check",
+            "--plan",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/setup-plan-v3",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/setup-ready-v3"
+          ],
+          "exit_code": 0,
+          "projects": [
+            ".",
+            "experiments/m0/simglucose",
+            "experiments/m4/beta_cell/runtime"
+          ],
+          "ready": true,
+          "receipt": "/private/tmp/opent1d-functional-lab-acceptance-20261003/setup-ready-v3",
+          "scope": "run"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.setup",
+            "plan",
+            "m4-study",
+            "--reconstruct",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/setup-reconstruct-plan-v3"
+          ],
+          "exit_code": 0,
+          "projects": [
+            "."
+          ],
+          "ready": null,
+          "receipt": "/private/tmp/opent1d-functional-lab-acceptance-20261003/setup-reconstruct-plan-v3",
+          "scope": "reconstruct"
+        },
+        {
+          "argv": [
+            "WORKTREES/functional-lab-plan/OpenT1D/.venv/bin/python",
+            "-B",
+            "-S",
+            "-m",
+            "experiments.setup",
+            "check",
+            "--plan",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/setup-reconstruct-plan-v3",
+            "--output",
+            "/private/tmp/opent1d-functional-lab-acceptance-20261003/setup-reconstruct-ready-v3"
+          ],
+          "exit_code": 0,
+          "projects": [
+            "."
+          ],
+          "ready": true,
+          "receipt": "/private/tmp/opent1d-functional-lab-acceptance-20261003/setup-reconstruct-ready-v3",
+          "scope": "reconstruct"
+        }
+      ],
+      "installation_invoked": false,
+      "schema": "opent1d.ot037-current-checks/1"
+    },
+    "sha256": "5e49201ce9690b982962e5f7ec6cbfea36a07f5d64a6595bcc7843c66dd09e71"
+  },
+  "setup_generation_and_readiness": {
+    "setup-install": {
+      "archive": "/private/tmp/opent1d-functional-lab-acceptance-20261003/setup-install",
+      "manifest_sha256": "852969963be97d536c5def31da727a243a653d59864e00e981f7b287018f2326",
+      "receipt": {
+        "interruption_signal": null,
+        "numerical_validation": false,
+        "operation": "install",
+        "plan_sha256": "dbfd81613e93ac1a13ac791440bb83756f43cbf27a255ce3902339056dcd2218",
+        "projects": [
+          {
+            "actual": {
+              "implementation": "CPython",
+              "packages": {},
+              "python": "3.12.13"
+            },
+            "installation": {
+              "exit_code": 0,
+              "status": "completed"
+            },
+            "lock_consistency": "matched",
+            "project": ".",
+            "ready": true,
+            "reason": null
+          },
+          {
+            "actual": {
+              "implementation": "CPython",
+              "packages": {
+                "numpy": "1.26.4",
+                "scipy": "1.13.1",
+                "simglucose": "0.2.11"
+              },
+              "python": "3.12.13"
+            },
+            "installation": {
+              "exit_code": 0,
+              "status": "completed"
+            },
+            "lock_consistency": "matched",
+            "project": "experiments/m0/simglucose",
+            "ready": true,
+            "reason": null
+          },
+          {
+            "actual": {
+              "implementation": "CPython",
+              "packages": {
+                "numpy": "2.2.6",
+                "scipy": "1.15.3"
+              },
+              "python": "3.12.13"
+            },
+            "installation": {
+              "exit_code": 0,
+              "status": "completed"
+            },
+            "lock_consistency": "matched",
+            "project": "experiments/m4/beta_cell/runtime",
+            "ready": true,
+            "reason": null
+          }
+        ],
+        "ready": true,
+        "schema": "opent1d.task-setup-receipt/1",
+        "scope": "run",
+        "source_or_model_executed": false,
+        "task": "m4-study"
+      }
+    },
+    "setup-missing": {
+      "archive": "/private/tmp/opent1d-functional-lab-acceptance-20261003/setup-missing",
+      "manifest_sha256": "1fd13171bb002297e40769dbdbc94dd7cf6dc45010c3d07a458b2df7557a20c8",
+      "receipt": {
+        "interruption_signal": null,
+        "numerical_validation": false,
+        "operation": "check",
+        "plan_sha256": "dbfd81613e93ac1a13ac791440bb83756f43cbf27a255ce3902339056dcd2218",
+        "projects": [
+          {
+            "actual": {
+              "implementation": "CPython",
+              "packages": {},
+              "python": "3.12.13"
+            },
+            "installation": {
+              "exit_code": null,
+              "status": "not_requested"
+            },
+            "lock_consistency": "matched",
+            "project": ".",
+            "ready": true,
+            "reason": null
+          },
+          {
+            "actual": null,
+            "installation": {
+              "exit_code": null,
+              "status": "not_requested"
+            },
+            "lock_consistency": "not_checked",
+            "project": "experiments/m0/simglucose",
+            "ready": false,
+            "reason": "missing_or_aliased_environment"
+          },
+          {
+            "actual": null,
+            "installation": {
+              "exit_code": null,
+              "status": "not_requested"
+            },
+            "lock_consistency": "not_checked",
+            "project": "experiments/m4/beta_cell/runtime",
+            "ready": false,
+            "reason": "missing_or_aliased_environment"
+          }
+        ],
+        "ready": false,
+        "schema": "opent1d.task-setup-receipt/1",
+        "scope": "run",
+        "source_or_model_executed": false,
+        "task": "m4-study"
+      }
+    },
+    "setup-plan": {
+      "archive": "/private/tmp/opent1d-functional-lab-acceptance-20261003/setup-plan",
+      "manifest_sha256": "5dd0f4fa59352b273c33d71e1954929dde904c8ba436b8414084ecd0a22e837f",
+      "plan": {
+        "controller": null,
+        "projects": [
+          {
+            "files": {
+              ".python-version": "7b55f8e67b5623c4bef3fa691288da9437d79d3aba156de48d481db32ac7d16d",
+              "pyproject.toml": "e4af0618d9a65625486fd760f76471c75876f20060ddaf75905505d231a557b6",
+              "uv.lock": "a44e7cac7edf13bbc37b71a92b61aa3d7545e85aa88dafe41ed8a78d34b56a35"
+            },
+            "install_argv": [
+              "uv",
+              "sync",
+              "--locked"
+            ],
+            "packages": {},
+            "project": ".",
+            "python": "CPython 3.12"
+          },
+          {
+            "files": {
+              ".python-version": "aa0d6581054e6e4ff3f91839deca7a854ad37221b8784d060b42d0f847ff1a3b",
+              "pyproject.toml": "6bbb5f49e74bd7df2e11ab39f69754a99ce1e4ef3736573943e3a75118c28007",
+              "uv.lock": "13d254dcebe8d1ab54c3140cdc07152d719a68477a1378d7fe77fc1568612aa9"
+            },
+            "install_argv": [
+              "uv",
+              "sync",
+              "--locked",
+              "--project",
+              "experiments/m0/simglucose"
+            ],
+            "packages": {
+              "numpy": "1.26.4",
+              "scipy": "1.13.1",
+              "simglucose": "0.2.11"
+            },
+            "project": "experiments/m0/simglucose",
+            "python": "CPython 3.12"
+          },
+          {
+            "files": {
+              "../../../../.python-version": "7b55f8e67b5623c4bef3fa691288da9437d79d3aba156de48d481db32ac7d16d",
+              "pyproject.toml": "7c69b6f63a48d72f927c0253b68492de1ac60700d0549744de1207709732d3c5",
+              "uv.lock": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04"
+            },
+            "install_argv": [
+              "uv",
+              "sync",
+              "--locked",
+              "--project",
+              "experiments/m4/beta_cell/runtime"
+            ],
+            "packages": {
+              "numpy": "2.2.6",
+              "scipy": "1.15.3"
+            },
+            "project": "experiments/m4/beta_cell/runtime",
+            "python": "CPython 3.12"
+          }
+        ],
+        "schema": "opent1d.task-setup-plan/1",
+        "scope": "run",
+        "source_sha256": {
+          "experiments/catalogue/__init__.py": "bfa2dfb82b61ee7613911a8961d153bbdb28d1b6a063eba1de4f0a89e615e9c0",
+          "experiments/catalogue/formats.py": "8d9750bf1c04d90d6e0054c403c895895ed57c69d39caf7be7b3967cc856e897",
+          "experiments/catalogue/storage.py": "12cf4adf488f6dbaa2db4838ad35e5d76f56e531d895abe6bc97ebe6316ca91d",
+          "experiments/m0/simglucose/recording.py": "4d8195fb662296e77735357ec7df734afb9a4589f68eef521d57332690c40e0e",
+          "experiments/m1/artifacts.py": "e7896d603e8953f9c11a58ddad116eb12494d170cdce06a02a6d53dc04548e79",
+          "experiments/m1/contracts.py": "408a8086116c4db8b387fedd929ab2bfae46740ad1d94e1745e20d4a7ba9f70f",
+          "experiments/m1/metrics.py": "2aa937e5bd3805508d81040a046ec8e0395869a73a1af1943c57b513fb1c21b4",
+          "experiments/m1/validation.py": "1610424acc91cb149a5f3eb163ea982de800194d5b9590493ab2f9515cabbd4e",
+          "experiments/p1_external/intake.py": "eef9e028c8f5a3c43fcfe49703e9c74a0b2b1efc789e8faf647769752f237b67",
+          "experiments/setup/__init__.py": "34510ea4a5cd294034c7f1cbd597dd80755a35e15368a8e48607fd52248e07b8",
+          "experiments/setup/__main__.py": "11ba0fbdfcb689e1d4eab76ab4e15fd6f1a03c0af95c2fb6509a6c8dd52939ef",
+          "experiments/setup/contract.json": "72bb585f2dce192e9df0017927056244207c7b5d0b5db60c6f50e3e0fd3133fc",
+          "experiments/setup/core.py": "10fe28412d6fcfac1d28b4c41922f8c75f3802be442f6cc6b856eb271ff59cba"
+        },
+        "task": "m4-study",
+        "uv": {
+          "path": "USER_HOME/.local/bin/uv",
+          "sha256": "f63ec276fa13f8f392542a334c0f58f36833b24304831e5f4c221e2edf7a16f3",
+          "version": "uv 0.11.16 (135a36367 2026-05-21 aarch64-apple-darwin)"
+        }
+      }
+    },
+    "setup-plan-v3": {
+      "archive": "/private/tmp/opent1d-functional-lab-acceptance-20261003/setup-plan-v3",
+      "manifest_sha256": "3ded0c6ad3bd1affde16e7b495a2a0ac9bc5d9eeaec5513a9fa742117ade1254",
+      "plan": {
+        "controller": null,
+        "projects": [
+          {
+            "files": {
+              ".python-version": "7b55f8e67b5623c4bef3fa691288da9437d79d3aba156de48d481db32ac7d16d",
+              "pyproject.toml": "e4af0618d9a65625486fd760f76471c75876f20060ddaf75905505d231a557b6",
+              "uv.lock": "a44e7cac7edf13bbc37b71a92b61aa3d7545e85aa88dafe41ed8a78d34b56a35"
+            },
+            "install_argv": [
+              "uv",
+              "sync",
+              "--locked"
+            ],
+            "packages": {},
+            "project": ".",
+            "python": "CPython 3.12"
+          },
+          {
+            "files": {
+              ".python-version": "aa0d6581054e6e4ff3f91839deca7a854ad37221b8784d060b42d0f847ff1a3b",
+              "pyproject.toml": "6bbb5f49e74bd7df2e11ab39f69754a99ce1e4ef3736573943e3a75118c28007",
+              "uv.lock": "13d254dcebe8d1ab54c3140cdc07152d719a68477a1378d7fe77fc1568612aa9"
+            },
+            "install_argv": [
+              "uv",
+              "sync",
+              "--locked",
+              "--project",
+              "experiments/m0/simglucose"
+            ],
+            "packages": {
+              "numpy": "1.26.4",
+              "scipy": "1.13.1",
+              "simglucose": "0.2.11"
+            },
+            "project": "experiments/m0/simglucose",
+            "python": "CPython 3.12"
+          },
+          {
+            "files": {
+              "../../../../.python-version": "7b55f8e67b5623c4bef3fa691288da9437d79d3aba156de48d481db32ac7d16d",
+              "pyproject.toml": "7c69b6f63a48d72f927c0253b68492de1ac60700d0549744de1207709732d3c5",
+              "uv.lock": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04"
+            },
+            "install_argv": [
+              "uv",
+              "sync",
+              "--locked",
+              "--project",
+              "experiments/m4/beta_cell/runtime"
+            ],
+            "packages": {
+              "numpy": "2.2.6",
+              "scipy": "1.15.3"
+            },
+            "project": "experiments/m4/beta_cell/runtime",
+            "python": "CPython 3.12"
+          }
+        ],
+        "schema": "opent1d.task-setup-plan/1",
+        "scope": "run",
+        "source_sha256": {
+          "experiments/catalogue/__init__.py": "bfa2dfb82b61ee7613911a8961d153bbdb28d1b6a063eba1de4f0a89e615e9c0",
+          "experiments/catalogue/formats.py": "fe48fbd74fdf3c4a658bfcb09c9e45facb8e287233bc478771081f417d53a483",
+          "experiments/catalogue/storage.py": "12cf4adf488f6dbaa2db4838ad35e5d76f56e531d895abe6bc97ebe6316ca91d",
+          "experiments/m0/simglucose/recording.py": "4d8195fb662296e77735357ec7df734afb9a4589f68eef521d57332690c40e0e",
+          "experiments/m1/artifacts.py": "e7896d603e8953f9c11a58ddad116eb12494d170cdce06a02a6d53dc04548e79",
+          "experiments/m1/contracts.py": "408a8086116c4db8b387fedd929ab2bfae46740ad1d94e1745e20d4a7ba9f70f",
+          "experiments/m1/metrics.py": "2aa937e5bd3805508d81040a046ec8e0395869a73a1af1943c57b513fb1c21b4",
+          "experiments/m1/validation.py": "1610424acc91cb149a5f3eb163ea982de800194d5b9590493ab2f9515cabbd4e",
+          "experiments/p1_external/intake.py": "eef9e028c8f5a3c43fcfe49703e9c74a0b2b1efc789e8faf647769752f237b67",
+          "experiments/setup/__init__.py": "34510ea4a5cd294034c7f1cbd597dd80755a35e15368a8e48607fd52248e07b8",
+          "experiments/setup/__main__.py": "11ba0fbdfcb689e1d4eab76ab4e15fd6f1a03c0af95c2fb6509a6c8dd52939ef",
+          "experiments/setup/contract.json": "72bb585f2dce192e9df0017927056244207c7b5d0b5db60c6f50e3e0fd3133fc",
+          "experiments/setup/core.py": "10fe28412d6fcfac1d28b4c41922f8c75f3802be442f6cc6b856eb271ff59cba"
+        },
+        "task": "m4-study",
+        "uv": {
+          "path": "USER_HOME/.local/bin/uv",
+          "sha256": "f63ec276fa13f8f392542a334c0f58f36833b24304831e5f4c221e2edf7a16f3",
+          "version": "uv 0.11.16 (135a36367 2026-05-21 aarch64-apple-darwin)"
+        }
+      }
+    },
+    "setup-ready": {
+      "archive": "/private/tmp/opent1d-functional-lab-acceptance-20261003/setup-ready",
+      "manifest_sha256": "1c9e00703cfecb69bedf9d814a6d0e68453f2ab003304c600067ef3e4b234a67",
+      "receipt": {
+        "interruption_signal": null,
+        "numerical_validation": false,
+        "operation": "check",
+        "plan_sha256": "dbfd81613e93ac1a13ac791440bb83756f43cbf27a255ce3902339056dcd2218",
+        "projects": [
+          {
+            "actual": {
+              "implementation": "CPython",
+              "packages": {},
+              "python": "3.12.13"
+            },
+            "installation": {
+              "exit_code": null,
+              "status": "not_requested"
+            },
+            "lock_consistency": "matched",
+            "project": ".",
+            "ready": true,
+            "reason": null
+          },
+          {
+            "actual": {
+              "implementation": "CPython",
+              "packages": {
+                "numpy": "1.26.4",
+                "scipy": "1.13.1",
+                "simglucose": "0.2.11"
+              },
+              "python": "3.12.13"
+            },
+            "installation": {
+              "exit_code": null,
+              "status": "not_requested"
+            },
+            "lock_consistency": "matched",
+            "project": "experiments/m0/simglucose",
+            "ready": true,
+            "reason": null
+          },
+          {
+            "actual": {
+              "implementation": "CPython",
+              "packages": {
+                "numpy": "2.2.6",
+                "scipy": "1.15.3"
+              },
+              "python": "3.12.13"
+            },
+            "installation": {
+              "exit_code": null,
+              "status": "not_requested"
+            },
+            "lock_consistency": "matched",
+            "project": "experiments/m4/beta_cell/runtime",
+            "ready": true,
+            "reason": null
+          }
+        ],
+        "ready": true,
+        "schema": "opent1d.task-setup-receipt/1",
+        "scope": "run",
+        "source_or_model_executed": false,
+        "task": "m4-study"
+      }
+    },
+    "setup-ready-v3": {
+      "archive": "/private/tmp/opent1d-functional-lab-acceptance-20261003/setup-ready-v3",
+      "manifest_sha256": "362c361d9b488c404bf9902289aa8897a7986935c78daca96dd0b076908bf9ee",
+      "receipt": {
+        "interruption_signal": null,
+        "numerical_validation": false,
+        "operation": "check",
+        "plan_sha256": "8a13d0b5adbe6ce512df047fd90fc3c684eb89ae0442d844b8caa2c511848706",
+        "projects": [
+          {
+            "actual": {
+              "implementation": "CPython",
+              "packages": {},
+              "python": "3.12.13"
+            },
+            "installation": {
+              "exit_code": null,
+              "status": "not_requested"
+            },
+            "lock_consistency": "matched",
+            "project": ".",
+            "ready": true,
+            "reason": null
+          },
+          {
+            "actual": {
+              "implementation": "CPython",
+              "packages": {
+                "numpy": "1.26.4",
+                "scipy": "1.13.1",
+                "simglucose": "0.2.11"
+              },
+              "python": "3.12.13"
+            },
+            "installation": {
+              "exit_code": null,
+              "status": "not_requested"
+            },
+            "lock_consistency": "matched",
+            "project": "experiments/m0/simglucose",
+            "ready": true,
+            "reason": null
+          },
+          {
+            "actual": {
+              "implementation": "CPython",
+              "packages": {
+                "numpy": "2.2.6",
+                "scipy": "1.15.3"
+              },
+              "python": "3.12.13"
+            },
+            "installation": {
+              "exit_code": null,
+              "status": "not_requested"
+            },
+            "lock_consistency": "matched",
+            "project": "experiments/m4/beta_cell/runtime",
+            "ready": true,
+            "reason": null
+          }
+        ],
+        "ready": true,
+        "schema": "opent1d.task-setup-receipt/1",
+        "scope": "run",
+        "source_or_model_executed": false,
+        "task": "m4-study"
+      }
+    },
+    "setup-reconstruct-plan-v3": {
+      "archive": "/private/tmp/opent1d-functional-lab-acceptance-20261003/setup-reconstruct-plan-v3",
+      "manifest_sha256": "ac42795c334eaef50f0628af19e393d5849f86bab07ac15e4c150b9361eac198",
+      "plan": {
+        "controller": null,
+        "projects": [
+          {
+            "files": {
+              ".python-version": "7b55f8e67b5623c4bef3fa691288da9437d79d3aba156de48d481db32ac7d16d",
+              "pyproject.toml": "e4af0618d9a65625486fd760f76471c75876f20060ddaf75905505d231a557b6",
+              "uv.lock": "a44e7cac7edf13bbc37b71a92b61aa3d7545e85aa88dafe41ed8a78d34b56a35"
+            },
+            "install_argv": [
+              "uv",
+              "sync",
+              "--locked"
+            ],
+            "packages": {},
+            "project": ".",
+            "python": "CPython 3.12"
+          }
+        ],
+        "schema": "opent1d.task-setup-plan/1",
+        "scope": "reconstruct",
+        "source_sha256": {
+          "experiments/catalogue/__init__.py": "bfa2dfb82b61ee7613911a8961d153bbdb28d1b6a063eba1de4f0a89e615e9c0",
+          "experiments/catalogue/formats.py": "fe48fbd74fdf3c4a658bfcb09c9e45facb8e287233bc478771081f417d53a483",
+          "experiments/catalogue/storage.py": "12cf4adf488f6dbaa2db4838ad35e5d76f56e531d895abe6bc97ebe6316ca91d",
+          "experiments/m0/simglucose/recording.py": "4d8195fb662296e77735357ec7df734afb9a4589f68eef521d57332690c40e0e",
+          "experiments/m1/artifacts.py": "e7896d603e8953f9c11a58ddad116eb12494d170cdce06a02a6d53dc04548e79",
+          "experiments/m1/contracts.py": "408a8086116c4db8b387fedd929ab2bfae46740ad1d94e1745e20d4a7ba9f70f",
+          "experiments/m1/metrics.py": "2aa937e5bd3805508d81040a046ec8e0395869a73a1af1943c57b513fb1c21b4",
+          "experiments/m1/validation.py": "1610424acc91cb149a5f3eb163ea982de800194d5b9590493ab2f9515cabbd4e",
+          "experiments/p1_external/intake.py": "eef9e028c8f5a3c43fcfe49703e9c74a0b2b1efc789e8faf647769752f237b67",
+          "experiments/setup/__init__.py": "34510ea4a5cd294034c7f1cbd597dd80755a35e15368a8e48607fd52248e07b8",
+          "experiments/setup/__main__.py": "11ba0fbdfcb689e1d4eab76ab4e15fd6f1a03c0af95c2fb6509a6c8dd52939ef",
+          "experiments/setup/contract.json": "72bb585f2dce192e9df0017927056244207c7b5d0b5db60c6f50e3e0fd3133fc",
+          "experiments/setup/core.py": "10fe28412d6fcfac1d28b4c41922f8c75f3802be442f6cc6b856eb271ff59cba"
+        },
+        "task": "m4-study",
+        "uv": {
+          "path": "USER_HOME/.local/bin/uv",
+          "sha256": "f63ec276fa13f8f392542a334c0f58f36833b24304831e5f4c221e2edf7a16f3",
+          "version": "uv 0.11.16 (135a36367 2026-05-21 aarch64-apple-darwin)"
+        }
+      }
+    },
+    "setup-reconstruct-ready-v3": {
+      "archive": "/private/tmp/opent1d-functional-lab-acceptance-20261003/setup-reconstruct-ready-v3",
+      "manifest_sha256": "a01d7985c1d9761f128fa82256812a6e6ae5299d3a181ee377bc3085315fc92e",
+      "receipt": {
+        "interruption_signal": null,
+        "numerical_validation": false,
+        "operation": "check",
+        "plan_sha256": "c3440720e9cb515d7e4db68f70a145ac425a00a01f61caa46b5f58459fd313f3",
+        "projects": [
+          {
+            "actual": {
+              "implementation": "CPython",
+              "packages": {},
+              "python": "3.12.13"
+            },
+            "installation": {
+              "exit_code": null,
+              "status": "not_requested"
+            },
+            "lock_consistency": "matched",
+            "project": ".",
+            "ready": true,
+            "reason": null
+          }
+        ],
+        "ready": true,
+        "schema": "opent1d.task-setup-receipt/1",
+        "scope": "reconstruct",
+        "source_or_model_executed": false,
+        "task": "m4-study"
+      }
+    }
+  },
+  "worktrees": {
+    "codex/functional-lab-plan": "WORKTREES/functional-lab-plan/OpenT1D",
+    "codex/local-campaigns": "WORKTREES/local-campaigns/OpenT1D",
+    "codex/m4-configurable-study": "WORKTREES/m4-configurable-study/OpenT1D",
+    "codex/researcher-tools": "WORKTREES/researcher-tools/OpenT1D"
+  }
+}

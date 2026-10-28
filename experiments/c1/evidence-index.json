@@ -1,0 +1,344 @@
+{
+  "schema_version": 1,
+  "local_store": "results/c1-clean-95342bc-*, results/c1-known-0c367fc, results/c1-method-audit-97f583a*.json, results/c1-feedback-0a6b0e6, results/c1-feedback-zero-0a6b0e6, results/c1-feedback-repeat-0a6b0e6, results/c1-feedback-audit-273d29d*.json, results/c1-feedback-target-plan.json, results/c1-target-f43bb85, results/c1-target-assessment-f43bb85*.json, results/c1-feedback-family-review-f2e9588*.json, results/c1-oref0-*, results/c1-comparator-route-preflight*.json, results/c1-g2p2c-state-parity*.json, results/c1-g2p2c-actor-source-probe*.json, results/c1-g2p2c-training-*, results/c1-g2p2c-smoke-repeat-*, results/c1-g2p2c-fallback-probe*.json, results/c1-g2p2c-runtime-parity*.json, results/c1-g2p2c-architecture-preflight*.json, results/c1-g2p2c-trained-preflight-*.json, results/c1-g2p2c-native-smoke-* and results/c1-g2p2c-reference-readiness*.json in the maintained main checkout; outside Git",
+  "scope": "Known-case C1/0.3–1.0 software development, C1/1.1–1.3 OpenAPS source/fixture/adapter checks, C1/1.4 no-go/replacement-source preflight, C1/1.5 exact source-state replay, C1/1.6 untrained source-actor callback replay and C1/1.7 M1-engine training debug preflight and C1/1.8 source-training freeze with repeated actor-value smoke and C1/1.9 synthetic missing-CGM fallback, plus C1/1.10 completed full source training, checkpoint intake, two-case native integration smoke and readiness audit; not a matched development comparison, held-out evaluation or independent human reproduction",
+  "cases": [
+    {
+      "directory": "c1-clean-95342bc-overlay-b",
+      "manifest_sha256": "1e420759c66f33d73a144796fcbe18fd7e6aba1782b28a6fb8e0c9005dad3118",
+      "files": 13
+    },
+    {
+      "directory": "c1-clean-95342bc-pid-b",
+      "manifest_sha256": "5830327bb6a03f7291c5c47eb0f69d7478c0fc7d2043b509aa7ac4dedb7b6c98",
+      "files": 13
+    },
+    {
+      "directory": "c1-clean-95342bc-overlay-d",
+      "manifest_sha256": "d75441e2d092e0fc4e198499b27b91899dc5b36b2841b6b665e9fca594bd8746",
+      "files": 13
+    },
+    {
+      "directory": "c1-clean-95342bc-pid-d",
+      "manifest_sha256": "c92fb5ab06173e3b1bbdc8bb729a646db8d463c5922724b0eb3af6c384fa0978",
+      "files": 13
+    },
+    {
+      "directory": "c1-clean-95342bc-overlay-zero",
+      "manifest_sha256": "ce6c820736dba1673e871bc7e50aa2422543f6fc3ad9b049c5aadf1540593dfe",
+      "files": 13
+    },
+    {
+      "directory": "c1-clean-95342bc-overlay-b-repeat",
+      "manifest_sha256": "459ee4ccd10863a1f4d2436cabec7ce163d07833d1a01a3b625c156e688c0cec",
+      "files": 13
+    },
+    {
+      "directory": "c1-clean-95342bc-base-b",
+      "manifest_sha256": "962a1f8da2a760b5e5754fc9092269de92b2f6491d1a628d6bab7a74fc903184",
+      "files": 10
+    }
+  ],
+  "development_matrix": {
+    "directory": "c1-known-0c367fc",
+    "native_commit": "0c367fc38d432d00694ea56c9e532ea6127affa8",
+    "planned_cases": 64,
+    "completed_cases": 64,
+    "plan_sha256": "352a45227f7584e9a7dda491ac15c172b18da027c3e504468799c9ef1cef9351",
+    "report_sha256": "dfaef8dea1ada27ba385351aef9a02bcb172310fb0045f2c3edae207065a2084"
+  },
+  "method_audit": {
+    "file": "c1-method-audit-97f583a.json",
+    "source_commit": "97f583a92cdf51ac50cc5342db058d2d9c9b7f90",
+    "sha256": "a5a050c4ba851e6215d4f48eadac91004d6911f5759150f317404d87e65e5a31",
+    "fresh_process_repeat": "c1-method-audit-97f583a-repeat.json",
+    "byte_identical_repeat": true
+  },
+  "feedback_matrix": {
+    "directory": "c1-feedback-0a6b0e6",
+    "native_commit": "0a6b0e6bab10060693f444de0d84d59f86269258",
+    "planned_cases": 48,
+    "completed_cases": 48,
+    "plan_sha256": "babeb80e5ffda5d44273733c15200aedfadc572ad01bc2a07d0b29d1d460012d",
+    "settings_sha256": "b162ce5eff99dfb0a668b435e5f3b5a3963ff20fb82fc4d8878760f68f446356",
+    "report_sha256": "a2fc313c38ad17012856c7b4e26ad5cb96f6c057606855b7be24c575f4b99fd6",
+    "zero_gain_base_identity": {
+      "directory": "c1-feedback-zero-0a6b0e6",
+      "manifest_sha256": "05f87051bf0f1535fc2679ff3bbf11d08ef8797cf339c1bdf59274e8c9be0a52",
+      "matched_files": ["initial.json", "trace.jsonl", "native-diagnostic.csv"]
+    },
+    "candidate_repeat": {
+      "directory": "c1-feedback-repeat-0a6b0e6",
+      "manifest_sha256": "674cad55517cde70f6d0d45437b6a137ad80f8bf9d859e86cb5550b509649104",
+      "matched_files": ["initial.json", "trace.jsonl", "commands.jsonl", "native-diagnostic.csv"]
+    }
+  },
+  "feedback_audit": {
+    "file": "c1-feedback-audit-273d29d.json",
+    "source_commit": "273d29d604c07231f32d7b984d3066ca992feed4",
+    "sha256": "eeedfc714083c8c49bcbebe1d8a01cddd7c739462c11b2c3a8073e29e3e21f60",
+    "fresh_process_repeat": "c1-feedback-audit-273d29d-repeat.json",
+    "byte_identical_repeat": true
+  },
+  "feedback_target_plan": {
+    "declaration": "experiments/c1/feedback-target-alignment.json",
+    "declaration_sha256": "89ea6df8fba63542e095ce0990b6ad9087df7fb74917811c15414a559678634e",
+    "local_file": "c1-feedback-target-plan.json",
+    "plan_sha256": "ae98a8e405b116e67bc65b8c2c7e1a440839a3fff4b5119ca5e2aa6586d597e7",
+    "native_runs_completed": 48
+  },
+  "feedback_target_matrix": {
+    "directory": "c1-target-f43bb85",
+    "native_commit": "f43bb85b71b30182b95009f485d5a6afd1a3fb71",
+    "planned_cases": 48,
+    "completed_cases": 48,
+    "study_plan_sha256": "333333f1d894fb3f741cd87f1ea1e54747b79cf170546aeaeb9d4f85e7d6d15b",
+    "declaration_sha256": "89ea6df8fba63542e095ce0990b6ad9087df7fb74917811c15414a559678634e",
+    "report_sha256": "b7e1b67592bab4c424564babac1a98b422153d886370eb38781197baf1438625",
+    "assessment_file": "c1-target-assessment-f43bb85.json",
+    "assessment_sha256": "838bb2f466bc876ecd0edb563113fe2bb0e77bbae8ab3ccca07b3bb8c9f03cc9",
+    "fresh_process_assessment_repeat": "c1-target-assessment-f43bb85-repeat.json",
+    "byte_identical_repeat": true,
+    "development_screen_pass": false
+  },
+  "feedback_family_review": {
+    "file": "c1-feedback-family-review-f2e9588.json",
+    "source_commit": "f2e9588b6456d1aa6814e22473ede4adf34ed760",
+    "sha256": "270b018bf3bfe8d74f05764eb45150537df00239899016f7ee661dd18af939ee",
+    "fresh_process_repeat": "c1-feedback-family-review-f2e9588-repeat.json",
+    "byte_identical_repeat": true,
+    "reviewed_a_b_cells": 8,
+    "identical_base_bundles": 16
+  },
+  "oref0_preflight": {
+    "file": "c1-oref0-preflight.json",
+    "sha256": "ff7fafdbac9be947c61f6b95cf0d554dcfb61ae251ff50e84fd7eb8b543a2e2a",
+    "fresh_process_repeat": "c1-oref0-preflight-repeat.json",
+    "byte_identical_repeat": true,
+    "source_commit": "88cf032aa74ff25f69464a7d9cd601ee3940c0b3",
+    "upstream_example_parity": false,
+    "eligible_m1_comparator": false,
+    "upstream_full_test_log": "c1-oref0-upstream-full-test.log",
+    "upstream_full_test_log_sha256": "bce850c4920e39968c90bfade5c4163499593868be1f9609a4bce220989c5bed"
+  },
+  "oref0_example_history": {
+    "file": "c1-oref0-example-history.json",
+    "sha256": "b4a36dde8341f7d61592e6bfb68eeb774e523cb5fbe2b12a41f55225c8ac8f52",
+    "fresh_process_repeat": "c1-oref0-example-history-repeat.json",
+    "byte_identical_repeat": true,
+    "revisions_checked": 4,
+    "matching_source_fixture_pairs": 0,
+    "introduction_iob_and_meal_parity": true,
+    "introduction_suggested_parity": false,
+    "locked_current_preflight_identical_to_c1_1_1": true,
+    "locked_source_baseline_pass": true,
+    "dependency_lock": "experiments/c1/oref0-package-lock.json",
+    "dependency_lock_sha256": "a166a36b39a23125517a69492a6e8419296b3f47e74e032af136f2ec42d414a9",
+    "source_baseline": "experiments/c1/oref0-source-baseline.json",
+    "source_baseline_sha256": "d9e888a2983d3c58aebcf3e466e653ae6bffa375397ad55a16eabe22a4db6b6d"
+  },
+  "oref0_adapter_preflight": {
+    "file": "c1-oref0-adapter-preflight.json",
+    "sha256": "6858e6a3b18e487451f1394f9764b8108374a26c67bf9b5b83ed6a8f213dc059",
+    "fresh_process_repeat": "c1-oref0-adapter-preflight-repeat.json",
+    "byte_identical_repeat": true,
+    "source_commit": "88cf032aa74ff25f69464a7d9cd601ee3940c0b3",
+    "synthetic_source_iob_pass": true,
+    "m1_confirmed_delivery_feed": false,
+    "five_three_minute_clock_compatible": false,
+    "eligible_m1_comparator": false
+  },
+  "comparator_route_preflight": {
+    "file": "c1-comparator-route-preflight.json",
+    "sha256": "1e3588778e9e57e245253e7919d3a582f7103197e0ea788e487f1013cf00d253",
+    "fresh_process_repeat": "c1-comparator-route-preflight-repeat.json",
+    "byte_identical_repeat": true,
+    "oref0_unmodified_m1_route": "no-go",
+    "g2p2c_source_commit": "37f7b7e161e9c1e7b702c8eebdc5cc7eb4f81d70",
+    "g2p2c_checkpoint_tracked": false,
+    "eligible_m1_comparator": false
+  },
+  "g2p2c_state_parity": {
+    "file": "c1-g2p2c-state-parity.json",
+    "sha256": "5a96dfbc04652bf42640dd3cbd352751147ac06558438ae1c3dd6993695ffd55",
+    "fresh_process_repeat": "c1-g2p2c-state-parity-repeat.json",
+    "byte_identical_repeat": true,
+    "source_commit": "37f7b7e161e9c1e7b702c8eebdc5cc7eb4f81d70",
+    "frames": 16,
+    "float32_exact_parity": true,
+    "reset_parity": true,
+    "eligible_m1_comparator": false
+  },
+  "g2p2c_actor_source_probe": {
+    "file": "c1-g2p2c-actor-source-probe.json",
+    "sha256": "568ff66c3e5ea5867d96434d011c505f2d78fae11eadec2c4c1233d52baff8d6",
+    "fresh_process_repeat": "c1-g2p2c-actor-source-probe-repeat.json",
+    "byte_identical_repeat": true,
+    "source_commit": "37f7b7e161e9c1e7b702c8eebdc5cc7eb4f81d70",
+    "frames": 16,
+    "actor_weights": "random initialization; no trained checkpoint",
+    "source_local_action_exact_parity": true,
+    "checkpoint_hash_rejection": true,
+    "checkpoint_shape_rejection": true,
+    "eligible_m1_comparator": false
+  },
+  "g2p2c_training_preflight": {
+    "file": "c1-g2p2c-training-preflight.json",
+    "sha256": "4271116854d8a130b310e890823432ff942f0331f60a8a4f78bed0ce89de0f67",
+    "fresh_process_repeat": "c1-g2p2c-training-preflight-repeat.json",
+    "byte_identical_repeat": true,
+    "training_lock_sha256": "7c9df6637d7078603395db9074ae9efcef5db7fe4d6911aa25ffb93a65901d70",
+    "source_commit": "37f7b7e161e9c1e7b702c8eebdc5cc7eb4f81d70",
+    "m1_simglucose_commit": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc",
+    "training_engine_matches_m1_pin": true,
+    "bundled_engine_matches_m1_physiology": false,
+    "eligible_m1_comparator": false
+  },
+  "g2p2c_runtime_parity": {
+    "file": "c1-g2p2c-runtime-parity.json",
+    "sha256": "796bcb288595159ef89412c62ad2d92f0384abf032f5e32b009ef3ebd23bf20b",
+    "fresh_process_repeat": "c1-g2p2c-runtime-parity-repeat.json",
+    "byte_identical_repeat": true,
+    "locked_and_installed_core_packages_checked": 7,
+    "native_core_runtime_parity": true,
+    "native_trajectory_replayed": false,
+    "eligible_m1_comparator": false
+  },
+  "g2p2c_engine_trajectory_parity": {
+    "m1_file": "c1-g2p2c-engine-trajectory-m1.json",
+    "training_file": "c1-g2p2c-engine-trajectory-training.json",
+    "sha256_each": "c88611181720744959d38cdceca75d4f658a8e66fe19e956db0d1ec32d393a59",
+    "byte_identical": true,
+    "profile": "adult#001",
+    "seed": 101,
+    "fixed_basal_u_min": 0.02,
+    "native_snapshots": 201,
+    "meal_exercised": true,
+    "trained_policy_checked": false,
+    "eligible_m1_comparator": false
+  },
+  "g2p2c_training_debug": {
+    "file": "c1-g2p2c-training-debug-report.json",
+    "sha256": "d49039ac1d5280ef6643e0b5191e154b5b172bc65f51565417cd867d7ff205c0",
+    "args_file": "c1-g2p2c-training-debug-args.json",
+    "log_file": "c1-g2p2c-training-debug.log",
+    "summary_file": "c1-g2p2c-training-debug-summary.csv",
+    "source_debug_interactions": 4096,
+    "source_reported_success": true,
+    "checkpoint_accepted": false,
+    "eligible_m1_comparator": false
+  },
+  "g2p2c_training_freeze": {
+    "declaration": "experiments/c1/g2p2c-training.json",
+    "declaration_sha256": "61a54b5fa67661418e480d8846d3a81b2eb06dbcf76c29a8c841cb413368fc4e",
+    "smoke_attempts": [
+      "c1-g2p2c-smoke-repeat-a/attempt.json",
+      "c1-g2p2c-smoke-repeat-b/attempt.json"
+    ],
+    "smoke_attempt_sha256": "3ac0b93fe9fc44f7a3c0057ce39f9b68aaa34fb979dd94c0c21a9d66d334ff5d",
+    "same_host_actor_tensor_sha256": "14983bece04753ad40b6a21e803f19b715f2751ba1f3a1739f0a408243cac03c",
+    "fresh_process_actor_value_repeat": true,
+    "source_debug_interactions_per_attempt": 4096,
+    "completed_full_profiles": ["adult#001", "adult#002"],
+    "full_training_completed": true,
+    "eligible_m1_comparator": false
+  },
+  "g2p2c_architecture_preflight": {
+    "file": "c1-g2p2c-architecture-preflight-roundtrip.json",
+    "sha256": "9c24fa23746556cb87d57ebaf7ce9a9d06842bc472e8d1c050ed64f4c9512a88",
+    "fresh_process_repeat": "c1-g2p2c-architecture-preflight-roundtrip-repeat.json",
+    "byte_identical_repeat": true,
+    "profiles": 2,
+    "initialized_tensor_count_per_profile": 20,
+    "invented_forward_states_per_profile": 16,
+    "exact_constructor_tensor_and_forward_parity": true,
+    "source_state_dict_weights_only_roundtrip": true,
+    "trained_profiles_checked": ["adult#001", "adult#002"],
+    "trained_checkpoint_checked": true,
+    "eligible_m1_comparator": false
+  },
+  "g2p2c_missing_cgm": {
+    "file": "c1-g2p2c-fallback-probe.json",
+    "sha256": "ea908eae4b457642549f024e9c901db6348831f41786226229a839dc3156ffb4",
+    "fresh_process_repeat": "c1-g2p2c-fallback-probe-repeat.json",
+    "byte_identical_repeat": true,
+    "source_commit": "37f7b7e161e9c1e7b702c8eebdc5cc7eb4f81d70",
+    "synthetic_gap_intervals": 10,
+    "fallback_basal_u_min": 0.02112267499992533,
+    "history_restart_and_rng_preservation": true,
+    "trained_profiles_checked": ["adult#001", "adult#002"],
+    "trained_actor_checked": true,
+    "eligible_m1_comparator": false
+  },
+  "g2p2c_native_smoke_plan": {
+    "declaration": "experiments/c1/g2p2c-native-smoke.json",
+    "declaration_sha256": "ca2baff8c07318beeabc98c7f5261e80673a91ae00220f1917febe11713e8c68",
+    "planned_known_native_cases": 2,
+    "native_cases_executed": 2,
+    "both_checkpoint_intakes_before_first_native_case": false,
+    "efficacy_metrics_authorized": false,
+    "eligible_m1_comparator": false
+  },
+  "g2p2c_adult001_trained_gate": {
+    "training_attempt_file": "c1-g2p2c-training-adult001/attempt.json",
+    "training_attempt_sha256": "a51e8e63d6644c5ad75c7168808a4f166ffd1ad9d186347dfdecae83a15c972f",
+    "training_summary_sha256": "603cdeca2be992d0fe9d83e51d5382f1375a873388b402d0148fe05697f266ff",
+    "checkpoint_sha256": "7b8f87cff41e2971c66cee4ca1ac0ce2fa56e263e0f45d96db4893e9d112e273",
+    "source_final_validation_rollouts": 500,
+    "source_completed": true,
+    "trained_preflight_file": "c1-g2p2c-trained-preflight-adult001.json",
+    "trained_preflight_repeat_file": "c1-g2p2c-trained-preflight-adult001-repeat.json",
+    "trained_preflight_sha256": "2331e4d8d61bd4f5b7312892850403b38aa861f7449da3e0264fc72e6877637f",
+    "trained_preflight_fresh_process_byte_identical": true,
+    "trained_source_intake_forward_parity": true,
+    "native_smoke_report_file": "c1-g2p2c-native-smoke-adult001-d101/report.json",
+    "native_smoke_repeat_report_file": "c1-g2p2c-native-smoke-adult001-d101-repeat/report.json",
+    "native_smoke_report_sha256": "0306b099f42335847e57b5fc3d06c6793aa9fc96fd47ca742da95bf0e313aecd",
+    "native_smoke_trace_sha256": "eedf8883395d067e10713ba7e275282df7bec8de9f8bfb4aed965d7779d7ad57",
+    "native_smoke_initial_sha256": "d00d189e1a699c99275d48b6d260d95df004e90d94208dc465c96f58c04cff8b",
+    "native_smoke_intervals": 960,
+    "native_smoke_masked_profile_basal_intervals": 10,
+    "native_smoke_fresh_process_byte_identical": true,
+    "native_smoke_saved_verification_pass": true,
+    "both_checkpoint_intakes_before_this_case": false,
+    "integration_gate_pass": true,
+    "eligible_m1_comparator": false
+  },
+  "g2p2c_adult002_trained_gate": {
+    "training_attempt_file": "c1-g2p2c-training-adult002/attempt.json",
+    "training_attempt_sha256": "320a700c00ba2a2d303a2e779c99e0959470e7ffa981428b41ca184d0d5db8dd",
+    "training_summary_sha256": "bd381254a996cebdc00ed8db90a1dd6df6234d7e4cbbb4869ef043bdb0b9e799",
+    "checkpoint_sha256": "3fa5f9a12f43154d8aaacd82ff5854e5c9a9aa87710f8c1e84eeb97611fbdcc9",
+    "source_final_validation_rollouts": 500,
+    "source_completed": true,
+    "trained_preflight_file": "c1-g2p2c-trained-preflight-adult002.json",
+    "trained_preflight_repeat_file": "c1-g2p2c-trained-preflight-adult002-repeat.json",
+    "trained_preflight_sha256": "58517ca934768e9b434e4417b8196ca2e85f6cab2d06b1eeb8c8d25c786a7e30",
+    "trained_preflight_fresh_process_byte_identical": true,
+    "trained_source_intake_forward_parity": true,
+    "native_smoke_report_file": "c1-g2p2c-native-smoke-adult002-d101/report.json",
+    "native_smoke_repeat_report_file": "c1-g2p2c-native-smoke-adult002-d101-repeat/report.json",
+    "native_smoke_report_sha256": "3add087d26b7f35781cbbc72bea55470209b7deff4627ae5271e10def903c66f",
+    "native_smoke_trace_sha256": "bccc5bae6ba358095e24801ef22a02c25eb165ee54a1eae3ae00fc2e115ba26e",
+    "native_smoke_initial_sha256": "85aa2238b37c5e74aa73acf05e6d07af26a56e16db2bf253de9cf62ecb5c1267",
+    "native_smoke_intervals": 960,
+    "native_smoke_masked_profile_basal_intervals": 10,
+    "native_smoke_fresh_process_byte_identical": true,
+    "native_smoke_saved_verification_pass": true,
+    "both_checkpoint_intakes_before_this_case": true,
+    "integration_gate_pass": true,
+    "eligible_m1_comparator": false
+  },
+  "g2p2c_reference_readiness": {
+    "interim_file": "c1-g2p2c-reference-readiness-interim.json",
+    "interim_sha256": "d9aa50f4bbda811dce324475ce19c71d7ef48a37e3e7d98d3c7197e3571238c0",
+    "interim_fails_closed_for_missing_adult002": true,
+    "file": "c1-g2p2c-reference-readiness.json",
+    "repeat_file": "c1-g2p2c-reference-readiness-repeat.json",
+    "sha256": "daf2b5803f74f8b5864c25c9b056dc1004e24420b3d37fceb86f17724f1757da",
+    "fresh_process_byte_identical": true,
+    "technical_m1_boundary_pass": true,
+    "matched_development_comparison_run": false,
+    "eligible_m1_comparator": false
+  }
+}

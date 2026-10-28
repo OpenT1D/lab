@@ -1,0 +1,21 @@
+{
+  "schema": "bc015-metadata-protocol/1",
+  "id": "BC-015-P1/1",
+  "specified_date": "2026-09-25",
+  "parent": "BC-014/1",
+  "question": "Does public or permitted release metadata substantiate every prerequisite for designing a held-out paired laboratory glucose-insulin-C-peptide assessment in one specified T1D population?",
+  "scope": "Metadata and source-document audit only; no participant records, parameter fitting, scoring, contact, request, or clinical conclusion.",
+  "evidence_rank": ["none", "catalogue", "protocol", "dictionary", "release_metadata"],
+  "requirements": {
+    "same_visit_dynamic_gic": "release_metadata",
+    "early_and_late_cpeptide": "release_metadata",
+    "stimulus_route_dose_clock": "protocol",
+    "exogenous_insulin_timing": "release_metadata",
+    "assay_units_matrix_limits_precision": "dictionary",
+    "renal_and_body_mass_context": "release_metadata",
+    "population_and_graft_route": "protocol",
+    "participant_disjoint_allocation": "release_metadata"
+  },
+  "interpretation": "Only all requirements supported at or above their minimum evidence rank qualifies a metadata packet for scientific design review. This does not authorize data access or human-model execution.",
+  "human_execution_authorized_by_this_tool": false
+}

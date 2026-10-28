@@ -1,0 +1,13 @@
+{
+  "schema": "opent1d.p1-controller/1",
+  "name": "example_rate",
+  "source_sha256": "41f372b095c28a8ea860d9af7cd1fe8e05e26b5acfe462ca707d18a46ccbf11d",
+  "source_identity": "OpenT1D invented P1/0.2 example in this checkout",
+  "rights": "author-owned",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "step_minutes": 3,
+  "observation": "held-cgm-with-age/1",
+  "action": "simglucose-pump-rate-u-min/1",
+  "missing_sensor": true
+}

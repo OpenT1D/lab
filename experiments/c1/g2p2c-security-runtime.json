@@ -1,0 +1,81 @@
+{
+  "schema": "opent1d.c1.g2p2c-security-runtime/1",
+  "baseline_revision": "9e7348e56fc3ec5b9ed404423b6cb6a2eeb51a4b",
+  "question": "Does the patched C1 runtime retain the pinned actor and bounded causal M1 integration boundary?",
+  "runtime": {
+    "python": ">=3.12,<3.13",
+    "torch": "2.13.0",
+    "numpy": "1.26.4",
+    "device": "cpu",
+    "threads": 1,
+    "deterministic_algorithms": true,
+    "projects": ["g2p2c_policy_source", "g2p2c_training_source"]
+  },
+  "selection": {
+    "date": "2026-10-04",
+    "advisory_snapshot_sha256": "243be018372ea5c7fb37ff07500341766218892c4eea8d3110a4b0052cd4a5a4",
+    "critical_advisory": "GHSA-53q9-r3pm-6pq6",
+    "critical_patch_floor": "2.6.0",
+    "latest_snapshot_patch_floor": "2.13.0",
+    "latest_snapshot_patch_advisory": "GHSA-rrmf-rvhw-rf47",
+    "sources": [
+      "https://github.com/pytorch/pytorch/security/advisories/GHSA-53q9-r3pm-6pq6",
+      "https://github.com/advisories/GHSA-rrmf-rvhw-rf47",
+      "https://github.com/pytorch/pytorch/releases/tag/v2.13.0",
+      "https://pypi.org/project/torch/2.13.0/"
+    ],
+    "verified_wheel": "torch-2.13.0-cp312-cp312-macosx_14_0_arm64.whl",
+    "verified_wheel_sha256": "2fe228aba290d14b9f31b049be550dbd469c3fd3013d7a19705b30454da97027",
+    "scope": "Outside all affected Torch ranges in this dated snapshot; not a guarantee about unknown vulnerabilities or arbitrary checkpoint safety."
+  },
+  "ancestry": {
+    "g2p2c_commit": "37f7b7e161e9c1e7b702c8eebdc5cc7eb4f81d70",
+    "simglucose_commit": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc",
+    "historical_torch": "2.2.0",
+    "historical_training_lock_sha256": "7c9df6637d7078603395db9074ae9efcef5db7fe4d6911aa25ffb93a65901d70",
+    "historical_policy_lock_sha256": "7d8ba9d44ba98ba29e1977cbfe1eb4fdc8d6b2238609ea90a62405f5a687bf73",
+    "training_plan_sha256": "61a54b5fa67661418e480d8846d3a81b2eb06dbcf76c29a8c841cb413368fc4e",
+    "native_smoke_plan_sha256": "ca2baff8c07318beeabc98c7f5261e80673a91ae00220f1917febe11713e8c68"
+  },
+  "checkpoint_boundary": {
+    "runtime_exact_version_required": true,
+    "sha256_before_deserialization": true,
+    "max_checkpoint_bytes": 67108864,
+    "format": "Uncompressed torch.save ZIP state_dict; no legacy pickle/TAR or TorchScript archive",
+    "max_archive_entries": 1024,
+    "max_total_uncompressed_bytes": 67108864,
+    "weights_only": true,
+    "user_safe_globals_allowed": false,
+    "payload": "Plain dict or OrderedDict with exact source actor keys and plain dense CPU float32 finite tensors of exact shape and dtype",
+    "strict_load_state_dict": true,
+    "unsafe_retry_allowed": false,
+    "limitations": "Size/format checks bound the accepted container; PyTorch deserialization is not an adversarial sandbox. Only trusted, declared checkpoints are supported."
+  },
+  "acceptance": {
+    "source_state_float32_exact_parity": true,
+    "source_actor_constructor_tensor_and_seven_output_exact_parity": true,
+    "trained_actor_tensor_digest_unchanged": true,
+    "trained_source_intake_forward_exact_states_per_profile": 16,
+    "synthetic_commands_per_profile": 741,
+    "synthetic_reset_exact_repeat": true,
+    "caller_rng_preserved": true,
+    "rejected_observation_or_action_does_not_advance_state": true,
+    "checkpoint_refusal": ["hash", "legacy_container", "executable_object", "extra_or_missing_keys", "shape", "dtype", "nonfinite", "sparse_or_tensor_subclass", "oversize", "custom_safe_globals", "wrong_runtime"],
+    "native_cases": [
+      {"profile": "adult#001", "seed": 101, "condition": "D", "checkpoint_sha256": "7b8f87cff41e2971c66cee4ca1ac0ce2fa56e263e0f45d96db4893e9d112e273", "actor_tensor_sha256": "a7d40830c114e918ac9c204c5b8dd7e6d3a1d5de9b07e5b739bb02aa4417d6d1"},
+      {"profile": "adult#002", "seed": 101, "condition": "D", "checkpoint_sha256": "3fa5f9a12f43154d8aaacd82ff5854e5c9a9aa87710f8c1e84eeb97611fbdcc9", "actor_tensor_sha256": "48e9da62a4d3bc9ad1c01ca89d0286fa081743c5378d71f3d978d9f99728242b"}
+    ],
+    "native_intervals_per_case": 960,
+    "native_endpoint_min": 2880,
+    "native_missing_cgm_intervals": 10,
+    "missing_cgm_action": "Exact declared profile basal, zero bolus",
+    "actions": "Finite basal within 0..5 U/min, zero bolus",
+    "saved_command_replay_exact": true,
+    "fresh_process_repeat_initial_trace_exact": true,
+    "historical_runtime_comparison": "Record exact equality or changed fields/max absolute differences; cross-version numeric equality is not assumed and is not a required gate",
+    "native_worker_timeout_seconds": 600,
+    "full_training_repeated": false,
+    "efficacy_metrics_authorized": false,
+    "comparator_eligible": false
+  }
+}

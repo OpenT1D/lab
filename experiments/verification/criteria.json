@@ -1,0 +1,15 @@
+{
+  "version": "iv001-engineering-limits/1",
+  "limits": {
+    "max_abs_glucose_mg_dl": 0.1,
+    "mean_abs_glucose_mg_dl": 0.02,
+    "max_abs_exposure_pp": 0.25,
+    "abs_insulin_u": 0.01
+  },
+  "rationale": {
+    "max_abs_glucose_mg_dl": "Engineering reporting scale of one tenth mg/dL, not a clinical accuracy tolerance. Prespecified after the two-configuration pilot: maximum native-to-finest deviation 0.00003310 mg/dL for simglucose and 0.08648801 mg/dL for Cambridge PID. Full-matrix deviations above 0.1 remain sensitive; historical exact regressions are unchanged.",
+    "mean_abs_glucose_mg_dl": "Engineering bound of 0.02 mg/dL on day-weighted mean absolute deviation, stricter than the pointwise bound to detect sustained small drift. Pilot native-to-finest means were 0.000001575 and 0.01534833 mg/dL. This bounds numerical reporting drift only and is not a biological prediction criterion.",
+    "max_abs_exposure_pp": "A quarter percentage point is 3.6 minutes of a 1440-minute scored day. It allows one simglucose three-minute interval crossing an exposure threshold, or up to three Cambridge one-minute intervals. Pilot maximum was one Cambridge interval (0.06944445 pp), zero for simglucose. Larger shifts are reported as sensitive.",
+    "abs_insulin_u": "A 0.01 U day-total engineering bound detects sustained delivery changes while allowing a few quantized basal intervals: one Cambridge 0.05 U/h increment for five minutes is 0.00416667 U. Both pilot tracks had zero delivery difference. Fixed-input replay additionally requires EXACT delivery and meal histories over common intervals, regardless of this feedback bound. This is not a dosing recommendation."
+  }
+}

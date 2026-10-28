@@ -1,0 +1,66 @@
+{
+  "schema": "opent1d.observation-analysis-protocol/1",
+  "id": "OT-054-synthetic/1",
+  "specified_date": "2026-10-18",
+  "scope": "Invented paired observations only; fixed supplied kinetics; no human inference or coverage claim",
+  "feasibility_handoff_commit": "4f38f01a3d3f96319155e83b9ede52bd595fb521",
+  "feasibility_dossier_commit": "cd10cb07577e6fb9183934f3b59fce974bf944e4",
+  "method": "polonsky1986-fixed-kinetic-linear-concentration-exact/1",
+  "source": {
+    "reference": "Polonsky et al. 1986, DOI 10.1172/JCI112308, p99 process scheme; existing BC-003/1 ancestry",
+    "decision": "0067-mmtt-feasibility-boundary",
+    "upstream_r_code_used": false
+  },
+  "endpoint": {
+    "window_min": [0, 120],
+    "total_unit": "pmol",
+    "rate_unit": "pmol/min",
+    "includes_basal": true,
+    "normalization": "none",
+    "paired_contrast": "followup minus baseline",
+    "equimolar_cpeptide_insulin_release_assumed": true
+  },
+  "canonical_units": {"time": "min", "cpeptide": "pmol/L", "volume": "L", "glucose": "mmol/L"},
+  "input_conversion": "opent1d.observations/1 nmol/L C-peptide multiplied by exactly 1000; original bytes retained",
+  "method_rules": {
+    "maximum_interval_evaluations": 500000,
+    "interpolation": "piecewise linear central concentration on actual observed times; no extrapolation",
+    "initial_central": "V times observed C at 0; recomputed for every draw and subset",
+    "initial_peripheral": "fixed initial_peripheral_factor times k1/k2 times initial central; factor 1 is equilibrium",
+    "integration": "exact peripheral linear-forcing update and compartment mass balance per interval",
+    "negative_rate_tolerance_pmol_min": 1e-9,
+    "negative_rate_policy": "retain calculated rates/totals and mark boundary failure; never clip",
+    "missing_censored_policy": "retain observation and fail affected visit; no imputation or LOQ substitution",
+    "glucose_policy": "retain measured traces, fasting glucose, AUC and meal/medication context; missing context prevents resolved classification",
+    "cohort_inference": "none; individual paired results and full coverage only"
+  },
+  "uncertainty_rules": {
+    "kind": "declared synthetic additive Gaussian perturbations, not an empirical assay model",
+    "independent_component": "one independent draw per retained C-peptide observation",
+    "paired_component": "one shared offset per participant and draw across both visits and all retained times",
+    "variant_pairing": "the same perturbed observations used across required variants",
+    "refit": "repeat baseline, initialization, interpolation and integration using only each draw's observations",
+    "failure_policy": "retain every draw and both visits; any failed required draw makes that variant interval unavailable",
+    "interval": "central nominal 95 percent perturbation interval; linear order-statistic interpolation; no human coverage claim",
+    "interpretation": "strictly above zero increase; strictly below zero decrease; otherwise unresolved, never evidence of no change"
+  },
+  "classification_rules": {
+    "consistent within investigated assumptions": "all required variants succeed with the same resolved direction",
+    "assumption-dependent": "different direction labels with at least one resolved direction, all required variants otherwise complete",
+    "insufficiently determined": "any required failed/missing variant or uncertainty draw, invalid import/context, or all labels unresolved"
+  },
+  "verification_tolerances_prespecified": {
+    "constant_equilibrium_total_abs_pmol": 1e-8,
+    "independent_rk4_integral_abs_pmol": 1e-5,
+    "source_forward_fine_grid_relative_total": 0.0001,
+    "source_forward_refinement": "absolute endpoint error decreases over 15, 5, 1 and 0.25 minute grids with forcing changes retained",
+    "unit_covariance_relative": 1e-11,
+    "small_interval_relative": 1e-10,
+    "one_compartment_gaussian_variance_relative": 0.15,
+    "one_compartment_shared_offset_covariance_relative": 0.25,
+    "one_compartment_gaussian_interval_halfwidth_relative": 0.15,
+    "fresh_process_repeat": "exact JSON/Markdown bytes under the recorded runtime",
+    "relocation_reconstruction": "exact report bytes; original archive unchanged"
+  },
+  "not_established": ["human access", "T1D individual kinetics", "empirical uncertainty coverage", "clinical margin", "independent usability", "comparative researcher benefit"]
+}

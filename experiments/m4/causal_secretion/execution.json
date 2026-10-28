@@ -1,0 +1,84 @@
+{
+  "schema": "m4-causal-execution/1",
+  "date": "2026-09-27",
+  "base_commit": "781ab6e",
+  "reference": {
+    "protocol": "BC-008/2",
+    "manifest_sha256": "4e06516f359c9298da5bef18eaaa36415b19efcad5d2f6f6d5730062e4f61186",
+    "passed": true
+  },
+  "example": {
+    "model_id": "bc008-equation-adapter-example/1",
+    "source_sha256": "2d65b88bfe858682fc0d05d24e404bad4f16166da4c4a94f916d76c5ba560215",
+    "report_sha256": "e3382e64118eb0b9b8b10eafe85081407b3b23744d8d930ca49cd6dc5e716a4f",
+    "passed": true,
+    "metrics": {
+      "glucose_solver_error_mg_dl": 2.725738691657222e-08,
+      "insulin_solver_error_pmol_l": 7.083112089142612e-07,
+      "source_solver_error_pmol_kg_min": 1.7063431645425453e-07,
+      "insulin_mass_error_pmol_kg": 1.6072476682893466e-11,
+      "glucose_mass_error_mg_kg": 3.6669374661735255e-08,
+      "negative_amount_tolerance": 0.0,
+      "fasting_glucose_drift_mg_dl": 1.057503662286231e-10,
+      "fasting_insulin_drift_pmol_l": 2.56281839932049e-10,
+      "basal_control_glucose_error_mg_dl": 0.0,
+      "basal_control_insulin_error_pmol_l": 0.0,
+      "repeat_error": 0.0
+    },
+    "glucose_contrast_vs_bc008": {
+      "fasting": {
+        "auc_above_initial_mg_min_dl": 0.0,
+        "peak_mg_dl": 0.0,
+        "nadir_mg_dl": 0.0,
+        "final_mg_dl": 0.0
+      },
+      "gastric_load_30g": {
+        "auc_above_initial_mg_min_dl": 0.0,
+        "peak_mg_dl": 0.0,
+        "nadir_mg_dl": 0.0,
+        "final_mg_dl": 0.0
+      }
+    }
+  },
+  "synthetic_parameter_variant": {
+    "model_id": "bc008-equation-adapter-synthetic-variant/1",
+    "declaration_sha256": "653f3147ef776275914abf732823513846600213cd30ffb89d76948d306d3bd7",
+    "report_sha256": "ef9be01b2bf3fdcf4f97dd17ed0bbe81674fa3985e590e45ca5cc06b2a332de9",
+    "passed": true,
+    "metrics": {
+      "glucose_solver_error_mg_dl": 4.702101142313387e-08,
+      "insulin_solver_error_pmol_l": 1.8903851597729404e-06,
+      "source_solver_error_pmol_kg_min": 3.385497475694166e-07,
+      "insulin_mass_error_pmol_kg": 1.6228796084760688e-11,
+      "glucose_mass_error_mg_kg": 3.6669374661735255e-08,
+      "negative_amount_tolerance": 0.0,
+      "fasting_glucose_drift_mg_dl": 1.0664077065940017e-10,
+      "fasting_insulin_drift_pmol_l": 2.17523316389968e-10,
+      "basal_control_glucose_error_mg_dl": 0.0,
+      "basal_control_insulin_error_pmol_l": 0.0,
+      "repeat_error": 0.0
+    },
+    "glucose_contrast_vs_bc008": {
+      "fasting": {
+        "auc_above_initial_mg_min_dl": 3.622766087119089e-09,
+        "peak_mg_dl": 8.810729923425242e-13,
+        "nadir_mg_dl": 0.0,
+        "final_mg_dl": 1.6200374375330284e-11
+      },
+      "gastric_load_30g": {
+        "auc_above_initial_mg_min_dl": 907.6623149717434,
+        "peak_mg_dl": 1.2347909297913873,
+        "nadir_mg_dl": 0.0,
+        "final_mg_dl": 5.190927598935843
+      }
+    }
+  },
+  "artifact_checks": {
+    "source_free_reconstruction_byte_identical": true,
+    "resealed_liver_rate_change_rejected": true,
+    "deliberate_model_failure_preserved": true,
+    "failed_case_count": 4,
+    "failure_report_has_no_scenario_contrasts": true
+  },
+  "scope": "synthetic numerical interface checks only; no human or therapy validation, no optimized insulin requirement"
+}

@@ -1,0 +1,69 @@
+{
+  "schema": "bc009-hepatic-protocol/1",
+  "id": "BC-009/1",
+  "base_commit": "c6cb206",
+  "specified_date": "2026-09-22",
+  "claim": "synthetic_structure_sensitivity_not_biological_validation",
+  "question": "How do two baseline-matched published hepatic relations change the BC-008 secretion contrast, separately and together?",
+  "parent": "experiments/m4/feedback/protocol.json",
+  "parent_id": "BC-008/2",
+  "source": {
+    "doi": "10.1109/TBME.2007.893506",
+    "locators": "p1743 Table I normal column and equations4-7; p1744 equations10-12",
+    "m5_min_kg_pmol": 0.0304,
+    "m6_published": 0.6471,
+    "HEb_published": 0.6,
+    "kp4_mg_pmol_min": 0.0618,
+    "native_m5": "archive but do not use: unused profile coefficient, individual ancestry not established",
+    "literal_coefficients": "evaluate baseline mismatch only; do not simulate an unbalanced drop-in as a mechanism effect"
+  },
+  "variants": [
+    {"id": "fixed", "extraction": false, "portal": false},
+    {"id": "extraction", "extraction": true, "portal": false},
+    {"id": "portal", "extraction": false, "portal": true},
+    {"id": "both", "extraction": true, "portal": true}
+  ],
+  "cases": ["native_zero", "constant_basal", "feedback_full"],
+  "scenarios": ["fasting", "gastric_load_30g"],
+  "inherits": "exact BC-008 profile, source coefficients, basal replacement, initial gastric stimulus, 240 min, 0.25-min reports, all three solvers and runtime",
+  "relations": {
+    "HEb": "m30/(m1+m30)",
+    "HE": "HEb - m5*(S-Sb) when extraction enabled; else HEb",
+    "m3": "m30 + m1*(HE-HEb)/((1-HE)*(1-HEb)); equals HE*m1/(1-HE), exact m30 at baseline",
+    "m6_effective": "HEb + m5*Sb; engineering reanchoring using source eq6, not fitted",
+    "EGP": "max(kp1-kp2*Gp-kp3*Id-kp4*(P-P0),0) when portal enabled; otherwise original native EGP",
+    "kp1_effective": "native kp1 + kp4*P0; engineering reanchoring using source eq12, not fitted",
+    "ownership": "replace native m30 loss in guarded liver derivative and its ledger; replace EGP in guarded plasma glucose derivative; use corrected Gdot in source at same stage; no second liver input or peripheral clearance change"
+  },
+  "HE_computational_envelope": [0, 0.999999],
+  "failure_policy": "terminate on HE boundary, BC-008 glucose envelope or negative physical amount; retain event time and last state, all other cases and incomplete-case denominator; never clip HE or conceal an unsupported domain",
+  "verification": {
+    "disabled_rhs_error": 0,
+    "disabled_reference_state_error": 0,
+    "stationary_derivative_change": 1e-8,
+    "literal_equation_error": 1e-12,
+    "source_stage_error": 1e-12,
+    "insulin_mass_error_pmol_kg": 1e-6,
+    "glucose_mass_error_mg_kg": 1e-5,
+    "glucose_solver_error_mg_dl": 0.01,
+    "insulin_solver_error_pmol_l": 0.01,
+    "source_solver_error_pmol_kg_min": 1e-5,
+    "fasting_glucose_drift_mg_dl": 0.01,
+    "fasting_insulin_drift_pmol_l": 0.01,
+    "constant_control_glucose_error_mg_dl": 0.01,
+    "zero_control_state_error": 0,
+    "negative_amount_tolerance": 1e-8,
+    "repeat_artifact_differences": 0
+  },
+  "quadrature": {"method": "quad_vec", "epsabs": 1e-9, "epsrel": 1e-9, "max_estimated_cumulative_error": 1e-6},
+  "analysis": {
+    "contrasts": "feedback_full minus constant_basal within each hepatic variant; change in this contrast versus fixed; both-extraction-portal+fixed interaction",
+    "outcomes": ["signed glucose AUC above initial", "sampled glucose peak/nadir", "final glucose", "final insulin", "signed insulin AUC above initial", "EGP integral", "hepatic loss integral"],
+    "numerical_resolution": "absolute contrast >=10 times largest change of the same contrast across coarse/tight/reference, denominator floor epsilon*(1+abs(reference)); zero and unresolved retained",
+    "biological_threshold": null,
+    "coefficient_uncertainty": "switching relations on/off is a structural diagnostic, not a confidence interval or a population range",
+    "identifiability": "no fitting; assess required observations and confounding, not human parameter recovery",
+    "publication_reproduction": "equation-level relations only; no full healthy/T2D cohort reproduction"
+  },
+  "excluded": ["BC-008 modification", "clinical treatment efficacy", "graft drainage prediction", "new C-peptide observation coupling", "human fitting or validation", "counterregulatory hormones or pulsatility", "claim of superior physiology", "unverified author-code or patient-data import"]
+}

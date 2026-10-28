@@ -1,0 +1,47 @@
+{
+  "protocol": "lit001-synthetic-reference/1",
+  "specified_utc": "2026-09-19T22:39:09.623462+00:00",
+  "claim": "Published-equation implementation with declared synthetic conditions; not a reported patient/cohort curve.",
+  "source": "10.3390/metabo11040235; Equation 3, Figure 3, Table 2",
+  "source_pdf_sha256": "4587ea88d98cb6f1dca6a73444aca42602eb62ebf39cccedad11412db80f300d",
+  "dose_U_per_kg": 0.2,
+  "horizon_min": 600,
+  "step_min": 0.25,
+  "conditions": {
+    "initial_SC1_SC2_plasma": 0,
+    "prior_input": 0,
+    "covariate_offset_from_unreported_cohort_mean": 0,
+    "random_effects": 0,
+    "ka1_interpretation": "constant per person; Eq3 printed ka1(t) conflicts with surrounding notation",
+    "body_mass_normalization": "states mU/kg, input mU/kg/min, volume L/kg; dimensionally inferred convention",
+    "source_exposure": "known development material; no parameter fitting"
+  },
+  "criteria": {
+    "max_concentration_error_mU_per_L": 1e-05,
+    "max_mass_error_mU_per_kg": 1e-07,
+    "negative_state_tolerance_mU_per_kg": 1e-09,
+    "rationale": "Engineering precision for tight numerical integration against an independent closed form; no empirical accuracy threshold."
+  },
+  "solvers": [
+    {
+      "method": "RK45",
+      "rtol": 1e-06,
+      "atol": 1e-09
+    },
+    {
+      "method": "RK45",
+      "rtol": 1e-09,
+      "atol": 1e-12
+    },
+    {
+      "method": "DOP853",
+      "rtol": 1e-10,
+      "atol": 1e-12
+    }
+  ],
+  "checked_source_locations": [
+    "PDF p5 Equation3/Figure3 visually checked by extraction agent and root",
+    "PDF p12 Table2 visually checked by extraction agent and root"
+  ],
+  "parameter_file_sha256_at_specification": "a86c944f3070c87907c54f9204e6fa64ce6a5bc467f3695645f4333da1a4005e"
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "opent1d.mmtt-sampling-protocol/1",
+  "scope": "synthetic-engineering-only",
+  "endpoint": "whole-body total endogenous secretion including basal",
+  "window_minutes": [0, 120],
+  "endpoint_unit": "pmol",
+  "paired_change": "followup minus baseline",
+  "reference": "full observed schedule; an analysis reference, not biological truth",
+  "subsets": "two or three development-selected proper subsets of actual times, preserving 0 and 120",
+  "masking": "opaque raw CSV cells removed before shared analyte parsing, conversion, initialization, uncertainty and estimation",
+  "shared_analysis": "opent1d.observation-analysis-plan/1",
+  "shared_clock_admission": "required_times_min; missing requests invalidate the visit before estimation",
+  "reuse": "same fixed kinetics, uncertainty settings, keyed retained-time perturbations, execution and native report reader",
+  "allocation": "participant-disjoint development/evaluation; all visits together",
+  "failures": "all planned people, visits, schedules, variants and perturbations retained",
+  "precision": "descriptive sample SD of reduced-minus-reference differences; not a confidence interval for bias",
+  "low_values": "show all observed minima, assay LOQ and censoring without a default clinical cutoff",
+  "empirical_margins": null,
+  "empirical_assessment": "not performed",
+  "human_execution_authorized": false,
+  "prospective_sampling_protocol_approved": false
+}

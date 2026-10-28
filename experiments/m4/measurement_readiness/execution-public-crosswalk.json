@@ -1,0 +1,42 @@
+{
+  "schema": "bc015-public-crosswalk-execution/1",
+  "date": "2026-09-25",
+  "protocol": "BC-015-P2/1",
+  "source": "Eight public CIT-07/08 Version 2 variable dictionaries from the official test-domain catalogue; no participant data",
+  "manifest_sha256": "47ec3f88b80f180bf4d84d81d70e721e6180a21a0fb9af1abd2440578efaa6c2",
+  "reader_sha256": "f8d5d520be5d95e5fec0d2431486b0a2bbccbdf8b4d0c21e1038be88658cdf8f",
+  "local_report": "results/m4-measurement-readiness/cit07-public-crosswalk-02.json",
+  "local_report_sha256": "b534983797020218e6eec8edd5e9a7ff19ed35ef6cba95c9295f40a64b5e8687",
+  "fresh_repeat": "byte-identical report at results/m4-measurement-readiness/cit07-public-crosswalk-03.json",
+  "findings": {
+    "fsigt_raw_has_cpeptide_column": false,
+    "shared_subject_key_documented": true,
+    "shared_transplant_day_field_documented": true,
+    "verified_same_challenge_gic_crosswalk": false,
+    "human_execution_authorized": false
+  },
+  "candidate_sha256": "323e791b7f85e768bee215508a43da1d07811356c7e084bac415695b6117eaf9",
+  "metadata_archive": "results/m4-measurement-readiness/cit07-dictionaries-01",
+  "metadata_manifest_sha256": "7935c0b6dc3cebda8c29b106a28831f136f2c20ee1c71a289dce71bef22cc0cb",
+  "metadata_report_sha256": "eea3433817f09a1d4b6703b7ba467f89dae13bbf14ff77c2979e15e51a378abd",
+  "metadata_counts": {
+    "supported": 2,
+    "unverified": 5,
+    "contradicted": 1
+  },
+  "checks": {
+    "source_hashes_and_fields": "eight dictionaries matched the manifest",
+    "independent_workbook_read": "bundled openpyxl extraction agreed with the standard-library field reader",
+    "metadata_archive_reconstruction": "byte-identical",
+    "focused_tests": "eight passed across BC-015-P1 and P2",
+    "repository_check": {
+      "command": "uv run --locked python scripts/check.py",
+      "status": "passed on clean retry after one unrelated M3 timeout-test stall",
+      "tests": 635,
+      "lint": "passed",
+      "strict_documentation_build": "passed",
+      "log_sha256": "384e1ef213ed6fec542a0c507d1d9beede64e30bba26173f56d971d9a889eb03"
+    }
+  },
+  "limitations": "Production-release equivalence, record coverage, event-level joins, data rights and external domain review remain unverified."
+}

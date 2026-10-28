@@ -1,0 +1,211 @@
+{
+  "schema": "bc013-protocol/1",
+  "id": "BC-013/1",
+  "specified_date": "2026-09-22",
+  "base_commit": "da5adbf41f370c6211db586537e101582436e28f",
+  "claim": "conditional_synthetic_bounded_nuisance_reoptimized_objective_profiles",
+  "question": "How do nuisance reoptimization and central-volume knowledge affect within-bound profile geometry for evoked gain and removal rates in the existing synthetic model?",
+  "parent_protocol": "BC-012/1",
+  "runtime": {
+    "project": "experiments/m0/simglucose",
+    "python": "3.12",
+    "numpy": "1.26.4",
+    "scipy": "1.13.1"
+  },
+  "model": {
+    "parameter_names": [
+      "evoked_gain",
+      "m4_scale",
+      "k3_scale",
+      "volume_scale"
+    ],
+    "truth": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "lower": [
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "upper": [
+      1.5,
+      1.5,
+      1.5,
+      1.5
+    ],
+    "unchanged": "BC012 model, 24 states, equilibrium reconditioning with exact basal G/I and known SC input, 30g gastric load, 240min, fixed hepatic/action/meal/Cp exchange and equimolar appearance"
+  },
+  "observation": {
+    "step_min": 30,
+    "data_cases": [
+      "noiseless",
+      "noise_117",
+      "noise_221"
+    ],
+    "synthetic_sd": [
+      5,
+      10,
+      30
+    ],
+    "source": "Fresh unchanged BC012/BC011 generator at volume1; known development examples, not held-out evaluation",
+    "conditioning": "Exclude t0 G/I from stochastic residuals; t0 Cp remains observed. 25 GIC or16 GI residuals. Independent Gaussian errors with fixed declared SD for noisy examples; noiseless gives weighted-objective geometry, not coverage."
+  },
+  "designs": {
+    "free_volume": {
+      "columns": [
+        0,
+        1,
+        2
+      ],
+      "estimated": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "fixed": {},
+      "profiled": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "fixed_volume": {
+      "columns": [
+        0,
+        1,
+        2
+      ],
+      "estimated": [
+        0,
+        1,
+        2
+      ],
+      "fixed": {
+        "volume_scale": 1.0
+      },
+      "profiled": [
+        0,
+        1,
+        2
+      ]
+    },
+    "GI": {
+      "columns": [
+        0,
+        1
+      ],
+      "estimated": [
+        0,
+        1
+      ],
+      "fixed": {},
+      "profiled": [
+        0,
+        1
+      ],
+      "unobservable": [
+        "k3_scale",
+        "volume_scale"
+      ]
+    }
+  },
+  "inference": {
+    "unrestricted_starts": [
+      [
+        0.7,
+        1.25,
+        0.8,
+        0.8
+      ],
+      [
+        1.3,
+        0.75,
+        1.2,
+        1.2
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "profile_starts": "Two starts at each target: unrestricted best parameters and whichever of the two inherited off-truth starts is farthest in nuisance log coordinates from that best (tie picks first). Fixed/interest coordinates override starts. No sequential warm-start selection.",
+    "optimizer": {
+      "method": "trf",
+      "max_nfev": 120,
+      "ftol": 1e-08,
+      "xtol": 1e-08,
+      "gtol": 1e-08,
+      "log_step": 0.001
+    },
+    "objective": "Q=sum(((prediction-observation)/fixed_SD)^2)=2*least_squares.cost. DeltaQ subtracts the same-design/data/solver unrestricted minimum; never clip negative DeltaQ.",
+    "volume_projection": "If V is free nuisance, minimize analytically over a=1/V: a=clip(sum(q*y)/sum(q*q),1/1.5,1/0.5), V=1/a, q=Cp(theta_first3,V1); Cp t0 included. Other nuisance parameters fitted in log coordinates. Keep projected volume estimate and bounds visible. When V is interest or fixed, do not project.",
+    "baseline_comparator": "For each free-volume dataset, independently run unchanged BC012 unprojected two-start fit_case under fit solver; compare best objective to projected unrestricted fit. Parent exact t0 G/I residuals contribute only floating roundoff."
+  },
+  "profiles": {
+    "coarse_grid": [
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      1.5
+    ],
+    "refinement_grid": [
+      0.625,
+      0.875,
+      1.125,
+      1.375
+    ],
+    "add_unrestricted_estimate": true,
+    "cutoff": 3.841458820694124,
+    "cutoff_meaning": "Nominal asymptotic pointwise one-parameter chi-square(1)95% reference contour under declared Gaussian SDs; not joint coverage, finite-sample/human confidence or coverage with active boundaries.",
+    "refinement": "Retain coarse/fine sampled topology. Bisect EVERY adjacent sampled sign-change bracket of DeltaQ-cutoff; retain complete history until absolute multiplier bracket width <=0.005 (max12 bisections). Report all crossing brackets and intervals supported by sampled points, never infer untested absence of disconnected regions.",
+    "slice": "At each target also evaluate Q with ALL nuisance values held at unrestricted best, including volume. This is a fixed-nuisance slice comparator, not the profile.",
+    "solver_verification": "Refit unrestricted baseline under reference solver with same3starts. Refit both final endpoints of EVERY crossing and both physical bounds under reference solver with two fixed profile starts; also evaluate each fit-solver best parameter vector under reference solver. Require objective agreement and contour-side agreement at checked endpoints/bounds.",
+    "bounds": "Interest bounds and active nuisance bounds are engineering limits; classify bound-limited endpoints and annotate nuisance-bound hits. Do not extrapolate or force closed intervals.",
+    "total_cases": 9,
+    "total_profiles": 27
+  },
+  "criteria": {
+    "objective_absolute_tolerance": 0.001,
+    "profile_below_baseline_tolerance": 0.0001,
+    "profile_above_slice_tolerance": 0.0001,
+    "crossing_max_width": 0.005,
+    "noiseless_parameter_relative_error": 0.01,
+    "analytic_volume_objective_error": 1e-08,
+    "quadratic_profile_objective_error": 1e-08,
+    "quadratic_profile_parameter_error": 1e-05,
+    "repeat_artifact_differences": 0
+  },
+  "verification": "Run unchanged BC012 forward verification; independent quadratic profiling oracle, conditional volume minimizer and bound oracles before biological profiling; verify same shared observations and profile/slice arithmetic; reference solver refits, baseline comparator and full fresh-process repetition.",
+  "failure_policy": "Store every start, fixed value, projected volume, predictions, residuals, nuisance bounds and failures. Any optimizer/model failure, missing planned case/profile/point, profile below declared minimum, profile above feasible slice, failed independent/numerical gate or unresolved reference contour-side mismatch prevents accepted completion. Never hide a lower profile by clipping DeltaQ or silently replace the original baseline. Preserve failed archives and require documented amendment before changing protocol.",
+  "excluded": [
+    "new dynamics or physiology",
+    "human data or independent empirical validation",
+    "10min schedule comparison",
+    "new noise realizations or coverage simulation",
+    "unknown SD or residual-rescaled likelihood",
+    "global uniqueness or proof no hidden profile components",
+    "claims of finite-sample/human confidence or therapy effect",
+    "unbounded extrapolation"
+  ],
+  "sources": [
+    {
+      "doi": "10.1093/bioinformatics/btp358",
+      "location": "Raue2009 sections2.1(Eqs4-6),2.2.2(Eq8),4(Eq10),Fig3",
+      "use": "weighted objective, likelihood-ratio contour, nuisance reoptimization and local-minimum caution"
+    },
+    {
+      "doi": "10.1080/01621459.1987.10478472",
+      "location": "SelfLiang1987 section3 pp607-609 and section4 p610",
+      "use": "regularity and parameter-boundary limitations of chi-square reference"
+    }
+  ]
+}

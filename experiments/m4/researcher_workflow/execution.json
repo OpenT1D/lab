@@ -1,0 +1,409 @@
+{
+  "schema": "m4-researcher-execution/1",
+  "date": "2026-10-02",
+  "branch": "codex/m4-researcher-workflow",
+  "implementation_commit": "ca09264274621eae86c2b732e4179af1e4053287",
+  "protocol_file_sha256": "f6a8a22036cc63b1a9770eec8b31932ff4761dbd9000846d6438721e86e62cf0",
+  "artifacts": {
+    "base": "results/m4-researcher-workflow",
+    "versioned": false
+  },
+  "runs": {
+    "dalla_man": {
+      "path": "results/m4-researcher-workflow/verified-dalla-man",
+      "git_head": "ca09264274621eae86c2b732e4179af1e4053287",
+      "git_dirty": false,
+      "status": "completed",
+      "passed": true,
+      "accepted_observation_cases": 6,
+      "manifest_sha256": "459e2ee6bb260f9ad282ca0f2fd3411834e58ec56db035ecf416001179410136",
+      "report_hashes": {
+        "report.json": "6ee65e81e80eb444bd1547821aced15a9813f5358eb975f98d7922ab9366620a",
+        "report.md": "7f1fb617d10cb402f68359291360e39397aa4e43e4924bffafa0be93c41cf1b5",
+        "figure.svg": "eebbfc6a694fe6bd17ee377a1998523f85c8b7b95ee51df6a49598a162853cb7"
+      },
+      "source_free_reconstruction": {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "python",
+          "-S",
+          "-m",
+          "experiments.m4.researcher_workflow.report",
+          "results/m4-researcher-workflow/verified-dalla-man",
+          "--output",
+          "results/m4-researcher-workflow/reconstructed-dalla-man"
+        ],
+        "path": "results/m4-researcher-workflow/reconstructed-dalla-man",
+        "byte_equal": {
+          "report.json": true,
+          "report.md": true,
+          "figure.svg": true
+        }
+      },
+      "causal_primary_cases": 8,
+      "causal_repeat_cases": 8,
+      "observation_primary_cases": 6,
+      "observation_repeat_cases": 6,
+      "repeat_changed": [],
+      "observation_checks": {
+        "oracle_concentration_error_pmol_l": {
+          "value": 2.5867009975877235e-10,
+          "limit": 1e-05,
+          "passed": true
+        },
+        "solver_concentration_error_pmol_l": {
+          "value": 2.585073800482929e-10,
+          "limit": 1e-05,
+          "passed": true
+        },
+        "mass_error_pmol_kg": {
+          "value": 5.9543481256696396e-12,
+          "limit": 1e-07,
+          "passed": true
+        },
+        "input_error_pmol_kg": {
+          "value": 4.547473508864641e-12,
+          "limit": 1e-07,
+          "passed": true
+        },
+        "negative_tolerance_pmol_kg": {
+          "value": 0.0,
+          "limit": 1e-09,
+          "passed": true
+        },
+        "equilibrium_drift_pmol_l": {
+          "value": 2.1934738470008597e-09,
+          "limit": 1e-07,
+          "passed": true
+        },
+        "zero_state_error": {
+          "value": 0.0,
+          "limit": 0,
+          "passed": true
+        },
+        "parent_source_solver_error_pmol_l": {
+          "value": 5.13832446813467e-07,
+          "limit": 0.01,
+          "passed": true
+        },
+        "finest_coarsening_error_pmol_l": {
+          "value": 0.02985165604994222,
+          "limit": 0.05,
+          "passed": true
+        },
+        "coarsening_error_ratio": {
+          "value": 0.1994057503325491,
+          "limit": 0.6,
+          "passed": true
+        },
+        "parent_dose_relative_error": {
+          "value": 1.6277853875713776e-07,
+          "limit": 0.0001,
+          "passed": true
+        },
+        "scale_ambiguity_error_pmol_l": {
+          "value": 0.0,
+          "limit": 1e-07,
+          "passed": true
+        },
+        "repeat_artifact_differences": {
+          "value": 0,
+          "limit": 0,
+          "passed": true
+        }
+      },
+      "meal_maximum_absolute_candidate_contrast": {
+        "host_constant_basal": {
+          "glucose_mg_dl": 35.45441053997129,
+          "insulin_pmol_l": 90.04583407938271,
+          "cpeptide_pmol_l": 675.6411987434294
+        },
+        "bc008_reference": {
+          "glucose_mg_dl": 0.0,
+          "insulin_pmol_l": 0.0,
+          "cpeptide_pmol_l": 0.0
+        }
+      },
+      "execution_command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "-m",
+        "experiments.m4.researcher_workflow.run",
+        "--config",
+        "experiments/m4/researcher_workflow/dalla_man.json",
+        "--reference",
+        "results/m4-researcher-workflow/dalla-man/reference",
+        "--output",
+        "results/m4-researcher-workflow/verified-dalla-man"
+      ]
+    },
+    "ultradian": {
+      "path": "results/m4-researcher-workflow/verified-ultradian",
+      "git_head": "ca09264274621eae86c2b732e4179af1e4053287",
+      "git_dirty": false,
+      "status": "completed",
+      "passed": true,
+      "accepted_observation_cases": 6,
+      "manifest_sha256": "323a46882132cc121cbe2deba7b2352c3f6a0611d31e29ff390d8a5bb83eb7e7",
+      "report_hashes": {
+        "report.json": "d87684731abe90af5bf810a7b2e54882d26bc65a07c14a4a62518e23c38025df",
+        "report.md": "01ab7917f53c76963745212b72652c8b479ddf9342db0bc7bb3014ae0d9ff636",
+        "figure.svg": "6b3705544ef9808d33439619be16156f44efaa90cd0a2159083670a3caa0179b"
+      },
+      "source_free_reconstruction": {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "python",
+          "-S",
+          "-m",
+          "experiments.m4.researcher_workflow.report",
+          "results/m4-researcher-workflow/verified-ultradian",
+          "--output",
+          "results/m4-researcher-workflow/reconstructed-ultradian"
+        ],
+        "path": "results/m4-researcher-workflow/reconstructed-ultradian",
+        "byte_equal": {
+          "report.json": true,
+          "report.md": true,
+          "figure.svg": true
+        }
+      },
+      "causal_primary_cases": 8,
+      "causal_repeat_cases": 8,
+      "observation_primary_cases": 6,
+      "observation_repeat_cases": 6,
+      "repeat_changed": [],
+      "observation_checks": {
+        "oracle_concentration_error_pmol_l": {
+          "value": 2.5867009975877235e-10,
+          "limit": 1e-05,
+          "passed": true
+        },
+        "solver_concentration_error_pmol_l": {
+          "value": 2.585073800482929e-10,
+          "limit": 1e-05,
+          "passed": true
+        },
+        "mass_error_pmol_kg": {
+          "value": 5.9543481256696396e-12,
+          "limit": 1e-07,
+          "passed": true
+        },
+        "input_error_pmol_kg": {
+          "value": 5.6843418860808015e-12,
+          "limit": 1e-07,
+          "passed": true
+        },
+        "negative_tolerance_pmol_kg": {
+          "value": 0.0,
+          "limit": 1e-09,
+          "passed": true
+        },
+        "equilibrium_drift_pmol_l": {
+          "value": 2.1934738470008597e-09,
+          "limit": 1e-07,
+          "passed": true
+        },
+        "zero_state_error": {
+          "value": 0.0,
+          "limit": 0,
+          "passed": true
+        },
+        "parent_source_solver_error_pmol_l": {
+          "value": 5.13832446813467e-07,
+          "limit": 0.01,
+          "passed": true
+        },
+        "finest_coarsening_error_pmol_l": {
+          "value": 0.02985165604994222,
+          "limit": 0.05,
+          "passed": true
+        },
+        "coarsening_error_ratio": {
+          "value": 0.1994057503325491,
+          "limit": 0.6,
+          "passed": true
+        },
+        "parent_dose_relative_error": {
+          "value": 1.6277853875713776e-07,
+          "limit": 0.0001,
+          "passed": true
+        },
+        "scale_ambiguity_error_pmol_l": {
+          "value": 0.0,
+          "limit": 1e-07,
+          "passed": true
+        },
+        "repeat_artifact_differences": {
+          "value": 0,
+          "limit": 0,
+          "passed": true
+        }
+      },
+      "meal_maximum_absolute_candidate_contrast": {
+        "host_constant_basal": {
+          "glucose_mg_dl": 15.36724570969048,
+          "insulin_pmol_l": 34.24005719701957,
+          "cpeptide_pmol_l": 253.03946944842605
+        },
+        "bc008_reference": {
+          "glucose_mg_dl": 20.307282353351468,
+          "insulin_pmol_l": 68.42970262382674,
+          "cpeptide_pmol_l": 429.4268929675439
+        }
+      },
+      "execution_command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "-m",
+        "experiments.m4.researcher_workflow.run",
+        "--config",
+        "experiments/m4/researcher_workflow/ultradian.json",
+        "--reference",
+        "results/m4-researcher-workflow/dalla-man/reference",
+        "--output",
+        "results/m4-researcher-workflow/verified-ultradian"
+      ]
+    },
+    "negative_rate_failure": {
+      "path": "results/m4-researcher-workflow/verified-failure",
+      "git_head": "ca09264274621eae86c2b732e4179af1e4053287",
+      "git_dirty": false,
+      "status": "failed",
+      "passed": false,
+      "accepted_observation_cases": 0,
+      "manifest_sha256": "f66b026d34c62c35e657b7d9930832050f3264968d1be74f338d9793eb8133fb",
+      "report_hashes": {
+        "report.json": "54d520f20cb9f8fbfce04f9221594ab15109f5adec95a55e5489e3d32a827a19",
+        "report.md": "4d23e981b6364828d4cbd05685319eea2a12e3880b4b701fc7f9271ca4e0adf6",
+        "figure.svg": "f823fc36538c00d3121e0ed8c1212d51ff475e04b8227bdac6f1b1e6bf71b4b0"
+      },
+      "source_free_reconstruction": {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "python",
+          "-S",
+          "-m",
+          "experiments.m4.researcher_workflow.report",
+          "results/m4-researcher-workflow/verified-failure",
+          "--output",
+          "results/m4-researcher-workflow/reconstructed-failure",
+          "--allow-failed"
+        ],
+        "path": "results/m4-researcher-workflow/reconstructed-failure",
+        "byte_equal": {
+          "report.json": true,
+          "report.md": true,
+          "figure.svg": true
+        }
+      },
+      "expected_failure": true,
+      "stage": "causal",
+      "case_accounting": {
+        "primary": {
+          "fasting--candidate": "not_attempted",
+          "fasting--host_constant_basal": "not_attempted",
+          "fasting--bc008_reference": "not_attempted",
+          "gastric_load_30g--candidate": "not_attempted",
+          "gastric_load_30g--host_constant_basal": "not_attempted",
+          "gastric_load_30g--bc008_reference": "not_attempted"
+        },
+        "repeat": {
+          "fasting--candidate": "not_attempted",
+          "fasting--host_constant_basal": "not_attempted",
+          "fasting--bc008_reference": "not_attempted",
+          "gastric_load_30g--candidate": "not_attempted",
+          "gastric_load_30g--host_constant_basal": "not_attempted",
+          "gastric_load_30g--bc008_reference": "not_attempted"
+        }
+      },
+      "execution_command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "-m",
+        "experiments.m4.researcher_workflow.run",
+        "--config",
+        "/tmp/m4-controlled-failure-input/config.json",
+        "--reference",
+        "results/m4-researcher-workflow/dalla-man/reference",
+        "--output",
+        "results/m4-researcher-workflow/verified-failure"
+      ]
+    }
+  },
+  "focused_root_tests": {
+    "passed": true,
+    "count": 16
+  },
+  "locked_cpeptide_numerical_and_lifecycle_tests": {
+    "passed": true,
+    "count": 5
+  },
+  "repository_check": {
+    "passed": true,
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "python",
+      "scripts/check.py"
+    ],
+    "root_unit_tests": 761,
+    "documentation_build": "passed",
+    "log_sha256": "dbd6511e4318cec627a4235ea9414ebe8cb461c31e60a35481806caab67edc73",
+    "scope": "local repository lint, formatting, citation metadata, navigation, unit tests and documentation; not biological validity or hosted CI"
+  },
+  "review": {
+    "independent_agent_reviews": 2,
+    "resolved_findings": [
+      "preserve failed numerical checks and truncated-artifact accounting",
+      "reap interrupted worker groups before sealing failure hashes",
+      "enforce reused reference source and native-lock parity"
+    ],
+    "scope": "software/numerical boundary review, not independent human or biological review"
+  },
+  "limitations": [
+    "Invented synthetic scenarios only; no human predictive or treatment evidence",
+    "Reused source-matched frozen BC-008 parent; historical numerical code and protocols unchanged",
+    "Local native execution; hosted CI and independent researcher usability unexecuted"
+  ],
+  "reference": {
+    "path": "results/m4-researcher-workflow/dalla-man/reference",
+    "manifest_sha256": "cb8e1aa587916e0aeea57844ad2c267f749072e7eab6bb779e73b0f078ac377d",
+    "status": "completed",
+    "git_head": "a0a10da6f32c4d525946a39e5f53891577b519b1",
+    "git_dirty": true,
+    "source_and_native_lock_snapshots_match_final_checkout": true,
+    "scope": "Fresh preliminary BC-008 run, reused unchanged by all final clean implementation attempts"
+  },
+  "post_execution_boundary_fix": {
+    "change": "Resolve the optional reference path before the output/reference overlap guard, including paths containing dot-dot components",
+    "numerical_scope": "No native equations, observer kinetics, clocks, criteria or report computations changed",
+    "regression_test": "test_dotdot_reference_cannot_hide_nested_output",
+    "passed": true
+  },
+  "locked_runtimes": {
+    "native": {
+      "python": "3.12.13",
+      "numpy": "1.26.4",
+      "scipy": "1.13.1"
+    },
+    "cpeptide": {
+      "python": "3.12.13",
+      "numpy": "2.2.6",
+      "scipy": "1.15.3"
+    }
+  }
+}

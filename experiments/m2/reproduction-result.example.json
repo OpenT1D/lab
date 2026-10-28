@@ -1,0 +1,19 @@
+{
+  "schema": "opent1d.m2-independent-reproduction/1",
+  "status": "not_executed",
+  "executed_by": null,
+  "date_utc": null,
+  "implementation_commit": null,
+  "operating_system_architecture": null,
+  "python_version": null,
+  "node_version": null,
+  "uv_version": null,
+  "commands_and_exit_statuses": [],
+  "development_status_counts": null,
+  "evaluation_status_counts": null,
+  "historical_checks": null,
+  "simulator_free_reconstruction": null,
+  "artifact_inventory_sha256": null,
+  "deviations_and_errors": [],
+  "scope": "Independent human execution; not a claim of biological or clinical validation"
+}

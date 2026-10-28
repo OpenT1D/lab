@@ -1,0 +1,15 @@
+OpenT1D
+Copyright 2026 OpenT1D contributors
+
+Original OpenT1D material is licensed under the Apache License, Version 2.0.
+Individual contributors retain copyright in their contributions.
+
+Third-party material, when included, retains its own license and notices.
+See docs/licensing.md and publication-rights.json for the reviewed source boundary.
+
+Generated SVG figures contain DejaVu Sans glyph outlines. The applicable
+Bitstream/DejaVu notice is reproduced in LICENSES/DejaVu.txt.
+Pinned upstream reference notices are retained in LICENSES/simglucose.txt,
+LICENSES/GlucoSim.txt, LICENSES/LT1.txt, LICENSES/G2P2C.txt and
+LICENSES/OpenAPS.txt. Those projects retain their own licenses; no parameter
+table, patient dataset or bundled native runtime is licensed by this NOTICE.

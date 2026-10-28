@@ -1,0 +1,73 @@
+{
+  "schema": "bc006-sources/1",
+  "review_date": "2026-09-20",
+  "review_kind": "internal source and mathematical audit; no external domain review",
+  "assets": [
+    {
+      "id": "author_code",
+      "url": "https://www.dei.unipd.it/~pedersen/secr_model_IVGTT_new.ode",
+      "sha256": "af28f9e08df5f57f8882bd63b7cf5516add9b104a34181f41d040c1101149b08",
+      "access": "HTTP200 fresh download, identical to BC001 inspected file",
+      "license": "No explicit redistribution license located; inspected only, not vendored",
+      "locators": {
+        "initialization": "lines 3, 94-95: warmup instruction, explicit X(0), separate derived X0 expression",
+        "scale": "lines 67-72: pancreas/volume convention, rounded conversion, extra multiplier",
+        "basal": "lines 34-35: separate basal secretion; lines 42, 53-56: mobilization and kinetic parameters",
+        "input": "lines 11-16: unavailable table or commented exponential surrogate",
+        "docked": "lines 39-40: docked dynamics and I(0)=311 seed; not a saved post-warmup state"
+      }
+    },
+    {
+      "id": "author_preprint",
+      "url": "https://www.dei.unipd.it/~pedersen/InterfaceFocus_preprint.pdf",
+      "sha256": "97b2f66a7fc9c509fa541e9de83d46d53da483e835df0857984d2fa729ee2d2c",
+      "access": "HTTP200 fresh download; same BC001 hash; equations visually checked on PDF page9, printed page7",
+      "locators": "PDF pages5-7 equations3-15; page9 equations16-22; final equivalents3.1-4.13",
+      "license": "Inspected only; not redistributed"
+    },
+    {
+      "id": "published_equation_4_13",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3638483/",
+      "sha256": "03a8245cbed5451a2887747c95bb45738d9dad4a7fc7d3289ad05325517d2eb8",
+      "access": "existing BC001 equation image visually reread; fresh PMC access challenged; no new full-text verification claim"
+    },
+    {
+      "id": "crossref_metadata",
+      "url": "https://api.crossref.org/works/10.1098/rsfs.2012.0085",
+      "sha256": "cdca1f038e5a8fc94304a30dfc080a90d4cd280b4711b37eb397fdc5f9f7a06b",
+      "access": "HTTP200; relation empty, update-to/updated-by absent; absence does not prove no correction"
+    },
+    {
+      "id": "cohort_input_headers",
+      "url": "https://www.dei.unipd.it/~pedersen/gluXPP_IVGTT.dat",
+      "sha256": "d3bbcbdc5c1f291f5d5c9e7199ea451e1ecf7d3222224f8b7c9c8911755387a0",
+      "access": "HTTP404 on HEAD; no participant data downloaded"
+    }
+  ],
+  "searches": [
+    {
+      "query": "\"Multiscale modelling of insulin secretion\" correction erratum",
+      "result": "No correction located in reviewed results; not an exhaustive absence proof"
+    },
+    {
+      "query": "\"10.1098/rsfs.2012.0085\" correction",
+      "result": "No linked correction located; publisher full-page retrieval failed"
+    },
+    {
+      "query": "\"gluXPP_IVGTT.dat\"",
+      "result": "No usable versioned permitted input located"
+    }
+  ],
+  "author_index": {
+    "url": "https://www.dei.unipd.it/~pedersen/pub.html",
+    "locator": "2013 publication entry, links to preprint and XPPAUT file",
+    "result": "No correction/supplement beyond linked assets identified in the inspected entry"
+  },
+  "xpp_syntax": {
+    "url": "https://sites.pitt.edu/~phase/bard/bardware/xpp/help/xppodes.html",
+    "observation": "Leading exclamation marks define derived parameters, not comments. The author expression uses f while the fusion parameter elsewhere is fplus; no equivalence or runtime behavior is assumed without executing an authorized pinned author workflow."
+  },
+  "conclusion": "No authoritative corrected initialization, saved warmup state, calibration for the extra CP multiplier, code license or missing cohort input was obtained. Numerical agreement can support a hypothesis only.",
+  "contact": "none",
+  "patient_data": "none"
+}

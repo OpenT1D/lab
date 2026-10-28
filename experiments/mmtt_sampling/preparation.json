@@ -1,0 +1,117 @@
+{
+  "schema": "opent1d.mmtt-sampling-preparation/1",
+  "status": "incomplete-technical-preparation",
+  "scope": "Manufactured references and invented observations only; no fitted endpoint estimates or empirical result",
+  "upstream": [
+    {
+      "origin": "0a9d5586030595727b8786d3a493ef95ec02130a",
+      "local": "78c3676",
+      "purpose": "shared observation importer and archive verifier"
+    },
+    {
+      "origin": "6b1efbc540d1a9854505ae0fbc99f4c28dca96f7",
+      "local": "7439b8a",
+      "purpose": "import preparation verification"
+    },
+    {
+      "origin": "f4d719d832908e47bc85716fd9f6c1a3541a1747",
+      "local": "5b6e3ab",
+      "purpose": "retain available CSV when metadata unavailable"
+    },
+    {
+      "origin": "f17172c43d97e2b7d514df543e24bed07b35ffd6",
+      "local": "c3ceb10",
+      "purpose": "full six-test import verification covering failure-retention correction"
+    },
+    {
+      "origin": "cd10cb07577e6fb9183934f3b59fce974bf944e4",
+      "local": "6f64f4b",
+      "purpose": "checked narrow scientific scope; all 15 handoff digests verified against origin"
+    },
+    {
+      "origin": "4f38f01a3d3f96319155e83b9ede52bd595fb521",
+      "local": "b25cd37",
+      "purpose": "exact source/scope handoff; synthetic only"
+    }
+  ],
+  "sources": {
+    "experiments/mmtt_sampling/__main__.py": "678dcbea5d605760a124775342698d444b65f100f24a8a51b5e97b637acb3c1e",
+    "experiments/mmtt_sampling/design.py": "edc322c49bb3e479d259786a97c17fc4bf689506b7f46eba24d0da27bfcb908f",
+    "experiments/mmtt_sampling/fixtures.py": "10ab8022f59a3c10a66d0aa338047e0ec2e78e4d2c869cecb2d7846cf32cf58d",
+    "experiments/mmtt_sampling/intake.py": "e58068ef69e3ddf5fafe89a5bcd2a92d6b2c961a01861b763dc028e14db87a90",
+    "experiments/mmtt_sampling/fixtures/design.json": "c1ad2b01657911503b9cff2f1af6403e53bbc0c6d56f9229bab285d9181bcce9",
+    "experiments/mmtt_sampling/fixtures/development-times.json": "b245027871843b0b721c716fe1dd5539fbbb341257ce70e8307438dc24b3aeba",
+    "experiments/observation_analysis/observations.py": "423d49e08900fe74f4be224fbf3b7deeed3fa1b58d7883e8453e5fc4691528b2",
+    "experiments/observation_analysis/intake.py": "58d940af77498aaa59490cd1c30f5b134adeca0d738750f0de4cb051e0fde788",
+    "experiments/observation_analysis/fixtures.py": "0d605bd99b9ba756ade83a367f36877f93b7df53bcdb6519a499936e8370db86",
+    "docs/decisions/0067-mmtt-feasibility-boundary.md": "c13d12576c3aed392fed824713f45984020ad810e2c459b7c17ea2b022e47dde",
+    "experiments/mmtt_sampling/fixtures/numerical-reference.json": "d713c88a4bd9a9f7626ba07f1d8aff93116cc78f3a0cb298c8719e4c53e19901",
+    "experiments/mmtt_sampling/comparison.py": "385c0f7f63dce83b3745495f1f6f75bead8d8728db555023e853562f5ca1b05e",
+    "experiments/mmtt_sampling/masking.py": "0a3de43a4c89f68adc366abe70d31f325ca48597a787e5c0310d253832cdcc1d"
+  },
+  "checks": {
+    "locked_repository": {
+      "tests": 1315,
+      "skipped": 13,
+      "status": "passed with comparison arithmetic; five later raw-masking tests passed separately",
+      "documentation": "strict build passed",
+      "sandbox": "localhost and process permissions required"
+    },
+    "final_delta": {
+      "observation_import_tests": 6,
+      "sampling_tests": 26,
+      "status": "passed including arithmetic, denominator controls and five raw-masking tests"
+    },
+    "local_route": [
+      "development export",
+      "shared import",
+      "shared verification",
+      "freeze-import",
+      "relocation",
+      "stdlib-only shared revalidation"
+    ],
+    "selection_receipt_sha256": "837db327810b73959366c15e2a41bac587a44607f267a0e61e45a3018f6ef3c1",
+    "manufactured_references": {
+      "cases": 4,
+      "control": "closed-form total versus compartment mass conservation",
+      "decimal_precision": 60,
+      "executed_through_estimator": false
+    },
+    "raw_mask_archive_case": {
+      "both_relocated_archives_revalidated": true,
+      "full_import_status": "invalid",
+      "manifests_sha256": {
+        "full": "f42e8906cfafee916ea83496c146a1a4774e46b6266cbc0e5340b980edf1e983",
+        "reduced": "b718d5ef53fd73dcb364b32b4394414d58e8c0b9ec9a9e29caef8bd97ce04b5f"
+      },
+      "omitted_rows": 30,
+      "planned_visits": 10,
+      "poisoned_omitted_cells_do_not_change_retained_bytes": true,
+      "reduced_import_status": "valid",
+      "retained_rows": 30,
+      "scope": "synthetic raw masking and shared import/reconstruction only; no estimation"
+    }
+  },
+  "acceptance": {
+    "technical": false,
+    "empirical": false,
+    "independent_usability": false
+  },
+  "remaining": [
+    "Checked OT-054 estimator, uncertainty and task report implementation under the controlled OT-053 narrow source/scope handoff",
+    "Estimator-level removed-observation and full-fit-state isolation with fresh refits",
+    "Numerical/failure-aware full versus subset endpoint and paired-conclusion reports with low-value and glucose context",
+    "Shared task-report reconstruction and complete local estimation user flow",
+    "Runnable estimation archives and expected answers for OT-056",
+    "Authorized observations, assay and protocol context, domain-frozen margins and precision plan for held-out empirical evaluation"
+  ],
+  "scientific_boundary": {
+    "decision": "0067",
+    "endpoint": "whole-body total secretion including basal over measured 0\u2013120 minutes",
+    "endpoint_unit": "pmol",
+    "paired_change": "follow-up minus baseline",
+    "human_execution_authorized": false,
+    "estimator_owner": "OT-054"
+  },
+  "record_scope": "Historical preparation through 73a9b2e; source hashes and remaining items describe that snapshot, not the later implementation."
+}

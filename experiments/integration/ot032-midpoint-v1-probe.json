@@ -1,0 +1,79 @@
+{
+  "scope": "independent_development_probe_not_final_new_executor_acceptance",
+  "load_mg": 15000,
+  "protocol_sha256": "818da02e79164f0e09197e403770f9d881dd996772d133fe75127b7651156324",
+  "rows": {
+    "bc008_reference": {
+      "statuses": {
+        "coarse": "completed",
+        "tight": "completed",
+        "reference": "completed"
+      },
+      "differences": {
+        "coarse": {
+          "glucose_error_mg_dl": 1.276878508246168e-06,
+          "insulin_error_pmol_l": 7.010853320036343e-05,
+          "source_error_pmol_kg_min": 1.350865261140477e-05
+        },
+        "tight": {
+          "glucose_error_mg_dl": 9.026771718479452e-09,
+          "insulin_error_pmol_l": 3.594102799629065e-07,
+          "source_error_pmol_kg_min": 6.208233238602645e-08
+        }
+      }
+    },
+    "dalla_man": {
+      "statuses": {
+        "coarse": "completed",
+        "tight": "completed",
+        "reference": "completed"
+      },
+      "differences": {
+        "coarse": {
+          "glucose_error_mg_dl": 1.276878508246168e-06,
+          "insulin_error_pmol_l": 7.010853320036343e-05,
+          "source_error_pmol_kg_min": 1.350865261140477e-05
+        },
+        "tight": {
+          "glucose_error_mg_dl": 9.026771718479452e-09,
+          "insulin_error_pmol_l": 3.594102799629065e-07,
+          "source_error_pmol_kg_min": 6.208233238602645e-08
+        }
+      }
+    },
+    "ultradian": {
+      "statuses": {
+        "coarse": "completed",
+        "tight": "completed",
+        "reference": "completed"
+      },
+      "differences": {
+        "coarse": {
+          "glucose_error_mg_dl": 4.07342218991893e-09,
+          "insulin_error_pmol_l": 3.0146884313006616e-09,
+          "source_error_pmol_kg_min": 5.787612611385384e-10
+        },
+        "tight": {
+          "glucose_error_mg_dl": 4.630103040040753e-12,
+          "insulin_error_pmol_l": 2.6852733338837427e-12,
+          "source_error_pmol_kg_min": 8.296696663023795e-13
+        }
+      }
+    }
+  },
+  "executed_after_protocol_freeze_commit": "77f13e7cdf0453f6d620f03bc42187ed0223cb21",
+  "implementation_status": "unchanged pure integrators; new executor not yet implemented",
+  "command": "experiments/m0/simglucose/.venv/bin/python -B /private/tmp/opent1d-ot032-midpoint-probe.py",
+  "platform": "local macOS arm64",
+  "runtime": {
+    "python": "3.12.13",
+    "numpy": "1.26.4",
+    "scipy": "1.13.1"
+  },
+  "gate": {
+    "source_error_pmol_kg_min_max": 1e-05,
+    "coarse_dalla_man_and_bc008": "failed",
+    "tight_all_sources": "passed",
+    "decision": "M4-STUDY/2 freezes coarse step halving before new execution; all tolerances unchanged"
+  }
+}

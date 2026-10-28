@@ -1,0 +1,342 @@
+{
+  "schema": "bc008-preflight-execution/1",
+  "status": "completed_pointwise_preflight_feedback_not_executed",
+  "base_commit": "ac1e63f",
+  "run_path": "results/m4-feedback-preflight/reference-02",
+  "manifest": {
+    "schema": "bc008-preflight/1",
+    "status": "completed",
+    "started_utc": "2026-09-20T17:04:00.408479+00:00",
+    "files": {
+      "native.log": "21a05ac6aff336514ec786b2766c1149064a522e3ec81b231654348d13becf33",
+      "probe.json": "ee1504da512ad0915e2221dee1d636242a18cfd0b053da655fd24d4185a58e2e",
+      "protocol.json": "b66087592810be35fa74372ad07172359897ceb40653abdf420b3c3fa1a4fd99",
+      "pyproject.toml": "107d7792bf6e99575e6b30f3639376059d5f9323bc8dedfd09c82824613c8cd5",
+      "report.json": "e8fa151113178dc900654b02c0b5c90a25d4bc9fa97782460f620b524d4a7501",
+      "source-contract.py": "4a35587c9c848a9c19586ab8e0aa28a1b5fcfe02c1b22e4fc7b0d46479dcb5ce",
+      "source-experiments__m4__kinetic_inlet__forcing.py": "b26fd2fd87aa47da328d24b2cbe56d8e3be45f9b4caf2c3c453f89acb07fddd1",
+      "source-experiments__m4__kinetic_inlet__native.py": "aaa6a921643bf6ec82fde84d53193c8ab9c9cdbe1b69de634089f652cb4b14dd",
+      "source-experiments__m4__kinetic_inlet__protocol.json": "ac2754f1718bcad7977d3332685abc8bb9a281056e5475d78ab7d7364b9df3dc",
+      "source-experiments__m4__paired_kinetics__common.py": "0d55ab114cf6381e2837670dd2b17b50a7109a0643bce756f2bd31d06209a12d",
+      "source-experiments__m4__paired_observation__contract.py": "eb422ce11a75840082801f8321fd10c7236509f71b7792ab83032e061b5f386d",
+      "source-experiments__m4__paired_observation__run.py": "a342e45ab3fc5218033d244d870bd2c9cd8a12099a5053b66f250b2c4b761f84",
+      "source-preflight.py": "17c19c1c0dff4e707ab503b86ea03f99fb073db6a3bef02079d1f7337f3ebce4",
+      "sources.json": "2a2b1f8a98ceaf2fd64120f8c73cd8e58d8703999f773eaeba76f2d444f89aed",
+      "uv.lock": "634d5849a1cc4ae37f4f00c12c713f168cffa93a43d5a22b571b0c41478fc95c"
+    },
+    "git_head": "ac1e63faa1f83e3280f8bdd973b9d090c5951c73",
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--project",
+      "/private/tmp/opent1d-beta-cell-reference/experiments/m0/simglucose",
+      "python",
+      "-m",
+      "experiments.m4.feedback.preflight",
+      "--native",
+      "/private/tmp/opent1d-beta-cell-reference/results/m4-feedback-preflight/reference-02"
+    ],
+    "finished_utc": "2026-09-20T17:04:01.188571+00:00"
+  },
+  "report": {
+    "schema": "bc008-preflight/1",
+    "claim": "pointwise_algebra_and_native_derivatives_only",
+    "feedback_executed": false,
+    "protocol": "BC-008/2",
+    "metrics": {
+      "native_derivative_locality_error": 0.0,
+      "baseline_derivative_change": 1.2049250486256824e-12,
+      "baseline_glucose_concentration_change": 0.0,
+      "baseline_plasma_insulin_change": 0.0,
+      "insulin_inventory_derivative_balance": 1.1102230246251565e-16,
+      "rhs_equivalence_error": 5.551115123125783e-17,
+      "zero_extension_error": 0.0
+    },
+    "passed": true,
+    "baselines": [
+      {
+        "id": "native_zero",
+        "state": [
+          0.0,
+          0.0,
+          0.0,
+          265.370112,
+          162.457097269,
+          5.5043265,
+          0.0,
+          100.25,
+          100.25,
+          3.20762505142,
+          72.4341762342,
+          141.153779328,
+          265.370112
+        ],
+        "u_sc_pmol_kg_min": 1.2386244136,
+        "action_insulin_u_min": 0.02112267499992533,
+        "Sb_pmol_kg_min": 0.0,
+        "Z_pmol_kg_min": 0.0,
+        "P_pmol_kg": 0.0,
+        "h_mg_dl": 138.56,
+        "derivative_change": 0.0
+      },
+      {
+        "id": "constant_basal",
+        "state": [
+          0.0,
+          0.0,
+          0.0,
+          265.370112,
+          162.457097269,
+          5.5043265,
+          0.0,
+          100.25,
+          100.25,
+          5.2123907085480585,
+          54.32563217565,
+          105.865334496,
+          265.370112
+        ],
+        "u_sc_pmol_kg_min": 0.9289683101999999,
+        "action_insulin_u_min": 0.015842006249944,
+        "Sb_pmol_kg_min": 0.7741402585,
+        "Z_pmol_kg_min": 0.7741402585,
+        "P_pmol_kg": 1.548280517,
+        "h_mg_dl": 138.56,
+        "derivative_change": 1.2049250486256824e-12
+      },
+      {
+        "id": "feedback_quarter",
+        "state": [
+          0.0,
+          0.0,
+          0.0,
+          265.370112,
+          162.457097269,
+          5.5043265,
+          0.0,
+          100.25,
+          100.25,
+          5.2123907085480585,
+          54.32563217565,
+          105.865334496,
+          265.370112
+        ],
+        "u_sc_pmol_kg_min": 0.9289683101999999,
+        "action_insulin_u_min": 0.015842006249944,
+        "Sb_pmol_kg_min": 0.7741402585,
+        "Z_pmol_kg_min": 0.7741402585,
+        "P_pmol_kg": 1.548280517,
+        "h_mg_dl": 138.56,
+        "derivative_change": 1.2049250486256824e-12
+      },
+      {
+        "id": "feedback_half",
+        "state": [
+          0.0,
+          0.0,
+          0.0,
+          265.370112,
+          162.457097269,
+          5.5043265,
+          0.0,
+          100.25,
+          100.25,
+          5.2123907085480585,
+          54.32563217565,
+          105.865334496,
+          265.370112
+        ],
+        "u_sc_pmol_kg_min": 0.9289683101999999,
+        "action_insulin_u_min": 0.015842006249944,
+        "Sb_pmol_kg_min": 0.7741402585,
+        "Z_pmol_kg_min": 0.7741402585,
+        "P_pmol_kg": 1.548280517,
+        "h_mg_dl": 138.56,
+        "derivative_change": 1.2049250486256824e-12
+      },
+      {
+        "id": "feedback_full",
+        "state": [
+          0.0,
+          0.0,
+          0.0,
+          265.370112,
+          162.457097269,
+          5.5043265,
+          0.0,
+          100.25,
+          100.25,
+          5.2123907085480585,
+          54.32563217565,
+          105.865334496,
+          265.370112
+        ],
+        "u_sc_pmol_kg_min": 0.9289683101999999,
+        "action_insulin_u_min": 0.015842006249944,
+        "Sb_pmol_kg_min": 0.7741402585,
+        "Z_pmol_kg_min": 0.7741402585,
+        "P_pmol_kg": 1.548280517,
+        "h_mg_dl": 138.56,
+        "derivative_change": 1.2049250486256824e-12
+      }
+    ],
+    "source_equation_probes": [
+      {
+        "G": 40.0,
+        "Gdot": -2.0,
+        "target": 0,
+        "pancreatic": 0.7000000000000001,
+        "liver": 1.5,
+        "Z_dot": -0.035,
+        "P_dot": -0.7999999999999999
+      },
+      {
+        "G": 40.0,
+        "Gdot": 0.0,
+        "target": 0,
+        "pancreatic": 0.7000000000000001,
+        "liver": 1.5,
+        "Z_dot": -0.035,
+        "P_dot": -0.7999999999999999
+      },
+      {
+        "G": 40.0,
+        "Gdot": 2.0,
+        "target": 0,
+        "pancreatic": 5.3,
+        "liver": 1.5,
+        "Z_dot": -0.035,
+        "P_dot": 3.8
+      },
+      {
+        "G": 100.0,
+        "Gdot": -2.0,
+        "target": 1.1,
+        "pancreatic": 0.7000000000000001,
+        "liver": 1.5,
+        "Z_dot": 0.020000000000000004,
+        "P_dot": -0.7999999999999999
+      },
+      {
+        "G": 100.0,
+        "Gdot": 0.0,
+        "target": 1.1,
+        "pancreatic": 0.7000000000000001,
+        "liver": 1.5,
+        "Z_dot": 0.020000000000000004,
+        "P_dot": -0.7999999999999999
+      },
+      {
+        "G": 100.0,
+        "Gdot": 2.0,
+        "target": 1.1,
+        "pancreatic": 5.3,
+        "liver": 1.5,
+        "Z_dot": 0.020000000000000004,
+        "P_dot": 3.8
+      },
+      {
+        "G": 110.0,
+        "Gdot": -2.0,
+        "target": 2.2,
+        "pancreatic": 0.7000000000000001,
+        "liver": 1.5,
+        "Z_dot": 0.07500000000000001,
+        "P_dot": -0.7999999999999999
+      },
+      {
+        "G": 110.0,
+        "Gdot": 0.0,
+        "target": 2.2,
+        "pancreatic": 0.7000000000000001,
+        "liver": 1.5,
+        "Z_dot": 0.07500000000000001,
+        "P_dot": -0.7999999999999999
+      },
+      {
+        "G": 110.0,
+        "Gdot": 2.0,
+        "target": 2.2,
+        "pancreatic": 5.3,
+        "liver": 1.5,
+        "Z_dot": 0.07500000000000001,
+        "P_dot": 3.8
+      },
+      {
+        "G": 140.0,
+        "Gdot": -2.0,
+        "target": 5.5,
+        "pancreatic": 0.7000000000000001,
+        "liver": 1.5,
+        "Z_dot": 0.24,
+        "P_dot": -0.7999999999999999
+      },
+      {
+        "G": 140.0,
+        "Gdot": 0.0,
+        "target": 5.5,
+        "pancreatic": 0.7000000000000001,
+        "liver": 1.5,
+        "Z_dot": 0.24,
+        "P_dot": -0.7999999999999999
+      },
+      {
+        "G": 140.0,
+        "Gdot": 2.0,
+        "target": 5.5,
+        "pancreatic": 5.3,
+        "liver": 1.5,
+        "Z_dot": 0.24,
+        "P_dot": 3.8
+      }
+    ],
+    "native_initial_derivative_max": 3.848832363928523e-11,
+    "limitations": [
+      "BC001 modification or arbitrary replay into its IVGTT reduction",
+      "full 2007 model reproduction",
+      "time-varying hepatic extraction or direct portal EGP restoration",
+      "clinical insulin reduction",
+      "cell count, transplant site or treatment efficacy",
+      "human validation or external domain review",
+      "C-peptide extension",
+      "controller development"
+    ]
+  },
+  "checks": {
+    "root_and_native_locked_syncs": "passed",
+    "new_root_tests": 13,
+    "repository_checks": {
+      "status": "passed",
+      "unit_tests": 318,
+      "strict_documentation_build": "passed",
+      "log_sha256": "596c9e104db2a3a99e49a02132d69eb2a0546308b90805147800faf850377a5a"
+    },
+    "fresh_process_repeat": {
+      "identical_files": 15,
+      "manifest_sha256": "47faac41aec77f63682ae0a8a2b00aa26df3955c699f0d533f8ae4aa63f02eee",
+      "exclusions": "only top-level manifest timestamps and command output directory"
+    },
+    "standard_library_reconstruction": "byte-identical with python -S",
+    "historical_protocol_1_reconstruction": "identical report; retained compatibility",
+    "source_snapshot_comparison": "match live implementation",
+    "remote_ci": "not run",
+    "test_source_sha256": "a72294cd412b86ee71fe055bfabaff9c19b949734a5e55a1aad4457fd5f12586",
+    "protocol_1_test_log_sha256": "0ce6c6f129f938009f2765576f226d4a10b08144c55f161adf328aa51c10d98e",
+    "current_protocol_tests": "included in the final 318-test repository run",
+    "runtime_snapshot_comparison": {
+      "pyproject.toml": "107d7792bf6e99575e6b30f3639376059d5f9323bc8dedfd09c82824613c8cd5",
+      "uv.lock": "634d5849a1cc4ae37f4f00c12c713f168cffa93a43d5a22b571b0c41478fc95c"
+    }
+  },
+  "prior_completed_preflights": [
+    "results/m4-feedback-preflight/reference-01",
+    "results/m4-feedback-preflight/repeat-01"
+  ],
+  "protocol_amendment": {
+    "previous_id": "BC-008/1",
+    "change": "Separate rate-state Z closed-form tolerance from mass-state P tolerance; both remain 1e-7 in their own units. No feedback execution has occurred and preflight criteria are unchanged."
+  },
+  "failed_scientific_attempts": [],
+  "limits": "No source or metabolic integration, author-program execution, dynamic reproduction, human assessment or outreach"
+}

@@ -1,0 +1,2398 @@
+{
+  "schema_version": "lit001.screening/1",
+  "reviewer": {
+    "type": "AI",
+    "agent": "/root/method_review",
+    "review_date": "2026-09-20",
+    "review_pass": "first-pass title/abstract screening",
+    "human_review_claimed": false
+  },
+  "scope": {
+    "source": "results/lit001/search-02/screening-input.json",
+    "source_sha256": "5e3c81102cd1c808f7346b678a377388e7e0d3280d0f548f1676f14fe81b97c0",
+    "start_index_inclusive": 0,
+    "stop_index_exclusive": 336,
+    "assigned_record_count": 336,
+    "reviewed_record_count": 336,
+    "method": "Every assigned title was read individually. Potential kinetic reports, uncertain formulations/populations, relevant model ancestry and potentially informative clinical/controller studies received abstract inspection. Decisions were assigned explicitly by record index, not by automated keyword/regex exclusion. Only supplied bibliography/abstracts were used for this screening pass; full-text inclusion is not claimed. Source-truncated abstracts and missing essential eligibility information remain explicit.",
+    "title_abstract_count": 121
+  },
+  "decisions": [
+    {
+      "key": "DOI:10.1101/2021.04.12.439573",
+      "input_index": 0,
+      "decision": "background",
+      "reason": "Animal preprint on a lispro-pramlintide coformulation; retain indirect formulation mechanism context, not adult T1D kinetics.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "DOI:10.1101/2022.03.10.483309",
+      "input_index": 1,
+      "decision": "background",
+      "reason": "Mouse and pig imaging/kinetic study of lispro formulations; mechanistic context without human T1D observations.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "DOI:10.1101/2022.08.01.502380",
+      "input_index": 2,
+      "decision": "background",
+      "reason": "In vitro formulation excipient and association-state study; relevant mechanism context, not human absorption measurements.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "DOI:10.1101/2022.11.24.22282706",
+      "input_index": 3,
+      "decision": "excluded",
+      "reason": "Regular-insulin delivery through an implanted chamber in diabetic rats; wrong formulation, population and delivery context.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "DOI:10.1101/2023.12.11.570688",
+      "input_index": 4,
+      "decision": "excluded",
+      "reason": "Insulin release from macroencapsulated islets; not subcutaneous conventional lispro kinetics.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "DOI:10.1101/2025.04.21.649806",
+      "input_index": 5,
+      "decision": "excluded",
+      "reason": "Oxygenated insulin-secreting cell encapsulation; not the target injected-insulin process.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "DOI:10.17863/cam.16644",
+      "input_index": 6,
+      "decision": "background",
+      "reason": "Thesis abstract describes adult closed-loop studies; retain an ancestry/source route, with the supplied abstract truncated and no lispro kinetic study established.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "DOI:10.20944/preprints202506.0263.v1",
+      "input_index": 7,
+      "decision": "excluded",
+      "reason": "Pregnancy planning and pregnancy outcomes; outside the adult nonpregnancy kinetic reference question.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "DOI:10.20944/preprints202605.0636.v1",
+      "input_index": 8,
+      "decision": "excluded",
+      "reason": "Adolescent menstrual-cycle CGM associations; not lispro concentration or absorption modeling.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "DOI:10.21203/rs.3.rs-6620166/v1",
+      "input_index": 9,
+      "decision": "excluded",
+      "reason": "In vitro biological activity of glulisine, detemir and degludec; no conventional lispro target.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "DOI:10.25560/28966",
+      "input_index": 10,
+      "decision": "background",
+      "reason": "Closed-loop thesis with a beta-cell-inspired controller; supplied abstract is truncated, so retain as contextual source rather than infer a lispro kinetic result.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "DOI:10.64898/2026.01.06.697969",
+      "input_index": 11,
+      "decision": "excluded",
+      "reason": "Detection of transplanted islets using staining; not injected lispro kinetics.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "DOI:10.64898/2026.01.11.26343881",
+      "input_index": 12,
+      "decision": "excluded",
+      "reason": "Paediatric cohort profile emphasizing glycaemic and neurophysiological outcomes; not target kinetic evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "ETH:407545",
+      "input_index": 13,
+      "decision": "unresolved",
+      "reason": "Thesis addresses subcutaneous insulin kinetic modeling, but the supplied abstract is truncated and formulation, adult eligibility and usable kinetic results are unresolved.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Retrieve thesis full text; determine lispro model content, adult population and relationship to the Wilinska model reports."
+    },
+    {
+      "key": "ETH:815335",
+      "input_index": 14,
+      "decision": "background",
+      "reason": "Lipohypertrophy thesis studies tissue characterization and glucose variability; relevant injection-site context, not a verified lispro PK experiment.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PAT:CA2612714",
+      "input_index": 15,
+      "decision": "excluded",
+      "reason": "Automated insulin-control system patent; not an original target-population kinetic study.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PAT:US2011105392",
+      "input_index": 16,
+      "decision": "excluded",
+      "reason": "Pegylated lispro patent concerns a modified formulation, outside conventional lispro.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PAT:US2011106049",
+      "input_index": 17,
+      "decision": "excluded",
+      "reason": "Automated insulin-control system patent; not an original target-population kinetic study.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PAT:US5970973",
+      "input_index": 18,
+      "decision": "excluded",
+      "reason": "Patent describes pulmonary aerosol delivery of lispro; wrong administration route.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PAT:WO2006124716",
+      "input_index": 19,
+      "decision": "excluded",
+      "reason": "Automated insulin-control system patent; not an original target-population kinetic study.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PAT:WO2009152128",
+      "input_index": 20,
+      "decision": "excluded",
+      "reason": "Pegylated lispro patent concerns a modified formulation, outside conventional lispro.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMC:PMC7207918",
+      "input_index": 21,
+      "decision": "excluded",
+      "reason": "Technology-use disparities abstract; no insulin kinetic outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMC:PMC9629377",
+      "input_index": 22,
+      "decision": "excluded",
+      "reason": "U-500-associated acanthosis case; wrong formulation and outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:10051177",
+      "input_index": 23,
+      "decision": "background",
+      "reason": "Broad pharmacological treatment overview; useful only as historical background/source discovery.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:10097896",
+      "input_index": 24,
+      "decision": "excluded",
+      "reason": "Diabetes education and routine treatment quality study; no target kinetic question.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:10097929",
+      "input_index": 25,
+      "decision": "excluded",
+      "reason": "Lispro mixture treatment in T2D; wrong population and formulation scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:10339922",
+      "input_index": 26,
+      "decision": "background",
+      "reason": "Dialysis case report on glycaemic management with lispro; contextual renal limitation, without a measured PK comparison in the abstract.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:10344631",
+      "input_index": 27,
+      "decision": "background",
+      "reason": "Intravenous lispro potency in rabbits; indirect systemic/pharmacological context, not adult T1D subcutaneous kinetics.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:10353301",
+      "input_index": 28,
+      "decision": "excluded",
+      "reason": "Insulin aspart source without a conventional lispro study indicated by the title.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:10443658",
+      "input_index": 29,
+      "decision": "primary_candidate",
+      "reason": "T1D crossover study measures free insulin during interruption and restart of lispro versus regular-insulin CSII; relevant changing-input kinetic evidence, with ages and assay/scenario details pending full text.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Retrieve and screen full text for adult T1D eligibility, conventional lispro formulation, dose/input history, assay, kinetic outputs and shared-cohort ancestry; inclusion is not yet confirmed."
+    },
+    {
+      "key": "PMID:10463187",
+      "input_index": 30,
+      "decision": "unresolved",
+      "reason": "Lispro PK in haemodialysis is potentially relevant, but no abstract is supplied and diabetes type, ages and overlap with the later dialysis report are unresolved.",
+      "reviewed_material": "title",
+      "next_action": "Retrieve full text or linked report; establish diabetes type, age range and whether this is an earlier report of index 103."
+    },
+    {
+      "key": "PMID:10535449",
+      "input_index": 31,
+      "decision": "excluded",
+      "reason": "Diabetogenic murine insulin epitopes in animals; immune pathogenesis rather than lispro kinetics.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:10593324",
+      "input_index": 32,
+      "decision": "background",
+      "reason": "Flexible insulin regimens overview; clinical context/source discovery only.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:10699152",
+      "input_index": 33,
+      "decision": "background",
+      "reason": "Broad genetically engineered insulin-analogue overview; historical formulation context, not a specified primary PK report.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:10784073",
+      "input_index": 34,
+      "decision": "excluded",
+      "reason": "Vascularization of membrane diffusion devices; not conventional lispro injection kinetics.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:10866043",
+      "input_index": 35,
+      "decision": "excluded",
+      "reason": "Insulin-antibody subclass responses after treatment; immunological outcomes rather than lispro concentration kinetics.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:10880895",
+      "input_index": 36,
+      "decision": "excluded",
+      "reason": "Single-patient glucose-profile comparison of delivery methods; abstract reports glycaemic outcomes, not a measured lispro kinetic analysis.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:10945154",
+      "input_index": 37,
+      "decision": "excluded",
+      "reason": "Humalog and mixtures for T2D treatment; wrong primary population/formulation question.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:10972339",
+      "input_index": 38,
+      "decision": "excluded",
+      "reason": "Nonhuman-primate islet transplantation; not injected lispro kinetics.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:10990077",
+      "input_index": 39,
+      "decision": "excluded",
+      "reason": "Oral insulin and residual beta-cell function; wrong route and process.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:11118018",
+      "input_index": 40,
+      "decision": "primary_candidate",
+      "reason": "T1D 24-hour clamp study includes continuous SC lispro as a comparator with insulin concentration profiles; retain the lispro arm and verify adult eligibility, baseline IV insulin and assay.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Retrieve and screen full text for adult T1D eligibility, conventional lispro formulation, dose/input history, assay, kinetic outputs and shared-cohort ancestry; inclusion is not yet confirmed."
+    },
+    {
+      "key": "PMID:11173725",
+      "input_index": 41,
+      "decision": "background",
+      "reason": "Practice-oriented account of lispro pump use; secondary context rather than an identified original PK experiment.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:11220353",
+      "input_index": 42,
+      "decision": "excluded",
+      "reason": "Nocturnal hypoglycaemia risk in T2D initiating insulin; wrong population and kinetic outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:11347749",
+      "input_index": 43,
+      "decision": "primary_candidate",
+      "reason": "T1D crossover clamp measures SC lispro PK at 0.2 U/kg in renal-impaired and normal-renal groups; retain groups separately and verify ages and free-insulin assay.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Retrieve and screen full text for adult T1D eligibility, conventional lispro formulation, dose/input history, assay, kinetic outputs and shared-cohort ancestry; inclusion is not yet confirmed."
+    },
+    {
+      "key": "PMID:11451642",
+      "input_index": 44,
+      "decision": "background",
+      "reason": "Insulin immunoassay cross-reactivity and validation paper; observation-method evidence, not adult lispro absorption data.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:11460580",
+      "input_index": 45,
+      "decision": "background",
+      "reason": "Physiological insulin replacement overview; background and source tracing.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:11460581",
+      "input_index": 46,
+      "decision": "background",
+      "reason": "External and implanted pump overview; route/context evidence, not a specified lispro kinetic study.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:11475277",
+      "input_index": 47,
+      "decision": "excluded",
+      "reason": "Inhaled-insulin topic; outside the selected SC lispro route.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:11479436",
+      "input_index": 48,
+      "decision": "background",
+      "reason": "General insulin-therapy source; title establishes contextual scope only.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:11553186",
+      "input_index": 49,
+      "decision": "background",
+      "reason": "Intramuscular lispro comparison in T2D; indirect route/population evidence, not primary SC T1D kinetics.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:11588149",
+      "input_index": 50,
+      "decision": "background",
+      "reason": "Recombinant insulin-analogue overview; formulation background/source discovery.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:11594299",
+      "input_index": 51,
+      "decision": "background",
+      "reason": "Review of rapid-acting insulin in pumps, including interruption studies; retain references, not review statements as primary measurements.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:11605714",
+      "input_index": 52,
+      "decision": "excluded",
+      "reason": "Aspart-focused PK/PD source; no target conventional-lispro study indicated by the title.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:11712398",
+      "input_index": 53,
+      "decision": "background",
+      "reason": "Summary of Japanese lispro studies; abstract distinguishes healthy-person PK from diabetic long-term effectiveness, so trace original reports.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:11727406",
+      "input_index": 54,
+      "decision": "excluded",
+      "reason": "Insulin therapy in T2D; outside primary population and focused kinetic question.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:11813930",
+      "input_index": 55,
+      "decision": "excluded",
+      "reason": "Glargine-focused source; not conventional rapid-acting lispro.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:11853368",
+      "input_index": 56,
+      "decision": "background",
+      "reason": "Paediatric analogue-use overview; indirect population context and references only.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:11887162",
+      "input_index": 57,
+      "decision": "excluded",
+      "reason": "Leptin concentrations in children; wrong analyte and population.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:11910977",
+      "input_index": 58,
+      "decision": "excluded",
+      "reason": "Inhaled insulin in T2D; wrong route and primary population.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:11911175",
+      "input_index": 59,
+      "decision": "background",
+      "reason": "Humalog/Humulin pen dose accuracy; delivery-input context, not measured tissue absorption.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12004916",
+      "input_index": 60,
+      "decision": "background",
+      "reason": "Insulin-formulation review; retain for formulation ancestry and source discovery.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12007726",
+      "input_index": 61,
+      "decision": "unresolved",
+      "reason": "SC lispro concentration measurements occur in a mixed group of two T1D and five T2D participants during exercise; adult T1D subgroup separability is not established.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Inspect full text for separate adult T1D insulin concentration results; otherwise keep as mixed-population background."
+    },
+    {
+      "key": "PMID:12022906",
+      "input_index": 62,
+      "decision": "excluded",
+      "reason": "Glargine basal-insulin source; wrong target formulation.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12032113",
+      "input_index": 63,
+      "decision": "primary_candidate",
+      "reason": "T1D crossover measures lispro and aspart with paired assays to distinguish residual intermediate human insulin; relevant PK and observation-model evidence, with adult age range to verify.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Retrieve and screen full text for adult T1D eligibility, conventional lispro formulation, dose/input history, assay, kinetic outputs and shared-cohort ancestry; inclusion is not yet confirmed."
+    },
+    {
+      "key": "PMID:12060061",
+      "input_index": 64,
+      "decision": "excluded",
+      "reason": "Glargine accumulation PK study; lispro is withheld during the measured fasting study periods, so no target lispro PK comparison.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:12073790",
+      "input_index": 65,
+      "decision": "background",
+      "reason": "Postprandial pharmacological approaches overview; contextual source only.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12086942",
+      "input_index": 66,
+      "decision": "excluded",
+      "reason": "Altered insulin peptide for immunotherapy; different intervention and biological question.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12091792",
+      "input_index": 67,
+      "decision": "background",
+      "reason": "Insulin-analogue treatment overview; retain historical context/source discovery only.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12153314",
+      "input_index": 68,
+      "decision": "excluded",
+      "reason": "Preparative HPLC modeling; manufacturing separation rather than in vivo absorption.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12166610",
+      "input_index": 69,
+      "decision": "background",
+      "reason": "Clinical glucose-management strategy source; background rather than a defined kinetic study.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12174321",
+      "input_index": 70,
+      "decision": "background",
+      "reason": "Hypoglycaemia and insulin-analogue overview; contextual source, not primary absorption measurement established by title.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12176272",
+      "input_index": 71,
+      "decision": "excluded",
+      "reason": "Oral nanocapsule insulin in rats; wrong route, formulation and population.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12215068",
+      "input_index": 72,
+      "decision": "excluded",
+      "reason": "Aspart-focused review of T1D/T2D treatment; outside the focused lispro source set.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12228011",
+      "input_index": 73,
+      "decision": "excluded",
+      "reason": "Adenoviral hepatic glucokinase intervention; not lispro kinetics.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12361817",
+      "input_index": 74,
+      "decision": "background",
+      "reason": "Novel-insulin overview; formulation/source-discovery background.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12365818",
+      "input_index": 75,
+      "decision": "background",
+      "reason": "Broad insulin-analogue source; title supports background classification only.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12401756",
+      "input_index": 76,
+      "decision": "primary_candidate",
+      "reason": "Randomized T1D lispro/aspart meal-clamp comparison includes insulin exposure, peak and time-course endpoints; retain conventional lispro arm with exact dose and age eligibility pending.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Retrieve and screen full text for adult T1D eligibility, conventional lispro formulation, dose/input history, assay, kinetic outputs and shared-cohort ancestry; inclusion is not yet confirmed."
+    },
+    {
+      "key": "PMID:12403642",
+      "input_index": 77,
+      "decision": "background",
+      "reason": "Lispro-mixture pharmacology review; distinguish protamine mixtures and trace any conventional-lispro source arms.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:12436330",
+      "input_index": 78,
+      "decision": "excluded",
+      "reason": "Pregnancy macrosomia outcomes; outside target population and kinetic question.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12450450",
+      "input_index": 79,
+      "decision": "background",
+      "reason": "Review of absorption/action variability; retain references and distinction between PK and PD variability.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:12453970",
+      "input_index": 80,
+      "decision": "excluded",
+      "reason": "Islet transplantation and CGM variability; not exogenous lispro PK.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12511146",
+      "input_index": 81,
+      "decision": "excluded",
+      "reason": "Collagen deposition and wound repair; outside target physiological process.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12518253",
+      "input_index": 82,
+      "decision": "background",
+      "reason": "SC lispro/aspart PK measured in healthy men; useful indirect population comparator, not primary T1D evidence.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:12641157",
+      "input_index": 83,
+      "decision": "excluded",
+      "reason": "Pressure effects in insulin chromatography; manufacturing analysis, not in vivo kinetics.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12641486",
+      "input_index": 84,
+      "decision": "background",
+      "reason": "Insulin-delivery systems review in older people; route context/source discovery only.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12648023",
+      "input_index": 85,
+      "decision": "excluded",
+      "reason": "Maternal-fetal drug transport; outside the selected nonpregnancy SC kinetic question.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12659919",
+      "input_index": 86,
+      "decision": "excluded",
+      "reason": "In vitro ultrasound-mediated transdermal delivery; different route and no adult T1D data.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12663596",
+      "input_index": 87,
+      "decision": "excluded",
+      "reason": "Retinopathy progression during pregnancy; outcome and population outside scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12685221",
+      "input_index": 88,
+      "decision": "background",
+      "reason": "Critical review of insulin analogues; retain for competing interpretations and original references.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12725708",
+      "input_index": 89,
+      "decision": "background",
+      "reason": "Review-level question about overall glycaemic control with rapid analogues; context, not an identified primary PK study.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12820692",
+      "input_index": 90,
+      "decision": "excluded",
+      "reason": "Prophylactic insulin in transplanted diabetic-prone rats; animal immune/transplant process.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12831339",
+      "input_index": 91,
+      "decision": "background",
+      "reason": "Broad insulin-therapy developments; formulation background/source discovery.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12832307",
+      "input_index": 92,
+      "decision": "primary_candidate",
+      "reason": "C-peptide-negative T1D crossover compares SC lispro/aspart serum insulin over an eight-hour study; relevant bolus reference candidate with age and assay details pending.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Retrieve and screen full text for adult T1D eligibility, conventional lispro formulation, dose/input history, assay, kinetic outputs and shared-cohort ancestry; inclusion is not yet confirmed."
+    },
+    {
+      "key": "PMID:12871607",
+      "input_index": 93,
+      "decision": "excluded",
+      "reason": "Paediatric/young-adult CSII glycaemic and growth outcomes; no PK analysis established by title.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12917058",
+      "input_index": 94,
+      "decision": "excluded",
+      "reason": "U-500 CSII case series in insulin resistance; wrong formulation and study question.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12965105",
+      "input_index": 95,
+      "decision": "excluded",
+      "reason": "Insulin-allergy desensitization case; no lispro kinetic study established.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12975026",
+      "input_index": 96,
+      "decision": "excluded",
+      "reason": "Pump therapy in T2D; wrong population and focused outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:14507228",
+      "input_index": 97,
+      "decision": "background",
+      "reason": "Review of injection-site complications and absorption implications; retain mechanism/source context only.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:14510870",
+      "input_index": 98,
+      "decision": "background",
+      "reason": "Meta-analysis of long-duration analogue versus soluble-insulin CSII trials; glycaemic effectiveness rather than original PK measurements.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:14570054",
+      "input_index": 99,
+      "decision": "excluded",
+      "reason": "History of antidiabetic drugs and epidemiology; outside focused kinetic evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:14598126",
+      "input_index": 100,
+      "decision": "excluded",
+      "reason": "Intraperitoneal closed-loop control in dogs; wrong population, route and outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:14632722",
+      "input_index": 101,
+      "decision": "primary_candidate",
+      "reason": "T1D meal crossover includes lispro-alone versus lispro/NPL mixture and regular insulin, with serial free-insulin concentrations; conventional comparator arm may be usable after full-text checks.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Retrieve and screen full text for adult T1D eligibility, conventional lispro formulation, dose/input history, assay, kinetic outputs and shared-cohort ancestry; inclusion is not yet confirmed."
+    },
+    {
+      "key": "PMID:1466160",
+      "input_index": 102,
+      "decision": "excluded",
+      "reason": "Diabetic bone disease and IGF-I; unrelated physiological process.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:14703957",
+      "input_index": 103,
+      "decision": "unresolved",
+      "reason": "SC lispro PK is measured in eight dialysis patients, but abstract does not establish T1D/adult subgroup eligibility; verify population and relationship to earlier dialysis record.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Verify adult T1D eligibility and overlap with the 1999 haemodialysis report before any quantitative inclusion."
+    },
+    {
+      "key": "PMID:15008840",
+      "input_index": 104,
+      "decision": "excluded",
+      "reason": "Pre-/postmeal lispro regimen study reports HbA1c, fructosamine and glucose profiles without PK outcomes in the abstract.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:15117581",
+      "input_index": 105,
+      "decision": "background",
+      "reason": "Model links glucose-clamp pharmacodynamics with blood glucose in healthy volunteers; methodological background, not T1D lispro absorption evidence.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:15161770",
+      "input_index": 106,
+      "decision": "excluded",
+      "reason": "Detemir, NPH and glargine variability comparison; no conventional lispro arm in title.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15170368",
+      "input_index": 107,
+      "decision": "background",
+      "reason": "Meta-analysis of pulmonary insulin disposition; indirect systemic-method context, not target route evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15198833",
+      "input_index": 108,
+      "decision": "background",
+      "reason": "ADICOL system-development report using lispro; retain implementation/clinical source ancestry, not a specific PK result from the abstract.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:15236749",
+      "input_index": 109,
+      "decision": "excluded",
+      "reason": "Insulin-peptide immune responses in animal models; wrong process and population.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15251776",
+      "input_index": 110,
+      "decision": "background",
+      "reason": "Broad historical insulin-treatment review; background/source discovery only.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15321001",
+      "input_index": 111,
+      "decision": "excluded",
+      "reason": "Inhaled versus SC human-insulin variability study; abstract identifies human insulin rather than conventional lispro.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:15349139",
+      "input_index": 112,
+      "decision": "background",
+      "reason": "Insulin-analogue management overview; secondary context/source discovery.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15382830",
+      "input_index": 113,
+      "decision": "background",
+      "reason": "Hovorka-type nonlinear MPC report explicitly contains a lispro absorption submodel; retain essential model ancestry, while reported evaluation concerns glucose prediction.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:15458335",
+      "input_index": 114,
+      "decision": "excluded",
+      "reason": "Mass transfer in insulin chromatography; not physiological absorption.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15504991",
+      "input_index": 115,
+      "decision": "excluded",
+      "reason": "CSII versus injections analyzed by baseline A1c; glycaemic treatment effect rather than kinetic outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15523542",
+      "input_index": 116,
+      "decision": "excluded",
+      "reason": "Aspart versus regular-insulin pump effectiveness; no lispro treatment arm and no PK analysis in abstract.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:15526500",
+      "input_index": 117,
+      "decision": "excluded",
+      "reason": "Lispro Mix25 in T2D clinical treatment; wrong formulation/population question.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15536606",
+      "input_index": 118,
+      "decision": "background",
+      "reason": "T1D interstitial-glucose model uses lispro therapy; relevant observation/coupling ancestry, but target modeled quantity is glucose rather than lispro absorption.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:15551297",
+      "input_index": 119,
+      "decision": "excluded",
+      "reason": "Hypoglycaemia burden overview; not a focused kinetic source.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15616226",
+      "input_index": 120,
+      "decision": "excluded",
+      "reason": "Basal glargine/ultralente trial uses aspart and glycaemic outcomes; no lispro PK arm.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:15651559",
+      "input_index": 121,
+      "decision": "primary_candidate",
+      "reason": "Wilinska anchor: T1D CSII lispro during meal conditions, competing absorption/degradation structures and reported parameter estimates; full-source extraction and adult eligibility remain required.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Retrieve and screen full text for adult T1D eligibility, conventional lispro formulation, dose/input history, assay, kinetic outputs and shared-cohort ancestry; inclusion is not yet confirmed."
+    },
+    {
+      "key": "PMID:15663191",
+      "input_index": 122,
+      "decision": "excluded",
+      "reason": "Rat bone-membrane enzyme study; outside target process/population.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15699519",
+      "input_index": 123,
+      "decision": "excluded",
+      "reason": "Experimental autoimmune diabetes and insulin immunity; not exogenous analogue kinetics.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15738707",
+      "input_index": 124,
+      "decision": "background",
+      "reason": "Comparison of minimal, AIDA and Sorensen models under IV glucose and SC-insulin scenarios; retain model ancestry and dose-response assumptions.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:15738712",
+      "input_index": 125,
+      "decision": "background",
+      "reason": "In vitro precipitation of pump insulin products including lispro; formulation/delivery context, not human PK.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:15776817",
+      "input_index": 126,
+      "decision": "excluded",
+      "reason": "In vitro iontophoresis through porcine skin; different delivery route and population.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15813164",
+      "input_index": 127,
+      "decision": "excluded",
+      "reason": "T2D insulin-treatment strategies; outside primary population and kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15827072",
+      "input_index": 128,
+      "decision": "excluded",
+      "reason": "Inhaled Exubera formulation; different route/formulation.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15871555",
+      "input_index": 129,
+      "decision": "excluded",
+      "reason": "Aspart-focused treatment summary; outside the lispro source set.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15918022",
+      "input_index": 130,
+      "decision": "excluded",
+      "reason": "Apolipoprotein metabolism in T1D; different kinetic analyte.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15934796",
+      "input_index": 131,
+      "decision": "excluded",
+      "reason": "Costs and utilization of lispro versus regular insulin; economic outcome rather than PK.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15964233",
+      "input_index": 132,
+      "decision": "excluded",
+      "reason": "Neural-network model and simulated controller optimize glucose; no physiological lispro concentration model or measurements in abstract.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:15981952",
+      "input_index": 133,
+      "decision": "excluded",
+      "reason": "Gestational-diabetes treatment review; outside selected population and kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15991899",
+      "input_index": 134,
+      "decision": "background",
+      "reason": "Early lispro overview; retain for historical pharmacology/source tracing.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16033737",
+      "input_index": 135,
+      "decision": "background",
+      "reason": "Dawn-phenomenon review; time-varying sensitivity context, distinct from absorption kinetics.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:16035288",
+      "input_index": 136,
+      "decision": "background",
+      "reason": "General T1D insulin-therapy source; secondary context only.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16091481",
+      "input_index": 137,
+      "decision": "excluded",
+      "reason": "SC versus intraperitoneal therapy assessed through apoB100 kinetics, not lispro absorption.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:16108855",
+      "input_index": 138,
+      "decision": "excluded",
+      "reason": "CSII health-economic comparison; no kinetic outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16120030",
+      "input_index": 139,
+      "decision": "excluded",
+      "reason": "Paediatric glucose excursions with pump versus injections; wrong primary population/outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:1612067",
+      "input_index": 140,
+      "decision": "background",
+      "reason": "Historical T1D insulin-therapy overview; background only.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16141788",
+      "input_index": 141,
+      "decision": "excluded",
+      "reason": "Bradykinin antagonist and hyperalgesia in rats; unrelated intervention/process.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16151977",
+      "input_index": 142,
+      "decision": "background",
+      "reason": "Glulisine time-action study in obese nondiabetic participants; indirect rapid-analogue comparison, not primary lispro T1D evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16176210",
+      "input_index": 143,
+      "decision": "excluded",
+      "reason": "Accidental intramuscular glargine case; wrong formulation/route.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16186270",
+      "input_index": 144,
+      "decision": "background",
+      "reason": "SC lispro comparator with multiple doses is studied in healthy volunteers; indirect PK evidence, not T1D.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:16239201",
+      "input_index": 145,
+      "decision": "excluded",
+      "reason": "Transition from lispro pump to glargine/lispro injections assessed by CGM; no PK endpoints in abstract.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:16240869",
+      "input_index": 146,
+      "decision": "background",
+      "reason": "New-insulin overview; secondary formulation context/source discovery.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16386093",
+      "input_index": 147,
+      "decision": "excluded",
+      "reason": "Preschool pump glycaemic control and hypoglycaemia; not adult lispro PK.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16389648",
+      "input_index": 148,
+      "decision": "excluded",
+      "reason": "Determinants of glycaemic control during intensified treatment; no kinetic study established by title.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16389894",
+      "input_index": 149,
+      "decision": "background",
+      "reason": "Review of PK and glycaemic variability; retain original references and variability definitions.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:16389896",
+      "input_index": 150,
+      "decision": "excluded",
+      "reason": "Detemir-focused action variability; wrong target formulation.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16390387",
+      "input_index": 151,
+      "decision": "excluded",
+      "reason": "Paediatric pump survey; no kinetic endpoint.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16409572",
+      "input_index": 152,
+      "decision": "unresolved",
+      "reason": "T1D fasting closed-loop study measures serum insulin as well as glucose, but the abstract does not identify insulin formulation or adult age range.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Check full text for exact insulin formulation, age range, measured concentration curves and study overlap with ADICOL reports."
+    },
+    {
+      "key": "PMID:16423804",
+      "input_index": 153,
+      "decision": "excluded",
+      "reason": "Sustained-release insulin microcapsules in rats; wrong formulation/population.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16490311",
+      "input_index": 154,
+      "decision": "excluded",
+      "reason": "Brain reactive oxygen species during neonatal hypoglycaemia; outside kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16519038",
+      "input_index": 155,
+      "decision": "excluded",
+      "reason": "Biphasic aspart effectiveness in T2D; wrong formulation/population.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16627387",
+      "input_index": 156,
+      "decision": "background",
+      "reason": "Review of long-term T1D insulin intervention strategies; contextual source, not original kinetic measurement.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:16627392",
+      "input_index": 157,
+      "decision": "background",
+      "reason": "Review of T1D insulin regimens; context/source discovery only.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:16631437",
+      "input_index": 158,
+      "decision": "background",
+      "reason": "Reanalysis of published insulin absorption curves motivated by T2D includes lispro; retain method and underlying-source route, without treating pooled estimates as adult T1D parameters.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:16690737",
+      "input_index": 159,
+      "decision": "background",
+      "reason": "ARCHITECT insulin assay cross-reactivity including lispro; relevant observation-method evidence.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:16740857",
+      "input_index": 160,
+      "decision": "excluded",
+      "reason": "Pump feasibility in children aged 2-7; wrong population and outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16741057",
+      "input_index": 161,
+      "decision": "excluded",
+      "reason": "Endothelin antagonism and retinopathy in mice; unrelated process/intervention.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16776745",
+      "input_index": 162,
+      "decision": "background",
+      "reason": "Review of obesity and rapid-analogue PK/PD, emphasizing T2D; indirect context and original references.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:16800757",
+      "input_index": 163,
+      "decision": "background",
+      "reason": "Lispro pump stability under in vitro stress; delivery/formulation context rather than measured subcutaneous absorption.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:16915795",
+      "input_index": 164,
+      "decision": "excluded",
+      "reason": "Paediatric insulin-therapy regimens; no adult kinetic question.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16920293",
+      "input_index": 165,
+      "decision": "excluded",
+      "reason": "Electroporation/iontophoretic human-insulin delivery; different route/formulation.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16932312",
+      "input_index": 166,
+      "decision": "excluded",
+      "reason": "Islet-transplant case for recurrent hypoglycaemia; not exogenous lispro kinetics.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16952461",
+      "input_index": 167,
+      "decision": "background",
+      "reason": "Mass-spectrometric insulin self-association measurements including lispro; mechanistic context, not in vivo human PK.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:17026485",
+      "input_index": 168,
+      "decision": "background",
+      "reason": "Review of insulin-analogue metabolic and mitogenic properties; context, not a primary absorption study.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:17028476",
+      "input_index": 169,
+      "decision": "background",
+      "reason": "Insulin-injection therapy update; secondary clinical context only.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17072232",
+      "input_index": 170,
+      "decision": "excluded",
+      "reason": "Brittle-diabetes management strategies; no specific PK/model result established by title.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17073325",
+      "input_index": 171,
+      "decision": "excluded",
+      "reason": "Fuzzy glucose controller; controller design rather than insulin concentration kinetics.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17130478",
+      "input_index": 172,
+      "decision": "excluded",
+      "reason": "Automated insulin delivery feasibility study reports glucose and hypoglycaemia outcomes, without lispro PK measurements in the abstract.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:17147307",
+      "input_index": 173,
+      "decision": "excluded",
+      "reason": "Insulin-pump cost-utility analysis; economic outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17271797",
+      "input_index": 174,
+      "decision": "background",
+      "reason": "Identifiability/parameter precision for a glucose model fitted to CGM; methodological context rather than lispro kinetic data.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:17344794",
+      "input_index": 175,
+      "decision": "background",
+      "reason": "Insulin-analogue management overview; source-discovery background.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17425237",
+      "input_index": 176,
+      "decision": "excluded",
+      "reason": "Pump-priming error report; device-use error rather than kinetic characterization.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17456839",
+      "input_index": 177,
+      "decision": "background",
+      "reason": "SC lispro comparator in healthy/COPD groups; indirect population PK evidence, no T1D cohort in abstract.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:17476466",
+      "input_index": 178,
+      "decision": "background",
+      "reason": "Insulin self-association and isolated rat-lung disposition; indirect mechanistic evidence with wrong route/population.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17561792",
+      "input_index": 179,
+      "decision": "excluded",
+      "reason": "Aspart versus human-insulin therapy in T2D; no target lispro arm.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17563303",
+      "input_index": 180,
+      "decision": "background",
+      "reason": "AIR-insulin system overview references SC lispro comparisons; retain source route, not secondary summary as primary PK.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:17593235",
+      "input_index": 181,
+      "decision": "background",
+      "reason": "SC glulisine/lispro dose comparison in subjects without diabetes; indirect BMI/formulation evidence.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:17632702",
+      "input_index": 182,
+      "decision": "excluded",
+      "reason": "GLP-1 stimulation in NOD mice to delay diabetes; different intervention and process.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17633894",
+      "input_index": 183,
+      "decision": "background",
+      "reason": "Insulin-analogue role in current treatment review; secondary context only.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17647145",
+      "input_index": 184,
+      "decision": "excluded",
+      "reason": "Detemir/NPH dose-response variability; no conventional lispro formulation.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17697056",
+      "input_index": 185,
+      "decision": "excluded",
+      "reason": "Premixed insulin in T2D; outside formulation/population scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17703168",
+      "input_index": 186,
+      "decision": "excluded",
+      "reason": "Inhaled-insulin therapy evaluation; different route and no target SC comparator established by title.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17703632",
+      "input_index": 187,
+      "decision": "background",
+      "reason": "Combination-insulin overview centered on glulisine; possible comparator references, not primary lispro evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17705688",
+      "input_index": 188,
+      "decision": "background",
+      "reason": "Control-oriented glucose/insulin model with SC/IV kinetics; generic model ancestry retained, with glucose-based validation and lispro identity unestablished.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:17767897",
+      "input_index": 189,
+      "decision": "excluded",
+      "reason": "Inhaled-insulin effectiveness/economic systematic review; wrong principal outcome and route.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17880811",
+      "input_index": 190,
+      "decision": "excluded",
+      "reason": "Treatment of children diagnosed below age seven; not adult kinetic evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17887808",
+      "input_index": 191,
+      "decision": "excluded",
+      "reason": "Pump-versus-injection economic comparison; no kinetic outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17890472",
+      "input_index": 192,
+      "decision": "excluded",
+      "reason": "Pulmonary diffusing-capacity standardization; not lispro absorption modeling.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17922880",
+      "input_index": 193,
+      "decision": "background",
+      "reason": "Inhaled-insulin smoking study has an SC lispro comparator in nondiabetic smokers; indirect population/route context.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:17946395",
+      "input_index": 194,
+      "decision": "background",
+      "reason": "T1D model fitting combines Hovorka with Wilinska SC kinetics; retain parameter/model ancestry and examine source measurements before promoting as an independent lispro kinetic study.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:18003374",
+      "input_index": 195,
+      "decision": "excluded",
+      "reason": "Hybrid neural-network/NMPC advisory system evaluated on simulated glucose; not a physiological lispro PK study.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:18036064",
+      "input_index": 196,
+      "decision": "excluded",
+      "reason": "Quality-of-life effects of pump therapy in preschool children; wrong outcome/population.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18076215",
+      "input_index": 197,
+      "decision": "background",
+      "reason": "Glulisine pharmacology review with lispro comparisons; retain original-source discovery only.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:18164094",
+      "input_index": 198,
+      "decision": "background",
+      "reason": "Repeated SC lispro/glulisine meal dosing measures PK in T2D; indirect population and repeated-dose context.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:18164698",
+      "input_index": 199,
+      "decision": "excluded",
+      "reason": "Chalcone effects in hyperglycaemic rats; unrelated intervention.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18192544",
+      "input_index": 200,
+      "decision": "background",
+      "reason": "SC lispro control in healthy/asthmatic nondiabetic volunteers; indirect PK evidence, not primary T1D.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:18227475",
+      "input_index": 201,
+      "decision": "background",
+      "reason": "Long-acting analogue versus pump overview; secondary basal-delivery context.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18274393",
+      "input_index": 202,
+      "decision": "excluded",
+      "reason": "Therapeutic education; no kinetic question.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18281121",
+      "input_index": 203,
+      "decision": "excluded",
+      "reason": "Detemir lipoatrophy case; different formulation and no target PK result.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18307459",
+      "input_index": 204,
+      "decision": "excluded",
+      "reason": "Pump versus glargine injections assessed by glucose variability; clinical glycaemic endpoint.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18316945",
+      "input_index": 205,
+      "decision": "excluded",
+      "reason": "Sensor-augmented pump therapy topic; no insulin kinetic study established by title.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18333891",
+      "input_index": 206,
+      "decision": "excluded",
+      "reason": "Metabolic-control changes after starting CSII; clinical outcome rather than specific PK evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18406299",
+      "input_index": 207,
+      "decision": "background",
+      "reason": "Lispro benefits/limitations overview; historical secondary pharmacology context.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:18414816",
+      "input_index": 208,
+      "decision": "excluded",
+      "reason": "Cost-effectiveness of insulin analogues; economic outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18438537",
+      "input_index": 209,
+      "decision": "background",
+      "reason": "T1D insulin-therapy history/review; contextual source only.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18454569",
+      "input_index": 210,
+      "decision": "background",
+      "reason": "Paediatric analogue overview; indirect-population context and references.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18465353",
+      "input_index": 211,
+      "decision": "background",
+      "reason": "Broad analogue-versus-human insulin comparison; contextual synthesis rather than a specified original kinetic study.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18473691",
+      "input_index": 212,
+      "decision": "excluded",
+      "reason": "Simulation of patient behaviour informed by glucose; behavioral/controller question rather than lispro kinetics.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18489896",
+      "input_index": 213,
+      "decision": "background",
+      "reason": "Mass-spectrometric detection of modified/counterfeit insulin; analytical-method context, not physiological PK evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18615401",
+      "input_index": 214,
+      "decision": "background",
+      "reason": "T1D treatment/monitoring update; broad contextual source only.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18641968",
+      "input_index": 215,
+      "decision": "background",
+      "reason": "VIAject comparison includes SC lispro in healthy volunteers; indirect population/formulation evidence.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:18698880",
+      "input_index": 216,
+      "decision": "background",
+      "reason": "Review of novel analogues and delivery routes; source-discovery context.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18761648",
+      "input_index": 217,
+      "decision": "excluded",
+      "reason": "Paediatric pump-versus-injection effectiveness review; wrong population and endpoint.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19015157",
+      "input_index": 218,
+      "decision": "excluded",
+      "reason": "Intranasal insulin in murine encephalopathy; wrong route/population/process.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19049379",
+      "input_index": 219,
+      "decision": "excluded",
+      "reason": "Lispro/aspart CSII comparison reports CGM-based glucose stability rather than insulin concentrations.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:19061492",
+      "input_index": 220,
+      "decision": "excluded",
+      "reason": "Insulin dosing adherence metrics; behavioral outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19120431",
+      "input_index": 221,
+      "decision": "background",
+      "reason": "Insulin-analogue development overview; historical formulation context.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19158048",
+      "input_index": 222,
+      "decision": "excluded",
+      "reason": "Basal-bolus dosing guidelines analysis; treatment heuristics rather than PK measurements.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19166434",
+      "input_index": 223,
+      "decision": "excluded",
+      "reason": "Pump-versus-injection CGMS variability; glucose outcome, not lispro kinetics.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19171006",
+      "input_index": 224,
+      "decision": "excluded",
+      "reason": "Pump-versus-injection cost-effectiveness; economic outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19174123",
+      "input_index": 225,
+      "decision": "background",
+      "reason": "New-insulin update; background/source discovery.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19177837",
+      "input_index": 226,
+      "decision": "excluded",
+      "reason": "Islet transplantation anatomical sites; different insulin source/process.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19193822",
+      "input_index": 227,
+      "decision": "background",
+      "reason": "Insulin-analogue therapy and physiological secretion overview; source-discovery context.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19221353",
+      "input_index": 228,
+      "decision": "excluded",
+      "reason": "Insulin-analogue cost-effectiveness; economic outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19292507",
+      "input_index": 229,
+      "decision": "background",
+      "reason": "Original generic rapid/long-acting SC insulin ODE models with plasma output; retain model ancestry, with exact lispro data/formulation identity requiring source tracing.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:19389820",
+      "input_index": 230,
+      "decision": "excluded",
+      "reason": "Lispro pump versus glargine/lispro MDI study evaluates 24-week glycaemic and economic outcomes, not PK.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:19393856",
+      "input_index": 231,
+      "decision": "excluded",
+      "reason": "Canadian pump health-economic comparison; no kinetic outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19444330",
+      "input_index": 232,
+      "decision": "background",
+      "reason": "UVA/Padova in silico preclinical platform; essential simulator/model ancestry, not independent lispro PK evidence.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:19459760",
+      "input_index": 233,
+      "decision": "primary_candidate",
+      "reason": "Two adults with T1D receive lispro by microneedle and conventional SC catheter with serial free-insulin measurements; retain SC control arm and verify scenario details.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Retrieve and screen full text for adult T1D eligibility, conventional lispro formulation, dose/input history, assay, kinetic outputs and shared-cohort ancestry; inclusion is not yet confirmed."
+    },
+    {
+      "key": "PMID:19459762",
+      "input_index": 234,
+      "decision": "background",
+      "reason": "Lispro with/without hyaluronidase PK in healthy volunteers; indirect formulation evidence, no T1D cohort.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:19464026",
+      "input_index": 235,
+      "decision": "excluded",
+      "reason": "Pramlintide treatment in adolescents; different primary intervention/population and no target kinetic study established.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19523989",
+      "input_index": 236,
+      "decision": "excluded",
+      "reason": "New B-chain-extended insulin analogue; not conventional lispro.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19539098",
+      "input_index": 237,
+      "decision": "primary_candidate",
+      "reason": "Adult T1D heating/no-heating CSII study measures insulin concentrations after lispro or aspart; candidate only if conventional-lispro and control-arm data can be separated.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Establish which participants/arms used conventional lispro and whether their kinetic outcomes are separable from aspart; retain no-heating control separately."
+    },
+    {
+      "key": "PMID:19565214",
+      "input_index": 238,
+      "decision": "excluded",
+      "reason": "Malignancy risk cohort; clinical safety outcome rather than absorption kinetics.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19578532",
+      "input_index": 239,
+      "decision": "excluded",
+      "reason": "CGM stream properties and closed-loop technology; sensor data rather than insulin PK.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19590755",
+      "input_index": 240,
+      "decision": "background",
+      "reason": "Lispro pump-pulse simulation studies plasma concentrations; retain kinetic-model reuse and numerical-reference context, not human measurement evidence.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:19642469",
+      "input_index": 241,
+      "decision": "excluded",
+      "reason": "Monoclonal-antibody diabetes overview; immune intervention outside kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19667674",
+      "input_index": 242,
+      "decision": "background",
+      "reason": "Physiological insulin replacement overview; historical context/source discovery.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19709151",
+      "input_index": 243,
+      "decision": "excluded",
+      "reason": "Long-term lispro clinical/economic benefit estimation; not PK.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19744642",
+      "input_index": 244,
+      "decision": "excluded",
+      "reason": "Cell-therapy eligibility discussion; different biological scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19756210",
+      "input_index": 245,
+      "decision": "excluded",
+      "reason": "Linear-quadratic-Gaussian controller design; no target kinetic evidence established by title.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19761358",
+      "input_index": 246,
+      "decision": "excluded",
+      "reason": "Protamine lispro suspension versus basal insulins in T2D; wrong formulation/population.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19761529",
+      "input_index": 247,
+      "decision": "excluded",
+      "reason": "Psychosocial factors associated with adolescent pump use; no kinetic endpoint.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19767384",
+      "input_index": 248,
+      "decision": "excluded",
+      "reason": "RealTrend CGM/pump glycaemic effectiveness study; no PK question established.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19879161",
+      "input_index": 249,
+      "decision": "excluded",
+      "reason": "Lipoic acid in diabetic rats; unrelated intervention and population.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19885148",
+      "input_index": 250,
+      "decision": "background",
+      "reason": "AIDA generic SC absorption bench simulation includes lispro/aspart examples; retain model ancestry and simulated-depot reference context.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:19885152",
+      "input_index": 251,
+      "decision": "background",
+      "reason": "Early T1D simulator/MPC work modifies a meal-model population; retain simulator ancestry, not a measured conventional-lispro study.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:19885207",
+      "input_index": 252,
+      "decision": "background",
+      "reason": "Clinical metabolic-system simulation model; generic engine ancestry and identification context, not direct lispro PK evidence in abstract.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:19885208",
+      "input_index": 253,
+      "decision": "background",
+      "reason": "Long-term T1D simulation source; retain potential metabolic-model ancestry, without treating simulated glycaemia as PK evidence.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19885231",
+      "input_index": 254,
+      "decision": "excluded",
+      "reason": "VIAject versus regular human insulin variability study; no lispro comparator.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:19888405",
+      "input_index": 255,
+      "decision": "excluded",
+      "reason": "Dual-hormone controller in diabetic swine; wrong population and experimental outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20001676",
+      "input_index": 256,
+      "decision": "excluded",
+      "reason": "Responses to CGM across delivery regimens; glycaemic/behavioral outcome rather than PK.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20046665",
+      "input_index": 257,
+      "decision": "background",
+      "reason": "AIDA/Tarin generic SC absorption with simulated plasma profiles; retain absorption/disposition ancestry, not clinical lispro measurements.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:20080164",
+      "input_index": 258,
+      "decision": "excluded",
+      "reason": "Nasal insulin mixtures; wrong delivery route/formulation.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20082584",
+      "input_index": 259,
+      "decision": "excluded",
+      "reason": "Pregnancy planning and outcomes by regimen; outside selected population/kinetic question.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20091571",
+      "input_index": 260,
+      "decision": "excluded",
+      "reason": "CSII-versus-injection treatment review; clinical delivery comparison without target kinetic question in title.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20105038",
+      "input_index": 261,
+      "decision": "excluded",
+      "reason": "Inverse-controller simulation evaluates glucose regulation using existing models; no new lispro kinetic specification or observations in abstract.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:20121899",
+      "input_index": 262,
+      "decision": "excluded",
+      "reason": "Guardian sensor measurement delay; glucose-observation rather than insulin kinetics.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20144414",
+      "input_index": 263,
+      "decision": "excluded",
+      "reason": "Padova/Montpellier closed-loop feasibility trial reports glucose-control outcomes; no plasma-insulin kinetic endpoint in abstract.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:20144416",
+      "input_index": 264,
+      "decision": "excluded",
+      "reason": "Virginia closed-loop trial reports glucose/hypoglycaemia outcomes; no insulin concentration analysis in abstract.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:20144418",
+      "input_index": 265,
+      "decision": "unresolved",
+      "reason": "T1D closed-loop reanalysis fits plasma-insulin as well as glucose with an SC kinetic model; the abstract does not identify insulin formulation, so lispro applicability requires full text.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Retrieve original/full reanalysis report to establish lispro formulation, adult range, source cohort identity and parameter/curve availability."
+    },
+    {
+      "key": "PMID:20144422",
+      "input_index": 266,
+      "decision": "excluded",
+      "reason": "Run-to-run tuning of MPC in silico; controller optimization rather than kinetic study.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20144424",
+      "input_index": 267,
+      "decision": "excluded",
+      "reason": "Simulated overnight closed-loop sensor-error risk analysis; no original lispro concentration data.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:20144442",
+      "input_index": 268,
+      "decision": "excluded",
+      "reason": "CSII glycaemic variability by anthropometry/complications; no kinetic outcome established.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20150302",
+      "input_index": 269,
+      "decision": "unresolved",
+      "reason": "Lispro/glargine clamp study measures PK in a youth cohort; whether separable adult observations exist is unresolved and cannot be inferred from the mean age.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Check exact ages and whether adult T1D control-arm outcomes are separable; otherwise retain indirect paediatric evidence."
+    },
+    {
+      "key": "PMID:20167176",
+      "input_index": 270,
+      "decision": "excluded",
+      "reason": "Exercise training study monitors glucose with microdialysis; no insulin concentration PK analysis in abstract.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:20167177",
+      "input_index": 271,
+      "decision": "background",
+      "reason": "Cambridge simulation environment provides synthetic model parameters; retain physiological model ancestry and distinguish virtual cohort from lispro empirical evidence.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:20215457",
+      "input_index": 272,
+      "decision": "excluded",
+      "reason": "Patient response algorithm for real-time CGM; behavioral/glycaemic trial, not PK.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20223123",
+      "input_index": 273,
+      "decision": "excluded",
+      "reason": "Pump effectiveness and economic systematic review; wrong endpoint.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20393188",
+      "input_index": 274,
+      "decision": "primary_candidate",
+      "reason": "Bihormonal T1D trial explicitly measures variable plasma lispro kinetics and adjusts PK assumptions; retain kinetic observations separately from controller outcomes and verify ages/delivery histories.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Retrieve and screen full text for adult T1D eligibility, conventional lispro formulation, dose/input history, assay, kinetic outputs and shared-cohort ancestry; inclusion is not yet confirmed."
+    },
+    {
+      "key": "PMID:20424816",
+      "input_index": 275,
+      "decision": "background",
+      "reason": "Insulin-receptor isoform/signaling comparison; indirect molecular mechanism context, not absorption PK.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20429049",
+      "input_index": 276,
+      "decision": "excluded",
+      "reason": "Glulisine/aspart comparison in healthy volunteers; no lispro arm and wrong primary population.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20508081",
+      "input_index": 277,
+      "decision": "excluded",
+      "reason": "Lispro protamine suspension versus glargine clamp study; no conventional rapid-acting lispro arm.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:20508226",
+      "input_index": 278,
+      "decision": "excluded",
+      "reason": "Pump-versus-injection glucose variability comparison; no target PK endpoint established.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20513325",
+      "input_index": 279,
+      "decision": "excluded",
+      "reason": "Patient perceptions of an artificial pancreas; no kinetic question.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20594535",
+      "input_index": 280,
+      "decision": "excluded",
+      "reason": "Pump cost-effectiveness; economic outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20646777",
+      "input_index": 281,
+      "decision": "excluded",
+      "reason": "Meal-behaviour predictive-control algorithm; controller/input anticipation rather than insulin kinetics.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20663463",
+      "input_index": 282,
+      "decision": "excluded",
+      "reason": "Zone MPC design; glucose-controller outcome rather than PK.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:2066644",
+      "input_index": 283,
+      "decision": "excluded",
+      "reason": "Octreotide-clearance intervention in T1D; target kinetic drug is octreotide, not conventional lispro.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:20687863",
+      "input_index": 284,
+      "decision": "excluded",
+      "reason": "Basal glargine versus pump trial assesses CGM and HbA1c; no lispro concentration analysis in abstract.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:20709120",
+      "input_index": 285,
+      "decision": "excluded",
+      "reason": "Nasal insulin microemulsion; wrong administration route/formulation.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:2076628",
+      "input_index": 286,
+      "decision": "background",
+      "reason": "Anatomical injection-region and variability source; historical human-insulin absorption context, not a lispro-specific study.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:2076798",
+      "input_index": 287,
+      "decision": "excluded",
+      "reason": "Intranasal glucagon for insulin reactions; different drug and route.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20841613",
+      "input_index": 288,
+      "decision": "background",
+      "reason": "Short-acting analogue PK dose dependence in obese T2D; indirect population context, not primary adult T1D.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20855123",
+      "input_index": 289,
+      "decision": "excluded",
+      "reason": "Glucose variability before/after CSII assessed by CGM; no PK endpoint.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20920426",
+      "input_index": 290,
+      "decision": "excluded",
+      "reason": "Biomaterial-tissue analyte transport for sensors; sensor interface rather than lispro SC absorption.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20920443",
+      "input_index": 291,
+      "decision": "background",
+      "reason": "T1D insulin/meal impulse-response model uses glucose measurements; retain PD/identifiability context, not direct insulin PK.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:20924141",
+      "input_index": 292,
+      "decision": "background",
+      "reason": "Paper-based PK/PD model of SC/inhaled insulin uses digitized healthy/T1D summaries; retain methodological/model ancestry while exact SC formulation is unresolved.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:20960101",
+      "input_index": 293,
+      "decision": "background",
+      "reason": "Glulisine/lispro clamp comparison in healthy Chinese men; indirect population PK evidence.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:21068007",
+      "input_index": 294,
+      "decision": "excluded",
+      "reason": "Sphingolipid biomarkers in diabetes models; unrelated analyte/process.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21074775",
+      "input_index": 295,
+      "decision": "excluded",
+      "reason": "Adsorption/elution of lispro in chromatography; manufacturing separation, not physiological absorption.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21129332",
+      "input_index": 296,
+      "decision": "excluded",
+      "reason": "Multinational closed-loop clinical summary reports glucose outcomes; no insulin kinetic analysis in abstract.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:21129338",
+      "input_index": 297,
+      "decision": "excluded",
+      "reason": "Coordinated basal-bolus control evaluated on virtual subjects; controller study without new PK measurements.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:21134878",
+      "input_index": 298,
+      "decision": "background",
+      "reason": "Review of analogue PK, stability and pump compatibility; trace original studies rather than treat synthesis as new kinetic evidence.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:21175271",
+      "input_index": 299,
+      "decision": "excluded",
+      "reason": "SWITCH sensor-augmented pump efficacy protocol; HbA1c/control question, not lispro PK.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21204959",
+      "input_index": 300,
+      "decision": "excluded",
+      "reason": "Paediatric diabetes-camp dose changes; wrong population/outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21217102",
+      "input_index": 301,
+      "decision": "excluded",
+      "reason": "Transition to sensor-augmented pumps; practical treatment guidance, not kinetic study.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21273493",
+      "input_index": 302,
+      "decision": "primary_candidate",
+      "reason": "T1D crossover compares lispro with/without hyaluronidase and regular insulin with PK outcomes; conventional lispro-alone comparator warrants full-text eligibility and scenario checks.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Retrieve and screen full text for adult T1D eligibility, conventional lispro formulation, dose/input history, assay, kinetic outputs and shared-cohort ancestry; inclusion is not yet confirmed."
+    },
+    {
+      "key": "PMID:21278138",
+      "input_index": 303,
+      "decision": "excluded",
+      "reason": "CGM comparison between delivery regimens; no target PK endpoint.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21301591",
+      "input_index": 304,
+      "decision": "excluded",
+      "reason": "Patient-preference discrete-choice study; no physiological kinetic outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21323816",
+      "input_index": 305,
+      "decision": "excluded",
+      "reason": "Paediatric diabetes technology review; outside adult kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21355716",
+      "input_index": 306,
+      "decision": "primary_candidate",
+      "reason": "T1D five-way meal crossover includes SC lispro at 0.125 U/kg against intradermal delivery; retain conventional SC control and verify age range, assay and dose timing.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Retrieve and screen full text for adult T1D eligibility, conventional lispro formulation, dose/input history, assay, kinetic outputs and shared-cohort ancestry; inclusion is not yet confirmed."
+    },
+    {
+      "key": "PMID:21355717",
+      "input_index": 307,
+      "decision": "primary_candidate",
+      "reason": "Five T1D subjects receive lispro through SC catheter versus intradermal microneedle, with plasma free-insulin measurements; verify adults and possible cohort overlap before extraction.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Verify adult eligibility, conventional SC comparator and participant/report overlap with earlier hollow-microneedle work."
+    },
+    {
+      "key": "PMID:21355718",
+      "input_index": 308,
+      "decision": "background",
+      "reason": "Microneedle versus SC lispro clamp in healthy male volunteers; indirect route comparator, not T1D.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:21355719",
+      "input_index": 309,
+      "decision": "excluded",
+      "reason": "Overnight closed-loop study in young children measures glucose control; wrong population and endpoint.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:2140087",
+      "input_index": 310,
+      "decision": "background",
+      "reason": "Human unmodified-insulin IM/SC absorption with labelled insulin in T1D; useful route/measurement context, not lispro-specific kinetics.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:21487310",
+      "input_index": 311,
+      "decision": "excluded",
+      "reason": "Diabetic motor-endplate innervation; unrelated process.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21504332",
+      "input_index": 312,
+      "decision": "excluded",
+      "reason": "Acceptance of artificial pancreas in adults; behavioral outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21516218",
+      "input_index": 313,
+      "decision": "excluded",
+      "reason": "MPC development using clinical heuristics and virtual-patient glucose responses; no target PK observations.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:21520027",
+      "input_index": 314,
+      "decision": "background",
+      "reason": "In vitro lispro/human-insulin fibrillation and self-association model; molecular mechanism context, not in vivo PK.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:21590789",
+      "input_index": 315,
+      "decision": "background",
+      "reason": "Forcing-function inference and identifiability for blood/sensor glucose; methodological context, not lispro concentration kinetics.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:21639404",
+      "input_index": 316,
+      "decision": "background",
+      "reason": "Insulin therapy in older adults overview; age-related context/source discovery only.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21668336",
+      "input_index": 317,
+      "decision": "background",
+      "reason": "Basal insulin-replacement overview; secondary physiological context, not a specified conventional-lispro experiment.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21680984",
+      "input_index": 318,
+      "decision": "excluded",
+      "reason": "Premixed-insulin hypoglycaemia in T2D; wrong formulation/population/outcome.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21714645",
+      "input_index": 319,
+      "decision": "background",
+      "reason": "Repeated SC lispro with/without hyaluronidase in healthy volunteers using 40 U/mL preparations; indirect formulation/variability evidence, not primary T1D U100.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:21714679",
+      "input_index": 320,
+      "decision": "excluded",
+      "reason": "Pregnancy lispro-versus-regular meta-analysis; pregnancy and glycaemic outcomes outside primary scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21714999",
+      "input_index": 321,
+      "decision": "excluded",
+      "reason": "GAD immunotherapy trial; different intervention/process.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21722583",
+      "input_index": 322,
+      "decision": "primary_candidate",
+      "reason": "T1D meal study compares VIAject, lispro and regular insulin with insulin absorption measures; retain conventional lispro comparator subject to adult and full-scenario verification.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Retrieve and screen full text for adult T1D eligibility, conventional lispro formulation, dose/input history, assay, kinetic outputs and shared-cohort ancestry; inclusion is not yet confirmed."
+    },
+    {
+      "key": "PMID:21823538",
+      "input_index": 323,
+      "decision": "excluded",
+      "reason": "Glargine-based basal-bolus versus pump glycaemic control; no target kinetic endpoint established.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21871962",
+      "input_index": 324,
+      "decision": "background",
+      "reason": "Immunoaffinity/LC-MS detects insulin analogues including Humalog; analytical observation-method context, not primary PK.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:21873226",
+      "input_index": 325,
+      "decision": "excluded",
+      "reason": "Leptin administration in T2D rats; unrelated intervention/population.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21951784",
+      "input_index": 326,
+      "decision": "background",
+      "reason": "HDX mass-spectrometry study of insulin oligomeric stability relates results to published PK; mechanistic and source-tracing background, not new human kinetics.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:21964866",
+      "input_index": 327,
+      "decision": "excluded",
+      "reason": "Three-year paediatric pump versus injection HbA1c/hospital comparison; wrong population and endpoint.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21981286",
+      "input_index": 328,
+      "decision": "primary_candidate",
+      "reason": "Adult T1D clamp crossover compares 12 U conventional lispro with VIAject formulations and reports PK; retain lispro comparator and verify relationship to later model-development cohorts.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Retrieve full text and trace any reuse of its lispro comparator in Schiavon/Faggionato; retain formulation and assay details."
+    },
+    {
+      "key": "PMID:22023376",
+      "input_index": 329,
+      "decision": "unresolved",
+      "reason": "Adult-leaning T1D pump study collects serial plasma insulin after meals/boluses/exercise, but formulation and exact adult range are absent from the abstract.",
+      "reviewed_material": "title_abstract",
+      "next_action": "Retrieve protocol/full text to identify insulin products, adult age bounds and whether lispro concentrations are separable."
+    },
+    {
+      "key": "PMID:22071283",
+      "input_index": 330,
+      "decision": "background",
+      "reason": "Review of closed-loop insulin delivery discusses absorption limits; secondary model/source context only.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:22131301",
+      "input_index": 331,
+      "decision": "excluded",
+      "reason": "Neural model of glucose fitted to CGM; no physiological lispro concentration model.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:22136324",
+      "input_index": 332,
+      "decision": "background",
+      "reason": "Lispro/hyaluronidase meal study in T2D; indirect formulation evidence, not primary population.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:22178070",
+      "input_index": 333,
+      "decision": "excluded",
+      "reason": "Neural glucose model/controller trained on glucose and lispro delivery; no measured plasma-insulin kinetic endpoint in abstract.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:22189548",
+      "input_index": 334,
+      "decision": "excluded",
+      "reason": "Elderly-versus-young pump effectiveness/safety comparison; no PK question established by title.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:22208709",
+      "input_index": 335,
+      "decision": "background",
+      "reason": "Pump-treatment overview mentions kinetic limitations; source-discovery context rather than original lispro PK evidence.",
+      "reviewed_material": "title_abstract"
+    }
+  ]
+}

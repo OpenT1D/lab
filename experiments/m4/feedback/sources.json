@@ -1,0 +1,63 @@
+{
+  "schema": "bc008-sources/1",
+  "review_date": "2026-09-20",
+  "review_kind": "internal primary-source suitability and native-code review; not external domain review",
+  "assets": [
+    {
+      "id": "dallaman2007",
+      "url": "https://isbgroup.eu/files/Dalla%20Man%202007.pdf",
+      "doi": "10.1109/TBME.2007.893506",
+      "sha256": "8780106c17434f6b553856c5bc0414c9a4fe1b5e8296b640aaa8c15d31b5eedc",
+      "access": "Existing public research copy reread; PDF web access succeeded; local pages 4 and 6 rendered and inspected this turn. Earlier BC001 inspection covers equations 3 and 10.",
+      "locators": "p1743 Table I normal secretion parameters; p1745 equations23-26 and h=Gb statement; p1742 equation3; p1743 equations4-5; p1744 equation10",
+      "facts": [
+        "alpha=0.05/min, beta=0.11 pmol/kg/min per mg/dL, K=2.30 pmol/kg per mg/dL, gamma=0.5/min",
+        "Eq26 lower target is -Sb for Y; shifted nonnegative Z=Y+Sb preserves the equation",
+        "Spo is pancreatic appearance into portal state; S=gamma*Ipo reaches liver after that state",
+        "Full paper has dynamic hepatic extraction and direct portal EGP action, absent in pinned native route"
+      ],
+      "rights": "Inspected only; do not redistribute PDF, figures or cohort data; original mathematical implementation planned"
+    },
+    {
+      "id": "pedersen2013",
+      "url": "https://www.dei.unipd.it/~pedersen/InterfaceFocus_preprint.pdf",
+      "doi": "10.1098/rsfs.2012.0085",
+      "sha256": "97b2f66a7fc9c509fa541e9de83d46d53da483e835df0857984d2fa729ee2d2c",
+      "access": "Existing public preprint text reread, PDF pages5-7; fresh PMC challenged and author URL web fetch unavailable",
+      "locators": "final sections3-4; preprint equations4-15: full threshold distribution versus declining-IVGTT reduction",
+      "verdict": "BC001 retained as bounded IVGTT reference; full granule distribution is a larger future alternative, not a drop-in two-state extension"
+    },
+    {
+      "id": "gim2007",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2769591/",
+      "doi": "10.1177/193229680700100303",
+      "access": "Full primary software article accessed",
+      "locators": "The Model: Normal Subject and Type1 Diabetes; software availability section",
+      "facts": [
+        "Describes static and dynamic secretion; T1D software substitutes SC insulin for secretion",
+        "Historical MATLAB/Simulink implementation described; no newly verified redistributable author-code release imported"
+      ]
+    },
+    {
+      "id": "native",
+      "url": "https://github.com/jxx123/simglucose/blob/a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc/simglucose/patient/t1dpatient.py",
+      "sha256": "7ad1302fbf064805e2294bbcffd482e55448e37e48b63e629a1ed7f11c701547",
+      "access": "Installed pinned source inspected with existing revision/file guards",
+      "locators": "model lines114-203; EGP line151; liver inlet line191; reset lines249-279",
+      "rights": "Installed MIT upstream retained, no native source or table vendored"
+    }
+  ],
+  "additional_code_search": {
+    "author_software": "GIM paper and author publication listing inspected; source equations are selected, not an unverified binary/software release",
+    "biomodels": "BIOMD0000000379 discovered as a candidate independent encoding; direct EBI page retrieval failed. Version, deviations and asset license not verified; not used as specification, oracle or imported code."
+  },
+  "correction_search": {
+    "queries": [
+      "Meal simulation model of the glucose-insulin system correction erratum 2007",
+      "10.1109/TBME.2007.893506 erratum correction"
+    ],
+    "result": "No linked correction identified in inspected search results; not an exhaustive absence claim"
+  },
+  "data": "No participant records downloaded. Published aggregate parameters are synthetic design anchors; no matched T1D secretion dataset or authorized new release established.",
+  "contact": "none"
+}

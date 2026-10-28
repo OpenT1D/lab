@@ -1,0 +1,94 @@
+{
+  "schema": "lit002-protocol/1",
+  "specified_utc": "2026-09-19T23:18:42.693368+00:00",
+  "status": "frozen_before_native_experiment",
+  "question": "How much does a source-derived change in subcutaneous insulin absorption alter insulin appearance and native Cambridge glucose trajectories under identical predefined delivered insulin and meals?",
+  "claim": "Synthetic structural sensitivity and implementation verification only; no physiological superiority, clinical prediction, patient or full-Faggionato reproduction.",
+  "source_parameter_record_sha256": "a86c944f3070c87907c54f9204e6fa64ce6a5bc467f3695645f4333da1a4005e",
+  "source_doi": "10.3390/metabo11040235",
+  "source_locations": [
+    "Equation3 and Figure3",
+    "Table2 fixed effects; LIT001 checked transcription"
+  ],
+  "native_revision": "9a6092065bd821f88691cd8d03b0550acd665573",
+  "node_version": "v22.22.2",
+  "horizon_min": 720,
+  "sample_step_min": 1,
+  "max_step_min": 0.25,
+  "refinement_max_step_min": 0.125,
+  "relative_tolerance": 0.001,
+  "equilibrium_glucose_mg_dl": 124.91784824923789,
+  "arms": [
+    "cambridge_native",
+    "cambridge_mean_matched",
+    "faggionato_sc"
+  ],
+  "absorption": {
+    "tau_min": 5.62,
+    "ka1_per_min": 0.000134,
+    "kd_per_min": 0.0283,
+    "ka2_per_min": 0.0128
+  },
+  "mean_matching": "tmaxI = (tau + 1/(ka1+kd) + kd/((ka1+kd)*ka2))/2; analytical first-moment matching, not data fitting.",
+  "ownership": "Only S1,S2 and their appearance contribution to I change in the hybrid. Native VI, BW, ke, action, glucose and meal equations retained. Faggionato VI/ke and noise/covariate/random effects are not mapped.",
+  "initialization": "Common basal and native plasma/action/glucose/gut equilibrium from intact Cambridge. Each SC system initialized at its own equilibrium; constant basal input for all t<0 fills the delay queue.",
+  "input_convention": "Already-delivered U/h; extra finite pulses added to common native equilibrium basal. Whole-body mU in native SC states; normalized mU/kg in analytic comparison. No pump/controller/insulin dosing advice. Event intervals are left-closed,right-open; same event union all arms.",
+  "scenarios": [
+    {
+      "id": "basal",
+      "insulin_segments": [],
+      "meals": []
+    },
+    {
+      "id": "pulse",
+      "insulin_segments": [
+        {
+          "start_min": 120,
+          "end_min": 125,
+          "extra_u_h": 24
+        }
+      ],
+      "meals": []
+    },
+    {
+      "id": "meal_pulse",
+      "insulin_segments": [
+        {
+          "start_min": 120,
+          "end_min": 125,
+          "extra_u_h": 24
+        }
+      ],
+      "meals": [
+        {
+          "start_min": 120,
+          "duration_min": 15,
+          "grams": 40
+        }
+      ]
+    }
+  ],
+  "impulse_comparison": {
+    "dose_mU_per_kg": 200,
+    "prior_basal": 0,
+    "step_min": 0.25,
+    "horizon_min": 720,
+    "note": "Separate ideal-impulse zero-history SC illustration, not the finite-pulse coupled scenario. t50/t90 from model cumulative appearance, not clinical duration of action."
+  },
+  "criteria": {
+    "max_sc_state_error_mU_per_kg": 0.005,
+    "max_appearance_error_mU_per_kg_min": 0.001,
+    "max_glucose_refinement_mg_dl": 0.1,
+    "max_insulin_refinement_mU_per_L": 0.01,
+    "max_glucose_contrast_refinement_mg_dl": 0.1,
+    "max_insulin_contrast_refinement_mU_per_L": 0.01,
+    "max_basal_glucose_deviation_mg_dl": 1e-05,
+    "max_basal_insulin_deviation_mU_per_L": 1e-05,
+    "relative_mass_tolerance": 1e-08,
+    "input_amount_relative_tolerance": 1e-10,
+    "negative_state_tolerance": 1e-08,
+    "rationale": "Prospective engineering resolution for numerical consistency and component ownership, not agreement with people. No threshold requiring a nonzero or favorable between-model effect."
+  },
+  "failure_policy": "Keep all scheduled arms/cases/refinements and failed/partial attempts. No scenario or dose tuning after results. Unavailable/failed values remain unavailable; no winner ranking.",
+  "known_material": "LIT001 source values and M2 Cambridge reference parameters already inspected development material. No held-out evidence used."
+}

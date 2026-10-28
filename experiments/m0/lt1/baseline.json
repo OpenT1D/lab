@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "reference": "pinned native Cambridge/MPC; recorded baseline, not external validation",
+  "evidence_run": "https://github.com/OpenT1D/OpenT1D/actions/runs/34721740861",
+  "environments": {
+    "darwin/arm64": {
+      "node": "v22.22.2",
+      "lock_sha256": "44ad7ba062a7d67032d91fcc9e0fa2aa3910b3856dce76bee5ba32093c1a150e",
+      "upstream_revision": "9a6092065bd821f88691cd8d03b0550acd665573",
+      "reference_sha256": "0f83faca10d32d345b3385b398329e180e41f667632d86bcfc96cd15779beb83",
+      "configuration_sha256": "dcc6705e4e5089447c2260de355ec90f20351897536e8cf5cd0e119284db5b95",
+      "source_files_digest": "ba4bdcc8041b2c0ae12f2bc4c0ad83fd69d9af42d2102f946d31ec498d5c377a",
+      "output_sha256": "8427a2a0b0b8cc68aa82c40ef486373c017291157231e9f76720c4957e3f3641"
+    },
+    "linux/x64": {
+      "node": "v22.22.2",
+      "lock_sha256": "44ad7ba062a7d67032d91fcc9e0fa2aa3910b3856dce76bee5ba32093c1a150e",
+      "upstream_revision": "9a6092065bd821f88691cd8d03b0550acd665573",
+      "reference_sha256": "0f83faca10d32d345b3385b398329e180e41f667632d86bcfc96cd15779beb83",
+      "configuration_sha256": "dcc6705e4e5089447c2260de355ec90f20351897536e8cf5cd0e119284db5b95",
+      "source_files_digest": "ba4bdcc8041b2c0ae12f2bc4c0ad83fd69d9af42d2102f946d31ec498d5c377a",
+      "output_sha256": "8427a2a0b0b8cc68aa82c40ef486373c017291157231e9f76720c4957e3f3641"
+    }
+  }
+}

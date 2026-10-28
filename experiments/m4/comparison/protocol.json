@@ -1,0 +1,92 @@
+{
+  "schema": "m4-source-comparison-protocol/1",
+  "id": "M4-COMPARISON/1",
+  "specified_date": "2026-10-03",
+  "question": "How do several frozen causal secretion sources differ in modeled glucose, insulin and C-peptide under identical fixed synthetic fasting and gastric-load conditions?",
+  "claim": "bounded_synthetic_source_comparison_and_numerical_verification",
+  "parent": "Unchanged complete M4-RESEARCHER/1 per source, M4-CAUSAL/1 and BC-008/2; passive observation with frozen BC-010/1 settings",
+  "reference": {
+    "id": "BC-008/2",
+    "policy": "One complete verified reference generated once or supplied through --reference; archived numerical evidence and fixed current source/reused/lock snapshots checked before dispatch; same archive identity for every child"
+  },
+  "scenarios": ["fasting", "gastric_load_30g"],
+  "modes": ["candidate", "host_constant_basal", "bc008_reference"],
+  "horizon_min": 240,
+  "sample_step_min": 0.25,
+  "sample_count": 961,
+  "execution": {
+    "config_schema": "m4-source-comparison-config/1",
+    "config_keys": ["schema", "sources", "timeout_seconds", "source_timeout_seconds"],
+    "source_keys": ["id", "model", "declaration"],
+    "source_count_min": 2,
+    "source_count_max": 8,
+    "source_order": "configuration roster order, sequential supervised child workflows",
+    "timeout_seconds_range": [1, 1800],
+    "source_timeout_seconds_range": [1, 10800],
+    "budget_ownership": "timeout_seconds bounds unchanged child stages and reference generation; source_timeout_seconds bounds each entire child workflow; terminate and reap owned workers before sealing failures",
+    "ordinary_failure": "preserve source failure and continue with later roster entries",
+    "global_interruption": "terminate and reap the active worker, preserve its interrupted attempt and mark later entries not_attempted",
+    "freeze": "complete ordered configuration, source/declaration bytes and SHA-256, numeric parameters, protocol/runtime identities and coordinator source inventory before supplied source execution"
+  },
+  "source_contract": {
+    "id": "M4-CAUSAL/1",
+    "state_count": 1,
+    "input": "current elapsed min, same-stage native G in mg/dL and Gdot in mg/(dL min), current Z, host Sb/h and frozen numeric parameters",
+    "output": "Z derivative in pmol/(kg min^2) and total pancreatic appearance Spo in pmol/(kg min)",
+    "ownership": "host initializes Z=Sb and portal P=Sb/gamma, owns portal transit/liver arrival and fixed SC replacement; no added basal, hidden mutable state, future glucose or additional portal state",
+    "trust": "trusted local single-file Python source; hash checking does not establish rights, purity or biological validity"
+  },
+  "conditions": {
+    "profile": "adult#001",
+    "gastric_load_mg": {"fasting": 0, "gastric_load_30g": 30000},
+    "basal_replacement_fraction": 0.25,
+    "initial_and_sc": "Exact unchanged BC-008 basal/native initial state, matched initial plasma insulin and fixed SC schedule; gastric solid load at t=0, no announced meal, bolus, controller, pump or sensor",
+    "observer": "One-way unchanged Polonsky forward C-peptide observation of total pancreatic Spo; inherited equimolar ratio 1, Q1=Sb/k3, Q2=k1*Q1/k2, zero delivered/eliminated ledgers, archived piecewise-linear forcing and Q1/volume concentration; no added basal/SC/hepatic factor/portal delay/molecular conversion/body-weight division",
+    "protocol_files_sha256": {
+      "experiments/m4/researcher_workflow/protocol.json": "f6a8a22036cc63b1a9770eec8b31932ff4761dbd9000846d6438721e86e62cf0",
+      "experiments/m4/causal_secretion/protocol.json": "b0a4e01475e95d6ddf785ce5764f89b2684569f6092f321ddb746290f9763739",
+      "experiments/m4/feedback/protocol.json": "b66087592810be35fa74372ad07172359897ceb40653abdf420b3c3fa1a4fd99",
+      "experiments/m4/feedback_observation/protocol.json": "69143f23b24e225753ada55a3d43ff2a39414635a624263db9e4f83c2d3ef98d"
+    },
+    "runtime_files_sha256": {
+      "experiments/m0/simglucose/uv.lock": "13d254dcebe8d1ab54c3140cdc07152d719a68477a1378d7fe77fc1568612aa9",
+      "experiments/m0/simglucose/pyproject.toml": "6bbb5f49e74bd7df2e11ab39f69754a99ce1e4ef3736573943e3a75118c28007",
+      "experiments/m4/beta_cell/runtime/uv.lock": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04",
+      "experiments/m4/beta_cell/runtime/pyproject.toml": "7c69b6f63a48d72f927c0253b68492de1ac60700d0549744de1207709732d3c5"
+    },
+    "adaptation": "Reject unsupported scenario, state, unit, grid, numerical protocol or runtime identity; never silently adapt"
+  },
+  "comparison": {
+    "support": "pairwise complete sources; each source must pass its entire unchanged child causal/observation/repeat workflow across both scenarios",
+    "common_controls": "verified BC-008 reference and host_constant_basal glucose/insulin/C-peptide trajectories must agree exactly across accepted children; disagreement makes comparison fail and direct contrasts null with reason",
+    "grid": "all exact 961 saved times from 0 through 240 min inclusive; no shortening, resampling, interpolation across unmatched grids or sample exclusion",
+    "direction": "left minus right in configuration roster order for every unordered source pair",
+    "signals": {"glucose": "mg/dL", "insulin": "pmol/L", "cpeptide": "pmol/L"},
+    "metrics": {
+      "signed_auc_difference": "sum((d_i+d_(i+1))/2 * (t_(i+1)-t_i)); trajectory units times min",
+      "signed_time_mean_difference": "signed_auc_difference / 240; trajectory units",
+      "maximum_absolute_pointwise_difference": "max(abs(d_i)); trajectory units",
+      "difference": "d_i = left_i - right_i"
+    },
+    "ineligible": "null descriptive metrics with explicit complete-source, identity, condition, grid or control reason; retain full planned pair and source/scenario denominators",
+    "overall": "all planned sources and common identity/control/grid checks must pass; accepted pairwise descriptions may remain when a separate source fails, but overall roster stays failed",
+    "interpretation": "descriptive modeled trajectory separation only; no automatic winner, source tuning, biological ranking, accuracy score or pooled-scenario ranking"
+  },
+  "failure_policy": "Never overwrite or overlap supplied input/reference/output directories. Preserve full ordered source/scenario roster, failed/interrupted/unattempted entries, child archives, stage/errors, commands/logs/exits and identities. Partial output or a completed scenario from a failed source cannot become accepted support.",
+  "verification": {
+    "native": "Unchanged complete M4-RESEARCHER/1 criteria, all eight causal cases plus eight repeats and six observation cases plus six repeats per source",
+    "reference_and_controls": "same verified BC-008 reference identity and exact common host/reference trajectory equality across accepted children",
+    "implementation": "two existing source structures, independent contrast arithmetic, identity/grid/control incompatibility rejection, complete failing roster, deadlines/interruption ownership and exact fresh-process repeat evidence",
+    "reconstruction": "byte-identical report.json, report.md and figure.svg from saved artifacts using only the standard library, unchanged child readers and no supplied source or numerical runtime execution",
+    "historical": "coordinator inventory outside source-hashed historical packages; unchanged single-source commands and old archive reconstruction"
+  },
+  "excluded": [
+    "human observations, calibration or clinical predictive quality",
+    "source tuning, winner selection or biological model ranking",
+    "new secretion physiology, states, runtimes or empirical task",
+    "insulin dosing, insulin-need estimation, beta-cell mass or treatment benefit",
+    "full ultradian engine reproduction or continuous-source convergence below 0.25 min",
+    "proof of arbitrary callback purity, rights or independent researcher usability",
+    "completed M4 biological acceptance, P1 product acceptance or public release"
+  ]
+}

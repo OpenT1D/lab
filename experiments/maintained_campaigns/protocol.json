@@ -1,0 +1,43 @@
+{
+  "schema": "opent1d.maintained-campaign-protocol/1",
+  "id": "MAINTAINED-CAMPAIGN/1",
+  "task": "m4-study-secure",
+  "configuration_schema": "opent1d.maintained-campaign-config/1",
+  "cell_count": [
+    1,
+    32
+  ],
+  "repeats": [
+    1,
+    8
+  ],
+  "maximum_slots": 128,
+  "timeout_seconds": [
+    1,
+    10800
+  ],
+  "order": "cell-major, then ascending repetition number",
+  "freeze": "Original campaign and native configurations, standalone source/declaration bytes, parameters, native protocol, implementation and root/native/observer lock and actual runtime identities before dispatch",
+  "session_policy": "Immutable root freeze and append-only numbered sessions. Every new session links the preceding sealed session manifest. Resume verifies all prior sessions and accepted native archives; unsealed sessions cannot be resumed.",
+  "attempt_policy": "Attempt each remaining slot once per explicit run/resume session. Each dispatched attempt has a fresh retained directory and links its previous dispatched attempt manifest. First complete accepted attempt permanently satisfies its slot; later failed, interrupted and unattempted evidence is never erased.",
+  "process_policy": "Sequential fixed maintained-study subprocesses. Outer deadline does not alter native stage budgets. Forward interruption and allow up to 30 seconds cleanup outside the budget, exceeding the maintained-reference owner 20 second grace. Seal available session/report evidence before exiting; global interruption stops later dispatch.",
+  "reporting": "Full cell/repetition and source/scenario planned denominators, every attempt and null/missing evidence. Aggregate execution and identity accounting only; no pooled scientific contrasts, source tuning, outcome-driven changes or winner selection.",
+  "reconstruction": "Explicit standard-library native reader and saved campaign identities; no supplied source or numerical runtime execution. Fresh external report directory only. Failed/incomplete evidence requires explicit allow-failed.",
+  "limits": "Trusted local synthetic m4-study-secure configurations only. Explicit setup installs maintained locks separately. No human observations, generic task dispatch, source tuning, pooled scientific metrics, winner selection or public release. Hard-killed unsealed sessions remain forensic evidence and require a fresh campaign; no automatic crash repair. Reconstruction executes no supplied model and requires only standard-library Python with matching trusted reader source/protocol/lock bytes.",
+  "report_schema": "opent1d.maintained-campaign-report/1",
+  "execution": {
+    "module": "experiments.m4.secure_study",
+    "preparation_schema": "m4-secure-study-preparation/1",
+    "native_archive_schema": "m4-secure-study-run/1",
+    "native_report_schema": "m4-secure-study-report/1",
+    "native_protocol_sha256": "bee2e2315653a0ac7584545c50372f05c6342158f30b9744ca9be77b4ec2ef63",
+    "root_runtime_schema": "opent1d.maintained-campaign-root-runtime/1",
+    "root_lock_selection": "Traverse the locked dev dependency roots and reachable edges under archived sys_platform; only sys_platform equality/inequality against a quoted literal is supported. Record selected packages and each evaluated marker. Unsupported selectors fail before dispatch. Native and observer attestations unchanged.",
+    "projects": [
+      ".",
+      "experiments/m0/simglucose_secure",
+      "experiments/m4/beta_cell/runtime"
+    ],
+    "cleanup_grace_seconds": 30
+  }
+}

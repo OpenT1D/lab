@@ -1,0 +1,2186 @@
+{
+  "schema": "lit001-tracing-screening/1",
+  "reviewer": "/root; AI-assisted internal title review plus targeted original-source followup; not duplicate human screening",
+  "source_sha256": "c973f7276a7dddb2481e8bfde0827d32b3038e0beb7c754b15f075f96cade035",
+  "edge_counts": {
+    "round1": 218,
+    "round2": 244
+  },
+  "extra_index_keys_before_aliases": 270,
+  "extra_records_after_verified_aliases": 265,
+  "decision_counts": {
+    "background": 186,
+    "excluded": 58,
+    "duplicate": 5,
+    "unresolved": 21
+  },
+  "round2_seed_reason": "Round1 exposed transport, unified-absorption and diffusion families: PMIDs25759184,19885242,16366223,8218870. Two rounds completed. Round2 identified no essential untraced equation dependency for the selected Faggionato reference. New eligible clinical leads are retained, not a claim of global citation saturation.",
+  "access_note": "Some public HTTP200responses were CAPTCHA pages. Source rendering seen through web tool and archive retrieval are distinguished. Unknown reference identities remain open.",
+  "decisions": [
+    {
+      "key": "UNMATCHED:cf4a5042c31b3c4c",
+      "first_round": 1,
+      "title": "Update: insulin lispro: a new, rapidly acting analogue",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:1914797",
+      "first_round": 1,
+      "title": "Comparison of subcutaneous soluble human insulin and insulin analogues (AspB9, GluB27; AspB10; AspB28) on meal-related plasma glucose excursions in type I diabetic subjects.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:1797506",
+      "first_round": 1,
+      "title": "Subcutaneous insulin absorption explained by insulin's physicochemical properties. Evidence from absorption studies of soluble human insulin and insulin analogues in humans.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:4908935",
+      "first_round": 1,
+      "title": "Absorption of injected insulin. A clinical-pharmacological study.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:6444267",
+      "first_round": 1,
+      "title": "Alterations in insulin absorption and in blood glucose control associated with varying insulin injection sites in diabetic patients.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:6765510",
+      "first_round": 1,
+      "title": "Absorption kinetics and biologic effects of subcutaneously injected insulin preparations.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:10837910",
+      "first_round": 1,
+      "title": "Models of subcutaneous insulin kinetics. A critical review.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "UNMATCHED:999db90b8aaad66d",
+      "first_round": 1,
+      "title": null,
+      "decision": "duplicate",
+      "reason": "Verified identity link by original title/DOI and source reference; retain edge without counting another publication record.",
+      "reviewed_material": "incomplete_bibliographic_record",
+      "canonical_key": "PMID:6339306"
+    },
+    {
+      "key": "PMID:6370771",
+      "first_round": 1,
+      "title": "Insulin responses to varying profiles of subcutaneous insulin infusion: kinetic modelling studies.",
+      "decision": "background",
+      "reason": "Abstract: healthy volunteers with soluble human insulin; retain infusion-model ancestry, not primary adult T1D lispro evidence.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:8572205",
+      "first_round": 1,
+      "title": "A model for multiple subcutaneous insulin injections developed from individual diabetic patient data.",
+      "decision": "background",
+      "reason": "Abstract: individual diabetic multiple-injection model; formulation/age not established. Historical model ancestry only; no lispro-specific numerical extraction.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:2693012",
+      "first_round": 1,
+      "title": "Computer simulation of plasma insulin and glucose dynamics after subcutaneous insulin injection.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:8218870",
+      "first_round": 1,
+      "title": "Pharmacokinetic model for the absorption of subcutaneously injected soluble insulin and monomeric insulin analogues.",
+      "decision": "background",
+      "reason": "Abstract: soluble/monomeric analogue transport model; conventional lispro formulation not established. Retain model ancestry.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:2654357",
+      "first_round": 1,
+      "title": "Modeling absorption kinetics of subcutaneous injected soluble insulin.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "UNMATCHED:44df8054cd7d1f50",
+      "first_round": 1,
+      "title": null,
+      "decision": "unresolved",
+      "reason": "Citation index lacks a title or sufficient identity. Preserve the unmatched edge; no inferred primary eligibility or numerical values.",
+      "reviewed_material": "incomplete_bibliographic_record"
+    },
+    {
+      "key": "PMID:6376015",
+      "first_round": 1,
+      "title": "Insulin pharmacokinetics.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "UNMATCHED:6c14dceb1234d51f",
+      "first_round": 1,
+      "title": null,
+      "decision": "unresolved",
+      "reason": "Citation index lacks a title or sufficient identity. Preserve the unmatched edge; no inferred primary eligibility or numerical values.",
+      "reviewed_material": "incomplete_bibliographic_record"
+    },
+    {
+      "key": "PMID:6745083",
+      "first_round": 1,
+      "title": "Alternative approaches to estimation of population pharmacokinetic parameters: comparison with the nonlinear mixed-effect model.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "UNMATCHED:59f964e08f0fcae0",
+      "first_round": 1,
+      "title": null,
+      "decision": "unresolved",
+      "reason": "Citation index lacks a title or sufficient identity. Preserve the unmatched edge; no inferred primary eligibility or numerical values.",
+      "reviewed_material": "incomplete_bibliographic_record"
+    },
+    {
+      "key": "UNMATCHED:ae8e961ff3489de7",
+      "first_round": 1,
+      "title": "The iterative two-stage population approach to IVGTT minimal modeling: improved precision with reduced sampling. Intravenous glucose tolerance test",
+      "decision": "duplicate",
+      "reason": "Verified identity link by original title/DOI and source reference; retain edge without counting another publication record.",
+      "reviewed_material": "title",
+      "canonical_key": "PMID:11120672"
+    },
+    {
+      "key": "UNMATCHED:f3ae9ab1e62e3f83",
+      "first_round": 1,
+      "title": null,
+      "decision": "unresolved",
+      "reason": "Citation index lacks a title or sufficient identity. Preserve the unmatched edge; no inferred primary eligibility or numerical values.",
+      "reviewed_material": "incomplete_bibliographic_record"
+    },
+    {
+      "key": "UNMATCHED:e062a27ff3e9855c",
+      "first_round": 1,
+      "title": null,
+      "decision": "unresolved",
+      "reason": "Citation index lacks a title or sufficient identity. Preserve the unmatched edge; no inferred primary eligibility or numerical values.",
+      "reviewed_material": "incomplete_bibliographic_record"
+    },
+    {
+      "key": "PMID:1873991",
+      "first_round": 1,
+      "title": "A pharmacodynamic approach to optimizing insulin therapy.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:3881645",
+      "first_round": 1,
+      "title": "Influence of concentration on the kinetics of SC-infused insulin. Comparison between square-wave SC infusion and bolus SC injection.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:4796692",
+      "first_round": 1,
+      "title": "A comparative study on the metabolism of human insulin and porcine proinsulin in man.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:517648",
+      "first_round": 1,
+      "title": "Hepatic uptake of insulin in man.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:6344651",
+      "first_round": 1,
+      "title": "Splanchnic and renal metabolism of insulin in human subjects: a dose-response study.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "UNMATCHED:0f07f347148c3e6c",
+      "first_round": 1,
+      "title": "The kinetics of insulin metabolism in diabetes mellitus",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:11978650",
+      "first_round": 1,
+      "title": "Direct evidence for insulin-induced capillary recruitment in skin of healthy subjects during physiological hyperinsulinemia.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:488572",
+      "first_round": 1,
+      "title": "Absorption kinetics of subcutaneously injected insulin. Evidence for degradation at the injection site.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:510140",
+      "first_round": 1,
+      "title": "Accelerated insulin degradation: an alternate mechanism for insulin resistance.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:1797487",
+      "first_round": 1,
+      "title": "Absorption kinetics and action profiles of subcutaneously administered insulin analogues (AspB9GluB27, AspB10, AspB28) in healthy subjects.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:499686",
+      "first_round": 1,
+      "title": "Variation in 125I-insulin absorption and blood glucose concentration.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:3909370",
+      "first_round": 1,
+      "title": "Diffusion and polymerization determines the insulin absorption from subcutaneous tissue in diabetic patients.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:6409773",
+      "first_round": 1,
+      "title": "Clinical factors influencing the absorption of 125I-NPH insulin in diabetic patients.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:41943733",
+      "first_round": 1,
+      "title": "Recent Advances in Modeling and Prediction of Blood Glucose in Type 1 Diabetes.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:41102316",
+      "first_round": 1,
+      "title": "Generalized multi task learning framework for glucose forecasting and hypoglycemia detection using simulation to reality.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:39696373",
+      "first_round": 1,
+      "title": "A prior-knowledge-guided dynamic attention mechanism to predict nocturnal hypoglycemic events in type 1 diabetes.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:38956183",
+      "first_round": 1,
+      "title": "An automatic deep reinforcement learning bolus calculator for automated insulin delivery systems.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:37543512",
+      "first_round": 1,
+      "title": "Integrating metabolic expenditure information from wearable fitness sensors into an AI-augmented automated insulin delivery system: a randomised clinical trial.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:37434362",
+      "first_round": 1,
+      "title": "Development and Validation of Binary Classifiers to Predict Nocturnal Hypoglycemia in Adults With Type 1 Diabetes.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:36462903",
+      "first_round": 1,
+      "title": "Bolus Insulin calculation without meal information. A reinforcement learning approach.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:36387535",
+      "first_round": 1,
+      "title": "A hypoglycemia early alarm method for patients with type 1 diabetes based on multi-dimensional sequential pattern mining.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:35698923",
+      "first_round": 1,
+      "title": "Practical constraint definition in safety schemes for artificial pancreas systems.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:35055576",
+      "first_round": 1,
+      "title": "Examining Type 1 Diabetes Mathematical Models Using Experimental Data.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:34450712",
+      "first_round": 1,
+      "title": "Using Absorption Models for Insulin and Carbohydrates and Deep Leaning to Improve Glucose Level Predictions.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:34300672",
+      "first_round": 1,
+      "title": "Learning Carbohydrate Digestion and Insulin Absorption Curves Using Blood Glucose Level Prediction and Deep Learning Models.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:34412843",
+      "first_round": 1,
+      "title": "Data-based algorithms and models using diabetics real data for blood glucose and hypoglycaemia prediction - A systematic literature review.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:33763974",
+      "first_round": 1,
+      "title": "Hypoglycaemia detection and prediction techniques: A systematic review on the latest developments.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:33726723",
+      "first_round": 1,
+      "title": "Stacked LSTM based deep recurrent neural network with kalman smoothing for blood glucose prediction.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:31027048",
+      "first_round": 1,
+      "title": "Data-Driven Robust Control for a Closed-Loop Artificial Pancreas.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PPR:PPR224270",
+      "first_round": 1,
+      "title": "Control of Blood Glucose Level for Type 1 Diabetes Mellitus using Improved Hovorka Equations: Comparison between Clinical and In-Silico Works",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:32517068",
+      "first_round": 1,
+      "title": "Artificial Intelligence in Decision Support Systems for Type 1 Diabetes.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:32204318",
+      "first_round": 1,
+      "title": "Prediction of Nocturnal Hypoglycemia in Adults with Type 1 Diabetes under Multiple Daily Injections Using Continuous Glucose Monitoring and Physical Activity Monitor.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:32399164",
+      "first_round": 1,
+      "title": "Dynamic Rule-Based Algorithm to Tune Insulin-on-Board Constraints for a Hybrid Artificial Pancreas System.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:31323886",
+      "first_round": 1,
+      "title": "Classification of Postprandial Glycemic Status with Application to Insulin Dosing in Type 1 Diabetes-An In Silico Proof-of-Concept.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:31195880",
+      "first_round": 1,
+      "title": "Prediction and prevention of hypoglycaemic events in type-1 diabetic patients using machine learning.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:30693047",
+      "first_round": 1,
+      "title": "Control of Blood Glucose for Type-1 Diabetes by Using Reinforcement Learning with Feedforward Algorithm.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:30522334",
+      "first_round": 1,
+      "title": "Subcutaneous Insulin Administration: Sufficient Progress or Ongoing Need?",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:30069675",
+      "first_round": 1,
+      "title": "Neural network-based model predictive control for type 1 diabetic rats on artificial pancreas system.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:30003801",
+      "first_round": 1,
+      "title": "Modeling of Diabetes and Its Clinical Impact.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:29998754",
+      "first_round": 1,
+      "title": "Artificial Pancreas: Clinical Study in Latin America Without Premeal Insulin Boluses.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:29725915",
+      "first_round": 1,
+      "title": "Postprandial fuzzy adaptive strategy for a hybrid proportional derivative controller for the artificial pancreas.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:29608335",
+      "first_round": 1,
+      "title": "Assessment of Mitigation Methods to Reduce the Risk of Hypoglycemia for Announced Exercise in a Uni-hormonal Artificial Pancreas.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:29650309",
+      "first_round": 1,
+      "title": "Open-loop glucose control: Automatic IOB-based super-bolus feature for commercial insulin pumps.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:29493359",
+      "first_round": 1,
+      "title": "Automatic Adaptation of Basal Insulin Using Sensor-Augmented Pump Therapy.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:29112978",
+      "first_round": 1,
+      "title": "Personalized blood glucose prediction: A hybrid approach using grammatical evolution and physiological models.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:28853168",
+      "first_round": 1,
+      "title": "A Novel Three-Compartmental Model for Artificial Pancreas: Development and Validation.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:28791547",
+      "first_round": 1,
+      "title": "Data Based Prediction of Blood Glucose Concentrations Using Evolutionary Methods.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:28728434",
+      "first_round": 1,
+      "title": "Economic Model Predictive Control of Bihormonal Artificial Pancreas System Based on Switching Control and Dynamic R-parameter.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:28324962",
+      "first_round": 1,
+      "title": "Design of a dual-hormone model predictive control for artificial pancreas with exercise model.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:27155940",
+      "first_round": 1,
+      "title": "Modelling the effect of insulin on the disposal of meal-attributable glucose in type 1 diabetes.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:26718555",
+      "first_round": 1,
+      "title": "A simplification of Cobelli's glucose-insulin model for type 1 diabetes mellitus and its FPGA implementation.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:26438720",
+      "first_round": 1,
+      "title": "Incorporating an Exercise Detection, Grading, and Hormone Dosing Algorithm Into the Artificial Pancreas Using Accelerometry and Heart Rate.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:26341131",
+      "first_round": 1,
+      "title": "Effect of Repeated Glucagon Doses on Hepatic Glycogen in Type 1 Diabetes: Implications for a Bihormonal Closed-Loop System.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:25759184",
+      "first_round": 1,
+      "title": "Pharmacokinetic Model of the Transport of Fast-Acting Insulin From the Subcutaneous and Intradermal Spaces to Blood.",
+      "decision": "background",
+      "reason": "Abstract: model comparison uses ten healthy volunteers with SC/ID injections. Background transport-model alternative, outside T1D primary population.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:33833847",
+      "first_round": 1,
+      "title": "Estimation of nonlinear differential equation model for glucose-insulin dynamics in type I diabetic patients using generalized smoothing.",
+      "decision": "background",
+      "reason": "Abstract: meals and intravenous insulin, outside SC route; methodological background.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:24876584",
+      "first_round": 1,
+      "title": "Predicting Plasma Glucose From Interstitial Glucose Observations Using Bayesian Methods.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:24876621",
+      "first_round": 1,
+      "title": "Can glucose be monitored accurately at the site of subcutaneous insulin delivery?",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:24260042",
+      "first_round": 1,
+      "title": "Systematically in silico comparison of unihormonal and bihormonal artificial pancreas systems.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:29922360",
+      "first_round": 1,
+      "title": "Use of Automated Bolus Calculators for Diabetes Management.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:23864149",
+      "first_round": 1,
+      "title": "Stochastic Virtual Population of Subjects With Type 1 Diabetes for the Assessment of Closed-Loop Glucose Controllers.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:23435829",
+      "first_round": 1,
+      "title": "Absorption patterns of meals containing complex carbohydrates in type 1 diabetes.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:23428611",
+      "first_round": 1,
+      "title": "Safety auxiliary feedback element for the artificial pancreas in type 1 diabetes.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:24278682",
+      "first_round": 1,
+      "title": "Diabetes technology: markers, monitoring, assessment, and control of blood glucose fluctuations in diabetes.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:22080230",
+      "first_round": 1,
+      "title": "Pathophysiology of postprandial hyperglycaemia in women with type 1 diabetes during pregnancy.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:22226248",
+      "first_round": 1,
+      "title": "A controlled study of the effectiveness of an adaptive closed-loop algorithm to minimize corticosteroid-induced stress hyperglycemia in type 1 diabetes.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21116725",
+      "first_round": 1,
+      "title": "Optimal design of clinical tests for the identification of physiological models of type 1 diabetes in the presence of model mismatch.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20851494",
+      "first_round": 1,
+      "title": "Structural identifiability and indistinguishability analyses of the minimal model and a euglycemic hyperinsulinemic clamp model for glucose-insulin dynamics.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20953334",
+      "first_round": 1,
+      "title": "Automatic Detection of Stress States in Type 1 Diabetes Subjects in Ambulatory Conditions.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20411597",
+      "first_round": 1,
+      "title": "A discrete-time recurrent neurofuzzy network for black-box modeling of insulin dynamics in diabetic type-1 patients.",
+      "decision": "background",
+      "reason": "Abstract: in-silico insulin model, not independent human evidence.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:20659841",
+      "first_round": 1,
+      "title": "Quest for the artificial pancreas: combining technology with treatment.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21572588",
+      "first_round": 1,
+      "title": "MATHEMATICAL MODELS OF SUBCUTANEOUS INJECTION OF INSULIN ANALOGUES: A MINI-REVIEW.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20144413",
+      "first_round": 1,
+      "title": "Glucose clamp algorithms and insulin time-action profiles.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20144293",
+      "first_round": 1,
+      "title": "Safety constraints in an artificial pancreatic beta cell: an implementation of model predictive control with insulin on board.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21297886",
+      "first_round": 1,
+      "title": "Enhanced modelling of the glucose–insulin system and its applications in insulin therapies.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20936056",
+      "first_round": 1,
+      "title": "Diabetes: Models, Signals, and Control.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19885242",
+      "first_round": 1,
+      "title": "A subcutaneous insulin pharmacokinetic model for computer simulation in a diabetes decision support role: model structure and parameter identification.",
+      "decision": "background",
+      "reason": "Full-text sections/tables inspected via PMC web rendering: model identified on37 mean profiles across six insulin types. MI subgroup reuses Shimoda/Plank/Hedman and healthy-vonMach sources, so not independent cohorts; some missing concentrations/weights assumed100U/ml/80kg by authors. Retain aggregate-model comparison, not selected for numerical reproduction.",
+      "reviewed_material": "full_text_selected_sections"
+    },
+    {
+      "key": "PMID:18477391",
+      "first_round": 1,
+      "title": "Mathematical modeling and analysis of insulin clearance in vivo.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18334377",
+      "first_round": 1,
+      "title": "An improved PID switching control strategy for type 1 diabetes.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19190726",
+      "first_round": 1,
+      "title": "A Feedforward-Feedback Glucose Control Strategy for Type 1 Diabetes Mellitus.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19885178",
+      "first_round": 1,
+      "title": "Parameters affecting postprandial blood glucose: effects of blood glucose measurement errors.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18709180",
+      "first_round": 1,
+      "title": "A Run-to-Run Control Strategy to Adjust Basal Insulin Infusion Rates in Type 1 Diabetes.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18088499",
+      "first_round": 1,
+      "title": "The future of open- and closed-loop insulin delivery systems.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17931052",
+      "first_round": 1,
+      "title": "Practical issues in the identification of empirical models from simulated type 1 diabetes data.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17572272",
+      "first_round": 1,
+      "title": "Insulin analogues in the treatment of diabetes in pregnancy.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19885087",
+      "first_round": 1,
+      "title": "GIM, simulation software of meal glucose-insulin model.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17376834",
+      "first_round": 1,
+      "title": "The virtual NOD mouse: applying predictive biosimulation to research in type 1 diabetes.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19888383",
+      "first_round": 1,
+      "title": "The artificial pancreas: how sweet engineering will solve bitter problems.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16867301",
+      "first_round": 1,
+      "title": "Glucose dynamics in Type I diabetes: insights from the classic and linear minimal models.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16865361",
+      "first_round": 1,
+      "title": "Within-patient variation of the pharmacokinetics of subcutaneously injected biphasic insulin aspart as assessed by compartmental modelling.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16804068",
+      "first_round": 1,
+      "title": "Evaluation of the effect of gain on the meal response of an automated closed-loop insulin delivery system.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17947128",
+      "first_round": 1,
+      "title": "An improved PID switching control strategy for type 1 diabetes.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "UNMATCHED:0cb0e36f694ca4a2",
+      "first_round": 1,
+      "title": "Closed-loop subcutaneous insulin infusion algorithm with a short-acting insulin analog for long-term clinical application of a wearable artificial endocrine pancreas",
+      "decision": "duplicate",
+      "reason": "Verified identity link by original title/DOI and source reference; retain edge without counting another publication record.",
+      "reviewed_material": "title",
+      "canonical_key": "PMID:9444512"
+    },
+    {
+      "key": "PMID:16366223",
+      "first_round": 1,
+      "title": "Comprehensive pharmacokinetic model of insulin Glargine and other insulin formulations.",
+      "decision": "background",
+      "reason": "Abstract: comprehensive model centred on glargine; retain model ancestry, not formulation-specific lispro evidence.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:19028573",
+      "first_round": 1,
+      "title": "Absorption kinetics of insulin after subcutaneous administration.",
+      "decision": "background",
+      "reason": "Abstract: physical soluble/crystalline-insulin model, retained as ancestry only.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:24878388",
+      "first_round": 1,
+      "title": "Insulin aspart pharmacokinetics: an assessment of its variability and underlying mechanisms.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16144811",
+      "first_round": 1,
+      "title": "A minimal model of insulin secretion and kinetics to assess hepatic insulin extraction.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:3552526",
+      "first_round": 1,
+      "title": "The kinetics of insulin in man. I. General aspects.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:2226110",
+      "first_round": 1,
+      "title": "Monomeric insulins and their experimental and clinical implications.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:24876534",
+      "first_round": 1,
+      "title": "The UVA/PADOVA Type 1 Diabetes Simulator: New Features.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "UNMATCHED:ccda8c7f18029ceb",
+      "first_round": 1,
+      "title": null,
+      "decision": "unresolved",
+      "reason": "Citation index lacks a title or sufficient identity. Preserve the unmatched edge; no inferred primary eligibility or numerical values.",
+      "reviewed_material": "incomplete_bibliographic_record"
+    },
+    {
+      "key": "PMID:11934663",
+      "first_round": 1,
+      "title": "Partitioning glucose distribution/transport, disposal, and endogenous production during IVGTT.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "UNMATCHED:5536e5a243db55d6",
+      "first_round": 1,
+      "title": null,
+      "decision": "unresolved",
+      "reason": "Citation index lacks a title or sufficient identity. Preserve the unmatched edge; no inferred primary eligibility or numerical values.",
+      "reviewed_material": "incomplete_bibliographic_record"
+    },
+    {
+      "key": "PMID:19671837",
+      "first_round": 1,
+      "title": "Minimal model assessment of hepatic insulin extraction during an oral test from standard insulin kinetic parameters.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:9550550",
+      "first_round": 1,
+      "title": "SAAM II: Simulation, Analysis, and Modeling Software for tracer and pharmacokinetic studies.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "UNMATCHED:51204753ddf5c1fe",
+      "first_round": 1,
+      "title": null,
+      "decision": "unresolved",
+      "reason": "Citation index lacks a title or sufficient identity. Preserve the unmatched edge; no inferred primary eligibility or numerical values.",
+      "reviewed_material": "incomplete_bibliographic_record"
+    },
+    {
+      "key": "PMID:40403633",
+      "first_round": 1,
+      "title": "Biophysical simulation of transcutaneous drug delivery for the rational design of hollow microneedle-based insulin infusion.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:39155919",
+      "first_round": 1,
+      "title": "Equivalent Electrical Circuit Approach to Enhance a Transducer for Insulin Bioavailability Assessment.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:38887022",
+      "first_round": 1,
+      "title": "Digital Twins in Type 1 Diabetes: A Systematic Review.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:37844003",
+      "first_round": 1,
+      "title": "The Minimally-Invasive Oral Glucose Minimal Model: Estimation of Gastric Retention, Glucose Rate of Appearance, and Insulin Sensitivity From Type 1 Diabetes Data Collected in Real-Life Conditions.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:38284154",
+      "first_round": 1,
+      "title": "Short- and Long-Term Effects on Glucose Control of Nonadherence to Insulin Therapy in People With Type 2 Diabetes An <i>In Silico</i> Study.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:38158565",
+      "first_round": 1,
+      "title": "drCORRECT: An Algorithm for the Preventive Administration of Postprandial Corrective Insulin Boluses in Type 1 Diabetes Management.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:37946403",
+      "first_round": 1,
+      "title": "Ketone-Based Alert System for Insulin Pump Failures.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:37368794",
+      "first_round": 1,
+      "title": "ReplayBG: A Digital Twin-Based Methodology to Identify a Personalized Model From Type 1 Diabetes Data and Simulate Glucose Concentrations to Assess Alternative Therapies.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:37195837",
+      "first_round": 1,
+      "title": "Individualized Models for Glucose Prediction in Type 1 Diabetes: Comparing Black-Box Approaches to a Physiological White-Box One.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:37898338",
+      "first_round": 1,
+      "title": "Emerging drug delivery systems with traditional routes - A roadmap to chronic inflammatory diseases.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:37803177",
+      "first_round": 1,
+      "title": "The importance of interpreting machine learning models for blood glucose prediction in diabetes: an analysis using SHAP.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:35118893",
+      "first_round": 1,
+      "title": "Clinical Evaluation of a Novel Insulin Immunosensor.",
+      "decision": "unresolved",
+      "reason": "Primary article Methods/Results/Table3 web extracts: nine adultsT1D, seven lispro/two aspart, separable subject IDs, meal injection with basal pump continuing. Product concentration and full dose/history not established; retain observation-model evidence. HTTP article archive returned CAPTCHA; XML500. Not verified coreU100 or executable reference.",
+      "reviewed_material": "primary_article_methods_results_excerpts"
+    },
+    {
+      "key": "PMID:34032128",
+      "first_round": 1,
+      "title": "Minimal and Maximal Models to Quantitate Glucose Metabolism: Tools to Measure, to Simulate and to Run in Silico Clinical Trials.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:32746033",
+      "first_round": 1,
+      "title": "Machine-Learning Based Model to Improve Insulin Bolus Calculation in Type 1 Diabetes Therapy.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:32546001",
+      "first_round": 1,
+      "title": "Impact of Accelerating Insulin on an Artificial Pancreas System Without Meal Announcement: An In Silico Examination.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:31947429",
+      "first_round": 1,
+      "title": "A Bayesian Framework to Identify Type 1 Diabetes Physiological Models Using Easily Accessible Patient Data.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:30441443",
+      "first_round": 1,
+      "title": "Long-acting Insulin in Diabetes Therapy: In Silico Clinical Trials with the UVA/Padova Type 1 Diabetes Simulator<sup>.</sup>",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15367729",
+      "first_round": 1,
+      "title": "Population pharmacokinetics II: estimation methods.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:27333446",
+      "first_round": 1,
+      "title": "Improving Efficacy of Inhaled Technosphere Insulin (Afrezza) by Postmeal Dosing: In-silico Clinical Trial with the University of Virginia/Padova Type 1 Diabetes Simulator.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16322398",
+      "first_round": 1,
+      "title": "Impact of insulin antibodies on insulin aspart pharmacokinetics and pharmacodynamics after 12-week treatment with multiple daily injections of biphasic insulin aspart 30 in patients with type 1 diabetes.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20103736",
+      "first_round": 1,
+      "title": "IVGTT glucose minimal model covariate selection by nonlinear mixed-effects approach.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:24466182",
+      "first_round": 1,
+      "title": "Effects of age, gender, BMI, and anatomical site on skin thickness in children and adults with diabetes.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20138357",
+      "first_round": 1,
+      "title": "Manual closed-loop insulin delivery in children and adolescents with type 1 diabetes: a phase 2 randomised crossover trial.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:3539462",
+      "first_round": 1,
+      "title": "Effects of physical exercise on insulin absorption in insulin-dependent diabetics. A comparison between human and porcine insulin.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:27630249",
+      "first_round": 1,
+      "title": "Regulation Catches Up to Reality.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:32324063",
+      "first_round": 1,
+      "title": "The Padova Type 2 Diabetes Simulator from Triple-Tracer Single-Meal Studies: <i>In Silico</i> Trials Also Possible in Rare but Not-So-Rare Individuals.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:11120672",
+      "first_round": 1,
+      "title": "The iterative two-stage population approach to IVGTT minimal modeling: improved precision with reduced sampling. Intravenous glucose tolerance test.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:41683841",
+      "first_round": 1,
+      "title": "The Transplantation of Pancreatic Islets to Portal Vein: The Influence on Liver Tissue.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:37743740",
+      "first_round": 1,
+      "title": "Developing the UVA/Padova Type 1 Diabetes Simulator: Modeling, Validation, Refinements, and Utility.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:37030857",
+      "first_round": 1,
+      "title": "Nonlinear Mixed Effects Modeling of Glucagon Kinetics in Healthy Subjects.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:35533921",
+      "first_round": 1,
+      "title": "Physiological based pharmacokinetic and biopharmaceutics modelling of subcutaneously administered compounds - An overview of in silico models.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:35475698",
+      "first_round": 1,
+      "title": "New Insulins, Biosimilars, and Insulin Therapy.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:11815491",
+      "first_round": 2,
+      "title": "Disturbances in beta-cell function in impaired fasting glycemia.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:1863105",
+      "first_round": 2,
+      "title": "Subcutaneous or intramuscular insulin injections.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:2872151",
+      "first_round": 2,
+      "title": "Prolonged plasma half-life of insulin in patients with a genetic defect of high affinity binding sites.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:7729308",
+      "first_round": 2,
+      "title": "Hyperglycemia and microvascular and macrovascular disease in diabetes.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19527957",
+      "first_round": 2,
+      "title": "Closed-loop control of artificial pancreatic Beta -cell in type 1 diabetes mellitus using model predictive iterative learning control.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:17926672",
+      "first_round": 2,
+      "title": "Meal simulation model of the glucose-insulin system.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:14632713",
+      "first_round": 2,
+      "title": "Alternative routes of insulin delivery.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16876586",
+      "first_round": 2,
+      "title": "Hypoglycemia in diabetes: pathophysiological mechanisms and diurnal variation.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19846371",
+      "first_round": 2,
+      "title": "A gain-scheduling model predictive controller for blood glucose control in type 1 diabetes.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:8063038",
+      "first_round": 2,
+      "title": "Effect of insulin concentration, subcutaneous fat thickness and skin temperature on subcutaneous insulin absorption in healthy subjects.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:2949920",
+      "first_round": 2,
+      "title": "Human, porcine and bovine ultralente insulin: subcutaneous administration in normal man.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:1914533",
+      "first_round": 2,
+      "title": "Subcutaneous absorption of insulin in insulin-dependent diabetic patients. Influence of species, physico-chemical properties of insulin and physiological factors.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16734548",
+      "first_round": 2,
+      "title": "A novel, model-based insulin and nutrition delivery controller for glycemic regulation in critically ill patients.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:14741069",
+      "first_round": 2,
+      "title": "Insulin glargine: long-acting basal insulin analog for improved metabolic control.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:9802742",
+      "first_round": 2,
+      "title": "Variability of the metabolic effect of soluble insulin and the rapid-acting insulin analog insulin aspart.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:3287182",
+      "first_round": 2,
+      "title": "Monomeric insulins obtained by protein engineering and their medical implications.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:2142052",
+      "first_round": 2,
+      "title": "The variability of the absorption of subcutaneously injected insulin: effect of injection technique and relation with brittleness.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:6400706",
+      "first_round": 2,
+      "title": "The absorption of subcutaneously injected short-acting soluble insulin: influence of injection technique and concentration.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:6339306",
+      "first_round": 2,
+      "title": "The pharmacokinetics of insulin after continuous subcutaneous infusion or bolus subcutaneous injection in diabetic patients.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:10837704",
+      "first_round": 2,
+      "title": "Insulin analogs with improved pharmacokinetic profiles.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:8320979",
+      "first_round": 2,
+      "title": "AIDA2: a Mk. II automated insulin dosage advisor.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:16160867",
+      "first_round": 2,
+      "title": "Pharmacokinetic and glucodynamic variability: assessment of insulin glargine, NPH insulin and insulin ultralente in healthy volunteers using a euglycaemic clamp technique.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:6765540",
+      "first_round": 2,
+      "title": "Insulin concentrations and time-action profiles of three different intermediate-acting insulin preparations in nondiabetic volunteers under glucose-controlled glucose infusion technique.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15628821",
+      "first_round": 2,
+      "title": "Measurement of insulin absorption and insulin action.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:16915542",
+      "first_round": 2,
+      "title": "Is the frequency of self-monitoring of blood glucose related to long-term metabolic control? Multicenter analysis including 24,500 patients from 191 centers in Germany and Austria.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:7047113",
+      "first_round": 2,
+      "title": "Factors influencing the absorption, serum insulin concentration, and blood glucose responses after injections of regular insulin and various insulin mixtures.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:10398627",
+      "first_round": 2,
+      "title": "Frequency of blood glucose monitoring in relation to glycaemic control: observational study with diabetes database.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:10834424",
+      "first_round": 2,
+      "title": "Time-action profile of the long-acting insulin analog insulin glargine (HOE901) in comparison with those of NPH insulin and placebo.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:7010077",
+      "first_round": 2,
+      "title": "A rise in ambient temperature augments insulin absorption in diabetic patients.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:9677952",
+      "first_round": 2,
+      "title": "AIDA--a computer-based interactive educational diabetes simulator.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15603999",
+      "first_round": 2,
+      "title": "Adaptive bolus-based targeted glucose regulation of hyperglycaemia in critical care.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:11375381",
+      "first_round": 2,
+      "title": "Direct comparison of insulin lispro and aspart shows small differences in plasma insulin profiles after subcutaneous injection in type 1 diabetes.",
+      "decision": "unresolved",
+      "reason": "Plausible primary: PubMed identifies adultT1D lispro/aspart plasma profiles but has no abstract. Original journal-page accessfailed; institutional mirrored original indexed text supports U10010U, fourteen randomized/13analyzed, cross-reactive free-insulin assay. PDFretrievaltimedout. Keep unresolved until complete original and overlapwith2002double-antibody study checked.",
+      "reviewed_material": "metadata_and_partial_original_text"
+    },
+    {
+      "key": "PMID:10841002",
+      "first_round": 2,
+      "title": "Pharmacokinetics of 125I-labeled insulin glargine (HOE 901) in healthy men: comparison with NPH insulin and the influence of different subcutaneous injection sites.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:1392436",
+      "first_round": 2,
+      "title": "The pharmacokinetics of two different concentrations of short-acting insulin, intermediate-acting insulin, and an insulin mixture following subcutaneous injection.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:1773708",
+      "first_round": 2,
+      "title": "A comparison of the pharmacokinetics and metabolic effects of human regular and NPH insulin mixtures.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:6799119",
+      "first_round": 2,
+      "title": "Smoking reduces insulin absorption from subcutaneous tissue.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15803107",
+      "first_round": 2,
+      "title": "Reproducibility and variability in the action of injected insulin.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:436361",
+      "first_round": 2,
+      "title": "Adipose tissue blood flow and insulin disappearance from subcutaneous tissue.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:10963823",
+      "first_round": 2,
+      "title": "Pharmacokinetics and pharmacodynamics of insulin aspart, a rapid-acting analog of human insulin, in healthy Japanese volunteers.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:1588781",
+      "first_round": 2,
+      "title": "A physiological model of glucose-insulin interaction in type 1 diabetes mellitus.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:2532097",
+      "first_round": 2,
+      "title": "Quantitative aspects of subcutaneous insulin absorption.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:6997118",
+      "first_round": 2,
+      "title": "Role of zinc in insulin biosynthesis. Some possible zinc-insulin interactions in the pancreatic B-cell.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:619237",
+      "first_round": 2,
+      "title": "Effects of leg exercise on insulin absorption in diabetic patients.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15823772",
+      "first_round": 2,
+      "title": "Comparison of pharmacokinetic and pharmacodynamic properties of single-dose oral insulin spray and subcutaneous insulin injection in healthy subjects using the euglycemic clamp technique.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:15721654",
+      "first_round": 2,
+      "title": "Integral-based parameter identification for long-term dynamic verification of a glucose-insulin system model.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:8187463",
+      "first_round": 2,
+      "title": "A probabilistic approach to glucose prediction and insulin dose adjustment: description of metabolic model and pilot evaluation study.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:37854621",
+      "first_round": 2,
+      "title": "In Silico Investigation of the Clinical Translatability of Competitive Clearance Glucose-Responsive Insulins.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:35320591",
+      "first_round": 2,
+      "title": "Modeling of Pharmacokinetic Profiles of Insulin Aspart and Biphasic Insulin Aspart 30/70.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:35343255",
+      "first_round": 2,
+      "title": "Determining Losses in Jet Injection Subcutaneous Insulin Delivery: A Model-Based Approach.",
+      "decision": "background",
+      "reason": "Abstract: seven healthy adults jet-injection delivery losses; indirect delivery-method evidence, outside T1D primarypopulation.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PPR:PPR468080",
+      "first_round": 2,
+      "title": "Photoacoustic imaging reveals mechanisms of rapid-acting insulin formulations dynamics at the injection site",
+      "decision": "duplicate",
+      "reason": "Verified identity link by original title/DOI and source reference; retain edge without counting another publication record.",
+      "reviewed_material": "title",
+      "canonical_key": "DOI:10.1101/2022.03.10.483309"
+    },
+    {
+      "key": "PMID:33462595",
+      "first_round": 2,
+      "title": "Numerical Simulation of Insulin Depot Formation in Subcutaneous Tissue Modeled as a Homogeneous Anisotropic Porous Media.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PPR:PPR189447",
+      "first_round": 2,
+      "title": "Delay-Induced Uncertainty in Physiological Systems",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:31416537",
+      "first_round": 2,
+      "title": "A subcutaneous insulin pharmacokinetic model for insulin Detemir.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:30369394",
+      "first_round": 2,
+      "title": "Insulin depot absorption modeling and pharmacokinetic simulation with insulin glargine 300 U/mL .",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:28841775",
+      "first_round": 2,
+      "title": "Rational Design of Glucose-Responsive Insulin Using Pharmacokinetic Modeling.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:27580690",
+      "first_round": 2,
+      "title": "Incorporating bolus and infusion pharmacokinetics into the ICING insulin model.",
+      "decision": "background",
+      "reason": "Abstract: IV bolus/infusion ICING identification, not SC lispro; methodologicalbackground.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:26092607",
+      "first_round": 2,
+      "title": "Estimation of secondary effect parameters in glycaemic dynamics using accumulating data from a virtual type 1 diabetic patient.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:25122564",
+      "first_round": 2,
+      "title": "Pharmacokinetic modeling of the subcutaneous absorption of therapeutic proteins.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19964316",
+      "first_round": 2,
+      "title": "Numerical analysis of a comprehensive in silico subcutaneous insulin absorption compartmental model.",
+      "decision": "background",
+      "reason": "Abstract: numerical analysis of Wong model, a numerical-method comparison rather than new clinical evidence.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:11944604",
+      "first_round": 2,
+      "title": "Insulin glargine: a new long-acting insulin product.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "UNMATCHED:1171835f62cc8ed0",
+      "first_round": 2,
+      "title": "Long-acting insulin analogs",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "UNMATCHED:42772358684a2cc3",
+      "first_round": 2,
+      "title": "Glucose metabolism modeling with BPTT-trained Elman nets",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "UNMATCHED:14db71cb358df17d",
+      "first_round": 2,
+      "title": null,
+      "decision": "unresolved",
+      "reason": "Citation index lacks a title or sufficient identity. Preserve the unmatched edge; no inferred primary eligibility or numerical values.",
+      "reviewed_material": "incomplete_bibliographic_record"
+    },
+    {
+      "key": "PMID:12904090",
+      "first_round": 2,
+      "title": "Insulin glargine: an updated review of its use in the management of diabetes mellitus.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "UNMATCHED:699a07d3a60f3424",
+      "first_round": 2,
+      "title": null,
+      "decision": "unresolved",
+      "reason": "Citation index lacks a title or sufficient identity. Preserve the unmatched edge; no inferred primary eligibility or numerical values.",
+      "reviewed_material": "incomplete_bibliographic_record"
+    },
+    {
+      "key": "UNMATCHED:f9bf50635f5bc0f0",
+      "first_round": 2,
+      "title": "Parameter identification of the endogenous glucose metabolism model for diabetes mellitus I patients",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:7616774",
+      "first_round": 2,
+      "title": "Numerical approximation of mathematical model for absorption of subcutaneously injected insulin.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "UNMATCHED:b36debf7c5143d0d",
+      "first_round": 2,
+      "title": "Fick’s first law of diffusion",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "UNMATCHED:bdd8d1dcd459e1f2",
+      "first_round": 2,
+      "title": null,
+      "decision": "unresolved",
+      "reason": "Citation index lacks a title or sufficient identity. Preserve the unmatched edge; no inferred primary eligibility or numerical values.",
+      "reviewed_material": "incomplete_bibliographic_record"
+    },
+    {
+      "key": "PMID:12661778",
+      "first_round": 2,
+      "title": "Biotransformation of insulin glargine after subcutaneous injection in healthy subjects.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12931275",
+      "first_round": 2,
+      "title": "Comparison of the subcutaneous absorption of insulin glargine (Lantus) and NPH insulin in patients with Type 2 diabetes.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "UNMATCHED:63ea956b26b5eb77",
+      "first_round": 2,
+      "title": "Prospektive Evaluation einer standardisierten Basalratenverteilung für die CSII bei Typ 1 Diabetes über 6 Monate",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "UNMATCHED:3f584fc023564680",
+      "first_round": 2,
+      "title": null,
+      "decision": "unresolved",
+      "reason": "Citation index lacks a title or sufficient identity. Preserve the unmatched edge; no inferred primary eligibility or numerical values.",
+      "reviewed_material": "incomplete_bibliographic_record"
+    },
+    {
+      "key": "UNMATCHED:46e5182fab608884",
+      "first_round": 2,
+      "title": null,
+      "decision": "unresolved",
+      "reason": "Citation index lacks a title or sufficient identity. Preserve the unmatched edge; no inferred primary eligibility or numerical values.",
+      "reviewed_material": "incomplete_bibliographic_record"
+    },
+    {
+      "key": "UNMATCHED:9ff9728903af6a60",
+      "first_round": 2,
+      "title": "Pharmacokinetic model for the absorption of subcutaneously injected insulin Glargine",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:12795655",
+      "first_round": 2,
+      "title": "Limitations to subcutaneous insulin administration in type 1 diabetes.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:31987985",
+      "first_round": 2,
+      "title": "Towards in vitro in vivo correlation for modified release subcutaneously administered insulins.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:24492795",
+      "first_round": 2,
+      "title": "A Bayesian network for modelling blood glucose concentration and exercise in type 1 diabetes.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:23798995",
+      "first_round": 2,
+      "title": "Is dynamic autocrine insulin signaling possible? A mathematical model predicts picomolar concentrations of extracellular monomeric insulin within human pancreatic islets.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "CTX:C7520",
+      "first_round": 2,
+      "title": "A new perspective on closed-loop glucose control using a physiology-based pharmacokinetic / pharmacodynamic model kernel",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21703346",
+      "first_round": 2,
+      "title": "Bioavailability and variability of biphasic insulin mixtures.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20870309",
+      "first_round": 2,
+      "title": "Insulin dosage optimization based on prediction of postprandial glucose excursions under uncertain parameters and food intake.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20870308",
+      "first_round": 2,
+      "title": "Comparison of interval and Monte Carlo simulation for the prediction of postprandial glucose under uncertainty in type 1 diabetes mellitus.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20597831",
+      "first_round": 2,
+      "title": "An advisory protocol for rapid- and slow-acting insulin therapy based on a run-to-run methodology.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21095890",
+      "first_round": 2,
+      "title": "Predictive modeling of glucose metabolism using free-living data of type 1 diabetic patients.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20144339",
+      "first_round": 2,
+      "title": "Computing the risk of postprandial hypo- and hyperglycemia in type 1 diabetes mellitus considering intrapatient variability and other sources of uncertainty.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19963637",
+      "first_round": 2,
+      "title": "Gaussian Process modelling of blood glucose response to free-living physical activity data in people with type 1 diabetes.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18173967",
+      "first_round": 2,
+      "title": "Which basal insulin should be used in patients with type 2 diabetes mellitus?",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:19885100",
+      "first_round": 2,
+      "title": "Incorporating a generic model of subcutaneous insulin absorption into the AIDA v4 diabetes simulator: 1. a prospective collaborative development plan.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:18002320",
+      "first_round": 2,
+      "title": "Prediction of glucose excursions under uncertain parameters and food intake in intensive insulin therapy for type 1 diabetes mellitus.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "UNMATCHED:ce870c0c503e8bf9",
+      "first_round": 2,
+      "title": null,
+      "decision": "unresolved",
+      "reason": "Citation index lacks a title or sufficient identity. Preserve the unmatched edge; no inferred primary eligibility or numerical values.",
+      "reviewed_material": "incomplete_bibliographic_record"
+    },
+    {
+      "key": "UNMATCHED:7f3a833f2adbdf2b",
+      "first_round": 2,
+      "title": null,
+      "decision": "unresolved",
+      "reason": "Citation index lacks a title or sufficient identity. Preserve the unmatched edge; no inferred primary eligibility or numerical values.",
+      "reviewed_material": "incomplete_bibliographic_record"
+    },
+    {
+      "key": "PMID:2655689",
+      "first_round": 2,
+      "title": "A comparison of three mathematical models to describe the disappearance curves of subcutaneously injected 125I-labelled insulin.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:6341148",
+      "first_round": 2,
+      "title": "Absorption rates of subcutaneously injected insulin in the dog as calculated from the plasma insulin levels by means of a simple mathematical model.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:1967767",
+      "first_round": 2,
+      "title": "Comparison of insulin analogue B9AspB27Glu and soluble human insulin in insulin-treated diabetes.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "UNMATCHED:cf317dbcf7d6878b",
+      "first_round": 2,
+      "title": null,
+      "decision": "duplicate",
+      "reason": "Verified identity link by original title/DOI and source reference; retain edge without counting another publication record.",
+      "reviewed_material": "incomplete_bibliographic_record",
+      "canonical_key": "PMID:6339306"
+    },
+    {
+      "key": "UNMATCHED:dd7bbb220f8406fb",
+      "first_round": 2,
+      "title": null,
+      "decision": "unresolved",
+      "reason": "Citation index lacks a title or sufficient identity. Preserve the unmatched edge; no inferred primary eligibility or numerical values.",
+      "reviewed_material": "incomplete_bibliographic_record"
+    },
+    {
+      "key": "UNMATCHED:a7d3832db7912c8e",
+      "first_round": 2,
+      "title": null,
+      "decision": "unresolved",
+      "reason": "Citation index lacks a title or sufficient identity. Preserve the unmatched edge; no inferred primary eligibility or numerical values.",
+      "reviewed_material": "incomplete_bibliographic_record"
+    },
+    {
+      "key": "UNMATCHED:52fb80117c765cf5",
+      "first_round": 2,
+      "title": null,
+      "decision": "unresolved",
+      "reason": "Citation index lacks a title or sufficient identity. Preserve the unmatched edge; no inferred primary eligibility or numerical values.",
+      "reviewed_material": "incomplete_bibliographic_record"
+    },
+    {
+      "key": "PMID:4856884",
+      "first_round": 2,
+      "title": "A model of the kinetics of insulin in man.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:6403173",
+      "first_round": 2,
+      "title": "Change to U-100 insulin does not appear to affect insulin absorption.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "UNMATCHED:f01097a5c6efe1fa",
+      "first_round": 2,
+      "title": null,
+      "decision": "unresolved",
+      "reason": "Citation index lacks a title or sufficient identity. Preserve the unmatched edge; no inferred primary eligibility or numerical values.",
+      "reviewed_material": "incomplete_bibliographic_record"
+    },
+    {
+      "key": "PMID:1797482",
+      "first_round": 2,
+      "title": "Intravenous insulin infusion to simulate subcutaneous absorption. Bioavailability and metabolic sequelae.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:32828456",
+      "first_round": 2,
+      "title": "Near-optimal insulin treatment for diabetes patients: A machine learning approach.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:25537835",
+      "first_round": 2,
+      "title": "Pharmacokinetics of diluted (U20) insulin aspart compared with standard (U100) in children aged 3-6 years with type 1 diabetes during closed-loop insulin delivery: a randomised clinical trial.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:24876428",
+      "first_round": 2,
+      "title": "Application of PK/PD modeling and simulation to dosing regimen optimization of high-dose human regular U-500 insulin.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:21994429",
+      "first_round": 2,
+      "title": "Pharmacokinetics and pharmacodynamics of high-dose human regular U-500 insulin versus human regular U-100 insulin in healthy obese subjects.",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:20097778",
+      "first_round": 2,
+      "title": "Glucose levels at the site of subcutaneous insulin administration and their relationship to plasma levels.",
+      "decision": "background",
+      "reason": "Abstract: five healthy volunteers, regular human insulin; tissue glucose sensing background, not adultT1DlisproPK.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:19211405",
+      "first_round": 2,
+      "title": "High-dose insulin therapy: is it time for U-500 insulin?",
+      "decision": "excluded",
+      "reason": "Title explicitly identifies a different formulation/population/route/process or a different clinical question; outside the primary conventional-lispro kinetic scope.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:10707011",
+      "first_round": 2,
+      "title": "Lymphatic transport of proteins after subcutaneous administration.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    },
+    {
+      "key": "PMID:9735562",
+      "first_round": 2,
+      "title": "Neural predictive controller for insulin delivery using the subcutaneous route.",
+      "decision": "background",
+      "reason": "Abstract: simulated neural controller using monomeric analogue model, no new clinicalPK evidence.",
+      "reviewed_material": "title_abstract"
+    },
+    {
+      "key": "PMID:8894386",
+      "first_round": 2,
+      "title": "Fuzzy filter for state estimation of a glucoregulatory system.",
+      "decision": "background",
+      "reason": "Citation-context record retained for model, physiology, measurement or control background. The reviewed title does not establish separable adult conventional-lispro concentration-time evidence; no primary eligibility or parameter claim is made.",
+      "reviewed_material": "title"
+    }
+  ]
+}

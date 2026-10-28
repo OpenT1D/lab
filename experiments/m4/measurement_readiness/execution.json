@@ -1,0 +1,38 @@
+{
+  "schema": "bc015-metadata-execution/1",
+  "date": "2026-09-25",
+  "protocol": "BC-015-P1/1",
+  "source_commit": "ea8566d",
+  "archive": "results/m4-measurement-readiness/cit07-01",
+  "archive_status": "completed",
+  "archive_files": {
+    "candidate.json": "1f76c660d1255e67d19d139484267339361960c2adbd92afb03cf0da097cac20",
+    "protocol.json": "0a99401d6b2c17bd6295f3004b584a470f156f3b45fdeec7d1b48133b6d44c67",
+    "report.json": "d9b258d88ff5bbaece5322f0bbf2f2a5ebba6cc4043345d4700167c867e0df6b",
+    "source-run.py": "6499d38752afc8154b1b6bfd4618818df6fbdc5076ab15125d061a699a564e51"
+  },
+  "manifest_sha256": "cb74b9c5ca43798907cf6cd50e74ffaadadb4f6806dec2a39fde29e231474ca3",
+  "report_sha256": "d9b258d88ff5bbaece5322f0bbf2f2a5ebba6cc4043345d4700167c867e0df6b",
+  "result": {
+    "counts": {
+      "contradicted": 1,
+      "supported": 2,
+      "unverified": 5
+    },
+    "metadata_packet_for_design_review": false,
+    "human_execution_authorized": false
+  },
+  "source_access": "public catalogue/protocol metadata only; production direct fetch returned HTTP 403; no participant data or access request",
+  "checks": {
+    "focused_tests": "5 passed",
+    "offline_reconstruction": "byte-identical",
+    "final_repository_check": {
+      "command": "uv run --locked python scripts/check.py",
+      "status": "passed",
+      "tests": 632,
+      "lint": "passed",
+      "strict_documentation_build": "passed",
+      "log_sha256": "97df822b987e77e2efc03cac6a776564cf5738e36cd59452d3a20e1def1c83e2"
+    }
+  }
+}

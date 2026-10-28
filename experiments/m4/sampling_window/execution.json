@@ -1,0 +1,79 @@
+{
+  "base_commit": "be6776c7f0d8129f7e296f5dfe536e5a9ddaccd8",
+  "cases_sha256": "bdb820738d9ef1a9aa3166427a33708b450993f3f19210181c5c99b6c835031d",
+  "exact_repeated_file_count": 17,
+  "extended_smaller_k3_error_count": 56,
+  "figure_sha256": "d89e72223d9c47708a38621bfbff2d5a9d65ca05ec09a152da06a155b9269ca7",
+  "human_validation": false,
+  "id": "BC-015-P4/1",
+  "local_archive": "results/m4-sampling-window/final-clean",
+  "local_repeat": "results/m4-sampling-window/final-clean-repeat",
+  "noisy_results": {
+    "early": {
+      "best_bound_hits": [
+        0,
+        4
+      ],
+      "completed_noisy": 64,
+      "failed_noisy": 0,
+      "max_abs_relative_error": [
+        0.11436901418090895,
+        0.5
+      ],
+      "median_abs_relative_error": [
+        0.03973820280282475,
+        0.217396997617758
+      ],
+      "p90_abs_relative_error": [
+        0.08327098467818948,
+        0.43688846684724714
+      ],
+      "planned_noisy": 64
+    },
+    "early_plus_hypothetical_late": {
+      "best_bound_hits": [
+        0,
+        0
+      ],
+      "completed_noisy": 64,
+      "failed_noisy": 0,
+      "max_abs_relative_error": [
+        0.07083058969276079,
+        0.16161535269318972
+      ],
+      "median_abs_relative_error": [
+        0.017046712642958206,
+        0.03738660679039102
+      ],
+      "p90_abs_relative_error": [
+        0.038695848290594186,
+        0.0867377394639228
+      ],
+      "planned_noisy": 64
+    }
+  },
+  "observation_sha256": "e5347adc0d6749223965b5afdf48674f8c890419892a6e9b47ae31f66163558a",
+  "paired_completed_draws": 64,
+  "protocol_sha256": "cf91630b4d0717d58a90257dbb5e097076b2e793c698b643bb255066d0c0c727",
+  "report_sha256": "9847e30c005937899321a3259e890285360ef69d8e1442e7157435a68742ae79",
+  "runtime": {
+    "numpy": "2.2.6",
+    "python": "3.12.13",
+    "scipy": "1.15.3"
+  },
+  "sample_counts": {
+    "early": 7,
+    "early_plus_hypothetical_late": 21
+  },
+  "schema": "bc015-sampling-window-execution/1",
+  "source_hashes": {
+    "source-analysis.py": "0bab48cf963fc49a4b4895962eaa4b7a810b6773b5072d42eddd21ff47bd50ec",
+    "source-cpeptide-model.py": "f46453669c17d98c4dc90eec6613641d32e222c2a3dd012709ca30e6868673ae",
+    "source-cpeptide-reference.py": "29efbcdd7065387f0089ff8704916fee48cd24237529137a5350e8886559c992",
+    "source-forcing.py": "b26fd2fd87aa47da328d24b2cbe56d8e3be45f9b4caf2c3c453f89acb07fddd1",
+    "source-plot.py": "776eddc85df392fc21b12fec9835ac8d906e0d6828bf2082fb36334decab47b1",
+    "source-report.py": "4622fcd888308966de7cb70e538298900ccbc036862abd2a445165e7469fe25f",
+    "source-run.py": "f62dcb1c8c1290ca85db45e6e5c4d00a051ae1a5c4933d496680fa18e57a99ea",
+    "source-test_numerical.py": "d2f094dbd5023c061c996c14705adbe8536b5729759bc791c99ed84ed85e3984"
+  }
+}
