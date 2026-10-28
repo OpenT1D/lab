@@ -117,6 +117,72 @@ class SnapshotTests(unittest.TestCase):
                 self.verify([change()], fetch)
             self.assertEqual(fetch.call_count, 2)
 
+    def test_announced_last_page_cannot_disappear_or_change_between_responses(self):
+        for mode in ("missing-link", "missing-last", "changed-last"):
+            first = headers(following=2)
+            first.replace_header(
+                "Link", first["Link"] + f', <{ENDPOINT}?per_page=100&page=3>; rel="last"'
+            )
+            second = headers() if mode == "missing-link" else headers(following=3)
+            third = [] if mode == "missing-link" else [change("third")]
+            scanned = [change(), change("second"), *third]
+            if mode == "changed-last":
+                second.replace_header(
+                    "Link", second["Link"] + f', <{ENDPOINT}?per_page=100&page=4>; rel="last"'
+                )
+            fetch = Mock(
+                side_effect=[([change()], first), ([change("second")], second), (third, headers())]
+            )
+            with self.subTest(mode=mode), self.assertRaisesRegex(ValueError, "pagination"):
+                self.verify(scanned, fetch)
+
+        first = headers(following=2)
+        first.replace_header(
+            "Link", first["Link"] + f', <{ENDPOINT}?per_page=100&page=2>; rel="last"'
+        )
+        result = self.verify(
+            [change(), change("second")],
+            Mock(side_effect=[([change()], first), ([change("second")], headers())]),
+        )
+        self.assertEqual(result["pages"], 2)
+        first = headers(following=2)
+        first.replace_header(
+            "Link", first["Link"] + f', <{ENDPOINT}?per_page=100&page=3>; rel="last"'
+        )
+        middle = headers(following=3)
+        middle.replace_header(
+            "Link", middle["Link"] + f', <{ENDPOINT}?per_page=100&page=3>; rel="last"'
+        )
+        fetch = Mock(
+            side_effect=[([change()], first), ([change("second")], middle), ([], headers())]
+        )
+        self.assertEqual(self.verify([change(), change("second")], fetch)["pages"], 3)
+
+    def test_deadline_expiring_during_fetch_or_final_validation_cannot_publish_success(self):
+        original = snapshot.fingerprint
+        for slow in ("fetch", "validation"):
+            clock, calls = [0.0], [0]
+
+            def fetch(*_args):
+                if slow == "fetch":
+                    clock[0] = 121.0
+                return [], headers()
+
+            def fingerprint(value):
+                calls[0] += 1
+                result = original(value)
+                if slow == "validation" and calls[0] == 3:
+                    clock[0] = 121.0
+                return result
+
+            with (
+                self.subTest(slow=slow),
+                patch.object(snapshot.time, "monotonic", side_effect=lambda: clock[0]),
+                patch.object(snapshot, "fingerprint", side_effect=fingerprint),
+                self.assertRaisesRegex(ValueError, "deadline|time"),
+            ):
+                self.verify([], fetch, wait=120)
+
     def test_pagination_refuses_foreign_targets_skips_cycles_duplicates_and_lost_next(self):
         for link in (
             '<https://attacker.invalid/path?per_page=100&page=2>; rel="next"',
