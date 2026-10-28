@@ -5,9 +5,13 @@ updates:
     schedule:
       interval: monthly
     open-pull-requests-limit: 3
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
     groups:
       actions:
         patterns: ['*']
+        update-types: [minor, patch]
   - package-ecosystem: uv
     directory: /
     exclude-paths:
@@ -17,6 +21,10 @@ updates:
     schedule:
       interval: monthly
     open-pull-requests-limit: 3
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
     groups:
       repository-tooling:
         patterns: ['*']
+        update-types: [minor, patch]
