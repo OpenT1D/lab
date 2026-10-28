@@ -28,6 +28,73 @@ class ProcessService(Service):
         return [([sys.executable, "-B", "-S", "-c", self.script], self.budget)]
 
 
+@unittest.skipUnless(os.name == "posix", "Real POSIX journal publication regression")
+class JournalPublicationTests(unittest.TestCase):
+    def test_pending_symlink_preserves_unrelated_bytes_and_recovers_running_journal(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            service = Service(root)
+            try:
+                job = {
+                    "schema": "opent1d.gui-job/1",
+                    "id": "job-preserved",
+                    "task": TASK,
+                    "operation": "check",
+                    "state": "queued",
+                    "commands": [],
+                    "result": None,
+                    "error": None,
+                }
+                folder = service.data / job["id"]
+                folder.mkdir()
+                journal = folder / "job.json"
+                pending = folder / "job.tmp"
+                service.persist(job)
+                saved = journal.read_bytes()
+                unrelated = root / "unrelated.txt"
+                unrelated.write_bytes(b"preserve unrelated bytes\x00\xff\n")
+                original = unrelated.read_bytes()
+                pending.symlink_to(unrelated)
+                changed = {**job, "state": "running", "pid": os.getpid()}
+                with journal.open("rb") as previous:
+                    service.persist(changed)
+                    self.assertEqual(previous.read(), saved)
+                self.assertEqual(unrelated.read_bytes(), original)
+                self.assertTrue(pending.is_symlink())
+                self.assertEqual(pending.readlink(), unrelated)
+                self.assertFalse(journal.is_symlink())
+                self.assertEqual(journal.stat().st_nlink, 1)
+                self.assertEqual(journal.read_bytes(), encode(changed))
+                self.assertEqual(
+                    sorted(path.name for path in folder.iterdir()), ["job.json", "job.tmp"]
+                )
+
+                service.close()
+                service = Service(root)
+                recovered = service.jobs[job["id"]]
+                self.assertEqual(recovered["state"], "failed")
+                self.assertEqual(
+                    recovered["error"], "Previous server stopped; ownership not adopted"
+                )
+                self.assertIsNone(service.active)
+                self.assertIsNone(service.process)
+                self.assertFalse(journal.is_symlink())
+                self.assertEqual(journal.stat().st_nlink, 1)
+                self.assertEqual(journal.read_bytes(), encode(recovered))
+                self.assertEqual(unrelated.read_bytes(), original)
+                self.assertTrue(pending.is_symlink())
+                self.assertEqual(pending.readlink(), unrelated)
+                self.assertEqual(
+                    sorted(path.name for path in folder.iterdir()), ["job.json", "job.tmp"]
+                )
+                service.close()
+                service = Service(root)
+                self.assertEqual(service.jobs[job["id"]], recovered)
+                self.assertEqual(unrelated.read_bytes(), original)
+            finally:
+                service.close()
+
+
 class LocalGUITests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
