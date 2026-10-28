@@ -39,7 +39,7 @@ jobs:
           HISTORICAL_REQUESTED: ${{ github.event_name == 'workflow_dispatch' && inputs.historical_native }}
         run: python3 scripts/publication_ci_scope.py >> "$GITHUB_OUTPUT"
       - name: Set up uv
-        uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4  # v10.1.0
+        uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e  # v10.3.2
         with:
           version: '0.11.16'
           enable-cache: false
@@ -139,7 +139,7 @@ jobs:
           cmp results/m4-feedback-preflight/ci-reference/report.json results/m4-feedback-preflight/reconstructed.json
       - name: Preserve beta-cell numerical evidence including failures
         if: always() && steps.scope.outputs.native_enabled == 'true'
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: m4-beta-cell
           path: |
@@ -167,7 +167,7 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e
         with:
           version: '0.11.16'
           enable-cache: false
@@ -236,7 +236,7 @@ jobs:
           cmp results/m4-comparison/ci-reference/figure.svg results/m4-comparison/ci-reconstructed/figure.svg
       - name: Preserve feedback evidence including failures
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: m4-feedback
           path: |
@@ -261,7 +261,7 @@ jobs:
           persist-credentials: false
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Set up uv
-        uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4  # v10.1.0
+        uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e  # v10.3.2
         with:
           version: '0.11.16'
           enable-cache: false
@@ -367,7 +367,7 @@ jobs:
             --left fasting-repeat-1 --right fasting-repeat-2
       - name: Preserve study, setup, campaign and catalogue evidence including failures
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: m4-study-tools
           path: results/m4-study-tools/
@@ -387,7 +387,7 @@ jobs:
           persist-credentials: false
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Set up uv
-        uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4  # v10.1.0
+        uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e  # v10.3.2
         with:
           version: '0.11.16'
           enable-cache: false
@@ -431,7 +431,7 @@ jobs:
           PY
       - name: Preserve maintained numerical evidence including failures
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: m4-maintained-ci
           path: results/m4-maintained-ci/
@@ -456,7 +456,7 @@ jobs:
       - name: Select the temporary actor-source directory at runtime
         run: printf '%s\n' "G2P2C_SOURCE=$RUNNER_TEMP/g2p2c-source" >> "$GITHUB_ENV"
       - name: Set up uv
-        uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4  # v10.1.0
+        uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e  # v10.3.2
         with:
           version: '0.11.16'
           enable-cache: false
@@ -503,7 +503,7 @@ jobs:
           cmp results/c1-checkpoint-ci/policy-primary.json results/c1-checkpoint-ci/training-primary.json
       - name: Preserve checkpoint and synthetic actor evidence including failures
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: c1-checkpoint-ci
           path: results/c1-checkpoint-ci/
@@ -521,7 +521,7 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e
         with:
           version: '0.11.16'
           enable-cache: false
@@ -544,7 +544,7 @@ jobs:
             results/m4-joint-identifiability/reconstructed.json
       - name: Preserve every recovery attempt including failures
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: m4-joint-identifiability
           path: results/m4-joint-identifiability/
@@ -565,7 +565,7 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e
         with:
           version: '0.11.16'
           enable-cache: false
@@ -594,7 +594,7 @@ jobs:
             results/m4-volume-sensitivity/reconstructed.svg
       - name: Preserve every volume comparison attempt including failures
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: m4-volume-sensitivity
           path: results/m4-volume-sensitivity/
@@ -615,7 +615,7 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e
         with:
           version: '0.11.16'
           enable-cache: false
@@ -644,7 +644,7 @@ jobs:
             results/m4-profile-likelihood/reconstructed.svg
       - name: Preserve every profile attempt including failures
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: m4-profile-likelihood
           path: results/m4-profile-likelihood/
@@ -662,7 +662,7 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e
         with:
           version: '0.11.16'
           python-version: '3.12.13'
@@ -692,7 +692,7 @@ jobs:
           python -m unittest discover -s experiments/m1 -p test_native.py -v
       - name: Preserve reference evidence including failed runs
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: simglucose-reference
           path: results/m0/
@@ -710,7 +710,7 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
         with:
           node-version: '22.22.2'
       - name: Install isolated TypeScript toolchain
@@ -736,7 +736,7 @@ jobs:
           experiments/m2/probe.mjs results/m2-host-probe
       - name: Preserve evidence including failed runs
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: lt1-reference
           path: |
@@ -758,7 +758,7 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e
         with:
           version: '0.11.16'
           python-version: '3.12.13'
@@ -775,7 +775,7 @@ jobs:
           python -m experiments.m1.verify --study results/m1/demo --output results/m1/verification
       - name: Preserve complete and failed demonstration artifacts
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: m1-demonstration
           path: results/m1/
@@ -793,11 +793,11 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e
         with:
           version: '0.11.16'
           enable-cache: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
         with:
           node-version: '22.22.2'
       - name: Install locked tooling and verify native source
@@ -820,7 +820,7 @@ jobs:
             --study results/m2/development --output results/m2/development-verification
       - name: Preserve M2 evidence including failures
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: m2-cambridge
           path: results/m2/
@@ -838,11 +838,11 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e
         with:
           version: '0.11.16'
           enable-cache: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
         with:
           node-version: '22.22.2'
       - name: Install locked isolated environments
@@ -870,7 +870,7 @@ jobs:
           cmp results/verification/numerical/report.json results/verification/reconstructed.json
       - name: Preserve internal verification including failures
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: internal-verification
           path: results/verification/
@@ -888,11 +888,11 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e
         with:
           version: '0.11.16'
           enable-cache: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
         with:
           node-version: '22.22.2'
       - name: Install locked isolated environments
@@ -913,7 +913,7 @@ jobs:
           --study results/robustness/matrix --output results/robustness/verification
       - name: Preserve robustness evidence including failures
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: internal-robustness
           path: results/robustness/
@@ -931,7 +931,7 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e
         with:
           version: '0.11.16'
           enable-cache: false
@@ -964,7 +964,7 @@ jobs:
           uv run --locked python -S -m experiments.m3.physiocgm verify --bundle results/m3/physiocgm-converted
       - name: Preserve synthetic M3 evidence including failures
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: m3-forecast
           path: results/m3/
@@ -982,11 +982,11 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e
         with:
           version: '0.11.16'
           enable-cache: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
         with:
           node-version: '22.22.2'
       - name: Install the existing locked native and plotting environments
@@ -1025,7 +1025,7 @@ jobs:
           --output results/lit002/figures
       - name: Preserve complete evidence including failures
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: lit002-absorption
           path: results/lit002/
