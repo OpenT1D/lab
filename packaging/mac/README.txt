@@ -1,8 +1,11 @@
 Unsigned internal Apple Silicon MMTT candidate
 
 Build on an Apple Silicon Mac with Apple's Command Line Tools from a clean
-committed checkout. Root uv is build tooling only. Network is needed once for
-the three hash-pinned upstream archives; a verified cache can then be reused.
+committed checkout, with zstd on the build PATH (check zstd --version). macOS
+system tar uses zstd to read the pinned full.tar.zst metadata; the verified
+build environment used zstd 1.5.7. It is not an application runtime requirement.
+Root uv is build tooling only. Network is needed once for the three hash-pinned
+upstream archives; a verified cache can then be reused.
 
   uv sync --locked
   uv run --locked python scripts/build_mac_app.py \

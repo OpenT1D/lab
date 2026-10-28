@@ -49,7 +49,10 @@ internal build procedure.
 
 The [maintainer build and probe reference](../packaging/mac/README.txt) owns the
 commands, fresh-directory requirements and isolated test workspace. Building
-needs an Apple Silicon Mac, Apple's Command Line Tools and locked root tooling.
+needs an Apple Silicon Mac, Apple's Command Line Tools, locked root tooling and
+`zstd` on the build PATH (`zstd --version` must succeed). macOS system tar uses
+that executable to read the pinned `.tar.zst` upstream metadata. It is a build
+prerequisite only; the application user needs none of these host tools.
 The runtime and provider inputs are pinned by hash in
 [`packaging/mac/runtime-lock.json`](../packaging/mac/runtime-lock.json).
 [Decision 0075](decisions/0075-mac-mmtt-runtime-capabilities.md) owns the runtime
