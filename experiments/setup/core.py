@@ -27,6 +27,7 @@ from experiments.catalogue.storage import (
 from experiments.desktop.runtime import SOURCE_FILES as RUNTIME_SOURCES
 from experiments.desktop.runtime import packaged_manifest, packaged_runtime, verify_packaged_project
 from experiments.platform_files import native_absolute
+from experiments.platform_process import SOURCE_FILES as PROCESS_SOURCES
 from experiments.setup.publication import check_install
 
 PLAN = "opent1d.task-setup-plan/1"
@@ -39,6 +40,7 @@ SOURCES = (
     "experiments/setup/__main__.py",
     "experiments/setup/core.py",
     *RUNTIME_SOURCES,
+    *PROCESS_SOURCES,
     "experiments/setup/publication.py",
     "publication-security.json",
     "experiments/setup/contract.json",
