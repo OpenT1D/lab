@@ -42,6 +42,7 @@ STARTUP_SECONDS = 30
 TERM_SECONDS = 20
 FORCE_SECONDS = 6
 ROOT_WAIT_SECONDS = 2
+GROUP_RECHECK_SECONDS = 1
 JOB_CLOSE_SECONDS = 2  # Existing WindowsOwnership.cleanup(0) final observation bound.
 CLEANUP_SECONDS = TERM_SECONDS + FORCE_SECONDS + ROOT_WAIT_SECONDS + JOB_CLOSE_SECONDS
 JSON_LIMIT = 4 * 1024 * 1024
@@ -406,6 +407,29 @@ class AdmissionFailure(ValueError):
         self.forwarded_signal = forwarded_signal
 
 
+def _owned_tree_call(process, operation):
+    """Clear POSIX denial only after retained-child reap and group disappearance."""
+    try:
+        return operation(process)
+    except PermissionError as error:
+        if os.name != "posix":
+            raise
+        # Darwin can deny killpg while only an unreaped zombie remains. Neither
+        # an access denial nor leader exit alone establishes absent descendants.
+        deadline = time.monotonic() + GROUP_RECHECK_SECONDS
+        while True:
+            code = process.poll()
+            try:
+                remaining = tree_exists(process)
+            except PermissionError:
+                remaining = None
+            if code is not None and remaining is False:
+                return False
+            if remaining is not None or time.monotonic() >= deadline:
+                raise error
+            time.sleep(0.02)
+
+
 class Admission:
     """One live cancellation owner from passive preparation through native dispatch."""
 
@@ -429,8 +453,11 @@ class Admission:
             self.received, self.cancelled_at = int(number), time.monotonic()
         if self.active is not None and not self.soft_sent:
             self.soft_sent = True
-            signal_tree(
-                self.active, signal.SIGTERM if number == getattr(signal, "SIGHUP", None) else number
+            _owned_tree_call(
+                self.active,
+                lambda process: signal_tree(
+                    process, signal.SIGTERM if number == getattr(signal, "SIGHUP", None) else number
+                ),
             )
 
     def assert_active(self):
@@ -513,7 +540,7 @@ class Admission:
                 self._forward(self.received)
             while True:
                 code = process.poll()
-                remaining = tree_exists(process)
+                remaining = _owned_tree_call(process, tree_exists)
                 now = time.monotonic()
                 if self.received is not None:
                     failure = "GlobalInterruption"
@@ -529,9 +556,9 @@ class Admission:
                 if stopped is not None:
                     if not self.soft_sent:
                         self.soft_sent = True
-                        signal_tree(process, signal.SIGTERM)
+                        _owned_tree_call(process, lambda owned: signal_tree(owned, signal.SIGTERM))
                     if now - stopped >= TERM_SECONDS and not forced:
-                        signal_tree(process, FORCE_SIGNAL)
+                        _owned_tree_call(process, lambda owned: signal_tree(owned, FORCE_SIGNAL))
                         forced = True
                     if now - stopped >= TERM_SECONDS + FORCE_SECONDS:
                         failure = "OwnedCleanupDeadline"
@@ -547,14 +574,18 @@ class Admission:
             if process is not None:
                 try:
                     # Even unexpected parent errors retain live Job/group ownership.
-                    if process.poll() is None or tree_exists(process):
-                        signal_tree(process, FORCE_SIGNAL)
                     try:
-                        process.wait(timeout=ROOT_WAIT_SECONDS)
-                    except subprocess.TimeoutExpired as error:
-                        raise AdmissionFailure("OwnedCleanupDeadline") from error
+                        if process.poll() is None or _owned_tree_call(process, tree_exists):
+                            _owned_tree_call(
+                                process, lambda owned: signal_tree(owned, FORCE_SIGNAL)
+                            )
                     finally:
-                        close_tree(process)
+                        try:
+                            process.wait(timeout=ROOT_WAIT_SECONDS)
+                        except subprocess.TimeoutExpired as error:
+                            raise AdmissionFailure("OwnedCleanupDeadline") from error
+                        finally:
+                            close_tree(process)
                 finally:
                     self.active = None
 
