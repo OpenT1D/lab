@@ -296,6 +296,7 @@ subtrees:
       - file: docs/decisions/0073-native-windows-installer
       - file: docs/decisions/0074-private-installer-publication-integration
       - file: docs/decisions/0076-public-check-families
+      - file: docs/decisions/0079-windows-stdlib-worker-identity
       - file: docs/decisions/0059-maintained-runtimes-and-local-gui
       - file: docs/templates/model-card
       - file: docs/templates/experiment-protocol

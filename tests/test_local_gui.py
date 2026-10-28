@@ -181,6 +181,11 @@ class LocalGUITests(unittest.TestCase):
         configured = self.configured()
         persist = self.service.persist
         process, owner = Mock(pid=123), Mock()
+        process.launch_record = {
+            "requested_argv": ["requested-python", "-S", "-m", "experiments.workflows"],
+            "argv": ["actual-python", "-S", "-m", "experiments.gui.windows_worker"],
+            "selection": "current-cpython-stdlib-base",
+        }
         process.poll.return_value = None
         process.wait.return_value = 1
         owner.observe.return_value = {123: {"authority": "live-windows-job"}}
@@ -215,6 +220,7 @@ class LocalGUITests(unittest.TestCase):
         owner.cleanup.assert_called_once()
         owner.close.assert_called_once_with()
         self.assertTrue(self.service.closing)
+        self.assertEqual(finished["commands"][0]["windows_launch"], process.launch_record)
         self.assertTrue(logs[0].closed)
         self.assertIsNone(self.service.process)
         self.assertIsNone(self.service.active)
@@ -226,6 +232,33 @@ class LocalGUITests(unittest.TestCase):
         self.assertEqual(frozen.read_bytes(), (self.root / "model.py").read_bytes())
         self.assertFalse(record["ready"])
         self.assertEqual(self.service.list_jobs(), [])
+
+    def test_optional_windows_launch_journal_is_accounting_and_never_execution_authority(self):
+        configured = self.configured()
+        job = self.service.start("check", configured["id"])
+        finished = self.finished(job["id"])
+        self.service.thread.join(5)
+        marker = self.root / "recorded-command-must-not-run"
+        for included in (False, True):
+            with self.subTest(windows_launch=included):
+                command = self.service.jobs[job["id"]]["commands"][0]
+                if included:
+                    command["windows_launch"] = {
+                        "requested_argv": ["untrusted-recorded-request"],
+                        "argv": [sys.executable, "-c", f"open({str(marker)!r},'w').write('bad')"],
+                        "selection": "historical-accounting-only",
+                    }
+                self.service.persist(self.service.jobs[job["id"]])
+                self.service.close()
+                with patch("experiments.gui.service.subprocess.Popen") as launch:
+                    self.service = ProcessService(self.root)
+                    restored = self.service.get_job(job["id"])
+                    launch.assert_not_called()
+                self.assertEqual(restored["state"], finished["state"])
+                self.assertEqual(restored["commands"][0], command)
+                self.assertFalse(marker.exists())
+                self.assertIsNone(self.service.active)
+                self.assertIsNone(self.service.process)
 
     def test_restart_restores_own_frozen_study_without_saved_readiness(self):
         original = self.configured()

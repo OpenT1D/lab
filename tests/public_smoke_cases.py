@@ -99,6 +99,15 @@ class HTTPTaskSmoke(unittest.TestCase):
         self.assertEqual(final["state"], "completed", final)
         self.assertFalse(final.get("remaining_owned_processes"), final)
         self.assertFalse(final["cleanup_forced"], final)
+        if os.name == "nt":
+            for command in final["commands"]:
+                launch = command["windows_launch"]
+                self.assertEqual(launch["requested_argv"], command["argv"])
+                self.assertIn(
+                    launch["selection"], ("current-cpython-direct", "current-cpython-stdlib-base")
+                )
+                index = launch["argv"].index("-m")
+                self.assertEqual(launch["argv"][index + 1], "experiments.gui.windows_worker")
         return final
 
     def flow(self, route, case, task, entry_key):

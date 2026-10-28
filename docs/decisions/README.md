@@ -1,5 +1,7 @@
 # Decision records
 
+- [0079 — Direct current CPython for Windows standard-library workers](0079-windows-stdlib-worker-identity.md): bind the two source MMTT routes to current CPython 3.12, bypass its venv redirector only for explicit no-site launches and retain actual launch provenance and live Job authority.
+
 - [0076 — Shared public check families](0076-public-check-families.md): one local stage contract, explicit real-host smokes, bounded Chromium flows and a required result that rejects unsuccessful or missing public families.
 
 - [0074 — Private installer/publication integration](0074-private-installer-publication-integration.md): preserve the current laboratory plan, installed runtime attestation and public-native distribution restrictions without publishing or changing historical evidence.

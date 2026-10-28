@@ -56,6 +56,11 @@ block unrelated internal fixes, contract inventory or feasibility work.
 | Conditional follow-up — Mac distribution | Turn the verified probe into a signed/notarized download with a controlled build/release workflow and clean-host/user evidence. | The exact downloaded artifact passes the lifecycle, data-preservation and interpretation checks below. Signing credentials, runtime rights and actual hosts/users are prerequisites for the affected acceptance, not assumed resources. |
 | Subsequent shared-laboratory work | Execute the named two-route extraction queue under OT-059 and minimal OT-060/061/064, followed by the remaining delivery slices. | Existing routes use shared services and preserve their scientific contracts/readers. Inventory can overlap the public work; public native execution needs a reviewed successor environment. Mac MMTT packaging is not gated on native remediation. |
 
+The Windows source smoke exposed a venv redirector creating the actual worker
+before Job assignment. [Decision 0079](docs/decisions/0079-windows-stdlib-worker-identity.md)
+selects the bounded current-CPython/no-site launch convention. Final real Job
+membership, strict cleanup and task-flow results remain platform acceptance gates.
+
 ### Next implementation: AI development
 
 The first bounded increment is implemented in the

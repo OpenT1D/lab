@@ -3,7 +3,9 @@
 import ctypes
 import os
 import signal
+import stat
 import subprocess
+import sys
 import time
 from ctypes import wintypes
 
@@ -123,9 +125,10 @@ class Job:
 class WindowsProcess:
     """Popen facade with pipe cancellation and kernel-owned forced termination."""
 
-    def __init__(self, process, job):
+    def __init__(self, process, job, *, launch_record=None):
         self.process, self.job = process, job
         self.cancelled = False
+        self.launch_record = launch_record
 
     @property
     def pid(self):
@@ -221,6 +224,50 @@ class WindowsOwnership:
             self.close()
 
 
+def _stdlib_argv(argv, index):
+    """Avoid the current venv's redirector only for explicit no-site starts.
+
+    CPython uses _base_executable itself when constructing a venv. This is not
+    discovery of another interpreter: a foreign or site-enabled request retains
+    its exact executable, packages and launch contract.
+    """
+    if "-S" not in argv[1:index] or not os.path.isabs(argv[0]):
+        return argv, "requested"
+    # Hardlinked launcher bytes can belong to different venvs. Preserve the
+    # requested path context instead of treating file identity as runtime identity.
+    if os.path.normcase(os.path.abspath(argv[0])) != os.path.normcase(
+        os.path.abspath(sys.executable)
+    ):
+        return argv, "requested"
+    try:
+        current = os.path.samefile(argv[0], sys.executable)
+    except OSError:
+        current = False
+    if not current:
+        return argv, "requested"
+    if sys.implementation.name != "cpython" or sys.version_info[:2] != (3, 12):
+        raise ValueError("Current no-site Windows workers require CPython 3.12")
+    base = getattr(sys, "_base_executable", None)
+    if not isinstance(base, str) or not os.path.isabs(base):
+        raise ValueError("Current CPython base executable is unavailable")
+    base = os.path.realpath(base, strict=True)
+    if not stat.S_ISREG(os.stat(base).st_mode):
+        raise ValueError("Current CPython base executable is not a regular file")
+    if os.path.samefile(base, sys.executable):
+        return argv, "current-cpython-direct"
+    prefix = os.path.realpath(sys.base_prefix, strict=True)
+    if os.path.normcase(os.path.commonpath((base, prefix))) != os.path.normcase(prefix):
+        raise ValueError("Current CPython base executable lies outside its base prefix")
+    directory = os.path.dirname(base)
+    folders = {directory, os.path.dirname(os.path.realpath(sys.executable))}
+    if any(
+        os.path.lexists(os.path.join(folder, "pyvenv.cfg"))
+        for folder in {directory, os.path.dirname(directory)}
+    ) or any(name.endswith("._pth") for folder in folders for name in os.listdir(folder)):
+        raise ValueError("Current CPython base has unsupported virtual/path configuration")
+    return [base, *argv[1:]], "current-cpython-stdlib-base"
+
+
 def spawn_owned(args, **kwargs):
     """Assign a gated bootstrap to its Job before allowing the native CLI to run."""
     if os.name != "nt":
@@ -233,22 +280,25 @@ def spawn_owned(args, **kwargs):
         raise ValueError("Unsupported Python operation flags")
     if len(argv) <= index + 1 or not argv[index + 1].startswith("experiments."):
         raise ValueError("Windows operations require an OpenT1D module")
+    requested = list(argv)
+    argv, selection = _stdlib_argv(argv, index)
+    actual = argv[: index + 1] + ["experiments.gui.windows_worker"] + argv[index + 1 :]
     kwargs.pop("start_new_session", None)
-    if "stdin" in kwargs or kwargs.get("shell") or kwargs.get("text"):
+    if "stdin" in kwargs or "executable" in kwargs or kwargs.get("shell") or kwargs.get("text"):
         raise ValueError("Windows operation control pipe must remain private and binary")
     kwargs["stdin"] = subprocess.PIPE
-    # Pipes and redirected logs need no console. CREATE_NO_WINDOW still creates
-    # a conhost.exe that can outlive the completed worker and look like a leaked
-    # descendant. Detaching avoids that helper; Job ownership remains unchanged.
+    # Pipes and redirected logs need no console. Direct no-site CPython avoids
+    # a venv redirector creating a worker before we can assign its parent Job.
     kwargs["creationflags"] = kwargs.get("creationflags", 0) | 0x00000008  # DETACHED_PROCESS
     job, process = Job(), None
     try:
-        process = subprocess.Popen(
-            argv[: index + 1] + ["experiments.gui.windows_worker"] + argv[index + 1 :],
-            **kwargs,
-        )
+        process = subprocess.Popen(actual, **kwargs)
         job.assign(process)
-        owned = WindowsProcess(process, job)
+        owned = WindowsProcess(
+            process,
+            job,
+            launch_record={"requested_argv": requested, "argv": actual, "selection": selection},
+        )
         ownership = WindowsOwnership(owned)
         ownership.observe()
         process.stdin.write(START)

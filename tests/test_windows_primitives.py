@@ -757,13 +757,14 @@ class WindowsOwnershipTests(unittest.TestCase):
             package = root / "experiments"
             package.mkdir()
             (package / "__init__.py").write_text(
-                "import json,os,threading\n"
+                "import json,os,sys,threading\n"
                 "from pathlib import Path\n"
                 f"__path__.append({str(ROOT / 'experiments')!r})\n"
                 "from experiments.platform_files import atomic_write_bytes\n"
                 "backstop=threading.Timer(10,lambda:os._exit(97))\n"
                 "backstop.daemon=True\nbackstop.start()\n"
-                f"atomic_write_bytes(Path({str(ready)!r}),json.dumps({{'pid':os.getpid()}}).encode())\n",
+                f"atomic_write_bytes(Path({str(ready)!r}),json.dumps({{'pid':os.getpid(),"
+                "'base':sys._base_executable,'version':sys.version}).encode())\n",
                 encoding="utf-8",
             )
             (package / "synthetic_gate_probe.py").write_text(
@@ -779,8 +780,17 @@ class WindowsOwnershipTests(unittest.TestCase):
                 while time.monotonic() < deadline:
                     try:
                         candidate = json.loads(ready.read_text(encoding="utf-8"))
-                        if isinstance(candidate, dict) and set(candidate) == {"pid"}:
-                            if type(candidate["pid"]) is int and candidate["pid"] > 0:
+                        if isinstance(candidate, dict) and set(candidate) == {
+                            "pid",
+                            "base",
+                            "version",
+                        }:
+                            if (
+                                type(candidate["pid"]) is int
+                                and candidate["pid"] > 0
+                                and isinstance(candidate["base"], str)
+                                and isinstance(candidate["version"], str)
+                            ):
                                 actual = candidate["pid"]
                                 break
                     except (FileNotFoundError, json.JSONDecodeError):
@@ -800,12 +810,21 @@ class WindowsOwnershipTests(unittest.TestCase):
                     actual_worker_in_job=bool(member.value),
                     actual_worker_wait=api.WaitForSingleObject(inner_handle, 0),
                     work_started=work.exists(),
+                    actual_matches_launched_base=os.path.samefile(
+                        candidate["base"], native.args[0]
+                    ),
+                    same_current_base=os.path.samefile(candidate["base"], sys._base_executable),
+                    same_current_version=candidate["version"] == sys.version,
                 )
                 print(
                     "OPENT1D_WINDOWS_BEFORE_START=" + json.dumps(observed, sort_keys=True),
                     flush=True,
                 )
                 self.assertFalse(work.exists(), "Module ran while its START gate was closed")
+                self.assertTrue(observed["actual_matches_launched_base"], observed)
+                self.assertTrue(observed["same_current_base"], observed)
+                self.assertTrue(observed["same_current_version"], observed)
+                self.assertEqual(actual, native.pid, "No-site worker still used a redirector")
                 self.assertTrue(
                     member.value, "Actual worker is outside the assigned Job: " + repr(observed)
                 )
@@ -871,14 +890,14 @@ class WindowsOwnershipTests(unittest.TestCase):
                     stdout=log,
                     stderr=log,
                 )
-                observations, completed_at = [], None
+                observations, completed_at, image_cache = [], None, {}
                 original_pids = process.job.pids
 
                 def observe_cleanup_inventory():
                     # Diagnose only the current live Job's returned IDs. Query
                     # and synchronization rights confer no termination authority.
                     pids = original_pids()
-                    row = inspect_job_processes(process, pids)
+                    row = inspect_job_processes(process, pids, image_cache=image_cache)
                     row["seconds_after_wait"] = (
                         None if completed_at is None else time.monotonic() - completed_at
                     )
@@ -886,7 +905,26 @@ class WindowsOwnershipTests(unittest.TestCase):
                     return pids  # Preserve the exact production inventory/result.
 
                 try:
-                    code = process.wait(timeout=15)
+                    deadline = time.monotonic() + 15
+                    while True:
+                        before = dict(image_cache)
+                        row = inspect_job_processes(
+                            process, original_pids(), image_cache=image_cache
+                        )
+                        if image_cache != before:
+                            print(
+                                "OPENT1D_WINDOWS_RUNNING_JOB_PROBE="
+                                + json.dumps({"repetition": repetition, **row}, sort_keys=True),
+                                flush=True,
+                            )
+                        try:
+                            code = process.wait(
+                                timeout=max(0, min(0.005, deadline - time.monotonic()))
+                            )
+                            break
+                        except subprocess.TimeoutExpired:
+                            if time.monotonic() >= deadline:
+                                raise
                     completed_at = time.monotonic()
                     self.assertEqual(code, 0)
                     self.assertTrue((output / "observations.csv").is_file())
