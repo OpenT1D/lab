@@ -9,6 +9,12 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
   handlers and existing timeout/exit receipts. Add focused transition and real
   caller receipt regressions with strict process observations.
 
+- Prepare the bounded public CI baseline with explicit Python/uv/Node setup,
+  independent private/manual guards for historical native jobs and short-lived
+  diagnostic artifacts. Add the exact Action allowlist and a staged activation
+  procedure; hosted results and platform settings still require actual execution
+  and readback.
+
 - Retain local-tool process ownership after normal worker exit or crash, so
   catalogue verification, historical readers and task setup clean up owned
   descendants before returning. Preserve partial logs, graceful cleanup and

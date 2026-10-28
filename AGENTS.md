@@ -8,8 +8,9 @@ component/test map, environment selection and task/review handoff.
 The initial maintained public exercise is the two synthetic MMTT tasks. Other
 bounded workflows have internal verification records; independent usability,
 human-data evaluation and biological validity remain separate open questions.
-Public Actions is disabled; local checks are not hosted CI results. Preserve the
-[public runtime and CI boundary](docs/publication-security.md).
+Initial publication used disabled public Actions. Hosted activation requires the
+reviewed [public runtime and CI boundary](docs/publication-security.md), verified
+settings and current-revision results. Local checks are not hosted CI results.
 
 ## Project direction
 

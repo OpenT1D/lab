@@ -34,7 +34,10 @@ class BranchPolicyTests(unittest.TestCase):
                 self.assertEqual(job["timeout-minutes"], 30)
                 self.assertEqual(job["needs"], "repository-checks")
                 self.assertEqual(
-                    job["if"], "needs.repository-checks.outputs.native_enabled == 'true'"
+                    job["if"],
+                    "github.event.repository.private && github.event_name == 'workflow_dispatch' "
+                    "&& inputs.historical_native "
+                    "&& needs.repository-checks.outputs.native_enabled == 'true'",
                 )
                 self.assertNotIn("continue-on-error", job)
                 for step in job["steps"]:
