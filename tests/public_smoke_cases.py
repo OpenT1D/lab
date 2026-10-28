@@ -3,11 +3,13 @@
 import copy
 import http.client
 import json
+import os
 import sys
 import tempfile
 import threading
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from experiments.gui.server import Server
 from experiments.gui.service import ROOT, Service, inventory
@@ -19,6 +21,27 @@ class HTTPTaskSmoke(unittest.TestCase):
         self.addCleanup(temporary.cleanup)
         self.workspace = Path(temporary.name).resolve()
         self.service = self.server = self.thread = None
+        if os.name == "nt":
+            from experiments.gui.windows_process import WindowsOwnership
+            from tests.windows_job_probe import inspect_job_processes
+
+            original = WindowsOwnership.observe
+
+            def observe(owner):
+                live = original(owner)
+                if live and owner.process.poll() is not None:
+                    frame = sys._getframe(1)
+                    row = inspect_job_processes(owner.process, list(live))
+                    row["caller"] = f"{Path(frame.f_code.co_filename).name}:{frame.f_lineno}"
+                    print(
+                        "OPENT1D_WINDOWS_EXIT_INVENTORY=" + json.dumps(row, sort_keys=True),
+                        flush=True,
+                    )
+                return live
+
+            observer = patch.object(WindowsOwnership, "observe", observe)
+            observer.start()
+            self.addCleanup(observer.stop)
         self.addCleanup(self.stop)
         self.start()
 
@@ -128,8 +151,28 @@ class HTTPTaskSmoke(unittest.TestCase):
         self.assertEqual(inventory(archive), before)
         self.assertFalse((self.workspace / ".venv").exists())
 
+    def repeated_flow(self, route, case, task, entry_key):
+        repetitions = 3 if os.name == "nt" else 1
+        for repetition in range(repetitions):
+            with self.subTest(task=task, repetition=repetition):
+                if repetition:
+                    temporary = tempfile.TemporaryDirectory(prefix="opent1d-public-smoke-")
+                    self.addCleanup(temporary.cleanup)
+                    self.workspace = Path(temporary.name).resolve()
+                    self.start()
+                if os.name == "nt":
+                    print(
+                        "OPENT1D_WINDOWS_HTTP_PROBE="
+                        + json.dumps({"task": task, "repetition": repetition}),
+                        flush=True,
+                    )
+                try:
+                    self.flow(route, case, task, entry_key)
+                finally:
+                    self.stop()
+
     def test_paired_task_http_and_reopen(self):
-        self.flow("observations", "increase", "mmtt-sensitivity", "observation_entry_id")
+        self.repeated_flow("observations", "increase", "mmtt-sensitivity", "observation_entry_id")
 
     def test_sampling_task_http_and_reopen(self):
-        self.flow("sampling", "information-loss", "mmtt-sampling", "sampling_entry_id")
+        self.repeated_flow("sampling", "information-loss", "mmtt-sampling", "sampling_entry_id")

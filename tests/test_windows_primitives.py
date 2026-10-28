@@ -738,22 +738,8 @@ class WindowsOwnershipTests(unittest.TestCase):
                 self._probe_real_job_completion(repetition)
 
     def _probe_real_job_completion(self, repetition):
-        import ctypes
-        from ctypes import wintypes
-
         from experiments.gui.windows_process import spawn_owned
-
-        kernel = ctypes.WinDLL("kernel32", use_last_error=True)
-        kernel.OpenProcess.argtypes = (wintypes.DWORD, wintypes.BOOL, wintypes.DWORD)
-        kernel.OpenProcess.restype = wintypes.HANDLE
-        kernel.IsProcessInJob.argtypes = (wintypes.HANDLE, wintypes.HANDLE, ctypes.c_void_p)
-        kernel.IsProcessInJob.restype = wintypes.BOOL
-        kernel.GetExitCodeProcess.argtypes = (wintypes.HANDLE, ctypes.c_void_p)
-        kernel.GetExitCodeProcess.restype = wintypes.BOOL
-        kernel.WaitForSingleObject.argtypes = (wintypes.HANDLE, wintypes.DWORD)
-        kernel.WaitForSingleObject.restype = wintypes.DWORD
-        kernel.CloseHandle.argtypes = (wintypes.HANDLE,)
-        kernel.CloseHandle.restype = wintypes.BOOL
+        from tests.windows_job_probe import inspect_job_processes
 
         with tempfile.TemporaryDirectory() as temporary:
             output = Path(temporary) / "invented"
@@ -780,37 +766,10 @@ class WindowsOwnershipTests(unittest.TestCase):
                     # Diagnose only the current live Job's returned IDs. Query
                     # and synchronization rights confer no termination authority.
                     pids = original_pids()
-                    row = {
-                        "leader_returncode": process.poll(),
-                        "seconds_after_wait": None
-                        if completed_at is None
-                        else time.monotonic() - completed_at,
-                        "associated": pids,
-                        "processes": [],
-                    }
-                    for pid in pids:
-                        handle = kernel.OpenProcess(0x00100000 | 0x1000, False, pid)
-                        item = {"pid": pid, "leader": pid == process.pid}
-                        row["processes"].append(item)
-                        if not handle:
-                            item["open_error"] = ctypes.get_last_error()
-                            continue
-                        try:
-                            member, code = wintypes.BOOL(), wintypes.DWORD()
-                            if not kernel.IsProcessInJob(
-                                handle, process.job.handle, ctypes.byref(member)
-                            ):
-                                raise ctypes.WinError(ctypes.get_last_error())
-                            if not kernel.GetExitCodeProcess(handle, ctypes.byref(code)):
-                                raise ctypes.WinError(ctypes.get_last_error())
-                            item.update(
-                                in_job=bool(member.value),
-                                exit_code=code.value,
-                                wait_result=kernel.WaitForSingleObject(handle, 0),
-                            )
-                        finally:
-                            if not kernel.CloseHandle(handle):
-                                raise ctypes.WinError(ctypes.get_last_error())
+                    row = inspect_job_processes(process, pids)
+                    row["seconds_after_wait"] = (
+                        None if completed_at is None else time.monotonic() - completed_at
+                    )
                     observations.append(row)
                     return pids  # Preserve the exact production inventory/result.
 
