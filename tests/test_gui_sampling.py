@@ -17,13 +17,13 @@ def wait_for_analysis(path, operation_state, timeout=10):
     """Observe an active writer's phase hint without treating partial JSON as final."""
     deadline = time.monotonic() + timeout
     while time.monotonic() < deadline:
-        state = operation_state()
-        if state not in {"queued", "running"}:
-            raise AssertionError("Operation ended before analysis: " + str(state))
         try:
             execution = json.loads(path.read_text())
         except (FileNotFoundError, json.JSONDecodeError):
             execution = None
+        state = operation_state()
+        if state not in {"queued", "running"}:
+            raise AssertionError("Operation ended before analysis: " + str(state))
         if isinstance(execution, dict):
             status = execution.get("status")
             if status in {"completed", "failed", "interrupted"}:

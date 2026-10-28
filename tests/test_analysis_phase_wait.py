@@ -78,10 +78,13 @@ class AnalysisPhaseWaitTests(unittest.TestCase):
         case.service.cancel.assert_called_once_with("job")
 
     def test_permanently_incomplete_or_non_analysis_hints_never_cancel(self):
-        for raw in (b"", b'{"phase":', b'{"status":"started","phase":"snapshot"}'):
+        for raw in (None, b"", b'{"phase":', b'{"status":"started","phase":"snapshot"}'):
             with self.subTest(raw=raw):
                 case = self.fixture()
-                self.phase.write_bytes(raw)
+                if raw is None:
+                    self.phase.unlink(missing_ok=True)
+                else:
+                    self.phase.write_bytes(raw)
                 self.now = 0
 
                 def advance(_seconds):
@@ -121,16 +124,41 @@ class AnalysisPhaseWaitTests(unittest.TestCase):
                     case.test_cancel_preserves_all_denominators_and_reconstructs()
                 case.service.cancel.assert_not_called()
 
+    def test_job_stopping_during_phase_read_never_cancels(self):
+        for state in ("completed", "failed", "cancelled", "cancelling"):
+            with self.subTest(state=state):
+                case = self.fixture()
+
+                def read_stale(_path):
+                    case.service.get_job.return_value = {"state": state}
+                    return '{"status":"started","phase":"analysis"}'
+
+                with (
+                    patch.object(Path, "read_text", read_stale),
+                    patch.object(sampling.time, "sleep") as sleep,
+                    self.assertRaisesRegex(AssertionError, "Operation ended before analysis"),
+                ):
+                    case.test_cancel_preserves_all_denominators_and_reconstructs()
+                sleep.assert_not_called()
+                case.service.cancel.assert_not_called()
+                case.wait.assert_not_called()
+
     def test_permanent_filesystem_error_is_not_retried_or_converted_to_success(self):
-        case = self.fixture()
-        with (
-            patch.object(Path, "read_text", side_effect=PermissionError("synthetic denial")),
-            patch.object(sampling.time, "sleep") as sleep,
-            self.assertRaises(PermissionError),
+        for error in (
+            PermissionError("synthetic denial"),
+            IsADirectoryError("synthetic directory"),
+            OSError("synthetic I/O error"),
         ):
-            case.test_cancel_preserves_all_denominators_and_reconstructs()
-        sleep.assert_not_called()
-        case.service.cancel.assert_not_called()
+            with self.subTest(error=type(error).__name__):
+                case = self.fixture()
+                with (
+                    patch.object(Path, "read_text", side_effect=error),
+                    patch.object(sampling.time, "sleep") as sleep,
+                    self.assertRaises(type(error)),
+                ):
+                    case.test_cancel_preserves_all_denominators_and_reconstructs()
+                sleep.assert_not_called()
+                case.service.cancel.assert_not_called()
 
 
 if __name__ == "__main__":
