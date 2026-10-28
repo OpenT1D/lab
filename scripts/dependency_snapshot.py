@@ -112,9 +112,11 @@ def fetch_page(url, token, timeout):
         return decode(raw), response.headers
 
 
-def pagination(header, endpoint, current):
+def pagination(header, endpoint, current, announced_last=None):
     if header is None:
-        return None
+        if announced_last is not None and current != announced_last:
+            raise ValueError("Dependency pagination ended before its announced last page")
+        return None, announced_last
     links = {}
     for part in header.split(","):
         match = re.fullmatch(r'\s*<([^<>]+)>;\s*rel="(next|prev|first|last)"\s*', part)
@@ -133,6 +135,14 @@ def pagination(header, endpoint, current):
         ):
             raise ValueError("Dependency pagination escaped its exact comparison")
         links[match[2]] = int(query["page"][0])
+    if announced_last is not None and (
+        "last" in links
+        and links["last"] != announced_last
+        or current < announced_last
+        and "last" not in links
+    ):
+        raise ValueError("Dependency pagination changed or lost its announced last page")
+    announced_last = links.get("last", announced_last)
     following = links.get("next")
     if following is not None and following != current + 1:
         raise ValueError("Dependency pagination skipped or repeated a page")
@@ -147,12 +157,20 @@ def pagination(header, endpoint, current):
         raise ValueError("Dependency pagination bounds are inconsistent")
     if following is None and links.get("last", current) > current:
         raise ValueError("Dependency pagination omitted a required next page")
-    return following
+    if announced_last is not None and (
+        current > announced_last
+        or following is None
+        and current != announced_last
+        or following is not None
+        and following > announced_last
+    ):
+        raise ValueError("Dependency pagination ended outside its announced last page")
+    return following, announced_last
 
 
 def comparison(endpoint, token, deadline, *, fetch=fetch_page):
     changes, warned = [], False
-    page = 1
+    page, announced_last = 1, None
     while True:
         remaining = deadline - time.monotonic()
         if remaining <= 0 or page > MAX_PAGES:
@@ -171,7 +189,11 @@ def comparison(endpoint, token, deadline, *, fetch=fetch_page):
         links = headers.get_all("Link", [])
         if len(links) > 1:
             raise ValueError("Duplicate dependency pagination header")
-        following = pagination(links[0] if links else None, endpoint, page)
+        following, announced_last = pagination(
+            links[0] if links else None, endpoint, page, announced_last
+        )
+        if time.monotonic() >= deadline:
+            raise ValueError("Dependency comparison exceeded its time deadline")
         if following is None:
             return changes, warned, page
         page = following
@@ -194,7 +216,11 @@ def verify(repository, base, head, token, scanned, *, fetch=fetch_page, wait=WAI
         attempts += 1
         changes, warned, pages = comparison(endpoint, token, deadline, fetch=fetch)
         if not warned:
-            if fingerprint(changes) != expected:
+            actual = fingerprint(changes)
+            finished = time.monotonic()
+            if finished >= deadline:
+                raise ValueError("Dependency comparison exceeded its validation deadline")
+            if actual != expected:
                 raise ValueError("Dependency Review did not scan the complete current comparison")
             return {
                 "schema": "opent1d.dependency-snapshot/1",
@@ -204,7 +230,7 @@ def verify(repository, base, head, token, scanned, *, fetch=fetch_page, wait=WAI
                 "change_count": len(changes),
                 "pages": pages,
                 "attempts": attempts,
-                "elapsed_seconds": time.monotonic() - started,
+                "elapsed_seconds": finished - started,
                 "snapshot_warnings": False,
             }
         remaining = deadline - time.monotonic()
