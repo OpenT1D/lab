@@ -102,8 +102,9 @@ It checks Python tooling style, Markdown, YAML, citation metadata, navigation, d
 The Markdown configuration allows long prose lines and template checklists. It checks structure rather than imposing hard wrapping on research reports. The root suite also checks bounded contracts, artifact validation and analysis fixtures. It does not execute native physiology; run the isolated checks in the canonical tutorials as appropriate. Neither passing tooling tests nor native regression equality establishes biological validity.
 The [public source policy](publication-security.md) limits the initial supported
 exercise to the two synthetic MMTT tasks. Initial publication used disabled
-Actions; local results must not be reported as hosted CI. The prepared `Root checks`
-job explicitly installs the selected Python 3.12, uv 0.11.16 and Node 24.22.1,
+Actions; later activation and exact hosted receipts are recorded in the
+[security boundary](publication-security.md). Local results must not be reported
+as hosted CI. The active `Root checks` job explicitly installs the selected Python 3.12, uv 0.11.16 and Node 24.22.1,
 then runs the root suite and standard-library boundary checks. Its Node preflight
 fails when Node is unavailable. Historical native jobs additionally require
 literal private-repository/manual-dispatch guards and cannot run in a public
@@ -123,7 +124,9 @@ to review the exact Action allowlist, enable the intended checks, obtain actual
 PR/main results and only then require `Repository checks`. Source changes alone
 do not activate GitHub settings. That stable result now aggregates the root job,
 the Linux/macOS/Windows public-smoke matrix and four Linux Chromium flows. Every
-family must succeed; cancellation, skip or a missing result cannot pass the gate.
+family must succeed; cancellation or a missing result cannot pass the gate.
+Dependency Review is also required on pull requests. Only its explicit skip on
+`push` or `workflow_dispatch` is accepted; the other families must still succeed.
 Native jobs remain outside its dependency roster. The existing Node fixtures
 continue to provide separate controlled DOM checks. See [decision 0076](decisions/0076-public-check-families.md).
 
@@ -183,7 +186,23 @@ Review `_build/linkcheck/output.txt`. Some publishers and private repositories r
 
 Use `uv add --group dev PACKAGE` for a justified new repository tool. Commit both `pyproject.toml` and `uv.lock`, and run the full checks. To update an existing tool, use `uv lock --upgrade-package PACKAGE`, then `uv sync --locked` and the same checks.
 
-Review dependency changes for compatibility and workflow impact. GitHub Actions are pinned to full commit hashes with readable release comments. The inactive `.github/dependabot.example.yml` preserves a future update configuration. Automatic version updates are disabled for the initial source publication.
+Review dependency changes for compatibility and workflow impact. GitHub Actions
+are pinned to full commit hashes with readable release comments. The recognized
+`.github/dependabot.yml` prepares monthly grouped updates for root uv tooling and
+Actions, with at most three open update PRs per ecosystem. Root uv excludes
+`experiments/`, `packaging/` and `tests/`; it does not maintain historical native
+locks or browser/package fixtures. Merging this configuration to the default
+branch enables that update service; a local file is not an observed service run.
+
+The read-only PR dependency job blocks introduced high/critical advisories in
+runtime, development and unknown scopes. It posts no PR comments and applies no
+license policy. After the pinned official action succeeds, a bounded API guard
+requires every comparison page to be warning-free and its full dependency and
+advisory inventory to match the action's scanned output. HTTP, pagination, JSON,
+warning/deadline or inventory errors fail the job. No local test proves hosted
+uv dependency-graph coverage; that needs a safe root-lock delta and a disposable
+known-vulnerable negative PR. See [the security boundary](publication-security.md#prepared-dependency-updates-and-pr-review)
+and [decision 0078](decisions/0078-dependency-review-completeness.md).
 
 ## Documentation conventions
 

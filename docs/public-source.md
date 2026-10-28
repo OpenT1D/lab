@@ -15,8 +15,11 @@ source on `OpenT1D/lab` as development research software. This replaces the
 25 October preparation-only decision. The reviewed initial public root is
 `60a756b3707827c7e7cc76a65f817f21d52cae40`; a separate documentation commit records
 publication status. The original `OpenT1D/OpenT1D` archive stays private.
-GitHub Actions remains disabled. No version tag, packaged release, installer or
-bundled runtime is published by this source-publication decision.
+That initial publication used disabled Actions. Subsequent public CI activation
+is recorded in the [security boundary](publication-security.md); the protected
+`Repository checks` gate now covers the reviewed public checks. No version tag,
+packaged release, installer or bundled runtime is published by the original
+source-publication decision.
 
 The current local review scope is described in the
 [28 October review](research/publication-preparation.md#source-review-28-october-2026).

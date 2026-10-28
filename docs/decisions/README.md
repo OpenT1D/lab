@@ -2,6 +2,8 @@
 
 - [0079 — Direct current CPython for Windows standard-library workers](0079-windows-stdlib-worker-identity.md): bind the two source MMTT routes to current CPython 3.12, bypass its venv redirector only for explicit no-site launches and retain actual launch provenance and live Job authority.
 
+- [0078 — Complete dependency review](0078-dependency-review-completeness.md): bounded monthly tooling updates, a required read-only PR check and complete comparison evidence bound to the official action's scanned output.
+
 - [0077 — Reviewed main documentation publication](0077-reviewed-main-documentation-publication.md): filtered PR artifacts, a separate main-only Pages job, bounded rights and exact transitive Action pins.
 
 - [0076 — Shared public check families](0076-public-check-families.md): one local stage contract, explicit real-host smokes, bounded Chromium flows and a required result that rejects unsuccessful or missing public families.

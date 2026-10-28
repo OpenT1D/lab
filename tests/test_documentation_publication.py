@@ -154,7 +154,9 @@ class DocumentationWorkflowTests(unittest.TestCase):
         self.assertEqual(action["with"], {"artifact_name": ARTIFACT})
         for name, job in workflow["jobs"].items():
             if name != "pages-deploy":
-                self.assertNotIn("permissions", job)
+                self.assertEqual(
+                    job.get("permissions", workflow["permissions"]), {"contents": "read"}
+                )
                 self.assertNotIn("environment", job)
         transitive = json.loads((ROOT / ".github/action-dependencies.json").read_text())
         self.assertEqual(

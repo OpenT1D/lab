@@ -71,9 +71,12 @@ class CIBaselinePolicyTests(unittest.TestCase):
         gate = jobs["public-checks"]
         self.assertEqual(gate["name"], "Repository checks")
         self.assertEqual(gate["if"], "always()")
-        self.assertEqual(gate["needs"], ["repository-checks", "public-smoke", "browser"])
+        self.assertEqual(
+            gate["needs"], ["repository-checks", "public-smoke", "browser", "dependency-review"]
+        )
         final = gate["steps"][-1]
         self.assertEqual(final["env"]["PUBLIC_CHECK_RESULTS"], "${{ toJSON(needs) }}")
+        self.assertEqual(final["env"]["PUBLIC_CHECK_EVENT"], "${{ github.event_name }}")
         self.assertEqual(final["run"], "python3 scripts/ci_gate.py")
         self.assertEqual(
             jobs["public-smoke"]["strategy"],
@@ -91,7 +94,7 @@ class CIBaselinePolicyTests(unittest.TestCase):
         self.assertEqual(jobs["browser"]["runs-on"], "ubuntu-24.04")
         for key in PUBLIC_JOBS:
             self.assertNotIn("continue-on-error", jobs[key])
-            if key not in {"repository-checks", "public-checks"}:
+            if key not in {"repository-checks", "public-checks", "dependency-review"}:
                 self.assertNotIn("if", jobs[key])
             for step in jobs[key]["steps"]:
                 self.assertNotIn("continue-on-error", step)
@@ -134,7 +137,7 @@ class CIBaselinePolicyTests(unittest.TestCase):
         for action in transitive:
             self.assertRegex(action, r"^[^@*]+@[0-9a-f]{40}$")
         self.assertEqual(set(selected["patterns_allowed"]), uses | transitive)
-        self.assertEqual(len(selected["patterns_allowed"]), 8)
+        self.assertEqual(len(selected["patterns_allowed"]), 9)
         self.assertEqual(
             json.loads((ROOT / ".github/public-source-actions-permissions.json").read_text()),
             {"enabled": True, "allowed_actions": "selected", "sha_pinning_required": True},
