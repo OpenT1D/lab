@@ -13,6 +13,27 @@ from experiments.gui.service import ROOT, Service, inventory
 from tests import test_gui_observations as gui_tests
 
 
+def wait_for_analysis(path, operation_state, timeout=10):
+    """Observe an active writer's phase hint without treating partial JSON as final."""
+    deadline = time.monotonic() + timeout
+    while time.monotonic() < deadline:
+        state = operation_state()
+        if state not in {"queued", "running"}:
+            raise AssertionError("Operation ended before analysis: " + str(state))
+        try:
+            execution = json.loads(path.read_text())
+        except (FileNotFoundError, json.JSONDecodeError):
+            execution = None
+        if isinstance(execution, dict):
+            status = execution.get("status")
+            if status in {"completed", "failed", "interrupted"}:
+                raise AssertionError("Execution ended before analysis: " + status)
+            if state == "running" and status == "started" and execution.get("phase") == "analysis":
+                return
+        time.sleep(0.01)
+    raise AssertionError("Native analysis phase not observed")
+
+
 class SamplingGUITests(unittest.TestCase):
     setUp = gui_tests.ObservationGUITests.setUp
     tearDown = gui_tests.ObservationGUITests.tearDown
@@ -196,13 +217,7 @@ class SamplingGUITests(unittest.TestCase):
         self.assertEqual(status, 202)
         entry = self.service.sampling.get(job["sampling_entry_id"])
         phase = self.service.sampling.folder(entry) / "archive/studies/full/execution.json"
-        deadline = time.monotonic() + 10
-        while time.monotonic() < deadline:
-            if phase.is_file() and json.loads(phase.read_text()).get("phase") == "analysis":
-                break
-            time.sleep(0.01)
-        else:
-            self.fail("Native analysis phase not observed")
+        wait_for_analysis(phase, lambda: self.service.get_job(job["id"])["state"])
         self.assertEqual(self.request("POST", "observations/example", {"case": "increase"})[0], 400)
         self.service.cancel(job["id"])
         final = self.wait(job)
