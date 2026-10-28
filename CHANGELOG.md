@@ -4,6 +4,11 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Stabilize GUI sampling cancellation checks by retrying incomplete live phase
+  JSON within the original deadline and requiring a running analysis before
+  cancellation. Add deterministic malformed-hint and operation-state
+  regressions while retaining cancellation and reconstruction accounting.
+
 - Close the cancellation window at local-tool cleanup entry and bound the final
   direct-worker reap. Retain catalogue/setup descendant cleanup, prior signal
   handlers and existing timeout/exit receipts. Add focused transition and real
