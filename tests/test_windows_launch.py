@@ -93,7 +93,7 @@ class WindowsLaunchTests(unittest.TestCase):
 
     def test_direct_packaged_current_interpreter_keeps_exact_argv_and_path_configuration(self):
         self.runtime.executable = str(self.base)
-        (self.base.parent / "python312._pth").write_text("import site\n", encoding="utf-8")
+        (self.base.parent / "python312._PTH").write_text("import site\n", encoding="utf-8")
         requested, process = self.spawn(self.base)
         self.assertEqual(self.launch.call_args.args[0][0], requested[0])
         self.assertEqual(process.launch_record["selection"], "current-cpython-direct")
@@ -144,6 +144,8 @@ class WindowsLaunchTests(unittest.TestCase):
             self.root / "pyvenv.cfg",
             self.current.parent / "python._pth",
             self.base.parent / "python312._pth",
+            self.base.parent / "python312._PTH",
+            self.current.parent / "python._pTh",
         ):
             with self.subTest(path=path):
                 path.write_text("Invented path override\n", encoding="utf-8")

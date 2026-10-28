@@ -263,7 +263,9 @@ def _stdlib_argv(argv, index):
     if any(
         os.path.lexists(os.path.join(folder, "pyvenv.cfg"))
         for folder in {directory, os.path.dirname(directory)}
-    ) or any(name.endswith("._pth") for folder in folders for name in os.listdir(folder)):
+    ) or any(
+        name.casefold().endswith("._pth") for folder in folders for name in os.listdir(folder)
+    ):
         raise ValueError("Current CPython base has unsupported virtual/path configuration")
     return [base, *argv[1:]], "current-cpython-stdlib-base"
 
