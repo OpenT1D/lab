@@ -4,6 +4,11 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Reap and freshly recheck completed POSIX admission workers before clearing
+  an exit-time group-access denial. Keep live/persistent denials as failures,
+  retain single-signal native sealing, and always attempt the final retained
+  wait and ownership close after observation or forced-cleanup errors.
+
 - Stabilize GUI sampling cancellation checks by retrying incomplete live phase
   JSON within the original deadline and requiring a running analysis before
   cancellation. Add deterministic malformed-hint and operation-state

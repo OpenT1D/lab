@@ -4,12 +4,13 @@ import errno
 import json
 import os
 import signal
+import subprocess
 import sys
 import tempfile
 import threading
 import time
 import unittest
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import Mock, call, patch
@@ -592,6 +593,13 @@ class PackagedAdmissionTests(unittest.TestCase):
                 self.assertTrue(retained[0]._opent1d_ownership.closed)
 
     def test_soft_cancellation_is_delivered_once_while_native_seals(self):
+        self.check_soft_cancellation()
+
+    @unittest.skipUnless(sys.platform == "darwin", "Actual Darwin unreaped group contract")
+    def test_soft_cancellation_at_unreaped_exit_preserves_the_native_seal(self):
+        self.check_soft_cancellation(pause_at_exit=True)
+
+    def check_soft_cancellation(self, *, pause_at_exit=False):
         with tempfile.TemporaryDirectory() as temporary:
             base = Path(temporary).resolve()
             package = base / "experiments"
@@ -626,8 +634,32 @@ class PackagedAdmissionTests(unittest.TestCase):
 
             observer = threading.Thread(target=cancel)
             observer.start()
+            actual_exists, paused = admission.tree_exists, []
+
+            def observe(process):
+                if owner.received is not None and process.returncode is None and not paused:
+                    paused.append(process)
+                    deadline = time.monotonic() + 3
+                    while time.monotonic() < deadline:
+                        # Only our retained fixture's PID. Do not reap it before
+                        # exercising the actual kernel group-observation race.
+                        state = subprocess.check_output(
+                            ["ps", "-p", str(process.pid), "-o", "stat="], text=True
+                        ).strip()
+                        if state.startswith("Z"):
+                            break
+                        time.sleep(0.005)
+                    else:
+                        self.fail("Owned sealing worker did not reach unreaped exit")
+                return actual_exists(process)
+
             try:
-                with self.assertRaises(admission.AdmissionFailure) as caught:
+                with (
+                    patch.object(admission, "tree_exists", side_effect=observe)
+                    if pause_at_exit
+                    else nullcontext(),
+                    self.assertRaises(admission.AdmissionFailure) as caught,
+                ):
                     owner.supervise(
                         [sys.executable, "-B", "-E", "-s", "-m", "experiments.admission_fixture"],
                         120,
@@ -635,6 +667,10 @@ class PackagedAdmissionTests(unittest.TestCase):
                     )
                 self.assertEqual(caught.exception.error_type, "GlobalInterruption")
                 self.assertEqual(sealed.read_text(), "1")
+                if pause_at_exit:
+                    self.assertEqual(len(paused), 1)
+                    self.assertEqual(paused[0].poll(), 0)
+                    self.assertFalse(actual_exists(paused[0]))
             finally:
                 stopped.set()
                 observer.join(timeout=2)
