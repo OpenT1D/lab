@@ -2,13 +2,13 @@
 [dependency-groups]
 dev = [
     "sphinx>=8.2,<9",
-    "myst-parser>=4,<5",
+    "myst-parser>=5.1.0,<6",
     "furo>=2025.7.19",
     "sphinx-external-toc>=1.0,<2",
-    "pymarkdownlnt>=0.9.30,<1",
+    "pymarkdownlnt>=0.9.41,<1",
     "yamllint>=1.37,<2",
     "cffconvert>=2.0,<3",
-    "ruff>=0.12,<1",
+    "ruff>=0.17.2,<1",
     "sphinxcontrib-mermaid>=1,<3",
 ]
 
