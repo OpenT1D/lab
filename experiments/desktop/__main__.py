@@ -14,6 +14,7 @@ from pathlib import Path
 from urllib.parse import urlsplit
 
 from experiments.desktop.installation_gate import InstallationGate
+from experiments.desktop.runtime import packaged_capabilities
 from experiments.gui.locking import WorkspaceLock
 from experiments.gui.server import Server
 from experiments.gui.service import Service, bounded_bytes
@@ -28,6 +29,8 @@ def default_workspace():
         if not local:
             raise ValueError("Windows did not provide a local application-data folder")
         return Path(local) / "OpenT1D" / "workspace"
+    if sys.platform == "darwin" and packaged_capabilities(SOURCE) is not None:
+        return Path.home() / "Library" / "Application Support" / "OpenT1D" / "MMTT"
     return Path.home() / ".local" / "share" / "opent1d-desktop" / "workspace"
 
 
@@ -39,6 +42,10 @@ def directory(path):
     source = native_absolute(SOURCE)
     if path == source or path.is_relative_to(source) or source.is_relative_to(path):
         raise ValueError("Keep analysis data separate from the installed application")
+    if packaged_capabilities(SOURCE) is not None:
+        application = source.parents[3]
+        if path == application or path.is_relative_to(application):
+            raise ValueError("Keep analysis data outside the Mac application bundle")
     path.mkdir(parents=True, exist_ok=True)
     return path.resolve(strict=True)
 
@@ -165,8 +172,10 @@ def run(args):
         interpreter = Path(sys.executable)
         if os.name == "nt" and interpreter.name.lower() == "pythonw.exe":
             interpreter = interpreter.with_name("python.exe")
-        archive_store = directory(
-            args.archive_dir or workspace.with_name(workspace.name + "-archives")
+        archive_store = (
+            None
+            if packaged_capabilities(SOURCE) is not None
+            else directory(args.archive_dir or workspace.with_name(workspace.name + "-archives"))
         )
         service = Service(
             workspace,

@@ -1,0 +1,26 @@
+OpenT1D MMTT — unsigned internal Apple Silicon candidate
+
+Original OpenT1D source is Apache-2.0. app/LICENSE, app/NOTICE and app/LICENSES
+retain the original source and upstream ancestry notices. This candidate exposes
+only the two synthetic standard-library MMTT tasks. It installs no development
+or historical numerical environments and includes no patient data.
+
+CPython 3.12.16, Python Software Foundation and contributors.
+Runtime provider: Astral python-build-standalone, immutable release 20261026:
+https://github.com/astral-sh/python-build-standalone/releases/tag/20261026
+
+The exact provider source archive is in third-party-sources. Its LICENSE* texts
+are retained in third-party-licenses/python. The exact upstream PYTHON.json
+build metadata is in runtime-metadata and identifies extension/library licensing.
+The runtime's own Python license remains in runtime/lib/python3.12/LICENSE.txt.
+The package manifest records the runtime archive, metadata and source hashes.
+
+The builder omits the enumerated command-alias links and removes pip/ensurepip
+and regenerable bytecode. No user Python installation is modified. Installed
+Python distributions are intentionally empty; bundled C-library licensing is
+separate and retained in the upstream build metadata/notices.
+
+The native launcher links Apple's system Cocoa framework. The candidate uses no
+Developer ID identity and is not notarised. Upstream/compiler ad-hoc signatures
+do not establish trusted public distribution. Public distribution and its full
+rights/security/lifecycle qualification are not established by this candidate.

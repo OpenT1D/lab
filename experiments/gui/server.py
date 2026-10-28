@@ -72,6 +72,9 @@ class Handler(BaseHTTPRequestHandler):
         api = target.path.startswith("/api/v1/")
         if not self.admitted(api=api):
             return
+        if api and not self.server.service.permits_api("GET", target.path):
+            self.send(403, {"error": "This application supports only the two synthetic MMTT tasks"})
+            return
         try:
             if target.path in {
                 "/",
@@ -91,6 +94,10 @@ class Handler(BaseHTTPRequestHandler):
                     raw = raw.replace(b"__SESSION_TOKEN__", self.server.token.encode())
                     raw = raw.replace(
                         b"__APPLICATION_PROFILE__", self.server.service.profile.encode()
+                    )
+                    raw = raw.replace(
+                        b"__TASK_CAPABILITIES__",
+                        ",".join(self.server.service.capabilities or ()).encode(),
                     )
                     if self.server.service.profile == "desktop":
                         raw = raw.replace(b"this checkout", b"your OpenT1D workspace")
@@ -319,6 +326,9 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         if not self.admitted(api=True, mutation=True):
+            return
+        if not self.server.service.permits_api("POST", urlsplit(self.path).path):
+            self.send(403, {"error": "This application supports only the two synthetic MMTT tasks"})
             return
         try:
             if self.headers.get_content_type() != "application/json" or self.headers.get(

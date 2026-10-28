@@ -16,6 +16,8 @@ from experiments.platform_files import is_link, open_regular
 
 ROOT = Path(__file__).resolve().parents[2]
 SCHEMA = "opent1d.windows-package/1"
+SCHEMA_V2 = "opent1d.desktop-package/2"
+MMTT_TASKS = ("mmtt-sensitivity", "mmtt-sampling")
 SOURCE_FILES = (
     "experiments/desktop/runtime.py",
     "experiments/durable_archives/__init__.py",
@@ -55,8 +57,20 @@ def packaged_manifest(source_root=None):
     if len(content) > 32 * 1024 * 1024:
         raise ValueError("Installed manifest is too large")
     data = json.loads(content)
-    if data.get("schema") != SCHEMA or not isinstance(data.get("runtime_paths"), dict):
+    if data.get("schema") not in {SCHEMA, SCHEMA_V2} or not isinstance(
+        data.get("runtime_paths"), dict
+    ):
         raise ValueError("Unsupported installed package manifest")
+    if data["schema"] == SCHEMA_V2 and (
+        data.get("capabilities")
+        != {"schema": "opent1d.desktop-capabilities/2", "tasks": list(MMTT_TASKS)}
+        or set(data["runtime_paths"]) != {"."}
+        or not isinstance(data.get("runtime_projects"), dict)
+        or set(data["runtime_projects"]) != {"."}
+        or data.get("platform")
+        != {"system": "Darwin", "architecture": "arm64", "minimum_release": "11.0"}
+    ):
+        raise ValueError("Unsupported installed capabilities or platform")
     source = data.get("source", {})
     if (
         not re.fullmatch(r"[0-9a-f]{40}", source.get("revision", ""))
@@ -64,6 +78,11 @@ def packaged_manifest(source_root=None):
     ):
         raise ValueError("Invalid installed source identity")
     return data
+
+
+def packaged_capabilities(source_root=None):
+    manifest = packaged_manifest(source_root)
+    return MMTT_TASKS if manifest is not None and manifest["schema"] == SCHEMA_V2 else None
 
 
 def packaged_runtime(project=".", source_root=None):
@@ -82,6 +101,7 @@ def packaged_runtime(project=".", source_root=None):
         "upstream_revisions",
     }:
         raise ValueError("Invalid packaged runtime descriptor")
+    modern = manifest["schema"] == SCHEMA_V2
     expected_directories = {
         ".": "runtime",
         "experiments/m0/simglucose_secure": "runtimes/native",
@@ -91,12 +111,15 @@ def packaged_runtime(project=".", source_root=None):
         raise ValueError("Unexpected packaged runtime directory")
     directory = _path(root.parent, record["directory"])
     if (
-        set(record["selectors"]) != {"uv.lock", "pyproject.toml"}
+        set(record["selectors"])
+        != ({"packaging/mac/runtime-lock.json"} if modern else {"uv.lock", "pyproject.toml"})
         or any(
             not isinstance(value, str) or not re.fullmatch(r"[0-9a-f]{64}", value)
             for value in record["selectors"].values()
         )
-        or not record["distributions"]
+        or not isinstance(record["distributions"], dict)
+        or (not modern and not record["distributions"])
+        or (modern and (record["distributions"] or record["upstream_revisions"]))
         or len(record["distributions"]) > 500
         or any(
             not isinstance(value, str) or not re.fullmatch(r"[0-9][a-zA-Z0-9.+!-]{0,79}", value)
@@ -111,7 +134,9 @@ def packaged_runtime(project=".", source_root=None):
     ):
         raise ValueError("Invalid packaged runtime lock inventory")
     python = _path(root.parent, manifest["runtime_paths"][project])
-    if python.parent != directory:
+    if (modern and python != directory / "bin/python3.12") or (
+        not modern and python.parent != directory
+    ):
         raise ValueError("Packaged interpreter lies outside its runtime")
     if record["python"] != manifest["runtime_paths"][project]:
         raise ValueError("Packaged interpreter identity differs")

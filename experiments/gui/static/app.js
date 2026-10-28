@@ -1,4 +1,5 @@
 "use strict";
+const mmttOnly = document.querySelector?.('meta[name="opent1d-capabilities"]')?.content === "mmtt-sensitivity,mmtt-sampling";
 
 const $ = (id) => document.getElementById(id);
 const token = document.querySelector('meta[name="opent1d-token"]').content;
@@ -427,7 +428,7 @@ async function init() {
   $("library-show-hidden").addEventListener("change", renderLibraryList);
   $("archive-visibility").addEventListener("click", changeLibraryVisibility);
   $("archive-view-operation").addEventListener("click", () => { if (active) workspaceNavigate(workspaceJobView(active)); });
-  try { session = await api("bootstrap"); session.defaults.sources.forEach(sourceCard); numberSources(); initializeStudyDraft(); jobs = session.jobs; renderHistory(); updateReadiness(); updateControls(); await refresh(); }
+  try { session = await api("bootstrap"); if(!mmttOnly){session.defaults.sources.forEach(sourceCard); numberSources(); initializeStudyDraft(); updateReadiness();} jobs = session.jobs; renderHistory(); updateControls(); await refresh(); }
   catch (error) { notice(error.message); }
   const poll = async () => { await refresh(); setTimeout(poll, 1000); }; setTimeout(poll, 1000);
 }
@@ -669,6 +670,7 @@ async function displayLibraryReport() {
   } catch (error) { if (current()) withdrawLibrarySnapshot(error.message); }
 }
 async function refreshLibrary() {
+  if (mmttOnly) return;
   const request = ++libraryListRequest, selection = librarySelection;
   try {
     const entries = (await api("library/entries")).entries;
@@ -942,6 +944,7 @@ async function displayCampaignReport() {
   } catch (error) { if (current()) { campaignNotice(error.message); $("campaign-results").hidden = true; campaignShown = null; } }
 }
 async function refreshCampaigns() {
+  if (mmttOnly) return;
   const request = ++campaignListRequest;
   try {
     const result = await api("campaigns"); if (request !== campaignListRequest) return;
@@ -1053,6 +1056,7 @@ async function displayDurableReport() {
   } catch (error) { if (current()) { durableNotice(error.message); clearDurableResults(); } }
 }
 async function refreshDurable() {
+  if (mmttOnly) return;
   const request = ++durableListRequest;
   const result = await api("durable/entries"); if (request !== durableListRequest) return;
   durableEntries = result.entries;
@@ -1364,6 +1368,7 @@ async function displayM3Report() {
   } catch (error) { if (current()) withdrawM3Snapshot(error.message); }
 }
 async function refreshM3() {
+  if (mmttOnly) return;
   const request = ++m3ListRequest;
   try {
     const result = await api("m3/entries"); if (request !== m3ListRequest) return;
@@ -1434,4 +1439,4 @@ $("m3-close-dialog").addEventListener("click", () => { ++m3BrowseRequest; $("m3-
 $("m3-directory-up").addEventListener("click", () => browseM3(m3Parent || ""));
 $("m3-dialog").addEventListener("cancel", () => { ++m3BrowseRequest; });
 
-renderCampaignPlan(); init(); initLibrary(); initDurable(); initM3();
+renderCampaignPlan(); init(); if(!mmttOnly){initLibrary(); initDurable(); initM3();}

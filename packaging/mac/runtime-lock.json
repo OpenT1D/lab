@@ -1,0 +1,32 @@
+{
+  "schema": "opent1d.mac-runtime-lock/1",
+  "provider": "Astral python-build-standalone",
+  "implementation": "CPython",
+  "version": "3.12.16",
+  "architecture": "arm64",
+  "minimum_macos": "11.0",
+  "release_page": "https://github.com/astral-sh/python-build-standalone/releases/tag/20261026",
+  "provider_revision": "fa506e0858ac9f2cc5b289c137b888a2aa24d1ee",
+  "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.12.16%2B20261026-aarch64-apple-darwin-install_only_stripped.tar.gz",
+  "sha256": "353d5f1b4fd2715e7053f12f068435d5bbad16b91e057006b5d01e0925709a7e",
+  "metadata_archive": {
+    "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.12.16%2B20261026-aarch64-apple-darwin-pgo%2Blto-full.tar.zst",
+    "sha256": "016758f4881e5f71d63eddfbcdd53f25c5a9152435a863e4dc0770758eae32c3"
+  },
+  "provider_sources": {
+    "url": "https://codeload.github.com/astral-sh/python-build-standalone/tar.gz/fa506e0858ac9f2cc5b289c137b888a2aa24d1ee",
+    "sha256": "2d393784593531f14f1aad1e4e60c91fde242cfa87432c35ed31f4c18b3e89ff"
+  },
+  "omitted_alias_links": {
+    "bin/2to3": "2to3-3.12",
+    "bin/idle3": "idle3.12",
+    "bin/pydoc3": "pydoc3.12",
+    "bin/python": "python3.12",
+    "bin/python3": "python3.12",
+    "bin/python3-config": "python3.12-config",
+    "lib/pkgconfig/python3-embed.pc": "python-3.12-embed.pc",
+    "lib/pkgconfig/python3.pc": "python-3.12.pc",
+    "share/man/man1/python.1": "python3.12.1",
+    "share/man/man1/python3.1": "python3.12.1"
+  }
+}
