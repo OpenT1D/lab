@@ -47,7 +47,7 @@ class M3FrontendTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         receipt = json.loads(result.stdout)
         self.assertTrue(receipt["passed"])
-        self.assertEqual(receipt["checks"], 33)
+        self.assertEqual(receipt["checks"], 34)
 
     def test_m3_controls_have_labels_and_status_while_existing_workflows_remain(self):
         controls = Controls()

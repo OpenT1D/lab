@@ -6,7 +6,7 @@ const source = fs.readFileSync("experiments/gui/static/app.js", "utf8");
 const start = source.indexOf("// M3 intake, saved native evidence"), end = source.indexOf('$("open-m3").addEventListener', start);
 assert(start >= 0 && end > start);
 let checks = 0;
-function harness() {
+function harness(mmttOnly = false) {
   const nodes = new Map(), pending = [], downloads = [];
   function element(name = "div") {
     return {name, textContent: "", children: [], dataset: {}, value: "", hidden: true, disabled: false, checked: false,
@@ -18,7 +18,7 @@ function harness() {
   }
   const $ = (id) => { if (!nodes.has(id)) nodes.set(id, element()); return nodes.get(id); };
   $("m3-task").value = "m3-compare"; $("m3-timeout").value = "120"; $("m3-root").value = "root"; $("m3-path").value = "comparison.json";
-  const context = vm.createContext({$, Date, active: null, selected: null, jobs: [], activeStates: new Set(["queued", "running", "cancelling"]), campaignPending: false, durablePending: false, durableSession: {can_export: true},
+  const context = vm.createContext({$, Date, mmttOnly, active: null, selected: null, jobs: [], activeStates: new Set(["queued", "running", "cancelling"]), campaignPending: false, durablePending: false, durableSession: {can_export: true},
     document: {createElement: element}, URL: {createObjectURL: () => "blob:native", revokeObjectURL() {}}, setTimeout() {},
     updateActivity() {}, updateControls() {}, refresh: async () => {},
     status(node, label, kind = "neutral") { node.textContent = label; node.className = kind; },
@@ -44,6 +44,12 @@ const tick = () => new Promise((resolve) => setImmediate(resolve));
 async function finishReport(h, operation, id, verification = "native_reader_verified", task = "m3-compare") { h.reply("m3/entries/" + id + "/report", report(id, verification, task)); await tick(); h.reply("m3/entries/" + id + "/artifacts/report.md", {text: async () => "# Original native report\n"}); await operation; }
 async function show(h, id, verification, task) { const operation = h.choose(id, verification, task); await finishReport(h, operation, id, verification, task); }
 
+// The source page keeps native M3 polling; the MMTT application suppresses it.
+{
+  const h = harness(true), refresh = h.run("refreshM3()");
+  assert.equal(h.pending.length, 0, "MMTT-only M3 refresh must not issue native requests");
+  await refresh; checks++;
+}
 {
   const h = harness(); h.input();
   assert.deepEqual(JSON.parse(h.run("JSON.stringify(m3Intake())")), {input_id: "input-first", task: "m3-compare", candidate_ids: ["trend", "ridge"], timeout_seconds: 120});

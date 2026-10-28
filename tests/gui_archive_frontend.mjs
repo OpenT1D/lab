@@ -7,7 +7,7 @@ const start = source.indexOf("// Archive views use their own selection tokens.")
 const helpersStart = source.indexOf("function m3Metric("), helpersEnd = source.indexOf("async function displayM3Report()", helpersStart);
 assert(start >= 0 && end > start && helpersStart >= 0 && helpersEnd > helpersStart);
 let checks = 0;
-function harness() {
+function harness(mmttOnly = false) {
   const nodes = new Map(), pending = [], urls = [], downloads = [];
   function element(name = "div") {
     return {name, hidden: true, disabled: false, value: "", textContent: "", children: [], dataset: {},
@@ -17,7 +17,7 @@ function harness() {
     };
   }
   const $ = (id) => { if (!nodes.has(id)) nodes.set(id, element()); return nodes.get(id); };
-  const context = vm.createContext({$, document: {createElement: element}, Date, active: null, m3Pending: false, campaignPending: false, durablePending: false,
+  const context = vm.createContext({$, document: {createElement: element}, Date, mmttOnly, active: null, m3Pending: false, campaignPending: false, durablePending: false,
     URL: {revokeObjectURL() {}, createObjectURL(blob) { urls.push(blob.name); return "blob:" + blob.name; }}, setTimeout() {},
     status(target, label, kind = "neutral") { target.textContent = label; target.className = kind; },
     api(path, body, raw) { return new Promise((resolve, reject) => pending.push({path, body, raw, resolve, reject})); },
@@ -108,6 +108,12 @@ async function showM5(h, id, mode = "mixed", verification = "native_reader_verif
   return showCustom(h, id, "m5-prognosis", verification, m5Report(id, mode, verification));
 }
 const tick = async () => { await Promise.resolve(); await Promise.resolve(); };
+// Snippets receive the page's profile explicitly; the MMTT app never polls archives.
+{
+  const h = harness(true), refresh = h.run("refreshLibrary()");
+  assert.equal(h.pending.length, 0, "MMTT-only library refresh must not issue native requests");
+  await refresh; checks++;
+}
 async function showM4(h, id, verification = "native_reader_verified") {
   const operation = h.choose(id, verification); h.reply(id, "report", m4Report(id, verification)); await tick(); h.reply(id, "figure.svg", {name: id}); await operation;
 }
