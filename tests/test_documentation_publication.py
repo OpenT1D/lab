@@ -20,14 +20,20 @@ MAIN = (
 ARTIFACT = "github-pages-${{ github.run_id }}-${{ github.run_attempt }}"
 
 
-def pages_condition(condition, values, *, inherited_success):
+def pages_condition(condition, values, *, inherited_success, workflow_cancelled=False):
     """Check the workflow's bounded conjunction, not GitHub's hosted scheduler."""
     clauses = condition.split(" && ")
-    if "always()" not in clauses and not inherited_success:
+    if (
+        not any(clause in {"always()", "!cancelled()"} for clause in clauses)
+        and not inherited_success
+    ):
         return False  # GitHub applies success() when no status function is supplied.
     result = True
     for clause in clauses:
         if clause == "always()":
+            continue
+        if clause == "!cancelled()":
+            result = result and not workflow_cancelled
             continue
         match = re.fullmatch(r"([a-z._-]+) == '([^']*)'", clause)
         if match is None or match[1] not in values:
@@ -153,7 +159,8 @@ class DocumentationWorkflowTests(unittest.TestCase):
         )
         deploy = workflow["jobs"]["pages-deploy"]
         self.assertEqual(
-            deploy["if"], "always() && " + MAIN + " && needs.public-checks.result == 'success'"
+            deploy["if"],
+            "always() && !cancelled() && " + MAIN + " && needs.public-checks.result == 'success'",
         )
         self.assertEqual(deploy["needs"], ["public-checks"])
         self.assertNotIn("pages-deploy", workflow["jobs"]["public-checks"]["needs"])
@@ -192,7 +199,7 @@ class DocumentationWorkflowTests(unittest.TestCase):
     def test_deploy_condition_rejects_untrusted_events_and_every_unsuccessful_aggregate(self):
         workflow = yaml.safe_load((ROOT / ".github/workflows/checks.yml").read_text())
         condition = workflow["jobs"]["pages-deploy"]["if"]
-        for repository, event, ref, result, inherited in itertools.product(
+        for repository, event, ref, result, inherited, cancelled in itertools.product(
             ("OpenT1D/lab", "another/repository"),
             (
                 "push",
@@ -205,6 +212,7 @@ class DocumentationWorkflowTests(unittest.TestCase):
             ("refs/heads/main", "refs/heads/other", "refs/pull/21/merge", "refs/tags/main", None),
             ("success", "failure", "cancelled", "skipped", "neutral", "unknown", "", None),
             (True, False),
+            (False, True),
         ):
             # The false inherited status models the observed legitimate PR-only
             # ancestor skip. Only the validated aggregate authorizes deployment.
@@ -219,10 +227,14 @@ class DocumentationWorkflowTests(unittest.TestCase):
                 and event == "push"
                 and ref == "refs/heads/main"
                 and result == "success"
+                and not cancelled
             )
-            with self.subTest(**values, inherited_success=inherited):
+            with self.subTest(**values, inherited_success=inherited, workflow_cancelled=cancelled):
                 self.assertEqual(
-                    pages_condition(condition, values, inherited_success=inherited), expected
+                    pages_condition(
+                        condition, values, inherited_success=inherited, workflow_cancelled=cancelled
+                    ),
+                    expected,
                 )
 
 

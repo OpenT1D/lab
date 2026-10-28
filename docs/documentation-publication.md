@@ -41,14 +41,17 @@ On main pushes, that PR-only job is explicitly skipped; the aggregate validates
 that event-specific result while requiring the root, matrix and browser results
 to succeed.
 
-The deploy condition uses `always()` to evaluate those guards after the
-event-specific ancestor skip; it still requires aggregate success and the exact
-trusted main push. GitHub otherwise applies an implicit status check, and skipped
+The deploy condition uses `always() && !cancelled()` to evaluate those guards after
+the event-specific ancestor skip while honoring manual workflow cancellation,
+including cancellation after aggregate success. It still requires that success
+and the exact trusted main push. GitHub otherwise applies an implicit status check, and skipped
 jobs can skip later jobs in the [dependency chain](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#jobsjob_idneeds).
 The [28 October main run](https://github.com/OpenT1D/lab/actions/runs/40784585671)
 uploaded its checked Pages artifact and passed the aggregate, but skipped
 publication after the PR-only dependency job was skipped. Corrected main
 deployment requires a subsequent successful hosted publication receipt.
+GitHub [re-evaluates job conditions on cancellation](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-cancellation);
+`always()` alone would keep a matching deployment job running.
 
 Only the deployment job grants `pages: write` and `id-token: write`, and it does
 not check out or execute repository code. The `github-pages` environment must have
