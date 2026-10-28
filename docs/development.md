@@ -70,7 +70,7 @@ Review `_build/linkcheck/output.txt`. Some publishers and private repositories r
 
 Use `uv add --group dev PACKAGE` for a justified new repository tool. Commit both `pyproject.toml` and `uv.lock`, and run the full checks. To update an existing tool, use `uv lock --upgrade-package PACKAGE`, then `uv sync --locked` and the same checks.
 
-Review dependency changes for compatibility and workflow impact. GitHub Actions are pinned to full commit hashes with readable release comments. Dependabot is configured for those actions and the uv lockfile.
+Review dependency changes for compatibility and workflow impact. GitHub Actions are pinned to full commit hashes with readable release comments. The inactive `.github/dependabot.example.yml` preserves a future update configuration. Automatic version updates are disabled for the initial source publication.
 
 ## Documentation conventions
 

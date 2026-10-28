@@ -123,6 +123,24 @@ CI-enabled JSON above remains reserved for a later explicit activation.
 The separate private archive's earlier plan/account limitations remain dated
 observations. Local verification is not a hosted CI result.
 
+## Automatic dependency jobs during initial publication
+
+The initial source push triggered three GitHub-managed Dependabot jobs despite
+repository Actions being disabled: two finished before cancellation and one was
+cancelled. Their [update run](https://github.com/OpenT1D/lab/actions/runs/40712032708),
+[cancelled update](https://github.com/OpenT1D/lab/actions/runs/40712032550) and
+[graph metadata run](https://github.com/OpenT1D/lab/actions/runs/40712032362) remain
+visible as actual platform history. No repository test or installer workflow ran;
+these service outcomes are not scientific or release verification.
+
+Both generated update PRs were closed without merging. The configuration was
+renamed to `.github/dependabot.example.yml` to disable automatic version updates.
+It is an inactive example, not a recognized `dependabot.yml` or `dependabot.yaml`.
+Repository Actions stays disabled. The passive dependency graph, vulnerability
+alerts, secret scanning and private reporting remain separate security features;
+the graph may run platform metadata processing when supported manifests change.
+No hosted repository CI, release automation or installer build is enabled.
+
 ## Activate on the selected public destination
 
 The selected new destination is [OpenT1D/lab](https://github.com/OpenT1D/lab).
