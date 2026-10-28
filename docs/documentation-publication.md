@@ -40,9 +40,10 @@ Only the deployment job grants `pages: write` and `id-token: write`, and it does
 not check out or execute repository code. The `github-pages` environment must have
 an exact `main` branch deployment policy and Pages must use the workflow build
 type. Both are platform settings to verify, not properties established by this
-document. Main runs and deployments are serialized without cancellation;
-superseded PR runs may be cancelled. Manual dispatch runs checks but does not
-publish the site.
+document. Active main runs and deployments are not cancelled; superseded pending
+runs may be replaced. Superseded PR runs may also be cancelled while active.
+Concurrency does not guarantee dispatch order. Manual dispatch runs checks but
+does not publish the site.
 
 The Pages upload composite Action contains a pinned `upload-artifact` dependency.
 [action-dependencies.json](../.github/action-dependencies.json) records that exact

@@ -26,8 +26,9 @@ inspection. Only a trusted repository main push uploads a Pages artifact; only a
 separate job after the complete public gate can deploy it. Bind that job to the
 main-only `github-pages` environment, grant Pages/identity writes there alone and
 use the current run/attempt artifact name. Do not add the deployment to its own
-gate's dependencies. Cancel superseded PR runs, serialize main/deployment runs
-without cancellation and keep manual dispatch non-publishing.
+gate's dependencies. Cancel superseded PR runs and preserve active main/deployment
+runs. Superseded pending runs may be replaced; concurrency does not guarantee
+dispatch order. Keep manual dispatch non-publishing.
 
 Pin the Pages Actions and record the composite upload Action's exact transitive
 artifact Action in the selected-revision allowlist. Do not widen publisher access.
