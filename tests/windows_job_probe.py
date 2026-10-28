@@ -3,6 +3,7 @@
 import ctypes
 from ctypes import wintypes
 from functools import lru_cache
+from pathlib import PureWindowsPath
 
 
 @lru_cache(maxsize=1)
@@ -12,6 +13,11 @@ def kernel():
         ("OpenProcess", (wintypes.DWORD, wintypes.BOOL, wintypes.DWORD), wintypes.HANDLE),
         ("IsProcessInJob", (wintypes.HANDLE, wintypes.HANDLE, ctypes.c_void_p), wintypes.BOOL),
         ("GetExitCodeProcess", (wintypes.HANDLE, ctypes.c_void_p), wintypes.BOOL),
+        (
+            "QueryFullProcessImageNameW",
+            (wintypes.HANDLE, wintypes.DWORD, wintypes.LPWSTR, ctypes.c_void_p),
+            wintypes.BOOL,
+        ),
         ("WaitForSingleObject", (wintypes.HANDLE, wintypes.DWORD), wintypes.DWORD),
         ("CloseHandle", (wintypes.HANDLE,), wintypes.BOOL),
     ):
@@ -51,6 +57,12 @@ def inspect_job_processes(process, pids):
                 exit_code=code.value,
                 wait_result=api.WaitForSingleObject(handle, 0),
             )
+            image = ctypes.create_unicode_buffer(32768)
+            size = wintypes.DWORD(len(image))
+            if api.QueryFullProcessImageNameW(handle, 0, image, ctypes.byref(size)):
+                item["image_basename"] = PureWindowsPath(image.value).name
+            else:
+                item["image_error"] = ctypes.get_last_error()
         finally:
             if not api.CloseHandle(handle):
                 raise ctypes.WinError(ctypes.get_last_error())
