@@ -158,7 +158,7 @@ def markdown(data):
 def save(output, data, original_request):
     dump(output / "request.json", original_request)
     dump(output / "catalogue.json", data)
-    (output / "report.md").write_text(markdown(data))
+    (output / "report.md").write_bytes(markdown(data).encode("utf-8"))
     seal(output)
 
 

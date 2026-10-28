@@ -733,6 +733,11 @@ class WindowsOwnershipTests(unittest.TestCase):
 
     @unittest.skipUnless(os.name == "nt", "Actual Windows kernel required")
     def test_real_job_launch_gates_and_reaps_example(self):
+        for repetition in range(5):
+            with self.subTest(repetition=repetition):
+                self._probe_real_job_completion(repetition)
+
+    def _probe_real_job_completion(self, repetition):
         import ctypes
         from ctypes import wintypes
 
@@ -768,14 +773,21 @@ class WindowsOwnershipTests(unittest.TestCase):
                     stdout=log,
                     stderr=log,
                 )
-                observations = []
+                observations, completed_at = [], None
                 original_pids = process.job.pids
 
                 def observe_cleanup_inventory():
                     # Diagnose only the current live Job's returned IDs. Query
                     # and synchronization rights confer no termination authority.
                     pids = original_pids()
-                    row = {"leader_returncode": process.poll(), "associated": pids, "processes": []}
+                    row = {
+                        "leader_returncode": process.poll(),
+                        "seconds_after_wait": None
+                        if completed_at is None
+                        else time.monotonic() - completed_at,
+                        "associated": pids,
+                        "processes": [],
+                    }
                     for pid in pids:
                         handle = kernel.OpenProcess(0x00100000 | 0x1000, False, pid)
                         item = {"pid": pid, "leader": pid == process.pid}
@@ -803,11 +815,26 @@ class WindowsOwnershipTests(unittest.TestCase):
                     return pids  # Preserve the exact production inventory/result.
 
                 try:
-                    self.assertEqual(process.wait(timeout=15), 0)
+                    code = process.wait(timeout=15)
+                    completed_at = time.monotonic()
+                    self.assertEqual(code, 0)
                     self.assertTrue((output / "observations.csv").is_file())
                 finally:
                     with patch.object(process.job, "pids", side_effect=observe_cleanup_inventory):
                         forced, remaining = owner.cleanup(0)
+                print(
+                    "OPENT1D_WINDOWS_JOB_PROBE="
+                    + json.dumps(
+                        {
+                            "repetition": repetition,
+                            "forced": forced,
+                            "remaining": remaining,
+                            "observations": observations,
+                        },
+                        sort_keys=True,
+                    ),
+                    flush=True,
+                )
                 self.assertFalse(forced, observations)
                 self.assertEqual(remaining, [], observations)
 
