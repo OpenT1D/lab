@@ -1,6 +1,6 @@
 ---
 name: scientific-numerical-change
-description: Implement or review OpenT1D model, adapter, solver, metric or scientific-analysis changes that can alter numerical meaning or outputs. Use the affected task's protocol and reference checks; prose-only edits do not need this workflow.
+description: Implement or review OpenT1D model, adapter, solver, metric or scientific-analysis changes that can alter numerical meaning or outputs. Use the affected task's protocol and reference checks; spelling or formatting edits that preserve scientific meaning do not need this workflow.
 ---
 
 # Scientific and numerical changes
