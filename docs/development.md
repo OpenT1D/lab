@@ -102,8 +102,9 @@ It checks Python tooling style, Markdown, YAML, citation metadata, navigation, d
 The Markdown configuration allows long prose lines and template checklists. It checks structure rather than imposing hard wrapping on research reports. The root suite also checks bounded contracts, artifact validation and analysis fixtures. It does not execute native physiology; run the isolated checks in the canonical tutorials as appropriate. Neither passing tooling tests nor native regression equality establishes biological validity.
 The [public source policy](publication-security.md) limits the initial supported
 exercise to the two synthetic MMTT tasks. Initial publication used disabled
-Actions; local results must not be reported as hosted CI. The prepared `Root checks`
-job explicitly installs the selected Python 3.12, uv 0.11.16 and Node 24.22.1,
+Actions; later activation and exact hosted receipts are recorded in the
+[security boundary](publication-security.md). Local results must not be reported
+as hosted CI. The active `Root checks` job explicitly installs the selected Python 3.12, uv 0.11.16 and Node 24.22.1,
 then runs the root suite and standard-library boundary checks. Its Node preflight
 fails when Node is unavailable. Historical native jobs additionally require
 literal private-repository/manual-dispatch guards and cannot run in a public
