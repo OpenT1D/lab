@@ -161,6 +161,19 @@ automatically remediated by this configuration. Merging it to the default branch
 enables update discovery; actual service runs and update PRs need their own
 receipts. Update PRs still require review and the complete public gate.
 
+Both version-update groups select only minor/patch releases. A separate wildcard
+SemVer-major ignore rule in each ecosystem prevents unmatched major upgrades
+from becoming individual PRs; major changes require a manual compatibility
+proposal. See the official [group filtering](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference#groups)
+and [ignore options](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference#ignore).
+This changes version-update policy, not security-update activation or merge policy.
+
+On 28 October 2026, the [first uv update run](https://github.com/OpenT1D/lab/actions/runs/40784594140)
+failed to resolve Sphinx 9.1.1 against MyST Parser 4's Sphinx-before-9 requirement.
+It also opened a grouped proposal containing MyST Parser 5.1.0. Those outcomes
+exposed the missing major-version filter. Local policy checks do not establish
+a successful service run with the corrected configuration.
+
 The pinned Dependency Review v5 job has only `contents: read`, runs only on
 `pull_request` and blocks newly introduced high/critical vulnerabilities in
 runtime, development and unknown scopes. It disables PR comments, license checks,

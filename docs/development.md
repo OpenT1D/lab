@@ -194,6 +194,13 @@ Actions, with at most three open update PRs per ecosystem. Root uv excludes
 locks or browser/package fixtures. Merging this configuration to the default
 branch enables that update service; a local file is not an observed service run.
 
+Both groups accept only minor/patch version updates, and each ecosystem also
+ignores all SemVer-major version updates. A group filter alone leaves unmatched
+updates eligible for individual PRs. Major upgrades require a separate manual
+proposal with compatibility checks, including the Action SHA allowlist where
+applicable; no update is automatically merged. These are
+[separate Dependabot options](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference#groups).
+
 The read-only PR dependency job blocks introduced high/critical advisories in
 runtime, development and unknown scopes. It posts no PR comments and applies no
 license policy. After the pinned official action succeeds, a bounded API guard
