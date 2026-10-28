@@ -4,6 +4,12 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Fix shared POSIX atomic publication so an existing temporary symlink cannot
+  overwrite unrelated bytes or become the published GUI journal. Byte writes
+  use fresh exclusive siblings and preserve stale pending entries; text writes
+  retain their fixed pending name and refuse existing entries. Add primitive
+  and real GUI persistence/restart regressions.
+
 - Refresh the canonical roadmap around the next AI-development change,
   reliability regressions, public CI, documentation/onboarding and a bounded
   two-task Apple Silicon application. Preserve OT-059–074 and open scientific
