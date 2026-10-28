@@ -97,6 +97,8 @@ class PublicSecurityTests(unittest.TestCase):
         dispatch = workflow["on"]["workflow_dispatch"]["inputs"]["historical_native"]
         self.assertFalse(dispatch["default"])
         public = json.loads((ROOT / ".github/public-source-branch-protection.json").read_text())
+        self.assertEqual(set(public["required_status_checks"]), {"strict", "checks"})
+        self.assertTrue(public["required_status_checks"]["strict"])
         self.assertEqual(
             public["required_status_checks"]["checks"],
             [{"context": "Repository checks", "app_id": 15368}],
