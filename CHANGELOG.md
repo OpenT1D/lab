@@ -4,6 +4,10 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Evaluate guarded main documentation deployment after an expected PR-only
+  dependency-review skip. Preserve successful-aggregate and trusted-main
+  requirements, deployment rights and the same-run checked artifact.
+
 - Limit monthly Dependabot version updates to minor/patch groups and explicitly
   ignore major updates in both root uv and Actions. Keep major proposals manual,
   existing PR caps, historical exclusions and dependency-review requirements.

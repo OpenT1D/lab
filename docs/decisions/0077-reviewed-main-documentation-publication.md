@@ -30,6 +30,12 @@ gate's dependencies. Cancel superseded PR runs and preserve active main/deployme
 runs. Superseded pending runs may be replaced; concurrency does not guarantee
 dispatch order. Keep manual dispatch non-publishing.
 
+Evaluate the guarded deploy condition with `always()` so an expected skip of the
+PR-only dependency-review ancestor on main pushes cannot suppress publication
+through GitHub's implicit status check. This enables condition evaluation; the
+trusted repository, push, main ref and successful aggregate remain mandatory.
+Failed, cancelled, skipped or missing aggregate results never authorize deployment.
+
 Pin the Pages Actions and record the composite upload Action's exact transitive
 artifact Action in the selected-revision allowlist. Do not widen publisher access.
 Use workflow-type Pages with an explicitly verified main environment rule.
