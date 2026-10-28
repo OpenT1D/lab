@@ -1,13 +1,20 @@
 # Working in OpenT1D
 
-OpenT1D has implemented bounded M1 and M2 workflows; independent human M2 reproduction remains open as a later external-review item, not a blocker for internal verification or M3 preparation. M3 adds synthetic CGM forecast preparation; human evaluation remains conditional on authorized release verification. Read the README,
-CONTRIBUTING.md and the relevant part of ROADMAP.md before making substantial
-changes. The roadmap is the canonical implementation plan.
+Read [README.md](README.md), [CONTRIBUTING.md](CONTRIBUTING.md) and the relevant
+part of [ROADMAP.md](ROADMAP.md) before substantial changes. The roadmap owns
+implementation order. The [development guide](docs/development.md) owns the
+component/test map, environment selection and task/review handoff.
+
+The initial maintained public exercise is the two synthetic MMTT tasks. Other
+bounded workflows have internal verification records; independent usability,
+human-data evaluation and biological validity remain separate open questions.
+Public Actions is disabled; local checks are not hosted CI results. Preserve the
+[public runtime and CI boundary](docs/publication-security.md).
 
 ## Project direction
 
-- Build an open modular T1D laboratory with shared infrastructure and useful modules.
-- Reuse upstream models where suitable; whole-engine integration is valid modularity.
+- Build shared infrastructure around useful research tasks; reuse upstream
+  models where suitable, including whole native engines.
 - Distinguish planned features, working software, reproduced references and scientific evidence.
 - Preserve model ancestry, units, time conventions, process ownership and source attribution.
 - Do not invent citations, data access, numerical results, APIs, partnerships or release metadata.
@@ -17,9 +24,14 @@ changes. The roadmap is the canonical implementation plan.
 - Write public-facing guides in English; preserve the Dutch research reports.
 - Keep each guide canonical and update `docs/_toc.yml` for new public documentation.
 - Use `uv sync --locked` and `uv run --locked python scripts/check.py` for repository checks.
-- The root Python environment is for tooling; it does not contain a simulation package.
-  Native M0 probes use separate locked environments under `experiments/m0/`.
+- Root Python is tooling, orchestration and the standard-library MMTT tasks, not
+  a simulation package. Native work uses its separately locked task environment.
+- Use isolated worktrees for concurrent writing, at most two implementation
+  changes initially, one owner per shared interface and a separate diff review.
+  Assign the final full repository check to one owner.
 - Add numerical checks when model behavior exists and the change warrants them.
+- Preserve frozen baselines and tolerances; investigate mismatches before
+  proposing a scientifically justified change.
 - Keep research inputs, credentials and private health records out of version control and logs.
 - Describe checks actually run and limitations that remain. Do not equate a CI pass with model validity.
 

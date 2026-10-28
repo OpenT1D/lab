@@ -12,7 +12,10 @@ body:
     id: proposal
     attributes:
       label: Proposed contribution
-      description: Describe the smallest complete contribution and what should be reused.
+      description: >-
+        Describe the smallest complete contribution, affected components, what
+        should be reused and explicit exclusions. Link the applicable roadmap
+        item, or explain why a new one is needed.
     validations:
       required: true
   - type: textarea
@@ -21,9 +24,28 @@ body:
       label: Existing models, data and alternatives
       description: Link original sources, upstream code, relevant licenses and known limitations.
   - type: textarea
+    id: contracts
+    attributes:
+      label: Scientific and compatibility contracts
+      description: >-
+        Identify units, timing, causal inputs, ancestry, failure accounting,
+        frozen baselines/tolerances, archive readers and runtime/rights
+        boundaries to preserve or change. Link a decision record when needed.
+  - type: textarea
     id: acceptance
     attributes:
       label: Evidence and completion criteria
-      description: How could another person verify or reproduce the result?
+      description: >-
+        How could another person verify the intended behavior? Give acceptance
+        cases, a counterexample and the relevant checks. Separate software
+        behavior, numerical evidence and any later human/scientific acceptance.
     validations:
       required: true
+  - type: textarea
+    id: handoff
+    attributes:
+      label: Current evidence and review handoff
+      description: >-
+        List checks already run with revision, outcomes, skips and retained
+        non-sensitive output, or say none. Note open questions, affected
+        callers/readers and what a separate reviewer should challenge.

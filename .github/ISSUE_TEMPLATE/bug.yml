@@ -30,7 +30,8 @@ body:
       label: Reproduction or supporting evidence
       description: >-
         Provide minimal steps and synthetic inputs, or a primary source and the
-        affected claim. Include observed and expected results when possible.
+        affected claim. Include the exact command, observed result and expected
+        behavior when possible. Link retained non-sensitive output.
     validations:
       required: true
   - type: textarea
@@ -42,4 +43,22 @@ body:
     id: impact
     attributes:
       label: Impact and possible fix
-      description: Identify affected results or workflows, if known.
+      description: >-
+        Identify affected results, components and callers/readers, if known.
+        Link an applicable roadmap item; suggest bounded scope and exclusions.
+  - type: textarea
+    id: contracts
+    attributes:
+      label: Contracts and acceptance cases
+      description: >-
+        If known, identify units, timing, source identity, failure accounting,
+        baselines/tolerances or compatibility to preserve. Give a success case
+        and a counterexample that would expose an incomplete fix.
+  - type: textarea
+    id: checks
+    attributes:
+      label: Checks and review handoff
+      description: >-
+        List checks actually run, outcomes and skips, or say none. Note local
+        versus hosted results, unresolved questions and evidence useful to a
+        separate reviewer. A software check is not scientific validation.
