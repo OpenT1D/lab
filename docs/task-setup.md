@@ -33,7 +33,7 @@ containing `secure` do not supersede the current advisory inventory.
   --plan results/setup-plan --output results/setup-check
 ```
 
-Plans bind the exact existing `pyproject.toml`, `uv.lock`, Python selection files and setup implementation identities. They also bind the discovered `uv` executable identity. Each operation uses fresh output and preserves a sealed plan or receipt. If those identities change, create a new plan rather than editing the old one.
+Plans bind the exact existing `pyproject.toml`, `uv.lock`, Python selection files and setup implementation identities, including the shared process helpers used to supervise installation. They also bind the discovered `uv` executable identity. Each operation uses fresh output and preserves a sealed plan or receipt. Changed implementation bytes are refused before readiness checks, installation or output creation. If those identities change, create a new plan rather than editing the old one.
 
 | Task | Required execution projects |
 | --- | --- |

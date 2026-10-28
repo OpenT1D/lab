@@ -4,6 +4,12 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Bind task-directed setup plans to the shared process-helper source inventory.
+  Reject changed worker/supervisor bytes before readiness checks, installation
+  or output creation, while preserving missing-environment and failed-install
+  receipts. Existing plans with different implementation identities require a
+  new plan.
+
 - Fix shared POSIX atomic publication so an existing temporary symlink cannot
   overwrite unrelated bytes or become the published GUI journal. Byte writes
   use fresh exclusive siblings and preserve stale pending entries; text writes
