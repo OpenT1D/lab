@@ -9,8 +9,77 @@ import tempfile
 import time
 import unittest
 from pathlib import Path
+from unittest.mock import Mock, patch
 
+from experiments.catalogue import storage
 from experiments.catalogue.storage import ROOT
+
+
+class CleanupRaceTests(unittest.TestCase):
+    def setUp(self):
+        self.process = Mock()
+        self.process.poll.return_value = 0
+        self.process.wait.return_value = 0
+        for name in ("signal_tree", "force_tree", "tree_exists", "close_tree"):
+            mocked = patch.object(storage, name)
+            setattr(self, name, mocked.start())
+            self.addCleanup(mocked.stop)
+        for name, value in (("CLEANUP_GRACE_SECONDS", 0), ("GROUP_RECHECK_SECONDS", 0.02)):
+            mocked = patch.object(storage, name, value, create=True)
+            mocked.start()
+            self.addCleanup(mocked.stop)
+
+    def test_probe_access_denial_is_cleared_only_after_reaping_and_observed_disappearance(self):
+        before_reap = []
+
+        def probe(_process):
+            if not before_reap:
+                before_reap.append(self.process.poll.call_count)
+                raise PermissionError("zombie group")
+            self.assertGreater(self.process.poll.call_count, before_reap[0])
+            return False
+
+        self.tree_exists.side_effect = probe
+        storage.cleanup(self.process)
+        self.force_tree.assert_not_called()
+        self.process.wait.assert_called_once()
+        self.close_tree.assert_called_once_with(self.process)
+
+    def test_force_access_denial_is_cleared_only_after_observed_disappearance(self):
+        self.tree_exists.side_effect = [True, True, PermissionError("exiting group"), False]
+        self.force_tree.side_effect = PermissionError("zombie group")
+        storage.cleanup(self.process)
+        self.force_tree.assert_called_once_with(self.process)
+        self.process.wait.assert_called_once()
+        self.close_tree.assert_called_once_with(self.process)
+
+    def test_term_access_denial_can_reap_an_already_exited_direct_child(self):
+        self.signal_tree.side_effect = PermissionError("already exited")
+        self.tree_exists.return_value = False
+        storage.cleanup(self.process)
+        self.process.poll.assert_called()
+        self.force_tree.assert_not_called()
+        self.close_tree.assert_called_once_with(self.process)
+
+    def test_persistent_probe_access_denial_is_not_reported_as_an_empty_group(self):
+        self.tree_exists.side_effect = PermissionError("persistent probe denial")
+        with self.assertRaisesRegex(PermissionError, "persistent probe denial"):
+            storage.cleanup(self.process)
+        self.close_tree.assert_called_once_with(self.process)
+
+    def test_live_group_does_not_clear_an_earlier_access_denial(self):
+        self.tree_exists.side_effect = [PermissionError("still live"), True, True]
+        with self.assertRaisesRegex(PermissionError, "still live"):
+            storage.cleanup(self.process)
+        self.force_tree.assert_called_once_with(self.process)
+        self.close_tree.assert_called_once_with(self.process)
+
+    def test_force_access_denial_is_preserved_while_a_group_remains(self):
+        self.tree_exists.return_value = True
+        self.force_tree.side_effect = PermissionError("force denied on live group")
+        with self.assertRaisesRegex(PermissionError, "force denied on live group"):
+            storage.cleanup(self.process)
+        self.close_tree.assert_called_once_with(self.process)
 
 
 @unittest.skipUnless(os.name == "posix", "POSIX session ownership requires POSIX")

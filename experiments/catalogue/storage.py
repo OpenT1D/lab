@@ -22,6 +22,7 @@ ROOT = Path(__file__).resolve().parents[2]
 ID = re.compile(r"[a-z][a-z0-9_-]{0,63}\Z")
 SHA = re.compile(r"[0-9a-f]{64}\Z")
 CLEANUP_GRACE_SECONDS = 10
+GROUP_RECHECK_SECONDS = 1
 
 
 def require(condition, message):
@@ -141,20 +142,43 @@ def text(value):
     return str(value).replace("\n", " ").replace("\r", " ").replace("|", "\\|").replace("`", "'")
 
 
+def _owned_tree_call(process, operation):
+    """Clear an access denial only after reaping and observing group disappearance."""
+    try:
+        return operation(process)
+    except PermissionError as error:
+        # Darwin killpg excludes zombies and can report EPERM between a leader's
+        # exit and our reap. A denied probe alone never establishes an empty group.
+        deadline = time.monotonic() + GROUP_RECHECK_SECONDS
+        while True:
+            process.poll()
+            try:
+                remaining = tree_exists(process)
+            except PermissionError:
+                remaining = None
+            if remaining is False:
+                return False
+            if remaining is True or time.monotonic() >= deadline:
+                raise error
+            time.sleep(0.02)
+
+
 def cleanup(process):
     """Retain tree ownership after leader exit, allowing bounded graceful cleanup."""
     try:
-        signal_tree(process, signal.SIGTERM)
+        _owned_tree_call(process, lambda owned: signal_tree(owned, signal.SIGTERM))
         deadline = time.monotonic() + CLEANUP_GRACE_SECONDS
         while True:
             process.poll()
-            if not tree_exists(process) or time.monotonic() >= deadline:
+            if not _owned_tree_call(process, tree_exists) or time.monotonic() >= deadline:
                 break
             time.sleep(0.02)
     finally:
         # Also force the tree if cancellation arrives during graceful cleanup.
         try:
-            force_tree(process)
+            process.poll()
+            if _owned_tree_call(process, tree_exists):
+                _owned_tree_call(process, force_tree)
             process.wait()
         finally:
             close_tree(process)
