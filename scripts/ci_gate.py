@@ -4,16 +4,25 @@ import json
 import os
 import sys
 
-REQUIRED = frozenset({"repository-checks", "public-smoke", "browser"})
+REQUIRED = frozenset({"repository-checks", "public-smoke", "browser", "dependency-review"})
+EVENTS = frozenset({"pull_request", "push", "workflow_dispatch"})
 
 
-def validate(results):
+def validate(results, event="pull_request"):
+    if event not in EVENTS:
+        raise ValueError("Missing or unsupported public check event")
     if not isinstance(results, dict) or set(results) != REQUIRED:
         raise ValueError("Missing or unexpected public check families")
     failed = [
         name
         for name in sorted(REQUIRED)
-        if not isinstance(results[name], dict) or results[name].get("result") != "success"
+        if not isinstance(results[name], dict)
+        or results[name].get("result") != "success"
+        and not (
+            name == "dependency-review"
+            and event in {"push", "workflow_dispatch"}
+            and results[name].get("result") == "skipped"
+        )
     ]
     if failed:
         raise ValueError("Public check families did not succeed: " + ", ".join(failed))
@@ -21,7 +30,7 @@ def validate(results):
 
 def main():
     try:
-        validate(json.loads(os.environ["PUBLIC_CHECK_RESULTS"]))
+        validate(json.loads(os.environ["PUBLIC_CHECK_RESULTS"]), os.environ["PUBLIC_CHECK_EVENT"])
     except (KeyError, ValueError) as error:
         print(str(error), file=sys.stderr)
         return 1

@@ -87,7 +87,9 @@ keep the recorded old environments and scientific evidence intact.
 When enabled, push and pull-request CI runs the root repository suite and documentation build,
 the standard-library paired boundary check, three-host public task smokes and four
 Linux Chromium flows. One required `Repository checks` result accepts only successful
-root, platform and browser families. Native jobs and root steps that install native projects are gated.
+root, platform and browser families, plus dependency review on pull requests.
+Only the dependency job may be skipped on explicit `push` or `workflow_dispatch`
+events. Native jobs and root steps that install native projects are gated.
 A manual `historical_native` dispatch can enable them **only** in a private
 repository without the public snapshot marker. Its default is false. Every
 native job/step also requires literal private-repository, `workflow_dispatch`
@@ -118,7 +120,7 @@ by workflows disabled, four selected Action revisions, approval for all external
 contributors, dependency alerts, private reporting, secret scanning and push
 protection. These dated observations do not establish the current platform
 settings. Current checked-in workflows pin their Action references; the prepared
-allowlist below admits exactly their five revisions. A separately enforced
+allowlist below admits exactly the checked-in revisions. A separately enforced
 platform SHA-pinning flag is not asserted here.
 
 On 28 October 2026 the maintainer authorized publication of the reviewed source
@@ -142,12 +144,75 @@ these service outcomes are not scientific or release verification.
 
 Both generated update PRs were closed without merging. The configuration was
 renamed to `.github/dependabot.example.yml` to disable automatic version updates.
-It is an inactive example, not a recognized `dependabot.yml` or `dependabot.yaml`.
-Repository Actions remained disabled. The passive dependency graph, vulnerability
+At that point it was an inactive example, not a recognized `dependabot.yml` or
+`dependabot.yaml`. Repository Actions remained disabled. The passive dependency graph, vulnerability
 alerts, secret scanning and private reporting remain separate security features;
 the graph may run platform metadata processing when supported manifests change.
 Those dependency-service outcomes did not activate repository CI, release
 automation or installer builds.
+
+## Prepared dependency updates and PR review
+
+The later recognized `.github/dependabot.yml` prepares monthly grouped updates
+for root uv tooling and pinned Actions, capped at three open version-update PRs
+per ecosystem. Its root uv scan explicitly excludes `experiments/**`,
+`packaging/**` and `tests/**`. No historical numerical lock or bundled runtime is
+automatically remediated by this configuration. Merging it to the default branch
+enables update discovery; actual service runs and update PRs need their own
+receipts. Update PRs still require review and the complete public gate.
+
+The pinned Dependency Review v5 job has only `contents: read`, runs only on
+`pull_request` and blocks newly introduced high/critical vulnerabilities in
+runtime, development and unknown scopes. It disables PR comments, license checks,
+warning-only mode and OpenSSF scorecard calls. It compares exact PR base/head
+SHAs and installs no dependency project. It does not close existing advisories
+or make historical environments supported.
+
+V5's [snapshot retry timeout returns its current comparison](https://github.com/actions/dependency-review-action/blob/a1d282b36b6f3519aa1f3fc636f609c47dddb294/src/main.ts)
+even when warnings remain. Therefore its successful result is followed by
+`scripts/dependency_snapshot.py`. The guard polls the same
+[dependency comparison API](https://docs.github.com/en/rest/dependency-graph/dependency-review)
+for at most 120 seconds, checks warnings on every page, refuses redirects and
+unsafe/incomplete pagination, and requires warning-free data to match the full
+unfiltered dependency/advisory output from the official action. A partial action
+result cannot become green merely because snapshots finish afterward. API,
+parse, timeout and mismatch failures require investigation or a fresh run.
+
+The stable public gate requires dependency-job success on PRs. It accepts only
+that job's explicit skip for `push` and `workflow_dispatch`; all other public
+families must succeed. Unknown/missing event information and skipped PR review
+fail closed. Fork and Dependabot PRs retain read-only tokens and external approval
+requirements. If GitHub cannot compare a fork's revisions or supply dependency
+snapshots, that is a failed check to resolve, not permission to bypass it, add a
+PAT or use a privileged PR trigger.
+
+Before operational acceptance, observe a safe root `uv.lock` update in the
+dependency graph and a disposable never-merge PR introducing a known high
+advisory. Verify both the dependency job and aggregate fail, then remove the
+probe and obtain green results. A requirements-file probe alone does not prove
+uv-lock coverage. Local negative fixtures establish rejection logic only.
+Snapshot completeness is bounded API evidence, not a guarantee that every
+vulnerability is known or that software/scientific results are valid. Review
+existing alerts separately; this increment supplies no automatic dismissals.
+
+## CodeQL observation — 28 October 2026
+
+The maintainer separately enabled GitHub-managed CodeQL default setup and read
+back a configured weekly standard analysis for Python, JavaScript/TypeScript and
+Actions. Its [initial hosted run](https://github.com/OpenT1D/lab/actions/runs/40757235369)
+succeeded. The recorded main analyses contained fourteen initial Python signals
+and no JavaScript or Actions signals; subsequent recorded PR analyses reported
+zero new results. Those PR results do not establish a clean repository baseline.
+
+A separate internal technical review found no demonstrated blocker for the two
+maintained synthetic tasks. Signals included simulated physiological variables
+misclassified as secrets, fixed invented fixtures and report fields, guarded
+artifact/static routes and historical controller indices. The codeload URL
+substring finding identified a small private-builder correctness follow-up;
+the reviewed hash-pinned path did not demonstrate SSRF. This bounded triage does
+not prove every alert false or qualify other workflows. All fourteen signals
+were left open. The 228 historical dependency alerts were also left unchanged;
+neither this triage nor the new PR delta check supplies automatic dismissals.
 
 ## Activate on the selected public destination
 
@@ -171,7 +236,7 @@ Keep every checked-in workflow manually disabled while staging repository policy
   the requested `sha_pinning_required: true` setting. Verify its actual readback.
 - [Selected revisions](../.github/public-source-selected-actions.json) is the body
   for `PUT /repos/OpenT1D/lab/actions/permissions/selected-actions`. It disables
-  blanket GitHub-owned/verified-publisher allowances and lists exactly the five
+  blanket GitHub-owned/verified-publisher allowances and lists exactly the
   checked-in Action revisions, including both historical and public Node actions.
 
 These are prepared REST payloads, not settings receipts. Repository-level disabled
@@ -191,7 +256,7 @@ Then perform and retain evidence for these platform steps:
 2. Apply the reviewed repository Actions permissions with `allowed_actions:
    selected` and `sha_pinning_required: true`, enabling the repository if needed
    to use the selected-actions API. While all workflows remain manually disabled,
-   apply and read back the exact five-revision allowlist. Verify read-only workflow
+   apply and read back the exact checked-in allowlist. Verify read-only workflow
    tokens, PR approval by workflows disabled and approval for all external
    contributors. Read back the requested SHA-pinning setting as well.
 3. Only after those controls match, enable the reviewed `checks.yml` workflow.
