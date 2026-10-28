@@ -3,7 +3,7 @@
 **Status, 3 October 2026:** OT-031 is implemented and internally verified.
 The two-source native comparison, outer launcher repeat, preserved failures,
 source deadlines, simulator-free reconstruction and locked repository checks
-pass the bounded [OT-031 acceptance](../../ROADMAP.md#proposed-internal-follow-up--ot-031-multiple-m4-secretion-sources).
+pass the bounded [OT-031 acceptance](roadmap-history-2026-10-28.md#proposed-internal-follow-up--ot-031-multiple-m4-secretion-sources).
 The [execution receipt](../../experiments/m4/comparison/execution.json)
 binds achieved commands, revisions, source/runtime inventories and hashes.
 

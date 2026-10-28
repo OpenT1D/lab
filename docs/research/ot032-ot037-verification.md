@@ -3,7 +3,7 @@
 **Status:** bounded implementation and internal verification completed,
 3 October 2026. This record separates numerical study evidence from campaign
 administration, catalogue reconstruction and environment readiness. The
-[roadmap](../../ROADMAP.md#functional-development-after-ot-031),
+[roadmap](roadmap-history-2026-10-28.md#functional-development-after-ot-031),
 [decision 0058](../decisions/0058-configurable-study-and-local-research-tools.md)
 and [execution plan](ot032-ot037-execution-plan.md) own scope. Main remains at
 baseline `d9991c115e795c2977177349805619df15981598`; no merge, push or release

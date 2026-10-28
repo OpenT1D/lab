@@ -198,4 +198,4 @@ incomplete or failed.
 
 This entry adds task access and execution checks. Independent researcher
 usability, human observation assessment and treatment evidence remain the
-separate requirements recorded in the [roadmap](../ROADMAP.md#post-integration-internal-work-packages).
+separate requirements recorded in the [roadmap](research/roadmap-history-2026-10-28.md#post-integration-internal-work-packages).

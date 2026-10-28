@@ -9,7 +9,7 @@ empirical sampling-equivalence margin. Human analysis, a clinical sampling
 recommendation and demonstrated product benefit remain open.
 
 This completes the feasibility decision required by the
-[roadmap](../../ROADMAP.md#planned-mixed-meal-analysis-tasks), not the empirical
+[roadmap](roadmap-history-2026-10-28.md#planned-mixed-meal-analysis-tasks), not the empirical
 or product gates. [Decision 0067](../decisions/0067-mmtt-feasibility-boundary.md)
 records the scientific boundary. No participant records were downloaded,
 no access application or outreach occurred, and no researcher has agreed to

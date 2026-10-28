@@ -4,6 +4,13 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Refresh the canonical roadmap around the next AI-development change,
+  reliability regressions, public CI, documentation/onboarding and a bounded
+  two-task Apple Silicon application. Preserve OT-059–074 and open scientific
+  acceptance; move the detailed chronology to a dated research record and
+  redirect historical links. These are planned increments, not new fixes,
+  activated services or released installers.
+
 - Integrate the private Windows installer with the current laboratory plan and
   source-publication preparation. Preserve packaged runtime verification and
   setup source bindings, and refuse public-snapshot Windows bundling before

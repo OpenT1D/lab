@@ -1,6 +1,6 @@
 # Literature research plan: from evidence map to a lispro reference
 
-Version 1.0, 20 September 2026. **Original plan for OT-023 / LIT-001.** The subsequent [execution and decision](lit001-results.md) records the completed bounded search, source dossier, engine audit and synthetic numerical verification, together with unresolved source access and the limits on published-curve reproduction. The prospective wording below preserves the original plan; use the execution report for actual outcomes. No patient data were acquired. The [roadmap](../../ROADMAP.md#follow-up-work-packages) remains the canonical implementation plan.
+Version 1.0, 20 September 2026. **Original plan for OT-023 / LIT-001.** The subsequent [execution and decision](lit001-results.md) records the completed bounded search, source dossier, engine audit and synthetic numerical verification, together with unresolved source access and the limits on published-curve reproduction. The prospective wording below preserves the original plan; use the execution report for actual outcomes. No patient data were acquired. The [roadmap](../../ROADMAP.md) remains the canonical implementation plan.
 
 ## 1. Purpose and intended result
 

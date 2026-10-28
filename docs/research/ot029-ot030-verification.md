@@ -2,7 +2,7 @@
 
 **Status:** implemented and internally verified on 2 October 2026, on branch
 `codex/researcher-tools-plan`. This record closes the bounded local software
-packages in the [roadmap](../../ROADMAP.md#post-integration-internal-work-packages).
+packages in the [roadmap](roadmap-history-2026-10-28.md#post-integration-internal-work-packages).
 The [execution metadata](../../experiments/integration/ot029_ot030.json)
 binds exact commands, source revisions, runtime locks and local report hashes.
 

@@ -7,7 +7,7 @@
 The six implemented task routes offer frozen individual experiments and
 comparisons. Researchers still need to manage configuration changes, repeated
 attempts, archive discovery and separate locked runtime installation manually.
-The [roadmap](../../ROADMAP.md#functional-development-after-ot-031) selects
+The [roadmap](../research/roadmap-history-2026-10-28.md#functional-development-after-ot-031) selects
 OT-032, OT-033, OT-034 and OT-037 as the next internal software increments.
 
 ## Decision

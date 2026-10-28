@@ -76,7 +76,10 @@ not establish biological validity, clinical benefit or independent usability.
 
 ## Product direction
 
-The next increment develops a shared laboratory around the working routes:
+The [public-development queue](ROADMAP.md#public-development-priorities) selects
+agent-development improvements, reliability/CI work, documentation and a bounded
+Mac application as the immediate delivery priorities. The shared-laboratory
+increment develops common services around the working routes:
 common project, execution and result services, compatible native adapters and a
 question-led workbench. Its test is whether a second method and research task
 reuse the infrastructure with less integration work. The

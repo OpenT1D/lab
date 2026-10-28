@@ -8,7 +8,7 @@ The final locked check passes **1,390 tests with 13 existing skips** and the
 strict documentation build. No researcher, independent reviewer or licensed
 comparator access is confirmed. The human pilot, product decision and full
 OT-056 goal remain open.
-The [roadmap](../../ROADMAP.md#planned-mixed-meal-analysis-tasks) owns acceptance.
+The [roadmap](roadmap-history-2026-10-28.md#planned-mixed-meal-analysis-tasks) owns acceptance.
 The earlier [GUI exercise](../gui-researcher-exercise.md) has a different task
 and cannot supply observations for this pilot.
 

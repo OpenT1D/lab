@@ -6,7 +6,7 @@ It covers invented observations, fixed explicit kinetics and engineering
 uncertainty only. Human execution, empirical T1D validity, independent
 researcher usability and comparative product value remain unestablished.
 The [canonical guide](../observation-analysis.md) owns execution instructions;
-the [roadmap](../../ROADMAP.md#planned-mixed-meal-analysis-tasks) owns scope.
+the [roadmap](roadmap-history-2026-10-28.md#planned-mixed-meal-analysis-tasks) owns scope.
 
 ## Contract and reuse
 

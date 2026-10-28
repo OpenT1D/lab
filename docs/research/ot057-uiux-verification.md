@@ -4,7 +4,7 @@
 locally retested and integrated into local and GitHub main. This record covers
 internal software verification. Windows execution, independent human usability,
 the comparative OT-056 researcher pilot and empirical applicability remain open.
-The [roadmap](../../ROADMAP.md#mmtt-interface-follow-up-ot-057) owns the scope.
+The [roadmap](roadmap-history-2026-10-28.md#mmtt-interface-follow-up-ot-057) owns the scope.
 
 ## Implementation and integration identity
 

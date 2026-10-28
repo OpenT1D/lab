@@ -27,12 +27,12 @@ original-method findings and a technically verified G2P2C integration; the
 does not qualify it as a fair efficacy comparator. Cure-oriented M4/M5 work
 currently verifies attributed equations, synthetic couplings and data
 requirements; it does not establish a treatment result. The completed internal
-[work packages](ROADMAP.md#post-integration-internal-work-packages) add a common
+[work packages](docs/research/roadmap-history-2026-10-28.md#post-integration-internal-work-packages) add a common
 local task entry and separately specified M3 predictor and M4 secretion-source
 comparisons. The entry now registers ten routes, including `m4-compare`,
 the separately versioned `m4-study` and its explicit
 [maintained successor](docs/m4-maintained-study.md), `m4-study-secure`. The
-[functional development packages](ROADMAP.md#functional-development-after-ot-031)
+[functional development packages](docs/research/roadmap-history-2026-10-28.md#functional-development-after-ot-031)
 add configurable initial loads, immutable local campaigns, an archive catalogue
 and explicit task-directed setup. The [OT-032–037 record](docs/research/ot032-ot037-verification.md)
 binds their local execution, failure and reconstruction scope.
@@ -60,7 +60,7 @@ and linked evidence before extending any of these workflows.
 | Controller integration | Propose a bounded external-method task with source identity, causal inputs, action units, timing, rights and failure behavior. |
 | Cure-oriented research | Review the [OT-024 dossier](docs/research/m4-evidence-dossier.md) and [M4 evidence gaps](ROADMAP.md); contribute independent numerical assessment, suitable measurements or domain review before proposing a therapy model. |
 | Models and data | Assess a candidate with the [model guide](docs/research/models.md) or [data guide](docs/research/data.md). |
-| Software | Work on the next unblocked [roadmap work package](ROADMAP.md#follow-up-work-packages). |
+| Software | Work on the next unblocked [roadmap work package](ROADMAP.md#now-next-and-later). |
 
 Small corrections can go straight to a pull request. For a new module, dependency, interface or substantial feature, first describe the research task and proposed approach in an issue or draft pull request. Include what can be reused and what needs to change. A short design discussion is sufficient unless the decision affects the shared architecture.
 

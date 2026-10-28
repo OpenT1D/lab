@@ -19,7 +19,7 @@ current causal secretion callback.
 ## Decision
 
 Apply [decision 0045](0045-tool-first-research-platform.md) through one shared
-offline observation-analysis core and two bounded tasks. The [roadmap plan](../../ROADMAP.md#planned-mixed-meal-analysis-tasks)
+offline observation-analysis core and two bounded tasks. The [roadmap plan](../research/roadmap-history-2026-10-28.md#planned-mixed-meal-analysis-tasks)
 is canonical for scope, sequence, deliverables and proposed product criteria.
 
 Start with retrospective standardized MMTTs in adults with T1D and measurable
