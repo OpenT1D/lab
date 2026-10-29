@@ -193,6 +193,9 @@ cancellation. The locally complete 1,756-test check passes with 32 skips. Give
 only the hosted root job twenty minutes to finish the expanded suite; native
 stage/source deadlines and every scientific criterion remain unchanged. Retain
 the initial canceled job and final-revision rerun as separate evidence.
+The first local rerun identifies one stale policy-test assertion that still
+expects fifteen minutes; update it to the measured twenty-minute job contract.
+Retain that failed check separately and rerun the complete final revision.
 
 Actual baseline crash, forced outer deadline and cancellation preserve incomplete
 attempts and all planned slots. A stronger cancellation follows a completed
