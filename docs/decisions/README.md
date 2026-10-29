@@ -1,5 +1,7 @@
 # Decision records
 
+- [0082 — Installed source payload](0082-installed-source-payload.md): keep an explicit original-layout source/data closure behind isolated Python/CLI processes for the internal installed developer candidate.
+
 - [0081 — Minimal project services](0081-minimal-project-services.md): retain a complete sequenced ledger, isolated workers and exact trusted readers for the first two-route service increment.
 
 - [0080 — Two-route metadata contract packet](0080-two-route-contract-packet.md): freeze bounded shared descriptors and native payload/reader fixtures before extracting services; capability families remain provisional.

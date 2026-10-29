@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools==84.2.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "opent1d-lab"
+version = "0.0.0.dev0"
+description = "Internal installed two-route OpenT1D developer candidate"
+requires-python = ">=3.12,<3.13"
+dependencies = []
+license = {file = "LICENSE"}
+
+[tool.setuptools]
+packages = ["opent1d_lab"]
+script-files = ["opent1d-lab"]
+include-package-data = false
+
+[tool.setuptools.package-data]
+opent1d_lab = ["_manifest.json", "_payload/app/**/*", "_payload/app/.python-version"]

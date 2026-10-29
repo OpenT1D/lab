@@ -21,7 +21,7 @@ from .routes import ROOT, forensic_result, native_result, reader_identity, valid
 from .store import require, safe_path, snapshot, write
 
 
-def begin(store, plan_id, *, retry_of=None, mode="execute"):
+def begin(store, plan_id, *, retry_of=None, mode="execute", application=None):
     store.require_lease(write_access=True)
     require(mode in {"execute", "import"}, "Unsupported attempt mode")
     require(plan_id in store.plans, "Unknown frozen plan")
@@ -35,6 +35,9 @@ def begin(store, plan_id, *, retry_of=None, mode="execute"):
         and (not prior or prior[-1][0] in store.finishes),
         "Explicit retry must name the previous terminal attempt",
     )
+    host = runtime_identity()
+    if application is not None:
+        host["application"] = application
     attempt = store.append(
         "start",
         {
@@ -42,7 +45,7 @@ def begin(store, plan_id, *, retry_of=None, mode="execute"):
             "ordinal": len(prior) + 1,
             "retry_of": retry_of,
             "mode": mode,
-            "host": runtime_identity(),
+            "host": host,
         },
     )
     work = store.path / "work" / attempt
@@ -196,7 +199,7 @@ def supervise(argv, log_path, *, timeout, cancel=None, grace=30):
     return receipt
 
 
-def execute(store, plan_id, *, retry_of=None, timeout=3600, cancel=None):
+def execute(store, plan_id, *, retry_of=None, timeout=3600, cancel=None, backend=None):
     store.require_lease(write_access=True)
     require(
         type(timeout) in (int, float) and math.isfinite(timeout) and timeout > 0,
@@ -204,7 +207,12 @@ def execute(store, plan_id, *, retry_of=None, timeout=3600, cancel=None):
     )
     descriptor, plan = store.plans[plan_id]
     validate_freeze(plan, descriptor, current=True)
-    attempt, work = begin(store, plan_id, retry_of=retry_of)
+    attempt, work = begin(
+        store,
+        plan_id,
+        retry_of=retry_of,
+        application=None if backend is None else backend.application,
+    )
     args = SimpleNamespace(
         config=plan / "input"
         if descriptor["task"] == "mmtt-sensitivity"
@@ -214,7 +222,11 @@ def execute(store, plan_id, *, retry_of=None, timeout=3600, cancel=None):
     )
     argv = receipt = None
     try:
-        admission = check(TASKS[descriptor["task"]], args)
+        admission = (
+            check(TASKS[descriptor["task"]], args)
+            if backend is None
+            else backend.check(TASKS[descriptor["task"]], args)
+        )
         write(work / "admission.json", admission)
         if not admission["runtimes_ready"]:
             receipt = {
@@ -224,7 +236,11 @@ def execute(store, plan_id, *, retry_of=None, timeout=3600, cancel=None):
                 "remaining_owned_processes": [],
             }
         else:
-            argv = command_for(TASKS[descriptor["task"]], args)
+            argv = (
+                command_for(TASKS[descriptor["task"]], args)
+                if backend is None
+                else backend.command_for(TASKS[descriptor["task"]], args)
+            )
     except (OSError, ValueError, KeyError, TypeError) as error:
         receipt = {
             "status": "failed",
@@ -255,7 +271,7 @@ def recover(store, attempt, *, execution_stopped=False):
     return finish(store, attempt, work, receipt, forensic=True)
 
 
-def reconstruct(store, attempt, output, *, allow_failed=False):
+def reconstruct(store, attempt, output, *, allow_failed=False, backend=None):
     store.require_lease()
     require(attempt in store.finishes, "Unfinished attempt; native reconstruction unavailable")
     finish_record, evidence = store.finishes[attempt]
@@ -280,7 +296,11 @@ def reconstruct(store, attempt, output, *, allow_failed=False):
         "Fresh output outside the project required",
     )
     args = SimpleNamespace(archive=evidence / "native", output=output, allow_failed=allow_failed)
-    argv = command_for(TASKS[descriptor["task"]], args, operation="reconstruct")
+    argv = (
+        command_for(TASKS[descriptor["task"]], args, operation="reconstruct")
+        if backend is None
+        else backend.command_for(TASKS[descriptor["task"]], args, operation="reconstruct")
+    )
     # Reader cwd/env/module are trusted and fixed by registry, never an archive.
     with tempfile_log() as logfile:
         receipt = supervise(argv, logfile, timeout=600)

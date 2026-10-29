@@ -1,0 +1,5 @@
+#!/bin/sh
+# POSIX CPython 3.12 virtual environments; never start Python through PATH.
+unset __PYVENV_LAUNCHER__ PYTHONHOME PYTHONPATH
+sdk_bin=$(CDPATH='' cd -- "${0%/*}" && pwd -P) || exit 2
+exec "$sdk_bin/python" -I -B -S "$sdk_bin/../lib/python3.12/site-packages/opent1d_lab/launcher.py" "$@"

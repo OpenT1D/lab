@@ -381,7 +381,7 @@ def validate_finish(evidence, data, descriptor, plan):
         )
 
 
-def freeze(store, task, inputs, *, parent=None):
+def freeze(store, task, inputs, *, parent=None, application=None):
     import tempfile
 
     store.require_lease(write_access=True)
@@ -389,6 +389,8 @@ def freeze(store, task, inputs, *, parent=None):
     with tempfile.TemporaryDirectory(prefix="opent1d-freeze-") as staging:
         captured = Path(staging).resolve() / "plan"
         descriptor = capture(task, inputs, captured)
+        if application is not None:
+            write(captured / "application.json", application)
         if parent is not None:
             require(store.plans[parent][0]["task"] == task, "Derived task differs")
         identity = store.append(
@@ -400,14 +402,14 @@ def freeze(store, task, inputs, *, parent=None):
     return identity
 
 
-def import_attempt(store, plan_id, archive, *, retry_of=None):
+def import_attempt(store, plan_id, archive, *, retry_of=None, application=None):
     """Explicit passive intake of existing native evidence, including failed archives."""
     from .execution import begin, finish
 
     store.require_lease(write_access=True)
     descriptor, plan = store.plans[plan_id]
     native_result(Path(archive), descriptor, plan)
-    attempt, work = begin(store, plan_id, retry_of=retry_of, mode="import")
+    attempt, work = begin(store, plan_id, retry_of=retry_of, mode="import", application=application)
     snapshot(archive, work / "native")
     result = native_result(work / "native", descriptor, plan)
     receipt = {
