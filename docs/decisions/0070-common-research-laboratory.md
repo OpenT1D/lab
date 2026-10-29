@@ -17,7 +17,7 @@ form a stable general laboratory interface.
 The product direction is a connected, modular T1D laboratory. A single polished
 analysis route is insufficient evidence of platform reuse; adding separate
 runners and screens for every question would preserve the same integration
-burden. The [product-direction research](../onderzoek/productrichting.md)
+burden. The [product-direction research](../research/product-direction.md)
 assesses the evidence, alternatives and remaining uncertainty.
 
 ## Decision

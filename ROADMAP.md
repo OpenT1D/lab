@@ -209,7 +209,7 @@ The shared-laboratory increment develops common services around the existing
 working routes. [Decision 0070](docs/decisions/0070-common-research-laboratory.md)
 records the direction; the [product requirements](docs/product-laboratory.md)
 own the research jobs, acceptance criteria and 48-capability traceability map.
-The [product-direction research report](docs/onderzoek/productrichting.md) owns the
+The [product-direction research report](docs/research/product-direction.md) owns the
 comparative evidence and its limits. This section is the canonical sequence for
 shared-laboratory extraction. The public-development queue above selects the
 immediate maintainer work. The dated

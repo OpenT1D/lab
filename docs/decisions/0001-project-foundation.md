@@ -6,7 +6,7 @@ Status: accepted for the repository foundation. Date: 2026-09-12.
 
 OpenT1D aims to become an open modular virtual laboratory connecting metabolic and biological T1D research. The initial repository contained a research report and roadmap. It needs a coherent public-facing structure before implementation begins.
 
-The [repository research](../onderzoek/repositorybasis.md) compares established projects and standards. The [scientific research](../onderzoek/projectopzet.md) covers candidate models, data and evidence.
+The [repository research](../research/repository-foundation.md) compares established projects and standards. The [scientific research](../research/project-design.md) covers candidate models, data and evidence.
 
 ## Decision
 

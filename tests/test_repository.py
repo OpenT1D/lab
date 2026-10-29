@@ -131,12 +131,12 @@ class DocumentationTests(unittest.TestCase):
     def test_rendered_reports_guides_and_ui_use_english(self) -> None:
         self.write(
             "docs/_toc.yml",
-            "root: docs/index\nentries:\n  - file: docs/onderzoek/report\n"
+            "root: docs/index\nentries:\n  - file: docs/research/foundation-report\n"
             "  - file: docs/research/internal-verification-results\n"
             "  - file: docs/research/english-guide\n",
         )
         self.write(
-            "docs/onderzoek/report.md",
+            "docs/research/foundation-report.md",
             "# Research report\n\nResearch content.\n\n## Research findings\n\n"
             "More research content.\n",
         )
@@ -149,7 +149,7 @@ class DocumentationTests(unittest.TestCase):
         result = self.build()
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         output = self.root / "_build" / "html"
-        reports = {"docs/onderzoek/report", "docs/research/internal-verification-results"}
+        reports = {"docs/research/foundation-report", "docs/research/internal-verification-results"}
         for page in (
             *sorted(reports),
             "docs/research/english-guide",

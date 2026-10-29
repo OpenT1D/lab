@@ -102,7 +102,7 @@ supports report review and verification, not M5 execution.
 [tool-first direction](decisions/0045-tool-first-research-platform.md) with
 explicit common-laboratory delivery and reuse criteria. The
 [roadmap delivery plan](../ROADMAP.md#common-laboratory-delivery-plan) is
-canonical. The [product-direction research](onderzoek/productrichting.md)
+canonical. The [product-direction research](research/product-direction.md)
 provides its evidence and alternatives, not a competing backlog.
 
 Standards-based exchange, larger compute backends, devices, personalization

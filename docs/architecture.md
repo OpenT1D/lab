@@ -40,7 +40,7 @@ same-estimator notebooks internally; empirical and human acceptance remain open.
 ## Common laboratory: intended structure and migration
 
 The [product requirements](product-laboratory.md),
-[research assessment](onderzoek/productrichting.md) and
+[research assessment](research/product-direction.md) and
 [roadmap delivery plan](../ROADMAP.md#common-laboratory-delivery-plan) define
 the accepted direction and future acceptance work. The following describes
 responsibilities to extract from existing routes; it does not introduce
@@ -140,7 +140,7 @@ The Markdown [protocol template](templates/experiment-protocol.md) defines the i
 
 ## Standards and dependencies
 
-Consider SBML, CellML, SED-ML/OMEX, FMI and PEtab for concrete exchange and calibration needs. Their roles and limitations are reviewed in the [research report](onderzoek/projectopzet.md). Compatibility with any standard is a future claim that needs a test.
+Consider SBML, CellML, SED-ML/OMEX, FMI and PEtab for concrete exchange and calibration needs. Their roles and limitations are reviewed in the [research report](research/project-design.md). Compatibility with any standard is a future claim that needs a test.
 
 Keep the experimental core independent of unnecessary engines and optional
 analysis packages. Preserve native environments and add integrations with
