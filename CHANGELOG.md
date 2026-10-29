@@ -52,13 +52,14 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 - Add named local check stages, explicit Linux/macOS/Windows synthetic task
   smokes and four real Chromium flows. Keep the broad root job and historical
   native gates; the stable required public result accepts only successful root,
-  platform and browser families. Hosted platform results remain to be measured.
+  platform and browser families. Actual hosted platform results are recorded in
+  the roadmap, alongside the integrated main and live-publication acceptance.
 
 - Prepare the bounded public CI baseline with explicit Python/uv/Node setup,
   independent private/manual guards for historical native jobs and short-lived
   diagnostic artifacts. Add the exact Action allowlist and a staged activation
-  procedure; hosted results and platform settings still require actual execution
-  and readback.
+  procedure. The later activation, settings readback and hosted results are
+  recorded in the public security boundary and roadmap.
 
 - Retain local-tool process ownership after normal worker exit or crash, so
   catalogue verification, historical readers and task setup clean up owned

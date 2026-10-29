@@ -4,6 +4,24 @@ This guide distinguishes repository files from settings and services that requir
 
 ## Current setup
 
+**Public setup checked 29 October 2026.**
+
+`OpenT1D/lab` is the public development repository. The
+[integrated-main run](https://github.com/OpenT1D/lab/actions/runs/40792457095)
+on `45fd3aa` passed the bounded public gate and actually published the
+[documentation site](https://opent1d.github.io/lab/). Main has strict app-bound
+`Repository checks`, pull-request and conversation requirements, including for
+administrators. The [security boundary](publication-security.md#ci-and-branch-controls)
+owns the settings/readback record, dependency-service observations and open
+advisories; the [publication guide](documentation-publication.md#acceptance-evidence)
+owns deployment and live-site acceptance.
+
+The [unsigned Apple Silicon MMTT candidate](mac-mmtt-candidate.md) has bounded
+local verification. No supported product version or public binary release has
+been published. Signing, clean-host and independent-user gates remain separate.
+
+## Earlier private-archive audit — 25 October 2026
+
 As checked through the GitHub API on **25 October 2026**, `OpenT1D/OpenT1D`
 is private, Issues are enabled and Discussions are disabled. Its description,
 topics and homepage are empty. The default branch is `main` at `3787cc0`.
@@ -37,10 +55,10 @@ On 28 October 2026, the maintainer authorized the reviewed source publication.
 commit. It is development research source, with no version tag, release,
 installer or bundled runtime. The private development archive is not pushed.
 
-GitHub Actions is disabled. The initial main branch uses the
+At initial source publication, GitHub Actions was disabled. Main then used the
 [manual branch policy](../.github/public-source-manual-branch-protection.json):
 pull requests, conversation resolution and administrator enforcement, no force
-pushes/deletion, and no required CI status. No hosted pass is claimed. Private
+pushes/deletion, and no required CI status. That initial state supplied no hosted pass. Private
 vulnerability reporting, dependency alerts and available secret scanning/push
 protection remain separate repository controls. The dated preparation record
 retains the earlier empty-destination observations and local verification.
@@ -52,34 +70,33 @@ selecting or publishing to a GitHub destination.
 
 ## Before opening the project to public contributions
 
-The requested initial source publication has no hosted CI/CD. Disable Actions
-before pushing, then use the [manual branch-control variant](publication-security.md#ci-and-branch-controls)
-with pull requests, conversation resolution, administrator enforcement and no
-force pushes/deletion, but no required CI status. Hosted-CI checklist items below
-remain deferred until explicit activation; they are not local-check failures or
-prerequisites for publishing this development source snapshot.
+The initial source publication used the
+[manual branch-control variant](publication-security.md#ci-and-branch-controls)
+with Actions disabled. The later reviewed activation supplied actual PR/main
+results and the required CI status. Keep those dated stages distinct; this
+checklist records the completed public setup and the remaining maintainer tasks.
 
 - [x] Preserve the original private development archive and prepare an independent public source root. Select its actual public destination separately.
 - [x] Record original-material authority, reviewed upstream/font notices and explicit source-only exclusions in [the rights inventory](../publication-rights.json). The two complete upstream parameter rows are withheld; originals remain private.
 - [x] Triage all 50 distinct base advisories; patch root entries and enforce [public installation/CI scope](publication-security.md), preserving historical locks and their open alerts.
 - [x] Verify the independent public root `de3d111f856c` and its receiving bundle clone, full checks, MMTT reports and fresh history scan. The [dated audit](research/publication-preparation.md#final-source-only-candidate) records this exact export and its four unavailable historical Actions-log downloads as explicit limits.
-- [x] Set and verify preparation-status description and five research topics on the empty `OpenT1D/lab` destination; no homepage is advertised.
+- [x] Set and verify preparation-status description and five research topics on the then-empty `OpenT1D/lab` destination. No homepage was advertised at that preparation stage; the verified site is now linked.
 - [x] Record the maintainer-selected confidential contact in both security and conduct policies.
 - [x] Maintainer confirmed ownership and message receipt at the chosen contact on 25 October 2026; no assistant test email was sent.
 - [x] Enable private vulnerability reporting on `OpenT1D/lab` and verify the enabled API state. End-to-end report/notification delivery is not claimed; no fictitious report was sent.
-- [ ] After explicit source-publication authorization, run `Repository checks` on the new public head and resulting default branch. The current destination is empty; native jobs remain excluded from the offering.
-- [ ] Verify the current pull-request head; the [historical foundation pass](https://github.com/OpenT1D/OpenT1D/actions/runs/34717719104) is not current-head evidence.
-- [ ] After a future authorized first source push creates main, activate [.github/public-source-branch-protection.json](../.github/public-source-branch-protection.json) for the public source scope (see [activation steps](publication-security.md#activate-on-the-selected-public-destination)): require the `Repository checks` status and prevent force pushes and deletion. Verify enforcement, including for administrators.
-- [ ] Require pull requests for shared changes. Do not require an approving reviewer who does not exist; add required independent review when another maintainer can provide it.
+- [x] Run `Repository checks` on the reviewed public head and resulting default branch: [PR 24 head](https://github.com/OpenT1D/lab/actions/runs/40790694303) and [integrated main](https://github.com/OpenT1D/lab/actions/runs/40792457095) passed. Native jobs remain excluded from the offering.
+- [x] Verify the exact selected pull-request head and resulting main revision. Each subsequent change still needs its own required results; the private historical foundation pass does not supply them.
+- [x] Activate and read back [.github/public-source-branch-protection.json](../.github/public-source-branch-protection.json) for the bounded public scope: require strict app-bound `Repository checks`, prevent force pushes/deletion and enforce controls for administrators.
+- [x] Require pull requests for shared changes. No additional approving reviewer is required; add required independent review when another maintainer can provide it.
 - [x] Confirm `.github/CODEOWNERS` names an account with write access. CODEOWNERS alone does not enforce approval.
 - [x] Confirm Actions permissions are read-only by default.
 - [x] Require approval for all external contributors on `OpenT1D/lab`, verified through its fork-workflow approval API.
 - [x] Verify that dependency alerts are enabled and inventory all open alerts (25 October audit); the reviewed mitigations and remaining historical alerts are recorded in [the public source policy](publication-security.md).
 - [ ] Confirm the maintainer's Dependabot notification preferences and delivery; use the repository's Security tab for alert triage in the meantime.
 - [x] Enable and read back secret scanning and push protection on the public destination. No source was pushed to test a real credential rejection.
-- [ ] Verify issue forms, the pull-request template, license detection and the citation panel after the default branch exists.
+- [ ] Verify the public issue forms, pull-request template, license detection and citation panel on the existing default branch; these UI/service checks remain separate from repository tests.
 - [ ] Run the external-link review on the public `OpenT1D/lab` URLs; retain the narrow exception only for the separate private `OpenT1D/OpenT1D` archive.
-- [ ] Decide whether to publish the built documentation using GitHub Pages or another host. Verify its URL before adding a website link or badge.
+- [x] Publish the checked main documentation through GitHub Pages, verify its deployment URL and live navigation/search/downloads, then add the repository homepage. The [publication receipt](documentation-publication.md#acceptance-evidence) binds the observed revision.
 
 Changing repository visibility, enabling hosting and sending community announcements are separate publication actions. This checklist does not perform them.
 
@@ -136,7 +153,7 @@ unperformed steps open. Do not infer scientific validity from these checks.
 
 ## Main-branch protection
 
-For the public source offering, use the prepared
+For the public source offering, the active configuration follows the
 [public source policy](../.github/public-source-branch-protection.json). It requires
 pull requests, the up-to-date `Repository checks` result from GitHub Actions and
 resolved review conversations, blocks force pushes/deletion and applies to
@@ -175,7 +192,20 @@ Do not automatically close unresolved scientific issues as stale. Review old iss
 
 The required workflow installs the locked development environment and runs the same command as contributors. It checks the navigation and tests that local notes stay out of the generated pages and search index. It uses read-only permissions, SHA-pinned actions, a timeout and cancellation of superseded runs. It does not need repository secrets or run pull-request code with privileged triggers.
 
-Automatic Dependabot version updates are disabled. The inactive `.github/dependabot.example.yml` preserves the optional monthly GitHub Actions/root-tooling configuration for a later explicit activation. The separately frozen native environments are not configured for automatic monthly version updates. Updates are reviewed, not automatically merged. Vulnerability alerts are enabled separately; the maintainer reviews them in the repository's Security tab and checks the affected version and use before deciding whether to update, mitigate or dismiss with a reason. Recheck dependency-graph coverage when the lockfile or packaging changes. These alerts do not cover every risk in the interpreter, downloaded browser libraries or commit-pinned Actions. A dependency changing numerical behavior in a future model integration also needs scientific-impact review.
+The active `.github/dependabot.yml` enables monthly grouped minor/patch updates
+for root uv tooling and pinned Actions, with explicit major-version ignore rules
+and three open update PRs per ecosystem. The [observed discovery and refresh runs](publication-security.md#prepared-dependency-updates-and-pr-review)
+record actual service execution. The separately frozen native environments are
+excluded. Updates require review and the complete public gate; they are not
+automatically merged.
+
+Vulnerability alerts are enabled separately; the maintainer reviews them in the
+repository's Security tab and checks the affected version and use before deciding
+whether to update, mitigate or dismiss with a reason. Recheck dependency-graph
+coverage when the lockfile or packaging changes. These alerts do not cover every
+risk in the interpreter, downloaded browser libraries or commit-pinned Actions.
+A dependency changing numerical behavior in a future model integration also
+needs scientific-impact review.
 
 The external-link workflow is manually triggered and reports link-check results in its log. Publisher access restrictions can cause false alarms, so it is not a required merge check. Revisit temporary exceptions before public releases.
 

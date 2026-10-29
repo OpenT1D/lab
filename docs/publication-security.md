@@ -84,7 +84,7 @@ keep the recorded old environments and scientific evidence intact.
 
 ## CI and branch controls
 
-When enabled, push and pull-request CI runs the root repository suite and documentation build,
+Active push and pull-request CI runs the root repository suite and documentation build,
 the standard-library paired boundary check, three-host public task smokes and four
 Linux Chromium flows. One required `Repository checks` result accepts only successful
 root, platform and browser families, plus dependency review on pull requests.
@@ -104,8 +104,8 @@ disabled GitHub Actions on `OpenT1D/lab`. Its local checks and exact source rece
 are not hosted results. Initial main used pull-request and conversation
 requirements, administrator enforcement and force-push/deletion protection
 **without a required CI status**. Requiring an unexecuted check while Actions is
-disabled would prevent ordinary changes. The activation procedure below prepares
-the later operational change without claiming it has happened.
+disabled would prevent ordinary changes. The later activation and actual hosted
+results are recorded below; this initial state remains historical evidence.
 
 Use [.github/public-source-branch-protection.json](../.github/public-source-branch-protection.json)
 for the public source default branch. It requires the actual **Repository
@@ -120,17 +120,37 @@ by workflows disabled, four selected Action revisions, approval for all external
 contributors, dependency alerts, private reporting, secret scanning and push
 protection. These dated observations do not establish the current platform
 settings. Current checked-in workflows pin their Action references; the prepared
-allowlist below admits exactly the checked-in revisions. A separately enforced
-platform SHA-pinning flag is not asserted here.
+allowlist below admits exactly the checked-in revisions. The later platform
+readback belongs to the activated baseline below.
 
 On 28 October 2026 the maintainer authorized publication of the reviewed source
 without CI/CD. Actions was disabled. The initial main branch used
 [the manual branch policy](../.github/public-source-manual-branch-protection.json),
 with pull requests, conversation resolution, administrator enforcement and no
 force pushes/deletion; it does not require an unexecuted CI status. The
-CI-enabled JSON above remains reserved for a later explicit activation.
+CI-enabled JSON above was reserved until the later reviewed activation.
 The separate private archive's earlier plan/account limitations remain dated
 observations. Local verification is not a hosted CI result.
+
+### Activated public baseline — 29 October 2026
+
+Actions was subsequently enabled for the reviewed public scope. The settings
+readback recorded nine selected full-SHA Action revisions, enforced SHA pinning,
+read-only workflow tokens, workflow PR approval disabled and approval required
+for all external contributors. Main requires the strict app-bound `Repository
+checks` result (GitHub Actions app `15368`), pull requests and conversation
+resolution, including for administrators, with force pushes and deletion disabled.
+
+The [final Mac PR-head run](https://github.com/OpenT1D/lab/actions/runs/40790694303)
+passed dependency review and every required public family. After merge, the
+[integrated-main run](https://github.com/OpenT1D/lab/actions/runs/40792457095)
+on clean source `45fd3aa4866f74862717e8a51c77b867f2b0a42f` passed 1,700 root tests
+with 33 expected skips, all three host smokes, four Chromium flows and the
+aggregate. Its PR-only dependency review was skipped as intended; all fifteen
+historical native jobs remained excluded. The same run actually published Pages;
+the [publication guide](documentation-publication.md#acceptance-evidence) records
+deployment and live-site acceptance. These observations qualify the bounded
+public development loop, not historical native execution or a product release.
 
 ## Automatic dependency jobs during initial publication
 
@@ -158,8 +178,8 @@ for root uv tooling and pinned Actions, capped at three open version-update PRs
 per ecosystem. Its root uv scan explicitly excludes `experiments/**`,
 `packaging/**` and `tests/**`. No historical numerical lock or bundled runtime is
 automatically remediated by this configuration. Merging it to the default branch
-enables update discovery; actual service runs and update PRs need their own
-receipts. Update PRs still require review and the complete public gate.
+enables update discovery; the actual service observations below provide its
+bounded receipt. Update PRs still require review and the complete public gate.
 
 Both version-update groups select only minor/patch releases. A separate wildcard
 SemVer-major ignore rule in each ecosystem prevents unmatched major upgrades
@@ -173,6 +193,18 @@ failed to resolve Sphinx 9.1.1 against MyST Parser 4's Sphinx-before-9 requireme
 It also opened a grouped proposal containing MyST Parser 5.1.0. Those outcomes
 exposed the missing major-version filter. Local policy checks do not establish
 a successful service run with the corrected configuration.
+
+After [PR 21](https://github.com/OpenT1D/lab/pull/21) merged the corrected policy,
+the [uv discovery](https://github.com/OpenT1D/lab/actions/runs/40789271964),
+[Actions discovery](https://github.com/OpenT1D/lab/actions/runs/40789271640),
+[uv refresh](https://github.com/OpenT1D/lab/actions/runs/40789276580) and
+[Actions refresh](https://github.com/OpenT1D/lab/actions/runs/40789276112) runs all
+succeeded. Their effective job definitions retained minor/patch groups and the
+wildcard major-version ignore rules. The uv logs explicitly ignored Sphinx/MyST
+updates and retained Sphinx 8.2.3/MyST Parser 4.0.1. The generated
+[Actions proposal](https://github.com/OpenT1D/lab/pull/22) and
+[root-tooling proposal](https://github.com/OpenT1D/lab/pull/23) were left for
+separate review; no historical numerical locks were changed by these observations.
 
 The pinned Dependency Review v5 job has only `contents: read`, runs only on
 `pull_request` and blocks newly introduced high/critical vulnerabilities in
@@ -256,6 +288,12 @@ the reviewed hash-pinned path did not demonstrate SSRF. This bounded triage does
 not prove every alert false or qualify other workflows. All fourteen signals
 were left open. The 228 historical dependency alerts were also left unchanged;
 neither this triage nor the new PR delta check supplies automatic dismissals.
+
+The [29 October main CodeQL run](https://github.com/OpenT1D/lab/actions/runs/40792456626)
+also succeeded for all three languages on `45fd3aa`. Its analyses reported the
+same fourteen Python signals and zero JavaScript/TypeScript or Actions signals;
+the read-only current-main inventory still contained open alerts 1–14. No alerts
+were dismissed or changed. This is a dated observation, not a clean-baseline claim.
 
 ## Activate on the selected public destination
 

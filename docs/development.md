@@ -193,7 +193,8 @@ are pinned to full commit hashes with readable release comments. The recognized
 Actions, with at most three open update PRs per ecosystem. Root uv excludes
 `experiments/`, `packaging/` and `tests/`; it does not maintain historical native
 locks or browser/package fixtures. Merging this configuration to the default
-branch enables that update service; a local file is not an observed service run.
+branch enables that update service; its [observed hosted discovery and refresh runs](publication-security.md#prepared-dependency-updates-and-pr-review)
+are recorded separately from repository verification.
 
 Both groups accept only minor/patch version updates, and each ecosystem also
 ignores all SemVer-major version updates. A group filter alone leaves unmatched
