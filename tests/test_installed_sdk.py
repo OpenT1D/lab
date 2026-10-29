@@ -753,7 +753,11 @@ class InstalledSDK(unittest.TestCase):
     def test_builder_refuses_facade_changed_after_clean_snapshot(self):
         source = self.root / "disposable-source"
         source.mkdir()
-        shutil.copytree(ROOT / "packaging/sdk", source / "packaging/sdk")
+        shutil.copytree(
+            ROOT / "packaging/sdk",
+            source / "packaging/sdk",
+            ignore=shutil.ignore_patterns("__pycache__", "*.pyc"),
+        )
         shutil.copyfile(ROOT / "LICENSE", source / "LICENSE")
         for args in (
             ["init", "--quiet"],
