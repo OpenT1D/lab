@@ -77,6 +77,7 @@ def main(site, project, plan):
                     "plan": plan,
                     "retry_of": None,
                     "timeout": 10,
+                    "runtime_attachment": None,
                 },
                 cancel=cancel,
             )

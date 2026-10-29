@@ -9,6 +9,12 @@ version `0.0.0.dev0` is internal; no release, stable API, general upgrade suppor
 or independent usability is claimed. The
 [verification record](research/ot060-installed-route.md) owns measured scope.
 
+The explicit [installed M4 successor](installed-m4.md) adds a version-2 artifact
+with reviewed, separately attached dependency directories. Its own
+[native verification record](research/ot060-native-m4.md) separates current
+execution/parity/relocation evidence from the historical task and this initial
+candidate's passive M4 checks.
+
 ## Build and install
 
 The builder uses the separately locked root tooling. Start from a clean source

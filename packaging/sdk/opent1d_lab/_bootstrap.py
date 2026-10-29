@@ -73,9 +73,11 @@ def main():
         modules = {
             "mmtt-sensitivity": "experiments.observation_analysis",
             "m4-study-secure": "experiments.m4.secure_study",
+            "m4-study-installed": "experiments.m4.installed_study",
         }
         if (
             task not in modules
+            or task not in checked["tasks"]
             or operation not in {"run", "reconstruct"}
             or (task == "m4-study-secure" and operation == "run")
         ):

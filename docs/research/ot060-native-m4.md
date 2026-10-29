@@ -67,7 +67,28 @@ locked-runtime reproduction.
 
 ## Evidence status
 
-Implementation, installation, numerical execution and relocation are pending.
+The reviewed new native34/observer12/build8 dependency closures have installed
+successfully in disposable environments. Initial installed development checks
+run all twelve unchanged native numerical tests successfully. Full study,
+parity and relocation acceptance remain pending.
+
+The original C-peptide suite contains fifteen cases. In the installed source
+layout, eleven numerical and two other cases pass while two historical recorder
+cases fail before numerical work on their original Git lookup. All fifteen
+unchanged cases pass from a real source checkout with the same SDK interpreter,
+reviewed observer overlay and attachment. The M4 observation path uses
+`case_record → solve → simulate`, not that historical standalone recorder.
+Full installed task observation/relocation still requires separate successful
+execution. Preserve the installed helper-suite failure rather than reporting it
+as an installed pass. The additional standalone beta-cell helper suite also has
+checkout-based recorder cases; its full source control is separate.
+
+Development failures before native evaluation include an overstrict uv version
+parser, mistakenly offline installer environment, exclusive receipt rewrite,
+namespace-parent assumptions and missing explicit distutils startup. Their logs
+are retained. These are not numerical discrepancies or reasons to change a
+baseline/tolerance.
+
 Retain full local runtime audits, candidate/source identities, commands, actual
 results, failures and limitations under ignored `results/ot060-native-m4/`.
 Keep full upstream parameter/table material out of public artifacts while its

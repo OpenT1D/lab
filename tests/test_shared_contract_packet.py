@@ -15,7 +15,7 @@ from experiments.m4.secure_study import run as m4_run
 from experiments.observation_analysis import plan as mmtt_plan
 from experiments.observation_analysis import run as mmtt_run
 from experiments.shared_contracts import inventory as inventory_module
-from experiments.shared_contracts.core import asset, identity, record, validate
+from experiments.shared_contracts.core import asset, digest, identity, record, validate
 from experiments.shared_contracts.inventory import inventory
 from experiments.shared_contracts.selected import FIXTURES, ROOT, boundary, reader
 from experiments.workflows.registry import TASKS
@@ -40,7 +40,28 @@ class ContractPacketTests(unittest.TestCase):
 
     def test_frozen_inventory_covers_ten_exact_route_boundaries(self):
         frozen = load(ROOT / "experiments/shared_contracts/route-inventory.json")
-        self.assertEqual(frozen, inventory())
+        current = inventory()
+        transition = load(ROOT / "experiments/shared_services/administration-transition.json")
+        self.assertEqual(transition["schema"], "opent1d.route-administration-transition/1")
+        self.assertEqual(
+            transition["base_inventory_sha256"],
+            digest((ROOT / "experiments/shared_contracts/route-inventory.json").read_bytes()),
+        )
+        old_admin, current_admin = (
+            value["administration_sources_sha256"] for value in (frozen, current)
+        )
+        self.assertEqual(set(old_admin), set(current_admin))
+        changed = {
+            name: {"before": old_admin[name], "after": current_admin[name]}
+            for name in old_admin
+            if old_admin[name] != current_admin[name]
+        }
+        self.assertEqual(set(changed), {"publication-security.json"})
+        self.assertEqual(transition["changes"], changed)
+        self.assertEqual(
+            {k: v for k, v in frozen.items() if k != "administration_sources_sha256"},
+            {k: v for k, v in current.items() if k != "administration_sources_sha256"},
+        )
         self.assertEqual(set(frozen["routes"]), set(TASKS))
         self.assertEqual(len(TASKS), 10)
         for name in ("mmtt-sensitivity", "mmtt-sampling"):

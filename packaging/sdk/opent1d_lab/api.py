@@ -27,10 +27,14 @@ class Project:
             parent=parent,
         )
 
-    def check(self, plan):
-        return self._call("check", plan=plan)
+    def check(self, plan, *, runtime_attachment=None):
+        return self._call(
+            "check",
+            plan=plan,
+            runtime_attachment=None if runtime_attachment is None else _path(runtime_attachment),
+        )
 
-    def run(self, plan, *, retry_of=None, timeout=600, cancel=None):
+    def run(self, plan, *, retry_of=None, timeout=600, cancel=None, runtime_attachment=None):
         return invoke(
             {
                 "action": "run",
@@ -38,6 +42,9 @@ class Project:
                 "plan": plan,
                 "retry_of": retry_of,
                 "timeout": timeout,
+                "runtime_attachment": None
+                if runtime_attachment is None
+                else _path(runtime_attachment),
             },
             cancel=cancel,
         )
@@ -84,3 +91,14 @@ def validate(task, inputs):
 
 def installation():
     return invoke({"action": "installation"})
+
+
+def attach_runtimes(native_site, observer_site, output):
+    return invoke(
+        {
+            "action": "attach",
+            "native_site": _path(native_site),
+            "observer_site": _path(observer_site),
+            "output": _path(output),
+        }
+    )

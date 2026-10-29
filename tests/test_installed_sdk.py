@@ -324,6 +324,44 @@ class InstalledSDK(unittest.TestCase):
                 (archive / name).read_bytes(), (self.root / "failed-rebuilt" / name).read_bytes()
             )
 
+    def test_m4_successor_requires_explicit_attachment_and_protects_store_outputs(self):
+        project = self.root / "successor-project"
+        self.call("create", "--project", project, "--name", "Invented reviewed M4 successor")
+        plans = []
+        for case in ("fasting", "gastric_load_15g"):
+            inputs = self.call(
+                "example",
+                "--task",
+                "m4-study-installed",
+                "--case",
+                case,
+                "--output",
+                self.root / case,
+            )["inputs"]
+            flags = ["--task", "m4-study-installed", "--config", inputs["config.json"]]
+            self.call("validate", *flags)
+            parent = ["--parent", plans[0]] if plans else []
+            plans.append(self.call("freeze", "--project", project, *flags, *parent)["plan"])
+        self.assertFalse(
+            self.call("check", "--project", project, "--plan", plans[0])["runtimes_ready"]
+        )
+        failed = self.call("run", "--project", project, "--plan", plans[0], expected=1)
+        self.assertEqual(failed["result"]["payload"], "forensic")
+        self.assertEqual(set(failed["result"]["slot_statuses"].values()), {"unavailable"})
+        before = self.call("info", "--project", project)["head"]
+        refused = self.call(
+            "attach-runtimes",
+            "--native-site",
+            self.root / "absent-native",
+            "--observer-site",
+            self.root / "absent-observer",
+            "--output",
+            project / "attachment.json",
+            expected=2,
+        )
+        self.assertIn("inside an existing project store", refused["error"])
+        self.assertEqual(self.call("info", "--project", project)["head"], before)
+
     def test_fresh_outputs_cannot_corrupt_any_existing_project(self):
         project, plan = self.prepared()
         attempt = self.call("run", "--project", project, "--plan", plan)["attempt"]
@@ -381,7 +419,7 @@ class InstalledSDK(unittest.TestCase):
             command, cwd=self.poison, env=self.env, capture_output=True, text=True, timeout=10
         )
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertEqual(json.loads(result.stdout)["schema"], "opent1d.installed-sdk/1")
+        self.assertEqual(json.loads(result.stdout)["schema"], "opent1d.installed-sdk/2")
         self.assertFalse(self.marker.exists())
         victim = package / "_payload/app/experiments/shared_services/store.py"
         victim.unlink()

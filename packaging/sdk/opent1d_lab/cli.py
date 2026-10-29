@@ -1,13 +1,13 @@
-"""The two-route installed command line, sharing the Python process-proxy API."""
+"""Installed task commands sharing the Python process-proxy API."""
 
 import argparse
 import json
 
-from .api import Project, create_project, example, installation, validate
+from .api import Project, attach_runtimes, create_project, example, installation, validate
 
 
 def _inputs(args):
-    if args.task == "m4-study-secure":
+    if args.task != "mmtt-sensitivity":
         if not args.config:
             raise ValueError("M4 requires --config")
         return {"config.json": args.config}
@@ -24,11 +24,19 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="action", required=True)
     commands.add_parser("installation")
+    command = commands.add_parser("attach-runtimes")
+    command.add_argument("--native-site", required=True)
+    command.add_argument("--observer-site", required=True)
+    command.add_argument("--output", required=True)
     command = commands.add_parser("create")
     command.add_argument("--project", required=True)
     command.add_argument("--name", required=True)
     command = commands.add_parser("example")
-    command.add_argument("--task", choices=("mmtt-sensitivity", "m4-study-secure"), required=True)
+    command.add_argument(
+        "--task",
+        choices=("mmtt-sensitivity", "m4-study-secure", "m4-study-installed"),
+        required=True,
+    )
     command.add_argument("--output", required=True)
     command.add_argument(
         "--case",
@@ -38,7 +46,9 @@ def main(argv=None):
     for operation in ("validate", "freeze"):
         command = commands.add_parser(operation)
         command.add_argument(
-            "--task", choices=("mmtt-sensitivity", "m4-study-secure"), required=True
+            "--task",
+            choices=("mmtt-sensitivity", "m4-study-secure", "m4-study-installed"),
+            required=True,
         )
         for name in ("config", "package", "csv", "settings"):
             command.add_argument("--" + name)
@@ -52,6 +62,8 @@ def main(argv=None):
             command.add_argument("--plan", required=True)
         if operation in ("run", "import"):
             command.add_argument("--retry-of")
+        if operation in ("check", "run"):
+            command.add_argument("--runtime-attachment")
         if operation == "run":
             command.add_argument("--timeout", type=float, default=600)
         if operation in ("reconstruct", "recover"):
@@ -69,6 +81,8 @@ def main(argv=None):
         project = Project(args.project) if hasattr(args, "project") else None
         if args.action == "installation":
             result = installation()
+        elif args.action == "attach-runtimes":
+            result = attach_runtimes(args.native_site, args.observer_site, args.output)
         elif args.action == "create":
             result = create_project(args.project, args.name).info()
         elif args.action == "example":
@@ -78,7 +92,12 @@ def main(argv=None):
         elif args.action == "freeze":
             result = project.freeze(args.task, _inputs(args), parent=args.parent)
         elif args.action == "run":
-            result = project.run(args.plan, retry_of=args.retry_of, timeout=args.timeout)
+            result = project.run(
+                args.plan,
+                retry_of=args.retry_of,
+                timeout=args.timeout,
+                runtime_attachment=args.runtime_attachment,
+            )
         elif args.action == "reconstruct":
             result = project.reconstruct(args.attempt, args.output, allow_failed=args.allow_failed)
         elif args.action == "import":
@@ -88,7 +107,7 @@ def main(argv=None):
         elif args.action == "recover":
             result = project.recover(args.attempt, execution_stopped=args.execution_stopped)
         elif args.action == "check":
-            result = project.check(args.plan)
+            result = project.check(args.plan, runtime_attachment=args.runtime_attachment)
         else:
             result = project.info()
         print(json.dumps(result, sort_keys=True, allow_nan=False))

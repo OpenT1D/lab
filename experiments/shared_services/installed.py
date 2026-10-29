@@ -13,8 +13,11 @@ from . import execution, routes, store
 
 
 class Backend:
-    def __init__(self, bootstrap, artifact):
+    def __init__(self, bootstrap, artifact, runtime_attachment=None):
         self.bootstrap = Path(bootstrap)
+        self.artifact = artifact
+        self.runtime_attachment = runtime_attachment
+        self.loaded_attachment = None
         self.application = {
             "schema": "opent1d.sdk-application/1",
             "descriptor_sha256": store.digest(store.encoded(artifact)),
@@ -23,7 +26,36 @@ class Backend:
             },
         }
 
+    def task(self, task_id):
+        store.require(task_id in self.artifact["tasks"], "Task not admitted by current artifact")
+        if task_id == "m4-study-installed":
+            from .installed_m4 import TASK
+
+            return TASK
+        return TASKS[task_id]
+
     def check(self, task, args):
+        if task.id == "m4-study-installed":
+            from experiments.m4.installed_study import profile
+            from experiments.m4.installed_study.common import prepare
+
+            details = prepare(args.config)
+            identity = None
+            if self.runtime_attachment is not None:
+                data, identity = profile.load(self.runtime_attachment)
+                self.loaded_attachment = (data, identity)
+            return {
+                "schema": "opent1d.installed-admission/2",
+                "task": task.id,
+                "metadata_valid": True,
+                "metadata": details,
+                "observation_path_issues": [],
+                "runtimes_ready": identity is not None,
+                "native_policy": "explicit-reviewed-attachment/1",
+                "runtime_attachment_sha256": identity,
+                "setup_performed": False,
+                "coordinator_runtime": runtime_identity(),
+            }
         details, issues = prepare_check(task, args)
         return {
             "schema": "opent1d.installed-admission/1",
@@ -40,7 +72,25 @@ class Backend:
         }
 
     def command_for(self, task, args, *, operation="run"):
-        store.require(task.id in routes.TASKS, "Unselected installed task")
+        store.require(task.id in self.artifact["tasks"], "Unselected installed task")
+        if task.id == "m4-study-installed" and operation == "run":
+            from experiments.m4.installed_study import common, context
+
+            store.require(self.loaded_attachment is not None, "Current runtime admission required")
+            _, identity = self.loaded_attachment
+            recorded = {
+                "schema": "opent1d.m4-execution-locations/1",
+                "python": sys.executable,
+                "bootstrap": str(common.HERE / "bootstrap.py"),
+                "attachment": str(Path(self.runtime_attachment).absolute()),
+                "attachment_sha256": identity,
+            }
+            return context.command(
+                "coordinator",
+                "study",
+                ["run", "--config", str(args.config), "--output", str(args.output)],
+                record=recorded,
+            )
         store.require(
             operation == "reconstruct" or task.id == "mmtt-sensitivity",
             "Native runtime not admitted by installed policy",
@@ -71,8 +121,9 @@ FIELDS = {
     "validate": {"task", "inputs"},
     "example": {"task", "output", "case"},
     "freeze": {"project", "task", "inputs", "parent"},
-    "check": {"project", "plan"},
-    "run": {"project", "plan", "retry_of", "timeout"},
+    "check": {"project", "plan", "runtime_attachment"},
+    "run": {"project", "plan", "retry_of", "timeout", "runtime_attachment"},
+    "attach": {"native_site", "observer_site", "output"},
     "reconstruct": {"project", "attempt", "output", "allow_failed"},
     "import": {"project", "plan", "archive", "retry_of"},
     "recover": {"project", "attempt", "execution_stopped"},
@@ -126,13 +177,20 @@ def example(task, output, case):
     else:
         store.require(case in {"fasting", "gastric_load_15g"}, "Unselected M4 example")
         name = "m4-fasting.json" if case == "fasting" else "m4-gastric-15g.json"
-        target = output / "experiments/shared_contracts/fixtures" / name
+        if task == "m4-study-installed":
+            from .installed_m4 import FIXTURES as selected_fixtures
+
+            name = "m4-fasting.json" if case == "fasting" else "m4-gastric-15g.json"
+            target = output / "experiments/m4/installed_study/fixtures" / name
+        else:
+            selected_fixtures = FIXTURES
+            target = output / "experiments/shared_contracts/fixtures" / name
         target.parent.mkdir(parents=True)
-        target.write_bytes((FIXTURES / name).read_bytes())
+        target.write_bytes((selected_fixtures / name).read_bytes())
         config = store.read(target)
         for source in config["sources"]:
             for field in ("model", "declaration"):
-                relative = (FIXTURES / source[field]).resolve().relative_to(routes.ROOT)
+                relative = (selected_fixtures / source[field]).resolve().relative_to(routes.ROOT)
                 copied = output / relative
                 copied.parent.mkdir(parents=True, exist_ok=True)
                 copied.write_bytes((routes.ROOT / relative).read_bytes())
@@ -158,11 +216,27 @@ def dispatch(request, bootstrap, artifact, *, cancel=None):
         action in FIELDS and set(request) == {"action", *FIELDS[action]},
         "Unsupported installed request fields",
     )
+    if action in {"example", "validate", "freeze"}:
+        store.require(request["task"] in artifact["tasks"], "Task not admitted by current artifact")
     if action == "installation":
         return {
             key: artifact[key]
             for key in ("schema", "source", "build_label", "tasks", "native_execution")
         }
+    if action == "attach":
+        from experiments.m4.installed_study import profile
+
+        store.require(
+            artifact["native_execution"] == "explicit-reviewed-attachment/1",
+            "Current artifact has no native attachment capability",
+        )
+        output = workspace_path(request["output"], bootstrap, fresh=True)
+        return profile.create(
+            request["native_site"],
+            request["observer_site"],
+            output,
+            Backend(bootstrap, artifact).application,
+        )
     if action == "example":
         output = workspace_path(request["output"], bootstrap, fresh=True)
         return example(request["task"], output, request["case"])
@@ -181,8 +255,14 @@ def dispatch(request, bootstrap, artifact, *, cancel=None):
     if action == "create":
         return {"project": str(store.create(path, request["name"]))}
     writing = action not in {"info", "check", "relocate"}
-    backend = Backend(bootstrap, artifact)
+    backend = Backend(bootstrap, artifact, request.get("runtime_attachment"))
     with store.opened(path, write_access=writing) as project:
+        store.require(
+            all(
+                descriptor["task"] in artifact["tasks"] for descriptor, _ in project.plans.values()
+            ),
+            "Current artifact does not admit this project's task",
+        )
         if action == "info":
             return {
                 "project": str(path),
@@ -228,7 +308,7 @@ def dispatch(request, bootstrap, artifact, *, cancel=None):
             descriptor, folder = project.plans[request["plan"]]
             routes.validate_freeze(folder, descriptor, current=True)
             return backend.check(
-                TASKS[descriptor["task"]],
+                backend.task(descriptor["task"]),
                 SimpleNamespace(
                     config=folder / "input"
                     if descriptor["task"] == "mmtt-sensitivity"

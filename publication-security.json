@@ -5,7 +5,10 @@
   "allowed_install_projects": [
     ".",
     "experiments/c1/g2p2c_source",
-    "experiments/m3/runtime"
+    "experiments/m3/runtime",
+    "experiments/m4/installed_study/native",
+    "experiments/m4/installed_study/observer",
+    "experiments/m4/installed_study/build_inputs"
   ],
   "blocked_historical_projects": [
     "experiments/c1/g2p2c_policy_source",
@@ -854,5 +857,19 @@
       "disposition": "Root entries fixed where present; affected historical environments excluded from public automatic installation and CI. No not-affected or patched claim for historical locks."
     }
   ],
-  "native_bundle_policy": "Private internal installer builds only. Public source snapshots refuse Windows staging/building before output or runtime access; the manual Windows workflow is private-repository-only. Integration does not patch frozen native locks or build inputs."
+  "native_bundle_policy": "Private internal installer builds only. Public source snapshots refuse Windows staging/building before output or runtime access; the manual Windows workflow is private-repository-only. Integration does not patch frozen native locks or build inputs.",
+  "reviewed_native_candidates": [
+    {
+      "id": "M4-STUDY-INSTALLED/1",
+      "projects": [
+        "experiments/m4/installed_study/native",
+        "experiments/m4/installed_study/observer",
+        "experiments/m4/installed_study/build_inputs"
+      ],
+      "review_file": "experiments/m4/installed_study/runtime-review.json",
+      "review_sha256": "13687a471b2477813f4311f04c4eff31ed63a144898cad75f282aafd94d6f50f",
+      "reviewed_on": "2026-10-29",
+      "scope": "Explicit internal candidate installation of these exact new projects. Numerical/process/relocation acceptance is separate; no native bundle/table redistribution clearance. Historical runtimes remain excluded."
+    }
+  ]
 }

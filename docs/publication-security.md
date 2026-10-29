@@ -65,6 +65,27 @@ process and reconstruction checks, review upstream/table rights and update this
 policy and supported scope. Preserve the original lock and evidence identity.
 A new lock must not inherit an old numerical verification claim.
 
+### Explicit internal M4 candidate installation — 29 October 2026
+
+The separate `M4-STUDY-INSTALLED/1` candidate admits only the new
+`experiments/m4/installed_study/native`, `observer` and `build_inputs` projects.
+Its [dated runtime review](../experiments/m4/installed_study/runtime-review.json)
+binds all six selector hashes, complete native/observer/build package rows,
+primary package/advisory metadata and upstream source identities. The locks
+retain the numerical pins and both upstream commits; ancillary fixes cover
+certifi, Pillow, setuptools and the newly identified wheel build advisory.
+The preparation tool validates the policy, review and protocol before creating
+output or launching an installer. Mixed historical/candidate requests remain
+refused; no historical allowlist or lock is changed.
+
+This is explicit candidate-install clearance needed to measure numerical and
+lifecycle behavior. Actual native/parity/relocation acceptance is recorded
+separately in [the task record](research/ot060-native-m4.md). It does not expand
+the initial two-task maintained public exercise or qualify a public native
+bundle. Upstream notices are retained; unresolved parameter/table redistribution
+rights keep full native payloads/parameter records local and out of public
+artifacts. A dated advisory review is not a future vulnerability guarantee.
+
 ## Private Windows installer integration
 
 The private OT-058 branch supplies an internal bundled installer, separately

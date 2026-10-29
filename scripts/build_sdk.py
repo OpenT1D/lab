@@ -1,4 +1,4 @@
-"""Build an internal dependency-free two-route wheel from an explicit source closure."""
+"""Build an internal dependency-free task wheel from an explicit source closure."""
 
 import argparse
 import hashlib
@@ -29,7 +29,7 @@ def copy_source(name, destination, source):
 def source_closure():
     from experiments.observation_analysis import plan as mmtt
     from experiments.shared_contracts.inventory import reader_source_inventory
-    from experiments.shared_contracts.selected import FIXTURES, boundary
+    from experiments.shared_contracts.selected import FIXTURES
     from experiments.shared_services import routes
 
     names = set(
@@ -43,15 +43,25 @@ def source_closure():
         metadata = routes.reader_identity(task)
         names.update(metadata["trusted_sources_sha256"])
         names.update(metadata["reader_static_dependencies_sha256"])
-        payload = (
-            {"config.json": (FIXTURES / "m4-fasting.json").read_bytes()}
-            if task == "m4-study-secure"
-            else {
-                name: (FIXTURES / ("mmtt-" + name)).read_bytes()
-                for name in ("package.json", "observations.csv", "settings.json")
-            }
-        )
-        names.update(routes.runtime_paths(boundary(task, payload)["binding"]))
+        if task == "m4-study-installed":
+            from experiments.shared_services.installed_m4 import FIXTURES as native_fixtures
+
+            payload = {"config.json": (native_fixtures / "m4-fasting.json").read_bytes()}
+            names.update(
+                path.relative_to(ROOT).as_posix()
+                for path in native_fixtures.iterdir()
+                if path.is_file()
+            )
+        else:
+            payload = (
+                {"config.json": (FIXTURES / "m4-fasting.json").read_bytes()}
+                if task == "m4-study-secure"
+                else {
+                    name: (FIXTURES / ("mmtt-" + name)).read_bytes()
+                    for name in ("package.json", "observations.csv", "settings.json")
+                }
+            )
+        names.update(routes.runtime_paths(routes.boundary(task, payload)["binding"]))
     names.update(path.relative_to(ROOT).as_posix() for path in FIXTURES.iterdir() if path.is_file())
     for source in json.loads((FIXTURES / "m4-fasting.json").read_bytes())["sources"]:
         for key in ("model", "declaration"):
@@ -100,12 +110,12 @@ def build(output, *, allow_dirty=False, build_label="internal"):
                 "bytes": len(raw),
             }
     descriptor = {
-        "schema": "opent1d.installed-sdk/1",
+        "schema": "opent1d.installed-sdk/2",
         "source": {key: source[key] for key in ("revision", "dirty")},
         "build_label": build_label,
         "files": files,
-        "tasks": ["mmtt-sensitivity", "m4-study-secure"],
-        "native_execution": "unavailable-public-policy",
+        "tasks": ["mmtt-sensitivity", "m4-study-secure", "m4-study-installed"],
+        "native_execution": "explicit-reviewed-attachment/1",
     }
     (package / "_manifest.json").write_text(json.dumps(descriptor, indent=2, sort_keys=True) + "\n")
     result = subprocess.run(

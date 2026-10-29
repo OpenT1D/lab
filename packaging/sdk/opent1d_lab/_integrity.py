@@ -6,8 +6,8 @@ import os
 import stat
 from pathlib import Path, PurePosixPath
 
-SCHEMA = "opent1d.installed-sdk/1"
-TASKS = ["mmtt-sensitivity", "m4-study-secure"]
+SCHEMA = "opent1d.installed-sdk/2"
+TASKS = ["mmtt-sensitivity", "m4-study-secure", "m4-study-installed"]
 
 
 def regular_bytes(path, limit=16 * 1024 * 1024):
@@ -47,9 +47,18 @@ def verify(package):
         not isinstance(metadata, dict)
         or set(metadata)
         != {"schema", "source", "build_label", "files", "tasks", "native_execution"}
-        or metadata["schema"] != SCHEMA
-        or metadata["tasks"] != TASKS
-        or metadata["native_execution"] != "unavailable-public-policy"
+        or not (
+            (
+                metadata["schema"] == SCHEMA
+                and metadata["tasks"] == TASKS
+                and metadata["native_execution"] == "explicit-reviewed-attachment/1"
+            )
+            or (
+                metadata["schema"] == "opent1d.installed-sdk/1"
+                and metadata["tasks"] == ["mmtt-sensitivity", "m4-study-secure"]
+                and metadata["native_execution"] == "unavailable-public-policy"
+            )
+        )
         or not isinstance(metadata["files"], dict)
         or not 1 <= len(metadata["files"]) <= 2000
     ):

@@ -4,6 +4,11 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Add an explicit internal installed M4 execution successor with separately
+  reviewed native, observer and build locks, current runtime attachments and
+  isolated role startup. Preserve historical identities and numerical criteria;
+  native acceptance and complete relocation are recorded separately.
+
 - Add an internal dependency-free installed Python/CLI candidate for MMTT
   sensitivity, passive maintained M4 intake and matching failed readers. Retain
   native identities, complete attempt history and separate application
