@@ -284,9 +284,14 @@ ten-route source/runtime/reader metadata, versioned shared descriptors, unchange
 native payloads, two-source fasting/15 g M4 intake, complete/incomplete MMTT and
 controlled failed/relocated reader cases. The
 [verification record](docs/research/ot059-contract-extraction.md) separates local
-checks from missing native success and hosted evidence. Select minimal
-OT-061/064 services next; complete native M4 relocation, retained MMTT reader
-upgrades and host lifecycle acceptance remain subsequent gates.
+checks from missing native success and hosted evidence. Increment 2 now has
+[minimal local project services](docs/shared-project-services.md): immutable
+freezes, a complete sequenced attempt ledger, isolated workers, forensic
+recovery and matching trusted readers. Its [verification record](docs/research/ot061-064-minimal-services.md)
+binds actual MMTT, controlled failed M4 and local macOS ownership/relocation
+checks. Complete native M4 execution/relocation remains a specific open gate;
+retained reader upgrades, installed increment 3 and other service hosts remain
+subsequent work. This does not close the full OT-061 or OT-064 packages.
 
 After each increment, record its verified scope and any contract change before
 selecting the next artifact. Full campaign caching, new scientific mechanisms,

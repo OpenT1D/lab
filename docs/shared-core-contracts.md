@@ -7,6 +7,10 @@ route migration is claimed. [Decision 0080](decisions/0080-two-route-contract-pa
 owns this boundary; the [task and verification record](research/ot059-contract-extraction.md)
 retains scope, checks and review.
 
+Increment 2 adds [minimal project services](shared-project-services.md) around
+these boundaries. This page remains the canonical unchanged packet reference;
+the service guide owns its ledger, isolated execution and compatibility matrix.
+
 ## Frozen packet and version policy
 
 The [fixture packet](../experiments/shared_contracts/fixtures/packet.json)

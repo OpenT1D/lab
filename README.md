@@ -91,8 +91,11 @@ reuse the infrastructure with less integration work. The
 [delivery plan](ROADMAP.md#common-laboratory-delivery-plan) owns implementation
 order; the [product requirements](docs/product-laboratory.md) define acceptance.
 The internal [OT-059 contract packet](docs/shared-core-contracts.md) inventories
-all ten routes and freezes two-route metadata/reader fixtures. Shared execution,
-storage, SDK migration and distribution capabilities remain planned.
+all ten routes and freezes two-route metadata/reader fixtures. The
+[minimal project services](docs/shared-project-services.md) add a complete local
+ledger, isolated execution and trusted reconstruction for the selected routes.
+Native M4 success/complete relocation, installed SDK migration and distribution
+capabilities remain separate gates.
 
 ## What we are building
 

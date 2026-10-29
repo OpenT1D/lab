@@ -1,5 +1,7 @@
 # Decision records
 
+- [0081 — Minimal project services](0081-minimal-project-services.md): retain a complete sequenced ledger, isolated workers and exact trusted readers for the first two-route service increment.
+
 - [0080 — Two-route metadata contract packet](0080-two-route-contract-packet.md): freeze bounded shared descriptors and native payload/reader fixtures before extracting services; capability families remain provisional.
 
 - [0079 — Direct current CPython for Windows standard-library workers](0079-windows-stdlib-worker-identity.md): bind the two source MMTT routes to current CPython 3.12, bypass its venv redirector only for explicit no-site launches and retain actual launch provenance and live Job authority.

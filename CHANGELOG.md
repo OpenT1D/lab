@@ -4,6 +4,11 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Add minimal internal OT-061/064 project services for MMTT sensitivity and
+  maintained M4: immutable freezes, complete attempt ledger, isolated workers,
+  forensic recovery and trusted byte-exact report reconstruction. Native M4
+  success, installed SDK, reader upgrades and other service hosts remain open.
+
 - Tighten shared-packet native status/runtime/source binding and retain static
   reader entrypoint dependencies, including implicit package initializers.
   Preserve native frozen inventories, scientific payloads and reader authority.
