@@ -1,5 +1,7 @@
 # Decision records
 
+- [0083 — Installed M4 execution successor](0083-installed-m4-execution-successor.md): preserve historical scientific identities while reviewing separate native environments, explicit attachments and complete installed relocation.
+
 - [0082 — Installed source payload](0082-installed-source-payload.md): keep an explicit original-layout source/data closure behind isolated Python/CLI processes for the internal installed developer candidate.
 
 - [0081 — Minimal project services](0081-minimal-project-services.md): retain a complete sequenced ledger, isolated workers and exact trusted readers for the first two-route service increment.
