@@ -67,3 +67,26 @@ shutdown, confirmed LaunchServices wait completion and finished diagnostic
 cleanup before a success receipt is published. LaunchServices observer status
 is not the Cocoa application's OS exit status. A failed or incomplete probe is
 not a successful candidate handoff.
+
+## Recorded internal qualification
+
+On 29 October 2026, [PR 24](https://github.com/OpenT1D/lab/pull/24) integrated clean
+candidate source `eda8f93afeb1daad3f260c8adaf227bbc42cc93f` into main `45fd3aa`.
+The two source trees were equal. The locally qualified build ID was
+`mac-mmtt-eda8f93afeb1-cae1ba6e88e3`; both fresh builds and the delivered ZIP
+extraction matched all 1,297 payload files and executable modes.
+
+On macOS 26.5.2 arm64, the real LaunchServices/Chromium probe passed seven checks
+covering both task chains, capability refusals, invalid input, partial
+cancellation, double launch and relocation/removal/replacement with preserved
+saved bytes. Authenticated shutdown, session removal and retained LaunchServices
+wait completion were confirmed before success. The included CPython interpreter
+passed sixteen unchanged numerical reference tests with no skips. A separate
+technical review rechecked the delivered app and ZIP inventories and checksums.
+
+The internal `OpenT1D-MMTT-unsigned-arm64.zip` had SHA-256
+`7cf19efb08ff1b346300444800fb88bb28a22ae539b1e7a0ebf3a7738e17cf2d`.
+It is an internal handoff artifact, with no public download or product version.
+This receipt applies to that exact build. The signing, notarisation, clean-host,
+minimum-OS and independent-user gates above remain open; later source revisions
+need a fresh candidate build and qualification.

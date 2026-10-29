@@ -49,7 +49,10 @@ jobs can skip later jobs in the [dependency chain](https://docs.github.com/en/ac
 The [28 October main run](https://github.com/OpenT1D/lab/actions/runs/40784585671)
 uploaded its checked Pages artifact and passed the aggregate, but skipped
 publication after the PR-only dependency job was skipped. Corrected main
-deployment requires a subsequent successful hosted publication receipt.
+publication was subsequently observed in the
+[corrected main run](https://github.com/OpenT1D/lab/actions/runs/40789265528)
+on `1714f06`; the deploy job actually ran and succeeded. The later integrated
+receipt is recorded below.
 GitHub [re-evaluates job conditions on cancellation](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-cancellation);
 `always()` alone would keep a matching deployment job running.
 
@@ -85,3 +88,18 @@ build type. Check the returned site URL, the `/lab/` entry redirect, a documenta
 page, search, an asset and a byte-exact notebook download using the deployed site.
 Only then set the repository homepage to the verified URL. Publication does not
 establish usability, biological validity or a packaged software release.
+
+On 29 October 2026, the [integrated-main run](https://github.com/OpenT1D/lab/actions/runs/40792457095)
+checked clean source `45fd3aa4866f74862717e8a51c77b867f2b0a42f`. Root checks ran
+1,700 tests with 33 expected skips; all three host smokes, four Chromium flows
+and the aggregate succeeded. The PR-only dependency job was skipped as intended.
+The successful `Publish documentation` job consumed
+`github-pages-40792457095-1` from that same run and attempt, and deployment
+`7400643365` reported success for the exact main revision.
+
+The live [site](https://opent1d.github.io/lab/) passed a separate Chromium check:
+the missing-slash redirect and documentation entry, navigation to the Mac guide,
+finished search, assets and byte-exact Mac build-reference/runtime-lock and MMTT
+notebook downloads. All 43 observed project responses succeeded with no page
+errors or failed requests. These are dated acceptance observations; subsequent
+changes require their own run and deployment receipts.
