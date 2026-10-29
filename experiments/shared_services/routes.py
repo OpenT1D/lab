@@ -81,9 +81,9 @@ def capture(task, inputs, target):
                 (folder / basename).write_bytes(bundle[field + "_raw"])
                 item[field] = name + "/" + basename
         (effective / "config.json").write_bytes(encoded(config))
-    trusted = reader_identity(task)
-    names = set(trusted["trusted_sources_sha256"]) | set(
-        trusted["reader_static_dependencies_sha256"]
+    reader_metadata = reader_identity(task)
+    names = set(reader_metadata["trusted_sources_sha256"]) | set(
+        reader_metadata["reader_static_dependencies_sha256"]
     )
     names.update(mmtt.ANCESTRY if task == "mmtt-sensitivity" else ())
     names.update(runtime_paths(metadata["binding"]))
@@ -100,7 +100,7 @@ def capture(task, inputs, target):
         "schema": "opent1d.service-freeze/1",
         "task": task,
         "boundary": metadata,
-        "reader": trusted,
+        "reader": reader_metadata,
         "original_sha256": {name: digest(raw) for name, raw in payload.items()},
         "trusted_sha256": snapshots,
     }
@@ -141,13 +141,13 @@ def validate_freeze(folder, descriptor, *, current):
         boundary(task, payload) == descriptor["boundary"],
         "Frozen task/source/runtime identity differs",
     )
-    trusted = descriptor["reader"]
+    reader_metadata = descriptor["reader"]
     require(
-        trusted == reader_identity(task),
+        reader_metadata == reader_identity(task),
         "Unsupported trusted reader version; archived code stays opaque",
     )
-    expected = set(trusted["trusted_sources_sha256"]) | set(
-        trusted["reader_static_dependencies_sha256"]
+    expected = set(reader_metadata["trusted_sources_sha256"]) | set(
+        reader_metadata["reader_static_dependencies_sha256"]
     )
     expected.update(mmtt.ANCESTRY if task == "mmtt-sensitivity" else ())
     expected.update(runtime_paths(descriptor["boundary"]["binding"]))

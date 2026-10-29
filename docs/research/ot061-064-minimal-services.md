@@ -208,3 +208,26 @@ this tracked record does not anticipate a pass. The previous `final-receipt.json
 continues to refer only to `ba084ae`. Native M4 success/complete relocation,
 other hosts, supported upgrades, installed use, second-engine families and
 independent human/scientific acceptance remain open as described above.
+
+## Public integration and CodeQL triage
+
+The service branch was updated from main `d0f0515`; only the changelog overlap
+needed manual resolution. The native/reader inventory remained byte-identical
+and the retained project still opened with four plans and six terminal attempts.
+
+[PR 29](https://github.com/OpenT1D/lab/pull/29) initially produced one new
+`py/clear-text-storage-sensitive-data` signal at the shared metadata writer.
+The retained SARIF flow starts at the local variable `trusted` assigned from
+`reader_identity`, then follows the descriptor's public `reader` field to JSON
+storage. That object contains a fixed module/schema, public source filenames
+and SHA-256 hashes, a compatibility label and an archived-execution prohibition;
+it contains no credential or private observation bytes.
+
+The upstream [sensitive-data heuristic](https://github.com/github/codeql/blob/main/shared/concepts/codeql/concepts/internal/SensitiveDataHeuristics.qll)
+classifies names containing `trusted` as potentially secret; its
+[Python assignment model](https://github.com/github/codeql/blob/main/python/ql/lib/semmle/python/dataflow/new/SensitiveDataSources.qll)
+marks the assignment's right-hand side as the source. Rename that local to
+`reader_metadata` to describe its actual content. Persisted descriptor fields
+and bytes stay unchanged. No query, result suppression, native source, baseline,
+tolerance or alert dismissal is introduced. The exact SARIF and subsequent
+local/hosted receipts are retained in local ignored `results/ot061-064/`.
