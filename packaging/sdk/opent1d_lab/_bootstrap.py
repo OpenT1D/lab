@@ -4,8 +4,10 @@ import hashlib
 import json
 import os
 import runpy
+import signal
 import stat
 import sys
+import threading
 from pathlib import Path
 
 
@@ -84,8 +86,22 @@ def main():
     from experiments.shared_services.installed import dispatch
 
     request = json.loads(sys.stdin.buffer.read(4 * 1024 * 1024 + 1))
-    response = dispatch(request, Path(__file__).absolute(), checked)
-    print(json.dumps({"ok": True, "result": response}, sort_keys=True, allow_nan=False))
+    cancel, previous = threading.Event(), {}
+
+    def stop(_number, _frame):
+        cancel.set()
+
+    try:
+        if isinstance(request, dict) and request.get("action") == "run":
+            # Keep ledger publication and terminal sealing intact when a
+            # request is cancelled before/after the inner worker supervisor.
+            for number in (signal.SIGINT, signal.SIGTERM, signal.SIGHUP):
+                previous[number] = signal.signal(number, stop)
+        response = dispatch(request, Path(__file__).absolute(), checked, cancel=cancel)
+        print(json.dumps({"ok": True, "result": response}, sort_keys=True, allow_nan=False))
+    finally:
+        for number, handler in previous.items():
+            signal.signal(number, handler)
 
 
 if __name__ == "__main__":

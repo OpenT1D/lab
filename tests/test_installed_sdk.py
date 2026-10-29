@@ -486,6 +486,33 @@ class InstalledSDK(unittest.TestCase):
         self.assertEqual(info["attempts"][0]["id"], evidence["attempt"])
         self.assertNotEqual(info["attempts"][0]["outcome"], "unfinished")
 
+    def test_early_cancel_seals_attempt_without_launching_native_worker(self):
+        project, plan = self.prepared()
+        result = subprocess.run(
+            [
+                sys.executable,
+                "-B",
+                "-m",
+                "tests.sdk_early_cancel_probe",
+                str(self.candidates["a"] / "lib/python3.12/site-packages"),
+                str(project),
+                plan,
+            ],
+            cwd=ROOT,
+            env=self.environ,
+            capture_output=True,
+            text=True,
+            timeout=20,
+        )
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        outcome = json.loads(result.stdout)
+        self.assertEqual(outcome["receipt"]["owned_processes"], [])
+        self.assertFalse((Path(outcome["evidence"]) / "worker.log").exists())
+        info = self.call("info", "--project", project)
+        self.assertEqual(len(info["attempts"]), 1)
+        self.assertEqual(info["attempts"][0]["id"], outcome["attempt"])
+        self.assertEqual(info["attempts"][0]["outcome"]["execution_status"], "interrupted")
+
     def test_builder_refuses_facade_changed_after_clean_snapshot(self):
         source = self.root / "disposable-source"
         source.mkdir()

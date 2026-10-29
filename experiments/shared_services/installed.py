@@ -151,7 +151,7 @@ def attempt_result(project, attempt):
     }
 
 
-def dispatch(request, bootstrap, artifact):
+def dispatch(request, bootstrap, artifact, *, cancel=None):
     store.require(isinstance(request, dict), "Structured installed request required")
     action = request.get("action")
     store.require(
@@ -242,6 +242,7 @@ def dispatch(request, bootstrap, artifact):
                 request["plan"],
                 retry_of=request["retry_of"],
                 timeout=request["timeout"],
+                cancel=cancel,
                 backend=backend,
             )
             return attempt_result(project, attempt)

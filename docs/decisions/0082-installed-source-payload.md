@@ -33,6 +33,10 @@ path with `-I -B -S`; it does not discover Python, uv, modules or readers throug
 PATH, cwd, PYTHONPATH or project/archive metadata. Normal Python API invocation
 still trusts its host Python startup environment. Reuse live process ownership
 for cancellation and cleanup; process isolation is not a hostile-code sandbox.
+The broker owns a run-scoped cancellation event before dispatch can mutate a
+project and through terminal sealing. Native worker handlers retain their own
+lifecycle. For admitted execution, queued cancellation before worker launch seals an interrupted
+forensic attempt without starting native work.
 
 Add a narrow shared-services installed execution backend. MMTT uses the current
 identified standard-library interpreter without uv or Git. M4 native execution

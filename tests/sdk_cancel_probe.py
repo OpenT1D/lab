@@ -8,6 +8,7 @@ import subprocess
 import sys
 import threading
 import time
+from pathlib import Path
 from unittest.mock import patch
 
 
@@ -34,9 +35,13 @@ def main(site, project, plan):
 
             def observe(self):
                 observed = super().observe()
-                if not stopped:
+                # runtime_identity can spawn a short inherited-group uname
+                # child before supervision is ready. The real native entry
+                # has its own session after supervise opens this attempt log.
+                ready = any((Path(project) / "work").glob("*/worker.log"))
+                if not stopped and ready:
                     for pid, identity in observed.items():
-                        if identity["ppid"] != self.process.pid:
+                        if identity["ppid"] != self.process.pid or identity["pgid"] != pid:
                             continue
                         actual = self.table.one(pid)
                         if actual and actual["alive"] and actual["start"] == identity["start"]:
@@ -47,7 +52,7 @@ def main(site, project, plan):
                             stopped.append((pid, identity["start"], time.monotonic()))
                             cancel.set()
                             break
-                elif time.monotonic() - stopped[0][2] > 0.15:
+                elif stopped and time.monotonic() - stopped[0][2] > 0.15:
                     resume()
                 return observed
 

@@ -85,7 +85,11 @@ native evidence without executing archived code. Imports are separate attempts.
 `Project` holds a path. Each call acquires and releases its own live store lease.
 `run` accepts a `threading.Event` as `cancel`. SIGINT, SIGTERM and SIGHUP on the
 main thread also request cancellation, with live owned cleanup and retained
-evidence. If an external crash leaves an unfinished attempt, first establish
+evidence. The broker queues run cancellation through project publication and
+terminal sealing. For an admitted run, queued cancellation before native launch seals an
+interrupted forensic attempt with unavailable slots. Cancellation before the
+broker reaches request dispatch can refuse without creating an attempt.
+If an external crash leaves an unfinished attempt, first establish
 independently that execution has stopped, then call
 `project.recover(attempt, execution_stopped=True)`. Recovery does not signal PIDs
 from a stored journal or claim observed cleanup of an earlier process.

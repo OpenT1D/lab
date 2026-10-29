@@ -249,7 +249,15 @@ def execute(store, plan_id, *, retry_of=None, timeout=3600, cancel=None, backend
             "remaining_owned_processes": [],
         }
     if receipt is None:
-        receipt = supervise(argv, work / "worker.log", timeout=timeout, cancel=cancel)
+        if cancel is not None and cancel.is_set():
+            receipt = {
+                "status": "interrupted",
+                "error": "Cancelled before worker launch",
+                "owned_processes": [],
+                "remaining_owned_processes": [],
+            }
+        else:
+            receipt = supervise(argv, work / "worker.log", timeout=timeout, cancel=cancel)
     write(work / "supervision.json", receipt)
     return finish(store, attempt, work, receipt)
 

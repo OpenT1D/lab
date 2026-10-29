@@ -112,6 +112,20 @@ handoff; permanent adverse tests retain the affected cases:
   a real controlled tree fixture verifies root/child cleanup while an unrelated
   process remains alive. A reaped numeric process group never becomes fallback
   authority.
+- The first full local check ran 1,740 tests with 32 skips and one failure in
+  installed cancellation. The original observer could select a transient
+  inherited-group `uname` child during platform metadata collection, before
+  native supervision. The corrected native-phase probe requires the attempt
+  worker log and a freshly checked child session. It passed five fresh-build
+  repeats. This also exposed a real early-cancellation gap: the broker could
+  terminate during project publication before its inner supervisor installed
+  handlers. The broker now queues a run-scoped cancellation event before
+  dispatch and through sealing, then skips native launch and seals an
+  interrupted forensic attempt if cancellation is already queued. A separate
+  installed trusted trace harness injects a real SIGTERM at `begin()` entry;
+  it requires a cleanly reopenable terminal attempt, unavailable slots and no
+  worker launch. The original failed full-check log is retained, not counted
+  as a pass.
 
 The installed cancellation probe uses the real installed broker/native commands
 and unchanged source/input bytes. A trusted test observer start-validates and
