@@ -11,7 +11,7 @@ dataset. Invented public fixtures are labeled as software examples. See the
 
 Record the target population, disease stage, observations, interventions and time resolution needed for the proposed claim. Assess whether the dataset actually contains those variables and whether missingness makes the question unanswerable.
 
-The [research report](../onderzoek/projectopzet.md#9-data-strategy) reviews candidate sources including MetaboNet, JAEB, TrialNet and HPAP/PANC-DB. A listing in that report does not mean access has been granted or that redistribution is permitted.
+The [research report](../research/project-design.md#9-data-strategy) reviews candidate sources including MetaboNet, JAEB, TrialNet and HPAP/PANC-DB. A listing in that report does not mean access has been granted or that redistribution is permitted.
 
 The [M0 data-fit assessment](m0-assessment.md#data-fit) proposes a source-level DCLP3 audit first, records its meal-data limitation, and distinguishes it from later MetaboNet harmonization or OhioT1DM access. It is a documentation review, not an acquired or verified patient dataset.
 

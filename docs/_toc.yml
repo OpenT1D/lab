@@ -313,7 +313,7 @@ subtrees:
       - file: docs/templates/experiment-protocol
   - caption: Research reports
     entries:
-      - file: docs/onderzoek/repositorybasis
-      - file: docs/onderzoek/projectopzet
-      - file: docs/onderzoek/productrichting
-      - file: docs/onderzoek/review-repositorybasis
+      - file: docs/research/repository-foundation
+      - file: docs/research/project-design
+      - file: docs/research/product-direction
+      - file: docs/research/repository-foundation-review
