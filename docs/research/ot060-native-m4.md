@@ -186,6 +186,14 @@ is excluded or allowlisted. This CI-only correction changes none of the 196
 native files. Its final clean-revision local/hosted outcomes are retained
 separately from the earlier execution artifacts.
 
+The first corrected hosted run passes dependency review and all three OS smoke
+jobs plus Chromium, but its root job reaches the fifteen-minute job limit while
+still completing late shared-service tests. It records no test failure before
+cancellation. The locally complete 1,756-test check passes with 32 skips. Give
+only the hosted root job twenty minutes to finish the expanded suite; native
+stage/source deadlines and every scientific criterion remain unchanged. Retain
+the initial canceled job and final-revision rerun as separate evidence.
+
 Actual baseline crash, forced outer deadline and cancellation preserve incomplete
 attempts and all planned slots. A stronger cancellation follows a completed
 961-point trajectory and retains its exact partial bytes. A real TERM queued
