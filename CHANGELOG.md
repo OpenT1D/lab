@@ -4,6 +4,9 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Use the existing OpenT1D app icon as the documentation favicon, with
+  page-relative links that work under the published `/lab/` project path.
+
 - Clarify OpenT1D's contribution alongside existing tools and fair task-specific
   comparisons. Keep the original OT-056 pilot criteria separate from general
   laboratory delivery, update installation/status guidance and clarify rights
