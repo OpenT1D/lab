@@ -104,7 +104,19 @@ def outcome(task, report, execution, payload, binding):
             and execution.get("implementation_sha256") == binding["implementation_sha256"],
             "Unsupported native report/execution",
         )
+        require(
+            report.get("execution_status") == execution.get("status"),
+            "Native report/execution status differs",
+        )
         native_plan = report.get("plan")
+        runtime = execution.get("runtime")
+        require(
+            isinstance(runtime, dict)
+            and set(runtime) == {"python", "implementation", "platform", "numerical_dependencies"}
+            and all(isinstance(value, str) and value.strip() for value in runtime.values())
+            and runtime["numerical_dependencies"] == "Python standard library",
+            "Native runtime record missing or invalid",
+        )
         require(
             isinstance(native_plan, dict)
             and native_plan.get("schema") == mmtt.SCHEMA
@@ -173,6 +185,19 @@ def outcome(task, report, execution, payload, binding):
     )
     require(report.get("protocol") == binding["method"], "Native result method differs")
     require(type(report.get("passed")) is bool, "Native result completeness differs")
+    require(
+        report.get("status") == execution.get("status"), "Native report/execution status differs"
+    )
+    provenance = report.get("provenance")
+    require(
+        isinstance(provenance, dict)
+        and provenance.get("sources") == binding["implementation_sha256"],
+        "Native result implementation differs",
+    )
+    require(
+        report.get("execution") == m4.protocol()["execution"],
+        "Native execution contract differs",
+    )
     config = report["configuration"]
     require(
         set(report["sources"]) == set(execution["sources"]) == {s["id"] for s in config["sources"]},
@@ -189,8 +214,19 @@ def outcome(task, report, execution, payload, binding):
             and set(saved["scenarios"]) == set(config["scenarios"]),
             "Native source result differs",
         )
+        require(
+            type(saved.get("accepted")) is bool
+            and saved["accepted"] == (saved["status"] == "completed"),
+            "Native source acceptance/status differs",
+        )
         for scenario in config["scenarios"]:
             cell = saved["scenarios"][scenario]
+            require(
+                type(cell.get("accepted")) is bool
+                and cell["accepted"] == saved["accepted"]
+                and (not cell["accepted"] or cell["status"] == "completed"),
+                "Native scenario acceptance/status differs",
+            )
             slots[f"{name}/{scenario}"] = (
                 "complete"
                 if cell["accepted"] is True and saved["accepted"] is True
@@ -204,5 +240,15 @@ def outcome(task, report, execution, payload, binding):
         and denominator.get("source_scenarios") == len(slots)
         and denominator.get("accepted_source_scenarios") == list(slots.values()).count("complete"),
         "Native result denominator differs",
+    )
+    require(
+        report["passed"]
+        == (
+            execution["status"] == "completed"
+            and report["reference"]["accepted"] is True
+            and report["common_controls"]["passed"] is True
+            and all(value["accepted"] for value in report["sources"].values())
+        ),
+        "Native result acceptance/status differs",
     )
     return execution["status"], report["passed"], slots

@@ -64,12 +64,20 @@ to scientific completeness, an incomplete result to complete, or a synthetic
 check to human/biological evidence. Test-generated descriptors exercise all five
 record types against real saved reports, including failures.
 
+Native report and execution status must agree. MMTT requires its recorded
+runtime object with the native Python/implementation/platform/stdlib fields;
+saved values are compared with each other, not with the reader host. M4 report
+source provenance and its declared execution contract must match the frozen
+binding. Accepted source/scenario summaries cannot contradict unattempted or
+failed execution records. These are metadata consistency checks; numerical
+arithmetic and native stage verification remain the reader's responsibility.
+
 ## Scientific payloads and provisional families
 
 | Provisional family | Existing routes | Preserved boundary and refusal |
 | --- | --- | --- |
 | Sampled stateful control | `p1-controller`; cross-check M1/M2 | P1 calls once per 3 min; held CGM retains measurement time, availability and age. Basal and bolus fields are rates in U/min; action interval is `[start,end)`, stored glucose is `(start,end]`. Actual meals and announced carbohydrate differ. Refuse skipped clocks, future observations, incompatible units or unsupported action semantics. |
-| Causal continuous source | Four M4 source/study routes | Pure RHS callback receives current `t,G,Gdot,Z,Sb,h,parameters`, returns pancreatic rate in pmol/(kg min). Host owns initialization, solver, portal transit, SC replacement and observation. Repeated/out-of-order probes catch selected hidden-state defects, without proving arbitrary code pure. A sampled controller is not an RHS callback. |
+| Causal continuous source | Four M4 source/study routes | Pure RHS callback receives current `t,G,Gdot,Z,Sb,h,parameters` and returns both `dZ/dt` in pmol/(kg min²) and pancreatic rate in pmol/(kg min); the host integrates the declared source state `Z`. Host owns initialization, solver, portal transit, SC replacement and observation. Repeated/out-of-order probes catch selected hidden-state defects, without proving arbitrary code pure. A sampled controller is not an RHS callback. |
 | Frozen causal forecast | Both M3 routes | Retain actual/available observation times, six exact causal times, horizons, origins, split and full failed-pair denominator. Targets are withheld until prediction; retain finite negative forecasts. No automatic refit from an evaluation score. |
 | Frozen landmark prognosis | `m5-prognosis` | Frozen model/state, development/evaluation separation, landmark inputs without future outcomes, U/day output and full eligible denominator. No treatment/cure interpretation. |
 | Offline paired observation analysis | `mmtt-sensitivity` | Retrospective inverse analysis, actual times, missing/censored values, context, fixed kinetics, all variants and failed draws; whole-body total secretion including basal in pmol, follow-up minus baseline. No causal simulator callback. |
@@ -105,7 +113,16 @@ task payload, without flattening them into generic signal ports.
 The [machine-readable inventory](../experiments/shared_contracts/route-inventory.json)
 lists exact paths and SHA-256 values, runtime selectors/required package pins,
 registered run/reader modules, additional static dependencies, administration
-sources and M5 archive aliases. `inventory.py` recomputes it passively; drift
+sources and M5 archive aliases. Each route additionally records
+`reader_source_roots` and `reader_static_dependencies_sha256`, starting at the
+actual registered `-m` entrypoint (including package `__main__.py`) and following
+local AST imports plus implicit parent-package initializers to a fixed point.
+This includes lazy execution branches in mixed read/run modules, rather than
+claiming a reader-only loaded closure. Dynamic imports, external packages and
+supplied-code dependencies remain task-owned. Known reader helpers such as
+P1's `m1/report.py`, M3's `workflow.py` and M4's hepatic modules are now covered
+without changing native frozen source inventories. `inventory.py` recomputes
+the metadata passively; drift
 fails the packet check and needs an explicit contract review, not automatic
 baseline regeneration. Counts below describe declared inventories, not a
 universal import closure or a guarantee that legacy snapshots captured every
@@ -120,7 +137,7 @@ dependency.
 | `m4-compare` | `comparison.common.SOURCES`; 63 | Root; simglucose and observer locks | Archived source hash = frozen provenance = current bytes. |
 | `m4-study` | `initial_load.common.source_paths()`; 127, AST closure from explicit roots | Root; simglucose and observer locks | Current path set; archived bytes against frozen hashes, protocol/locks against frozen identities. |
 | `m4-study-secure` | `secure_study.common.source_paths()`; 139, original inherited roots plus maintained dependencies | Root; secure simglucose and observer locks | Frozen snapshot/path-set policy plus maintained execution identity and completed-stage runtime attestations. |
-| `m5-prognosis` | `researcher_workflow.contract.SOURCES`; 5 aliases plus embedded protocol, generated fixture, supplied model/state and tooling lock | Root/stdlib | Five implementation aliases equal current bytes; supplied model/state opaque; checks original report in place. |
+| `m5-prognosis` | `researcher_workflow.contract.SOURCES`; 5 aliases plus embedded protocol, generated fixture, supplied model/state and tooling lock | Root/stdlib | Five implementation aliases and archived `tooling-uv.lock` equal current source/root lock bytes; supplied model/state opaque; checks original report in place. |
 | `mmtt-sensitivity` | `observation_analysis.plan.source_identity()`; 18, plus 5 ancestry files and protocol | Root/stdlib | Current implementation, protocol and ancestry, retained opaque snapshots. Exact runtime checked for execution. |
 | `mmtt-sampling` | `mmtt_sampling.plan.source_identity()`; 27, plus 7 ancestry files, both protocols and development seal | Root/stdlib | Current sampling/shared identities, frozen development evidence and nested MMTT reader. |
 

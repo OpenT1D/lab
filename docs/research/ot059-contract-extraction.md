@@ -127,3 +127,77 @@ relocation in an explicitly reviewed environment, second-engine conformance,
 reader upgrades and host lifecycle evidence remain open. Windows installer
 completion and the later family/intended-user exercise are separate and do
 not block this packet.
+
+## Critical double-check of the committed packet
+
+On 29 October, the user requested a further independent review with two agents.
+Both read-only GPT-6.1 Sol reviewers used xhigh reasoning on clean revision
+`c5337a3160341812769d361074fb4351fbf0c14d`. One challenged metadata admission
+with rehashed counterexamples; the other compared the inventory and scientific
+claims directly with native entrypoints/readers. The integration owner remains
+the only writer and full-suite owner.
+
+Four bounded correction groups were confirmed before further changes:
+
+- Native report and execution statuses could disagree; M4 acceptance summaries
+  could additionally contradict unattempted source/status records.
+- MMTT runtime records could disappear on both sides or become identical
+  arbitrary strings. The correction requires the existing native runtime shape,
+  without comparing a saved runtime to the review host.
+- M4 report source provenance and its native execution-contract object could
+  disagree with the shared frozen binding.
+- Declared native source inventories omitted known reader import dependencies.
+  A disposable change to `experiments/m3/workflow.py` broke both M3 reader
+  entrypoints while the original inventory drift check still passed. Additional
+  static reader dependencies must include actual package entrypoints and parent
+  initializers, without changing frozen native source lists. M5's existing
+  current-tooling-lock reader equality gate also needs explicit documentation.
+
+Acceptance requires refusing these rehashed contradictions while retaining
+unchanged complete/incomplete/interrupted controls and relocated readers. The
+reader inventory must detect helper and implicit package-initializer changes.
+These are metadata/identity corrections; numerical arithmetic, native protocols,
+scientific baselines/tolerances and the public installation boundary stay intact.
+Focused regressions, both reviewers' fix checks and a fresh full repository
+receipt on the final integrated revision are required after correction.
+
+All four correction groups are implemented and separately re-reviewed. The
+contract reviewer repeated the original rehashed cases, including promoted
+unattempted M4 slots; each now fails for its intended consistency reason.
+Unmodified complete, incomplete, interrupted and relocated controls still pass.
+The saved-runtime check deliberately accepts a well-formed record from a
+different host. It does not authenticate that observation or compare it with
+the reconstruction host.
+
+The inventory reviewer repeated the original disposable M3 helper failure:
+the unmodified inventory matches its frozen metadata, while the helper change
+now changes both M3 reader inventories. All locally loaded modules from all ten
+actual `-B -S` reader imports are represented. A separate passive fixture also
+covers transitively imported parent initializers. Static imports from mixed
+read/run modules include lazy execution branches; dynamic imports, external
+packages and supplied-code dependencies remain explicit exclusions.
+
+Final targeted packet checks: 14 tests passed. Against the previous
+`selected.py` implementation, the two new admission regression methods produced
+seven assertion failures and no import/runtime errors; the same checks pass
+after correction. The contract reviewer independently ran all 14 tests; the
+inventory reviewer ran three selected controls and its disposable import/drift
+and package-parent probes. Both report no remaining actionable findings within
+their scope. These are local agent reviews, not independent human/scientific
+acceptance.
+
+| Corrected file | Separately reviewed SHA-256 |
+| --- | --- |
+| `experiments/shared_contracts/selected.py` | `8939d223b06e80bc01707087a88339b4a889b63573fd2173ccf6d9b2524cb559` |
+| `experiments/shared_contracts/inventory.py` | `5ea157dd0521b05dea60625914fc4acb689d895ffc8facc27accdd997c1f5cea` |
+| `experiments/shared_contracts/route-inventory.json` | `44a1ea37b2685b1162550df3e997672251e2ee2c1b82ec3603b14f451481eb7d` |
+| `tests/test_shared_contract_packet.py` | `2beb2b08218cbd5f3a98ac5044aea1ee893728dcf5b381b7cb3eb5903bee664e` |
+
+The original `results/ot059/final-receipt.json` remains the unchanged receipt for
+`c5337a3`. The integration owner's new full check after committing these
+corrections retains its exact revision, dirty state, skips, command outcome and
+log under local ignored `results/ot059/doublecheck-final-receipt.json`. The
+retained targeted and old-behavior logs are alongside it. This record does not
+anticipate that new full-check result. Native science inputs, protocols,
+baselines and tolerances remain unchanged; the same native and external gates
+remain open.

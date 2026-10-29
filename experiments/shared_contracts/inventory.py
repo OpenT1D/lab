@@ -17,6 +17,7 @@ from experiments.observation_analysis import plan as mmtt
 from experiments.setup import core as setup
 from experiments.workflows.registry import TASKS
 
+from .core import digest, require
 from .selected import ROOT, hashes
 
 PROVIDERS = {
@@ -68,7 +69,8 @@ READER_POLICIES = {
     ),
     "m5-prognosis": (
         "Five archived implementation aliases equal current bytes; supplied "
-        "model/state opaque; verify original report in place."
+        "model/state opaque; archived tooling-uv.lock equals current root uv.lock; "
+        "verify original report in place."
     ),
     "mmtt-sensitivity": (
         "Current implementation, protocol and ancestry; opaque snapshots; exact "
@@ -79,6 +81,40 @@ READER_POLICIES = {
         "development seal; nested MMTT reader."
     ),
 }
+
+
+def reader_source_inventory(module):
+    """Static local imports from the registered -m entrypoint and package parents.
+
+    Mixed reader/run modules include lazy execution branches. This is a source
+    inventory, not a dynamically loaded reader-only or external runtime closure.
+    Reuse the existing passive AST walker without changing native frozen lists.
+    """
+    stem = module.replace(".", "/")
+    roots = {
+        name
+        for name in (stem + ".py", stem + "/__init__.py", stem + "/__main__.py")
+        if (ROOT / name).is_file()
+    }
+    require(roots, "Registered reader source is missing")
+    paths = set(roots)
+    while True:
+        paths = set(m4_study.source_closure(paths))
+        parents = {
+            (parent / "__init__.py").as_posix()
+            for name in paths
+            for parent in (ROOT / name).relative_to(ROOT).parents
+            if parent.parts and (ROOT / parent / "__init__.py").is_file()
+        }
+        if parents <= paths:
+            break
+        paths.update(parents)
+    return {
+        "reader_source_roots": sorted(roots),
+        "reader_static_dependencies_sha256": {
+            name: digest((ROOT / name).read_bytes()) for name in sorted(paths)
+        },
+    }
 
 
 def inventory():
@@ -140,6 +176,7 @@ def inventory():
             "reader_projects": setup.requirements(task, reconstruction=True),
             "historical_helper_supported": task in historical.TASKS,
             "reader_policy": READER_POLICIES[task],
+            **reader_source_inventory(entry.reconstruct_module),
         }
     return {
         "schema": "opent1d.route-inventory/1",

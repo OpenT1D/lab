@@ -4,6 +4,10 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Tighten shared-packet native status/runtime/source binding and retain static
+  reader entrypoint dependencies, including implicit package initializers.
+  Preserve native frozen inventories, scientific payloads and reader authority.
+
 - Add the internal OT-059 two-route contract/extraction packet: ten-route
   source/runtime/reader inventory, versioned metadata descriptors, preserved
   synthetic payloads and positive/refused/failed/relocated reader fixtures.
