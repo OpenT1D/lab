@@ -77,7 +77,7 @@ class InstalledSDK(unittest.TestCase):
         (self.poison / "experiments/__init__.py").write_text(
             (self.poison / "sitecustomize.py").read_text()
         )
-        for name in ("uv", "git"):
+        for name in ("uv", "git", "file", "uname"):
             (self.poison / name).write_text(f"#!/bin/sh\ntouch '{self.marker}'\nexit 9\n")
             (self.poison / name).chmod(0o755)
         self.env = {
@@ -129,6 +129,28 @@ class InstalledSDK(unittest.TestCase):
     def native(self, project, attempt):
         with opened(project) as store:
             return store.finishes[attempt][1] / "native"
+
+    def test_api_metadata_helpers_use_trusted_system_path(self):
+        code = (
+            "import json,opent1d_lab as lab\n"
+            f"p=lab.create_project({str(self.root / 'api-project')!r},'invented API control')\n"
+            f"inputs=lab.example('mmtt-sensitivity',{str(self.root / 'api-inputs')!r})['inputs']\n"
+            "plan=p.freeze('mmtt-sensitivity',inputs)['plan']\n"
+            "assert p.check(plan)['runtimes_ready']\n"
+            "result=p.run(plan)\n"
+            "print(json.dumps(result))\n"
+        )
+        result = subprocess.run(
+            [str(self.candidates["a"] / "bin/python"), "-I", "-B", "-c", code],
+            cwd=self.poison,
+            env=self.env,
+            capture_output=True,
+            text=True,
+            timeout=60,
+        )
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertEqual(json.loads(result.stdout)["result"]["completeness"], "complete")
+        self.assertFalse(self.marker.exists())
 
     def test_installed_run_retry_relocation_and_wrapper_upgrade(self):
         project, plan = self.prepared()

@@ -95,9 +95,11 @@ all ten routes and freezes two-route metadata/reader fixtures. The
 [minimal project services](docs/shared-project-services.md) add a complete local
 ledger, isolated execution and trusted reconstruction for the selected routes.
 The [internal installed Python/CLI candidate](docs/installed-sdk.md) exercises
-MMTT outside a checkout and retains passive M4 intake/failed readers. Native M4
-success/complete relocation, full two-route installed acceptance, other hosts
-and distribution capabilities remain separate gates.
+MMTT outside a checkout and retains historical passive M4 intake/failed readers.
+Its explicit [native M4 successor](docs/installed-m4.md) now has local macOS
+fasting/15 g execution, exact direct/installed parity and complete relocated
+report evidence. Thin GUI integration and intended-user feedback come next;
+other hosts, broader compatibility and distribution retain separate gates.
 
 ## What we are building
 

@@ -7,13 +7,16 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 - Add an explicit internal installed M4 execution successor with separately
   reviewed native, observer and build locks, current runtime attachments and
   isolated role startup. Preserve historical identities and numerical criteria;
-  native acceptance and complete relocation are recorded separately.
+  both selected native plans pass exact direct/installed parity and complete
+  relocation with original paths absent. Bind runtime patient/parameter bytes
+  and current application identity, verify inner ownership receipts, and use
+  the system PATH for SDK host metadata helpers.
 
 - Add an internal dependency-free installed Python/CLI candidate for MMTT
   sensitivity, passive maintained M4 intake and matching failed readers. Retain
   native identities, complete attempt history and separate application
-  provenance through bounded wrapper upgrades. Native M4 success, full two-route
-  installed acceptance, other hosts and public distribution remain open.
+  provenance through bounded wrapper upgrades. The initial historical M4 task
+  remains passive; other hosts and public distribution remain open.
 
 - Enforce live project leases and scoped attempt workspaces; reject resealed
   native payloads missing MMTT draw evidence or carrying swapped M4 sources.

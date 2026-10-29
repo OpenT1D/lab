@@ -205,7 +205,8 @@ OT-059 increment 1 now has an internal
 [contract/extraction packet](docs/shared-core-contracts.md), followed by the
 bounded [increment 2 services](docs/shared-project-services.md). The full
 OT-060–074 packages and later increments remain planned; these internal
-artifacts do not supply installed route migration or new native numerical evidence.
+initial packet/service records do not supply installed route migration or new
+native numerical evidence; the bounded installed increment below owns those checks.
 The shared-laboratory increment develops common services around the existing
 working routes. [Decision 0070](docs/decisions/0070-common-research-laboratory.md)
 records the direction; the [product requirements](docs/product-laboratory.md)
@@ -290,7 +291,8 @@ checks from missing native success and hosted evidence. Increment 2 now has
 freezes, a complete sequenced attempt ledger, isolated workers, forensic
 recovery and matching trusted readers. Its [verification record](docs/research/ot061-064-minimal-services.md)
 binds actual MMTT, controlled failed M4 and local macOS ownership/relocation
-checks. Complete native M4 execution/relocation remains a specific open gate.
+checks. Its original record leaves complete native M4 execution/relocation open;
+the explicit installed successor below supplies the selected local counterpart.
 Increment 3 has an [internal installed Python/CLI developer candidate](docs/installed-sdk.md):
 MMTT creation, validation, freezes, execution/retry and byte-exact relocated
 readers outside a checkout; passive M4 fasting/15 g plans, explicit native-policy
@@ -298,9 +300,19 @@ failure and matching failed readers. Application provenance is separate from
 unchanged native identity. Its first wrapper-build A/B check and changed-reader
 refusal are bounded upgrade cases, not general compatibility. The
 [verification record](docs/research/ot060-installed-route.md) owns actual
-artifacts/checks. Native M4 success/parity/complete installed relocation, other
-hosts and independent use remain open; the full increment-3 exit and OT-060/061/064
-packages are not closed.
+artifacts/checks. The explicit
+[installed M4 successor](docs/installed-m4.md) now supplies native fasting and
+parent-linked 15 g execution through separately reviewed overlays, exact parity
+for all 396 selected scientific files and complete relocated JSON/Markdown/SVG
+reports with the original source/input/SDK/runtime paths physically absent.
+Its [native verification record](docs/research/ot060-native-m4.md) retains exact
+artifact identities, failures, critical agent controls and scoped local macOS
+evidence. Historical task/lock identities remain intact. This demonstrates the
+selected local installed technical boundary; other hosts, broader historical
+parity/upgrade support, distribution and independent use remain open. The full
+OT-060/061/064 packages are not closed. Increment 4's thin GUI and formative
+intended-user exercise are the next queue step; unavailable users leave user
+acceptance open without blocking internal preparation.
 
 After each increment, record its verified scope and any contract change before
 selecting the next artifact. Full campaign caching, new scientific mechanisms,
