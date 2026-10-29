@@ -40,7 +40,10 @@ def main(site, project, plan):
                             continue
                         actual = self.table.one(pid)
                         if actual and actual["alive"] and actual["start"] == identity["start"]:
-                            os.kill(pid, signal.SIGSTOP)
+                            try:
+                                os.kill(pid, signal.SIGSTOP)
+                            except ProcessLookupError:
+                                continue
                             stopped.append((pid, identity["start"], time.monotonic()))
                             cancel.set()
                             break
@@ -55,7 +58,10 @@ def main(site, project, plan):
             pid, start, _ = stopped[0]
             actual = owners[0].table.one(pid)
             if actual and actual["alive"] and actual["start"] == start:
-                os.kill(pid, signal.SIGCONT)
+                try:
+                    os.kill(pid, signal.SIGCONT)
+                except ProcessLookupError:
+                    pass
 
     try:
         with patch.object(client, "exec", side_effect=controlled_exec, create=True):
@@ -82,11 +88,19 @@ def main(site, project, plan):
         assert stopped and unrelated.poll() is None, result
         print(json.dumps(result, sort_keys=True))
     finally:
-        resume()
-        for owner in owners:
-            owner.cleanup(0)
-        unrelated.terminate()
-        unrelated.wait(timeout=5)
+        try:
+            resume()
+        finally:
+            try:
+                for owner in owners:
+                    owner.cleanup(0)
+            finally:
+                try:
+                    unrelated.terminate()
+                except ProcessLookupError:
+                    pass
+                finally:
+                    unrelated.wait(timeout=5)
 
 
 if __name__ == "__main__":
