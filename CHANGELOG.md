@@ -12,6 +12,10 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
   and current application identity, verify inner ownership receipts, and use
   the system PATH for SDK host metadata helpers.
 
+- Match the dependency snapshot guard's pagination to the pinned official
+  review Action and bind canonical continuation URLs to the trusted repository
+  ID; retain complete-page, warning, deadline and exact-inventory refusals.
+
 - Add an internal dependency-free installed Python/CLI candidate for MMTT
   sensitivity, passive maintained M4 intake and matching failed readers. Retain
   native identities, complete attempt history and separate application

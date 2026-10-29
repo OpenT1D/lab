@@ -16,6 +16,8 @@ API = "https://api.github.com"
 WARNING = "x-github-dependency-graph-snapshot-warnings"
 MAX_BYTES = 8 * 1024 * 1024
 MAX_PAGES = 100
+# Match the pinned official Action: GitHub projects manifest rows per page.
+PER_PAGE = 5
 WAIT_SECONDS = 120
 
 
@@ -129,7 +131,7 @@ def pagination(header, endpoint, current, announced_last=None):
             (url.scheme, url.netloc, url.path) != (target.scheme, target.netloc, target.path)
             or url.fragment
             or set(query) != {"page", "per_page"}
-            or query["per_page"] != ["100"]
+            or query["per_page"] != [str(PER_PAGE)]
             or len(query["page"]) != 1
             or not re.fullmatch(r"[1-9][0-9]*", query["page"][0])
         ):
@@ -175,7 +177,9 @@ def comparison(endpoint, token, deadline, *, fetch=fetch_page):
         remaining = deadline - time.monotonic()
         if remaining <= 0 or page > MAX_PAGES:
             raise ValueError("Dependency comparison exceeded its time or page limit")
-        data, headers = fetch(endpoint + f"?per_page=100&page={page}", token, min(30, remaining))
+        data, headers = fetch(
+            endpoint + f"?per_page={PER_PAGE}&page={page}", token, min(30, remaining)
+        )
         fingerprint(data)  # Validate every page, including pages that report warnings.
         changes.extend(data)
         values = headers.get_all(WARNING, [])
@@ -199,17 +203,29 @@ def comparison(endpoint, token, deadline, *, fetch=fetch_page):
         page = following
 
 
-def verify(repository, base, head, token, scanned, *, fetch=fetch_page, wait=WAIT_SECONDS):
+def verify(
+    repository,
+    base,
+    head,
+    token,
+    scanned,
+    *,
+    repository_id,
+    fetch=fetch_page,
+    wait=WAIT_SECONDS,
+):
     if not re.fullmatch(r"[A-Za-z0-9_-]+/[A-Za-z0-9_.-]+", repository) or repository.split("/")[
         -1
     ] in {".", ".."}:
         raise ValueError("Invalid dependency review repository")
+    if not isinstance(repository_id, str) or not re.fullmatch(r"[1-9][0-9]{0,19}", repository_id):
+        raise ValueError("Invalid dependency review repository ID")
     if not all(re.fullmatch(r"[0-9a-f]{40}", value) for value in (base, head)):
         raise ValueError("Dependency review requires exact commit SHAs")
     if not token or not token.isascii() or any(ord(character) < 33 for character in token):
         raise ValueError("Invalid or absent dependency API token")
     expected = fingerprint(scanned)
-    endpoint = f"{API}/repos/{repository}/dependency-graph/compare/{base}...{head}"
+    endpoint = f"{API}/repositories/{repository_id}/dependency-graph/compare/{base}...{head}"
     started = time.monotonic()
     deadline, attempts = started + wait, 0
     while True:
@@ -250,6 +266,7 @@ def main():
             os.environ["PR_HEAD_SHA"],
             os.environ["GITHUB_TOKEN"],
             decode(raw),
+            repository_id=os.environ["GITHUB_REPOSITORY_ID"],
         )
         print(json.dumps(result, sort_keys=True))
         return 0

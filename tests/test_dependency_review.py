@@ -5,6 +5,7 @@ import io
 import os
 import unittest
 import urllib.error
+import urllib.parse
 from contextlib import redirect_stderr, redirect_stdout
 from email.message import Message
 from pathlib import Path
@@ -16,7 +17,8 @@ from scripts import dependency_snapshot as snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE, HEAD = "a" * 40, "b" * 40
-ENDPOINT = f"{snapshot.API}/repos/OpenT1D/lab/dependency-graph/compare/{BASE}...{HEAD}"
+REPOSITORY_ID = "1433449291"
+ENDPOINT = f"{snapshot.API}/repositories/{REPOSITORY_ID}/dependency-graph/compare/{BASE}...{HEAD}"
 TOKEN = "synthetic-not-a-credential"
 
 
@@ -41,15 +43,89 @@ def headers(*, warning=None, following=None):
     if warning is not None:
         result[snapshot.WARNING] = base64.b64encode(warning.encode()).decode()
     if following is not None:
-        result["Link"] = f'<{ENDPOINT}?per_page=100&page={following}>; rel="next"'
+        result["Link"] = f'<{ENDPOINT}?per_page=5&page={following}>; rel="next"'
     return result
 
 
 class SnapshotTests(unittest.TestCase):
     def verify(self, scanned, fetch, **kwargs):
-        return snapshot.verify("OpenT1D/lab", BASE, HEAD, TOKEN, scanned, fetch=fetch, **kwargs)
+        return snapshot.verify(
+            "OpenT1D/lab",
+            BASE,
+            HEAD,
+            TOKEN,
+            scanned,
+            repository_id=REPOSITORY_ID,
+            fetch=fetch,
+            **kwargs,
+        )
 
-    def test_complete_empty_and_reordered_comparisons_bind_the_full_scanned_inventory(self):
+    def test_action_page_size_preserves_real_manifest_projection(self):
+        # PR 32 produced 54 rows with per_page=100, but the pinned Action's
+        # per_page=5 produced 46 + 12 rows. The extra four direct-manifest
+        # rows occur before their corresponding lockfile's later page.
+        common = [change(f"dependency-{index}") for index in range(54)]
+        for row in common[42:]:
+            row["manifest"] = "observer/uv.lock"
+        direct = [{**row, "manifest": "observer/pyproject.toml"} for row in common[42:46]]
+        scanned = common[:42] + direct + common[42:]
+
+        def server(url, _token, _timeout):
+            query = urllib.parse.parse_qs(urllib.parse.urlsplit(url).query)
+            if query["per_page"] == ["100"]:
+                return common, headers()
+            self.assertEqual(query["per_page"], ["5"])
+            page = int(query["page"][0])
+            if page == 1:
+                return scanned[:46], headers(following=2)
+            self.assertEqual(page, 2)
+            return scanned[46:], headers()
+
+        fetch = Mock(side_effect=server)
+        result = self.verify(scanned, fetch)
+        self.assertEqual((result["change_count"], result["pages"]), (58, 2))
+        self.assertEqual(
+            [call.args[0] for call in fetch.call_args_list],
+            [ENDPOINT + f"?per_page=5&page={page}" for page in (1, 2)],
+        )
+        with (
+            patch.object(snapshot, "PER_PAGE", 100),
+            self.assertRaisesRegex(ValueError, "did not scan"),
+        ):
+            self.verify(scanned, Mock(side_effect=server))
+
+    def test_invalid_runner_repository_id_never_starts_a_request(self):
+        for value in (None, 1, True, "", "0", "01", "-1", "1\n", "١٢٣", "1" * 21):
+            fetch = Mock()
+            with (
+                self.subTest(repository_id=value),
+                self.assertRaisesRegex(ValueError, "ID"),
+            ):
+                snapshot.verify(
+                    "OpenT1D/lab",
+                    BASE,
+                    HEAD,
+                    TOKEN,
+                    [],
+                    repository_id=value,
+                    fetch=fetch,
+                )
+            fetch.assert_not_called()
+
+    def test_canonical_pagination_cannot_change_repository_or_page_size(self):
+        for target in (
+            ENDPOINT.replace("/1433449291/", "/1433449292/") + "?per_page=5&page=2",
+            ENDPOINT + "?per_page=100&page=2",
+        ):
+            with (
+                self.subTest(target=target),
+                self.assertRaisesRegex(ValueError, "exact comparison"),
+            ):
+                snapshot.pagination(f'<{target}>; rel="next"', ENDPOINT, 1)
+
+    def test_complete_empty_and_reordered_comparisons_bind_the_full_scanned_inventory(
+        self,
+    ):
         for records in ([], [change(), change("other")]):
             with self.subTest(records=records):
                 result = self.verify(records, Mock(return_value=(records[::-1], headers())))
@@ -58,7 +134,9 @@ class SnapshotTests(unittest.TestCase):
                 self.assertFalse(result["snapshot_warnings"])
                 self.assertEqual(result["attempts"], 1)
 
-    def test_all_page_warnings_survive_later_clean_pages_and_retry_the_whole_comparison(self):
+    def test_all_page_warnings_survive_later_clean_pages_and_retry_the_whole_comparison(
+        self,
+    ):
         fetch = Mock(
             side_effect=[
                 ([change()], headers(warning="Snapshot pending", following=2)),
@@ -73,7 +151,7 @@ class SnapshotTests(unittest.TestCase):
         self.assertEqual(result["pages"], 2)
         self.assertEqual(
             [call.args[0] for call in fetch.call_args_list],
-            [ENDPOINT + f"?per_page=100&page={page}" for page in (1, 2, 1, 2)],
+            [ENDPOINT + f"?per_page=5&page={page}" for page in (1, 2, 1, 2)],
         )
 
     def test_persistent_snapshot_warnings_stop_at_a_bounded_deadline(self):
@@ -92,7 +170,9 @@ class SnapshotTests(unittest.TestCase):
         self.assertEqual(clock[0], 11)
         self.assertEqual(fetch.call_count, 3)
 
-    def test_action_partial_output_or_later_advisory_changes_cannot_pass_complete_api_data(self):
+    def test_action_partial_output_or_later_advisory_changes_cannot_pass_complete_api_data(
+        self,
+    ):
         advisory = {
             "severity": "high",
             "advisory_ghsa_id": "GHSA-synthetic",
@@ -104,7 +184,10 @@ class SnapshotTests(unittest.TestCase):
             ([change()], [change(), change("missing")]),
             ([change()], [change(vulnerabilities=[advisory])]),
         ):
-            with self.subTest(scanned=scanned), self.assertRaisesRegex(ValueError, "did not scan"):
+            with (
+                self.subTest(scanned=scanned),
+                self.assertRaisesRegex(ValueError, "did not scan"),
+            ):
                 self.verify(scanned, Mock(return_value=(actual, headers())))
 
     def test_later_page_http_or_parse_failures_are_never_ignored(self):
@@ -121,24 +204,32 @@ class SnapshotTests(unittest.TestCase):
         for mode in ("missing-link", "missing-last", "changed-last"):
             first = headers(following=2)
             first.replace_header(
-                "Link", first["Link"] + f', <{ENDPOINT}?per_page=100&page=3>; rel="last"'
+                "Link", first["Link"] + f', <{ENDPOINT}?per_page=5&page=3>; rel="last"'
             )
             second = headers() if mode == "missing-link" else headers(following=3)
             third = [] if mode == "missing-link" else [change("third")]
             scanned = [change(), change("second"), *third]
             if mode == "changed-last":
                 second.replace_header(
-                    "Link", second["Link"] + f', <{ENDPOINT}?per_page=100&page=4>; rel="last"'
+                    "Link",
+                    second["Link"] + f', <{ENDPOINT}?per_page=5&page=4>; rel="last"',
                 )
             fetch = Mock(
-                side_effect=[([change()], first), ([change("second")], second), (third, headers())]
+                side_effect=[
+                    ([change()], first),
+                    ([change("second")], second),
+                    (third, headers()),
+                ]
             )
-            with self.subTest(mode=mode), self.assertRaisesRegex(ValueError, "pagination"):
+            with (
+                self.subTest(mode=mode),
+                self.assertRaisesRegex(ValueError, "pagination"),
+            ):
                 self.verify(scanned, fetch)
 
         first = headers(following=2)
         first.replace_header(
-            "Link", first["Link"] + f', <{ENDPOINT}?per_page=100&page=2>; rel="last"'
+            "Link", first["Link"] + f', <{ENDPOINT}?per_page=5&page=2>; rel="last"'
         )
         result = self.verify(
             [change(), change("second")],
@@ -147,18 +238,24 @@ class SnapshotTests(unittest.TestCase):
         self.assertEqual(result["pages"], 2)
         first = headers(following=2)
         first.replace_header(
-            "Link", first["Link"] + f', <{ENDPOINT}?per_page=100&page=3>; rel="last"'
+            "Link", first["Link"] + f', <{ENDPOINT}?per_page=5&page=3>; rel="last"'
         )
         middle = headers(following=3)
         middle.replace_header(
-            "Link", middle["Link"] + f', <{ENDPOINT}?per_page=100&page=3>; rel="last"'
+            "Link", middle["Link"] + f', <{ENDPOINT}?per_page=5&page=3>; rel="last"'
         )
         fetch = Mock(
-            side_effect=[([change()], first), ([change("second")], middle), ([], headers())]
+            side_effect=[
+                ([change()], first),
+                ([change("second")], middle),
+                ([], headers()),
+            ]
         )
         self.assertEqual(self.verify([change(), change("second")], fetch)["pages"], 3)
 
-    def test_deadline_expiring_during_fetch_or_final_validation_cannot_publish_success(self):
+    def test_deadline_expiring_during_fetch_or_final_validation_cannot_publish_success(
+        self,
+    ):
         original = snapshot.fingerprint
         for slow in ("fetch", "validation"):
             clock, calls = [0.0], [0]
@@ -183,20 +280,22 @@ class SnapshotTests(unittest.TestCase):
             ):
                 self.verify([], fetch, wait=120)
 
-    def test_pagination_refuses_foreign_targets_skips_cycles_duplicates_and_lost_next(self):
+    def test_pagination_refuses_foreign_targets_skips_cycles_duplicates_and_lost_next(
+        self,
+    ):
         for link in (
-            '<https://attacker.invalid/path?per_page=100&page=2>; rel="next"',
-            f'<{ENDPOINT}/other?per_page=100&page=2>; rel="next"',
-            f'<{ENDPOINT}?per_page=100&page=1>; rel="next"',
-            f'<{ENDPOINT}?per_page=100&page=3>; rel="next"',
-            f'<{ENDPOINT}?per_page=100&page=2&page=3>; rel="next"',
-            f'<{ENDPOINT}?per_page=100&page=2#fragment>; rel="next"',
-            f'<{ENDPOINT}?per_page=100&page=2>; rel="last"',
-            f'<{ENDPOINT}?per_page=100&page=2>; rel="next", '
-            f'<{ENDPOINT}?per_page=100&page=1>; rel="last"',
-            f'<{ENDPOINT}?per_page=100&page=1>; rel="prev"',
-            f'<{ENDPOINT}?per_page=100&page=2>; rel="next", '
-            f'<{ENDPOINT}?per_page=100&page=2>; rel="next"',
+            '<https://attacker.invalid/path?per_page=5&page=2>; rel="next"',
+            f'<{ENDPOINT}/other?per_page=5&page=2>; rel="next"',
+            f'<{ENDPOINT}?per_page=5&page=1>; rel="next"',
+            f'<{ENDPOINT}?per_page=5&page=3>; rel="next"',
+            f'<{ENDPOINT}?per_page=5&page=2&page=3>; rel="next"',
+            f'<{ENDPOINT}?per_page=5&page=2#fragment>; rel="next"',
+            f'<{ENDPOINT}?per_page=5&page=2>; rel="last"',
+            f'<{ENDPOINT}?per_page=5&page=2>; rel="next", '
+            f'<{ENDPOINT}?per_page=5&page=1>; rel="last"',
+            f'<{ENDPOINT}?per_page=5&page=1>; rel="prev"',
+            f'<{ENDPOINT}?per_page=5&page=2>; rel="next", '
+            f'<{ENDPOINT}?per_page=5&page=2>; rel="next"',
             "not-a-link",
         ):
             with self.subTest(link=link), self.assertRaises(ValueError):
@@ -240,7 +339,8 @@ class SnapshotTests(unittest.TestCase):
         optional.pop("scope")
         optional.pop("vulnerabilities")
         self.assertEqual(
-            snapshot.fingerprint([optional]), snapshot.fingerprint([change(scope="unknown")])
+            snapshot.fingerprint([optional]),
+            snapshot.fingerprint([change(scope="unknown")]),
         )
         self.assertNotEqual(
             snapshot.fingerprint([change()]), snapshot.fingerprint([change(), change()])
@@ -257,11 +357,38 @@ class SnapshotTests(unittest.TestCase):
         ):
             fetch = Mock()
             with self.subTest(repository=repository), self.assertRaises(ValueError):
-                snapshot.verify(repository, base, head, token, [], fetch=fetch)
+                snapshot.verify(
+                    repository,
+                    base,
+                    head,
+                    token,
+                    [],
+                    repository_id=REPOSITORY_ID,
+                    fetch=fetch,
+                )
             fetch.assert_not_called()
 
 
 class SnapshotTransportTests(unittest.TestCase):
+    def test_cli_binds_trusted_runner_repository_id(self):
+        env = {
+            "GITHUB_REPOSITORY": "OpenT1D/lab",
+            "GITHUB_REPOSITORY_ID": REPOSITORY_ID,
+            "GITHUB_TOKEN": TOKEN,
+            "PR_BASE_SHA": BASE,
+            "PR_HEAD_SHA": HEAD,
+            "DEPENDENCY_CHANGES": "[]",
+        }
+        with (
+            patch.dict(os.environ, env, clear=True),
+            patch.object(snapshot, "verify", return_value={"verified": True}) as verify,
+            redirect_stdout(io.StringIO()),
+        ):
+            self.assertEqual(snapshot.main(), 0)
+        verify.assert_called_once_with(
+            "OpenT1D/lab", BASE, HEAD, TOKEN, [], repository_id=REPOSITORY_ID
+        )
+
     def test_transport_bounds_payload_pins_api_version_and_refuses_redirects(self):
         response = Mock(status=200, headers=Message())
         response.read.return_value = b"[]"
@@ -292,6 +419,7 @@ class SnapshotTransportTests(unittest.TestCase):
     def test_cli_errors_fail_without_a_success_receipt_or_token_disclosure(self):
         env = {
             "GITHUB_REPOSITORY": "OpenT1D/lab",
+            "GITHUB_REPOSITORY_ID": REPOSITORY_ID,
             "GITHUB_TOKEN": TOKEN,
             "PR_BASE_SHA": BASE,
             "PR_HEAD_SHA": HEAD,
@@ -315,7 +443,9 @@ class SnapshotTransportTests(unittest.TestCase):
 
 
 class DependencyPolicyTests(unittest.TestCase):
-    def test_review_is_read_only_pr_only_and_snapshot_proof_follows_the_full_action(self):
+    def test_review_is_read_only_pr_only_and_snapshot_proof_follows_the_full_action(
+        self,
+    ):
         workflow = yaml.safe_load((ROOT / ".github/workflows/checks.yml").read_text())
         job = workflow["jobs"]["dependency-review"]
         self.assertEqual(job["if"], "github.event_name == 'pull_request'")
@@ -345,13 +475,16 @@ class DependencyPolicyTests(unittest.TestCase):
         )
         self.assertNotIn("if", guard)
         self.assertEqual(
-            guard["env"]["DEPENDENCY_CHANGES"], "${{ steps.review.outputs.dependency-changes }}"
+            guard["env"]["DEPENDENCY_CHANGES"],
+            "${{ steps.review.outputs.dependency-changes }}",
         )
         self.assertIn("python3 scripts/dependency_snapshot.py", guard["run"])
         for step in job["steps"]:
             self.assertNotIn("continue-on-error", step)
 
-    def test_monthly_updates_are_only_root_uv_and_actions_with_native_and_asset_exclusions(self):
+    def test_monthly_updates_are_only_root_uv_and_actions_with_native_and_asset_exclusions(
+        self,
+    ):
         data = yaml.safe_load((ROOT / ".github/dependabot.yml").read_text())
         self.assertEqual(data["version"], 2)
         updates = {value["package-ecosystem"]: value for value in data["updates"]}
@@ -374,11 +507,14 @@ class DependencyPolicyTests(unittest.TestCase):
             self.assertEqual(config["schedule"], {"interval": "monthly"})
             self.assertEqual(config["open-pull-requests-limit"], 3)
         self.assertEqual(
-            updates["uv"]["exclude-paths"], ["experiments/**", "packaging/**", "tests/**"]
+            updates["uv"]["exclude-paths"],
+            ["experiments/**", "packaging/**", "tests/**"],
         )
         self.assertFalse((ROOT / ".github/dependabot.example.yml").exists())
 
-    def test_group_filter_and_global_major_ignore_both_require_manual_major_proposals(self):
+    def test_group_filter_and_global_major_ignore_both_require_manual_major_proposals(
+        self,
+    ):
         data = yaml.safe_load((ROOT / ".github/dependabot.yml").read_text())
         groups = {"github-actions": "actions", "uv": "repository-tooling"}
         for config in data["updates"]:
@@ -386,14 +522,24 @@ class DependencyPolicyTests(unittest.TestCase):
             with self.subTest(ecosystem=ecosystem, layer="group"):
                 self.assertEqual(
                     config["groups"],
-                    {groups[ecosystem]: {"patterns": ["*"], "update-types": ["minor", "patch"]}},
+                    {
+                        groups[ecosystem]: {
+                            "patterns": ["*"],
+                            "update-types": ["minor", "patch"],
+                        }
+                    },
                 )
             # Unmatched major updates otherwise become individual PRs. Group
             # filtering alone does not disable that independent update path.
             with self.subTest(ecosystem=ecosystem, layer="global-major-ignore"):
                 self.assertEqual(
                     config.get("ignore"),
-                    [{"dependency-name": "*", "update-types": ["version-update:semver-major"]}],
+                    [
+                        {
+                            "dependency-name": "*",
+                            "update-types": ["version-update:semver-major"],
+                        }
+                    ],
                 )
 
 

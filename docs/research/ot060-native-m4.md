@@ -164,6 +164,28 @@ not alter any of the 196 numerical/helper payload files. Direct internal
 bootstrap use still trusts its caller's host environment; the supported entry
 is the installed SDK/CLI.
 
+The final wrapper control builds clean `ea6d2abcde2b7809a99fd32ae0dfabcce29e1b15`
+as `native-handoff-c`, wheel SHA-256
+`c98131069502a0b3836b35124f4ed80fc5ac0684a8134b2a7822c69122dfc911`.
+It reads both A1 complete archives and performs a full fasting retry through
+the SDK with all five PATH helper traps present. Attempt
+`ae8af755daad4f42e1c5979937ea1ac117b7caeba82731ab8a87c4447e315652`
+completes, retains the earlier attempts, reproduces its own reports and matches
+all 198 A1 scientific files exactly. No trap executes. Its 196 numerical/helper
+source files remain identical to A1. The clean full repository check at that
+revision passes 1,752 tests with 32 expected skips and a warning-free docs build.
+
+The added manifests expose a hosted dependency-snapshot comparison defect:
+the pinned official review Action requests `per_page=5`, producing 58 rows in
+two pages (46 and 12), while the guard's 100-size request produces 54 rows.
+GitHub's canonical continuation also uses the numeric repository path. The
+guard now binds the trusted runner's repository ID, requests the same page size
+and validates every canonical continuation, warning and full fingerprint.
+Twenty targeted tests and a replay of both actual API pages pass; no dependency
+is excluded or allowlisted. This CI-only correction changes none of the 196
+native files. Its final clean-revision local/hosted outcomes are retained
+separately from the earlier execution artifacts.
+
 Actual baseline crash, forced outer deadline and cancellation preserve incomplete
 attempts and all planned slots. A stronger cancellation follows a completed
 961-point trajectory and retains its exact partial bytes. A real TERM queued
