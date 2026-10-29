@@ -11,7 +11,8 @@ build the P1 workflow to connect one declared external controller, complete a
 synthetic experiment, and explain its reconstructible report. It is the
 intended-user exercise for [P1 product acceptance](../ROADMAP.md#p1--first-usable-research-product).
 The [acceptance review packet](research/p1-product-acceptance-review.md)
-records the conditional human rights decision for the exact internal handoff
+records the conditional distribution-rights decision made by a human reviewer
+for the exact internal handoff
 and what the maintainer must decide after the run.
 Completing this exercise alone does not accept the product.
 

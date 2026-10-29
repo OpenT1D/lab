@@ -82,6 +82,14 @@ Use clear commit messages. There is no mandatory commit-message syntax, CLA or s
 
 ## Evidence expected with a change
 
+Describe the research task a contribution helps with, what it reuses and what
+others can reproduce or extend. Credit existing projects and consider an
+upstream contribution when it serves the task. When comparing tools, state the
+question, supported versions, equivalent inputs and outcomes, preparation and
+maintenance effort, and limitations. Report favorable, similar, unfavorable and
+inconclusive results with the same care. Scope any improvement claim to the
+comparison actually performed.
+
 For documentation, verify local links and check scientific claims against the cited primary source. Distinguish proposed behavior from implemented behavior. Public project documentation, including research reports, is written in English. Preserve historical findings and source references when translating existing reports.
 
 For software, provide checks that address the behavior that matters. A defect fix should normally include a small reproduction. A numerical change should include a suitable reference, justified tolerance and explanation of any changed outputs. Formatting-only changes do not need invented tests.

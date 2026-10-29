@@ -4,6 +4,8 @@
 
 Translated from Dutch on 29 October 2026. Historical findings and source
 references below retain their original scope; this is not a new research review.
+Editorial wording was clarified on 29 October 2026 to describe contributions
+and comparison scopes without ranking projects.
 
 <a id="1-advies"></a>
 
@@ -13,7 +15,7 @@ references below retain their original scope; this is not a new research review.
 
 The first scientific contribution should be a verifiable statement: under which conditions does a conclusion about a treatment or control algorithm hold when the physiological model, virtual population or measurement uncertainty changes? This fits the long-term ambition and produces useful infrastructure before a multiscale digital twin is available.
 
-Open simulators, modular frameworks, data-processing pipelines and benchmarks already exist. OpenT1D should connect to them. The distinctive ambition is a maintained collection of experimental protocols, adapters, model descriptions and evidence with which others can actually collaborate. That distinction is a strategic hypothesis to test with external users; the research does not support a claim that nobody has tried this before.
+Open simulators, modular frameworks, data-processing pipelines and benchmarks already exist. OpenT1D should connect to them. The proposed contribution is a maintained collection of experimental protocols, adapters, model descriptions and evidence with which others can collaborate. Its usefulness should be assessed with researchers and informed by existing workflows and opportunities for reuse.
 
 The priorities are:
 

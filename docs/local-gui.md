@@ -63,8 +63,12 @@ available. See the [paired analysis guide](observation-analysis.md) and
 [sampling comparison guide](mmtt-sampling.md) for their complete flows. The
 [OT-057 verification record](research/ot057-uiux-verification.md) records the
 seven interface fixes integrated into main and their internal macOS retests.
-Each question has its own **Explore** button; supplied examples are ready to
-try. Example results do not establish performance in people.
+Each question has its own **Explore** button. The two MMTT examples use root
+tooling in the public source checkout. Other cards require their declared
+runtimes; the historical M4 runtime is excluded from automatic public setup.
+Use the task guide and installation policy to check availability for the selected
+checkout or packaged profile. Example results do not establish performance in
+people.
 **Results → Your experiments** opens retained own-workspace
 M4 studies, M3 forecasts/comparisons, paired observation and sampling analyses, campaigns
 and registered durable packages

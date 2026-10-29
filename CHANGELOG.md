@@ -4,6 +4,11 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Clarify OpenT1D's contribution alongside existing tools and fair task-specific
+  comparisons. Keep the original OT-056 pilot criteria separate from general
+  laboratory delivery, update installation/status guidance and clarify rights
+  review and fresh-process reconstruction terminology.
+
 - Enforce live project leases and scoped attempt workspaces; reject resealed
   native payloads missing MMTT draw evidence or carrying swapped M4 sources.
   Require verified empty process cleanup before recording reader verification.
