@@ -50,9 +50,101 @@ setup is automatic. Runtime selection is explicit and current-application bound.
    local, browser, native and hosted evidence separately under ignored
    `results/ot065-thin-gui/`, including failures and exact source/artifact hashes.
 
-## Evidence status
+## Implemented boundary and candidate
 
-Implementation and technical rehearsal are pending. No participant or independent
-usability result is recorded. Public parameter/runtime distribution, other native
-hosts, general upgrade compatibility, broad OT-072 acceptance and biological
-validity remain separate questions.
+The [installed GUI guide](../installed-gui.md) owns supported commands and the
+formative workflow. The facade exposes two supplied-example tasks, explicit
+runtime selection, immutable freeze/parent detail, complete attempt history,
+trusted report copies, cancellation, server drain and full project copying.
+One controller calls the public SDK; it does not implement a second scientific
+workflow or auto-install native dependencies. The original ten-route registry,
+all 196 scientific/helper/condition source files and numerical criteria retain
+their prior bytes.
+
+Technical rehearsal uses clean `a8f2eff414a74d9215fde14914fd54a33f40d9e9`,
+installed outside the checkout in SDK-only POSIX CPython 3.12.13 environments on
+macOS arm64. Candidate B (`thin-gui-b`) has wheel SHA-256
+`73eefb82b9122254362df1450719eaa84b46b36e9622d960d7450471d1fcfc3f`
+and canonical descriptor SHA-256
+`c54ac2962811ab116749343d7a40903fad8bb5687b90098001aa57541f322473`.
+Build C has the same source and a separate wrapper identity for reader/handoff
+checks. The wheels contain no native runtime dependencies. Exact build receipts,
+host observations, projects, packet manifests and checks are retained locally
+under ignored `results/ot065-thin-gui/`; these private receipts are not publicly
+downloadable release artifacts.
+
+## Critical review and corrections
+
+Three agents independently challenged the reader/filesystem, HTTP/process and
+formative boundaries. Their controls exposed and corrected:
+
+- Workspace child paths that could overwrite an existing SDK project's files.
+  Constructor admission now checks every reserved child before its first write.
+- An actual installed MMTT report refusal: trusted reconstruction also writes a
+  manifest seal. The GUI accepts its fixed roster and checks its bytes, while
+  offering only the two authoritative MMTT reports or three M4 reports.
+- Stale frozen-input/readiness views, automatic refresh overwriting an explicit
+  original-parent choice, and partial figure loading mixing two report identities.
+  Context invalidation, once-per-draft defaults and atomic display updates now
+  preserve the selected plan/report. Controlled DOM counterexamples fail for
+  their original reasons on development D and pass on the final source.
+- Slow-drip requests escaping inactivity timeouts, duplicate/framing/authentication
+  cases, shutdown tied to delivering its response, and repeated signals deadlocking
+  a non-reentrant lock. Seventeen actual socket/signal controls pass with a
+  five-second total read deadline and 16 concurrent request handlers. Disconnects
+  do not prevent shutdown. Repeated TERM starts one shutdown thread.
+- A terminal journal write failure presenting false GUI completion. The SDK
+  result/info survive while the convenience job reports its persistence error.
+- Preparation seals accepting answered observation forms, missing references,
+  unsupported payloads, altered scope and contradictory original/copied hashes.
+  Candidate/reference consistency, fixed materials/roster and exactly blank
+  observations are now checked in addition to byte inventory. The key leaves
+  arbitrary reference failure causes unassessed and distinguishes the separately
+  controlled missing-attachment exercise.
+
+The installed browser rehearsal created, froze, executed and reconstructed MMTT,
+displaying the authoritative quantities, variant intervals and retained
+denominators. Keyboard form submission and section navigation worked; the
+390-pixel layout had a 390-pixel document width, with no console errors observed.
+These are internal browser checks, not accessibility certification or usability
+findings. The separate native lifecycle agent reached an actual completed
+961-point trajectory before authenticated Cancel and a fresh server TERM case.
+Both retained interrupted native evidence, exited successfully, left observed
+ownership empty before harness cleanup, preserved an unrelated process and
+released the GUI lease. No harness force-cleanup was needed.
+
+## Native execution, relocation and packet rehearsal
+
+The final native success, scientific parity, physical relocation and real packet
+preparation receipts are being collected against the candidate above. The final
+integrated repository check is assigned to the root owner; local and hosted
+receipts retain their own revisions and outcomes. A source/artifact identity is
+not inferred from a wheel filename or the internal version number.
+
+## Human exercise remains unrun
+
+`prepare-study-packet` binds four distinct actual reference attempts: complete
+MMTT, fasting and parent-linked 15 g, plus an unsuccessful installed M4 attempt.
+It checks supplied input hashes and reconstructs on a disposable complete project
+copy, requiring original project bytes to remain unchanged. Participant tasks,
+facilitator expectations and blank observations are separate. Canonical packet
+verification refuses a different installed candidate, changed material or a
+contradictory preparation claim. A descriptor/file seal provides consistency,
+not authentication against wholesale replacement.
+
+An actual intended analyst who did not build the candidate is still needed;
+an actual distinct recipient is needed for a handoff claim. Before observing,
+freeze candidate/packet/host/attachment, task order, documentation, help policy,
+reference answers and adjudication rubric. Record first submissions, task
+status (unassisted, assisted, blocked or not assessed), active work, unattended
+compute, elapsed time, help content, critical interpretation errors, independent
+assessment and separate retests. Long native work can use split sessions; saved
+reports offered after a recorded block do not turn execution into success.
+Filled observations live outside the sealed packet. No participant, human timing,
+independent acceptance or performance advantage is invented by technical rehearsal.
+
+Historical checkout GUI and OT-056 task/comparison thresholds are unchanged.
+General file intake, clean-host installation usability, public parameter/runtime
+distribution, other native hosts, general upgrade compatibility, broad OT-072
+acceptance, human-data evaluation and biological validity remain separate open
+questions. This bounded increment does not close the full OT-065/072 packages.
