@@ -16,10 +16,7 @@ export function monitor(page) {
       receipt.responses.push({ url: response.url(), status: response.status() });
       if (response.status() >= 400) receipt.errors.push(`HTTP ${response.status()}: ${response.url()}`);
       if (response.request().resourceType() === 'document') {
-        documents.push(response.text().then(
-          html => ({ url: response.url(), html }),
-          error => ({ url: response.url(), error: error.message }),
-        ));
+        documents.push(response.url());
       }
     },
   };
@@ -76,10 +73,18 @@ export async function auditDocument(page, url, request, { renderTimeout = 10_000
 
     // Headless Chromium does not always request favicons. Explicitly check
     // declared assets and downloads, including links missing from the build.
-    const sources = await Promise.all(documents);
-    for (const source of sources) {
-      if (source.error) receipt.errors.push(`Document body: ${source.url} ${source.error}`);
-    }
+    // An immediate meta refresh can discard the initial browser response body.
+    // Fetch the observed navigation URLs through HTTP instead of racing CDP's
+    // body buffer. The loopback server serves the same immutable staged files.
+    const sources = await Promise.all(Array.from(new Set(documents), async url => {
+      const response = await request.get(url);
+      try {
+        if (response.status() !== 200) receipt.errors.push(`Document source HTTP ${response.status()}: ${url}`);
+        return { url: response.url(), html: await response.text() };
+      } finally {
+        await response.dispose();
+      }
+    }));
     // Include the entry HTML before a meta refresh replaces its DOM. This is
     // essential for detecting a broken favicon on the redirect itself.
     const discovery = await page.evaluate(sources => {
