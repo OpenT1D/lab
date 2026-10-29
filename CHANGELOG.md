@@ -4,6 +4,10 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Add required Chromium documentation checks for every generated page, assets,
+  downloads, browser errors, search and theme changes, with fault probes and
+  retained diagnostics.
+
 - Use the existing OpenT1D app icon as the documentation favicon, with
   page-relative links that work under the published `/lab/` project path.
 

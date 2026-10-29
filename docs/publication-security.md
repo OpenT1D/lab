@@ -86,7 +86,9 @@ keep the recorded old environments and scientific evidence intact.
 
 Active push and pull-request CI runs the root repository suite and documentation build,
 the standard-library paired boundary check, three-host public task smokes and four
-Linux Chromium flows. One required `Repository checks` result accepts only successful
+Linux Chromium MMTT flows plus the
+[documentation browser checks](documentation-publication.md#browser-regression-checks).
+One required `Repository checks` result accepts only successful
 root, platform and browser families, plus dependency review on pull requests.
 Only the dependency job may be skipped on explicit `push` or `workflow_dispatch`
 events. Native jobs and root steps that install native projects are gated.

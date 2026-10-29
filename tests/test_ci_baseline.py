@@ -113,6 +113,19 @@ class CIBaselinePolicyTests(unittest.TestCase):
         )
         self.assertIn("npm --prefix tests/browser run install:browser -- --with-deps", browser)
         self.assertIn("npm --prefix tests/browser test", browser)
+        self.assertIn("npm --prefix tests/browser run test:docs", browser)
+        browser_steps = jobs["browser"]["steps"]
+        docs = next(step for step in browser_steps if "run test:docs" in step.get("run", ""))
+        self.assertNotIn("if", docs)
+        build = next(
+            step
+            for step in browser_steps
+            if "_build/documentation-preview/lab" in step.get("run", "")
+        )
+        self.assertNotIn("if", build)
+        self.assertIn("scripts/check.py --stage docs", build["run"])
+        self.assertIn("scripts/stage_documentation.py _build/html", build["run"])
+        self.assertLess(browser_steps.index(build), browser_steps.index(docs))
 
     def test_selected_action_payload_allows_exactly_the_checked_in_revisions(self):
         uses = set()
