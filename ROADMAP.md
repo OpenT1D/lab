@@ -202,9 +202,10 @@ not complete those packages or replace OT-058's Windows requirement.
 
 **Planning decision, 25 October 2026; packet update, 29 October 2026 —**
 OT-059 increment 1 now has an internal
-[contract/extraction packet](docs/shared-core-contracts.md). OT-060–074 and the
-later shared-service increments remain planned; this packet does not migrate
-routes or supply new native numerical evidence.
+[contract/extraction packet](docs/shared-core-contracts.md), followed by the
+bounded [increment 2 services](docs/shared-project-services.md). The full
+OT-060–074 packages and later increments remain planned; these internal
+artifacts do not supply installed route migration or new native numerical evidence.
 The shared-laboratory increment develops common services around the existing
 working routes. [Decision 0070](docs/decisions/0070-common-research-laboratory.md)
 records the direction; the [product requirements](docs/product-laboratory.md)

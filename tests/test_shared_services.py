@@ -290,6 +290,163 @@ class ProjectServices(unittest.TestCase):
                 pass
         self.assertTrue((self.project / "pending/unfinished/raw.txt").exists())
 
+    def test_closed_project_handle_cannot_bypass_a_new_live_lease(self):
+        with store.opened(self.project, write_access=True) as stale:
+            plan = self.freeze(stale)
+            attempt = execution.execute(stale, plan)
+        with store.opened(self.project, write_access=True) as live:
+            before, _ = store.inventory(self.project, store.Budget())
+            output = self.root / "stale-output"
+            for operation in (
+                stale.inspect,
+                lambda: stale.append("project", {}),
+                lambda: self.freeze(stale),
+                lambda: execution.begin(stale, plan, retry_of=attempt),
+                lambda: execution.execute(stale, plan, retry_of=attempt),
+                lambda: execution.recover(stale, attempt, execution_stopped=True),
+                lambda: routes.import_attempt(stale, plan, output),
+                lambda: execution.reconstruct(stale, attempt, output),
+                lambda: stale.relocate(output),
+            ):
+                with self.assertRaisesRegex(ValueError, "active project lease"):
+                    operation()
+                self.assertFalse(output.exists())
+                after, _ = store.inventory(self.project, store.Budget())
+                self.assertEqual(after, before)
+            live.inspect()
+        with store.opened(self.project) as readonly:
+            with self.assertRaisesRegex(ValueError, "Writable project lease"):
+                execution.recover(readonly, attempt, execution_stopped=True)
+
+    def test_invalid_attempt_arguments_do_not_delete_assets_or_publish_events(self):
+        external = self.root / "external-assets"
+        external.mkdir()
+        (external / "source.txt").write_bytes(b"preserve original bytes")
+        with store.opened(self.project, write_access=True) as project:
+            plan = self.freeze(project)
+            before = dict(project.head)
+            with self.assertRaisesRegex(ValueError, "Unsupported attempt mode"):
+                execution.begin(project, plan, mode="unknown")
+            self.assertEqual(project.head, before)
+            attempt, work = execution.begin(project, plan)
+            with self.assertRaisesRegex(ValueError, "workspace differs"):
+                execution.finish(
+                    project,
+                    attempt,
+                    external,
+                    {"status": "failed", "remaining_owned_processes": []},
+                    forensic=True,
+                )
+            self.assertEqual((external / "source.txt").read_bytes(), b"preserve original bytes")
+            self.assertTrue(work.is_dir())
+            self.assertNotIn(attempt, project.finishes)
+            execution.recover(project, attempt, execution_stopped=True)
+            before = dict(project.head)
+            with self.assertRaisesRegex(ValueError, "No unfinished attempt"):
+                execution.finish(
+                    project,
+                    attempt,
+                    external,
+                    {"status": "failed", "remaining_owned_processes": []},
+                    forensic=True,
+                )
+            self.assertEqual(project.head, before)
+            project.inspect()
+
+    def test_reader_requires_zero_exit_and_observed_empty_cleanup(self):
+        actual_supervise = execution.supervise
+        with store.opened(self.project, write_access=True) as project:
+            plan = self.freeze(project)
+            attempt = execution.execute(project, plan)
+            before = dict(project.head)
+            for index, adverse in enumerate(
+                (
+                    {"remaining_owned_processes": None},
+                    {"remaining_owned_processes": [{"pid": -1, "start": "injected observation"}]},
+                    {"exit_code": 7},
+                )
+            ):
+
+                def adverse_receipt(*args, **kwargs):
+                    return {**actual_supervise(*args, **kwargs), **adverse}
+
+                with (
+                    patch.object(execution, "supervise", side_effect=adverse_receipt),
+                    self.assertRaisesRegex(ValueError, "Trusted native reader refused"),
+                ):
+                    execution.reconstruct(project, attempt, self.root / f"unverified-{index}")
+                self.assertEqual(project.head, before)
+                self.assertTrue((self.root / f"unverified-{index}/report.json").is_file())
+
+    def test_mmtt_intake_requires_native_freeze_draw_ledger_and_failed_admission(self):
+        from experiments.observation_analysis.run import run as run_mmtt
+
+        with store.opened(self.project, write_access=True) as project:
+            plan = self.freeze(project)
+            original = execution.execute(project, plan)
+            native = project.finishes[original][1] / "native"
+            interrupted = self.root / "interrupted-native"
+            with patch(
+                "experiments.observation_analysis.run.evaluate", side_effect=KeyboardInterrupt
+            ):
+                run_mmtt(project.plans[plan][1] / "input", interrupted)
+            before = dict(project.head)
+            for label, source, missing in (
+                ("complete-no-freeze", native, "frozen"),
+                ("complete-no-draws", native, "attempts.json"),
+                ("interrupted-no-admission", interrupted, "admission.json"),
+            ):
+                changed = self.root / label
+                shutil.copytree(source, changed)
+                if (changed / missing).is_dir():
+                    shutil.rmtree(changed / missing)
+                else:
+                    (changed / missing).unlink()
+                (changed / "manifest.json").unlink()
+                seal(changed)
+                with self.subTest(case=label), self.assertRaises((ValueError, OSError)):
+                    routes.import_attempt(project, plan, changed, retry_of=original)
+                self.assertEqual(project.head, before)
+            changed = self.root / "complete-missing-draw"
+            shutil.copytree(native, changed)
+            draws = store.read(changed / "attempts.json")
+            draws["people"]["invented-01"]["variants"]["nominal"]["draws"].pop()
+            (changed / "attempts.json").write_bytes(encoded(draws))
+            (changed / "manifest.json").unlink()
+            seal(changed)
+            with self.assertRaisesRegex(ValueError, "draw/perturbation indices differ"):
+                routes.import_attempt(project, plan, changed, retry_of=original)
+            self.assertEqual(project.head, before)
+            for index, mutate in enumerate(
+                (
+                    lambda ledger: ledger["people"]["invented-01"].pop("perturbations"),
+                    lambda ledger: ledger.pop("planned_interval_evaluations"),
+                    lambda ledger: ledger["people"]["invented-01"]["perturbations"].pop(),
+                )
+            ):
+                changed = self.root / f"missing-native-variate-{index}"
+                shutil.copytree(native, changed)
+                ledger = store.read(changed / "attempts.json")
+                mutate(ledger)
+                (changed / "attempts.json").write_bytes(encoded(ledger))
+                (changed / "manifest.json").unlink()
+                seal(changed)
+                with (
+                    self.subTest(case=index),
+                    self.assertRaisesRegex(ValueError, "Incomplete native"),
+                ):
+                    routes.import_attempt(project, plan, changed, retry_of=original)
+                self.assertEqual(project.head, before)
+            # The native failed reader deliberately supports a missing or
+            # partial frozen snapshot when the original admission is retained.
+            shutil.rmtree(interrupted / "frozen")
+            (interrupted / "manifest.json").unlink()
+            seal(interrupted)
+            imported = routes.import_attempt(project, plan, interrupted, retry_of=original)
+            execution.reconstruct(
+                project, imported, self.root / "failed-admission-rebuilt", allow_failed=True
+            )
+
     def test_reader_and_export_refuse_dotdot_and_symlink_output_aliases(self):
         outside = self.root / "outside"
         outside.mkdir()
@@ -431,6 +588,27 @@ class ProjectServices(unittest.TestCase):
                 (invalid / missing).unlink()
                 with self.subTest(case=label), self.assertRaises((ValueError, OSError, KeyError)):
                     routes.import_attempt(project, first, invalid)
+            self.assertEqual(project.attempts, {})
+            swapped = self.root / "m4-swapped-scientific-source"
+            shutil.copytree(native, swapped)
+            native_plan = store.read(swapped / "plan.json")
+            for name in ("model.py", "model.json"):
+                (swapped / "frozen/dalla_man" / name).write_bytes(
+                    (swapped / "frozen/ultradian" / name).read_bytes()
+                )
+            native_plan["sources"]["dalla_man"] = copy.deepcopy(native_plan["sources"]["ultradian"])
+            (swapped / "plan.json").write_bytes(encoded(native_plan))
+            files = routes.m4_inventory(swapped)
+            (swapped / "manifest.json").write_bytes(
+                encoded(
+                    {
+                        "schema": routes.m4.VERSION,
+                        "files": {name: digest(raw) for name, raw in files.items()},
+                    }
+                )
+            )
+            with self.assertRaisesRegex(ValueError, "scientific source differs"):
+                routes.import_attempt(project, first, swapped)
             self.assertEqual(project.attempts, {})
             with patch.object(
                 execution, "spawn", side_effect=AssertionError("import must be passive")

@@ -22,6 +22,8 @@ from .store import require, safe_path, snapshot, write
 
 
 def begin(store, plan_id, *, retry_of=None, mode="execute"):
+    store.require_lease(write_access=True)
+    require(mode in {"execute", "import"}, "Unsupported attempt mode")
     require(plan_id in store.plans, "Unknown frozen plan")
     require(
         not (set(store.attempts) - set(store.finishes)),
@@ -50,6 +52,13 @@ def begin(store, plan_id, *, retry_of=None, mode="execute"):
 
 
 def finish(store, attempt, work, receipt, *, forensic=False):
+    store.require_lease(write_access=True)
+    require(
+        attempt in store.attempts and attempt not in store.finishes,
+        "No unfinished attempt to seal",
+    )
+    work = safe_path(work)
+    require(work == store.path / "work" / attempt, "Attempt workspace differs from owned work")
     descriptor, plan = store.plans[store.attempts[attempt]["plan"]]
     require(
         receipt["remaining_owned_processes"] == [],
@@ -182,10 +191,13 @@ def supervise(argv, log_path, *, timeout, cancel=None, grace=30):
             for signum, handler in previous.items():
                 signal.signal(signum, handler)
     receipt["received_signals"] = received
+    if receipt["remaining_owned_processes"] != []:
+        receipt.update(status="failed", error="Owned process cleanup remains unresolved")
     return receipt
 
 
 def execute(store, plan_id, *, retry_of=None, timeout=3600, cancel=None):
+    store.require_lease(write_access=True)
     require(
         type(timeout) in (int, float) and math.isfinite(timeout) and timeout > 0,
         "Finite positive deadline required",
@@ -228,6 +240,7 @@ def execute(store, plan_id, *, retry_of=None, timeout=3600, cancel=None):
 
 def recover(store, attempt, *, execution_stopped=False):
     """Explicit offline recovery; never adopt or signal a journal's PID."""
+    store.require_lease(write_access=True)
     require(execution_stopped is True, "Explicit confirmation that execution stopped is required")
     require(attempt in store.attempts and attempt not in store.finishes, "No unfinished attempt")
     work = store.path / "work" / attempt
@@ -243,6 +256,7 @@ def recover(store, attempt, *, execution_stopped=False):
 
 
 def reconstruct(store, attempt, output, *, allow_failed=False):
+    store.require_lease()
     require(attempt in store.finishes, "Unfinished attempt; native reconstruction unavailable")
     finish_record, evidence = store.finishes[attempt]
     result = finish_record["result"]
@@ -271,7 +285,9 @@ def reconstruct(store, attempt, output, *, allow_failed=False):
     with tempfile_log() as logfile:
         receipt = supervise(argv, logfile, timeout=600)
     require(
-        receipt["status"] == "completed",
+        receipt["status"] == "completed"
+        and receipt.get("exit_code") == 0
+        and receipt.get("remaining_owned_processes") == [],
         "Trusted native reader refused reconstruction: " + str(receipt["error"]),
     )
     from experiments.catalogue.storage import digest

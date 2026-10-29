@@ -4,6 +4,10 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Enforce live project leases and scoped attempt workspaces; reject resealed
+  native payloads missing MMTT draw evidence or carrying swapped M4 sources.
+  Require verified empty process cleanup before recording reader verification.
+
 - Add minimal internal OT-061/064 project services for MMTT sensitivity and
   maintained M4: immutable freezes, complete attempt ledger, isolated workers,
   forensic recovery and trusted byte-exact report reconstruction. Native M4

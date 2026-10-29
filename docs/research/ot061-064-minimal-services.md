@@ -141,3 +141,70 @@ evidence remain separate. Interrupted event/head publication fails closed with
 forensic evidence; automated journal repair is not implemented. Agent review
 does not establish independent scientific validation. Substantial AI assistance
 is explicit in the ownership above.
+
+## Critical double-check of the committed services
+
+On 29 October, the user requested another critical review with multiple agents.
+Two read-only GPT-6.1 Sol reviewers independently inspected clean commit
+`ba084ae23088dba6887178616d3b34b2e126b763` against the original `718800a` base.
+One investigated storage, freeze identity and readers; the other investigated
+lifecycle and evidence claims. The integration owner remained the only writer
+and full-check owner. The original receipt above is preserved unchanged.
+
+Six bounded corrections were reproduced on disposable projects before fixes:
+
+- A project object retained after its `opened` context could bypass a newer
+  writer's exclusive lease. The subsequent writer could collide and leave the
+  store unreadable. Every service operation now requires the live context's
+  lease; context exit invalidates the object before releasing the lock.
+- A completed MMTT archive could lose its native freeze, draw file or raw
+  perturbation evidence, be resealed, and still acquire complete native metadata.
+  An interrupted archive could similarly lose its admission. Intake now requires
+  the native frozen-plan association, raw draw/variate fields and rosters,
+  descriptive native report consistency and exact failed admission association.
+  Failed partial snapshots retain the native reader's existing allowance. Full
+  numerical replay remains an explicit trusted-reader operation.
+- A failed M4 native plan could substitute the other source/declaration pair,
+  reseal its native inventory and keep the original shared/report metadata.
+  Each native scientific source/declaration now matches the shared frozen pair,
+  in addition to its own native frozen gates and report binding.
+- Reader completion alone could publish verification despite a nonempty or
+  unknown owned-process cleanup receipt. Supervision now marks that unresolved,
+  and reader verification independently requires zero exit and empty cleanup.
+  Actual native reader outputs with injected adverse cleanup receipts refuse
+  without adding a verified ledger event; these injections do not demonstrate
+  an actual unkillable child.
+- An invalid `begin` mode could commit an event that the store subsequently
+  refused. Unsupported modes now refuse before any event or workspace write.
+- `finish` could snapshot and remove a foreign caller-supplied directory, then
+  leave the original work directory inconsistent with its terminal event.
+  It now requires the exact owned active workspace and refuses already terminal
+  attempts before writing or deleting anything.
+
+The helper argument cases were internal Python API misuse, not a demonstrated
+GUI or CLI exploit. They are still useful boundaries for subsequent SDK work.
+The stricter intake gates preserve valid version-1 archives; malformed native
+payloads previously mislabeled admissible are refused. No native scientific
+source, protocol, runtime lock, frozen fixture, baseline or tolerance changed.
+
+The updated service suite has 17 tests. The combined service/OT-059/maintained
+M4/observation workflow command above passed 47 tests with no skips. The
+lifecycle reviewer additionally passed six focused tests, repeated its original
+mode and reader-cleanup cases, and checked an actual ownership-constructor
+failure: the direct worker was reaped, cleanup stayed explicitly unknown and an
+unrelated process survived. The storage reviewer repeated all four original
+intake cases and the escaped-lease case, with unaltered original/moved MMTT
+controls still passing. Its five focused regressions passed. Both reviewers
+reported no remaining actionable finding within their inspected scope;
+`git diff --check` passed. Their exact reviewed source identities are retained
+in `doublecheck-review.json` and match the corrected commit's code.
+
+The integration owner's fresh committed-revision full-check result and final
+review identities are retained under local ignored
+`results/ot061-064/doublecheck-final-receipt.json`,
+`doublecheck-final-check.log` and `doublecheck-review.json`. Consult those
+receipts for the actual final revision, dirty state, outcomes and limitations;
+this tracked record does not anticipate a pass. The previous `final-receipt.json`
+continues to refer only to `ba084ae`. Native M4 success/complete relocation,
+other hosts, supported upgrades, installed use, second-engine families and
+independent human/scientific acceptance remain open as described above.

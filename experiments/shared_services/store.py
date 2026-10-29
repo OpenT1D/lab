@@ -75,18 +75,30 @@ def opened(path, *, write_access=False):
         except BlockingIOError:
             raise ValueError("Project is in use; ownership cannot be adopted") from None
         store = Store(path, write_access)
-        store.inspect()
+        store._lease = lease
         try:
+            store.inspect()
             yield store
         finally:
+            store._lease = None
+            store.writable = False
             fcntl.flock(lease, fcntl.LOCK_UN)
 
 
 class Store:
     def __init__(self, path, writable):
         self.path, self.writable = path, writable
+        self._lease = None
+
+    def require_lease(self, *, write_access=False):
+        require(
+            self._lease is not None and not self._lease.closed,
+            "An active project lease is required; reopen the project",
+        )
+        require(not write_access or self.writable, "Writable project lease required")
 
     def inspect(self):
+        self.require_lease()
         require(
             {p.name for p in self.path.iterdir()}
             == {".lock", "HEAD.json", "events", "work", "pending"},
@@ -212,7 +224,7 @@ class Store:
         require(event["sequence"] == 1 or self.events, "Missing project genesis")
 
     def append(self, kind, data, populate=None):
-        require(self.writable, "Writable project lease required")
+        self.require_lease(write_access=True)
         staging = Path(tempfile.mkdtemp(prefix="event-", dir=self.path / "pending"))
         sequence = self.head["count"] + 1
         event = {
@@ -254,6 +266,7 @@ class Store:
 
     def relocate(self, output):
         """Export the entire ledger; native/opaque files remain byte identical."""
+        self.require_lease()
         require(
             not (set(self.attempts) - set(self.finishes)),
             "Recover unfinished attempts before export",

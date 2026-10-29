@@ -9,6 +9,7 @@ from experiments.m4.initial_load.common import inventory as m4_inventory
 from experiments.m4.secure_study import common as m4
 from experiments.m4.secure_study.report import validate_frozen as validate_m4_frozen
 from experiments.observation_analysis import plan as mmtt
+from experiments.observation_analysis.analysis import report_from_attempts
 from experiments.shared_contracts.inventory import reader_source_inventory
 from experiments.shared_contracts.selected import boundary, outcome, reader
 
@@ -190,6 +191,64 @@ def validate_freeze(folder, descriptor, *, current):
         )
 
 
+def validate_draw_ledger(attempts, native_plan, package):
+    """Retain every native variate and draw roster, without replaying estimates."""
+    require(
+        isinstance(attempts, dict)
+        and set(attempts)
+        == {
+            "schema",
+            "import_errors",
+            "import_valid",
+            "work_limit_refused",
+            "planned_interval_evaluations",
+            "people",
+        }
+        and type(attempts["import_valid"]) is bool
+        and type(attempts["work_limit_refused"]) is bool
+        and type(attempts["planned_interval_evaluations"]) is int
+        and attempts["planned_interval_evaluations"] >= 0,
+        "Incomplete native draw ledger fields",
+    )
+    settings = native_plan["settings"]
+    visits = set(settings["visit_order"])
+    variants = {variant["id"] for variant in settings["variants"]}
+    for person in package["participants"]:
+        record = attempts["people"][person["id"]]
+        require(
+            set(record) == {"allocation", "context", "references", "perturbations", "variants"}
+            and record["allocation"] == person["allocation"]
+            and record["context"] == person["context"]
+            and set(record["references"]) == visits
+            and set(record["variants"]) == variants
+            and isinstance(record["perturbations"], list)
+            and len(record["perturbations"]) in (0, settings["uncertainty"]["draws"]),
+            "Incomplete native variates or participant roster",
+        )
+        indices = list(range(len(record["perturbations"])))
+        for index, draw in enumerate(record["perturbations"]):
+            require(
+                set(draw) == {"index", "shared_offset_pmol_l", "visits", "generation_errors"}
+                and type(draw["index"]) is int
+                and draw["index"] == index
+                and set(draw["visits"]) == visits
+                and isinstance(draw["generation_errors"], list)
+                and all(
+                    isinstance(values, list)
+                    and len(values) == len(record["references"][visit]["times_min"])
+                    for visit, values in draw["visits"].items()
+                ),
+                "Incomplete native perturbation roster",
+            )
+        for value in record["variants"].values():
+            require(
+                set(value) == {"point", "draws", "not_attempted_reason"}
+                and isinstance(value["draws"], list)
+                and [draw["index"] for draw in value["draws"]] == indices,
+                "Native draw/perturbation indices differ",
+            )
+
+
 def native_result(archive, descriptor, plan):
     archive = safe_path(archive)
     inventory(archive, Budget())
@@ -198,10 +257,40 @@ def native_result(archive, descriptor, plan):
     execution = read(archive / ("execution.json" if task == "mmtt-sensitivity" else "state.json"))
     if task == "mmtt-sensitivity":
         load_sealed(archive)
+        shared_plan = read(plan / "input/plan.json")
         require(
-            report["plan"] == read(plan / "input/plan.json"),
+            report["plan"] == shared_plan,
             "Native archive belongs to another frozen plan",
         )
+        if execution.get("status") == "completed":
+            native_plan, _, _ = mmtt.load_plan(archive / "frozen")
+            require(native_plan == shared_plan, "Native frozen plan differs from shared freeze")
+            # Arithmetic replay stays with the explicit trusted reader. Passive
+            # admission still requires the saved native all-draw ledger.
+            attempts = decode(
+                read_regular(archive / "attempts.json", 128 * 1024 * 1024, "native draw ledger")
+            )
+            require(
+                isinstance(attempts, dict)
+                and attempts.get("schema") == report.get("schema")
+                and isinstance(attempts.get("people"), dict)
+                and set(attempts["people"]) == set(report.get("people", {})),
+                "Native draw ledger envelope or participant roster differs",
+            )
+            validate_draw_ledger(attempts, shared_plan, read(plan / "original/package.json"))
+            summary = report_from_attempts(shared_plan, attempts)
+            summary["execution_status"] = "completed"
+            require(summary == report, "Native draw ledger differs from saved report")
+        else:
+            admitted = read(archive / "admission.json")
+            require(
+                admitted
+                == {
+                    "plan": shared_plan,
+                    "package": read(plan / "original/package.json"),
+                },
+                "Native failed admission differs from shared freeze",
+            )
         payload = {
             name: (plan / "original" / name).read_bytes() for name in descriptor["original_sha256"]
         }
@@ -225,6 +314,13 @@ def native_result(archive, descriptor, plan):
             == descriptor["boundary"]["binding"]["implementation_sha256"],
             "Native implementation differs",
         )
+        for name, expected in descriptor["boundary"]["binding"]["source_sha256"].items():
+            source = native_plan["sources"][name]
+            require(
+                all(source[field] == sha for field, sha in expected.items())
+                and source["declaration"] == read(plan / "input" / name / "model.json"),
+                "Native scientific source differs from shared freeze",
+            )
         payload = {"config.json": (plan / "input/config.json").read_bytes()}
     status, complete, slots = outcome(
         task, report, execution, payload, descriptor["boundary"]["binding"]
@@ -288,6 +384,7 @@ def validate_finish(evidence, data, descriptor, plan):
 def freeze(store, task, inputs, *, parent=None):
     import tempfile
 
+    store.require_lease(write_access=True)
     require(parent is None or parent in store.plans, "Missing parent plan")
     with tempfile.TemporaryDirectory(prefix="opent1d-freeze-") as staging:
         captured = Path(staging).resolve() / "plan"
@@ -307,6 +404,7 @@ def import_attempt(store, plan_id, archive, *, retry_of=None):
     """Explicit passive intake of existing native evidence, including failed archives."""
     from .execution import begin, finish
 
+    store.require_lease(write_access=True)
     descriptor, plan = store.plans[plan_id]
     native_result(Path(archive), descriptor, plan)
     attempt, work = begin(store, plan_id, retry_of=retry_of, mode="import")

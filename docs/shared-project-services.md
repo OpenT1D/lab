@@ -16,6 +16,10 @@ each mutation and execution. Readers hold a shared lease. Concurrent writers
 are refused. The first tested service host is local Apple Silicon macOS; the
 code admits POSIX hosts, while Linux service qualification and Windows service
 support remain unverified. Existing host smokes qualify their own boundaries.
+Project objects expire when their `opened` context exits. Retaining an object
+does not retain authority to read, execute, export or mutate it; reopen it under
+a new lease. Invalid attempt modes and foreign/finished workspaces refuse
+before event publication or cleanup can alter assets.
 
 The project contains `HEAD.json`, `events/`, `work/`, `pending/` and `.lock`.
 Every event has a consecutive sequence number, previous-event identity and
@@ -76,6 +80,14 @@ attempt. `routes.import_attempt` passively copies an existing native archive
 that matches a frozen plan. Neither opening nor importing starts a worker,
 setup command or archived Python. Imported results remain unchecked until the
 explicit trusted reader succeeds. A refused input does not publish a freeze.
+Passive native intake requires completed MMTT's own frozen plan and full raw
+draw/variate ledger, and binds failed/interrupted admission to the shared plan
+and original package. Incomplete failed snapshots remain admissible with that
+retained admission. M4's own frozen scientific source/declaration pairs must
+match the shared freeze as well as its report. Descriptive ledger/report
+consistency is checked during intake; the explicit reader still performs full
+arithmetic replay. Resealing a structurally incomplete or swapped native payload does not
+make it admissible.
 
 ## Execution and failure accounting
 
@@ -110,6 +122,8 @@ draws/visits. Completeness, recorded reconstruction and `synthetic-only`
 scientific evidence cannot be promoted by process completion. Successful
 reconstruction adds its own immutable ledger event linked to the attempt and
 original report hashes. Native payloads remain authoritative.
+Reader verification also requires a zero exit code and an observed empty
+owned-process set; incomplete or unknown cleanup cannot publish verification.
 
 ## Reader and compatibility matrix
 
