@@ -4,7 +4,7 @@ Version 1.0, 20 September 2026. **L2: bounded source map completed.** This updat
 
 ## Scope and source checking
 
-The five topics and their project connections are inherited from the [Dutch research report](../onderzoek/projectopzet.md), especially its landscape and later-extension sections. That report remains unchanged. The original publications below were rechecked during this update; the Dalla Man meal paper adds a more specific source route. Access depth is recorded explicitly because finding a publication does not establish that every equation, parameter or executable asset is available.
+The five topics and their project connections are inherited from the [research report (now translated into English)](../onderzoek/projectopzet.md), especially its landscape and later-extension sections. Its historical findings remain unchanged. The original publications below were rechecked during this update; the Dalla Man meal paper adds a more specific source route. Access depth is recorded explicitly because finding a publication does not establish that every equation, parameter or executable asset is available.
 
 | Original source and inspected version | Material rechecked on 20 September 2026 | Remaining access/specification limit |
 | --- | --- | --- |

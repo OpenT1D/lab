@@ -265,7 +265,7 @@ A positive model-improvement verdict is not required for research completion. If
 
 ## 12. Deliverables and repository organization
 
-This document is the canonical plan. Extend the roadmap only with package status and links; avoid duplicating detailed instructions. Keep the historical Dutch research reports intact. New public guides and dossiers are in English.
+This document is the canonical plan. Extend the roadmap only with package status and links; avoid duplicating detailed instructions. Preserve the findings and references of historical research reports, now translated into English. Public guides and dossiers are in English.
 
 During execution, create a readable LIT-001 results dossier linked from the documentation table of contents, a source register, extraction records, study/model relationships, an engine comparison and a decision/acceptance record. Use ordinary versioned files initially. Final filenames and a minimal record schema are chosen in L1 after the extraction pilot; no machine-readable schema or evidence database is claimed as implemented by this plan.
 

@@ -82,7 +82,7 @@ Use clear commit messages. There is no mandatory commit-message syntax, CLA or s
 
 ## Evidence expected with a change
 
-For documentation, verify local links and check scientific claims against the cited primary source. Distinguish proposed behavior from implemented behavior. Public project documentation is written in English; the existing research reports are in Dutch.
+For documentation, verify local links and check scientific claims against the cited primary source. Distinguish proposed behavior from implemented behavior. Public project documentation, including research reports, is written in English. Preserve historical findings and source references when translating existing reports.
 
 For software, provide checks that address the behavior that matters. A defect fix should normally include a small reproduction. A numerical change should include a suitable reference, justified tolerance and explanation of any changed outputs. Formatting-only changes do not need invented tests.
 
