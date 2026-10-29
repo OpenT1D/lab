@@ -12,7 +12,7 @@ The minimum deliverable is a completed evidence dossier and feasibility decision
 
 ## 2. Position in the project
 
-Use the [existing landscape report](../onderzoek/projectopzet.md), [model guide](models.md), [validation guide](validation.md), model cards and archived implementation evidence as starting material. Preserve historical reports and protocols; record newly checked evidence in the LIT-001 outputs.
+Use the [existing landscape report](../research/project-design.md), [model guide](models.md), [validation guide](validation.md), model cards and archived implementation evidence as starting material. Preserve historical reports and protocols; record newly checked evidence in the LIT-001 outputs.
 
 | Existing track | Contribution from LIT-001 | Boundary that remains |
 | --- | --- | --- |

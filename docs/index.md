@@ -168,13 +168,13 @@ and scientific corrections.
 The public guides and these detailed research reports are in English. The reports
 preserve their original dated findings; translation does not constitute a new audit:
 
-- [T1D modeling landscape and project design](onderzoek/projectopzet.md):
+- [T1D modeling landscape and project design](research/project-design.md):
   simulator candidates, data, standards and scientific evidence.
-- [Repository foundation research](onderzoek/repositorybasis.md):
+- [Repository foundation research](research/repository-foundation.md):
   lessons from existing projects and the repository decisions.
-- [Repository foundation review](onderzoek/review-repositorybasis.md):
+- [Repository foundation review](research/repository-foundation-review.md):
   review findings and the scope of the original foundation checks.
-- [Product-direction research](onderzoek/productrichting.md):
+- [Product-direction research](research/product-direction.md):
   research jobs, existing tools and the shared laboratory direction.
 - [Internal numerical verification](research/internal-verification-results.md):
   the historical IV-001 results, numerical sensitivity and recorded limitations.

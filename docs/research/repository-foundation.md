@@ -23,7 +23,7 @@ The reference date is 12 September 2026. The comparison uses official repositori
 
 The research assesses six aspects: first introduction, joining as a contributor, scientific auditability, maintenance, responsibilities and suitability for a project that does not yet have a runtime. Observed practices and recommendations for OpenT1D are separated below. Documents on a moving main branch may change after the reference date.
 
-The technical and biological quality of T1D model candidates is covered in the separate [project research](projectopzet.md). This report concerns the setup needed to assess and maintain such quality later. Popular projects provide useful examples; their size or reputation is no reason to adopt their entire process.
+The technical and biological quality of T1D model candidates is covered in the separate [project research](project-design.md). This report concerns the setup needed to assess and maintain such quality later. Popular projects provide useful examples; their size or reputation is no reason to adopt their entire process.
 
 <a id="3-vergelijking-met-bestaande-projecten"></a>
 
@@ -79,7 +79,7 @@ The public guides will be in English. The existing Dutch research reports will b
 | Model, data and evidence conventions | `docs/research/` | New application or relevant methodological lesson |
 | Participation and responsibility | Root community documents | Changed workflow, contact or role |
 | Operational setup | `docs/maintenance.md` | Activation of GitHub features and releases |
-| Research sources | `docs/onderzoek/` | New or changed decisive information |
+| Research sources | `docs/research/` | New or changed decisive information |
 
 <a id="5-benodigde-repositorybestanden"></a>
 
@@ -128,7 +128,7 @@ The model-card format asks for the original publication, code version, parameter
 
 The protocol format records the question, scenario, intervention, tuning, outcome measures and analysis method. It includes space for failures, exclusions, independent evaluation material and deviations from the original plan. A result must later be reconstructible from saved output without manual corrections to a figure or table.
 
-Status is not compressed into one quality badge. A module can be implemented and reproduce an upstream example while still lacking relevant external validation. These properties must remain visible separately. The sources and arguments are discussed in more detail in the [scientific project research](projectopzet.md#8-validation-as-core-functionality).
+Status is not compressed into one quality badge. A module can be implemented and reproduce an upstream example while still lacking relevant external validation. These properties must remain visible separately. The sources and arguments are discussed in more detail in the [scientific project research](project-design.md#8-validation-as-core-functionality).
 
 The first publication need not present a new optimal control algorithm. A meaningful comparison or a correctly documented dependence on model choice can already contribute to research. The broader laboratory then grows by applying the same evidence and reproducibility infrastructure to new biological questions.
 

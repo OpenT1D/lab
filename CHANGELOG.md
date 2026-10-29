@@ -4,6 +4,9 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Consolidate the translated foundation reports under `docs/research/` with
+  English file names, removing `docs/onderzoek/` and updating maintained links.
+
 - Tighten shared-packet native status/runtime/source binding and retain static
   reader entrypoint dependencies, including implicit package initializers.
   Preserve native frozen inventories, scientific payloads and reader authority.

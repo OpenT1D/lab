@@ -6,7 +6,7 @@
 
 Subsequent execution is recorded in the [native reproduction record](m0-reproduction.md), [data card](m0-data-fit.md), and accepted [decision 0002](../decisions/0002-m0-reference-first.md). The conclusions below describe the original proposal, not the later completion status.
 
-The [roadmap](../../ROADMAP.md) remains the implementation plan. This page supplies evidence for OT-001–OT-004 and OT-013; the [first experiment](first-experiment.md) is the canonical protocol candidate and [decision 0002](../decisions/0002-m0-reference-first.md) records the proposed reuse boundary. The earlier [landscape report](../onderzoek/projectopzet.md) remains broader background.
+The [roadmap](../../ROADMAP.md) remains the implementation plan. This page supplies evidence for OT-001–OT-004 and OT-013; the [first experiment](first-experiment.md) is the canonical protocol candidate and [decision 0002](../decisions/0002-m0-reference-first.md) records the proposed reuse boundary. The earlier [landscape report](../research/project-design.md) remains broader background.
 
 ## Recommendation
 

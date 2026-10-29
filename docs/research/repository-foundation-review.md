@@ -174,7 +174,7 @@ This is a maintenance gap, not a demonstrated vulnerable dependency in the curre
 
 ### B4 — P2: Dutch reports are marked as English
 
-**Location:** `docs/conf.py:7–35` and generated versions of `docs/onderzoek/projectopzet.md` and `docs/onderzoek/repositorybasis.md`.
+**Location:** `docs/conf.py:7–35` and generated versions of the project-design and repository-foundation reports (original Dutch paths in the reviewed baseline).
 
 **Evidence:** both HTML pages contain `lang="en"` on the `html` element and no `lang="nl"` on the Dutch article or another suitable content container. This was established again after the clean build. The document language therefore inherits English. Current tests do not check this property.
 
