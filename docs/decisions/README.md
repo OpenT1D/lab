@@ -1,5 +1,7 @@
 # Decision records
 
+- [0080 — Two-route metadata contract packet](0080-two-route-contract-packet.md): freeze bounded shared descriptors and native payload/reader fixtures before extracting services; capability families remain provisional.
+
 - [0079 — Direct current CPython for Windows standard-library workers](0079-windows-stdlib-worker-identity.md): bind the two source MMTT routes to current CPython 3.12, bypass its venv redirector only for explicit no-site launches and retain actual launch provenance and live Job authority.
 
 - [0078 — Complete dependency review](0078-dependency-review-completeness.md): bounded monthly tooling updates, a required read-only PR check and complete comparison evidence bound to the official action's scanned output.

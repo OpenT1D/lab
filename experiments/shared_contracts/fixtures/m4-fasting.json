@@ -1,0 +1,20 @@
+{
+  "schema": "m4-secure-study-config/1",
+  "sources": [
+    {
+      "id": "dalla_man",
+      "model": "../../m4/causal_secretion/example_model.py",
+      "declaration": "../../m4/causal_secretion/example_model.json"
+    },
+    {
+      "id": "ultradian",
+      "model": "../../m4/ultradian_secretion/model.py",
+      "declaration": "../../m4/ultradian_secretion/model.json"
+    }
+  ],
+  "scenarios": [
+    "fasting"
+  ],
+  "timeout_seconds": 600,
+  "source_timeout_seconds": 3600
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "opent1d.observation-analysis-settings/1",
+  "visit_order": [
+    "before",
+    "after"
+  ],
+  "variants": [
+    {
+      "id": "nominal",
+      "rationale": "BC-003 nominal T1D group coefficients as synthetic controls; 4.585 L explicitly supplied whole-body volume, not inferred from demographics",
+      "k1_per_min": 0.037,
+      "k2_per_min": 0.031,
+      "k3_per_min": 0.052,
+      "volume_l": 4.585,
+      "initial_peripheral_factor": 1.0
+    },
+    {
+      "id": "volume-120",
+      "rationale": "Deliberate 20 percent volume engineering stress; no human range",
+      "k1_per_min": 0.037,
+      "k2_per_min": 0.031,
+      "k3_per_min": 0.052,
+      "volume_l": 5.502,
+      "initial_peripheral_factor": 1.0
+    },
+    {
+      "id": "peripheral-075",
+      "rationale": "Deliberate 75 percent initial peripheral inventory stress; no empirical fasting-prehistory distribution",
+      "k1_per_min": 0.037,
+      "k2_per_min": 0.031,
+      "k3_per_min": 0.052,
+      "volume_l": 4.585,
+      "initial_peripheral_factor": 0.75
+    }
+  ],
+  "uncertainty": {
+    "draws": 128,
+    "seed": 117,
+    "independent_sd_pmol_l": 2.0,
+    "paired_offset_sd_pmol_l": 1.0,
+    "scope": "synthetic-engineering"
+  }
+}

@@ -1,0 +1,11 @@
+participant_id,visit_id,challenge_id,time_min,glucose_mmol_l,glucose_status,cpeptide_nmol_l,cpeptide_status
+invented-01,before,meal-01,0,5.5,observed,0.2,observed
+invented-01,before,meal-01,30,5.5,observed,,below_loq
+invented-01,before,meal-01,60,5.5,observed,0.2,observed
+invented-01,before,meal-01,90,5.5,observed,0.2,observed
+invented-01,before,meal-01,120,5.5,observed,0.2,observed
+invented-01,after,meal-01,0,5.5,observed,0.3,observed
+invented-01,after,meal-01,30,5.5,observed,0.3,observed
+invented-01,after,meal-01,60,5.5,observed,0.3,observed
+invented-01,after,meal-01,90,5.5,observed,0.3,observed
+invented-01,after,meal-01,120,5.5,observed,0.3,observed

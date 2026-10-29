@@ -90,7 +90,9 @@ question-led workbench. Its test is whether a second method and research task
 reuse the infrastructure with less integration work. The
 [delivery plan](ROADMAP.md#common-laboratory-delivery-plan) owns implementation
 order; the [product requirements](docs/product-laboratory.md) define acceptance.
-These shared interfaces and distribution capabilities are planned.
+The internal [OT-059 contract packet](docs/shared-core-contracts.md) inventories
+all ten routes and freezes two-route metadata/reader fixtures. Shared execution,
+storage, SDK migration and distribution capabilities remain planned.
 
 ## What we are building
 

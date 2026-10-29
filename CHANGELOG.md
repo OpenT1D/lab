@@ -4,6 +4,11 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Add the internal OT-059 two-route contract/extraction packet: ten-route
+  source/runtime/reader inventory, versioned metadata descriptors, preserved
+  synthetic payloads and positive/refused/failed/relocated reader fixtures.
+  Shared services, native parity and SDK migration remain subsequent work.
+
 - Add an unsigned internal Apple Silicon MMTT application candidate with its
   own pinned interpreter, two enforced task capabilities, source/runtime
   inventories and bounded real-application verification tools.
