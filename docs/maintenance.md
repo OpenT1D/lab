@@ -2,14 +2,16 @@
 
 This guide distinguishes repository files from settings and services that require separate activation. It is also the release checklist for the initial maintainer.
 
-## Current public setup — 29 October 2026
+## Current setup
+
+**Public setup checked 29 October 2026.**
 
 `OpenT1D/lab` is the public development repository. The
 [integrated-main run](https://github.com/OpenT1D/lab/actions/runs/40792457095)
 on `45fd3aa` passed the bounded public gate and actually published the
 [documentation site](https://opent1d.github.io/lab/). Main has strict app-bound
 `Repository checks`, pull-request and conversation requirements, including for
-administrators. The [security boundary](publication-security.md#activated-public-baseline-29-october-2026)
+administrators. The [security boundary](publication-security.md#ci-and-branch-controls)
 owns the settings/readback record, dependency-service observations and open
 advisories; the [publication guide](documentation-publication.md#acceptance-evidence)
 owns deployment and live-site acceptance.
@@ -66,7 +68,7 @@ without the private development history. Preserve original evidence privately an
 review the explicit path-redaction map. Run checks on that new candidate before
 selecting or publishing to a GitHub destination.
 
-## Public contribution readiness
+## Before opening the project to public contributions
 
 The initial source publication used the
 [manual branch-control variant](publication-security.md#ci-and-branch-controls)
