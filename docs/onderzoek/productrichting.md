@@ -1,394 +1,404 @@
-# Productrichting: een gemeenschappelijk T1D-onderzoekslaboratorium
+<a id="productrichting-een-gemeenschappelijk-t1d-onderzoekslaboratorium"></a>
 
-**Onderzoeksdatum: 25 oktober 2026.** Dit rapport onderbouwt de productrichting
-van OpenT1D. Het [productdocument](../product-laboratory.md) is de canonieke
-beschrijving van requirements; de [roadmap](../../ROADMAP.md) is het canonieke
-implementatieplan. Onderstaande ontwerpkeuzes en gebruiksproeven zijn
-onderzoeksconclusies, geen aanvullende implementatietoezeggingen.
+# Product direction: a shared T1D research laboratory
 
-## Vraag, aanpak en bewijskracht
+Translated from Dutch on 29 October 2026. Historical findings and source
+references below retain their original scope; this is not a new research review.
 
-De centrale vraag is welke waarde OpenT1D toevoegt wanneer bestaande projecten
-al simulatie, controllers, glucosevoorspelling en biologische analyse leveren.
-De kans ligt in een samenhangend laboratorium waarin onderzoekers geschikte
-modellen, methoden, scenario's en observaties combineren, vergelijken en later
-opnieuw gebruiken. De wetenschappelijke algoritmen hoeven daarvoor niet nieuw
-te zijn. De praktische winst moet blijken uit minder verbindingswerk bij de
-tweede engine, tweede methode en tweede onderzoeksvraag.
+**Research date: 25 October 2026.** This report supports OpenT1D's product
+direction. The [product document](../product-laboratory.md) is the canonical
+requirements description; the [roadmap](../../ROADMAP.md) is the canonical
+implementation plan. The design choices and usage trials below are research
+conclusions, not additional implementation commitments.
 
-Drie onderzoeksagents onderzochten parallel wetenschappelijke
-interoperabiliteit, onderzoekerswerkstromen en productervaring/adoptie. De
-hoofdagent onderzocht architectuur, kwaliteit, distributie en onderhoud en
-integreerde de bevindingen. Dit is onderzoek door drie agents plus de
-hoofdagent, geen onafhankelijke menselijke of wetenschappelijke review.
-Geraadpleegd zijn repositorycode en documentatie, oorspronkelijke publicaties,
-officiële documentatie en upstream issues. Bronlinks staan bij hun claims.
+<a id="vraag-aanpak-en-bewijskracht"></a>
 
-Er zijn geen onderzoekers geïnterviewd, partners geworven, private
-gezondheidsgegevens geopend of nieuwe wetenschappelijke benchmarks uitgevoerd.
-De beschreven gebruikersbehoeften en kostenbesparingen zijn hypotheses.
-Publieke documentatie toont dat een functie wordt aangeboden; zij bewijst geen
-superioriteit. Een preprint en een open issue hebben een andere bewijskracht
-dan een gerepliceerde studie of onafhankelijke producttest.
+## Question, approach and strength of evidence
 
-## Uitgangspositie van OpenT1D
+The central question is what value OpenT1D adds when existing projects already
+provide simulation, controllers, glucose forecasting and biological analysis.
+The opportunity is a coherent laboratory in which researchers combine, compare
+and later reuse suitable models, methods, scenarios and observations. The
+scientific algorithms need not be new. Practical benefits must be demonstrated
+through less integration work for the second engine, second method and second
+research question.
 
-De bestaande [architectuur](../architecture.md) omvat begrensde native
-M1/M2-tracks en onderzoekerintakes voor controllers, voorspellers,
-secretiebronnen en prognostische modellen. Daarnaast zijn er een lokale GUI,
-runtime-locks, campagnes, bronregistratie, bewaarde mislukkingen en
-rapportreconstructie. Dat zijn bruikbare bouwstenen voor een laboratorium.
-Een stabiele algemene modelinterface en gepubliceerde installeerbare SDK zijn
-nog geen huidige capabilities.
+Three research agents investigated scientific interoperability, researcher
+workflows and product experience/adoption in parallel. The lead agent
+investigated architecture, quality, distribution and maintenance and integrated
+the findings. This is research by three agents plus the lead agent, not an
+independent human or scientific review. Sources consulted were repository code
+and documentation, original publications, official documentation and upstream
+issues. Source links accompany their claims.
 
-De [algemene taakentry](../local-workflow-entry.md) registreert tien routes.
-De registry, checks en dispatch bevatten taakafhankelijke keuzes. De
-[campagnes](../maintained-campaigns.md) beheren herhaalde M4-studies, maar
-vormen geen algemene keten van import, fit, simulatie en analyse. De twee
-[MMTT-taken](../mmtt-sampling.md) tonen al concreet hergebruik van één
-analysekern. De grootste productachterstand is de overgang tussen zulke taken:
-een bruikbaar fitresultaat, observatieartefact of scenario moet een volgende
-vraag kunnen voeden zonder nieuw projectbeheer en rapportparsing.
+No researchers were interviewed, partners recruited, private health records
+opened or new scientific benchmarks run. The described user needs and cost
+savings are hypotheses. Public documentation shows that a feature is offered;
+it does not prove superiority. A preprint and an open issue have a different
+strength of evidence from a replicated study or independent product test.
 
-Enkele grenzen zijn bepalend voor de beoordeling. De huidige
-[M2-vergelijking](../m2-tutorial.md) gebruikt afzonderlijke native tracks met
-verschillende controllers, signalen en parameterisaties. Zij voert niet één
-gemeenschappelijke controller uit op twee verwisselbare engines en is geen
-geïsoleerd experiment naar alleen het effect van fysiologie. De
-[M5-archiefbibliotheek](../research/m5-archive-library-verification.md) biedt
-inzage en verificatie van bewaarde prognostische rapporten, geen algemene
-M5-uitvoerings-GUI. Veel huidige voorbeelden zijn synthetisch en intern
-geverifieerd; onafhankelijke gebruiksacceptatie en toepassingsgebonden
-empirisch bewijs blijven afzonderlijk open.
+<a id="uitgangspositie-van-opent1d"></a>
 
-## Het bestaande functionele landschap
+## OpenT1D's starting position
 
-| Project of ecosysteem | Bestaande functie | Betekenis voor OpenT1D |
+The existing [architecture](../architecture.md) includes bounded native M1/M2
+tracks and researcher intakes for controllers, predictors, secretion sources
+and prognostic models. There are also a local GUI, runtime locks, campaigns,
+source registration, retained failures and report reconstruction. These are
+useful laboratory building blocks. A stable general model interface and a
+published installable SDK are not current capabilities.
+
+The [general task entry](../local-workflow-entry.md) registers ten routes.
+The registry, checks and dispatch contain task-specific choices. The
+[campaigns](../maintained-campaigns.md) manage repeated M4 studies but do not
+form a general import, fit, simulation and analysis chain. The two
+[MMTT tasks](../mmtt-sampling.md) already demonstrate concrete reuse of one
+analysis core. The largest product gap is the transition between such tasks:
+a useful fit result, observation artifact or scenario should feed a subsequent
+question without new project management and report parsing.
+
+Several boundaries determine the assessment. The current
+[M2 comparison](../m2-tutorial.md) uses separate native tracks with different
+controllers, signals and parameterizations. It does not run one common
+controller on two interchangeable engines and is not an isolated experiment
+on physiology alone. The
+[M5 archive library](../research/m5-archive-library-verification.md) provides
+inspection and verification of saved prognostic reports, not a general M5
+execution GUI. Many current examples are synthetic and internally verified;
+independent user acceptance and application-specific empirical evidence remain
+separate open requirements.
+
+<a id="het-bestaande-functionele-landschap"></a>
+
+## The existing functional landscape
+
+| Project or ecosystem | Existing function | Implication for OpenT1D |
 | --- | --- | --- |
-| [simglucose](https://github.com/jxx123/simglucose) | Fysiologische simulator, virtuele profielen, controllers, scenario's, batchuitvoering en Gymnasium | Een native engine hergebruiken; geen nieuwe kopie van dezelfde simulatie bouwen |
-| [LoopInsighT1](https://lt1.org/method/) | Meerdere modellen en componenten, controllers, sensoren en interactieve experimenten | Zowel native host als componentbron; meer dan een visualisatietool |
-| [APS_TestBed](https://github.com/UVA-DSA/APS_TestBed) | Meerdere simulators, controllers en foutinjectie | Twee engines en storingsscenario's vormen op zichzelf geen nieuwe bijdrage |
-| [RL4T1D](https://github.com/RL4H/RL4T1D) en [GluCoEnv](https://github.com/RL4H/GluCoEnv) | RL-omgevingen, algoritmen en trainingsexperimenten | Training en inference aansluiten; geen algemeen RL-framework herbouwen |
-| [GluPredKit](https://github.com/replicahealth/GluPredKit) | Gegevensverwerking, modeltraining, voorspelling, evaluatie en rapporten | Een bestaande voorspelketen integreren in plaats van een parallelle modelcatalogus onderhouden |
-| [ReplayBG](https://gcappon.github.io/py_replay_bg/documentation/twinning_procedure.html) | Persoonlijke parameterschatting via MAP/MCMC en [replay](https://gcappon.github.io/py_replay_bg/documentation/replaying.html) met gewijzigde inputs | Observaties, fit en scenario-uitvoering verbinden zonder de schattingsmethode opnieuw te implementeren |
-| [BioSimulators](https://docs.biosimulators.org/Biosimulators_test_suite/) | Capabilities, standaarden en conformatietests voor simulatoren | Algemene conventies en validators hergebruiken; eigen werk concentreren op T1D-betekenis |
+| [simglucose](https://github.com/jxx123/simglucose) | Physiological simulator, virtual profiles, controllers, scenarios, batch execution and Gymnasium | Reuse a native engine; do not build another copy of the same simulation |
+| [LoopInsighT1](https://lt1.org/method/) | Multiple models and components, controllers, sensors and interactive experiments | Both a native host and a component source; more than a visualization tool |
+| [APS_TestBed](https://github.com/UVA-DSA/APS_TestBed) | Multiple simulators, controllers and fault injection | Two engines and failure scenarios alone are not a new contribution |
+| [RL4T1D](https://github.com/RL4H/RL4T1D) and [GluCoEnv](https://github.com/RL4H/GluCoEnv) | RL environments, algorithms and training experiments | Connect training and inference; do not rebuild a general RL framework |
+| [GluPredKit](https://github.com/replicahealth/GluPredKit) | Data processing, model training, prediction, evaluation and reports | Integrate an existing prediction pipeline rather than maintaining a parallel model catalogue |
+| [ReplayBG](https://gcappon.github.io/py_replay_bg/documentation/twinning_procedure.html) | Personal parameter estimation through MAP/MCMC and [replay](https://gcappon.github.io/py_replay_bg/documentation/replaying.html) with changed inputs | Connect observations, fitting and scenario execution without reimplementing the estimation method |
+| [BioSimulators](https://docs.biosimulators.org/Biosimulators_test_suite/) | Capabilities, standards and simulator conformance tests | Reuse general conventions and validators; focus custom work on T1D semantics |
 
-De voorspelruimte is inmiddels bijzonder druk. [GlucoBench](https://arxiv.org/abs/2410.05780)
-biedt datasets, taken en referentiemodellen. De preprint
-[MetaboNet-Bench van juni 2026](https://arxiv.org/abs/2606.18640) behandelt
-multimodale voorspelling, meerdere gegevensbronnen en subgroepen. De preprint
-[From Prediction to Practice van mei 2026](https://arxiv.org/abs/2605.00645)
-combineert taakgerichte voorspeldevaluatie met simulatorinterventies.
-Meer modellen, meer datasets of een interventiebenchmark zijn daarom geen
-voldoende onderscheidende productbelofte.
+The prediction space is now particularly crowded.
+[GlucoBench](https://arxiv.org/abs/2410.05780) provides datasets, tasks and
+reference models. The
+[June 2026 MetaboNet-Bench preprint](https://arxiv.org/abs/2606.18640) addresses
+multimodal forecasting, multiple data sources and subgroups. The
+[May 2026 From Prediction to Practice preprint](https://arxiv.org/abs/2605.00645)
+combines task-oriented prediction evaluation with simulator interventions.
+More models, more datasets or an intervention benchmark are therefore not a
+sufficiently distinctive product promise.
 
-Ook biologische analyse heeft bestaande oplossingen.
-[ISEC](https://pubmed.ncbi.nlm.nih.gov/8894385/) en het open R-pakket
+Biological analysis also has existing solutions.
+[ISEC](https://pubmed.ncbi.nlm.nih.gov/8894385/) and the open R package
 [`insulin.secretion`](https://cran.r-project.org/web/packages/insulin.secretion/index.html)
-bieden C-peptidedeconvolutie; [AOMM](https://www.nanomath.us/aomm) biedt
-Windows-batchanalyse van maaltijd- en glucosetolerantietests. De
-[AOMM-publicatie](https://journals.sagepub.com/doi/10.1177/19322968251365274)
-beschrijft validatie tegenover handmatig geëxtraheerde referentieresultaten
-uit een eerdere studie. Een
-vergelijking met OpenT1D vereist nog overeenkomende endpoints, toegankelijke
-software en passende gebruiksrechten. Een moderne deconvolutiefunctie of GUI
-is op zichzelf geen wetenschappelijke vernieuwing.
+provide C-peptide deconvolution; [AOMM](https://www.nanomath.us/aomm) provides
+Windows batch analysis of meal and glucose tolerance tests. The
+[AOMM publication](https://journals.sagepub.com/doi/10.1177/19322968251365274)
+describes validation against manually extracted reference results from an
+earlier study. A comparison with OpenT1D still requires matching endpoints,
+accessible software and appropriate usage rights. A modern deconvolution
+function or GUI is not scientific innovation on its own.
 
-## Waar een geïntegreerd laboratorium waarde kan leveren
+<a id="waar-een-geïntegreerd-laboratorium-waarde-kan-leveren"></a>
 
-De relevante producteenheid is een onderzoek dat wordt uitgebreid. Een
-controlleronderzoeker wil dezelfde vraag in een andere engine onderzoeken.
-Een modelleur wil een absorptiecomponent vervangen en een eenvoudiger
-parameterwijziging als comparator behouden. Een dataonderzoeker wil dezelfde
-cohortselectie gebruiken voor een tweede voorspeller. Een biomedisch analist
-wil na een gevoeligheidsanalyse onderzoeken welke meetmomenten informatie
-toevoegen. Deze rollen hebben gemeenschappelijk beheer nodig, maar geen
-identieke wiskundige interface.
+## Where an integrated laboratory can add value
 
-Een gemeenschappelijke route kan lopen van vraag en project naar bronnen,
-compatibiliteit, scenario/cohort, ontwikkeling, bevroren evaluatie, uitvoering,
-vergelijking en overdracht. Een Pythongebruiker kan in een notebook beginnen
-en hetzelfde plan in de GUI volgen. Een collega kan een toegestane export
-openen en de analyse controleren. Nieuwe domeinen leveren hun eigen
-wetenschappelijke payload en rapportsecties, terwijl projectopslag,
-uitvoeringsstatus en archiefvoorzieningen worden hergebruikt.
+The relevant product unit is a study being extended. A controller researcher
+wants to investigate the same question in another engine. A modeler wants to
+replace an absorption component while retaining a simpler parameter change as
+a comparator. A data researcher wants to use the same cohort selection for a
+second predictor. A biomedical analyst wants to investigate which measurement
+times add information after a sensitivity analysis. These roles need common
+management, but not identical mathematical interfaces.
 
-Dit is een producthypothese met toetsbare baten. Meet hoeveel extra code,
-configuratie, installatie, hulp en interpretatiewerk nodig zijn voor de tweede
-en derde taak. Vergelijk met competente bestaande tools en een goed notebook,
-inclusief voorbereiding en onderhoud aan beide kanten. Minder stappen zijn
-alleen winst wanneer de gebruiker ook een correct resultaat en juiste
-interpretatie bereikt. Een auditfunctie ondersteunt dit werk; zij vervangt
-niet de bredere laboratoriumambitie.
+A common route can lead from question and project to sources, compatibility,
+scenario/cohort, development, frozen evaluation, execution, comparison and
+handoff. A Python user can start in a notebook and follow the same plan in the
+GUI. A colleague can open an authorized export and check the analysis. New
+domains supply their own scientific payload and report sections while reusing
+project storage, execution status and archive facilities.
 
-## Wetenschappelijke compatibiliteit als kernfunctie
+This is a product hypothesis with testable benefits. Measure how much extra
+code, configuration, installation, assistance and interpretation work the
+second and third tasks require. Compare with capable existing tools and a
+good notebook, including preparation and maintenance on both sides. Fewer
+steps are beneficial only when the user also reaches a correct result and
+interpretation. An audit function supports this work; it does not replace the
+broader laboratory ambition.
 
-Compatibiliteit moet betrekking hebben op concrete mogelijkheden. Een engine
-kan geschikt zijn voor een basal-ratecontroller en ongeschikt voor een
-pompgeschiedenisafhankelijke policy. Een offline estimator hoeft geen
-tijdstapfunctie te verzinnen. Hele-engine-integratie behoudt solver, toestand
-en componentlifecycle. Biologische compositie is een apart integratieniveau,
-met expliciete eigenaar voor absorptie, secretie, transit, extractie,
-klaring, vertraging en meetruis.
+<a id="wetenschappelijke-compatibiliteit-als-kernfunctie"></a>
 
-Aan iedere relevante grens horen eenheid, compartiment, toedieningsroute,
-hoeveelheid versus rate, whole-body/per-kg-schaal, tijdsteun en beschikbaarheid.
-Solverstappen, sensoracquisitie, ontvangst, controllerbeslissing en aflevering
-zijn verschillende klokken. Een vijfminutenpolicy wordt geen equivalente
-drieminutenpolicy door alleen de actie-eenheid om te rekenen. De bestaande
-[oref0-routebeoordeling](../research/c1-comparator-route.md) laat zo'n
-praktische incompatibiliteit zien. Een adapter moet die uitleggen voordat
-een langdurig experiment begint.
+## Scientific compatibility as a core function
 
-Gelijke grammen betekenen evenmin een gelijke maaltijd wanneer de ene engine
-een instantane bolus en de andere een opnameprofiel gebruikt. Plasma,
-interstitium en CGM zijn verschillende signalen; puntmetingen en
-intervalgemiddelden zijn niet uitwisselbaar. Een scenario legt zowel bedoeling
-als effectieve native vertaling vast. Virtueel profiel 1 in twee engines is
-geen gepaarde persoon. Identieke seeds maken verschillende toevalsprocessen
-niet automatisch gepaard.
+Compatibility must concern concrete capabilities. An engine may suit a basal
+rate controller and be unsuitable for a policy that depends on pump history.
+An offline estimator need not invent a time-step function. Whole-engine
+integration preserves solver, state and component lifecycle. Biological
+composition is a separate integration level, with explicit ownership of
+absorption, secretion, transit, extraction, clearance, delay and measurement
+noise.
 
-Vergelijk daarom eerst passende contrasten binnen engines en onderzoek
-vervolgens gevoeligheid voor enginekeuze. Bewaar tuningbudget, volledige
-geplande roosters, niet-ondersteunde cellen en mislukkingen. Onderscheid
-numerieke, parameter-, meet-, toevals-, structuur- en populatieonzekerheid.
-Een synthetische parameterstress is geen empirische populatieverdeling.
-Een technisch geldige compositie erft de biologische validiteit van haar
-onderdelen niet automatisch.
+Every relevant boundary needs units, compartment, administration route,
+amount versus rate, whole-body/per-kg scale, temporal support and availability.
+Solver steps, sensor acquisition, receipt, controller decision and delivery
+are different clocks. A five-minute policy does not become an equivalent
+three-minute policy merely by converting the action unit. The existing
+[oref0 route assessment](../research/c1-comparator-route.md) demonstrates such
+a practical incompatibility. An adapter must explain it before a lengthy
+experiment starts.
 
-Een adapterconformatietest moet native en aangepaste uitvoering onder
-betekenisvolle stimuli vergelijken en reset, events, aflevering, causaliteit,
-fouten en numerieke verfijning toetsen. Bestandsintegriteit helpt daarbij,
-maar vervangt deze controles niet. De bestaande
-[absorptievervanging](../lit002-tutorial.md) is een bruikbaar uitgangspunt:
-zij vergelijkt een componentverandering met native gedrag en een eenvoudiger
-parameteralternatief.
+Equal grams likewise do not mean an equal meal when one engine uses an
+instantaneous bolus and another an absorption profile. Plasma, interstitium
+and CGM are different signals; point measurements and interval averages are
+not interchangeable. A scenario records both intent and effective native
+translation. Virtual profile 1 in two engines is not a paired person.
+Identical seeds do not automatically pair different random processes.
 
-## Gegevens, voorspelling, kalibratie en biologische analyse
+First compare suitable contrasts within engines, then investigate sensitivity
+to engine choice. Retain tuning budget, complete planned grids, unsupported
+cells and failures. Distinguish numerical, parameter, measurement, random,
+structural and population uncertainty. A synthetic parameter stress test is
+not an empirical population distribution. A technically valid composition does
+not automatically inherit its components' biological validity.
 
-Een gedeelde gegevenslaag moet tijdreeksen, events, bezoeken en afgeleide
-artefacten kunnen onderscheiden. Bewaar bronidentiteit, werkelijke meettijden,
-beschikbaarheid waar bekend, units, missingness, censoring, context en
-participant-/visitverband. Eén vijfminutenrooster kan niet alle taken dragen.
-Onbekende maaltijd- of insulinegegevens mogen niet stilzwijgend als nul worden
-geïnterpreteerd om een importer te laten slagen. ReplayBG's
-[gegevensvereisten](https://gcappon.github.io/py_replay_bg/documentation/data_requirements.html)
-illustreren hoeveel semantiek achter een ogenschijnlijk eenvoudige tabel zit.
+An adapter conformance test must compare native and adapted execution under
+meaningful stimuli and check reset, events, delivery, causality, errors and
+numerical refinement. File integrity helps but does not replace these checks.
+The existing [absorption replacement](../lit002-tutorial.md) is a useful
+starting point: it compares a component change with native behavior and a
+simpler parameter alternative.
 
-Bij forecasting horen preprocessing, fit, modeltoestand en evaluatie als
-herkenbare fasen bij elkaar. Een bevroren model kan in zijn eigen omgeving
-worden geëvalueerd; aanpassen van de rapportage hoeft geen training te
-herhalen. Bewaar fitdata, splits en eerdere evaluatietoegang. Een nieuwe map
-maakt bekende gegevens niet ongezien. Imports van bestaande voorspellingen
-maken heranalyse mogelijk, maar bewijzen niet achteraf welke informatie het
-model werkelijk gebruikte.
+<a id="gegevens-voorspelling-kalibratie-en-biologische-analyse"></a>
 
-De [reproduceerbaarheidsstudie van Lu et al. uit september 2026](https://journals.plos.org/digitalhealth/article?id=10.1371%2Fjournal.pdig.0001633)
-onderzocht 67 papers en acht modellen. Naast technische en statistische
-reproduceerbaarheid onderzocht zij prestaties op andere gegevensbronnen.
-Daarbij werden modellen per dataset opnieuw getraind met vijfvoudige
-crossvalidatie; dit was geen bevroren modeltransport vanuit OhioT1DM. Onze
-ontwerpconclusie is dat passende onafhankelijke evaluatie nodig blijft en
-beoogd bevroren cohorttransport een afzonderlijke toets vraagt. De studie
-bewijst geen vraag naar OpenT1D; synthetische platformtests stellen geen
-menselijke voorspelprestatie vast.
+## Data, prediction, calibration and biological analysis
 
-Kalibratie voegt een andere keten toe: observaties en meetmodel, parameters,
-fit, onzekerheid, identificeerbaarheid en toetsing onder andere condities.
-Een betere CGM-fit identificeert niet automatisch absorptie of leverextractie.
-Hergebruik bestaande schatters zoals ReplayBG of geschikte
-[PEtab-tooling](https://petab.readthedocs.io/en/latest/). Een fitparameter is
-gebonden aan zijn modelstructuur; hij wordt niet vanzelf geldig in een andere
-engine. Historische replay met gegeven behandeling bewijst op zichzelf geen
-counterfactueel behandelingseffect.
+A shared data layer must distinguish time series, events, visits and derived
+artifacts. Preserve source identity, actual measurement times, availability
+where known, units, missingness, censoring, context and participant/visit
+relationships. One five-minute grid cannot support every task. Unknown meal
+or insulin data must not silently be interpreted as zero to make an importer
+pass. ReplayBG's
+[data requirements](https://gcappon.github.io/py_replay_bg/documentation/data_requirements.html)
+illustrate how much semantics lie behind a seemingly simple table.
 
-MMTT is een waardevolle tweede domeinproef doordat zij inverse analyse en
-assays toevoegt. De huidige [observatieanalyse](../observation-analysis.md)
-schat totale whole-bodysecretie inclusief basaal over 0–120 minuten, met
-follow-up minus baseline, onder vaste synthetische kinetiek. Dat is een andere
-uitkomst dan gemeten C-peptide-AUC. Toets daarom afzonderlijk de meerwaarde
-van deze modelstap tegenover eenvoudiger passende maten, en de productwaarde
-tegenover een notebook met dezelfde estimator. Notebookpariteit bewijst geen
-extra wetenschappelijke waarde.
+In forecasting, preprocessing, fitting, model state and evaluation belong
+together as recognizable phases. A frozen model can be evaluated in its own
+environment; changing reporting need not repeat training. Preserve fitting
+data, splits and earlier evaluation access. A new folder does not make known
+data unseen. Imports of existing predictions enable reanalysis, but do not
+retrospectively prove which information the model actually used.
 
-Voor empirische toepassing zijn geschikte gekoppelde bezoeken, werkelijke
-sampletijden, assay/LOQ, medicatie- en niercontext, gerechtvaardigde kinetiek
-en een passend interpretatieplan nodig. De
-[standaardkinetiek van Van Cauter](https://pubmed.ncbi.nlm.nih.gov/1551497/)
-verleent synthetische instellingen geen individuele T1D-validiteit. Bestaand
-[onderzoek naar 90-minutenmetingen](https://pmc.ncbi.nlm.nih.gov/articles/PMC3554273/)
-onderbouwt evenmin automatisch het longitudinale secretie-endpoint. De
-[huidige empirische voorbereiding](../research/mmtt-sampling-empirical-plan.md)
-houdt deze eisen terecht apart van softwareontwikkeling.
+The [September 2026 reproducibility study by Lu et al.](https://journals.plos.org/digitalhealth/article?id=10.1371%2Fjournal.pdig.0001633)
+examined 67 papers and eight models. Alongside technical and statistical
+reproducibility, it investigated performance on other data sources. Models
+were retrained per dataset with five-fold cross-validation; this was not
+frozen model transport from OhioT1DM. Our design conclusion is that suitable
+independent evaluation remains necessary and intended frozen cohort transport
+requires a separate test. The study does not prove demand for OpenT1D;
+synthetic platform tests do not establish human prediction performance.
 
-## Architectuur, standaarden en hergebruik
+Calibration adds another chain: observations and measurement model,
+parameters, fitting, uncertainty, identifiability and testing under other
+conditions. A better CGM fit does not automatically identify absorption or
+hepatic extraction. Reuse existing estimators such as ReplayBG or suitable
+[PEtab tooling](https://petab.readthedocs.io/en/latest/). A fitted parameter is
+bound to its model structure; it does not automatically become valid in
+another engine. Historical replay with given treatment does not itself prove
+a counterfactual treatment effect.
 
-De aangewezen richting is een kleine gedeelde project-, experiment-,
-capability-, uitvoerings- en resultaatlaag met taakgebonden wetenschappelijke
-contracten. Python-API, CLI en GUI gebruiken dezelfde diensten. Migreer
-bestaande routes stapsgewijs door deze kern en behoud hun historische
-readers. Een nieuwe abstractie naast onveranderd routebeheer zou juist een
-tweede codebase creëren.
+MMTT is a valuable second domain trial because it adds inverse analysis and
+assays. The current [observation analysis](../observation-analysis.md)
+estimates total whole-body secretion including basal over 0–120 minutes,
+with follow-up minus baseline, under fixed synthetic kinetics. This differs
+from measured C-peptide AUC. Therefore assess separately the added value of
+this model step against simpler suitable measures, and the product value
+against a notebook with the same estimator. Notebook parity does not prove
+additional scientific value.
 
-Een multi-environment-adapter kan een bestaande Pythonomgeving, Nodeproces,
-Rscript, native executable of container aanroepen. Begin met complete runs
-en batches. Tijdsgekoppelde componenten vragen een afzonderlijk contract;
-een bestandsworkflow mag geen nauw gekoppelde ODE-feedback nabootsen zonder
-numerieke koppelingsanalyse. Een plugin moet beschrijfbaar zijn zonder het
-model bij alleen openen van een project uit te voeren.
+Empirical use requires suitable paired visits, actual sample times, assay/LOQ,
+medication and renal context, justified kinetics and a suitable interpretation
+plan. The [Van Cauter standard kinetics](https://pubmed.ncbi.nlm.nih.gov/1551497/)
+do not confer individual T1D validity on synthetic settings. Existing
+[research on 90-minute measurements](https://pmc.ncbi.nlm.nih.gov/articles/PMC3554273/)
+also does not automatically support the longitudinal secretion endpoint. The
+[current empirical preparation](../research/mmtt-sampling-empirical-plan.md)
+rightly keeps these requirements separate from software development.
 
-Gebruik een algemeen resultaatmanifest met taakgebonden tabellen voor
-trajecten, events, parameters, metrics, coverage en attempts. Iedere metric
-draagt betekenis, versie, eenheid, steun en aggregatie-eenheid. Verschillende
-taakuitkomsten mogen in dezelfde bibliotheek staan zonder gezamenlijke
-kwaliteitsranglijst. Gewone data-/figuurexport maakt het lab ook bruikbaar
-naast notebooks en bestaande analysetools.
+<a id="architectuur-standaarden-en-hergebruik"></a>
 
-Standaarden vervullen verschillende rollen:
+## Architecture, standards and reuse
 
-| Grens | Passend hulpmiddel | Te behouden beperking |
+The recommended direction is a small shared project, experiment, capability,
+execution and result layer with task-specific scientific contracts. Python
+API, CLI and GUI use the same services. Migrate existing routes through this
+core incrementally and retain their historical readers. A new abstraction
+alongside unchanged route management would create a second codebase.
+
+A multi-environment adapter can invoke an existing Python environment, Node
+process, R script, native executable or container. Start with complete runs
+and batches. Components coupled in time require a separate contract; a file
+workflow must not imitate tightly coupled ODE feedback without numerical
+coupling analysis. It must be possible to describe a plugin without executing
+the model merely by opening a project.
+
+Use a general result manifest with task-specific tables for trajectories,
+events, parameters, metrics, coverage and attempts. Each metric carries
+meaning, version, unit, support and aggregation unit. Different task outcomes
+may share a library without a common quality ranking. Ordinary data/figure
+export also makes the lab useful alongside notebooks and existing analysis
+tools.
+
+Standards serve different roles:
+
+| Boundary | Suitable tool | Limitation to preserve |
 | --- | --- | --- |
-| Uitvoerbare modeluitwisseling | [FMI](https://fmi-standard.org/docs/3.0.2/) | Een FMU bepaalt niet het co-simulatiealgoritme of biologische ownership |
-| Modelrepresentatie | [SBML](https://sbml.org/documents/specifications/) en [CellML](https://www.cellml.org/specifications/cellml_2.0/index) | Gelijke syntax of units bewijst geen passende schaal of populatie |
-| Experiment en bundel | [SED-ML](https://sed-ml.org/documents/sed-ml-L1V5.pdf) en [OMEX](https://github.com/combine-org/combine-specifications/blob/main/specifications/omex.md) | Ondersteun een expliciete subset; willekeurige callbacks worden niet automatisch portable |
-| Kalibratie | [PEtab](https://petab.readthedocs.io/en/latest/) | Geen vervanging voor een causale controllerinterface |
-| Uitvoeringsherkomst | [Workflow Run RO-Crate](https://www.researchobject.org/workflow-run-crate/profiles/) | Metadata is geen bewijs van correcte uitvoering of geldige fysiologie |
+| Executable model exchange | [FMI](https://fmi-standard.org/docs/3.0.2/) | An FMU does not determine the co-simulation algorithm or biological ownership |
+| Model representation | [SBML](https://sbml.org/documents/specifications/) and [CellML](https://www.cellml.org/specifications/cellml_2.0/index) | Equal syntax or units do not prove suitable scale or population |
+| Experiment and bundle | [SED-ML](https://sed-ml.org/documents/sed-ml-L1V5.pdf) and [OMEX](https://github.com/combine-org/combine-specifications/blob/main/specifications/omex.md) | Support an explicit subset; arbitrary callbacks do not automatically become portable |
+| Calibration | [PEtab](https://petab.readthedocs.io/en/latest/) | No replacement for a causal controller interface |
+| Execution provenance | [Workflow Run RO-Crate](https://www.researchobject.org/workflow-run-crate/profiles/) | Metadata does not prove correct execution or valid physiology |
 
-Voeg een bridge toe wanneer zij een nuttige donor of uitwisseling ontsluit.
-Alle engines eerst naar één standaard vertalen is geen voorwaarde voor
-gemeenschappelijke laboratoriumwaarde. Zelf te bouwen zijn vooral
-T1D-semantiek, compatibiliteitscontroles, experimentflow en eerlijke
-vergelijkingen. Solvers, inferentie, plotting en generieke schedulers zijn
-geschikte hergebruikdoelen.
+Add a bridge when it enables a useful source integration or exchange.
+Translating all engines into one standard first is not a prerequisite for
+shared laboratory value. Custom development should focus on T1D semantics,
+compatibility checks, experiment flow and fair comparisons. Solvers,
+inference, plotting and generic schedulers are suitable reuse targets.
 
-Voor grotere studies bieden [Snakemake](https://snakemake.readthedocs.io/en/stable/executing/cli.html)
-en [Nextflow](https://docs.seqera.io/nextflow/executor) bestaande executorgrenzen.
-Koppel eerst één backend aan een echte studie; bouw geen eigen clusterbeheer.
-Beperk resources en voorkom oversubscriptie bij intern parallelle fitters.
-Behoud een eigen volledig gepland-run-/attemptregister: de beschreven
-[Nextflow-lineage](https://docs.seqera.io/nextflow/tutorials/data-lineage)
-neemt gefaalde en afgebroken taken niet op.
+For larger studies, [Snakemake](https://snakemake.readthedocs.io/en/stable/executing/cli.html)
+and [Nextflow](https://docs.seqera.io/nextflow/executor) provide existing
+executor boundaries. First connect one backend to a real study; do not build
+custom cluster management. Limit resources and prevent oversubscription by
+internally parallel fitters. Retain a complete planned-run/attempt register of
+your own: the described
+[Nextflow lineage](https://docs.seqera.io/nextflow/tutorials/data-lineage)
+does not include failed and aborted tasks.
 
-Cache-identiteit geldt per stap. Veranderde metrics vereisen nieuwe analyse,
-maar ongewijzigde simulatie- of voorspelartefacten kunnen hergebruikt worden.
-Veranderde inputs, scenario's, modellen of runtimes raken de bijbehorende
-upstreamstappen. Een cachehit is geen onafhankelijke replicatie. Native
-checkpointing en opnieuw uitvoeren zijn verschillende capabilities.
-[MLflow](https://mlflow.org/docs/latest/ml/tracking) kan bestaande teams
-ondersteunen met runs en modelregistratie; een centrale trackingdienst hoeft
-geen verplichte dependency van iedere lokale gebruiker te zijn.
+Cache identity applies per step. Changed metrics require new analysis, but
+unchanged simulation or prediction artifacts can be reused. Changed inputs,
+scenarios, models or runtimes affect the corresponding upstream steps. A cache
+hit is not independent replication. Native checkpointing and rerunning are
+different capabilities. [MLflow](https://mlflow.org/docs/latest/ml/tracking)
+can support existing teams with runs and model registration; a central
+tracking service need not be a mandatory dependency for every local user.
 
-## Werkbank, installatie en toegankelijkheid
+<a id="werkbank-installatie-en-toegankelijkheid"></a>
 
-Een project buiten de installatie/checkout is een stabielere gebruikseenheid
-dan een verzameling uitvoermappen. De werkbank moet een vraag, bronnen,
-conceptplan, freeze, uitvoering en vergelijking begrijpelijk verbinden.
-Programmeerexperts behouden toegang tot scripts en volledige configuraties;
-andere onderzoekers hoeven geen Pythonobjecten of hashes te beheren om een
-ondersteunde taak uit te voeren. Domeinbeperkingen verschijnen bij keuzes
-die zij beïnvloeden.
+## Workbench, installation and accessibility
 
-De voorbeelden van [Galaxy history](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history/tutorial.html)
-en de [nf-core launcher](https://nf-co.re/docs/nf-core-tools/cli/pipelines/launch)
-tonen herbruikbare patronen voor geschiedenis en configuratie. Zij bewijzen
-geen vraag naar een nieuwe OpenT1D-interface. Gebruik zulke patronen zonder
-een IDE of volledige collaboratiesuite na te bouwen.
+A project outside the installation/checkout is a more stable unit of use than
+a collection of output folders. The workbench must connect a question,
+sources, draft plan, freeze, execution and comparison understandably.
+Programming experts retain access to scripts and full configurations; other
+researchers should not need to manage Python objects or hashes to run a
+supported task. Domain limitations appear at the choices they affect.
 
-De geselecteerde Windowsuitkomst van [OT-058](../../ROADMAP.md#planned-windows-installer-ot-058)
-is één installer en launchshortcut, zonder dat de gebruiker Git, WSL/Ubuntu,
-Python, dependencies of terminalcommando's hoeft te beheren. De huidige
-POSIX-afhankelijke lifecycle vereist daarvoor productwerk. Een native backend
-is een te onderzoeken optie; appbeheerde WSL is hiermee niet bij voorbaat
-verboden. De gekozen oplossing moet de gebruikersuitkomst en echte
-clean-Windowschecks halen. Voorbereid macOSgebruik bewijst geen
-Windowsinstallatie.
+The examples of [Galaxy history](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history/tutorial.html)
+and the [nf-core launcher](https://nf-co.re/docs/nf-core-tools/cli/pipelines/launch)
+show reusable history and configuration patterns. They do not prove demand
+for a new OpenT1D interface. Use such patterns without rebuilding an IDE or a
+complete collaboration suite.
 
-Toegankelijkheid hoort bij de gewone flow: toetsenbordbediening, focus,
-leesbare status, labels, contrast en fouten met herstelactie. Gebruik
-[WCAG 2.2](https://www.w3.org/TR/WCAG22/) als expliciet beoordelingskader;
-claim geen conformiteit zonder toetsing. Tutorials, taakgidsen,
-API-referentie en uitleg hebben verschillende functies, zoals
-[Diátaxis](https://diataxis.fr/start-here/) beschrijft. Test zelfstandig
-installeren, correct uitvoeren en heropenen met werkelijke onderzoekers en
-registreer ook hulp en interpretatiefouten.
+The selected Windows outcome of [OT-058](../../ROADMAP.md#planned-windows-installer-ot-058)
+is one installer and launch shortcut, without requiring the user to manage
+Git, WSL/Ubuntu, Python, dependencies or terminal commands. The current
+POSIX-dependent lifecycle requires product work to achieve this. A native
+backend is an option to investigate; app-managed WSL is not ruled out in
+advance. The chosen solution must meet the user outcome and real clean
+Windows checks. Prepared macOS use does not prove Windows installation.
 
-## Kwaliteit, privacy en houdbaarheid
+Accessibility belongs in the ordinary flow: keyboard operation, focus,
+readable status, labels, contrast and errors with recovery actions. Use
+[WCAG 2.2](https://www.w3.org/TR/WCAG22/) as an explicit assessment framework;
+do not claim conformance without testing. Tutorials, task guides, API
+reference and explanation serve different functions, as
+[Diátaxis](https://diataxis.fr/start-here/) describes. Test independent
+installation, correct execution and reopening with actual researchers, and
+record assistance and interpretation errors as well.
 
-Maak uitvoering, volledigheid, integriteit, rapportreconstructie en
-wetenschappelijke acceptatie afzonderlijk zichtbaar. Reconstructie controleert
-de bewaarde selectie en analyse; zij reproduceert niet vanzelf een arbitrair
-aangeleverd algoritme. Een onafhankelijke modelheruitvoering en een
-modelspecifieke arithmetic replay zijn sterkere, afzonderlijke garanties.
-Een correct gereconstrueerd mislukt onderzoek blijft mislukt.
+<a id="kwaliteit-privacy-en-houdbaarheid"></a>
 
-Combineer snelle contracttests met native regressies, numerieke oracles,
-platformlifecycle en GUI/CLI-pariteit. Meer tests zijn geen vervanging voor
-individuele bron- en numericaliteitscontroles. Behoud passende vertrouwde
-readers voor historische archieven; een nieuwe appversie mag oude plannen
-niet stil wijzigen. API-, protocol-, parameter-, metric- en readerversies
-beantwoorden verschillende vragen.
+## Quality, privacy and sustainability
 
-Onderzoekercode draait momenteel met lokaal vertrouwen; workers en deadlines
-vormen geen sandbox. Een gedeeld project openen mag geen callback, notebook
-of installatiehook starten. Containers bieden ook geen automatische garantie
-voor vijandige gedeelde uitvoering; zie [Docker security](https://docs.docker.com/engine/security/).
-Datatoegang, netwerk, secrets en resources moeten passen bij de gekozen
-backend en gebruikssituatie.
+Make execution, completeness, integrity, report reconstruction and scientific
+acceptance separately visible. Reconstruction checks the saved selection and
+analysis; it does not automatically reproduce an arbitrarily supplied
+algorithm. Independent model re-execution and model-specific arithmetic
+replay are stronger, separate guarantees. A correctly reconstructed failed
+study remains failed.
 
-Private brondata, individuele uitkomsten en logs horen apart van een
-deelbaar protocolpakket. De huidige native archieven bewaren juist inputbytes
-en traces. Een deelbare export moet bewust toegestane onderdelen kiezen;
-hashes anonimiseren gegevens niet. Zonder passende datatoegang kan een collega
-metadata of vrijgegeven analyse controleren, maar het empirische resultaat
-niet volledig opnieuw uitvoeren. Een synthetisch fixture maakt de route
-testbaar zonder dat resultaat te vervangen.
+Combine fast contract tests with native regressions, numerical oracles,
+platform lifecycle and GUI/CLI parity. More tests do not replace individual
+source and numerical checks. Retain suitable trusted readers for historical
+archives; a new app version must not silently change old plans. API,
+protocol, parameter, metric and reader versions answer different questions.
 
-Distributierechten gelden per asset: code, parameters, checkpoints, data en
-binaries kunnen andere voorwaarden hebben. Procesisolatie is geen algemene
-licentie-uitzondering. Behoud bronidentiteit, notices en distributiescope en
-beoordeel passende rechten vóór bundeling; zie de [licentiegids](../licensing.md).
-Release-identiteit en eventuele citaties moeten daadwerkelijk bestaan.
+Researcher code currently runs under local trust; workers and deadlines do
+not form a sandbox. Opening a shared project must not start a callback,
+notebook or installation hook. Containers also provide no automatic guarantee
+for hostile shared execution; see [Docker security](https://docs.docker.com/engine/security/).
+Data access, network, secrets and resources must suit the chosen backend and
+usage situation.
 
-Houd officiële, experimentele, community- en historische integraties
-herkenbaar. Een ondersteunde adapter vraagt onderhoudseigenaarschap,
-upstreambeleid, conformancefixtures en documentatie. Ondersteunde kernomgevingen
-en expliciete historische locks kunnen naast elkaar bestaan; het
-[Scientific Python-onderhoudskader](https://scientific-python.org/specs/spec-0000/)
-is een referentie, geen reden om onderzoeksbaselines stil te vervangen.
-Meet supportlast en opslaggroei voordat extra engines of diensten worden
-toegezegd. [JOSS-review](https://joss.readthedocs.io/en/latest/reviewer_guidelines.html)
-kan later helpen, maar vervangt geen aangetoonde onderzoekstoepassing.
+Private source data, individual outcomes and logs belong separately from a
+shareable protocol package. Current native archives deliberately retain input
+bytes and traces. A shareable export must explicitly select authorized parts;
+hashes do not anonymize data. Without suitable data access, a colleague can
+check metadata or released analysis, but cannot fully rerun the empirical
+result. A synthetic fixture makes the route testable without replacing that
+result.
 
-## Welke productproeven de richting kunnen beoordelen
+Distribution rights apply per asset: code, parameters, checkpoints, data and
+binaries may have different terms. Process isolation is not a general license
+exception. Preserve source identity, notices and distribution scope and assess
+appropriate rights before bundling; see the [licensing guide](../licensing.md).
+Release identity and any citations must actually exist.
 
-Een overtuigende proef omvat een passende controllerstudie via twee engines,
-gevolgd door een tweede controller en vraag zonder nieuwe kern- of GUIroute.
-Een andere proef gebruikt dezelfde projectvoorzieningen voor MMTT-gevoeligheid
-en samplingverlies. Een forecastroute toetst vervolgens fit/evaluatie en eigen
-runtimes. Een collega moet een toegestane overdracht kunnen openen en een
-rapport reconstrueren; een onderbroken campagne moet haar volledige
-pogingengeschiedenis behouden. Dit zijn gebruikscriteria, geen extra
-werkpakketten naast de roadmap.
+Keep official, experimental, community and historical integrations
+recognizable. A supported adapter requires maintenance ownership, an upstream
+policy, conformance fixtures and documentation. Supported core environments
+and explicit historical locks can coexist; the
+[Scientific Python maintenance framework](https://scientific-python.org/specs/spec-0000/)
+is a reference, not a reason to replace research baselines silently. Measure
+support burden and storage growth before promising extra engines or services.
+[JOSS review](https://joss.readthedocs.io/en/latest/reviewer_guidelines.html)
+may help later but does not replace a demonstrated research application.
 
-Meet tijd tot eerste correct resultaat, hulp, nieuwe verbindingscode,
-instelwerk, kritieke interpretatiefouten, handoff en werkelijk hergebruik bij
-een volgende studie. Leg grenzen vooraf per proef vast; verzin geen universeel
-percentage tijdswinst. Als iedere nieuwe vraag opnieuw projectbeheer,
-supervisie en rapportlogica nodig heeft, vraagt de kern consolidatie. Als
-een bestaande tool de volledige taak beter oplost, kan een upstreambijdrage
-of kleine adapter waardevoller zijn dan een nieuwe interne functie.
+<a id="welke-productproeven-de-richting-kunnen-beoordelen"></a>
 
-Immunologie, celtherapie, multiscale modellen, surrogates, optimalisatie en
-cloudteams blijven mogelijke richtingen. Toelating vraagt telkens een
-concrete onderzoeksvraag, geschikte bron en rechten, verdedigbare koppeling,
-passende evaluator en onderhoudscapaciteit. Een celmodel wordt niet door een
-eenhedenconversie een menselijke whole-body T1D-engine. Een synthetische
-prognose is geen therapie- of immuunsimulatie. Zulke open evidencevragen hoeven
-bruikbare interne platformontwikkeling niet te blokkeren; zij begrenzen de
-claims van iedere uitbreiding.
+## Product trials that can assess the direction
 
-De hoofdconclusie is daarom een breed maar toetsbaar productdoel: bestaande
-modellen en methoden samen bruikbaar maken voor opeenvolgende onderzoeken,
-met hun verschillen behouden. De concrete requirements horen in het
-[productdocument](../product-laboratory.md); selectie, afhankelijkheden en
-implementatie blijven vastgelegd in de [roadmap](../../ROADMAP.md).
+A convincing trial includes a suitable controller study through two engines,
+followed by a second controller and question without a new core or GUI route.
+Another trial uses the same project facilities for MMTT sensitivity and
+sampling loss. A forecasting route then tests fitting/evaluation and separate
+runtimes. A colleague must be able to open an authorized handoff and
+reconstruct a report; an interrupted campaign must retain its full attempt
+history. These are usage criteria, not additional work packages alongside the
+roadmap.
+
+Measure time to first correct result, assistance, new integration code,
+configuration work, critical interpretation errors, handoff and actual reuse
+in a subsequent study. Set boundaries per trial in advance; do not invent a
+universal percentage time saving. If every new question again requires
+project management, supervision and report logic, the core needs
+consolidation. If an existing tool solves the complete task better, an
+upstream contribution or small adapter may be more valuable than a new
+internal feature.
+
+Immunology, cell therapy, multiscale models, surrogates, optimization and
+cloud teams remain possible directions. Each admission requires a concrete
+research question, suitable source and rights, defensible coupling,
+appropriate evaluator and maintenance capacity. Unit conversion does not turn
+a cell model into a human whole-body T1D engine. A synthetic prognosis is not
+a therapy or immune simulation. These open evidence questions need not block
+useful internal platform development; they bound the claims of each extension.
+
+The main conclusion is therefore a broad but testable product goal: make
+existing models and methods usable together for successive studies while
+preserving their differences. Concrete requirements belong in the
+[product document](../product-laboratory.md); selection, dependencies and
+implementation remain recorded in the [roadmap](../../ROADMAP.md).

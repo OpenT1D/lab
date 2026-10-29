@@ -41,4 +41,4 @@ Record what each reviewer assessed: implementation, reproduction, methods or bio
 
 When a correction changes prior results, retain the affected version, describe the impact and issue corrected artifacts. Do not silently replace published results; see [maintenance](../maintenance.md#scientific-corrections).
 
-The scientific basis, including context-of-use guidance and parameter identifiability, is documented with primary references in [the project research report](../onderzoek/projectopzet.md#8-validatie-als-kernfunctionaliteit).
+The scientific basis, including context-of-use guidance and parameter identifiability, is documented with primary references in [the project research report](../onderzoek/projectopzet.md#8-validation-as-core-functionality).

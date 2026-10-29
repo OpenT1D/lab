@@ -1,244 +1,295 @@
-# Kritische review van de OpenT1D-repositorybasis
+<a id="kritische-review-van-de-opent1d-repositorybasis"></a>
 
-Dit rapport bewaart de bevindingen over baselinecommit `b6bb60486a6bdf158f9954073ca70c9c5bfa31bb`. Na de review zijn verbeteringen opgepakt; de [maintainerhandleiding](../maintenance.md#current-setup) beschrijft de actuele operationele status en resterende activeringspunten. Het oorspronkelijke oordeel hieronder is geen nieuwe controle van die opvolgende wijzigingen.
+# Critical review of the OpenT1D repository foundation
 
-## 1. Oordeel
+Translated from Dutch on 29 October 2026. Historical findings, language-policy
+statements and audit results below describe the original report, not a new review.
 
-**De repositorybasis is geschikt om M0 te starten en verder te ontwikkelen op de huidige private hoofdbranch. Zij is nog niet gereed voor volledige publieke onboarding en de gebouwde documentatiesite heeft een concrete toegankelijkheidsfout.** De onderzoeksrichting, bijdrageafspraken en bestaande technische controles vormen een samenhangende basis. Er is geen bevestigde P0 of P1 gevonden die de huidige private `main` onbruikbaar of onverantwoord maakt.
+This report preserves findings about baseline commit `b6bb60486a6bdf158f9954073ca70c9c5bfa31bb`. Improvements were taken up after the review; the [maintainer guide](../maintenance.md#current-setup) describes the current operational status and remaining activation points. The original judgement below is not a new check of those subsequent changes.
 
-De voornaamste inhoudelijke kracht is dat OpenT1D een groot wetenschappelijk doel verbindt aan controleerbare tussenresultaten. Het onderscheid tussen eigen infrastructuur, externe modellen en gerichte eigen modules is duidelijk. De documenten kennen geen algemene validatiestatus toe aan software die alleen installeert of een simulatie kan uitvoeren. Dat is voor dit project wezenlijker dan een lange lijst communitybestanden of badges.
+<a id="1-oordeel"></a>
 
-Vier punten vragen gerichte opvolging. Een vertrouwelijk meldkanaal ontbreekt, branchregels worden niet afgedwongen, dependencywaarschuwingen staan uit en Nederlandstalige rapporten krijgen Engelse taalmetadata. De eerste twee waren al als open activeringspunten beschreven; de actuele GitHub-status bevestigt ze. De uitgeschakelde kwetsbaarheidsmeldingen zijn nu expliciet via de API vastgesteld. De verkeerde taalmarkering is een nieuw gereproduceerde fout in de uitvoer.
+## 1. Judgement
 
-| Bevinding | Ernst | Private main | Publieke bijdragen | Gebouwde documentatiesite / eerste release |
+**The repository foundation is suitable for starting M0 and continuing development on the current private main branch. It is not yet ready for full public onboarding, and the built documentation site has a concrete accessibility defect.** The research direction, contribution conventions and existing technical checks form a coherent foundation. No confirmed P0 or P1 was found that makes the current private `main` unusable or irresponsible.
+
+The main substantive strength is that OpenT1D connects a large scientific goal to auditable intermediate results. The distinction between its own infrastructure, external models and targeted original modules is clear. The documents do not assign general validation status to software that merely installs or can execute a simulation. For this project, that matters more than a long list of community files or badges.
+
+Four points require targeted follow-up. A confidential reporting channel is missing, branch rules are not enforced, dependency alerts are disabled and Dutch reports receive English language metadata. The first two were already described as open activation points; the current GitHub status confirms them. Disabled vulnerability alerts have now been explicitly established through the API. The incorrect language marking is a newly reproduced output defect.
+
+| Finding | Severity | Private main | Public contributions | Built documentation site / first release |
 | --- | --- | --- | --- | --- |
-| B1 — Geen werkende vertrouwelijke meldroute | P1 voor publieke onboarding | Geen huidige blokkade | Eerst oplossen | Securityroute nodig voor een publieke softwarerelease |
-| B2 — Checks en wijzigingsroute zijn niet afgedwongen | P2 | Bekende operationele beperking | Eerst de eigen publicatieafspraken uitvoeren | Releaseproces moet een aantoonbaar gecontroleerde bronversie gebruiken |
-| B3 — Dependencywaarschuwingen staan uit | P2 | Verbetering van doorlopend onderhoud | Activeren en dekking controleren | Kwetsbaarheidsbeoordeling opnemen vóór een softwaredistributie |
-| B4 — Nederlandse rapporten hebben Engelse taalmetadata | P2 | Geen huidige blokkade | Geen blokkade voor alleen Markdown op GitHub | Oplossen vóór publieke verspreiding van de HTML-site |
+| B1 — No working confidential reporting route | P1 for public onboarding | No current blocker | Resolve first | Security route needed for a public software release |
+| B2 — Checks and change route are not enforced | P2 | Known operational limitation | First implement the project's own publication conventions | Release process must use a demonstrably checked source version |
+| B3 — Dependency alerts are disabled | P2 | Improvement to ongoing maintenance | Activate and check coverage | Include vulnerability assessment before software distribution |
+| B4 — Dutch reports have English language metadata | P2 | No current blocker | No blocker for Markdown alone on GitHub | Resolve before public distribution of the HTML site |
 
-P0 betekent een direct ernstig probleem; P1 blokkeert verantwoord gebruik of de genoemde publicatiestap; P2 is een betekenisvol kwaliteits- of onderhoudsprobleem. P3 wordt hieronder alleen gebruikt voor optionele versterkingen van de controles. De prioriteiten zijn een beoordeling van impact in deze fase, geen automatisch afgeleide Scorecard-score.
+P0 means an immediate serious problem; P1 blocks responsible use or the specified publication step; P2 is a meaningful quality or maintenance problem. P3 is used below only for optional strengthening of checks. The priorities assess impact at this stage, rather than being an automatically derived Scorecard score.
 
-## 2. Reikwijdte en bewijs
+<a id="2-reikwijdte-en-bewijs"></a>
 
-De beoordeelde basis is commit `b6bb60486a6bdf158f9954073ca70c9c5bfa31bb`, op 12 september 2026 zowel lokaal als op GitHub `main`. De werkdirectory was bij aanvang schoon. Alle 50 bijgehouden bestanden zijn betrokken: projectdocumenten, onderzoeksrapporten, templates, licentie- en citatiemateriaal, Python-tooling, tests, lockfile en GitHub-configuratie. Dit nieuwe rapport en zijn navigatievermelding vallen buiten de beoordeelde baseline.
+## 2. Scope and evidence
 
-De technische verificatie omvat een nieuwe clone zonder gedeelde Git-objecten, een nieuwe `.venv` en een lege uv-packagecache. De installatie haalde de dependencies opnieuw op. De aanwezige uv 0.11.16 en Python 3.12.13 op macOS ARM64 werden gebruikt; de Python-installatie zelf is niet opnieuw vanaf een lege machine opgebouwd. De aanvullende negatieve proeven gebruikten afzonderlijke tijdelijke kopieën en een bestaande toolingomgeving. Dat is een andere bewijssoort dan de schone installatie.
+The assessed foundation is commit `b6bb60486a6bdf158f9954073ca70c9c5bfa31bb`, both locally and on GitHub `main` on 12 September 2026. The working directory was initially clean. All 50 tracked files were included: project documents, research reports, templates, licence and citation material, Python tooling, tests, lockfile and GitHub configuration. This new report and its navigation entry are outside the assessed baseline.
 
-GitHub-instellingen en bestaande hosted runs zijn opnieuw gelezen. De geslaagde [run op de huidige main-commit](https://github.com/OpenT1D/OpenT1D/actions/runs/34717812888) en de [pull-requestrun vóór de merge](https://github.com/OpenT1D/OpenT1D/actions/runs/34717784427) bevestigen uitvoering op Ubuntu 24.04. Er is voor deze review geen nieuwe remote workflow gestart en geen instelling, issue, pull request of branch gewijzigd.
+Technical verification includes a fresh clone without shared Git objects, a new `.venv` and an empty uv package cache. Installation fetched the dependencies again. The existing uv 0.11.16 and Python 3.12.13 on macOS ARM64 were used; the Python installation itself was not rebuilt from an empty machine. Additional negative probes used separate temporary copies and an existing tooling environment. This is a different type of evidence from the clean installation.
 
-De vergelijking gebruikt actuele officiële projectdocumentatie en primaire richtlijnen. Zij beoordeelt concrete praktijken, niet de volledige kwaliteit van de voorbeeldprojecten. Bewegende documentatiebranches kunnen na de peildatum veranderen. De wetenschappelijke broncontrole is gericht op beslissende claims; zij is geen volledige audit van alle 41 wetenschappelijke voetnoten, de onderliggende vergelijkingen of klinische datasets.
+GitHub settings and existing hosted runs were read again. The successful [run on the current main commit](https://github.com/OpenT1D/OpenT1D/actions/runs/34717812888) and the [pull-request run before the merge](https://github.com/OpenT1D/OpenT1D/actions/runs/34717784427) confirm execution on Ubuntu 24.04. No new remote workflow was started for this review, and no setting, issue, pull request or branch was changed.
 
-## 3. Wat sterk is
+The comparison uses current official project documentation and primary guidelines. It assesses concrete practices, not the overall quality of the example projects. Moving documentation branches may change after the reference date. Scientific source checking targets decisive claims; it is not a full audit of all 41 scientific footnotes, underlying equations or clinical datasets.
 
-### 3.1 Een duidelijke ingang en één uitvoeringsplan
+<a id="3-wat-sterk-is"></a>
 
-[README.md](../../README.md) maakt de huidige status onmiddellijk zichtbaar. De installatiecommando's bouwen documentatie en worden ook zo omschreven. Een bezoeker krijgt geen fictieve simulator-API, gevalideerde virtuele patiënt of toekomstige release aangeboden als bestaande mogelijkheid.
+## 3. Strengths
 
-[ROADMAP.md](../../ROADMAP.md) is de leidende planning. M0 vraagt om een concreet protocol, controle van upstreamherkomst en rechten, en een reproduceerbare referentie. M1 levert een volledige experimentketen; M2 controleert vervangbaarheid met een andere fysiologische familie. De latere biologische en datagerichte paden hebben eigen afhankelijkheden. Het ontbreken van de simulator is daarmee een expliciete projectfase, geen ontbrekend foundationbestand.
+<a id="31-een-duidelijke-ingang-en-één-uitvoeringsplan"></a>
 
-De publicatiechecklist maakt bovendien onderscheid tussen voorbereiding in bestanden en activatie op GitHub. Dat voorkomt dat bijvoorbeeld CODEOWNERS, een securitypolicy of een workflowbestand wordt verward met respectievelijk verplichte review, een bereikbaar meldkanaal of een daadwerkelijk geslaagde run.
+### 3.1 A clear entry point and one execution plan
 
-### 3.2 Modulariteit met betekenisvolle grenzen
+[README.md](../../README.md) makes the current status immediately visible. The installation commands build documentation and are described accordingly. A visitor is not offered a fictional simulator API, validated virtual patient or future release as an existing capability.
 
-De [architectuur](../architecture.md) ondersteunt zowel volledige engines als fijnere compositie. Bestaande onderzoekers hoeven hun model niet eerst in een nieuwe vergelijkingstaal te herschrijven. Tegelijk zijn eenheden, compartimenten, routes, tijdsconventies en eigenaarschap van processen expliciete integratievoorwaarden.
+[ROADMAP.md](../../ROADMAP.md) is the leading plan. M0 requires a concrete protocol, checks of upstream ancestry and rights, and a reproducible reference. M1 provides a full experiment chain; M2 checks replaceability with another physiological family. Later biological and data-oriented paths have their own dependencies. The absence of a simulator is therefore an explicit project phase, not a missing foundation file.
 
-Dit principe komt terug in de modelgids, modelkaart en biologische roadmap. Het voorkomt bijvoorbeeld dat een module en een engine ongemerkt beide dezelfde absorptie berekenen. De documenten schrijven nog geen universele interface voor voordat de eerste integraties aantonen welke afspraken werkelijk nodig zijn.
+The publication checklist also distinguishes preparation in files from activation on GitHub. This prevents CODEOWNERS, a security policy or a workflow file from being confused with required review, a reachable reporting channel or an actually successful run, respectively.
 
-### 3.3 Wetenschappelijk bewijs blijft afzonderlijk zichtbaar
+<a id="32-modulariteit-met-betekenisvolle-grenzen"></a>
 
-De [validatiegids](../research/validation.md) onderscheidt correcte implementatie, behoud van upstreamgedrag, toepassingsgerichte empirische toetsing en onafhankelijke reproductie. De roadmap houdt technische voortgang en ontbrekend bewijs apart. Een exploratieve module kan dus bruikbaar zijn zonder een ongefundeerde behandelingsclaim te krijgen.
+### 3.2 Modularity with meaningful boundaries
 
-Databeoordeling begint in M0. De [datagids](../research/data.md) behandelt onder meer ontbrekende waarden, deelnemeroverlap, tijdsbetekenis, feitelijke afgifte versus commando's en toegangsrechten. De model- en protocoltemplates vragen om bronversies, beperkingen, failures en evaluatiescheiding. Dat is een passende inhoudelijke basis voor later reproduceerbaar onderzoek.
+The [architecture](../architecture.md) supports both whole engines and finer composition. Existing researchers do not first need to rewrite their model in a new equation language. At the same time, units, compartments, routes, time conventions and process ownership are explicit integration conditions.
 
-### 3.4 Een uitvoerbare bijdrageprocedure
+This principle recurs in the model guide, model card and biological roadmap. For example, it prevents a module and an engine from silently both calculating the same absorption. The documents do not prescribe a universal interface before the first integrations demonstrate which conventions are actually needed.
 
-[CONTRIBUTING.md](../../CONTRIBUTING.md) biedt concrete ingangen voor code, documentatie, bronbeoordeling en reproductie. Het benodigde bewijs verschilt per type bijdrage. Kleine correcties mogen direct naar een pull request; gedeelde interfaces en nieuwe modules vragen een vroeg inhoudelijk voorstel. Er is geen algemene verplichting om voor iedere wijziging een nieuw besluitdocument te schrijven.
+<a id="33-wetenschappelijk-bewijs-blijft-afzonderlijk-zichtbaar"></a>
 
-Governance noemt een echte verantwoordelijke, belangenconflicten en de beperkingen van één maintainer. AI-assistentie is toegestaan met verantwoordelijkheid voor begrip, herkomst en verificatie. Dat past bij snelle ontwikkeling zonder automatisch gegenereerde inhoud tot wetenschappelijk bewijs te verheffen.
+### 3.3 Scientific evidence remains separately visible
 
-### 3.5 Bestaande technische maatregelen doen werkelijk iets
+The [validation guide](../research/validation.md) distinguishes correct implementation, preservation of upstream behaviour, application-specific empirical evaluation and independent reproduction. The roadmap keeps technical progress and missing evidence separate. An exploratory module can therefore be useful without receiving an unsupported treatment claim.
 
-Dezelfde repositorycheck wordt lokaal en in CI gebruikt. De lockfile bevat 62 pakketrecords uit PyPI; de daarin vermelde distributiearchieven hebben SHA-256-hashes. De twee Actions zijn op volledige commit-hashes vastgezet. De workflows hebben leesrechten, een tijdslimiet, annulering van vervangen runs en geen geprivilegieerde pull-requesttrigger.
+Data assessment starts in M0. The [data guide](../research/data.md) addresses missing values, participant overlap, time semantics, actual delivery versus commands and access rights, among other things. Model and protocol templates ask for source versions, limitations, failures and evaluation separation. This is an appropriate substantive foundation for later reproducible research.
 
-De bestaande regressietests bewaken concrete fouten. Het uitschakelen van beperkte paginadetectie laat de test voor lokale notities falen. Het uitschakelen van het opruimen van HTML-uitvoer laat de test voor verwijderde pagina's en downloads falen. De eerdere oplossingen zijn dus opnieuw gecontroleerd en worden niet opnieuw als open defect opgevoerd.
+<a id="34-een-uitvoerbare-bijdrageprocedure"></a>
 
-## 4. Vergelijking met toonaangevende projecten
+### 3.4 A usable contribution procedure
 
-| Project en gecontroleerde praktijk | Probleem dat wordt opgelost | Betekenis voor OpenT1D |
+[CONTRIBUTING.md](../../CONTRIBUTING.md) offers concrete entry points for code, documentation, source assessment and reproduction. Required evidence differs by contribution type. Small corrections may go directly to a pull request; shared interfaces and new modules require an early substantive proposal. There is no general requirement to write a new decision record for every change.
+
+Governance names a real responsible person, conflicts of interest and the limitations of one maintainer. AI assistance is permitted with responsibility for understanding, origin and verification. This supports rapid development without elevating automatically generated content to scientific evidence.
+
+<a id="35-bestaande-technische-maatregelen-doen-werkelijk-iets"></a>
+
+### 3.5 Existing technical measures actually work
+
+The same repository check is used locally and in CI. The lockfile contains 62 package records from PyPI; the distribution archives listed there have SHA-256 hashes. The two Actions are pinned to full commit hashes. Workflows have read permissions, a time limit, cancellation of superseded runs and no privileged pull-request trigger.
+
+Existing regression tests guard concrete faults. Disabling restricted page discovery makes the local-notes test fail. Disabling HTML-output cleanup makes the retired-pages-and-downloads test fail. The earlier fixes have therefore been checked again and are not listed again as open defects.
+
+<a id="4-vergelijking-met-toonaangevende-projecten"></a>
+
+## 4. Comparison with leading projects
+
+| Project and checked practice | Problem addressed | Meaning for OpenT1D |
 | --- | --- | --- |
-| PyBaMM gebruikt een vastgelegde ontwikkelomgeving, strikte documentatiecontroles en credit voor gebruikte modellen en methoden.[^1] | Een experiment moet uitvoerbaar zijn en zijn wetenschappelijke herkomst behouden. | De locked tooling en strikte build behouden. Upstreamcitatie later verbinden aan daadwerkelijke modelmanifesten en uitgevoerde experimenten. Voorbeeldtests toevoegen zodra echte simulatievoorbeelden bestaan. |
-| SciPy benoemt ook documentatie, review en reproductie als bijdragen en maakt besluitbevoegdheid zichtbaar.[^2][^3] | Nieuwe bijdragers moeten een ingang vinden en weten hoe men een besluit neemt of betwist. | De verschillende bijdragevormen en founder-governance passen. Een steering council is pas zinvol wanneer er echte leden en verantwoordelijkheden zijn. |
-| scikit-learn vraagt begrijpelijke, zorgvuldig beoordeelde bijdragen en behandelt onzorgvuldige AI-voorstellen als belasting voor reviewers.[^4] | Een indiener moet de voorgestelde wijziging kunnen beoordelen en onderhouden. | Verantwoordelijkheid en verificatie behouden; de beperktere AI-werkwijze hoeft niet te worden gekopieerd. OpenT1D mag een eigen, expliciet beleid voeren. |
-| Mesa vraagt vroege afstemming over probleem en ontwerp, en voorbeelden en tests bij bruikbare nieuwe functies.[^5] | Voorkomen dat veel code wordt gebouwd voordat nut en integratie duidelijk zijn. | Een korte upstreamproef in M0 en gerichte ontwerpbesluiten behouden. Geen universele extra goedkeuringsrondes voor kleine wijzigingen invoeren. |
-| PhysiCell geeft concrete voorbeeldprojecten met build- en uitvoercommando's en wetenschappelijke referenties.[^6] | Gebruikers leren het systeem via daadwerkelijk werkende experimenten. | Met M1 een vergelijkbare eerste gebruikservaring opleveren. De huidige toolingquickstart is eerlijk; een simulatiehandleiding zonder simulator zou dat niet zijn. |
-| BioSimulators verbindt uitvoeringsconventies aan toetsbare voorbeeldarchieven.[^7] | Een interoperabiliteitsclaim moet controleerbaar zijn. | Het principe van een referentie per ondersteunde adapter overnemen. COMBINE/OMEX of SED-ML alleen implementeren wanneer een concrete ondersteunde taak dat nodig heeft. Technische conformiteit blijft iets anders dan biologische geldigheid. |
+| PyBaMM uses a specified development environment, strict documentation checks and credit for models and methods used.[^1] | An experiment must be executable and retain its scientific origins. | Retain locked tooling and the strict build. Later connect upstream citation to actual model manifests and executed experiments. Add example tests once real simulation examples exist. |
+| SciPy also names documentation, review and reproduction as contributions and makes decision authority visible.[^2][^3] | New contributors need an entry point and to know how decisions are made or contested. | The different contribution forms and founder governance fit. A steering council is useful only when real members and responsibilities exist. |
+| scikit-learn requires understandable, carefully assessed contributions and treats careless AI proposals as a burden on reviewers.[^4] | A submitter must be able to assess and maintain the proposed change. | Retain responsibility and verification; the more restrictive AI workflow need not be copied. OpenT1D may set its own explicit policy. |
+| Mesa requires early discussion of problem and design, plus examples and tests for useful new features.[^5] | Avoid building much code before usefulness and integration are clear. | Retain a short upstream probe in M0 and focused design decisions. Do not introduce universal extra approval rounds for small changes. |
+| PhysiCell provides concrete example projects with build and execution commands and scientific references.[^6] | Users learn the system through experiments that actually work. | Deliver a comparable first-use experience with M1. The current tooling quickstart is honest; a simulation tutorial without a simulator would not be. |
+| BioSimulators connects execution conventions to testable example archives.[^7] | An interoperability claim must be auditable. | Adopt the principle of a reference per supported adapter. Implement COMBINE/OMEX or SED-ML only when a concrete supported task requires it. Technical conformance remains distinct from biological validity. |
 
-Deze vergelijking ondersteunt de bestaande richting. De grootste resterende verbetering zit in het afronden en controleren van operationele afspraken, niet in het kopiëren van meer documenten. De bijdrageprocedure van een groot project is een voorbeeld van een oplossing voor diens omstandigheden, geen universeel voorschrift voor OpenT1D.
+This comparison supports the existing direction. The largest remaining improvement lies in completing and checking operational conventions, rather than copying more documents. A large project's contribution procedure is an example of a solution for its circumstances, not a universal prescription for OpenT1D.
 
-De actuele AI-policy van SciPy vraagt bijvoorbeeld expliciete disclosure en begrenst autonome inzendingen.[^8] Dat is een eigen projectbeleid. OpenSSF maakt bij de Code-Review-controle daarnaast expliciet onderscheid tussen onafhankelijke menselijke review en AI- of botreview, maar erkent ook de beperkingen van een project met één actieve bijdrager.[^9] Deze review vormt geen bewijs dat OpenT1D al een onafhankelijke menselijke reviewpraktijk heeft.
+For example, SciPy's current AI policy requires explicit disclosure and limits autonomous submissions.[^8] This is a project-specific policy. OpenSSF's Code-Review check also explicitly distinguishes independent human review from AI or bot review, while recognising the limitations of a project with one active contributor.[^9] This review does not establish that OpenT1D already has an independent human review practice.
 
-## 5. Relevante standaarden en richtlijnen
+<a id="5-relevante-standaarden-en-richtlijnen"></a>
 
-| Kader | Status | Toetsing en oordeel |
+## 5. Relevant standards and guidelines
+
+| Framework | Status | Assessment and judgement |
 | --- | --- | --- |
-| GitHub-communitybestanden en formschema | Productconventies en schemas | Herkenbare bestanden en drie inhoudelijk passende issueforms zijn aanwezig. Schemaregels zijn iets anders dan YAML-opmaak. De werkelijke private formulierweergave blijft apart te controleren.[^10][^11] |
-| GitHub Actions secure use | Beveiligingsrichtlijn | Minimale tokenrechten, volledige SHA-pinning en ontbreken van geprivilegieerde PR-uitvoering passen. Branchafdwinging staat hier los van.[^12] |
-| CODEOWNERS en branchregels | Productvoorwaarden en instellingen | Het genoemde account heeft administratorrechten en GitHub rapporteert geen CODEOWNERS-fouten. `main` is volgens de branch-API niet beschermd. Zie B2.[^13] |
-| OpenSSF Scorecard | Heuristische controles | Bruikbare dimensies zijn CI, review, branchbescherming, updatebeleid, tokenrechten en kwetsbaarheden. Er is geen volledige Scorecard uitgevoerd of totaalscore toegekend.[^9] |
-| OpenSSF Best Practices | Criteria voor een vrijwillig badgeprogramma | Licentie, projectbeschrijving, bijdrageprocedure en tests passen bij de basis. Publieke toegankelijkheid, onderhoudshistorie en overige criteria zijn daarmee niet aangetoond. Geen badge claimen.[^14] |
-| FAIR software | Aanbevelingen | Repository, licentie, registratie, citatie en kwaliteitscontrole zijn bruikbare doelen. De huidige private repository heeft geen volledige publieke FAIR-status. Registratie en archivering bij een werkelijk bruikbaar artefact organiseren.[^15] |
-| SPDX en REUSE | Metadata-afspraken; REUSE is een vrijwillige specificatie | `Apache-2.0` is een duidelijke identifier. Bestandsgewijze rechtenmetadata wordt nuttiger bij gemengde assets. Zonder REUSE-claim is het ontbreken van REUSE-configuratie geen schending van die specificatie.[^16][^17] |
-| Apache-2.0 | De gekozen licentievoorwaarden | Rootlicentie en attributiebeleid zijn aanwezig. De gids behandelt rechten van code, data en parameters afzonderlijk. Dit is geen compatibiliteitsoordeel over nog niet geïntegreerde engines.[^18] |
-| Citation File Format | Metadataformaat | De CFF-validator slaagt. Er zijn geen fictieve releasegegevens of DOI's. Auteursrecht, toestemming en GitHub-weergave volgen niet uit een geslaagde schemavalidatie.[^19] |
-| Diátaxis | Documentatiemethode | De documentatie is rond lezersvragen georganiseerd. Er is geen verplichting om vier lege mapbomen of een niet-bestaande API-reference aan te maken.[^20] |
-| WCAG 2.2, taalmarkering | Formeel toegankelijkheidscriterium wanneer conformiteit wordt beoordeeld | De Nederlandse HTML-inhoud krijgt Engelse taalmetadata. Zie B4. Dit is geen volledige WCAG-audit en geen uitspraak over wettelijke verplichtingen.[^21][^22] |
-| uv en Sphinx | Toolgedrag en configuratie | De gedocumenteerde Python 3.12-route werkt vanuit een nieuwe omgeving. Een Sphinx-build controleert documentverwijzingen, maar is geen algemene GitHub-schema- of raw-HTML-validator.[^23][^24] |
+| GitHub community files and form schema | Product conventions and schemas | Recognisable files and three substantively appropriate issue forms are present. Schema rules differ from YAML formatting. Actual private form rendering remains to be checked separately.[^10][^11] |
+| GitHub Actions secure use | Security guideline | Minimal token permissions, full SHA pinning and absence of privileged PR execution fit. Branch enforcement is separate.[^12] |
+| CODEOWNERS and branch rules | Product conditions and settings | The named account has administrator rights and GitHub reports no CODEOWNERS errors. According to the branch API, `main` is not protected. See B2.[^13] |
+| OpenSSF Scorecard | Heuristic checks | Useful dimensions include CI, review, branch protection, update policy, token permissions and vulnerabilities. No full Scorecard was run or overall score assigned.[^9] |
+| OpenSSF Best Practices | Criteria for a voluntary badge programme | Licence, project description, contribution procedure and tests fit the foundation. Public accessibility, maintenance history and other criteria are not thereby established. Do not claim a badge.[^14] |
+| FAIR software | Recommendations | Repository, licence, registration, citation and quality checks are useful goals. The current private repository does not have full public FAIR status. Arrange registration and archiving for an actually usable artifact.[^15] |
+| SPDX and REUSE | Metadata conventions; REUSE is a voluntary specification | `Apache-2.0` is a clear identifier. Per-file rights metadata becomes more useful with mixed assets. Without a REUSE claim, lacking REUSE configuration is not a violation of that specification.[^16][^17] |
+| Apache-2.0 | The chosen licence terms | Root licence and attribution policy are present. The guide treats rights to code, data and parameters separately. This is not a compatibility judgement on engines not yet integrated.[^18] |
+| Citation File Format | Metadata format | The CFF validator passes. There are no fictional release details or DOIs. Copyright, permission and GitHub rendering do not follow from passing schema validation.[^19] |
+| Diátaxis | Documentation method | Documentation is organised around reader questions. There is no requirement to create four empty directory trees or a nonexistent API reference.[^20] |
+| WCAG 2.2, language marking | Formal accessibility criterion when assessing conformance | Dutch HTML content receives English language metadata. See B4. This is not a full WCAG audit or a statement about legal obligations.[^21][^22] |
+| uv and Sphinx | Tool behaviour and configuration | The documented Python 3.12 route works from a new environment. A Sphinx build checks document references, but is not a general GitHub-schema or raw-HTML validator.[^23][^24] |
 
-Geen van deze kaders vereist dat OpenT1D nu een fictieve release, pakket-API, DOI, adviesraad of volledige biologische standaardimplementatie toevoegt. Evenmin bewijst een community-health-percentage dat de wetenschap, contactkanalen of onderhoudspraktijk goed zijn.
+None of these frameworks requires OpenT1D to add a fictional release, package API, DOI, advisory board or complete biological standards implementation now. Nor does a community-health percentage prove that the science, contact channels or maintenance practice are sound.
 
-## 6. Bevindingen
+<a id="6-bevindingen"></a>
 
-### B1 — P1 bij publieke onboarding: vertrouwelijke meldroute ontbreekt
+## 6. Findings
 
-**Locatie:** `SECURITY.md:7–9`, `CODE_OF_CONDUCT.md:20` en `docs/maintenance.md:20–21` in de beoordeelde commit.
+<a id="b1--p1-bij-publieke-onboarding-vertrouwelijke-meldroute-ontbreekt"></a>
 
-**Bewijs:** beide policies zeggen expliciet dat geen vertrouwelijk kanaal is geconfigureerd. Het actuele private-vulnerability-reporting-endpoint retourneerde HTTP 404. Die status alleen bewijst geen oorzaak; de combinatie met de expliciete policies toont wel dat geen werkende route is bevestigd. Een conditionele verwijzing naar een eventuele GitHub-knop is nog geen bereikbaar kanaal. GitHub behandelt private vulnerability reporting als een afzonderlijk te activeren voorziening.[^25]
+### B1 — P1 for public onboarding: confidential reporting route missing
 
-**Impact:** een externe bijdrager kan een kwetsbaarheid of vertrouwelijk gedragsincident niet via een vastgelegde operationele projectroute melden. De tekst is eerlijk, maar de ontbrekende uitvoering blijft relevant zodra de community wordt opengesteld. Dit is een bestaande, expliciet bekende publicatievoorwaarde, geen nieuw aangetroffen exploit.
+**Location:** `SECURITY.md:7–9`, `CODE_OF_CONDUCT.md:20` and `docs/maintenance.md:20–21` in the reviewed commit.
 
-**Voorstel:** een door de eigenaar aangewezen en beheerde contactroute opnemen. Security- en conductmeldingen mogen dezelfde ingang hebben als de afhandeling duidelijk is. Waar passend de GitHub-voorziening activeren zodra die beschikbaar is. Geen adres, ontvanger of onafhankelijke ombudsfunctie verzinnen.
+**Evidence:** both policies explicitly state that no confidential channel is configured. The current private-vulnerability-reporting endpoint returned HTTP 404. That status alone does not prove a cause; combined with the explicit policies, it does show that no working route is confirmed. A conditional reference to a possible GitHub button is not yet a reachable channel. GitHub treats private vulnerability reporting as a feature to activate separately.[^25]
 
-**Acceptatie:** de policies noemen een echte bereikbare route en verantwoordelijke; een toegestane testmelding bereikt privé de bedoelde ontvanger; beperkingen bij een melding over de enige maintainer blijven zichtbaar. Het versturen van zo'n testbericht vraagt afzonderlijke toestemming en is in deze review niet gedaan.
+**Impact:** an external contributor cannot report a vulnerability or confidential conduct incident through a specified operational project route. The text is honest, but the missing implementation remains relevant when the community opens. This is an existing, explicitly known publication prerequisite, not a newly discovered exploit.
 
-### B2 — P2: controles en wijzigingsroute worden niet afgedwongen
+**Proposal:** include a contact route designated and managed by the owner. Security and conduct reports may share an entry point if handling is clear. Where appropriate, activate the GitHub feature when available. Do not invent an address, recipient or independent ombuds role.
 
-**Locatie:** GitHub-instellingen voor `main`; bijbehorende afspraken in `docs/maintenance.md:24–25`; `.github/workflows/checks.yml:3–27` en `.github/CODEOWNERS:2`.
+**Acceptance:** the policies name a real reachable route and responsible person; an authorised test report privately reaches the intended recipient; limitations for a report about the sole maintainer remain visible. Sending such a test message requires separate permission and was not done in this review.
 
-**Bewijs:** `GET /repos/OpenT1D/OpenT1D/branches/main` rapporteerde `protected: false`. Zowel het ruleset-endpoint als het branch-protection-endpoint gaf HTTP 403 met de melding dat een planwijziging of publieke zichtbaarheid nodig is. Tegelijk slagen hosted checks en herkent GitHub de code owner. Er bestaat dus een werkende controle, maar geen afgedwongen koppeling tussen die controle en iedere wijziging op `main`.
+<a id="b2--p2-controles-en-wijzigingsroute-worden-niet-afgedwongen"></a>
 
-**Impact:** een geslaagde vorige run voorkomt niet dat later een wijziging zonder geslaagde controle wordt geplaatst of historie wordt overschreven. Voor de huidige private founderfase is dit een bekende operationele beperking. Voor publieke samenwerking moet de repository haar eigen beschreven wijzigingsroute daadwerkelijk inrichten. CODEOWNERS op zichzelf is geen bescherming.[^13]
+### B2 — P2: checks and change route are not enforced
 
-**Voorstel:** bij de geschikte plan- of zichtbaarheidskeuze de `Repository checks`-status, pull-requestroute en bescherming tegen force-push/deletie instellen. Leg een eventuele maintainerbypass expliciet vast. Tot die tijd wijzigingen via de afgesproken PR- en controleprocedure laten verlopen en niet beweren dat GitHub dit afdwingt.
+**Location:** GitHub settings for `main`; related conventions in `docs/maintenance.md:24–25`; `.github/workflows/checks.yml:3–27` and `.github/CODEOWNERS:2`.
 
-**Acceptatie:** instellingen en een gecontroleerde proef bevestigen dat een gewone wijziging de vereiste status moet halen en dat force-push/deletie beperkt zijn. Een tweede menselijke goedkeurder wordt pas verplicht wanneer die werkelijk beschikbaar is. De huidige beperking is geen reden om tijdens een review de repository ongevraagd openbaar te maken.
+**Evidence:** `GET /repos/OpenT1D/OpenT1D/branches/main` reported `protected: false`. Both the ruleset endpoint and branch-protection endpoint returned HTTP 403 with a message that a plan change or public visibility is needed. At the same time, hosted checks pass and GitHub recognises the code owner. There is therefore a working check, but no enforced connection between that check and every change to `main`.
 
-### B3 — P2: kwetsbaarheidsmeldingen voor dependencies staan uit
+**Impact:** a previous successful run does not prevent a later change being placed without a successful check or history being overwritten. For the current private founder phase, this is a known operational limitation. For public collaboration, the repository must actually configure its own described change route. CODEOWNERS alone is not protection.[^13]
 
-**Locatie:** actuele GitHub-securityinstellingen; `.github/dependabot.yml:3–18`; open onderhoudspunt `docs/maintenance.md:29`.
+**Proposal:** with the appropriate plan or visibility choice, configure the `Repository checks` status, pull-request route and protection against force-push/deletion. Explicitly record any maintainer bypass. Until then, use the agreed PR and checking procedure for changes and do not claim that GitHub enforces it.
 
-**Bewijs:** het vulnerability-alerts-endpoint gaf HTTP 404 met een expliciete melding dat de alerts uitstaan. Het Dependabot-alerts-endpoint bevestigde dit met HTTP 403. De YAML-configuratie plant maandelijkse versie-updates. GitHub onderscheidt die functie van waarschuwingen over bekende kwetsbaarheden en van security-updates.[^26][^27]
+**Acceptance:** settings and a controlled probe confirm that an ordinary change must achieve the required status and that force-push/deletion are restricted. A second human approver becomes mandatory only when actually available. The current limitation is no reason to make the repository public unasked during a review.
 
-**Impact:** het project krijgt via deze voorziening geen doorlopende waarschuwing bij een nieuw bekend dependencyprobleem. Een maandelijkse update-PR en een lockfile lossen dit niet zelfstandig op. Een geïsoleerde scan met pip-audit 2.10.1 vond op de peildatum geen bekende kwetsbaarheden in de 61 geïnstalleerde Python-pakketten, zonder overgeslagen pakketten. Dit is een momentopname, geen bewijs dat monitoring overbodig is.[^28]
+<a id="b3--p2-kwetsbaarheidsmeldingen-voor-dependencies-staan-uit"></a>
 
-**Voorstel:** dependency alerts activeren en controleren of de dependencygraph de gebruikte Python-afhankelijkheden werkelijk herkent. Wijs afhandeling toe en controleer de notificatievoorkeur. Kies bij onvoldoende graphdekking een kleine periodieke audit van de feitelijk gebruikte dependencies. Behoud maandelijkse versie-updates daarnaast; automatische merges zijn niet nodig.
+### B3 — P2: dependency vulnerability alerts are disabled
 
-**Acceptatie:** het alerts-endpoint bevestigt activatie, de relevante dependencies zijn zichtbaar en er is een verantwoordelijke voor opvolging. Eventuele ontbrekende ecosysteemdekking is expliciet opgevangen. De audit of meldingen hebben een gecontroleerde route, zonder bewust een kwetsbaar pakket in de hoofdbranch te introduceren.
+**Location:** current GitHub security settings; `.github/dependabot.yml:3–18`; open maintenance point `docs/maintenance.md:29`.
 
-Dit is een onderhoudsgat, niet een aangetoonde kwetsbare dependency in de huidige versie. De Python-scan dekt niet automatisch Actions, de Python-interpreter of de via CDN geladen Mermaid-library.
+**Evidence:** the vulnerability-alerts endpoint returned HTTP 404 with an explicit message that alerts are disabled. The Dependabot-alerts endpoint confirmed this with HTTP 403. The YAML configuration schedules monthly version updates. GitHub distinguishes that feature from alerts about known vulnerabilities and from security updates.[^26][^27]
 
-### B4 — P2: Nederlandse rapporten worden als Engels gemarkeerd
+**Impact:** this feature does not provide ongoing project alerts for newly known dependency problems. A monthly update PR and a lockfile do not solve this independently. An isolated scan with pip-audit 2.10.1 found no known vulnerabilities in the 61 installed Python packages on the reference date, with no skipped packages. This is a snapshot, not evidence that monitoring is unnecessary.[^28]
 
-**Locatie:** `docs/conf.py:7–35` en de gegenereerde versies van `docs/onderzoek/projectopzet.md` en `docs/onderzoek/repositorybasis.md`.
+**Proposal:** activate dependency alerts and check whether the dependency graph actually recognises the Python dependencies used. Assign follow-up and check notification preferences. If graph coverage is insufficient, choose a small periodic audit of dependencies actually used. Retain monthly version updates alongside this; automatic merges are unnecessary.
 
-**Bewijs:** beide HTML-pagina's bevatten `lang="en"` op het `html`-element en geen `lang="nl"` op het Nederlandse artikel of een andere passende inhoudscontainer. Dit is opnieuw vastgesteld na de schone build. De documenttaal erft daardoor Engels. De huidige tests controleren deze eigenschap niet.
+**Acceptance:** the alerts endpoint confirms activation, relevant dependencies are visible and someone is responsible for follow-up. Any missing ecosystem coverage is explicitly addressed. The audit or alerts have a checked route, without deliberately introducing a vulnerable package into the main branch.
 
-**Impact:** schermlezers en andere taalafhankelijke hulpmiddelen krijgen de verkeerde uitspraaktaal voor duizenden woorden Nederlands. Een document kan visueel goed ogen en tegelijk onjuist worden voorgelezen. WCAG 2.2 SC 3.1.1 vraagt een programmatisch bepaalbare hoofdtaal; SC 3.1.2 behandelt afwijkende talen binnen inhoud.[^21][^22]
+This is a maintenance gap, not a demonstrated vulnerable dependency in the current version. The Python scan does not automatically cover Actions, the Python interpreter or the Mermaid library loaded from a CDN.
 
-**Voorstel:** taalmetadata per document invoeren en in de daadwerkelijke template-uitvoer verwerken. Overwegend Nederlandse pagina's krijgen `html lang="nl"`, Engelse gidsen blijven `en` en de Engelstalige interfaceonderdelen krijgen `lang="en"`. Een frontmatterveld toevoegen zonder effect op HTML is onvoldoende.
+<a id="b4--p2-nederlandse-rapporten-worden-als-engels-gemarkeerd"></a>
 
-**Acceptatie:** controle van de gegenereerde HTML toont de juiste effectieve taal voor beide bestaande rapporten én dit nieuwe rapport; Engelse pagina's behouden hun taal. Voeg een regressiecontrole toe en controleer ten minste één rapport met taalinspectie of een schermlezer. Omdat deze review alleen rapportagewijzigingen bevat, blijft de fout ook voor de HTML-versie van dit rapport nog open.
+### B4 — P2: Dutch reports are marked as English
 
-De fout blokkeert geen verdere private ontwikkeling. Zij moet worden opgelost vóór het publiek delen van de gebouwde site. Alleen de Markdown-bestanden openbaar maken op GitHub is een afzonderlijke publicatiestap met andere rendering.
+**Location:** `docs/conf.py:7–35` and generated versions of `docs/onderzoek/projectopzet.md` and `docs/onderzoek/repositorybasis.md`.
 
-## 7. Verificatie en grenzen van de controles
+**Evidence:** both HTML pages contain `lang="en"` on the `html` element and no `lang="nl"` on the Dutch article or another suitable content container. This was established again after the clean build. The document language therefore inherits English. Current tests do not check this property.
 
-### 7.1 Werkelijk uitgevoerde controles
+**Impact:** screen readers and other language-dependent tools receive the wrong pronunciation language for thousands of Dutch words. A document can look visually correct while being read aloud incorrectly. WCAG 2.2 SC 3.1.1 requires a programmatically determinable main language; SC 3.1.2 addresses different languages within content.[^21][^22]
 
-| Controle | Uitkomst | Bewijsgrens |
+**Proposal:** introduce per-document language metadata and apply it in actual template output. Predominantly Dutch pages receive `html lang="nl"`, English guides remain `en` and English interface elements receive `lang="en"`. Adding a frontmatter field without an effect on HTML is insufficient.
+
+**Acceptance:** inspection of generated HTML shows the correct effective language for both existing reports and this new report; English pages retain their language. Add a regression check and inspect at least one report using language inspection or a screen reader. Because this review contains only reporting changes, the defect remains open for the HTML version of this report too.
+
+The defect does not block further private development. It must be resolved before publicly sharing the built site. Making only the Markdown files public on GitHub is a separate publication step with different rendering.
+
+<a id="7-verificatie-en-grenzen-van-de-controles"></a>
+
+## 7. Verification and limits of the checks
+
+<a id="71-werkelijk-uitgevoerde-controles"></a>
+
+### 7.1 Checks actually executed
+
+| Check | Outcome | Evidence limit |
 | --- | --- | --- |
-| Nieuwe clone, nieuwe `.venv`, lege packagecache; `uv sync --locked` | Geslaagd; dependencies opnieuw opgehaald | Bestaande uv- en Python-installatie gebruikt; geen volledig nieuwe machine |
-| `uv run --locked python scripts/check.py` | Geslaagd: Ruff, Markdown, YAML, CFF, navigatie, zeven tests, strikte HTML-build | Geen simulatie- of biologische tests |
-| Gegenereerde interne links en ankers | 1.464 verwijzingen over 28 HTML-pagina's, geen fout | Baseline vóór toevoeging van dit rapport; geen volledige toegankelijkheidstoets |
-| Bestaande GitHub Actions-runs | Geslaagd op de beoordeelde main-commit en op de genoemde PR | Historische echte hosted runs opnieuw geverifieerd; geen nieuwe remote run voor de review gestart |
-| `actionlint` 1.7.12 op beide workflows | Geslaagd | Afzonderlijk aanwezig via Homebrew; geen onderdeel van de vastgelegde repositorycheck |
-| pip-audit 2.10.1 op de schone Python-omgeving | 61 pakketten, nul bekende kwetsbaarheden, nul overgeslagen | PyPI-advisorygegevens op de peildatum, alleen geïnstalleerde Python-pakketten |
-| Lockfile-inventaris | 62 pakketrecords, PyPI-bronnen, distributiehashes aanwezig | Sommige platformafhankelijke pakketten worden lokaal niet geïnstalleerd; hashes bewijzen geen afwezigheid van schadelijke code |
-| CODEOWNERS-API en accountrechten | Geen parsefouten; genoemde account heeft administratorrechten | Geen verplichte onafhankelijke review door het bestaan van dit bestand |
-| Taalmetadata van Nederlandse HTML-rapporten | Fout gereproduceerd: alleen Engelse taalmarkering | B4; visuele opmaak en uitspraak zijn afzonderlijke eigenschappen |
+| Fresh clone, new `.venv`, empty package cache; `uv sync --locked` | Passed; dependencies fetched again | Used existing uv and Python installation; not a completely new machine |
+| `uv run --locked python scripts/check.py` | Passed: Ruff, Markdown, YAML, CFF, navigation, seven tests, strict HTML build | No simulation or biological tests |
+| Generated internal links and anchors | 1,464 references across 28 HTML pages, no error | Baseline before adding this report; not a full accessibility assessment |
+| Existing GitHub Actions runs | Passed on the reviewed main commit and specified PR | Historical actual hosted runs verified again; no new remote run started for the review |
+| `actionlint` 1.7.12 on both workflows | Passed | Separately available through Homebrew; not part of the specified repository check |
+| pip-audit 2.10.1 on the clean Python environment | 61 packages, zero known vulnerabilities, zero skipped | PyPI advisory data on the reference date, installed Python packages only |
+| Lockfile inventory | 62 package records, PyPI sources, distribution hashes present | Some platform-dependent packages are not installed locally; hashes do not prove absence of malicious code |
+| CODEOWNERS API and account rights | No parse errors; named account has administrator rights | This file's existence does not require independent review |
+| Language metadata of Dutch HTML reports | Defect reproduced: English language marking only | B4; visual layout and pronunciation are separate properties |
 
-De uv-waarschuwing over ontbrekende `requires-python` bij deze tooling-only configuratie is zichtbaar. De vastgelegde Python 3.12-route werkt. Ook `uv add --group dev PACKAGE` is in een tijdelijke kopie met een beschikbare dependency gecontroleerd. Er is geen bewijs dat daarvoor nu een fictief installeerbaar OpenT1D-pakket moet worden toegevoegd.[^23]
+The uv warning about missing `requires-python` in this tooling-only configuration is visible. The specified Python 3.12 route works. `uv add --group dev PACKAGE` was also checked in a temporary copy with an available dependency. There is no evidence that a fictional installable OpenT1D package must now be added for this.[^23]
 
-### 7.2 Negatieve proeven
+<a id="72-negatieve-proeven"></a>
 
-Elke onderstaande verandering is in een afzonderlijke tijdelijke kopie aangebracht. Alleen synthetische inhoud is gebruikt. De hoofdrepository en haar bestaande tests zijn niet gewijzigd.
+### 7.2 Negative probes
 
-| Proef | Werkelijke reactie | Beoordeling |
+Each change below was made in a separate temporary copy. Only synthetic content was used. The main repository and its existing tests were not changed.
+
+| Probe | Actual response | Assessment |
 | --- | --- | --- |
-| Beperkte Sphinx-paginadetectie uitschakelen | Test voor lokale notities faalt | Bestaande beveiliging tegen onbedoelde paginadetectie is aantoonbaar bewaakt |
-| Opruimen van oude HTML-uitvoer uitschakelen | Test voor verwijderde pagina's/downloads faalt | Eerdere fix heeft een relevante regressietest |
-| Expliciete downloadlink naar synthetisch bestand in `data/private/` toevoegen | Check slaagt; bestand wordt als download opgenomen | Exact gedocumenteerde grens in `docs/development.md:42`; een pagina-allowlist is geen sandbox voor expliciete assets |
-| Raw HTML-link naar een ontbrekend bestand toevoegen | Check slaagt; foutieve link staat in uitvoer | HTML-links worden niet volledig door MyST gecontroleerd |
-| Kapotte Markdown-link in de PR-template toevoegen | Check slaagt | GitHub-only Markdown krijgt stijlcontrole, maar geen Sphinx-referentiecontrole |
-| `runs-on` wijzigen in `runs-onn` | Repositorycheck slaagt; actionlint faalt | YAML-opmaakcontrole is geen Actions-schemavalidatie |
-| Issueformtype `textarea` wijzigen in `textinput` | Repositorycheck slaagt | YAML-opmaakcontrole bewijst geen formschema-conformiteit |
+| Disable restricted Sphinx page discovery | Local-notes test fails | Existing protection against unintended page discovery is demonstrably guarded |
+| Disable cleanup of old HTML output | Retired-pages/downloads test fails | Earlier fix has a relevant regression test |
+| Add an explicit download link to a synthetic file in `data/private/` | Check passes; file is included as a download | Exactly documented boundary in `docs/development.md:42`; a page allowlist is not a sandbox for explicit assets |
+| Add a raw HTML link to a missing file | Check passes; incorrect link appears in output | MyST does not fully check HTML links |
+| Add a broken Markdown link in the PR template | Check passes | GitHub-only Markdown gets style checks, but no Sphinx reference checks |
+| Change `runs-on` to `runs-onn` | Repository check passes; actionlint fails | YAML formatting checks are not Actions schema validation |
+| Change issue-form type `textarea` to `textinput` | Repository check passes | YAML formatting checks do not prove form-schema conformance |
 
-Deze proeven tonen controlegrenzen, niet dat de huidige workflows, formulieren of bestaande verwijzingen defect zijn. De huidige workflows slagen juist voor actionlint en hosted uitvoering. De bestaande expliciete-assetwaarschuwing moet behouden blijven; een testbestand dat bewust wordt gelinkt is geen bewijs van een verborgen lek in automatische paginadetectie.
+These probes show checking boundaries, not that current workflows, forms or existing references are defective. Current workflows actually pass actionlint and hosted execution. The existing explicit-asset warning must be retained; a deliberately linked test file is not evidence of a hidden leak in automatic page discovery.
 
-De laatste vier proeven rechtvaardigen optionele P3-versterkingen: actionlint reproduceerbaar opnemen, een beperkte formschemacheck toevoegen en GitHub-only/raw-HTML-links controleren. Hun acceptatiecriterium is dat de beschreven synthetische fout wordt afgewezen terwijl geldige bestaande bestanden slagen. Nieuwe tooling moet dezelfde lokale en CI-route krijgen, met beperkte onderhoudslast.[^11][^29]
+The last four probes justify optional P3 strengthening: include actionlint reproducibly, add a limited form-schema check and check GitHub-only/raw-HTML links. Their acceptance criterion is rejection of the described synthetic fault while valid existing files pass. New tooling must use the same local and CI route, with limited maintenance burden.[^11][^29]
 
-### 7.3 Externe links
+<a id="73-externe-links"></a>
 
-De afzonderlijke Sphinx-linkcheck eindigde met exitcode 1. Van 87 externe URL-records werden er 70 als werkend gerapporteerd, twee als redirect en vier bewust overgeslagen vanwege private repositorytoegang. Elf verzoeken werden geweigerd: tien met HTTP 403 bij PMC, NEJM en Sage, en één met HTTP 429 bij GitHub/PhysiCell. Er werd in deze run geen HTTP 404 gerapporteerd. Daarnaast waren er tien lokale fragmentrecords die deze builder niet controleerde; die vallen onder de afzonderlijk geslaagde interne HTML-linkcontrole.
+### 7.3 External links
 
-Een 403 of 429 is onvoldoende om een wetenschappelijke bron als verdwenen te classificeren. De broncontrole heeft relevante publicatieclaims waar mogelijk via de oorspronkelijke abstracten of auteursversies onderzocht. Niet iedere geweigerde pagina is daarmee volledig geverifieerd. De keuze om externe beschikbaarheid buiten de verplichte PR-check te houden is passend; voeg geen brede permanente uitzonderingen toe om het rapport kunstmatig groen te maken.
+The separate Sphinx linkcheck ended with exit code 1. Of 87 external URL records, 70 were reported working, two as redirects and four deliberately skipped because of private repository access. Eleven requests were rejected: ten with HTTP 403 at PMC, NEJM and Sage, and one with HTTP 429 at GitHub/PhysiCell. No HTTP 404 was reported in this run. There were also ten local fragment records that this builder did not check; these fall under the separately successful internal HTML link check.
 
-### 7.4 Overige GitHub-status
+A 403 or 429 is insufficient to classify a scientific source as missing. Source checking examined relevant publication claims through original abstracts or author versions where possible. Not every rejected page was thereby fully verified. Keeping external availability outside the required PR check is appropriate; do not add broad permanent exceptions to make the report artificially green.
 
-De repository is privé, `main` is de default branch, Issues staan aan en Discussions uit. De About-beschrijving is leeg en er zijn geen topics. Dat is een klein vindbaarheidspunt vóór publieke opening, geen fout in de projectinhoud. De licentie wordt als Apache-2.0 herkend.
+<a id="74-overige-github-status"></a>
 
-Actions staan aan en de standaard workflowrechten zijn read-only. De huidige workflows pinnen hun Actions, terwijl accountbrede SHA-afdwinging niet aanstaat. Dat verschil is geen gebrek in de huidige twee bestanden. Secret-protectionstatus kon niet betrouwbaar uit de geretourneerde metadata worden vastgesteld; een ontbrekende waarde is niet als uitgeschakeld of geslaagd geïnterpreteerd.
+### 7.4 Other GitHub status
 
-Issueformweergave, het citaatpaneel en externe-bijdragegoedkeuring zijn niet volledig via een ingelogde browser bevestigd. De maintainerchecklist vermeldt de eerste twee al. De officiële formschemadocumentatie beperkt het blokkeren van indiening via `validations.required` bovendien tot publieke repositories; afwijkend gedrag in een private repository is daardoor niet automatisch een formulierfout.[^11]
+The repository is private, `main` is the default branch, Issues are enabled and Discussions disabled. The About description is empty and there are no topics. This is a small discoverability point before public opening, not a defect in project content. The licence is recognised as Apache-2.0.
 
-## 8. Inhoudelijke en wetenschappelijke broncontrole
+Actions are enabled and default workflow permissions are read-only. Current workflows pin their Actions, while account-wide SHA enforcement is disabled. That difference is not a defect in the current two files. Secret-protection status could not be established reliably from returned metadata; a missing value was not interpreted as disabled or passed.
 
-De gecontroleerde kernclaims ondersteunen de beschreven fasering. Een repositorylabel of publicatieabstract is daarbij alleen bewijs voor de betreffende beschrijving, niet voor de numerieke kwaliteit van een toekomstige adapter.
+Issue-form rendering, the citation panel and external-contribution approval were not fully confirmed through a logged-in browser. The maintainer checklist already lists the first two. Official form-schema documentation also limits submission blocking through `validations.required` to public repositories; different behaviour in a private repository is therefore not automatically a form defect.[^11]
 
-| Onderwerp | Bevinding bij primaire broncontrole | Consequentie |
+<a id="8-inhoudelijke-en-wetenschappelijke-broncontrole"></a>
+
+## 8. Substantive and scientific source checking
+
+The checked core claims support the described phasing. A repository label or publication abstract is evidence only for the corresponding description, not for the numerical quality of a future adapter.
+
+| Topic | Finding from primary source checking | Consequence |
 | --- | --- | --- |
-| simglucose | UVA/Padova 2008, 30 virtuele profielen en toegang tot extra patiënttoestanden staan in de oorspronkelijke repository.[^30] | Ancestry en begrenzing van controllerinformatie zijn terecht expliciet |
-| GluCoEnv | De repository verwijst naar simglucose/UVA2008 en PyTorch-uitvoering.[^31] | Een tweede implementatie van deze basis is geen tweede onafhankelijke fysiologiefamilie |
-| LT1 | `Cambridge.ts` noemt Hovorka-gerelateerde bronnen; de paper beschrijft headless uitvoering en modulaire architectuur.[^32][^33] | Een kandidaat voor een andere familie en een adapterproef is onderbouwd; uitvoerbaarheid binnen OpenT1D nog te bewijzen |
-| APS TestBed | Het oorspronkelijke artikel beschrijft twee simulatoren en foutinjectie.[^34] | De roadmap onderzoekt terecht of bestaande infrastructuur al een deel van de behoefte dekt |
-| ReplayBG | De oorspronkelijke evaluatie gebruikt 100 virtuele personen en twee casussen met echte gegevens.[^35] | De beperkte claim in de onderzoeksbasis is passend; een Python-port of nieuwe toepassing erft dit bewijs niet automatisch |
-| MetaboNet | Tabel 1 rapporteert 3.135/1.895 subjects en 1.228,2/867,4 patiëntjaren voor totaal/publiek; §2.2 beschrijft overlap en resterende meerdere identifiers.[^36] | Brongetallen kloppen, maar zijn geen eigen audit van unieke deelnemers of data-inhoud |
-| MetaboNet-Bench | De appendix noemt beperkingen tot niet-commercieel onderzoek en onderwijs voor de bundel.[^37] | De teksten laten terecht feitelijke download- en componentvoorwaarden beslissend blijven |
-| Toepassingsgericht modelbewijs | FDA-guidance beschrijft risicogerichte geloofwaardigheid; het kalibratieprotocol behandelt identificeerbaarheid en onzekerheid.[^38][^39] | OpenT1D gebruikt dit als ontwerpkader en claimt geen automatische regulatoire conformiteit |
-| Biologische modelgrenzen | De OGTT-methodestudie is geen algemene T1D/graftvalidatie; PhysioLab betreft de NOD-muis.[^40][^41] | De repository draagt bewijs niet ongegrond tussen populaties en soorten over |
-| Therapievragen | TN10 onderzoekt risico vóór diagnose, PROTECT recente diagnose; de zimislecel-publicatie rapporteert 10 van 12 volledige-dosisdeelnemers insulineonafhankelijk op één jaar, met immuunsuppressie en interimanalyses.[^42][^43][^44] | De teksten onderscheiden fase, eindpunt en behandelvoorwaarden en beloven geen universele genezing |
+| simglucose | UVA/Padova 2008, 30 virtual profiles and access to additional patient states are described in the original repository.[^30] | Ancestry and limits on controller information are appropriately explicit |
+| GluCoEnv | The repository refers to simglucose/UVA2008 and PyTorch execution.[^31] | A second implementation of this basis is not a second independent physiological family |
+| LT1 | `Cambridge.ts` names Hovorka-related sources; the paper describes headless execution and modular architecture.[^32][^33] | A candidate for a different family and an adapter probe are supported; executability within OpenT1D remains to be proved |
+| APS TestBed | The original article describes two simulators and fault injection.[^34] | The roadmap appropriately investigates whether existing infrastructure already covers part of the need |
+| ReplayBG | The original evaluation uses 100 virtual people and two cases with real data.[^35] | The limited claim in the research foundation is appropriate; a Python port or new application does not automatically inherit this evidence |
+| MetaboNet | Table 1 reports 3,135/1,895 subjects and 1,228.2/867.4 patient-years for total/public; §2.2 describes overlap and remaining multiple identifiers.[^36] | Source figures are correct, but are not an internal audit of unique participants or data content |
+| MetaboNet-Bench | The appendix states restrictions to noncommercial research and education for the bundle.[^37] | The texts appropriately leave actual download and component terms decisive |
+| Application-specific model evidence | FDA guidance describes risk-informed credibility; the calibration protocol addresses identifiability and uncertainty.[^38][^39] | OpenT1D uses this as a design framework and claims no automatic regulatory conformance |
+| Biological model boundaries | The OGTT methodology study is not general T1D/graft validation; PhysioLab concerns the NOD mouse.[^40][^41] | The repository does not transfer evidence between populations and species without support |
+| Therapy questions | TN10 examines risk before diagnosis, PROTECT recent diagnosis; the zimislecel publication reports 10 of 12 full-dose participants insulin-independent at one year, with immunosuppression and interim analyses.[^42][^43][^44] | The texts distinguish stage, endpoint and treatment conditions and promise no universal cure |
 
-Ook het onderscheid tussen oudere UVA/Padova-generaties en de uitbreiding naar dagsimulatie is in de versiegebonden literatuur gecontroleerd.[^45] Geen van deze controles installeerde een simulator of onderzocht patiëntrecords. De huidige ontbrekende tolerantiegetallen, controllersettings en definitieve populatiekeuze horen bij M0; willekeurige waarden toevoegen zou de basis minder betrouwbaar maken.
+The distinction between older UVA/Padova generations and the extension to day-long simulation was also checked in the version-specific literature.[^45] None of these checks installed a simulator or examined patient records. Currently missing tolerance values, controller settings and final population selection belong to M0; adding arbitrary values would make the foundation less reliable.
 
-Drie inhoudelijke aanscherpingen zijn bruikbaar als ontwerpkeuze, maar geen bevestigde fout. Maak in M0 desgewenst één externe gebruiksvraag explicieter, zodat de technische added value ook aan een echte behoefte kan worden getoetst. Benoem bij de MetaboNet-aantallen desgewenst direct dat de gerapporteerde subjecttelling geen onafhankelijk gededupliceerd aantal unieke personen is; de bestaande overlapwaarschuwing dekt dit risico al. Voeg een ingevulde claim-evidencekaart toe wanneer de eerste echte upstreamreproductie daarvoor inhoud oplevert.
+Three substantive refinements are useful design choices, but not confirmed defects. If desired, make one external user question more explicit in M0, so that technical added value can also be tested against a real need. If desired, state directly with the MetaboNet counts that the reported subject count is not an independently deduplicated count of unique people; the existing overlap warning already covers this risk. Add a completed claim-evidence card when the first real upstream reproduction provides content for it.
 
-## 9. Geprioriteerd verbeterplan
+<a id="9-geprioriteerd-verbeterplan"></a>
 
-| Volgorde | Actie | Gereed wanneer | Afhankelijkheid |
+## 9. Prioritised improvement plan
+
+| Order | Action | Complete when | Dependency |
 | --- | --- | --- | --- |
-| Eerstvolgende onderhoudsverbetering | B3: dependencywaarschuwingen en dekking regelen | Activatie, relevante dependencygraph en verantwoordelijke aantoonbaar aanwezig; eventuele dekkingstekorten opgevangen | Bevoegde GitHub-instelling; geen nieuwe modelcode nodig |
-| Vóór externe publieke bijdragen | B1: vertrouwelijk meldkanaal afronden | Policies verwijzen naar werkende route en toegestane ontvangsttest slaagt | Eigenaar levert kanaal en ontvanger |
-| Vóór externe publieke bijdragen | B2: wijzigingsroute afdwingen waar beschikbaar | Vereiste check, PR-route, bescherming en eventuele bypass aantoonbaar ingesteld | Geschikt plan of bewuste publicatiestap |
-| Vóór publieke HTML-site | B4: taalmetadata herstellen | Nederlandse en Engelse inhoud hebben passende effectieve taal; regressietest slaagt | Kleine documentatieconfiguratie-/templatewijziging |
-| Bij publieke opening | Overige bestaande checklist uitvoeren | About, topics, private reporting waar beschikbaar, formulieren, citaatpaneel en rechten voor externe bijdragen gecontroleerd | Gekozen publicatie- en notificatiebeleid |
-| Optioneel, bij verdere toolingwijzigingen | P3: schemas en overige links beter bewaken | De vier genoemde synthetische fouten worden afgewezen met bruikbare uitleg | Beperkte reproduceerbare toolinguitbreiding |
-| Daarna inhoudelijk verder | M0 uitvoeren volgens de bestaande roadmap | Protocol, bronrevisies, assetrechten, upstreamreferentie en datafit concreet | Werkelijk modelonderzoek, geen extra foundationbureaucratie |
+| Next maintenance improvement | B3: arrange dependency alerts and coverage | Activation, relevant dependency graph and responsible person demonstrably present; any coverage gaps addressed | Authorised GitHub setting; no new model code needed |
+| Before external public contributions | B1: complete confidential reporting channel | Policies refer to a working route and authorised receipt test passes | Owner supplies channel and recipient |
+| Before external public contributions | B2: enforce change route where available | Required check, PR route, protection and any bypass demonstrably configured | Appropriate plan or deliberate publication step |
+| Before public HTML site | B4: fix language metadata | Dutch and English content have appropriate effective language; regression test passes | Small documentation configuration/template change |
+| At public opening | Execute remaining existing checklist | About, topics, private reporting where available, forms, citation panel and external-contribution permissions checked | Chosen publication and notification policy |
+| Optional, with further tooling changes | P3: better guard schemas and other links | The four specified synthetic faults are rejected with useful explanations | Limited reproducible tooling extension |
+| Then continue substantive work | Execute M0 according to the existing roadmap | Protocol, source revisions, asset rights, upstream reference and data fit concrete | Actual model research, no extra foundation bureaucracy |
 
-Voor een eerste software- of onderzoeksrelease blijven de bestaande mijlpaalcriteria gelden: een reproduceerbaar voorbeeld, versies en toegestane assets, relevante numerieke checks, claimgrenzen en een passende correctieprocedure. Packaging, distributie-inventaris, archivering en eventuele attesten moeten de daadwerkelijke release volgen. Het ontbreken daarvan in de huidige documentatiefase is niet als fout geclassificeerd.
+For a first software or research release, existing milestone criteria remain applicable: a reproducible example, versions and permitted assets, relevant numerical checks, claim boundaries and an appropriate correction procedure. Packaging, distribution inventory, archiving and any attestations must follow the actual release. Their absence at the current documentation stage is not classified as a defect.
 
-## 10. Reproductie en beperkingen
+<a id="10-reproductie-en-beperkingen"></a>
 
-De kerncontrole is vanuit een nieuwe clone te herhalen met onderstaande commando's. Gebruik voor een vergelijking met dit rapport de genoemde baselinecommit en een afzonderlijke lege cache; de omvang van de site verandert zodra dit rapport wordt toegevoegd.
+## 10. Reproduction and limitations
+
+The core check can be repeated from a fresh clone using the commands below. For comparison with this report, use the specified baseline commit and a separate empty cache; the site's size changes when this report is added.
 
 ```sh
 uv sync --locked
@@ -246,7 +297,7 @@ uv run --locked python scripts/check.py
 uv run --locked sphinx-build -E -a -b linkcheck -c docs . _build/linkcheck
 ```
 
-De taalbevinding is zonder extra Python-library te inspecteren:
+The language finding can be inspected without an additional Python library:
 
 ```sh
 uv run --locked python - <<'PY'
@@ -266,58 +317,60 @@ for name in ("projectopzet", "repositorybasis"):
 PY
 ```
 
-Op de baseline is de uitvoer voor beide documenten uitsluitend `html en`. De negatieve proeven zijn afzonderlijk te herhalen met de wijzigingen uit §7.2; pas die nooit toe op een bronversie die wordt gepubliceerd. De toets op geretourneerde HTTP-statussen vereist passende repositorytoegang. De rapportage bewaart geen credentials, patiëntgegevens of testmeldingen.
+On the baseline, the output for both documents is only `html en`. The negative probes can be repeated separately with the changes from §7.2; never apply them to a source version being published. Checking returned HTTP statuses requires appropriate repository access. Reporting retains no credentials, patient data or test messages.
 
-Dit onderzoek bewijst geen volledige afwezigheid van kwetsbaarheden, volledige WCAG-conformiteit, juridische geschiktheid van toekomstige modeldistributies of biologische validiteit. De aanvullende audittools maken geen deel uit van de repositorylockfile. Windows is niet apart uitgevoerd; Linux is onderbouwd door de bestaande hosted runs, niet door een nieuwe lokale Linux-installatie. De wetenschappelijke checks betroffen vooral oorspronkelijke abstracts, relevante tekstpassages en projectdocumentatie; supplementen, volledige datalicenties en alle eventuele errata zijn niet uitputtend beoordeeld.
+This research proves neither complete absence of vulnerabilities, full WCAG conformance, legal suitability of future model distributions nor biological validity. The supplementary audit tools are not part of the repository lockfile. Windows was not executed separately; Linux is supported by existing hosted runs, not a new local Linux installation. Scientific checks mainly concerned original abstracts, relevant text passages and project documentation; supplements, full data licences and all possible errata were not assessed exhaustively.
 
-Tijdens de review zijn alleen dit Nederlandstalige rapport en de verwijzing ernaar in de inhoudsopgave toegevoegd. De uitvoering van verbeteringen vindt daarna plaats en verandert het bewijs over de genoemde baseline niet.
+During the review, only this originally Dutch report and its table-of-contents reference were added. Improvements are implemented afterwards and do not change the evidence about the specified baseline.
 
-## Bronnen
+<a id="bronnen"></a>
 
-Alle webbronnen zijn geraadpleegd op 12 september 2026. Projectdocumentatie en GitHub-richtlijnen betreffen de op die datum geraadpleegde versie. De repositorybevindingen verwijzen naar de vastgelegde baselinecommit; operationele GitHub-waarnemingen zijn gedateerde momentopnamen. Publicatiejaren hieronder behoren bij de oorspronkelijke studies.
+## Sources
 
-[^1]: PyBaMM contributors. [Contributing to PyBaMM](https://github.com/pybamm-team/PyBaMM/blob/main/CONTRIBUTING.md). Officiële bijdragegids; tooling, documentatie, voorbeelden en citaties.
-[^2]: SciPy community. [Contribute to SciPy](https://scipy.org/contribute/). Officiële bijdrage-ingang.
-[^3]: SciPy community. [SciPy Project Governance](https://docs.scipy.org/doc/scipy/dev/governance.html). Rollen en besluitvorming.
-[^4]: scikit-learn developers. [Contributing](https://scikit-learn.org/stable/developers/contributing.html). Bijdragekwaliteit, rechten en geautomatiseerde bijdragen.
-[^5]: Mesa contributors. [Contributing to Mesa](https://github.com/mesa/mesa/blob/main/CONTRIBUTING.md). Probleemafstemming, ontwerp, voorbeelden en tests.
-[^6]: PhysiCell contributors. [PhysiCell README](https://github.com/MathCancer/PhysiCell/blob/master/README.md). Voorbeeldprojecten en wetenschappelijke verwijzingen; automatische linkcheck gaf eenmaal HTTP 429.
-[^7]: BioSimulators Team. [BioSimulators test suite](https://docs.biosimulators.org/Biosimulators_test_suite/). Simulatorconventies en voorbeeldarchieven.
-[^8]: SciPy community. [AI Policy](https://docs.scipy.org/doc/scipy/dev/conduct/ai_policy.html). Projectspecifiek beleid, geen algemene norm voor OpenT1D.
-[^9]: OpenSSF Scorecard contributors. [Scorecard Checks](https://github.com/ossf/scorecard/blob/main/docs/checks.md). Onder meer Code-Review, Branch-Protection, CI-Tests en Vulnerabilities; geen Scorecard-run of totaalscore voor deze review.
-[^10]: GitHub. [Creating a default community health file](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file). Ondersteunde communitybestanden.
-[^11]: GitHub. [Syntax for GitHub's form schema](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-githubs-form-schema). Elementtypes, validatie en publieke-repositorybeperking van required-velden.
-[^12]: GitHub. [Secure use reference](https://docs.github.com/en/actions/reference/security/secure-use). Tokenrechten, pinning en omgang met onbetrouwbare invoer.
-[^13]: GitHub. [About code owners](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners). Vereiste toegang en afzonderlijke branchregels.
-[^14]: OpenSSF. [Best Practices Badge: passing criteria](https://www.bestpractices.dev/en/criteria/0). Vrijwillige programmavoorwaarden.
-[^15]: Netherlands eScience Center en DANS. [FAIR software recommendations](https://fair-software.eu/). Vijf aanbevelingen voor onderzoekssoftware.
-[^16]: SPDX Project. [Handling license information](https://spdx.dev/learn/handling-license-info/). Licentie-identifiers en bestandsgewijze informatie.
-[^17]: Free Software Foundation Europe. [REUSE Specification 3.3](https://reuse.software/spec-3.3/). Voorwaarden voor de vrijwillige REUSE-aanpak.
-[^18]: Apache Software Foundation. [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html). Januari 2004; officiële licentietekst.
-[^19]: Citation File Format contributors. [Citation File Format](https://citation-file-format.github.io/). Metadataformaat en integraties.
-[^20]: Daniele Procida. [Diátaxis](https://diataxis.fr/). Documentatiemethode.
-[^21]: W3C. [Understanding WCAG 2.2 SC 3.1.1: Language of Page](https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html). Taalbepaling en hulpmiddelen; de pagina verwijst naar het formele criterium.
-[^22]: W3C. [Understanding WCAG 2.2 SC 3.1.2: Language of Parts](https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html). Taalwisseling binnen inhoud.
-[^23]: Astral. [Configuring projects](https://docs.astral.sh/uv/concepts/projects/config/). Projectconfiguratie en onderscheid met packaging.
-[^24]: Sphinx developers. [sphinx-build](https://www.sphinx-doc.org/en/master/man/sphinx-build.html). Buildgedrag en waarschuwingen.
-[^25]: GitHub. [Configuring private vulnerability reporting for a repository](https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/configure-vulnerability-reporting/configure-for-a-repository). Afzonderlijke activering van de meldvoorziening.
-[^26]: GitHub. [Dependabot alerts](https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-alerts). Detectie, activatie, meldingen en beperkingen.
-[^27]: GitHub. [Dependabot version updates](https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-version-updates). Onderscheid tussen versie-updates en securityfunctionaliteit.
-[^28]: Python Packaging Authority. [pip-audit](https://github.com/pypa/pip-audit). Bekende kwetsbaarheden via advisorydiensten; in deze review versie 2.10.1, zonder automatische fixes.
-[^29]: rhysd en contributors. [actionlint](https://github.com/rhysd/actionlint). Statische validatie van GitHub Actions; lokaal versie 1.7.12.
-[^30]: Jinyu Xie en contributors. [simglucose](https://github.com/jxx123/simglucose). Oorspronkelijke repository en documentatie.
-[^31]: GluCoEnv developers. [GluCoEnv](https://github.com/RL4H/GluCoEnv). Repository; fysiologische herkomst en uitvoering.
-[^32]: LoopInsighT1 contributors. [Cambridge.ts](https://github.com/hpeuscher/loopinsight1/blob/master/src/core/models/Cambridge.ts). Modelimplementatie met oorspronkelijke referenties.
-[^33]: Peuscher et al. [A Modular Open-Source Framework for In-Browser Diabetes Simulation](https://backend.orbit.dtu.dk/ws/files/383717203/1-s2.0-S2405896324021827-main.pdf). IFAC-PapersOnLine, 2024; vooral §2.2.
-[^34]: Zhou et al. [Design and Validation of an Open-Source Closed-Loop Testbed for Artificial Pancreas Systems](https://arxiv.org/abs/2208.06479). CHASE, 2022; auteursversie.
-[^35]: Cappon et al. [ReplayBG: A Digital Twin-Based Methodology](https://pubmed.ncbi.nlm.nih.gov/37368794/). IEEE Transactions on Biomedical Engineering, 2023; oorspronkelijke abstract.
-[^36]: Wolff et al. [MetaboNet: The Largest Publicly Available Consolidated Dataset for Type 1 Diabetes Management](https://arxiv.org/html/2601.11505v1). 2026; tabel 1 en §2.2 van de auteursversie.
-[^37]: Jeffries et al. [MetaboNet-Bench](https://arxiv.org/html/2606.18640v1). Preprint, juni 2026; appendix over datavoorwaarden.
-[^38]: U.S. Food and Drug Administration. [Assessing the Credibility of Computational Modeling and Simulation in Medical Device Submissions](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/assessing-credibility-computational-modeling-and-simulation-medical-device-submissions). Definitieve guidance, november 2023.
+All web sources were accessed on 12 September 2026. Project documentation and GitHub guidelines refer to the version accessed on that date. Repository findings refer to the recorded baseline commit; operational GitHub observations are dated snapshots. Publication years below belong to the original studies.
+
+[^1]: PyBaMM contributors. [Contributing to PyBaMM](https://github.com/pybamm-team/PyBaMM/blob/main/CONTRIBUTING.md). Official contribution guide; tooling, documentation, examples and citations.
+[^2]: SciPy community. [Contribute to SciPy](https://scipy.org/contribute/). Official contribution entry point.
+[^3]: SciPy community. [SciPy Project Governance](https://docs.scipy.org/doc/scipy/dev/governance.html). Roles and decision-making.
+[^4]: scikit-learn developers. [Contributing](https://scikit-learn.org/stable/developers/contributing.html). Contribution quality, rights and automated contributions.
+[^5]: Mesa contributors. [Contributing to Mesa](https://github.com/mesa/mesa/blob/main/CONTRIBUTING.md). Problem discussion, design, examples and tests.
+[^6]: PhysiCell contributors. [PhysiCell README](https://github.com/MathCancer/PhysiCell/blob/master/README.md). Example projects and scientific references; automated linkcheck returned HTTP 429 once.
+[^7]: BioSimulators Team. [BioSimulators test suite](https://docs.biosimulators.org/Biosimulators_test_suite/). Simulator conventions and example archives.
+[^8]: SciPy community. [AI Policy](https://docs.scipy.org/doc/scipy/dev/conduct/ai_policy.html). Project-specific policy, not a general standard for OpenT1D.
+[^9]: OpenSSF Scorecard contributors. [Scorecard Checks](https://github.com/ossf/scorecard/blob/main/docs/checks.md). Includes Code-Review, Branch-Protection, CI-Tests and Vulnerabilities; no Scorecard run or overall score for this review.
+[^10]: GitHub. [Creating a default community health file](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file). Supported community files.
+[^11]: GitHub. [Syntax for GitHub's form schema](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-githubs-form-schema). Element types, validation and public-repository restriction for required fields.
+[^12]: GitHub. [Secure use reference](https://docs.github.com/en/actions/reference/security/secure-use). Token permissions, pinning and handling untrusted input.
+[^13]: GitHub. [About code owners](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners). Required access and separate branch rules.
+[^14]: OpenSSF. [Best Practices Badge: passing criteria](https://www.bestpractices.dev/en/criteria/0). Voluntary programme conditions.
+[^15]: Netherlands eScience Center and DANS. [FAIR software recommendations](https://fair-software.eu/). Five recommendations for research software.
+[^16]: SPDX Project. [Handling license information](https://spdx.dev/learn/handling-license-info/). Licence identifiers and per-file information.
+[^17]: Free Software Foundation Europe. [REUSE Specification 3.3](https://reuse.software/spec-3.3/). Conditions for the voluntary REUSE approach.
+[^18]: Apache Software Foundation. [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html). January 2004; official licence text.
+[^19]: Citation File Format contributors. [Citation File Format](https://citation-file-format.github.io/). Metadata format and integrations.
+[^20]: Daniele Procida. [Diátaxis](https://diataxis.fr/). Documentation method.
+[^21]: W3C. [Understanding WCAG 2.2 SC 3.1.1: Language of Page](https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html). Language determination and assistive tools; the page refers to the formal criterion.
+[^22]: W3C. [Understanding WCAG 2.2 SC 3.1.2: Language of Parts](https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html). Language changes within content.
+[^23]: Astral. [Configuring projects](https://docs.astral.sh/uv/concepts/projects/config/). Project configuration and distinction from packaging.
+[^24]: Sphinx developers. [sphinx-build](https://www.sphinx-doc.org/en/master/man/sphinx-build.html). Build behaviour and warnings.
+[^25]: GitHub. [Configuring private vulnerability reporting for a repository](https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/configure-vulnerability-reporting/configure-for-a-repository). Separate activation of the reporting feature.
+[^26]: GitHub. [Dependabot alerts](https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-alerts). Detection, activation, notifications and limitations.
+[^27]: GitHub. [Dependabot version updates](https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-version-updates). Distinction between version updates and security functionality.
+[^28]: Python Packaging Authority. [pip-audit](https://github.com/pypa/pip-audit). Known vulnerabilities through advisory services; version 2.10.1 in this review, without automatic fixes.
+[^29]: rhysd and contributors. [actionlint](https://github.com/rhysd/actionlint). Static validation of GitHub Actions; local version 1.7.12.
+[^30]: Jinyu Xie and contributors. [simglucose](https://github.com/jxx123/simglucose). Original repository and documentation.
+[^31]: GluCoEnv developers. [GluCoEnv](https://github.com/RL4H/GluCoEnv). Repository; physiological origins and execution.
+[^32]: LoopInsighT1 contributors. [Cambridge.ts](https://github.com/hpeuscher/loopinsight1/blob/master/src/core/models/Cambridge.ts). Model implementation with original references.
+[^33]: Peuscher et al. [A Modular Open-Source Framework for In-Browser Diabetes Simulation](https://backend.orbit.dtu.dk/ws/files/383717203/1-s2.0-S2405896324021827-main.pdf). IFAC-PapersOnLine, 2024; especially §2.2.
+[^34]: Zhou et al. [Design and Validation of an Open-Source Closed-Loop Testbed for Artificial Pancreas Systems](https://arxiv.org/abs/2208.06479). CHASE, 2022; author version.
+[^35]: Cappon et al. [ReplayBG: A Digital Twin-Based Methodology](https://pubmed.ncbi.nlm.nih.gov/37368794/). IEEE Transactions on Biomedical Engineering, 2023; original abstract.
+[^36]: Wolff et al. [MetaboNet: The Largest Publicly Available Consolidated Dataset for Type 1 Diabetes Management](https://arxiv.org/html/2601.11505v1). 2026; table 1 and §2.2 of the author version.
+[^37]: Jeffries et al. [MetaboNet-Bench](https://arxiv.org/html/2606.18640v1). Preprint, June 2026; appendix on data terms.
+[^38]: U.S. Food and Drug Administration. [Assessing the Credibility of Computational Modeling and Simulation in Medical Device Submissions](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/assessing-credibility-computational-modeling-and-simulation-medical-device-submissions). Final guidance, November 2023.
 [^39]: Villaverde et al. [A protocol for dynamic model calibration](https://pmc.ncbi.nlm.nih.gov/articles/PMC8769694/). Briefings in Bioinformatics, 2022; online 2021.
-[^40]: Breda et al. [Oral glucose tolerance test minimal model indexes of beta-cell function and insulin sensitivity](https://pubmed.ncbi.nlm.nih.gov/11147781/). Diabetes, 2001; oorspronkelijke methodestudie.
-[^41]: Shoda et al. [The Type 1 Diabetes PhysioLab Platform](https://pubmed.ncbi.nlm.nih.gov/20491795/). Clinical & Experimental Immunology, 2010; NOD-muismodel.
-[^42]: Herold et al. [An Anti-CD3 Antibody, Teplizumab, in Relatives at Risk for Type 1 Diabetes](https://pubmed.ncbi.nlm.nih.gov/31180194/). NEJM, 2019. Populatie en eindpunt gecontroleerd; een toekomstige reproductie moet ook de gecorrigeerde publicatie en supplementen gebruiken.
+[^40]: Breda et al. [Oral glucose tolerance test minimal model indexes of beta-cell function and insulin sensitivity](https://pubmed.ncbi.nlm.nih.gov/11147781/). Diabetes, 2001; original methodology study.
+[^41]: Shoda et al. [The Type 1 Diabetes PhysioLab Platform](https://pubmed.ncbi.nlm.nih.gov/20491795/). Clinical & Experimental Immunology, 2010; NOD mouse model.
+[^42]: Herold et al. [An Anti-CD3 Antibody, Teplizumab, in Relatives at Risk for Type 1 Diabetes](https://pubmed.ncbi.nlm.nih.gov/31180194/). NEJM, 2019. Population and endpoint checked; a future reproduction must also use the corrected publication and supplements.
 [^43]: Ramos et al. [Teplizumab and β-Cell Function in Newly Diagnosed Type 1 Diabetes](https://pubmed.ncbi.nlm.nih.gov/37861217/). NEJM, 2023; PROTECT.
-[^44]: Reichman et al. [Stem Cell-Derived, Fully Differentiated Islets for Type 1 Diabetes](https://pubmed.ncbi.nlm.nih.gov/40544428/). NEJM, 2025; oorspronkelijke abstract en geïndexeerde passages.
+[^44]: Reichman et al. [Stem Cell-Derived, Fully Differentiated Islets for Type 1 Diabetes](https://pubmed.ncbi.nlm.nih.gov/40544428/). NEJM, 2025; original abstract and indexed passages.
 [^45]: Visentin et al. [The UVA/Padova Type 1 Diabetes Simulator Goes From Single Meal to Single Day](https://pubmed.ncbi.nlm.nih.gov/29451021/). Journal of Diabetes Science and Technology, 2018.

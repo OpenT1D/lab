@@ -73,7 +73,6 @@ class DocumentationTests(unittest.TestCase):
         self.write("docs/index.md", "# Documentation\n\nPublic documentation.\n")
         self.write("docs/_toc.yml", "root: docs/index\n")
         shutil.copy2(REPOSITORY / "docs" / "conf.py", self.root / "docs" / "conf.py")
-        shutil.copytree(REPOSITORY / "docs" / "_templates", self.root / "docs" / "_templates")
 
     def write(self, name: str, text: str) -> None:
         path = self.root / name
@@ -129,7 +128,7 @@ class DocumentationTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("missing.md", result.stderr)
 
-    def test_rendered_languages_distinguish_reports_and_english_ui(self) -> None:
+    def test_rendered_reports_guides_and_ui_use_english(self) -> None:
         self.write(
             "docs/_toc.yml",
             "root: docs/index\nentries:\n  - file: docs/onderzoek/report\n"
@@ -138,21 +137,21 @@ class DocumentationTests(unittest.TestCase):
         )
         self.write(
             "docs/onderzoek/report.md",
-            "# Nederlands rapport\n\nNederlandse inhoud.\n\n## Onderzoeksresultaten\n\n"
-            "Meer Nederlandse inhoud.\n",
+            "# Research report\n\nResearch content.\n\n## Research findings\n\n"
+            "More research content.\n",
         )
         self.write(
             "docs/research/internal-verification-results.md",
-            "# Historisch verificatierapport\n\nNederlandse inhoud.\n\n"
-            "## Onderzoeksresultaten\n\nHistorische bevindingen.\n",
+            "# Historical verification report\n\nResearch content.\n\n"
+            "## Research findings\n\nHistorical findings.\n",
         )
         self.write("docs/research/english-guide.md", "# English guide\n\nResearch guidance.\n")
         result = self.build()
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         output = self.root / "_build" / "html"
-        dutch = {"docs/onderzoek/report", "docs/research/internal-verification-results"}
+        reports = {"docs/onderzoek/report", "docs/research/internal-verification-results"}
         for page in (
-            *sorted(dutch),
+            *sorted(reports),
             "docs/research/english-guide",
             "docs/index",
             "search",
@@ -161,21 +160,19 @@ class DocumentationTests(unittest.TestCase):
             with self.subTest(page=page):
                 parsed = EffectiveLanguages()
                 parsed.feed((output / f"{page}.html").read_text(encoding="utf-8"))
-                expected = "nl" if page in dutch else "en"
-                self.assertEqual(parsed.root_language, expected)
+                self.assertEqual(parsed.root_language, "en")
+                self.assertTrue(all(lang == "en" for _, lang in parsed.text), parsed.text)
                 self.assertIn(("Skip to content", "en"), parsed.text)
-                self.assertIn(("Nederlands rapport", "nl"), parsed.text)
-                self.assertNotIn(("Nederlands rapport", "en"), parsed.text)
+                self.assertIn(("Research report", "en"), parsed.text)
                 self.assertIn(("Toggle site navigation sidebar", "en"), parsed.labels)
                 self.assertTrue(parsed.labels)
                 self.assertTrue(all(lang == "en" for _, lang in parsed.labels), parsed.labels)
-                if expected == "nl":
+                if page in reports:
                     # Furo styles permalink visibility using direct children of
                     # headings; language annotations must not insert a wrapper.
                     self.assertEqual(parsed.permalink_parents, ["h1", "h2"])
-                    self.assertIn(("Nederlandse inhoud.", "nl"), parsed.text)
-                    self.assertIn(("Onderzoeksresultaten", "nl"), parsed.text)
-                    self.assertNotIn(("Onderzoeksresultaten", "en"), parsed.text)
+                    self.assertIn(("Research content.", "en"), parsed.text)
+                    self.assertIn(("Research findings", "en"), parsed.text)
                     self.assertIn(("On this page", "en"), parsed.text)
                     self.assertIn(("Previous", "en"), parsed.text)
                 elif page == "docs/index":

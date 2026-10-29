@@ -23,8 +23,8 @@ known defect into extra scope without a selected fix.
 Match the evidence to the changed boundary:
 
 - Documentation and guidance: check local links, supported commands, navigation
-  for new public guides and claims against the canonical source. Preserve the
-  Dutch research reports.
+  for new public guides and claims against the canonical source. Preserve historical research findings, source references and link
+  targets; public guides and research reports use English.
 - Contracts, storage and reports: check supported success, rejection and
   incomplete/failure behavior, input/source identity, byte consumption and
   reconstruction/reader compatibility where affected.

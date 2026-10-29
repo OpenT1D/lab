@@ -107,7 +107,7 @@ research, not prerequisites for using the tools.
 - [Documentation](https://opent1d.github.io/lab/): choose a task, run it and interpret its limits.
 - [Roadmap](ROADMAP.md): completed work, next packages and open evidence.
 - [Development](docs/development.md): locked tooling, checks and documentation preview.
-- [Research reports](docs/onderzoek/projectopzet.md): the Dutch research basis.
+- [Research reports](docs/onderzoek/projectopzet.md): the research basis, translated into English.
 - [Maintainer guide](docs/maintenance.md): publication checklist and first-release criteria.
 - [Publication preparation](docs/research/publication-preparation.md): dated audit findings and unresolved actions.
 
