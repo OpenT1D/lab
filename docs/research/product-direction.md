@@ -4,6 +4,8 @@
 
 Translated from Dutch on 29 October 2026. Historical findings and source
 references below retain their original scope; this is not a new research review.
+Editorial wording was clarified on 29 October 2026 to describe contributions
+and comparison scopes without ranking projects.
 
 **Research date: 25 October 2026.** This report supports OpenT1D's product
 direction. The [product document](../product-laboratory.md) is the canonical
@@ -76,21 +78,22 @@ separate open requirements.
 | --- | --- | --- |
 | [simglucose](https://github.com/jxx123/simglucose) | Physiological simulator, virtual profiles, controllers, scenarios, batch execution and Gymnasium | Reuse a native engine; do not build another copy of the same simulation |
 | [LoopInsighT1](https://lt1.org/method/) | Multiple models and components, controllers, sensors and interactive experiments | Both a native host and a component source; more than a visualization tool |
-| [APS_TestBed](https://github.com/UVA-DSA/APS_TestBed) | Multiple simulators, controllers and fault injection | Two engines and failure scenarios alone are not a new contribution |
+| [APS_TestBed](https://github.com/UVA-DSA/APS_TestBed) | Multiple simulators, controllers and fault injection | Reuse existing multi-engine and fault-injection capabilities where suitable |
 | [RL4T1D](https://github.com/RL4H/RL4T1D) and [GluCoEnv](https://github.com/RL4H/GluCoEnv) | RL environments, algorithms and training experiments | Connect training and inference; do not rebuild a general RL framework |
 | [GluPredKit](https://github.com/replicahealth/GluPredKit) | Data processing, model training, prediction, evaluation and reports | Integrate an existing prediction pipeline rather than maintaining a parallel model catalogue |
 | [ReplayBG](https://gcappon.github.io/py_replay_bg/documentation/twinning_procedure.html) | Personal parameter estimation through MAP/MCMC and [replay](https://gcappon.github.io/py_replay_bg/documentation/replaying.html) with changed inputs | Connect observations, fitting and scenario execution without reimplementing the estimation method |
 | [BioSimulators](https://docs.biosimulators.org/Biosimulators_test_suite/) | Capabilities, standards and simulator conformance tests | Reuse general conventions and validators; focus custom work on T1D semantics |
 
-The prediction space is now particularly crowded.
+Several existing projects support prediction research.
 [GlucoBench](https://arxiv.org/abs/2410.05780) provides datasets, tasks and
 reference models. The
 [June 2026 MetaboNet-Bench preprint](https://arxiv.org/abs/2606.18640) addresses
 multimodal forecasting, multiple data sources and subgroups. The
 [May 2026 From Prediction to Practice preprint](https://arxiv.org/abs/2605.00645)
 combines task-oriented prediction evaluation with simulator interventions.
-More models, more datasets or an intervention benchmark are therefore not a
-sufficiently distinctive product promise.
+These capabilities provide starting points for reuse and task-specific
+comparison. Assess whether connecting or extending them helps the intended
+research workflow, and retain their source attribution.
 
 Biological analysis also has existing solutions.
 [ISEC](https://pubmed.ncbi.nlm.nih.gov/8894385/) and the open R package
@@ -100,8 +103,8 @@ Windows batch analysis of meal and glucose tolerance tests. The
 [AOMM publication](https://journals.sagepub.com/doi/10.1177/19322968251365274)
 describes validation against manually extracted reference results from an
 earlier study. A comparison with OpenT1D still requires matching endpoints,
-accessible software and appropriate usage rights. A modern deconvolution
-function or GUI is not scientific innovation on its own.
+accessible software and appropriate usage rights. Assess estimator behavior,
+scientific interpretation and interface usability separately.
 
 <a id="waar-een-geïntegreerd-laboratorium-waarde-kan-leveren"></a>
 

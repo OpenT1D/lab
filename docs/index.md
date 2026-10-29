@@ -51,8 +51,10 @@ simulation release or established clinical benefit.
 For Windows users, the [OT-058 installation candidate](windows-installation.md)
 bundles all current GUI routes and their runtimes in one offline installer.
 No GitHub checkout, WSL or separate Python setup is required by that flow.
-Actual Windows installation and independent user acceptance remain open; this
-is not a public release. The commands below describe the developer checkout.
+The exact private J candidate has bounded clean-install and workflow checks. A
+new installer built from the integrated source needs its own qualification;
+public distribution and independent user acceptance remain open. The commands
+below describe the developer checkout.
 
 For Apple Silicon, the [unsigned internal MMTT candidate](mac-mmtt-candidate.md)
 bundles its own interpreter for the two synthetic tasks. Its source and binary

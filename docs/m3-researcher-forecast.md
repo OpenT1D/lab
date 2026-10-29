@@ -206,6 +206,11 @@ without the original input paths or predictor execution. Its use of
 Use the recorded implementation checkout: source, lock and protocol hashes
 must match the saved provenance.
 
+The verification receipt's historical `independent_reconstruction` field means
+that the saved-analysis implementation was run in a fresh process. It does not
+mean a second implementation or an external researcher reproduced the result.
+The receipt field and historical archive identities retain their original names.
+
 For an arbitrary supplied predictor, this reconstruction checks the recorded
 candidate outputs and their analysis; it cannot independently derive those
 outputs from the model without executing its source. The existing portable

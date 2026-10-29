@@ -24,7 +24,7 @@ uv run --locked python scripts/check.py
 
 ### Verification record — 20 September 2026
 
-The complete synthetic verification passed locally: a native donor fit was exported unchanged, used for two separately invented external people, and reconstructed byte-for-byte with `python -S` after deleting the verification's original inputs, donor fit, plans and live ledgers. Its `verification.json` records no external refit, unchanged model/scaler bytes and no human evaluation. Generated evidence remains local and is not committed.
+The complete synthetic verification passed locally: a native donor fit was exported unchanged, used for two separately invented external people, and reconstructed byte-for-byte with `python -S` after deleting the verification's original inputs, donor fit, plans and live ledgers. Its `verification.json` records no external refit, unchanged model/scaler bytes and no human evaluation. The historical `independent_reconstruction` field means fresh-process reconstruction using the same saved-analysis implementation; it does not establish an independent implementation or external researcher reproduction. Generated evidence remains local and is not committed.
 
 The 37 external unit checks cover causal and exact-time behavior, hand-calculated metrics, portable model integrity, metadata-only freezing, access ordering and repeat disclosure, human-input refusal, full-cohort failure accounting, deadline/interruption preservation, semantic tampering and reconstruction. The existing four M3 and five AZT1D native tests also passed. Repository checks, including the documentation build, passed. The new CI step repeats the synthetic transfer verification; a remote CI execution is not claimed here.
 

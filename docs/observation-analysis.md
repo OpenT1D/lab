@@ -11,7 +11,10 @@ route. The [internal verification record](research/ot054-verification.md)
 separates this bounded software evidence from the open empirical and user gates.
 The later [OT-057 interface verification](research/ot057-uiux-verification.md)
 records saved-plan editing, field recovery and report navigation on integrated
-main; Windows and independent human usability remain open.
+main. The later [public host smokes](publication-security.md)
+and [private Windows candidate checks](windows-installation.md) retain their
+separate source and artifact scopes. Independent human usability and full
+Windows GUI/distribution acceptance remain open.
 
 The [beginner test packet](gui-test-session.md) supplies a separate Dutch task
 card and offline feedback form for this route, with moderator expectations kept
