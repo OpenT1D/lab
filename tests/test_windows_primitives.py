@@ -793,7 +793,8 @@ class WindowsOwnershipTests(unittest.TestCase):
                             ):
                                 actual = candidate["pid"]
                                 break
-                    except (FileNotFoundError, json.JSONDecodeError):
+                    except (FileNotFoundError, PermissionError, json.JSONDecodeError):
+                        # Publication may still hold its Windows DELETE handle.
                         pass
                     time.sleep(0.01)
                 self.assertIsNotNone(actual, "Actual worker did not publish bounded readiness")
