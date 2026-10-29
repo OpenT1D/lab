@@ -223,11 +223,21 @@ storage. That object contains a fixed module/schema, public source filenames
 and SHA-256 hashes, a compatibility label and an archived-execution prohibition;
 it contains no credential or private observation bytes.
 
-The upstream [sensitive-data heuristic](https://github.com/github/codeql/blob/main/shared/concepts/codeql/concepts/internal/SensitiveDataHeuristics.qll)
+The upstream [sensitive-data heuristic](https://github.com/github/codeql/blob/a1575b98a8cc19bcfa7bb6cb41be688cb3dae65c/shared/concepts/codeql/concepts/internal/SensitiveDataHeuristics.qll)
 classifies names containing `trusted` as potentially secret; its
-[Python assignment model](https://github.com/github/codeql/blob/main/python/ql/lib/semmle/python/dataflow/new/SensitiveDataSources.qll)
+[Python assignment model](https://github.com/github/codeql/blob/a1575b98a8cc19bcfa7bb6cb41be688cb3dae65c/python/ql/lib/semmle/python/dataflow/new/SensitiveDataSources.qll)
 marks the assignment's right-hand side as the source. Rename that local to
 `reader_metadata` to describe its actual content. Persisted descriptor fields
 and bytes stay unchanged. No query, result suppression, native source, baseline,
 tolerance or alert dismissal is introduced. The exact SARIF and subsequent
 local/hosted receipts are retained in local ignored `results/ot061-064/`.
+
+The new hosted CodeQL run on `f5bfe29` passed. Its Windows smoke exposed a
+separate existing readiness-fixture race: `ready.json` can already be published
+while the atomic writer still holds its DELETE-access verification handle.
+An ordinary read can briefly raise `PermissionError`. The fixture now retries
+that read within its unchanged five-second deadline. The complete JSON,
+interpreter, PID, actual Job-membership and no-work-before-START gates remain
+unchanged; persistent denial still fails. A separate read-only reviewer checked
+the publication and fixture paths. Actual changed-head Windows results are
+required; a macOS source review is not Windows execution evidence.
