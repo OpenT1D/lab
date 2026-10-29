@@ -86,14 +86,16 @@ export async function auditDocument(page, url, request, { renderTimeout = 10_000
       const selector = 'img[src], source[src], script[src], link[rel~="stylesheet"], link[rel~="icon"], link[rel~="preload"], a[download]';
       const collect = (document, base) => Array.from(document.querySelectorAll(selector), element => {
         const source = element.getAttribute('src') || element.getAttribute('href');
-        return source ? new URL(source, base).href : null;
+        return source?.trim() ? new URL(source, base).href : null;
       });
       const missingIcons = [];
       const assets = [
         ...collect(document, document.baseURI),
-        ...sources.filter(source => source.html).flatMap(source => {
+        ...sources.filter(source => typeof source.html === 'string').flatMap(source => {
           const parsed = new DOMParser().parseFromString(source.html, 'text/html');
-          if (!parsed.querySelector('link[rel~="icon"][href]')) missingIcons.push(source.url);
+          if (!Array.from(parsed.querySelectorAll('link[rel~="icon"]')).some(
+            icon => icon.getAttribute('href')?.trim(),
+          )) missingIcons.push(source.url);
           const base = new URL(parsed.querySelector('base[href]')?.getAttribute('href') || source.url, source.url).href;
           return collect(parsed, base);
         }),

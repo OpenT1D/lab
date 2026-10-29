@@ -47,3 +47,11 @@ test('audit rejects an absent favicon declaration before meta refresh', async ({
   await expect(auditDocument(page, url, request)).rejects.toThrow(/Missing favicon link: .*__audit-no-icon.html/);
   expect(page.url()).toBe(new URL('docs/index.html', baseURL).href);
 });
+
+for (const [name, href] of [['empty', ''], ['whitespace', '   ']]) {
+  test(`audit rejects an ${name} favicon href before meta refresh`, async ({ page, request, baseURL }) => {
+    const url = new URL('__audit-empty-icon.html', baseURL).href;
+    await page.route(url, route => route.fulfill({ contentType: 'text/html', body: `<!doctype html><link rel="icon" href="${href}"><meta http-equiv="refresh" content="0; url=docs/index.html">` }));
+    await expect(auditDocument(page, url, request)).rejects.toThrow(/Missing favicon link: .*__audit-empty-icon.html/);
+  });
+}
