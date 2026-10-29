@@ -1,0 +1,63 @@
+{
+  "cases": {
+    "m4-failed-launch-relocated": {
+      "denominators": {
+        "accepted_pairs": 0,
+        "accepted_source_scenarios": 0,
+        "accepted_sources": 0,
+        "pairs": 1,
+        "source_scenarios": 2,
+        "sources": 2
+      },
+      "execution_status": "failed",
+      "passed": false,
+      "relocated_report_bytes_equal": true,
+      "report_schema": "m4-secure-study-report/1",
+      "source_statuses": {
+        "dalla_man": "not_attempted",
+        "ultradian": "not_attempted"
+      }
+    },
+    "mmtt-censored": {
+      "coverage": {
+        "complete_cohort": false,
+        "complete_people": 0,
+        "completed_variant_pairs": 0,
+        "planned_people": 1,
+        "planned_variant_pairs": 3,
+        "planned_visits": 2
+      },
+      "execution_status": "completed",
+      "relocated_report_bytes_equal": true,
+      "report_schema": "opent1d.observation-analysis/1"
+    },
+    "mmtt-interrupted-relocated": {
+      "coverage": {
+        "complete_cohort": false,
+        "complete_people": 0,
+        "completed_variant_pairs": 0,
+        "planned_people": 1,
+        "planned_variant_pairs": 3,
+        "planned_visits": 2
+      },
+      "execution_status": "interrupted",
+      "relocated_report_bytes_equal": true,
+      "report_schema": "opent1d.observation-analysis/1"
+    },
+    "mmtt-positive-relocated": {
+      "coverage": {
+        "complete_cohort": true,
+        "complete_people": 1,
+        "completed_variant_pairs": 3,
+        "planned_people": 1,
+        "planned_variant_pairs": 3,
+        "planned_visits": 2
+      },
+      "execution_status": "completed",
+      "relocated_report_bytes_equal": true,
+      "report_schema": "opent1d.observation-analysis/1"
+    }
+  },
+  "schema": "opent1d.contract-reference-outcomes/1",
+  "scope": "Observed structural projections of synthetic controls; no native M4 success or numerical baseline. Reconstructed original report bytes before retaining projections."
+}

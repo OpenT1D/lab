@@ -6,6 +6,10 @@ supply a patient dataset. Start with the task you want to perform below;
 the [local entry](local-workflow-entry.md) discovers and checks supported routes.
 Each linked guide owns its model contract and scientific interpretation.
 
+For shared-service development, the [OT-059 contract packet](shared-core-contracts.md)
+inventories all ten routes and their source/runtime/reader boundaries. It freezes
+two-route fixtures before migration; the shared SDK and services remain planned.
+
 The independent public snapshot has a
 [bounded installation and CI policy](publication-security.md). Historical native
 locks retain advisories and are excluded from automatic public setup. The route

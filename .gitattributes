@@ -2,3 +2,5 @@
 *.png binary
 *.jpg binary
 *.pdf binary
+# OT-059 freezes the original csv.writer bytes, including CRLF framing.
+experiments/shared_contracts/fixtures/*.csv -text whitespace=cr-at-eol

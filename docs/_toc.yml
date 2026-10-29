@@ -73,6 +73,8 @@ subtrees:
       - file: docs/research/ot054-verification
       - file: docs/research/ot057-uiux-verification
       - file: docs/research/ot058-installer-verification
+      - file: docs/shared-core-contracts
+      - file: docs/research/ot059-contract-extraction
       - file: docs/m4-synthetic-basal-equivalence
       - file: docs/m4-ultradian-basal-equivalence
       - file: docs/research/m4-chain-protocol
@@ -302,6 +304,7 @@ subtrees:
       - file: docs/decisions/0077-reviewed-main-documentation-publication
       - file: docs/decisions/0078-dependency-review-completeness
       - file: docs/decisions/0079-windows-stdlib-worker-identity
+      - file: docs/decisions/0080-two-route-contract-packet
       - file: docs/decisions/0059-maintained-runtimes-and-local-gui
       - file: docs/templates/model-card
       - file: docs/templates/experiment-protocol

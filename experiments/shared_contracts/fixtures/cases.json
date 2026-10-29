@@ -1,0 +1,14 @@
+{
+  "schema": "opent1d.contract-reference-cases/1",
+  "cases": [
+    {"id": "m4-positive-fasting", "task": "m4-study-secure", "input": "m4-fasting.json", "expected": "passive-admission", "planned_source_scenarios": 2, "native_success": false},
+    {"id": "m4-derived-15g", "task": "m4-study-secure", "input": "m4-gastric-15g.json", "expected": "passive-admission", "planned_source_scenarios": 2, "native_success": false},
+    {"id": "m4-refused-load", "task": "m4-study-secure", "input": "m4-fasting.json", "mutation": {"scenarios": ["gastric_load_14g"]}, "expected": "refused-before-execution"},
+    {"id": "m4-failed-launch-relocated", "task": "m4-study-secure", "input": "m4-fasting.json", "injection": "FileNotFoundError at supervised reference spawn", "expected": "failed-sealed-report; full roster; relocated byte-identical reconstruction with allow_failed", "native_success": false},
+    {"id": "mmtt-positive-relocated", "task": "mmtt-sensitivity", "input": "mmtt-observations.csv", "expected": "completed; complete; relocated byte-identical reconstruction", "planned_variant_pairs": 3},
+    {"id": "mmtt-refused-units", "task": "mmtt-sensitivity", "input": "mmtt-package.json", "mutation": {"units.cpeptide": "pmol/L"}, "expected": "refused-before-execution"},
+    {"id": "mmtt-censored", "task": "mmtt-sensitivity", "input": "mmtt-censored.csv", "expected": "execution-completed; scientific-incomplete; all three required variants retained"},
+    {"id": "mmtt-interrupted-relocated", "task": "mmtt-sensitivity", "input": "mmtt-observations.csv", "injection": "KeyboardInterrupt at analysis boundary after admission", "expected": "interrupted-sealed-report; full roster; relocated byte-identical reconstruction with allow_failed"},
+    {"id": "control-family-crosscheck", "task": "p1-controller", "input": "experiments/p1_external/example", "expected": "sampled-stateful CGM/action contract; refuse clock skips and incompatible RHS family"}
+  ]
+}

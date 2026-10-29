@@ -200,7 +200,11 @@ not complete those packages or replace OT-058's Windows requirement.
 
 ## Common laboratory delivery plan
 
-**Planning decision, 25 October 2026 — all OT-059–074 deliverables below are planned.**
+**Planning decision, 25 October 2026; packet update, 29 October 2026 —**
+OT-059 increment 1 now has an internal
+[contract/extraction packet](docs/shared-core-contracts.md). OT-060–074 and the
+later shared-service increments remain planned; this packet does not migrate
+routes or supply new native numerical evidence.
 The shared-laboratory increment develops common services around the existing
 working routes. [Decision 0070](docs/decisions/0070-common-research-laboratory.md)
 records the direction; the [product requirements](docs/product-laboratory.md)
@@ -274,6 +278,15 @@ synthetic integration fixtures, not reserved scientific evaluation.
 | 2 — Minimal OT-061/064 services | Wrap the existing workers and readers with shared project storage, frozen identity and all-attempt accounting on one declared host. Start, interrupt and retain a controlled failed attempt; relocate and reconstruct complete and incomplete evidence. Preserve required source/reader snapshots explicitly. The current historical helper does not support MMTT; specify and verify that reader path rather than assume the helper covers it. |
 | 3 — Minimal OT-060 installed route | Outside a checkout, create a project, check/freeze/run both selected tasks, derive the changed plan and reopen authoritative reports through Python/CLI. Original plans and attempts remain intact; native outputs meet the existing task-specific criteria. Use the declared reader/app compatibility cases for the first upgrade test. This closes the first usable slice, not the whole future SDK or portability matrix. |
 | 4 — Early OT-065/072 feedback | Add the thin GUI path over those same plans and services. Prepare the formative exercise now and run it as soon as a technically verified candidate and an actual intended user are available. Use early observations of help, wrong interpretations and recovery to prioritize broader multi-engine work. An unavailable participant leaves user acceptance open and the usability risk recorded; internal integration and fixes can proceed. |
+
+Increment 1 is implemented as the [OT-059 packet](docs/shared-core-contracts.md):
+ten-route source/runtime/reader metadata, versioned shared descriptors, unchanged
+native payloads, two-source fasting/15 g M4 intake, complete/incomplete MMTT and
+controlled failed/relocated reader cases. The
+[verification record](docs/research/ot059-contract-extraction.md) separates local
+checks from missing native success and hosted evidence. Select minimal
+OT-061/064 services next; complete native M4 relocation, retained MMTT reader
+upgrades and host lifecycle acceptance remain subsequent gates.
 
 After each increment, record its verified scope and any contract change before
 selecting the next artifact. Full campaign caching, new scientific mechanisms,

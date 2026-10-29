@@ -1,0 +1,50 @@
+{
+  "schema": "opent1d.observations/1",
+  "data_kind": "synthetic",
+  "provenance": "Invented validation fixture; no participant observations",
+  "units": {
+    "time": "min",
+    "glucose": "mmol/L",
+    "cpeptide": "nmol/L"
+  },
+  "participants": [
+    {
+      "id": "invented-01",
+      "allocation": "development",
+      "context": {
+        "age_years": 30,
+        "sex": "unspecified",
+        "weight_kg": 70,
+        "height_cm": 170,
+        "renal_context": "invented; no renal inference",
+        "population": "invented; no T1D applicability claimed"
+      },
+      "visits": [
+        {
+          "id": "before",
+          "challenge_id": "meal-01",
+          "protocol": "invented 0–120 min",
+          "meal": "invented challenge",
+          "medication_context": "invented; none supplied",
+          "assay": {
+            "id": "invented-assay",
+            "cpeptide_lod_nmol_l": 0.01,
+            "cpeptide_loq_nmol_l": 0.02
+          }
+        },
+        {
+          "id": "after",
+          "challenge_id": "meal-01",
+          "protocol": "invented 0–120 min",
+          "meal": "invented challenge",
+          "medication_context": "invented; none supplied",
+          "assay": {
+            "id": "invented-assay",
+            "cpeptide_lod_nmol_l": 0.01,
+            "cpeptide_loq_nmol_l": 0.02
+          }
+        }
+      ]
+    }
+  ]
+}
