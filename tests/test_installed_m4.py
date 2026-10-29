@@ -9,11 +9,13 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 from experiments.m4.installed_study import common, context, profile, report, runtime
 from experiments.m4.installed_study.adapter import activate, freeze
 from experiments.m4.installed_study.process import Control, supervise, validate_receipt
+from experiments.shared_services.installed import Backend
 from experiments.shared_services.installed_m4 import FIXTURES
 from scripts.prepare_m4_runtimes import validate_policy
 
@@ -49,6 +51,14 @@ class InstalledM4(unittest.TestCase):
                     if "git" in item["source"]
                 },
                 "files": {"synthetic-inert-metadata.bin": {"sha256": "1" * 64, "bytes": 1}},
+            }
+        for name, key in (
+            ("simglucose/patient/t1dpatient.py", "patient_file_sha256"),
+            ("simglucose/params/vpatient_params.csv", "parameter_file_sha256"),
+        ):
+            roles["native"]["files"][name] = {
+                "sha256": p["conditions"]["upstream"][key],
+                "bytes": 1,
             }
         return {
             "schema": profile.SCHEMA,
@@ -149,6 +159,41 @@ class InstalledM4(unittest.TestCase):
         # the deliberately absent directories; it cannot become runtime-ready.
         with self.assertRaisesRegex(ValueError, "dependency directory missing"):
             profile.load(filename)
+
+    def test_attachment_patient_and_parameter_inventory_matches_preserved_identity(self):
+        attachment = self.attachment()
+        self.assertEqual(profile.evidence(attachment), attachment)
+        for name in (
+            "simglucose/patient/t1dpatient.py",
+            "simglucose/params/vpatient_params.csv",
+        ):
+            for remove in (False, True):
+                changed = copy.deepcopy(attachment)
+                if remove:
+                    del changed["roles"]["native"]["files"][name]
+                else:
+                    changed["roles"]["native"]["files"][name]["sha256"] = "0" * 64
+                with self.assertRaisesRegex(ValueError, "preserved upstream identity"):
+                    profile.evidence(changed)
+
+    def test_admission_binds_current_sdk_application(self):
+        artifact = {
+            "source": {"revision": "3" * 40, "dirty": False},
+            "build_label": "current-sdk",
+            "tasks": ["mmtt-sensitivity", "m4-study-secure", "m4-study-installed"],
+            "native_execution": "explicit-reviewed-attachment/1",
+        }
+        backend = Backend(self.root / "bootstrap.py", artifact, self.root / "attachment.json")
+        task = SimpleNamespace(id="m4-study-installed")
+        args = SimpleNamespace(config=FIXTURES / "m4-fasting.json")
+        data = {"application": backend.application}
+        with patch.object(profile, "load", return_value=(data, "4" * 64)):
+            self.assertTrue(backend.check(task, args)["runtimes_ready"])
+        data = copy.deepcopy(data)
+        data["application"]["build_label"] = "prior-sdk"
+        with patch.object(profile, "load", return_value=(data, "4" * 64)):
+            with self.assertRaisesRegex(ValueError, "different current SDK application"):
+                backend.check(task, args)
 
     def test_frozen_plan_ties_application_and_source_bytes_to_attachment(self):
         output, _ = self.frozen()

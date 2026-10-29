@@ -43,6 +43,10 @@ class Backend:
             identity = None
             if self.runtime_attachment is not None:
                 data, identity = profile.load(self.runtime_attachment)
+                store.require(
+                    data["application"] == self.application,
+                    "Runtime attachment belongs to a different current SDK application",
+                )
                 self.loaded_attachment = (data, identity)
             return {
                 "schema": "opent1d.installed-admission/2",

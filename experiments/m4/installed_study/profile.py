@@ -300,6 +300,15 @@ def evidence(record):
                 and 0 <= value["bytes"] <= 512 * 1024 * 1024,
                 "Invalid dependency file identity",
             )
+    native_files = record["roles"]["native"]["files"]
+    for name, key in (
+        ("simglucose/patient/t1dpatient.py", "patient_file_sha256"),
+        ("simglucose/params/vpatient_params.csv", "parameter_file_sha256"),
+    ):
+        require(
+            native_files.get(name, {}).get("sha256") == p["conditions"]["upstream"][key],
+            "Attached native patient/parameter bytes differ from preserved upstream identity",
+        )
     require(
         record["roles"]["native"]["site_packages"] != record["roles"]["observer"]["site_packages"],
         "Distinct dependency roles required",
