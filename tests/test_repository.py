@@ -73,6 +73,7 @@ class DocumentationTests(unittest.TestCase):
         self.write("docs/index.md", "# Documentation\n\nPublic documentation.\n")
         self.write("docs/_toc.yml", "root: docs/index\n")
         shutil.copy2(REPOSITORY / "docs" / "conf.py", self.root / "docs" / "conf.py")
+        shutil.copytree(REPOSITORY / "docs" / "_templates", self.root / "docs" / "_templates")
         icon = Path("experiments/gui/static/icon.svg")
         (self.root / icon).parent.mkdir(parents=True)
         shutil.copy2(REPOSITORY / icon, self.root / icon)
