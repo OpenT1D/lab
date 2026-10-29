@@ -158,7 +158,7 @@ tests; broader coverage needs its own selected scope and actual results.
 Use the implemented [reviewed-main publication workflow](docs/documentation-publication.md)
 for the canonical Sphinx output. PRs build/check the staged site; a separate
 deployment follows the same main run's complete public gate. Verify navigation,
-search and example downloads before advertising a homepage. Preserve the Dutch research reports and register
+search and example downloads before advertising a homepage. Preserve the historical findings of the research reports and register
 new public guides in `docs/_toc.yml`. External link checks remain separate from
 unrelated PR acceptance.
 
@@ -209,7 +209,7 @@ The shared-laboratory increment develops common services around the existing
 working routes. [Decision 0070](docs/decisions/0070-common-research-laboratory.md)
 records the direction; the [product requirements](docs/product-laboratory.md)
 own the research jobs, acceptance criteria and 48-capability traceability map.
-The [Dutch research report](docs/onderzoek/productrichting.md) owns the
+The [product-direction research report](docs/onderzoek/productrichting.md) owns the
 comparative evidence and its limits. This section is the canonical sequence for
 shared-laboratory extraction. The public-development queue above selects the
 immediate maintainer work. The dated

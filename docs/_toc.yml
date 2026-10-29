@@ -308,7 +308,7 @@ subtrees:
       - file: docs/decisions/0059-maintained-runtimes-and-local-gui
       - file: docs/templates/model-card
       - file: docs/templates/experiment-protocol
-  - caption: Research reports (Dutch)
+  - caption: Research reports
     entries:
       - file: docs/onderzoek/repositorybasis
       - file: docs/onderzoek/projectopzet

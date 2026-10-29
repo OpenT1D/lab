@@ -1,90 +1,113 @@
-# OpenT1D: onderzoeksbasis en projectopzet
+<a id="opent1d-onderzoeksbasis-en-projectopzet"></a>
 
-## 1. Advies
+# OpenT1D: research basis and project design
 
-**Ontwikkel OpenT1D als een open, modulair virtueel laboratorium voor T1D-onderzoek: gedeelde infrastructuur én bruikbare bouwblokken, met hergebruik van modellen van anderen. Begin met een volledig reproduceerbaar glucose-/insuline-experiment en bewijs vroeg dat verschillende modelfamilies kunnen worden aangesloten. Bouw van daaruit naar personalisatie, bètacelfunctie en afgebakende therapievragen.**
+Translated from Dutch on 29 October 2026. Historical findings and source
+references below retain their original scope; this is not a new research review.
 
-De eerste wetenschappelijke opbrengst moet een controleerbare uitspraak zijn: onder welke omstandigheden blijft een conclusie over een behandeling of regelalgoritme overeind als het fysiologische model, de virtuele populatie of de meetonzekerheid verandert? Dat past bij de langetermijnambitie en levert bruikbare infrastructuur op voordat een multiscale digital twin beschikbaar is.
+<a id="1-advies"></a>
 
-Er bestaan al open simulatoren, modulaire raamwerken, databewerkingspijplijnen en benchmarks. OpenT1D moet daarop aansluiten. De onderscheidende ambitie is een onderhouden verzameling experimentele protocollen, adapters, modelbeschrijvingen en bewijsmateriaal waarmee anderen daadwerkelijk samen kunnen werken. Dat onderscheid is een strategische hypothese die met externe gebruikers moet worden getoetst; het onderzoek onderbouwt geen claim dat niemand dit eerder heeft geprobeerd.
+## 1. Recommendation
 
-De prioriteiten zijn:
+**Develop OpenT1D as an open, modular virtual laboratory for T1D research: shared infrastructure and useful building blocks, reusing others' models. Start with a fully reproducible glucose/insulin experiment and demonstrate early that different model families can be connected. Build from there toward personalization, beta-cell function and bounded therapy questions.**
 
-1. **Reproduceerbaarheid:** hetzelfde experiment opnieuw kunnen uitvoeren, inclusief versies, instellingen, invoer, toeval en analyse.
-2. **Vergelijkbaarheid:** expliciete afspraken over waarnemingen, interventies, populaties, meeteenheden en uitkomstmaten.
-3. **Wetenschappelijke geldigheid:** per onderzoeksvraag aangeven wat is getoetst en waar extrapolatie begint.
-4. **Hergebruik:** bestaande modellen en analysetools aansluiten met zo weinig mogelijk wijzigingen.
-5. **Uitbreidbaarheid:** nieuwe biologische processen toelaten zodra een meetbare vraag, bruikbaar model en passende validatiedata beschikbaar zijn.
+The first scientific contribution should be a verifiable statement: under which conditions does a conclusion about a treatment or control algorithm hold when the physiological model, virtual population or measurement uncertainty changes? This fits the long-term ambition and produces useful infrastructure before a multiscale digital twin is available.
 
-De eerste bouwvolgorde is **upstreamreproductie → volledig experiment → betekenisvolle uitwisselbaarheid tussen modelfamilies**. Onderzoek naar geschikte echte data begint direct. Daarna kunnen externe toetsing, personalisatie, apparaten en biologische uitbreidingen volgens hun eigen afhankelijkheden verdergaan. Resterende endogene secretie is de eerste voorgestelde biologische uitbreiding; die hoeft niet te wachten tot alle personalisatie of apparaatfuncties af zijn. AI kan vanaf het begin de ontwikkeling versnellen en later experimentele zoekmethoden ondersteunen. De volgorde hangt af van bewijs en interfaces, niet van een veronderstelde ontwikkelsnelheid of teamomvang.
+Open simulators, modular frameworks, data-processing pipelines and benchmarks already exist. OpenT1D should connect to them. The distinctive ambition is a maintained collection of experimental protocols, adapters, model descriptions and evidence with which others can actually collaborate. That distinction is a strategic hypothesis to test with external users; the research does not support a claim that nobody has tried this before.
 
-## 2. Reikwijdte en bewijskracht
+The priorities are:
 
-Deze analyse betreft wetenschappelijke positionering, herbruikbare software, data, architectuur en een uitvoerbare roadmap. De peildatum voor de bronnen is 12 september 2026. Het rapport gebruikt oorspronkelijke onderzoekspublicaties, officiële projectdocumentatie, repositories, standaarden en voorwaarden van datahouders. Nieuwe preprints worden als zodanig onderscheiden van gepubliceerde studies.
+1. **Reproducibility:** rerunning the same experiment, including versions, settings, inputs, randomness and analysis.
+2. **Comparability:** explicit conventions for observations, interventions, populations, units and outcome measures.
+3. **Scientific validity:** stating what has been tested for each research question and where extrapolation begins.
+4. **Reuse:** connecting existing models and analysis tools with as few changes as possible.
+5. **Extensibility:** admitting new biological processes once a measurable question, useful model and suitable validation data are available.
 
-De aanbevelingen zijn ontwerpkeuzes op basis van die bronnen. Er zijn voor dit rapport geen simulatoren geïnstalleerd, geen numerieke resultaten gereproduceerd en geen patiëntdatasets gedownload. Beschikbaarheid in een repository betekent daarom nog geen bewezen installeerbaarheid, onderhoudskwaliteit, modelgetrouwheid of recht op herdistributie van alle meegeleverde bestanden. Die controles zijn expliciete eerste mijlpalen.
+The initial build order is **upstream reproduction → complete experiment → meaningful interchangeability between model families**. Research into suitable real data starts immediately. External assessment, personalization, devices and biological extensions can then proceed according to their own dependencies. Residual endogenous secretion is the first proposed biological extension; it need not wait for all personalization or device functions to be complete. AI can accelerate development from the start and later support experimental search methods. The order depends on evidence and interfaces, not an assumed development speed or team size.
 
-Voor OpenT1D is het nuttig drie soorten uitspraken uit elkaar te houden: wat een publicatie heeft aangetoond, wat een softwareproject zegt te ondersteunen en wat OpenT1D zelf na reproductie kan bevestigen. Een toelichting in een README is voldoende om een kandidaat te selecteren, maar onvoldoende om een wetenschappelijke prestatieclaim over te nemen.
+<a id="2-reikwijdte-en-bewijskracht"></a>
 
-De actuele uitvoeringsroadmap staat in [ROADMAP.md](../../ROADMAP.md); de publieke [visie](../vision.md) en [architectuurrichting](../architecture.md) werken de modulaire laboratoriumopzet uit. De wetenschappelijke mijlpalen beschrijven nog te bouwen en te toetsen functionaliteit. De repositorybasis heeft inmiddels documentatie en controletooling; dat verandert de hier beschreven bewijskracht van de kandidaatmodellen niet.
+## 2. Scope and strength of evidence
 
-## 3. Het bestaande landschap
+This analysis concerns scientific positioning, reusable software, data, architecture and an executable roadmap. The source reference date is 12 September 2026. The report uses original research publications, official project documentation, repositories, standards and data-holder terms. New preprints are distinguished from published studies.
 
-### 3.1 Simulatoren en raamwerken
+The recommendations are design choices based on those sources. No simulators were installed, numerical results reproduced or patient datasets downloaded for this report. Availability in a repository therefore does not establish installability, maintenance quality, model fidelity or redistribution rights for every included file. Those checks are explicit first milestones.
 
-| Project | Aantoonbare basis | Mogelijke rol in OpenT1D | Aandachtspunt |
+For OpenT1D, three kinds of statement should be distinguished: what a publication demonstrated, what a software project says it supports and what OpenT1D can itself confirm after reproduction. A README explanation is enough to select a candidate, but insufficient to adopt a scientific performance claim.
+
+The current implementation roadmap is in [ROADMAP.md](../../ROADMAP.md); the public [vision](../vision.md) and [architecture direction](../architecture.md) develop the modular laboratory design. The scientific milestones describe functionality still to be built and tested. The repository foundation now has documentation and checking tools; this does not change the strength of evidence described here for the candidate models.
+
+<a id="3-het-bestaande-landschap"></a>
+
+## 3. The existing landscape
+
+<a id="31-simulatoren-en-raamwerken"></a>
+
+### 3.1 Simulators and frameworks
+
+| Project | Demonstrable basis | Possible role in OpenT1D | Point to address |
 |---|---|---|---|
-| UVA/Padova T1D Simulator | Gepubliceerde glucose-/insulinemodellen en toetsing aan klinische gegevens.[^1] | Wetenschappelijke referentie; eventueel optionele externe engine | Versie, populatie, toegangsvoorwaarden en toepassingsbereik afzonderlijk vaststellen |
-| simglucose | Python-implementatie op basis van UVA/Padova 2008; 30 virtuele profielen; MIT-code.[^2] | Eerste adapter en eenvoudige referentie-experimenten | Geen onafhankelijke validatie of FDA-status veronderstellen voor deze implementatie |
-| GluCoEnv | PyTorch-omgeving voor parallelle glucosecontrole en RL; bouwt voort op simglucose/UVA 2008; MIT volgens repository.[^3] | Latere versnelling en RL-experimenten | Een andere engine binnen grotendeels dezelfde modelfamilie |
-| LoopInsighT1 / LT1 | Modulaire TypeScript-simulator met patiënt, controller, sensor en actuator; MIT.[^4][^5] | Eerste kandidaat voor een tweede modelfamilie en hergebruik van modules | Compatibiliteit en numerieke referenties van de geselecteerde versie toetsen |
-| APS TestBed | Onderzoekstestbed dat twee simulatoren, controllers en foutinjectie combineert.[^6] | Bestaande protocollen en architectuur bestuderen; uitbreiding afwegen | Onderdelen en licenties controleren vóór overname |
-| McGill Artificial Pancreas Simulator | MATLAB-raamwerk met onder meer een Hovorka-patiëntmodel; MIT.[^7] | Onafhankelijke referentie voor modelgedrag | MATLAB en eventuele aanvullende runtimevoorwaarden |
-| py-mgipsim | Python-simulator voor maaltijden, activiteit en insulinetoediening; GPL-3.0.[^8] | Kandidaat voor activiteit en aanvullende fysiologie | Herkomst per modelvariant en distributie onder GPL vastleggen |
-| ReplayBG / py_replay_bg | Identificatie van persoonlijke modellen en simulatie van gewijzigde insuline-/koolhydraatinvoer.[^9][^10] | Personalisatie en retrospectieve experimenten | Python-code heeft GPL-3.0; validatie van het oorspronkelijke artikel niet automatisch gelijkstellen aan elke port |
+| UVA/Padova T1D Simulator | Published glucose/insulin models and assessment against clinical data.[^1] | Scientific reference; possibly an optional external engine | Establish version, population, access terms and scope separately |
+| simglucose | Python implementation based on UVA/Padova 2008; 30 virtual profiles; MIT code.[^2] | First adapter and simple reference experiments | Do not assume independent validation or FDA status for this implementation |
+| GluCoEnv | PyTorch environment for parallel glucose control and RL; builds on simglucose/UVA 2008; MIT according to the repository.[^3] | Later acceleration and RL experiments | Another engine within largely the same model family |
+| LoopInsighT1 / LT1 | Modular TypeScript simulator with patient, controller, sensor and actuator; MIT.[^4][^5] | First candidate for a second model family and module reuse | Test compatibility and numerical references of the selected version |
+| APS TestBed | Research testbed combining two simulators, controllers and fault injection.[^6] | Study existing protocols and architecture; consider extension | Check components and licenses before adoption |
+| McGill Artificial Pancreas Simulator | MATLAB framework including a Hovorka patient model; MIT.[^7] | Independent reference for model behavior | MATLAB and any additional runtime requirements |
+| py-mgipsim | Python simulator for meals, activity and insulin delivery; GPL-3.0.[^8] | Candidate for activity and additional physiology | Record ancestry per model variant and GPL distribution obligations |
+| ReplayBG / py_replay_bg | Identification of personal models and simulation with changed insulin/carbohydrate inputs.[^9][^10] | Personalization and retrospective experiments | Python code is GPL-3.0; do not automatically equate the original article's validation with every port |
 
-**Modeldiversiteit moet op herkomst worden beoordeeld.** simglucose en GluCoEnv vormen bijvoorbeeld een zinvolle vergelijking van implementaties en snelheid. Omdat beide naar dezelfde basis verwijzen, leveren zij samen geen sterke toets op onzekerheid over de fysiologische modelstructuur.[^2][^3] Een Hovorka/Cambridge-variant naast een UVA/Dalla Man-variant is daarvoor een geschiktere kandidaat. Gedeelde aannames blijven ook dan bestaan.
+**Model diversity must be assessed by ancestry.** simglucose and GluCoEnv, for example, provide a useful comparison of implementations and speed. Because both refer to the same basis, together they do not strongly test uncertainty in physiological model structure.[^2][^3] A Hovorka/Cambridge variant alongside a UVA/Dalla Man variant is a more suitable candidate for that purpose. Shared assumptions remain even then.
 
-LT1 is een bijzonder relevante vergelijking: de publicatie beschrijft zowel uitvoering zonder gebruikersinterface als modulaire simulatie.[^5] De Cambridge-implementatie is bovendien concreet terug te vinden in de repository.[^39] Dit maakt een dunne adapter kansrijker dan een nieuwe implementatie van alle differentiaalvergelijkingen. Dat de combinatie met OpenT1D praktisch werkt, moet een uitvoerbare proef nog aantonen.
+LT1 is a particularly relevant comparison: the publication describes both headless execution and modular simulation.[^5] The Cambridge implementation can also be found concretely in the repository.[^39] This makes a thin adapter more promising than a new implementation of all differential equations. An executable trial must still demonstrate that the combination with OpenT1D works in practice.
 
-### 3.2 Data, analyse en benchmarks
+<a id="32-data-analyse-en-benchmarks"></a>
 
-Voor glucosevoorspelling bestaan onder meer GlucoBench, GluPredKit en het recente MetaboNet-Bench.[^11][^12][^14] Voor normalisatie van klinische gegevens bestaat BabelBetes; voor glucoseanalyse is er AGATA, inclusief een Python-port.[^15][^16] Een generieke voorspellingstool of nieuwe verzameling datasetparsers zou daardoor veel bestaand werk overlappen.
+### 3.2 Data, analysis and benchmarks
 
-Deze projecten zijn ook niet allemaal hetzelfde. Voorspellen welke glucosewaarde volgt bij geobserveerde omstandigheden is een andere evaluatietaak dan onderzoeken wat een gewijzigde interventie zou veroorzaken. OpenT1D kan bestaande voorspellingstaken aansluiten, terwijl de eigen kern zich richt op expliciete interventies, modelkoppeling en de robuustheid van experimentele conclusies.
+Glucose forecasting projects include GlucoBench, GluPredKit and the recent MetaboNet-Bench.[^11][^12][^14] BabelBetes provides clinical data normalization; AGATA provides glucose analysis, including a Python port.[^15][^16] A generic prediction tool or new collection of dataset parsers would therefore overlap substantial existing work.
 
-### 3.3 Welke ontwikkelroute heeft de voorkeur?
+These projects are not all the same. Predicting the next glucose value under observed conditions is a different evaluation task from investigating what a changed intervention would cause. OpenT1D can connect existing prediction tasks while its own core focuses on explicit interventions, model coupling and robustness of experimental conclusions.
 
-| Route | Sterkte | Zwakte | Advies |
+<a id="33-welke-ontwikkelroute-heeft-de-voorkeur"></a>
+
+### 3.3 Which development route is preferred?
+
+| Route | Strength | Weakness | Recommendation |
 |---|---|---|---|
-| Nieuwe universele simulator | Volledige controle over implementatie | Grote verificatielast en duplicatie van biologie | Afwijzen als startpunt |
-| Eén bestaand raamwerk uitbreiden | Veel onmiddellijk hergebruik | Kan begrensd worden door één runtime of modelstructuur | Serieus onderzoeken in de eerste mijlpaal |
-| Gedeelde laboratoriuminfrastructuur met adapters en gerichte eigen modules | Behoud van bronmodellen; ondersteunt vergelijking en uitbreiding | Adaptersemantiek en versiebeheer vragen discipline | Voorkeursroute, beginnen bij een volledig experiment |
-| Direct een multiscale QSP-platform bouwen | Sluit inhoudelijk aan op de eindvisie | Moeilijk te kalibreren en te valideren zonder specifieke data | Later, per onderzoeksvraag |
+| New universal simulator | Full implementation control | Large verification burden and duplication of biology | Reject as a starting point |
+| Extend one existing framework | Much immediate reuse | May be constrained by one runtime or model structure | Investigate seriously in the first milestone |
+| Shared laboratory infrastructure with adapters and focused custom modules | Preserves source models; supports comparison and extension | Adapter semantics and versioning require discipline | Preferred route, starting with a complete experiment |
+| Build a multiscale QSP platform immediately | Fits the ultimate vision | Difficult to calibrate and validate without specific data | Later, per research question |
 
-De eerste ontwikkelbeslissing moet daarom concreet zijn: voer hetzelfde kleine protocol rechtstreeks in simglucose en LT1 uit en leg vast welke functionaliteit ontbreekt. Onderzoek tegelijk of APS TestBed die leemte al grotendeels afdekt. De eerste integratie kan vooral configuratie, documentatie en adapters toevoegen; later kunnen ontbrekende modules en koppelingen volgen. Dat behoudt de ambitie van een gezamenlijk virtueel laboratorium en voorkomt onnodige duplicatie per onderdeel. Een eigen solver is geen voorwaarde voor waarde.
+The first development decision should therefore be concrete: run the same small protocol directly in simglucose and LT1 and record the missing functionality. At the same time, investigate whether APS TestBed already covers most of that gap. The first integration may mainly add configuration, documentation and adapters; missing modules and couplings can follow later. This preserves the shared virtual laboratory ambition and avoids unnecessary duplication per component. A custom solver is not a prerequisite for value.
 
-## 4. Eerste doelgroep en eerste onderzoeksvraag
+<a id="4-eerste-doelgroep-en-eerste-onderzoeksvraag"></a>
 
-De aanbevolen eerste gebruiker is een onderzoeker of ontwikkelaar die een glucosecontroller, fysiologisch model of apparaatmodel wil vergelijken met bestaande referenties. Deze gebruiker kan direct profiteren van een reproduceerbaar protocol en hoeft geen volledige digital twin te adopteren.
+## 4. First audience and first research question
 
-De eerste onderzoeksvraag luidt:
+The recommended first user is a researcher or developer who wants to compare a glucose controller, physiological model or device model with existing references. This user can immediately benefit from a reproducible protocol without adopting a complete digital twin.
 
-> Hoe verandert de relatieve prestatie van referentiecontrollers bij verschillen in maaltijdinformatie, sensormetingen en fysiologische modelkeuze?
+The first research question is:
 
-Een tweede, infrastructuurgerichte vraag hoort daarbij: kan iemand buiten het project één controller of model aansluiten en dezelfde resultaten zelfstandig reconstrueren? Die gebruikstest is nodig om te bepalen of OpenT1D werkelijk gedeelde infrastructuur oplevert.
+> How does the relative performance of reference controllers change with differences in meal information, sensor measurements and physiological model choice?
 
-Een eerste demonstratie mag één simulator gebruiken. Een overtuigende eerste onderzoeksrelease vereist daarnaast vergelijking met ten minste één andere fysiologische modelfamilie, of een zeer expliciete beperking van de claim tot de gekozen engine. Het is niet nodig dat alle controllers in alle modellen dezelfde rangorde krijgen. Een verklaarde omkering kan juist het belangrijkste resultaat zijn.
+A second, infrastructure-oriented question accompanies it: can someone outside the project connect one controller or model and independently reconstruct the same results? That usage test is necessary to determine whether OpenT1D actually provides shared infrastructure.
 
-De eerste scope omvat volwassen virtuele profielen, subcutane insulinetoediening, maaltijden en synthetische CGM-metingen. Kinderen, zwangerschap, inspanning, meerdere hormonen en nieuwe insulineformuleringen volgen afzonderlijk zodra de modelbasis en validatie daarvoor beschikbaar zijn. Dit is een keuze om onderzoeksclaims precies te kunnen formuleren, geen oordeel over het belang van die onderwerpen.
+A first demonstration may use one simulator. A convincing first research release additionally requires comparison with at least one other physiological model family, or a very explicit restriction of the claim to the selected engine. All controllers need not rank the same in all models. An explained reversal may be the most important result.
 
-## 5. Het eerste complete experiment
+The first scope includes adult virtual profiles, subcutaneous insulin delivery, meals and synthetic CGM measurements. Children, pregnancy, exercise, multiple hormones and new insulin formulations follow separately once the model basis and validation are available. This is a choice to formulate research claims precisely, not a judgment of those subjects' importance.
 
-### 5.1 Een kleine maar volledige keten
+<a id="5-het-eerste-complete-experiment"></a>
 
-Het eerste product bestaat uit een Python-bibliotheek, een opdrachtregelinterface en een automatisch rapport. Een onderzoeker selecteert een versie van een protocol, een model, virtuele profielen en een controller. OpenT1D valideert de combinatie, voert alle gevallen uit en bewaart de resultaten met de informatie die nodig is om ze opnieuw te berekenen.
+## 5. The first complete experiment
 
-Voorgestelde gebruikershandeling:
+<a id="51-een-kleine-maar-volledige-keten"></a>
+
+### 5.1 A small but complete chain
+
+The first product consists of a Python library, a command-line interface and an automatic report. A researcher selects a protocol version, model, virtual profiles and controller. OpenT1D validates the combination, runs every case and saves results with the information needed to recalculate them.
+
+Proposed user action:
 
 ```text
 opent1d run experiments/reference-meals.yaml
@@ -92,365 +115,435 @@ opent1d report runs/<run-id>
 opent1d reproduce runs/<run-id>/manifest.json
 ```
 
-Dit is een ontwerpschets, geen bestaande CLI. De praktische belofte is dat het rapport volledig uit opgeslagen gegevens volgt, zonder handmatige notebookstappen of nabewerking van grafieken.
+This is a design sketch, not an existing CLI. The practical promise is that the report follows entirely from saved data, without manual notebook steps or graph postprocessing.
 
-### 5.2 Referenties en scenario's
+<a id="52-referenties-en-scenarios"></a>
 
-Gebruik eerst een gedocumenteerde basaal-bolusstrategie en een eenvoudige PID-controller. Ze dienen als functionele referenties; voeg vóór een inhoudelijke claim over geavanceerde controllers een passende sterkere referentie toe, bijvoorbeeld een gepubliceerde MPC-implementatie. Onderzoek hergebruik voordat een nieuwe controller wordt geschreven. Alle controllers krijgen per benchmarktrack dezelfde soorten informatie.
+### 5.2 References and scenarios
 
-Begin met een gepubliceerd of upstream referentiescenario waarvan de invoer en uitkomsten voldoende gespecificeerd zijn. Voeg daarna afzonderlijke varianten toe: correcte maaltijdaankondiging, ontbrekende aankondiging, onnauwkeurige koolhydraatinformatie, sensorruis en sensoruitval. Een ontbrekende aankondiging verandert wat de controller weet; een andere werkelijke maaltijd verandert de patiëntinvoer. Die twee gebeurtenissen mogen niet ongemerkt samenvallen.
+First use a documented basal-bolus strategy and a simple PID controller. They serve as functional references; before making a substantive claim about advanced controllers, add a suitable stronger reference, such as a published MPC implementation. Investigate reuse before writing a new controller. All controllers receive the same types of information within each benchmark track.
 
-Een meerdaags scenario is pas een volgende stap nadat initialisatie, opwarmperiode en tijdsvariatie zijn onderzocht. De oorspronkelijke UVA/Padova-versies hadden een specifieker gevalideerd toepassingsbereik dan alle mogelijke meerdaagse simulaties; de publicatie over S2013 bespreekt die begrenzing expliciet.[^40] Een engine die een week kan doorrekenen heeft daarmee nog geen onderbouwde weekvoorspelling.
+Start with a published or upstream reference scenario whose inputs and outcomes are sufficiently specified. Then add separate variants: correct meal announcement, missing announcement, inaccurate carbohydrate information, sensor noise and sensor dropout. A missing announcement changes what the controller knows; a different actual meal changes the patient input. These two events must not coincide unnoticed.
 
-Dit is een versiegebonden beperking: de latere S2017-publicatie beschrijft juist uitbreiding naar dagsimulaties, met onder meer variërende insulinegevoeligheid en aangepaste insulinetoedieningsmodellen.[^41] OpenT1D moet zulke verschillen tussen modelgeneraties zichtbaar maken.
+A multiday scenario is a subsequent step only after initialization, warm-up period and time variation have been investigated. Original UVA/Padova versions had a more specific validated scope than all possible multiday simulations; the S2013 publication explicitly discusses that limitation.[^40] An engine's ability to simulate a week does not establish a supported week-long prediction.
 
-Voer storingen eerst afzonderlijk uit, daarna in combinaties. Kies ernst, duur en frequentie óf op basis van gegevens óf als expliciete stressproef. Een kunstmatig zware storing vertelt iets over robuustheid onder die aanname; zij levert geen schatting van de incidentie in de praktijk.
+This limitation is version-specific: the later S2017 publication describes an extension to daily simulations, including varying insulin sensitivity and adapted insulin delivery models.[^41] OpenT1D must make such differences between model generations visible.
 
-### 5.3 Uitkomsten en eerlijke vergelijking
+Run faults individually first, then in combinations. Choose severity, duration and frequency either from data or as an explicit stress test. An artificially severe fault says something about robustness under that assumption; it does not estimate real-world incidence.
 
-De rapportage moet TIR van 70–180 mg/dL, TBR onder 70 en onder 54 mg/dL, en TAR boven 180 en boven 250 mg/dL bevatten. Deze indeling sluit aan op de internationale consensus voor CGM-rapportage.[^23] Bewaar de drempels en grensconventies in de benchmarkversie en ondersteun weergave in mmol/L. Klinische streefpercentages zijn niet automatisch de slaagcriteria voor een simulator.
+<a id="53-uitkomsten-en-eerlijke-vergelijking"></a>
 
-Voeg glucosevariabiliteit, insulinetoediening, duur van lage-glucose-episoden, runtime, solverfouten, ontbrekende observaties en afgebroken runs toe. Bereken uitkomsten afzonderlijk op gesimuleerde bloedglucose en op synthetische CGM-metingen als beide beschikbaar zijn. Een goede sensorwaarde kan immers een modelmatige afwijking in de onderliggende toestand verbergen.
+### 5.3 Outcomes and fair comparison
 
-Presenteer uitkomsten per virtuele patiënt en per scenario, met gepaarde verschillen tussen controllers. Herhaalde toevalsseeds zijn geen nieuwe patiënten. Gebruik onzekerheidsintervallen met een passende groepering van herhaalde metingen en vermeld of zij alleen simulatievariatie of ook variatie tussen profielen beschrijven. Miljoenen gesimuleerde minuten uit enkele profielen onderbouwen geen brede klinische representativiteit.
+Reporting must include TIR at 70–180 mg/dL, TBR below 70 and below 54 mg/dL, and TAR above 180 and above 250 mg/dL. These categories align with the international consensus on CGM reporting.[^23] Preserve thresholds and boundary conventions in the benchmark version and support display in mmol/L. Clinical target percentages are not automatically simulator pass criteria.
 
-Een ranglijst met één totaalscore is onvoldoende. Laat ten minste de verhouding tussen glucosecontrole, lage-glucoseblootstelling en storingsgedrag zien. Vooraf gekozen primaire uitkomsten en analyses voorkomen dat achteraf alleen de gunstigste resultaten worden gerapporteerd. Vermeld ook onbesliste vergelijkingen en verschillen die kleiner zijn dan de relevante onzekerheid.
+Add glucose variability, insulin delivery, duration of low-glucose episodes, runtime, solver errors, missing observations and aborted runs. Calculate outcomes separately on simulated blood glucose and synthetic CGM measurements when both are available. A good sensor value may hide a model deviation in the underlying state.
 
-Beperk eindpunten tot wat daadwerkelijk wordt gemodelleerd. Rapporteer geen gesimuleerde ketoacidose, klinisch ernstige hypoglykemie of duurzame HbA1c-verbetering wanneer het model alleen korte glucose-/insulinereeksen bevat. Een glucosegrensoverschrijding blijft in dat geval een glucose-uitkomst.
+Present outcomes per virtual patient and scenario, with paired differences between controllers. Repeated random seeds are not new patients. Use uncertainty intervals with appropriate grouping of repeated measurements and state whether they describe simulation variation alone or also variation between profiles. Millions of simulated minutes from a few profiles do not support broad clinical representativeness.
 
-Gebruik een opzettelijk slechte of triviale referentie om te controleren of de benchmark duidelijke tekortkomingen detecteert. Zorg daarnaast dat gesimuleerde uitval en noodinterventies zichtbaar blijven. Een vroeg gestopte run mag niet een gunstige score krijgen doordat de rest van de simulatie uit de noemer verdwijnt.
+A ranking with one total score is insufficient. Show at least the relationship between glucose control, low-glucose exposure and failure behavior. Prespecified primary outcomes and analyses prevent retrospective reporting of only the most favorable results. Also report inconclusive comparisons and differences smaller than the relevant uncertainty.
 
-## 6. Architectuur
+Limit endpoints to what is actually modeled. Do not report simulated ketoacidosis, clinically severe hypoglycemia or sustained HbA1c improvement when the model contains only short glucose/insulin series. A glucose threshold crossing remains a glucose outcome in that case.
 
-### 6.1 Een kleine kern met twee niveaus van modulariteit
+Use a deliberately poor or trivial reference to check that the benchmark detects clear shortcomings. Also ensure that simulated failures and emergency interventions remain visible. An early-stopped run must not receive a favorable score because the rest of the simulation disappears from the denominator.
 
-Er zijn twee verschillende integratieproblemen. Op korte termijn moet OpenT1D complete bestaande simulatoren kunnen aansturen. Later moet het biologische subsystemen kunnen koppelen. Probeer niet meteen elke bestaande simulator op te splitsen in dezelfde interne componenten: daarbij kunnen aannames en numerieke eigenschappen veranderen.
+<a id="6-architectuur"></a>
 
-Begin daarom met een engine-adapter rond een bestaande simulator. Leg daarnaast een beperkt componentcontract vast voor nieuwe modules die daar werkelijk aan kunnen voldoen. Een engine kan intern een volledige glucose-/insulinecyclus beheren, terwijl OpenT1D het scenario, de controllerinformatie en de uitvoer standaardiseert.
+## 6. Architecture
+
+<a id="61-een-kleine-kern-met-twee-niveaus-van-modulariteit"></a>
+
+### 6.1 A small core with two levels of modularity
+
+There are two different integration problems. In the short term, OpenT1D must drive complete existing simulators. Later, it must couple biological subsystems. Do not immediately try to split every existing simulator into the same internal components: doing so can change assumptions and numerical properties.
+
+Start with an engine adapter around an existing simulator. Also define a limited component contract for new modules that can actually satisfy it. An engine may internally manage a complete glucose/insulin cycle while OpenT1D standardizes the scenario, controller information and output.
 
 ```mermaid
 flowchart TD
-    E[Experiment: vraag, scenario, populatie, protocol] --> V[Controle van compatibiliteit en invoer]
-    V --> R[Experimentrunner]
-    R --> A[Adapter voor bestaande engine]
-    R --> B[Compositie van expliciete modules]
-    A --> O[Waarnemingen, acties, toestanden en fouten]
+    E[Experiment: question, scenario, population, protocol] --> V[Compatibility and input checks]
+    V --> R[Experiment runner]
+    R --> A[Adapter for existing engine]
+    R --> B[Composition of explicit modules]
+    A --> O[Observations, actions, states and errors]
     B --> O
-    O --> M[Metrics en onzekerheidsanalyse]
-    M --> P[Reproduceerbaar rapport]
-    E --> H[Versies, herkomst en manifest]
+    O --> M[Metrics and uncertainty analysis]
+    M --> P[Reproducible report]
+    E --> H[Versions, provenance and manifest]
     O --> H
     H --> P
 ```
 
-Dit schema is een voorstel voor verantwoordelijkheden. Het impliceert geen microservices, cloudplatform of onafhankelijke solver voor ieder blok.
+This diagram proposes responsibilities. It implies neither microservices, a cloud platform nor an independent solver for each block.
 
-### 6.2 Contracten die vanaf het begin nodig zijn
+<a id="62-contracten-die-vanaf-het-begin-nodig-zijn"></a>
 
-| Contract | Minimaal vast te leggen |
+### 6.2 Contracts needed from the start
+
+| Contract | Minimum information to record |
 |---|---|
-| Modelbeschrijving | Identiteit, versie, bron, modelfamilie, soort, ziektefase, aannames en toepassingsbereik |
-| Poort of variabele | Grootheid, eenheid, compartiment, concentratie of hoeveelheid, meetbaar of latent |
-| Tijd | Relatieve tijd, invoerinterval, observatie-interval, eventvolgorde en interne integratiestap |
-| Patiëntprofiel | Parameters, correlaties, initialisatie en herkomst; onderscheid synthetisch en persoonsgebonden |
-| Scenario | Werkelijke gebeurtenissen en afzonderlijke informatie die aan de controller bekend is |
-| Controller | Toegestane observaties, acties, limieten, intern geheugen en resetgedrag |
-| Apparaat | Meet- of afgiftegedrag, vertraging, onzekerheid, storingen en kalibratiebasis |
-| Resultaat | Tijdreeksen, eenheden, kwaliteitsmarkeringen, failures, manifest en metriekversie |
-| Validatie | Onderzoeksvraag, toetsgegevens, vooraf bepaalde criteria, resultaten en beperkingen |
+| Model description | Identity, version, source, model family, species, disease stage, assumptions and scope |
+| Port or variable | Quantity, unit, compartment, concentration or amount, observable or latent |
+| Time | Relative time, input interval, observation interval, event order and internal integration step |
+| Patient profile | Parameters, correlations, initialization and ancestry; distinguish synthetic and person-specific |
+| Scenario | Actual events and separate information known to the controller |
+| Controller | Permitted observations, actions, limits, internal memory and reset behavior |
+| Device | Measurement or delivery behavior, delay, uncertainty, faults and calibration basis |
+| Result | Time series, units, quality flags, failures, manifest and metric version |
+| Validation | Research question, assessment data, prespecified criteria, results and limitations |
 
-Een voorbeeld van een noodzakelijke semantische controle: een bolus in eenheden en een afgiftesnelheid in eenheden per uur zijn verschillende invoeren. Een ander voorbeeld is plasma-insuline versus subcutaan toegediende insuline. Alleen dezelfde variabelenaam of een converteerbare eenheid maakt deze grootheden nog niet uitwisselbaar.
+One example of a necessary semantic check: a bolus in units and a delivery rate in units per hour are different inputs. Another is plasma insulin versus subcutaneously delivered insulin. A shared variable name or convertible unit alone does not make these quantities interchangeable.
 
-Leg vast of een hoeveelheid geldt op een tijdstip of geïntegreerd is over een interval. Definieer of de controller op tijdstip t eerst de nieuwe meting ontvangt en daarna een actie kiest, en wanneer die actie de fysiologie beïnvloedt. Deze afspraken voorkomen dat verschillen in eventvolgorde voor verschillen in behandelingen worden aangezien.
+Record whether an amount applies at a time point or is integrated over an interval. Define whether the controller at time t first receives the new measurement and then chooses an action, and when that action affects physiology. These conventions prevent event-order differences being mistaken for treatment differences.
 
-Ondersteun capabilities: een adapter meldt bijvoorbeeld of hij toestanden kan herstellen, een controller kan laten ingrijpen, endogene secretie kan ontvangen of parameters tijdens een run kan wijzigen. Weiger een niet-ondersteund experiment vooraf. Stilzwijgend een invoer negeren maakt het resultaat onbruikbaar.
+Support capabilities: an adapter reports, for example, whether it can restore states, allow controller intervention, receive endogenous secretion or change parameters during a run. Reject unsupported experiments beforehand. Silently ignoring an input makes the result unusable.
 
-### 6.3 Numerieke verantwoordelijkheden
+<a id="63-numerieke-verantwoordelijkheden"></a>
 
-Laat aanvankelijk de oorspronkelijke engine zijn eigen vergelijkingen en solver uitvoeren. Controleer dat de adapter dezelfde referentietijdreeksen oplevert als rechtstreekse uitvoering. Bewaar solverkeuze, fouttoleranties en relevante runtime-informatie, naast de random seeds.
+### 6.3 Numerical responsibilities
 
-Voor toekomstige koppelingen moeten communicatie-intervallen, vertragingen, terugkoppelingen en gedeelde toestanden expliciet worden. Strak gekoppelde processen kunnen een gezamenlijke solver of iteratieve oplossing nodig hebben. Een trage immuunmodule eenmaal per dag bijwerken is een hypothese over tijdschalen, geen vanzelfsprekend correcte integratiemethode. Toets zo'n keuze met stapverkleining en een fijnere referentie.
+Initially let the original engine execute its own equations and solver. Check that the adapter produces the same reference time series as direct execution. Preserve solver choice, error tolerances and relevant runtime information alongside random seeds.
 
-Er mag één eigenaar zijn voor elk gemodelleerd proces. Als een nieuwe module insulineabsorptie overneemt, moet duidelijk zijn dat dezelfde absorptie niet ook in de bestaande engine wordt toegepast. Voor massabalansen geldt hetzelfde: de interne opslag van een hoeveelheid en de overdracht tussen compartimenten moeten gezamenlijk kloppen.
+Future couplings require explicit communication intervals, delays, feedback and shared states. Tightly coupled processes may need a joint solver or iterative solution. Updating a slow immune module once daily is a hypothesis about timescales, not an inherently correct integration method. Test such a choice with step refinement and a finer reference.
 
-### 6.4 Technische keuzes
+Each modeled process must have one owner. If a new module takes over insulin absorption, it must be clear that the same absorption is not also applied in the existing engine. The same holds for mass balances: internal storage of an amount and transfer between compartments must be jointly consistent.
 
-Advies: gebruik Python voor experimentdefinities, adapters, analyse en de opdrachtregelinterface. Houd modelengines in hun oorspronkelijke taal wanneer dat verificatie eenvoudiger maakt. Bewaar configuratie in versieerbare tekstbestanden, tijdreeksen in een tabel- of arrayformaat met expliciete metadata, en resultaten in een lokaal inspecteerbare directorystructuur.
+<a id="64-technische-keuzes"></a>
 
-Een passende eerste stack is Python met NumPy/SciPy, schema-validatie, Parquet voor tabulaire uitvoer en een eenvoudige rapportgenerator. Dit zijn architectuurvoorkeuren, geen al geteste dependencyset. De concrete ondersteunde versies volgen uit de adapterproeven. Houd zware ML-libraries, GPU-ondersteuning en externe runtimes optioneel.
+### 6.4 Technical choices
 
-Gebruik één repository zolang onderdelen samen veranderen. Scheid code logisch in contracts, adapters, experiments, validation, metrics en reporting; maak pas aparte packages wanneer onafhankelijk versiebeheer werkelijk nodig is. Begin met lokale parallelle uitvoering. Meet geheugen, rekentijd en I/O voordat een gedistribueerde runner wordt toegevoegd.
+Recommendation: use Python for experiment definitions, adapters, analysis and the command-line interface. Keep model engines in their original language when this simplifies verification. Store configuration in versioned text files, time series in a table or array format with explicit metadata, and results in a locally inspectable directory structure.
 
-Een webinterface kan later configuratie en rapporten ontsluiten. De eerste wetenschappelijke functionaliteit moet ook volledig via bestanden en code beschikbaar zijn. Dat maakt CI, batchruns en gebruik door andere onderzoekers eenvoudiger.
+A suitable initial stack is Python with NumPy/SciPy, schema validation, Parquet for tabular output and a simple report generator. These are architectural preferences, not an already tested dependency set. Concrete supported versions follow from adapter trials. Keep heavy ML libraries, GPU support and external runtimes optional.
 
-## 7. Standaarden: aansluiten waar ze iets oplossen
+Use one repository while components change together. Separate code logically into contracts, adapters, experiments, validation, metrics and reporting; create separate packages only when independent versioning is actually needed. Start with local parallel execution. Measure memory, compute time and I/O before adding a distributed runner.
 
-| Standaard of infrastructuur | Geschikt voor | Aanbevolen moment |
+A web interface can later expose configuration and reports. The first scientific functionality must also be fully available through files and code. This simplifies CI, batch runs and use by other researchers.
+
+<a id="7-standaarden-aansluiten-waar-ze-iets-oplossen"></a>
+
+## 7. Standards: connect where they solve a problem
+
+| Standard or infrastructure | Suitable for | Recommended point of adoption |
 |---|---|---|
-| SBML | Uitwisseling van ondersteunde biologische modelstructuren.[^25] | Bij een concrete biochemische of QSP-module |
-| CellML | Beschrijving van wiskundige fysiologische modellen.[^26] | Bij hergebruik van een passend bestaand model |
-| SED-ML | Beschrijving van simulatie-experimenten, modellen, analyses en uitvoer.[^27] | Eerst een expliciete mapping van de ondersteunde experimenten |
-| COMBINE/OMEX | Bundelen van model- en experimentbestanden.[^28] | Export van één aantoonbaar reproduceerbaar voorbeeld |
-| FMI | Modeluitwisseling en co-simulatie tussen runtimes.[^29] | Als meerdere concrete adapters dezelfde behoefte hebben |
-| BioSimulators/BioSimulations | Bestaande conventies, validatietools en uitvoering/publicatie van modelstudies.[^30] | Hergebruiken waar de gekozen modelvorm wordt ondersteund |
-| PEtab | Reproduceerbare specificatie van parameterestimatieproblemen.[^31] | Bij kalibratie van daarvoor geschikte mechanistische modellen |
+| SBML | Exchange of supported biological model structures.[^25] | A concrete biochemical or QSP module |
+| CellML | Description of mathematical physiological models.[^26] | Reuse of a suitable existing model |
+| SED-ML | Description of simulation experiments, models, analyses and output.[^27] | First an explicit mapping of supported experiments |
+| COMBINE/OMEX | Bundling model and experiment files.[^28] | Export of one demonstrably reproducible example |
+| FMI | Model exchange and co-simulation between runtimes.[^29] | When multiple concrete adapters share the need |
+| BioSimulators/BioSimulations | Existing conventions, validation tools and execution/publication of model studies.[^30] | Reuse where the chosen model form is supported |
+| PEtab | Reproducible specification of parameter estimation problems.[^31] | Calibration of suitable mechanistic models |
 
-Geen van deze standaarden bewijst dat twee modellen biologisch bij elkaar passen. FMI specificeert bijvoorbeeld interfaces; de co-simulatiecoördinatie en wetenschappelijke koppeling blijven verantwoordelijkheden van de integrator.[^29] Ook ondersteunt niet iedere implementatie elk onderdeel van een standaard.
+None of these standards proves that two models are biologically compatible. FMI, for example, specifies interfaces; co-simulation coordination and scientific coupling remain the integrator's responsibilities.[^29] Nor does every implementation support every part of a standard.
 
-Definieer daarom een klein OpenT1D-profiel met versie, ondersteunde mogelijkheden en mapping naar bestaande begrippen. Exporteer alleen wat betekenisgetrouw kan worden weergegeven. Een gesloten regelkring met maatwerkcode mag niet als volledig SED-ML-reproduceerbaar worden gepresenteerd wanneer de gekozen toolchain die semantiek niet kan uitvoeren.
+Define a small OpenT1D profile with a version, supported capabilities and mapping to existing concepts. Export only what can be represented faithfully. A closed control loop with custom code must not be presented as fully SED-ML reproducible when the chosen toolchain cannot execute those semantics.
 
-De juiste volgorde is een werkend experiment, een expliciete beschrijving van zijn betekenis en daarna toetsing van uitwisseling. Dat geeft een concrete basis voor standaardisatie zonder vooraf een universele beschrijvingstaal te ontwerpen.
+The right order is a working experiment, an explicit description of its meaning and then exchange testing. This provides a concrete basis for standardization without designing a universal description language in advance.
 
-## 8. Validatie als kernfunctionaliteit
+<a id="8-validatie-als-kernfunctionaliteit"></a>
 
-### 8.1 Vier afzonderlijke vragen
+## 8. Validation as core functionality
 
-De FDA beschrijft voor mechanistische modellen in medische-hulpmiddelendossiers een risicogestuurde beoordeling van geloofwaardigheid.[^22] OpenT1D kan de gedachte daarvan gebruiken: bepaal eerst de vraag en het beoogde gebruik, en verzamel vervolgens passend bewijs. Dit is een ontwerpbasis, geen claim dat het project daarmee aan alle indieningsvereisten voldoet.
+<a id="81-vier-afzonderlijke-vragen"></a>
 
-| Vraag | Voorbeeld van bewijs | Wat dit nog niet bewijst |
+### 8.1 Four separate questions
+
+The FDA describes risk-based credibility assessment for mechanistic models in medical device submissions.[^22] OpenT1D can use the underlying idea: first define the question and intended use, then gather suitable evidence. This is a design basis, not a claim that the project thereby meets all submission requirements.
+
+| Question | Example evidence | What this does not yet prove |
 |---|---|---|
-| Voert de code het bedoelde model uit? | Referentievergelijking, eenhedencontrole, solverconvergentie | Dat het model de werkelijkheid voldoende beschrijft |
-| Kan iemand het experiment reproduceren? | Schone installatie, vastgelegde inputs en manifest | Dat de aannames juist zijn |
-| Beschrijft het model de bedoelde gegevens? | Toetsing op niet-gebruikte data, onzekerheidsdekking | Dat het effect van een andere behandeling klopt |
-| Is de interventieconclusie geloofwaardig? | Passende experimentele of klinische interventiedata | Geldigheid voor andere populaties of therapieën |
+| Does the code execute the intended model? | Reference comparison, unit checks, solver convergence | That the model describes reality sufficiently |
+| Can someone reproduce the experiment? | Clean installation, recorded inputs and manifest | That the assumptions are correct |
+| Does the model describe the intended data? | Assessment on unused data, uncertainty coverage | That the effect of a different treatment is correct |
+| Is the intervention conclusion credible? | Suitable experimental or clinical intervention data | Validity for other populations or therapies |
 
-De historische acceptatie van een UVA/Padova-simulator voor een bepaald preklinisch gebruik is geen overdraagbaar keurmerk voor afgeleide Python-code, nieuwe populaties of extra biologische modules.[^1][^40] Gebruik in documentatie daarom concrete bewoordingen over herkomst en eigen verificatie. Vermijd de aanduiding “FDA-goedgekeurde OpenT1D-simulator”.
+Historical acceptance of a UVA/Padova simulator for a particular preclinical use is not a transferable certification for derived Python code, new populations or additional biological modules.[^1][^40] Documentation should therefore use concrete wording about ancestry and local verification. Avoid the label “FDA-approved OpenT1D simulator”.
 
-### 8.2 Een bewijspakket per model en toepassing
+<a id="82-een-bewijspakket-per-model-en-toepassing"></a>
 
-Ieder model krijgt een beschrijving met de ondersteunde onderzoeksvragen, bronvergelijkingen, parameterherkomst, beperkingen en controles. Iedere samengestelde toepassing krijgt aanvullend een eigen dossier. Een versie van het model kan geschikt zijn voor een maaltijdrespons en tegelijk onvoldoende onderbouwd zijn voor inspanning of langdurige ziekteprogressie.
+### 8.2 An evidence package per model and application
 
-Een praktisch bewijspakket bevat: het protocol, de precieze model- en dataversies, de toetsgevallen, vooraf vastgelegde criteria, alle uitkomsten, de foutanalyse en een conclusie over de betreffende toepassing. Registreer bij elke claim of zij uit een bron komt, lokaal is gereproduceerd of onafhankelijk is gecontroleerd.
+Each model receives a description of supported research questions, source equations, parameter ancestry, limitations and checks. Each composed application additionally receives its own dossier. A model version may suit a meal response while being insufficiently supported for exercise or long-term disease progression.
 
-Gebruik geen universeel certificaat “gevalideerd”. Werk met expliciete aanduidingen als “upstreamreferentie gereproduceerd”, “getoetst op extern cohort voor deze uitkomst” of “exploratief buiten kalibratiebereik”. Zo kan OpenT1D nieuwe modules toelaten zonder hun wetenschappelijke volwassenheid te overschatten.
+A practical evidence package contains the protocol, exact model and data versions, test cases, prespecified criteria, all outcomes, error analysis and a conclusion about that application. Record for each claim whether it comes from a source, was reproduced locally or was independently checked.
 
-### 8.3 Identificeerbaarheid en onzekerheid
+Do not use a universal “validated” certificate. Use explicit labels such as “upstream reference reproduced”, “assessed on an external cohort for this outcome” or “exploratory outside the calibration range”. This lets OpenT1D admit new modules without overstating their scientific maturity.
 
-Een goede fit kan ontstaan doordat verschillende parametercombinaties hetzelfde meetpatroon produceren. Het protocol van Villaverde en collega's behandelt daarom identificeerbaarheid, parameterestimatie en onzekerheidsanalyse als samenhangende onderdelen van modelkalibratie.[^24]
+<a id="83-identificeerbaarheid-en-onzekerheid"></a>
 
-Voor OpenT1D betekent dit: begin met weinig te schatten parameters, documenteer priors of grenzen en onderzoek of de beschikbare data juist die parameters kunnen onderscheiden. Controleer vervolgens de onzekerheid van de voorspelling die voor de onderzoeksvraag relevant is. Een parameter hoeft niet perfect bepaald te zijn om een bepaalde voorspelling bruikbaar te maken; die bruikbaarheid moet wel afzonderlijk worden getoetst.
+### 8.3 Identifiability and uncertainty
 
-Onderscheid meetonzekerheid, parameteronzekerheid, verschillen tussen modelstructuren en numerieke fouten. Veel toevalsseeds verkleinen alleen de Monte Carlo-onzekerheid binnen de gekozen aannames. Ze herstellen geen ontbrekend biologisch mechanisme.
+A good fit can arise because different parameter combinations produce the same measurement pattern. The protocol by Villaverde and colleagues therefore treats identifiability, parameter estimation and uncertainty analysis as related parts of model calibration.[^24]
 
-### 8.4 Benchmarklekkage en controle van informatie
+For OpenT1D, this means starting with few parameters to estimate, documenting priors or bounds and investigating whether the available data can distinguish those parameters. Then check uncertainty in the prediction relevant to the research question. A parameter need not be perfectly determined for a particular prediction to be useful, but that usefulness must be assessed separately.
 
-Houd trainings-, afstemmings- en toetsmateriaal gescheiden. Bij persoonsgebonden modellen zijn zowel een latere periode van dezelfde persoon als een andere persoon of studie nuttige, maar verschillende toetsen. Neem normalisatie, imputatie en selectie van features mee in die scheiding.
+Distinguish measurement uncertainty, parameter uncertainty, differences between model structures and numerical errors. Many random seeds only reduce Monte Carlo uncertainty within the chosen assumptions. They do not repair a missing biological mechanism.
 
-Een controller mag in een realistische track alleen de informatie ontvangen die in dat scenario beschikbaar is. Verberg werkelijke toekomstige maaltijden, latente fysiologische parameters en foutloze bloedglucose als de controller alleen CGM zou ontvangen. simglucose documenteert toegang tot patiënttoestanden via extra controllerinformatie; de adapter moet dus bewust de toegestane observaties begrenzen.[^2]
+<a id="84-benchmarklekkage-en-controle-van-informatie"></a>
 
-Volledig publieke benchmarks hebben onvermijdelijk een risico op afstemming op de testset. Begin met transparante, bevroren protocollen en expliciete registratie van tuning. Voeg later extern beheerde of prospectief gekozen evaluaties toe. Een verborgen seed alleen is geen sterke toets op generalisatie als dezelfde patiënten en scenarioverdelingen al bekend zijn.
+### 8.4 Benchmark leakage and information control
 
-## 9. Datastrategie
+Keep training, tuning and assessment material separate. For person-specific models, both a later period from the same person and another person or study are useful but different tests. Include normalization, imputation and feature selection in that separation.
 
-### 9.1 Geselecteerde bronnen
+In a realistic track, a controller may receive only information available in that scenario. Hide actual future meals, latent physiological parameters and error-free blood glucose if the controller would receive only CGM. simglucose documents access to patient states through extra controller information; the adapter must therefore deliberately restrict permitted observations.[^2]
 
-| Bron | Relevantie | Toegang en beperking | Gebruik in de roadmap |
+Fully public benchmarks inevitably risk test-set tuning. Start with transparent frozen protocols and explicit tuning records. Later add externally managed or prospectively chosen evaluations. A hidden seed alone is not a strong generalization test when the same patients and scenario distributions are already known.
+
+<a id="9-datastrategie"></a>
+
+## 9. Data strategy
+
+<a id="91-geselecteerde-bronnen"></a>
+
+### 9.1 Selected sources
+
+| Source | Relevance | Access and limitation | Use in the roadmap |
 |---|---|---|---|
-| Synthetische upstreamreferenties | Adapter- en softwarecontrole | Rechten op bestanden en parameterprofielen vastleggen | Eerste release |
-| JAEB Diabetes datasets | Klinische AID- en andere diabetesstudies; catalogus met protocollen.[^17] | Per studie gebruiksvoorwaarden en feitelijke variabelen controleren.[^18] | Externe vergelijking en geselecteerde reconstructies |
-| MetaboNet | Geharmoniseerde CGM- en insulinegegevens uit meerdere bronnen.[^13] | Publieke en DUA-beperkte delen onderscheiden; bron- en bundelvoorwaarden controleren | Eerste kandidaat voor brede data-aansluiting |
-| OhioT1DM | Kleine, rijk beschreven dataset voor voorspelling.[^19] | DUA; oorspronkelijke paper beschrijft institutionele ondertekening | Optioneel; geen afhankelijkheid voor de basisinstallatie |
-| TrialNet TN10 via NIDDK | Teplizumab-preventiestudie met data beschikbaar op aanvraag.[^20] | Aanvraag en toegestane onderzoekstoepassing | Latere ziekteprogressie- en interventietoets |
-| HPAP / PANC-DB | Moleculaire, cellulaire en functionele eilandjesgegevens.[^21] | Registratie; geraadpleegde overeenkomst verbiedt herdistributie | Latere toets van cellulaire modules |
+| Synthetic upstream references | Adapter and software checks | Record rights to files and parameter profiles | First release |
+| JAEB Diabetes datasets | Clinical AID and other diabetes studies; catalogue with protocols.[^17] | Check terms and actual variables per study.[^18] | External comparison and selected reconstructions |
+| MetaboNet | Harmonized CGM and insulin data from multiple sources.[^13] | Distinguish public and DUA-restricted portions; check source and bundle terms | First candidate for broad data integration |
+| OhioT1DM | Small, richly described prediction dataset.[^19] | DUA; original paper describes institutional signature | Optional; no dependency for the basic installation |
+| TrialNet TN10 through NIDDK | Teplizumab prevention study with data available on request.[^20] | Application and authorized research use | Later disease progression and intervention assessment |
+| HPAP / PANC-DB | Molecular, cellular and functional islet data.[^21] | Registration; consulted agreement prohibits redistribution | Later assessment of cellular modules |
 
-MetaboNet rapporteert 3.135 deelnemers in de totale verzameling, waarvan 1.895 in het publieke deel. De gerapporteerde 1.228 patiëntjaren met overlappende CGM- en insulinegegevens horen bij de totale verzameling; het publieke deel bevat ongeveer 867 van zulke patiëntjaren.[^13] Deze aantallen zijn bronclaims, geen eigen audit. Ze maken duidelijk dat OhioT1DM niet de enige logische startbron is.
+MetaboNet reports 3,135 participants in the total collection, including 1,895 in the public portion. The reported 1,228 patient-years with overlapping CGM and insulin data concern the total collection; the public portion contains approximately 867 such patient-years.[^13] These numbers are source claims, not our own audit. They show that OhioT1DM is not the only logical initial source.
 
-De MetaboNet-Bench-preprint van juni 2026 beschrijft voor de geconsolideerde dataset een beperking tot niet-commercieel onderzoek en onderwijs, naast oorspronkelijke bronvoorwaarden.[^14] De daadwerkelijke voorwaarden van een gedownloade versie blijven beslissend. Een openbare download is geen algemene toestemming om data opnieuw te verspreiden of ieder industrieel gebruik mogelijk te maken.
+The June 2026 MetaboNet-Bench preprint describes a restriction to noncommercial research and education for the consolidated dataset, alongside original source terms.[^14] The actual terms of a downloaded version remain decisive. A public download is not general permission to redistribute data or enable every industrial use.
 
-### 9.2 Concreet selectiebeleid
+<a id="92-concreet-selectiebeleid"></a>
 
-Start met een datainventaris die per onderzoeksvraag vaststelt welke variabelen noodzakelijk zijn. Voor glucosevoorspelling kan een bepaalde CGM-reeks voldoende zijn, terwijl identificatie van maaltijddynamiek ook bruikbare maaltijdregistraties vereist. Controleer intervalbetekenis, ontbrekende waarden, feitelijke insulineafgifte, apparaatwissels en eventuele tijdverschuivingen vóór modelkalibratie.
+### 9.2 Concrete selection policy
 
-Gebruik voor het eerste externe experiment één geselecteerde dataset of een duidelijk gedefinieerde subset, met een vastgelegde bronversie en aparte toetsperiode. Breid vervolgens uit naar een tweede studie. Een grote verzameling slecht passende gegevens is minder nuttig dan een kleinere set die de gekozen vraag daadwerkelijk ondersteunt.
+Start with a data inventory establishing which variables are necessary per research question. A particular CGM series may suffice for glucose forecasting, whereas identifying meal dynamics also requires useful meal records. Check interval meaning, missing values, actual insulin delivery, device changes and any time shifts before model calibration.
 
-OpenT1D moet ruwe events kunnen bewaren naast geüniformeerde tijdreeksen. Anders kan bijvoorbeeld niet meer worden achterhaald of een waarde een totale insulinehoeveelheid per interval of een op dat moment geldende afgiftesnelheid was. Registreer de oorspronkelijke waarde, conversie en kwaliteitsmarkering waar dat voor reconstructie nodig is.
+For the first external experiment, use one selected dataset or clearly defined subset, with a recorded source version and separate assessment period. Then extend to a second study. A large collection of poorly matched data is less useful than a smaller set that actually supports the chosen question.
 
-### 9.3 Datakwaliteit is onderdeel van het model
+OpenT1D must preserve raw events alongside standardized time series. Otherwise, for example, it may no longer be possible to determine whether a value was total insulin per interval or a delivery rate effective at that moment. Record the original value, conversion and quality flag where needed for reconstruction.
 
-Maak onderscheid tussen nul, ontbrekend, onbekend en geïmputeerd. Een ontbrekende maaltijdregistratie is niet hetzelfde als bewijs dat er geen maaltijd was. Ook een nul in een insulinereeks kan verschillende betekenissen hebben, afhankelijk van het bronformaat.
+<a id="93-datakwaliteit-is-onderdeel-van-het-model"></a>
 
-Zoek naar overlap tussen studies voordat datasets over train en test worden verdeeld. Een deelnemer kan onder verschillende identifiers voorkomen. De MetaboNet-publicatie bespreekt dit probleem expliciet; overname van een harmonisatieformaat heft het risico voor nieuwe combinaties niet op.[^13]
+### 9.3 Data quality is part of the model
 
-Gebruik een versieerbare datakaart: populatie, inclusiecriteria, tijdsresolutie, ontbrekende modaliteiten, toestemming, variabelen en bekende beperkingen. Geef bij elk experiment de selectie en uitsluitingen weer. Rapporteer hoeveel deelnemers en welke delen van hun gegevens daadwerkelijk zijn gebruikt.
+Distinguish zero, missing, unknown and imputed. A missing meal record is not evidence that no meal occurred. A zero in an insulin series may also have different meanings depending on the source format.
 
-### 9.4 Open infrastructuur met gecontroleerde data
+Look for overlap between studies before dividing datasets into training and test sets. A participant may appear under different identifiers. The MetaboNet publication explicitly discusses this problem; adopting a harmonization format does not remove the risk for new combinations.[^13]
 
-Lever publieke demo's en CI-controles met synthetische of aantoonbaar herdistribueerbare gegevens. Voor beperkt toegankelijke studies levert OpenT1D een converter en lokaal uitvoerbaar protocol; de gebruiker verkrijgt zelf passende toegang. Bewaar onderzoeksgegevens buiten de broncoderepository en leg vast welke afgeleide resultaten gepubliceerd mogen worden.
+Use a versioned data card: population, inclusion criteria, temporal resolution, missing modalities, consent, variables and known limitations. Show selection and exclusions for every experiment. Report how many participants and which portions of their data were actually used.
 
-Voor onafhankelijk onderzoek zijn institutionele DUA's een mogelijke externe afhankelijkheid. Maak daarom geen dataset met zo'n overeenkomst noodzakelijk voor de eerste bruikbare release. Dit gaat om toegangsvoorwaarden, niet om hoeveel ontwikkelwerk iemand kan uitvoeren.
+<a id="94-open-infrastructuur-met-gecontroleerde-data"></a>
 
-## 10. De route naar multiscale T1D
+### 9.4 Open infrastructure with controlled data
 
-### 10.1 Apparaten, activiteit en nieuwe insulines
+Supply public demos and CI checks with synthetic or demonstrably redistributable data. For restricted studies, OpenT1D supplies a converter and locally executable protocol; the user obtains suitable access independently. Store research data outside the source repository and record which derived results may be published.
 
-Na M2 kan de glucose-/insulineproductlijn zelfstandig worden uitgebreid, zonder eerst het immuunsysteem te modelleren. Prioriteer daarbij een vraag met een bestaande modelbasis: een sensorfoutmodel, een afgiftevertraging, een activiteitsscenario of een andere insulinekinetiek. py-mgipsim en de latere UVA/Padova-literatuur zijn concrete vertrekpunten voor respectievelijk activiteit en aangepaste toedieningsmodellen.[^8][^41]
+Institutional DUAs may be an external dependency for independent research. Therefore do not make a dataset with such an agreement necessary for the first useful release. This concerns access terms, not how much development work someone can perform.
 
-Voor nieuwe insulines moet onderscheid worden gemaakt tussen farmacokinetiek, de concentratie in de tijd, en farmacodynamiek, het effect daarvan. Een andere formulering als louter “sneller werkende insuline” invoeren is alleen verantwoord als de gekozen parametrisatie die toepassing ondersteunt. Begin met een gepubliceerd referentieprofiel, toets de losse module en daarna de koppeling aan glucose-uitkomsten.
+<a id="10-de-route-naar-multiscale-t1d"></a>
 
-Voor apparaten geldt een vergelijkbare volgorde: eerst het relevante meet- of afgiftegedrag, daarna de gevolgen voor een controller. Een parameterset met een commerciële merknaam is geen bewijs dat het huidige product nauwkeurig wordt gesimuleerd. Apparatuurversie, modelbron en toepassingsgrenzen moeten zichtbaar zijn.
+## 10. The route toward multiscale T1D
 
-Deze uitbreidingen vormen een keuzetak op basis van de eerstvolgende onderzoeksvraag. Ze zijn geen verplichte omweg naar bètacel- of immuunonderzoek. Ook voor combinatietherapieën blijft gelden dat ieder geclaimd effect een passend mechanisme en toetsbasis vereist.
+<a id="101-apparaten-activiteit-en-nieuwe-insulines"></a>
 
-### 10.2 Personalisatie van glucose-/insulinedynamiek
+### 10.1 Devices, activity and new insulins
 
-ReplayBG biedt een concrete route: eerst parameters identificeren uit CGM, insuline en koolhydraten, daarna gewijzigde invoeren simuleren.[^9] De oorspronkelijke studie toetste de methodologie op 100 virtuele personen en presenteerde twee casussen met echte gegevens. Dat is bruikbaar uitgangsbewijs, maar geen algemene bevestiging van individuele behandelvoorspellingen in iedere klinische situatie.
+After M2, the glucose/insulin product line can expand independently, without first modeling the immune system. Prioritize a question with an existing model basis: a sensor fault model, delivery delay, activity scenario or different insulin kinetics. py-mgipsim and later UVA/Padova literature are concrete starting points for activity and adapted delivery models respectively.[^8][^41]
 
-Begin met reconstructie en voorspelling op apart gehouden gegevens. Voer daarna interventietesten uit waarvan de verwachte reactie onafhankelijk bekend is. Leg vast welke omstandigheden bij een replay gelijk worden verondersteld: gedrag, inspanning, voeding, ziekte en modelparameters kunnen in werkelijkheid mede door de behandeling veranderen.
+For new insulins, distinguish pharmacokinetics, the concentration over time, from pharmacodynamics, its effect. Introducing another formulation merely as “faster-acting insulin” is defensible only if the chosen parameterization supports that use. Start with a published reference profile, test the standalone module and then its coupling to glucose outcomes.
 
-Voor OpenT1D is een gepersonaliseerd model een versie van een model met persoonsgebonden gegevens, een kalibratieprocedure en onzekerheid. Reserveer een sterkere digital-twinclaim voor een toepassing met toetsbare persoonskoppeling, een updateprocedure en bewijs voor het bedoelde gebruik. De grens moet in de projectdocumentatie expliciet staan.
+A similar sequence applies to devices: first the relevant measurement or delivery behavior, then its consequences for a controller. A parameter set carrying a commercial brand name does not prove accurate simulation of the current product. Device version, model source and scope must be visible.
 
-### 10.3 Bètacelfunctie als eerste biologische uitbreiding
+These extensions form an optional branch based on the next research question. They are not a mandatory detour toward beta-cell or immune research. For combination therapies too, each claimed effect requires a suitable mechanism and assessment basis.
 
-De logische brug naar ziekteverandering is endogene insulinesecretie en functionele bètacelcapaciteit. C-peptide-gebaseerde minimal-modelmethoden laten zien hoe secretie en gevoeligheid uit dynamische metingen kunnen worden geschat.[^32] Die oorspronkelijke methodologie is geen automatische validatie voor T1D, transplantaties of ieder assayprotocol; een nieuwe toepassing vraagt passende gegevens.
+<a id="102-personalisatie-van-glucose-insulinedynamiek"></a>
 
-Een eerste module moet daarom een beperkt aantal eigenschappen beschrijven, bijvoorbeeld secretierespons op glucose, functionele capaciteit en C-peptidekinetiek. Meetbare secretiefunctie en anatomische celmassa moeten afzonderlijke begrippen blijven. Als hun afzonderlijke waarden niet uit de gegevens zijn af te leiden, rapporteer dan een effectieve functionele capaciteit in plaats van een schijnbaar exacte celmassa.
+### 10.2 Personalizing glucose/insulin dynamics
 
-De eerste onderzoeksvraag kan zijn: welke glucose- en insuline-uitkomsten voorspelt een model bij verschillende onderbouwde niveaus van resterende secretie? Toets de secretiekant aan dynamische metingen en de metabole kant aan gegevens die niet voor afstemming zijn gebruikt. Onderzoek bovendien of koppeling van die twee kanten de voorspelling verbetert boven een eenvoudiger model.
+ReplayBG provides a concrete route: first identify parameters from CGM, insulin and carbohydrates, then simulate changed inputs.[^9] The original study assessed the methodology on 100 virtual people and presented two cases with real data. This is useful initial evidence, but not general confirmation of individual treatment predictions in every clinical situation.
 
-De technische koppeling vraagt aandacht voor de plaats waar insuline verschijnt. Endogene afgifte en subcutane toediening zijn niet identiek. Een graft heeft bovendien een implantatieplaats. Beschrijf toedieningsroute, compartiment en extractie in het contract en laat een domeinexpert de koppeling beoordelen.
+Start with reconstruction and prediction on held-out data. Then run intervention tests whose expected response is independently known. Record which conditions are assumed unchanged during replay: behavior, exercise, nutrition, illness and model parameters may themselves change with treatment in reality.
 
-### 10.4 Celtherapie als afgebakend volgend experiment
+For OpenT1D, a personalized model is a model version with person-specific data, a calibration procedure and uncertainty. Reserve a stronger digital-twin claim for an application with testable linkage to a person, an update procedure and evidence for the intended use. The boundary must be explicit in project documentation.
 
-De fase 1–2-publicatie over zimislecel uit 2025 rapporteerde insulineonafhankelijkheid na een jaar bij 10 van de 12 deelnemers die de volledige dosis hadden gekregen en die follow-up hadden bereikt. Alle deelnemers kregen immuunsuppressie; het betrof een kleine studie met interimanalyses.[^36] Deze resultaten bieden aanknopingspunten voor uitkomsten en mechanistische vragen, geen volledige gegevensbasis voor een universele transplantatiesimulator.
+<a id="103-bètacelfunctie-als-eerste-biologische-uitbreiding"></a>
 
-Een eerste celtherapieonderzoek kan zich richten op de gevoeligheid van glucose-uitkomsten voor functionele graftcapaciteit en verlies van functie. Voeg zuurstoftransport, vascularisatie, encapsulatie of lokale immuunreacties alleen toe wanneer ze nodig zijn om een specifieke vraag te beantwoorden en meetgegevens beschikbaar zijn. Elke extra module moet een toetsbare verbetering leveren.
+### 10.3 Beta-cell function as the first biological extension
 
-Definieer functionele genezing voor een experiment operationeel: welke mate van insulineonafhankelijkheid, welke glucoseregulatie, hoe lang behouden, en onder welke aanvullende behandeling? Een platform mag verschillende definities ondersteunen, maar mag kortdurende insulineonafhankelijkheid niet stilzwijgend gelijkstellen aan blijvende genezing zonder immuunsuppressie.
+The logical bridge toward disease modification is endogenous insulin secretion and functional beta-cell capacity. C-peptide-based minimal-model methods show how secretion and sensitivity can be estimated from dynamic measurements.[^32] That original methodology does not automatically validate T1D, transplantation or every assay protocol; a new application requires suitable data.
 
-### 10.5 Immuunsysteem en ziekteprogressie
+A first module should therefore describe a limited number of properties, such as glucose-stimulated secretion, functional capacity and C-peptide kinetics. Measurable secretory function and anatomical cell mass must remain separate concepts. If their separate values cannot be inferred from data, report effective functional capacity rather than apparently exact cell mass.
 
-Het T1D PhysioLab-model laat zien dat uitgebreide koppeling van immuuncellen, eilandjes en ziekteverloop mogelijk is. Het gepubliceerde toepassingsgebied betreft echter de NOD-muis.[^33] Daarmee is het een architectuur- en hypothesebron, geen direct gevalideerde menselijke module. Beschikbaarheid van herbruikbare broncode en rechten zijn hier niet vastgesteld.
+The first research question could be: which glucose and insulin outcomes does a model predict at different supported levels of residual secretion? Assess secretion against dynamic measurements and metabolism against data not used for tuning. Also investigate whether coupling the two improves prediction over a simpler model.
 
-Begin voor menselijke ziekteprogressie met een beperkte vraag en de benodigde observabelen. Een mogelijke eerste toets is het reproduceren van een gepubliceerde interventie-uitkomst bij de juiste ziektefase. TN10 onderzocht vertraging van diagnose bij deelnemers met een hoog risico; PROTECT onderzocht behoud van bètacelfunctie kort na diagnose.[^34][^35] Deze populaties en eindpunten mogen niet tot één generieke “T1D-behandeling” worden samengevoegd.
+The technical coupling requires attention to where insulin appears. Endogenous secretion and subcutaneous delivery are not identical. A graft also has an implantation site. Describe delivery route, compartment and extraction in the contract and have a domain expert assess the coupling.
 
-Gebruik eerst een transparant, eenvoudig progressiemodel als referentie. Vergelijk vervolgens een mechanistische uitbreiding op extra voorspellend vermogen, identificeerbaarheid en interventiegedrag. Een model dat historische behandelarmen kan fitten moet een andere studie of vooraf apart gehouden interventie kunnen doorstaan voordat een bredere voorspellende claim gerechtvaardigd is.
+<a id="104-celtherapie-als-afgebakend-volgend-experiment"></a>
 
-Graftafstoting, auto-immuniteit en effecten van immuunsuppressie zijn afzonderlijke processen. Ze hoeven niet allemaal in de eerste module te zitten. Het model moet wel expliciet maken welke ervan zijn opgenomen en welke als externe randvoorwaarde worden behandeld.
+### 10.4 Cell therapy as a bounded next experiment
 
-### 10.6 Multiscale integratie als resultaat
+The 2025 phase 1–2 zimislecel publication reported insulin independence after one year in 10 of the 12 participants who had received the full dose and reached that follow-up. All participants received immunosuppression; this was a small study with interim analyses.[^36] These results offer starting points for outcomes and mechanistic questions, not a complete data basis for a universal transplantation simulator.
 
-Het einddoel is een familie van compatibele modellen voor verschillende vragen. Voor een AID-experiment kan een goed onderbouwd glucosemodel voldoende zijn. Voor een eilandjesimplantaat kan lokale transportdynamiek nodig zijn. Voor preventie kan langdurige immuun- en bètacelprogressie centraal staan.
+A first cell-therapy study could focus on the sensitivity of glucose outcomes to functional graft capacity and loss of function. Add oxygen transport, vascularization, encapsulation or local immune responses only when needed to answer a specific question and measurement data are available. Every additional module must deliver a testable improvement.
 
-Een multiscale compositie is pas geslaagd wanneer zij aantoonbaar iets toevoegt aan de voorspelling of verklaring, tegen acceptabele onzekerheid en rekenkosten. De onderzoeksvraag bepaalt dus welke schalen worden gekoppeld. Een zo groot mogelijk model is geen zelfstandig succescriterium.
+Define functional cure operationally for an experiment: what degree of insulin independence, what glucose regulation, sustained for how long and under what additional treatment? A platform may support different definitions, but must not silently equate short-term insulin independence with permanent cure without immunosuppression.
 
-## 11. Rol van AI
+<a id="105-immuunsysteem-en-ziekteprogressie"></a>
 
-### 11.1 AI bij ontwikkeling
+### 10.5 Immune system and disease progression
 
-Gebruik AI intensief voor adapters, documentatie, bronverwijzingen, testgevallen, experimentconfiguraties en analysecode. De belangrijkste discipline is dat gegenereerde vergelijkingen, conversies en parameterwaarden herleidbaar blijven tot een gecontroleerde bron. Een plausibele toelichting is geen vervanging voor een numerieke referentie.
+The T1D PhysioLab model shows that extensive coupling of immune cells, islets and disease course is possible. Its published scope, however, concerns the NOD mouse.[^33] It is therefore a source of architecture and hypotheses, not a directly validated human module. Availability of reusable source code and rights has not been established here.
 
-Organiseer werk in kleine controleerbare wijzigingen. Een adapter krijgt bijvoorbeeld een bekende invoer en een verwachte upstreamtijdreeks. Een metriek krijgt handmatig berekenbare grensgevallen. Een biologische uitbreiding krijgt expliciete aannames en een onafhankelijke toets. Deze controles kunnen geautomatiseerd worden zonder te veronderstellen dat de bouwsnelheid laag is.
+For human disease progression, start with a limited question and the necessary observables. One possible first assessment is reproducing a published intervention outcome at the right disease stage. TN10 investigated delaying diagnosis in high-risk participants; PROTECT investigated preserving beta-cell function shortly after diagnosis.[^34][^35] These populations and endpoints must not be merged into one generic “T1D treatment”.
 
-### 11.2 AI als onderzoeksonderwerp
+First use a transparent, simple progression model as a reference. Then compare a mechanistic extension for additional predictive power, identifiability and intervention behavior. A model that fits historical treatment arms must withstand another study or an intervention held out in advance before a broader predictive claim is justified.
 
-Voeg AI-methoden in oplopende afhankelijkheid toe: parameterzoeken en gevoeligheidsanalyse; selectie van informatieve experimenten; surrogaatmodellen voor dure berekeningen; daarna nieuwe controllers of behandelingsstrategieën. Deze volgorde is een aanbeveling om iedere methode tegen begrijpelijke referenties te kunnen toetsen.
+Graft rejection, autoimmunity and immunosuppression effects are separate processes. They need not all appear in the first module. The model must explicitly state which are included and which are treated as external boundary conditions.
 
-Een RL-controller hoort een eigen afstemmingsprotocol en afgescheiden toetsgevallen te hebben. Test overdracht naar een andere fysiologische modelfamilie en rapporteer gevoeligheid voor observatie- en apparaatfouten. Een surrogate moet ook buiten zijn trainingspunten worden getoetst, inclusief een criterium wanneer de oorspronkelijke engine weer nodig is.
+<a id="106-multiscale-integratie-als-resultaat"></a>
 
-Gebruik een taalmodel aanvankelijk voor voorstellen en uitleg rond experimenten. Laat formele configuratievalidatie en de simulator bepalen wat werkelijk wordt uitgevoerd. Een automatisch gevonden strategie blijft een onderzoekshypothese totdat passend interventiebewijs beschikbaar is.
+### 10.6 Multiscale integration as an outcome
 
-## 12. Open source, wetenschappelijke samenwerking en adoptie
+The ultimate goal is a family of compatible models for different questions. A well-supported glucose model may suffice for an AID experiment. Local transport dynamics may be necessary for an islet implant. Long-term immune and beta-cell progression may be central to prevention.
 
-### 12.1 Licenties en distributie
+A multiscale composition succeeds only when it demonstrably improves prediction or explanation at acceptable uncertainty and computational cost. The research question therefore determines which scales are coupled. The largest possible model is not a success criterion in itself.
 
-Advies voor zelfstandig geschreven kerncode: Apache-2.0, vanwege de brede hergebruiksmogelijkheden en expliciete patentlicentie voor bijdragen.[^38] Dit is een voorstel voor nieuwe code; het verandert geen rechten op code, modellen, datasets of parameterbestanden van anderen.
+<a id="11-rol-van-ai"></a>
 
-Maak per dependency zichtbaar welke licentie geldt. simglucose, GluCoEnv en LT1 publiceren MIT-code, terwijl onder meer py_replay_bg, py-mgipsim en py_agata GPL-3.0 aangeven.[^2][^3][^4][^8][^10][^16] Bepaal daarom per daadwerkelijk te verspreiden combinatie welke verplichtingen gelden. Een optionele plug-in of een apart proces is geen automatische oplossing voor licentiecompatibiliteit; de wijze én betekenis van de koppeling zijn relevant.[^37]
+## 11. The role of AI
 
-Begin met een helder distribueerbare basis en documenteer aanvullende engines afzonderlijk. Wanneer een GPL-engine essentieel wordt, kan verspreiding van de betreffende combinatie onder GPL een bewuste keuze zijn. Een publicatie, een dataset en de implementatie daarvan kunnen allemaal verschillende voorwaarden hebben.
+<a id="111-ai-bij-ontwikkeling"></a>
 
-### 12.2 Een bijdrage moet klein genoeg zijn om te beoordelen
+### 11.1 AI in development
 
-De ideale eerste externe bijdrage is één controller, modeladapter of benchmarkscenario met een reproduceerbaar voorbeeld. Vraag bij een modelbijdrage om herkomst, ondersteunde toepassing, licentie, parameterbasis, referentie-uitvoer en beperkingen. Maak softwarebijdragen en wetenschappelijke claims afzonderlijk beoordeelbaar.
+Use AI extensively for adapters, documentation, references, test cases, experiment configurations and analysis code. The key discipline is keeping generated equations, conversions and parameter values traceable to a checked source. A plausible explanation does not replace a numerical reference.
 
-Gebruik eenvoudige besluitdocumenten voor wijzigingen aan eenheden, interfaces, metrics en benchmarkprotocollen. Versieer wetenschappelijke protocollen afzonderlijk van de software: een andere TIR-berekening of andere populatieselectie kan resultaten veranderen zonder dat de API verandert.
+Organize work into small, verifiable changes. An adapter, for example, receives a known input and expected upstream time series. A metric receives manually calculable boundary cases. A biological extension receives explicit assumptions and an independent assessment. These checks can be automated without assuming a slow development pace.
 
-Bewaar citeerbare releases, een changelog, bijdragen van oorspronkelijke modelauteurs en een correctieprocedure voor fouten in eerdere resultaten. Het project heeft aanvankelijk geen omvangrijke bestuurlijke structuur nodig. Het heeft wel een herkenbare verantwoordelijke nodig voor releases en een manier om inhoudelijke kritiek in een herhaalbaar experiment om te zetten.
+<a id="112-ai-als-onderzoeksonderwerp"></a>
 
-### 12.3 Externe samenwerking gericht op bewijs
+### 11.2 AI as a research subject
 
-Relevante gesprekspartners zijn de beheerders van de geselecteerde simulatoren, groepen die glucosecontrole onderzoeken, de betrokken datahouders en later onderzoekers naar eilandjesfunctie of immunotherapie. Een concreet samenwerkingsvoorstel is sterker dan een brede platformpitch: bijvoorbeeld een upstreamscenario reproduceren en laten beoordelen of de adapter het bedoelde gedrag behoudt.
+Add AI methods in increasing dependency order: parameter search and sensitivity analysis; selection of informative experiments; surrogate models for expensive calculations; then new controllers or treatment strategies. This sequence is a recommendation for assessing every method against understandable references.
 
-De eerste vragen aan mogelijke gebruikers zijn welke vergelijking nu moeilijk te herhalen is, welke uitkomsten voor hen beslissend zijn en wat zij nodig hebben om een eigen model aan te sluiten. Het succescriterium is dat zij een onderzoekstaak kunnen uitvoeren, niet dat zij de visie interessant vinden.
+An RL controller needs its own tuning protocol and separate test cases. Test transfer to another physiological model family and report sensitivity to observation and device faults. A surrogate must also be assessed outside its training points, including a criterion for when the original engine is needed again.
 
-Meet adoptie met zelfstandig gereproduceerde experimenten, externe adapters en gebruik in concrete analyses. Sterren, downloads en aantallen gesimuleerde jaren zijn aanvullende signalen. Ze vervangen geen bewijs dat anderen de infrastructuur betrouwbaar kunnen gebruiken.
+Initially use a language model for proposals and explanations around experiments. Let formal configuration validation and the simulator determine what actually runs. An automatically discovered strategy remains a research hypothesis until appropriate intervention evidence is available.
 
-## 13. Roadmap op basis van beslismomenten
+<a id="12-open-source-wetenschappelijke-samenwerking-en-adoptie"></a>
 
-| Mijlpaal | Op te leveren resultaat | Voorwaarde om door te gaan |
+## 12. Open source, scientific collaboration and adoption
+
+<a id="121-licenties-en-distributie"></a>
+
+### 12.1 Licensing and distribution
+
+Recommendation for independently written core code: Apache-2.0, for broad reuse and an explicit contributor patent license.[^38] This is a proposal for new code; it changes no rights to others' code, models, datasets or parameter files.
+
+Make each dependency's license visible. simglucose, GluCoEnv and LT1 publish MIT code, while py_replay_bg, py-mgipsim and py_agata, among others, indicate GPL-3.0.[^2][^3][^4][^8][^10][^16] Determine obligations for each combination actually distributed. An optional plugin or separate process does not automatically resolve license compatibility; both the manner and meaning of coupling matter.[^37]
+
+Start with a clearly distributable foundation and document additional engines separately. If a GPL engine becomes essential, distributing the relevant combination under GPL may be a deliberate choice. A publication, dataset and its implementation can all have different terms.
+
+<a id="122-een-bijdrage-moet-klein-genoeg-zijn-om-te-beoordelen"></a>
+
+### 12.2 A contribution must be small enough to review
+
+The ideal first external contribution is one controller, model adapter or benchmark scenario with a reproducible example. Request ancestry, supported use, license, parameter basis, reference output and limitations for a model contribution. Make software contributions and scientific claims separately assessable.
+
+Use simple decision records for changes to units, interfaces, metrics and benchmark protocols. Version scientific protocols separately from software: a different TIR calculation or population selection can change results without changing the API.
+
+Preserve citable releases, a changelog, contributions by original model authors and a correction procedure for errors in earlier results. Initially, the project needs no extensive governance structure. It does need an identifiable release owner and a way to turn substantive criticism into a repeatable experiment.
+
+<a id="123-externe-samenwerking-gericht-op-bewijs"></a>
+
+### 12.3 External collaboration focused on evidence
+
+Relevant contacts are maintainers of selected simulators, glucose-control research groups, the data holders involved and later researchers in islet function or immunotherapy. A concrete collaboration proposal is stronger than a broad platform pitch: for example, reproducing an upstream scenario and having the adapter assessed for preservation of intended behavior.
+
+The first questions for potential users are which comparison is currently difficult to repeat, which outcomes are decisive for them and what they need to connect their own model. The success criterion is that they can perform a research task, not that they find the vision interesting.
+
+Measure adoption through independently reproduced experiments, external adapters and use in concrete analyses. Stars, downloads and numbers of simulated years are supplementary signals. They do not replace evidence that others can use the infrastructure reliably.
+
+<a id="13-roadmap-op-basis-van-beslismomenten"></a>
+
+## 13. Roadmap based on decision points
+
+| Milestone | Deliverable | Condition for proceeding |
 |---|---|---|
-| M0 — Keuze en referenties | Onderbouwde keuze tussen uitbreiding en integratielaag; uitvoerbare upstreamreferenties | Modelherkomst, rechten en reproduceerbaarheid voldoende helder |
-| M1 — Volledig basisexperiment | Eén engine, referentiecontrollers, versieerbaar scenario, metrics en herhaalbaar rapport | Adapter behoudt upstreamgedrag; invoer- en metriekcontroles slagen |
-| M2 — Vergelijking tussen modellen | Ten minste twee fysiologische modelfamilies met compatibele tracks | Verschillen in conclusies worden zichtbaar en aannames zijn vergelijkbaar |
-| M3 — Externe data en personalisatie | Eén gedocumenteerde datapijplijn, beperkte kalibratie en onafhankelijke toets | Geen datalek naar toetsmateriaal; onzekerheid en falende gevallen gerapporteerd |
-| M4 — Bètacelfunctie | Secretie-/C-peptidemodule met passende gegevens en metabole koppeling | Meerwaarde en identificeerbaarheid onderzocht; koppeling inhoudelijk beoordeeld |
-| M5 — Gerichte therapie | Eén celtherapie- óf immuuntherapievraag met een eigen bewijspakket | Resultaten houden stand op passend apart gehouden materiaal |
-| M6 — Multiscale onderzoek | Geselecteerde gekoppelde modules, efficiënte uitvoering en experimentele zoekmethoden | Extra complexiteit levert meetbare winst boven eenvoudiger modellen |
+| M0 — Selection and references | Supported choice between extension and integration layer; executable upstream references | Model ancestry, rights and reproducibility sufficiently clear |
+| M1 — Complete basic experiment | One engine, reference controllers, versioned scenario, metrics and repeatable report | Adapter preserves upstream behavior; input and metric checks pass |
+| M2 — Comparison between models | At least two physiological model families with compatible tracks | Differences in conclusions are visible and assumptions comparable |
+| M3 — External data and personalization | One documented data pipeline, limited calibration and independent assessment | No leakage into assessment material; uncertainty and failed cases reported |
+| M4 — Beta-cell function | Secretion/C-peptide module with suitable data and metabolic coupling | Added value and identifiability investigated; coupling assessed scientifically |
+| M5 — Targeted therapy | One cell-therapy or immunotherapy question with its own evidence package | Results hold on suitable separately held-out material |
+| M6 — Multiscale research | Selected coupled modules, efficient execution and experimental search methods | Extra complexity produces measurable benefit over simpler models |
 
-Deze tabel vat de onderzoeksgebieden samen; de actuele afhankelijkheden en acceptatiecriteria staan uitsluitend in [de roadmap](../../ROADMAP.md). M0–M2 leveren de eerste werkende onderzoekstaak van het bredere laboratorium. Databeoordeling begint al in M0. M3, M4 en de apparaattak kunnen naast elkaar lopen zodra hun eigen modelkoppelingen en gegevens beschikbaar zijn. M4 vereist dus niet dat heel M3 is afgerond. M5–M6 bouwen op de mechanismen en het bewijs die hun gekozen vraag nodig heeft. Er staat geen beloofde datum voor een volledige digital twin.
+This table summarizes research areas; current dependencies and acceptance criteria live exclusively in [the roadmap](../../ROADMAP.md). M0–M2 deliver the broader laboratory's first working research task. Data assessment starts in M0. M3, M4 and the device branch can proceed alongside each other once their own model couplings and data are available. M4 therefore does not require all of M3 to be complete. M5–M6 build on the mechanisms and evidence needed by their selected question. There is no promised date for a complete digital twin.
 
-Technische voorbereiding kan vooruitlopen op een wetenschappelijke mijlpaal. Terwijl toegang tot gegevens wordt verkregen, kunnen bijvoorbeeld een synthetische testset, interface en analyseprocedure gereed worden gemaakt. Die voorbereiding krijgt niet de status “gevalideerde module” zolang het vereiste bewijs ontbreekt.
+Technical preparation can precede a scientific milestone. While data access is being obtained, for example, a synthetic test set, interface and analysis procedure can be prepared. That preparation does not receive “validated module” status while the required evidence is absent.
 
-## 14. Risico's en beslissingen
+<a id="14-risicos-en-beslissingen"></a>
 
-| Risico | Vroeg signaal | Gerichte reactie |
+## 14. Risks and decisions
+
+| Risk | Early signal | Focused response |
 |---|---|---|
-| Bestaande infrastructuur dupliceren | Het prototype herhaalt vooral LT1, APS TestBed of datatooling | Bestaande onderdelen hergebruiken; eigen werk richten op ontbrekende functies, koppelingen en bewijspakketten |
-| Verwarring tussen engines en modelfamilies | Twee implementaties van dezelfde basis gelden als onafhankelijke validatie | Herkomst registreren en minimaal één andere modelstructuur toetsen |
-| Onjuiste koppeling | Uitvoer lijkt plausibel, maar absorptie, extractie of tijdsvolgorde is dubbel gemodelleerd | Proceseigenaarschap, compartimenten en referentiebalansen expliciteren |
-| Overfitting aan kleine virtuele populaties | Goede gemiddelden, zwakke prestaties op nieuwe scenario's | Afgescheiden afstemming, nieuwe modelstructuur en externe gegevens |
-| Onbruikbare klinische data | Maaltijden, echte afgifte of tijdsinformatie ontbreken | Onderzoeksvraag aanpassen of geschiktere gegevens selecteren |
-| Te veel niet-identificeerbare parameters | Veel verschillende fits geven uiteenlopende interventievoorspellingen | Model reduceren of informatievere metingen zoeken |
-| Onvoldoende rechten | Open code bevat data of componenten met andere voorwaarden | Herkomst per asset; publieke kern met passende aparte datapaden |
-| Groei zonder externe bruikbaarheid | Veel modules, niemand reproduceert een resultaat zelfstandig | Eerst één externe gebruikstaak afronden |
-| Te sterke wetenschappelijke claim | Reconstructie wordt gepresenteerd als bewezen behandelvoorspelling | Claim beperken tot het werkelijk getoetste gebruik |
+| Duplicating existing infrastructure | The prototype mainly repeats LT1, APS TestBed or data tooling | Reuse existing components; focus custom work on missing functions, couplings and evidence packages |
+| Confusing engines with model families | Two implementations of the same basis count as independent validation | Record ancestry and assess at least one other model structure |
+| Incorrect coupling | Output looks plausible, but absorption, extraction or event order is modeled twice | Make process ownership, compartments and reference balances explicit |
+| Overfitting small virtual populations | Good averages, weak performance on new scenarios | Separate tuning, new model structure and external data |
+| Unusable clinical data | Meals, actual delivery or time information missing | Adapt the question or select more suitable data |
+| Too many non-identifiable parameters | Many different fits produce divergent intervention predictions | Reduce the model or seek more informative measurements |
+| Insufficient rights | Open code contains data or components with other terms | Ancestry per asset; public core with suitable separate data paths |
+| Growth without external usability | Many modules, nobody independently reproduces a result | Complete one external user task first |
+| Overstated scientific claim | Reconstruction presented as proven treatment prediction | Limit the claim to the use actually assessed |
 
-De belangrijkste directe beslissingen zijn de starttrack, de twee kandidaat-engines, de eerste upstreamreferentie, de betekenis van tijd en eenheden, en het rapportformaat. De exacte cloudarchitectuur, een algemene modelmarktplaats en een volledige immuunontologie kunnen wachten tot een concreet experiment ze vereist.
+The most important immediate decisions are the initial track, two candidate engines, first upstream reference, meaning of time and units, and report format. Exact cloud architecture, a general model marketplace and a complete immune ontology can wait until a concrete experiment requires them.
 
-Een overtuigende eerste publieke demonstratie laat dezelfde controllervergelijking zien op twee modelfamilies, met identieke informatievoorwaarden, alle fouten en reproduceerbare uitvoer. De wetenschappelijke uitkomst hoeft geen spectaculaire verbetering te zijn. Een goed verklaard verschil tussen modellen, dat een ander zelfstandig kan bevestigen, bewijst precies de waarde die OpenT1D wil leveren.
+A convincing first public demonstration shows the same controller comparison across two model families, with identical information conditions, all errors and reproducible output. The scientific outcome need not be a spectacular improvement. A well-explained difference between models that someone else can independently confirm demonstrates precisely the value OpenT1D aims to provide.
 
-## Bronnen
+<a id="bronnen"></a>
 
-De genummerde voetnoten vormen het volledige bronnenregister. Repositoryverwijzingen betreffen de geraadpleegde toestand; voor een uitvoerbaar experiment moeten commit of release en bijbehorende licentiebestanden alsnog worden vastgezet. Jaartallen bij papers zijn publicatiejaren, niet noodzakelijk de leeftijd van de oorspronkelijke gegevens.
+## Sources
 
-[^1]: Visentin et al. *The University of Virginia/Padova Type 1 Diabetes Simulator Matches the Glucose Traces of a Clinical Trial*. Diabetes Technology & Therapeutics, 2014. [Publicatie](https://pmc.ncbi.nlm.nih.gov/articles/PMC4074748/). Gebruikt voor klinische modeltoetsing en het specifieke historische preklinische toepassingsgebied.
-[^2]: Jinyu Xie en bijdragers. *simglucose*. [Repository en documentatie](https://github.com/jxx123/simglucose), [MIT-licentie](https://github.com/jxx123/simglucose/blob/master/LICENSE). Geraadpleegd 12 september 2026. Gebruikt voor modelherkomst, profielen, interfaces en toegang tot latente toestanden.
-[^3]: GluCoEnv-ontwikkelaars. *GluCoEnv*. [Repository](https://github.com/RL4H/GluCoEnv). Geraadpleegd 12 september 2026. Gebruikt voor PyTorch-uitvoering, herkomst van de fysiologie en repositorylicentie.
-[^4]: Heiko Peuscher en bijdragers. *LoopInsighT1*. [Repository](https://github.com/hpeuscher/loopinsight1), [MIT-licentie](https://github.com/hpeuscher/loopinsight1/blob/master/LICENSE.md). Geraadpleegd 12 september 2026.
-[^5]: Peuscher, Schrills, Eichenlaub en Jørgensen. *A Modular Open-Source Framework for In-Browser Diabetes Simulation*. IFAC-PapersOnLine 58(24), 309–314, 2024. [Artikel](https://doi.org/10.1016/j.ifacol.2024.11.055), [institutionele volledige tekst, vooral §2.2](https://backend.orbit.dtu.dk/ws/files/383717203/1-s2.0-S2405896324021827-main.pdf). Gebruikt voor architectuur en uitvoering zonder GUI.
-[^6]: Zhou, Kouzel, Ren en Alemzadeh. *Design and Validation of an Open-Source Closed-Loop Testbed for Artificial Pancreas Systems*. CHASE, 2022. [Auteursversie](https://arxiv.org/abs/2208.06479), [APS TestBed-repository](https://github.com/UVA-DSA/APS_TestBed). Gebruikt om overlap met bestaande multi-enginebenchmarking en foutinjectie vast te stellen.
-[^7]: McGill Diabetes Lab. *Artificial Pancreas Simulator*. [Repository](https://github.com/McGillDiabetesLab/artificial-pancreas-simulator). Geraadpleegd 12 september 2026. Gebruikt voor MATLAB-raamwerk, Hovorka-model en MIT-vermelding.
-[^8]: Illinois Tech-ontwikkelaars. *py-mgipsim*. [Repository](https://github.com/illinoistech-itm/py-mgipsim), [GPL-3.0-licentie](https://github.com/illinoistech-itm/py-mgipsim/blob/main/LICENSE). Geraadpleegd 12 september 2026. De oorspronkelijke mGIPsim-methodiek is beschreven in [*Simulation Software for Assessment of Nonlinear and Adaptive Multivariable Control Algorithms: Glucose–Insulin Dynamics in Type 1 Diabetes*](https://pmc.ncbi.nlm.nih.gov/articles/PMC7449052/), 2019. De relatie met elke actuele Python-modelvariant moet bij integratie worden gecontroleerd.
-[^9]: Cappon, Vettoretti, Sparacino, Del Favero en Facchinetti. *ReplayBG: A Digital Twin-Based Methodology to Identify a Personalized Model From Type 1 Diabetes Data and Simulate Glucose Concentrations to Assess Alternative Therapies*. IEEE Transactions on Biomedical Engineering 70(11), 3227–3238, 2023. [Publicatie en abstract](https://pubmed.ncbi.nlm.nih.gov/37368794/), DOI 10.1109/TBME.2023.3286856. Gebruikt voor de methode en omvang van de oorspronkelijke evaluatie.
-[^10]: Giacomo Cappon en bijdragers. *py_replay_bg*. [Repository](https://github.com/gcappon/py_replay_bg), [documentatie](https://gcappon.github.io/py_replay_bg/). Geraadpleegd 12 september 2026. Gebruikt voor beschikbaarheid van de Python-port en GPL-3.0-vermelding.
-[^11]: Sergazinov en collega's. *GlucoBench*. [Officiële repository](https://github.com/IrinaStatsLab/GlucoBench). Geraadpleegd 12 september 2026. Gebruikt voor bestaande voorspellingstaken; geen codehergebruik of licentievrijgave verondersteld.
-[^12]: GluPredKit-ontwikkelaars / Replica Health. *GluPredKit*. [Repository](https://github.com/replicahealth/GluPredKit). Geraadpleegd 12 september 2026. Gebruikt voor bestaande voorbereiding, training en evaluatie van glucosevoorspelling.
-[^13]: Wolff, Calhoun, Aiello, Qin en Royston. *MetaboNet: The Largest Publicly Available Consolidated Dataset for Type 1 Diabetes Management*. 2026. [Volledige auteursversie, tabel 1 en §2](https://arxiv.org/html/2601.11505v1), [tijdschriftpublicatie](https://doi.org/10.1177/19322968261441637). Gebruikt voor aantallen, publieke versus beperkte data en overlap tussen deelnemers. De cijfers volgen de geraadpleegde auteursversie; een downloadversie kan afwijken.
-[^14]: Jeffries et al. *MetaboNet-Bench: A Multi-modal Benchmark for Glucose Forecasting in Type 1 Diabetes*. Preprint, 17 juni 2026. [Publicatie, inclusief appendix over datarechten](https://arxiv.org/html/2606.18640v1), [repository](https://github.com/njeffrie/MetaboNet-Bench). Gebruikt voor bestaande multimodale evaluatie en gerapporteerde voorwaarden van de dataverzameling. Publicatie als preprint impliceert geen afgeronde peerreview; code- en datalicentie zijn afzonderlijke vragen.
-[^15]: BabelBetes-ontwikkelaars. *BabelBetes*. [Repository](https://github.com/nudgebg/babelbetes), [PyPI-release 0.3.1 van 2 juni 2026](https://pypi.org/project/babelbetes/0.3.1/). Gebruikt voor bestaande normalisatie van klinische diabetesgegevens.
-[^16]: Cappon, Sparacino en Facchinetti. *AGATA: A toolbox for automated glucose data analysis*. 2023, DOI 10.1177/19322968221147570. [Python-repository](https://github.com/gcappon/py_agata). Geraadpleegd 12 september 2026. Gebruikt voor analysetooling en GPL-3.0-vermelding.
-[^17]: Jaeb Center for Health Research. *Diabetes: Datasets & Documents*. [Studiecatalogus](https://public.jaeb.org/datasets/diabetes). Geraadpleegd 12 september 2026. Gebruikt voor bestaande studies en protocollen, niet als garantie over de inhoud van ieder databestand.
-[^18]: Jaeb Center for Health Research. *DCLP3 Public Dataset: terms of use*. [Aanvraag- en voorwaardenpagina](https://public.jaeb.org/dataset/573). Geraadpleegd 12 september 2026. Gebruikt voor registratie, attributie en studiegebonden voorwaarden.
-[^19]: Marling en Bunescu. *The OhioT1DM Dataset for Blood Glucose Level Prediction: Update 2020*. CEUR Workshop Proceedings, 2020. [Volledige tekst, met name §5](https://ceur-ws.org/Vol-2675/paper11.pdf). Gebruikt voor datasetomvang en de beschreven DUA-route; actuele individuele toegang is niet bevestigd.
-[^20]: Krischer / NIDDK Central Repository. *Anti-CD3 Mab (Teplizumab) for Prevention of Diabetes in Relatives At-Risk for Type 1 Diabetes Mellitus (TN10)*. Dataset, versie 3, bijgewerkt 21 mei 2024. [Studiepagina](https://repository.niddk.nih.gov/study/113), DOI 10.58020/vwa2-e568. Geraadpleegd 12 september 2026. Data beschikbaar op aanvraag.
-[^21]: Human Pancreas Analysis Program. PANC-DB [beschrijving](https://hpap.pmacs.upenn.edu/about-pancdb), [beschikbare assays en toegang](https://hpap.pmacs.upenn.edu/faq), [gebruiksovereenkomst](https://hpap.pmacs.upenn.edu/user-agreement). Geraadpleegd 12 september 2026. Gebruikt voor datatypes, registratie en herdistributiebeperking; de voorwaarden bij feitelijke toegang opnieuw vastleggen.
-[^22]: U.S. Food and Drug Administration. *Assessing the Credibility of Computational Modeling and Simulation in Medical Device Submissions*. Definitieve guidance, november 2023. [Officiële publicatie](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/assessing-credibility-computational-modeling-and-simulation-medical-device-submissions). Gebruikt als kader voor toepassingsgerichte geloofwaardigheid.
-[^23]: Battelino et al. *Clinical Targets for Continuous Glucose Monitoring Data Interpretation: Recommendations From the International Consensus on Time in Range*. Diabetes Care 42(8), 1593–1603, 2019. [Publicatie](https://pubmed.ncbi.nlm.nih.gov/31177185/), [volledige tekst](https://pmc.ncbi.nlm.nih.gov/articles/PMC6973648/). Gebruikt voor de glucosebanden van TIR, TBR en TAR.
-[^24]: Villaverde, Pathirana, Fröhlich, Hasenauer en Banga. *A protocol for dynamic model calibration*. Briefings in Bioinformatics 23(1), bbab387, 2022; online 2021. [Volledige tekst](https://pmc.ncbi.nlm.nih.gov/articles/PMC8769694/). Gebruikt voor samenhang tussen identificeerbaarheid, kalibratie en onzekerheid.
-[^25]: SBML Editors. *SBML Level 3 Version 2 Core, Release 2*. 2019. [Officiële specificatiepagina](https://sbml.org/documents/specifications/level-3/version-2/core/).
-[^26]: CellML Project. *CellML language specifications*. [Officiële specificaties](https://www.cellml.org/specifications). Geraadpleegd 12 september 2026.
-[^27]: SED-ML Community. *Simulation Experiment Description Markup Language*. [Officiële beschrijving](https://sed-ml.org/). Geraadpleegd 12 september 2026. De te ondersteunen versie moet bij implementatie expliciet worden vastgelegd.
-[^28]: COMBINE Community. *COMBINE Archive Specification / OMEX, version 1*. [Officiële specificatie](https://raw.githubusercontent.com/combine-org/combine-specifications/main/specifications/files/omex.version-1.pdf). Geraadpleegd 12 september 2026.
-[^29]: Modelica Association, FMI Project. *Functional Mock-up Interface Specification 3.0.2*. [Officiële specificatie](https://fmi-standard.org/docs/3.0.2/). Geraadpleegd 12 september 2026. Gebruikt voor model exchange, co-simulatie en verantwoordelijkheden van de importer.
-[^30]: BioSimulations/BioSimulators. [Platformdocumentatie](https://docs.biosimulations.org/), [test suite](https://docs.biosimulators.org/Biosimulators_test_suite/). Geraadpleegd 12 september 2026. Gebruikt voor herbruikbare uitvoeringsconventies en standaardvalidatie.
-[^31]: PEtab-ontwikkelaars. [PEtab-documentatie](https://petab.readthedocs.io/en/latest/), [formaatspecificatie 2.0](https://petab.readthedocs.io/en/latest/v2/documentation_data_format.html). Geraadpleegd 12 september 2026. Gebruikt voor uitwisselbare parameterestimatieproblemen; daadwerkelijke engineondersteuning moet apart worden getoetst.
-[^32]: Breda, Cavaghan, Toffolo, Polonsky en Cobelli. *Oral glucose tolerance test minimal model indexes of beta-cell function and insulin sensitivity*. Diabetes 50(1), 150–158, 2001. [Oorspronkelijke methodestudie](https://pubmed.ncbi.nlm.nih.gov/11147781/). Geen rechtstreekse validatie voor alle T1D-populaties of graftsituaties.
-[^33]: Shoda et al. *The Type 1 Diabetes PhysioLab Platform: a validated physiologically based mathematical model of pathogenesis in the non-obese diabetic mouse*. Clinical & Experimental Immunology 161(2), 250–267, 2010. [Publicatie](https://pmc.ncbi.nlm.nih.gov/articles/PMC2909407/). Gebruikt als voorbeeld van immuun-/bètacelkoppeling in de NOD-muis.
-[^34]: Herold et al. *An Anti-CD3 Antibody, Teplizumab, in Relatives at Risk for Type 1 Diabetes*. New England Journal of Medicine, 2019. [Oorspronkelijke trialpublicatie](https://www.nejm.org/doi/full/10.1056/NEJMoa1902226). Gebruikt voor onderzoeksvraag en populatie van preventieonderzoek.
-[^35]: Ramos et al. *Teplizumab and β-Cell Function in Newly Diagnosed Type 1 Diabetes*. New England Journal of Medicine, 2023. [PROTECT-publicatie](https://www.nejm.org/doi/full/10.1056/NEJMoa2308743). Gebruikt voor behoud van bètacelfunctie na diagnose als afzonderlijke toepassing.
-[^36]: Reichman et al. *Stem Cell–Derived, Fully Differentiated Islets for Type 1 Diabetes*. New England Journal of Medicine 393, 858–868, 2025; online 20 juni 2025. [Oorspronkelijke fase 1–2-publicatie](https://www.nejm.org/doi/10.1056/NEJMoa2506549). Gebruikt voor uitkomsten, omvang en beperkingen van de gerapporteerde celtherapiestudie.
-[^37]: Free Software Foundation. *Frequently Asked Questions about the GNU Licenses*. [Uitleg over combinaties en aggregatie](https://www.gnu.org/licenses/gpl-faq.en.html#MereAggregation). Geraadpleegd 12 september 2026. Interpretatie van de licentiebeheerder; de beoordeling van een concrete distributie hangt van de feiten af.
-[^38]: Apache Software Foundation. *Apache License, Version 2.0*. Januari 2004. [Officiële licentietekst](https://www.apache.org/licenses/LICENSE-2.0.html), met name §3 over de patentlicentie.
-[^39]: LoopInsighT1-ontwikkelaars. *Cambridge.ts*. [Modelimplementatie met bronverwijzingen](https://github.com/hpeuscher/loopinsight1/blob/master/src/core/models/Cambridge.ts). Geraadpleegd 12 september 2026. Gebruikt om een concrete kandidaat uit de Hovorka/Cambridge-familie aan te wijzen.
-[^40]: Dalla Man et al. *The UVA/PADOVA Type 1 Diabetes Simulator: New Features*. Journal of Diabetes Science and Technology, 2014. [Publicatie](https://pmc.ncbi.nlm.nih.gov/articles/PMC4454102/). Gebruikt voor versiegebonden modeluitbreidingen en de toen beschreven beperking tot een single-meal-validatie. Dit is geen beschrijving van alle latere simulatorversies.
-[^41]: Visentin et al. *The UVA/Padova Type 1 Diabetes Simulator Goes From Single Meal to Single Day*. Journal of Diabetes Science and Technology 12(2), 273–281, 2018. [Publicatie en abstract](https://pubmed.ncbi.nlm.nih.gov/29451021/), DOI 10.1177/1932296818757747. Gebruikt voor het onderscheid tussen simulatorgeneraties, tijdsvariatie en uitgebreidere insulinekinetiek.
+The numbered footnotes form the complete source register. Repository links concern the consulted state; an executable experiment must still pin a commit or release and its license files. Paper years are publication years, not necessarily the age of the original data.
+
+[^1]: Visentin et al. *The University of Virginia/Padova Type 1 Diabetes Simulator Matches the Glucose Traces of a Clinical Trial*. Diabetes Technology & Therapeutics, 2014. [Publication](https://pmc.ncbi.nlm.nih.gov/articles/PMC4074748/). Used for clinical model assessment and the specific historical preclinical scope.
+[^2]: Jinyu Xie and contributors. *simglucose*. [Repository and documentation](https://github.com/jxx123/simglucose), [MIT license](https://github.com/jxx123/simglucose/blob/master/LICENSE). Accessed 12 September 2026. Used for model ancestry, profiles, interfaces and access to latent states.
+[^3]: GluCoEnv developers. *GluCoEnv*. [Repository](https://github.com/RL4H/GluCoEnv). Accessed 12 September 2026. Used for PyTorch execution, physiological ancestry and repository license.
+[^4]: Heiko Peuscher and contributors. *LoopInsighT1*. [Repository](https://github.com/hpeuscher/loopinsight1), [MIT license](https://github.com/hpeuscher/loopinsight1/blob/master/LICENSE.md). Accessed 12 September 2026.
+[^5]: Peuscher, Schrills, Eichenlaub and Jørgensen. *A Modular Open-Source Framework for In-Browser Diabetes Simulation*. IFAC-PapersOnLine 58(24), 309–314, 2024. [Article](https://doi.org/10.1016/j.ifacol.2024.11.055), [institutional full text, especially §2.2](https://backend.orbit.dtu.dk/ws/files/383717203/1-s2.0-S2405896324021827-main.pdf). Used for architecture and headless execution.
+[^6]: Zhou, Kouzel, Ren and Alemzadeh. *Design and Validation of an Open-Source Closed-Loop Testbed for Artificial Pancreas Systems*. CHASE, 2022. [Author version](https://arxiv.org/abs/2208.06479), [APS TestBed repository](https://github.com/UVA-DSA/APS_TestBed). Used to establish overlap with existing multi-engine benchmarking and fault injection.
+[^7]: McGill Diabetes Lab. *Artificial Pancreas Simulator*. [Repository](https://github.com/McGillDiabetesLab/artificial-pancreas-simulator). Accessed 12 September 2026. Used for the MATLAB framework, Hovorka model and MIT statement.
+[^8]: Illinois Tech developers. *py-mgipsim*. [Repository](https://github.com/illinoistech-itm/py-mgipsim), [GPL-3.0 license](https://github.com/illinoistech-itm/py-mgipsim/blob/main/LICENSE). Accessed 12 September 2026. The original mGIPsim methodology is described in [*Simulation Software for Assessment of Nonlinear and Adaptive Multivariable Control Algorithms: Glucose–Insulin Dynamics in Type 1 Diabetes*](https://pmc.ncbi.nlm.nih.gov/articles/PMC7449052/), 2019. The relationship to each current Python model variant must be checked during integration.
+[^9]: Cappon, Vettoretti, Sparacino, Del Favero and Facchinetti. *ReplayBG: A Digital Twin-Based Methodology to Identify a Personalized Model From Type 1 Diabetes Data and Simulate Glucose Concentrations to Assess Alternative Therapies*. IEEE Transactions on Biomedical Engineering 70(11), 3227–3238, 2023. [Publication and abstract](https://pubmed.ncbi.nlm.nih.gov/37368794/), DOI 10.1109/TBME.2023.3286856. Used for the method and extent of the original evaluation.
+[^10]: Giacomo Cappon and contributors. *py_replay_bg*. [Repository](https://github.com/gcappon/py_replay_bg), [documentation](https://gcappon.github.io/py_replay_bg/). Accessed 12 September 2026. Used for Python port availability and the GPL-3.0 statement.
+[^11]: Sergazinov and colleagues. *GlucoBench*. [Official repository](https://github.com/IrinaStatsLab/GlucoBench). Accessed 12 September 2026. Used for existing prediction tasks; no code reuse or license clearance assumed.
+[^12]: GluPredKit developers / Replica Health. *GluPredKit*. [Repository](https://github.com/replicahealth/GluPredKit). Accessed 12 September 2026. Used for existing glucose prediction preparation, training and evaluation.
+[^13]: Wolff, Calhoun, Aiello, Qin and Royston. *MetaboNet: The Largest Publicly Available Consolidated Dataset for Type 1 Diabetes Management*. 2026. [Full author version, table 1 and §2](https://arxiv.org/html/2601.11505v1), [journal publication](https://doi.org/10.1177/19322968261441637). Used for counts, public versus restricted data and participant overlap. The figures follow the consulted author version; a downloaded version may differ.
+[^14]: Jeffries et al. *MetaboNet-Bench: A Multi-modal Benchmark for Glucose Forecasting in Type 1 Diabetes*. Preprint, 17 June 2026. [Publication, including appendix on data rights](https://arxiv.org/html/2606.18640v1), [repository](https://github.com/njeffrie/MetaboNet-Bench). Used for existing multimodal evaluation and reported collection terms. Publication as a preprint does not imply completed peer review; code and data licenses are separate questions.
+[^15]: BabelBetes developers. *BabelBetes*. [Repository](https://github.com/nudgebg/babelbetes), [PyPI release 0.3.1 of 2 June 2026](https://pypi.org/project/babelbetes/0.3.1/). Used for existing clinical diabetes data normalization.
+[^16]: Cappon, Sparacino and Facchinetti. *AGATA: A toolbox for automated glucose data analysis*. 2023, DOI 10.1177/19322968221147570. [Python repository](https://github.com/gcappon/py_agata). Accessed 12 September 2026. Used for analysis tooling and the GPL-3.0 statement.
+[^17]: Jaeb Center for Health Research. *Diabetes: Datasets & Documents*. [Study catalogue](https://public.jaeb.org/datasets/diabetes). Accessed 12 September 2026. Used for existing studies and protocols, not as a guarantee of every data file's contents.
+[^18]: Jaeb Center for Health Research. *DCLP3 Public Dataset: terms of use*. [Application and terms page](https://public.jaeb.org/dataset/573). Accessed 12 September 2026. Used for registration, attribution and study-specific terms.
+[^19]: Marling and Bunescu. *The OhioT1DM Dataset for Blood Glucose Level Prediction: Update 2020*. CEUR Workshop Proceedings, 2020. [Full text, especially §5](https://ceur-ws.org/Vol-2675/paper11.pdf). Used for dataset size and the described DUA route; current individual access has not been confirmed.
+[^20]: Krischer / NIDDK Central Repository. *Anti-CD3 Mab (Teplizumab) for Prevention of Diabetes in Relatives At-Risk for Type 1 Diabetes Mellitus (TN10)*. Dataset, version 3, updated 21 May 2024. [Study page](https://repository.niddk.nih.gov/study/113), DOI 10.58020/vwa2-e568. Accessed 12 September 2026. Data available on request.
+[^21]: Human Pancreas Analysis Program. PANC-DB [description](https://hpap.pmacs.upenn.edu/about-pancdb), [available assays and access](https://hpap.pmacs.upenn.edu/faq), [user agreement](https://hpap.pmacs.upenn.edu/user-agreement). Accessed 12 September 2026. Used for data types, registration and redistribution restrictions; record terms again at actual access.
+[^22]: U.S. Food and Drug Administration. *Assessing the Credibility of Computational Modeling and Simulation in Medical Device Submissions*. Final guidance, November 2023. [Official publication](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/assessing-credibility-computational-modeling-and-simulation-medical-device-submissions). Used as a framework for application-specific credibility.
+[^23]: Battelino et al. *Clinical Targets for Continuous Glucose Monitoring Data Interpretation: Recommendations From the International Consensus on Time in Range*. Diabetes Care 42(8), 1593–1603, 2019. [Publication](https://pubmed.ncbi.nlm.nih.gov/31177185/), [full text](https://pmc.ncbi.nlm.nih.gov/articles/PMC6973648/). Used for TIR, TBR and TAR glucose bands.
+[^24]: Villaverde, Pathirana, Fröhlich, Hasenauer and Banga. *A protocol for dynamic model calibration*. Briefings in Bioinformatics 23(1), bbab387, 2022; online 2021. [Full text](https://pmc.ncbi.nlm.nih.gov/articles/PMC8769694/). Used for the relationship between identifiability, calibration and uncertainty.
+[^25]: SBML Editors. *SBML Level 3 Version 2 Core, Release 2*. 2019. [Official specification page](https://sbml.org/documents/specifications/level-3/version-2/core/).
+[^26]: CellML Project. *CellML language specifications*. [Official specifications](https://www.cellml.org/specifications). Accessed 12 September 2026.
+[^27]: SED-ML Community. *Simulation Experiment Description Markup Language*. [Official description](https://sed-ml.org/). Accessed 12 September 2026. The version to support must be explicitly recorded during implementation.
+[^28]: COMBINE Community. *COMBINE Archive Specification / OMEX, version 1*. [Official specification](https://raw.githubusercontent.com/combine-org/combine-specifications/main/specifications/files/omex.version-1.pdf). Accessed 12 September 2026.
+[^29]: Modelica Association, FMI Project. *Functional Mock-up Interface Specification 3.0.2*. [Official specification](https://fmi-standard.org/docs/3.0.2/). Accessed 12 September 2026. Used for model exchange, co-simulation and importer responsibilities.
+[^30]: BioSimulations/BioSimulators. [Platform documentation](https://docs.biosimulations.org/), [test suite](https://docs.biosimulators.org/Biosimulators_test_suite/). Accessed 12 September 2026. Used for reusable execution conventions and standard validation.
+[^31]: PEtab developers. [PEtab documentation](https://petab.readthedocs.io/en/latest/), [format specification 2.0](https://petab.readthedocs.io/en/latest/v2/documentation_data_format.html). Accessed 12 September 2026. Used for exchangeable parameter estimation problems; actual engine support must be tested separately.
+[^32]: Breda, Cavaghan, Toffolo, Polonsky and Cobelli. *Oral glucose tolerance test minimal model indexes of beta-cell function and insulin sensitivity*. Diabetes 50(1), 150–158, 2001. [Original methods study](https://pubmed.ncbi.nlm.nih.gov/11147781/). No direct validation for all T1D populations or graft situations.
+[^33]: Shoda et al. *The Type 1 Diabetes PhysioLab Platform: a validated physiologically based mathematical model of pathogenesis in the non-obese diabetic mouse*. Clinical & Experimental Immunology 161(2), 250–267, 2010. [Publication](https://pmc.ncbi.nlm.nih.gov/articles/PMC2909407/). Used as an example of immune/beta-cell coupling in the NOD mouse.
+[^34]: Herold et al. *An Anti-CD3 Antibody, Teplizumab, in Relatives at Risk for Type 1 Diabetes*. New England Journal of Medicine, 2019. [Original trial publication](https://www.nejm.org/doi/full/10.1056/NEJMoa1902226). Used for the prevention research question and population.
+[^35]: Ramos et al. *Teplizumab and β-Cell Function in Newly Diagnosed Type 1 Diabetes*. New England Journal of Medicine, 2023. [PROTECT publication](https://www.nejm.org/doi/full/10.1056/NEJMoa2308743). Used for preservation of beta-cell function after diagnosis as a separate application.
+[^36]: Reichman et al. *Stem Cell–Derived, Fully Differentiated Islets for Type 1 Diabetes*. New England Journal of Medicine 393, 858–868, 2025; online 20 June 2025. [Original phase 1–2 publication](https://www.nejm.org/doi/10.1056/NEJMoa2506549). Used for outcomes, size and limitations of the reported cell-therapy study.
+[^37]: Free Software Foundation. *Frequently Asked Questions about the GNU Licenses*. [Explanation of combinations and aggregation](https://www.gnu.org/licenses/gpl-faq.en.html#MereAggregation). Accessed 12 September 2026. Interpretation by the license steward; assessment of a concrete distribution depends on the facts.
+[^38]: Apache Software Foundation. *Apache License, Version 2.0*. January 2004. [Official license text](https://www.apache.org/licenses/LICENSE-2.0.html), especially §3 on the patent license.
+[^39]: LoopInsighT1 developers. *Cambridge.ts*. [Model implementation with references](https://github.com/hpeuscher/loopinsight1/blob/master/src/core/models/Cambridge.ts). Accessed 12 September 2026. Used to identify a concrete candidate from the Hovorka/Cambridge family.
+[^40]: Dalla Man et al. *The UVA/PADOVA Type 1 Diabetes Simulator: New Features*. Journal of Diabetes Science and Technology, 2014. [Publication](https://pmc.ncbi.nlm.nih.gov/articles/PMC4454102/). Used for version-specific model extensions and the single-meal validation limitation described then. This does not describe all later simulator versions.
+[^41]: Visentin et al. *The UVA/Padova Type 1 Diabetes Simulator Goes From Single Meal to Single Day*. Journal of Diabetes Science and Technology 12(2), 273–281, 2018. [Publication and abstract](https://pubmed.ncbi.nlm.nih.gov/29451021/), DOI 10.1177/1932296818757747. Used to distinguish simulator generations, time variation and expanded insulin kinetics.

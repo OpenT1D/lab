@@ -13,6 +13,10 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
   synthetic payloads and positive/refused/failed/relocated reader fixtures.
   Shared services, native parity and SDK migration remain subsequent work.
 
+- Translate the five Dutch research reports into English, preserving dated
+  findings, source references and existing section links. Use English throughout
+  the documentation site and update contribution and verification guidance.
+
 - Add an unsigned internal Apple Silicon MMTT application candidate with its
   own pinned interpreter, two enforced task capabilities, source/runtime
   inventories and bounded real-application verification tools.

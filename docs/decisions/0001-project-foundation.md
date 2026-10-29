@@ -12,7 +12,7 @@ The [repository research](../onderzoek/repositorybasis.md) compares established 
 
 Build shared infrastructure and useful reference modules. Reuse upstream work when suitable and allow whole-engine integration as well as justified component composition. Prove the first complete experiment and early interchange across model families before declaring general interfaces.
 
-Use English for public guides and preserve the Dutch research reports. The root README introduces the project; the roadmap is the canonical implementation plan. Organize deeper material by project design, research practice, contribution and maintenance.
+Use English for public guides and preserve the research reports. The original decision retained them in Dutch; they were translated into English on 29 October 2026 without updating the historical findings. The root README introduces the project; the roadmap is the canonical implementation plan. Organize deeper material by project design, research practice, contribution and maintenance.
 
 License original project material under Apache-2.0 and retain separate terms for third-party assets. Require attributable, reproducible contributions without adding a CLA or signed-off-by workflow at this stage.
 

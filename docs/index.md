@@ -165,7 +165,8 @@ and scientific corrections.
 
 ## Research reports
 
-The public guides are in English. These detailed research reports remain in Dutch:
+The public guides and these detailed research reports are in English. The reports
+preserve their original dated findings; translation does not constitute a new audit:
 
 - [T1D modeling landscape and project design](onderzoek/projectopzet.md):
   simulator candidates, data, standards and scientific evidence.

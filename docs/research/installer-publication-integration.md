@@ -14,7 +14,7 @@ The original main checkout and source branches are not reset or rewritten.
 | Publication preparation | `c0c2d542e1c86d537409368d83b4fa01902ecd61` |
 
 The installer forked before main's two common-laboratory planning commits.
-Integration retains the product requirements, Dutch research report, architecture
+Integration retains the product requirements, research report (now translated into English), architecture
 and OT-059–074 plan while importing the native installer and its bounded Windows
 verification. README/roadmap/changelog and navigation conflicts retain both the
 implemented internal candidate and the separately planned common core.
