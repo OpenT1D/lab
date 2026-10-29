@@ -10,7 +10,7 @@ function section(start, end) {
 }
 const helpers = section("// Polling must retain", "// End retained polling helpers.");
 let checks = 0;
-function harness(code) {
+function harness(code, mmttOnly = false) {
   const nodes = new Map(), pending = [], selections = [];
   const document = {activeElement: null};
   function element(name = "div") {
@@ -38,7 +38,7 @@ function harness(code) {
   document.createElement = element;
   const $ = (id) => { if (!nodes.has(id)) { const node = element(id === "durable-source" ? "select" : "div"); node.id = id; nodes.set(id, node); document.body.append(node); } return nodes.get(id); };
   document.getElementById = $;
-  const context = vm.createContext({$, document, Date, active: null,
+  const context = vm.createContext({$, document, Date, mmttOnly, active: null,
     libraryEntries: [], librarySelected: null, campaigns: [], campaignSelected: null,
     durableEntries: [], durableSelected: null, durableListRequest: 0,
     m3Entries: [], m3Selected: null, m3Inputs: [], m3Pending: false,
@@ -59,6 +59,14 @@ function harness(code) {
     const request = pending.splice(index, 1)[0]; (fail ? request.reject : request.resolve)(value);
   }
   return {$, context, document, pending, selections, run, reply};
+}
+// Both omitted native views must return before starting a request in the MMTT app.
+for (const [name, end] of [["refreshDurable", "async function startDurable"], ["refreshCampaigns", "async function startSavedCampaign"]]) {
+  const h = harness(section("async function " + name + "()", end), true);
+  h.context.campaignListRequest = 0;
+  const refresh = h.run(name + "()");
+  assert.equal(h.pending.length, 0, "MMTT-only " + name + " must not issue native requests");
+  await refresh; checks++;
 }
 const listCases = [
   {fn: "renderLibraryList", state: "libraryEntries", id: "library-list", end: "function renderLibraryDigests", field: "metadata_status",

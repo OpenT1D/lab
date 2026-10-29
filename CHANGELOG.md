@@ -4,6 +4,10 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Add an unsigned internal Apple Silicon MMTT application candidate with its
+  own pinned interpreter, two enforced task capabilities, source/runtime
+  inventories and bounded real-application verification tools.
+
 - Evaluate guarded main documentation deployment after an expected PR-only
   dependency-review skip. Preserve successful-aggregate and trusted-main
   requirements, honor manual workflow cancellation, and retain deployment rights

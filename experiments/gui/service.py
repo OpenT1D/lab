@@ -174,6 +174,9 @@ class Service:
         self.profile = profile
         self.root = native_absolute(root).resolve(strict=True)
         self.source_root = Path(source_root or self.root).resolve(strict=True)
+        from experiments.desktop.runtime import packaged_capabilities
+
+        self.capabilities = packaged_capabilities(self.source_root)
         self.python = str(Path(python or sys.executable).absolute())
         self.data = self.root / "results" / "gui"
         self.safe_path("results/gui", exists=False)
@@ -189,24 +192,26 @@ class Service:
         self.manager = WorkspaceLock(self.data / ".manager.lock")
         try:
             self.example_prefix = ""
-            if self.profile == "desktop":
+            if self.profile == "desktop" and self.capabilities is None:
                 from experiments.desktop.examples import prepare
 
                 self.example_prefix = prepare(self.source_root, self.root) + "/"
             self.load_journals()
-            from .durable import Durable, store_identity
-            from .library import Library
+            self.library = self.campaigns = self.durable = self.m3 = None
+            if self.capabilities is None:
+                from .durable import Durable, store_identity
+                from .library import Library
 
-            store = store_identity(self.root, archive_store)
-            roots = (*archive_roots, *((store["path"],) if store else ()))
-            self.library = Library(self, roots)
-            from .campaigns import Campaigns
+                store = store_identity(self.root, archive_store)
+                roots = (*archive_roots, *((store["path"],) if store else ()))
+                self.library = Library(self, roots)
+                from .campaigns import Campaigns
 
-            self.campaigns = Campaigns(self)
-            self.durable = Durable(self, store)
-            from .m3 import M3
+                self.campaigns = Campaigns(self)
+                self.durable = Durable(self, store)
+                from .m3 import M3
 
-            self.m3 = M3(self)
+                self.m3 = M3(self)
             from .observations import Observations
 
             self.observations = Observations(self)
@@ -228,6 +233,16 @@ class Service:
                 job = read_json(journal)
                 if not isinstance(job, dict):
                     continue
+                if self.capabilities is not None:
+                    prefix = {"mmtt-sensitivity": "observation_", "mmtt-sampling": "sampling_"}.get(
+                        job.get("task")
+                    )
+                    if (
+                        prefix is None
+                        or job.get("operation") not in OBSERVATION_OPERATIONS
+                        or not job["operation"].startswith(prefix)
+                    ):
+                        continue
                 if job.get("id") != directory.name or job.get("schema") != "opent1d.gui-job/1":
                     continue
                 if job.get("operation") in LIBRARY_OPERATIONS:
@@ -351,6 +366,16 @@ class Service:
         }
 
     def bootstrap(self):
+        if self.capabilities is not None:
+            return {
+                "schema": "opent1d.gui-session/2",
+                "profile": self.profile,
+                "capabilities": list(self.capabilities),
+                "workspace": self.root.name,
+                "draft_scope": digest(str(self.root).encode()),
+                "defaults": {"sources": []},
+                "jobs": self.list_jobs(),
+            }
         return {
             "schema": "opent1d.gui-session/1",
             "profile": self.profile,
@@ -361,6 +386,29 @@ class Service:
             "contract": CONTRACT,
             "jobs": self.list_jobs(),
         }
+
+    def permits_api(self, method, path):
+        """The installed two-task profile refuses every other API before dispatch."""
+        if self.capabilities is None:
+            return True
+        if path in {"/api/v1/bootstrap", "/api/v1/jobs"}:
+            return method == "GET"
+        if path == "/api/desktop/shutdown":
+            return method == "POST"
+        if path.startswith(("/api/v1/observations/", "/api/v1/sampling/")):
+            return True
+        parts = path.strip("/").split("/")
+        if len(parts) in {4, 5} and parts[:3] == ["api", "v1", "jobs"]:
+            job = self.jobs.get(parts[3])
+            return (
+                job is not None
+                and job.get("task") in self.capabilities
+                and (
+                    (method == "GET" and len(parts) == 4)
+                    or (method == "POST" and parts[4:] == ["cancel"])
+                )
+            )
+        return False
 
     def browse(self, directory="experiments/m4", kind="model"):
         if kind not in {"model", "declaration"}:
@@ -520,8 +568,9 @@ class Service:
         """Any attempted shared-runtime installation invalidates every prior check."""
         for configuration in self.configurations.values():
             configuration["ready"] = False
-        self.campaigns.invalidate_readiness()
-        self.m3.invalidate_readiness()
+        for controller in (self.campaigns, self.m3):
+            if controller is not None:
+                controller.invalidate_readiness()
 
     def configure_campaign(self, body):
         with self.lock:

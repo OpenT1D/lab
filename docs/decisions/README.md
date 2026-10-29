@@ -8,6 +8,8 @@
 
 - [0076 — Shared public check families](0076-public-check-families.md): one local stage contract, explicit real-host smokes, bounded Chromium flows and a required result that rejects unsuccessful or missing public families.
 
+- [0075 — Mac MMTT runtime and capabilities](0075-mac-mmtt-runtime-capabilities.md): a real ARM64 stdlib runtime, two enforced task capabilities and a separate unsigned internal application candidate.
+
 - [0074 — Private installer/publication integration](0074-private-installer-publication-integration.md): preserve the current laboratory plan, installed runtime attestation and public-native distribution restrictions without publishing or changing historical evidence.
 
 - [0070 — A shared laboratory proven through reuse](0070-common-research-laboratory.md): task-specific scientific contracts, native engine preservation, incremental core extraction and second/third-task product acceptance.

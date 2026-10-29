@@ -1,6 +1,7 @@
 "use strict";
 
 const desktopApp = document.querySelector?.('meta[name="opent1d-profile"]')?.content === "desktop";
+const workspaceMMTTOnly = document.querySelector?.('meta[name="opent1d-capabilities"]')?.content === "mmtt-sensitivity,mmtt-sampling";
 
 // Navigation only changes presentation; the native workflows retain their state.
 const workspaceViews = {
@@ -19,6 +20,7 @@ let workspaceObservedJob = null;
 const workspaceOperationNames = {sampling_example:"Preparing sampling example",sampling_freeze:"Freezing sampling plan",sampling_run:"Comparing measurement times",sampling_reconstruct:"Checking sampling analysis",observation_example:"Preparing invented meal tests",observation_freeze:"Validating and freezing observation plan",observation_run:"Running paired secretion analysis",observation_reconstruct:"Checking saved observation analysis",check:"Checking study setup",install:desktopApp ? "Checking included components" : "Installing task environments",run:"Running secretion experiment",reconstruct:"Checking saved study analysis",m3_fixture:"Preparing synthetic inputs",m3_check:"Checking forecast setup",m3_run:"Running forecast experiment",m3_reconstruct:"Checking saved forecast analysis",campaign_check:"Checking repeat setup",campaign_install:desktopApp ? "Checking included components" : "Installing repeat environments",campaign_run:"Running repeated experiments",campaign_resume:"Resuming remaining repeats",campaign_reconstruct:"Checking saved repeat analysis",library_index:"Reading archive metadata",library_verify:"Checking saved archive analysis",durable_export:"Exporting the saved experiment",durable_register:"Checking archive package bytes",durable_verify:"Checking archive package bytes",durable_reconstruct:"Checking saved package analysis",durable_forensic:"Retaining available raw evidence"};
 
 function workspaceNavigate(view, {focus = true, remember = true} = {}) {
+  if (workspaceMMTTOnly && !["overview", "observations", "sampling"].includes(view)) view = "overview";
   if (!Object.hasOwn(workspaceViews, view)) view = "overview";
   const destination = workspaceViews[view];
   for (const [key, entry] of Object.entries(workspaceViews)) {
@@ -154,6 +156,13 @@ document.addEventListener("invalid", (event) => {
   while (parent) { if (parent.tagName === "DETAILS") parent.open = true; parent = parent.parentElement; }
 }, true);
 workspaceNavigate(window.location.hash.slice(1), {focus: false, remember: false});
+
+if (workspaceMMTTOnly) {
+  for (const id of ["open-m3", "new-study"]) document.getElementById(id).closest("article").hidden = true;
+  document.getElementById("open-library").hidden = true;
+  document.getElementById("workspace-more").hidden = true;
+  document.querySelector(".start-intro").textContent = "Explore two synthetic paired meal-test questions and keep their saved analyses.";
+}
 
 if (desktopApp) {
   document.getElementById("install-task").textContent = "Recheck application components";

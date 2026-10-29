@@ -1,6 +1,6 @@
 # OpenT1D roadmap
 
-**Updated 28 October 2026.** This is the canonical implementation order for
+**Updated 29 October 2026.** This is the canonical implementation order for
 OpenT1D. The immediate public-development queue comes first; the shared-laboratory
 plan below retains its own dependencies and acceptance criteria. The
 [historical record](docs/research/roadmap-history-2026-10-28.md) preserves earlier
@@ -30,10 +30,15 @@ guarded native jobs and retained diagnostics; the
 [baseline main run](https://github.com/OpenT1D/lab/actions/runs/40763325611)
 passed on `c2db13a`. Main now requires the strict, app-bound `Repository checks`
 result, with pull-request and conversation-resolution requirements.
-[PR 13](https://github.com/OpenT1D/lab/pull/13) adds reviewed-main documentation
-publication; deployment and live-site acceptance follow the
-[publication guide](docs/documentation-publication.md). A Mac distribution and the
-shared SDK remain planned work. The
+[PR 13](https://github.com/OpenT1D/lab/pull/13) publishes the verified
+[documentation site](https://opent1d.github.io/lab/); its actual main deployment,
+navigation, search and notebook downloads were checked. [PR 18](https://github.com/OpenT1D/lab/pull/18)
+adds complete dependency review and bounded monthly update discovery, with
+actual causal negative and safe uv-lock probes. An
+[unsigned Apple Silicon MMTT candidate](docs/mac-mmtt-candidate.md) supplies a
+bundled standard-library runtime and two enforced capabilities. Signed/public
+Mac distribution, independent first use and the shared SDK retain their own open
+gates. The
 [publication record](docs/research/publication-preparation.md) retains the initial
 disabled-Actions state; the [security boundary](docs/publication-security.md)
 still governs public execution. Dependency-service runs are not repository
@@ -46,9 +51,10 @@ application that another researcher can use independently. Both start from the
 two existing synthetic MMTT tasks. This planning change selects work; completion
 requires the artifacts and checks below. Queue names are planning labels, not
 new issue numbers, release versions or delivery dates. The AI-development,
-public CI baseline and check-family increments are implemented. Select one
-bounded documentation/first-use artifact next; Mac feasibility can proceed in
-parallel. Unfinished distribution or external-acceptance gates do not block
+public CI baseline, check-family, hosted-documentation and internal Mac-candidate
+increments are implemented. Select a bounded intended-user first-use exercise
+next when a participant is available. Unfinished distribution or
+external-acceptance gates do not block
 unrelated internal fixes, contract inventory or feasibility work.
 
 ### Now, next and later
@@ -60,8 +66,8 @@ unrelated internal fixes, contract inventory or feasibility work.
 | Implemented public increment — CI baseline | Reviewed checks are active with explicit Python/uv/Node setup, retained diagnostics and actual hosted runs. | The baseline main run passed and branch protection reads back the strict app-bound `Repository checks` requirement. Keep historical native execution excluded. |
 | Implemented public increment — Test families and platform coverage | [PR 11](https://github.com/OpenT1D/lab/pull/11) adds named local style/tests/docs stages, one broad Linux root job, three-host public smokes, four Linux Chromium flows and one required public gate. | The final PR-head families passed; integrated-main acceptance is recorded below. Both MMTT tasks, local HTTP, filesystem/process behavior and byte-exact reconstruction have bounded actual-host coverage. The gate rejects failed, cancelled, skipped or missing public families. Broader root, browser and release coverage remains separate. |
 | Implemented public increment — Dependency updates and PR review | Monthly root uv/Action updates and read-only high/critical dependency-delta review, with complete snapshot data bound to the official scan. | The [hosted negative and positive probes](docs/publication-security.md#prepared-dependency-updates-and-pr-review) demonstrate actual root uv-lock graph coverage, dependency-driven aggregate failure and all-green safe results. Recognized configuration enables monthly discovery after merge; actual update service runs and PRs need their own receipts. Historical native locks and existing alerts remain separate. |
-| Next — Documentation acceptance and first use | The reviewed-main publication workflow is implemented in [PR 13](https://github.com/OpenT1D/lab/pull/13). Verify the deployed site and improve the routes for trying, extending and contributing to the project. Run the source-checkout exercise with an actual intended user when available. | A warning-free build is hosted at a verified URL. A user can prepare, freeze, run, interpret and reopen a synthetic result; record assistance, mistakes and failed attempts. User availability does not block internal fixes or packaging probes. |
-| Parallel feasibility — Mac application | Build an internal Apple Silicon candidate for the two MMTT tasks using the existing calculations and reports, a real bundled CPython interpreter and a thin `.app` launcher. | Finder launch, both task chains and report reconstruction work without Git, uv, host Python or terminal setup. Record actual runtime, architecture, minimum OS, rights and payload identity. This probe may overlap documentation work and does not wait for the whole shared SDK. |
+| Implemented publication; open first-use acceptance | The reviewed-main workflow publishes [the documentation site](https://opent1d.github.io/lab/), with actual navigation, search, assets and byte-exact notebook checks. Improve first-use routes with an actual intended user when available. | A warning-free build and live-site acceptance are recorded for PR 13. Intended-user preparation, freezing, interpretation and reopening still need observed assistance, mistakes and failed attempts. User availability does not block internal fixes or packaging. |
+| Implemented internal candidate — Mac application | The [Apple Silicon MMTT candidate](docs/mac-mmtt-candidate.md) bundles real pinned CPython and a native launcher for two existing synthetic tasks. | Qualify each exact artifact with repeat-build inventories, LaunchServices/browser task chains, report reconstruction, lifecycle/data-preservation checks and unchanged bundled-interpreter numerical references. Keep source/runtime/architecture/rights identities. This remains unsigned internal evidence; minimum-OS, clean-host, arbitrary upgrade and independent-user acceptance are separate. |
 | Conditional follow-up — Mac distribution | Turn the verified probe into a signed/notarized download with a controlled build/release workflow and clean-host/user evidence. | The exact downloaded artifact passes the lifecycle, data-preservation and interpretation checks below. Signing credentials, runtime rights and actual hosts/users are prerequisites for the affected acceptance, not assumed resources. |
 | Subsequent shared-laboratory work | Execute the named two-route extraction queue under OT-059 and minimal OT-060/061/064, followed by the remaining delivery slices. | Existing routes use shared services and preserve their scientific contracts/readers. Inventory can overlap the public work; public native execution needs a reviewed successor environment. Mac MMTT packaging is not gated on native remediation. |
 

@@ -39,7 +39,7 @@ class ArchiveFrontendTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         receipt = json.loads(result.stdout)
         self.assertTrue(receipt["passed"])
-        self.assertEqual(receipt["checks"], 108)
+        self.assertEqual(receipt["checks"], 109)
 
     def test_archive_controls_and_native_sections_have_accessible_semantics(self):
         parser = ArchiveControls()

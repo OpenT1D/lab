@@ -1,0 +1,259 @@
+// Opt-in real macOS/Chromium probe; never use a researcher's existing workspace.
+// node tests/mac_app_probe.mjs APP FRESH_EVIDENCE_DIR PLAYWRIGHT_PROJECT_DIR
+import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import { cp, mkdir, readFile, readdir, realpath, rm, writeFile } from 'node:fs/promises';
+import { createRequire } from 'node:module';
+import path from 'node:path';
+import { completeProbe, disposeObservers, errorDetails, observeApplication, receiptPublication, waitForApplications } from './mac_probe_lifecycle.mjs';
+
+assert.equal(process.platform, 'darwin');
+assert.equal(process.arch, 'arm64');
+const [application, evidence, browserProject] = process.argv.slice(2).map(value => path.resolve(value));
+assert(application && evidence && browserProject, 'Supply app, fresh evidence and browser project');
+assert(!evidence.startsWith(application + path.sep), 'Evidence must be outside the app');
+await mkdir(evidence); // Deliberately refuse an existing directory.
+const require = createRequire(path.join(browserProject, 'package.json'));
+const { chromium, expect: baseExpect } = require('@playwright/test');
+const expect = baseExpect.configure({ timeout: 30_000 });
+const workspace = path.join(evidence, 'workspace');
+await mkdir(workspace);
+const marker = path.join(workspace, 'user-marker.txt');
+await writeFile(marker, 'This user evidence must survive application replacement and removal.\n');
+const markerBytes = await readFile(marker);
+const foreign = path.join(workspace, 'results/gui/job-foreign/job.json');
+await mkdir(path.dirname(foreign), { recursive: true });
+const foreignBytes = Buffer.from(JSON.stringify({ schema: 'opent1d.gui-job/1', id: 'job-foreign',
+  task: 'mmtt-sensitivity', operation: 'library_index', state: 'running' }));
+await writeFile(foreign, foreignBytes);
+const statePath = path.join(evidence, 'session.json');
+let expired = false;
+let deadlineClose = Promise.resolve({});
+const timeout = setTimeout(() => {
+  expired = true;
+  console.error('Mac application probe exceeded 300 seconds');
+  // Closing Chromium rejects pending UI waits; the ordinary finally still owns
+  // application shutdown. Do not exit past cleanup while a worker may be live.
+  if (browser) deadlineClose = browser.close().then(() => ({}), error => ({ error }));
+}, 300_000);
+let state, browser, context, page, primaryError, screenshotError, receipt;
+const errors = [], observers = [], checks = [];
+
+async function until(read, test, milliseconds = 30_000, cleanup = false) {
+  const end = Date.now() + milliseconds;
+  while (Date.now() < end && (cleanup || !expired)) {
+    try { const value = await read(); if (test(value)) return value; } catch { /* bounded startup */ }
+    await new Promise(resolve => setTimeout(resolve, 50));
+  }
+  throw new Error('The expected application state did not arrive');
+}
+async function api(route, body) {
+  const response = await fetch(new URL(route, state.url), {
+    method: body === undefined ? 'GET' : 'POST',
+    headers: { 'X-OpenT1D-Token': state.token, Origin: state.url.replace(/\/$/, ''), 'Content-Type': 'application/json' },
+    signal: AbortSignal.timeout(5_000),
+    ...(body === undefined ? {} : { body: JSON.stringify(body) }),
+  });
+  return response;
+}
+async function launch(app) {
+  await rm(statePath, { force: true });
+  observers.push(observeApplication(app,
+    ['--data-dir', workspace, '--state-file', statePath, '--no-browser'],
+    path.join(evidence, `launch-${observers.length + 1}.log`)));
+  state = await until(async () => JSON.parse(await readFile(statePath)), value => Number.isInteger(value.pid));
+  const bootstrap = await until(async () => (await api('/api/v1/bootstrap')).json(), value => value.schema === 'opent1d.gui-session/2');
+  assert.deepEqual(bootstrap.capabilities, ['mmtt-sensitivity', 'mmtt-sampling']);
+  assert.equal(bootstrap.profile, 'desktop');
+  assert(!bootstrap.jobs.some(job => job.id === 'job-foreign'));
+  assert.deepEqual(await readFile(foreign), foreignBytes);
+  const actualPython = execFileSync('/bin/ps', ['-ww', '-p', String(state.pid), '-o', 'command='], { encoding: 'utf8' }).trim();
+  const flags = actualPython.indexOf(' -I -B -S ');
+  assert(flags > 0, 'The worker must use the included isolated interpreter');
+  assert.equal(await realpath(actualPython.slice(0, flags)), await realpath(path.join(app, 'Contents/Resources/payload/runtime/bin/python3.12')));
+  return state;
+}
+async function stop() {
+  if (!state) return;
+  const response = await api('/api/desktop/shutdown', {});
+  assert.equal(response.status, 202);
+  await waitForApplications(observers);
+  // The endpoint and its manager must be gone before another app is admitted.
+  await assert.rejects(readFile(path.join(workspace, 'application-session.json')),
+    error => error.code === 'ENOENT');
+  state = undefined;
+}
+async function inventory(folder) {
+  const result = {};
+  async function visit(directory) {
+    for (const item of await readdir(directory, { withFileTypes: true })) {
+      const target = path.join(directory, item.name);
+      if (item.isDirectory()) await visit(target);
+      else {
+        assert(item.isFile(), 'Only regular bundle/evidence files are expected');
+        result[path.relative(folder, target)] = createHash('sha256').update(await readFile(target)).digest('hex');
+      }
+    }
+  }
+  await visit(folder);
+  return result;
+}
+async function download(prefix, suffix) {
+  const event = page.waitForEvent('download');
+  await page.locator(`#${prefix}-download-json`).click();
+  const file = await event;
+  const target = path.join(evidence, `${suffix}-report.json`);
+  await file.saveAs(target);
+  assert.equal(await file.failure(), null);
+  return readFile(target);
+}
+async function prepare(task, draws = 32) {
+  await page.goto(state.url);
+  await page.locator(`#open-${task.view}`).click();
+  await page.locator(`#${task.prefix}-case`).selectOption(task.example);
+  await page.locator(`#${task.prefix}-example`).click();
+  await expect(page.locator(`#${task.prefix}-validation`)).toContainText('visits loaded');
+  await page.locator(`#${task.prefix}-display-name`).fill(`Mac probe ${task.task} ${draws}`);
+  await page.locator(`#${task.prefix}-settings-details > summary`).click();
+  await page.locator(`#${task.prefix}-draws`).fill(String(draws));
+}
+async function freeze(task) {
+  await page.locator(`#${task.prefix}-freeze`).click();
+  await expect(page.locator(`#${task.prefix}-plan-state`)).toContainText('Ready to run');
+}
+const tasks = [
+  { prefix: 'obs', view: 'observations', example: 'increase', task: 'mmtt-sensitivity' },
+  { prefix: 'sam', view: 'sampling', example: 'information-loss', task: 'mmtt-sampling' },
+];
+const saved = [];
+let original;
+try {
+  original = await inventory(application);
+  await launch(application);
+  const initialPid = state.pid;
+  await launch(application);
+  assert.equal(state.pid, initialPid);
+  checks.push('LaunchServices opens included interpreter with hostile PATH/PYTHONPATH; double launch reuses server');
+  for (const route of ['files', 'm3/bootstrap', 'campaigns/configurations', 'library/roots', 'durable/bootstrap']) {
+    assert.equal((await api('/api/v1/' + route)).status, 403);
+    assert.equal((await api('/api/v1/' + route, {})).status, 403);
+  }
+  browser = await chromium.launch();
+  context = await browser.newContext({ acceptDownloads: true });
+  await context.tracing.start({ screenshots: true, snapshots: true });
+  page = await context.newPage();
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto(state.url);
+  for (const id of ['open-m3', 'new-study', 'open-library', 'workspace-more']) await expect(page.locator(`#${id}`)).toBeHidden();
+  checks.push('Only two tasks exposed; native/library/campaign/export APIs refused');
+  await prepare(tasks[0]);
+  await page.locator('#obs-draws').fill('31');
+  await page.locator('#obs-freeze').click();
+  await expect(page.locator('#obs-form-error')).toContainText('32 to 1024');
+  await expect(page.locator('#obs-run')).toBeDisabled();
+  checks.push('Invalid draw count remains visible and cannot run');
+  for (const task of tasks) {
+    await prepare(task);
+    await freeze(task);
+    await page.locator(`#${task.prefix}-run`).click();
+    await expect(page.locator(`#${task.prefix}-execution`)).toHaveText('Analysis finished · results complete');
+    const entry = page.locator(`#${task.prefix}-analysis-list button`).filter({ hasText: `Mac probe ${task.task} 32` });
+    const id = await entry.getAttribute('data-entry-id');
+    const archive = path.join(workspace, 'results/gui', task.view, 'archives', id, 'archive');
+    const bytes = await download(task.prefix, task.prefix);
+    assert.deepEqual(bytes, await readFile(path.join(archive, 'report.json')));
+    const report = JSON.parse(bytes);
+    assert.equal(report.task, task.task);
+    assert.equal(report.execution_status, 'completed');
+    assert.equal(report.kind, 'synthetic');
+    assert.equal(report.human_evaluation, false);
+    saved.push({ task, id, archive, bytes, inventory: await inventory(archive) });
+    await page.screenshot({ path: path.join(evidence, `${task.prefix}-complete.png`), fullPage: true });
+    checks.push(`${task.task}: example → freeze → real worker → download`);
+  }
+  await prepare(tasks[1], 1024);
+  await freeze(tasks[1]);
+  const launched = page.waitForResponse(value => value.request().method() === 'POST' && /\/sampling\/configurations\/[^/]+\/run$/.test(value.url()));
+  await page.locator('#sam-run').click();
+  const job = await (await launched).json();
+  const phase = path.join(workspace, 'results/gui/sampling/archives', job.sampling_entry_id, 'archive/studies/full/execution.json');
+  await until(async () => JSON.parse(await readFile(phase)).phase, value => value === 'analysis');
+  await page.locator('#sam-cancel').click();
+  await expect(page.locator('#sam-execution')).toHaveText('Analysis interrupted');
+  const interrupted = JSON.parse(await download('sam', 'interrupted'));
+  assert.equal(interrupted.execution_status, 'interrupted');
+  assert(interrupted.coverage.not_attempted_draw_pairs > 0);
+  await page.locator('#sam-reconstruct').click();
+  await expect(page.locator('#sam-result-detail')).toContainText('Saved report checked');
+  const journal = JSON.parse(await readFile(path.join(workspace, 'results/gui', job.id, 'job.json')));
+  assert.equal(journal.cleanup_forced, false);
+  assert.deepEqual(journal.remaining_owned_processes || [], []);
+  checks.push('Controlled analysis-phase cancellation retains reconstructable partial evidence');
+  await stop();
+  const relocated = path.join(evidence, 'relocated', 'OpenT1D.app');
+  await cp(application, relocated, { recursive: true });
+  await launch(relocated);
+  for (const item of saved) {
+    await page.goto(`${state.url}#${item.task.view}`);
+    await page.locator(`#${item.task.prefix}-analysis-list button[data-entry-id="${item.id}"]`).click();
+    await expect(page.locator(`#${item.task.prefix}-execution`)).toHaveText('Analysis finished · results complete');
+    await page.locator(`#${item.task.prefix}-reconstruct`).click();
+    await expect(page.locator(`#${item.task.prefix}-result-detail`)).toContainText('Saved report checked');
+    assert.deepEqual(await download(item.task.prefix, item.task.prefix + '-reopened'), item.bytes);
+    assert.deepEqual(await inventory(item.archive), item.inventory);
+  }
+  await stop();
+  assert.deepEqual(await inventory(application), original);
+  await rm(relocated, { recursive: true });
+  assert.deepEqual(await readFile(marker), markerBytes);
+  for (const item of saved) assert.deepEqual(await inventory(item.archive), item.inventory);
+  await cp(application, relocated, { recursive: true });
+  await launch(relocated);
+  for (const task of tasks) {
+    const response = await api(`/api/v1/${task.view}/entries`);
+    assert.equal(response.status, 200);
+  }
+  await stop();
+  await rm(relocated, { recursive: true });
+  assert.deepEqual(await readFile(marker), markerBytes);
+  checks.push('Relocation, app removal/replacement and reopening preserve old report bytes and unrelated user file');
+  assert.deepEqual(errors, []);
+  assert(!expired, 'The application probe exceeded its global deadline');
+  const manifest = JSON.parse(await readFile(path.join(application, 'Contents/Resources/payload/package-manifest.json')));
+  receipt = {
+    build_id: manifest.build_id, source_revision: manifest.source.revision,
+    runtime: manifest.runtime.version, browser: browser.version(), checks,
+    page_errors: errors, signed_developer_id: false, notarised: false,
+  };
+} catch (error) {
+  primaryError = error;
+  if (page) {
+    try { await page.screenshot({ path: path.join(evidence, 'failure.png'), fullPage: true }); }
+    catch (error) { screenshotError = error; }
+  }
+} finally {
+  clearTimeout(timeout);
+  let launchObservers;
+  const publication = receiptPublication(path.join(evidence, 'receipt.json'));
+  await completeProbe({
+    primaryError,
+    cleanup: [
+      ['authenticated shutdown', stop],
+      ['LaunchServices exit observations', async () => { launchObservers = await waitForApplications(observers); }],
+      ['trace', async () => { if (context) await context.tracing.stop({ path: path.join(evidence, 'trace.zip') }); }],
+      ['browser', async () => { if (browser) await browser.close(); }],
+      ['deadline browser cleanup', async () => { const result = await deadlineClose; if (result.error) throw result.error; }],
+      ['failure screenshot', async () => { if (screenshotError) throw screenshotError; }],
+    ],
+    commit: async () => {
+      assert(receipt && !expired, 'A completed in-deadline probe is required');
+      await publication.publish({ ...receipt, launch_observers: launchObservers, cleanup: 'confirmed' });
+    },
+    rollback: () => publication.rollback(),
+    dispose: () => disposeObservers(observers),
+    recordFailure: error => writeFile(path.join(evidence, 'failure.json'),
+      JSON.stringify(errorDetails(error), null, 2) + '\n', { flag: 'wx' }),
+  });
+}
+console.log(JSON.stringify({ evidence, checks: checks.length, build_id: receipt.build_id }));

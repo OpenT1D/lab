@@ -23,7 +23,7 @@ class PollingFrontendTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         receipt = json.loads(result.stdout)
         self.assertTrue(receipt["passed"])
-        self.assertEqual(receipt["checks"], 23)
+        self.assertEqual(receipt["checks"], 25)
 
 
 if __name__ == "__main__":

@@ -12,6 +12,7 @@ subtrees:
       - file: docs/product-laboratory
 
       - file: docs/windows-installation
+      - file: docs/mac-mmtt-candidate
 
       - file: docs/public-source
       - file: docs/publication-security
@@ -296,6 +297,7 @@ subtrees:
       - file: docs/decisions/0072-source-publication-rights-and-runtime-scope
       - file: docs/decisions/0073-native-windows-installer
       - file: docs/decisions/0074-private-installer-publication-integration
+      - file: docs/decisions/0075-mac-mmtt-runtime-capabilities
       - file: docs/decisions/0076-public-check-families
       - file: docs/decisions/0077-reviewed-main-documentation-publication
       - file: docs/decisions/0078-dependency-review-completeness
