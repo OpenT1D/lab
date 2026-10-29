@@ -1,19 +1,25 @@
 """Noneditable wheel use outside checkout, retained readers and adverse artifacts."""
 
+import hashlib
+import http.client
 import importlib.util
 import json
 import marshal
 import os
+import re
 import shutil
 import struct
 import subprocess
 import sys
 import tempfile
+import time
 import unittest
+import uuid
 from pathlib import Path
 from unittest.mock import patch
 
 from experiments.catalogue.storage import digest, encoded
+from experiments.gui.ownership import Ownership
 from experiments.shared_services.store import opened
 from scripts import build_sdk
 from scripts.build_windows_installer import source_inventory
@@ -151,6 +157,177 @@ class InstalledSDK(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertEqual(json.loads(result.stdout)["result"]["completeness"], "complete")
         self.assertFalse(self.marker.exists())
+
+    def test_thin_gui_shares_ledger_parent_ids_and_two_file_mmtt_reader(self):
+        workspace = self.root / "gui-workspace"
+        logfile = self.root / "gui.log"
+        process = owner = None
+        with logfile.open("wb") as output:
+            try:
+                process = subprocess.Popen(
+                    [
+                        str(self.candidates["a"] / "bin/opent1d-lab"),
+                        "gui",
+                        "--workspace",
+                        str(workspace),
+                    ],
+                    cwd=self.poison,
+                    env=self.env,
+                    stdout=output,
+                    stderr=subprocess.STDOUT,
+                    start_new_session=True,
+                )
+                owner = Ownership(process)
+                deadline = time.monotonic() + 20
+                match = None
+                while time.monotonic() < deadline:
+                    owner.observe()
+                    match = re.search(r"http://127\.0\.0\.1:(\d+)", logfile.read_text())
+                    if match or process.poll() is not None:
+                        break
+                    time.sleep(0.05)
+                self.assertIsNotNone(match, logfile.read_text())
+                port = int(match[1])
+                token = None
+
+                def request(route, body=None, expected=200):
+                    connection = http.client.HTTPConnection("127.0.0.1", port, timeout=20)
+                    headers = {"X-OpenT1D-Token": token} if token else {}
+                    if body is not None:
+                        headers.update(
+                            Origin=f"http://127.0.0.1:{port}",
+                            **{"Content-Type": "application/json"},
+                        )
+                    try:
+                        connection.request(
+                            "POST" if body is not None else "GET",
+                            route,
+                            json.dumps(body) if body is not None else None,
+                            headers,
+                        )
+                        response = connection.getresponse()
+                        raw = response.read()
+                        self.assertEqual(response.status, expected, raw)
+                        return raw
+                    finally:
+                        connection.close()
+
+                html = request("/")
+                token = re.search(rb'name="opent1d-token" content="([a-f0-9]{64})"', html)[
+                    1
+                ].decode()
+
+                def action(operation, arguments, project=None):
+                    job = json.loads(
+                        request(
+                            "/api/actions",
+                            {
+                                "request_id": uuid.uuid4().hex,
+                                "operation": operation,
+                                "project": project,
+                                "arguments": arguments,
+                            },
+                            202,
+                        )
+                    )
+                    deadline = time.monotonic() + 45
+                    while time.monotonic() < deadline:
+                        owner.observe()
+                        job = json.loads(request("/api/jobs/" + job["id"]))
+                        if job["status"] != "running":
+                            self.assertEqual(job["status"], "done", job)
+                            return job
+                        time.sleep(0.05)
+                    self.fail("Installed GUI action did not finish: " + operation)
+
+                handle = action("create", {"name": "Invented shared GUI project"})["project"]
+                draft = action("prepare", {"task": "mmtt-sensitivity", "case": "complete"}, handle)[
+                    "result"
+                ]
+                plan = action(
+                    "freeze",
+                    {"draft": draft["id"], "name": "Original invented pair", "parent": None},
+                    handle,
+                )["result"]["plan"]
+                state = json.loads(request("/api/state"))
+                folder = Path(next(p["path"] for p in state["projects"] if p["id"] == handle))
+                head = (folder / "HEAD.json").read_bytes()
+                detail = action("plan", {"plan": plan}, handle)["result"]
+                self.assertIsNone(detail["parent"])
+                self.assertEqual(
+                    detail["scientific_input"]["settings"]["uncertainty"]["draws"], 128
+                )
+                self.assertEqual((folder / "HEAD.json").read_bytes(), head)
+                self.assertTrue(action("check", {"plan": plan}, handle)["result"]["runtimes_ready"])
+                result = action("run", {"plan": plan, "retry_of": None}, handle)["result"]
+                self.assertEqual(result["result"]["completeness"], "complete")
+                self.assertEqual(result["receipt"]["remaining_owned_processes"], [])
+                attempt = result["attempt"]
+                cli = self.call("info", "--project", folder)
+                self.assertEqual(cli["plans"][0]["id"], plan)
+                self.assertEqual(cli["attempts"][0]["id"], attempt)
+                inputs = self.call(
+                    "example",
+                    "--task",
+                    "mmtt-sensitivity",
+                    "--case",
+                    "censored",
+                    "--output",
+                    self.root / "cli-example",
+                )["inputs"]
+                child = self.call(
+                    "freeze",
+                    "--project",
+                    folder,
+                    "--task",
+                    "mmtt-sensitivity",
+                    "--package",
+                    inputs["package.json"],
+                    "--csv",
+                    inputs["observations.csv"],
+                    "--settings",
+                    inputs["settings.json"],
+                    "--parent",
+                    plan,
+                )["plan"]
+                action("refresh", {}, handle)
+                info = next(
+                    p["info"]
+                    for p in json.loads(request("/api/state"))["projects"]
+                    if p["id"] == handle
+                )
+                self.assertEqual(next(p["parent"] for p in info["plans"] if p["id"] == child), plan)
+                verified = action("verify", {"attempt": attempt, "allow_failed": False}, handle)[
+                    "result"
+                ]
+                self.assertEqual(set(verified["report_sha256"]), {"report.json", "report.md"})
+                report = verified["report"]
+                head = (folder / "HEAD.json").read_bytes()
+                for name, expected in verified["report_sha256"].items():
+                    self.assertEqual(
+                        hashlib.sha256(request(f"/api/reports/{report}/{name}")).hexdigest(),
+                        expected,
+                    )
+                request("/api/state")
+                self.assertEqual((folder / "HEAD.json").read_bytes(), head)
+                moved = self.root / "moved-gui-project"
+                action("relocate", {"output": str(moved)}, handle)
+                self.assertEqual(self.call("info", "--project", moved)["plans"], info["plans"])
+                copy = workspace / "reports" / report / "report.md"
+                copy.write_bytes(b"changed report copy")
+                request(f"/api/reports/{report}/report.md", expected=409)
+                request("/api/shutdown", {}, 202)
+                process.wait(timeout=45)
+                self.assertEqual(process.returncode, 0, logfile.read_text())
+                self.assertEqual(owner.cleanup(0)[1], [])
+                self.assertFalse(self.marker.exists())
+            finally:
+                if process is not None:
+                    if process.poll() is None:
+                        process.terminate()
+                    if owner is not None:
+                        owner.cleanup(45)
+                    process.wait(timeout=3)
 
     def test_installed_run_retry_relocation_and_wrapper_upgrade(self):
         project, plan = self.prepared()

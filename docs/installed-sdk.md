@@ -15,6 +15,8 @@ with reviewed, separately attached dependency directories. Its own
 execution/parity/relocation evidence from the historical task and this initial
 candidate's passive M4 checks. Both selected native plans now pass local macOS
 execution, exact scientific parity and complete physical-removal relocation.
+The [thin installed GUI](installed-gui.md) consumes these same public services;
+its guide also covers candidate-bound formative exercise preparation.
 
 ## Build and install
 

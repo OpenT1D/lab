@@ -19,6 +19,10 @@ class Project:
     def info(self):
         return self._call("info")
 
+    def plan(self, plan):
+        """Read an immutable plan and its recorded parent without executing it."""
+        return self._call("plan", plan=plan)
+
     def freeze(self, task, inputs, *, parent=None):
         return self._call(
             "freeze",

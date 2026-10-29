@@ -45,6 +45,9 @@ repository tooling; it does not install a general simulation package.
 A second [synthetic task](docs/mmtt-sampling.md) compares full and reduced meal-test
 measurement schedules on the same analysis core. These examples demonstrate
 software behavior under declared assumptions, not performance in people.
+An internal [installed project GUI](docs/installed-gui.md) now connects supplied
+MMTT and native M4 tasks to the shared SDK project ledger and prepares sealed,
+unanswered user-exercise materials. Intended-user sessions remain unrun.
 A separate internal [Windows 11 x64 installer candidate](docs/windows-installation.md)
 bundles all current GUI routes and their runtimes. Its [OT-058 record](docs/research/ot058-installer-verification.md)
 retains bounded clean-install, workflow, preservation and upgrade checks, plus

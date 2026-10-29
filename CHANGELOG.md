@@ -4,6 +4,12 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Add a thin loopback GUI to the installed SDK for supplied MMTT and M4
+  examples, shared plan/parent/attempt identities, explicit runtime selection,
+  cancellation, trusted report copies and whole-project relocation. Add sealed
+  formative materials bound to actual references and the installed artifact,
+  with separate facilitator answers and blank human observations.
+
 - Add an explicit internal installed M4 execution successor with separately
   reviewed native, observer and build locks, current runtime attachments and
   isolated role startup. Preserve historical identities and numerical criteria;

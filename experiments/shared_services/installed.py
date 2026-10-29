@@ -122,6 +122,7 @@ FIELDS = {
     "installation": set(),
     "create": {"project", "name"},
     "info": {"project"},
+    "plan": {"project", "plan"},
     "validate": {"task", "inputs"},
     "example": {"task", "output", "case"},
     "freeze": {"project", "task", "inputs", "parent"},
@@ -224,8 +225,11 @@ def dispatch(request, bootstrap, artifact, *, cancel=None):
         store.require(request["task"] in artifact["tasks"], "Task not admitted by current artifact")
     if action == "installation":
         return {
-            key: artifact[key]
-            for key in ("schema", "source", "build_label", "tasks", "native_execution")
+            "descriptor_sha256": Backend(bootstrap, artifact).application["descriptor_sha256"],
+            **{
+                key: artifact[key]
+                for key in ("schema", "source", "build_label", "tasks", "native_execution")
+            },
         }
     if action == "attach":
         from experiments.m4.installed_study import profile
@@ -258,7 +262,7 @@ def dispatch(request, bootstrap, artifact, *, cancel=None):
     path = workspace_path(request["project"], bootstrap, fresh=action == "create")
     if action == "create":
         return {"project": str(store.create(path, request["name"]))}
-    writing = action not in {"info", "check", "relocate"}
+    writing = action not in {"info", "plan", "check", "relocate"}
     backend = Backend(bootstrap, artifact, request.get("runtime_attachment"))
     with store.opened(path, write_access=writing) as project:
         store.require(
@@ -268,12 +272,18 @@ def dispatch(request, bootstrap, artifact, *, cancel=None):
             "Current artifact does not admit this project's task",
         )
         if action == "info":
+            parents = {
+                identity: event["data"]["parent"]
+                for identity, event, _ in project.events
+                if event["kind"] == "freeze"
+            }
             return {
                 "project": str(path),
                 "head": project.head,
                 "plans": [
                     {
                         "id": identity,
+                        "parent": parents[identity],
                         "task": descriptor["task"],
                         "slots": descriptor["boundary"]["planned_slots"],
                     }
@@ -296,6 +306,27 @@ def dispatch(request, bootstrap, artifact, *, cancel=None):
                     for _, event, _ in project.events
                     if event["kind"] == "reconstruct"
                 ],
+            }
+        if action == "plan":
+            identity = request["plan"]
+            descriptor, folder = project.plans[identity]
+            parent = next(
+                event["data"]["parent"]
+                for key, event, _ in project.events
+                if key == identity and event["kind"] == "freeze"
+            )
+            scientific = store.read(
+                folder
+                / "input"
+                / ("plan.json" if descriptor["task"] == "mmtt-sensitivity" else "config.json")
+            )
+            return {
+                "plan": identity,
+                "parent": parent,
+                "task": descriptor["task"],
+                "boundary": descriptor["boundary"],
+                "scientific_input": scientific,
+                "original_sha256": descriptor["original_sha256"],
             }
         if action == "freeze":
             identity = routes.freeze(
