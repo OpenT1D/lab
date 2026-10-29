@@ -44,6 +44,14 @@ class ReferenceSDK:
                 }
             )
         self.readers = []
+        for attempt in self.attempts:
+            role = attempt["id"]
+            names = [] if role == "failed" else ["report.md", "report.json"]
+            if role in {"fasting", "load15"}:
+                names.append("figure.svg")
+            attempt["outcome"]["report_sha256"] = {
+                name: packet.sha256((role + name).encode()) for name in names
+            }
 
     def installation(self):
         return copy.deepcopy(self.candidate)
@@ -155,6 +163,22 @@ class SharedGUIPacketTests(unittest.TestCase):
         manifest.write_bytes(packet.encoded(revised))
         with self.assertRaisesRegex(ValueError, "structure"):
             packet.verify(self.output, sdk=self.sdk)
+
+    def test_resealed_scope_payload_and_original_report_disagreement_refuse(self):
+        self.create()
+        filename = self.output / "packet.json"
+        original = json.loads(filename.read_bytes())
+        for field in ("scope", "payload", "original_hash"):
+            revised = copy.deepcopy(original)
+            if field == "scope":
+                revised["scope"] = "Independent human acceptance established"
+            elif field == "payload":
+                revised["references"]["mmtt"]["attempt"]["outcome"]["payload"] = "unknown"
+            else:
+                revised["references"]["mmtt"]["attempt"]["outcome"]["report_sha256"] = {}
+            filename.write_bytes(packet.encoded(revised))
+            with self.assertRaises(ValueError):
+                packet.verify(self.output, sdk=self.sdk)
 
     def test_tamper_extra_file_link_and_candidate_mismatch_refuse(self):
         self.create()

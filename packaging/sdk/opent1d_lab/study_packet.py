@@ -10,6 +10,7 @@ from . import api
 from ._gui_files import decode, encoded, outside_projects, path, read, require, sha256, write
 
 SCHEMA = "opent1d.formative-study-packet/1"
+SCOPE = "internal-local-research; installation usability not assessed"
 ROLES = ("mmtt", "fasting", "load15", "failed")
 TASKS = (
     (
@@ -198,6 +199,7 @@ def create(project_path, attempts, output, *, sdk=api):
         attempt = recorded[attempts[role]]
         outcome = attempt["outcome"]
         require(isinstance(outcome, dict), "Reference attempts must have terminal evidence")
+        require(outcome["payload"] in {"native", "forensic"}, "Unsupported reference payload")
         detail = project.plan(attempt["plan"])
         if role == "mmtt":
             require(detail["task"] == "mmtt-sensitivity", "MMTT reference required")
@@ -262,6 +264,10 @@ def create(project_path, attempts, output, *, sdk=api):
             result = reader.reconstruct(
                 attempts[role], Path(temporary).resolve() / role, allow_failed=role == "failed"
             )
+            require(
+                result["report_sha256"] == reference["attempt"]["outcome"]["report_sha256"],
+                "Reconstructed and recorded report hashes differ",
+            )
             expected_names = {"report.json", "report.md"}
             if role != "mmtt":
                 expected_names.add("figure.svg")
@@ -298,7 +304,7 @@ def create(project_path, attempts, output, *, sdk=api):
             "machine": platform.machine(),
             "python": platform.python_version(),
         },
-        "scope": "internal-local-research; installation usability not assessed",
+        "scope": SCOPE,
         "reference_project": {
             "head": before["head"],
             "inventory_sha256": sha256(encoded(original)),
@@ -343,6 +349,7 @@ def verify(packet_path, *, sdk=api):
             "files",
         }
         and packet["exercise"] == "shared-project-mmtt-m4/1"
+        and packet["scope"] == SCOPE
         and set(packet["references"]) == set(ROLES),
         "Incomplete preparation structure",
     )
@@ -355,6 +362,11 @@ def verify(packet_path, *, sdk=api):
         )
         attempt, detail = reference["attempt"], reference["plan"]
         outcome = attempt["outcome"]
+        require(outcome["payload"] in {"native", "forensic"}, "Unsupported reference payload")
+        require(
+            outcome["report_sha256"] == reference["report_sha256"],
+            "Recorded and copied report hashes differ",
+        )
         require(
             attempt["id"] not in seen
             and attempt["plan"] == detail["plan"]
