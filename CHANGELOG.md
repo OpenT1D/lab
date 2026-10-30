@@ -4,6 +4,12 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Extend the planned integrated-laboratory development window from the merged
+  installed SDK, native M4 and thin GUI: add shared sampling, editable studies,
+  comparisons, a connected synthetic study and reader-transition qualification,
+  with M3 as stretch. Preserve existing evidence and remaining user/distribution
+  gates; this planning change adds no runtime, model result or supported release.
+
 - Serve installed GUI report downloads with fixed header values and reject
   unsupported download names before encoding or emitting a response.
 
