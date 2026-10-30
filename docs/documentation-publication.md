@@ -30,7 +30,7 @@ All PR HTML is untrusted contributor content; inspect it in that context.
 
 ## Browser regression checks
 
-The required Linux Chromium job independently builds and stages documentation
+The required Linux browser matrix runs Chromium, Firefox and WebKit. Each job independently builds and stages documentation
 from the same checked-out source using the commands above. It serves that tree
 under `/lab/`, matching the published project path. It checks every generated
 HTML page, including the entry redirect and search. This verifies the source
@@ -41,6 +41,7 @@ With the locked browser tooling installed as described in the
 [development guide](development.md), run:
 
 ```sh
+npm --prefix tests/browser run install:browser -- chromium firefox webkit
 uv run --locked python scripts/check.py --stage docs
 uv run --locked python scripts/stage_documentation.py _build/html _build/documentation-preview/lab
 npm --prefix tests/browser run test:docs
@@ -60,20 +61,30 @@ over HTTP against its original bytes. Search must finish and open a result;
 the diagram must render again after a theme change. Synthetic fault pages test
 that missing assets and browser errors are actually rejected.
 
-The suite uses four Chromium workers, no retries and a five-minute total budget.
+Each CI engine uses four workers, no retries and a five-minute documentation
+budget. The matrix uses `fail-fast: false`, so one failing engine does not cancel
+the others' diagnostics. All three results must succeed for the required gate.
+The four MMTT application flows run only in the Chromium job. Local `test:docs`
+runs all three engines within a fifteen-minute total budget; select one with
+`npm --prefix tests/browser run test:docs -- --project firefox --global-timeout=300000`.
+The installer keeps Chromium as its default; explicit browser names select the
+requested engines. On Linux, add `--with-deps` before those names when needed.
+
 The pinned Mermaid module still requires jsDelivr access; a failed CDN load
 fails the browser check. Logs, per-page JSON receipts and failure screenshots
-and traces are retained with the existing browser diagnostics for five days.
-The browser job remains a dependency of `Repository checks`, so a failure also
-prevents main publication. This is a build regression check; live-site acceptance
-and coverage in other browser engines remain separate.
+and traces are retained in separate `browser-<engine>-...` artifacts for five
+days. Per-page receipts record the actual engine name and version. The browser
+matrix remains a dependency of `Repository checks`, so a failure also prevents
+main publication. These checks cover Playwright's engine builds on Ubuntu 24.04;
+live-site acceptance, other operating systems and installed browser/release
+qualification remain separate.
 
 ## Publish reviewed main
 
 Only a `push` to `refs/heads/main` in `OpenT1D/lab` uploads a Pages artifact. The
 artifact name includes its run ID and attempt. The deployment job waits for the
 same run's complete `Repository checks` gate: root checks, the three-host smoke
-matrix and Linux Chromium flows must all succeed. A failed, cancelled or skipped
+matrix, Chromium MMTT flows and all three documentation engines must succeed. A failed, cancelled or skipped
 family prevents deployment. The deployment job is not a dependency of that gate.
 
 Pull requests also require the read-only [dependency review](publication-security.md).

@@ -7,7 +7,9 @@ if (!process.env.PLAYWRIGHT_BROWSERS_PATH || !path.isAbsolute(process.env.PLAYWR
 }
 
 const cli = fileURLToPath(new URL('node_modules/playwright/cli.js', import.meta.url));
-const result = spawnSync(process.execPath, [cli, 'install', 'chromium', ...process.argv.slice(2)], {
+const args = process.argv.slice(2);
+if (!args.some(arg => ['chromium', 'firefox', 'webkit'].includes(arg))) args.unshift('chromium');
+const result = spawnSync(process.execPath, [cli, 'install', ...args], {
   stdio: 'inherit',
   timeout: 300_000,
 });
