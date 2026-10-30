@@ -1,6 +1,6 @@
 import { test as base, expect } from '@playwright/test';
 import { createServer } from 'node:http';
-import { auditDocument } from './documentation-audit.mjs';
+import { assertClean, auditDocument, monitor, waitForSearchCompletion } from './documentation-audit.mjs';
 
 // Real disposable HTTP responses make the browser and explicit source/asset
 // fetches observe identical fixtures, including an immediate meta refresh.
@@ -37,6 +37,105 @@ const test = base.extend({
 });
 
 const html = body => `<!doctype html><link rel="icon" href="_static/icon.svg"><title>Synthetic audit fixture</title>${body}`;
+// Like Sphinx, expose the result link and finished heading while a non-blocking
+// summary fetch is still pending. Real HTTP latency makes an early click abort
+// that request; no browser errors are intercepted or substituted.
+function searchFixture(site, fault = 'healthy') {
+  const state = { summaryFinished: false, targetRequested: false, targetBeforeSummary: false };
+  const summary = site.handle('__search-summary.txt', (_request, response) => {
+    const timer = setTimeout(() => {
+      response.writeHead(fault === 'missing summary' ? 404 : 200, { 'Content-Type': 'text/plain' });
+      response.end('Delayed summary is complete');
+    }, 800);
+    response.on('finish', () => { state.summaryFinished = true; });
+    response.on('close', () => clearTimeout(timer));
+  });
+  const target = site.handle('__search-target.html', (_request, response) => {
+    state.targetRequested = true;
+    state.targetBeforeSummary = !state.summaryFinished;
+    response.writeHead(200, { 'Content-Type': 'text/html' });
+    response.end(html(`<article><h1>Search target</h1></article>${fault === 'target asset' ? '<script src="__missing-target.js"></script>' : ''}`));
+  });
+  const lateFault = {
+    'console error': 'console.error("delayed search console fault")',
+    'JavaScript exception': 'throw new Error("delayed search page fault")',
+  }[fault] || '';
+  const source = site.put('__search.html', html(`
+    <div id="search-results"><h2>Search Results</h2><a href="${target}">First result</a><p id="summary"></p></div>
+    <script>
+      fetch(${JSON.stringify(summary)}).then(response => response.text()).then(text => {
+        document.getElementById('summary').textContent = text;
+        ${lateFault}
+      });
+    </script>`));
+  return { source, target, summary, state };
+}
+
+test('search waits for a delayed summary before opening a result', async ({ page, faultSite }, testInfo) => {
+  const fixture = searchFixture(faultSite);
+  const { receipt, stop } = monitor(page);
+  try {
+    await page.goto(fixture.source);
+    await waitForSearchCompletion(page, receipt);
+    const summaryBeforeClick = await page.locator('#summary').textContent();
+    await page.getByRole('link', { name: 'First result' }).click();
+    await expect(page).toHaveURL(fixture.target);
+    await expect(page.locator('article h1')).toHaveText('Search target');
+    await page.waitForLoadState('networkidle');
+    assertClean(receipt);
+    expect(summaryBeforeClick).toBe('Delayed summary is complete');
+    expect(fixture.state).toEqual({ summaryFinished: true, targetRequested: true, targetBeforeSummary: false });
+  } finally {
+    stop();
+    await testInfo.attach('delayed-search.json', { body: JSON.stringify({ ...fixture.state, ...receipt }), contentType: 'application/json' });
+  }
+});
+
+for (const [fault, error] of [
+  ['missing summary', /HTTP 404: .*__search-summary.txt/],
+  ['console error', /Console: delayed search console fault/],
+  ['JavaScript exception', /JavaScript: (?:Error: )?delayed search page fault/],
+  ['aborted summary', /Request failed: .*__search-summary.txt/],
+]) {
+  test(`search preserves ${fault} while waiting for completion`, async ({ browserName, page, faultSite }, testInfo) => {
+    const fixture = searchFixture(faultSite, fault);
+    if (fault === 'aborted summary') await page.route('**/__search-summary.txt', route => route.abort('aborted'));
+    const { receipt, stop } = monitor(page);
+    try {
+      await page.goto(fixture.source);
+      await expect(waitForSearchCompletion(page, receipt)).rejects.toThrow(error);
+      expect(receipt.errors.some(message => error.test(message))).toBe(true);
+      if (fault === 'aborted summary') {
+        const failed = receipt.requestFailures.find(item => item.url === fixture.summary);
+        expect(failed?.type).toBe('fetch');
+        if (browserName === 'firefox') expect(failed.failure).toBe('NS_BINDING_ABORTED');
+      }
+      expect(fixture.state.targetRequested).toBe(false);
+      expect(page.url()).toBe(fixture.source);
+    } finally {
+      stop();
+      await testInfo.attach('search-fault.json', { body: JSON.stringify({ ...fixture.state, ...receipt }), contentType: 'application/json' });
+    }
+  });
+}
+
+test('search keeps monitoring asset errors after opening the result', async ({ page, faultSite }, testInfo) => {
+  const fixture = searchFixture(faultSite, 'target asset');
+  const { receipt, stop } = monitor(page);
+  try {
+    await page.goto(fixture.source);
+    await waitForSearchCompletion(page, receipt);
+    await page.getByRole('link', { name: 'First result' }).click();
+    await expect(page).toHaveURL(fixture.target);
+    await page.waitForLoadState('networkidle');
+    expect(() => assertClean(receipt)).toThrow(/HTTP 404: .*__missing-target.js/);
+    expect(fixture.state.targetBeforeSummary).toBe(false);
+  } finally {
+    stop();
+    await testInfo.attach('search-target-fault.json', { body: JSON.stringify({ ...fixture.state, ...receipt }), contentType: 'application/json' });
+  }
+});
+
 const cases = [
   ['missing image', '<img src="__missing-image.svg">', /HTTP 404: .*__missing-image.svg/],
   ['missing stylesheet', '<link rel="stylesheet" href="__missing-style.css">', /HTTP 404: .*__missing-style.css/],
