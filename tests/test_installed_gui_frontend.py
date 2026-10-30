@@ -30,4 +30,4 @@ class InstalledGUIFrontendTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
             evidence = json.loads(receipt.read_bytes())
             self.assertTrue(evidence["passed"], evidence)
-            self.assertEqual(len(evidence["tests"]), 9)
+            self.assertEqual(len(evidence["tests"]), 12)

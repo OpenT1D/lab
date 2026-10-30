@@ -30,7 +30,7 @@ def source_closure():
     from experiments.observation_analysis import plan as mmtt
     from experiments.shared_contracts.inventory import reader_source_inventory
     from experiments.shared_contracts.selected import FIXTURES
-    from experiments.shared_services import routes
+    from experiments.shared_services import routes, sampling
 
     names = set(
         reader_source_inventory("experiments.shared_services.installed")[
@@ -43,6 +43,16 @@ def source_closure():
         metadata = routes.reader_identity(task)
         names.update(metadata["trusted_sources_sha256"])
         names.update(metadata["reader_static_dependencies_sha256"])
+        if task == "mmtt-sampling":
+            names.update(sampling.native.ANCESTRY_FILES)
+            names.update(routes.runtime_paths(sampling.binding()))
+            names.update(
+                {
+                    "experiments/mmtt_sampling/protocol.json",
+                    "experiments/mmtt_sampling/fixtures/design.json",
+                }
+            )
+            continue
         if task == "m4-study-installed":
             from experiments.shared_services.installed_m4 import FIXTURES as native_fixtures
 
@@ -115,11 +125,11 @@ def build(output, *, allow_dirty=False, build_label="internal"):
                 "bytes": len(raw),
             }
     descriptor = {
-        "schema": "opent1d.installed-sdk/2",
+        "schema": "opent1d.installed-sdk/3",
         "source": {key: source[key] for key in ("revision", "dirty")},
         "build_label": build_label,
         "files": files,
-        "tasks": ["mmtt-sensitivity", "m4-study-secure", "m4-study-installed"],
+        "tasks": ["mmtt-sensitivity", "m4-study-secure", "m4-study-installed", "mmtt-sampling"],
         "native_execution": "explicit-reviewed-attachment/1",
     }
     (package / "_manifest.json").write_text(json.dumps(descriptor, indent=2, sort_keys=True) + "\n")

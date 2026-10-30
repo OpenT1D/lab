@@ -17,6 +17,12 @@ candidate's passive M4 checks. Both selected native plans now pass local macOS
 execution, exact scientific parity and complete physical-removal relocation.
 The [thin installed GUI](installed-gui.md) consumes these same public services;
 its guide also covers candidate-bound formative exercise preparation.
+The current version-3 descriptor also includes `mmtt-sampling`, with its original
+development seal, native schedule reports and unchanged inverse estimator. Its
+[integration record](research/installed-mmtt-sampling.md) owns the new evidence.
+Version-1 and version-2 descriptors retain their exact historical task rosters
+and cannot declare sampling. Version 1 still refuses native execution; version 2
+retains its existing explicit reviewed-attachment policy.
 
 ## Build and install
 
@@ -136,6 +142,50 @@ add `--allow-failed` for incomplete/failed evidence. `run --retry-of ...`,
 `import --archive ...`, `relocate --output ...` and
 `recover --attempt ... --execution-stopped` mirror the Python operations.
 `--help` lists each command's required fields.
+
+## Reduced measurement schedules
+
+The sampling route uses the same project methods and retains all native parent
+and child reports. Export one of `information-loss`, `constant`, `incomplete` or
+`steep-response` explicitly:
+
+```python
+inputs = lab.example("mmtt-sampling", root / "sampling-inputs",
+                     case="information-loss")["inputs"]
+lab.validate("mmtt-sampling", inputs)
+plan = project.freeze("mmtt-sampling", inputs)["plan"]
+result = project.run(plan, timeout=600)
+project.reconstruct(result["attempt"], root / "sampling-report")
+```
+
+`inputs` contains `package.json`, `observations.csv`, `settings.json`, `design.json`
+and `development`, a sealed development-only observation import. The raw files
+must match the sealed selection evidence. Evaluation participants cannot enter
+development selection. Selection, allocation, original bytes and effective native
+freeze remain bound to the plan. Validation and freezing perform no estimation.
+
+The CLI uses the same explicit inputs for both `validate` and `freeze`:
+
+```bash
+"$SDK" example --task mmtt-sampling --case information-loss \
+  --output "$PWD/sampling-inputs"
+"$SDK" freeze --project "$PWD/cli-study" --task mmtt-sampling \
+  --package "$PWD/sampling-inputs/study/package.json" \
+  --csv "$PWD/sampling-inputs/study/observations.csv" \
+  --settings "$PWD/sampling-inputs/study/settings.json" \
+  --design "$PWD/sampling-inputs/study/sampling-design.json" \
+  --development-import "$PWD/sampling-inputs/development"
+```
+
+Use the returned plan with `check`, `run` and the normal attempt/retry/reader
+commands. All four schedules, five participants and three variants retain their
+60 planned slots, including unavailable ones. Supplied settings retain 128
+draws per slot. The result's `report_sha256` includes the parent JSON/Markdown
+and each available `studies/<schedule>/report.json` and `.md`. Reconstruct the
+whole directory to preserve native relative links. A full curve is a comparison
+reference, not biological truth; the information-loss reversal is engineered
+synthetic evidence. Incomplete and interrupted native reports require the same
+explicit `allow_failed` option. Hard stops can instead retain forensic evidence.
 
 ## M4 and compatibility boundaries
 

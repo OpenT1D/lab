@@ -1,4 +1,4 @@
-Browser development checks (synthetic MMTT and built documentation)
+Browser development checks (checkout/installed synthetic MMTT and built documentation)
 
 Run from the repository root with Node 24 and the locked Python 3.12 root
 environment. No native simulation environment is installed by this suite.
@@ -23,6 +23,15 @@ One Chromium worker, no retries, 90 seconds per test and a five-minute global
 budget bound the MMTT suite. The success paths use 32 explicitly selected synthetic
 uncertainty draws. Cancellation uses 1024 and waits for the saved analysis-phase
 marker before clicking Cancel; it never changes the calculation or server.
+
+The additional installed-sampling test builds a source/data wheel, installs it
+noneditably in a disposable CPython 3.12 environment and launches its actual GUI
+from an unrelated directory. It retains the supplied 128 draws, reads/downloads
+native child reports, checks desktop/narrow views, relocates/restarts without the
+original project path and proves nested-tampering withdrawal. It uses no native
+simulator, substituted response or checkout GUI. Its build receipt and screenshots
+are retained with the other Chromium diagnostics. Development runs allow a dirty
+source fixture; formal candidate receipts still require a clean source build.
 
 Reports, server logs and success screenshots are under output/playwright/.
 Failures retain traces, screenshots and a copy of the synthetic workspace.

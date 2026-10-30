@@ -7,17 +7,22 @@ from .api import Project, attach_runtimes, create_project, example, installation
 
 
 def _inputs(args):
-    if args.task != "mmtt-sensitivity":
+    if args.task not in {"mmtt-sensitivity", "mmtt-sampling"}:
         if not args.config:
             raise ValueError("M4 requires --config")
         return {"config.json": args.config}
     if not all((args.package, args.csv, args.settings)):
         raise ValueError("MMTT requires --package, --csv and --settings")
-    return {
+    inputs = {
         "package.json": args.package,
         "observations.csv": args.csv,
         "settings.json": args.settings,
     }
+    if args.task == "mmtt-sampling":
+        if not all((args.design, args.development_import)):
+            raise ValueError("Sampling requires --design and --development-import")
+        inputs.update({"design.json": args.design, "development": args.development_import})
+    return inputs
 
 
 def main(argv=None):
@@ -45,23 +50,32 @@ def main(argv=None):
     command = commands.add_parser("example")
     command.add_argument(
         "--task",
-        choices=("mmtt-sensitivity", "m4-study-secure", "m4-study-installed"),
+        choices=("mmtt-sensitivity", "m4-study-secure", "m4-study-installed", "mmtt-sampling"),
         required=True,
     )
     command.add_argument("--output", required=True)
     command.add_argument(
         "--case",
         default="complete",
-        choices=("complete", "censored", "fasting", "gastric_load_15g"),
+        choices=(
+            "complete",
+            "censored",
+            "fasting",
+            "gastric_load_15g",
+            "information-loss",
+            "constant",
+            "incomplete",
+            "steep-response",
+        ),
     )
     for operation in ("validate", "freeze"):
         command = commands.add_parser(operation)
         command.add_argument(
             "--task",
-            choices=("mmtt-sensitivity", "m4-study-secure", "m4-study-installed"),
+            choices=("mmtt-sensitivity", "m4-study-secure", "m4-study-installed", "mmtt-sampling"),
             required=True,
         )
-        for name in ("config", "package", "csv", "settings"):
+        for name in ("config", "package", "csv", "settings", "design", "development-import"):
             command.add_argument("--" + name)
         if operation == "freeze":
             command.add_argument("--project", required=True)

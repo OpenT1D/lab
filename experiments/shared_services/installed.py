@@ -67,7 +67,7 @@ class Backend:
             "metadata_valid": True,
             "metadata": details,
             "observation_path_issues": issues,
-            "runtimes_ready": task.id == "mmtt-sensitivity",
+            "runtimes_ready": task.id in {"mmtt-sensitivity", "mmtt-sampling"},
             "coordinator_runtime": runtime_identity(),
             "native_policy": "unavailable-public-policy"
             if task.id == "m4-study-secure"
@@ -96,7 +96,7 @@ class Backend:
                 record=recorded,
             )
         store.require(
-            operation == "reconstruct" or task.id == "mmtt-sensitivity",
+            operation == "reconstruct" or task.id in {"mmtt-sensitivity", "mmtt-sampling"},
             "Native runtime not admitted by installed policy",
         )
         command = [
@@ -158,6 +158,30 @@ def workspace_path(value, bootstrap, *, fresh=False):
 
 def example(task, output, case):
     store.require(task in routes.TASKS, "Unselected installed task")
+    if task == "mmtt-sampling":
+        from experiments.mmtt_sampling.fixtures import CASES, export_example
+        from experiments.observation_analysis.intake import import_observations
+
+        store.require(case in CASES, "Unselected sampling example case")
+        output.mkdir()
+        full = export_example(output / "study", case=case)
+        development = export_example(output / "development-input", True, case=case)
+        imported = output / "development"
+        import_observations(
+            development / "package.json", development / "observations.csv", imported
+        )
+        return {
+            "task": task,
+            "inputs": {
+                **{
+                    name: str(full / name)
+                    for name in ("package.json", "observations.csv", "settings.json")
+                },
+                "design.json": str(full / "sampling-design.json"),
+                "development": str(imported),
+            },
+            "scientific_evidence": "synthetic-only",
+        }
     store.require(
         case
         in (
@@ -318,7 +342,11 @@ def dispatch(request, bootstrap, artifact, *, cancel=None):
             scientific = store.read(
                 folder
                 / "input"
-                / ("plan.json" if descriptor["task"] == "mmtt-sensitivity" else "config.json")
+                / (
+                    "plan.json"
+                    if descriptor["task"] in {"mmtt-sensitivity", "mmtt-sampling"}
+                    else "config.json"
+                )
             )
             return {
                 "plan": identity,
@@ -346,7 +374,7 @@ def dispatch(request, bootstrap, artifact, *, cancel=None):
                 backend.task(descriptor["task"]),
                 SimpleNamespace(
                     config=folder / "input"
-                    if descriptor["task"] == "mmtt-sensitivity"
+                    if descriptor["task"] in {"mmtt-sensitivity", "mmtt-sampling"}
                     else folder / "input/config.json",
                     reference=None,
                 ),

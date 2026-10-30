@@ -127,4 +127,51 @@ await check('mmtt_two_file_report_never_requests_figure',async()=>{
  assert.deepEqual(calls,['/api/reports/mmtt/report.md']);assert.equal(e.run('currentReport.attempt'),'mmtt-attempt');assert.equal(e.byId('report-figure').classList.contains('hidden'),true);assert.equal(e.figureButton.classList.contains('hidden'),true);
  return {requests:calls,figure_hidden:true,figure_download_hidden:true};
 });
+await check('sampling_selection_explains_development_and_reference_scope',async()=>{
+ const e=environment();e.byId('task').value='mmtt-sampling';e.run('updateTask();');
+ assert.equal(e.byId('example-case').children.length,4);
+ assert.match(e.byId('task-context').textContent,/Development-only selection/);
+ assert.match(e.byId('task-context').textContent,/not biological truth/);
+ return {four_controls:true,development_scope:true,reference_scope:true};
+});
+await check('sampling_children_use_scoped_authenticated_text_requests',async()=>{
+ const e=environment(),calls=[];
+ e.context.fetch=async(url,options)=>{calls.push({url,token:options.headers['X-OpenT1D-Token']});return {ok:true,text:async()=> '# Full schedule\n<script>untrusted()</script>'};};
+ e.context.record={id:'a'.repeat(32),files:['report.md','report.json','studies/full/report.md','studies/full/report.json','../private.md']};
+ e.run('renderChildReports(record);');
+ const children=e.byId('child-reports').children;
+ assert.equal(children.length,2,'Only one admitted native schedule is rendered');
+ assert.equal(children[1].children[0].textContent,'Schedule: full');
+ await children[1].children[1].onclick();
+ assert.deepEqual(calls,[{url:'/api/reports/'+('a'.repeat(32))+'/studies/full/report.md',token:'session-token'}]);
+ const content=children[1].children.at(-1);
+ assert.equal(content.children[0].textContent,'Full schedule');
+ assert.equal(content.children[1].textContent,'<script>untrusted()</script>');
+ assert.equal(content.children[1].tag,'p','Saved text is never executed as HTML');
+ return {scoped_child_route:true,session_token:true,unsafe_name_not_rendered:true,html_inert:true};
+});
+await check('sampling_refusals_and_invalid_polls_withdraw_verified_content',async()=>{
+ for(const button of [1,2,3]){
+  const e=environment();seed(e);
+  e.run('currentReport={id:"sampling",project:"project",valid:true,files:["report.md","report.json","studies/full/report.md","studies/full/report.json"]};renderChildReports(currentReport);render();');
+  const child=e.byId('child-reports').children[1];
+  e.context.fetch=async()=>({ok:true,text:async()=> '# Verified child content'});
+  await child.children[1].onclick();
+  assert.equal(child.children.at(-1).children[0].textContent,'Verified child content');
+  e.context.fetch=async()=>({ok:false,json:async()=>({error:'Report directory changed'})});
+  await child.children[button].onclick();
+  assert.equal(e.run('currentReport'),null);
+  assert.equal(e.byId('saved-report').classList.contains('hidden'),true);
+  assert.equal(e.byId('child-reports').children.length,0);
+  assert.equal(e.byId('notice').textContent,'Report directory changed');
+ }
+ const e=environment();seed(e);
+ e.run('currentReport={id:"sampling",project:"project",valid:true};render();');
+ const incoming=base();incoming.reports=[{id:'sampling',valid:true}];await poll(e,incoming);
+ assert.equal(e.run('currentReport.id'),'sampling','Valid unchanged polls preserve the report');
+ incoming.reports[0].valid=false;await poll(e,incoming);
+ assert.equal(e.run('currentReport'),null);
+ assert.equal(e.byId('saved-report').classList.contains('hidden'),true);
+ return {read_and_both_download_refusals_withdraw:true,invalid_poll_withdraws:true,valid_poll_preserves:true};
+});
 receipt.passed=Object.values(receipt.tests).every(value=>value.passed);fs.writeFileSync(receiptPath,JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify({passed:receipt.passed,source_sha256:receipt.source_sha256,tests:Object.fromEntries(Object.entries(receipt.tests).map(([name,value])=>[name,value.passed])),receipt:receiptPath}));if(!receipt.passed)process.exitCode=1;

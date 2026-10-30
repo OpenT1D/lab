@@ -4,6 +4,13 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Integrate `mmtt-sampling` into installed Python/CLI and the shared project
+  workbench. Retain sealed development-only selection, all 60 supplied planned
+  slots, native parent/child reports, explicit incomplete readers and relocation.
+  Add descriptor version 3 with strict historical rosters, actual installed and
+  browser regressions, and withdraw displayed reports when nested reads refuse.
+  Preserve the estimator, native sampling files and OT-059 frozen packet.
+
 - Accept a narrowly verified Firefox favicon cancellation during an immediate
   documentation redirect. Require a natural completed browser reload and valid
   image bytes, retain the raw cancellation and preserve real asset failures.

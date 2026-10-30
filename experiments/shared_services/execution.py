@@ -228,7 +228,7 @@ def execute(store, plan_id, *, retry_of=None, timeout=3600, cancel=None, backend
     )
     args = SimpleNamespace(
         config=plan / "input"
-        if descriptor["task"] == "mmtt-sensitivity"
+        if descriptor["task"] in {"mmtt-sensitivity", "mmtt-sampling"}
         else plan / "input/config.json",
         output=work / "native",
         reference=None,

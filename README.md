@@ -46,7 +46,7 @@ A second [synthetic task](docs/mmtt-sampling.md) compares full and reduced meal-
 measurement schedules on the same analysis core. These examples demonstrate
 software behavior under declared assumptions, not performance in people.
 An internal [installed project GUI](docs/installed-gui.md) now connects supplied
-MMTT and native M4 tasks to the shared SDK project ledger and prepares sealed,
+paired-sensitivity, reduced-sampling MMTT and native M4 tasks to the shared SDK project ledger and prepares sealed,
 unanswered user-exercise materials. Intended-user sessions remain unrun.
 A separate internal [Windows 11 x64 installer candidate](docs/windows-installation.md)
 bundles all current GUI routes and their runtimes. Its [OT-058 record](docs/research/ot058-installer-verification.md)
@@ -109,6 +109,9 @@ fasting/15 g execution, exact direct/installed parity and complete relocated
 report evidence. A [thin installed GUI](docs/installed-gui.md) now exposes those
 workflows. Intended-user feedback, other hosts, broader compatibility and
 distribution retain separate gates.
+The [sampling migration](docs/research/installed-mmtt-sampling.md) retains the
+native development seal, complete slot accounting and parent/child reports
+through installed execution and relocation; the numerical core is unchanged.
 
 ## What we are building
 

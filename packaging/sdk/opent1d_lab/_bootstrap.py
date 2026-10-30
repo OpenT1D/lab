@@ -72,6 +72,7 @@ def main():
         task, operation = sys.argv[2:4]
         modules = {
             "mmtt-sensitivity": "experiments.observation_analysis",
+            "mmtt-sampling": "experiments.mmtt_sampling",
             "m4-study-secure": "experiments.m4.secure_study",
             "m4-study-installed": "experiments.m4.installed_study",
         }
