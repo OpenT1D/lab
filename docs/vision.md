@@ -84,10 +84,10 @@ interpretation of their own data and methods.
 
 The M0–M2 references and bounded internal verification provide the foundation.
 P1 supplies a fixed synthetic task, local controller intake and attributed
-examples. One exact internal P1 Git-bundle handoff received a conditional
-human rights decision; independent intended-user execution and product
-acceptance remain open. That decision does not authorize a general release
-or broader distribution. The [P1 review record](research/p1-product-acceptance-review.md)
+examples. A human reviewer conditionally approved the distribution rights for
+one exact internal P1 Git-bundle handoff; independent intended-user execution
+and product acceptance remain open. That decision does not authorize a general
+release or broader distribution. The [P1 review record](research/p1-product-acceptance-review.md)
 keeps the scope and remaining evidence explicit.
 
 M3 forecasting, M4 secretion/glucose/C-peptide and M5 prognosis supply

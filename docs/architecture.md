@@ -7,10 +7,12 @@ and [common-laboratory decision](decisions/0070-common-research-laboratory.md),
 the architecture should connect suitable researcher-owned models, controllers
 and authorized data through supported, versioned boundaries. A shared laboratory
 core should make projects, experiment plans, execution, comparison and evidence
-reusable across scientific tasks. This direction and its proposed interfaces
-are not an implemented common core or a stable public API. Current adapters
-demonstrate particular engines and methods, not an interchangeable public
-plugin system. OpenT1D keeps invented fixtures and provenance with its tools,
+reusable across scientific tasks. The implemented
+[minimal project services](shared-project-services.md) cover selected MMTT/M4
+contracts with bounded storage, isolated execution and trusted reconstruction.
+The full common-core migration and stable public SDK remain planned. Current
+adapters demonstrate particular engines and methods; they do not establish an
+interchangeable public plugin system. OpenT1D keeps invented fixtures and provenance with its tools,
 not a patient dataset.
 
 [Decision 0055](decisions/0055-task-entry-and-m3-comparison.md) supplies the

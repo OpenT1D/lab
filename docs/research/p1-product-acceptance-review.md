@@ -98,7 +98,9 @@ does not establish an independent chain of title for simglucose's parameter
 tables. These questions must be answered for the chosen distribution; a
 source link and a license name alone do not close them.
 
-### Human rights review record — conditional internal scope
+<a id="human-rights-review-record--conditional-internal-scope"></a>
+
+### Distribution-rights review record — conditional internal scope
 
 The authorized reviewer stated their decision authority and approved the
 prepared scoped proposal in the task conversation on 26 September 2026. The

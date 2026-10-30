@@ -28,6 +28,11 @@ mermaid_version = "11.12.1"
 html_theme = "furo"
 language = "en"
 html_title = "OpenT1D"
+# Reuse the app icon; Sphinx copies it to _static and resolves each page depth.
+html_favicon = "../experiments/gui/static/icon.svg"
+templates_path = ["_templates"]
+# Give the project entry its icon before redirecting to the documentation root.
+html_additional_pages = {"index": "index-redirect.html"}
 html_show_sourcelink = False
 html_theme_options = {
     "source_repository": "https://github.com/OpenT1D/lab/",
