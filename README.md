@@ -84,10 +84,15 @@ not establish biological validity, clinical benefit or independent usability.
 
 ## Product direction
 
-The [public-development queue](ROADMAP.md#public-development-priorities) selects
-agent-development improvements, reliability/CI work, documentation and a bounded
-Mac application as the immediate delivery priorities. The shared-laboratory
-increment develops common services around the working routes:
+The [public-development queue](ROADMAP.md#public-development-priorities) now
+selects [further integrated laboratory work](ROADMAP.md#selected-development-window-first-integrated-laboratory)
+on the merged installed SDK, native M4 successor and thin project GUI: shared
+sampling, editable studies, reproducible comparisons, a connected synthetic
+study and an internal candidate with a tested reader transition. These remaining
+increments are planned; M3 migration is a stretch goal.
+Development can proceed while intended-user acceptance remains open. The
+implemented public checks and bounded Mac candidate retain their current scope.
+The shared-laboratory increment develops common services around the working routes:
 common project, execution and result services, compatible native adapters and a
 question-led workbench. Its test is whether a second method and research task
 reuse the infrastructure with less integration work. The
