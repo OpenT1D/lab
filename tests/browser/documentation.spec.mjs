@@ -17,16 +17,22 @@ const encoded = name => name.split('/').map(encodeURIComponent).join('/');
 
 for (const name of pages) {
   test(`page: ${name}`, async ({ page, request, baseURL }, testInfo) => {
+    const browser = page.context().browser();
+    const engine = { name: browser.browserType().name(), version: browser.version() };
     let receipt;
     try {
       receipt = await auditDocument(page, new URL(encoded(name), baseURL).href, request);
+      expect(engine.name).toBe(testInfo.project.name);
     } catch (error) {
-      receipt = error.receipt;
+      receipt = error.receipt || receipt;
       throw error;
     } finally {
-      if (receipt) await testInfo.attach('browser-audit.json', {
-        body: JSON.stringify(receipt, null, 2), contentType: 'application/json',
-      });
+      if (receipt) {
+        receipt.browser = engine;
+        await testInfo.attach('browser-audit.json', {
+          body: JSON.stringify(receipt, null, 2), contentType: 'application/json',
+        });
+      }
     }
   });
 }

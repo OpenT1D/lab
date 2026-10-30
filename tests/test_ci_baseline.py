@@ -92,6 +92,10 @@ class CIBaselinePolicyTests(unittest.TestCase):
             },
         )
         self.assertEqual(jobs["browser"]["runs-on"], "ubuntu-24.04")
+        self.assertEqual(
+            jobs["browser"]["strategy"],
+            {"fail-fast": False, "matrix": {"browser": ["chromium", "firefox", "webkit"]}},
+        )
         for key in PUBLIC_JOBS:
             self.assertNotIn("continue-on-error", jobs[key])
             if key not in {"repository-checks", "public-checks", "dependency-review"}:
@@ -115,8 +119,16 @@ class CIBaselinePolicyTests(unittest.TestCase):
         self.assertIn("npm --prefix tests/browser test", browser)
         self.assertIn("npm --prefix tests/browser run test:docs", browser)
         browser_steps = jobs["browser"]["steps"]
+        mmtt = next(
+            step
+            for step in browser_steps
+            if step.get("run", "").startswith("npm --prefix tests/browser test ")
+        )
+        self.assertEqual(mmtt["if"], "matrix.browser == 'chromium'")
+        self.assertIn("${{ matrix.browser }}", browser_steps[-1]["with"]["name"])
         docs = next(step for step in browser_steps if "run test:docs" in step.get("run", ""))
         self.assertNotIn("if", docs)
+        self.assertIn("--project '${{ matrix.browser }}' --global-timeout=300000", docs["run"])
         build = next(
             step
             for step in browser_steps

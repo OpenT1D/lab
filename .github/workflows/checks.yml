@@ -280,9 +280,13 @@ jobs:
           retention-days: 5
 
   browser:
-    name: Chromium MMTT and documentation
+    name: Browser checks (${{ matrix.browser }})
     runs-on: ubuntu-24.04
     timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
     defaults:
       run:
         shell: bash
@@ -316,21 +320,24 @@ jobs:
         run: npm --prefix tests/browser ci --ignore-scripts --no-audit --no-fund
       - name: Select temporary browser cache
         run: echo "PLAYWRIGHT_BROWSERS_PATH=$RUNNER_TEMP/opent1d-playwright-browsers" >> "$GITHUB_ENV"
-      - name: Install Chromium and its Linux dependencies
-        run: npm --prefix tests/browser run install:browser -- --with-deps
-      - name: Run four real browser flows
+      - name: Install selected browser and its Linux dependencies
+        run: npm --prefix tests/browser run install:browser -- --with-deps '${{ matrix.browser }}'
+      - name: Run four Chromium MMTT flows
+        if: matrix.browser == 'chromium'
         run: npm --prefix tests/browser test 2>&1 | tee results/ci/browser.log
       - name: Build and stage documentation for the project path
         run: |
           uv run --locked python scripts/check.py --stage docs
           uv run --locked python scripts/stage_documentation.py _build/html _build/documentation-preview/lab
       - name: Check all documentation pages, assets and browser behavior
-        run: npm --prefix tests/browser run test:docs 2>&1 | tee results/ci/documentation-browser.log
+        run: >-
+          npm --prefix tests/browser run test:docs -- --project '${{ matrix.browser }}' --global-timeout=300000
+          2>&1 | tee results/ci/documentation-browser.log
       - name: Preserve browser diagnostics
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: browser-${{ github.run_id }}-${{ github.run_attempt }}
+          name: browser-${{ matrix.browser }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             output/playwright/
             results/ci/

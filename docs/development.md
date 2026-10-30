@@ -130,7 +130,7 @@ to review the exact Action allowlist, enable the intended checks, obtain actual
 PR/main results and only then require `Repository checks`. Source changes alone
 do not activate GitHub settings. That stable result now aggregates the root job,
 the Linux/macOS/Windows public-smoke matrix, four Linux Chromium MMTT flows and
-the documentation browser suite. Every
+the Chromium/Firefox/WebKit documentation matrix. Every
 family must succeed; cancellation or a missing result cannot pass the gate.
 Dependency Review is also required on pull requests. Only its explicit skip on
 `push` or `workflow_dispatch` is accepted; the other families must still succeed.
@@ -151,7 +151,9 @@ suite uses Playwright 1.64.1, one Chromium worker, no retries and four synthetic
 task/failure/reopen flows. Synthetic screenshots, traces, logs and failure
 workspaces are under `output/playwright/`. The same required job also runs the
 [documentation browser checks](documentation-publication.md#browser-regression-checks)
-in a separate output directory and with a separate five-minute budget. Additional browsers, Windows browser
+in a separate output directory, with a five-minute CI budget for each engine.
+All three documentation engines must pass the required gate. The guide includes
+installation and local commands. Additional browser/platform coverage, Windows browser
 shutdown and OS/release qualification require separate evidence; configured jobs
 do not establish hosted passes.
 
