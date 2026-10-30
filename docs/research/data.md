@@ -37,4 +37,4 @@ Preserve the data-processing version with each result. If access terms prevent f
 
 The [M0 data card and crosswalk](m0-data-fit.md) records the completed public-documentation assessment, with native release verification and authorized access explicitly pending.
 
-The current [M3 feasibility review](m3-data-feasibility.md) selects a conditional six-person OhioT1DM CGM-only forecast question and documents why existing physiological replay is unsupported. The [M3 tutorial](../m3-tutorial.md) supplies executable synthetic mechanics and an explicitly unverified native-release adapter; its human rights gate is not a grant of access.
+The current [M3 feasibility review](m3-data-feasibility.md) selects a conditional six-person OhioT1DM CGM-only forecast question and documents why existing physiological replay is unsupported. The [M3 tutorial](../m3-tutorial.md) supplies executable synthetic mechanics and an explicitly unverified native-release adapter; its human review of data-use rights is not a grant of access.

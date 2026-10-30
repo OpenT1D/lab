@@ -32,6 +32,18 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
   provenance through bounded wrapper upgrades. The initial historical M4 task
   remains passive; other hosts and public distribution remain open.
 
+- Add required Chromium documentation checks for every generated page, assets,
+  downloads, browser errors, search and theme changes, with fault probes and
+  retained diagnostics.
+
+- Use the existing OpenT1D app icon as the documentation favicon, with
+  page-relative links that work under the published `/lab/` project path.
+
+- Clarify OpenT1D's contribution alongside existing tools and fair task-specific
+  comparisons. Keep the original OT-056 pilot criteria separate from general
+  laboratory delivery, update installation/status guidance and clarify rights
+  review and fresh-process reconstruction terminology.
+
 - Enforce live project leases and scoped attempt workspaces; reject resealed
   native payloads missing MMTT draw evidence or carrying swapped M4 sources.
   Require verified empty process cleanup before recording reader verification.

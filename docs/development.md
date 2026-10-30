@@ -34,7 +34,7 @@ Ownership below means the implementation boundary responsible for a behavior. Re
 
 | Component boundary | Implementation to inspect | Existing checks and their bounded purpose |
 | --- | --- | --- |
-| Repository tooling and documentation | `scripts/check.py`, `docs/conf.py`, `docs/_toc.yml` | `tests/test_repository.py`: navigation, build failure, publication exclusions and rendered language. Markdown/YAML/style checks run separately in `scripts/check.py`. |
+| Repository tooling and documentation | `scripts/check.py`, `docs/conf.py`, `docs/_toc.yml` | `tests/test_repository.py`: navigation, build failure, publication exclusions and rendered language. `tests/browser/documentation*.spec.mjs`: rendered-page assets, browser errors, search/theme behavior and fault probes. Markdown/YAML/style checks run separately in `scripts/check.py`. |
 | Task registry, dispatch and setup | `experiments/workflows/`, `experiments/setup/` | `test_workflow_entry.py`, `test_workflow_study.py`, `test_task_setup.py`: passive checks, explicit runtime selection, dispatch, source binding and installation refusal. Test files in this table are under `tests/` unless stated otherwise. |
 | OT-059 shared contract packet | `experiments/shared_contracts/`; [contract guide](shared-core-contracts.md) | `test_shared_contract_packet.py`: ten-route inventory, two-route metadata/lineage, refusal, actual MMTT and controlled M4 failed-launch/relocation readers. No native M4 success or route migration. |
 | Minimal OT-061/064 project services | `experiments/shared_services/`; [service guide](shared-project-services.md) | `test_shared_services.py`: complete event ledger, freezes/retries, isolated MMTT workers, controlled M4 failure, forensic recovery, native readers/relocation and observed nested POSIX ownership. No installed SDK or native M4 success. |
@@ -129,7 +129,8 @@ Follow the [activation procedure](publication-security.md#activate-on-the-select
 to review the exact Action allowlist, enable the intended checks, obtain actual
 PR/main results and only then require `Repository checks`. Source changes alone
 do not activate GitHub settings. That stable result now aggregates the root job,
-the Linux/macOS/Windows public-smoke matrix and four Linux Chromium flows. Every
+the Linux/macOS/Windows public-smoke matrix, four Linux Chromium MMTT flows and
+the documentation browser suite. Every
 family must succeed; cancellation or a missing result cannot pass the gate.
 Dependency Review is also required on pull requests. Only its explicit skip on
 `push` or `workflow_dispatch` is accepted; the other families must still succeed.
@@ -148,7 +149,9 @@ Set `PLAYWRIGHT_BROWSERS_PATH` to an absolute temporary browser-cache directory
 first. Linux hosts can add `-- --with-deps` to the browser-install command. The
 suite uses Playwright 1.64.1, one Chromium worker, no retries and four synthetic
 task/failure/reopen flows. Synthetic screenshots, traces, logs and failure
-workspaces are under `output/playwright/`. Additional browsers, Windows browser
+workspaces are under `output/playwright/`. The same required job also runs the
+[documentation browser checks](documentation-publication.md#browser-regression-checks)
+in a separate output directory and with a separate five-minute budget. Additional browsers, Windows browser
 shutdown and OS/release qualification require separate evidence; configured jobs
 do not establish hosted passes.
 

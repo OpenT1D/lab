@@ -280,7 +280,7 @@ jobs:
           retention-days: 5
 
   browser:
-    name: Chromium MMTT flows
+    name: Chromium MMTT and documentation
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     defaults:
@@ -320,6 +320,12 @@ jobs:
         run: npm --prefix tests/browser run install:browser -- --with-deps
       - name: Run four real browser flows
         run: npm --prefix tests/browser test 2>&1 | tee results/ci/browser.log
+      - name: Build and stage documentation for the project path
+        run: |
+          uv run --locked python scripts/check.py --stage docs
+          uv run --locked python scripts/stage_documentation.py _build/html _build/documentation-preview/lab
+      - name: Check all documentation pages, assets and browser behavior
+        run: npm --prefix tests/browser run test:docs 2>&1 | tee results/ci/documentation-browser.log
       - name: Preserve browser diagnostics
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

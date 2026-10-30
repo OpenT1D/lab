@@ -10,7 +10,7 @@ const output = fileURLToPath(new URL('../../output/playwright/', import.meta.url
 
 export default defineConfig({
   testDir: '.',
-  testMatch: '*.spec.mjs',
+  testMatch: 'mmtt.spec.mjs',
   fullyParallel: false,
   workers: 1,
   retries: 0,

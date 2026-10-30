@@ -4,6 +4,8 @@
 
 Translated from Dutch on 29 October 2026. Historical findings, language-policy
 statements and audit results below describe the original report, not a new review.
+The comparison heading was clarified editorially on 29 October 2026; its old
+English and Dutch section links remain available.
 
 This report preserves findings about baseline commit `b6bb60486a6bdf158f9954073ca70c9c5bfa31bb`. Improvements were taken up after the review; the [maintainer guide](../maintenance.md#current-setup) describes the current operational status and remaining activation points. The original judgement below is not a new check of those subsequent changes.
 
@@ -86,7 +88,9 @@ Existing regression tests guard concrete faults. Disabling restricted page disco
 
 <a id="4-vergelijking-met-toonaangevende-projecten"></a>
 
-## 4. Comparison with leading projects
+<a id="4-comparison-with-leading-projects"></a>
+
+## 4. Practices in established projects
 
 | Project and checked practice | Problem addressed | Meaning for OpenT1D |
 | --- | --- | --- |

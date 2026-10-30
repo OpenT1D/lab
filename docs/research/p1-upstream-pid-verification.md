@@ -31,7 +31,7 @@ U/min contract. This screen is not a ranking of controller quality.
 | Source inspected | Contract finding | Disposition |
 | --- | --- | --- |
 | [`uciAPC` at `7b3b3cd`](https://github.com/rland93/uciAPC/tree/7b3b3cd888b36b3f787f58d041ae3464d514c27c) | The published `src/controller.py` contains unresolved `<<<<<<<` merge markers; `python3 -m py_compile` raises `SyntaxError` at line 7. Its PID also reads profile tables and uses removed NumPy `asscalar`. | Do not wrap an unexecutable source or silently repair its method and parameters for the first P1 example. |
-| [Berián et al. source at `e013b7f`](https://github.com/jberian/closed_loop/tree/e013b7f4c681073d6f0e8891fa8ba000ab2fd2d8/Simulation/simglucose_with_blockage) | The article controller uses a modified simulator action with a blockage field, five-minute history and separate `AP_params.csv`. The [repository README](https://github.com/jberian/closed_loop/blob/e013b7f4c681073d6f0e8891fa8ba000ab2fd2d8/README.md) calls the license GPL v2 while its [root LICENSE](https://github.com/jberian/closed_loop/blob/e013b7f4c681073d6f0e8891fa8ba000ab2fd2d8/LICENSE) contains LGPL v3 text. | A distinct contract and human rights clarification would be needed; do not treat the publication's source availability as permission to port it into P1. |
+| [Berián et al. source at `e013b7f`](https://github.com/jberian/closed_loop/tree/e013b7f4c681073d6f0e8891fa8ba000ab2fd2d8/Simulation/simglucose_with_blockage) | The article controller uses a modified simulator action with a blockage field, five-minute history and separate `AP_params.csv`. The [repository README](https://github.com/jberian/closed_loop/blob/e013b7f4c681073d6f0e8891fa8ba000ab2fd2d8/README.md) calls the license GPL v2 while its [root LICENSE](https://github.com/jberian/closed_loop/blob/e013b7f4c681073d6f0e8891fa8ba000ab2fd2d8/LICENSE) contains LGPL v3 text. | A distinct contract and licensing clarification by a human reviewer would be needed; do not treat the publication's source availability as permission to port it into P1. |
 | [OpenAPS `oref0`](c1-comparator-route.md) | Existing C1 audit found unresolved source-state and five/three-minute action semantics. | Keep the recorded no-go; do not re-label the source as a P1 rate controller. |
 | [G2P2C](c1-g2p2c-training-freeze.md) | The actor requires trained weights and a source-specific missing-CGM fallback; P1/0.2 copies only two source files and does not bind an external checkpoint. | Its completed C1 technical smoke does not make this two-file route reproducible. |
 
@@ -99,7 +99,7 @@ support a performance ranking or a real-world safety claim.
 
 The declaration is a supplier attestation, not a legal conclusion. The
 adapter runs trusted local Python with the user's process permissions. A
-human rights review and an independent intended-user execution record were
+human review of distribution rights and an independent intended-user execution record were
 required by [P1 acceptance](../../ROADMAP.md#p1--first-usable-research-product).
 The later [conditional review](p1-product-acceptance-review.md) covers one
 exact internal checkout; independent execution remains open.

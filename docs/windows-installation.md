@@ -74,8 +74,10 @@ checkout builder remains available for internal candidates, and the manual
 Windows workflow is private-repository-only. This is a distribution-scope gate,
 not a hostile-code sandbox. Known native/build dependency findings, upstream
 parameter rights, signing and public distribution remain separate decisions;
-see [publication security](publication-security.md). Source publication remains
-explicitly deferred, and this integration starts no hosted workflow.
+see [publication security](publication-security.md). The reviewed source is now
+published as [OpenT1D/lab](https://github.com/OpenT1D/lab). Public installer
+distribution remains deferred; publication of source does not qualify a newly
+built installer or extend the private J candidate's checks.
 
 ## Included workflows
 

@@ -101,8 +101,9 @@ The [internal installed Python/CLI candidate](docs/installed-sdk.md) exercises
 MMTT outside a checkout and retains historical passive M4 intake/failed readers.
 Its explicit [native M4 successor](docs/installed-m4.md) now has local macOS
 fasting/15 g execution, exact direct/installed parity and complete relocated
-report evidence. Thin GUI integration and intended-user feedback come next;
-other hosts, broader compatibility and distribution retain separate gates.
+report evidence. A [thin installed GUI](docs/installed-gui.md) now exposes those
+workflows. Intended-user feedback, other hosts, broader compatibility and
+distribution retain separate gates.
 
 ## What we are building
 
@@ -113,6 +114,11 @@ modularity. Preserve model ancestry, units, timing and process ownership;
 [architecture](docs/architecture.md) and [decision records](docs/decisions/README.md)
 explain the existing boundaries. Original controllers and mechanisms are optional
 research, not prerequisites for using the tools.
+
+OpenT1D aims to contribute alongside existing research tools through useful
+integrations, reproducible studies and upstream improvements. We assess that
+contribution through [task-specific comparisons](docs/product-laboratory.md#product-value-measurement)
+that report strengths, limitations and tradeoffs.
 
 ## Explore the repository
 
