@@ -17,6 +17,11 @@ STATIC = {
     "/app.js": ("app.js", "text/javascript; charset=utf-8"),
     "/app.css": ("app.css", "text/css; charset=utf-8"),
 }
+DOWNLOAD_HEADERS = {
+    "report.json": 'attachment; filename="report.json"',
+    "report.md": 'attachment; filename="report.md"',
+    "figure.svg": 'attachment; filename="figure.svg"',
+}
 CSP = (
     "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' blob:; "
     "connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'; "
@@ -133,6 +138,13 @@ class Handler(BaseHTTPRequestHandler):
         pass
 
     def send(self, status, value, mime="application/json", *, filename=None):
+        disposition = None
+        if filename is not None:
+            require(
+                type(filename) is str and filename in DOWNLOAD_HEADERS,
+                "Unsupported report download filename",
+            )
+            disposition = DOWNLOAD_HEADERS[filename]
         raw = encoded(value) if not isinstance(value, bytes) else value
         self.send_response(status)
         self.send_header("Content-Type", mime)
@@ -142,8 +154,8 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Referrer-Policy", "no-referrer")
         self.send_header("Content-Security-Policy", CSP)
         self.send_header("Cross-Origin-Resource-Policy", "same-origin")
-        if filename is not None:
-            self.send_header("Content-Disposition", 'attachment; filename="' + filename + '"')
+        if disposition is not None:
+            self.send_header("Content-Disposition", disposition)
         try:
             self.end_headers()
             self.wfile.write(raw)

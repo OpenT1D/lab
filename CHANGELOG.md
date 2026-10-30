@@ -4,6 +4,9 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Serve installed GUI report downloads with fixed header values and reject
+  unsupported download names before encoding or emitting a response.
+
 - Bind GUI readiness results to the checked project, plan and runtime selection.
   Ignore stale results after selection changes and older polling responses;
   clear previous readiness when checking again.

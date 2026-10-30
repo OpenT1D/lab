@@ -13,7 +13,7 @@ import types
 import unittest
 import uuid
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from experiments.shared_services import store
 
@@ -384,6 +384,89 @@ class GUIHTTPTests(unittest.TestCase):
         }
         self.assertEqual(self.call("/api/actions", body=action)[0], 202)
         self.assertEqual(self.call("/api/actions", body=action, headers={"Origin": "null"})[0], 403)
+
+    def test_report_downloads_use_fixed_headers_and_bad_routes_do_not_download(self):
+        cases = (
+            ("report.json", "application/json", b"{}\n", 'attachment; filename="report.json"'),
+            ("report.md", "text/markdown", b"# Report\n", 'attachment; filename="report.md"'),
+            ("figure.svg", "image/svg+xml", b"<svg/>", 'attachment; filename="figure.svg"'),
+        )
+        bodies = {name: (raw, mime) for name, mime, raw, _ in cases}
+        with patch.object(
+            self.controller, "report", side_effect=lambda identity, name: bodies[name]
+        ) as report:
+            for name, mime, raw, disposition in cases:
+                with self.subTest(name=name):
+                    connection = http.client.HTTPConnection(
+                        "127.0.0.1", self.server.server_port, timeout=8
+                    )
+                    try:
+                        connection.request(
+                            "GET",
+                            "/api/reports/" + "a" * 32 + "/" + name,
+                            headers={"X-OpenT1D-Token": self.server.token},
+                        )
+                        response = connection.getresponse()
+                        self.assertEqual(response.status, 200)
+                        self.assertEqual(response.read(), raw)
+                        self.assertEqual(response.getheader("Content-Type"), mime)
+                        self.assertEqual(
+                            [
+                                value
+                                for key, value in response.getheaders()
+                                if key.lower() == "content-disposition"
+                            ],
+                            [disposition],
+                        )
+                    finally:
+                        connection.close()
+            report.reset_mock()
+            for name in (
+                "other.json",
+                "report.md%0d%0aX-Injected%3a%201",
+                "report.md%22",
+                "report.md/extra",
+                "%72eport.md",
+                "figure.svg.exe",
+            ):
+                with self.subTest(route=name):
+                    status, _, headers = self.call("/api/reports/" + "a" * 32 + "/" + name)
+                    self.assertEqual(status, 404)
+                    header_names = {key.lower() for key in headers}
+                    self.assertNotIn("content-disposition", header_names)
+                    self.assertNotIn("x-injected", header_names)
+            report.assert_not_called()
+        self.assertNotIn("Content-Disposition", self.call("/api/state")[2])
+
+    def test_download_name_is_rejected_before_any_encoding_or_response_output(self):
+        for name in (
+            "report.md\r",
+            "report.md\n",
+            'report.md"\r\nX-Probe: injected',
+            'report.md"',
+            "report.md\\extra",
+            "",
+            "other.json",
+            0,
+            True,
+            b"report.md",
+            [],
+            {},
+        ):
+            with self.subTest(filename=name):
+                handler = transport.Handler.__new__(transport.Handler)
+                handler.send_response = Mock()
+                handler.send_header = Mock()
+                handler.end_headers = Mock()
+                handler.wfile = Mock()
+                with patch.object(transport, "encoded", return_value=b"{}") as encode:
+                    with self.assertRaisesRegex(ValueError, "Unsupported report download filename"):
+                        handler.send(200, {"controlled": True}, filename=name)
+                    encode.assert_not_called()
+                handler.send_response.assert_not_called()
+                handler.send_header.assert_not_called()
+                handler.end_headers.assert_not_called()
+                handler.wfile.write.assert_not_called()
 
     def raw(self, headers, body=b"{}"):
         with socket.create_connection(
