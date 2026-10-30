@@ -43,8 +43,9 @@ const html = body => `<!doctype html><link rel="icon" href="_static/icon.svg"><t
 function searchFixture(site, fault = 'healthy') {
   const state = { summaryFinished: false, targetRequested: false, targetBeforeSummary: false };
   const summary = site.handle('__search-summary.txt', (_request, response) => {
+    response.writeHead(fault === 'missing summary' ? 404 : 200, { 'Content-Type': 'text/plain' });
+    response.flushHeaders();
     const timer = setTimeout(() => {
-      response.writeHead(fault === 'missing summary' ? 404 : 200, { 'Content-Type': 'text/plain' });
       response.end('Delayed summary is complete');
     }, 800);
     response.on('finish', () => { state.summaryFinished = true; });
@@ -97,7 +98,7 @@ for (const [fault, error] of [
   ['JavaScript exception', /JavaScript: (?:Error: )?delayed search page fault/],
   ['aborted summary', /Request failed: .*__search-summary.txt/],
 ]) {
-  test(`search preserves ${fault} while waiting for completion`, async ({ browserName, page, faultSite }, testInfo) => {
+  test(`search preserves ${fault} while waiting for completion`, async ({ page, faultSite }, testInfo) => {
     const fixture = searchFixture(faultSite, fault);
     if (fault === 'aborted summary') await page.route('**/__search-summary.txt', route => route.abort('aborted'));
     const { receipt, stop } = monitor(page);
@@ -108,7 +109,8 @@ for (const [fault, error] of [
       if (fault === 'aborted summary') {
         const failed = receipt.requestFailures.find(item => item.url === fixture.summary);
         expect(failed?.type).toBe('fetch');
-        if (browserName === 'firefox') expect(failed.failure).toBe('NS_BINDING_ABORTED');
+        expect(failed.failure).toBeTruthy();
+        expect(receipt.errors).toContain(`Request failed: ${fixture.summary} ${failed.failure}`);
       }
       expect(fixture.state.targetRequested).toBe(false);
       expect(page.url()).toBe(fixture.source);
