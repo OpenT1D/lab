@@ -11,6 +11,10 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
   browser regressions, and withdraw displayed reports when nested reads refuse.
   Preserve the estimator, native sampling files and OT-059 frozen packet.
 
+- Accept a narrowly verified Firefox favicon cancellation during an immediate
+  documentation redirect. Require a natural completed browser reload and valid
+  image bytes, retain the raw cancellation and preserve real asset failures.
+
 - Extend the planned integrated-laboratory development window from the merged
   installed SDK, native M4 and thin GUI: add shared sampling, editable studies,
   comparisons, a connected synthetic study and reader-transition qualification,

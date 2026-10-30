@@ -1,18 +1,44 @@
 // Listen before navigation, including the root entry's meta refresh. Keep
 // failures from the earlier document even after the browser has redirected.
 export function monitor(page) {
-  const receipt = { errors: [], warnings: [], responses: [] };
+  const receipt = { errors: [], warnings: [], responses: [], requestFailures: [], redirectCancellations: [] };
   const documents = [];
+  const requests = new Map();
+  const browserResponses = new Map();
+  let order = 0;
+  let requestId = 0;
+  function record(request) {
+    if (!requests.has(request)) {
+      let mainFrame = false;
+      try { mainFrame = request.frame() === page.mainFrame(); } catch (_) { /* Service worker. */ }
+      requests.set(request, {
+        id: ++requestId,
+        url: request.url(), type: request.resourceType(),
+        referer: request.headers().referer, mainFrame,
+      });
+    }
+    return requests.get(request);
+  }
   const listeners = {
+    request: request => { record(request).started = ++order; },
     pageerror: error => receipt.errors.push(`JavaScript: ${error.message}`),
     console: message => {
       if (message.type() === 'error') receipt.errors.push(`Console: ${message.text()}`);
       if (message.type() === 'warning') receipt.warnings.push(message.text());
     },
-    requestfailed: request => receipt.errors.push(
-      `Request failed: ${request.url()} ${request.failure()?.errorText}`,
-    ),
+    requestfailed: request => {
+      const item = record(request);
+      item.failure = request.failure()?.errorText;
+      item.failed = ++order;
+      item.errorIndex = receipt.errors.length;
+      receipt.errors.push(`Request failed: ${item.url} ${item.failure}`);
+      receipt.requestFailures.push({ ...item });
+    },
+    requestfinished: request => { record(request).finished = ++order; },
     response: response => {
+      const item = record(response.request());
+      item.status = response.status();
+      if (item.type === 'image') browserResponses.set(item.id, response);
       receipt.responses.push({ url: response.url(), status: response.status() });
       if (response.status() >= 400) receipt.errors.push(`HTTP ${response.status()}: ${response.url()}`);
       if (response.request().resourceType() === 'document') {
@@ -24,10 +50,49 @@ export function monitor(page) {
   return {
     receipt,
     documents,
+    snapshot: () => Array.from(requests.values(), item => ({ ...item })),
+    responseFor: item => browserResponses.get(item.id),
     stop: () => {
       for (const [event, listener] of Object.entries(listeners)) page.off(event, listener);
     },
   };
+}
+
+function documentURL(value) {
+  try {
+    const url = new URL(value);
+    url.hash = '';
+    return url.href;
+  } catch (_) { return null; }
+}
+
+// A cancellation is still an error unless the obsolete icon was naturally
+// re-requested and fully loaded by the final document. API/decode probes must
+// never manufacture that evidence; callers supply a pre-probe snapshot.
+export function redirectIconRecoveries(browserName, requests, sources, finalURL, assets) {
+  if (browserName !== 'firefox') return [];
+  const final = documentURL(finalURL);
+  if (!final) return [];
+  const target = sources.find(source => documentURL(source.url) === final);
+  const navigated = url => requests.some(item => item.type === 'document' && item.mainFrame
+    && item.status === 200 && item.finished && !item.failure && documentURL(item.url) === url);
+  if (!target || !navigated(final)) return [];
+  return requests.flatMap(failed => {
+    if (failed.failure !== 'NS_BINDING_ABORTED' || failed.type !== 'image'
+      || !failed.mainFrame || !failed.started || !Number.isInteger(failed.errorIndex)) return [];
+    const source = sources.find(source => documentURL(source.url) === documentURL(failed.referer)
+      && documentURL(source.refresh) === final && documentURL(source.url) !== final
+      && source.icons.includes(failed.url) && target.icons.includes(failed.url));
+    if (!source || !navigated(documentURL(source.url))
+      || new URL(source.url).origin !== new URL(final).origin
+      || new URL(failed.url).origin !== new URL(final).origin
+      || !assets.some(asset => asset.url === failed.url && asset.status === 200)) return [];
+    const recovered = requests.find(item => item !== failed && item.url === failed.url
+      && item.type === 'image' && item.mainFrame && documentURL(item.referer) === final
+      && item.started > failed.failed && item.finished > item.started
+      && item.status === 200 && !item.failure);
+    return recovered ? [{ failed, recovered, source: source.url, target: final }] : [];
+  });
 }
 
 export function assertClean(receipt) {
@@ -62,13 +127,14 @@ export async function inspectRendering(page, receipt, renderTimeout = 10_000) {
 }
 
 export async function auditDocument(page, url, request, { renderTimeout = 10_000 } = {}) {
-  const { receipt, documents, stop } = monitor(page);
+  const { receipt, documents, snapshot, responseFor, stop } = monitor(page);
   receipt.url = url;
   try {
     const response = await page.goto(url, { waitUntil: 'load' });
     receipt.status = response?.status();
     if (receipt.status !== 200) receipt.errors.push(`Document did not return HTTP 200: ${url}`);
     await page.waitForLoadState('networkidle');
+    const naturalRequests = snapshot(); // Before rendering, DOMParser or decode probes.
     await inspectRendering(page, receipt, renderTimeout);
 
     // Headless Chromium does not always request favicons. Explicitly check
@@ -94,6 +160,7 @@ export async function auditDocument(page, url, request, { renderTimeout = 10_000
         return source?.trim() ? new URL(source, base).href : null;
       });
       const missingIcons = [];
+      const documentSources = [];
       const assets = [
         ...collect(document, document.baseURI),
         ...sources.filter(source => typeof source.html === 'string').flatMap(source => {
@@ -102,10 +169,15 @@ export async function auditDocument(page, url, request, { renderTimeout = 10_000
             icon => icon.getAttribute('href')?.trim(),
           )) missingIcons.push(source.url);
           const base = new URL(parsed.querySelector('base[href]')?.getAttribute('href') || source.url, source.url).href;
+          const icons = Array.from(parsed.querySelectorAll('link[rel~="icon"][href]'), icon => new URL(icon.getAttribute('href'), base).href);
+          const meta = Array.from(parsed.querySelectorAll('meta[http-equiv]')).find(meta => meta.getAttribute('http-equiv').toLowerCase() === 'refresh');
+          const refresh = meta?.getAttribute('content')?.match(/^\s*0\s*;\s*url\s*=\s*(.+?)\s*$/i);
+          const destination = refresh?.[1].replace(/^(['"])(.*)\1$/, '$2');
+          documentSources.push({ url: source.url, icons, refresh: destination ? new URL(destination, base).href : null });
           return collect(parsed, base);
         }),
       ].filter(url => /^https?:/.test(url));
-      return { assets, missingIcons };
+      return { assets, missingIcons, documentSources };
     }, sources);
     for (const source of discovery.missingIcons) receipt.errors.push(`Missing favicon link: ${source}`);
     receipt.assets = [];
@@ -116,6 +188,33 @@ export async function auditDocument(page, url, request, { renderTimeout = 10_000
       await response.dispose();
     }
     receipt.finalURL = page.url();
+    const recoveries = redirectIconRecoveries(page.context().browser().browserType().name(),
+      naturalRequests, discovery.documentSources, receipt.finalURL, receipt.assets);
+    const accepted = new Set();
+    for (const recovery of recoveries) {
+      let decoded = false;
+      try {
+        const response = responseFor(recovery.recovered);
+        const mime = response.headers()['content-type']?.split(';')[0] || 'application/octet-stream';
+        const data = `data:${mime};base64,${(await response.body()).toString('base64')}`;
+        decoded = await page.evaluate(async data => {
+          const image = new Image();
+          image.src = data;
+          try {
+            await image.decode();
+            return image.naturalWidth > 0 && image.naturalHeight > 0;
+          } catch (_) { return false; }
+        }, data);
+      } catch (_) { /* Unavailable response bytes cannot justify an exception. */ }
+      if (!decoded) {
+        receipt.errors.push(`Recovered favicon response did not decode: ${recovery.failed.url}`);
+        continue;
+      }
+      accepted.add(recovery.failed.errorIndex);
+      receipt.redirectCancellations.push({ ...recovery, decoded, decodeSource: 'completed-browser-response' });
+    }
+    if (recoveries.length) await page.waitForLoadState('networkidle');
+    receipt.errors = receipt.errors.filter((_error, index) => !accepted.has(index));
   } catch (error) {
     receipt.errors.push(`Inspection: ${error.message}`);
   } finally {

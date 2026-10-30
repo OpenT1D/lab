@@ -68,6 +68,15 @@ Per-page JSON receipts record the actual engine/version. Results and failure
 screenshots/traces are under output/playwright/documentation, preserving the
 MMTT diagnostics. CI retains both suites' diagnostics including failures.
 
+The redirect audit accepts only Firefox's exact NS_BINDING_ABORTED for an
+obsolete main-frame favicon during a matching immediate same-origin meta refresh.
+Both documents must declare the same icon. A later natural browser image request
+must have completed with HTTP 200 before probes, its actual response bytes must
+decode, and the explicit asset probe must succeed. Raw failures and classified
+recoveries remain recorded. Other request, asset and decode failures stay fatal;
+there is no page retry. Native Firefox-only fixtures are intentionally skipped
+in Chromium/WebKit; the complete page audit still runs in every engine.
+
 Playwright 1.64.1 is pinned in package.json and package-lock.json. Version/source:
 https://github.com/microsoft/playwright/releases/tag/v1.64.1
 https://playwright.dev/docs/test-use-options
