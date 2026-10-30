@@ -5,7 +5,7 @@ globalThis.workbench = (() => {
     "mmtt-sampling": ["package.json", "observations.csv", "settings.json", "design.json", "development-package.json", "development-observations.csv"],
     "m4-study-installed": ["config.json"],
   };
-  let current = null, inputs = {}, invalidFiles = {}, fileEdits = {}, dirty = false, conflict = false, saving = false, saveError = null, timer = null, generation = 0, pickerSelection = null;
+  let current = null, inputs = {}, invalidFiles = {}, fileEdits = {}, dirty = false, conflict = false, saving = false, saveError = null, timer = null, generation = 0, editEpoch = 0, pickerSelection = null;
   const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
   const key = record => `opent1d.concept-recovery/1:${data.workspace}:${record.project}:${record.id}`;
   const json = name => JSON.parse(inputs[name].replace(/^\uFEFF/, ""));
@@ -19,7 +19,7 @@ globalThis.workbench = (() => {
   function schedule() { clearTimeout(timer); if (!conflict) timer = setTimeout(() => save(), 800); }
   function changed(rebuild = false) {
     if (!current) return;
-    dirty = true; saveError = null; invalidatePlanView(); backup(); schedule();
+    editEpoch++; dirty = true; saveError = null; invalidatePlanView(); backup(); schedule();
     if (rebuild) assumptions();
     status();
   }
@@ -60,6 +60,7 @@ globalThis.workbench = (() => {
       const selectedFile = upload.files[0], sequence = (fileEdits[name] || 0) + 1;
       fileEdits[name] = sequence;
       if (!selectedFile) { delete invalidFiles[name]; status(); return; }
+      editEpoch++;
       const stamp = generation, relevant = () => stamp === generation && fileEdits[name] === sequence;
       invalidFiles[name] = "Reading " + name + "…"; status();
       try {
@@ -157,10 +158,11 @@ globalThis.workbench = (() => {
     paint(); invalidatePlanView(); if (dirty && !conflict) schedule(); render();
   }
   async function open(identity, recover = true) {
-    const stamp = ++generation, selectedProject = selected;
+    const stamp = ++generation, selectedProject = selected, edits = editEpoch;
     try {
       const record = await (await request("/api/drafts/" + identity)).json();
       if (stamp !== generation || selectedProject !== selected || record.project !== selected) return;
+      if (edits !== editEpoch) { notice("Your newer local edits are retained. Save them before opening a saved revision."); return; }
       accept(record, {recover});
     } catch (error) { notice(error.message, true); }
   }

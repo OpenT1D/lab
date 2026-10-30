@@ -108,6 +108,19 @@ bounded diagnostics, retained edits/recovery, preserved selection, latest-upload
 ordering, parent retention and the unchanged scientific/OT-059 inventory.
 The final committed review is retained with the handoff.
 
+A subsequent critical review independently reproduced two further defects.
+Revalidating a frozen concept cleared its frozen-plan anchor, so a later edit
+could lose its immediate parent. Validation now retains that anchor on both
+success and refusal; editing still creates an unfrozen child. A delayed saved
+concept open/reload could replace edits entered after the request. A separate
+edit counter now rejects that late replacement, including file selections whose
+asynchronous read has not finished. Recovery bytes and newer controls remain
+intact. Controller and actual installed HTTP checks cover revalidation/derivation;
+the controlled DOM wrapper now has 24 cases. Both new DOM regressions fail on
+the previous JavaScript for the expected replacement/state assertions and pass
+after correction. An actual installed Chromium case delays an authentic SDK
+response to verify the reload race without substituting its content.
+
 The late-validation regression also fails on a disposable JavaScript copy with
 that fix removed, for the expected lost-edit assertion. A 320,108-byte CSV with
 20,000 invalid rows previously generated a 2,129,502-byte diagnostic result;

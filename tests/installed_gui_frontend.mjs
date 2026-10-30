@@ -212,6 +212,35 @@ await check('pending_validation_cannot_replace_new_edits_or_clear_recovery',asyn
  assert.equal(e.run('draft.validation'),null);
  return {new_edits_retained:true,recovery_retained:true,old_validation_not_applied:true};
 });
+await check('pending_open_or_reload_cannot_replace_newer_local_edits',async()=>{
+ for(const reload of [true,false]){
+  const record=concept(),e=setupConcept(record);let finish;
+  const loaded=reload?record:concept({id:'e'.repeat(32)});
+  e.context.fetch=()=>new Promise(resolve=>{finish=resolve;});
+  const pending=e.run('workbench.open("'+loaded.id+'",'+!reload+');');
+  e.byId('assumption-draws').value='64';e.byId('assumption-draws').oninput();
+  finish({ok:true,json:async()=>loaded});await pending;
+  assert.equal(e.byId('assumption-draws').value,'64');
+  assert.equal(e.run('draft.id'),record.id);
+  assert.equal(e.byId('freeze-draft').disabled,true);assert.equal(e.backups.size,1);
+  assert.match(e.byId('notice').textContent,/newer local edits/i);
+ }
+ return {reload_and_open_keep_newer_edits:true,old_validation_not_applied:true};
+});
+await check('pending_reload_cannot_discard_a_new_upload_still_being_read',async()=>{
+ const record=concept(),e=setupConcept(record);let finishLoad,finishFile;
+ e.context.fetch=()=>new Promise(resolve=>{finishLoad=resolve;});
+ const loading=e.run('workbench.open("'+record.id+'",false);');
+ const upload=e.byId('source-settings-json-upload');
+ upload.files=[{size:12,arrayBuffer:()=>new Promise(resolve=>{finishFile=resolve;})}];
+ const reading=upload.onchange();
+ finishLoad({ok:true,json:async()=>record});await loading;
+ assert.equal(e.byId('freeze-draft').disabled,true);
+ const raw='{"new_upload":true}';finishFile(new TextEncoder().encode(raw).buffer);await reading;
+ assert.equal(e.byId('source-settings-json').value,raw);
+ assert.equal(e.backups.size,1);assert.equal(e.byId('freeze-draft').disabled,true);
+ return {pending_file_choice_retained:true,completed_upload_retained:true};
+});
 await check('concept_picker_preserves_explicit_selection_across_polling',async()=>{
  const record=concept(),e=setupConcept(record),other={...concept({id:'e'.repeat(32)}),name:'Other concept'};
  e.context.incoming={...base(),drafts:[record,other]};

@@ -260,7 +260,11 @@ class Controller:
             stamp["error"] = str(error)[:1200]
         with self.mutex:
             return self.draft_store.annotate(
-                draft["id"], draft["revision"], draft["project"], stamp
+                draft["id"],
+                draft["revision"],
+                draft["project"],
+                stamp,
+                frozen_plan=draft["frozen_plan"],
             )
 
     def journal(self, job):

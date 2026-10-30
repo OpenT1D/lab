@@ -228,6 +228,62 @@ class GUIStateTests(unittest.TestCase):
             "A completed job must retain its exact immutable concept revision",
         )
 
+    def test_revalidating_frozen_concept_preserves_derived_plan_parent(self):
+        handle = self.project()
+        raw = {"package.json": "{}", "observations.csv": "", "settings.json": "{}"}
+        anchor = "f" * 64
+        for valid in (True, False):
+            with self.subTest(validation_succeeds=valid):
+                first = self.controller.draft_store.create(
+                    handle, "mmtt-sensitivity", "Frozen concept", raw
+                )
+                frozen = self.controller.draft_store.annotate(
+                    first["id"], first["revision"], handle, {}, anchor
+                )
+                with patch.object(self.controller, "inspect_draft") as inspect:
+                    inspect.return_value = ({}, {"valid": True})
+                    if not valid:
+                        inspect.side_effect = ValueError("Controlled validation refusal")
+                    checked = self.finish(
+                        self.controller.submit(
+                            self.request(
+                                "draft_validate",
+                                {"draft": frozen["id"], "revision": frozen["revision"]},
+                                handle,
+                            )
+                        )
+                    )["result"]
+                self.assertEqual(checked["validation"]["valid"], valid)
+                self.assertEqual(checked["frozen_plan"], anchor)
+                if valid:
+                    refused = self.finish(
+                        self.controller.submit(
+                            self.request(
+                                "freeze",
+                                {
+                                    "draft": checked["id"],
+                                    "revision": checked["revision"],
+                                    "name": checked["name"],
+                                    "parent": checked["parent"],
+                                },
+                                handle,
+                            )
+                        )
+                    )
+                    self.assertEqual(refused["status"], "error")
+                    self.assertIn("already frozen", refused["error"])
+                edited = self.controller.draft_store.save(
+                    checked["id"],
+                    checked["revision"],
+                    handle,
+                    "Derived concept",
+                    checked["parent"],
+                    {**raw, "settings.json": '{"changed": true}'},
+                )
+                self.assertEqual(edited["parent"], anchor)
+                self.assertIsNone(edited["frozen_plan"])
+                self.assertIsNone(edited["validation"])
+
     def test_close_drains_metadata_and_holds_lease_until_join(self):
         handle = self.project()
         self.sdk.entered.clear()

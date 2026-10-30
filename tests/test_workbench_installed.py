@@ -259,6 +259,12 @@ class EditableWorkbench(unittest.TestCase):
                     for p in original.rglob("*")
                     if p.is_file()
                 }
+            rechecked = app.validate(app.draft(draft["id"]))
+            self.assertEqual(rechecked["frozen_plan"], plan)
+            app.freeze(rechecked, expected="error")
+            auto_derived = app.save(rechecked, good, name="Edited after revalidation")
+            self.assertEqual(auto_derived["parent"], plan)
+            self.assertIsNone(auto_derived["frozen_plan"])
             derived = app.action("derive", {"plan": plan}, project)
             self.assertEqual(derived["files"], good)
             self.assertEqual(derived["parent"], plan)

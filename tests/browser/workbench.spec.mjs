@@ -142,6 +142,38 @@ test('cross-tab concept recovery, explicit restore and exact large-seed raw edit
   await other.close();
 });
 
+test('delayed saved-concept reload retains edits entered after the reload request', async ({ page, app }) => {
+  await create(page, app, 'Delayed concept reload');
+  await page.locator('#prepare-form button[type="submit"]').click();
+  await expect(page.locator('#freeze-draft')).toBeEnabled();
+  const draftId = (await state(page, app)).drafts[0].id;
+  let release, started;
+  const delay = new Promise(resolve => { release = resolve; });
+  const requested = new Promise(resolve => { started = resolve; });
+  const route = '**/api/drafts/' + draftId;
+  await page.route(route, async request => {
+    const response = await request.fetch();
+    started();
+    await delay;
+    await request.fulfill({ response });
+  });
+  try {
+    await page.locator('#reload-draft').click();
+    await requested;
+    await page.locator('#assumption-draws').fill('64');
+    release();
+    await expect(page.locator('#notice')).toContainText('newer local edits');
+    await expect(page.locator('#assumption-draws')).toHaveValue('64');
+    await expect(page.locator('#freeze-draft')).toBeDisabled();
+    await saved(page);
+    await page.locator('#validate-draft').click();
+    await expect(page.locator('#freeze-draft')).toBeEnabled();
+  } finally {
+    release();
+    await page.unroute(route);
+  }
+});
+
 test('own sampling development split, editable schedules, keyboard and reflow', async ({ page, app }, testInfo) => {
   const files = await inputs(app, 'mmtt-sampling', 'information-loss');
   await create(page, app, 'Own sampling editor');
