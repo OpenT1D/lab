@@ -28,6 +28,46 @@ search and downloads. The HTML artifact expires after one day. Pull requests
 cannot publish Pages and receive no Pages or identity-token write permission.
 All PR HTML is untrusted contributor content; inspect it in that context.
 
+## Browser regression checks
+
+The required Linux Chromium job independently builds and stages documentation
+from the same checked-out source using the commands above. It serves that tree
+under `/lab/`, matching the published project path. It checks every generated
+HTML page, including the entry redirect and search. This verifies the source
+and staging procedure; it does not consume the root job's uploaded artifact or
+establish that GitHub Pages has deployed it.
+
+With the locked browser tooling installed as described in the
+[development guide](development.md), run:
+
+```sh
+uv run --locked python scripts/check.py --stage docs
+uv run --locked python scripts/stage_documentation.py _build/html _build/documentation-preview/lab
+npm --prefix tests/browser run test:docs
+```
+
+The staging destination must not already exist. Remove an earlier
+`_build/documentation-preview` before restaging. The test runner owns its loopback
+HTTP server on port 8766 and refuses to reuse another server.
+
+Listeners are attached before navigation so errors during the entry redirect
+are retained. HTTP errors, failed requests, console errors and JavaScript
+exceptions fail the check. Images must decode and Mermaid must render to SVG.
+Declared assets and downloads are requested explicitly, including the favicon
+in the entry HTML before its redirect. Each captured HTML document must declare
+an icon, so removing the entry's icon link also fails. Every staged non-HTML file is checked
+over HTTP against its original bytes. Search must finish and open a result;
+the diagram must render again after a theme change. Synthetic fault pages test
+that missing assets and browser errors are actually rejected.
+
+The suite uses four Chromium workers, no retries and a five-minute total budget.
+The pinned Mermaid module still requires jsDelivr access; a failed CDN load
+fails the browser check. Logs, per-page JSON receipts and failure screenshots
+and traces are retained with the existing browser diagnostics for five days.
+The browser job remains a dependency of `Repository checks`, so a failure also
+prevents main publication. This is a build regression check; live-site acceptance
+and coverage in other browser engines remain separate.
+
 ## Publish reviewed main
 
 Only a `push` to `refs/heads/main` in `OpenT1D/lab` uploads a Pages artifact. The

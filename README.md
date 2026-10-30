@@ -111,6 +111,11 @@ modularity. Preserve model ancestry, units, timing and process ownership;
 explain the existing boundaries. Original controllers and mechanisms are optional
 research, not prerequisites for using the tools.
 
+OpenT1D aims to contribute alongside existing research tools through useful
+integrations, reproducible studies and upstream improvements. We assess that
+contribution through [task-specific comparisons](docs/product-laboratory.md#product-value-measurement)
+that report strengths, limitations and tradeoffs.
+
 ## Explore the repository
 
 - [Documentation](https://opent1d.github.io/lab/): choose a task, run it and interpret its limits.

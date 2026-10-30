@@ -1,6 +1,7 @@
 # Product requirements: a shared T1D research laboratory
 
-**Planning requirements, 25 October 2026.** OpenT1D aims to provide one coherent
+**Planning requirements, 25 October 2026; contribution and scope clarification,
+29 October 2026.** OpenT1D aims to provide one coherent
 laboratory in which researchers can combine, replace and compare suitable
 existing models and methods. Its contribution is shared research infrastructure
 and useful integrations. Developing an original controller or physiological
@@ -8,10 +9,10 @@ engine is an optional research choice.
 
 This guide owns the product requirements and acceptance jobs. The
 [roadmap](../ROADMAP.md) is the sole authority for implementation order,
-dependencies and status. OT-059–074 are planned work packages; their inclusion
-here delivers no SDK, stable public interface, portable runtime or new scientific
-capability. [Architecture](architecture.md) describes the current bounded
-implementation; existing task guides and evidence records remain authoritative
+dependencies and status. OT-059–074 identify work packages with separately
+recorded increments and open requirements. Their inclusion here is not evidence
+that a capability is delivered. [Architecture](architecture.md) describes the
+current bounded implementation; existing task guides and evidence records remain authoritative
 for what can actually be run.
 
 ## Product definition and users
@@ -259,6 +260,19 @@ require separate intended use and evidence; none follows from these plans.
 
 ## Product value measurement
 
+OpenT1D aims to make a useful contribution alongside existing research tools.
+Reusable integration, clearer assumptions, reliable handoff, maintainability and
+upstream improvements are contributions to assess in their own right. Describe
+the research task, who benefits and the effort needed to provide and maintain it.
+
+Comparisons help identify strengths, gaps and opportunities to improve. Select
+an applicable reference workflow and agree on the question, versions, inputs,
+endpoints, preparation, assistance and evaluation rules before observations.
+Give each workflow competent preparation and report favorable, similar,
+unfavorable and inconclusive outcomes, including costs and tradeoffs. Claims of
+improvement apply to the measured task and conditions. A comparison may support
+reuse, collaboration or an upstream change as the most useful next step.
+
 Measure the second and third integration or research task, not only a prepared
 first example. Compare with competent existing tools and a good notebook,
 including setup, connecting code, failure diagnosis, interpretation and
@@ -270,7 +284,16 @@ handoff, reopening after updates and subsequent reuse without developer help.
 Observe real intended researchers and distinguish installation, usability,
 integration and scientific acceptance. Set task-specific decision rules before
 the exercise; no general success percentage, user result or adoption claim is
-established here.
+established here. Correctness, usability, interoperability and sustainable
+maintenance define the selected laboratory acceptance exercise. Comparative
+productivity is a separate question when relevant; a useful integration need
+not outperform another tool on every measure.
+
+The [original OT-056 pilot](research/ot056-researcher-pilot.md) retains its
+proposed 30% time-reduction target and matching evaluator for that specific
+study. That target is not a shared-laboratory delivery threshold. Amending the
+pilot requires a declared protocol/evaluator revision before new observations,
+with the original criteria and any prior results retained.
 
 ## Optional extension gate
 
@@ -280,8 +303,10 @@ team collaboration remain possible parts of the laboratory. Their scope follows
 the roadmap and these evidence gates:
 
 1. **Admission:** identify the researcher question, reusable upstream assets,
-   new capability, necessary observations and rights, comparator, evaluator and
-   maintenance responsibility. Explain what existing tooling cannot supply.
+   capability to connect or extend, necessary observations and rights, evaluator
+   and maintenance responsibility. Explain why the integration is useful and
+   what will be reused or contributed upstream. Identify a suitable reference
+   workflow when the question calls for a comparison.
 2. **Bounded exploratory integration:** demonstrate suitable contracts,
    ownership, causal/data boundaries, numerical behavior, failures and a
    reconstructible complete task. Label hypothetical mechanisms and unavailable

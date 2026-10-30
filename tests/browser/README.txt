@@ -1,4 +1,4 @@
-Browser development checks (synthetic MMTT only)
+Browser development checks (synthetic MMTT and built documentation)
 
 Run from the repository root with Node 24 and the locked Python 3.12 root
 environment. No native simulation environment is installed by this suite.
@@ -20,7 +20,7 @@ unique temporary workspace per test. It restarts that server to reopen saved
 reports. There is no substituted backend or intercepted application response.
 
 One Chromium worker, no retries, 90 seconds per test and a five-minute global
-budget bound the suite. The success paths use 32 explicitly selected synthetic
+budget bound the MMTT suite. The success paths use 32 explicitly selected synthetic
 uncertainty draws. Cancellation uses 1024 and waits for the saved analysis-phase
 marker before clicking Cancel; it never changes the calculation or server.
 
@@ -28,6 +28,25 @@ Reports, server logs and success screenshots are under output/playwright/.
 Failures retain traces, screenshots and a copy of the synthetic workspace.
 Temporary workspaces are removed after each test. The browser cache is only the
 explicit PLAYWRIGHT_BROWSERS_PATH; do not point it at private research data.
+
+The separate documentation suite reuses the same pinned tools. Build and stage
+the HTML under the published project path before running it:
+
+  uv run --locked python scripts/check.py --stage docs
+  uv run --locked python scripts/stage_documentation.py _build/html _build/documentation-preview/lab
+  npm --prefix tests/browser run test:docs
+
+Remove a previous _build/documentation-preview before restaging. The destination
+must be fresh. The runner owns a loopback HTTP server on port 8766. It audits all
+generated HTML pages, initial redirect icons, image/Mermaid rendering, declared
+assets and downloads, and checks all staged non-HTML bytes. It also exercises
+search and dark mode and proves rejection with synthetic fault pages. Mermaid's
+pinned jsDelivr module requires network access; load failures fail the check.
+
+Documentation uses four Chromium workers, no retries, 45 seconds per test and a
+separate five-minute total budget. Per-page JSON receipts, results and failure
+screenshots/traces are under output/playwright/documentation, preserving the
+MMTT diagnostics. CI retains both suites' diagnostics including failures.
 
 Playwright 1.64.1 is pinned in package.json and package-lock.json. Version/source:
 https://github.com/microsoft/playwright/releases/tag/v1.64.1

@@ -8,7 +8,7 @@ The final locked check passes **1,390 tests with 13 existing skips** and the
 strict documentation build. No researcher, independent reviewer or licensed
 comparator access is confirmed. The human pilot, product decision and full
 OT-056 goal remain open.
-The [roadmap](roadmap-history-2026-10-28.md#planned-mixed-meal-analysis-tasks) owns acceptance.
+The [original OT-056 acceptance plan](roadmap-history-2026-10-28.md#planned-mixed-meal-analysis-tasks) records this pilot's proposed criteria.
 The earlier [GUI exercise](../gui-researcher-exercise.md) has a different task
 and cannot supply observations for this pilot.
 
@@ -17,6 +17,22 @@ integrated into main on 19 October, with remote identity verified on 22 October.
 Its internal macOS retests and 1,393-test repository check extend the software
 evidence; they supply no human pilot observations and do not close this goal.
 The 1,390-test result above remains the historical OT-056 acceptance result.
+
+## Scope in the current laboratory plan
+
+**Clarification, 29 October 2026.** This remains a proposed comparative study.
+Its 30% time-reduction target, five-pair rules and matching evaluator are
+retained for that study; no measured productivity advantage is claimed. The
+[current delivery plan](../../ROADMAP.md#common-laboratory-delivery-plan) and
+[product requirements](../product-laboratory.md#product-value-measurement)
+assess useful laboratory contributions through correctness, usability,
+interoperability and maintainability. The pilot's comparative progression rules
+are not general delivery thresholds for those integrations.
+
+Before conducting an amended pilot, declare its protocol and evaluator revision,
+justify the task-specific criteria and preserve the original analysis. Do not
+change thresholds after seeing observations or relabel an old result under new
+criteria. The dated pilot proposal and technical evidence below remain intact.
 
 ## Technical completion and human acceptance
 
