@@ -20,6 +20,7 @@ from .store import Budget, inventory, read, require, safe_path, snapshot, write
 ROOT = Path(__file__).resolve().parents[2]
 TASKS = {
     "mmtt-sensitivity": "experiments.observation_analysis",
+    "mmtt-sampling": "experiments.mmtt_sampling",
     "m4-study-secure": "experiments.m4.secure_study",
     "m4-study-installed": "experiments.m4.installed_study",
 }
@@ -34,6 +35,10 @@ def native_provider(task):
 
 
 def reader(task):
+    if task == "mmtt-sampling":
+        from .sampling import reader as sampling_reader
+
+        return sampling_reader()
     if task == "m4-study-installed":
         from .installed_m4 import reader as current_reader
 
@@ -77,6 +82,10 @@ def reader_identity(task):
 def capture(task, inputs, target):
     """Freeze originals separately from effective relocatable M4 path spelling."""
     require(task in TASKS, "Unselected task")
+    if task == "mmtt-sampling":
+        from .sampling import capture as capture_sampling
+
+        return capture_sampling(inputs, target)
     target.mkdir()
     original = target / "original"
     original.mkdir()
@@ -145,6 +154,10 @@ def capture(task, inputs, target):
 
 
 def validate_freeze(folder, descriptor, *, current):
+    if isinstance(descriptor, dict) and descriptor.get("task") == "mmtt-sampling":
+        from .sampling import validate_freeze as validate_sampling
+
+        return validate_sampling(folder, descriptor, current=current)
     require(
         isinstance(descriptor, dict)
         and set(descriptor)
@@ -288,6 +301,10 @@ def native_result(archive, descriptor, plan):
     archive = safe_path(archive)
     inventory(archive, Budget())
     task = descriptor["task"]
+    if task == "mmtt-sampling":
+        from .sampling import native_result as sampling_result
+
+        return sampling_result(archive, descriptor, plan)
     report = read(archive / "report.json")
     execution = read(archive / ("execution.json" if task == "mmtt-sensitivity" else "state.json"))
     if task == "mmtt-sensitivity":

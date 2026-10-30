@@ -5,8 +5,19 @@ Extraction increment 2 adds internal services for `mmtt-sensitivity` and
 [Decision 0081](decisions/0081-minimal-project-services.md) defines the storage
 and process boundary; the [task/evidence record](research/ot061-064-minimal-services.md)
 owns its acceptance cases. The [OT-059 packet](shared-core-contracts.md) remains
-the unchanged metadata reference. This is developer software in a checkout;
-an installed SDK/CLI and GUI migration belong to later increments.
+the unchanged metadata reference. This initial extraction was developer software
+in a checkout. The subsequent [installed SDK](installed-sdk.md) and
+[shared workbench](installed-gui.md) now expose the same project services.
+
+The bounded [sampling extension](research/installed-mmtt-sampling.md) adds
+`experiments/shared_services/sampling.py` as a separate adapter under
+[decision 0085](decisions/0085-installed-mmtt-sampling.md). It captures four raw
+files and the sealed development import, retains schedule/person/variant slots,
+and admits associated native parent/child reports with their saved draw ledgers.
+Explicit reconstruction remains the trusted arithmetic check. Parent and all
+available child report hashes survive relocation. The installed descriptor is
+version 3; the OT-059 version-1 packet and original service evidence below remain
+unchanged. The installed M4 successor retains its separate guide and evidence.
 
 ## Project and immutable history
 

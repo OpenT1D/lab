@@ -1,6 +1,6 @@
 # 0085 — Preserve the sampling study through installed project services
 
-Date: 30 October 2026. Status: accepted for bounded implementation; verification pending.
+Date: 30 October 2026. Status: implemented with bounded internal verification.
 
 ## Decision
 

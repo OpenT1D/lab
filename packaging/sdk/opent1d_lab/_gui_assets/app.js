@@ -1,15 +1,17 @@
 "use strict";
 const $ = id => document.getElementById(id);
 const token = document.querySelector('meta[name="opent1d-token"]').content;
-const names = {"mmtt-sensitivity": "Paired meal-test assumptions", "m4-study-installed": "Synthetic secretion models", "m4-study-secure": "Historical secretion study"};
-const cases = {"mmtt-sensitivity": [["complete", "Invented paired visit"], ["censored", "Invented paired visit with censored measurements"]], "m4-study-installed": [["fasting", "Fasting"], ["gastric_load_15g", "15 g initial gastric amount"]]};
-const context = {"mmtt-sensitivity": "Whole-body total endogenous secretion, including basal, over observed 0–120 minutes (pmol). Change is follow-up minus baseline. Three required assumption variants; 128 perturbations with seed 117. Invented data only.", "m4-study-installed": "Both supplied sources · adult#001 · 240 minutes · 961 quarter-minute samples. The gastric amount is an initial condition, not a timed meal. Native runtimes must be prepared separately."};
+const names = {"mmtt-sampling": "Fewer meal-test measurement times", "mmtt-sensitivity": "Paired meal-test assumptions", "m4-study-installed": "Synthetic secretion models", "m4-study-secure": "Historical secretion study"};
+const cases = {"mmtt-sampling": [["information-loss", "Invented information loss"], ["constant", "Constant-input control"], ["incomplete", "Incomplete measurements"], ["steep-response", "Steep-response boundary control"]], "mmtt-sensitivity": [["complete", "Invented paired visit"], ["censored", "Invented paired visit with censored measurements"]], "m4-study-installed": [["fasting", "Fasting"], ["gastric_load_15g", "15 g initial gastric amount"]]};
+const context = {"mmtt-sampling": "Compare full and reduced actual measurement times using the same estimator and assumptions. Development-only selection is frozen before analysis; evaluation results do not select schedules. Whole-body total secretion including basal over 0–120 minutes (pmol). Full curves are references, not biological truth. Invented data only.", "mmtt-sensitivity": "Whole-body total endogenous secretion, including basal, over observed 0–120 minutes (pmol). Change is follow-up minus baseline. Three required assumption variants; 128 perturbations with seed 117. Invented data only.", "m4-study-installed": "Both supplied sources · adult#001 · 240 minutes · 961 quarter-minute samples. The gastric amount is an initial condition, not a timed meal. Native runtimes must be prepared separately."};
 let data = null, selected = null, draft = null, selectedPlan = null, currentReport = null, pending = false, watched = null, loaded = false;
 let imageURL = null, parentDraft = null, refreshIssued = 0, refreshApplied = 0;
 const handled = new Set();
 function invalidatePlanView() { $("plan-inspector").classList.add("hidden"); $("plan-inspector").open = false; $("plan-details").textContent = ""; $("readiness").textContent = "Check this frozen plan with the current runtime selection before execution."; }
 function element(tag, text, cls) { const node = document.createElement(tag); if (text !== undefined) node.textContent = text; if (cls) node.className = cls; return node; }
 function notice(message, error = false) { $("notice").textContent = message; $("notice").className = "notice" + (error ? " error" : ""); if (error) $("notice").focus(); }
+function withdrawReport() { currentReport = null; $("report-text").replaceChildren(); $("child-reports").replaceChildren(); if (imageURL) URL.revokeObjectURL(imageURL); imageURL = null; $("report-figure").src = ""; $("saved-report").classList.add("hidden"); }
+function reportRefused(error) { withdrawReport(); notice(error.message, true); }
 async function request(url, body) {
   const options = {headers: {"X-OpenT1D-Token": token}, cache: "no-store"};
   if (body !== undefined) { options.method = "POST"; options.headers["Content-Type"] = "application/json"; options.body = JSON.stringify(body); }
@@ -40,6 +42,7 @@ async function refresh() {
     refreshApplied = issued;
     if (data?.runtime_revision !== incoming.runtime_revision || data?.runtime_attachment !== incoming.runtime_attachment) invalidatePlanView();
     data = incoming;
+    if (currentReport && !data.reports?.some(record => record.id === currentReport.id && record.valid)) withdrawReport();
     if (!loaded) { for (const job of data.jobs) if (job.status !== "running") handled.add(job.id); loaded = true; }
     for (const job of data.jobs) if (job.id === watched && job.status !== "running" && !handled.has(job.id)) {
       handled.add(job.id); watched = null;
@@ -101,7 +104,7 @@ function render() {
     options($("parent-plan"), [["", "Original plan"], ...plans.filter(plan => plan.task === draft.task).map(plan => [plan.id, label(plan)])], oldParent);
     if (parentDraft !== draft.id) { parentDraft = draft.id; $("parent-plan").value = ""; if (draft.case === "gastric_load_15g") { const fasting = plans.find(plan => plan.task === draft.task && plan.slots.some(slot => slot.endsWith("/fasting"))); if (fasting) $("parent-plan").value = fasting.id; } }
   }
-  $("runtime-status").textContent = data.runtime_attachment ? `Selected attachment: ${data.runtime_attachment}` : "No native runtime attachment selected. The paired meal-test task needs no simulator.";
+  $("runtime-status").textContent = data.runtime_attachment ? `Selected attachment: ${data.runtime_attachment}` : "No native runtime attachment selected. Both meal-test tasks need no simulator.";
   renderAttempts(chosen.info?.attempts || [], plans, busy);
   $("saved-report").classList.toggle("hidden", !currentReport || currentReport.project !== selected);
 }
@@ -119,12 +122,12 @@ function renderAttempts(attempts, plans, busy) {
     verify.disabled = busy || !result || result.payload !== "native";
     verify.onclick = () => action("verify", {attempt: attempt.id, allow_failed: $("allow-failed").checked}); actions.append(verify);
     if (result?.payload === "forensic") row.append(element("p", "No admissible native report. The original failure ledger and forensic files are retained.", "muted"));
-    if (result && attempt.id === (attempts.filter(item => item.plan === attempt.plan).at(-1)?.id)) { const retry = element("button", "Run a new attempt"); retry.disabled = busy || !["mmtt-sensitivity", "m4-study-installed"].includes(plan?.task); retry.onclick = () => action("run", {plan: attempt.plan, retry_of: attempt.id}); actions.append(retry); }
+    if (result && attempt.id === (attempts.filter(item => item.plan === attempt.plan).at(-1)?.id)) { const retry = element("button", "Run a new attempt"); retry.disabled = busy || !["mmtt-sensitivity", "mmtt-sampling", "m4-study-installed"].includes(plan?.task); retry.onclick = () => action("run", {plan: attempt.plan, retry_of: attempt.id}); actions.append(retry); }
     row.append(actions); return row;
   }));
 }
-function renderMarkdown(text) {
-  const container = $("report-text"); container.replaceChildren(); const lines = text.split("\n");
+function renderMarkdown(text, container = $("report-text")) {
+  container.replaceChildren(); const lines = text.split("\n");
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i]; if (!line.trim()) continue;
     if (line.startsWith("|")) {
@@ -135,6 +138,31 @@ function renderMarkdown(text) {
     else container.append(element("p", line.replaceAll("**", "")));
   }
 }
+async function downloadReport(record, name) {
+  const response = await request(`/api/reports/${record.id}/${name}`);
+  const url = URL.createObjectURL(await response.blob());
+  const link = element("a"); link.href = url; link.download = name.replaceAll("/", "-"); link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+function renderChildReports(record) {
+  const container = $("child-reports"); container.replaceChildren();
+  const reports = record.files.filter(name => /^studies\/[a-z][a-z0-9_-]{0,63}\/report\.md$/.test(name));
+  container.classList.toggle("hidden", !reports.length);
+  if (reports.length) container.append(element("h3", "Native analysis for each measurement schedule"));
+  for (const name of reports) {
+    const schedule = name.split("/")[1], details = element("details"), content = element("div", undefined, "report-text");
+    details.append(element("summary", `Schedule: ${schedule}`));
+    const view = element("button", "Read native analysis");
+    view.onclick = async () => { try { renderMarkdown(await (await request(`/api/reports/${record.id}/${name}`)).text(), content); } catch (error) { reportRefused(error); } };
+    details.append(view);
+    for (const extension of ["md", "json"]) {
+      const download = element("button", extension === "md" ? "Download schedule report" : "Download schedule JSON");
+      download.onclick = async () => { try { await downloadReport(record, name.replace(/\.md$/, "." + extension)); } catch (error) { reportRefused(error); } };
+      details.append(download);
+    }
+    details.append(content); container.append(details);
+  }
+}
 async function showReport(identity) {
   const record = data.reports.find(item => item.id === identity);
   if (!record) throw new Error("Verified report pointer is unavailable; refresh and verify again.");
@@ -142,6 +170,7 @@ async function showReport(identity) {
   const hasFigure = record.files.includes("figure.svg");
   const nextImageURL = hasFigure ? URL.createObjectURL(await (await request(`/api/reports/${identity}/figure.svg`)).blob()) : null;
   renderMarkdown(markdown);
+  renderChildReports(record);
   if (imageURL) URL.revokeObjectURL(imageURL);
   imageURL = nextImageURL;
   $("report-figure").classList.toggle("hidden", !hasFigure);
@@ -169,5 +198,5 @@ $("clear-runtime").onclick = () => action("clear_attachment", {}, null);
 $("relocate-form").onsubmit = event => { event.preventDefault(); action("relocate", {output: $("relocate-path").value}); };
 $("cancel-run").onclick = async () => { try { if (data.active) await request(`/api/jobs/${data.active}/cancel`, {}); await refresh(); } catch (error) { notice(error.message, true); } };
 $("stop-server").onclick = async () => { try { await request("/api/shutdown", {}); data.closing = true; render(); notice("Server stopping. Runs are cancelled through the SDK; project actions finish before exit. Keep the terminal open until it exits."); } catch (error) { notice(error.message, true); } };
-for (const button of document.querySelectorAll("[data-download]")) button.onclick = async () => { try { if (!currentReport) return; const response = await request(`/api/reports/${currentReport.id}/${button.dataset.download}`); const url = URL.createObjectURL(await response.blob()); const link = element("a"); link.href = url; link.download = button.dataset.download; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); } catch (error) { currentReport = null; render(); notice(error.message, true); } };
+for (const button of document.querySelectorAll("[data-download]")) button.onclick = async () => { try { if (currentReport) await downloadReport(currentReport, button.dataset.download); } catch (error) { reportRefused(error); } };
 updateTask(); refresh(); setInterval(refresh, 1500);

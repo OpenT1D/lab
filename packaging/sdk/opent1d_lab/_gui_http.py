@@ -229,10 +229,11 @@ class Handler(BaseHTTPRequestHandler):
             elif match := re.fullmatch(r"/api/jobs/([a-f0-9]{32})", route):
                 self.send(200, self.server.controller.get_job(match[1]))
             elif match := re.fullmatch(
-                r"/api/reports/([a-f0-9]{32})/(report\.json|report\.md|figure\.svg)", route
+                r"/api/reports/([a-f0-9]{32})/((?:studies/[a-z][a-z0-9_-]{0,63}/)?report\.(?:json|md)|figure\.svg)",
+                route,
             ):
                 raw, mime = self.server.controller.report(match[1], match[2])
-                self.send(200, raw, mime, filename=match[2])
+                self.send(200, raw, mime, filename=match[2].rsplit("/", 1)[-1])
             else:
                 self.send(404, {"error": "Unknown route"})
         except (BrokenPipeError, ConnectionResetError):

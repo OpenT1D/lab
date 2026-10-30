@@ -1,6 +1,7 @@
 """Thin SDK actions and transient browser jobs; no second experiment ledger."""
 
 import json
+import re
 import threading
 import time
 import uuid
@@ -9,7 +10,7 @@ from datetime import UTC, datetime
 from . import api
 from ._gui_files import Lease, decode, encoded, outside_projects, path, read, require, sha256, write
 
-TASKS = {"mmtt-sensitivity", "m4-study-installed"}
+TASKS = {"mmtt-sensitivity", "mmtt-sampling", "m4-study-installed"}
 REPORTS = {
     "report.json": "application/json",
     "report.md": "text/markdown",
@@ -35,6 +36,35 @@ GLOBAL = {"create", "open", "attach", "select_attachment", "clear_attachment"}
 
 def now():
     return datetime.now(UTC).isoformat()
+
+
+def report_mime(name):
+    require(isinstance(name, str), "Unknown report filename")
+    if name in REPORTS:
+        return REPORTS[name]
+    require(
+        re.fullmatch(r"studies/[a-z][a-z0-9_-]{0,63}/report\.(json|md)", name) is not None,
+        "Unknown report filename",
+    )
+    return REPORTS[name.rsplit("/", 1)[-1]]
+
+
+def report_snapshot(directory):
+    """Retain a bounded regular report tree, including native child copies."""
+    directory = path(directory, directory=True)
+    files, directories = {}, set()
+    for index, item in enumerate(directory.rglob("*")):
+        require(index < 64, "Report copy entry limit exceeded")
+        name = item.relative_to(directory).as_posix()
+        if item.is_dir():
+            path(item, directory=True)
+            directories.add(name)
+        else:
+            files[name] = sha256(read(item, 64 * 1024 * 1024))
+    expected = {parent for name in files for parent in (name.rsplit("/", 1)[0],) if "/" in name}
+    expected |= {"studies"} if any(name.startswith("studies/") for name in files) else set()
+    require(directories == expected, "Unexpected report directory")
+    return files
 
 
 class Busy(ValueError):
@@ -383,19 +413,29 @@ class Controller:
             result = project.reconstruct(
                 args["attempt"], destination, allow_failed=args["allow_failed"]
             )
+            names = set(result["report_sha256"])
+            require({"report.json", "report.md"} <= names, "Report roster")
+            require(len(names) <= 10, "Unsupported authoritative report roster")
+            for name in names:
+                report_mime(name)
+            children = {name for name in names if name.startswith("studies/")}
+            require(not children or "figure.svg" not in names, "Mixed report families")
             require(
-                set(result["report_sha256"]) in ({"report.json", "report.md"}, set(REPORTS)),
-                "Unsupported authoritative report roster",
+                all(
+                    name.rsplit(".", 1)[0] + ".json" in names
+                    and name.rsplit(".", 1)[0] + ".md" in names
+                    for name in children
+                ),
+                "Incomplete child report roster",
             )
             for name, expected in result["report_sha256"].items():
                 require(
                     sha256(read(destination / name, 64 * 1024 * 1024)) == expected,
                     "Reconstructed report bytes changed",
                 )
-            entries = {p.name for p in destination.iterdir()}
+            entries = report_snapshot(destination)
             require(
-                entries
-                in (set(result["report_sha256"]), {*result["report_sha256"], "manifest.json"}),
+                set(entries) in (names, names | {"manifest.json"}),
                 "Unsupported reconstructed report directory",
             )
             record = {
@@ -407,9 +447,7 @@ class Controller:
                 "valid": True,
                 "completeness": result["completeness"],
                 "hashes": result["report_sha256"],
-                "snapshot_hashes": {
-                    name: sha256(read(destination / name, 64 * 1024 * 1024)) for name in entries
-                },
+                "snapshot_hashes": entries,
                 "files": sorted(result["report_sha256"]),
             }
             with self.mutex:
@@ -447,7 +485,7 @@ class Controller:
             self.runtime_revision += 1
 
     def report(self, identity, name):
-        require(name in REPORTS, "Unknown report filename")
+        mime = report_mime(name)
         with self.mutex:
             record = self.reports[identity]
             require(record["valid"], "Report copy is unavailable; verify again")
@@ -455,7 +493,7 @@ class Controller:
         try:
             directory = path(record["directory"], directory=True)
             require(
-                {p.name for p in directory.iterdir()} == set(record["snapshot_hashes"]),
+                report_snapshot(directory) == record["snapshot_hashes"],
                 "Report directory changed",
             )
             if "manifest.json" in record["snapshot_hashes"]:
@@ -468,7 +506,7 @@ class Controller:
             require(
                 sha256(raw) == record["hashes"][name], "Verified report copy changed; verify again"
             )
-            return raw, REPORTS[name]
+            return raw, mime
         except (ValueError, OSError):
             with self.mutex:
                 record["valid"] = False

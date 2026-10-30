@@ -4,7 +4,8 @@ The thin GUI is an internal interface to the [installed SDK](installed-sdk.md).
 It uses the same immutable plans, parent links, attempts and trusted readers as
 Python and the CLI. Its workspace catalog and job labels are convenience state;
 the SDK project is the authoritative research record. This interface covers
-supplied MMTT examples and the [installed M4 successor](installed-m4.md).
+supplied paired-sensitivity and reduced-sampling MMTT examples and the
+[installed M4 successor](installed-m4.md).
 The older checkout GUI and its historical exercises retain their own scope.
 
 Use the SDK build/install procedure, then launch from any working directory:
@@ -56,6 +57,12 @@ qualification is macOS arm64. It is not a public installer or a clean-host test.
    MMTT offers JSON/Markdown; M4 additionally offers SVG. Verification checks
    saved analysis, without rerunning physiological models. The displayed copy
    records verification time; verify again to assess changed project evidence.
+   Sampling additionally lists each native measurement-schedule analysis with
+   explicit read and JSON/Markdown download actions. The parent retains its
+   development/evaluation split and all planned slots. Only fixed, hashed report
+   paths are served; changed nested copies withdraw the displayed verification
+   on refusal or the next invalid-state update. Verify again from the preserved
+   project to create a fresh copy.
 6. **Copy complete project** relocates all plans, inputs, attempts and native
    evidence to a fresh folder. Open the copy and verify its reports before
    removing the original. A report download alone is not a project handoff.
@@ -63,6 +70,10 @@ qualification is macOS arm64. It is not a public installer or a clean-host test.
 MMTT represents whole-body total endogenous secretion including basal, in pmol
 over the observed 0–120 minutes; change is follow-up minus baseline. The supplied
 settings retain three assumption variants and 128 perturbations with seed 117.
+Choose **Fewer meal-test measurement times** for information-loss, constant-input,
+incomplete or steep-response controls. Preparation retains the sealed development
+selection and separate evaluation participants. Schedule allocation and the
+estimator are unchanged; full curves are references, not biological truth.
 The M4 examples retain both sources, 240 minutes and 961 quarter-minute outputs.
 The 15 g condition is an initial gastric load, not a timed meal. These examples
 demonstrate synthetic software behavior, not biological accuracy or treatment
@@ -83,6 +94,12 @@ private health records out. Native parameter/table redistribution rights remain
 separate; the GUI does not grant permission to distribute those project bytes.
 
 ## Prepare an actual user exercise
+
+The original exercise below still selects paired MMTT and M4 references. Adding
+sampling to the installed interface does not expand that packet, freeze new
+human tasks or record any participant evidence. The
+[sampling integration record](research/installed-mmtt-sampling.md) describes its
+separate software/browser checks.
 
 The selected [verification and preparation record](research/ot065-072-shared-gui.md)
 owns this bounded formative exercise. First retain a real reference project with

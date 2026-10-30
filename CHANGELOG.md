@@ -4,6 +4,13 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Integrate `mmtt-sampling` into installed Python/CLI and the shared project
+  workbench. Retain sealed development-only selection, all 60 supplied planned
+  slots, native parent/child reports, explicit incomplete readers and relocation.
+  Add descriptor version 3 with strict historical rosters, actual installed and
+  browser regressions, and withdraw displayed reports when nested reads refuse.
+  Preserve the estimator, native sampling files and OT-059 frozen packet.
+
 - Extend the planned integrated-laboratory development window from the merged
   installed SDK, native M4 and thin GUI: add shared sampling, editable studies,
   comparisons, a connected synthetic study and reader-transition qualification,

@@ -628,7 +628,7 @@ class InstalledSDK(unittest.TestCase):
             command, cwd=self.poison, env=self.env, capture_output=True, text=True, timeout=10
         )
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertEqual(json.loads(result.stdout)["schema"], "opent1d.installed-sdk/2")
+        self.assertEqual(json.loads(result.stdout)["schema"], "opent1d.installed-sdk/3")
         self.assertFalse(self.marker.exists())
         victim = package / "_payload/app/experiments/shared_services/store.py"
         victim.unlink()
