@@ -93,6 +93,11 @@ def build(output, *, allow_dirty=False, build_label="internal"):
     facade = ROOT / "packaging/sdk"
     for path in sorted((facade / "opent1d_lab").glob("*.py")):
         copy_source(path.relative_to(ROOT).as_posix(), package / path.name, source)
+    for path in sorted((facade / "opent1d_lab/_gui_assets").glob("*")):
+        if path.is_file():
+            copy_source(
+                path.relative_to(ROOT).as_posix(), package / "_gui_assets" / path.name, source
+            )
     (package / "_build_info.py").write_text("BUILD_LABEL = " + repr(build_label) + "\n")
     for name in ("pyproject.toml", "opent1d-lab"):
         copy_source((facade / name).relative_to(ROOT).as_posix(), project / name, source)

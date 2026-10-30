@@ -317,9 +317,13 @@ artifact identities, failures, critical agent controls and scoped local macOS
 evidence. Historical task/lock identities remain intact. This demonstrates the
 selected local installed technical boundary; other hosts, broader historical
 parity/upgrade support, distribution and independent use remain open. The full
-OT-060/061/064 packages are not closed. Increment 4's thin GUI and formative
-intended-user exercise are the next queue step; unavailable users leave user
-acceptance open without blocking internal preparation.
+OT-060/061/064 packages are not closed. Increment 4 now has a
+[thin installed project GUI](docs/installed-gui.md) and candidate-bound,
+unanswered formative exercise preparation. Its
+[selected record](docs/research/ot065-072-shared-gui.md) separates technical
+checks from actual human sessions. Intended-user acceptance remains open;
+unavailable users do not block internal preparation. The broader OT-065/072
+packages are not closed by this bounded supplied-example interface.
 
 After each increment, record its verified scope and any contract change before
 selecting the next artifact. Full campaign caching, new scientific mechanisms,

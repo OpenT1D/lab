@@ -24,6 +24,17 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="action", required=True)
     commands.add_parser("installation")
+    command = commands.add_parser("prepare-study-packet")
+    command.add_argument("--reference-project", required=True)
+    for role in ("mmtt", "fasting", "load15", "failed"):
+        command.add_argument("--" + role + "-attempt", required=True)
+    command.add_argument("--output", required=True)
+    command = commands.add_parser("verify-study-packet")
+    command.add_argument("--packet", required=True)
+    command = commands.add_parser("gui")
+    command.add_argument("--workspace", required=True)
+    command.add_argument("--port", type=int, default=0)
+    command.add_argument("--runtime-attachment")
     command = commands.add_parser("attach-runtimes")
     command.add_argument("--native-site", required=True)
     command.add_argument("--observer-site", required=True)
@@ -55,10 +66,19 @@ def main(argv=None):
         if operation == "freeze":
             command.add_argument("--project", required=True)
             command.add_argument("--parent")
-    for operation in ("info", "check", "run", "reconstruct", "import", "relocate", "recover"):
+    for operation in (
+        "info",
+        "plan",
+        "check",
+        "run",
+        "reconstruct",
+        "import",
+        "relocate",
+        "recover",
+    ):
         command = commands.add_parser(operation)
         command.add_argument("--project", required=True)
-        if operation in ("check", "run", "import"):
+        if operation in ("plan", "check", "run", "import"):
             command.add_argument("--plan", required=True)
         if operation in ("run", "import"):
             command.add_argument("--retry-of")
@@ -78,6 +98,27 @@ def main(argv=None):
             command.add_argument("--execution-stopped", action="store_true")
     args = parser.parse_args(argv)
     try:
+        if args.action in {"prepare-study-packet", "verify-study-packet"}:
+            from . import study_packet
+
+            if args.action == "verify-study-packet":
+                result = study_packet.verify(args.packet)
+            else:
+                result = study_packet.create(
+                    args.reference_project,
+                    {
+                        role: getattr(args, role + "_attempt")
+                        for role in ("mmtt", "fasting", "load15", "failed")
+                    },
+                    args.output,
+                )
+            print(json.dumps(result, sort_keys=True))
+            return 0
+        if args.action == "gui":
+            from .gui import serve
+
+            serve(args.workspace, port=args.port, runtime_attachment=args.runtime_attachment)
+            return 0
         project = Project(args.project) if hasattr(args, "project") else None
         if args.action == "installation":
             result = installation()
@@ -108,6 +149,8 @@ def main(argv=None):
             result = project.recover(args.attempt, execution_stopped=args.execution_stopped)
         elif args.action == "check":
             result = project.check(args.plan, runtime_attachment=args.runtime_attachment)
+        elif args.action == "plan":
+            result = project.plan(args.plan)
         else:
             result = project.info()
         print(json.dumps(result, sort_keys=True, allow_nan=False))

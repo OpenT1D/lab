@@ -45,6 +45,9 @@ repository tooling; it does not install a general simulation package.
 A second [synthetic task](docs/mmtt-sampling.md) compares full and reduced meal-test
 measurement schedules on the same analysis core. These examples demonstrate
 software behavior under declared assumptions, not performance in people.
+An internal [installed project GUI](docs/installed-gui.md) now connects supplied
+MMTT and native M4 tasks to the shared SDK project ledger and prepares sealed,
+unanswered user-exercise materials. Intended-user sessions remain unrun.
 A separate internal [Windows 11 x64 installer candidate](docs/windows-installation.md)
 bundles all current GUI routes and their runtimes. Its [OT-058 record](docs/research/ot058-installer-verification.md)
 retains bounded clean-install, workflow, preservation and upgrade checks, plus
@@ -98,8 +101,9 @@ The [internal installed Python/CLI candidate](docs/installed-sdk.md) exercises
 MMTT outside a checkout and retains historical passive M4 intake/failed readers.
 Its explicit [native M4 successor](docs/installed-m4.md) now has local macOS
 fasting/15 g execution, exact direct/installed parity and complete relocated
-report evidence. Thin GUI integration and intended-user feedback come next;
-other hosts, broader compatibility and distribution retain separate gates.
+report evidence. A [thin installed GUI](docs/installed-gui.md) now exposes those
+workflows. Intended-user feedback, other hosts, broader compatibility and
+distribution retain separate gates.
 
 ## What we are building
 

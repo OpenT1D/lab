@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="opent1d-token" content="__SESSION_TOKEN__">
+  <title>Project laboratory · OpenT1D</title>
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the study</a>
+<header class="topbar">
+  <a class="brand" href="/" aria-label="OpenT1D project laboratory"><span class="brand-mark" aria-hidden="true">o</span><span>OpenT1D<small>PROJECT LABORATORY</small></span></a>
+  <span class="scope">Internal research candidate · invented data</span>
+  <button id="stop-server" class="quiet">Stop server</button>
+</header>
+<div class="layout">
+  <aside class="sidebar" aria-label="Projects">
+    <div class="side-heading"><h2>Your projects</h2><span id="project-count" class="count">0</span></div>
+    <nav id="project-list" aria-label="Saved projects"></nav>
+    <form id="create-project" class="side-form">
+      <label for="project-name">New project name</label>
+      <input id="project-name" name="name" maxlength="100" placeholder="A question to investigate" required>
+      <button type="submit" class="primary">Create project</button>
+    </form>
+    <details class="side-details"><summary>Open an existing project</summary>
+      <form id="open-project"><label for="open-path">Project folder</label><input id="open-path" name="path" placeholder="Absolute folder path" required><button type="submit">Open project</button></form>
+      <p>Use the same project folder as the Python or command-line SDK. Opening does not run an experiment.</p>
+    </details>
+    <p class="side-note">Closing this browser tab keeps work running. <strong>Stop server</strong> stops a run through the SDK and finishes other project actions before exit.</p>
+  </aside>
+  <main id="main" tabindex="-1">
+    <div id="notice" class="notice hidden" role="status" tabindex="-1"></div>
+    <div id="job" class="job hidden" role="status" aria-live="polite"><div><strong id="job-title"></strong><p id="job-detail"></p></div><button id="cancel-run" class="danger">Stop run</button></div>
+    <section id="welcome" class="welcome">
+      <p class="eyebrow">A project, from question to evidence</p>
+      <h1>Keep the whole research trail.</h1>
+      <p>Create a project or open an existing one. Freeze the assumptions, run a supported synthetic task, then verify and keep its report.</p>
+      <div class="task-cards"><article><span class="task-number">01</span><h2>Paired meal tests</h2><p>Explore how estimated secretion change depends on fixed analysis assumptions.</p><span class="tag">Python standard library</span></article><article><span class="task-number">02</span><h2>Secretion models</h2><p>Compare the two supplied sources under fasting and a 15 g initial gastric condition.</p><span class="tag">Prepared native runtimes</span></article></div>
+      <p class="limit">These are invented engineering examples. They do not establish accuracy in people, biological validity or treatment effects.</p>
+    </section>
+    <div id="project-view" class="hidden">
+      <section class="project-heading"><div><p class="eyebrow">Shared SDK project</p><h1 id="selected-name"></h1><p id="selected-path" class="muted path"></p></div><button id="refresh-project">Refresh saved ledger</button></section>
+      <nav class="section-nav" aria-label="Project sections"><a href="#study">Study</a><a href="#attempts">Attempts</a><a href="#saved-report">Report</a><a href="#handoff">Handoff</a></nav>
+      <section id="study" class="panel">
+        <div class="section-title"><span class="step">1</span><div><h2>Prepare a study</h2><p>Choose supplied inputs, inspect their assumptions, then freeze a named plan.</p></div></div>
+        <form id="prepare-form" class="form-grid">
+          <div><label for="task">Research task</label><select id="task"><option value="mmtt-sensitivity">Paired meal-test assumptions</option><option value="m4-study-installed">Synthetic secretion models</option></select></div>
+          <div><label for="example-case">Supplied example</label><select id="example-case"></select></div>
+          <p id="task-context" class="context full"></p>
+          <button type="submit">Prepare and validate inputs</button>
+        </form>
+        <div id="draft" class="draft hidden"><p id="draft-status"></p><details><summary>Inspect supplied input and validation details</summary><pre id="draft-details"></pre></details>
+          <form id="freeze-form" class="form-grid"><div><label for="plan-name">Plan name</label><input id="plan-name" maxlength="100" placeholder="The condition to investigate" required></div><div><label for="parent-plan">Derived from</label><select id="parent-plan"><option value="">Original plan</option></select></div><button type="submit" class="primary">Freeze plan</button></form>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="section-title"><span class="step">2</span><div><h2>Run a frozen plan</h2><p>A new attempt preserves the plan and every earlier attempt.</p></div></div>
+        <label for="plan-select">Saved plan</label><select id="plan-select"></select>
+        <p id="plan-parent" class="muted"></p>
+        <div class="actions"><button id="inspect-plan">Inspect frozen inputs</button><button id="check-plan">Check readiness</button><button id="run-plan" class="primary">Run plan</button></div>
+        <p id="readiness" class="context">Checking readiness does not install dependencies or run a model.</p>
+        <details id="plan-inspector" class="hidden"><summary>Frozen assumptions and original input hashes</summary><pre id="plan-details"></pre></details>
+        <details class="runtime"><summary>Prepared native runtimes</summary><p id="runtime-status"></p><p>Runtime selection is explicit. An attachment from another SDK build must be recreated for this application. No installation is performed here.</p>
+          <form id="select-runtime" class="form-grid"><div class="full"><label for="attachment-path">Existing reviewed attachment file</label><input id="attachment-path" placeholder="Absolute path to an attachment JSON file" required></div><button type="submit">Select attachment</button><button type="button" id="clear-runtime" class="quiet">Clear selection</button></form>
+          <details><summary>Create an attachment for this application</summary><form id="attach-runtime" class="form-grid"><div class="full"><label for="native-site">Reviewed native site-packages folder</label><input id="native-site" placeholder="Absolute directory" required></div><div class="full"><label for="observer-site">Reviewed observer site-packages folder</label><input id="observer-site" placeholder="Absolute directory" required></div><button type="submit">Verify and attach prepared runtimes</button></form></details>
+        </details>
+      </section>
+      <section id="attempts" class="panel">
+        <div class="section-title"><span class="step">3</span><div><h2>Find and verify results</h2><p>Execution, scientific completeness and report verification are separate.</p></div></div>
+        <div id="attempt-list"></div>
+        <label class="check"><input type="checkbox" id="allow-failed"> Explicitly verify incomplete native evidence, retaining its failed or interrupted status</label>
+      </section>
+      <section id="saved-report" class="panel hidden">
+        <div class="report-heading"><div><p class="eyebrow">Verified report copy</p><h2>Saved analysis</h2><p id="report-context" class="muted"></p></div><span id="report-completeness" class="tag"></span></div>
+        <p class="context">Verification reconstructs saved analysis with the trusted reader. It does not run the model again. This copy records the verification time; refresh and verify again to assess changed project evidence.</p>
+        <div class="actions"><button data-download="report.md">Download report</button><button data-download="report.json">Download JSON</button><button data-download="figure.svg">Download figure</button></div>
+        <div id="report-text" class="report-text"></div>
+        <img id="report-figure" alt="Authoritative saved research figure; quantities and units are also described in the report." class="report-figure">
+      </section>
+      <section id="handoff" class="panel">
+        <div class="section-title"><span class="step">4</span><div><h2>Keep and hand off the project</h2><p>Copy the entire project, including original inputs, plans, attempts and native evidence.</p></div></div>
+        <form id="relocate-form" class="form-grid"><div class="full"><label for="relocate-path">New project folder</label><input id="relocate-path" placeholder="A new absolute location outside any existing project" required></div><button type="submit">Copy complete project</button></form>
+        <p class="muted">Keep the original until you have opened the copy and verified its reports. Native parameter records remain local while redistribution rights are unresolved.</p>
+      </section>
+      <p class="limit">Synthetic software evidence only. No insulin dosing, device operation or clinical decisions.</p>
+    </div>
+    <footer><span id="application"></span><details><summary>Workspace location</summary><span id="workspace-path" class="path"></span></details></footer>
+  </main>
+</div>
+</body>
+</html>
