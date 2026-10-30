@@ -1,0 +1,86 @@
+"""Small installed API over the original immutable project services."""
+
+from pathlib import Path
+
+from ._client import invoke
+
+
+def _path(value):
+    return str(Path(value).absolute())
+
+
+class Project:
+    def __init__(self, path):
+        self.path = _path(path)
+
+    def _call(self, action, **fields):
+        return invoke({"action": action, "project": self.path, **fields})
+
+    def info(self):
+        return self._call("info")
+
+    def freeze(self, task, inputs, *, parent=None):
+        return self._call(
+            "freeze",
+            task=task,
+            inputs={name: _path(path) for name, path in inputs.items()},
+            parent=parent,
+        )
+
+    def check(self, plan):
+        return self._call("check", plan=plan)
+
+    def run(self, plan, *, retry_of=None, timeout=600, cancel=None):
+        return invoke(
+            {
+                "action": "run",
+                "project": self.path,
+                "plan": plan,
+                "retry_of": retry_of,
+                "timeout": timeout,
+            },
+            cancel=cancel,
+        )
+
+    def reconstruct(self, attempt, output, *, allow_failed=False):
+        return self._call(
+            "reconstruct", attempt=attempt, output=_path(output), allow_failed=allow_failed
+        )
+
+    def import_attempt(self, plan, archive, *, retry_of=None):
+        return self._call("import", plan=plan, archive=_path(archive), retry_of=retry_of)
+
+    def relocate(self, output):
+        return self._call("relocate", output=_path(output))
+
+    def recover(self, attempt, *, execution_stopped=False):
+        return self._call("recover", attempt=attempt, execution_stopped=execution_stopped)
+
+
+def create_project(path, name):
+    result = invoke({"action": "create", "project": _path(path), "name": name})
+    return Project(result["project"])
+
+
+def open_project(path):
+    project = Project(path)
+    project.info()
+    return project
+
+
+def example(task, output, *, case="complete"):
+    return invoke({"action": "example", "task": task, "output": _path(output), "case": case})
+
+
+def validate(task, inputs):
+    return invoke(
+        {
+            "action": "validate",
+            "task": task,
+            "inputs": {name: _path(path) for name, path in inputs.items()},
+        }
+    )
+
+
+def installation():
+    return invoke({"action": "installation"})

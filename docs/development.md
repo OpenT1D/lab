@@ -38,6 +38,7 @@ Ownership below means the implementation boundary responsible for a behavior. Re
 | Task registry, dispatch and setup | `experiments/workflows/`, `experiments/setup/` | `test_workflow_entry.py`, `test_workflow_study.py`, `test_task_setup.py`: passive checks, explicit runtime selection, dispatch, source binding and installation refusal. Test files in this table are under `tests/` unless stated otherwise. |
 | OT-059 shared contract packet | `experiments/shared_contracts/`; [contract guide](shared-core-contracts.md) | `test_shared_contract_packet.py`: ten-route inventory, two-route metadata/lineage, refusal, actual MMTT and controlled M4 failed-launch/relocation readers. No native M4 success or route migration. |
 | Minimal OT-061/064 project services | `experiments/shared_services/`; [service guide](shared-project-services.md) | `test_shared_services.py`: complete event ledger, freezes/retries, isolated MMTT workers, controlled M4 failure, forensic recovery, native readers/relocation and observed nested POSIX ownership. No installed SDK or native M4 success. |
+| Internal OT-060 installed developer candidate | `scripts/build_sdk.py`, `packaging/sdk/`, `experiments/shared_services/installed.py`; [installed guide](installed-sdk.md) | `test_installed_sdk.py`, `sdk_ownership_probe.py`, `sdk_cancel_probe.py`, `sdk_early_cancel_probe.py`: noneditable wheels outside checkout, MMTT run/retry/move/read, passive M4 and failed readers, wrapper A/B provenance, incompatible readers, poisoned lookup/cache, unsafe output/FIFO refusal, controlled installed/early cancellation and owned child cleanup. Native M4 success, general upgrades and other-host qualification remain open. |
 | Shared MMTT estimator and paired sensitivity | `experiments/observation_analysis/` | `test_observation_estimator.py`: separate RK4/Decimal references and unit covariance; `test_observation_import.py`, `test_observation_workflow.py`: intake, CLI, interrupted evidence and reconstruction. |
 | Reduced MMTT measurement schedules | `experiments/mmtt_sampling/`, reused `experiments/observation_analysis/analysis.py` | `test_mmtt_sampling_masking.py`, `test_mmtt_sampling_estimator.py`, `test_mmtt_sampling_comparison.py`, `test_mmtt_sampling_workflow.py`: masking, shared estimator boundary, descriptive comparisons and saved workflow. |
 | Local GUI and HTTP lifecycle | `experiments/gui/server.py`, `service.py`, route managers and `static/` | `test_local_gui.py`, `test_gui_observations.py`, `test_gui_sampling.py`: local HTTP, jobs, cancellation, reports and tampering. `test_gui_observation_frontend.py`, `test_gui_sampling_summary.py` and other frontend wrappers exercise their controlled fixtures with Node where declared. |
@@ -174,8 +175,8 @@ The [M3 tutorial](m3-tutorial.md) owns the separately locked statistical-estimat
 ## Individual checks
 
 ```sh
-uv run --locked ruff check docs/conf.py scripts tests experiments
-uv run --locked ruff format --check docs/conf.py scripts tests experiments
+uv run --locked ruff check docs/conf.py scripts tests experiments packaging/sdk/opent1d_lab
+uv run --locked ruff format --check docs/conf.py scripts tests experiments packaging/sdk/opent1d_lab
 uv run --locked python -m unittest discover -s tests -v
 uv run --locked cffconvert --validate
 ```

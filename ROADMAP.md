@@ -297,9 +297,17 @@ checks from missing native success and hosted evidence. Increment 2 now has
 freezes, a complete sequenced attempt ledger, isolated workers, forensic
 recovery and matching trusted readers. Its [verification record](docs/research/ot061-064-minimal-services.md)
 binds actual MMTT, controlled failed M4 and local macOS ownership/relocation
-checks. Complete native M4 execution/relocation remains a specific open gate;
-retained reader upgrades, installed increment 3 and other service hosts remain
-subsequent work. This does not close the full OT-061 or OT-064 packages.
+checks. Complete native M4 execution/relocation remains a specific open gate.
+Increment 3 has an [internal installed Python/CLI developer candidate](docs/installed-sdk.md):
+MMTT creation, validation, freezes, execution/retry and byte-exact relocated
+readers outside a checkout; passive M4 fasting/15 g plans, explicit native-policy
+failure and matching failed readers. Application provenance is separate from
+unchanged native identity. Its first wrapper-build A/B check and changed-reader
+refusal are bounded upgrade cases, not general compatibility. The
+[verification record](docs/research/ot060-installed-route.md) owns actual
+artifacts/checks. Native M4 success/parity/complete installed relocation, other
+hosts and independent use remain open; the full increment-3 exit and OT-060/061/064
+packages are not closed.
 
 After each increment, record its verified scope and any contract change before
 selecting the next artifact. Full campaign caching, new scientific mechanisms,

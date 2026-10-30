@@ -4,6 +4,12 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Add an internal dependency-free installed Python/CLI candidate for MMTT
+  sensitivity, passive maintained M4 intake and matching failed readers. Retain
+  native identities, complete attempt history and separate application
+  provenance through bounded wrapper upgrades. Native M4 success, full two-route
+  installed acceptance, other hosts and public distribution remain open.
+
 - Add required Chromium documentation checks for every generated page, assets,
   downloads, browser errors, search and theme changes, with fault probes and
   retained diagnostics.

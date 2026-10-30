@@ -94,8 +94,10 @@ The internal [OT-059 contract packet](docs/shared-core-contracts.md) inventories
 all ten routes and freezes two-route metadata/reader fixtures. The
 [minimal project services](docs/shared-project-services.md) add a complete local
 ledger, isolated execution and trusted reconstruction for the selected routes.
-Native M4 success/complete relocation, installed SDK migration and distribution
-capabilities remain separate gates.
+The [internal installed Python/CLI candidate](docs/installed-sdk.md) exercises
+MMTT outside a checkout and retains passive M4 intake/failed readers. Native M4
+success/complete relocation, full two-route installed acceptance, other hosts
+and distribution capabilities remain separate gates.
 
 ## What we are building
 
