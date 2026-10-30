@@ -57,9 +57,14 @@ exceptions fail the check. Images must decode and Mermaid must render to SVG.
 Declared assets and downloads are requested explicitly, including the favicon
 in the entry HTML before its redirect. Each captured HTML document must declare
 an icon, so removing the entry's icon link also fails. Every staged non-HTML file is checked
-over HTTP against its original bytes. Search must finish and open a result;
-the diagram must render again after a theme change. Synthetic fault pages test
-that missing assets and browser errors are actually rejected.
+over HTTP against its original bytes. The search test first lets the entry page's
+requests finish before submitting the query. It then waits for search to finish
+listing results and for summary requests to settle before opening a result. Sphinx's finished
+heading alone does not establish that those requests have completed. The same
+strict monitor stays active before and after navigation; pending-request errors
+are not discarded. The diagram must render again after a theme change.
+Synthetic fault pages test that missing assets and browser errors are actually
+rejected.
 
 Firefox can cancel the entry page's favicon request while following its immediate
 meta refresh. That exact `NS_BINDING_ABORTED` is accepted only for a main-frame

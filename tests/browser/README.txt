@@ -53,6 +53,12 @@ assets and downloads, and checks all staged non-HTML bytes. It also exercises
 search and dark mode and proves rejection with synthetic fault pages. Mermaid's
 pinned jsDelivr module requires network access; load failures fail the check.
 
+The search check lets the entry page finish before submitting the query, then
+waits for the finished heading and completed summary requests before opening a
+result. The strict monitor remains active across those waits and the navigation.
+Delayed-response fixtures verify that real HTTP, request,
+console and JavaScript errors remain fatal; the test does not discard errors.
+
 Documentation runs all three Playwright engines with four workers, no retries,
 45 seconds per test and a fifteen-minute local total budget. Select one engine:
 

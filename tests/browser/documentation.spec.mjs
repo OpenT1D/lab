@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { assertClean, auditDocument, inspectRendering, monitor } from './documentation-audit.mjs';
+import { assertClean, auditDocument, inspectRendering, monitor, waitForSearchCompletion } from './documentation-audit.mjs';
 
 const site = fileURLToPath(new URL('../../_build/documentation-preview/lab/', import.meta.url));
 const files = readdirSync(site, { recursive: true, withFileTypes: true })
@@ -59,9 +59,11 @@ test('search finishes and opens a result', async ({ page, baseURL }, testInfo) =
   const { receipt, stop } = monitor(page);
   try {
     await page.goto(new URL('docs/index.html', baseURL).href);
+    await page.waitForLoadState('networkidle');
+    assertClean(receipt);
     await page.getByRole('searchbox').or(page.getByRole('textbox', { name: 'Search', exact: true })).fill('MMTT');
     await page.keyboard.press('Enter');
-    await expect(page.locator('#search-results h2')).toHaveText('Search Results');
+    await waitForSearchCompletion(page, receipt);
     const result = page.locator('#search-results a').first();
     await expect(result).toBeVisible();
     const target = await result.getAttribute('href');
