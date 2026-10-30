@@ -1,5 +1,7 @@
 # Decision records
 
+- [0086 — Recoverable editable studies](0086-editable-workbench-drafts.md): exact synthetic input revisions, validation, immutable derivation and bounded workbench recovery.
+
 - [0085 — Installed MMTT sampling](0085-installed-mmtt-sampling.md): retain sealed development evidence, complete native child reports and strict installed capabilities through the shared SDK and workbench.
 
 - [0084 — Installed project GUI](0084-installed-project-gui.md): reuse the installed SDK ledger, explicit execution and trusted readers through a thin loopback interface and prepare a bounded formative exercise.
