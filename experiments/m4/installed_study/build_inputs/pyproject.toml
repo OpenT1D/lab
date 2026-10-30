@@ -1,0 +1,18 @@
+[project]
+name = "opent1d-installed-m4-build-inputs"
+version = "0.0.0.dev0"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "setuptools==84.2.1",
+    "wheel==0.46.2",
+    "packaging==26.3",
+    "hatchling==1.32.4",
+    "pathspec==1.1.1",
+    "pluggy==1.7.0",
+    "tomlkit==0.15.2",
+    "trove-classifiers==2026.9.21.13",
+]
+
+[tool.uv]
+package = false
+required-version = ">=0.11.16"

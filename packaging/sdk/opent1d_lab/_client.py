@@ -72,7 +72,9 @@ def invoke(request, *, cancel=None):
         if not key.startswith(("PYTHON", "UV_"))
         and key not in {"VIRTUAL_ENV", "__PYVENV_LAUNCHER__"}
     }
-    environment.update(PYTHONDONTWRITEBYTECODE="1", PYTHONNOUSERSITE="1")
+    # platform.platform() may inspect the interpreter with file/uname while
+    # recording host metadata. These helpers must not come from caller PATH.
+    environment.update(PYTHONDONTWRITEBYTECODE="1", PYTHONNOUSERSITE="1", PATH=os.defpath)
     with tempfile.TemporaryDirectory(prefix="opent1d-sdk-call-") as temporary:
         output = Path(temporary) / "response.json"
         errors = Path(temporary) / "stderr.log"

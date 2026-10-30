@@ -11,7 +11,9 @@ from experiments.m4.secure_study.report import validate_frozen as validate_m4_fr
 from experiments.observation_analysis import plan as mmtt
 from experiments.observation_analysis.analysis import report_from_attempts
 from experiments.shared_contracts.inventory import reader_source_inventory
-from experiments.shared_contracts.selected import boundary, outcome, reader
+from experiments.shared_contracts.selected import boundary as legacy_boundary
+from experiments.shared_contracts.selected import outcome as legacy_outcome
+from experiments.shared_contracts.selected import reader as legacy_reader
 
 from .store import Budget, inventory, read, require, safe_path, snapshot, write
 
@@ -19,7 +21,40 @@ ROOT = Path(__file__).resolve().parents[2]
 TASKS = {
     "mmtt-sensitivity": "experiments.observation_analysis",
     "m4-study-secure": "experiments.m4.secure_study",
+    "m4-study-installed": "experiments.m4.installed_study",
 }
+
+
+def native_provider(task):
+    if task == "m4-study-installed":
+        from experiments.m4.installed_study import common
+
+        return common
+    return m4
+
+
+def reader(task):
+    if task == "m4-study-installed":
+        from .installed_m4 import reader as current_reader
+
+        return current_reader()
+    return legacy_reader(task)
+
+
+def boundary(task, payload):
+    if task == "m4-study-installed":
+        from .installed_m4 import boundary as current_boundary
+
+        return current_boundary(payload)
+    return legacy_boundary(task, payload)
+
+
+def outcome(task, report, execution, payload, binding):
+    if task == "m4-study-installed":
+        from .installed_m4 import outcome as current_outcome
+
+        return current_outcome(task, report, execution, payload, binding)
+    return legacy_outcome(task, report, execution, payload, binding)
 
 
 def runtime_paths(binding):
@@ -48,7 +83,7 @@ def capture(task, inputs, target):
     payload = {}
     expected = (
         {"config.json"}
-        if task == "m4-study-secure"
+        if task != "mmtt-sensitivity"
         else {"package.json", "observations.csv", "settings.json"}
     )
     require(set(inputs) == expected, "Explicit native input roster required")
@@ -66,7 +101,7 @@ def capture(task, inputs, target):
             effective,
         )
     else:
-        config, bundles = m4.intake(inputs["config.json"])
+        config, bundles = native_provider(task).intake(inputs["config.json"])
         require(
             payload["config.json"] == next(iter(bundles.values()))["config_raw"],
             "M4 input changed during capture",
@@ -124,7 +159,7 @@ def validate_freeze(folder, descriptor, *, current):
         set(descriptor["original_sha256"])
         == (
             {"config.json"}
-            if task == "m4-study-secure"
+            if task != "mmtt-sensitivity"
             else {"package.json", "observations.csv", "settings.json"}
         ),
         "Original input roster differs",
@@ -298,13 +333,18 @@ def native_result(archive, descriptor, plan):
         files = m4_inventory(archive)
         manifest = read(archive / "manifest.json")
         require(
-            manifest.get("schema") == m4.VERSION
+            manifest.get("schema") == native_provider(task).VERSION
             and manifest.get("files") == {name: digest(raw) for name, raw in files.items()},
             "Native M4 archive inventory differs from manifest",
         )
         # This helper is passive and does not activate inherited module
         # bindings. Full assessment/reconstruction stays in an isolated reader.
-        native_plan = validate_m4_frozen(archive, files)
+        if task == "m4-study-installed":
+            from experiments.m4.installed_study.report import validate_frozen
+
+            native_plan = validate_frozen(archive, files)
+        else:
+            native_plan = validate_m4_frozen(archive, files)
         require(
             native_plan["configuration"] == read(plan / "input/config.json"),
             "Native archive belongs to another frozen plan",
@@ -327,7 +367,7 @@ def native_result(archive, descriptor, plan):
     )
     names = (
         ("report.json", "report.md", "figure.svg")
-        if task == "m4-study-secure"
+        if task != "mmtt-sensitivity"
         else ("report.json", "report.md")
     )
     return {

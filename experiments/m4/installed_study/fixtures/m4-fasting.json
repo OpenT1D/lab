@@ -1,0 +1,20 @@
+{
+  "scenarios": [
+    "fasting"
+  ],
+  "schema": "m4-installed-study-config/1",
+  "source_timeout_seconds": 3600,
+  "sources": [
+    {
+      "declaration": "../../causal_secretion/example_model.json",
+      "id": "dalla_man",
+      "model": "../../causal_secretion/example_model.py"
+    },
+    {
+      "declaration": "../../ultradian_secretion/model.json",
+      "id": "ultradian",
+      "model": "../../ultradian_secretion/model.py"
+    }
+  ],
+  "timeout_seconds": 600
+}

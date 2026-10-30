@@ -1,0 +1,25 @@
+{
+  "base_inventory_sha256": "44a1ea37b2685b1162550df3e997672251e2ee2c1b82ec3603b14f451481eb7d",
+  "candidate_review": [
+    {
+      "id": "M4-STUDY-INSTALLED/1",
+      "projects": [
+        "experiments/m4/installed_study/native",
+        "experiments/m4/installed_study/observer",
+        "experiments/m4/installed_study/build_inputs"
+      ],
+      "review_file": "experiments/m4/installed_study/runtime-review.json",
+      "review_sha256": "13687a471b2477813f4311f04c4eff31ed63a144898cad75f282aafd94d6f50f",
+      "reviewed_on": "2026-10-29",
+      "scope": "Explicit internal candidate installation of these exact new projects. Numerical/process/relocation acceptance is separate; no native bundle/table redistribution clearance. Historical runtimes remain excluded."
+    }
+  ],
+  "changes": {
+    "publication-security.json": {
+      "after": "c7c0be8620cd2e6405f09203a9a1c1228ad0b078adfcb028fed2140df1325f20",
+      "before": "99eb3c0035476117580a28377863d486d1fbc9af5db08ce3c96e544bbddf822c"
+    }
+  },
+  "schema": "opent1d.route-administration-transition/1",
+  "scope": "Explicit candidate-installation review; unchanged ten scientific route/reader records and original frozen inventory."
+}

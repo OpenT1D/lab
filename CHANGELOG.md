@@ -4,11 +4,23 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Add an explicit internal installed M4 execution successor with separately
+  reviewed native, observer and build locks, current runtime attachments and
+  isolated role startup. Preserve historical identities and numerical criteria;
+  both selected native plans pass exact direct/installed parity and complete
+  relocation with original paths absent. Bind runtime patient/parameter bytes
+  and current application identity, verify inner ownership receipts, and use
+  the system PATH for SDK host metadata helpers.
+
+- Match the dependency snapshot guard's pagination to the pinned official
+  review Action and bind canonical continuation URLs to the trusted repository
+  ID; retain complete-page, warning, deadline and exact-inventory refusals.
+
 - Add an internal dependency-free installed Python/CLI candidate for MMTT
   sensitivity, passive maintained M4 intake and matching failed readers. Retain
   native identities, complete attempt history and separate application
-  provenance through bounded wrapper upgrades. Native M4 success, full two-route
-  installed acceptance, other hosts and public distribution remain open.
+  provenance through bounded wrapper upgrades. The initial historical M4 task
+  remains passive; other hosts and public distribution remain open.
 
 - Add required Chromium documentation checks for every generated page, assets,
   downloads, browser errors, search and theme changes, with fault probes and

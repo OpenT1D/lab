@@ -1,13 +1,20 @@
 # Internal installed Python and CLI candidate
 
-This OT-060 developer candidate installs two selected routes into a separate
-CPython 3.12 virtual environment. It runs the synthetic standard-library MMTT
-sensitivity task outside a checkout. M4 supports passive intake, frozen plans,
-an explicit native-runtime refusal and matching failed-result readers.
-Successful native M4 execution and complete migration remain open. The wheel
-version `0.0.0.dev0` is internal; no release, stable API, general upgrade support
-or independent usability is claimed. The
-[verification record](research/ot060-installed-route.md) owns measured scope.
+This OT-060 developer candidate installs selected tasks into a separate
+CPython 3.12 virtual environment. It runs synthetic standard-library MMTT
+sensitivity outside a checkout. The historical `m4-study-secure` identity keeps
+passive intake, frozen plans, explicit native-runtime refusal and matching failed
+readers. The original two-route
+[verification record](research/ot060-installed-route.md) retains that scope.
+The wheel version `0.0.0.dev0` is internal; no release, stable API, general upgrade
+support or independent usability is claimed.
+
+The explicit [installed M4 successor](installed-m4.md) adds a version-2 artifact
+with reviewed, separately attached dependency directories. Its own
+[native verification record](research/ot060-native-m4.md) separates current
+execution/parity/relocation evidence from the historical task and this initial
+candidate's passive M4 checks. Both selected native plans now pass local macOS
+execution, exact scientific parity and complete physical-removal relocation.
 
 ## Build and install
 
@@ -157,6 +164,8 @@ application labels never authorize executing archived code. General old-version
 compatibility and automatic project migration remain open. Normal Python API
 startup trusts its host Python environment; the CLI starts with `-I -B -S`,
 verified source and an independent bytecode-cache location. Process isolation is
-not a hostile-code sandbox. Distribution rights, native parity, other hosts,
-full two-route installed acceptance and intended-user evidence retain their
+not a hostile-code sandbox. SDK subprocesses use the system default PATH for
+host metadata helpers; direct internal bootstrap use trusts its caller's host
+environment. Distribution rights, broader historical native parity, other hosts,
+general compatibility and intended-user evidence retain their
 [roadmap gates](../ROADMAP.md#shared-core-extraction-queue).

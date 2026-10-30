@@ -21,6 +21,10 @@ from .routes import ROOT, forensic_result, native_result, reader_identity, valid
 from .store import require, safe_path, snapshot, write
 
 
+def selected_task(task_id, backend):
+    return TASKS[task_id] if backend is None else backend.task(task_id)
+
+
 def begin(store, plan_id, *, retry_of=None, mode="execute", application=None):
     store.require_lease(write_access=True)
     require(mode in {"execute", "import"}, "Unsupported attempt mode")
@@ -91,7 +95,7 @@ def finish(store, attempt, work, receipt, *, forensic=False):
     return attempt
 
 
-def supervise(argv, log_path, *, timeout, cancel=None, grace=30):
+def supervise(argv, log_path, *, timeout, cancel=None, grace=30, header=None, environment=None):
     """Forward cancellation to the coordinator; retain observed nested ownership."""
     require(
         type(timeout) in (int, float) and math.isfinite(timeout) and timeout > 0,
@@ -123,8 +127,17 @@ def supervise(argv, log_path, *, timeout, cancel=None, grace=30):
             for signum in handled_signals():
                 previous[signum] = signal.signal(signum, stop)
         with Path(log_path).open("xb") as log:
+            if header is not None:
+                import json
+
+                log.write((json.dumps(header, sort_keys=True) + "\n").encode())
+                log.flush()
             process = spawn(
-                argv, cwd=ROOT, env=child_environment(), stdout=log, stderr=subprocess.STDOUT
+                argv,
+                cwd=ROOT,
+                env=child_environment() if environment is None else environment,
+                stdout=log,
+                stderr=subprocess.STDOUT,
             )
             ownership = Ownership(process)
             deadline, stopped = time.monotonic() + timeout, None
@@ -223,9 +236,15 @@ def execute(store, plan_id, *, retry_of=None, timeout=3600, cancel=None, backend
     argv = receipt = None
     try:
         admission = (
-            check(TASKS[descriptor["task"]], args)
+            check(
+                selected_task(descriptor["task"], backend),
+                args,
+            )
             if backend is None
-            else backend.check(TASKS[descriptor["task"]], args)
+            else backend.check(
+                selected_task(descriptor["task"], backend),
+                args,
+            )
         )
         write(work / "admission.json", admission)
         if not admission["runtimes_ready"]:
@@ -236,11 +255,9 @@ def execute(store, plan_id, *, retry_of=None, timeout=3600, cancel=None, backend
                 "remaining_owned_processes": [],
             }
         else:
-            argv = (
-                command_for(TASKS[descriptor["task"]], args)
-                if backend is None
-                else backend.command_for(TASKS[descriptor["task"]], args)
-            )
+            task = selected_task(descriptor["task"], backend)
+            argv = command_for(task, args) if backend is None else backend.command_for(task, args)
+
     except (OSError, ValueError, KeyError, TypeError) as error:
         receipt = {
             "status": "failed",
@@ -305,9 +322,17 @@ def reconstruct(store, attempt, output, *, allow_failed=False, backend=None):
     )
     args = SimpleNamespace(archive=evidence / "native", output=output, allow_failed=allow_failed)
     argv = (
-        command_for(TASKS[descriptor["task"]], args, operation="reconstruct")
+        command_for(
+            selected_task(descriptor["task"], backend),
+            args,
+            operation="reconstruct",
+        )
         if backend is None
-        else backend.command_for(TASKS[descriptor["task"]], args, operation="reconstruct")
+        else backend.command_for(
+            selected_task(descriptor["task"], backend),
+            args,
+            operation="reconstruct",
+        )
     )
     # Reader cwd/env/module are trusted and fixed by registry, never an archive.
     with tempfile_log() as logfile:

@@ -78,7 +78,10 @@ subtrees:
       - file: docs/shared-project-services
       - file: docs/research/ot061-064-minimal-services
       - file: docs/installed-sdk
+      - file: docs/installed-m4
       - file: docs/research/ot060-installed-route
+      - file: docs/research/ot060-native-m4
+      - file: docs/research/m4-installed-runtime-protocol
       - file: docs/m4-synthetic-basal-equivalence
       - file: docs/m4-ultradian-basal-equivalence
       - file: docs/research/m4-chain-protocol
@@ -311,6 +314,7 @@ subtrees:
       - file: docs/decisions/0080-two-route-contract-packet
       - file: docs/decisions/0081-minimal-project-services
       - file: docs/decisions/0082-installed-source-payload
+      - file: docs/decisions/0083-installed-m4-execution-successor
       - file: docs/decisions/0059-maintained-runtimes-and-local-gui
       - file: docs/templates/model-card
       - file: docs/templates/experiment-protocol
