@@ -5,23 +5,27 @@ import crypto from 'node:crypto';
 const sourcePath=process.argv[2];
 const receiptPath=process.argv[3];
 const source=fs.readFileSync(sourcePath,'utf8');
+const draftSourcePath=process.argv[4];
+const draftSource=fs.readFileSync(draftSourcePath,'utf8');
 class Element {
  constructor(tag='div'){this.tag=tag;this.value='';this.children=[];this.textContent='';this.content='session-token';this.src='';this.open=false;this.hiddenClasses=new Set();const classes=this.hiddenClasses;this.classList={add(...names){for(const name of names)classes.add(name);},remove(...names){for(const name of names)classes.delete(name);},contains(name){return classes.has(name);},toggle(name,force){if(force===undefined)force=!classes.has(name);if(force)classes.add(name);else classes.delete(name);return force;}};}
  replaceChildren(...items){this.children=items;if(items.length&&items.every(item=>item.tag==='option'))this.value=items[0].value;}
  append(...items){this.children.push(...items);}
+ setAttribute(name,value){this[name]=value;} removeAttribute(name){delete this[name];}
  focus(){} scrollIntoView(){}
 }
-function environment(){
+function environment({concepts=false}={}){
  const nodes=new Map(),byId=id=>{if(!nodes.has(id))nodes.set(id,new Element(['task','example-case','parent-plan','plan-select'].includes(id)?'select':'div'));return nodes.get(id);};byId('task').value='mmtt-sensitivity';
  const figureButton=new Element('button'),urlCalls=[];
- const context={document:{getElementById:byId,querySelector:query=>query.includes('opent1d-token')?{content:'session-token'}:figureButton,querySelectorAll:()=>[],createElement:tag=>new Element(tag)},fetch:()=>new Promise(()=>{}),setInterval(){},setTimeout(){},crypto:{randomUUID:()=> 'controlled-request'},URL:{createObjectURL(){const value='blob:controlled-'+urlCalls.length;urlCalls.push(['create',value]);return value;},revokeObjectURL(value){urlCalls.push(['revoke',value]);}},console};
- vm.createContext(context);vm.runInContext(source,context,{filename:sourcePath});return {context,byId,figureButton,urlCalls,run:code=>vm.runInContext(code,context)};
+ const backups=new Map();
+ const context={document:{getElementById:byId,querySelector:query=>query.includes('opent1d-token')?{content:'session-token'}:figureButton,querySelectorAll:()=>[],createElement:tag=>{const node=new Element(tag);let id='';Object.defineProperty(node,'id',{get:()=>id,set:value=>{id=value;nodes.set(value,node);}});return node;}},fetch:()=>new Promise(()=>{}),setInterval(){},setTimeout(){},clearTimeout(){},addEventListener(){},localStorage:{setItem:(k,v)=>backups.set(k,v),getItem:k=>backups.get(k)||null,removeItem:k=>backups.delete(k)},TextDecoder,crypto:{randomUUID:()=> 'controlled-request'},URL:{createObjectURL(){const value='blob:controlled-'+urlCalls.length;urlCalls.push(['create',value]);return value;},revokeObjectURL(value){urlCalls.push(['revoke',value]);}},console};
+ vm.createContext(context);if(concepts)vm.runInContext(draftSource,context,{filename:draftSourcePath});vm.runInContext(source,context,{filename:sourcePath});return {context,byId,figureButton,urlCalls,backups,run:code=>vm.runInContext(code,context)};
 }
 function base(){
  return {projects:[{id:'project',name:'Controlled project',path:'/project',labels:{},info:{plans:[{id:'fasting',task:'m4-study-installed',slots:['dalla_man/fasting','ultradian/fasting'],parent:null},{id:'mmtt-base',task:'mmtt-sensitivity',slots:['person/primary'],parent:null}],attempts:[]}}],jobs:[],active:null,closing:false,workspace:'/workspace',installation:{build_label:'controlled',source:{revision:'a'.repeat(40)}},runtime_attachment:'/attachment-A.json',runtime_revision:0};
 }
 function seed(e){e.run('data='+JSON.stringify(base())+';selected="project";selectedPlan="fasting";');}
-const receipt={schema:'opent1d.gui-dom-agent-review/1',scope:'Controlled DOM with actual unmodified application JavaScript; not a real-browser or human usability check',source_path:sourcePath,source_sha256:crypto.createHash('sha256').update(source).digest('hex'),node:process.version,tests:{}};
+const receipt={schema:'opent1d.gui-dom-agent-review/1',scope:'Controlled DOM with actual unmodified application JavaScript; not a real-browser or human usability check',source_path:sourcePath,source_sha256:crypto.createHash('sha256').update(source).digest('hex'),draft_source_sha256:crypto.createHash('sha256').update(draftSource).digest('hex'),node:process.version,tests:{}};
 async function check(name,fn){try{receipt.tests[name]={passed:true,observed:await fn()};}catch(error){receipt.tests[name]={passed:false,error:error.stack};}}
 await check('explicit_parent_survives_repeated_render_and_new_drafts_reset',async()=>{
  const e=environment();seed(e);
@@ -173,5 +177,144 @@ await check('sampling_refusals_and_invalid_polls_withdraw_verified_content',asyn
  assert.equal(e.run('currentReport'),null);
  assert.equal(e.byId('saved-report').classList.contains('hidden'),true);
  return {read_and_both_download_refusals_withdraw:true,invalid_poll_withdraws:true,valid_poll_preserves:true};
+});
+const sharedSettings=JSON.parse(fs.readFileSync(new URL('../experiments/shared_contracts/fixtures/mmtt-settings.json',import.meta.url),'utf8'));
+function concept({id='d'.repeat(32),parent=null}={}){
+ const record={id,project:'project',task:'mmtt-sensitivity',name:'Own concept',parent,revision:1,files:{'package.json':'raw metadata','observations.csv':'\uFEFFa,b\r\n1,2\r\n','settings.json':JSON.stringify(sharedSettings)},history:[{revision:1,name:'Own concept',saved_at:'2026-10-30T12:00:00Z'}],validation:{valid:true,revision:1,application:'d'.repeat(64),content_sha256:'c'.repeat(64)},content_sha256:'c'.repeat(64),frozen_plan:null};return record;
+}
+function setupConcept(record=concept()){
+ const e=environment({concepts:true});seed(e);
+ e.run('data.installation.descriptor_sha256="'+('d'.repeat(64))+'";data.drafts=[];');
+ if(record.parent)e.run('data.projects[0].info.plans.push({id:"'+record.parent+'",task:"mmtt-sensitivity",slots:["person/primary"]});');
+ e.context.record=record;e.run('workbench.accept(record);');return e;
+}
+function savedResult(record,args){return {...record,...args,revision:record.revision+1,validation:null,history:[{revision:record.revision+1,name:args.name,saved_at:'2026-10-30T12:01:00Z'},...record.history]};}
+await check('concept_autosave_preserves_untouched_bytes_and_live_controls',async()=>{
+ const record=concept(),e=setupConcept(record),control=e.byId('assumption-draws');
+ control.value='32';control.oninput();let sent;
+ e.context.saveAction=async(operation,args)=>{sent={operation,args};return {status:'done',result:savedResult(record,args)};};e.run('action=saveAction;');
+ await e.run('workbench.save();');
+ assert.equal(sent.args.files['observations.csv'],record.files['observations.csv']);
+ assert.equal(JSON.parse(sent.args.files['settings.json']).uncertainty.draws,32);
+ assert.equal(e.byId('assumption-draws'),control,'Autosave must not replace a focused input');
+ return {raw_bom_crlf_preserved:true,control_identity_preserved:true};
+});
+await check('pending_validation_cannot_replace_new_edits_or_clear_recovery',async()=>{
+ const record=concept(),e=setupConcept(record);let finish;
+ e.context.validationAction=()=>new Promise(resolve=>{finish=resolve;});e.run('action=validationAction;');
+ const pending=e.run('workbench.validate();');
+ const control=e.byId('assumption-draws');control.value='64';control.oninput();
+ const result={...record,revision:2,validation:{...record.validation,revision:2}};
+ finish({status:'done',result});await pending;
+ assert.equal(e.byId('assumption-draws').value,'64');
+ assert.equal(e.backups.size,1);
+ assert.equal(e.byId('freeze-draft').disabled,true);
+ assert.equal(e.run('draft.validation'),null);
+ return {new_edits_retained:true,recovery_retained:true,old_validation_not_applied:true};
+});
+await check('pending_open_or_reload_cannot_replace_newer_local_edits',async()=>{
+ for(const reload of [true,false]){
+  const record=concept(),e=setupConcept(record);let finish;
+  const loaded=reload?record:concept({id:'e'.repeat(32)});
+  e.context.fetch=()=>new Promise(resolve=>{finish=resolve;});
+  const pending=e.run('workbench.open("'+loaded.id+'",'+!reload+');');
+  e.byId('assumption-draws').value='64';e.byId('assumption-draws').oninput();
+  finish({ok:true,json:async()=>loaded});await pending;
+  assert.equal(e.byId('assumption-draws').value,'64');
+  assert.equal(e.run('draft.id'),record.id);
+  assert.equal(e.byId('freeze-draft').disabled,true);assert.equal(e.backups.size,1);
+  assert.match(e.byId('notice').textContent,/newer local edits/i);
+ }
+ return {reload_and_open_keep_newer_edits:true,old_validation_not_applied:true};
+});
+await check('pending_reload_cannot_discard_a_new_upload_still_being_read',async()=>{
+ const record=concept(),e=setupConcept(record);let finishLoad,finishFile;
+ e.context.fetch=()=>new Promise(resolve=>{finishLoad=resolve;});
+ const loading=e.run('workbench.open("'+record.id+'",false);');
+ const upload=e.byId('source-settings-json-upload');
+ upload.files=[{size:12,arrayBuffer:()=>new Promise(resolve=>{finishFile=resolve;})}];
+ const reading=upload.onchange();
+ finishLoad({ok:true,json:async()=>record});await loading;
+ assert.equal(e.byId('freeze-draft').disabled,true);
+ const raw='{"new_upload":true}';finishFile(new TextEncoder().encode(raw).buffer);await reading;
+ assert.equal(e.byId('source-settings-json').value,raw);
+ assert.equal(e.backups.size,1);assert.equal(e.byId('freeze-draft').disabled,true);
+ return {pending_file_choice_retained:true,completed_upload_retained:true};
+});
+await check('concept_picker_preserves_explicit_selection_across_polling',async()=>{
+ const record=concept(),e=setupConcept(record),other={...concept({id:'e'.repeat(32)}),name:'Other concept'};
+ e.context.incoming={...base(),drafts:[record,other]};
+ e.run('data.drafts=incoming.drafts;workbench.render(data,project(),false);');
+ e.byId('draft-select').value=other.id;
+ e.run('workbench.render(data,project(),false);workbench.render(data,project(),false);');
+ assert.equal(e.byId('draft-select').value,other.id);
+ e.context.fetch=async()=>({ok:true,json:async()=>other});await e.byId('open-draft').onclick();
+ assert.equal(e.run('draft.id'),other.id);
+ return {explicit_picker_preserved:true,chosen_concept_opened:true};
+});
+await check('conflict_fork_retains_frozen_parent',async()=>{
+ const record=concept({parent:'a'.repeat(64)}),e=setupConcept(record);let sent;
+ e.context.createAction=async(operation,args)=>{sent=args;return {status:'done',result:{...concept({id:'e'.repeat(32),parent:args.parent}),name:args.name,files:args.files}};};e.run('action=createAction;');
+ await e.byId('fork-draft').onclick();
+ assert.equal(sent.parent,record.parent);
+ assert.equal(e.run('draft.parent'),record.parent);
+ return {parent_preserved:true};
+});
+await check('raw_large_seed_and_invalid_upload_cannot_silently_use_old_values',async()=>{
+ const record=concept();record.files['settings.json']=record.files['settings.json'].replace('"seed":117','"seed":9007199254740993');
+ const e=setupConcept(record);assert.match(e.byId('assumptions').children[0].textContent,/exact integer range/);
+ e.byId('plan-name').value='Keep exact seed';e.byId('plan-name').oninput();let sent;
+ e.context.saveAction=async(operation,args)=>{sent=args;return {status:'done',result:savedResult(record,args)};};e.run('action=saveAction;');
+ await e.run('workbench.save();');assert.equal(sent.files['settings.json'],record.files['settings.json']);
+ const valid=setupConcept();const upload=valid.byId('source-observations-csv-upload');
+ upload.files=[{size:1,arrayBuffer:async()=>new Uint8Array([255]).buffer}];await upload.onchange();
+ assert.equal(valid.byId('freeze-draft').disabled,true);assert.equal(valid.byId('validate-draft').disabled,true);
+ return {large_seed_exact:true,invalid_utf8_blocks_freeze:true};
+});
+await check('late_save_response_does_not_replace_another_open_concept',async()=>{
+ const record=concept(),e=setupConcept(record);let finish,args;
+ e.byId('assumption-draws').value='64';e.byId('assumption-draws').oninput();
+ e.context.saveAction=async(operation,value)=>{args=value;return new Promise(resolve=>{finish=resolve;});};e.run('action=saveAction;');
+ const pending=e.run('workbench.save();');const other=concept({id:'e'.repeat(32)});e.context.other=other;e.run('workbench.accept(other);');
+ finish({status:'done',result:savedResult(record,args)});await pending;
+ assert.equal(e.run('draft.id'),other.id);
+ return {late_old_save_ignored:true};
+});
+await check('newer_file_selection_and_raw_correction_win_over_old_reads',async()=>{
+ const e=setupConcept(),upload=e.byId('source-package-json-upload'),area=e.byId('source-package-json');let finish;
+ upload.files=[{size:10,arrayBuffer:()=>new Promise(resolve=>{finish=resolve;})}];const older=upload.onchange();
+ upload.files=[{size:10,arrayBuffer:async()=>new TextEncoder().encode('{"newer":true}').buffer}];await upload.onchange();
+ finish(new TextEncoder().encode('{"older":true}').buffer);await older;
+ assert.equal(area.value,'{"newer":true}');
+ upload.files=[{size:10,arrayBuffer:()=>new Promise(resolve=>{finish=resolve;})}];const pending=upload.onchange();
+ area.value='{"corrected":true}';area.oninput();finish(new TextEncoder().encode('{"late":true}').buffer);await pending;
+ assert.equal(area.value,'{"corrected":true}');
+ return {latest_file_wins:true,raw_correction_wins:true};
+});
+await check('invalid_structured_value_never_reuses_old_valid_assumptions',async()=>{
+ const record=concept(),e=setupConcept(record);let sent;
+ const control=e.byId('assumption-draws');control.value='';control.oninput();
+ assert.equal(e.byId('freeze-draft').disabled,true);
+ e.context.saveAction=async(operation,args)=>{sent=args;return {status:'done',result:savedResult(record,args)};};e.run('action=saveAction;');
+ await e.run('workbench.save();');assert.equal(JSON.parse(sent.files['settings.json']).uncertainty.draws,'');
+ assert.equal(e.byId('freeze-draft').disabled,true);
+ return {invalid_value_preserved_for_correction:true,old_validation_not_used:true};
+});
+await check('frozen_plan_inspection_displays_exact_large_integer_text',async()=>{
+ const e=environment();seed(e);e.run('loaded=true;watched="exact-plan";');
+ const incoming=base();incoming.jobs=[{id:'exact-plan',status:'done',operation:'plan',project:'project',result:{task:'mmtt-sensitivity',scientific_input:{seed:9007199254740993},scientific_input_text:'{"seed":9007199254740993}'}}];
+ await poll(e,incoming);
+ assert.match(e.byId('plan-details').textContent,/9007199254740993/);
+ assert.doesNotMatch(e.byId('plan-details').textContent,/9007199254740992/);
+ return {exact_native_integer_display:true};
+});
+await check('refused_autosave_keeps_edits_and_explicit_unsaved_status',async()=>{
+ const e=setupConcept();e.byId('assumption-draws').value='64';e.byId('assumption-draws').oninput();
+ e.context.refused=async()=>({status:'error',error:'Controlled unavailable storage'});e.run('action=refused;');
+ await e.run('workbench.save();');
+ assert.match(e.byId('draft-status').textContent,/Not saved/);
+ assert.equal(e.backups.size,1);assert.equal(e.byId('assumption-draws').value,'64');
+ assert.equal(e.byId('freeze-draft').disabled,true);
+ return {unsaved_status_explicit:true,local_edits_retained:true};
 });
 receipt.passed=Object.values(receipt.tests).every(value=>value.passed);fs.writeFileSync(receiptPath,JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify({passed:receipt.passed,source_sha256:receipt.source_sha256,tests:Object.fromEntries(Object.entries(receipt.tests).map(([name,value])=>[name,value.passed])),receipt:receiptPath}));if(!receipt.passed)process.exitCode=1;

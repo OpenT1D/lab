@@ -3,7 +3,16 @@
 import argparse
 import json
 
-from .api import Project, attach_runtimes, create_project, example, installation, validate
+from .api import (
+    Project,
+    attach_runtimes,
+    create_project,
+    example,
+    inspect_inputs,
+    installation,
+    prepare_development,
+    validate,
+)
 
 
 def _inputs(args):
@@ -68,7 +77,7 @@ def main(argv=None):
             "steep-response",
         ),
     )
-    for operation in ("validate", "freeze"):
+    for operation in ("validate", "inspect", "freeze"):
         command = commands.add_parser(operation)
         command.add_argument(
             "--task",
@@ -89,10 +98,11 @@ def main(argv=None):
         "import",
         "relocate",
         "recover",
+        "export-inputs",
     ):
         command = commands.add_parser(operation)
         command.add_argument("--project", required=True)
-        if operation in ("plan", "check", "run", "import"):
+        if operation in ("plan", "check", "run", "import", "export-inputs"):
             command.add_argument("--plan", required=True)
         if operation in ("run", "import"):
             command.add_argument("--retry-of")
@@ -102,7 +112,7 @@ def main(argv=None):
             command.add_argument("--timeout", type=float, default=600)
         if operation in ("reconstruct", "recover"):
             command.add_argument("--attempt", required=True)
-        if operation in ("reconstruct", "relocate"):
+        if operation in ("reconstruct", "relocate", "export-inputs"):
             command.add_argument("--output", required=True)
         if operation == "reconstruct":
             command.add_argument("--allow-failed", action="store_true")
@@ -110,6 +120,9 @@ def main(argv=None):
             command.add_argument("--archive", required=True)
         if operation == "recover":
             command.add_argument("--execution-stopped", action="store_true")
+    command = commands.add_parser("prepare-development")
+    for name in ("package", "csv", "design", "output"):
+        command.add_argument("--" + name, required=True)
     args = parser.parse_args(argv)
     try:
         if args.action in {"prepare-study-packet", "verify-study-packet"}:
@@ -136,6 +149,8 @@ def main(argv=None):
         project = Project(args.project) if hasattr(args, "project") else None
         if args.action == "installation":
             result = installation()
+        elif args.action == "prepare-development":
+            result = prepare_development(args.package, args.csv, args.design, args.output)
         elif args.action == "attach-runtimes":
             result = attach_runtimes(args.native_site, args.observer_site, args.output)
         elif args.action == "create":
@@ -144,6 +159,8 @@ def main(argv=None):
             result = example(args.task, args.output, case=args.case)
         elif args.action == "validate":
             result = validate(args.task, _inputs(args))
+        elif args.action == "inspect":
+            result = inspect_inputs(args.task, _inputs(args))
         elif args.action == "freeze":
             result = project.freeze(args.task, _inputs(args), parent=args.parent)
         elif args.action == "run":
@@ -165,6 +182,8 @@ def main(argv=None):
             result = project.check(args.plan, runtime_attachment=args.runtime_attachment)
         elif args.action == "plan":
             result = project.plan(args.plan)
+        elif args.action == "export-inputs":
+            result = project.export_inputs(args.plan, args.output)
         else:
             result = project.info()
         print(json.dumps(result, sort_keys=True, allow_nan=False))

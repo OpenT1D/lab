@@ -274,7 +274,14 @@ finally:
             handle = action("create", {"name": "Invented GUI sampling"})["project"]
             draft = action("prepare", {"task": "mmtt-sampling", "case": "information-loss"}, handle)
             plan = action(
-                "freeze", {"draft": draft["id"], "parent": None, "name": "Sampling control"}, handle
+                "freeze",
+                {
+                    "draft": draft["id"],
+                    "revision": draft["revision"],
+                    "parent": None,
+                    "name": "Sampling control",
+                },
+                handle,
             )["plan"]
             self.assertTrue(action("check", {"plan": plan}, handle)["runtimes_ready"])
             result = action("run", {"plan": plan, "retry_of": None}, handle)

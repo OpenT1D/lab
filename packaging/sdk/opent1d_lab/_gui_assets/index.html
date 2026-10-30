@@ -6,6 +6,7 @@
   <meta name="opent1d-token" content="__SESSION_TOKEN__">
   <title>Project laboratory · OpenT1D</title>
   <link rel="stylesheet" href="/app.css">
+  <script src="/drafts.js" defer></script>
   <script src="/app.js" defer></script>
 </head>
 <body>
@@ -49,17 +50,29 @@
           <div><label for="task">Research task</label><select id="task"><option value="mmtt-sensitivity">Paired meal-test assumptions</option><option value="mmtt-sampling">Fewer meal-test measurement times</option><option value="m4-study-installed">Synthetic secretion models</option></select></div>
           <div><label for="example-case">Supplied example</label><select id="example-case"></select></div>
           <p id="task-context" class="context full"></p>
-          <button type="submit">Prepare and validate inputs</button>
+          <button type="submit" id="prepare-supplied">Prepare and validate inputs</button>
+          <button type="button" id="new-draft">Start with my synthetic inputs</button>
         </form>
-        <div id="draft" class="draft hidden"><p id="draft-status"></p><details><summary>Inspect supplied input and validation details</summary><pre id="draft-details"></pre></details>
-          <form id="freeze-form" class="form-grid"><div><label for="plan-name">Plan name</label><input id="plan-name" maxlength="100" placeholder="The condition to investigate" required></div><div><label for="parent-plan">Derived from</label><select id="parent-plan"><option value="">Original plan</option></select></div><button type="submit" class="primary">Freeze plan</button></form>
+        <div class="concept-picker"><label for="draft-select">Saved study concepts</label><select id="draft-select"><option value="">No saved concepts yet</option></select><button type="button" id="open-draft">Open saved concept</button></div>
+        <p id="draft-issues" class="context hidden" role="status"></p>
+        <div id="draft" class="draft hidden"><h3>Editable study concept</h3><p id="draft-status" role="status" aria-live="polite"></p>
+          <p id="draft-conflict" class="notice error hidden" role="alert"></p>
+          <p class="muted">Saved concepts can be corrected and restored. A frozen plan keeps its own original inputs and cannot be edited in place.</p>
+          <form id="freeze-form" class="form-grid"><div><label for="plan-name">Study name</label><input id="plan-name" maxlength="100" placeholder="The condition to investigate" required></div><div><label for="parent-plan">Derived from</label><select id="parent-plan"><option value="">Original plan</option></select></div>
+            <div id="assumptions" class="full"></div>
+            <details id="raw-inputs" class="full"><summary>Upload or edit synthetic source files</summary><p class="muted">Choose UTF-8 JSON/CSV files. Untouched files retain their original bytes. Sampling requires a separate development-only package and CSV.</p><div id="file-editors"></div></details>
+            <div class="actions full"><button type="button" id="save-draft">Save concept</button><button type="button" id="validate-draft">Validate saved inputs</button><button type="submit" id="freeze-draft" class="primary">Freeze plan</button><button type="button" id="close-draft">Return to frozen plans</button></div>
+          </form>
+          <div class="actions"><button type="button" id="reload-draft">Reload saved version</button><button type="button" id="fork-draft" class="hidden">Keep my edits as a new concept</button></div>
+          <label for="draft-revision">Saved concept revision</label><select id="draft-revision"></select><button type="button" id="restore-draft">Restore as a new revision</button>
+          <details><summary>Inspect validation and input hashes</summary><pre id="draft-details"></pre></details>
         </div>
       </section>
       <section class="panel">
         <div class="section-title"><span class="step">2</span><div><h2>Run a frozen plan</h2><p>A new attempt preserves the plan and every earlier attempt.</p></div></div>
         <label for="plan-select">Saved plan</label><select id="plan-select"></select>
         <p id="plan-parent" class="muted"></p>
-        <div class="actions"><button id="inspect-plan">Inspect frozen inputs</button><button id="check-plan">Check readiness</button><button id="run-plan" class="primary">Run plan</button></div>
+        <div class="actions"><button id="inspect-plan">Inspect frozen inputs</button><button id="derive-plan">Derive an editable study</button><button id="check-plan">Check readiness</button><button id="run-plan" class="primary">Run plan</button></div>
         <p id="readiness" class="context">Checking readiness does not install dependencies or run a model.</p>
         <details id="plan-inspector" class="hidden"><summary>Frozen assumptions and original input hashes</summary><pre id="plan-details"></pre></details>
         <details class="runtime"><summary>Prepared native runtimes</summary><p id="runtime-status"></p><p>Runtime selection is explicit. An attachment from another SDK build must be recreated for this application. No installation is performed here.</p>

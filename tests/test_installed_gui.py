@@ -137,7 +137,7 @@ class GUIStateTests(unittest.TestCase):
         return job["project"]
 
     def test_reserved_child_projects_are_refused_without_any_write(self):
-        for name in ("projects", "inputs", "reports", "attachments", "journal"):
+        for name in ("projects", "inputs", "drafts", "reports", "attachments", "journal"):
             workspace = self.root / name
             workspace.mkdir()
             store.create(workspace / name, "Do not modify")
@@ -182,6 +182,107 @@ class GUIStateTests(unittest.TestCase):
                 self.controller.submit(request)
         self.assertIsNone(self.controller.active)
         self.assertEqual(self.finish(self.controller.submit(request))["status"], "done")
+
+    def test_concept_job_polling_is_compact_and_details_stay_revision_bound(self):
+        handle = self.project()
+        raw = {
+            "package.json": "invented raw metadata",
+            "observations.csv": "x" * 100000,
+            "settings.json": "{invalid concept for correction",
+        }
+        job = self.finish(
+            self.controller.submit(
+                self.request(
+                    "draft_create",
+                    {"task": "mmtt-sensitivity", "name": "Own input", "parent": None, "files": raw},
+                    handle,
+                )
+            )
+        )
+        self.assertEqual(job["result"]["files"], raw)
+        state = self.controller.state()
+        self.assertLess(len(files.encoded(state)), 12000)
+        self.assertNotIn("files", state["jobs"][-1]["arguments"])
+        self.assertNotIn("files", state["jobs"][-1]["result"])
+        self.assertNotIn("files", self.controller.jobs[job["id"]]["arguments"])
+        first = job["result"]
+        saved = self.finish(
+            self.controller.submit(
+                self.request(
+                    "draft_save",
+                    {
+                        "draft": first["id"],
+                        "revision": first["revision"],
+                        "name": first["name"],
+                        "parent": None,
+                        "files": {**raw, "settings.json": "new raw text"},
+                    },
+                    handle,
+                )
+            )
+        )
+        self.assertEqual(saved["result"]["revision"], 2)
+        self.assertEqual(
+            self.controller.get_job(job["id"])["result"]["files"],
+            raw,
+            "A completed job must retain its exact immutable concept revision",
+        )
+
+    def test_revalidating_frozen_concept_preserves_derived_plan_parent(self):
+        handle = self.project()
+        raw = {"package.json": "{}", "observations.csv": "", "settings.json": "{}"}
+        anchor = "f" * 64
+        for valid in (True, False):
+            with self.subTest(validation_succeeds=valid):
+                first = self.controller.draft_store.create(
+                    handle, "mmtt-sensitivity", "Frozen concept", raw
+                )
+                frozen = self.controller.draft_store.annotate(
+                    first["id"], first["revision"], handle, {}, anchor
+                )
+                with patch.object(self.controller, "inspect_draft") as inspect:
+                    inspect.return_value = ({}, {"valid": True})
+                    if not valid:
+                        inspect.side_effect = ValueError("Controlled validation refusal")
+                    checked = self.finish(
+                        self.controller.submit(
+                            self.request(
+                                "draft_validate",
+                                {"draft": frozen["id"], "revision": frozen["revision"]},
+                                handle,
+                            )
+                        )
+                    )["result"]
+                self.assertEqual(checked["validation"]["valid"], valid)
+                self.assertEqual(checked["frozen_plan"], anchor)
+                if valid:
+                    refused = self.finish(
+                        self.controller.submit(
+                            self.request(
+                                "freeze",
+                                {
+                                    "draft": checked["id"],
+                                    "revision": checked["revision"],
+                                    "name": checked["name"],
+                                    "parent": checked["parent"],
+                                },
+                                handle,
+                            )
+                        )
+                    )
+                    self.assertEqual(refused["status"], "error")
+                    self.assertIn("already frozen", refused["error"])
+                edited = self.controller.draft_store.save(
+                    checked["id"],
+                    checked["revision"],
+                    handle,
+                    "Derived concept",
+                    checked["parent"],
+                    {**raw, "settings.json": '{"changed": true}'},
+                )
+                self.assertEqual(edited["parent"], anchor)
+                self.assertIsNone(edited["frozen_plan"])
+                self.assertIsNone(edited["validation"])
 
     def test_close_drains_metadata_and_holds_lease_until_join(self):
         handle = self.project()
@@ -384,6 +485,50 @@ class GUIHTTPTests(unittest.TestCase):
         }
         self.assertEqual(self.call("/api/actions", body=action)[0], 202)
         self.assertEqual(self.call("/api/actions", body=action, headers={"Origin": "null"})[0], 403)
+
+    def test_large_concept_intake_uses_only_the_bounded_authenticated_route(self):
+        def action(operation, arguments, project=None):
+            request = {
+                "request_id": uuid.uuid4().hex,
+                "operation": operation,
+                "project": project,
+                "arguments": arguments,
+            }
+            route = "/api/drafts" if operation == "draft_create" else "/api/actions"
+            status, raw, _ = self.call(route, body=request)
+            self.assertEqual(status, 202, raw)
+            job = json.loads(raw)
+            deadline = time.monotonic() + 5
+            while job["status"] == "running" and time.monotonic() < deadline:
+                time.sleep(0.01)
+                job = json.loads(self.call("/api/jobs/" + job["id"])[1])
+            self.assertEqual(job["status"], "done", job)
+            return job["result"]
+
+        handle = action("create", {"name": "Own HTTP concept"})["project"]
+        raw = {
+            "package.json": "unfinished",
+            "settings.json": "{}",
+            "observations.csv": "x" * 100000,
+        }
+        request = {
+            "request_id": uuid.uuid4().hex,
+            "operation": "draft_create",
+            "project": handle,
+            "arguments": {
+                "task": "mmtt-sensitivity",
+                "name": "Own raw files",
+                "parent": None,
+                "files": raw,
+            },
+        }
+        self.assertEqual(self.call("/api/actions", body=request)[0], 400)
+        draft = action("draft_create", request["arguments"], handle)
+        self.assertEqual(draft["files"], raw)
+        route = "/api/drafts/" + draft["id"]
+        self.assertEqual(self.call(route, headers={"X-OpenT1D-Token": "old"})[0], 403)
+        self.assertEqual(json.loads(self.call(route)[1])["files"], raw)
+        self.assertEqual(self.call("/api/drafts", body={**request, "operation": "run"})[0], 400)
 
     def test_report_downloads_use_fixed_headers_and_bad_routes_do_not_download(self):
         cases = (

@@ -4,7 +4,7 @@ const token = document.querySelector('meta[name="opent1d-token"]').content;
 const names = {"mmtt-sampling": "Fewer meal-test measurement times", "mmtt-sensitivity": "Paired meal-test assumptions", "m4-study-installed": "Synthetic secretion models", "m4-study-secure": "Historical secretion study"};
 const cases = {"mmtt-sampling": [["information-loss", "Invented information loss"], ["constant", "Constant-input control"], ["incomplete", "Incomplete measurements"], ["steep-response", "Steep-response boundary control"]], "mmtt-sensitivity": [["complete", "Invented paired visit"], ["censored", "Invented paired visit with censored measurements"]], "m4-study-installed": [["fasting", "Fasting"], ["gastric_load_15g", "15 g initial gastric amount"]]};
 const context = {"mmtt-sampling": "Compare full and reduced actual measurement times using the same estimator and assumptions. Development-only selection is frozen before analysis; evaluation results do not select schedules. Whole-body total secretion including basal over 0–120 minutes (pmol). Full curves are references, not biological truth. Invented data only.", "mmtt-sensitivity": "Whole-body total endogenous secretion, including basal, over observed 0–120 minutes (pmol). Change is follow-up minus baseline. Three required assumption variants; 128 perturbations with seed 117. Invented data only.", "m4-study-installed": "Both supplied sources · adult#001 · 240 minutes · 961 quarter-minute samples. The gastric amount is an initial condition, not a timed meal. Native runtimes must be prepared separately."};
-let data = null, selected = null, draft = null, selectedPlan = null, currentReport = null, pending = false, watched = null, loaded = false;
+let data = null, selected = null, draft = null, selectedPlan = null, currentReport = null, pending = false, pendingOperation = null, watched = null, loaded = false;
 let imageURL = null, parentDraft = null, refreshIssued = 0, refreshApplied = 0;
 const handled = new Set();
 function invalidatePlanView() { $("plan-inspector").classList.add("hidden"); $("plan-inspector").open = false; $("plan-details").textContent = ""; $("readiness").textContent = "Check this frozen plan with the current runtime selection before execution."; }
@@ -22,13 +22,18 @@ async function request(url, body) {
 async function action(operation, arguments_ = {}, project = selected) {
   if (pending || data?.active) { notice("Another action is still running. Stop the run or wait for it to finish.", true); return; }
   if (operation === "check") invalidatePlanView();
-  pending = true; render();
+  pendingOperation = operation; pending = true; render();
   try {
-    const response = await request("/api/actions", {request_id: crypto.randomUUID(), operation, project, arguments: arguments_});
+    const route = ["draft_create", "draft_save"].includes(operation) ? "/api/drafts" : "/api/actions";
+    const response = await request(route, {request_id: crypto.randomUUID(), operation, project, arguments: arguments_});
     const job = await response.json(); watched = job.id; handled.delete(job.id);
     await refresh();
-  } catch (error) { notice(error.message, true); }
-  finally { pending = false; render(); }
+    let finished = job;
+    while (finished.status === "running") { await new Promise(resolve => setTimeout(resolve, 100)); finished = await (await request("/api/jobs/" + job.id)).json(); }
+    await refresh();
+    return finished;
+  } catch (error) { notice(error.message, true); return {status: "error", error: error.message}; }
+  finally { pending = false; pendingOperation = null; render(); }
 }
 function project() { return data?.projects.find(item => item.id === selected); }
 function label(plan) { return project()?.labels[plan.id] || `${names[plan.task] || plan.task} · ${plan.slots.join(", ")}`; }
@@ -53,9 +58,10 @@ async function refresh() {
       }
       if (job.project && job.project !== selected) { selected = job.project; invalidatePlanView(); }
       const result = job.result;
-      if (job.operation === "prepare") { draft = result; $("plan-name").value = `${names[result.task]} — ${cases[result.task].find(row => row[0] === result.case)[1]}`; notice("Inputs validated. Inspect the assumptions and freeze a plan before running."); }
-      else if (job.operation === "freeze") { selectedPlan = result.plan; draft = null; invalidatePlanView(); notice("Plan frozen. The original inputs and assumptions are retained."); }
-      else if (job.operation === "plan") { $("plan-details").textContent = JSON.stringify(result, null, 2); $("plan-inspector").classList.remove("hidden"); $("plan-inspector").open = true; }
+      if (job.operation === "prepare") { if (globalThis.workbench) await workbench.open(result.id, false); else { draft = result; $("plan-name").value = `${names[result.task]} — ${cases[result.task].find(row => row[0] === result.case)[1]}`; } notice(draft?.validation?.valid === false ? "Concept saved. Correct its validation errors before freezing." : "Inputs validated. Inspect the assumptions and freeze a plan before running."); }
+      else if (job.operation.startsWith("draft_") || job.operation === "derive") { notice(job.operation === "draft_validate" ? "Validation finished. Inspect the saved concept and its diagnostics." : "Study concept saved. No frozen plan was changed."); }
+      else if (job.operation === "freeze") { selectedPlan = result.plan; draft = null; globalThis.workbench?.close(); invalidatePlanView(); notice("Plan frozen. The original inputs and assumptions are retained."); }
+      else if (job.operation === "plan") { if (typeof result.scientific_input_text === "string") { const metadata = {...result}; delete metadata.scientific_input; delete metadata.scientific_input_text; $("plan-details").textContent = JSON.stringify(metadata, null, 2) + "\n\nScientific inputs (exact saved JSON):\n" + result.scientific_input_text; } else $("plan-details").textContent = JSON.stringify(result, null, 2); $("plan-inspector").classList.remove("hidden"); $("plan-inspector").open = true; }
       else if (job.operation === "check") { $("readiness").textContent = result.runtimes_ready ? "Ready for explicit execution. This check did not run a model or install dependencies." : "Native execution is unavailable with the current selection. Configure reviewed runtimes; an explicit run without them retains an admission failure and performs no setup."; notice(result.runtimes_ready ? "Readiness check passed." : "Readiness check found unavailable native runtimes.", !result.runtimes_ready); }
       else if (job.operation === "run") { notice(`Execution ${result.result.execution_status}; scientific evidence ${result.result.completeness}. Verify the saved report explicitly to inspect its conclusions.`, result.result.completeness !== "complete"); }
       else if (job.operation === "verify") { await showReport(result.report); notice("Saved analysis verified. This did not run the model again."); }
@@ -97,7 +103,7 @@ function render() {
   $("plan-parent").textContent = parent ? `Derived from: ${label(parent)}. The original plan is preserved.` : selectedData ? "Original frozen plan. Inputs cannot be edited in place." : "Prepare inputs and freeze the first plan.";
   for (const name of ["inspect-plan", "check-plan", "run-plan"]) $(name).disabled = busy || !selectedData;
   $("draft").classList.toggle("hidden", !draft || draft.project !== selected);
-  if (draft && draft.project === selected) {
+  if (draft && draft.project === selected && !globalThis.workbench) {
     $("draft-status").textContent = "Supplied inputs validated; not yet frozen.";
     $("draft-details").textContent = JSON.stringify(draft.validation, null, 2);
     const oldParent = $("parent-plan").value;
@@ -107,6 +113,7 @@ function render() {
   $("runtime-status").textContent = data.runtime_attachment ? `Selected attachment: ${data.runtime_attachment}` : "No native runtime attachment selected. Both meal-test tasks need no simulator.";
   renderAttempts(chosen.info?.attempts || [], plans, busy);
   $("saved-report").classList.toggle("hidden", !currentReport || currentReport.project !== selected);
+  globalThis.workbench?.render(data, chosen, busy);
 }
 function renderAttempts(attempts, plans, busy) {
   if (!attempts.length) { $("attempt-list").replaceChildren(element("p", "No attempts yet. A run preserves its own outcome here.", "muted")); return; }
@@ -185,9 +192,9 @@ async function showReport(identity) {
 $("create-project").onsubmit = event => { event.preventDefault(); action("create", {name: $("project-name").value}, null); };
 $("open-project").onsubmit = event => { event.preventDefault(); action("open", {path: $("open-path").value}, null); };
 $("prepare-form").onsubmit = event => { event.preventDefault(); draft = null; action("prepare", {task: $("task").value, case: $("example-case").value}); };
-$("freeze-form").onsubmit = event => { event.preventDefault(); if (draft) action("freeze", {draft: draft.id, name: $("plan-name").value, parent: $("parent-plan").value || null}); };
+$("freeze-form").onsubmit = event => { event.preventDefault(); if (globalThis.workbench) workbench.freeze(); else if (draft) action("freeze", {draft: draft.id, revision: draft.revision, name: $("plan-name").value, parent: $("parent-plan").value || null}); };
 $("task").onchange = updateTask;
-$("plan-select").onchange = () => { selectedPlan = $("plan-select").value; invalidatePlanView(); render(); };
+$("plan-select").onchange = () => { selectedPlan = $("plan-select").value; globalThis.workbench?.close(); invalidatePlanView(); render(); };
 $("refresh-project").onclick = () => action("refresh");
 $("inspect-plan").onclick = () => action("plan", {plan: selectedPlan});
 $("check-plan").onclick = () => action("check", {plan: selectedPlan});
@@ -199,4 +206,5 @@ $("relocate-form").onsubmit = event => { event.preventDefault(); action("relocat
 $("cancel-run").onclick = async () => { try { if (data.active) await request(`/api/jobs/${data.active}/cancel`, {}); await refresh(); } catch (error) { notice(error.message, true); } };
 $("stop-server").onclick = async () => { try { await request("/api/shutdown", {}); data.closing = true; render(); notice("Server stopping. Runs are cancelled through the SDK; project actions finish before exit. Keep the terminal open until it exits."); } catch (error) { notice(error.message, true); } };
 for (const button of document.querySelectorAll("[data-download]")) button.onclick = async () => { try { if (currentReport) await downloadReport(currentReport, button.dataset.download); } catch (error) { reportRefused(error); } };
+globalThis.workbench?.bind();
 updateTask(); refresh(); setInterval(refresh, 1500);

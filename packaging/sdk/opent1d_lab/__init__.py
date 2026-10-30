@@ -5,8 +5,10 @@ from .api import (
     attach_runtimes,
     create_project,
     example,
+    inspect_inputs,
     installation,
     open_project,
+    prepare_development,
     validate,
 )
 
@@ -18,4 +20,6 @@ __all__ = [
     "example",
     "validate",
     "installation",
+    "inspect_inputs",
+    "prepare_development",
 ]

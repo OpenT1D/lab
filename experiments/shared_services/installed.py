@@ -123,7 +123,10 @@ FIELDS = {
     "create": {"project", "name"},
     "info": {"project"},
     "plan": {"project", "plan"},
+    "export-inputs": {"project", "plan", "output"},
     "validate": {"task", "inputs"},
+    "inspect": {"task", "inputs"},
+    "prepare-development": {"package", "csv", "design", "output"},
     "example": {"task", "output", "case"},
     "freeze": {"project", "task", "inputs", "parent"},
     "check": {"project", "plan", "runtime_attachment"},
@@ -245,7 +248,7 @@ def dispatch(request, bootstrap, artifact, *, cancel=None):
         action in FIELDS and set(request) == {"action", *FIELDS[action]},
         "Unsupported installed request fields",
     )
-    if action in {"example", "validate", "freeze"}:
+    if action in {"example", "validate", "inspect", "freeze"}:
         store.require(request["task"] in artifact["tasks"], "Task not admitted by current artifact")
     if action == "installation":
         return {
@@ -272,6 +275,21 @@ def dispatch(request, bootstrap, artifact, *, cancel=None):
     if action == "example":
         output = workspace_path(request["output"], bootstrap, fresh=True)
         return example(request["task"], output, request["case"])
+    if action == "prepare-development":
+        from .workbench import development
+
+        store.require("mmtt-sampling" in artifact["tasks"], "Sampling capability required")
+        return development(
+            request["package"],
+            request["csv"],
+            request["design"],
+            workspace_path(request["output"], bootstrap, fresh=True),
+        )
+    if action == "inspect":
+        from .workbench import inspect
+
+        with tempfile.TemporaryDirectory(prefix="opent1d-sdk-inspect-") as temporary:
+            return inspect(request["task"], request["inputs"], Path(temporary).resolve() / "plan")
     if action == "validate":
         with tempfile.TemporaryDirectory(prefix="opent1d-sdk-validate-") as temporary:
             metadata = routes.capture(
@@ -286,7 +304,7 @@ def dispatch(request, bootstrap, artifact, *, cancel=None):
     path = workspace_path(request["project"], bootstrap, fresh=action == "create")
     if action == "create":
         return {"project": str(store.create(path, request["name"]))}
-    writing = action not in {"info", "plan", "check", "relocate"}
+    writing = action not in {"info", "plan", "check", "relocate", "export-inputs"}
     backend = Backend(bootstrap, artifact, request.get("runtime_attachment"))
     with store.opened(path, write_access=writing) as project:
         store.require(
@@ -356,6 +374,12 @@ def dispatch(request, bootstrap, artifact, *, cancel=None):
                 "scientific_input": scientific,
                 "original_sha256": descriptor["original_sha256"],
             }
+        if action == "export-inputs":
+            from .workbench import export
+
+            return export(
+                project, request["plan"], workspace_path(request["output"], bootstrap, fresh=True)
+            )
         if action == "freeze":
             identity = routes.freeze(
                 project,
