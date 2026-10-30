@@ -4,6 +4,10 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Require documentation browser checks in Chromium, Firefox and WebKit, with
+  separate engine diagnostics and bounded CI jobs. Keep MMTT application checks
+  in Chromium.
+
 - Serve installed GUI report downloads with fixed header values and reject
   unsupported download names before encoding or emitting a response.
 

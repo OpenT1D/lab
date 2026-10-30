@@ -108,7 +108,7 @@ keep the recorded old environments and scientific evidence intact.
 Active push and pull-request CI runs the root repository suite and documentation build,
 the standard-library paired boundary check, three-host public task smokes and four
 Linux Chromium MMTT flows plus the
-[documentation browser checks](documentation-publication.md#browser-regression-checks).
+[Chromium, Firefox and WebKit documentation browser checks](documentation-publication.md#browser-regression-checks).
 One required `Repository checks` result accepts only successful
 root, platform and browser families, plus dependency review on pull requests.
 Only the dependency job may be skipped on explicit `push` or `workflow_dispatch`
@@ -324,7 +324,9 @@ The selected new destination is [OpenT1D/lab](https://github.com/OpenT1D/lab).
 Keep `OpenT1D/OpenT1D` private. The checked-in baseline retains the existing
 fifteen historical native jobs and root steps, one required `Repository checks`
 gate, read-only tokens and no checkout credentials. Public execution comprises
-one broad root job, a Linux/macOS/Windows smoke matrix and a Linux browser job.
+one broad root job, a Linux/macOS/Windows smoke matrix and a Linux browser-engine
+matrix. Each Chromium/Firefox/WebKit member must pass its documentation checks;
+only the Chromium member executes the MMTT application flows.
 It explicitly selects Python 3.12, uv 0.11.16 and
 Node 24.22.1 with dependency caching off. Historical native Node versions and
 runtime locks remain separate. Public diagnostics contain synthetic-check logs,

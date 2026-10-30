@@ -34,6 +34,7 @@ the HTML under the published project path before running it:
 
   uv run --locked python scripts/check.py --stage docs
   uv run --locked python scripts/stage_documentation.py _build/html _build/documentation-preview/lab
+  npm --prefix tests/browser run install:browser -- chromium firefox webkit
   npm --prefix tests/browser run test:docs
 
 Remove a previous _build/documentation-preview before restaging. The destination
@@ -43,8 +44,18 @@ assets and downloads, and checks all staged non-HTML bytes. It also exercises
 search and dark mode and proves rejection with synthetic fault pages. Mermaid's
 pinned jsDelivr module requires network access; load failures fail the check.
 
-Documentation uses four Chromium workers, no retries, 45 seconds per test and a
-separate five-minute total budget. Per-page JSON receipts, results and failure
+Documentation runs all three Playwright engines with four workers, no retries,
+45 seconds per test and a fifteen-minute local total budget. Select one engine:
+
+  npm --prefix tests/browser run test:docs -- --project firefox --global-timeout=300000
+
+CI runs one required matrix job per engine with a five-minute documentation
+budget, fail-fast disabled and distinct browser-<engine>-... diagnostic artifacts.
+All three must pass the public gate. Only Chromium runs the MMTT application
+flows. The installer defaults to Chromium; explicit names select engines. Linux
+hosts can include --with-deps before the names.
+
+Per-page JSON receipts record the actual engine/version. Results and failure
 screenshots/traces are under output/playwright/documentation, preserving the
 MMTT diagnostics. CI retains both suites' diagnostics including failures.
 
@@ -54,4 +65,4 @@ https://playwright.dev/docs/test-use-options
 
 These are browser/software regressions, not numerical acceptance, scientific
 validity, independent usability, OS qualification or release evidence. Workflow
-activation and additional browser/platform coverage are separate work.
+activation and additional operating-system/installed-browser coverage are separate work.

@@ -15,10 +15,11 @@ export default defineConfig({
   fullyParallel: true,
   workers: 4,
   timeout: 45_000,
-  globalTimeout: 300_000,
+  globalTimeout: 900_000,
   outputDir: `${output}/test-results`,
   reporter: [['list'], ['json', { outputFile: `${output}/results.json` }]],
   use: { ...common.use, baseURL: 'http://127.0.0.1:8766/lab/' },
+  projects: ['chromium', 'firefox', 'webkit'].map(name => ({ name, use: { browserName: name } })),
   webServer: {
     command: `"${python}" -B -S -m http.server 8766 --bind 127.0.0.1 --directory _build/documentation-preview`,
     cwd: root,
