@@ -15,6 +15,7 @@ from ._integrity import verify
 STATIC = {
     "/": ("index.html", "text/html; charset=utf-8"),
     "/app.js": ("app.js", "text/javascript; charset=utf-8"),
+    "/drafts.js": ("drafts.js", "text/javascript; charset=utf-8"),
     "/app.css": ("app.css", "text/css; charset=utf-8"),
 }
 DOWNLOAD_HEADERS = {
@@ -202,11 +203,11 @@ class Handler(BaseHTTPRequestHandler):
             )
         return target.path
 
-    def body(self):
+    def body(self, maximum=65536):
         require(not self.headers.get_all("Transfer-Encoding", []), "Transfer encoding refused")
         length = self.one("Content-Length", required=True)
         require(
-            re.fullmatch(r"0|[1-9][0-9]{0,5}", length) is not None and int(length) <= 65536,
+            re.fullmatch(r"0|[1-9][0-9]{0,6}", length) is not None and int(length) <= maximum,
             "Bounded JSON body required",
         )
         content_type = self.one("Content-Type", required=True)
@@ -226,6 +227,8 @@ class Handler(BaseHTTPRequestHandler):
                 self.send(200, self.server.assets[name], mime)
             elif route == "/api/state":
                 self.send(200, self.server.controller.state())
+            elif match := re.fullmatch(r"/api/drafts/([a-f0-9]{32})", route):
+                self.send(200, self.server.controller.get_draft(match[1]))
             elif match := re.fullmatch(r"/api/jobs/([a-f0-9]{32})", route):
                 self.send(200, self.server.controller.get_job(match[1]))
             elif match := re.fullmatch(
@@ -253,8 +256,15 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):
         try:
             route = self.authorized(mutation=True)
-            body = self.body()
+            body = self.body(2 * 1024 * 1024 if route == "/api/drafts" else 65536)
             if route == "/api/actions":
+                self.send(202, self.server.controller.submit(body))
+            elif route == "/api/drafts":
+                require(
+                    isinstance(body, dict)
+                    and body.get("operation") in {"draft_create", "draft_save"},
+                    "Only bounded concept intake uses this route",
+                )
                 self.send(202, self.server.controller.submit(body))
             elif match := re.fullmatch(r"/api/jobs/([a-f0-9]{32})/cancel", route):
                 require(body == {}, "Empty cancellation body required")

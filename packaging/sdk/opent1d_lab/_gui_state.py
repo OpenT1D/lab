@@ -8,7 +8,9 @@ import uuid
 from datetime import UTC, datetime
 
 from . import api
+from ._gui_drafts import Drafts
 from ._gui_files import Lease, decode, encoded, outside_projects, path, read, require, sha256, write
+from ._gui_inputs import materialize, texts
 
 TASKS = {"mmtt-sensitivity", "mmtt-sampling", "m4-study-installed"}
 REPORTS = {
@@ -21,7 +23,12 @@ FIELDS = {
     "open": {"path"},
     "refresh": set(),
     "prepare": {"task", "case"},
-    "freeze": {"draft", "name", "parent"},
+    "draft_create": {"task", "name", "parent", "files"},
+    "draft_save": {"draft", "revision", "name", "parent", "files"},
+    "draft_validate": {"draft", "revision"},
+    "draft_restore": {"draft", "revision", "selected"},
+    "derive": {"plan"},
+    "freeze": {"draft", "revision", "name", "parent"},
     "plan": {"plan"},
     "check": {"plan"},
     "run": {"plan", "retry_of"},
@@ -78,6 +85,7 @@ class Controller:
         for name in (
             "projects",
             "inputs",
+            "drafts",
             "reports",
             "attachments",
             "journal",
@@ -90,7 +98,7 @@ class Controller:
         self.lease = Lease(self.root / ".gui.lock")
         try:
             self.installation = sdk.installation()
-            for name in ("projects", "inputs", "reports", "attachments", "journal"):
+            for name in ("projects", "inputs", "drafts", "reports", "attachments", "journal"):
                 target = self.root / name
                 target.mkdir(exist_ok=True)
                 outside_projects(target)
@@ -121,8 +129,8 @@ class Controller:
                     "Invalid project display metadata",
                 )
             self.mutex = threading.RLock()
-            self.jobs, self.requests, self.infos, self.drafts, self.plans, self.reports = (
-                {},
+            self.draft_store = Drafts(self.root / "drafts")
+            self.jobs, self.requests, self.infos, self.plans, self.reports = (
                 {},
                 {},
                 {},
@@ -180,24 +188,80 @@ class Controller:
                             }
                             for value in self.reports.values()
                         ],
+                        "drafts": self.draft_store.summaries(),
+                        "draft_issues": self.draft_store.issues,
                         "previous_actions": self.previous,
                     }
                 )
             )
 
     @staticmethod
-    def public(job):
-        return {
+    def compact_result(operation, result):
+        if operation == "prepare" or operation == "derive" or operation.startswith("draft_"):
+            return {
+                key: value
+                for key, value in result.items()
+                if key
+                in {"id", "project", "task", "name", "parent", "revision", "case", "frozen_plan"}
+            }
+        return result
+
+    def public(self, job, *, draft_content=False):
+        result = job.get("result")
+        if draft_content and isinstance(result, dict) and "id" in result and "revision" in result:
+            result = {**self.draft_store.get(result["id"], result["revision"]), **result}
+        value = {
             key: value for key, value in job.items() if key not in {"thread", "cancel", "clock"}
         } | {
             "elapsed_seconds": round(time.monotonic() - job["clock"], 1)
             if job["status"] == "running"
             else job.get("elapsed_seconds", 0)
         }
+        value["arguments"] = {key: item for key, item in job["arguments"].items() if key != "files"}
+        if result is not None:
+            value["result"] = result
+        return value
 
     def get_job(self, identity):
         with self.mutex:
-            return json.loads(encoded(self.public(self.jobs[identity])))
+            return json.loads(encoded(self.public(self.jobs[identity], draft_content=True)))
+
+    def get_draft(self, identity):
+        with self.mutex:
+            result = self.draft_store.get(identity)
+            require(result["project"] in self.catalog["projects"], "Concept project is unavailable")
+            result["current_application"] = self.application_id()
+            return result
+
+    def application_id(self):
+        return self.installation.get("descriptor_sha256") or sha256(encoded(self.installation))
+
+    def inspect_draft(self, draft):
+        inputs = materialize(self.sdk, draft["task"], draft["files"], self.root / "inputs")
+        if draft["parent"] is not None:
+            project = self.sdk.Project(self.catalog["projects"][draft["project"]]["path"])
+            require(
+                project.plan(draft["parent"])["task"] == draft["task"],
+                "Parent plan belongs to another task",
+            )
+        return inputs, self.sdk.inspect_inputs(draft["task"], inputs)
+
+    def validate_draft(self, draft):
+        stamp = {
+            "application": self.application_id(),
+            "valid": False,
+            "result": None,
+            "error": None,
+        }
+        try:
+            _, stamp["result"] = self.inspect_draft(draft)
+            stamp["valid"] = True
+        except (ValueError, OSError, KeyError, TypeError, RuntimeError) as error:
+            stamp["error"] = str(error)[:1200]
+        with self.mutex:
+            return self.draft_store.annotate(
+                draft["id"], draft["revision"], draft["project"], stamp
+            )
 
     def journal(self, job):
         value = {
@@ -290,7 +354,12 @@ class Controller:
     def work(self, job):
         try:
             result, project = self.perform(job)
-            if project is not None:
+            if project is not None and job["operation"] not in {
+                "draft_create",
+                "draft_save",
+                "draft_validate",
+                "draft_restore",
+            }:
                 with self.mutex:
                     job.update(
                         project=project, cancelable=False, phase="Reading the saved project ledger"
@@ -299,7 +368,11 @@ class Controller:
                 with self.mutex:
                     self.infos[project] = info
             with self.mutex:
-                job.update(result=result, status="done", phase="Action finished")
+                job.update(
+                    result=self.compact_result(job["operation"], result),
+                    status="done",
+                    phase="Action finished",
+                )
         except Exception as error:
             with self.mutex:
                 if job["project"] is not None:
@@ -309,6 +382,9 @@ class Controller:
                 )
         finally:
             with self.mutex:
+                job["arguments"] = {
+                    key: item for key, item in job["arguments"].items() if key != "files"
+                }
                 job.update(
                     finished=now(),
                     elapsed_seconds=round(time.monotonic() - job["clock"], 1),
@@ -351,33 +427,102 @@ class Controller:
             result = self.sdk.example(
                 args["task"], self.root / "inputs" / uuid.uuid4().hex, case=args["case"]
             )
-            validation = self.sdk.validate(args["task"], result["inputs"])
-            key = uuid.uuid4().hex
-            draft = {
-                "id": key,
-                "project": handle,
-                "task": args["task"],
-                "case": args["case"],
-                "inputs": result["inputs"],
-                "validation": validation,
-            }
-            self.drafts[key] = draft
+            with self.mutex:
+                draft = self.draft_store.create(
+                    handle,
+                    args["task"],
+                    "Supplied " + args["case"],
+                    texts(args["task"], result["inputs"]),
+                    origin={"kind": "example", "case": args["case"]},
+                )
+            draft = self.validate_draft(draft)
+            # Preserve the supplied-case hint for the original M4 parent suggestion.
+            draft["case"] = args["case"]
+            return draft, handle
+        if operation == "draft_create":
+            if args["parent"] is not None:
+                require(
+                    project.plan(args["parent"])["task"] == args["task"],
+                    "Parent plan belongs to another task",
+                )
+            with self.mutex:
+                return self.draft_store.create(
+                    handle, args["task"], args["name"], args["files"], parent=args["parent"]
+                ), handle
+        if operation == "draft_save":
+            with self.mutex:
+                return self.draft_store.save(
+                    args["draft"],
+                    args["revision"],
+                    handle,
+                    args["name"],
+                    args["parent"],
+                    args["files"],
+                ), handle
+        if operation == "draft_restore":
+            with self.mutex:
+                return self.draft_store.restore(
+                    args["draft"], args["revision"], handle, args["selected"]
+                ), handle
+        if operation == "draft_validate":
+            draft = self.draft_store.current(args["draft"], args["revision"], handle)
+            return self.validate_draft(draft), handle
+        if operation == "derive":
+            result = project.export_inputs(args["plan"], self.root / "inputs" / uuid.uuid4().hex)
+            require(result["task"] in TASKS, "Unsupported editable task")
+            with self.mutex:
+                draft = self.draft_store.create(
+                    handle,
+                    result["task"],
+                    "Derived study",
+                    texts(result["task"], result["inputs"]),
+                    parent=args["plan"],
+                    origin={"kind": "plan", "plan": args["plan"]},
+                )
             return draft, handle
         if operation == "freeze":
-            draft = self.drafts[args["draft"]]
-            require(draft["project"] == handle, "Input draft belongs to another project")
+            draft = self.draft_store.current(args["draft"], args["revision"], handle)
+            stamp = draft["validation"]
+            require(
+                isinstance(stamp, dict)
+                and stamp.get("valid") is True
+                and stamp.get("revision") == draft["revision"]
+                and stamp.get("content_sha256") == draft["content_sha256"]
+                and stamp.get("application") == self.application_id(),
+                "Validate this exact saved concept revision before freezing",
+            )
+            require(
+                draft["frozen_plan"] is None,
+                "This concept is already frozen; edit to derive a plan",
+            )
+            require(
+                args["parent"] == draft["parent"],
+                "Parent selection changed; save and validate again",
+            )
             require(
                 isinstance(args["name"], str) and 1 <= len(args["name"].strip()) <= 100,
                 "Enter a plan name",
             )
-            result = project.freeze(draft["task"], draft["inputs"], parent=args["parent"])
+            inputs, inspected = self.inspect_draft(draft)
+            require(inspected == stamp["result"], "Concept inputs changed after validation")
+            result = project.freeze(draft["task"], inputs, parent=draft["parent"])
             with self.mutex:
                 self.catalog["projects"][handle]["labels"][result["plan"]] = args["name"].strip()
                 write(self.catalog_file, self.catalog)
+                self.draft_store.annotate(
+                    draft["id"], draft["revision"], handle, stamp, result["plan"]
+                )
             return result, handle
         if operation == "plan":
             result = project.plan(args["plan"])
             self.plans[(handle, args["plan"])] = result
+            if "scientific_input" in result:
+                result = {
+                    **result,
+                    "scientific_input_text": json.dumps(
+                        result["scientific_input"], indent=2, sort_keys=True, allow_nan=False
+                    ),
+                }
             return result, handle
         if operation == "check":
             result = project.check(
@@ -460,6 +605,8 @@ class Controller:
             copied = self.register(
                 destination, self.catalog["projects"][handle]["name"] + " — copy"
             )
+            with self.mutex:
+                self.draft_store.clone_project(handle, copied)
             return {"project": copied, "original": handle}, copied
         if operation == "attach":
             result = self.sdk.attach_runtimes(

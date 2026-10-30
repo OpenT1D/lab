@@ -4,7 +4,8 @@ The thin GUI is an internal interface to the [installed SDK](installed-sdk.md).
 It uses the same immutable plans, parent links, attempts and trusted readers as
 Python and the CLI. Its workspace catalog and job labels are convenience state;
 the SDK project is the authoritative research record. This interface covers
-supplied paired-sensitivity and reduced-sampling MMTT examples and the
+supplied examples and user-chosen synthetic inputs for paired-sensitivity and
+reduced-sampling MMTT, plus editable selected configurations for the
 [installed M4 successor](installed-m4.md).
 The older checkout GUI and its historical exercises retain their own scope.
 
@@ -26,11 +27,13 @@ qualification is macOS arm64. It is not a public installer or a clean-host test.
 1. Create a named project, or open an existing SDK project folder. Opening and
    refreshing read the ledger; they do not execute a task. GUI project handles
    and display names differ from the authoritative plan and attempt IDs.
-2. Select a task and supplied example, prepare/validate it, inspect its details
-   and freeze a named plan. The GUI does not accept arbitrary file uploads.
-   Use the SDK for other supported intake. For 15 g, choose the fasting plan
-   under **Derived from**; the original remains frozen. The default suggestion
-   can be changed explicitly. **Inspect frozen inputs** shows original hashes,
+2. Select a task and supplied example, or choose **Start with my synthetic
+   inputs**. Upload or edit the named UTF-8 source files, inspect/edit assumptions
+   and save a concept. **Validate saved inputs** uses the SDK without estimation.
+   Correct invalid text in the retained concept; validation errors do not erase
+   it. **Freeze plan** requires this exact saved and validated revision. For 15 g,
+   explicitly choose the fasting plan under **Derived from**, save and validate;
+   the original remains frozen. **Inspect frozen inputs** shows original hashes,
    scientific configuration and the recorded parent.
 3. Select a saved plan and **Check readiness**. MMTT uses the standard library.
    Native M4 needs an explicitly reviewed attachment for this exact installed
@@ -65,7 +68,67 @@ qualification is macOS arm64. It is not a public installer or a clean-host test.
    project to create a fresh copy.
 6. **Copy complete project** relocates all plans, inputs, attempts and native
    evidence to a fresh folder. Open the copy and verify its reports before
-   removing the original. A report download alone is not a project handoff.
+   removing the original. This GUI action also copies concept revision histories
+   to the new workspace handle, clearing their validation. A CLI project copy
+   carries the authoritative SDK ledger; it does not transfer GUI workspace
+   concepts. A report download alone is not a project handoff.
+
+## Edit, save and recover a study
+
+**Saved study concepts** reopens a named concept after a browser reload or server
+restart. Edits autosave after a short pause; **Save concept** or Ctrl/Cmd+S saves
+explicitly. Only **Saved revision** acknowledges server persistence. Keep the
+server terminal open through shutdown. Unsaved browser recovery text is scoped
+to that browser origin; a different port/browser does not carry it. The last
+acknowledged server revision remains the recovery boundary after a crash.
+
+Each saved revision retains its exact source bytes and immutable history.
+**Restore as a new revision** appends the chosen earlier contents rather than
+rewinding history. Uncommitted interrupted writes are reported without replacing
+the committed revision. Damaged concepts are listed separately and cannot be
+frozen. Limits are 200 concepts per workspace, 1,024 revisions and 64 MiB of
+deduplicated source blobs per concept. Start a new concept when a limit is reached.
+
+Two tabs cannot silently overwrite each other. After a conflict, **Reload saved
+version** explicitly discards local edits, while **Keep my edits as a new concept**
+preserves them separately, including the chosen frozen parent. The picker keeps
+an explicit selection across background status polling. Uploads preserve the
+latest file/text choice even if an older file read finishes later.
+
+For MMTT, supply `package.json`, `observations.csv` and `settings.json` using the
+[paired input contract](observation-analysis.md). Sampling additionally needs
+`design.json`, `development-package.json` and `development-observations.csv` under
+the [sampling contract](mmtt-sampling.md). The SDK seals that explicit development
+pair; it never silently selects a development cohort from evaluation outcomes.
+Metadata/design must declare matching identities and development allocation.
+The selected M4 editor accepts `config.json`, with its existing fixed source pair
+and supported scenarios/timeouts. It accepts no uploaded model code or new runtime.
+
+JSON files are bounded to 128 KiB each and CSV files to 512 KiB, within a 2 MiB
+concept request. These GUI limits are narrower than some native CLI limits.
+Untouched uploads preserve UTF-8 BOM/CRLF bytes. A structured edit rewrites only
+its relevant JSON file; raw editors support all admitted fields. Large 64-bit
+seeds retain their exact raw representation; structured controls refuse to round
+values outside JavaScript's safe integer range.
+
+Input admission is separate from scientific completeness. Native import
+diagnostics can retain censored, missing or invalid visits; freezing does not
+invent estimates or shrink planned support. Inspection exposes the full visit
+roster and error counts with bounded diagnostic text and explicit truncation.
+Original source bytes remain available for correction and native analysis.
+
+**Derive an editable study** exports the selected frozen plan's original inputs
+through the SDK, retaining it as parent. Changing a previously frozen concept
+also derives from that freeze. Save and validate the changed assumptions, then
+freeze a new plan. No original plan, attempt or report is overwritten. An open
+unfrozen concept blocks accidental execution of an older plan; **Return to frozen
+plans** makes that choice explicit. Changing scientific inputs or parent clears
+validation/readiness. A late response cannot replace newer edits or mark them valid.
+
+The [workbench evidence record](research/editable-workbench.md) separates actual
+installed tests, keyboard/focus and accessible-name checks, narrow/200-percent-text
+reflow observations and separate technical review. Actual screen-reader use,
+formal accessibility qualification and independent intended-user acceptance remain open.
 
 MMTT represents whole-body total endogenous secretion including basal, in pmol
 over the observed 0–120 minutes; change is follow-up minus baseline. The supplied

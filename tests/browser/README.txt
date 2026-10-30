@@ -33,6 +33,15 @@ simulator, substituted response or checkout GUI. Its build receipt and screensho
 are retained with the other Chromium diagnostics. Development runs allow a dirty
 source fixture; formal candidate receipts still require a clean source build.
 
+Three installed workbench flows reuse installed-fixtures.mjs and cover own
+synthetic files, exact CSV BOM/CRLF retention, invalid-input correction, autosave
+focus, restart, immutable parent derivation, cross-tab conflict/restore, large
+raw integer seeds, explicit sampling development separation, keyboard labels
+and narrow/200-percent-text reflow. Their analysis plan explicitly uses32 draws;
+the supplied installed-sampling control above still uses128. Eight application
+flows share the same five-minute budget. These are bounded software/accessibility
+observations, not formal screen-reader or independent usability qualification.
+
 Reports, server logs and success screenshots are under output/playwright/.
 Failures retain traces, screenshots and a copy of the synthetic workspace.
 Temporary workspaces are removed after each test. The browser cache is only the

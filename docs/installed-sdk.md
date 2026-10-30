@@ -23,6 +23,10 @@ development seal, native schedule reports and unchanged inverse estimator. Its
 Version-1 and version-2 descriptors retain their exact historical task rosters
 and cannot declare sampling. Version 1 still refuses native execution; version 2
 retains its existing explicit reviewed-attachment policy.
+The [editable workbench](installed-gui.md#edit-save-and-recover-a-study) reuses
+passive SDK input inspection, explicit development sealing and original-input
+export. Its concepts remain workspace convenience state; SDK freezes stay
+authoritative and immutable.
 
 ## Build and install
 
@@ -142,6 +146,59 @@ add `--allow-failed` for incomplete/failed evidence. `run --retry-of ...`,
 `import --archive ...`, `relocate --output ...` and
 `recover --attempt ... --execution-stopped` mirror the Python operations.
 `--help` lists each command's required fields.
+
+## Inspect and derive user-chosen synthetic inputs
+
+`lab.inspect_inputs(task, inputs)` performs native admission and returns original
+hashes, planned slots and bounded observation diagnostics without estimation.
+`valid=True` admits the metadata/settings/native freeze, while
+`observations.valid`, per-visit errors, missing/censored counts and explicit
+truncation describe the input separately. It does not promise a complete model
+result. `validate` retains its original minimal admission interface.
+
+Export exact frozen inputs to a fresh directory, change explicitly selected
+settings, inspect and freeze with the original parent:
+
+```python
+import json
+
+copied = project.export_inputs(plan, root / "derived-inputs")
+settings_path = Path(copied["inputs"]["settings.json"])
+settings = json.loads(settings_path.read_bytes())
+settings["uncertainty"]["draws"] = 64
+settings_path.write_text(json.dumps(settings), encoding="utf-8")
+inspection = lab.inspect_inputs(copied["task"], copied["inputs"])
+derived = project.freeze(copied["task"], copied["inputs"], parent=plan)["plan"]
+```
+
+This MMTT example reuses the earlier `project`, `plan` and `root`. Export preserves
+all original file bytes, including sampling development evidence. M4 export
+recreates the selected trusted source bundle and original configuration; archived
+Python is never executed. Unsupported historical tasks/readers refuse.
+
+`inspect` uses the same explicit flags as `validate`; original-input export is:
+
+```bash
+"$SDK" export-inputs --project "$PWD/cli-study" --plan PLAN_ID \
+  --output "$PWD/derived-inputs"
+```
+
+For own sampling inputs, prepare an explicit development-only seal before normal
+inspection/freezing. Supply a development package containing exactly the design's
+selection participants, its matching CSV and the study design:
+
+```python
+prepared = lab.prepare_development(
+    root / "development-package.json", root / "development-observations.csv",
+    root / "design.json", root / "development-import",
+)
+```
+
+Use `prepared["development"]` as the `development` input alongside the four full
+study files. CLI equivalent: `prepare-development --package ... --csv ...
+--design ... --output ...`. Roster/allocation checks precede development CSV
+interpretation. The unchanged native importer and schedule-time checks supply
+the seal; no evaluation estimator or automatic schedule selection runs.
 
 ## Reduced measurement schedules
 

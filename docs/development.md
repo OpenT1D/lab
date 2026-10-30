@@ -44,6 +44,7 @@ Ownership below means the implementation boundary responsible for a behavior. Re
 | Shared MMTT estimator and paired sensitivity | `experiments/observation_analysis/` | `test_observation_estimator.py`: separate RK4/Decimal references and unit covariance; `test_observation_import.py`, `test_observation_workflow.py`: intake, CLI, interrupted evidence and reconstruction. |
 | Reduced MMTT measurement schedules | `experiments/mmtt_sampling/`, reused `experiments/observation_analysis/analysis.py` | `test_mmtt_sampling_masking.py`, `test_mmtt_sampling_estimator.py`, `test_mmtt_sampling_comparison.py`, `test_mmtt_sampling_workflow.py`: masking, shared estimator boundary, descriptive comparisons and saved workflow. |
 | Installed/shared sampling extension | `experiments/shared_services/sampling.py`, installed facade/CLI and GUI; [integration record](research/installed-mmtt-sampling.md) | `test_sampling_services.py`: exact native parity, development seal, nested child/draw association and moved reconstruction. `test_sampling_capabilities.py`: strict descriptor v1/v2/v3. `test_installed_sampling.py`: noneditable wheel, four controls, shared GUI/CLI IDs, cancellation/owned cleanup, downloads, tampering and restart/relocation. `tests/browser/installed-sampling.spec.mjs`: actual installed Chromium flow with native child display/download and withdrawal. No numerical core or OT-059 fixture changes. |
+| Editable installed studies | `experiments/shared_services/workbench.py`, `_gui_drafts.py`, `_gui_inputs.py`, `drafts.js`; [guide](installed-gui.md#edit-save-and-recover-a-study) and [record](research/editable-workbench.md) | `test_workbench_drafts.py`: immutable byte/revision history, CAS, interrupted writes, corruption, diagnostic bounds and copies. `test_workbench_installed.py`: actual noneditable own MMTT/sampling/M4 intake, native parity, source refusal, parent preservation and restarted/moved concepts. `installed_gui_frontend.mjs`: late-response/upload, picker, safe-seed and conflict regressions. `tests/browser/workbench.spec.mjs`: own files, autosave/focus, restart, conflicts, correction, derivation and keyboard/reflow. |
 | Local GUI and HTTP lifecycle | `experiments/gui/server.py`, `service.py`, route managers and `static/` | `test_local_gui.py`, `test_gui_observations.py`, `test_gui_sampling.py`: local HTTP, jobs, cancellation, reports and tampering. `test_gui_observation_frontend.py`, `test_gui_sampling_summary.py` and other frontend wrappers exercise their controlled fixtures with Node where declared. |
 | File and process primitives | `experiments/platform_files.py`, `platform_process.py`, `experiments/gui/windows_process.py` | `test_regular_file_snapshots.py`, `test_windows_primitives.py`: stable reads and platform boundaries. `test_windows_launch.py`, `test_windows_source_admission.py`: current/base interpreter selection and source-only MMTT guards. Process callers also need their lifecycle tests, for example `test_local_campaign_process.py`, `test_maintained_campaign_process.py`, `test_task_setup.py`; host-specific cases can skip. |
 | Campaigns, catalogue and durable archives | `experiments/campaigns/`, `maintained_campaigns/`, `catalogue/`, `durable_archives/`, `historical_readers/` | `test_local_campaigns.py`, `test_maintained_campaigns.py`, `test_experiment_catalogue.py`, `test_durable_archives.py`, `test_historical_readers.py`: scheduling, eligibility, reconstruction and reader compatibility, with synthetic/fixture inputs. |
@@ -117,8 +118,11 @@ fails when Node is unavailable. Historical native jobs additionally require
 literal private-repository/manual-dispatch guards and cannot run in a public
 repository, even if a changed scope helper reports them enabled.
 
-The root job keeps dependency caching off and its current twenty-minute
-limit. It attempts to retain setup/check/boundary logs and a selected environment
+The root job keeps dependency caching off and a twenty-five-minute limit. Cold
+hosted runs before the editable-workbench tests took 19 minutes 38 seconds and
+19 minutes 19 seconds, close to the former twenty-minute limit; the
+[workbench record](research/editable-workbench.md) owns the measured extension.
+No test family or native scope guard is removed. The job attempts to retain setup/check/boundary logs and a selected environment
 receipt under `results/ci` for five days, including after a failed check. The
 receipt distinguishes the checked-out source SHA, event SHA and PR-head SHA;
 command timings remain in the logs. It does not dump environment variables or
@@ -148,8 +152,8 @@ npm --prefix tests/browser test
 
 Set `PLAYWRIGHT_BROWSERS_PATH` to an absolute temporary browser-cache directory
 first. Linux hosts can add `-- --with-deps` to the browser-install command. The
-suite uses Playwright 1.64.1, one Chromium worker, no retries and four synthetic
-task/failure/reopen flows. Synthetic screenshots, traces, logs and failure
+suite uses Playwright 1.64.1, one Chromium worker, no retries and eight synthetic
+checkout/installed task, failure, concept and reopen flows. Synthetic screenshots, traces, logs and failure
 workspaces are under `output/playwright/`. The same required job also runs the
 [documentation browser checks](documentation-publication.md#browser-regression-checks)
 in a separate output directory, with a five-minute CI budget for each engine.

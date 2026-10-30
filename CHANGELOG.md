@@ -4,6 +4,14 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Extend the installed workbench with own bounded synthetic inputs, revisioned
+  recoverable concepts, editable assumptions/schedules and derived immutable
+  plans. Preserve exact untouched bytes, parent links, development-only sampling
+  seals and native scientific code. Add installed SDK inspection/input-export
+  methods, compact authenticated polling and tests for correction/conflicts,
+  restart, relocation and late responses. Raise only the root CI budget to
+  25 minutes from measured cold runs near the former limit; retain all guards.
+
 - Integrate `mmtt-sampling` into installed Python/CLI and the shared project
   workbench. Retain sealed development-only selection, all 60 supplied planned
   slots, native parent/child reports, explicit incomplete readers and relocation.

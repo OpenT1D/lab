@@ -23,6 +23,10 @@ class Project:
         """Read an immutable plan and its recorded parent without executing it."""
         return self._call("plan", plan=plan)
 
+    def export_inputs(self, plan, output):
+        """Export exact original inputs for an explicitly derived editable study."""
+        return self._call("export-inputs", plan=plan, output=_path(output))
+
     def freeze(self, task, inputs, *, parent=None):
         return self._call(
             "freeze",
@@ -89,6 +93,29 @@ def validate(task, inputs):
             "action": "validate",
             "task": task,
             "inputs": {name: _path(path) for name, path in inputs.items()},
+        }
+    )
+
+
+def inspect_inputs(task, inputs):
+    """Admit native inputs and summarize observations without estimation."""
+    return invoke(
+        {
+            "action": "inspect",
+            "task": task,
+            "inputs": {name: _path(path) for name, path in inputs.items()},
+        }
+    )
+
+
+def prepare_development(package, csv, design, output):
+    return invoke(
+        {
+            "action": "prepare-development",
+            "package": _path(package),
+            "csv": _path(csv),
+            "design": _path(design),
+            "output": _path(output),
         }
     )
 

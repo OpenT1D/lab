@@ -246,7 +246,12 @@ class InstalledSDK(unittest.TestCase):
                 ]
                 plan = action(
                     "freeze",
-                    {"draft": draft["id"], "name": "Original invented pair", "parent": None},
+                    {
+                        "draft": draft["id"],
+                        "revision": draft["revision"],
+                        "name": "Original invented pair",
+                        "parent": None,
+                    },
                     handle,
                 )["result"]["plan"]
                 state = json.loads(request("/api/state"))

@@ -1,6 +1,6 @@
 # 0086 — Recoverable editable studies over the installed SDK
 
-Date: 30 October 2026. Status: selected for bounded implementation.
+Date: 30 October 2026. Status: implemented; final integrated verification recorded separately.
 
 ## Decision
 

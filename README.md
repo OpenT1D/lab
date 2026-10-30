@@ -45,8 +45,9 @@ repository tooling; it does not install a general simulation package.
 A second [synthetic task](docs/mmtt-sampling.md) compares full and reduced meal-test
 measurement schedules on the same analysis core. These examples demonstrate
 software behavior under declared assumptions, not performance in people.
-An internal [installed project GUI](docs/installed-gui.md) now connects supplied
-paired-sensitivity, reduced-sampling MMTT and native M4 tasks to the shared SDK project ledger and prepares sealed,
+An internal [installed project GUI](docs/installed-gui.md) connects supplied and
+user-chosen synthetic MMTT inputs, editable assumptions and recovered concepts to
+the shared SDK project ledger, alongside selected native M4 configurations. It prepares sealed,
 unanswered user-exercise materials. Intended-user sessions remain unrun.
 A separate internal [Windows 11 x64 installer candidate](docs/windows-installation.md)
 bundles all current GUI routes and their runtimes. Its [OT-058 record](docs/research/ot058-installer-verification.md)
@@ -86,10 +87,11 @@ not establish biological validity, clinical benefit or independent usability.
 
 The [public-development queue](ROADMAP.md#public-development-priorities) now
 selects [further integrated laboratory work](ROADMAP.md#selected-development-window-first-integrated-laboratory)
-on the merged installed SDK, native M4 successor and thin project GUI: shared
-sampling, editable studies, reproducible comparisons, a connected synthetic
-study and an internal candidate with a tested reader transition. These remaining
-increments are planned; M3 migration is a stretch goal.
+on the merged installed SDK, native M4 successor and project GUI. Shared sampling
+and the bounded [editable workbench](docs/research/editable-workbench.md) are
+implemented; reproducible comparisons, a connected synthetic study and an
+internal candidate with a tested reader transition remain planned. M3 migration
+is a stretch goal.
 Development can proceed while intended-user acceptance remains open. The
 implemented public checks and bounded Mac candidate retain their current scope.
 The shared-laboratory increment develops common services around the working routes:
