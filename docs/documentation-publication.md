@@ -61,6 +61,22 @@ over HTTP against its original bytes. Search must finish and open a result;
 the diagram must render again after a theme change. Synthetic fault pages test
 that missing assets and browser errors are actually rejected.
 
+Firefox can cancel the entry page's favicon request while following its immediate
+meta refresh. That exact `NS_BINDING_ABORTED` is accepted only for a main-frame
+image declared as the favicon in both documents. The same-origin source and
+final document must both load successfully, and the final document must naturally
+request and completely load the same icon with HTTP 200 before any test probes.
+Its explicit asset check must also return 200, and the bytes of that completed
+browser response must decode as an image. A later successful GET cannot substitute
+for failed or corrupt browser data.
+
+The original failed request and its narrowly classified recovery remain in the
+JSON receipt. Other cancellations, HTTP errors, missing declarations, incomplete
+loads and decoding failures still fail. The suite does not retry or reload a
+page to obtain recovery evidence. Native Firefox redirect regressions are
+Firefox-specific; those fixtures are intentionally skipped in the other engine
+projects. Every generated documentation page is still checked in all three.
+
 Each CI engine uses four workers, no retries and a five-minute documentation
 budget. The matrix uses `fail-fast: false`, so one failing engine does not cancel
 the others' diagnostics. All three results must succeed for the required gate.
