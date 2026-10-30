@@ -1,5 +1,7 @@
 # Decision records
 
+- [0085 — Installed MMTT sampling](0085-installed-mmtt-sampling.md): retain sealed development evidence, complete native child reports and strict installed capabilities through the shared SDK and workbench.
+
 - [0084 — Installed project GUI](0084-installed-project-gui.md): reuse the installed SDK ledger, explicit execution and trusted readers through a thin loopback interface and prepare a bounded formative exercise.
 
 - [0083 — Installed M4 execution successor](0083-installed-m4-execution-successor.md): preserve historical scientific identities while reviewing separate native environments, explicit attachments and complete installed relocation.
