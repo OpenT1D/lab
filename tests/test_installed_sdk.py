@@ -258,7 +258,17 @@ class InstalledSDK(unittest.TestCase):
                     detail["scientific_input"]["settings"]["uncertainty"]["draws"], 128
                 )
                 self.assertEqual((folder / "HEAD.json").read_bytes(), head)
-                self.assertTrue(action("check", {"plan": plan}, handle)["result"]["runtimes_ready"])
+                checked = action("check", {"plan": plan}, handle)
+                self.assertTrue(checked["result"]["runtimes_ready"])
+                self.assertEqual(
+                    checked["check_context"],
+                    {
+                        "project": handle,
+                        "plan": plan,
+                        "runtime_attachment": None,
+                        "runtime_revision": 0,
+                    },
+                )
                 result = action("run", {"plan": plan, "retry_of": None}, handle)["result"]
                 self.assertEqual(result["result"]["completeness"], "complete")
                 self.assertEqual(result["receipt"]["remaining_owned_processes"], [])

@@ -5,7 +5,7 @@ const names = {"mmtt-sensitivity": "Paired meal-test assumptions", "m4-study-ins
 const cases = {"mmtt-sensitivity": [["complete", "Invented paired visit"], ["censored", "Invented paired visit with censored measurements"]], "m4-study-installed": [["fasting", "Fasting"], ["gastric_load_15g", "15 g initial gastric amount"]]};
 const context = {"mmtt-sensitivity": "Whole-body total endogenous secretion, including basal, over observed 0–120 minutes (pmol). Change is follow-up minus baseline. Three required assumption variants; 128 perturbations with seed 117. Invented data only.", "m4-study-installed": "Both supplied sources · adult#001 · 240 minutes · 961 quarter-minute samples. The gastric amount is an initial condition, not a timed meal. Native runtimes must be prepared separately."};
 let data = null, selected = null, draft = null, selectedPlan = null, currentReport = null, pending = false, watched = null, loaded = false;
-let imageURL = null, parentDraft = null;
+let imageURL = null, parentDraft = null, refreshIssued = 0, refreshApplied = 0;
 const handled = new Set();
 function invalidatePlanView() { $("plan-inspector").classList.add("hidden"); $("plan-inspector").open = false; $("plan-details").textContent = ""; $("readiness").textContent = "Check this frozen plan with the current runtime selection before execution."; }
 function element(tag, text, cls) { const node = document.createElement(tag); if (text !== undefined) node.textContent = text; if (cls) node.className = cls; return node; }
@@ -19,6 +19,7 @@ async function request(url, body) {
 }
 async function action(operation, arguments_ = {}, project = selected) {
   if (pending || data?.active) { notice("Another action is still running. Stop the run or wait for it to finish.", true); return; }
+  if (operation === "check") invalidatePlanView();
   pending = true; render();
   try {
     const response = await request("/api/actions", {request_id: crypto.randomUUID(), operation, project, arguments: arguments_});
@@ -33,13 +34,20 @@ function options(select, values, chosen) { select.replaceChildren(...values.map(
 function updateTask() { const task = $("task").value; options($("example-case"), cases[task]); $("task-context").textContent = context[task]; }
 async function refresh() {
   try {
-    const previousRuntime = data?.runtime_attachment;
-    data = await (await request("/api/state")).json();
-    if (previousRuntime !== data.runtime_attachment) invalidatePlanView();
+    const issued = ++refreshIssued;
+    const incoming = await (await request("/api/state")).json();
+    if (issued < refreshApplied || (data && incoming.runtime_revision < data.runtime_revision)) return;
+    refreshApplied = issued;
+    if (data?.runtime_revision !== incoming.runtime_revision || data?.runtime_attachment !== incoming.runtime_attachment) invalidatePlanView();
+    data = incoming;
     if (!loaded) { for (const job of data.jobs) if (job.status !== "running") handled.add(job.id); loaded = true; }
     for (const job of data.jobs) if (job.id === watched && job.status !== "running" && !handled.has(job.id)) {
       handled.add(job.id); watched = null;
       if (job.status === "error") { notice(job.error, true); continue; }
+      if (job.operation === "check") {
+        const checked = job.check_context;
+        if (!checked || checked.project !== selected || checked.plan !== selectedPlan || checked.runtime_revision !== data.runtime_revision || checked.runtime_attachment !== data.runtime_attachment) { notice("Readiness result belongs to an earlier selection. Check the current frozen plan again."); continue; }
+      }
       if (job.project && job.project !== selected) { selected = job.project; invalidatePlanView(); }
       const result = job.result;
       if (job.operation === "prepare") { draft = result; $("plan-name").value = `${names[result.task]} — ${cases[result.task].find(row => row[0] === result.case)[1]}`; notice("Inputs validated. Inspect the assumptions and freeze a plan before running."); }

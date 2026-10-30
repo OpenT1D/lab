@@ -166,6 +166,31 @@ hosted receipts retain their exact revisions/outcomes separately. Local native
 results are not hosted native CI or user acceptance. Artifact identity is not
 inferred from a wheel filename or the internal version number.
 
+## Readiness context correction
+
+A subsequent critical review reproduced a false readiness display on `17dcb7d`:
+a completed check for runtime A could arrive in the same poll as runtime B,
+clear the old view and then mark B ready with A's result. The SDK independently
+revalidates execution; no execution bypass was demonstrated. This display defect
+needed correction before the human exercise.
+
+Checks now capture the project, frozen plan, runtime path and a session-local
+selection revision before calling the SDK with that captured path. Every
+successful attach/select/clear advances the revision, including same-path
+reselection. The browser applies a result only to its matching context and
+rejects older poll responses or runtime revisions. A slow poll can still update
+while another is pending. Starting a new check clears previous readiness;
+external file changes are not continuously monitored.
+
+The five added controlled DOM cases fail on the previous source for their
+intended assertions; all nine DOM cases pass with the correction. Seventeen
+targeted GUI/packet tests and the actual installed-SDK MMTT GUI exercise pass.
+Two read-only agents reviewed the diff and counterexamples. The integration
+owner retains the final-revision full-check and rebuilt-artifact receipts
+separately. The 196 native-bound source files are outside this correction;
+earlier native execution and packet D retain their original artifact identities.
+Any corrected candidate needs its own attachment and formative packet before use.
+
 ## Human exercise remains unrun
 
 `prepare-study-packet` binds four distinct actual reference attempts: complete

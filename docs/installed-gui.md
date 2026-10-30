@@ -37,6 +37,11 @@ qualification is macOS arm64. It is not a public installer or a clean-host test.
    the separately prepared native/observer folders. No dependency installation
    or archived callback runs through the GUI. Old artifacts' attachments refuse
    execution until recreated for the current application.
+   Readiness records that check's snapshot. Changing the project, plan or
+   runtime selection, including in another tab, requires a new check; an older
+   result cannot mark the new selection ready. External runtime file changes
+   are not monitored continuously. Check again after changing those files;
+   execution independently validates its actual runtime selection through the SDK.
 4. **Run plan** creates an attempt through the SDK. One SDK action runs per
    workspace. The screen shows elapsed time and the facade's action, without
    inventing native phase percentages. **Stop run** requests SDK cancellation

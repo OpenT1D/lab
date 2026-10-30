@@ -65,6 +65,16 @@ class ControlledSDK:
             def plan(self, _identity):
                 return {"task": "mmtt-sensitivity"}
 
+            def check(self, identity, *, runtime_attachment):
+                sdk.calls.append(("check", identity, runtime_attachment))
+                return {
+                    "task": "mmtt-sensitivity",
+                    "metadata_valid": True,
+                    "runtimes_ready": True,
+                    "native_policy": "controlled",
+                    "setup_performed": False,
+                }
+
             def run(self, _identity, *, cancel, **_kwargs):
                 sdk.calls.append("run")
                 sdk.entered.set()
@@ -195,6 +205,63 @@ class GUIStateTests(unittest.TestCase):
         self.assertEqual(self.finish(job)["status"], "done")
         other = state.Controller(self.controller.root, sdk=self.sdk)
         other.close()
+
+    def test_check_context_survives_all_later_runtime_selections(self):
+        handle = self.project()
+        attachment_a = self.root / "a.json"
+        attachment_b = self.root / "b.json"
+        for attachment in (attachment_a, attachment_b):
+            attachment.write_text("{}")
+        plan = "a" * 64
+        for revision, attachment in enumerate(
+            (None, attachment_a, attachment_b, attachment_a, attachment_a, None, None)
+        ):
+            if revision:
+                operation = "clear_attachment" if attachment is None else "select_attachment"
+                args = {} if attachment is None else {"path": str(attachment)}
+                selected = self.finish(self.controller.submit(self.request(operation, args)))
+                self.assertEqual(selected["status"], "done", selected)
+            snapshot = self.controller.state()
+            self.assertEqual(snapshot["runtime_revision"], revision)
+            self.assertEqual(
+                snapshot["runtime_attachment"], str(attachment) if attachment else None
+            )
+            checked = self.finish(
+                self.controller.submit(self.request("check", {"plan": plan}, handle))
+            )
+            self.assertEqual(checked["status"], "done", checked)
+            expected = {
+                "project": handle,
+                "plan": plan,
+                "runtime_attachment": str(attachment) if attachment else None,
+                "runtime_revision": revision,
+            }
+            self.assertEqual(checked["check_context"], expected)
+            self.assertIn(("check", plan, expected["runtime_attachment"]), self.sdk.calls)
+            if revision == 1:
+                original = checked
+        self.assertEqual(
+            self.controller.get_job(original["id"])["check_context"], original["check_context"]
+        )
+        with patch.object(
+            self.sdk, "attach_runtimes", create=True, return_value={"attachment": str(attachment_a)}
+        ):
+            attached = self.finish(
+                self.controller.submit(
+                    self.request("attach", {"native_site": "/native", "observer_site": "/observer"})
+                )
+            )
+        self.assertEqual(attached["status"], "done", attached)
+        self.assertEqual(self.controller.state()["runtime_revision"], 7)
+        self.assertEqual(self.controller.state()["runtime_attachment"], str(attachment_a))
+        refused = self.finish(
+            self.controller.submit(
+                self.request("select_attachment", {"path": str(self.root / "missing.json")})
+            )
+        )
+        self.assertEqual(refused["status"], "error", refused)
+        self.assertEqual(self.controller.state()["runtime_revision"], 7)
+        self.assertEqual(self.controller.state()["runtime_attachment"], str(attachment_a))
 
     def test_cancel_uses_sdk_event_and_keeps_incomplete_outcome(self):
         handle = self.project()

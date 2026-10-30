@@ -4,6 +4,10 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Bind GUI readiness results to the checked project, plan and runtime selection.
+  Ignore stale results after selection changes and older polling responses;
+  clear previous readiness when checking again.
+
 - Add a thin loopback GUI to the installed SDK for supplied MMTT and M4
   examples, shared plan/parent/attempt identities, explicit runtime selection,
   cancellation, trusted report copies and whole-project relocation. Add sealed

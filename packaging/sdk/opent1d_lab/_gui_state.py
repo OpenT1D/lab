@@ -102,6 +102,7 @@ class Controller:
             self.active = None
             self.closing = False
             self.runtime_attachment = str(path(runtime_attachment)) if runtime_attachment else None
+            self.runtime_revision = 0
             self.previous = []
             for filename in sorted((self.root / "journal").glob("*.json"))[-32:]:
                 record = decode(read(filename, 65536))
@@ -127,6 +128,7 @@ class Controller:
                         "workspace": str(self.root),
                         "closing": self.closing,
                         "runtime_attachment": self.runtime_attachment,
+                        "runtime_revision": self.runtime_revision,
                         "projects": [
                             {"id": key, **value, "info": self.infos.get(key)}
                             for key, value in self.catalog["projects"].items()
@@ -222,6 +224,13 @@ class Controller:
                 "cancelable": operation == "run",
                 "cancel_requested": False,
             }
+            if operation == "check":
+                job["check_context"] = {
+                    "project": project,
+                    "plan": arguments["plan"],
+                    "runtime_attachment": self.runtime_attachment,
+                    "runtime_revision": self.runtime_revision,
+                }
             self.jobs[job["id"]] = job
             self.requests[key] = (identity, job["id"])
             self.active = job
@@ -341,7 +350,9 @@ class Controller:
             self.plans[(handle, args["plan"])] = result
             return result, handle
         if operation == "check":
-            result = project.check(args["plan"], runtime_attachment=self.runtime_attachment)
+            result = project.check(
+                args["plan"], runtime_attachment=job["check_context"]["runtime_attachment"]
+            )
             return {
                 key: result[key]
                 for key in (
@@ -418,17 +429,22 @@ class Controller:
                 args["observer_site"],
                 self.root / "attachments" / (uuid.uuid4().hex + ".json"),
             )
-            self.runtime_attachment = result["attachment"]
+            self.select_runtime(result["attachment"])
             return result, None
         if operation == "select_attachment":
             filename = outside_projects(args["path"])
             read(filename, 16 * 1024 * 1024)
-            self.runtime_attachment = str(filename)
+            self.select_runtime(str(filename))
             return {"selected": str(filename), "validated": False}, None
         if operation == "clear_attachment":
-            self.runtime_attachment = None
+            self.select_runtime(None)
             return {"selected": None}, None
         raise ValueError("Unsupported action")
+
+    def select_runtime(self, attachment):
+        with self.mutex:
+            self.runtime_attachment = attachment
+            self.runtime_revision += 1
 
     def report(self, identity, name):
         require(name in REPORTS, "Unknown report filename")
