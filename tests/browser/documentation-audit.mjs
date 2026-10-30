@@ -103,6 +103,14 @@ export function assertClean(receipt) {
   }
 }
 
+// Sphinx finishes listing links before its summary fetches settle. Keep the
+// original monitor active and reject errors before leaving the search page.
+export async function waitForSearchCompletion(page, receipt) {
+  await page.locator('#search-results').getByRole('heading', { name: 'Search Results', exact: true }).waitFor({ state: 'visible' });
+  await page.waitForLoadState('networkidle');
+  assertClean(receipt);
+}
+
 export async function inspectRendering(page, receipt, renderTimeout = 10_000) {
   receipt.images = [];
   for (const image of await page.locator('img').all()) {

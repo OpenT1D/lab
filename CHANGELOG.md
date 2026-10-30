@@ -12,6 +12,10 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
   restart, relocation and late responses. Raise only the root CI budget to
   25 minutes from measured cold runs near the former limit; retain all guards.
 
+- Wait for page loads and documentation search summaries before advancing
+  browser search checks. Preserve strict error monitoring and add delayed-response
+  regressions for genuine network, asset and JavaScript failures.
+
 - Integrate `mmtt-sampling` into installed Python/CLI and the shared project
   workbench. Retain sealed development-only selection, all 60 supplied planned
   slots, native parent/child reports, explicit incomplete readers and relocation.

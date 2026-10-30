@@ -8,6 +8,10 @@ under [decision 0086](../decisions/0086-editable-workbench-drafts.md), on
 `codex/editable-study-workbench`. One integration owner writes and runs the final
 full repository check; a separate read-only agent reviews the diff.
 
+Before final verification, integrate main through `5d4afe5` (documentation search
+completion checks). Preserve both additive changelog entries; no sampling or
+workbench numerical implementation is changed by that integration.
+
 ## Acceptance and counterexamples
 
 1. Import researcher-chosen declared synthetic metadata/CSV, edit shared
