@@ -1,6 +1,6 @@
 # 0088 — A connected synthetic secretion and observation study
 
-Date: 31 October 2026. Status: selected before implementation or new study output.
+Date: 31 October 2026. Status: implemented; contract selected before implementation or new study output.
 
 ## Decision
 
