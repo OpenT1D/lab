@@ -1,6 +1,6 @@
 # 0087 — Reproducible comparisons of frozen plans and variants
 
-Date: 31 October 2026. Status: selected for implementation.
+Date: 31 October 2026. Status: implemented; exact final verification recorded separately.
 
 ## Decision
 

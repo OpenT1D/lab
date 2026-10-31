@@ -4,6 +4,13 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Add frozen preexecution comparisons across native variants and compatible
+  derived plans in the installed SDK, CLI and workbench. Preserve the complete
+  roster, fixed first attempts, explicit changed scientific fields and failed or
+  unattempted cases. Reconstruct exact ledger-prefix JSON/Markdown/CSV reports
+  after retries, restart and relocation, with task-owned units and native readers.
+  Guard late report responses/download refusals against newer verification.
+
 - Extend the installed workbench with own bounded synthetic inputs, revisioned
   recoverable concepts, editable assumptions/schedules and derived immutable
   plans. Preserve exact untouched bytes, parent links, development-only sampling

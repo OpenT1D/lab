@@ -125,6 +125,7 @@ class Store:
             "Lost, duplicate or uncommitted ledger event",
         )
         self.events, self.plans, self.attempts, self.finishes = [], {}, {}, {}
+        self.comparisons = {}
         tip = None
         for sequence in range(1, head["count"] + 1):
             folder = self.path / "events" / f"{sequence:08d}"
@@ -173,6 +174,12 @@ class Store:
                     "Derived task differs",
                 )
             self.plans[identity] = (data["descriptor"], folder / "plan")
+        elif kind == "comparison":
+            from .comparisons import validate
+
+            require(set(data) == {"definition"}, "Invalid comparison event")
+            validate(self, data["definition"])
+            self.comparisons[identity] = data["definition"]
         elif kind == "start":
             require(
                 set(data) == {"plan", "ordinal", "retry_of", "mode", "host"}

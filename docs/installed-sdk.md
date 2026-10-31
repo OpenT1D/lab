@@ -244,6 +244,73 @@ reference, not biological truth; the information-loss reversal is engineered
 synthetic evidence. Incomplete and interrupted native reports require the same
 explicit `allow_failed` option. Hard stops can instead retain forensic evidence.
 
+## Reproducible variants and frozen-plan comparisons
+
+Create the complete comparison before executing any selected plan. These methods
+use the same project ledger as the workbench. `comparison_options(plan)` returns
+the task-owned assumption, schedule/variant or source/load selectors present in
+that exact frozen plan. Comparisons remain within one task and compatible
+observations, allocation, endpoint, protocol, source and reader support.
+
+For a fresh unattempted MMTT sensitivity plan:
+
+```python
+definition = {
+    "schema": "opent1d.plan-comparison/1",
+    "name": "Synthetic volume assumptions",
+    "question": "How does the declared volume change the same paired endpoint?",
+    "baseline": "nominal",
+    "variants": [
+        {"id": "nominal", "label": "Nominal volume", "plan": fresh_plan,
+         "selector": {"variant": "nominal"}},
+        {"id": "volume", "label": "20 percent volume stress", "plan": fresh_plan,
+         "selector": {"variant": "volume-120"}},
+    ],
+}
+frozen = project.freeze_comparison(definition)
+comparison = frozen["comparison"]
+project.run(fresh_plan)  # One native attempt serves both selected variants.
+saved = project.reconstruct_comparison(comparison, root / "comparison-report")
+tip = saved["snapshot"]["tip"]
+project.comparison(comparison)  # Current fixed-first-attempt statuses.
+project.reconstruct_comparison(comparison, root / "same-snapshot", at=tip)
+```
+
+`fresh_plan` must be a newly frozen, unattempted plan. The earlier tutorial plan
+has already run and is refused here; derive a fresh plan when repeating its
+assumptions. Freeze 2–16 unique labelled members, optionally across compatible
+derived plans. Only each plan's first attempt is selected. Later retries stay
+in history, while failures, partial evidence and unattempted members remain in
+the comparison denominator. A saved ledger tip reproduces an old report even
+after another member first runs. Full project relocation retains those tips.
+
+Sampling selectors use `{"schedule": "full", "variant": "nominal"}` or a
+preselected reduced schedule. The original observations and development seal
+remain fixed. Installed M4 selectors use, for example,
+`{"source": "dalla_man", "scenario": "fasting"}`; compare supported sources or
+explicit initial loads with their native complete-grid descriptive metrics.
+No concentration curve is treated as a secreted amount or pooled score.
+
+The CLI takes a bounded JSON definition file:
+
+```bash
+"$SDK" comparison-options --project "$PWD/cli-study" --plan FRESH_PLAN_ID
+"$SDK" freeze-comparison --project "$PWD/cli-study" --definition comparison.json
+"$SDK" comparison --project "$PWD/cli-study" --comparison COMPARISON_ID
+"$SDK" reconstruct-comparison --project "$PWD/cli-study" \
+  --comparison COMPARISON_ID --output "$PWD/comparison-report"
+"$SDK" reconstruct-comparison --project "$PWD/cli-study" \
+  --comparison COMPARISON_ID --at SAVED_LEDGER_TIP --output "$PWD/exact-replay"
+```
+
+Each reconstruction writes sealed JSON, Markdown and CSV with exact input/plan,
+first-attempt, native report, comparison-reader and ledger-prefix bindings. It
+uses existing authoritative readers, without executing supplied models or
+archived code. MMTT's existing offline reader repeats verification arithmetic;
+that is distinct from a native model run. Changed comparison-reader bytes refuse
+without a separately supported transition. Comparisons add no runtime setup,
+native distribution permission, scientific validity or human acceptance.
+
 ## M4 and compatibility boundaries
 
 Export M4 inputs with `example --task m4-study-secure --case fasting --output ...`

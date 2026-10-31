@@ -7,6 +7,7 @@
   <title>Project laboratory · OpenT1D</title>
   <link rel="stylesheet" href="/app.css">
   <script src="/drafts.js" defer></script>
+  <script src="/comparisons.js" defer></script>
   <script src="/app.js" defer></script>
 </head>
 <body>
@@ -43,7 +44,7 @@
     </section>
     <div id="project-view" class="hidden">
       <section class="project-heading"><div><p class="eyebrow">Shared SDK project</p><h1 id="selected-name"></h1><p id="selected-path" class="muted path"></p></div><button id="refresh-project">Refresh saved ledger</button></section>
-      <nav class="section-nav" aria-label="Project sections"><a href="#study">Study</a><a href="#attempts">Attempts</a><a href="#saved-report">Report</a><a href="#handoff">Handoff</a></nav>
+      <nav class="section-nav" aria-label="Project sections"><a href="#study">Study</a><a href="#comparisons">Comparisons</a><a href="#attempts">Attempts</a><a href="#saved-report">Report</a><a href="#handoff">Handoff</a></nav>
       <section id="study" class="panel">
         <div class="section-title"><span class="step">1</span><div><h2>Prepare a study</h2><p>Choose supplied inputs, inspect their assumptions, then freeze a named plan.</p></div></div>
         <form id="prepare-form" class="form-grid">
@@ -80,6 +81,29 @@
           <details><summary>Create an attachment for this application</summary><form id="attach-runtime" class="form-grid"><div class="full"><label for="native-site">Reviewed native site-packages folder</label><input id="native-site" placeholder="Absolute directory" required></div><div class="full"><label for="observer-site">Reviewed observer site-packages folder</label><input id="observer-site" placeholder="Absolute directory" required></div><button type="submit">Verify and attach prepared runtimes</button></form></details>
         </details>
       </section>
+      <section id="comparisons" class="panel">
+        <div class="section-title"><div><h2>Compare frozen plans and variants</h2><p>Freeze the complete roster before execution. Compare the same observations and endpoint under explicit assumptions.</p></div></div>
+        <p class="context">Only plans without prior attempts can join a new comparison. Derive a fresh plan to repeat earlier assumptions. The first attempt stays selected, including failures; later retries never replace it.</p>
+        <form id="comparison-form" class="form-grid">
+          <div><label for="comparison-name">Comparison name</label><input id="comparison-name" maxlength="100" required></div>
+          <div><label for="comparison-question">Research question</label><input id="comparison-question" maxlength="1000" required></div>
+          <div><label for="comparison-plan">Unattempted frozen plan</label><select id="comparison-plan"></select></div>
+          <button type="button" id="comparison-options">Load plan variants</button>
+          <div><label for="comparison-selector">Assumption, schedule or source/load</label><select id="comparison-selector"></select></div>
+          <div><label for="comparison-label">Member label</label><input id="comparison-label" maxlength="100" placeholder="Name this condition"></div>
+          <button type="button" id="comparison-add">Add member</button>
+          <div id="comparison-roster" class="full"></div>
+          <div><label for="comparison-baseline">Baseline member</label><select id="comparison-baseline"></select></div>
+          <button type="submit" id="comparison-freeze" class="primary">Freeze comparison roster</button>
+        </form>
+        <label for="comparison-select">Saved comparisons</label><select id="comparison-select"></select>
+        <div class="actions"><button id="comparison-open">Inspect saved comparison</button><button id="comparison-next">Run next unattempted plan</button><button id="comparison-verify">Reconstruct current comparison</button></div>
+        <label for="comparison-tip">Saved report ledger tip (optional)</label><input id="comparison-tip" maxlength="64" placeholder="Paste a saved snapshot tip to reproduce that exact report">
+        <button id="comparison-replay">Reconstruct saved snapshot</button>
+        <p id="comparison-status" role="status" aria-live="polite"></p>
+        <div id="comparison-members"></div>
+        <details><summary>Exact changed fields relative to the frozen baseline</summary><pre id="comparison-changes"></pre></details>
+      </section>
       <section id="attempts" class="panel">
         <div class="section-title"><span class="step">3</span><div><h2>Find and verify results</h2><p>Execution, scientific completeness and report verification are separate.</p></div></div>
         <div id="attempt-list"></div>
@@ -88,7 +112,7 @@
       <section id="saved-report" class="panel hidden">
         <div class="report-heading"><div><p class="eyebrow">Verified report copy</p><h2>Saved analysis</h2><p id="report-context" class="muted"></p></div><span id="report-completeness" class="tag"></span></div>
         <p class="context">Verification reconstructs saved analysis with the trusted reader. It does not run the model again. This copy records the verification time; refresh and verify again to assess changed project evidence.</p>
-        <div class="actions"><button data-download="report.md">Download report</button><button data-download="report.json">Download JSON</button><button data-download="figure.svg">Download figure</button></div>
+        <div class="actions"><button data-download="report.md">Download report</button><button data-download="report.json">Download JSON</button><button data-download="figure.svg">Download figure</button><button id="download-comparison" data-download="comparison.csv" class="hidden">Download comparison CSV</button></div>
         <div id="report-text" class="report-text"></div>
         <section id="child-reports" class="hidden" aria-label="Native reports for each measurement schedule"></section>
         <img id="report-figure" alt="Authoritative saved research figure; quantities and units are also described in the report." class="report-figure">

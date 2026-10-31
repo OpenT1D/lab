@@ -23,6 +23,23 @@ class Project:
         """Read an immutable plan and its recorded parent without executing it."""
         return self._call("plan", plan=plan)
 
+    def comparison_options(self, plan):
+        """Read task-owned selectors for an existing immutable plan."""
+        return self._call("comparison-options", plan=plan)
+
+    def freeze_comparison(self, definition):
+        """Freeze the complete comparison roster before any selected plan runs."""
+        return self._call("freeze-comparison", definition=definition)
+
+    def comparison(self, comparison, *, at=None):
+        return self._call("comparison", comparison=comparison, at=at)
+
+    def reconstruct_comparison(self, comparison, output, *, at=None):
+        """Reconstruct fixed first attempts at an explicit saved ledger tip."""
+        return self._call(
+            "reconstruct-comparison", comparison=comparison, at=at, output=_path(output)
+        )
+
     def export_inputs(self, plan, output):
         """Export exact original inputs for an explicitly derived editable study."""
         return self._call("export-inputs", plan=plan, output=_path(output))

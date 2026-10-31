@@ -1,5 +1,7 @@
 # Decision records
 
+- [0087 — Frozen workbench comparisons](0087-frozen-workbench-comparisons.md): preexecution rosters, fixed first attempts, task-owned contrasts and prefix-bound reconstruction.
+
 - [0086 — Recoverable editable studies](0086-editable-workbench-drafts.md): exact synthetic input revisions, validation, immutable derivation and bounded workbench recovery.
 
 - [0085 — Installed MMTT sampling](0085-installed-mmtt-sampling.md): retain sealed development evidence, complete native child reports and strict installed capabilities through the shared SDK and workbench.
@@ -165,5 +167,3 @@ The M4 records were assigned numbers 0016–0028 when the parallel M3, LIT-002 a
 - [0002 — Reference reproduction before integration](0002-m0-reference-first.md): accepted M1 engine-integration boundary following native probes, with reproduction separated from comparison.
 
 - [0001 — Project foundation](0001-project-foundation.md): modular laboratory, repository structure, language, licensing and current tooling.
-- [0087 — Frozen workbench comparisons](0087-frozen-workbench-comparisons.md): preexecution rosters, fixed first attempts, task-owned contrasts and prefix-bound reconstruction.
-
