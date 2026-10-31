@@ -22,6 +22,7 @@ class InstalledGUIFrontendTests(unittest.TestCase):
                     str(ROOT / "packaging/sdk/opent1d_lab/_gui_assets/app.js"),
                     str(receipt),
                     str(ROOT / "packaging/sdk/opent1d_lab/_gui_assets/drafts.js"),
+                    str(ROOT / "packaging/sdk/opent1d_lab/_gui_assets/comparisons.js"),
                 ],
                 cwd=ROOT,
                 capture_output=True,
@@ -31,4 +32,4 @@ class InstalledGUIFrontendTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
             evidence = json.loads(receipt.read_bytes())
             self.assertTrue(evidence["passed"], evidence)
-            self.assertEqual(len(evidence["tests"]), 24)
+            self.assertEqual(len(evidence["tests"]), 35)

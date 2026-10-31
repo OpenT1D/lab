@@ -7,6 +7,8 @@ const receiptPath=process.argv[3];
 const source=fs.readFileSync(sourcePath,'utf8');
 const draftSourcePath=process.argv[4];
 const draftSource=fs.readFileSync(draftSourcePath,'utf8');
+const comparisonSourcePath=process.argv[5];
+const comparisonSource=fs.readFileSync(comparisonSourcePath,'utf8');
 class Element {
  constructor(tag='div'){this.tag=tag;this.value='';this.children=[];this.textContent='';this.content='session-token';this.src='';this.open=false;this.hiddenClasses=new Set();const classes=this.hiddenClasses;this.classList={add(...names){for(const name of names)classes.add(name);},remove(...names){for(const name of names)classes.delete(name);},contains(name){return classes.has(name);},toggle(name,force){if(force===undefined)force=!classes.has(name);if(force)classes.add(name);else classes.delete(name);return force;}};}
  replaceChildren(...items){this.children=items;if(items.length&&items.every(item=>item.tag==='option'))this.value=items[0].value;}
@@ -14,12 +16,12 @@ class Element {
  setAttribute(name,value){this[name]=value;} removeAttribute(name){delete this[name];}
  focus(){} scrollIntoView(){}
 }
-function environment({concepts=false}={}){
+function environment({concepts=false,comparisons=false}={}){
  const nodes=new Map(),byId=id=>{if(!nodes.has(id))nodes.set(id,new Element(['task','example-case','parent-plan','plan-select'].includes(id)?'select':'div'));return nodes.get(id);};byId('task').value='mmtt-sensitivity';
  const figureButton=new Element('button'),urlCalls=[];
  const backups=new Map();
  const context={document:{getElementById:byId,querySelector:query=>query.includes('opent1d-token')?{content:'session-token'}:figureButton,querySelectorAll:()=>[],createElement:tag=>{const node=new Element(tag);let id='';Object.defineProperty(node,'id',{get:()=>id,set:value=>{id=value;nodes.set(value,node);}});return node;}},fetch:()=>new Promise(()=>{}),setInterval(){},setTimeout(){},clearTimeout(){},addEventListener(){},localStorage:{setItem:(k,v)=>backups.set(k,v),getItem:k=>backups.get(k)||null,removeItem:k=>backups.delete(k)},TextDecoder,crypto:{randomUUID:()=> 'controlled-request'},URL:{createObjectURL(){const value='blob:controlled-'+urlCalls.length;urlCalls.push(['create',value]);return value;},revokeObjectURL(value){urlCalls.push(['revoke',value]);}},console};
- vm.createContext(context);if(concepts)vm.runInContext(draftSource,context,{filename:draftSourcePath});vm.runInContext(source,context,{filename:sourcePath});return {context,byId,figureButton,urlCalls,backups,run:code=>vm.runInContext(code,context)};
+ vm.createContext(context);if(concepts)vm.runInContext(draftSource,context,{filename:draftSourcePath});if(comparisons)vm.runInContext(comparisonSource,context,{filename:comparisonSourcePath});vm.runInContext(source,context,{filename:sourcePath});return {context,byId,figureButton,urlCalls,backups,run:code=>vm.runInContext(code,context)};
 }
 function base(){
  return {projects:[{id:'project',name:'Controlled project',path:'/project',labels:{},info:{plans:[{id:'fasting',task:'m4-study-installed',slots:['dalla_man/fasting','ultradian/fasting'],parent:null},{id:'mmtt-base',task:'mmtt-sensitivity',slots:['person/primary'],parent:null}],attempts:[]}}],jobs:[],active:null,closing:false,workspace:'/workspace',installation:{build_label:'controlled',source:{revision:'a'.repeat(40)}},runtime_attachment:'/attachment-A.json',runtime_revision:0};
@@ -111,7 +113,7 @@ await check('rechecking_clears_previous_readiness_even_if_the_new_check_is_refus
 });
 await check('partial_m4_load_preserves_entire_old_report_then_success_commits_new_identity',async()=>{
  const e=environment();seed(e);
- e.run('currentReport={id:"old",project:"project",attempt:"old-complete-attempt",completeness:"complete"};imageURL="blob:old";data.reports=[{id:"new",project:"project",attempt:"new-incomplete-attempt",verified_at:"2026-10-29T12:00:00Z",completeness:"incomplete",files:["report.json","report.md","figure.svg"]}];');
+ e.run('currentReport={id:"old",project:"project",attempt:"old-complete-attempt",completeness:"complete"};imageURL="blob:old";data.reports=[{id:"new",project:"project",valid:true,attempt:"new-incomplete-attempt",verified_at:"2026-10-29T12:00:00Z",completeness:"incomplete",files:["report.json","report.md","figure.svg"]}];');
  const oldHeading=new Element('h3');oldHeading.textContent='OLD COMPLETE REPORT';e.byId('report-text').append(oldHeading);e.byId('report-context').textContent='Verified old-complete-attempt';e.byId('report-completeness').textContent='complete';e.byId('report-figure').src='blob:old';
  function snapshot(){return {text:e.byId('report-text').children.map(n=>n.textContent),context:e.byId('report-context').textContent,completeness:e.byId('report-completeness').textContent,downloadAttempt:e.run('currentReport.attempt'),image:e.byId('report-figure').src,urlCalls:[...e.urlCalls]};}
  const before=snapshot();
@@ -126,7 +128,7 @@ await check('partial_m4_load_preserves_entire_old_report_then_success_commits_ne
 });
 await check('mmtt_two_file_report_never_requests_figure',async()=>{
  const e=environment();seed(e);const calls=[];
- e.run('data.reports=[{id:"mmtt",project:"project",attempt:"mmtt-attempt",verified_at:"2026-10-29T12:00:00Z",completeness:"complete",files:["report.json","report.md"]}];');
+ e.run('data.reports=[{id:"mmtt",project:"project",valid:true,attempt:"mmtt-attempt",verified_at:"2026-10-29T12:00:00Z",completeness:"complete",files:["report.json","report.md"]}];');
  e.context.fetch=async url=>{calls.push(url);return {ok:true,text:async()=> '# MMTT REPORT'};};await e.run('showReport("mmtt")');
  assert.deepEqual(calls,['/api/reports/mmtt/report.md']);assert.equal(e.run('currentReport.attempt'),'mmtt-attempt');assert.equal(e.byId('report-figure').classList.contains('hidden'),true);assert.equal(e.figureButton.classList.contains('hidden'),true);
  return {requests:calls,figure_hidden:true,figure_download_hidden:true};
@@ -142,7 +144,7 @@ await check('sampling_children_use_scoped_authenticated_text_requests',async()=>
  const e=environment(),calls=[];
  e.context.fetch=async(url,options)=>{calls.push({url,token:options.headers['X-OpenT1D-Token']});return {ok:true,text:async()=> '# Full schedule\n<script>untrusted()</script>'};};
  e.context.record={id:'a'.repeat(32),files:['report.md','report.json','studies/full/report.md','studies/full/report.json','../private.md']};
- e.run('renderChildReports(record);');
+ e.run('currentReport=record;renderChildReports(record);');
  const children=e.byId('child-reports').children;
  assert.equal(children.length,2,'Only one admitted native schedule is rendered');
  assert.equal(children[1].children[0].textContent,'Schedule: full');
@@ -316,5 +318,137 @@ await check('refused_autosave_keeps_edits_and_explicit_unsaved_status',async()=>
  assert.equal(e.backups.size,1);assert.equal(e.byId('assumption-draws').value,'64');
  assert.equal(e.byId('freeze-draft').disabled,true);
  return {unsaved_status_explicit:true,local_edits_retained:true};
+});
+await check('slow_prior_comparison_report_cannot_replace_new_verification',async()=>{
+ const e=environment();seed(e);const state=base();
+ state.reports=['A','B'].map(id=>({id,project:'project',comparison:'comparison-'+id,snapshot:{tip:'tip-'+id},verified_at:'2026-10-31T00:00:00Z',completeness:'complete',files:['report.md','report.json','comparison.csv'],valid:true}));
+ const first={id:'JA',status:'running',operation:'comparison_verify',project:'project',arguments:{comparison:'comparison-A',at:null}};
+ const doneA={...first,status:'done',result:{report:'A'}},doneB={id:'JB',status:'done',operation:'comparison_verify',project:'project',result:{report:'B'}};
+ let releaseA,reportStarted,calls=0,stateCalls=0,background;
+ const delay=new Promise(resolve=>{releaseA=resolve;}),started=new Promise(resolve=>{reportStarted=resolve;});
+ e.context.setTimeout=fn=>fn();
+ e.context.fetch=async url=>{
+  if(url==='/api/actions')return {ok:true,json:async()=>++calls===1?first:doneB};
+  if(url==='/api/state')return {ok:true,json:async()=>({...state,jobs:++stateCalls===1?[first]:calls===1?[doneA]:[doneA,doneB]})};
+  if(url==='/api/jobs/JA'){background=e.run('refresh();');await started;return {ok:true,json:async()=>doneA};}
+  if(url==='/api/reports/A/report.md'){reportStarted();await delay;return {ok:true,text:async()=> '# A'};}
+  if(url==='/api/reports/B/report.md')return {ok:true,text:async()=> '# B'};
+  throw Error(url);
+ };
+ e.run('loaded=true;');await e.run('action("comparison_verify",{comparison:"comparison-A",at:null});');
+ await e.run('action("comparison_verify",{comparison:"comparison-B",at:null});');
+ assert.equal(e.run('currentReport.id'),'B');releaseA();await background;
+ assert.equal(e.run('currentReport.id'),'B');assert.match(e.byId('report-context').textContent,/tip-B/);
+ return {new_report_and_download_identity_retained:true};
+});
+await check('older_report_download_refusal_cannot_withdraw_newer_report',async()=>{
+ const e=environment();seed(e);e.run('currentReport={id:"B"};');
+ e.context.old={id:'A'};e.run('reportRefused(new Error("old request failed"),old);');
+ assert.equal(e.run('currentReport?.id'),'B');return {new_report_retained:true};
+});
+function setupComparisons(){const e=environment({comparisons:true});seed(e);e.run('data.projects[0].info.head={tip:"HEAD"};data.projects[0].info.comparisons=[{id:"A",name:"A",members:2},{id:"B",name:"B",members:3}];render();');return e;}
+await check('escaped_rationale_pipes_preserve_before_after_table_columns',async()=>{
+ const e=environment(),pipe=String.fromCharCode(92)+'|';
+ e.context.markdown='| Member | Field | Before | After |\n| --- | --- | --- | --- |\n| changed | /selected_assumptions/rationale | "Before '+pipe+' rationale" | "After '+pipe+' rationale" |';
+ e.run('renderMarkdown(markdown);');const rows=e.byId('report-text').children[0].children[0].children;
+ assert.equal(rows[0].children.length,4);assert.equal(rows[1].children.length,4);
+ assert.equal(rows[1].children[2].textContent,'"Before | rationale"');
+ assert.equal(rows[1].children[3].textContent,'"After | rationale"');return {four_columns_exact_before_after:true};
+});
+await check('invalid_displayed_copy_cannot_cancel_a_newer_report_load',async()=>{
+ for(const kind of ['refusal','poll']){
+  const e=environment();seed(e);const state=base();
+  state.reports=['A','B'].map(id=>({id,project:'project',attempt:id,verified_at:'2026-10-31T00:00:00Z',completeness:'complete',files:['report.md','report.json'],valid:true}));
+  e.context.state=state;e.run('data=state;currentReport=data.reports[0];loaded=true;');let finish;
+  e.context.fetch=()=>new Promise(resolve=>{finish=resolve;});const loading=e.run('showReport("B");');
+  if(kind==='refusal')e.run('reportRefused(new Error("Old copy failed"),currentReport);');
+  else {const incoming={...state,reports:state.reports.map(r=>({...r,valid:r.id!=='A'}))};e.context.fetch=async()=>({ok:true,json:async()=>incoming});await e.run('refresh();');}
+  finish({ok:true,text:async()=> '# B'});assert.equal(await loading,true);
+  assert.equal(e.run('currentReport?.id'),'B');
+ }
+ return {old_refusal_and_invalid_poll_preserve_new_load:true};
+});
+await check('refused_report_cannot_reappear_from_a_pre_refusal_state_response',async()=>{
+ for(const invalidation of ['refusal','poll']){
+  const e=environment();seed(e);const state=base();
+  state.reports=[{id:'A',project:'project',attempt:'A',verified_at:'2026-10-31T00:00:00Z',completeness:'complete',files:['report.md','report.json'],valid:true}];
+  e.context.state=state;e.run('data=state;currentReport=data.reports[0];loaded=true;');
+  const capturedState=JSON.parse(JSON.stringify(state));let finishReport,finishPoll;
+  e.context.fetch=url=>new Promise(resolve=>{if(url.endsWith('/report.md'))finishReport=resolve;else if(url==='/api/state')finishPoll=resolve;else throw Error(url);});
+  const reading=e.run('showReport("A");');
+  if(invalidation==='refusal'){
+   const polling=e.run('refresh();');e.run('reportRefused(new Error("Report directory changed"),currentReport);');
+   finishPoll({ok:true,json:async()=>capturedState});await polling;
+  }else{
+   const invalid=JSON.parse(JSON.stringify(state));invalid.reports[0].valid=false;
+   await poll(e,invalid);await poll(e,capturedState);
+  }
+  finishReport({ok:true,text:async()=> '# OLD COPY A'});
+  assert.equal(await reading,false);assert.equal(e.run('currentReport'),null);
+  assert.equal(e.run('data.reports[0].valid'),false);
+ }
+ return {refusal_and_invalid_poll_remain_invalid_across_stale_snapshots:true};
+});
+await check('late_refusal_of_an_absent_record_survives_later_old_snapshot',async()=>{
+ const e=environment();seed(e);const state=base();
+ state.reports=['A','B'].map(id=>({id,project:'project',attempt:id,verified_at:'2026-10-31T00:00:00Z',completeness:'complete',files:['report.md','report.json'],valid:true}));
+ e.context.state=state;e.run('data=state;currentReport=data.reports[1];loaded=true;');
+ const capturedState=JSON.parse(JSON.stringify(state));e.context.old=state.reports[0];
+ e.run('data.reports=data.reports.filter(record=>record.id!=="A");reportRefused(new Error("Old download refused"),old);');
+ await poll(e,capturedState);e.context.fetch=()=>{throw Error('Invalid copy must not be fetched');};
+ assert.equal(await e.run('showReport("A");'),false);assert.equal(e.run('currentReport.id'),'B');
+ return {absent_invalid_record_remembered:true,newer_report_retained:true};
+});
+await check('invalid_report_ids_survive_discarded_older_poll_responses',async()=>{
+ const e=environment();seed(e);const state=base();
+ state.reports=[{id:'A',project:'project',attempt:'A',verified_at:'2026-10-31T00:00:00Z',completeness:'complete',files:['report.md','report.json'],valid:true}];
+ e.context.state=state;e.run('data=state;currentReport=data.reports[0];loaded=true;');
+ const valid=JSON.parse(JSON.stringify(state)),invalid=JSON.parse(JSON.stringify(state));invalid.reports[0].valid=false;
+ let finishReport;const states=[];
+ e.context.fetch=url=>new Promise(resolve=>{if(url.endsWith('/report.md'))finishReport=resolve;else if(url==='/api/state')states.push(resolve);else throw Error(url);});
+ const reading=e.run('showReport("A");'),older=e.run('refresh();'),newer=e.run('refresh();');
+ states[1]({ok:true,json:async()=>valid});await newer;
+ states[0]({ok:true,json:async()=>invalid});await older;
+ finishReport({ok:true,text:async()=> '# OLD COPY A'});
+ assert.equal(await reading,false);assert.equal(e.run('currentReport'),null);assert.equal(e.run('data.reports[0].valid'),false);
+ return {discarded_snapshot_retains_monotonic_invalidation:true};
+});
+function comparisonValue(){return {comparison:'A',changes_text:'A changes',variants:[{id:'a1',label:'A1',plan:'mmtt-base',selector:{variant:'nominal'}},{id:'a2',label:'A2',plan:'mmtt-base',selector:{variant:'volume-120'}}],attempts:{'mmtt-base':{status:'unattempted'}},baseline:'a1',snapshot:{tip:'HEAD'}};}
+await check('comparison_selection_clears_previous_roster_status',async()=>{
+ const e=setupComparisons();e.context.a=comparisonValue();e.run('action=async()=>({status:"done",result:a});');await e.byId('comparison-open').onclick();
+ e.byId('comparison-select').value='B';e.byId('comparison-select').onchange();
+ assert.doesNotMatch(e.byId('comparison-status').textContent,/2 planned members/);
+ assert.match(e.byId('comparison-status').textContent,/inspect/i);return {old_snapshot_status_cleared:true};
+});
+await check('comparison_roster_and_explicit_baseline_survive_project_switch_and_refusal',async()=>{
+ const e=setupComparisons();e.run('action=async()=>({status:"done",result:{options:[{selector:{variant:"nominal"},label:"nominal"},{selector:{variant:"volume-120"},label:"volume-120"}]}});');
+ e.byId('comparison-plan').value='mmtt-base';e.byId('comparison-plan').onchange();await e.byId('comparison-options').onclick();
+ e.byId('comparison-name').value='Unsaved roster';e.byId('comparison-question').value='Question';
+ for(const variant of ['nominal','volume-120']){e.byId('comparison-selector').value=JSON.stringify({variant});e.byId('comparison-add').onclick();}
+ e.byId('comparison-baseline').value='member-2';e.run('data.projects.push({...data.projects[0],id:"other"});selected="other";render();selected="project";render();');
+ assert.equal(e.byId('comparison-roster').children.length,2);assert.equal(e.byId('comparison-baseline').value,'member-2');assert.equal(e.byId('comparison-name').value,'Unsaved roster');
+ e.run('action=async()=>({status:"error",error:"Controlled conflict"});');await e.byId('comparison-form').onsubmit({preventDefault(){}});
+ assert.equal(e.byId('comparison-roster').children.length,2);assert.equal(e.byId('comparison-baseline').value,'member-2');return {roster_metadata_baseline_retained:true};
+});
+await check('edits_during_comparison_freeze_keep_the_unsaved_roster_and_metadata',async()=>{
+ for(const changed of ['comparison-name','comparison-question','comparison-baseline',null]){
+  const e=setupComparisons();e.run('action=async()=>({status:"done",result:{options:[{selector:{variant:"nominal"},label:"nominal"},{selector:{variant:"volume-120"},label:"volume-120"}]}});');
+  e.byId('comparison-plan').value='mmtt-base';e.byId('comparison-plan').onchange();await e.byId('comparison-options').onclick();
+  e.byId('comparison-name').value='Submitted name';e.byId('comparison-question').value='Submitted question';
+  for(const variant of ['nominal','volume-120']){e.byId('comparison-selector').value=JSON.stringify({variant});e.byId('comparison-add').onclick();}
+  let finish;e.context.freezeAction=operation=>operation==='comparison_freeze'?new Promise(resolve=>{finish=resolve;}):Promise.resolve({status:'done',result:comparisonValue()});e.run('action=freezeAction;');
+  const freezing=e.byId('comparison-form').onsubmit({preventDefault(){}});
+  if(changed)e.byId(changed).value=changed==='comparison-baseline'?'member-2':'Newer edit';
+  finish({status:'done',result:{comparison:'A'}});await freezing;
+  assert.equal(e.byId('comparison-roster').children.length,changed?2:0);
+  if(changed)assert.equal(e.byId(changed).value,changed==='comparison-baseline'?'member-2':'Newer edit');
+ }
+ return {name_question_baseline_edits_preserved:true,unchanged_submission_clears_roster:true};
+});
+await check('late_comparison_options_cannot_describe_another_plan',async()=>{
+ const e=setupComparisons();let finish;e.context.optionsAction=()=>new Promise(resolve=>{finish=resolve;});e.run('action=optionsAction;');
+ const pending=e.byId('comparison-options').onclick();e.byId('comparison-plan').value='mmtt-base';e.byId('comparison-plan').onchange();
+ finish({status:'done',result:{options:[{selector:{source:'old'},label:'Old source'}]}});await pending;
+ assert.equal(e.byId('comparison-selector').children.length,0);return {late_selector_ignored:true};
 });
 receipt.passed=Object.values(receipt.tests).every(value=>value.passed);fs.writeFileSync(receiptPath,JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify({passed:receipt.passed,source_sha256:receipt.source_sha256,tests:Object.fromEntries(Object.entries(receipt.tests).map(([name,value])=>[name,value.passed])),receipt:receiptPath}));if(!receipt.passed)process.exitCode=1;

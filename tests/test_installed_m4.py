@@ -148,6 +148,23 @@ class InstalledM4(unittest.TestCase):
         with self.assertRaises(ValueError):
             profile.evidence(changed)
 
+    def test_current_sampling_roster_attachment_remains_strict(self):
+        attachment = self.attachment()
+        legacy = attachment["application"]["tasks"]
+        current = [*legacy, "mmtt-sampling"]
+        attachment["application"]["tasks"] = current
+        self.assertEqual(profile.evidence(attachment), attachment)
+        for invalid in (
+            current + ["unselected"],
+            current[::-1],
+            legacy[:-1],
+            [*current, "mmtt-sampling"],
+        ):
+            changed = copy.deepcopy(attachment)
+            changed["application"]["tasks"] = invalid
+            with self.assertRaisesRegex(ValueError, "Invalid current application"):
+                profile.evidence(changed)
+
     def test_noncanonical_attachment_refuses_before_dependency_access(self):
         attachment = self.attachment()
         filename = self.root / "attachment.json"

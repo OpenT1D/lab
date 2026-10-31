@@ -156,6 +156,53 @@ report copies. It is not an authenticated remote collaboration service. Keep
 private health records out. Native parameter/table redistribution rights remain
 separate; the GUI does not grant permission to distribute those project bytes.
 
+## Compare variants and frozen plans
+
+Use **Compare frozen plans and variants** before running the selected plans.
+Choose plans with the same task, original observations, participant allocation,
+visit order and scientific support. Plans may differ in their declared MMTT
+assumptions or sampling schedules. Sampling retains its development seal.
+Installed M4 supports only its existing reviewed source/load selections and
+requires its separately prepared attachment for execution.
+
+1. Name the comparison and state the research question. Choose an unattempted
+   frozen plan, **Load plan variants**, select its assumption/schedule or
+   source/load, name the member and **Add member**. Repeat for 2–16 distinct
+   plan/selector combinations. Several members may share one plan.
+2. Choose an explicit **Baseline member** and **Freeze comparison roster**.
+   Inspect the exact changed fields, including selected kinetic/volume values,
+   retained sampling times and initial load/source identities. Incompatible
+   input support is refused; the editable roster remains available for correction.
+   Changes to the name, question or baseline while freezing remain in the editable
+   roster; the saved comparison retains exactly the submitted values.
+3. **Run next unattempted plan** executes unique plans sequentially in frozen
+   roster order. The first attempt remains selected, including failures and
+   incomplete results. A later retry cannot replace it. To repeat previously
+   executed assumptions, first derive and freeze a fresh plan, then freeze a new
+   comparison before its execution. Recover an unfinished attempt through the
+   existing explicit SDK recovery path before another execution.
+   Existing archives cannot be imported as a comparison member's first attempt;
+   use a separate plan for retrospective intake.
+4. **Reconstruct current comparison** verifies saved native evidence and keeps
+   every planned member/case, including unattempted and unavailable values.
+   Download JSON, Markdown and **comparison CSV**. Inspect allocations, units,
+   point/interval completeness and the explicit member-minus-baseline direction.
+   Unresolved intervals do not establish no change; there is no biological score.
+5. A report records its exact ledger tip. Paste it under **Saved report ledger
+   tip** and **Reconstruct saved snapshot** to reproduce that report after later
+   execution/retries, restart or project copying. Refreshing current statuses
+   creates a new view; it does not alter earlier report snapshots. Choosing a
+   different comparison clears the previous status/report context. Delayed reads
+   cannot replace a newer verification or its download identity.
+
+MMTT reports retain whole-body secretion including basal over 0–120 minutes in
+pmol, with follow-up minus baseline. M4 tables retain its complete 0–240-minute
+quarter-minute grid and native signal-specific AUC, time-mean and pointwise
+contrasts. They require entire-source/reference/control acceptance. Neither
+route supplies empirical equivalence, a new interval for between-member
+differences, treatment effects or independent usability evidence. The
+[comparison record](research/workbench-comparisons.md) owns the bounded checks.
+
 ## Prepare an actual user exercise
 
 The original exercise below still selects paired MMTT and M4 references. Adding

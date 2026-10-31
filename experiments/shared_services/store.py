@@ -97,6 +97,20 @@ class Store:
         )
         require(not write_access or self.writable, "Writable project lease required")
 
+    def require_comparison_start(self, plan, mode, ordinal):
+        self.require_lease()
+        require(
+            mode != "import"
+            or ordinal != 1
+            or not any(
+                member["plan"] == plan
+                for comparison in self.comparisons.values()
+                for member in comparison["variants"]
+            ),
+            "A preexecution comparison requires an executed first attempt; "
+            "import existing evidence into a separate plan",
+        )
+
     def inspect(self):
         self.require_lease()
         require(
@@ -125,6 +139,7 @@ class Store:
             "Lost, duplicate or uncommitted ledger event",
         )
         self.events, self.plans, self.attempts, self.finishes = [], {}, {}, {}
+        self.comparisons = {}
         tip = None
         for sequence in range(1, head["count"] + 1):
             folder = self.path / "events" / f"{sequence:08d}"
@@ -173,6 +188,12 @@ class Store:
                     "Derived task differs",
                 )
             self.plans[identity] = (data["descriptor"], folder / "plan")
+        elif kind == "comparison":
+            from .comparisons import validate
+
+            require(set(data) == {"definition"}, "Invalid comparison event")
+            validate(self, data["definition"])
+            self.comparisons[identity] = data["definition"]
         elif kind == "start":
             require(
                 set(data) == {"plan", "ordinal", "retry_of", "mode", "host"}
@@ -184,6 +205,7 @@ class Store:
                 (key, row) for key, row in self.attempts.items() if row["plan"] == data["plan"]
             ]
             require(data["ordinal"] == len(prior) + 1, "Lost or duplicate attempt ordinal")
+            self.require_comparison_start(data["plan"], data["mode"], data["ordinal"])
             require(
                 data["retry_of"] == (prior[-1][0] if prior else None)
                 and (not prior or prior[-1][0] in self.finishes),

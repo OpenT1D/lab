@@ -5,13 +5,14 @@ const names = {"mmtt-sampling": "Fewer meal-test measurement times", "mmtt-sensi
 const cases = {"mmtt-sampling": [["information-loss", "Invented information loss"], ["constant", "Constant-input control"], ["incomplete", "Incomplete measurements"], ["steep-response", "Steep-response boundary control"]], "mmtt-sensitivity": [["complete", "Invented paired visit"], ["censored", "Invented paired visit with censored measurements"]], "m4-study-installed": [["fasting", "Fasting"], ["gastric_load_15g", "15 g initial gastric amount"]]};
 const context = {"mmtt-sampling": "Compare full and reduced actual measurement times using the same estimator and assumptions. Development-only selection is frozen before analysis; evaluation results do not select schedules. Whole-body total secretion including basal over 0–120 minutes (pmol). Full curves are references, not biological truth. Invented data only.", "mmtt-sensitivity": "Whole-body total endogenous secretion, including basal, over observed 0–120 minutes (pmol). Change is follow-up minus baseline. Three required assumption variants; 128 perturbations with seed 117. Invented data only.", "m4-study-installed": "Both supplied sources · adult#001 · 240 minutes · 961 quarter-minute samples. The gastric amount is an initial condition, not a timed meal. Native runtimes must be prepared separately."};
 let data = null, selected = null, draft = null, selectedPlan = null, currentReport = null, pending = false, pendingOperation = null, watched = null, loaded = false;
-let imageURL = null, parentDraft = null, refreshIssued = 0, refreshApplied = 0;
+let imageURL = null, parentDraft = null, refreshIssued = 0, refreshApplied = 0, reportIssued = 0;
 const handled = new Set();
+const invalidReports = new Set();
 function invalidatePlanView() { $("plan-inspector").classList.add("hidden"); $("plan-inspector").open = false; $("plan-details").textContent = ""; $("readiness").textContent = "Check this frozen plan with the current runtime selection before execution."; }
 function element(tag, text, cls) { const node = document.createElement(tag); if (text !== undefined) node.textContent = text; if (cls) node.className = cls; return node; }
 function notice(message, error = false) { $("notice").textContent = message; $("notice").className = "notice" + (error ? " error" : ""); if (error) $("notice").focus(); }
-function withdrawReport() { currentReport = null; $("report-text").replaceChildren(); $("child-reports").replaceChildren(); if (imageURL) URL.revokeObjectURL(imageURL); imageURL = null; $("report-figure").src = ""; $("saved-report").classList.add("hidden"); }
-function reportRefused(error) { withdrawReport(); notice(error.message, true); }
+function withdrawReport(cancelLoading = true) { if (cancelLoading) reportIssued++; currentReport = null; $("report-text").replaceChildren(); $("child-reports").replaceChildren(); if (imageURL) URL.revokeObjectURL(imageURL); imageURL = null; $("report-figure").src = ""; $("saved-report").classList.add("hidden"); }
+function reportRefused(error, record = currentReport) { if (record?.id) invalidReports.add(record.id); const known = data?.reports?.find(item => item.id === record?.id); if (known) known.valid = false; if (record?.id !== currentReport?.id) return; withdrawReport(false); notice(error.message, true); }
 async function request(url, body) {
   const options = {headers: {"X-OpenT1D-Token": token}, cache: "no-store"};
   if (body !== undefined) { options.method = "POST"; options.headers["Content-Type"] = "application/json"; options.body = JSON.stringify(body); }
@@ -22,6 +23,7 @@ async function request(url, body) {
 async function action(operation, arguments_ = {}, project = selected) {
   if (pending || data?.active) { notice("Another action is still running. Stop the run or wait for it to finish.", true); return; }
   if (operation === "check") invalidatePlanView();
+  if (operation === "verify" || operation === "comparison_verify") reportIssued++;
   pendingOperation = operation; pending = true; render();
   try {
     const route = ["draft_create", "draft_save"].includes(operation) ? "/api/drafts" : "/api/actions";
@@ -43,11 +45,15 @@ async function refresh() {
   try {
     const issued = ++refreshIssued;
     const incoming = await (await request("/api/state")).json();
+    for (const record of incoming.reports || []) if (!record.valid) invalidReports.add(record.id);
+    for (const record of data?.reports || []) if (invalidReports.has(record.id)) record.valid = false;
+    if (currentReport && invalidReports.has(currentReport.id)) withdrawReport(false);
     if (issued < refreshApplied || (data && incoming.runtime_revision < data.runtime_revision)) return;
     refreshApplied = issued;
     if (data?.runtime_revision !== incoming.runtime_revision || data?.runtime_attachment !== incoming.runtime_attachment) invalidatePlanView();
+    for (const record of incoming.reports || []) if (invalidReports.has(record.id)) record.valid = false;
     data = incoming;
-    if (currentReport && !data.reports?.some(record => record.id === currentReport.id && record.valid)) withdrawReport();
+    if (currentReport && !data.reports?.some(record => record.id === currentReport.id && record.valid)) withdrawReport(false);
     if (!loaded) { for (const job of data.jobs) if (job.status !== "running") handled.add(job.id); loaded = true; }
     for (const job of data.jobs) if (job.id === watched && job.status !== "running" && !handled.has(job.id)) {
       handled.add(job.id); watched = null;
@@ -56,7 +62,7 @@ async function refresh() {
         const checked = job.check_context;
         if (!checked || checked.project !== selected || checked.plan !== selectedPlan || checked.runtime_revision !== data.runtime_revision || checked.runtime_attachment !== data.runtime_attachment) { notice("Readiness result belongs to an earlier selection. Check the current frozen plan again."); continue; }
       }
-      if (job.project && job.project !== selected) { selected = job.project; invalidatePlanView(); }
+      if (job.project && job.project !== selected) { withdrawReport(); selected = job.project; invalidatePlanView(); }
       const result = job.result;
       if (job.operation === "prepare") { if (globalThis.workbench) await workbench.open(result.id, false); else { draft = result; $("plan-name").value = `${names[result.task]} — ${cases[result.task].find(row => row[0] === result.case)[1]}`; } notice(draft?.validation?.valid === false ? "Concept saved. Correct its validation errors before freezing." : "Inputs validated. Inspect the assumptions and freeze a plan before running."); }
       else if (job.operation.startsWith("draft_") || job.operation === "derive") { notice(job.operation === "draft_validate" ? "Validation finished. Inspect the saved concept and its diagnostics." : "Study concept saved. No frozen plan was changed."); }
@@ -64,7 +70,8 @@ async function refresh() {
       else if (job.operation === "plan") { if (typeof result.scientific_input_text === "string") { const metadata = {...result}; delete metadata.scientific_input; delete metadata.scientific_input_text; $("plan-details").textContent = JSON.stringify(metadata, null, 2) + "\n\nScientific inputs (exact saved JSON):\n" + result.scientific_input_text; } else $("plan-details").textContent = JSON.stringify(result, null, 2); $("plan-inspector").classList.remove("hidden"); $("plan-inspector").open = true; }
       else if (job.operation === "check") { $("readiness").textContent = result.runtimes_ready ? "Ready for explicit execution. This check did not run a model or install dependencies." : "Native execution is unavailable with the current selection. Configure reviewed runtimes; an explicit run without them retains an admission failure and performs no setup."; notice(result.runtimes_ready ? "Readiness check passed." : "Readiness check found unavailable native runtimes.", !result.runtimes_ready); }
       else if (job.operation === "run") { notice(`Execution ${result.result.execution_status}; scientific evidence ${result.result.completeness}. Verify the saved report explicitly to inspect its conclusions.`, result.result.completeness !== "complete"); }
-      else if (job.operation === "verify") { await showReport(result.report); notice("Saved analysis verified. This did not run the model again."); }
+      else if (job.operation === "verify") { if (await showReport(result.report)) notice("Saved analysis verified. This did not run the model again."); }
+      else if (job.operation.startsWith("comparison_")) { if (job.operation === "comparison_verify") { if (await showReport(result.report)) notice("Comparison reconstructed from fixed native evidence. Every planned member is retained."); } else notice("Comparison metadata read or saved. No model was run."); }
       else if (job.operation === "relocate") { selectedPlan = null; currentReport = null; notice("The complete project copy is open. Verify its saved reports before removing the original."); }
       else if (job.operation === "attach") { invalidatePlanView(); notice("Prepared dependencies verified and attached to this application."); }
       else if (job.operation === "select_attachment") { invalidatePlanView(); notice("Attachment selected. Check a frozen plan to validate it for this application."); }
@@ -79,7 +86,7 @@ function render() {
   if (!data) return;
   const busy = pending || !!data.active || data.closing;
   $("project-count").textContent = data.projects.length;
-  $("project-list").replaceChildren(...data.projects.map(item => { const button = element("button", item.name, "project-choice" + (item.id === selected ? " selected" : "")); button.disabled = busy; button.onclick = () => { selected = item.id; selectedPlan = null; draft = null; currentReport = null; invalidatePlanView(); action("refresh", {}, item.id); }; return button; }));
+  $("project-list").replaceChildren(...data.projects.map(item => { const button = element("button", item.name, "project-choice" + (item.id === selected ? " selected" : "")); button.disabled = busy; button.onclick = () => { withdrawReport(); selected = item.id; selectedPlan = null; draft = null; invalidatePlanView(); action("refresh", {}, item.id); }; return button; }));
   const chosen = project();
   $("welcome").classList.toggle("hidden", !!chosen); $("project-view").classList.toggle("hidden", !chosen);
   const active = data.jobs.find(job => job.id === data.active);
@@ -114,6 +121,7 @@ function render() {
   renderAttempts(chosen.info?.attempts || [], plans, busy);
   $("saved-report").classList.toggle("hidden", !currentReport || currentReport.project !== selected);
   globalThis.workbench?.render(data, chosen, busy);
+  globalThis.comparisons?.render(data, chosen, busy);
 }
 function renderAttempts(attempts, plans, busy) {
   if (!attempts.length) { $("attempt-list").replaceChildren(element("p", "No attempts yet. A run preserves its own outcome here.", "muted")); return; }
@@ -133,13 +141,22 @@ function renderAttempts(attempts, plans, busy) {
     row.append(actions); return row;
   }));
 }
+function tableCells(line) {
+  const cells = []; let start = 0, slashes = 0;
+  for (let i = 0; i < line.length; i++) {
+    if (line[i] === "|" && slashes % 2 === 0) { cells.push(line.slice(start, i)); start = i + 1; }
+    slashes = line[i] === "\\" ? slashes + 1 : 0;
+  }
+  cells.push(line.slice(start));
+  return cells.slice(1, -1).map(value => value.trim().replaceAll("\\|", "|"));
+}
 function renderMarkdown(text, container = $("report-text")) {
   container.replaceChildren(); const lines = text.split("\n");
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i]; if (!line.trim()) continue;
     if (line.startsWith("|")) {
       const wrapper = element("div", undefined, "table-scroll"), table = element("table"); let first = true;
-      while (i < lines.length && lines[i].startsWith("|")) { const cells = lines[i].split("|").slice(1, -1).map(value => value.trim()); if (!cells.every(value => /^[:\- ]+$/.test(value))) { const row = element("tr"); for (const value of cells) { const cell = element(first ? "th" : "td", value.replaceAll("**", "")); if (first) cell.scope = "col"; row.append(cell); } table.append(row); first = false; } i++; }
+      while (i < lines.length && lines[i].startsWith("|")) { const cells = tableCells(lines[i]); if (!cells.every(value => /^[:\- ]+$/.test(value))) { const row = element("tr"); for (const value of cells) { const cell = element(first ? "th" : "td", value.replaceAll("**", "")); if (first) cell.scope = "col"; row.append(cell); } table.append(row); first = false; } i++; }
       i--; wrapper.append(table); container.append(wrapper);
     } else if (line.startsWith("#")) container.append(element("h3", line.replace(/^#+\s*/, "")));
     else container.append(element("p", line.replaceAll("**", "")));
@@ -160,34 +177,41 @@ function renderChildReports(record) {
     const schedule = name.split("/")[1], details = element("details"), content = element("div", undefined, "report-text");
     details.append(element("summary", `Schedule: ${schedule}`));
     const view = element("button", "Read native analysis");
-    view.onclick = async () => { try { renderMarkdown(await (await request(`/api/reports/${record.id}/${name}`)).text(), content); } catch (error) { reportRefused(error); } };
+    view.onclick = async () => { try { const text = await (await request(`/api/reports/${record.id}/${name}`)).text(); if (currentReport?.id === record.id) renderMarkdown(text, content); } catch (error) { reportRefused(error, record); } };
     details.append(view);
     for (const extension of ["md", "json"]) {
       const download = element("button", extension === "md" ? "Download schedule report" : "Download schedule JSON");
-      download.onclick = async () => { try { await downloadReport(record, name.replace(/\.md$/, "." + extension)); } catch (error) { reportRefused(error); } };
+      download.onclick = async () => { try { await downloadReport(record, name.replace(/\.md$/, "." + extension)); } catch (error) { reportRefused(error, record); } };
       details.append(download);
     }
     details.append(content); container.append(details);
   }
 }
 async function showReport(identity) {
+  const issued = ++reportIssued;
   const record = data.reports.find(item => item.id === identity);
   if (!record) throw new Error("Verified report pointer is unavailable; refresh and verify again.");
+  if (!record.valid || invalidReports.has(identity)) return false;
+  try {
   const markdown = await (await request(`/api/reports/${identity}/report.md`)).text();
   const hasFigure = record.files.includes("figure.svg");
   const nextImageURL = hasFigure ? URL.createObjectURL(await (await request(`/api/reports/${identity}/figure.svg`)).blob()) : null;
+  if (issued !== reportIssued || selected !== record.project || invalidReports.has(identity) || !data.reports.some(item => item.id === identity && item.valid)) { if (nextImageURL) URL.revokeObjectURL(nextImageURL); return false; }
   renderMarkdown(markdown);
   renderChildReports(record);
   if (imageURL) URL.revokeObjectURL(imageURL);
   imageURL = nextImageURL;
   $("report-figure").classList.toggle("hidden", !hasFigure);
   document.querySelector('[data-download="figure.svg"]').classList.toggle("hidden", !hasFigure);
+  $("download-comparison").classList.toggle("hidden", !record.files.includes("comparison.csv"));
   if (hasFigure) $("report-figure").src = imageURL;
   currentReport = record;
-  $("report-context").textContent = `Verified ${new Date(record.verified_at).toLocaleString()} · attempt ${record.attempt.slice(0, 12)}`;
+  $("report-context").textContent = `Verified ${new Date(record.verified_at).toLocaleString()} · ` + (record.comparison ? `comparison ${record.comparison.slice(0, 12)} · snapshot ${record.snapshot.tip}` : `attempt ${record.attempt.slice(0, 12)}`);
   $("report-completeness").textContent = record.completeness;
   $("report-completeness").className = "tag" + (record.completeness === "complete" ? "" : " warn");
   $("saved-report").classList.remove("hidden"); $("saved-report").scrollIntoView({behavior: "smooth", block: "start"});
+  return true;
+  } catch (error) { if (issued !== reportIssued || selected !== record.project) return false; throw error; }
 }
 $("create-project").onsubmit = event => { event.preventDefault(); action("create", {name: $("project-name").value}, null); };
 $("open-project").onsubmit = event => { event.preventDefault(); action("open", {path: $("open-path").value}, null); };
@@ -205,6 +229,7 @@ $("clear-runtime").onclick = () => action("clear_attachment", {}, null);
 $("relocate-form").onsubmit = event => { event.preventDefault(); action("relocate", {output: $("relocate-path").value}); };
 $("cancel-run").onclick = async () => { try { if (data.active) await request(`/api/jobs/${data.active}/cancel`, {}); await refresh(); } catch (error) { notice(error.message, true); } };
 $("stop-server").onclick = async () => { try { await request("/api/shutdown", {}); data.closing = true; render(); notice("Server stopping. Runs are cancelled through the SDK; project actions finish before exit. Keep the terminal open until it exits."); } catch (error) { notice(error.message, true); } };
-for (const button of document.querySelectorAll("[data-download]")) button.onclick = async () => { try { if (currentReport) await downloadReport(currentReport, button.dataset.download); } catch (error) { reportRefused(error); } };
+for (const button of document.querySelectorAll("[data-download]")) button.onclick = async () => { const record = currentReport; try { if (record) await downloadReport(record, button.dataset.download); } catch (error) { reportRefused(error, record); } };
 globalThis.workbench?.bind();
+globalThis.comparisons?.bind();
 updateTask(); refresh(); setInterval(refresh, 1500);

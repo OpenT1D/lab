@@ -89,8 +89,8 @@ The [public-development queue](ROADMAP.md#public-development-priorities) now
 selects [further integrated laboratory work](ROADMAP.md#selected-development-window-first-integrated-laboratory)
 on the merged installed SDK, native M4 successor and project GUI. Shared sampling
 and the bounded [editable workbench](docs/research/editable-workbench.md) are
-implemented; reproducible comparisons, a connected synthetic study and an
-internal candidate with a tested reader transition remain planned. M3 migration
+implemented, alongside [reproducible frozen comparisons](docs/research/workbench-comparisons.md).
+A connected synthetic study and an internal candidate with a tested reader transition remain planned. M3 migration
 is a stretch goal.
 Development can proceed while intended-user acceptance remains open. The
 implemented public checks and bounded Mac candidate retain their current scope.
