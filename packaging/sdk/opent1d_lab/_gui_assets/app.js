@@ -99,6 +99,15 @@ function render() {
   for (const button of document.querySelectorAll("form button, #refresh-project, #inspect-plan, #check-plan, #run-plan, #clear-runtime")) button.disabled = busy;
   $("stop-server").disabled = data.closing;
   $("application").textContent = `Internal SDK · ${data.installation.build_label} · ${data.installation.source.revision.slice(0, 8)}`;
+  const bounded = data.installation.schema === "opent1d.installed-sdk/4";
+  for (const id of ["native-card", "runtime-controls", "connected-study", "connected-nav"]) $(id).classList.toggle("hidden", bounded);
+  $("candidate-capabilities").textContent = bounded ? "This candidate supports paired meal-test assumptions, reduced sampling and frozen comparisons. Native and connected studies require a separately qualified candidate." : "This developer build includes both MMTT tasks and explicit native study capabilities.";
+  const admitted = Object.keys(cases).filter(task => (data.installation.tasks || Object.keys(cases)).includes(task));
+  if (Array.from($("task").children).map(option => option.value).join() !== admitted.join()) {
+    const previous = $("task").value;
+    options($("task"), admitted.map(task => [task, names[task]]), previous);
+    if ($("task").value !== previous) updateTask();
+  }
   $("workspace-path").textContent = data.workspace;
   if (!chosen) return;
   $("selected-name").textContent = chosen.name; $("selected-path").textContent = chosen.path;

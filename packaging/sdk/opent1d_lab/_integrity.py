@@ -54,6 +54,11 @@ def verify(package):
                 and metadata["native_execution"] == "explicit-reviewed-attachment/1"
             )
             or (
+                metadata["schema"] == "opent1d.installed-sdk/4"
+                and metadata["tasks"] == ["mmtt-sensitivity", "mmtt-sampling"]
+                and metadata["native_execution"] == "unavailable-public-policy"
+            )
+            or (
                 metadata["schema"] == "opent1d.installed-sdk/2"
                 and metadata["tasks"] == TASKS[:3]
                 and metadata["native_execution"] == "explicit-reviewed-attachment/1"

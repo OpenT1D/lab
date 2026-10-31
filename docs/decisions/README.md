@@ -1,5 +1,7 @@
 # Decision records
 
+- [0089 — Internal candidate and reader transition](0089-internal-candidate-reader-transition.md): exact two-task candidate and pinned comparison reader compatibility without rewriting evidence.
+
 - [0088 — Connected synthetic observation study](0088-connected-synthetic-observation-study.md): freeze and preserve known pancreatic input, forward C-peptide, inverse analysis and reduced sampling through existing task services.
 
 - [0087 — Frozen workbench comparisons](0087-frozen-workbench-comparisons.md): preexecution rosters, fixed first attempts, task-owned contrasts and prefix-bound reconstruction.

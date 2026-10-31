@@ -92,7 +92,9 @@ and the bounded [editable workbench](docs/research/editable-workbench.md) are
 implemented, alongside [reproducible frozen comparisons](docs/research/workbench-comparisons.md).
 The [connected synthetic study](docs/research/connected-synthetic-study.md) now
 composes known secretion, forward C-peptide, inverse analysis and reduced
-sampling. An internal candidate with a tested reader transition remains next;
+sampling. The bounded [internal MMTT candidate](docs/internal-mmtt-candidate.md)
+adds an explicit, pinned transition for previous MMTT comparison readers;
+native candidate qualification and broader transitions remain separate.
 M3 migration is a stretch goal.
 Development can proceed while intended-user acceptance remains open. The
 implemented public checks and bounded Mac candidate retain their current scope.

@@ -78,6 +78,7 @@ subtrees:
       - file: docs/shared-project-services
       - file: docs/research/ot061-064-minimal-services
       - file: docs/installed-sdk
+      - file: docs/internal-mmtt-candidate
       - file: docs/installed-m4
       - file: docs/installed-gui
       - file: docs/research/ot060-installed-route
@@ -326,6 +327,7 @@ subtrees:
       - file: docs/decisions/0086-editable-workbench-drafts
       - file: docs/decisions/0087-frozen-workbench-comparisons
       - file: docs/decisions/0088-connected-synthetic-observation-study
+      - file: docs/decisions/0089-internal-candidate-reader-transition
       - file: docs/decisions/0059-maintained-runtimes-and-local-gui
       - file: docs/templates/model-card
       - file: docs/templates/experiment-protocol

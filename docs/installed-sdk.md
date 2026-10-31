@@ -6,6 +6,10 @@ sensitivity outside a checkout. The historical `m4-study-secure` identity keeps
 passive intake, frozen plans, explicit native-runtime refusal and matching failed
 readers. The original two-route
 [verification record](research/ot060-installed-route.md) retains that scope.
+The [two-task internal candidate](internal-mmtt-candidate.md) adds a separately
+bounded, pinned MMTT comparison-reader transition and exact-artifact procedure.
+The default wheel below retains its broader developer scope.
+
 The wheel version `0.0.0.dev0` is internal; no release, stable API, general upgrade
 support or independent usability is claimed.
 

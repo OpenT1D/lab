@@ -323,6 +323,7 @@ def dispatch(request, bootstrap, artifact, *, cancel=None):
         "reconstruct-comparison",
         "study",
         "reconstruct-study",
+        "reconstruct",
     }
     backend = Backend(bootstrap, artifact, request.get("runtime_attachment"))
     with store.opened(path, write_access=writing) as project:

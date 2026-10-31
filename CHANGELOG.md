@@ -4,6 +4,16 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Add a bounded internal MMTT wheel/workbench candidate with an enforced two-task
+  capability roster, candidate-bound formative preparation and a repeatable
+  exact-artifact A/B qualification procedure. Support one pinned PR-43 MMTT
+  comparison reader transition, binding the complete prior and successor
+  identities while preserving original definitions and report bytes. Return
+  actual reader provenance separately and make installed reconstruction readonly.
+  Unknown or altered readers still refuse. Native/connected projects and public
+  release remain outside this candidate; numerical methods and tolerances stay
+  unchanged.
+
 - Add a prospectively frozen connected synthetic study across known pancreatic
   secretion, forward C-peptide observations, inverse analysis and reduced
   sampling in the installed SDK, CLI and workbench. Preserve native source and
