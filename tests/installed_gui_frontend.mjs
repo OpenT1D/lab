@@ -550,4 +550,12 @@ await check('connected_metadata_gap_preserves_study_and_verified_report_identity
  assert.equal(e.byId('connected-select').value,'A');assert.equal(e.run('currentReport'),null);assert.equal(e.byId('saved-report').classList.contains('hidden'),true);
  return {temporary_gap_preserves_selection_and_report:true,legitimate_removal_withdraws_report:true};
 });
+await check('bounded_candidate_only_offers_its_two_mmtt_tasks',async()=>{
+ const e=environment({concepts:true,comparisons:true,connected:true});seed(e);
+ e.run('data.installation.schema="opent1d.installed-sdk/4";data.installation.tasks=["mmtt-sensitivity","mmtt-sampling"];render();');
+ assert.deepEqual(e.byId('task').children.map(option=>option.value).sort(),['mmtt-sampling','mmtt-sensitivity']);
+ for(const id of ['native-card','runtime-controls','connected-study','connected-nav'])assert.equal(e.byId(id).classList.contains('hidden'),true,id);
+ assert.match(e.byId('candidate-capabilities').textContent,/separately qualified candidate/);
+ return {two_tasks_only:true,native_and_connected_hidden:true,explicit_scope:true};
+});
 receipt.passed=Object.values(receipt.tests).every(value=>value.passed);fs.writeFileSync(receiptPath,JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify({passed:receipt.passed,source_sha256:receipt.source_sha256,tests:Object.fromEntries(Object.entries(receipt.tests).map(([name,value])=>[name,value.passed])),receipt:receiptPath}));if(!receipt.passed)process.exitCode=1;

@@ -108,6 +108,11 @@ class Controller:
         self.lease = Lease(self.root / ".gui.lock")
         try:
             self.installation = sdk.installation()
+            require(
+                self.installation.get("schema") != "opent1d.installed-sdk/4"
+                or runtime_attachment is None,
+                "This MMTT candidate does not admit native runtime attachments",
+            )
             for name in ("projects", "inputs", "drafts", "reports", "attachments", "journal"):
                 target = self.root / name
                 target.mkdir(exist_ok=True)
@@ -422,6 +427,17 @@ class Controller:
 
     def perform(self, job):
         operation, args, handle = job["operation"], job["arguments"], job["project"]
+        if operation in {"prepare", "draft_create"}:
+            require(
+                args["task"] in self.installation.get("tasks", TASKS),
+                "Task not admitted by this candidate",
+            )
+        if self.installation.get("schema") == "opent1d.installed-sdk/4":
+            require(
+                operation not in {"attach", "select_attachment", "clear_attachment"}
+                and not operation.startswith("study_"),
+                "This MMTT candidate does not admit native or connected study actions",
+            )
         project = self.sdk.Project(self.catalog["projects"][handle]["path"]) if handle else None
         if operation == "create":
             require(

@@ -8,6 +8,9 @@ supplied examples and user-chosen synthetic inputs for paired-sensitivity and
 reduced-sampling MMTT, plus editable selected configurations for the
 [installed M4 successor](installed-m4.md).
 The older checkout GUI and its historical exercises retain their own scope.
+The [bounded internal MMTT candidate](internal-mmtt-candidate.md) deliberately
+admits only the two MMTT tasks and their comparisons. Its startup view and
+service gates omit native/connected execution and runtime attachments.
 
 Use the SDK build/install procedure, then launch from any working directory:
 

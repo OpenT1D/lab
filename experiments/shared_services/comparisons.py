@@ -9,7 +9,7 @@ from pathlib import Path
 from experiments.shared_contracts.inventory import reader_source_inventory
 
 from . import comparison_tasks as tasks
-from . import store
+from . import reader_compatibility, store
 
 SCHEMA = "opent1d.plan-comparison/1"
 REPORT_SCHEMA = "opent1d.plan-comparison-report/1"
@@ -21,6 +21,7 @@ def reader():
         "schema": REPORT_SCHEMA,
         **reader_source_inventory("experiments.shared_services.comparisons"),
         "archived_code_execution": False,
+        "compatibility": reader_compatibility.policy(),
     }
 
 
@@ -164,8 +165,11 @@ def freeze(project, request, *, study_intent=None):
 def validate(project, value):
     store.require(isinstance(value, dict), "Invalid frozen comparison")
     request = {key: value[key] for key in ("schema", "name", "question", "baseline", "variants")}
+    expected = definition(project, request)
+    if reader_compatibility.accepts(value.get("reader"), expected["reader"], expected["task"]):
+        expected["reader"] = value["reader"]
     store.require(
-        store.encoded(value) == store.encoded(definition(project, request)),
+        store.encoded(value) == store.encoded(expected),
         "Frozen comparison/source identity differs",
     )
 
@@ -259,4 +263,6 @@ def reconstruct(project, identity, output, *, at=None, backend=None):
         "reconstruction": "verified",
         "completeness": report["completeness"],
         "report_sha256": {name: store.digest(raw) for name, raw in files.items()},
+        "reader": reader(),
+        "reader_transition": reader_compatibility.receipt(value["reader"], reader(), value["task"]),
     }

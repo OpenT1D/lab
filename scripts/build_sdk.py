@@ -84,12 +84,13 @@ def source_closure():
             "publication-security.json",
             "experiments/setup/contract.json",
             "experiments/shared_services/connected_protocol.json",
+            "experiments/shared_services/reader_compatibility.json",
         }
     )
     return sorted(names)
 
 
-def build(output, *, allow_dirty=False, build_label="internal"):
+def build(output, *, allow_dirty=False, build_label="internal", mmtt_only=False):
     from experiments.durable_archives.storage import safe_path
     from scripts.build_windows_installer import source_inventory
 
@@ -126,12 +127,16 @@ def build(output, *, allow_dirty=False, build_label="internal"):
                 "bytes": len(raw),
             }
     descriptor = {
-        "schema": "opent1d.installed-sdk/3",
+        "schema": "opent1d.installed-sdk/4" if mmtt_only else "opent1d.installed-sdk/3",
         "source": {key: source[key] for key in ("revision", "dirty")},
         "build_label": build_label,
         "files": files,
-        "tasks": ["mmtt-sensitivity", "m4-study-secure", "m4-study-installed", "mmtt-sampling"],
-        "native_execution": "explicit-reviewed-attachment/1",
+        "tasks": ["mmtt-sensitivity", "mmtt-sampling"]
+        if mmtt_only
+        else ["mmtt-sensitivity", "m4-study-secure", "m4-study-installed", "mmtt-sampling"],
+        "native_execution": "unavailable-public-policy"
+        if mmtt_only
+        else "explicit-reviewed-attachment/1",
     }
     (package / "_manifest.json").write_text(json.dumps(descriptor, indent=2, sort_keys=True) + "\n")
     result = subprocess.run(
@@ -164,6 +169,12 @@ def build(output, *, allow_dirty=False, build_label="internal"):
         "runtime_dependencies": [],
         "native_runtimes_shipped": False,
         "public_release": False,
+        "tasks": descriptor["tasks"],
+        "descriptor_schema": descriptor["schema"],
+        "native_execution": descriptor["native_execution"],
+        "descriptor_sha256": hashlib.sha256(
+            (json.dumps(descriptor, indent=2, sort_keys=True, allow_nan=False) + "\n").encode()
+        ).hexdigest(),
     }
     (output / "receipt.json").write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n")
     return receipt
@@ -178,10 +189,16 @@ def main():
         help="development fixtures only; retained in artifact identity",
     )
     parser.add_argument("--build-label", default="internal")
+    parser.add_argument("--mmtt-only", action="store_true", help="bounded internal MMTT candidate")
     args = parser.parse_args()
     print(
         json.dumps(
-            build(args.output, allow_dirty=args.allow_dirty, build_label=args.build_label),
+            build(
+                args.output,
+                allow_dirty=args.allow_dirty,
+                build_label=args.build_label,
+                mmtt_only=args.mmtt_only,
+            ),
             sort_keys=True,
         )
     )

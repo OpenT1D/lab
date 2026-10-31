@@ -22,12 +22,17 @@ class SamplingCapabilities(unittest.TestCase):
             raw = b"inert capability fixture\n"
             (root / "data.txt").write_bytes(raw)
             current = ["mmtt-sensitivity", "m4-study-secure", "m4-study-installed", "mmtt-sampling"]
-            for version, tasks in ((1, current[:2]), (2, current[:3]), (3, current)):
+            for version, tasks in (
+                (1, current[:2]),
+                (2, current[:3]),
+                (3, current),
+                (4, ["mmtt-sensitivity", "mmtt-sampling"]),
+            ):
                 descriptor = {
                     "schema": f"opent1d.installed-sdk/{version}",
                     "tasks": tasks,
                     "native_execution": "unavailable-public-policy"
-                    if version == 1
+                    if version in {1, 4}
                     else "explicit-reviewed-attachment/1",
                     "source": {"revision": "a" * 40, "dirty": False},
                     "build_label": "controlled",
@@ -45,6 +50,17 @@ class SamplingCapabilities(unittest.TestCase):
                     manifest.write_text(json.dumps(changed))
                     with self.assertRaisesRegex(ValueError, "Unsupported installed artifact"):
                         INTEGRITY.verify(root)
+                    if version == 4:
+                        for roster in (
+                            tasks[::-1],
+                            tasks + [tasks[0]],
+                            tasks + ["m4-study-installed"],
+                        ):
+                            manifest.write_text(json.dumps({**descriptor, "tasks": roster}))
+                            with self.assertRaisesRegex(
+                                ValueError, "Unsupported installed artifact"
+                            ):
+                                INTEGRITY.verify(root)
 
 
 if __name__ == "__main__":

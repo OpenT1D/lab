@@ -1,6 +1,6 @@
 # 0089 — A bounded internal candidate and comparison reader transition
 
-Date: 31 October 2026. Status: selected before implementation and qualification.
+Date: 31 October 2026. Status: implemented; selected before implementation and qualification.
 
 ## Decision
 

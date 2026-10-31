@@ -9,8 +9,10 @@ Each linked guide owns its model contract and scientific interpretation.
 For shared-service development, the [OT-059 contract packet](shared-core-contracts.md)
 inventories all ten routes and their source/runtime/reader boundaries. It freezes
 two-route fixtures before migration. The [minimal project services](shared-project-services.md)
-add bounded storage, isolated execution and matching trusted readers; the installed
-SDK and complete native route migration remain planned.
+add bounded storage, isolated execution and matching trusted readers. The
+[installed SDK](installed-sdk.md) and its separately scoped
+[internal MMTT candidate](internal-mmtt-candidate.md) now provide working bounded
+routes; complete native migration and broader distribution remain planned.
 
 The independent public snapshot has a
 [bounded installation and CI policy](publication-security.md). Historical native

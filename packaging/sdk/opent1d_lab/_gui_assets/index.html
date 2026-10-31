@@ -40,12 +40,13 @@
       <p class="eyebrow">A project, from question to evidence</p>
       <h1>Keep the whole research trail.</h1>
       <p>Create a project or open an existing one. Freeze the assumptions, run a supported synthetic task, then verify and keep its report.</p>
-      <div class="task-cards"><article><span class="task-number">01</span><h2>Paired meal tests</h2><p>Explore how estimated secretion change depends on fixed analysis assumptions.</p><span class="tag">Python standard library</span></article><article><span class="task-number">02</span><h2>Secretion models</h2><p>Compare the two supplied sources under fasting and a 15 g initial gastric condition.</p><span class="tag">Prepared native runtimes</span></article></div>
+      <div class="task-cards"><article><span class="task-number">01</span><h2>Paired meal tests</h2><p>Explore how estimated secretion change depends on fixed analysis assumptions.</p><span class="tag">Python standard library</span></article><article id="native-card"><span class="task-number">02</span><h2>Secretion models</h2><p>Compare the two supplied sources under fasting and a 15 g initial gastric condition.</p><span class="tag">Prepared native runtimes</span></article></div>
+      <p id="candidate-capabilities" class="context"></p>
       <p class="limit">These are invented engineering examples. They do not establish accuracy in people, biological validity or treatment effects.</p>
     </section>
     <div id="project-view" class="hidden">
       <section class="project-heading"><div><p class="eyebrow">Shared SDK project</p><h1 id="selected-name"></h1><p id="selected-path" class="muted path"></p></div><button id="refresh-project">Refresh saved ledger</button></section>
-      <nav class="section-nav" aria-label="Project sections"><a href="#study">Study</a><a href="#comparisons">Comparisons</a><a href="#connected-study">Connected study</a><a href="#attempts">Attempts</a><a href="#saved-report">Report</a><a href="#handoff">Handoff</a></nav>
+      <nav class="section-nav" aria-label="Project sections"><a href="#study">Study</a><a href="#comparisons">Comparisons</a><a id="connected-nav" href="#connected-study">Connected study</a><a href="#attempts">Attempts</a><a href="#saved-report">Report</a><a href="#handoff">Handoff</a></nav>
       <section id="study" class="panel">
         <div class="section-title"><span class="step">1</span><div><h2>Prepare a study</h2><p>Choose supplied inputs, inspect their assumptions, then freeze a named plan.</p></div></div>
         <form id="prepare-form" class="form-grid">
@@ -77,7 +78,7 @@
         <div class="actions"><button id="inspect-plan">Inspect frozen inputs</button><button id="derive-plan">Derive an editable study</button><button id="check-plan">Check readiness</button><button id="run-plan" class="primary">Run plan</button></div>
         <p id="readiness" class="context">Checking readiness does not install dependencies or run a model.</p>
         <details id="plan-inspector" class="hidden"><summary>Frozen assumptions and original input hashes</summary><pre id="plan-details"></pre></details>
-        <details class="runtime"><summary>Prepared native runtimes</summary><p id="runtime-status"></p><p>Runtime selection is explicit. An attachment from another SDK build must be recreated for this application. No installation is performed here.</p>
+        <details id="runtime-controls" class="runtime"><summary>Prepared native runtimes</summary><p id="runtime-status"></p><p>Runtime selection is explicit. An attachment from another SDK build must be recreated for this application. No installation is performed here.</p>
           <form id="select-runtime" class="form-grid"><div class="full"><label for="attachment-path">Existing reviewed attachment file</label><input id="attachment-path" placeholder="Absolute path to an attachment JSON file" required></div><button type="submit">Select attachment</button><button type="button" id="clear-runtime" class="quiet">Clear selection</button></form>
           <details><summary>Create an attachment for this application</summary><form id="attach-runtime" class="form-grid"><div class="full"><label for="native-site">Reviewed native site-packages folder</label><input id="native-site" placeholder="Absolute directory" required></div><div class="full"><label for="observer-site">Reviewed observer site-packages folder</label><input id="observer-site" placeholder="Absolute directory" required></div><button type="submit">Verify and attach prepared runtimes</button></form></details>
         </details>
