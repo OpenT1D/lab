@@ -136,13 +136,22 @@ function renderAttempts(attempts, plans, busy) {
     row.append(actions); return row;
   }));
 }
+function tableCells(line) {
+  const cells = []; let start = 0, slashes = 0;
+  for (let i = 0; i < line.length; i++) {
+    if (line[i] === "|" && slashes % 2 === 0) { cells.push(line.slice(start, i)); start = i + 1; }
+    slashes = line[i] === "\\" ? slashes + 1 : 0;
+  }
+  cells.push(line.slice(start));
+  return cells.slice(1, -1).map(value => value.trim().replaceAll("\\|", "|"));
+}
 function renderMarkdown(text, container = $("report-text")) {
   container.replaceChildren(); const lines = text.split("\n");
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i]; if (!line.trim()) continue;
     if (line.startsWith("|")) {
       const wrapper = element("div", undefined, "table-scroll"), table = element("table"); let first = true;
-      while (i < lines.length && lines[i].startsWith("|")) { const cells = lines[i].split("|").slice(1, -1).map(value => value.trim()); if (!cells.every(value => /^[:\- ]+$/.test(value))) { const row = element("tr"); for (const value of cells) { const cell = element(first ? "th" : "td", value.replaceAll("**", "")); if (first) cell.scope = "col"; row.append(cell); } table.append(row); first = false; } i++; }
+      while (i < lines.length && lines[i].startsWith("|")) { const cells = tableCells(lines[i]); if (!cells.every(value => /^[:\- ]+$/.test(value))) { const row = element("tr"); for (const value of cells) { const cell = element(first ? "th" : "td", value.replaceAll("**", "")); if (first) cell.scope = "col"; row.append(cell); } table.append(row); first = false; } i++; }
       i--; wrapper.append(table); container.append(wrapper);
     } else if (line.startsWith("#")) container.append(element("h3", line.replace(/^#+\s*/, "")));
     else container.append(element("p", line.replaceAll("**", "")));

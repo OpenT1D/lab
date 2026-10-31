@@ -347,6 +347,14 @@ await check('older_report_download_refusal_cannot_withdraw_newer_report',async()
  assert.equal(e.run('currentReport?.id'),'B');return {new_report_retained:true};
 });
 function setupComparisons(){const e=environment({comparisons:true});seed(e);e.run('data.projects[0].info.head={tip:"HEAD"};data.projects[0].info.comparisons=[{id:"A",name:"A",members:2},{id:"B",name:"B",members:3}];render();');return e;}
+await check('escaped_rationale_pipes_preserve_before_after_table_columns',async()=>{
+ const e=environment(),pipe=String.fromCharCode(92)+'|';
+ e.context.markdown='| Member | Field | Before | After |\n| --- | --- | --- | --- |\n| changed | /selected_assumptions/rationale | "Before '+pipe+' rationale" | "After '+pipe+' rationale" |';
+ e.run('renderMarkdown(markdown);');const rows=e.byId('report-text').children[0].children[0].children;
+ assert.equal(rows[0].children.length,4);assert.equal(rows[1].children.length,4);
+ assert.equal(rows[1].children[2].textContent,'"Before | rationale"');
+ assert.equal(rows[1].children[3].textContent,'"After | rationale"');return {four_columns_exact_before_after:true};
+});
 await check('invalid_displayed_copy_cannot_cancel_a_newer_report_load',async()=>{
  for(const kind of ['refusal','poll']){
   const e=environment();seed(e);const state=base();

@@ -10,6 +10,9 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
   unattempted cases. Reconstruct exact ledger-prefix JSON/Markdown/CSV reports
   after retries, restart and relocation, with task-owned units and native readers.
   Guard late report responses/download refusals against newer verification.
+  Preserve escaped pipes in report table cells. Correct current-SDK M4 runtime
+  attachment admission to accept exactly the legacy or sampling-expanded task
+  roster; retain all source/runtime gates and unchanged numerical criteria.
 
 - Extend the installed workbench with own bounded synthetic inputs, revisioned
   recoverable concepts, editable assumptions/schedules and derived immutable

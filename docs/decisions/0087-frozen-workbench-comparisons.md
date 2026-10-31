@@ -49,5 +49,14 @@ imputation, zero substitution, pooled allocation, efficacy ranking or new
 uncertainty/equivalence claim is selected. Native protocols, numerical files,
 frozen baselines/tolerances and OT-059 fixtures remain unchanged.
 
+An exact installed rehearsal found that native attachment metadata still admitted
+only the old three-task application roster. Admit exactly that historical roster
+or the current four-task roster including `mmtt-sampling`, with ordering,
+duplicates, application/source identity and all native runtime/rights gates still
+checked. This admission-only correction changes the helper identity; create a new
+current-artifact attachment and repeat native qualification. It does not change
+equations, protocols, numerical references or tolerances, or authorize old-reader
+transitions. Keep captured prior artifacts intact.
+
 The [implementation record](../research/workbench-comparisons.md) owns acceptance,
 counterexamples, review, final local evidence and remaining qualification gates.

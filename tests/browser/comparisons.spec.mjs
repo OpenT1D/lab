@@ -18,9 +18,11 @@ test('frozen comparison: variants and derived plans, first attempts, snapshots a
   const project = await page.locator('#selected-path').textContent();
   const source = app.command('example', '--task', 'mmtt-sensitivity', '--case', 'complete', '--output', path.join(app.folder, 'inputs')).inputs;
   const settings = JSON.parse(await readFile(source['settings.json'], 'utf8')); settings.uncertainty.draws = 32;
+  settings.variants[0].rationale = 'Original | baseline';
   await writeFile(source['settings.json'], JSON.stringify(settings));
   const freeze = parent => app.command('freeze', '--project', project, '--task', 'mmtt-sensitivity', '--package', source['package.json'], '--csv', source['observations.csv'], '--settings', source['settings.json'], ...(parent ? ['--parent', parent] : [])).plan;
   const baseline = freeze(); settings.variants[0].volume_l = 5.1;
+  settings.variants[0].rationale = 'Changed | derived';
   await writeFile(source['settings.json'], JSON.stringify(settings));
   const derived = freeze(baseline);
   await page.locator('#refresh-project').click(); await jobFinished(page);
@@ -56,6 +58,10 @@ test('frozen comparison: variants and derived plans, first attempts, snapshots a
   await page.locator('#comparison-verify').click();
   await expect(page.locator('#report-completeness')).toHaveText('complete');
   const complete = JSON.parse(await downloadJSON(page));
+  const rationale = page.locator('#report-text tr').filter({ hasText: '/selected_assumptions/rationale' }).filter({ hasText: 'Changed | derived' });
+  await expect(rationale.locator('td')).toHaveCount(4);
+  await expect(rationale.locator('td').nth(2)).toContainText('Original | baseline');
+  await expect(rationale.locator('td').nth(3)).toContainText('Changed | derived');
   expect(complete.coverage.planned_members).toBe(3);
   expect(complete.members[0].attempt.attempt).toBe(complete.members[1].attempt.attempt);
   expect(complete.members[2].attempt.attempt).not.toBe(complete.members[0].attempt.attempt);

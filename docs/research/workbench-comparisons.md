@@ -79,15 +79,18 @@ shared first attempts, unattempted/current reports, exact old snapshot downloads
 restart, keyboard focus and narrow/200-percent text. Earlier browser flows retain
 their separate lifecycle, sampling, cancellation and correction coverage.
 
-Separate read-only core and GUI reviews reproduced six issues: incomplete helper
+Separate read-only core and GUI reviews and installed rehearsal reproduced eight issues: incomplete helper
 source binding, selector-only rather than resolved scientific changes, expired
 service reads, late report replacement, stale selection status, and cancellation
-of a new report load while withdrawing an invalid old copy. Corrections
+of a new report load while withdrawing an invalid old copy, escaped rationale
+pipes shifting report columns, and attachment refusal of the current SDK roster. Corrections
 bind the full source closure, show numeric changes and enforce leases, verification
-epochs, separate display withdrawal and current comparison context. The controlled frontend wrapper has 30
+epochs, separate display withdrawal and current comparison context. The controlled frontend wrapper has 31
 cases; three new report/status cases fail on saved pre-fix JavaScript and pass
 after correction. A fourth regression fails on the intermediate report guard
 when an old refusal/invalid poll cancels a newer load, and passes after correction.
+A pipe-rationale regression fails on the old table splitter and now preserves
+exact before/after cells in both controlled and actual browser checks.
 Other cases preserve roster metadata/explicit baseline after
 project switching or refusal and reject late selector responses. Agent review is
 technical evidence, not independent scientific or intended-user acceptance.
@@ -96,8 +99,15 @@ Development initially used a noncanonical temporary path; existing file guards
 refused it, and canonicalising the owned temporary fixed the reader invocation.
 An early browser text-size probe attempted an inline stylesheet and was correctly
 blocked by CSP; it now uses the existing direct DOM text-size mechanism. Neither
-failed run supplies acceptance. Native protocols, scientific files, references,
-tolerances and OT-059 fixtures are unchanged.
+failed run supplies acceptance. The first exact-artifact native rehearsal refused
+the SDK's four-task roster before execution: attachment metadata admitted only
+the old three-task application. The regression repeats that refusal and tests
+both exact supported rosters plus extra, missing, reordered and duplicate task
+refusals. Only the admission profile changes; the new helper/application identity
+requires fresh attachment and repeated native qualification. Native equations,
+numerical/analysis files, protocols, references, tolerances and OT-059 fixtures are
+unchanged. An earlier full check was stopped when these final corrections became
+necessary; its partial log is not a final-revision pass.
 
 ## Final receipts and remaining gates
 

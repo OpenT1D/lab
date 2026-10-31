@@ -291,6 +291,12 @@ remain fixed. Installed M4 selectors use, for example,
 explicit initial loads with their native complete-grid descriptive metrics.
 No concentration curve is treated as a secreted amount or pooled score.
 
+Native attachments admit the exact historical three-task or current four-task
+application roster including sampling. Extra, missing, reordered or duplicate
+tasks refuse. Recreate attachments for the current artifact: this admission
+correction changes its helper/source identity and does not qualify an older
+artifact or enable an unsupported reader transition.
+
 The CLI takes a bounded JSON definition file:
 
 ```bash

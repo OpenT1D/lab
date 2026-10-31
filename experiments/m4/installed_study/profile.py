@@ -245,7 +245,11 @@ def evidence(record):
         and type(application["source"]["dirty"]) is bool
         and isinstance(application["build_label"], str)
         and application["build_label"]
-        and application["tasks"] == ["mmtt-sensitivity", "m4-study-secure", "m4-study-installed"]
+        and application["tasks"]
+        in (
+            ["mmtt-sensitivity", "m4-study-secure", "m4-study-installed"],
+            ["mmtt-sensitivity", "m4-study-secure", "m4-study-installed", "mmtt-sampling"],
+        )
         and application["native_execution"] == "explicit-reviewed-attachment/1",
         "Invalid current application evidence",
     )
