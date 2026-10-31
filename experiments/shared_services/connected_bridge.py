@@ -58,7 +58,7 @@ def generated(definition, archive):
         "Complete accepted forward reference and controls required",
     )
     require(
-        report["configuration"]["scenarios"] == list(p["scenarios"].values())
+        report["configuration"]["scenarios"] == [p["scenarios"][v] for v in ("before", "after")]
         and list(report["sources"]) == sorted(p["sources"]),
         "Forward source/scenario roster differs",
     )
@@ -221,7 +221,6 @@ def generated(definition, archive):
         "schema": "opent1d.observation-analysis-settings/1",
         "visit_order": ["before", "after"],
         "uncertainty": copy.deepcopy(p["uncertainty"]),
-        "required_times_min": observed_times,
         "variants": [],
     }
     for name in p["variants"]:

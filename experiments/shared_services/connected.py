@@ -46,7 +46,7 @@ def definition(project, request):
     )
     config = store.read(folder / "original/config.json")
     store.require(
-        config["scenarios"] == list(p["scenarios"].values())
+        config["scenarios"] == [p["scenarios"][v] for v in ("before", "after")]
         and [s["id"] for s in config["sources"]] == p["sources"],
         "Both frozen sources and fasting/15-g scenarios required",
     )
