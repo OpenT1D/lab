@@ -65,7 +65,13 @@ test('connected study: prospective stages, absent native admission, fixed failur
   expect(await reportJSON(page)).toBe(failedText);
   await page.setViewportSize({ width: 520, height: 900 });
   await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+  await page.locator('.attempt h3').evaluateAll(headings => {
+    for (const heading of headings) heading.style.fontFamily = 'monospace';
+  });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  expect(await page.locator('.attempt h3').evaluateAll(headings => headings.every(heading =>
+    heading.getBoundingClientRect().right <= heading.parentElement.getBoundingClientRect().right + 0.5,
+  ))).toBe(true);
   await page.locator('#connected-open').focus(); await page.keyboard.press('Tab');
   await expect(page.locator('#connected-next')).not.toBeFocused(); // Disabled stages are skipped.
   await expect(page.locator('#connected-verify')).toBeFocused();

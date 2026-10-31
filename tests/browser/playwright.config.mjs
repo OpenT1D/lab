@@ -16,7 +16,7 @@ export default defineConfig({
   retries: 0,
   forbidOnly: true,
   timeout: 90_000,
-  globalTimeout: 300_000,
+  globalTimeout: 480_000,
   expect: { timeout: 30_000 },
   outputDir: `${output}/test-results`,
   reporter: [['list'], ['json', { outputFile: `${output}/results.json` }]],

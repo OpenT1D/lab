@@ -120,14 +120,18 @@ fails when Node is unavailable. Historical native jobs additionally require
 literal private-repository/manual-dispatch guards and cannot run in a public
 repository, even if a changed scope helper reports them enabled.
 
-The root job keeps dependency caching off and a thirty-minute limit. Cold
+The root job keeps dependency caching off and a forty-minute limit. Cold
 hosted runs before the editable-workbench tests took 19 minutes 38 seconds and
 19 minutes 19 seconds, close to the former twenty-minute limit; the
 [workbench record](research/editable-workbench.md) owns the measured extension.
 The comparison run's 1,810-test phase took 1,471.308 seconds before a fixture
 failure, leaving insufficient room for setup, documentation and boundary checks
 within twenty-five minutes. The [comparison record](research/workbench-comparisons.md)
-records the fixture correction and measured budget increase.
+records the fixture correction and measured budget increase. The connected-study
+run on `62c0a3c` reached the subsequent thirty-minute limit while its root tests
+were still running; the [connected-study record](research/connected-synthetic-study.md)
+records that cancelled hosted run and the forty-minute budget. Individual tests,
+uncached tooling, scope guards and numerical criteria remain enforced.
 No test family or native scope guard is removed. The job attempts to retain setup/check/boundary logs and a selected environment
 receipt under `results/ci` for five days, including after a failed check. The
 receipt distinguishes the checked-out source SHA, event SHA and PR-head SHA;

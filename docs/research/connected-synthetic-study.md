@@ -124,8 +124,36 @@ JavaScript for their intended acceptance/identity/recovery reasons. The installe
 Chromium study case passed after waiting for report commitment and selecting the
 saved snapshot explicitly. Its measured flow exceeded the old 90-second budget;
 only this case selects 150 seconds. The first complete 11-case browser family
-passed in 3.8 minutes within the unchanged five-minute family budget. Final
-revision receipts are reported with the PR and retained local logs.
+passed in 3.8 minutes within the then-five-minute family budget.
+
+Hosted Chromium on `62c0a3c` exposed horizontal overflow in the four-slot M4
+attempt heading at 520 pixels with 200-percent text. The exact retained CI DOM
+reproduces it with only the attempt heading's monospace fallback: document width
+566 pixels; the heading's right edge 565.922 versus its parent's 451.813.
+`min-width: 0` and `overflow-wrap: anywhere` on that heading restore document
+width 520 and retain all text. The regression keeps the enlarged root size,
+uses that fallback only on the heading and checks both document and parent
+bounds. A badge-only change would not fix the reproduced cause.
+
+The same hosted family exceeded its 300-second global limit after eight cases,
+leaving three unrun. Its measured individual connected case took about
+137 seconds within the existing 150-second case limit. Keep that limit and all
+11 cases/assertions; increase only the application family's global budget to
+480 seconds so the full family and cleanup can complete. Documentation browser
+budgets and native guards are unchanged. Retain failed run
+`41221625251` and its downloaded artifact separately. Final revision receipts
+are reported with the PR and retained local logs.
+
+The same cold hosted run's root job was cancelled at its configured thirty-minute
+boundary, with test output still advancing and no completed suite result. It
+retains job `124597196593`, its logs and artifact under run `41221625251`.
+Increase that job's total budget to forty minutes and update its explicit policy
+check; retain uncached locked tooling, every test family, source/native guards
+and all numerical tolerances. The earlier local development run completed
+1,831 tests with 32 declared skips in 1,165.436 seconds, followed by a strict
+successful documentation build. Its tree changed during the hosted-layout fix,
+so it is not the final clean-revision receipt. The root owner repeats the full
+command after integration; hosted completion is assessed separately.
 
 ## Actual installed native chain
 

@@ -4,6 +4,7 @@
 @media(max-width:700px){.topbar{height:auto;min-height:76px;flex-wrap:wrap;padding:1rem;gap:.7rem}.scope{order:3;width:100%;margin:0}.topbar>button{margin-left:auto}.layout{display:block}.sidebar{border-right:0;border-bottom:1px solid var(--line);padding:1.2rem}.side-form{margin-top:1rem;padding-top:1rem}.side-note{margin-top:1rem}.side-form input{max-width:none}.side-form button{width:auto}.sidebar nav{display:flex;gap:.4rem;flex-wrap:wrap}.project-choice{width:auto;max-width:100%;margin:0}.side-heading{margin-bottom:.6rem}main{padding:1.5rem 1rem}.welcome{padding:.9rem 0}.task-cards{grid-template-columns:1fr;gap:.85rem;margin:1.5rem 0}.task-cards article{padding:1.3rem}.form-grid{grid-template-columns:1fr}.panel{padding:1.1rem}.section-title{gap:.65rem}.section-nav{gap:1.3rem}.section-nav a{font-size:.82rem}.job{align-items:flex-start}.job button{font-size:.78rem;padding:.5rem}.report-heading{align-items:flex-start;flex-direction:column}.attempt-top{flex-wrap:wrap}footer{display:block}footer details{max-width:100%;margin-top:.6rem}.actions button{font-size:.83rem}}
 
 /* Keep long ancestry text from compressing status and source columns. */
+.attempt h3{min-width:0;overflow-wrap:anywhere}
 .section-nav{flex-wrap:wrap}
 #comparison-status,#comparison-members,#comparison-roster,#connected-status,#connected-stages,#report-context{overflow-wrap:anywhere;min-width:0}
 #comparison-form>*,#connected-form>*{min-width:0;max-width:100%}#comparisons button,#connected-study button{max-width:100%;overflow-wrap:anywhere}.report-heading>div{min-width:0;max-width:100%}
