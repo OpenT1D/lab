@@ -19,6 +19,9 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
   server fixture, with reproductions of both defects. Retain its readiness limit;
   increase only the root CI budget to 30 minutes after a measured hosted test
   phase of 24 minutes 31 seconds, preserving caching and native guards.
+  Refuse precomputed imports as a prospective comparison's first attempt, detach
+  returned views from stored ledger data, retain invalid report identities across
+  stale polls and preserve metadata edits made during comparison freezing.
 
 - Extend the installed workbench with own bounded synthetic inputs, revisioned
   recoverable concepts, editable assumptions/schedules and derived immutable

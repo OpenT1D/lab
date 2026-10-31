@@ -7,11 +7,12 @@ const context = {"mmtt-sampling": "Compare full and reduced actual measurement t
 let data = null, selected = null, draft = null, selectedPlan = null, currentReport = null, pending = false, pendingOperation = null, watched = null, loaded = false;
 let imageURL = null, parentDraft = null, refreshIssued = 0, refreshApplied = 0, reportIssued = 0;
 const handled = new Set();
+const invalidReports = new Set();
 function invalidatePlanView() { $("plan-inspector").classList.add("hidden"); $("plan-inspector").open = false; $("plan-details").textContent = ""; $("readiness").textContent = "Check this frozen plan with the current runtime selection before execution."; }
 function element(tag, text, cls) { const node = document.createElement(tag); if (text !== undefined) node.textContent = text; if (cls) node.className = cls; return node; }
 function notice(message, error = false) { $("notice").textContent = message; $("notice").className = "notice" + (error ? " error" : ""); if (error) $("notice").focus(); }
 function withdrawReport(cancelLoading = true) { if (cancelLoading) reportIssued++; currentReport = null; $("report-text").replaceChildren(); $("child-reports").replaceChildren(); if (imageURL) URL.revokeObjectURL(imageURL); imageURL = null; $("report-figure").src = ""; $("saved-report").classList.add("hidden"); }
-function reportRefused(error, record = currentReport) { const known = data?.reports?.find(item => item.id === record?.id); if (known) known.valid = false; if (record?.id !== currentReport?.id) return; withdrawReport(false); notice(error.message, true); }
+function reportRefused(error, record = currentReport) { if (record?.id) invalidReports.add(record.id); const known = data?.reports?.find(item => item.id === record?.id); if (known) known.valid = false; if (record?.id !== currentReport?.id) return; withdrawReport(false); notice(error.message, true); }
 async function request(url, body) {
   const options = {headers: {"X-OpenT1D-Token": token}, cache: "no-store"};
   if (body !== undefined) { options.method = "POST"; options.headers["Content-Type"] = "application/json"; options.body = JSON.stringify(body); }
@@ -44,9 +45,13 @@ async function refresh() {
   try {
     const issued = ++refreshIssued;
     const incoming = await (await request("/api/state")).json();
+    for (const record of incoming.reports || []) if (!record.valid) invalidReports.add(record.id);
+    for (const record of data?.reports || []) if (invalidReports.has(record.id)) record.valid = false;
+    if (currentReport && invalidReports.has(currentReport.id)) withdrawReport(false);
     if (issued < refreshApplied || (data && incoming.runtime_revision < data.runtime_revision)) return;
     refreshApplied = issued;
     if (data?.runtime_revision !== incoming.runtime_revision || data?.runtime_attachment !== incoming.runtime_attachment) invalidatePlanView();
+    for (const record of incoming.reports || []) if (invalidReports.has(record.id)) record.valid = false;
     data = incoming;
     if (currentReport && !data.reports?.some(record => record.id === currentReport.id && record.valid)) withdrawReport(false);
     if (!loaded) { for (const job of data.jobs) if (job.status !== "running") handled.add(job.id); loaded = true; }
@@ -186,11 +191,12 @@ async function showReport(identity) {
   const issued = ++reportIssued;
   const record = data.reports.find(item => item.id === identity);
   if (!record) throw new Error("Verified report pointer is unavailable; refresh and verify again.");
+  if (!record.valid || invalidReports.has(identity)) return false;
   try {
   const markdown = await (await request(`/api/reports/${identity}/report.md`)).text();
   const hasFigure = record.files.includes("figure.svg");
   const nextImageURL = hasFigure ? URL.createObjectURL(await (await request(`/api/reports/${identity}/figure.svg`)).blob()) : null;
-  if (issued !== reportIssued || selected !== record.project || !data.reports.some(item => item.id === identity && item.valid)) { if (nextImageURL) URL.revokeObjectURL(nextImageURL); return false; }
+  if (issued !== reportIssued || selected !== record.project || invalidReports.has(identity) || !data.reports.some(item => item.id === identity && item.valid)) { if (nextImageURL) URL.revokeObjectURL(nextImageURL); return false; }
   renderMarkdown(markdown);
   renderChildReports(record);
   if (imageURL) URL.revokeObjectURL(imageURL);

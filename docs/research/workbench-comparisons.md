@@ -134,6 +134,25 @@ boundary checks. Caching, test families and native scope guards remain unchanged
 
 ## Final receipts and remaining gates
 
+A subsequent critical review of clean `98a1064` found four further defects.
+Importing a precomputed archive could become a prospective comparison's first
+attempt. First imports now refuse before publication and during ledger replay;
+unrelated imports and later imported retries remain supported. Returned comparison
+views also shared nested objects with the open ledger: editing a returned selector
+could change report hashes at the same saved tip. Complete detached views now
+preserve exact reconstruction, including native report-hash dictionaries.
+
+In the GUI, a delayed state response could restore a refused report's `valid`
+flag, including when an earlier-issued poll was discarded. Invalid report IDs
+are now retained independently of replaceable snapshots and collected before
+discarding stale responses. They withdraw that copy without cancelling a newer
+report load. Finally, edits to comparison name/question/baseline during freezing
+now retain the unsubmitted roster; the saved comparison keeps submitted values.
+Four core negative controls fail semantically on saved old behavior and pass
+after correction. The controlled frontend family has 35 cases, with four new
+cases detecting old stale-state or pending-edit behavior. Actual installed
+Python/CLI refusal preserves the head and leaves the plan unattempted.
+
 The integration owner runs `uv sync --locked` and one final full
 `uv run --locked python scripts/check.py`, the complete Chromium family and a
 clean retained installed SDK rehearsal on the final integrated revision. Exact
@@ -152,13 +171,15 @@ for that success receipt. Keep upstream parameter/runtime payloads local.
 
 The clean `2c24f90` wheel passed all four installed qualification cases, including
 actual fasting/15-g M4 execution and reconstruction without runtime lookup. The
-subsequent fixture/CI correction changes no shipped SDK or scientific payload.
-Final qualification must compare every shipped payload hash with that wheel,
-install the newly identified wrapper outside the checkout, create its own current
-runtime attachment and reconstruct the retained native comparison with dependency
-roles unavailable. Record the native execution revision separately from this
-final-wrapper check; unchanged payload does not turn an earlier execution into a
-new-revision run.
+fixture/CI-only `98a1064` successor retained all 268 payload hashes and passed
+fresh installation/attachment and exact retained native reconstruction. Its hosted
+root run passed 1,812 tests in 1,423.251 seconds, with 33 declared skips; the
+aggregate, OS smokes, browser jobs and CodeQL were green. These remain historical
+receipts. The subsequent critical-review fixes change the shared reader identity:
+they require fresh current-revision plans, comparison freezes, explicit attachment
+and native rehearsal. They do not establish a supported changed-reader transition
+for earlier comparison ledgers. Numerical equations, protocols, references and
+tolerances remain unchanged.
 
 Current-artifact native M4 execution requires its reviewed attachment and separate
 qualification. Passive intake, controlled report fixtures or refusal do not supply

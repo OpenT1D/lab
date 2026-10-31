@@ -283,6 +283,11 @@ derived plans. Only each plan's first attempt is selected. Later retries stay
 in history, while failures, partial evidence and unattempted members remain in
 the comparison denominator. A saved ledger tip reproduces an old report even
 after another member first runs. Full project relocation retains those tips.
+The first attempt of a comparison member must execute through the shared
+services. Importing an existing archive cannot establish this prospective order
+and is refused without changing the project. Import into a separate plan instead.
+Later imported retries remain in history and cannot replace the selected first
+executed attempt.
 
 Sampling selectors use `{"schedule": "full", "variant": "nominal"}` or a
 preselected reduced schedule. The original observations and development seal

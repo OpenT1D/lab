@@ -1,5 +1,6 @@
 """Immutable preexecution rosters and ledger-prefix comparison reconstruction."""
 
+import copy
 import json
 import re
 import tempfile
@@ -203,13 +204,15 @@ def view(project, identity, *, at=None):
             "payload": None if result is None else result["payload"],
             "report_sha256": {} if result is None else result["report_sha256"],
         }
-    return {
-        "comparison": identity,
-        **value,
-        "snapshot": {"sequence": len(events), "tip": events[-1][0]},
-        "attempts": attempts,
-        "changes_text": json.dumps(value["changes"], indent=2, sort_keys=True, allow_nan=False),
-    }
+    return copy.deepcopy(
+        {
+            "comparison": identity,
+            **value,
+            "snapshot": {"sequence": len(events), "tip": events[-1][0]},
+            "attempts": attempts,
+            "changes_text": json.dumps(value["changes"], indent=2, sort_keys=True, allow_nan=False),
+        }
+    )
 
 
 def reconstruct(project, identity, output, *, at=None, backend=None):

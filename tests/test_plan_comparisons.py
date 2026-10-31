@@ -86,6 +86,12 @@ class PlanComparisons(unittest.TestCase):
             self.assertEqual(value["completeness"], "complete")
             self.assertEqual(value["coverage"]["planned_members"], 2)
             self.assertEqual(value["coverage"]["planned_cases"], 6)
+            exposed = comparisons.view(project, identity)
+            exposed["attempts"][plan]["report_sha256"]["report.json"] = "0" * 64
+            self.assertEqual(
+                comparisons.view(project, identity)["attempts"][plan]["report_sha256"],
+                value["definition"]["attempts"][plan]["report_sha256"],
+            )
             rows = value["members"][1]["rows"]
             for row in rows:
                 c = (
@@ -145,6 +151,79 @@ class PlanComparisons(unittest.TestCase):
             current = comparisons.view(project, frozen["comparison"])
             self.assertEqual(current["attempts"][plans[1]]["attempt"], failed)
             self.assertEqual(current["attempts"][plans[0]]["attempt"], first)
+
+    def test_view_mutation_cannot_change_frozen_snapshot(self):
+        with store.opened(self.project, write_access=True) as project:
+            plan = self.freeze_plan(project)
+            identity = comparisons.freeze(project, self.definition([plan, plan]))["comparison"]
+            tip = project.head["tip"]
+        with store.opened(self.project) as project:
+            before = comparisons.reconstruct(project, identity, self.root / "before", at=tip)
+            original = copy.deepcopy(comparisons.view(project, identity, at=tip))
+            exposed = comparisons.view(project, identity, at=tip)
+            exposed["variants"][1]["selector"]["variant"] = "nominal"
+            exposed["changes"][1]["fields"].clear()
+            exposed["support"]["participants"][0]["allocation"] = "changed"
+            exposed["reader"]["schema"] = "changed"
+            self.assertEqual(comparisons.view(project, identity, at=tip), original)
+            after = comparisons.reconstruct(project, identity, self.root / "after", at=tip)
+            self.assertEqual(before["report_sha256"], after["report_sha256"])
+
+    def test_first_import_cannot_satisfy_prospective_comparison(self):
+        with store.opened(self.project, write_access=True) as project:
+            historical = self.freeze_plan(project)
+            old_attempt = execution.execute(project, historical)
+            archive = project.finishes[old_attempt][1] / "native"
+            plan = self.freeze_plan(project)
+            identity = comparisons.freeze(project, self.definition([plan, plan]))["comparison"]
+            original = {
+                path.relative_to(self.project).as_posix(): path.read_bytes()
+                for path in self.project.rglob("*")
+                if path.is_file()
+            }
+            for attempt in (
+                lambda: execution.begin(project, plan, mode="import"),
+                lambda: routes.import_attempt(project, plan, archive),
+            ):
+                with self.assertRaisesRegex(ValueError, "executed first attempt"):
+                    attempt()
+                self.assertEqual(
+                    {
+                        path.relative_to(self.project).as_posix(): path.read_bytes()
+                        for path in self.project.rglob("*")
+                        if path.is_file()
+                    },
+                    original,
+                )
+                self.assertFalse(any((self.project / "pending").iterdir()))
+                self.assertFalse(any((self.project / "work").iterdir()))
+            unrelated = self.freeze_plan(project)
+            imported = routes.import_attempt(project, unrelated, archive)
+            self.assertEqual(project.attempts[imported]["mode"], "import")
+            first = execution.execute(project, plan)
+            later = routes.import_attempt(project, plan, archive, retry_of=first)
+            self.assertEqual(project.attempts[later]["mode"], "import")
+            self.assertEqual(
+                comparisons.view(project, identity)["attempts"][plan]["attempt"], first
+            )
+
+    def test_replay_refuses_imported_first_attempt_after_comparison(self):
+        with store.opened(self.project, write_access=True) as project:
+            plan = self.freeze_plan(project)
+            comparisons.freeze(project, self.definition([plan, plan]))
+            project.append(
+                "start",
+                {
+                    "plan": plan,
+                    "ordinal": 1,
+                    "retry_of": None,
+                    "mode": "import",
+                    "host": {"controlled": "precomputed archive intake"},
+                },
+            )
+        with self.assertRaisesRegex(ValueError, "executed first attempt"):
+            with store.opened(self.project):
+                pass
 
     def test_roster_prior_execution_duplicates_support_and_prefix_refusals(self):
         with store.opened(self.project, write_access=True) as project:

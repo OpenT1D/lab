@@ -108,6 +108,51 @@ class InstalledComparisons(unittest.TestCase):
             self.assertEqual(python["comparison"], identity)
             self.assertEqual(python["baseline"], "baseline")
 
+            original = moved / "events/00000002/plan/original"
+            fresh = self.call(
+                "freeze",
+                "--project",
+                moved,
+                "--task",
+                "mmtt-sensitivity",
+                "--package",
+                original / "package.json",
+                "--csv",
+                original / "observations.csv",
+                "--settings",
+                original / "settings.json",
+            )["plan"]
+            source.write_text(
+                json.dumps(
+                    self.definition(
+                        [
+                            self.member("base", fresh, {"variant": "nominal"}),
+                            self.member("changed", fresh, {"variant": "volume-120"}),
+                        ]
+                    )
+                )
+            )
+            prospective = self.call(
+                "freeze-comparison", "--project", moved, "--definition", source
+            )["comparison"]
+            head = (moved / "HEAD.json").read_bytes()
+            archive = next(moved.glob("events/*/evidence/native"))
+            refused = self.call(
+                "import", "--project", moved, "--plan", fresh, "--archive", archive, expected=2
+            )
+            self.assertIn("executed first attempt", refused["error"])
+            python = self.call_python(
+                "import opent1d_lab as lab,json\n"
+                "project=lab.Project(" + repr(str(moved)) + ")\n"
+                "try:\n project.import_attempt(" + repr(fresh) + "," + repr(str(archive)) + ")\n"
+                "except ValueError as error:\n print(json.dumps({'refused':str(error)}))\n"
+                "else:\n raise AssertionError('Imported prior computation was accepted')\n"
+            )
+            self.assertIn("executed first attempt", python["refused"])
+            self.assertEqual((moved / "HEAD.json").read_bytes(), head)
+            current = self.call("comparison", "--project", moved, "--comparison", prospective)
+            self.assertEqual(current["attempts"][fresh]["status"], "unattempted")
+
     def call_python(self, code):
         import subprocess
 

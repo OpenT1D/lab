@@ -368,6 +368,51 @@ await check('invalid_displayed_copy_cannot_cancel_a_newer_report_load',async()=>
  }
  return {old_refusal_and_invalid_poll_preserve_new_load:true};
 });
+await check('refused_report_cannot_reappear_from_a_pre_refusal_state_response',async()=>{
+ for(const invalidation of ['refusal','poll']){
+  const e=environment();seed(e);const state=base();
+  state.reports=[{id:'A',project:'project',attempt:'A',verified_at:'2026-10-31T00:00:00Z',completeness:'complete',files:['report.md','report.json'],valid:true}];
+  e.context.state=state;e.run('data=state;currentReport=data.reports[0];loaded=true;');
+  const capturedState=JSON.parse(JSON.stringify(state));let finishReport,finishPoll;
+  e.context.fetch=url=>new Promise(resolve=>{if(url.endsWith('/report.md'))finishReport=resolve;else if(url==='/api/state')finishPoll=resolve;else throw Error(url);});
+  const reading=e.run('showReport("A");');
+  if(invalidation==='refusal'){
+   const polling=e.run('refresh();');e.run('reportRefused(new Error("Report directory changed"),currentReport);');
+   finishPoll({ok:true,json:async()=>capturedState});await polling;
+  }else{
+   const invalid=JSON.parse(JSON.stringify(state));invalid.reports[0].valid=false;
+   await poll(e,invalid);await poll(e,capturedState);
+  }
+  finishReport({ok:true,text:async()=> '# OLD COPY A'});
+  assert.equal(await reading,false);assert.equal(e.run('currentReport'),null);
+  assert.equal(e.run('data.reports[0].valid'),false);
+ }
+ return {refusal_and_invalid_poll_remain_invalid_across_stale_snapshots:true};
+});
+await check('late_refusal_of_an_absent_record_survives_later_old_snapshot',async()=>{
+ const e=environment();seed(e);const state=base();
+ state.reports=['A','B'].map(id=>({id,project:'project',attempt:id,verified_at:'2026-10-31T00:00:00Z',completeness:'complete',files:['report.md','report.json'],valid:true}));
+ e.context.state=state;e.run('data=state;currentReport=data.reports[1];loaded=true;');
+ const capturedState=JSON.parse(JSON.stringify(state));e.context.old=state.reports[0];
+ e.run('data.reports=data.reports.filter(record=>record.id!=="A");reportRefused(new Error("Old download refused"),old);');
+ await poll(e,capturedState);e.context.fetch=()=>{throw Error('Invalid copy must not be fetched');};
+ assert.equal(await e.run('showReport("A");'),false);assert.equal(e.run('currentReport.id'),'B');
+ return {absent_invalid_record_remembered:true,newer_report_retained:true};
+});
+await check('invalid_report_ids_survive_discarded_older_poll_responses',async()=>{
+ const e=environment();seed(e);const state=base();
+ state.reports=[{id:'A',project:'project',attempt:'A',verified_at:'2026-10-31T00:00:00Z',completeness:'complete',files:['report.md','report.json'],valid:true}];
+ e.context.state=state;e.run('data=state;currentReport=data.reports[0];loaded=true;');
+ const valid=JSON.parse(JSON.stringify(state)),invalid=JSON.parse(JSON.stringify(state));invalid.reports[0].valid=false;
+ let finishReport;const states=[];
+ e.context.fetch=url=>new Promise(resolve=>{if(url.endsWith('/report.md'))finishReport=resolve;else if(url==='/api/state')states.push(resolve);else throw Error(url);});
+ const reading=e.run('showReport("A");'),older=e.run('refresh();'),newer=e.run('refresh();');
+ states[1]({ok:true,json:async()=>valid});await newer;
+ states[0]({ok:true,json:async()=>invalid});await older;
+ finishReport({ok:true,text:async()=> '# OLD COPY A'});
+ assert.equal(await reading,false);assert.equal(e.run('currentReport'),null);assert.equal(e.run('data.reports[0].valid'),false);
+ return {discarded_snapshot_retains_monotonic_invalidation:true};
+});
 function comparisonValue(){return {comparison:'A',changes_text:'A changes',variants:[{id:'a1',label:'A1',plan:'mmtt-base',selector:{variant:'nominal'}},{id:'a2',label:'A2',plan:'mmtt-base',selector:{variant:'volume-120'}}],attempts:{'mmtt-base':{status:'unattempted'}},baseline:'a1',snapshot:{tip:'HEAD'}};}
 await check('comparison_selection_clears_previous_roster_status',async()=>{
  const e=setupComparisons();e.context.a=comparisonValue();e.run('action=async()=>({status:"done",result:a});');await e.byId('comparison-open').onclick();
@@ -384,6 +429,21 @@ await check('comparison_roster_and_explicit_baseline_survive_project_switch_and_
  assert.equal(e.byId('comparison-roster').children.length,2);assert.equal(e.byId('comparison-baseline').value,'member-2');assert.equal(e.byId('comparison-name').value,'Unsaved roster');
  e.run('action=async()=>({status:"error",error:"Controlled conflict"});');await e.byId('comparison-form').onsubmit({preventDefault(){}});
  assert.equal(e.byId('comparison-roster').children.length,2);assert.equal(e.byId('comparison-baseline').value,'member-2');return {roster_metadata_baseline_retained:true};
+});
+await check('edits_during_comparison_freeze_keep_the_unsaved_roster_and_metadata',async()=>{
+ for(const changed of ['comparison-name','comparison-question','comparison-baseline',null]){
+  const e=setupComparisons();e.run('action=async()=>({status:"done",result:{options:[{selector:{variant:"nominal"},label:"nominal"},{selector:{variant:"volume-120"},label:"volume-120"}]}});');
+  e.byId('comparison-plan').value='mmtt-base';e.byId('comparison-plan').onchange();await e.byId('comparison-options').onclick();
+  e.byId('comparison-name').value='Submitted name';e.byId('comparison-question').value='Submitted question';
+  for(const variant of ['nominal','volume-120']){e.byId('comparison-selector').value=JSON.stringify({variant});e.byId('comparison-add').onclick();}
+  let finish;e.context.freezeAction=operation=>operation==='comparison_freeze'?new Promise(resolve=>{finish=resolve;}):Promise.resolve({status:'done',result:comparisonValue()});e.run('action=freezeAction;');
+  const freezing=e.byId('comparison-form').onsubmit({preventDefault(){}});
+  if(changed)e.byId(changed).value=changed==='comparison-baseline'?'member-2':'Newer edit';
+  finish({status:'done',result:{comparison:'A'}});await freezing;
+  assert.equal(e.byId('comparison-roster').children.length,changed?2:0);
+  if(changed)assert.equal(e.byId(changed).value,changed==='comparison-baseline'?'member-2':'Newer edit');
+ }
+ return {name_question_baseline_edits_preserved:true,unchanged_submission_clears_roster:true};
 });
 await check('late_comparison_options_cannot_describe_another_plan',async()=>{
  const e=setupComparisons();let finish;e.context.optionsAction=()=>new Promise(resolve=>{finish=resolve;});e.run('action=optionsAction;');

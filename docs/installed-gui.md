@@ -173,12 +173,16 @@ requires its separately prepared attachment for execution.
    Inspect the exact changed fields, including selected kinetic/volume values,
    retained sampling times and initial load/source identities. Incompatible
    input support is refused; the editable roster remains available for correction.
+   Changes to the name, question or baseline while freezing remain in the editable
+   roster; the saved comparison retains exactly the submitted values.
 3. **Run next unattempted plan** executes unique plans sequentially in frozen
    roster order. The first attempt remains selected, including failures and
    incomplete results. A later retry cannot replace it. To repeat previously
    executed assumptions, first derive and freeze a fresh plan, then freeze a new
    comparison before its execution. Recover an unfinished attempt through the
    existing explicit SDK recovery path before another execution.
+   Existing archives cannot be imported as a comparison member's first attempt;
+   use a separate plan for retrospective intake.
 4. **Reconstruct current comparison** verifies saved native evidence and keeps
    every planned member/case, including unattempted and unavailable values.
    Download JSON, Markdown and **comparison CSV**. Inspect allocations, units,

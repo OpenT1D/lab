@@ -39,6 +39,7 @@ def begin(store, plan_id, *, retry_of=None, mode="execute", application=None):
         and (not prior or prior[-1][0] in store.finishes),
         "Explicit retry must name the previous terminal attempt",
     )
+    store.require_comparison_start(plan_id, mode, len(prior) + 1)
     host = runtime_identity()
     if application is not None:
         host["application"] = application

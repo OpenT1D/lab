@@ -89,7 +89,7 @@ globalThis.comparisons = (() => {
       const definition = {schema: "opent1d.plan-comparison/1", name: $("comparison-name").value, question: $("comparison-question").value, baseline: $("comparison-baseline").value, variants: roster};
       const job = await action("comparison_freeze", {definition});
       if (job?.status === "done" && selected === expectedProject) {
-        if (roster === submitted) { roster = []; paintRoster(); }
+        if (roster === submitted && $("comparison-name").value === definition.name && $("comparison-question").value === definition.question && $("comparison-baseline").value === definition.baseline) { roster = []; paintRoster(); }
         $("comparison-select").value = job.result.comparison; await open();
       }
     };
