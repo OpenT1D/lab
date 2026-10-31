@@ -1,0 +1,97 @@
+# 0088 — A connected synthetic secretion and observation study
+
+Date: 31 October 2026. Status: selected before implementation or new study output.
+
+## Decision
+
+Implement roadmap step 5 as a versioned composition of existing installed tasks.
+One owner writes shared interfaces and runs the final repository check; separate
+read-only reviewers challenge the scientific bridge and workbench integration.
+The starting revision is `c0481d51b200ad6126aecfe18c2418597f1470c2`.
+
+Freeze the question, complete source/case roster, bridge rules, observation case,
+inverse assumptions, uncertainty and schedules before running the forward plan.
+Reuse `m4-study-installed` with both existing sources and both `fasting` and
+`gastric_load_15g` initial conditions. Require its entire native reference,
+source, observer, refinement, repeat and complete-grid assessment to pass.
+Do not introduce another physiological engine, estimator or runtime role.
+
+After authoritative forward reconstruction, materialize exact MMTT input bytes
+and a sealed bridge manifest. Bind the original forward plan, fixed first
+attempt, native hashes, conversion identity and new sampling plan/comparison.
+The sampling task already runs the full inverse analysis and two reduced
+schedules. Freeze its comparison roster before its first execution. Cross-task
+ancestry belongs in this study/bridge relation; same-task `freeze.parent` rules
+remain unchanged. First attempts are fixed, including failures. Retrospective
+imports cannot become a study stage's first attempt. Unmaterialized, failed and
+unattempted stages/cases remain visible in the predeclared denominator.
+
+## Scientific bridge
+
+Keep complete 0–240-minute parent evidence. Export only the original 0–120-minute
+prefix at 0.25-minute times, with no clock shift, extrapolation or equilibrium
+reset. Pair fasting as `before` with the 15-g initial gastric amount as `after`.
+These are different synthetic stimuli under the same method, not longitudinal
+people or a treatment effect. The two source methods become named synthetic
+cases: Dalla Man development and ultradian evaluation. This split is not an
+independent human cohort or empirical generalisation claim.
+
+Use pancreatic appearance (`source_rates` column 0), already basal-inclusive in
+pmol/(kg min), with equimolar appearance ratio one. Do not substitute liver
+arrival, apply hepatic extraction/insulin portal transit, add basal or SC insulin,
+or repeat body-weight conversion. Read the common native body weight `W` from
+the accepted parameter record. Both source cases must use that same profile.
+The existing observer's nominal rates are 0.037/0.031/0.052 per minute and volume
+0.0655 L/kg. Initial central/peripheral amounts are basal equilibrium, and both
+cumulative ledgers start at zero. Check that the accepted observer uses exactly
+these conventions. Whole-body volume is `W * 0.0655` L; observed concentration
+already is pmol/L and becomes CSV nmol/L by division by exactly 1000. Native
+glucose becomes mmol/L by the repository's explicit factor-18 convention; it is
+context, not an additional inverse input. Insulin remains separate parent data.
+
+Define known whole-body secretion by independent Decimal trapezoids over the
+finite pancreatic interpolant on 0–120 minutes, multiplied by `W` once. Do not
+use the inverse estimator, forward delivered ledger or half a 240-minute total
+as the oracle. Check each visit and follow-up-minus-baseline. Keep C-peptide AUC
+in nmol min/L separate from secretion in pmol.
+
+Generate noiseless point observations. Freeze 32 engineering perturbations,
+seed 117, independent SD 0.05 pmol/L and paired offset SD 0.025 pmol/L; these are
+synthetic numerical stresses, not assay precision or empirical confidence.
+Use nominal, volume-times-1.2, k3-times-1.2 and initial-peripheral-times-0.75
+variants. Fix 1-minute and 15-minute reduced schedules before generated output.
+Development evidence contains only the Dalla Man case, never evaluation values.
+Support complete observations and an explicitly frozen missing-evaluation
+60-minute follow-up sample. Missing cells stay missing; no imputation or
+truth-based repair is permitted. No additional censoring/noise mechanism is
+inferred; the existing importer owns LOQ, context and boundary refusals.
+
+## Preselected checks and limits
+
+Require full nominal noiseless point totals and paired change to agree with the
+known interpolant amounts within `1e-4 * max(1, abs(known_pmol))`. This engineering
+criterion reuses the fine-grid inverse reference rationale. Verify independent
+volume scaling and the explicit elimination/initial-stock mismatch algebra.
+There is no required superiority threshold for reduced schedules; retain negative
+inferred rates, failed required draws and unresolved conclusions. Point recovery
+and native interval completeness remain separate acceptance fields.
+
+Use independent constant/affine fixtures, wrong-weight/window/inlet/unit controls,
+missing and shortened curves, altered/resealed bridge/development evidence,
+prior imports, first failures/retries, unfinished prefixes and interrupted
+materialization. Reconstruct exact old-prefix bytes after retries, restart and
+relocation without running a native model. Run real installed SDK/CLI/HTTP and
+browser flows, and a fresh current-artifact native full chain under the already
+reviewed runtime overlays. Root tooling does not install native physiology.
+
+Adding study events changes the shared reader closure. Preserve a pre-change
+comparison project and exact reconstruction as a counterexample. Refuse an
+unsupported changed reader without modifying originals; do not weaken source
+equality or claim the roadmap step-6 reader transition is complete.
+
+Independent intended-user use, biological validity, kinetic calibration,
+clinical sampling equivalence, new cohort uncertainty and packaged-app release
+remain outside this decision. The existing [forward observer](../research/m4-feedback-observation-protocol.md),
+[sampling-window study](../research/m4-sampling-window-protocol.md),
+[MMTT method](../observation-analysis.md) and their original references remain
+canonical. Their earlier results do not qualify this new connected chain.

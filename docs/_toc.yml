@@ -86,6 +86,7 @@ subtrees:
       - file: docs/research/installed-mmtt-sampling
       - file: docs/research/editable-workbench
       - file: docs/research/workbench-comparisons
+      - file: docs/research/connected-synthetic-study
       - file: docs/research/m4-installed-runtime-protocol
       - file: docs/m4-synthetic-basal-equivalence
       - file: docs/m4-ultradian-basal-equivalence
@@ -324,6 +325,7 @@ subtrees:
       - file: docs/decisions/0085-installed-mmtt-sampling
       - file: docs/decisions/0086-editable-workbench-drafts
       - file: docs/decisions/0087-frozen-workbench-comparisons
+      - file: docs/decisions/0088-connected-synthetic-observation-study
       - file: docs/decisions/0059-maintained-runtimes-and-local-gui
       - file: docs/templates/model-card
       - file: docs/templates/experiment-protocol
