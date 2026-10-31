@@ -7,6 +7,10 @@ installer or public release. Qualification selects local Apple Silicon macOS.
 The wheel remains `0.0.0.dev0`; its source revision, complete manifest and wheel
 SHA-256 identify the actual artifact, rather than that development version.
 
+The separately selected [integrated candidate](internal-integrated-candidate.md)
+adds maintained M4 and connected-study qualification with explicit reviewed
+runtime attachment. It preserves this two-task build and its compatibility scope.
+
 ## Build and retain the candidate
 
 Read the [installed guide](installed-sdk.md) for Python, CLI and workbench use.

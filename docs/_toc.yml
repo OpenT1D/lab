@@ -79,6 +79,7 @@ subtrees:
       - file: docs/research/ot061-064-minimal-services
       - file: docs/installed-sdk
       - file: docs/internal-mmtt-candidate
+      - file: docs/internal-integrated-candidate
       - file: docs/installed-m4
       - file: docs/installed-gui
       - file: docs/research/ot060-installed-route

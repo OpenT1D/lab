@@ -20,7 +20,9 @@ function command(executable, args, options) {
 
 export const test = base.extend({
   mmttOnly: [false, { option: true }],
-  app: async ({ mmttOnly }, use, testInfo) => {
+  integratedCandidate: [false, { option: true }],
+  app: async ({ mmttOnly, integratedCandidate }, use, testInfo) => {
+    if (mmttOnly && integratedCandidate) throw new Error('Choose one candidate scope');
     const folder = await realpath(await mkdtemp(path.join(tmpdir(), 'opent1d-installed-browser-')));
     const env = { ...process.env, UV_CACHE_DIR: path.join(folder, 'cache'), PYTHONNOUSERSITE: '1' };
     delete env.PYTHONPATH;
@@ -56,8 +58,8 @@ export const test = base.extend({
       } finally { clearTimeout(timer); lines.close(); }
     }
     try {
-      const retained = mmttOnly && process.env.OPENT1D_READER_CANDIDATE_RECEIPT;
-      const receipt = retained ? await readFile(retained, 'utf8') : command(python, [path.join(root, 'scripts/build_sdk.py'), '--output', path.join(folder, 'build'), '--allow-dirty', '--build-label', 'sampling-browser-regression', ...(mmttOnly ? ['--mmtt-only'] : [])], options);
+      const retained = integratedCandidate ? process.env.OPENT1D_INTEGRATED_CANDIDATE_RECEIPT : mmttOnly && process.env.OPENT1D_READER_CANDIDATE_RECEIPT;
+      const receipt = retained ? await readFile(retained, 'utf8') : command(python, [path.join(root, 'scripts/build_sdk.py'), '--output', path.join(folder, 'build'), '--allow-dirty', '--build-label', 'sampling-browser-regression', ...(mmttOnly ? ['--mmtt-only'] : integratedCandidate ? ['--integrated-candidate'] : [])], options);
       if (retained && createHash('sha256').update(await readFile(JSON.parse(receipt).wheel)).digest('hex') !== JSON.parse(receipt).wheel_sha256) throw new Error('Retained candidate wheel differs from its receipt');
       await writeFile(testInfo.outputPath('build-receipt.json'), receipt);
       const installedPython = path.join(folder, 'sdk/bin/python');
@@ -66,7 +68,10 @@ export const test = base.extend({
       const cli = path.join(folder, 'sdk/bin/opent1d-lab');
       if (retained) {
         const expected = JSON.parse(receipt), actual = JSON.parse(command(cli, ['installation'], options));
-        if (expected.source.dirty !== false || actual.source.dirty !== false || actual.source.revision !== expected.source.revision || actual.build_label !== expected.build_label || actual.descriptor_sha256 !== expected.descriptor_sha256 || actual.schema !== 'opent1d.installed-sdk/4' || actual.schema !== expected.descriptor_schema || JSON.stringify(actual.tasks) !== JSON.stringify(['mmtt-sensitivity', 'mmtt-sampling']) || JSON.stringify(actual.tasks) !== JSON.stringify(expected.tasks) || actual.native_execution !== 'unavailable-public-policy' || actual.native_execution !== expected.native_execution) throw new Error('Installed candidate descriptor differs from the retained clean two-task receipt');
+        const schema = integratedCandidate ? 'opent1d.installed-sdk/5' : 'opent1d.installed-sdk/4';
+        const tasks = integratedCandidate ? ['mmtt-sensitivity', 'm4-study-secure', 'm4-study-installed', 'mmtt-sampling'] : ['mmtt-sensitivity', 'mmtt-sampling'];
+        const policy = integratedCandidate ? 'explicit-reviewed-attachment/1' : 'unavailable-public-policy';
+        if (expected.source.dirty !== false || actual.source.dirty !== false || actual.source.revision !== expected.source.revision || actual.build_label !== expected.build_label || actual.descriptor_sha256 !== expected.descriptor_sha256 || actual.schema !== schema || actual.schema !== expected.descriptor_schema || JSON.stringify(actual.tasks) !== JSON.stringify(tasks) || JSON.stringify(actual.tasks) !== JSON.stringify(expected.tasks) || actual.native_execution !== policy || actual.native_execution !== expected.native_execution) throw new Error('Installed candidate descriptor differs from the retained clean scope receipt');
       }
       const app = { folder, workspace, cli, installedPython, env, command: (...args) => JSON.parse(command(cli, args.map(String), options)), url: await start(cli), restart: async () => { await stop(); app.url = await start(cli); } };
       await use(app);

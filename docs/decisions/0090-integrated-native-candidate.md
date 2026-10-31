@@ -44,7 +44,8 @@ selected; signing, clean-host and intended-user acceptance remain separate.
    adult #001, the complete 0–240-minute quarter-minute grid and original units.
    The predeclared scientific parity roster is the existing `numeric_paths`
    (reference and each source), `observation_paths` (each source), both primary
-   and repeat, plus the existing BC-008 `numerical_files` roster. Require raw
+   and repeat, plus primary and repeat of the existing BC-008 `numerical_files`
+   roster (274 files total). Require raw
    byte equality; investigate any difference rather than dropping a field or
    relaxing a tolerance. Commands, timing, attestations and seals remain separate
    execution evidence. Do not claim separately executed parent-linked plans.

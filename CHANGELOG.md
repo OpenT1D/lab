@@ -4,6 +4,13 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Add an explicit integrated internal candidate for maintained M4 and the
+  connected synthetic study, retaining the two-MMTT build and unchanged scientific
+  payload/readers. Add exact-artifact qualification for reviewed runtime roles,
+  direct/installed numerical parity, complete/missing chains, cancellation,
+  failure and relocation, plus candidate-bound unanswered first-use preparation.
+  Public native distribution, changed native readers and user acceptance remain open.
+
 - Add a bounded internal MMTT wheel/workbench candidate with an enforced two-task
   capability roster, candidate-bound formative preparation and a repeatable
   exact-artifact A/B qualification procedure. Support one pinned PR-43 MMTT

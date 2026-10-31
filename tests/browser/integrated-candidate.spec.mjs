@@ -1,0 +1,45 @@
+import { readFile } from 'node:fs/promises';
+import { test, expect } from './installed-fixtures.mjs';
+
+test.use({ integratedCandidate: true });
+
+test('integrated candidate exposes M4 and connected study, preserving absent-runtime failure', async ({ page, app }, testInfo) => {
+  test.setTimeout(150_000);
+  const errors = []; page.on('pageerror', error => errors.push(error.message));
+  await page.goto(app.url);
+  await expect(page.locator('#candidate-capabilities')).toContainText('connected synthetic chain');
+  await page.getByLabel('New project name').fill('Integrated candidate exercise');
+  await page.getByRole('button', { name: 'Create project', exact: true }).click();
+  await expect(page.locator('#task option')).toHaveCount(3);
+  await expect(page.locator('#task option[value="m4-study-installed"]')).toHaveCount(1);
+  await expect(page.locator('#task option[value="m4-study-secure"]')).toHaveCount(0);
+  await expect(page.locator('#runtime-controls')).toBeVisible();
+  await expect(page.locator('#connected-study')).toBeVisible();
+  await page.locator('#connected-name').fill('Preserved unavailable forward');
+  await page.locator('#connected-question').fill('Are all planned observations preserved without native admission?');
+  await page.locator('#connected-freeze').click();
+  await expect(page.locator('#connected-status')).toContainText('Run fixed forward plan');
+  await page.locator('#connected-next').click();
+  await expect(page.locator('#job')).toBeHidden();
+  await expect(page.locator('#connected-stages')).toContainText('failed');
+  await expect(page.locator('#connected-next')).toBeDisabled();
+  await page.locator('#connected-verify').click();
+  await expect(page.locator('#saved-report')).toBeVisible();
+  const download = page.waitForEvent('download');
+  await page.locator('[data-download="report.json"]').click();
+  const report = JSON.parse(await readFile(await (await download).path(), 'utf8'));
+  expect(report.coverage.planned_rows).toBe(72);
+  expect(report.coverage.unavailable_point_rows).toBe(72);
+  expect(report.definition.sampling_plan).toBeNull();
+  expect(report.definition.stages.forward.status).toBe('failed');
+  await app.restart(); await page.goto(app.url);
+  await page.getByRole('button', { name: 'Integrated candidate exercise', exact: true }).click();
+  await page.locator('#connected-open').click();
+  await expect(page.locator('#connected-stages')).toContainText('failed');
+  await expect(page.locator('#connected-next')).toBeDisabled();
+  await page.setViewportSize({ width: 520, height: 900 });
+  await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.screenshot({ path: testInfo.outputPath('integrated-candidate.png'), fullPage: false });
+  expect(errors).toEqual([]);
+});
