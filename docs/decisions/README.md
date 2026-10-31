@@ -1,5 +1,7 @@
 # Decision records
 
+- [0090 — Integrated native candidate](0090-integrated-native-candidate.md): qualify M4 and the connected synthetic study in an explicit internal candidate while preserving readers and runtime boundaries.
+
 - [0089 — Internal candidate and reader transition](0089-internal-candidate-reader-transition.md): exact two-task candidate and pinned comparison reader compatibility without rewriting evidence.
 
 - [0088 — Connected synthetic observation study](0088-connected-synthetic-observation-study.md): freeze and preserve known pancreatic input, forward C-peptide, inverse analysis and reduced sampling through existing task services.
