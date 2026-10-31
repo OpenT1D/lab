@@ -1,5 +1,7 @@
 # Decision records
 
+- [0087 — Frozen workbench comparisons](0087-frozen-workbench-comparisons.md): preexecution rosters, fixed first attempts, task-owned contrasts and prefix-bound reconstruction.
+
 - [0086 — Recoverable editable studies](0086-editable-workbench-drafts.md): exact synthetic input revisions, validation, immutable derivation and bounded workbench recovery.
 
 - [0085 — Installed MMTT sampling](0085-installed-mmtt-sampling.md): retain sealed development evidence, complete native child reports and strict installed capabilities through the shared SDK and workbench.

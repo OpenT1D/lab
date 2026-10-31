@@ -17,6 +17,7 @@ REPORTS = {
     "report.json": "application/json",
     "report.md": "text/markdown",
     "figure.svg": "image/svg+xml",
+    "comparison.csv": "text/csv; charset=utf-8",
 }
 FIELDS = {
     "create": {"name"},
@@ -30,6 +31,10 @@ FIELDS = {
     "derive": {"plan"},
     "freeze": {"draft", "revision", "name", "parent"},
     "plan": {"plan"},
+    "comparison_options": {"plan"},
+    "comparison_freeze": {"definition"},
+    "comparison_open": {"comparison", "at"},
+    "comparison_verify": {"comparison", "at"},
     "check": {"plan"},
     "run": {"plan", "retry_of"},
     "verify": {"attempt", "allow_failed"},
@@ -175,11 +180,13 @@ class Controller:
                         "active": self.active["id"] if self.active else None,
                         "reports": [
                             {
-                                key: value[key]
+                                key: value.get(key)
                                 for key in (
                                     "id",
                                     "project",
                                     "attempt",
+                                    "comparison",
+                                    "snapshot",
                                     "verified_at",
                                     "valid",
                                     "completeness",
@@ -517,6 +524,12 @@ class Controller:
                     draft["id"], draft["revision"], handle, stamp, result["plan"]
                 )
             return result, handle
+        if operation == "comparison_options":
+            return project.comparison_options(args["plan"]), handle
+        if operation == "comparison_freeze":
+            return project.freeze_comparison(args["definition"]), handle
+        if operation == "comparison_open":
+            return project.comparison(args["comparison"], at=args["at"]), handle
         if operation == "plan":
             result = project.plan(args["plan"])
             self.plans[(handle, args["plan"])] = result
@@ -553,18 +566,28 @@ class Controller:
                 runtime_attachment=self.runtime_attachment,
             )
             return result, handle
-        if operation == "verify":
-            require(
-                type(args["allow_failed"]) is bool, "Explicit incomplete-evidence option required"
-            )
+        if operation in {"verify", "comparison_verify"}:
             key = uuid.uuid4().hex
             destination = self.root / "reports" / key
-            result = project.reconstruct(
-                args["attempt"], destination, allow_failed=args["allow_failed"]
-            )
+            if operation == "verify":
+                require(
+                    type(args["allow_failed"]) is bool,
+                    "Explicit incomplete-evidence option required",
+                )
+                result = project.reconstruct(
+                    args["attempt"], destination, allow_failed=args["allow_failed"]
+                )
+            else:
+                result = project.reconstruct_comparison(
+                    args["comparison"], destination, at=args["at"]
+                )
             names = set(result["report_sha256"])
             require({"report.json", "report.md"} <= names, "Report roster")
             require(len(names) <= 10, "Unsupported authoritative report roster")
+            require(
+                ("comparison.csv" in names) == (operation == "comparison_verify"),
+                "Comparison/native report families differ",
+            )
             for name in names:
                 report_mime(name)
             children = {name for name in names if name.startswith("studies/")}
@@ -590,7 +613,9 @@ class Controller:
             record = {
                 "id": key,
                 "project": handle,
-                "attempt": args["attempt"],
+                "attempt": args.get("attempt"),
+                "comparison": args.get("comparison"),
+                "snapshot": result.get("snapshot"),
                 "directory": str(destination),
                 "verified_at": now(),
                 "valid": True,

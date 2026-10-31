@@ -123,6 +123,23 @@ def main(argv=None):
     command = commands.add_parser("prepare-development")
     for name in ("package", "csv", "design", "output"):
         command.add_argument("--" + name, required=True)
+    for operation in (
+        "comparison-options",
+        "freeze-comparison",
+        "comparison",
+        "reconstruct-comparison",
+    ):
+        command = commands.add_parser(operation)
+        command.add_argument("--project", required=True)
+        if operation == "comparison-options":
+            command.add_argument("--plan", required=True)
+        elif operation == "freeze-comparison":
+            command.add_argument("--definition", required=True)
+        else:
+            command.add_argument("--comparison", required=True)
+            command.add_argument("--at")
+        if operation == "reconstruct-comparison":
+            command.add_argument("--output", required=True)
     args = parser.parse_args(argv)
     try:
         if args.action in {"prepare-study-packet", "verify-study-packet"}:
@@ -149,6 +166,16 @@ def main(argv=None):
         project = Project(args.project) if hasattr(args, "project") else None
         if args.action == "installation":
             result = installation()
+        elif args.action == "comparison-options":
+            result = project.comparison_options(args.plan)
+        elif args.action == "freeze-comparison":
+            from ._gui_files import decode, read
+
+            result = project.freeze_comparison(decode(read(args.definition, 65536)))
+        elif args.action == "comparison":
+            result = project.comparison(args.comparison, at=args.at)
+        elif args.action == "reconstruct-comparison":
+            result = project.reconstruct_comparison(args.comparison, args.output, at=args.at)
         elif args.action == "prepare-development":
             result = prepare_development(args.package, args.csv, args.design, args.output)
         elif args.action == "attach-runtimes":

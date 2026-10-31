@@ -123,6 +123,10 @@ FIELDS = {
     "create": {"project", "name"},
     "info": {"project"},
     "plan": {"project", "plan"},
+    "comparison-options": {"project", "plan"},
+    "freeze-comparison": {"project", "definition"},
+    "comparison": {"project", "comparison", "at"},
+    "reconstruct-comparison": {"project", "comparison", "at", "output"},
     "export-inputs": {"project", "plan", "output"},
     "validate": {"task", "inputs"},
     "inspect": {"task", "inputs"},
@@ -304,7 +308,16 @@ def dispatch(request, bootstrap, artifact, *, cancel=None):
     path = workspace_path(request["project"], bootstrap, fresh=action == "create")
     if action == "create":
         return {"project": str(store.create(path, request["name"]))}
-    writing = action not in {"info", "plan", "check", "relocate", "export-inputs"}
+    writing = action not in {
+        "info",
+        "plan",
+        "check",
+        "relocate",
+        "export-inputs",
+        "comparison-options",
+        "comparison",
+        "reconstruct-comparison",
+    }
     backend = Backend(bootstrap, artifact, request.get("runtime_attachment"))
     with store.opened(path, write_access=writing) as project:
         store.require(
@@ -343,12 +356,40 @@ def dispatch(request, bootstrap, artifact, *, cancel=None):
                     }
                     for identity, record in project.attempts.items()
                 ],
+                "comparisons": [
+                    {
+                        "id": key,
+                        "name": value["name"],
+                        "task": value["task"],
+                        "members": len(value["variants"]),
+                    }
+                    for key, value in project.comparisons.items()
+                ],
                 "reader_checks": [
                     event["data"]
                     for _, event, _ in project.events
                     if event["kind"] == "reconstruct"
                 ],
             }
+        if action == "comparison-options":
+            from .comparison_tasks import plan_data
+
+            value = plan_data(project, request["plan"])
+            return {key: value[key] for key in ("plan", "task", "options", "support")}
+        if action in {"freeze-comparison", "comparison", "reconstruct-comparison"}:
+            from . import comparisons
+
+            if action == "freeze-comparison":
+                return comparisons.freeze(project, request["definition"])
+            if action == "comparison":
+                return comparisons.view(project, request["comparison"], at=request["at"])
+            return comparisons.reconstruct(
+                project,
+                request["comparison"],
+                workspace_path(request["output"], bootstrap, fresh=True),
+                at=request["at"],
+                backend=backend,
+            )
         if action == "plan":
             identity = request["plan"]
             descriptor, folder = project.plans[identity]
