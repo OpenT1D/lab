@@ -165,3 +165,5 @@ The M4 records were assigned numbers 0016–0028 when the parallel M3, LIT-002 a
 - [0002 — Reference reproduction before integration](0002-m0-reference-first.md): accepted M1 engine-integration boundary following native probes, with reproduction separated from comparison.
 
 - [0001 — Project foundation](0001-project-foundation.md): modular laboratory, repository structure, language, licensing and current tooling.
+- [0087 — Frozen workbench comparisons](0087-frozen-workbench-comparisons.md): preexecution rosters, fixed first attempts, task-owned contrasts and prefix-bound reconstruction.
+
