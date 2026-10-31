@@ -140,6 +140,12 @@ def build(project, definition, bridge, directory):
     matched = [row for row in rows if row["matched_point_pass"] is not None]
     points = sum(row["value"] is not None for row in rows)
     complete = sum(row["status"] == "complete" for row in rows)
+    passed = all(row["matched_point_pass"] for row in matched) and all(checks)
+    evaluable = all(row["value"] is not None for row in matched) and all(
+        row["bias_pass"] is not None
+        for row in rows
+        if row["schedule"] == "full" and row["variant"] != "nominal"
+    )
     store.require(
         len(rows) == 72 and len(matched) == 6 and len(checks) == 18,
         "Connected endpoint denominator differs",
@@ -167,6 +173,10 @@ def build(project, definition, bridge, directory):
             "all_passed": all(row["matched_point_pass"] for row in matched),
         },
         "mismatch_controls": {"planned": 18, "passed": sum(checks), "all_passed": all(checks)},
+        "numerical_acceptance": {
+            "status": "passed" if passed else "failed" if evaluable else "unavailable",
+            "all_passed": passed,
+        },
         "rows": rows,
         "limitations": [
             "Two synthetic source-method cases, not two people or an independent cohort",
@@ -214,6 +224,7 @@ def render(report):
         "",
         "Known truth: whole-body pmol, basal included; paired change is after minus before.",
         "",
+        "Numerical point checks: **" + report["numerical_acceptance"]["status"] + "**. "
         "Matched full points: " + str(report["point_recovery"]["passed"]) + "/6; "
         "mismatch algebra: " + str(report["mismatch_controls"]["passed"]) + "/18. "
         "Point/interval/failure states remain separate.",

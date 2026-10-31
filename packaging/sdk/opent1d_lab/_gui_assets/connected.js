@@ -45,7 +45,9 @@ globalThis.connected = (() => {
     $("connected-select").disabled = busy || !studies.length;
     $("connected-freeze").disabled = busy;
     for (const id of ["connected-open", "connected-verify", "connected-replay"]) $(id).disabled = busy || !studies.length;
-    $("connected-next").disabled = busy || !loaded || stale || !["run", "materialize"].includes(loaded.next.action);
+    const unfinished = attempts.some(attempt => attempt.outcome === "unfinished");
+    $("connected-next").disabled = busy || !loaded || stale || !["run", "materialize"].includes(loaded.next.action) || loaded.next.action === "run" && unfinished;
+    if (!stale && loaded?.next.action === "run" && unfinished) $("connected-status").textContent = "Recover the unfinished project attempt explicitly before starting another execution.";
     $("connected-next").textContent = loaded?.next.action === "materialize" ? "Materialize or resume observations and plans" : loaded?.next.plan === loaded?.forward_plan ? "Run known secretion and forward observations" : "Run full inverse and reduced sampling";
     $("connected-forward-report").disabled = busy || !loaded || loaded.stages.forward.payload !== "native";
     $("connected-inverse-report").disabled = busy || !loaded || loaded.stages.inverse_sampling.payload !== "native";
@@ -55,7 +57,7 @@ globalThis.connected = (() => {
       event.preventDefault(); keep();
       const expectedProject = selected;
       const job = await action("study_freeze", {name: $("connected-name").value, question: $("connected-question").value, forward_plan: $("connected-forward").value || null, observation_case: $("connected-case").value});
-      if (job?.status === "done" && selected === expectedProject) { $("connected-select").value = job.result.study; await open(); }
+      if (job?.status === "done" && selected === expectedProject) { clear(); withdrawReport(); $("connected-select").value = job.result.study; await open(); }
     };
     $("connected-select").onchange = () => { clear(); withdrawReport(); render(); };
     $("connected-open").onclick = open;

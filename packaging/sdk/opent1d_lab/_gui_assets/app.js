@@ -211,11 +211,11 @@ async function showReport(identity) {
   if (hasFigure) $("report-figure").src = imageURL;
   currentReport = record;
   $("report-context").textContent = `Verified ${new Date(record.verified_at).toLocaleString()} · ` + (record.study ? `connected study ${record.study.slice(0, 12)} · snapshot ${record.snapshot.tip}` : record.comparison ? `comparison ${record.comparison.slice(0, 12)} · snapshot ${record.snapshot.tip}` : `attempt ${record.attempt.slice(0, 12)}`);
-  $("report-completeness").textContent = record.completeness;
-  $("report-completeness").className = "tag" + (record.completeness === "complete" ? "" : " warn");
+  $("report-completeness").textContent = record.completeness + (record.numerical_acceptance ? ` · point checks ${record.numerical_acceptance.status}` : "");
+  $("report-completeness").className = "tag" + (record.completeness === "complete" && (!record.numerical_acceptance || record.numerical_acceptance.all_passed) ? "" : " warn");
   $("saved-report").classList.remove("hidden"); $("saved-report").scrollIntoView({behavior: "smooth", block: "start"});
   return true;
-  } catch (error) { if (issued !== reportIssued || selected !== record.project) return false; throw error; }
+  } catch (error) { if (issued !== reportIssued || selected !== record.project || (record.study && globalThis.connected && connected.selection() !== record.study)) return false; throw error; }
 }
 $("create-project").onsubmit = event => { event.preventDefault(); action("create", {name: $("project-name").value}, null); };
 $("open-project").onsubmit = event => { event.preventDefault(); action("open", {path: $("open-path").value}, null); };

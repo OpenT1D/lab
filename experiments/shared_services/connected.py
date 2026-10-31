@@ -428,5 +428,8 @@ def reconstruct(project, identity, output, *, at=None, backend=None):
         "snapshot": value["snapshot"],
         "reconstruction": "verified",
         "completeness": report["completeness"],
+        "point_recovery": report["point_recovery"],
+        "mismatch_controls": report["mismatch_controls"],
+        "numerical_acceptance": report["numerical_acceptance"],
         "report_sha256": {name: store.digest(raw) for name, raw in files.items()},
     }
