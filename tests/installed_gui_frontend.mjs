@@ -9,25 +9,28 @@ const draftSourcePath=process.argv[4];
 const draftSource=fs.readFileSync(draftSourcePath,'utf8');
 const comparisonSourcePath=process.argv[5];
 const comparisonSource=fs.readFileSync(comparisonSourcePath,'utf8');
+const connectedSourcePath=process.argv[6];
+const connectedSource=fs.readFileSync(connectedSourcePath,'utf8');
 class Element {
  constructor(tag='div'){this.tag=tag;this.value='';this.children=[];this.textContent='';this.content='session-token';this.src='';this.open=false;this.hiddenClasses=new Set();const classes=this.hiddenClasses;this.classList={add(...names){for(const name of names)classes.add(name);},remove(...names){for(const name of names)classes.delete(name);},contains(name){return classes.has(name);},toggle(name,force){if(force===undefined)force=!classes.has(name);if(force)classes.add(name);else classes.delete(name);return force;}};}
- replaceChildren(...items){this.children=items;if(items.length&&items.every(item=>item.tag==='option'))this.value=items[0].value;}
+ replaceChildren(...items){this.children=items;if(this.tag==='select'||items.length&&items.every(item=>item.tag==='option'))this.value=items[0]?.value||'';}
  append(...items){this.children.push(...items);}
  setAttribute(name,value){this[name]=value;} removeAttribute(name){delete this[name];}
  focus(){} scrollIntoView(){}
 }
-function environment({concepts=false,comparisons=false}={}){
- const nodes=new Map(),byId=id=>{if(!nodes.has(id))nodes.set(id,new Element(['task','example-case','parent-plan','plan-select'].includes(id)?'select':'div'));return nodes.get(id);};byId('task').value='mmtt-sensitivity';
+function environment({concepts=false,comparisons=false,connected=false}={}){
+ const nodes=new Map(),byId=id=>{if(!nodes.has(id))nodes.set(id,new Element(['task','example-case','parent-plan','plan-select','connected-select','connected-forward','connected-case'].includes(id)?'select':'div'));return nodes.get(id);};byId('task').value='mmtt-sensitivity';
  const figureButton=new Element('button'),urlCalls=[];
  const backups=new Map();
  const context={document:{getElementById:byId,querySelector:query=>query.includes('opent1d-token')?{content:'session-token'}:figureButton,querySelectorAll:()=>[],createElement:tag=>{const node=new Element(tag);let id='';Object.defineProperty(node,'id',{get:()=>id,set:value=>{id=value;nodes.set(value,node);}});return node;}},fetch:()=>new Promise(()=>{}),setInterval(){},setTimeout(){},clearTimeout(){},addEventListener(){},localStorage:{setItem:(k,v)=>backups.set(k,v),getItem:k=>backups.get(k)||null,removeItem:k=>backups.delete(k)},TextDecoder,crypto:{randomUUID:()=> 'controlled-request'},URL:{createObjectURL(){const value='blob:controlled-'+urlCalls.length;urlCalls.push(['create',value]);return value;},revokeObjectURL(value){urlCalls.push(['revoke',value]);}},console};
- vm.createContext(context);if(concepts)vm.runInContext(draftSource,context,{filename:draftSourcePath});if(comparisons)vm.runInContext(comparisonSource,context,{filename:comparisonSourcePath});vm.runInContext(source,context,{filename:sourcePath});return {context,byId,figureButton,urlCalls,backups,run:code=>vm.runInContext(code,context)};
+ vm.createContext(context);if(concepts)vm.runInContext(draftSource,context,{filename:draftSourcePath});if(comparisons)vm.runInContext(comparisonSource,context,{filename:comparisonSourcePath});if(connected)vm.runInContext(connectedSource,context,{filename:connectedSourcePath});vm.runInContext(source,context,{filename:sourcePath});return {context,byId,figureButton,urlCalls,backups,run:code=>vm.runInContext(code,context)};
 }
 function base(){
  return {projects:[{id:'project',name:'Controlled project',path:'/project',labels:{},info:{plans:[{id:'fasting',task:'m4-study-installed',slots:['dalla_man/fasting','ultradian/fasting'],parent:null},{id:'mmtt-base',task:'mmtt-sensitivity',slots:['person/primary'],parent:null}],attempts:[]}}],jobs:[],active:null,closing:false,workspace:'/workspace',installation:{build_label:'controlled',source:{revision:'a'.repeat(40)}},runtime_attachment:'/attachment-A.json',runtime_revision:0};
 }
 function seed(e){e.run('data='+JSON.stringify(base())+';selected="project";selectedPlan="fasting";');}
 const receipt={schema:'opent1d.gui-dom-agent-review/1',scope:'Controlled DOM with actual unmodified application JavaScript; not a real-browser or human usability check',source_path:sourcePath,source_sha256:crypto.createHash('sha256').update(source).digest('hex'),draft_source_sha256:crypto.createHash('sha256').update(draftSource).digest('hex'),node:process.version,tests:{}};
+receipt.connected_source_sha256=crypto.createHash('sha256').update(connectedSource).digest('hex');
 async function check(name,fn){try{receipt.tests[name]={passed:true,observed:await fn()};}catch(error){receipt.tests[name]={passed:false,error:error.stack};}}
 await check('explicit_parent_survives_repeated_render_and_new_drafts_reset',async()=>{
  const e=environment();seed(e);
@@ -450,5 +453,101 @@ await check('late_comparison_options_cannot_describe_another_plan',async()=>{
  const pending=e.byId('comparison-options').onclick();e.byId('comparison-plan').value='mmtt-base';e.byId('comparison-plan').onchange();
  finish({status:'done',result:{options:[{selector:{source:'old'},label:'Old source'}]}});await pending;
  assert.equal(e.byId('comparison-selector').children.length,0);return {late_selector_ignored:true};
+});
+
+function studyValue(identity='A',action='run') {
+ const stage={status:'unattempted',completeness:null,attempt:null,payload:null};
+ return {study:identity,name:'Study '+identity,next:{action,plan:'forward',reason:'Run fixed forward plan'},snapshot:{tip:'HEAD'},stages:{forward:stage,inverse_sampling:stage},forward_plan:'forward',protocol:{},planned:{}};
+}
+function setupConnected() {
+ const e=environment({connected:true});seed(e);
+ e.run('data.projects[0].info.head={tip:"HEAD"};data.projects[0].info.plans.push({id:"forward",task:"m4-study-installed",slots:["a","b","c","d"]});data.projects[0].info.studies=[{id:"A",name:"Study A",observation_case:"complete"},{id:"B",name:"Study B",observation_case:"missing-evaluation"}];render();');
+ return e;
+}
+function studyRecord(id='report-A',study='A') {return {id,project:'project',study,attempt:null,snapshot:{tip:'HEAD'},verified_at:'2026-10-31T00:00:00Z',completeness:'complete',numerical_acceptance:{status:'failed'},files:['report.md','report.json','study.csv'],valid:true};}
+await check('connected_report_has_study_identity_truth_csv_and_separate_point_acceptance',async()=>{
+ const e=setupConnected(),calls=[];e.context.record=studyRecord();e.run('data.reports=[record];');
+ e.context.fetch=async url=>{calls.push(url);return {ok:true,text:async()=> '# CONNECTED TRUTH'};};
+ await e.run('showReport("report-A");');
+ assert.equal(e.run('currentReport.study'),'A');assert.match(e.byId('report-context').textContent,/connected study A.*snapshot HEAD/);
+ assert.equal(e.byId('report-completeness').textContent,'complete · point checks failed');
+ assert.equal(e.byId('download-study').classList.contains('hidden'),false);
+ assert.deepEqual(calls,['/api/reports/report-A/report.md']);
+ return {study_identity_without_attempt:true,point_acceptance_separate_from_completeness:true,fixed_csv_visible:true};
+});
+await check('late_connected_inspection_cannot_replace_a_newer_study_or_project',async()=>{
+ for(const change of ['study','project']) {
+  const e=setupConnected();let finish;e.context.pendingAction=()=>new Promise(resolve=>{finish=resolve;});e.run('action=pendingAction;');
+  const pending=e.byId('connected-open').onclick();
+  if(change==='study'){e.byId('connected-select').value='B';e.byId('connected-select').onchange();}
+  else e.run('data.projects.push({...data.projects[0],id:"other"});selected="other";render();');
+  finish({status:'done',result:studyValue()});await pending;
+  assert.equal(e.byId('connected-stages').children.length,0);assert.equal(e.byId('connected-next').disabled,true);
+ }
+ return {other_study_and_project_reject_late_inspection:true};
+});
+await check('connected_next_requires_fresh_head_and_explicit_unfinished_recovery',async()=>{
+ const e=setupConnected();e.context.value=studyValue();e.run('action=async()=>({status:"done",result:value});');await e.byId('connected-open').onclick();
+ assert.equal(e.byId('connected-next').disabled,false);
+ e.run('data.projects[0].info.head.tip="NEW";render();');assert.equal(e.byId('connected-next').disabled,true);assert.match(e.byId('connected-status').textContent,/ledger changed/);
+ e.run('data.projects[0].info.head.tip="HEAD";data.projects[0].info.attempts.push({plan:"other",outcome:"unfinished"});render();');
+ assert.equal(e.byId('connected-next').disabled,true);assert.match(e.byId('connected-status').textContent,/Recover the unfinished/);
+ return {stale_head_refused:true,unrelated_unfinished_attempt_requires_recovery:true};
+});
+await check('connected_next_advances_exactly_one_existing_action',async()=>{
+ for(const step of ['run','materialize']) {
+  const e=setupConnected(),calls=[];e.context.value=studyValue('A',step);
+  e.context.recordAction=async(operation,payload)=>{calls.push([operation,payload]);return {status:'done',result:e.context.value};};e.run('action=recordAction;');
+  await e.byId('connected-open').onclick();calls.length=0;await e.byId('connected-next').onclick();
+  assert.deepEqual(calls.map(c=>c[0]),[step==='run'?'run':'study_materialize','study_open']);
+  if(step==='run'){assert.equal(calls[0][1].plan,'forward');assert.equal(calls[0][1].retry_of,null);}
+  else assert.equal(calls[0][1].study,'A');
+ }
+ return {one_run_or_materialize_then_metadata_only:true,existing_process_action_reused:true};
+});
+await check('connected_concepts_keep_forward_choice_and_metadata_across_project_switches',async()=>{
+ const e=setupConnected();e.byId('connected-name').value='Unsaved study';e.byId('connected-question').value='Synthetic question';e.byId('connected-case').value='missing-evaluation';e.byId('connected-forward').value='forward';
+ e.run('data.projects.push({...data.projects[0],id:"other"});selected="other";render();selected="project";render();render();');
+ for(const [id,value] of [['connected-name','Unsaved study'],['connected-question','Synthetic question'],['connected-case','missing-evaluation'],['connected-forward','forward']])assert.equal(e.byId(id).value,value);
+ return {per_project_name_question_missing_case_existing_forward_choice:true};
+});
+await check('freezing_another_connected_study_withdraws_previous_report_and_downloads',async()=>{
+ const e=setupConnected();e.context.record=studyRecord();e.run('data.reports=[record];');e.context.fetch=async()=>({ok:true,text:async()=> '# STUDY A'});await e.run('showReport("report-A");');
+ e.context.value=studyValue('B');e.run('action=async operation=>({status:"done",result:operation==="study_freeze"?{study:"B"}:value});');
+ await e.byId('connected-form').onsubmit({preventDefault(){}});
+ assert.equal(e.byId('connected-select').value,'B');assert.equal(e.run('currentReport'),null);assert.equal(e.byId('saved-report').classList.contains('hidden'),true);assert.equal(e.byId('report-text').children.length,0);
+ return {new_selection_withdraws_old_identity_content_downloads:true};
+});
+await check('obsolete_connected_report_success_and_error_cannot_affect_new_selection',async()=>{
+ for(const fail of [false,true]) {
+  const e=setupConnected();e.context.record=studyRecord();e.run('data.reports=[record];');let finish;
+  e.context.fetch=()=>new Promise(resolve=>{finish=resolve;});const pending=e.run('showReport("report-A");');
+  e.byId('connected-select').value='B';
+  finish(fail?{ok:false,json:async()=>({error:'Obsolete A failure'})}:{ok:true,text:async()=> '# OBSOLETE A'});
+  assert.equal(await pending,false);assert.equal(e.run('currentReport'),null);
+ }
+ return {late_success_and_refusal_ignored_for_other_study:true};
+});
+
+await check('connected_refused_freeze_retains_existing_forward_through_metadata_refresh',async()=>{
+ const e=setupConnected();e.byId('connected-forward').value='forward';e.byId('connected-name').value='   ';e.byId('connected-question').value='Retained question';
+ e.context.originalInfo=e.run('data.projects[0].info');let submitted;
+ e.context.refused=async(operation,args)=>{submitted=args.forward_plan;e.run('delete data.projects[0].info;render();');return {status:'error',error:'Text required'};};e.run('action=refused;');
+ await e.byId('connected-form').onsubmit({preventDefault(){}});
+ assert.equal(submitted,'forward');assert.equal(e.byId('connected-forward').value,'forward');assert.equal(e.byId('connected-freeze').disabled,true);
+ e.run('data.projects[0].info=originalInfo;render();');
+ assert.equal(e.byId('connected-forward').value,'forward');assert.equal(e.byId('connected-question').value,'Retained question');assert.equal(e.byId('connected-freeze').disabled,false);
+ return {refusal_metadata_gap_and_refresh_preserve_explicit_forward:true};
+});
+await check('connected_metadata_gap_preserves_study_and_verified_report_identity',async()=>{
+ const e=setupConnected();e.byId('connected-select').value='B';e.byId('connected-select').onchange();e.context.value=studyValue('B');e.run('action=async()=>({status:"done",result:value});');await e.byId('connected-open').onclick();
+ e.context.record=studyRecord('report-B','B');e.run('data.reports=[record];');e.context.fetch=async()=>({ok:true,text:async()=> '# STUDY B'});await e.run('showReport("report-B");');
+ e.run('globalThis.savedInfo=data.projects[0].info;delete data.projects[0].info;render();');
+ assert.equal(e.byId('connected-select').value,'B');assert.equal(e.byId('connected-next').disabled,true);assert.equal(e.byId('connected-verify').disabled,true);assert.equal(e.run('currentReport.study'),'B');
+ e.run('data.projects[0].info=savedInfo;render();');
+ assert.equal(e.byId('connected-select').value,'B');assert.equal(e.run('currentReport.study'),'B');assert.equal(e.byId('saved-report').classList.contains('hidden'),false);
+ e.run('data.projects[0].info.studies=data.projects[0].info.studies.filter(s=>s.id!=="B");render();');
+ assert.equal(e.byId('connected-select').value,'A');assert.equal(e.run('currentReport'),null);assert.equal(e.byId('saved-report').classList.contains('hidden'),true);
+ return {temporary_gap_preserves_selection_and_report:true,legitimate_removal_withdraws_report:true};
 });
 receipt.passed=Object.values(receipt.tests).every(value=>value.passed);fs.writeFileSync(receiptPath,JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify({passed:receipt.passed,source_sha256:receipt.source_sha256,tests:Object.fromEntries(Object.entries(receipt.tests).map(([name,value])=>[name,value.passed])),receipt:receiptPath}));if(!receipt.passed)process.exitCode=1;

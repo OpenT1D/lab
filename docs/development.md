@@ -47,6 +47,7 @@ Ownership below means the implementation boundary responsible for a behavior. Re
 | Editable installed studies | `experiments/shared_services/workbench.py`, `_gui_drafts.py`, `_gui_inputs.py`, `drafts.js`; [guide](installed-gui.md#edit-save-and-recover-a-study) and [record](research/editable-workbench.md) | `test_workbench_drafts.py`: immutable byte/revision history, CAS, interrupted writes, corruption, diagnostic bounds and copies. `test_workbench_installed.py`: actual noneditable own MMTT/sampling/M4 intake, native parity, source refusal, parent preservation and restarted/moved concepts. `installed_gui_frontend.mjs`: late-response/upload, picker, safe-seed and conflict regressions. `tests/browser/workbench.spec.mjs`: own files, autosave/focus, restart, conflicts, correction, derivation and keyboard/reflow. |
 | Frozen variants and plan comparisons | `experiments/shared_services/comparisons.py`, `comparison_tasks.py`, `comparison_reports.py`, `comparisons.js`; [SDK](installed-sdk.md#reproducible-variants-and-frozen-plan-comparisons), [workbench](installed-gui.md#compare-variants-and-frozen-plans) and [record](research/workbench-comparisons.md) | `test_plan_comparisons.py`: independent constant/trajectory oracles, complete failure/unattempted support, fixed attempts, prefix/unfinished isolation, leases and source binding. `test_installed_comparisons.py`: real noneditable Python/CLI/HTTP, sampling/allocation, supported M4 refusal, downloads/restart/relocation and exact snapshot replay. `installed_gui_frontend.mjs` and `tests/browser/comparisons.spec.mjs`: delayed verification/selector status, roster recovery and actual installed flows. Native M4 success requires its separately recorded exact-artifact rehearsal. |
 | Local GUI and HTTP lifecycle | `experiments/gui/server.py`, `service.py`, route managers and `static/` | `test_local_gui.py`, `test_gui_observations.py`, `test_gui_sampling.py`: local HTTP, jobs, cancellation, reports and tampering. `test_gui_observation_frontend.py`, `test_gui_sampling_summary.py` and other frontend wrappers exercise their controlled fixtures with Node where declared. |
+| Connected synthetic study | `experiments/shared_services/connected*.py`, `connected_protocol.json`, installed facade and `connected.js`; [protocol](decisions/0088-connected-synthetic-observation-study.md) and [record](research/connected-synthetic-study.md) | `test_connected_study.py` / `connected_fixtures.py`: independent analytic forward fixture with actual inverse/sampling arithmetic, units, mismatch algebra, missing data, first attempts, interrupted materialization, tampering and exact prefix/relocation. `test_installed_connected.py`: noneditable Python/CLI/HTTP and genuine absent-runtime failure. `installed_gui_frontend.mjs` and `tests/browser/connected.spec.mjs`: selection/report identity, stale responses, explicit stage actions, restart, keyboard and narrow reflow. Actual native forward-to-inverse qualification uses separately reviewed M4 roles outside root CI. |
 | File and process primitives | `experiments/platform_files.py`, `platform_process.py`, `experiments/gui/windows_process.py` | `test_regular_file_snapshots.py`, `test_windows_primitives.py`: stable reads and platform boundaries. `test_windows_launch.py`, `test_windows_source_admission.py`: current/base interpreter selection and source-only MMTT guards. Process callers also need their lifecycle tests, for example `test_local_campaign_process.py`, `test_maintained_campaign_process.py`, `test_task_setup.py`; host-specific cases can skip. |
 | Campaigns, catalogue and durable archives | `experiments/campaigns/`, `maintained_campaigns/`, `catalogue/`, `durable_archives/`, `historical_readers/` | `test_local_campaigns.py`, `test_maintained_campaigns.py`, `test_experiment_catalogue.py`, `test_durable_archives.py`, `test_historical_readers.py`: scheduling, eligibility, reconstruction and reader compatibility, with synthetic/fixture inputs. |
 | M0/M1/M2 and controller work | `experiments/m0/`, `m1/`, `m2/`, `p1_external/`, `c1/` | Root `test_m1_contracts.py`, `test_m1_artifacts.py`, `test_m2.py`, `test_p1_external.py` and `test_c1_*.py` cover their declared contracts/fixtures. Separately selected native tests and numerical runs in the task guides verify actual engines. |
@@ -119,14 +120,18 @@ fails when Node is unavailable. Historical native jobs additionally require
 literal private-repository/manual-dispatch guards and cannot run in a public
 repository, even if a changed scope helper reports them enabled.
 
-The root job keeps dependency caching off and a thirty-minute limit. Cold
+The root job keeps dependency caching off and a forty-minute limit. Cold
 hosted runs before the editable-workbench tests took 19 minutes 38 seconds and
 19 minutes 19 seconds, close to the former twenty-minute limit; the
 [workbench record](research/editable-workbench.md) owns the measured extension.
 The comparison run's 1,810-test phase took 1,471.308 seconds before a fixture
 failure, leaving insufficient room for setup, documentation and boundary checks
 within twenty-five minutes. The [comparison record](research/workbench-comparisons.md)
-records the fixture correction and measured budget increase.
+records the fixture correction and measured budget increase. The connected-study
+run on `62c0a3c` reached the subsequent thirty-minute limit while its root tests
+were still running; the [connected-study record](research/connected-synthetic-study.md)
+records that cancelled hosted run and the forty-minute budget. Individual tests,
+uncached tooling, scope guards and numerical criteria remain enforced.
 No test family or native scope guard is removed. The job attempts to retain setup/check/boundary logs and a selected environment
 receipt under `results/ci` for five days, including after a failed check. The
 receipt distinguishes the checked-out source SHA, event SHA and PR-head SHA;
@@ -139,7 +144,7 @@ Follow the [activation procedure](publication-security.md#activate-on-the-select
 to review the exact Action allowlist, enable the intended checks, obtain actual
 PR/main results and only then require `Repository checks`. Source changes alone
 do not activate GitHub settings. That stable result now aggregates the root job,
-the Linux/macOS/Windows public-smoke matrix, four Linux Chromium MMTT flows and
+the Linux/macOS/Windows public-smoke matrix, the Linux Chromium application flows and
 the Chromium/Firefox/WebKit documentation matrix. Every
 family must succeed; cancellation or a missing result cannot pass the gate.
 Dependency Review is also required on pull requests. Only its explicit skip on

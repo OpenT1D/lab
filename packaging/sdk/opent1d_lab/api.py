@@ -27,6 +27,28 @@ class Project:
         """Read task-owned selectors for an existing immutable plan."""
         return self._call("comparison-options", plan=plan)
 
+    def freeze_study(self, name, question, *, forward_plan=None, observation_case="complete"):
+        """Freeze the connected study before forward execution; optionally create its M4 plan."""
+        return self._call(
+            "freeze-study",
+            name=name,
+            question=question,
+            forward_plan=forward_plan,
+            observation_case=observation_case,
+        )
+
+    def study(self, study, *, at=None):
+        """Read fixed stage identities, next explicit action and the complete planned support."""
+        return self._call("study", study=study, at=at)
+
+    def materialize_study(self, study):
+        """Verify forward evidence and resume publication of exact downstream inputs/plans."""
+        return self._call("materialize-study", study=study)
+
+    def reconstruct_study(self, study, output, *, at=None):
+        """Verify a saved connected chain without rerunning its forward model."""
+        return self._call("reconstruct-study", study=study, output=_path(output), at=at)
+
     def freeze_comparison(self, definition):
         """Freeze the complete comparison roster before any selected plan runs."""
         return self._call("freeze-comparison", definition=definition)

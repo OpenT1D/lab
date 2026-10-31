@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/app.css">
   <script src="/drafts.js" defer></script>
   <script src="/comparisons.js" defer></script>
+  <script src="/connected.js" defer></script>
   <script src="/app.js" defer></script>
 </head>
 <body>
@@ -44,7 +45,7 @@
     </section>
     <div id="project-view" class="hidden">
       <section class="project-heading"><div><p class="eyebrow">Shared SDK project</p><h1 id="selected-name"></h1><p id="selected-path" class="muted path"></p></div><button id="refresh-project">Refresh saved ledger</button></section>
-      <nav class="section-nav" aria-label="Project sections"><a href="#study">Study</a><a href="#comparisons">Comparisons</a><a href="#attempts">Attempts</a><a href="#saved-report">Report</a><a href="#handoff">Handoff</a></nav>
+      <nav class="section-nav" aria-label="Project sections"><a href="#study">Study</a><a href="#comparisons">Comparisons</a><a href="#connected-study">Connected study</a><a href="#attempts">Attempts</a><a href="#saved-report">Report</a><a href="#handoff">Handoff</a></nav>
       <section id="study" class="panel">
         <div class="section-title"><span class="step">1</span><div><h2>Prepare a study</h2><p>Choose supplied inputs, inspect their assumptions, then freeze a named plan.</p></div></div>
         <form id="prepare-form" class="form-grid">
@@ -104,6 +105,25 @@
         <div id="comparison-members"></div>
         <details><summary>Exact changed fields relative to the frozen baseline</summary><pre id="comparison-changes"></pre></details>
       </section>
+      <section id="connected-study" class="panel">
+        <div class="section-title"><div><h2>Connect secretion, observations and inverse analysis</h2><p>Freeze the entire synthetic study before its forward model runs. Preserve every parent, conversion and failed case.</p></div></div>
+        <p class="context">Two source-method cases, not people: fasting and a 15-g initial gastric amount. Keep the full 240-minute native evidence; use its unchanged first 120 minutes for full inverse and 1/15-minute sampling. Known secreted amount and C-peptide AUC remain separate.</p>
+        <p class="muted">Attach reviewed runtimes before running the forward stage. Running without admission records a failure and blocks descendants. Later retries cannot replace the study's fixed first attempt.</p>
+        <form id="connected-form" class="form-grid">
+          <div><label for="connected-name">Connected study name</label><input id="connected-name" maxlength="100" required></div>
+          <div><label for="connected-question">Connected research question</label><input id="connected-question" maxlength="1000" required></div>
+          <div><label for="connected-forward">Forward plan</label><select id="connected-forward"></select></div>
+          <div><label for="connected-case">Frozen observation control</label><select id="connected-case"><option value="complete">Complete synthetic observations</option><option value="missing-evaluation">Missing evaluation C-peptide at 60 minutes</option></select></div>
+          <button id="connected-freeze" type="submit" class="primary">Freeze connected study</button>
+        </form>
+        <label for="connected-select">Saved connected studies</label><select id="connected-select"></select>
+        <div class="actions"><button id="connected-open">Inspect connected study</button><button id="connected-next">Run next explicit stage</button><button id="connected-verify">Verify connected study</button></div>
+        <div class="actions"><button id="connected-forward-report">Verify native forward report</button><button id="connected-inverse-report">Verify native full and reduced reports</button></div>
+        <label for="connected-tip">Connected report ledger tip</label><input id="connected-tip" maxlength="64" placeholder="Paste the exact snapshot tip from an earlier study report">
+        <button id="connected-replay">Verify saved connected snapshot</button>
+        <p id="connected-status" role="status" aria-live="polite"></p><div id="connected-stages"></div>
+        <details><summary>Frozen study protocol, planned support and cross-task identities</summary><pre id="connected-details"></pre></details>
+      </section>
       <section id="attempts" class="panel">
         <div class="section-title"><span class="step">3</span><div><h2>Find and verify results</h2><p>Execution, scientific completeness and report verification are separate.</p></div></div>
         <div id="attempt-list"></div>
@@ -112,7 +132,7 @@
       <section id="saved-report" class="panel hidden">
         <div class="report-heading"><div><p class="eyebrow">Verified report copy</p><h2>Saved analysis</h2><p id="report-context" class="muted"></p></div><span id="report-completeness" class="tag"></span></div>
         <p class="context">Verification reconstructs saved analysis with the trusted reader. It does not run the model again. This copy records the verification time; refresh and verify again to assess changed project evidence.</p>
-        <div class="actions"><button data-download="report.md">Download report</button><button data-download="report.json">Download JSON</button><button data-download="figure.svg">Download figure</button><button id="download-comparison" data-download="comparison.csv" class="hidden">Download comparison CSV</button></div>
+        <div class="actions"><button data-download="report.md">Download report</button><button data-download="report.json">Download JSON</button><button data-download="figure.svg">Download figure</button><button id="download-comparison" data-download="comparison.csv" class="hidden">Download comparison CSV</button><button id="download-study" data-download="study.csv" class="hidden">Download connected study CSV</button></div>
         <div id="report-text" class="report-text"></div>
         <section id="child-reports" class="hidden" aria-label="Native reports for each measurement schedule"></section>
         <img id="report-figure" alt="Authoritative saved research figure; quantities and units are also described in the report." class="report-figure">

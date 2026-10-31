@@ -322,6 +322,85 @@ that is distinct from a native model run. Changed comparison-reader bytes refuse
 without a separately supported transition. Comparisons add no runtime setup,
 native distribution permission, scientific validity or human acceptance.
 
+## Connected synthetic study
+
+A connected study composes the existing `m4-study-installed` forward observer
+with `mmtt-sampling`. It adds no task, model, runtime or estimator. Freeze its
+question and the complete protocol before the forward plan first executes:
+
+```python
+study = project.freeze_study(
+    "Known synthetic secretion",
+    "Does the matched inverse recover the known 0–120-minute input?",
+)
+identity, forward = study["study"], study["forward_plan"]
+project.study(identity)  # Fixed stages, all planned support and next explicit action.
+project.check(forward, runtime_attachment=attachment)
+project.run(forward, runtime_attachment=attachment, timeout=10800)
+bridge = project.materialize_study(identity)
+project.run(bridge["sampling_plan"], timeout=600)
+report = project.reconstruct_study(identity, root / "connected-report")
+project.reconstruct_study(identity, root / "connected-replay", at=report["snapshot"]["tip"])
+```
+
+`attachment` is a newly created reviewed attachment for this installed artifact,
+following the [M4 guide](installed-m4.md). A missing attachment retains a failed
+first forward attempt and blocks observation materialization. Each stage runs
+explicitly through the existing execution/cancellation service. Retrying retains
+later attempts but cannot replace the study's first executed attempt. An archive
+import cannot serve as that prospective first attempt.
+
+The default freeze creates one unattempted M4 plan containing both supported
+sources and both fasting/initial-15-g scenarios. Alternatively supply
+`forward_plan=...` for an unused plan with exactly that supported configuration.
+The question, two source-method cases, allocation, bridge, four inverse variants,
+32 engineering perturbations and full/one-minute/fifteen-minute schedules are
+fixed in [decision 0088](decisions/0088-connected-synthetic-observation-study.md).
+`observation_case="missing-evaluation"` prospectively blanks the evaluation
+case's after-visit C-peptide at minute 60; the row and every planned endpoint
+remain present. Declare that control before running the shared forward plan.
+
+Materialization verifies the original complete forward evidence, seals converted
+observations and separate development evidence, then freezes a sampling child
+and a six-member comparison. Its committed intent supports an explicit repeat
+of `materialize_study` after interruption without duplicating or retargeting
+plans. The cross-task bridge is distinct from existing same-task parent links.
+
+The CLI uses the same service operations:
+
+```bash
+"$SDK" freeze-study --project "$PWD/cli-study" \
+  --name "Known synthetic secretion" --question "Does the matched inverse recover its input?"
+"$SDK" study --project "$PWD/cli-study" --study STUDY_ID
+"$SDK" check --project "$PWD/cli-study" --plan FORWARD_PLAN_ID \
+  --runtime-attachment REVIEWED_ATTACHMENT_JSON
+"$SDK" run --project "$PWD/cli-study" --plan FORWARD_PLAN_ID \
+  --runtime-attachment REVIEWED_ATTACHMENT_JSON --timeout 10800
+"$SDK" materialize-study --project "$PWD/cli-study" --study STUDY_ID
+"$SDK" run --project "$PWD/cli-study" --plan SAMPLING_PLAN_ID --timeout 600
+"$SDK" reconstruct-study --project "$PWD/cli-study" \
+  --study STUDY_ID --output "$PWD/connected-report"
+```
+
+Use the returned forward and sampling plan IDs with the ordinary `check`/`run`
+commands. Add `--forward-plan` or `--observation-case missing-evaluation` at
+freeze, and `--at SAVED_LEDGER_TIP` for a report's exact historical snapshot.
+Reconstruction writes sealed `report.json`, `report.md` and `study.csv`. All
+72 case/schedule/variant/endpoint rows retain known truth, inverse point values,
+point and interval status, and explicit failures. Numerical acceptance reports
+six matched point and eighteen mismatch checks separately from native evidence
+completeness. The companion comparison preserves its fixed six selectors;
+all twelve native schedule/variant combinations remain in the study report.
+
+Only the unchanged first 120 minutes of the original 240-minute forward run
+enter the inverse. Known totals independently integrate pancreatic pmol/kg/min
+and apply body weight once. C-peptide concentrations and AUC remain separate from
+secreted amounts. These source methods represent two synthetic cases, not two
+people. Fasting versus 15 g is a stimulus contrast, not a treatment effect.
+See the [verification record](research/connected-synthetic-study.md) for observed
+recovery, sparse-schedule failures and remaining limits. Reader identities stay
+strict; this increment does not implement the roadmap's changed-reader upgrade.
+
 ## M4 and compatibility boundaries
 
 Export M4 inputs with `example --task m4-study-secure --case fasting --output ...`

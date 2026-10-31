@@ -127,6 +127,10 @@ FIELDS = {
     "freeze-comparison": {"project", "definition"},
     "comparison": {"project", "comparison", "at"},
     "reconstruct-comparison": {"project", "comparison", "at", "output"},
+    "freeze-study": {"project", "name", "question", "forward_plan", "observation_case"},
+    "study": {"project", "study", "at"},
+    "materialize-study": {"project", "study"},
+    "reconstruct-study": {"project", "study", "at", "output"},
     "export-inputs": {"project", "plan", "output"},
     "validate": {"task", "inputs"},
     "inspect": {"task", "inputs"},
@@ -317,6 +321,8 @@ def dispatch(request, bootstrap, artifact, *, cancel=None):
         "comparison-options",
         "comparison",
         "reconstruct-comparison",
+        "study",
+        "reconstruct-study",
     }
     backend = Backend(bootstrap, artifact, request.get("runtime_attachment"))
     with store.opened(path, write_access=writing) as project:
@@ -365,12 +371,68 @@ def dispatch(request, bootstrap, artifact, *, cancel=None):
                     }
                     for key, value in project.comparisons.items()
                 ],
+                "studies": [
+                    {
+                        "id": key,
+                        "name": value["name"],
+                        "observation_case": value["observation_case"],
+                    }
+                    for key, value in project.studies.items()
+                ],
                 "reader_checks": [
                     event["data"]
                     for _, event, _ in project.events
                     if event["kind"] == "reconstruct"
                 ],
             }
+        if action in {"freeze-study", "study", "materialize-study", "reconstruct-study"}:
+            from . import comparisons, connected
+
+            store.require(
+                {"m4-study-installed", "mmtt-sampling"} <= set(artifact["tasks"]),
+                "Connected study requires both selected native and sampling capabilities",
+            )
+            if action == "freeze-study":
+                name = comparisons.text(request["name"], 100)
+                question = comparisons.text(request["question"], 1000)
+                store.require(
+                    request["observation_case"] in connected.protocol()["observation_cases"],
+                    "Unknown observation case",
+                )
+                plan = request["forward_plan"]
+                if plan is None:
+                    with tempfile.TemporaryDirectory(prefix="connected-forward-") as temporary:
+                        root = Path(temporary).resolve()
+                        inputs = example("m4-study-installed", root / "inputs", "fasting")["inputs"]
+                        config_path = Path(inputs["config.json"])
+                        config = store.read(config_path)
+                        config["scenarios"] = ["fasting", "gastric_load_15g"]
+                        config_path.write_bytes(store.encoded(config))
+                        plan = routes.freeze(
+                            project, "m4-study-installed", inputs, application=backend.application
+                        )
+                return connected.freeze(
+                    project,
+                    {
+                        "name": name,
+                        "question": question,
+                        "forward_plan": plan,
+                        "observation_case": request["observation_case"],
+                    },
+                )
+            if action == "study":
+                return connected.view(project, request["study"], at=request["at"])
+            if action == "materialize-study":
+                return connected.materialize(
+                    project, request["study"], backend=backend, application=backend.application
+                )
+            return connected.reconstruct(
+                project,
+                request["study"],
+                workspace_path(request["output"], bootstrap, fresh=True),
+                at=request["at"],
+                backend=backend,
+            )
         if action == "comparison-options":
             from .comparison_tasks import plan_data
 

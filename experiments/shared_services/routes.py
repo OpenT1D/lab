@@ -438,7 +438,7 @@ def validate_finish(evidence, data, descriptor, plan):
         )
 
 
-def freeze(store, task, inputs, *, parent=None, application=None):
+def freeze(store, task, inputs, *, parent=None, application=None, study_intent=None):
     import tempfile
 
     store.require_lease(write_access=True)
@@ -450,9 +450,16 @@ def freeze(store, task, inputs, *, parent=None, application=None):
             write(captured / "application.json", application)
         if parent is not None:
             require(store.plans[parent][0]["task"] == task, "Derived task differs")
+        data = {"parent": parent, "descriptor": descriptor}
+        if study_intent is not None:
+            from .connected import validate_child
+
+            require(parent is None, "Connected child cannot use cross-task parent")
+            validate_child(store, study_intent, descriptor, captured)
+            data["study_intent"] = study_intent
         identity = store.append(
             "freeze",
-            {"parent": parent, "descriptor": descriptor},
+            data,
             lambda folder: snapshot(captured, folder / "plan"),
         )
     store.inspect()

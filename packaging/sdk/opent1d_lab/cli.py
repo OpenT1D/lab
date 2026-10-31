@@ -140,6 +140,22 @@ def main(argv=None):
             command.add_argument("--at")
         if operation == "reconstruct-comparison":
             command.add_argument("--output", required=True)
+    for operation in ("freeze-study", "study", "materialize-study", "reconstruct-study"):
+        command = commands.add_parser(operation)
+        command.add_argument("--project", required=True)
+        if operation == "freeze-study":
+            command.add_argument("--name", required=True)
+            command.add_argument("--question", required=True)
+            command.add_argument("--forward-plan")
+            command.add_argument(
+                "--observation-case", default="complete", choices=("complete", "missing-evaluation")
+            )
+        else:
+            command.add_argument("--study", required=True)
+        if operation in {"study", "reconstruct-study"}:
+            command.add_argument("--at")
+        if operation == "reconstruct-study":
+            command.add_argument("--output", required=True)
     args = parser.parse_args(argv)
     try:
         if args.action in {"prepare-study-packet", "verify-study-packet"}:
@@ -166,6 +182,19 @@ def main(argv=None):
         project = Project(args.project) if hasattr(args, "project") else None
         if args.action == "installation":
             result = installation()
+        elif args.action == "freeze-study":
+            result = project.freeze_study(
+                args.name,
+                args.question,
+                forward_plan=args.forward_plan,
+                observation_case=args.observation_case,
+            )
+        elif args.action == "study":
+            result = project.study(args.study, at=args.at)
+        elif args.action == "materialize-study":
+            result = project.materialize_study(args.study)
+        elif args.action == "reconstruct-study":
+            result = project.reconstruct_study(args.study, args.output, at=args.at)
         elif args.action == "comparison-options":
             result = project.comparison_options(args.plan)
         elif args.action == "freeze-comparison":

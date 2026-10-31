@@ -203,6 +203,42 @@ route supplies empirical equivalence, a new interval for between-member
 differences, treatment effects or independent usability evidence. The
 [comparison record](research/workbench-comparisons.md) owns the bounded checks.
 
+## Connect known secretion to inverse analysis
+
+**Connected synthetic study** freezes a named question and the versioned protocol
+before execution. Choose a new bounded forward plan or an unused existing
+four-slot M4 plan. Select the complete observation case or the predeclared
+missing-evaluation control, then **Freeze connected study**. The two source
+methods represent synthetic cases with development/evaluation allocations.
+
+**Inspect connected study** reads the fixed stages and current ledger tip. The next-action
+button performs exactly one explicit step: run the forward plan, materialize or
+resume the observation bridge and frozen downstream plans, or run the inverse
+and sampling plan. Select the exact-artifact M4 attachment under **Prepared
+native runtimes** before forward execution. Each run uses the ordinary SDK
+process ownership and **Stop run** controls. Recover an unfinished attempt
+explicitly before starting another; a failed first attempt remains selected.
+A changed project ledger requires another inspection before advancing.
+
+**Verify connected study** reconstructs the chain without running native models.
+It retains all 72 planned truth-comparison rows, including unattempted,
+missing-point and failed-draw endpoints. The report badge shows native evidence
+completeness and numerical point-check acceptance separately. Download JSON,
+Markdown or **study CSV**. The displayed identity is the study and saved ledger
+tip. Choosing or freezing another study withdraws the previous report and its
+downloads. A saved tip under **Connected report ledger tip** reproduces an earlier
+snapshot after later attempts, restart or project copying.
+
+The two native-stage report buttons verify preserved forward and full/reduced
+reports through their existing readers; incomplete native reports require the
+existing explicit checkbox. No failed stage is fabricated. Generated observations
+are sealed separately from known source truth; neither an interval crossing zero
+nor an unavailable interval establishes no change. Read the
+[SDK protocol and commands](installed-sdk.md#connected-synthetic-study) and
+[bounded numerical evidence](research/connected-synthetic-study.md). This study
+does not expand the formative human exercise below or establish sampling
+agreement in human data.
+
 ## Prepare an actual user exercise
 
 The original exercise below still selects paired MMTT and M4 references. Adding

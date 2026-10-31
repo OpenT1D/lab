@@ -102,14 +102,24 @@ class Store:
         require(
             mode != "import"
             or ordinal != 1
-            or not any(
-                member["plan"] == plan
-                for comparison in self.comparisons.values()
-                for member in comparison["variants"]
+            or not (
+                any(
+                    member["plan"] == plan
+                    for comparison in self.comparisons.values()
+                    for member in comparison["variants"]
+                )
+                or any(value["forward_plan"] == plan for value in self.studies.values())
+                or plan in self.study_children.values()
             ),
             "A preexecution comparison requires an executed first attempt; "
             "import existing evidence into a separate plan",
         )
+        for intent, child in self.study_children.items():
+            require(
+                child != plan
+                or any(value[1]["intent"] == intent for value in self.study_bridges.values()),
+                "Complete connected materialization before child execution",
+            )
 
     def inspect(self):
         self.require_lease()
@@ -140,6 +150,8 @@ class Store:
         )
         self.events, self.plans, self.attempts, self.finishes = [], {}, {}, {}
         self.comparisons = {}
+        self.studies, self.study_intents, self.study_children = {}, {}, {}
+        self.study_comparisons, self.study_bridges = {}, {}
         tip = None
         for sequence in range(1, head["count"] + 1):
             folder = self.path / "events" / f"{sequence:08d}"
@@ -178,7 +190,12 @@ class Store:
         elif kind == "freeze":
             from .routes import validate_freeze
 
-            require(event["sequence"] > 1 and set(data) == {"parent", "descriptor"}, "Freeze event")
+            require(
+                event["sequence"] > 1
+                and set(data)
+                in ({"parent", "descriptor"}, {"parent", "descriptor", "study_intent"}),
+                "Freeze event",
+            )
             parent = data["parent"]
             require(parent is None or parent in self.plans, "Missing prior parent plan")
             validate_freeze(folder / "plan", data["descriptor"], current=False)
@@ -187,13 +204,43 @@ class Store:
                     self.plans[parent][0]["task"] == data["descriptor"]["task"],
                     "Derived task differs",
                 )
+            if "study_intent" in data:
+                from .connected import validate_child
+
+                require(parent is None, "Cross-task ancestry belongs to the connected intent")
+                validate_child(self, data["study_intent"], data["descriptor"], folder / "plan")
+                self.study_children[data["study_intent"]] = identity
             self.plans[identity] = (data["descriptor"], folder / "plan")
         elif kind == "comparison":
             from .comparisons import validate
 
-            require(set(data) == {"definition"}, "Invalid comparison event")
+            require(
+                set(data) in ({"definition"}, {"definition", "study_intent"}),
+                "Invalid comparison event",
+            )
             validate(self, data["definition"])
+            if "study_intent" in data:
+                from .connected import validate_comparison
+
+                validate_comparison(self, data["study_intent"], data["definition"])
+                self.study_comparisons[data["study_intent"]] = identity
             self.comparisons[identity] = data["definition"]
+        elif kind == "study":
+            from .connected import validate
+
+            require(set(data) == {"definition"}, "Invalid study event")
+            validate(self, data["definition"])
+            self.studies[identity] = data["definition"]
+        elif kind == "study-intent":
+            from .connected import validate_intent
+
+            validate_intent(self, data, folder)
+            self.study_intents[data["study"]] = (identity, data, folder)
+        elif kind == "study-bridge":
+            from .connected import validate_bridge
+
+            validate_bridge(self, data)
+            self.study_bridges[data["study"]] = (identity, data)
         elif kind == "start":
             require(
                 set(data) == {"plan", "ordinal", "retry_of", "mode", "host"}

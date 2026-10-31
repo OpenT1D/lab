@@ -4,6 +4,23 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Add a prospectively frozen connected synthetic study across known pancreatic
+  secretion, forward C-peptide observations, inverse analysis and reduced
+  sampling in the installed SDK, CLI and workbench. Preserve native source and
+  observer evidence, exact time/unit conversions, development-only selection,
+  independent known-input/mismatch checks and every planned failure. Resume
+  interrupted materialization without duplicate plans and replay exact ledger
+  prefixes after relocation. Separate point acceptance from interval evidence;
+  guard report identity when selecting or freezing another study. Admit the
+  native sampling report under its declared bounded report budget. Existing
+  models, estimator, scientific tolerances and reader compatibility gates remain.
+  Wrap four-slot native attempt labels at enlarged text and fallback fonts.
+  Extend only the application browser family's global budget to eight minutes
+  after the hosted eleven-case family exceeded five minutes; retain every case,
+  per-case deadline, assertion and native guard. Separately extend the root job
+  to forty minutes after the cold hosted run reached its thirty-minute limit
+  while tests were still running; retain uncached tooling and all test families.
+
 - Add frozen preexecution comparisons across native variants and compatible
   derived plans in the installed SDK, CLI and workbench. Preserve the complete
   roster, fixed first attempts, explicit changed scientific fields and failed or

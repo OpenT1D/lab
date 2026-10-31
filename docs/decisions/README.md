@@ -1,5 +1,7 @@
 # Decision records
 
+- [0088 — Connected synthetic observation study](0088-connected-synthetic-observation-study.md): freeze and preserve known pancreatic input, forward C-peptide, inverse analysis and reduced sampling through existing task services.
+
 - [0087 — Frozen workbench comparisons](0087-frozen-workbench-comparisons.md): preexecution rosters, fixed first attempts, task-owned contrasts and prefix-bound reconstruction.
 
 - [0086 — Recoverable editable studies](0086-editable-workbench-drafts.md): exact synthetic input revisions, validation, immutable derivation and bounded workbench recovery.

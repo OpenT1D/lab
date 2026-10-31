@@ -10,13 +10,13 @@ const output = fileURLToPath(new URL('../../output/playwright/', import.meta.url
 
 export default defineConfig({
   testDir: '.',
-  testMatch: ['mmtt.spec.mjs', 'installed-sampling.spec.mjs', 'workbench.spec.mjs', 'comparisons.spec.mjs'],
+  testMatch: ['mmtt.spec.mjs', 'installed-sampling.spec.mjs', 'workbench.spec.mjs', 'comparisons.spec.mjs', 'connected.spec.mjs'],
   fullyParallel: false,
   workers: 1,
   retries: 0,
   forbidOnly: true,
   timeout: 90_000,
-  globalTimeout: 300_000,
+  globalTimeout: 480_000,
   expect: { timeout: 30_000 },
   outputDir: `${output}/test-results`,
   reporter: [['list'], ['json', { outputFile: `${output}/results.json` }]],

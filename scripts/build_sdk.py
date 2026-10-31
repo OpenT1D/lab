@@ -83,6 +83,7 @@ def source_closure():
             "publication-snapshot.json",
             "publication-security.json",
             "experiments/setup/contract.json",
+            "experiments/shared_services/connected_protocol.json",
         }
     )
     return sorted(names)

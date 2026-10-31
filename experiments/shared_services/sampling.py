@@ -189,9 +189,10 @@ def native_result(archive, descriptor, service_plan):
     saved_plan, package, raw = native.load_plan(archive / "frozen")
     expected_plan, _, _ = native.load_plan(service_plan / "input")
     require(saved_plan == expected_plan, "Sampling archive belongs to another frozen study")
-    report, execution, journal = (
-        read(archive / name) for name in ("report.json", "execution.json", "schedules.json")
+    report = decode(
+        read_regular(archive / "report.json", runner.MAX_REPORT, "native sampling report")
     )
+    execution, journal = (read(archive / name) for name in ("execution.json", "schedules.json"))
     status = execution.get("status")
     require(
         execution.get("schema") == runner.EXECUTION

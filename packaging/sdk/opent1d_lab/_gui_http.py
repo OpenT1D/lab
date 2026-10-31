@@ -17,6 +17,7 @@ STATIC = {
     "/app.js": ("app.js", "text/javascript; charset=utf-8"),
     "/drafts.js": ("drafts.js", "text/javascript; charset=utf-8"),
     "/comparisons.js": ("comparisons.js", "text/javascript; charset=utf-8"),
+    "/connected.js": ("connected.js", "text/javascript; charset=utf-8"),
     "/app.css": ("app.css", "text/css; charset=utf-8"),
 }
 DOWNLOAD_HEADERS = {
@@ -24,6 +25,7 @@ DOWNLOAD_HEADERS = {
     "report.md": 'attachment; filename="report.md"',
     "figure.svg": 'attachment; filename="figure.svg"',
     "comparison.csv": 'attachment; filename="comparison.csv"',
+    "study.csv": 'attachment; filename="study.csv"',
 }
 CSP = (
     "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' blob:; "
@@ -234,7 +236,7 @@ class Handler(BaseHTTPRequestHandler):
             elif match := re.fullmatch(r"/api/jobs/([a-f0-9]{32})", route):
                 self.send(200, self.server.controller.get_job(match[1]))
             elif match := re.fullmatch(
-                r"/api/reports/([a-f0-9]{32})/((?:studies/[a-z][a-z0-9_-]{0,63}/)?report\.(?:json|md)|figure\.svg|comparison\.csv)",
+                r"/api/reports/([a-f0-9]{32})/((?:studies/[a-z][a-z0-9_-]{0,63}/)?report\.(?:json|md)|figure\.svg|comparison\.csv|study\.csv)",
                 route,
             ):
                 raw, mime = self.server.controller.report(match[1], match[2])
