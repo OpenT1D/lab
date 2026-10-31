@@ -326,6 +326,7 @@ subtrees:
       - file: docs/decisions/0086-editable-workbench-drafts
       - file: docs/decisions/0087-frozen-workbench-comparisons
       - file: docs/decisions/0088-connected-synthetic-observation-study
+      - file: docs/decisions/0089-internal-candidate-reader-transition
       - file: docs/decisions/0059-maintained-runtimes-and-local-gui
       - file: docs/templates/model-card
       - file: docs/templates/experiment-protocol
