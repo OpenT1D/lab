@@ -35,10 +35,9 @@ class EditableWorkbench(unittest.TestCase):
                 self.workspace = test.root / "workspace"
                 self.process = None
                 self.logs = []
-                self.start()
 
             def start(self):
-                log = (test.root / ("server-" + str(len(self.logs)) + ".log")).open("w+")
+                log = (test.root / ("server-" + str(len(self.logs)) + ".log")).open("w")
                 self.logs.append(log)
                 self.process = subprocess.Popen(
                     [str(test.cli), "gui", "--workspace", str(self.workspace)],
@@ -47,11 +46,15 @@ class EditableWorkbench(unittest.TestCase):
                     stdout=log,
                     stderr=log,
                 )
+                output = ""
                 deadline = time.monotonic() + 20
                 while time.monotonic() < deadline:
-                    log.seek(0)
-                    output = log.read()
-                    match = re.search(r"http://127\.0\.0\.1:(\d+)", output)
+                    # A fresh reader must not move the child's inherited stdout
+                    # write offset between the ready URL and its next message.
+                    output = Path(log.name).read_text(encoding="utf-8", errors="replace")
+                    match = re.search(
+                        r"^OpenT1D project GUI: http://127\.0\.0\.1:(\d+)\r?\n", output, re.M
+                    )
                     if match:
                         self.port = int(match[1])
                         self.token = None
@@ -163,11 +166,14 @@ class EditableWorkbench(unittest.TestCase):
 
         app = App()
         try:
+            app.start()
             yield app
         finally:
-            app.stop()
-            for log in app.logs:
-                log.close()
+            try:
+                app.stop()
+            finally:
+                for log in app.logs:
+                    log.close()
 
     def inputs(self, case, task="mmtt-sensitivity"):
         exported = self.call(

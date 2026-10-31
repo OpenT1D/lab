@@ -79,12 +79,13 @@ shared first attempts, unattempted/current reports, exact old snapshot downloads
 restart, keyboard focus and narrow/200-percent text. Earlier browser flows retain
 their separate lifecycle, sampling, cancellation and correction coverage.
 
-Separate read-only core and GUI reviews, installed rehearsal and hosted checks reproduced nine issues: incomplete helper
+Separate read-only core and GUI reviews, installed rehearsal and hosted checks reproduced ten issues: incomplete helper
 source binding, selector-only rather than resolved scientific changes, expired
 service reads, late report replacement, stale selection status, and cancellation
 of a new report load while withdrawing an invalid old copy, escaped rationale
 pipes shifting report columns, attachment refusal of the current SDK roster, and
-narrow-layout overflow with Linux font metrics. Corrections
+narrow-layout overflow with Linux font metrics, and a shared file-offset race in
+the installed-server test fixture with missing cleanup on startup failure. Corrections
 bind the full source closure, show numeric changes and enforce leases, verification
 epochs, separate display withdrawal and current comparison context. The controlled frontend wrapper has 31
 cases; three new report/status cases fail on saved pre-fix JavaScript and pass
@@ -119,6 +120,18 @@ correction, alongside the original narrow sampling assertion. Keep the hosted
 failure and local negative/fixed logs; no width assertion or test tolerance is
 relaxed. Final verification repeats the complete family on the corrected source.
 
+Hosted root run `41198261157` failed after 1,810 tests in 1,471.308 seconds:
+the installed-server fixture lost the ready URL although the server was running.
+The fixture passed one writable log descriptor to the child and also rewound that
+descriptor while polling. The shared file offset let the child's next line
+overwrite the URL. Read polling now opens a separate descriptor; startup is
+inside the cleanup scope, including failed startup. Two controlled regressions
+reproduce URL loss and missing process cleanup on the saved old fixture and pass
+after correction. The twenty-second readiness limit is unchanged. The root CI
+budget alone increases from twenty-five to thirty minutes because the observed
+test phase already consumed over twenty-four minutes, before documentation and
+boundary checks. Caching, test families and native scope guards remain unchanged.
+
 ## Final receipts and remaining gates
 
 The integration owner runs `uv sync --locked` and one final full
@@ -136,6 +149,16 @@ receipt must show all original native reference/observer/repeat/grid gates and
 comparison reconstruction/relocation without dependency or callback lookup.
 Installation, controlled arithmetic fixtures and passive refusal do not substitute
 for that success receipt. Keep upstream parameter/runtime payloads local.
+
+The clean `2c24f90` wheel passed all four installed qualification cases, including
+actual fasting/15-g M4 execution and reconstruction without runtime lookup. The
+subsequent fixture/CI correction changes no shipped SDK or scientific payload.
+Final qualification must compare every shipped payload hash with that wheel,
+install the newly identified wrapper outside the checkout, create its own current
+runtime attachment and reconstruct the retained native comparison with dependency
+roles unavailable. Record the native execution revision separately from this
+final-wrapper check; unchanged payload does not turn an earlier execution into a
+new-revision run.
 
 Current-artifact native M4 execution requires its reviewed attachment and separate
 qualification. Passive intake, controlled report fixtures or refusal do not supply

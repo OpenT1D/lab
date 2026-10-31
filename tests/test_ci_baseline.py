@@ -36,7 +36,7 @@ class CIBaselinePolicyTests(unittest.TestCase):
         )
         self.assertNotIn("if", self.job)
         self.assertEqual(self.job["runs-on"], "ubuntu-24.04")
-        self.assertEqual(self.job["timeout-minutes"], 25)
+        self.assertEqual(self.job["timeout-minutes"], 30)
         self.assertEqual(self.job["defaults"]["run"]["shell"], "bash")
         self.assertEqual((ROOT / ".python-version").read_text().strip(), "3.12")
         self.assertEqual(self.steps["Install selected Python"]["run"], "uv python install")

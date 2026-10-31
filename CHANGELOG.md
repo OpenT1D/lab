@@ -15,6 +15,10 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
   roster; retain all source/runtime gates and unchanged numerical criteria.
   Wrap navigation and long comparison/snapshot text on narrow layouts, including
   enlarged text and wider fallback fonts.
+  Correct shared log-offset polling and failed-start cleanup in the installed
+  server fixture, with reproductions of both defects. Retain its readiness limit;
+  increase only the root CI budget to 30 minutes after a measured hosted test
+  phase of 24 minutes 31 seconds, preserving caching and native guards.
 
 - Extend the installed workbench with own bounded synthetic inputs, revisioned
   recoverable concepts, editable assumptions/schedules and derived immutable
