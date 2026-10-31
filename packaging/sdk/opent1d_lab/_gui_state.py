@@ -18,6 +18,7 @@ REPORTS = {
     "report.md": "text/markdown",
     "figure.svg": "image/svg+xml",
     "comparison.csv": "text/csv; charset=utf-8",
+    "study.csv": "text/csv; charset=utf-8",
 }
 FIELDS = {
     "create": {"name"},
@@ -35,6 +36,10 @@ FIELDS = {
     "comparison_freeze": {"definition"},
     "comparison_open": {"comparison", "at"},
     "comparison_verify": {"comparison", "at"},
+    "study_freeze": {"name", "question", "forward_plan", "observation_case"},
+    "study_open": {"study", "at"},
+    "study_materialize": {"study"},
+    "study_verify": {"study", "at"},
     "check": {"plan"},
     "run": {"plan", "retry_of"},
     "verify": {"attempt", "allow_failed"},
@@ -186,6 +191,7 @@ class Controller:
                                     "project",
                                     "attempt",
                                     "comparison",
+                                    "study",
                                     "snapshot",
                                     "verified_at",
                                     "valid",
@@ -526,6 +532,17 @@ class Controller:
             return result, handle
         if operation == "comparison_options":
             return project.comparison_options(args["plan"]), handle
+        if operation == "study_freeze":
+            return project.freeze_study(
+                args["name"],
+                args["question"],
+                forward_plan=args["forward_plan"],
+                observation_case=args["observation_case"],
+            ), handle
+        if operation == "study_open":
+            return project.study(args["study"], at=args["at"]), handle
+        if operation == "study_materialize":
+            return project.materialize_study(args["study"]), handle
         if operation == "comparison_freeze":
             return project.freeze_comparison(args["definition"]), handle
         if operation == "comparison_open":
@@ -566,7 +583,7 @@ class Controller:
                 runtime_attachment=self.runtime_attachment,
             )
             return result, handle
-        if operation in {"verify", "comparison_verify"}:
+        if operation in {"verify", "comparison_verify", "study_verify"}:
             key = uuid.uuid4().hex
             destination = self.root / "reports" / key
             if operation == "verify":
@@ -577,10 +594,12 @@ class Controller:
                 result = project.reconstruct(
                     args["attempt"], destination, allow_failed=args["allow_failed"]
                 )
-            else:
+            elif operation == "comparison_verify":
                 result = project.reconstruct_comparison(
                     args["comparison"], destination, at=args["at"]
                 )
+            else:
+                result = project.reconstruct_study(args["study"], destination, at=args["at"])
             names = set(result["report_sha256"])
             require({"report.json", "report.md"} <= names, "Report roster")
             require(len(names) <= 10, "Unsupported authoritative report roster")
@@ -588,6 +607,16 @@ class Controller:
                 ("comparison.csv" in names) == (operation == "comparison_verify"),
                 "Comparison/native report families differ",
             )
+            require(
+                ("study.csv" in names) == (operation == "study_verify"),
+                "Connected/native report families differ",
+            )
+            if operation in {"comparison_verify", "study_verify"}:
+                csv = "study.csv" if operation == "study_verify" else "comparison.csv"
+                require(
+                    names == {"report.json", "report.md", csv},
+                    "Fixed composite report roster required",
+                )
             for name in names:
                 report_mime(name)
             children = {name for name in names if name.startswith("studies/")}
@@ -615,6 +644,7 @@ class Controller:
                 "project": handle,
                 "attempt": args.get("attempt"),
                 "comparison": args.get("comparison"),
+                "study": args.get("study"),
                 "snapshot": result.get("snapshot"),
                 "directory": str(destination),
                 "verified_at": now(),

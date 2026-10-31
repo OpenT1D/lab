@@ -5,7 +5,7 @@
 
 /* Keep long ancestry text from compressing status and source columns. */
 .section-nav{flex-wrap:wrap}
-#comparison-status,#comparison-members,#comparison-roster,#report-context{overflow-wrap:anywhere;min-width:0}
-#comparison-form>*{min-width:0;max-width:100%}#comparisons button{max-width:100%;overflow-wrap:anywhere}.report-heading>div{min-width:0;max-width:100%}
+#comparison-status,#comparison-members,#comparison-roster,#connected-status,#connected-stages,#report-context{overflow-wrap:anywhere;min-width:0}
+#comparison-form>*,#connected-form>*{min-width:0;max-width:100%}#comparisons button,#connected-study button{max-width:100%;overflow-wrap:anywhere}.report-heading>div{min-width:0;max-width:100%}
 .report-text th,.report-text td{min-width:5rem}.report-text th:first-child,.report-text td:first-child{min-width:7rem}
 .concept-picker{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.6rem;margin-top:1.5rem}.concept-picker label{grid-column:1/-1}fieldset{border:1px solid var(--line);border-radius:6px;margin:1rem 0;padding:1rem;min-width:0}legend{font-size:.88rem;font-weight:650;padding:0 .4rem}fieldset label{margin-top:.7rem}textarea{display:block;width:100%;resize:vertical;min-height:140px;max-height:480px;border:1px solid #b9cbce;border-radius:6px;padding:.7rem;background:white;color:var(--ink);font: .8rem/1.5 ui-monospace,monospace;tab-size:2}textarea:focus{outline:3px solid #76c7bc;outline-offset:3px}[aria-invalid=true]{border-color:var(--danger)}#assumptions>fieldset>fieldset{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem 1rem}#draft-status{margin:.8rem 0}#draft-issues{white-space:pre-wrap}@media(max-width:650px){.concept-picker{grid-template-columns:1fr}#assumptions>fieldset>fieldset{grid-template-columns:1fr}}
