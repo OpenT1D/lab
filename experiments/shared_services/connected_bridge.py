@@ -4,7 +4,7 @@ import copy
 import csv
 import io
 import math
-from decimal import Decimal, localcontext
+from decimal import Context, Decimal, localcontext
 
 from experiments.catalogue.storage import decode
 from experiments.m3.researcher.intake import read_regular
@@ -24,8 +24,7 @@ def numeric(value, *, positive=False):
 def decimal_area(times, values):
     """Independent finite-interpolant amount, without Forcing or inverse helpers."""
     require(len(times) == len(values) and len(times) >= 2, "Complete area support required")
-    with localcontext() as context:
-        context.prec = 50
+    with localcontext(Context(prec=50)):
         total = Decimal(0)
         for a, b, left, right in zip(times[:-1], times[1:], values[:-1], values[1:], strict=True):
             numeric(a)
@@ -48,6 +47,12 @@ def csv_bytes(rows):
 
 
 def generated(definition, archive):
+    # Materialization and replay must not inherit the caller's Decimal settings.
+    with localcontext(Context(prec=50)):
+        return _generated(definition, archive)
+
+
+def _generated(definition, archive):
     """Consume fixed primary/reference/candidate paths after native verification."""
     p = definition["protocol"]
     report = read(archive / "report.json")

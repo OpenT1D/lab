@@ -300,12 +300,15 @@ def validate_comparison(project, intent, definition):
 def validate_bridge(project, data):
     store.require(
         set(data) == {"study", "intent", "sampling_plan", "comparison"}
+        and all(isinstance(value, str) for value in data.values())
         and data["study"] in project.study_intents
         and data["study"] not in project.study_bridges,
         "Invalid or duplicate final study bridge",
     )
     store.require(
         data["intent"] == project.study_intents[data["study"]][0]
+        and data["intent"] in project.study_children
+        and data["intent"] in project.study_comparisons
         and project.study_children.get(data["intent"]) == data["sampling_plan"]
         and project.study_comparisons.get(data["intent"]) == data["comparison"],
         "Materialized child/comparison binding differs",
