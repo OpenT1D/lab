@@ -131,6 +131,25 @@ class ConnectedStudy(unittest.TestCase):
             bridge["truth"]["synthetic-dalla-man"]["after"]["known_total_pmol"] * 2,
         )
 
+    def test_native_nonbinary_basal_preserves_exact_initial_operation_order(self):
+        basal = 0.7741402585  # Preserved adult#001 native basal; no new parameter.
+        central = basal / 0.052
+        expected = 0.037 / 0.031 * central
+        self.assertNotEqual(expected, 0.037 * central / 0.031)
+        archive = forward_archive(self.root / "native-initial", basal=basal)
+        definition = {"protocol": connected.protocol(), "observation_case": "complete"}
+        files = connected_bridge.generated(definition, archive)
+        bridge = store.decode(files["bridge.json"])
+        actual = bridge["truth"]["synthetic-dalla-man"]["before"]
+        self.assertEqual(actual["initial_amounts_pmol_kg"], [central, expected])
+        self.assertAlmostEqual(actual["known_total_pmol"], basal * 120 * 70, delta=1e-8)
+        self.assertEqual(
+            store.read(
+                archive / "children/dalla_man/observations/primary/cases/fasting--candidate.json"
+            )["boundary"]["initial"][:2],
+            [central, expected],
+        )
+
     def test_bridge_refuses_wrong_inlet_grid_kinetics_and_profile(self):
         archive = forward_archive(self.root / "control")
         definition = {"protocol": connected.protocol(), "observation_case": "complete"}

@@ -28,6 +28,7 @@ globalThis.connected = (() => {
     let selectedForward = $("connected-forward").value;
     if (projectId !== selected) {
       keep(); projectId = selected; clear();
+      options($("connected-select"), [], "");
       const saved = concepts.get(projectId);
       $("connected-name").value = saved?.name || "";
       $("connected-question").value = saved?.question || "";
@@ -36,21 +37,27 @@ globalThis.connected = (() => {
     }
     const plans = chosen?.info?.plans || [], attempts = chosen?.info?.attempts || [];
     const forward = plans.filter(plan => plan.task === "m4-study-installed" && plan.slots.length === 4 && !attempts.some(a => a.plan === plan.id));
-    options($("connected-forward"), [["", "Create a new bounded M4 fasting / 15-g plan"], ...forward.map(plan => [plan.id, label(plan)])], selectedForward);
-    const studies = chosen?.info?.studies || [];
-    options($("connected-select"), studies.map(study => [study.id, study.name + " · " + study.observation_case]), $("connected-select").value);
+    const choices = forward.map(plan => [plan.id, label(plan)]);
+    if (!chosen?.info && selectedForward) choices.push([selectedForward, "Selected forward plan · refresh project metadata"]);
+    options($("connected-forward"), [["", "Create a new bounded M4 fasting / 15-g plan"], ...choices], selectedForward);
+    const studies = chosen?.info?.studies || [], selectedStudy = $("connected-select").value;
+    const studyChoices = studies.map(study => [study.id, study.name + " · " + study.observation_case]);
+    if (!chosen?.info && selectedStudy) studyChoices.push([selectedStudy, "Selected study · refresh project metadata"]);
+    if (chosen?.info && selectedStudy && !studies.some(study => study.id === selectedStudy)) { clear(); withdrawReport(); }
+    options($("connected-select"), studyChoices, selectedStudy);
     const stale = loaded && (loaded.study !== $("connected-select").value || loaded.snapshot.tip !== chosen?.info?.head?.tip);
     if (stale) $("connected-status").textContent = "The project ledger changed. Inspect the study again before advancing. Earlier report snapshots remain reproducible.";
+    if (!chosen?.info) $("connected-status").textContent = "Refresh project metadata before inspecting or advancing the selected study.";
     $("connected-forward").disabled = busy;
     $("connected-select").disabled = busy || !studies.length;
-    $("connected-freeze").disabled = busy;
+    $("connected-freeze").disabled = busy || !chosen?.info;
     for (const id of ["connected-open", "connected-verify", "connected-replay"]) $(id).disabled = busy || !studies.length;
     const unfinished = attempts.some(attempt => attempt.outcome === "unfinished");
-    $("connected-next").disabled = busy || !loaded || stale || !["run", "materialize"].includes(loaded.next.action) || loaded.next.action === "run" && unfinished;
+    $("connected-next").disabled = busy || !chosen?.info || !loaded || stale || !["run", "materialize"].includes(loaded.next.action) || loaded.next.action === "run" && unfinished;
     if (!stale && loaded?.next.action === "run" && unfinished) $("connected-status").textContent = "Recover the unfinished project attempt explicitly before starting another execution.";
     $("connected-next").textContent = loaded?.next.action === "materialize" ? "Materialize or resume observations and plans" : loaded?.next.plan === loaded?.forward_plan ? "Run known secretion and forward observations" : "Run full inverse and reduced sampling";
-    $("connected-forward-report").disabled = busy || !loaded || loaded.stages.forward.payload !== "native";
-    $("connected-inverse-report").disabled = busy || !loaded || loaded.stages.inverse_sampling.payload !== "native";
+    $("connected-forward-report").disabled = busy || !chosen?.info || !loaded || loaded.stages.forward.payload !== "native";
+    $("connected-inverse-report").disabled = busy || !chosen?.info || !loaded || loaded.stages.inverse_sampling.payload !== "native";
   }
   function bind() {
     $("connected-form").onsubmit = async event => {

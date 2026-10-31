@@ -131,7 +131,8 @@ def _generated(definition, archive):
             boundary = observation["boundary"]
             basal = numeric(parent["baseline"]["Sb_pmol_kg_min"])
             initial = [basal / kinetics["k3"], 0, 0, 0]
-            initial[1] = kinetics["k1"] * initial[0] / kinetics["k2"]
+            # Preserve the native observer's floating-point operation order.
+            initial[1] = kinetics["k1"] / kinetics["k2"] * initial[0]
             require(
                 boundary["times"] == times
                 and boundary["signal"] == "pancreatic"

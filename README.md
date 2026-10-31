@@ -90,8 +90,10 @@ selects [further integrated laboratory work](ROADMAP.md#selected-development-win
 on the merged installed SDK, native M4 successor and project GUI. Shared sampling
 and the bounded [editable workbench](docs/research/editable-workbench.md) are
 implemented, alongside [reproducible frozen comparisons](docs/research/workbench-comparisons.md).
-A connected synthetic study and an internal candidate with a tested reader transition remain planned. M3 migration
-is a stretch goal.
+The [connected synthetic study](docs/research/connected-synthetic-study.md) now
+composes known secretion, forward C-peptide, inverse analysis and reduced
+sampling. An internal candidate with a tested reader transition remains next;
+M3 migration is a stretch goal.
 Development can proceed while intended-user acceptance remains open. The
 implemented public checks and bounded Mac candidate retain their current scope.
 The shared-laboratory increment develops common services around the working routes:

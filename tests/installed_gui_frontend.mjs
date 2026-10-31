@@ -13,13 +13,13 @@ const connectedSourcePath=process.argv[6];
 const connectedSource=fs.readFileSync(connectedSourcePath,'utf8');
 class Element {
  constructor(tag='div'){this.tag=tag;this.value='';this.children=[];this.textContent='';this.content='session-token';this.src='';this.open=false;this.hiddenClasses=new Set();const classes=this.hiddenClasses;this.classList={add(...names){for(const name of names)classes.add(name);},remove(...names){for(const name of names)classes.delete(name);},contains(name){return classes.has(name);},toggle(name,force){if(force===undefined)force=!classes.has(name);if(force)classes.add(name);else classes.delete(name);return force;}};}
- replaceChildren(...items){this.children=items;if(items.length&&items.every(item=>item.tag==='option'))this.value=items[0].value;}
+ replaceChildren(...items){this.children=items;if(this.tag==='select'||items.length&&items.every(item=>item.tag==='option'))this.value=items[0]?.value||'';}
  append(...items){this.children.push(...items);}
  setAttribute(name,value){this[name]=value;} removeAttribute(name){delete this[name];}
  focus(){} scrollIntoView(){}
 }
 function environment({concepts=false,comparisons=false,connected=false}={}){
- const nodes=new Map(),byId=id=>{if(!nodes.has(id))nodes.set(id,new Element(['task','example-case','parent-plan','plan-select'].includes(id)?'select':'div'));return nodes.get(id);};byId('task').value='mmtt-sensitivity';
+ const nodes=new Map(),byId=id=>{if(!nodes.has(id))nodes.set(id,new Element(['task','example-case','parent-plan','plan-select','connected-select','connected-forward','connected-case'].includes(id)?'select':'div'));return nodes.get(id);};byId('task').value='mmtt-sensitivity';
  const figureButton=new Element('button'),urlCalls=[];
  const backups=new Map();
  const context={document:{getElementById:byId,querySelector:query=>query.includes('opent1d-token')?{content:'session-token'}:figureButton,querySelectorAll:()=>[],createElement:tag=>{const node=new Element(tag);let id='';Object.defineProperty(node,'id',{get:()=>id,set:value=>{id=value;nodes.set(value,node);}});return node;}},fetch:()=>new Promise(()=>{}),setInterval(){},setTimeout(){},clearTimeout(){},addEventListener(){},localStorage:{setItem:(k,v)=>backups.set(k,v),getItem:k=>backups.get(k)||null,removeItem:k=>backups.delete(k)},TextDecoder,crypto:{randomUUID:()=> 'controlled-request'},URL:{createObjectURL(){const value='blob:controlled-'+urlCalls.length;urlCalls.push(['create',value]);return value;},revokeObjectURL(value){urlCalls.push(['revoke',value]);}},console};
@@ -529,4 +529,25 @@ await check('obsolete_connected_report_success_and_error_cannot_affect_new_selec
  return {late_success_and_refusal_ignored_for_other_study:true};
 });
 
+await check('connected_refused_freeze_retains_existing_forward_through_metadata_refresh',async()=>{
+ const e=setupConnected();e.byId('connected-forward').value='forward';e.byId('connected-name').value='   ';e.byId('connected-question').value='Retained question';
+ e.context.originalInfo=e.run('data.projects[0].info');let submitted;
+ e.context.refused=async(operation,args)=>{submitted=args.forward_plan;e.run('delete data.projects[0].info;render();');return {status:'error',error:'Text required'};};e.run('action=refused;');
+ await e.byId('connected-form').onsubmit({preventDefault(){}});
+ assert.equal(submitted,'forward');assert.equal(e.byId('connected-forward').value,'forward');assert.equal(e.byId('connected-freeze').disabled,true);
+ e.run('data.projects[0].info=originalInfo;render();');
+ assert.equal(e.byId('connected-forward').value,'forward');assert.equal(e.byId('connected-question').value,'Retained question');assert.equal(e.byId('connected-freeze').disabled,false);
+ return {refusal_metadata_gap_and_refresh_preserve_explicit_forward:true};
+});
+await check('connected_metadata_gap_preserves_study_and_verified_report_identity',async()=>{
+ const e=setupConnected();e.byId('connected-select').value='B';e.byId('connected-select').onchange();e.context.value=studyValue('B');e.run('action=async()=>({status:"done",result:value});');await e.byId('connected-open').onclick();
+ e.context.record=studyRecord('report-B','B');e.run('data.reports=[record];');e.context.fetch=async()=>({ok:true,text:async()=> '# STUDY B'});await e.run('showReport("report-B");');
+ e.run('globalThis.savedInfo=data.projects[0].info;delete data.projects[0].info;render();');
+ assert.equal(e.byId('connected-select').value,'B');assert.equal(e.byId('connected-next').disabled,true);assert.equal(e.byId('connected-verify').disabled,true);assert.equal(e.run('currentReport.study'),'B');
+ e.run('data.projects[0].info=savedInfo;render();');
+ assert.equal(e.byId('connected-select').value,'B');assert.equal(e.run('currentReport.study'),'B');assert.equal(e.byId('saved-report').classList.contains('hidden'),false);
+ e.run('data.projects[0].info.studies=data.projects[0].info.studies.filter(s=>s.id!=="B");render();');
+ assert.equal(e.byId('connected-select').value,'A');assert.equal(e.run('currentReport'),null);assert.equal(e.byId('saved-report').classList.contains('hidden'),true);
+ return {temporary_gap_preserves_selection_and_report:true,legitimate_removal_withdraws_report:true};
+});
 receipt.passed=Object.values(receipt.tests).every(value=>value.passed);fs.writeFileSync(receiptPath,JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify({passed:receipt.passed,source_sha256:receipt.source_sha256,tests:Object.fromEntries(Object.entries(receipt.tests).map(([name,value])=>[name,value.passed])),receipt:receiptPath}));if(!receipt.passed)process.exitCode=1;

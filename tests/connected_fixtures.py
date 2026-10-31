@@ -27,7 +27,7 @@ SLOPES = {
 def affine_state(time, slope, basal=1.0):
     k1, k2, k3 = (KINETICS[key] for key in ("k1", "k2", "k3"))
     central = basal / k3
-    peripheral = k1 * central / k2
+    peripheral = k1 / k2 * central
     if time == 0:
         return [central, peripheral, 0.0, 0.0]
     total = k1 + k2 + k3
@@ -45,7 +45,7 @@ def affine_state(time, slope, basal=1.0):
     return [q1, q2, eliminated, delivered]
 
 
-def forward_archive(path, *, weight=70.0):
+def forward_archive(path, *, weight=70.0, basal=1.0):
     path = Path(path)
     path.mkdir()
     times = [index / 4 for index in range(961)]
@@ -66,14 +66,14 @@ def forward_archive(path, *, weight=70.0):
         target.write_bytes(store.encoded(value))
 
     write("reference/primary/native.json", {"parameters": parameters})
-    initial = affine_state(0, 0)
+    initial = affine_state(0, 0, basal)
     for source in SOURCES:
         write(f"children/{source}/primary/native.json", {"parameters": parameters})
         selected = {"accepted": True, "scenarios": {}, "curves": {}}
         for scene in SCENARIOS:
             slope = SLOPES[source][scene]
-            rates = [1 + slope * time for time in times]
-            states = [affine_state(time, slope) for time in times]
+            rates = [basal + slope * time for time in times]
+            states = [affine_state(time, slope, basal) for time in times]
             glucose = [99.0] * len(times)
             insulin = [10.0] * len(times)
             parent = {
@@ -82,7 +82,7 @@ def forward_archive(path, *, weight=70.0):
                 "mode": "candidate",
                 "solver": {"name": "reference"},
                 "times": times,
-                "baseline": {"Sb_pmol_kg_min": 1.0},
+                "baseline": {"Sb_pmol_kg_min": basal},
                 "source_rates": [[rate, rate * 0.5] for rate in rates],
                 "states": [[0, 0, 0, g, 0, i] for g, i in zip(glucose, insulin, strict=True)],
             }
@@ -94,7 +94,7 @@ def forward_archive(path, *, weight=70.0):
                     "step_min": 0.25,
                     "appearance_scale": 1,
                     "parameters": KINETICS,
-                    "basal_pmol_kg_min": 1.0,
+                    "basal_pmol_kg_min": basal,
                     "initial": initial,
                     "forcing": {
                         "edges": times,
