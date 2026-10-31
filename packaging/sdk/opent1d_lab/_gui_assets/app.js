@@ -101,7 +101,7 @@ function render() {
   $("application").textContent = `Internal SDK · ${data.installation.build_label} · ${data.installation.source.revision.slice(0, 8)}`;
   const bounded = data.installation.schema === "opent1d.installed-sdk/4";
   for (const id of ["native-card", "runtime-controls", "connected-study", "connected-nav"]) $(id).classList.toggle("hidden", bounded);
-  $("candidate-capabilities").textContent = bounded ? "This candidate supports paired meal-test assumptions, reduced sampling and frozen comparisons. Native and connected studies require a separately qualified candidate." : "This developer build includes both MMTT tasks and explicit native study capabilities.";
+  $("candidate-capabilities").textContent = bounded ? "This candidate supports paired meal-test assumptions, reduced sampling and frozen comparisons. Native and connected studies require a separately qualified candidate." : data.installation.schema === "opent1d.installed-sdk/5" ? "This internal candidate includes both MMTT tasks, M4 secretion studies and the connected synthetic chain. M4 execution requires an attachment for this application and interpreter." : "This developer build includes both MMTT tasks and explicit native study capabilities.";
   const admitted = Object.keys(cases).filter(task => (data.installation.tasks || Object.keys(cases)).includes(task));
   if (Array.from($("task").children).map(option => option.value).join() !== admitted.join()) {
     const previous = $("task").value;

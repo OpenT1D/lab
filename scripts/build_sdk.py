@@ -90,10 +90,19 @@ def source_closure():
     return sorted(names)
 
 
-def build(output, *, allow_dirty=False, build_label="internal", mmtt_only=False):
+def build(
+    output,
+    *,
+    allow_dirty=False,
+    build_label="internal",
+    mmtt_only=False,
+    integrated_candidate=False,
+):
     from experiments.durable_archives.storage import safe_path
     from scripts.build_windows_installer import source_inventory
 
+    if mmtt_only and integrated_candidate:
+        raise ValueError("Choose either the MMTT or integrated candidate")
     if importlib.metadata.version("setuptools") != "84.2.1":
         raise ValueError("Build with the separately locked root tooling (setuptools 84.2.1)")
     source = source_inventory(ROOT, allow_dirty=allow_dirty)
@@ -127,7 +136,11 @@ def build(output, *, allow_dirty=False, build_label="internal", mmtt_only=False)
                 "bytes": len(raw),
             }
     descriptor = {
-        "schema": "opent1d.installed-sdk/4" if mmtt_only else "opent1d.installed-sdk/3",
+        "schema": "opent1d.installed-sdk/5"
+        if integrated_candidate
+        else "opent1d.installed-sdk/4"
+        if mmtt_only
+        else "opent1d.installed-sdk/3",
         "source": {key: source[key] for key in ("revision", "dirty")},
         "build_label": build_label,
         "files": files,
@@ -189,7 +202,13 @@ def main():
         help="development fixtures only; retained in artifact identity",
     )
     parser.add_argument("--build-label", default="internal")
-    parser.add_argument("--mmtt-only", action="store_true", help="bounded internal MMTT candidate")
+    candidate = parser.add_mutually_exclusive_group()
+    candidate.add_argument(
+        "--mmtt-only", action="store_true", help="bounded internal MMTT candidate"
+    )
+    candidate.add_argument(
+        "--integrated-candidate", action="store_true", help="internal MMTT/M4/connected candidate"
+    )
     args = parser.parse_args()
     print(
         json.dumps(
@@ -198,6 +217,7 @@ def main():
                 allow_dirty=args.allow_dirty,
                 build_label=args.build_label,
                 mmtt_only=args.mmtt_only,
+                integrated_candidate=args.integrated_candidate,
             ),
             sort_keys=True,
         )
