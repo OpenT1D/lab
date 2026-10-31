@@ -147,10 +147,16 @@ def definition(project, request):
     return result
 
 
-def freeze(project, request):
+def freeze(project, request, *, study_intent=None):
     project.require_lease(write_access=True)
     value = definition(project, request)
-    identity = project.append("comparison", {"definition": value})
+    data = {"definition": value}
+    if study_intent is not None:
+        from .connected import validate_comparison
+
+        validate_comparison(project, study_intent, value)
+        data["study_intent"] = study_intent
+    identity = project.append("comparison", data)
     project.inspect()
     return {"comparison": identity, **value}
 
