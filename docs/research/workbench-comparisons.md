@@ -153,6 +153,21 @@ after correction. The controlled frontend family has 35 cases, with four new
 cases detecting old stale-state or pending-edit behavior. Actual installed
 Python/CLI refusal preserves the head and leaves the plan unattempted.
 
+The first full local run on `6724e93` finished 1,815 tests in 857.457 seconds
+with one failure in the pre-existing sampling cancellation test. Its watcher used
+the parent's announced `analysis` marker, which precedes the child's admitted
+analysis. Cancellation before child admission can correctly leave forensic
+failed evidence, contradicting the fixture's assumed native interruption. The
+watcher now requires the child's actual `analysis` phase with status `started`;
+the strict interrupted-status and cleanup assertions remain unchanged, with
+better failure diagnostics. The isolated old repeat passed in 10.034 seconds;
+the corrected case passed in 10.940 seconds. Neither substitutes for a new full
+check. This fixture-only correction changes no shipped SDK payload or numerical
+criteria. Retain the failed full log and its original status assertion.
+A controlled interruption before child admission reproduces that refusal with
+zero estimator calls. The original run lacks detailed status diagnostics, so its
+exact timing cannot be established retrospectively.
+
 The integration owner runs `uv sync --locked` and one final full
 `uv run --locked python scripts/check.py`, the complete Chromium family and a
 clean retained installed SDK rehearsal on the final integrated revision. Exact

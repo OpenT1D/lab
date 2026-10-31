@@ -157,12 +157,12 @@ observed=threading.Event()
 def stop():
     deadline=time.monotonic()+30
     while time.monotonic()<deadline:
-        for path in (root/'project/work').glob('*/native/execution.json'):
+        for path in (root/'project/work').glob('*/native/studies/*/execution.json'):
             try:
                 state=json.loads(path.read_bytes())
             except (OSError,ValueError):
                 continue
-            if 'analysis' in state.get('schedules',{{}}).values():
+            if state.get('phase')=='analysis' and state.get('status')=='started':
                 observed.set(); cancel.set(); return
         time.sleep(.005)
 watcher=threading.Thread(target=stop)
@@ -175,7 +175,7 @@ try:
     assert not watcher.is_alive()
     assert unrelated.poll() is None
     assert result['receipt']['remaining_owned_processes']==[]
-    assert result['result']['execution_status']=='interrupted'
+    assert result['result']['execution_status']=='interrupted', result
     assert len(result['result']['slot_statuses'])==60
     assert result['result']['completeness']=='incomplete'
     if result['result']['payload']=='native':
