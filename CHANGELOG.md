@@ -13,6 +13,8 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
   Preserve escaped pipes in report table cells. Correct current-SDK M4 runtime
   attachment admission to accept exactly the legacy or sampling-expanded task
   roster; retain all source/runtime gates and unchanged numerical criteria.
+  Wrap navigation and long comparison/snapshot text on narrow layouts, including
+  enlarged text and wider fallback fonts.
 
 - Extend the installed workbench with own bounded synthetic inputs, revisioned
   recoverable concepts, editable assumptions/schedules and derived immutable

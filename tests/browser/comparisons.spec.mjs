@@ -80,8 +80,13 @@ test('frozen comparison: variants and derived plans, first attempts, snapshots a
   await expect(page.locator('#report-completeness')).toHaveText('complete');
   await page.setViewportSize({ width: 520, height: 900 });
   await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+  await page.evaluate(() => { document.querySelector('.section-nav').style.fontFamily = 'monospace'; });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await page.locator('#comparison-open').focus(); await page.keyboard.press('Tab');
   await expect(page.locator('#comparison-verify')).toBeFocused();
   await page.screenshot({ path: testInfo.outputPath('comparison-narrow.png'), fullPage: false });
+  await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   expect(errors).toEqual([]);
 });

@@ -79,11 +79,12 @@ shared first attempts, unattempted/current reports, exact old snapshot downloads
 restart, keyboard focus and narrow/200-percent text. Earlier browser flows retain
 their separate lifecycle, sampling, cancellation and correction coverage.
 
-Separate read-only core and GUI reviews and installed rehearsal reproduced eight issues: incomplete helper
+Separate read-only core and GUI reviews, installed rehearsal and hosted checks reproduced nine issues: incomplete helper
 source binding, selector-only rather than resolved scientific changes, expired
 service reads, late report replacement, stale selection status, and cancellation
 of a new report load while withdrawing an invalid old copy, escaped rationale
-pipes shifting report columns, and attachment refusal of the current SDK roster. Corrections
+pipes shifting report columns, attachment refusal of the current SDK roster, and
+narrow-layout overflow with Linux font metrics. Corrections
 bind the full source closure, show numeric changes and enforce leases, verification
 epochs, separate display withdrawal and current comparison context. The controlled frontend wrapper has 31
 cases; three new report/status cases fail on saved pre-fix JavaScript and pass
@@ -108,6 +109,15 @@ requires fresh attachment and repeated native qualification. Native equations,
 numerical/analysis files, protocols, references, tolerances and OT-059 fixtures are
 unchanged. An earlier full check was stopped when these final corrections became
 necessary; its partial log is not a final-revision pass.
+
+Hosted Chromium caught horizontal overflow at 390 pixels in two existing flows,
+although local default-font checks passed. The five-link navigation now wraps;
+long comparison/snapshot context and controls can shrink/wrap. Report tables keep
+their own horizontal scrolling. A new real-browser case fails on the old CSS at
+520 pixels with 200-percent text and a wider fallback font, then passes after
+correction, alongside the original narrow sampling assertion. Keep the hosted
+failure and local negative/fixed logs; no width assertion or test tolerance is
+relaxed. Final verification repeats the complete family on the corrected source.
 
 ## Final receipts and remaining gates
 
