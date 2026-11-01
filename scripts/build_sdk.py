@@ -106,7 +106,7 @@ def build(
     from scripts.build_windows_installer import source_inventory
 
     if sum((mmtt_only, integrated_candidate, m3_workbench)) > 1:
-        raise ValueError("Choose one explicit SDK scope")
+        raise ValueError("Choose either --mmtt-only, --integrated-candidate or --m3-workbench")
     if importlib.metadata.version("setuptools") != "84.2.1":
         raise ValueError("Build with the separately locked root tooling (setuptools 84.2.1)")
     source = source_inventory(ROOT, allow_dirty=allow_dirty)
