@@ -1,0 +1,365 @@
+{
+  "schema": "opent1d.ot062-lt1-fixture-ledger/1",
+  "kind": "invented",
+  "fixture_sha256": "85f04b94b64642f95efcbd5fafa332dc1d36287af89ea795b38df2b7b502efc9",
+  "slots": [
+    "control",
+    "failure-retry",
+    "unattempted"
+  ],
+  "attempts": [
+    {
+      "id": "control-first",
+      "slot": "control",
+      "ordinal": 1,
+      "retry_of": null,
+      "transcript": {
+        "input": {
+          "engine": "lt1_cambridge",
+          "step_min": 5,
+          "horizon_min": 20,
+          "seed": 101,
+          "basal_u_h": 1.2,
+          "target_mg_dl": 120,
+          "gain": 0.01,
+          "max_u_h": 3,
+          "samples": [
+            {
+              "measured_min": 0,
+              "available_min": 0,
+              "glucose_mg_dl": 120
+            },
+            {
+              "measured_min": 5,
+              "available_min": 5,
+              "glucose_mg_dl": 180
+            },
+            {
+              "measured_min": 10,
+              "available_min": 15,
+              "glucose_mg_dl": 60
+            },
+            {
+              "measured_min": 15,
+              "available_min": 20,
+              "glucose_mg_dl": 150
+            }
+          ],
+          "actual_events": [
+            {
+              "id": "meal-1",
+              "start_min": 10,
+              "grams": 40
+            }
+          ],
+          "announcements": [
+            {
+              "id": "announce-1",
+              "event_id": "meal-1",
+              "start_min": 10,
+              "available_min": 5,
+              "grams": 20
+            }
+          ]
+        },
+        "identity": {
+          "input_sha256": "4ef88665a22c45c9f3c421d2235e9bba5cde6fa063bcf27428322195e0665a83",
+          "upstream_revision": "9a6092065bd821f88691cd8d03b0550acd665573",
+          "runtime_lock_sha256": "44ad7ba062a7d67032d91fcc9e0fa2aa3910b3856dce76bee5ba32093c1a150e"
+        },
+        "status": "completed",
+        "error": null,
+        "rows": [
+          {
+            "time_min": 0,
+            "observation": {
+              "measured_min": 0,
+              "available_min": 0,
+              "glucose_mg_dl": 120,
+              "fresh": true
+            },
+            "new_announcements": [],
+            "previous_mg_dl": 120,
+            "command_u_h": 1.2,
+            "native_action": {
+              "kind": "basal_rate",
+              "unit": "U/h",
+              "rate": 1.2
+            },
+            "delivered_rate": 0.9,
+            "interval_end_min": 5
+          },
+          {
+            "time_min": 5,
+            "observation": {
+              "measured_min": 5,
+              "available_min": 5,
+              "glucose_mg_dl": 180,
+              "fresh": true
+            },
+            "new_announcements": [
+              "announce-1"
+            ],
+            "previous_mg_dl": 120,
+            "command_u_h": 1.2,
+            "native_action": {
+              "kind": "basal_rate",
+              "unit": "U/h",
+              "rate": 1.2
+            },
+            "delivered_rate": 1.2,
+            "interval_end_min": 10
+          },
+          {
+            "time_min": 10,
+            "observation": {
+              "measured_min": 5,
+              "available_min": 5,
+              "glucose_mg_dl": 180,
+              "fresh": false
+            },
+            "new_announcements": [],
+            "previous_mg_dl": 180,
+            "command_u_h": 1.2,
+            "native_action": {
+              "kind": "basal_rate",
+              "unit": "U/h",
+              "rate": 1.2
+            },
+            "delivered_rate": 1.2,
+            "interval_end_min": 15
+          },
+          {
+            "time_min": 15,
+            "observation": {
+              "measured_min": 10,
+              "available_min": 15,
+              "glucose_mg_dl": 60,
+              "fresh": true
+            },
+            "new_announcements": [],
+            "previous_mg_dl": 180,
+            "command_u_h": 1.8,
+            "native_action": {
+              "kind": "basal_rate",
+              "unit": "U/h",
+              "rate": 1.8
+            },
+            "delivered_rate": 1.5,
+            "interval_end_min": 20
+          }
+        ],
+        "delivered_u": 0.4
+      }
+    },
+    {
+      "id": "failed-first",
+      "slot": "failure-retry",
+      "ordinal": 1,
+      "retry_of": null,
+      "transcript": {
+        "input": {
+          "engine": "lt1_cambridge",
+          "step_min": 5,
+          "horizon_min": 20,
+          "seed": 101,
+          "basal_u_h": 1.2,
+          "target_mg_dl": 120,
+          "gain": 0.01,
+          "max_u_h": 3,
+          "samples": [
+            {
+              "measured_min": 0,
+              "available_min": 0,
+              "glucose_mg_dl": 120
+            },
+            {
+              "measured_min": 5,
+              "available_min": 5,
+              "glucose_mg_dl": 180
+            },
+            {
+              "measured_min": 10,
+              "available_min": 15,
+              "glucose_mg_dl": 60
+            },
+            {
+              "measured_min": 15,
+              "available_min": 20,
+              "glucose_mg_dl": 150
+            }
+          ],
+          "actual_events": [
+            {
+              "id": "meal-1",
+              "start_min": 10,
+              "grams": 40
+            }
+          ],
+          "announcements": [
+            {
+              "id": "announce-1",
+              "event_id": "meal-1",
+              "start_min": 10,
+              "available_min": 5,
+              "grams": 20
+            }
+          ]
+        },
+        "identity": {
+          "input_sha256": "4ef88665a22c45c9f3c421d2235e9bba5cde6fa063bcf27428322195e0665a83",
+          "upstream_revision": "9a6092065bd821f88691cd8d03b0550acd665573",
+          "runtime_lock_sha256": "44ad7ba062a7d67032d91fcc9e0fa2aa3910b3856dce76bee5ba32093c1a150e"
+        },
+        "status": "failed",
+        "error": "invented initialization failure",
+        "rows": [],
+        "delivered_u": null
+      }
+    },
+    {
+      "id": "explicit-retry",
+      "slot": "failure-retry",
+      "ordinal": 2,
+      "retry_of": "failed-first",
+      "transcript": {
+        "input": {
+          "engine": "lt1_cambridge",
+          "step_min": 5,
+          "horizon_min": 20,
+          "seed": 101,
+          "basal_u_h": 1.2,
+          "target_mg_dl": 120,
+          "gain": 0.01,
+          "max_u_h": 3,
+          "samples": [
+            {
+              "measured_min": 0,
+              "available_min": 0,
+              "glucose_mg_dl": 120
+            },
+            {
+              "measured_min": 5,
+              "available_min": 5,
+              "glucose_mg_dl": 180
+            },
+            {
+              "measured_min": 10,
+              "available_min": 15,
+              "glucose_mg_dl": 60
+            },
+            {
+              "measured_min": 15,
+              "available_min": 20,
+              "glucose_mg_dl": 150
+            }
+          ],
+          "actual_events": [
+            {
+              "id": "meal-1",
+              "start_min": 10,
+              "grams": 40
+            }
+          ],
+          "announcements": [
+            {
+              "id": "announce-1",
+              "event_id": "meal-1",
+              "start_min": 10,
+              "available_min": 5,
+              "grams": 20
+            }
+          ]
+        },
+        "identity": {
+          "input_sha256": "4ef88665a22c45c9f3c421d2235e9bba5cde6fa063bcf27428322195e0665a83",
+          "upstream_revision": "9a6092065bd821f88691cd8d03b0550acd665573",
+          "runtime_lock_sha256": "44ad7ba062a7d67032d91fcc9e0fa2aa3910b3856dce76bee5ba32093c1a150e"
+        },
+        "status": "completed",
+        "error": null,
+        "rows": [
+          {
+            "time_min": 0,
+            "observation": {
+              "measured_min": 0,
+              "available_min": 0,
+              "glucose_mg_dl": 120,
+              "fresh": true
+            },
+            "new_announcements": [],
+            "previous_mg_dl": 120,
+            "command_u_h": 1.2,
+            "native_action": {
+              "kind": "basal_rate",
+              "unit": "U/h",
+              "rate": 1.2
+            },
+            "delivered_rate": 0.9,
+            "interval_end_min": 5
+          },
+          {
+            "time_min": 5,
+            "observation": {
+              "measured_min": 5,
+              "available_min": 5,
+              "glucose_mg_dl": 180,
+              "fresh": true
+            },
+            "new_announcements": [
+              "announce-1"
+            ],
+            "previous_mg_dl": 120,
+            "command_u_h": 1.2,
+            "native_action": {
+              "kind": "basal_rate",
+              "unit": "U/h",
+              "rate": 1.2
+            },
+            "delivered_rate": 1.2,
+            "interval_end_min": 10
+          },
+          {
+            "time_min": 10,
+            "observation": {
+              "measured_min": 5,
+              "available_min": 5,
+              "glucose_mg_dl": 180,
+              "fresh": false
+            },
+            "new_announcements": [],
+            "previous_mg_dl": 180,
+            "command_u_h": 1.2,
+            "native_action": {
+              "kind": "basal_rate",
+              "unit": "U/h",
+              "rate": 1.2
+            },
+            "delivered_rate": 1.2,
+            "interval_end_min": 15
+          },
+          {
+            "time_min": 15,
+            "observation": {
+              "measured_min": 10,
+              "available_min": 15,
+              "glucose_mg_dl": 60,
+              "fresh": true
+            },
+            "new_announcements": [],
+            "previous_mg_dl": 180,
+            "command_u_h": 1.8,
+            "native_action": {
+              "kind": "basal_rate",
+              "unit": "U/h",
+              "rate": 1.8
+            },
+            "delivered_rate": 1.5,
+            "interval_end_min": 20
+          }
+        ],
+        "delivered_u": 0.4
+      }
+    }
+  ]
+}
