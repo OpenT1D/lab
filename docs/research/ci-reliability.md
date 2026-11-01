@@ -164,3 +164,37 @@ attempt receipts and separate critical review, with one full-check owner.
 The associated CI pull request is stacked on the M3 branch; neither PR is merged
 by this workflow. No previous native M4 or M3 result is relabelled as evidence
 for a new exact installed artifact.
+
+## Search completion follow-up from PR 48
+
+A separately reported Firefox failure on `eb2284688b6976b9a9e708c71a9ee8bf9583708e`,
+[run 41300144495](https://github.com/OpenT1D/lab/actions/runs/41300144495),
+attempt 1, job `124829203433`, retains artifact `13081505129`. The actual
+result navigation began while the 800-millisecond summary fetch body was pending.
+The receipt retained its `NS_BINDING_ABORTED`, a JavaScript network error and the
+intended target-asset 404. The target 404 assertion passed; the subsequent
+summary-before-navigation assertion failed. This is a real early-completion
+error, not a prefetch exception or lost asset detection.
+
+The separate two-file fix `d227ae9196d9c40dd310833909554a6fca717381` can be
+cherry-picked without the M3/SDK or workflow migration. The existing monitor now
+tracks every actual request through `requestfinished`/`requestfailed`, requires
+a fresh 500-millisecond quiescence after completion and lets browser callbacks
+settle before its final error check. Its Node-side 15-second deadline also
+bounds blocked browser settlement. It issues no extra fetch, erases no error
+and keeps the original monitor active through result navigation. This checks
+the bounded Sphinx completion boundary and queued callbacks; it is not a promise
+that arbitrarily delayed future page activity can never occur.
+
+All original fault assertions remain. Seven additional real-browser cases cover
+a fetch started after an already reached idle state, response headers without
+a completed body, deferred 404/abort, queued console/JavaScript faults and page
+timers holding settlement callbacks. The three cached-idle regressions fail
+against an unchanged predecessor helper because the summary is still empty or
+the expected fault has not yet been awaited. A first candidate's unbounded
+browser-evaluation path was independently reproduced and corrected before
+handoff. The final 13 search cases passed in all three engines (39 cases,
+15.9 seconds locally); that targeted result is separate from the final full
+browser matrix and hosted acceptance. The adapter audit reuses this exact fix
+and owns its separate final-source checks; this branch remains the only owner
+of the complete M3/CI integration check.

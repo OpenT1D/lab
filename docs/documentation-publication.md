@@ -187,3 +187,11 @@ finished search, assets and byte-exact Mac build-reference/runtime-lock and MMTT
 notebook downloads. All 43 observed project responses succeeded with no page
 errors or failed requests. These are dated acceptance observations; subsequent
 changes require their own run and deployment receipts.
+
+The search completion guard waits for actual request completion and a fresh
+500-millisecond quiet interval, then settles browser callbacks while preserving
+all observed errors. A Node-side deadline also bounds an unresponsive browser
+settlement. Cached `networkidle` alone is insufficient for delayed summary
+bodies. The [CI follow-up](research/ci-reliability.md#search-completion-follow-up-from-pr-48)
+records the original Firefox failure, unchanged target-asset assertion and
+positive/fault/deadline regressions across all three engines.
