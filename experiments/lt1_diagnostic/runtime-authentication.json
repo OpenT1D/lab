@@ -1,0 +1,99 @@
+{
+  "schema": "opent1d.lt1-runtime-authentication/1",
+  "checked_at": "2026-11-01T22:56:44.923Z",
+  "candidate": {
+    "version": "22.23.4",
+    "platform": "darwin-arm64",
+    "archive_sha256": "c9e1dbc748b33ed2d14f42445191ecaf14c56259c7a9a26d0042c49ec2b66428"
+  },
+  "verification_tool": {
+    "name": "OpenPGP.js",
+    "version": "6.3.2",
+    "archive_sha256": "3eeea348b6e02e81387af584a189eab5446f3df223382127bc17ac06b6ea77b7",
+    "node_bundle_sha256": "9274be7afb7fe902c39acb686066c379874e8a444b7d10fea3f5eab60596f95e",
+    "registry_signatures_verified": 2,
+    "registry_spki_sha256": "fb190a462123443500cbcdb6519623e7179e9f38d84ad4e9362b72d2b68b62c1",
+    "frozen_manifest_sha256": "1b689ee06d5a438996727eafabd56beea8fb490b76f0cfc530f90df7e171e97c",
+    "wrapper_sha256": "a0d4a1ba82f15dc4ba84f82c7e2866bc61ce61ed0e67c89a78333615337f1bc3"
+  },
+  "signature": {
+    "primary_fingerprint": "5BE8A3F6C8A5C01D106C0AD820B1A390B168D356",
+    "signing_fingerprint": "5BE8A3F6C8A5C01D106C0AD820B1A390B168D356",
+    "signing_key_id": "20b1a390b168d356",
+    "algorithm": {
+      "algorithm": "eddsaLegacy",
+      "curve": "ed25519Legacy"
+    },
+    "signature_created": "2026-10-21T10:33:12.000Z",
+    "primary_valid_now": true,
+    "primary_revoked_in_fetched_key": false,
+    "signer_valid_at_signing_and_now": true,
+    "verified": true,
+    "authenticated_text_sha256": "c90c3f1478fda8308b22cc1a1b0dc536169196444e67ee8b5c582fd351d02bce"
+  },
+  "inputs": {
+    "signed": "a662bf8938f1ea15a9ba0017a89a53a28812b8ab179be11dd62d642cb6e33396",
+    "key": "5115095e2f8010c75da052ecb1cfb3af630e084f0f8daa93a863557b01b0f90a",
+    "plain": "c90c3f1478fda8308b22cc1a1b0dc536169196444e67ee8b5c582fd351d02bce",
+    "wrong_key": "acf8c1f1d1df8b68c87bde1ccff9754cd29a0671ec92fd2b190f38b3305938f1"
+  },
+  "negative_controls": {
+    "payload": {
+      "rejected": true,
+      "error": "Error: Error verifying signed message: Signed digest did not match"
+    },
+    "signature_armor_or_packet": {
+      "rejected": true,
+      "error": "Error: Error verifying signed message: Signed digest did not match"
+    },
+    "wrong_key_identity_policy": {
+      "rejected": true,
+      "error": "AssertionError [ERR_ASSERTION]: primary fingerprint\n+ actual - expected\n\n+ 'DD792F5973C6DE52C432CBDAC77ABFA00DDBF2B7'\n- '5BE8A3F6C8A5C01D106C0AD820B1A390B168D356'\n"
+    },
+    "wrong_key_library_verify": {
+      "rejected": true,
+      "phase": "verify",
+      "error": "Error: Error verifying signed message: Could not find signing key with key ID 20b1a390b168d356"
+    }
+  },
+  "private_receipts": {
+    "process_sha256": "b69583e2d94eafa011f1c85723cf5cbbd364c3375c79d8b9c1b95bb94e10a0fa",
+    "result_sha256": "8e0a3d1b2314c2d5b8c11e2d669cd1730723df430e20ad13b82677077ba98854"
+  },
+  "utility_scope": {
+    "existing_host_node": "v22.22.2",
+    "existing_host_node_sha256": "450f27e22fc8babf6eb2e19d77474d99b12f3c12515900c0266a0ca7ea526fbf",
+    "host_toolchain_trust": "conditional existing utility TCB; no native runtime clearance",
+    "network": false,
+    "fork": false,
+    "mach_lookup": false,
+    "v8_old_space_mb": 128,
+    "hard_total_memory_cap": false,
+    "cpu_seconds": 10,
+    "output_file_limit_bytes": 1048576,
+    "file_descriptors": 64,
+    "wall_deadline_seconds": 15,
+    "candidate_executed": false,
+    "package_install_or_lifecycle_scripts": false
+  },
+  "limitations": [
+    "Only the exact release signature and archive bytes authenticated; security/build/source-to-binary/OS review remains incomplete",
+    "Current revocation observation limited to fetched official key bytes",
+    "Existing host tooling and bootstrap paths remain a trust assumption",
+    "No restricted-use, distribution, setup or execution admission created"
+  ],
+  "authorizations": {
+    "setup": false,
+    "native_execution": false,
+    "distribution": false
+  },
+  "sources": [
+    "https://nodejs.org/dist/v22.23.4/SHASUMS256.txt.asc",
+    "https://github.com/nodejs/release-keys",
+    "https://github.com/nodejs/node/blob/v22.23.4/README.md",
+    "https://registry.npmjs.org/openpgp/6.3.2",
+    "https://github.com/openpgpjs/openpgpjs/releases/tag/v6.3.2",
+    "https://github.com/openpgpjs/openpgpjs/security/advisories/GHSA-8qff-qr5q-5pr8",
+    "https://github.com/openpgpjs/openpgpjs/security/advisories/GHSA-ch3c-v47x-4pgp"
+  ]
+}

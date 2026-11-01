@@ -45,6 +45,11 @@ signer/subkey and reviewed revocation policy, then check the exact archive line.
 Fingerprint matching and npm registry ECDSA verification remain separate evidence.
 Node OpenPGP authentication is still open.
 
+The subsequent [authentication/integration record](ot062-lt1-auth-integration.md)
+authenticates the exact retained signature/archive with a separately reviewed
+established utility. That later result closes the signature question only; it
+does not clear the runtime/security, rights, setup or execution gates recorded here.
+
 ## Rights and setup mechanism
 
 The selected [LT1 MIT notice](https://github.com/hpeuscher/loopinsight1/blob/9a6092065bd821f88691cd8d03b0550acd665573/LICENSE.md)
