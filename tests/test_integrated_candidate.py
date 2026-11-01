@@ -42,6 +42,27 @@ class IntegratedCandidate(unittest.TestCase):
     python = connected.InstalledConnectedStudies.python
     server = editable.EditableWorkbench.server
 
+    def test_all_existing_wheel_scopes_bind_both_reader_packets_and_helper(self):
+        for receipt in self.receipts.values():
+            with zipfile.ZipFile(receipt["wheel"]) as wheel:
+                metadata = json.loads(wheel.read("opent1d_lab/_manifest.json"))
+                prefix = "_payload/app/experiments/shared_services/"
+                for name in ("reader_compatibility.json", "reader_compatibility_m3.json"):
+                    raw = wheel.read("opent1d_lab/" + prefix + name)
+                    self.assertEqual(
+                        hashlib.sha256(raw).hexdigest(), metadata["files"][prefix + name]["sha256"]
+                    )
+                packet = json.loads(
+                    wheel.read("opent1d_lab/" + prefix + "reader_compatibility_m3.json")
+                )
+                helper = wheel.read("opent1d_lab/" + prefix + "reader_compatibility.py")
+                self.assertEqual(
+                    hashlib.sha256(helper).hexdigest(),
+                    packet["successor"]["reader_static_dependencies_sha256"][
+                        "experiments/shared_services/reader_compatibility.py"
+                    ],
+                )
+
     def test_candidate_preserves_entire_developer_and_mmtt_scientific_payload(self):
         payloads = {}
         for version, receipt in self.receipts.items():

@@ -93,6 +93,11 @@ builds a development fixture. A development build is not an artifact receipt.
 
 ## Prepared formative exercise and open gates
 
+The [first-session supplement](mmtt-formative-session.md) fixes a short MMTT-only
+task order, artifact/start checklist, separate neutral participant card, actual
+reference key and blank observation/report structure. Use it with the retained
+packet; preparation does not record a human session or independent handoff.
+
 Successful qualification generates `formative-packet/`: give only `participant/`
 to an actual intended analyst. Keep `facilitator/`, its actual reference reports
 and blank observation template separate. A participant recovery project contains
@@ -110,3 +115,29 @@ notarisation, clean-host installation, other-platform qualification, native
 packaging, broader reader transitions and public release remain open. Software
 and numerical checks do not establish biological validity or human sampling
 equivalence. The [roadmap](../ROADMAP.md) owns the subsequent work.
+
+## Explicit M3-era comparison successor
+
+The current source adds the separately selected
+[exact successor packet](decisions/0092-exact-m3-reader-successor.md). The original
+version-1 registry is byte-preserved. A version-2 packet pins one complete current
+reader and admits only A, the exact historical B reader including its original
+policy digest, and the exact MMTT comparison identity computed from
+`6e77f7b86d3418ac5702dfb1efdd0edf68cabd90`. The latter is a generic MMTT comparison
+frozen during M3 development; this is not migration of M3 forecasts or native
+M4/connected studies. Unknown predecessors, altered helpers and every non-reader
+definition field remain refused. Original report/definition bytes and project
+inventories remain unchanged; the operation receipt names the actual transition.
+
+For a newly built version-2 successor, explicitly add
+`--reader-policy opent1d.comparison-reader-transition/2` to the qualification
+command above. The default keeps the original literal version-1 assertion for
+historical A-to-B reproduction. The version-2 mode extracts the packet from the
+hash-verified successor wheel and binds its complete reader, packet digest,
+historical registry and exact M3-era predecessor. It reports qualification
+schema 2; it never relabels an old version-1 receipt. The original task,
+failure/cancellation, saved-prefix, relocation, rollback and constant-input
+controls still run. Additional retained B/M3-era comparisons need their own
+installed source-bound replay evidence, not a declaration that a root check
+qualified a wheel. Final exact artifacts and receipts belong to the associated
+CI integration PR; distribution and native qualification remain separate.

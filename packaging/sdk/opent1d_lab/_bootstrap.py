@@ -66,6 +66,17 @@ def main():
     payload = package / "_payload/app"
     sys.path.insert(0, str(payload))
     os.chdir(payload)
+    if "m3-compare" in checked["tasks"]:
+        from experiments.shared_services.forecasting_context import activate
+
+        activate(Path(__file__).absolute(), checked)
+    if len(sys.argv) > 1 and sys.argv[1] == "--m3-child":
+        if "m3-compare" not in checked["tasks"] or sys.argv[2:3] != ["run"]:
+            raise ValueError("Unadmitted M3 child entry")
+        module = "experiments.m3.researcher"
+        sys.argv = [module, *sys.argv[2:]]
+        runpy.run_module(module, run_name="__main__")
+        return
     if len(sys.argv) > 1 and sys.argv[1] == "--native":
         if len(sys.argv) < 4:
             raise ValueError("Native worker selection missing")
@@ -75,6 +86,7 @@ def main():
             "mmtt-sampling": "experiments.mmtt_sampling",
             "m4-study-secure": "experiments.m4.secure_study",
             "m4-study-installed": "experiments.m4.installed_study",
+            "m3-compare": "experiments.m3.comparison",
         }
         if (
             task not in modules

@@ -20,7 +20,58 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
+  root-tests:
+    name: Root tests (${{ matrix.shard }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ['1/4', '2/4', '3/4', '4/4']
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Set up uv
+        uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4  # v10.1.0
+        with:
+          version: '0.11.16'
+          enable-cache: false
+      - name: Install selected Python
+        run: uv python install
+      - name: Set up required frontend Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1  # v7.1.0
+        with:
+          node-version: '24.22.1'
+          package-manager-cache: false
+      - name: Install locked root tooling
+        run: uv sync --locked
+      - name: Record source and tools
+        env:
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          mkdir -p results/ci
+          uv run --locked python scripts/ci_environment.py > results/ci/environment.json
+      - name: Run complete selected root-test modules
+        run: >-
+          uv run --locked python scripts/check.py --stage tests --test-shard '${{ matrix.shard }}'
+          2>&1 | tee results/ci/root-tests.log
+      - name: Preserve root-test selection and outcomes
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: root-tests-${{ strategy.job-index }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: results/ci/
+          if-no-files-found: warn
+          retention-days: 5
+
   repository-checks:
+    needs: root-tests
     outputs:
       native_enabled: ${{ steps.scope.outputs.native_enabled }}
     name: Root checks
@@ -63,7 +114,9 @@ jobs:
           HISTORICAL_REQUESTED: ${{ github.event_name == 'workflow_dispatch' && inputs.historical_native }}
         run: uv run --locked python scripts/publication_ci_scope.py >> "$GITHUB_OUTPUT"
       - name: Check repository and build documentation
-        run: uv run --locked python scripts/check.py 2>&1 | tee results/ci/repository-checks.log
+        run: |
+          uv run --locked python scripts/check.py --stage style 2>&1 | tee results/ci/style.log
+          uv run --locked python scripts/check.py --stage docs 2>&1 | tee results/ci/repository-checks.log
 
       - name: Verify paired boundary preflight and reconstruction
         run: |
@@ -282,7 +335,7 @@ jobs:
   browser:
     name: Browser checks (${{ matrix.browser }})
     runs-on: ubuntu-24.04
-    timeout-minutes: ${{ matrix.browser == 'chromium' && 20 || 15 }}
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
@@ -320,11 +373,14 @@ jobs:
         run: npm --prefix tests/browser ci --ignore-scripts --no-audit --no-fund
       - name: Select temporary browser cache
         run: echo "PLAYWRIGHT_BROWSERS_PATH=$RUNNER_TEMP/opent1d-playwright-browsers" >> "$GITHUB_ENV"
+      - name: Bound Ubuntu acquisition and select its official archive
+        run: sudo --preserve-env=GITHUB_ACTIONS python3 scripts/browser_dependencies.py
       - name: Install selected browser and its Linux dependencies
-        run: npm --prefix tests/browser run install:browser -- --with-deps '${{ matrix.browser }}'
-      - name: Run four Chromium MMTT flows
-        if: matrix.browser == 'chromium'
-        run: npm --prefix tests/browser test 2>&1 | tee results/ci/browser.log
+        run: |
+          sudo -- "$(command -v node)" --test tests/browser/installer-process.test.mjs
+          sudo --preserve-env=PLAYWRIGHT_BROWSERS_PATH -- "$(command -v node)" \
+            tests/browser/install-browser.mjs --with-deps '${{ matrix.browser }}' \
+            2>&1 | tee results/ci/browser-install.log
       - name: Build and stage documentation for the project path
         run: |
           uv run --locked python scripts/check.py --stage docs
@@ -338,6 +394,72 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: browser-${{ matrix.browser }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            output/playwright/
+            results/ci/
+          if-no-files-found: warn
+          retention-days: 5
+
+  browser-apps:
+    name: Browser application (${{ matrix.shard }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ['1/3', '2/3', '3/3']
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Set up uv
+        uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4  # v10.1.0
+        with:
+          version: '0.11.16'
+          enable-cache: false
+      - name: Install selected Python
+        run: uv python install
+      - name: Set up selected Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1  # v7.1.0
+        with:
+          node-version: '24.22.1'
+          package-manager-cache: false
+      - name: Install locked root tooling
+        run: uv sync --locked
+      - name: Record source and tools
+        env:
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          mkdir -p results/ci
+          uv run --locked python scripts/ci_environment.py > results/ci/environment.json
+      - name: Install locked browser tooling
+        run: npm --prefix tests/browser ci --ignore-scripts --no-audit --no-fund
+      - name: Select temporary browser cache
+        run: echo "PLAYWRIGHT_BROWSERS_PATH=$RUNNER_TEMP/opent1d-playwright-browsers" >> "$GITHUB_ENV"
+      - name: Bound Ubuntu acquisition and select its official archive
+        run: sudo --preserve-env=GITHUB_ACTIONS python3 scripts/browser_dependencies.py
+      - name: Install selected browser and its Linux dependencies
+        run: |
+          sudo -- "$(command -v node)" --test tests/browser/installer-process.test.mjs
+          sudo --preserve-env=PLAYWRIGHT_BROWSERS_PATH -- "$(command -v node)" \
+            tests/browser/install-browser.mjs --with-deps chromium \
+            2>&1 | tee results/ci/browser-install.log
+      - name: Run isolated Chromium application cases
+        env:
+          OPENT1D_BROWSER_SHARD: ${{ matrix.shard }}
+        run: >-
+          npm --prefix tests/browser test -- --config application-ci.config.mjs
+          2>&1 | tee results/ci/browser.log
+      - name: Preserve browser diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: browser-apps-${{ strategy.job-index }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             output/playwright/
             results/ci/
@@ -392,7 +514,7 @@ jobs:
 
   public-checks:
     name: Repository checks
-    needs: [repository-checks, public-smoke, browser, dependency-review]
+    needs: [repository-checks, root-tests, public-smoke, browser, browser-apps, dependency-review]
     if: always()
     runs-on: ubuntu-24.04
     timeout-minutes: 15

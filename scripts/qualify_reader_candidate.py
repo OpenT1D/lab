@@ -17,10 +17,41 @@ import subprocess
 import sys
 import threading
 import time
+import zipfile
 from pathlib import Path
 
 PREDECESSOR = "fc041c6e51463ae640d97c55719e742253e453e0"
 TASKS = ["mmtt-sensitivity", "mmtt-sampling"]
+LEGACY_POLICY = "opent1d.comparison-reader-transition/1"
+CURRENT_POLICY = "opent1d.comparison-reader-transition/2"
+
+
+def canonical(value):
+    return (json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n").encode()
+
+
+def transition_identity(result, reader_policy=LEGACY_POLICY, packet_raw=None):
+    if reader_policy == LEGACY_POLICY:
+        # Preserve the original qualification's literal historical assertion.
+        assert result["reader_transition"]["policy"] == "opent1d.comparison-reader-transition/1"
+        return
+    assert reader_policy == CURRENT_POLICY and packet_raw is not None
+    packet = json.loads(packet_raw)
+    assert packet["schema"] == CURRENT_POLICY and packet["tasks"] == TASKS
+    assert packet["historical_registry_sha256"] == (
+        "6b50b5b97f9888e55f2fdddd86388a35963ce090291f37850cffb4863ed6f0e0"
+    )
+    assert packet["m3_predecessor_revision"] == "6e77f7b86d3418ac5702dfb1efdd0edf68cabd90"
+    assert hashlib.sha256(canonical(packet["m3_predecessor"])).hexdigest() == (
+        "b6fb575b6bf5532a53f0fb2fd20a3efad5bfadc162dae9f010a2e0d6442e24ec"
+    )
+    expected = {"schema": CURRENT_POLICY, "registry_sha256": hashlib.sha256(packet_raw).hexdigest()}
+    assert result["reader_transition"]["policy"] == CURRENT_POLICY
+    assert result["reader_transition"]["registry_sha256"] == expected["registry_sha256"]
+    assert canonical(result["reader"]["compatibility"]) == canonical(expected)
+    assert canonical(
+        {key: value for key, value in result["reader"].items() if key != "compatibility"}
+    ) == canonical(packet["successor"])
 
 
 def write(path, value):
@@ -314,7 +345,7 @@ def prepare(root):
     return record
 
 
-def replay(root, source):
+def replay(root, source, reader_policy=LEGACY_POLICY, packet_raw=None):
     import opent1d_lab as lab
 
     root.mkdir()
@@ -337,10 +368,7 @@ def replay(root, source):
             )
         assert results[name]["report_sha256"] == original["report_sha256"], name
         if not name.endswith("-native"):
-            assert (
-                results[name]["reader_transition"]["policy"]
-                == "opent1d.comparison-reader-transition/1"
-            ), name
+            transition_identity(results[name], reader_policy, packet_raw)
     assert inventory(Path(project.path)) == before, "Reading changed the original project"
     # Retrying must never replace the frozen first failure/cancellation.
     for name in ("failed", "cancelled"):
@@ -371,6 +399,7 @@ def orchestrate(args):
     probe = root / "qualification.py"
     shutil.copyfile(__file__, probe)
     artifacts = {}
+    packet_path = None
     env = {key: value for key, value in os.environ.items() if key != "PYTHONPATH"}
     env["UV_CACHE_DIR"] = str(root / "cache")
     for label in ("a", "b"):
@@ -384,6 +413,15 @@ def orchestrate(args):
         else:
             assert receipt["source"]["revision"] != PREDECESSOR
             assert receipt["tasks"] == TASKS
+            if args.reader_policy == CURRENT_POLICY:
+                with zipfile.ZipFile(wheel) as payload:
+                    prefix = "opent1d_lab/_payload/app/experiments/shared_services/"
+                    legacy = payload.read(prefix + "reader_compatibility.json")
+                    assert hashlib.sha256(legacy).hexdigest() == (
+                        "6b50b5b97f9888e55f2fdddd86388a35963ce090291f37850cffb4863ed6f0e0"
+                    )
+                    packet_path = root / "qualified-reader-packet.json"
+                    packet_path.write_bytes(payload.read(prefix + "reader_compatibility_m3.json"))
         destination = root / ("artifact-" + label)
         destination.mkdir()
         shutil.copyfile(wheel, destination / wheel.name)
@@ -431,6 +469,10 @@ def orchestrate(args):
         ]
         if source:
             command += ["--source", str(source)]
+        if mode == "replay":
+            command += ["--reader-policy", args.reader_policy]
+            if packet_path:
+                command += ["--qualification-packet", str(packet_path)]
         with (root / (label + "-" + mode + ".log")).open("xb") as log:
             subprocess.run(
                 command,
@@ -497,6 +539,10 @@ def orchestrate(args):
         "human_sessions": "not_recorded",
         "public_release": False,
     }
+    if args.reader_policy == CURRENT_POLICY:
+        result["schema"] = "opent1d.internal-mmtt-candidate-qualification/2"
+        result["reader_policy"] = CURRENT_POLICY
+        result["reader_packet_sha256"] = hashlib.sha256(packet_path.read_bytes()).hexdigest()
     materials(root / "formative-packet", result, root / "current-workflows")
     result["formative_packet_sha256"] = hashlib.sha256(
         (root / "formative-packet/packet.json").read_bytes()
@@ -512,13 +558,28 @@ def main():
     parser.add_argument("--probe", choices=("prepare", "replay"))
     parser.add_argument("--source", type=Path)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument(
+        "--reader-policy", choices=(LEGACY_POLICY, CURRENT_POLICY), default=LEGACY_POLICY
+    )
+    parser.add_argument(
+        "--qualification-packet",
+        type=Path,
+        help="internal replay probe; exact packet extracted from the verified successor wheel",
+    )
     for label in ("a", "b"):
         parser.add_argument("--" + label + "-wheel", type=Path)
         parser.add_argument("--" + label + "-receipt", type=Path)
     args = parser.parse_args()
     if args.probe:
         result = (
-            prepare(args.output) if args.probe == "prepare" else replay(args.output, args.source)
+            prepare(args.output)
+            if args.probe == "prepare"
+            else replay(
+                args.output,
+                args.source,
+                args.reader_policy,
+                args.qualification_packet.read_bytes() if args.qualification_packet else None,
+            )
         )
         print(
             json.dumps(

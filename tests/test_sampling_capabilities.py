@@ -28,6 +28,7 @@ class SamplingCapabilities(unittest.TestCase):
                 (3, current),
                 (4, ["mmtt-sensitivity", "mmtt-sampling"]),
                 (5, current),
+                (6, current + ["m3-compare"]),
             ):
                 descriptor = {
                     "schema": f"opent1d.installed-sdk/{version}",
@@ -51,7 +52,7 @@ class SamplingCapabilities(unittest.TestCase):
                     manifest.write_text(json.dumps(changed))
                     with self.assertRaisesRegex(ValueError, "Unsupported installed artifact"):
                         INTEGRITY.verify(root)
-                    if version in {4, 5}:
+                    if version in {4, 5, 6}:
                         for roster in (
                             tasks[::-1],
                             tasks + [tasks[0]],

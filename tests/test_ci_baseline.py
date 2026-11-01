@@ -31,6 +31,7 @@ class CIBaselinePolicyTests(unittest.TestCase):
     def test_root_job_keeps_its_id_outputs_scope_and_explicit_uncached_toolchain(self):
         self.assertEqual(set(self.workflow["jobs"]), PUBLIC_JOBS | NATIVE_JOBS | PUBLICATION_JOBS)
         self.assertEqual(self.job["name"], "Root checks")
+        self.assertEqual(self.job["needs"], "root-tests")
         self.assertEqual(
             self.job["outputs"], {"native_enabled": "${{ steps.scope.outputs.native_enabled }}"}
         )
@@ -60,6 +61,10 @@ class CIBaselinePolicyTests(unittest.TestCase):
             "uv run --locked python scripts/check.py",
             self.steps["Check repository and build documentation"]["run"],
         )
+        root_commands = self.steps["Check repository and build documentation"]["run"]
+        self.assertIn("scripts/check.py --stage style", root_commands)
+        self.assertIn("scripts/check.py --stage docs", root_commands)
+        self.assertNotIn("--stage tests", root_commands)
         for name, job in self.workflow["jobs"].items():
             if name in NATIVE_JOBS:
                 for step in job["steps"]:
@@ -72,7 +77,15 @@ class CIBaselinePolicyTests(unittest.TestCase):
         self.assertEqual(gate["name"], "Repository checks")
         self.assertEqual(gate["if"], "always()")
         self.assertEqual(
-            gate["needs"], ["repository-checks", "public-smoke", "browser", "dependency-review"]
+            gate["needs"],
+            [
+                "repository-checks",
+                "root-tests",
+                "public-smoke",
+                "browser",
+                "browser-apps",
+                "dependency-review",
+            ],
         )
         final = gate["steps"][-1]
         self.assertEqual(final["env"]["PUBLIC_CHECK_RESULTS"], "${{ toJSON(needs) }}")
@@ -102,7 +115,7 @@ class CIBaselinePolicyTests(unittest.TestCase):
                 self.assertNotIn("if", jobs[key])
             for step in jobs[key]["steps"]:
                 self.assertNotIn("continue-on-error", step)
-        for key in ("public-smoke", "browser"):
+        for key in ("public-smoke", "browser", "root-tests", "browser-apps"):
             steps = jobs[key]["steps"]
             upload = steps[-1]
             self.assertEqual(upload["if"], "always()")
@@ -115,16 +128,39 @@ class CIBaselinePolicyTests(unittest.TestCase):
         self.assertIn(
             "npm --prefix tests/browser ci --ignore-scripts --no-audit --no-fund", browser
         )
-        self.assertIn("npm --prefix tests/browser run install:browser -- --with-deps", browser)
-        self.assertIn("npm --prefix tests/browser test", browser)
+        self.assertIn("tests/browser/install-browser.mjs --with-deps", browser)
+        self.assertIn("sudo --preserve-env=PLAYWRIGHT_BROWSERS_PATH", browser)
+        self.assertIn("--test tests/browser/installer-process.test.mjs", browser)
+        self.assertIn(
+            "sudo --preserve-env=GITHUB_ACTIONS python3 scripts/browser_dependencies.py", browser
+        )
         self.assertIn("npm --prefix tests/browser run test:docs", browser)
         browser_steps = jobs["browser"]["steps"]
+        app_steps = jobs["browser-apps"]["steps"]
         mmtt = next(
             step
-            for step in browser_steps
+            for step in app_steps
             if step.get("run", "").startswith("npm --prefix tests/browser test ")
         )
-        self.assertEqual(mmtt["if"], "matrix.browser == 'chromium'")
+        self.assertNotIn("if", mmtt)
+        self.assertIn("--config application-ci.config.mjs", mmtt["run"])
+        self.assertEqual(mmtt["env"], {"OPENT1D_BROWSER_SHARD": "${{ matrix.shard }}"})
+        self.assertEqual(
+            jobs["browser-apps"]["strategy"],
+            {"fail-fast": False, "matrix": {"shard": ["1/3", "2/3", "3/3"]}},
+        )
+        self.assertEqual(
+            jobs["root-tests"]["strategy"],
+            {"fail-fast": False, "matrix": {"shard": ["1/4", "2/4", "3/4", "4/4"]}},
+        )
+        root = next(
+            step for step in jobs["root-tests"]["steps"] if "--test-shard" in step.get("run", "")
+        )
+        self.assertNotIn("if", root)
+        self.assertIn(
+            "scripts/check.py --stage tests --test-shard '${{ matrix.shard }}'", root["run"]
+        )
+        self.assertNotIn("npm --prefix tests/browser test ", browser)
         self.assertIn("${{ matrix.browser }}", browser_steps[-1]["with"]["name"])
         docs = next(step for step in browser_steps if "run test:docs" in step.get("run", ""))
         self.assertNotIn("if", docs)
@@ -186,9 +222,8 @@ class CIBaselinePolicyTests(unittest.TestCase):
                 check=False,
             )
             self.assertEqual(completed.returncode, 7)
-            self.assertIn(
-                "synthetic failure", (root / "results/ci/repository-checks.log").read_text()
-            )
+            self.assertIn("synthetic failure", (root / "results/ci/style.log").read_text())
+            self.assertFalse((root / "results/ci/repository-checks.log").exists())
 
     @unittest.skipUnless(shutil.which("bash"), "Hosted Ubuntu log pipelines require Bash")
     def test_first_paired_failure_cannot_be_hidden_by_a_successful_final_compare(self):

@@ -18,7 +18,7 @@ from .api import (
 def _inputs(args):
     if args.task not in {"mmtt-sensitivity", "mmtt-sampling"}:
         if not args.config:
-            raise ValueError("M4 requires --config")
+            raise ValueError("This task requires --config")
         return {"config.json": args.config}
     if not all((args.package, args.csv, args.settings)):
         raise ValueError("MMTT requires --package, --csv and --settings")
@@ -59,7 +59,13 @@ def main(argv=None):
     command = commands.add_parser("example")
     command.add_argument(
         "--task",
-        choices=("mmtt-sensitivity", "m4-study-secure", "m4-study-installed", "mmtt-sampling"),
+        choices=(
+            "mmtt-sensitivity",
+            "m4-study-secure",
+            "m4-study-installed",
+            "mmtt-sampling",
+            "m3-compare",
+        ),
         required=True,
     )
     command.add_argument("--output", required=True)
@@ -81,7 +87,13 @@ def main(argv=None):
         command = commands.add_parser(operation)
         command.add_argument(
             "--task",
-            choices=("mmtt-sensitivity", "m4-study-secure", "m4-study-installed", "mmtt-sampling"),
+            choices=(
+                "mmtt-sensitivity",
+                "m4-study-secure",
+                "m4-study-installed",
+                "mmtt-sampling",
+                "m3-compare",
+            ),
             required=True,
         )
         for name in ("config", "package", "csv", "settings", "design", "development-import"):

@@ -247,11 +247,11 @@ solver as the only integrator and never mutate sampled controller state there.
 
 ## Bounded browser fix dependencies
 
-The user subsequently requested that PR 48 retain the definitive shared fixes
-for its failed hosted browser run, with full final-head verification. These are
-explicitly reused dependencies of the audit PR, authored/reviewed with the CI
-and M3 owners; the independent engine contracts and fixtures above are unchanged.
-No full M3 migration or CI partitioning is included.
+Before main advanced, the user requested that PR 48 retain the definitive shared
+fixes for its failed hosted browser run, with full final-head verification.
+The bounded backports below were authored/reviewed with the CI and M3 owners;
+they did not include the full M3 migration or CI partitioning. The independent
+engine contracts and fixtures above are unchanged.
 
 - Source commit `d227ae9196d9c40dd310833909554a6fca717381` changes only
   `documentation-audit.mjs` and `documentation-faults.spec.mjs`. The search
@@ -274,6 +274,27 @@ No full M3 migration or CI partitioning is included.
   motivating 30 seconds' total reserve. Individual action/default assertion
   limits remain 15/30 seconds; connected completion remains bounded at 60 seconds.
 
+The later integration takes main
+`02adda647fc649f117a9216023da0a279778ae56`, including the M3/CI squash
+`3b12fe17050db40d7c47ac6ac441c57e28cb28f4` and the user-material squash
+`02adda647fc649f117a9216023da0a279778ae56`. Its production code, workflow,
+browser tests and canonical development guide are retained byte for byte.
+The two actual conflicts select main's development guide and connected test;
+the workflow also retains main's current documentation-job budget. The ToC
+keeps main's M3, reader and session entries alongside both audit guides.
+
+Current verification follows the [development guide](../development.md),
+[CI record](ci-reliability.md) and
+[M3 correction](installed-m3.md#hosted-chromium-correction): four root-test
+shards, three application shards covering all fourteen cases including M3,
+and all three documentation engines. Each application shard has an eight-minute
+suite budget; the local combined suite retains twelve minutes. The connected
+case has the subsequently justified 240-second total; its 60-second job waits,
+15/30-second action/assertion limits and all assertions remain. Documentation
+jobs retain fifteen minutes and five-minute test budgets. Zero retries and the
+complete test rosters remain required. The earlier unsharded limits above are
+historical dependency evidence, not the current CI configuration.
+
 Original hosted run [41300144495, attempt 1](https://github.com/OpenT1D/lab/actions/runs/41300144495)
 on `eb2284688b6976b9a9e708c71a9ee8bf9583708e` remains failed. Firefox passed
 388 cases and failed the search-target ordering assertion. Its retained trace
@@ -282,9 +303,9 @@ summary request, even though the target 404 was also detected. The old helper
 trusted an already achieved network-idle state. Chromium's connected case
 exhausted 150 seconds after restart and the 480-second suite left planned work
 unrun. A larger budget alone does not repair the visibility/completion defect
-or supply a pass. The new final head must run all thirteen application cases
-and the complete Chromium/Firefox/WebKit documentation matrix; targeted donor
-checks and an earlier clean local audit run do not replace it.
+or supply a pass. The integrated final head must run all fourteen current
+application cases and the complete Chromium/Firefox/WebKit documentation matrix;
+targeted donor checks and earlier clean audit/main runs do not replace it.
 
 ## Verification receipt and remaining gates
 
@@ -325,7 +346,8 @@ The standalone audit commit `eb2284688b6976b9a9e708c71a9ee8bf9583708e`
 passed all 1,867 root tests with 32 expected skips (13 locked C1/PyTorch and
 19 actual-Windows cases), style/navigation/citation and the strict HTML build,
 with a clean worktree before and after. The later browser dependency combination
-requires its own full-check receipt and final diff review.
+and current main integration each require their own full-check receipt and
+final diff review, as recorded in the PR handoff.
 Local results are not hosted CI. Agent review is technical review, not an
 independent human reproduction or biological assessment.
 

@@ -55,6 +55,9 @@ def inspect(task, inputs, target):
         "input_sha256": metadata["original_sha256"],
         "estimation_performed": False,
     }
+    if task == "m3-compare":
+        result["capture"] = store.read(target / "original/capture.json")
+        result["observation_bytes_verified"] = False
     if task in {"mmtt-sensitivity", "mmtt-sampling"}:
         result["observations"] = observations(
             {
@@ -89,10 +92,14 @@ def export(project, plan, output):
     descriptor, folder = project.plans[plan]
     task = descriptor["task"]
     store.require(
-        task in {"mmtt-sensitivity", "mmtt-sampling", "m4-study-installed"},
+        task in {"mmtt-sensitivity", "mmtt-sampling", "m4-study-installed", "m3-compare"},
         "Historical inputs are not editable through this interface",
     )
-    if task == "m4-study-installed":
+    if task == "m3-compare":
+        from .forecasting import materialize
+
+        result = materialize(folder, output)
+    elif task == "m4-study-installed":
         from .installed import example
 
         # Sources come from the trusted selected bundle, never archived Python.

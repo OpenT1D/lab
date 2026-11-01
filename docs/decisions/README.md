@@ -1,5 +1,7 @@
 # Decision records
 
+- [0091 — Shared M3 workbench](0091-m3-shared-workbench.md): preserve the native frozen comparison and causal readers through installed project services.
+
 - [0090 — Integrated native candidate](0090-integrated-native-candidate.md): qualify M4 and the connected synthetic study in an explicit internal candidate while preserving readers and runtime boundaries.
 
 - [0089 — Internal candidate and reader transition](0089-internal-candidate-reader-transition.md): exact two-task candidate and pinned comparison reader compatibility without rewriting evidence.
@@ -173,3 +175,5 @@ The M4 records were assigned numbers 0016–0028 when the parallel M3, LIT-002 a
 - [0002 — Reference reproduction before integration](0002-m0-reference-first.md): accepted M1 engine-integration boundary following native probes, with reproduction separated from comparison.
 
 - [0001 — Project foundation](0001-project-foundation.md): modular laboratory, repository structure, language, licensing and current tooling.
+
+- [0092 — Exact M3-era MMTT reader successor](0092-exact-m3-reader-successor.md).

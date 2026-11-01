@@ -9,6 +9,14 @@ document.** The [metadata snapshot](../../experiments/adapter_audit/runtime-righ
 is descriptive evidence, not an installer policy or executable admission file.
 Every authorization in it is false.
 
+The subsequent integration retains main
+`02adda647fc649f117a9216023da0a279778ae56`, including its M3/CI, exact reader
+qualification and formative-session materials. All 26 selected protected-file
+hashes still match the assessed checkout. Main's production code, workflow and
+browser budgets remain unchanged; exact integrated-head checks are recorded
+separately in the PR handoff. No earlier checkout's CI receipt qualifies this
+combined source automatically.
+
 The proposed order is LT1 first, on one declared macOS arm64 host, after the
 conditions below have been met. Historical simglucose remains excluded from
 fresh/public setup; prepare a separately identified patched successor before

@@ -43,6 +43,8 @@ def source_closure():
         metadata = routes.reader_identity(task)
         names.update(metadata["trusted_sources_sha256"])
         names.update(metadata["reader_static_dependencies_sha256"])
+        if task == "m3-compare":
+            continue
         if task == "mmtt-sampling":
             names.update(sampling.native.ANCESTRY_FILES)
             names.update(routes.runtime_paths(sampling.binding()))
@@ -85,6 +87,8 @@ def source_closure():
             "experiments/setup/contract.json",
             "experiments/shared_services/connected_protocol.json",
             "experiments/shared_services/reader_compatibility.json",
+            "experiments/shared_services/reader_compatibility_m3.json",
+            "experiments/shared_services/forecasting_context.py",
         }
     )
     return sorted(names)
@@ -97,12 +101,13 @@ def build(
     build_label="internal",
     mmtt_only=False,
     integrated_candidate=False,
+    m3_workbench=False,
 ):
     from experiments.durable_archives.storage import safe_path
     from scripts.build_windows_installer import source_inventory
 
-    if mmtt_only and integrated_candidate:
-        raise ValueError("Choose either the MMTT or integrated candidate")
+    if sum((mmtt_only, integrated_candidate, m3_workbench)) > 1:
+        raise ValueError("Choose either --mmtt-only, --integrated-candidate or --m3-workbench")
     if importlib.metadata.version("setuptools") != "84.2.1":
         raise ValueError("Build with the separately locked root tooling (setuptools 84.2.1)")
     source = source_inventory(ROOT, allow_dirty=allow_dirty)
@@ -136,7 +141,9 @@ def build(
                 "bytes": len(raw),
             }
     descriptor = {
-        "schema": "opent1d.installed-sdk/5"
+        "schema": "opent1d.installed-sdk/6"
+        if m3_workbench
+        else "opent1d.installed-sdk/5"
         if integrated_candidate
         else "opent1d.installed-sdk/4"
         if mmtt_only
@@ -146,7 +153,8 @@ def build(
         "files": files,
         "tasks": ["mmtt-sensitivity", "mmtt-sampling"]
         if mmtt_only
-        else ["mmtt-sensitivity", "m4-study-secure", "m4-study-installed", "mmtt-sampling"],
+        else ["mmtt-sensitivity", "m4-study-secure", "m4-study-installed", "mmtt-sampling"]
+        + (["m3-compare"] if m3_workbench else []),
         "native_execution": "unavailable-public-policy"
         if mmtt_only
         else "explicit-reviewed-attachment/1",
@@ -209,6 +217,9 @@ def main():
     candidate.add_argument(
         "--integrated-candidate", action="store_true", help="internal MMTT/M4/connected candidate"
     )
+    candidate.add_argument(
+        "--m3-workbench", action="store_true", help="explicit internal M3 SDK/workbench increment"
+    )
     args = parser.parse_args()
     print(
         json.dumps(
@@ -218,6 +229,7 @@ def main():
                 build_label=args.build_label,
                 mmtt_only=args.mmtt_only,
                 integrated_candidate=args.integrated_candidate,
+                m3_workbench=args.m3_workbench,
             ),
             sort_keys=True,
         )
