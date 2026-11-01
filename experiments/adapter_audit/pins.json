@@ -1,0 +1,10 @@
+{
+  "simglucose": {
+    "path": "experiments/m0/simglucose/uv.lock",
+    "sha256": "13d254dcebe8d1ab54c3140cdc07152d719a68477a1378d7fe77fc1568612aa9"
+  },
+  "lt1_cambridge": {
+    "path": "experiments/m0/lt1/package-lock.json",
+    "sha256": "44ad7ba062a7d67032d91fcc9e0fa2aa3910b3856dce76bee5ba32093c1a150e"
+  }
+}
