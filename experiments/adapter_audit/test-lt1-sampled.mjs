@@ -41,6 +41,19 @@ test('six ticks in thirty minutes, no terminal memory transition', () => {
   assert.equal(kernel.source, 25);
 });
 
+test('full reset state equals fresh construction, including failed initialization', () => {
+  const kernel = new SampledAudit1(1.2);
+  const fresh = new SampledAudit1(1.2);
+  assert.deepEqual(kernel, fresh);
+  kernel.update(0, sample(0, 0, 180));
+  kernel.update(5, sample(5, 5, 60));
+  kernel.reset();
+  assert.deepEqual(kernel, fresh);
+  assert.throws(() => kernel.update(0, sample(0, 5, 999)), /observation-clock/);
+  assert.deepEqual(kernel, fresh);
+  assert.equal(kernel.update(0, sample(0, 0, 120)).command_u_h, 1.2);
+});
+
 test('duplicate, reversed and missed ticks refuse before state changes', () => {
   const kernel = new SampledAudit1(1.2);
   kernel.update(0, sample(0, 0, 180));

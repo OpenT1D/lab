@@ -17,7 +17,7 @@ export class SampledAudit1 {
   }
   reset() {
     this.previous = 120; this.source = -1; this.next = 0;
-    this.callback = -1; this.rate = this.basal;
+    this.callback = -1; this.rate = this.basal; this.last = null;
   }
   update(minute, observation = null) {
     finite(minute);

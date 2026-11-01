@@ -235,3 +235,10 @@ The Node kernel suite uses the existing host tooling Node; it does not execute
 the downloaded 22.23.4 candidate. Exact revision/dirty state, actual outcomes,
 separate review findings and private log locations belong in the PR handoff.
 Local root checks are not hosted CI, native parity or independent human evidence.
+
+A subsequent critical PR review found that reset retained the old `last`
+observation object, although the next valid initial sample overwrote it. Reset
+now explicitly sets that field to null, giving the same complete state as fresh
+construction, including when the first observation is rejected. A full-state
+regression control detects the old behavior. No command formula, historical
+fixture, baseline or tolerance changes.
