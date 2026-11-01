@@ -1,0 +1,184 @@
+{
+  "schema": "opent1d.lt1-qualification-review/1",
+  "reviewed_on": "2026-11-01",
+  "base_pr": 53,
+  "authorizations": {
+    "setup": false,
+    "native_execution": false,
+    "distribution": false
+  },
+  "node": {
+    "version": "22.23.4",
+    "identified_source_commit": "27f213124280b4db4cd1e3dd42f6f8afd01ceff7",
+    "tag_signature_verified": false,
+    "artifact_openpgp_verified": false,
+    "cjs_module_lexer": {
+      "version": "2.2.0",
+      "osv_queries": 1,
+      "matches": 0,
+      "scope": "name/version only"
+    },
+    "build_provenance": {
+      "official_declared": "darwin-arm64: macOS13 arm64, Xcode16, minimum macOS11; BUILDING.md",
+      "not_established": [
+        "exact binary build receipt/toolchain patch/SDK identity",
+        "binary-to-source reproducibility",
+        "OS/framework advisory disposition",
+        "full vendor/source patch closure"
+      ]
+    },
+    "zlib_disposition": {
+      "CVE-2026-22184": {
+        "basis": "Node assessment PR435 merged; contrib/untgz excluded",
+        "status": "upstream non-applicability rationale identified"
+      },
+      "CVE-2026-27171": {
+        "basis": "Node assessment PR439 merged; CRC combine functions unexposed/unused by Node API; native addons excluded",
+        "status": "upstream bounded reachability rationale identified"
+      },
+      "CVE-2026-85091": {
+        "status": "unresolved",
+        "source_evidence": "Both gzwrite.c copies lack upstream failure resets. V8 build target includes gzwrite.c. No binary API reachability or exploit established."
+      }
+    }
+  },
+  "rights": {
+    "upstream_commit": "9a6092065bd821f88691cd8d03b0550acd665573",
+    "declared_license": "MIT",
+    "notice_condition": "Include copyright and permission notices in all copies or substantial portions of the Software; retain full disclaimer in preserved license.",
+    "ancestry_limits": "Cambridge source names Hovorka2004 and Andersen2014; no per-default source mapping or independent chain of title established. IdealCGM and StaticInsulinPump are generic source-defined devices, not separately loaded manufacturer tables.",
+    "source_defined_default_counts": {
+      "Cambridge": 17,
+      "IdealCGM": 1,
+      "StaticInsulinPump": 9
+    },
+    "operator_decision": null,
+    "reviewer_decision": null,
+    "output_policy": "Keep full settings, states and raw reports private until export review; this is project policy, not a universal MIT restriction on numeric outputs."
+  },
+  "setup_proposal": {
+    "identity": "proposed-frozen-data-only-stager/1",
+    "status": "not implemented or admitted",
+    "packages": 20,
+    "flat_targets": true,
+    "prefixes": {
+      "@types/node": "node/",
+      "other_packages": "package/"
+    },
+    "npm_or_corepack_required": false,
+    "scope": "Basic passive member inspection only; no extraction or code execution. Safe implementation, adverse archive controls, staged receipts and loader compatibility remain pending."
+  },
+  "host_fixture": {
+    "kind": "invented",
+    "host_scope": "one private named Darwin arm64 host",
+    "os": "26.5.2",
+    "runtime": {
+      "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+      "executable_sha256": "a395f264e5612a2819662ed3e37fd30d39ed61179b98e5f86c3c783a008d8623",
+      "sandbox_sha256": "8290e4be7387a0df83cd1559e86afd880464f269450573d012795761fe298f16",
+      "dyld_profile_sha256": "06215a5d32689aefe395c29710e182eb54ba22162f50df8b4842290f8a19bf1c"
+    },
+    "status": "passed",
+    "cases": {
+      "complete": {
+        "status": "passed",
+        "durable_rows": 3,
+        "boundary_groups": 1
+      },
+      "failure": {
+        "status": "passed",
+        "durable_rows": 3,
+        "boundary_groups": 2
+      },
+      "deadline": {
+        "status": "passed",
+        "durable_rows": 3,
+        "boundary_groups": 2
+      },
+      "cancel": {
+        "status": "passed",
+        "durable_rows": 3,
+        "boundary_groups": 2
+      }
+    },
+    "implementation_files": 141,
+    "implementation_inventory_sha256": "4831426c648de2e6bd13d7b41b3d7f21ebc3ce6bf86e09b35f140f307093dd28",
+    "private_receipt_sha256": "8d7795d762dcdf5691baae1684407f886acfb29bc0f7e323c9a83722b7aa91c7",
+    "native_qualification": false,
+    "observations": "Direct file-content read/write and loopback socket denial; explicit clean isolated startup; durable invented prefix; parent failure, deadline/cancel, live child ownership/cleanup and unrelated-process preservation. No arbitrary-code, native-loader, immutable-staging or project-store acceptance."
+  },
+  "sources": [
+    {
+      "name": "node-building",
+      "url": "https://raw.githubusercontent.com/nodejs/node/v22.23.4/BUILDING.md",
+      "bytes": 38338,
+      "sha256": "947d7b5e88529d7d7fed6c7872f12c7f38d2acf4b98427c1fbe7f968b2e989b0"
+    },
+    {
+      "name": "cjs-version",
+      "url": "https://raw.githubusercontent.com/nodejs/node/v22.23.4/src/cjs_module_lexer_version.h",
+      "bytes": 277,
+      "sha256": "1e3e6163db0b013cc519aef5f723fff79201b96f8e85212e2756bff284d435ee"
+    },
+    {
+      "name": "release-keys-readme",
+      "url": "https://raw.githubusercontent.com/nodejs/release-keys/main/README.md",
+      "bytes": 6069,
+      "sha256": "caee8c460eee4240f17e11290032b71ee1a5ba06fdbc106db4b77d097b5cca49"
+    },
+    {
+      "name": "node-tag-ref",
+      "url": "https://api.github.com/repos/nodejs/node/git/ref/tags/v22.23.4",
+      "bytes": 329,
+      "sha256": "57747735eba1343e7f028e485fcf1385136a9a65e4a8f24d77588459b0c369d8"
+    },
+    {
+      "name": "zlib-node-gzwrite",
+      "url": "https://raw.githubusercontent.com/nodejs/node/v22.23.4/deps/zlib/gzwrite.c",
+      "bytes": 19237,
+      "sha256": "469b1e58932ea11bdda2a153f6655f7b3c13254240fae157181b49ed1bc93b47"
+    },
+    {
+      "name": "zlib-v8-gzwrite",
+      "url": "https://raw.githubusercontent.com/nodejs/node/v22.23.4/deps/v8/third_party/zlib/gzwrite.c",
+      "bytes": 19237,
+      "sha256": "469b1e58932ea11bdda2a153f6655f7b3c13254240fae157181b49ed1bc93b47"
+    },
+    {
+      "name": "zlib-upstream-fix",
+      "url": "https://api.github.com/repos/madler/zlib/commits/df84af25dc1942490e1d1c899a07619152a46148",
+      "bytes": 4160,
+      "sha256": "0e0c16783bda758b8f94461c7644f9b2316d7201892247f2ef0db60c12bdd596"
+    },
+    {
+      "name": "zlib-upstream-issue",
+      "url": "https://api.github.com/repos/madler/zlib/issues/1310",
+      "bytes": 3392,
+      "sha256": "31b99a98d27a5b65dd9dc13396c200ea25b4f399675db6625b72e707a75b6e16"
+    },
+    {
+      "name": "node-vuln-pr439",
+      "url": "https://api.github.com/repos/nodejs/nodejs-dependency-vuln-assessments/pulls/439",
+      "bytes": 19935,
+      "sha256": "deb0148766bbb84bc3468308772c88ff3d918ebc393319a32a2eaeb26acf059e"
+    },
+    {
+      "name": "node-vuln-pr435",
+      "url": "https://api.github.com/repos/nodejs/nodejs-dependency-vuln-assessments/pulls/435",
+      "bytes": 19582,
+      "sha256": "fe0f5498efcccfe7aad8576558dfae0cb2133ee4dff6ac7e1a246f4148f3e2d9"
+    },
+    {
+      "name": "node-tag",
+      "url": "https://api.github.com/repos/nodejs/node/git/tags/f206f23d067e60ce0cc6506abb28fe5e2f2dc8c3",
+      "bytes": 1762,
+      "sha256": "d9af343eb054498eab7d689ba4484407319681dcd878d86ecd5a9c7db64c9a8c"
+    },
+    {
+      "name": "node-v8-build",
+      "url": "https://raw.githubusercontent.com/nodejs/node/v22.23.4/tools/v8_gypfiles/v8.gyp",
+      "bytes": 88788,
+      "sha256": "6a6ec4bccac3420879d60f8c979eca1dc0ecf188d534beb977102499c26a13e6"
+    }
+  ]
+}

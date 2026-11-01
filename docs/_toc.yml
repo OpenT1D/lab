@@ -80,6 +80,7 @@ subtrees:
       - file: docs/research/ot062-lt1-preparation
       - file: docs/research/ot062-lt1-harness
       - file: docs/research/ot062-lt1-native-worker
+      - file: docs/research/ot062-lt1-host-qualification
       - file: docs/shared-project-services
       - file: docs/research/ot061-064-minimal-services
       - file: docs/installed-sdk
