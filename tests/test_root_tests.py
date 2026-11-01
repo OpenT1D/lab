@@ -159,6 +159,45 @@ class RootPartitionTests(unittest.TestCase):
         self.assertFalse(receipt["completed"])
         self.assertFalse(receipt["passed"])
 
+    def test_optional_class_and_module_fixture_skips_are_explicit_complete_accounting(self):
+        for fixture in ("class", "module"):
+            module = types.ModuleType("test_root_optional_fixture")
+
+            class Optional(unittest.TestCase):
+                def test_a(self):
+                    self.fail("Skipped optional fixture must not execute")
+
+                def test_b(self):
+                    self.fail("Skipped optional fixture must not execute")
+
+            def unavailable():
+                raise unittest.SkipTest("CONTROL OPTIONAL TOOLING")
+
+            Optional.__module__ = module.__name__
+            if fixture == "class":
+                Optional.setUpClass = staticmethod(unavailable)
+            else:
+                module.setUpModule = unavailable
+            suite = unittest.defaultTestLoader.loadTestsFromTestCase(Optional)
+            with tempfile.TemporaryDirectory() as temporary:
+                output = Path(temporary) / "receipt.json"
+                with (
+                    self.subTest(fixture=fixture),
+                    patch.dict(root_tests.sys.modules, {module.__name__: module}),
+                    patch.object(root_tests, "discover", return_value=suite),
+                ):
+                    self.assertEqual(root_tests.main(["--output", str(output)]), 0)
+                receipt = json.loads(output.read_text())
+            self.assertTrue(receipt["passed"])
+            self.assertTrue(receipt["completed"])
+            self.assertEqual(receipt["tests_run"], 0)
+            self.assertEqual(len(receipt["fixture_skipped"]), 2)
+            self.assertEqual(len(receipt["skipped"]), 1)
+            self.assertEqual(
+                {row["reason"] for row in receipt["fixture_skipped"]},
+                {"CONTROL OPTIONAL TOOLING"},
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,5 +1,7 @@
 # Decision records
 
+- [0091 — Shared M3 workbench](0091-m3-shared-workbench.md): preserve the native frozen comparison and causal readers through installed project services.
+
 - [0090 — Integrated native candidate](0090-integrated-native-candidate.md): qualify M4 and the connected synthetic study in an explicit internal candidate while preserving readers and runtime boundaries.
 
 - [0089 — Internal candidate and reader transition](0089-internal-candidate-reader-transition.md): exact two-task candidate and pinned comparison reader compatibility without rewriting evidence.

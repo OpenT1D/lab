@@ -12,7 +12,7 @@ from ._gui_drafts import Drafts
 from ._gui_files import Lease, decode, encoded, outside_projects, path, read, require, sha256, write
 from ._gui_inputs import materialize, texts
 
-TASKS = {"mmtt-sensitivity", "mmtt-sampling", "m4-study-installed"}
+TASKS = {"mmtt-sensitivity", "mmtt-sampling", "m4-study-installed", "m3-compare"}
 REPORTS = {
     "report.json": "application/json",
     "report.md": "text/markdown",
@@ -539,7 +539,16 @@ class Controller:
             )
             inputs, inspected = self.inspect_draft(draft)
             require(inspected == stamp["result"], "Concept inputs changed after validation")
-            result = project.freeze(draft["task"], inputs, parent=draft["parent"])
+            result = project.freeze(
+                draft["task"],
+                inputs,
+                parent=draft["parent"],
+                **(
+                    {"expected_input_sha256": stamp["result"]["input_sha256"]}
+                    if draft["task"] == "m3-compare"
+                    else {}
+                ),
+            )
             with self.mutex:
                 self.catalog["projects"][handle]["labels"][result["plan"]] = args["name"].strip()
                 write(self.catalog_file, self.catalog)

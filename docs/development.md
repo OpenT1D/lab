@@ -53,6 +53,7 @@ Ownership below means the implementation boundary responsible for a behavior. Re
 | File and process primitives | `experiments/platform_files.py`, `platform_process.py`, `experiments/gui/windows_process.py` | `test_regular_file_snapshots.py`, `test_windows_primitives.py`: stable reads and platform boundaries. `test_windows_launch.py`, `test_windows_source_admission.py`: current/base interpreter selection and source-only MMTT guards. Process callers also need their lifecycle tests, for example `test_local_campaign_process.py`, `test_maintained_campaign_process.py`, `test_task_setup.py`; host-specific cases can skip. |
 | Campaigns, catalogue and durable archives | `experiments/campaigns/`, `maintained_campaigns/`, `catalogue/`, `durable_archives/`, `historical_readers/` | `test_local_campaigns.py`, `test_maintained_campaigns.py`, `test_experiment_catalogue.py`, `test_durable_archives.py`, `test_historical_readers.py`: scheduling, eligibility, reconstruction and reader compatibility, with synthetic/fixture inputs. |
 | M0/M1/M2 and controller work | `experiments/m0/`, `m1/`, `m2/`, `p1_external/`, `c1/` | Root `test_m1_contracts.py`, `test_m1_artifacts.py`, `test_m2.py`, `test_p1_external.py` and `test_c1_*.py` cover their declared contracts/fixtures. Separately selected native tests and numerical runs in the task guides verify actual engines. |
+| Shared installed M3 comparison | `experiments/shared_services/forecasting.py`, `forecasting_context.py`, descriptor 6; [guide](installed-m3.md) | `test_m3_services.py`: frozen resources, passive intake, long failed prefixes, mismatches, unknown readers and recovery. `test_installed_m3.py`: actual noneditable direct/installed parity, retry/derivation, missing/nonfinite failure, cancellation and physical-removal relocation. `tests/browser/m3-workbench.spec.mjs`: actual installed correction/freeze/run/download/reopen/reflow. Original M3 readers and separate estimator verification remain authoritative. |
 | M3 forecasting | `experiments/m3/` | Root `test_m3_artifacts.py`, `test_m3_researcher_study.py`, `test_m3_comparison_study.py` and source-specific families cover declared intake, causal/artifact and report contracts. Native estimator execution uses the separate M3 guide/environment. |
 | M4 secretion and kinetic studies | `experiments/m4/` | Root `test_m4_researcher_workflow.py`, `test_m4_secure_study.py`, `test_m4_comparison_run.py` and study-specific families cover bounded configuration, execution/report fixtures and compatibility. Task-specific `test_numerical.py` files select their documented native environment. |
 | M5 prognostic tasks | `experiments/m5/` | `test_m5_researcher_workflow.py`, `test_m5_native_rehearsal.py`, `test_m5_release_preflight.py`: frozen supplied-model task, synthetic rehearsal and conditional preflight. These do not verify human predictive validity. |
@@ -181,10 +182,16 @@ dependencies and browser download share a 300-second budget and log separate
 phases. The ephemeral hosted browser runners select the official Ubuntu archive
 for the exact Azure mirror URI and retain authenticated, fail-closed APT setup;
 see the [bounded CI record](research/ci-reliability.md#selected-implementation). The
-suite uses Playwright 1.64.1, one Chromium worker, no retries and 13 synthetic
+suite uses Playwright 1.64.1, one Chromium worker, no retries and 14 synthetic
 checkout/installed task, failure, concept and reopen cases. CI partitions those
-cases into three isolated jobs, retaining one worker per job and zero retries. Synthetic screenshots, traces, logs and failure
-workspaces are under `output/playwright/`. The separate required browser matrix runs the
+cases into three isolated jobs, retaining one worker per job, zero retries and
+an eight-minute budget per shard. The default local combined suite retains the
+M3 increment's twelve-minute ceiling; the separate documentation engines keep
+fifteen-minute jobs and five-minute test budgets. The
+[M3 integration record](research/installed-m3.md#hosted-chromium-correction)
+records the actual pending-action/synchronization defect and its regression.
+Synthetic screenshots, traces, logs and failure workspaces are under
+`output/playwright/`. The separate required browser matrix runs the
 [documentation browser checks](documentation-publication.md#browser-regression-checks)
 in a separate output directory, with a five-minute CI budget for each engine.
 All three documentation engines must pass the required gate. The guide includes

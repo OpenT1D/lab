@@ -29,8 +29,10 @@ about 108 seconds on Darwin arm64 with the same Python/Node/Playwright versions.
 Its largest waits were asynchronous UI/job completion: about 15 seconds for
 report withdrawal, 15 for the failed stage and 13 for the frozen study. Fixture
 setup took about 9 seconds. A selector disabled while reopening later became
-enabled. This evidence identifies total budget pressure; it does not establish
-a permanently stuck selector or a product defect. An interrupted profiling
+enabled. This evidence identifies total budget pressure; this trace alone does not establish
+a permanently stuck selector or a product defect. The later M3 trace exposed
+a separate real pending-request visibility/synchronization defect, preserved
+with its regression in the [integrated M3 source](installed-m3.md#hosted-chromium-correction). An interrupted profiling
 probe identified repeated source-closure traversal as a major cost. It is
 neither a passing suite nor an uninstrumented performance comparison.
 
@@ -60,8 +62,9 @@ their case count; weights are never an allowlist. The initial estimated loads
 are approximately 596 seconds per shard. They are estimates, not new hosted
 measurements. Discovery/import errors fail before selection; empty or invalid
 shards fail. Tests verify the full multiset union, including repeated IDs, and
-fixture lifecycle. A prematurely stopped runner cannot pass with selected
-cases unrun. Receipts replace old evidence before discovery and record the
+fixture lifecycle. Class/module fixture skips explicitly explain their planned cases without
+changing unittest's original skip outcome. A prematurely stopped runner cannot
+pass with selected cases unrun. Receipts replace old evidence before discovery and record the
 source, selected IDs, digest, counts, outcomes, durations and skip reasons.
 
 The default local command still runs style, all root tests and documentation.
@@ -73,8 +76,8 @@ cancelled family cannot pass.
 
 Run application Chromium cases in three isolated Playwright shards with one
 worker per job and zero retries. The CI configuration enables case sharding;
-each case retains a fresh application, installation and workspace. The default
-local selection still contains all 13 cases. Documentation retains separate
+each case retains a fresh application, installation and workspace. The integrated
+local selection contains all 13 original cases plus the M3 case. Documentation retains separate
 Chromium/Firefox/WebKit jobs and their complete page/fault checks. Builds and
 installations remain uncached and repeated across those isolated jobs: avoiding
 an extra cross-job artifact trust/cache boundary is preferable for this bounded
@@ -82,8 +85,10 @@ change. This spends additional runner/setup time to reduce the critical path;
 no reduced total CPU consumption is claimed.
 
 The connected case receives a bounded 180-second total reserve after the
-134.7-second pass and 150-second expiry on identical source. The 15-second action,
-30-second assertion and 480-second suite limits remain. Sharding prevents this
+134.7-second pass and 150-second expiry on identical source. The 15-second action and default 30-second assertion limits remain. The M3
+completion helper explicitly retains its bounded 60-second job wait and the
+changed-study assertion. Each CI shard keeps a 480-second suite ceiling; the
+local combined 14-case suite retains M3's 720-second ceiling. Sharding prevents this
 long case from consuming the later cases' shared global budget. This budget
 change does not speed up reconstruction or qualify slow native work.
 
@@ -134,5 +139,28 @@ review and exact final local/hosted receipts. Compare Linux run durations with
 Linux durations; report the Mac full check separately. A successful local check
 is not a hosted result, and a single faster hosted run is not a general speedup
 claim. Native numerical qualification, intended-user acceptance and biological
-validity remain separate. The parallel M3 integration must be reverified on the
-combined source; this branch's results cannot qualify that later tree.
+validity remain separate. The combined source must be checked explicitly; previous standalone receipts
+do not qualify it, and subsequent M3 edits require new verification.
+
+## Exact M3 integration
+
+At the user's explicit coordination request this CI branch incorporates the
+repaired M3 predecessor `e502d6427d0e4648457617f35532039c0c78e5a5` (PR 46).
+Its production SDK/CLI, adapter, readers, workbench and pending-action fix remain
+owned by that predecessor. The staged CI diff is reviewed against that exact
+base. Only `docs/development.md` conflicted textually; resolution retains both
+M3 guidance and the bounded CI orchestration. Automatic merges of the workflow,
+ToC and connected case are also inspected explicitly. The connected case keeps
+M3's delayed-completion/changed-study assertions and this increment's measured
+180-second total reserve. Root and browser rosters include every new M3 case;
+untimed root modules are selected with the normal fallback weight.
+
+The M3 predecessor's 20-minute combined Chromium job becomes separate
+15-minute documentation and application jobs, with an unchanged five-minute
+documentation budget and eight-minute per-shard application budget. The
+12-minute local combined-suite budget remains. Final acceptance uses the
+integrated commit's full local check, actual browser cases, hosted source/run/
+attempt receipts and separate critical review, with one full-check owner.
+The associated CI pull request is stacked on the M3 branch; neither PR is merged
+by this workflow. No previous native M4 or M3 result is relabelled as evidence
+for a new exact installed artifact.

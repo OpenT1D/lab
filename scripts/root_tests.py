@@ -6,6 +6,7 @@ import json
 import subprocess
 import sys
 import unittest
+from collections import Counter
 from pathlib import Path
 from time import perf_counter
 
@@ -57,6 +58,37 @@ def identities(suite):
 
 def digest(names):
     return hashlib.sha256(("\n".join(names) + "\n").encode()).hexdigest()
+
+
+class AccountingResult(unittest.TextTestResult):
+    """Explain fixture skips without treating unexplained unrun cases as passes."""
+
+    def __init__(self, *args, selected, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.started_ids = []
+        self.fixture_skipped = []
+        self.fixture_cases = {}
+        for case in selected:
+            kind = case.__class__
+            for fixture in (
+                f"setUpClass ({kind.__module__}.{kind.__qualname__})",
+                f"setUpModule ({kind.__module__})",
+            ):
+                self.fixture_cases.setdefault(fixture, []).append(case.id())
+
+    def startTest(self, test):
+        self.started_ids.append(test.id())
+        super().startTest(test)
+
+    def addSkip(self, test, reason):
+        super().addSkip(test, reason)
+        remaining = Counter(self.fixture_cases.get(test.id(), []))
+        remaining.subtract(self.started_ids)
+        remaining.subtract(row["test"] for row in self.fixture_skipped)
+        for name, count in remaining.items():
+            self.fixture_skipped.extend(
+                {"test": name, "reason": reason, "fixture": test.id()} for _ in range(max(0, count))
+            )
 
 
 def main(argv=None):
@@ -120,8 +152,18 @@ def main(argv=None):
             return 0
         receipt["phase"] = "tests"
         write_receipt()
-        result = unittest.TextTestRunner(verbosity=2, durations=25).run(selected)
-        complete = result.testsRun == len(selected_ids)
+        selected_cases = list(cases(selected))
+        result = unittest.TextTestRunner(
+            verbosity=2,
+            durations=25,
+            resultclass=lambda *args, **kwargs: AccountingResult(
+                *args, selected=selected_cases, **kwargs
+            ),
+        ).run(selected)
+        accounted = Counter(result.started_ids) + Counter(
+            row["test"] for row in result.fixture_skipped
+        )
+        complete = accounted == Counter(selected_ids)
         passed = complete and result.wasSuccessful()
         receipt.update(
             completed=complete,
@@ -129,6 +171,7 @@ def main(argv=None):
             passed=passed,
             tests_run=result.testsRun,
             skipped=[{"test": case.id(), "reason": reason} for case, reason in result.skipped],
+            fixture_skipped=result.fixture_skipped,
             failures=[case.id() for case, _ in result.failures],
             errors=[case.id() for case, _ in result.errors],
             expected_failures=[case.id() for case, _ in result.expectedFailures],

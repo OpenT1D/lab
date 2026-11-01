@@ -85,7 +85,7 @@ projects. Every generated documentation page is still checked in all three.
 Each CI engine uses four workers, no retries and a five-minute documentation
 budget. The matrix uses `fail-fast: false`, so one failing engine does not cancel
 the others' diagnostics. All three results must succeed for the required gate.
-The 13 application cases run in a separate three-shard Chromium family. Local `test:docs`
+The 14 application cases run in a separate three-shard Chromium family. Local `test:docs`
 runs all three engines within a fifteen-minute total budget; select one with
 `npm --prefix tests/browser run test:docs -- --project firefox --global-timeout=300000`.
 The installer keeps Chromium as its default; explicit browser names select the

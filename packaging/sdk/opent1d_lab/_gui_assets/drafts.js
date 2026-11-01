@@ -4,6 +4,7 @@ globalThis.workbench = (() => {
     "mmtt-sensitivity": ["package.json", "observations.csv", "settings.json"],
     "mmtt-sampling": ["package.json", "observations.csv", "settings.json", "design.json", "development-package.json", "development-observations.csv"],
     "m4-study-installed": ["config.json"],
+    "m3-compare": ["config.json"],
   };
   let current = null, inputs = {}, invalidFiles = {}, fileEdits = {}, dirty = false, conflict = false, saving = false, saveError = null, timer = null, generation = 0, editEpoch = 0, pickerSelection = null;
   const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
@@ -97,6 +98,10 @@ globalThis.workbench = (() => {
     const target = $("assumptions"); target.replaceChildren();
     if (!current) return;
     try {
+      if (current.task === "m3-compare") {
+        const box = element("fieldset"); box.append(element("legend", "Frozen synthetic CGM predictors"));
+        box.append(element("p", "Edit the comparison JSON below. Choose absolute local synthetic observation and reviewed predictor declaration paths. Validation captures identities without importing predictors. Execution runs trusted local Python with your permissions; process isolation is not a sandbox. Six exact five-minute CGM values, 30-minute horizon, mg/dL; no fitting or future meal/insulin features.", "muted")); target.append(box); return;
+      }
       if (current.task === "m4-study-installed") {
         const value = json("config.json"), box = element("fieldset"); box.append(element("legend", "Selected synthetic M4 study"));
         for (const name of ["timeout_seconds", "source_timeout_seconds"]) control(box, name.replaceAll("_", " "), value[name], v => changeJSON("config.json", s => { s[name] = v; }), {step: "1"});

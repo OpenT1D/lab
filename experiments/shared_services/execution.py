@@ -236,6 +236,10 @@ def execute(store, plan_id, *, retry_of=None, timeout=3600, cancel=None, backend
     )
     argv = receipt = None
     try:
+        if descriptor["task"] == "m3-compare":
+            from .forecasting import materialize
+
+            args.config = Path(materialize(plan, work / "invocation")["inputs"]["config.json"])
         admission = (
             check(
                 selected_task(descriptor["task"], backend),

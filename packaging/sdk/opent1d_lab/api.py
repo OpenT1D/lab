@@ -66,12 +66,17 @@ class Project:
         """Export exact original inputs for an explicitly derived editable study."""
         return self._call("export-inputs", plan=plan, output=_path(output))
 
-    def freeze(self, task, inputs, *, parent=None):
+    def freeze(self, task, inputs, *, parent=None, expected_input_sha256=None):
         return self._call(
             "freeze",
             task=task,
             inputs={name: _path(path) for name, path in inputs.items()},
             parent=parent,
+            **(
+                {"expected_input_sha256": expected_input_sha256}
+                if expected_input_sha256 is not None
+                else {}
+            ),
         )
 
     def check(self, plan, *, runtime_attachment=None):
