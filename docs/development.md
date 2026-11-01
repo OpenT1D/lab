@@ -53,6 +53,7 @@ Ownership below means the implementation boundary responsible for a behavior. Re
 | File and process primitives | `experiments/platform_files.py`, `platform_process.py`, `experiments/gui/windows_process.py` | `test_regular_file_snapshots.py`, `test_windows_primitives.py`: stable reads and platform boundaries. `test_windows_launch.py`, `test_windows_source_admission.py`: current/base interpreter selection and source-only MMTT guards. Process callers also need their lifecycle tests, for example `test_local_campaign_process.py`, `test_maintained_campaign_process.py`, `test_task_setup.py`; host-specific cases can skip. |
 | Campaigns, catalogue and durable archives | `experiments/campaigns/`, `maintained_campaigns/`, `catalogue/`, `durable_archives/`, `historical_readers/` | `test_local_campaigns.py`, `test_maintained_campaigns.py`, `test_experiment_catalogue.py`, `test_durable_archives.py`, `test_historical_readers.py`: scheduling, eligibility, reconstruction and reader compatibility, with synthetic/fixture inputs. |
 | M0/M1/M2 and controller work | `experiments/m0/`, `m1/`, `m2/`, `p1_external/`, `c1/` | Root `test_m1_contracts.py`, `test_m1_artifacts.py`, `test_m2.py`, `test_p1_external.py` and `test_c1_*.py` cover their declared contracts/fixtures. Separately selected native tests and numerical runs in the task guides verify actual engines. |
+| Shared installed M3 comparison | `experiments/shared_services/forecasting.py`, `forecasting_context.py`, descriptor 6; [guide](installed-m3.md) | `test_m3_services.py`: frozen resources, passive intake, long failed prefixes, mismatches, unknown readers and recovery. `test_installed_m3.py`: actual noneditable direct/installed parity, retry/derivation, missing/nonfinite failure, cancellation and physical-removal relocation. `tests/browser/m3-workbench.spec.mjs`: actual installed correction/freeze/run/download/reopen/reflow. Original M3 readers and separate estimator verification remain authoritative. |
 | M3 forecasting | `experiments/m3/` | Root `test_m3_artifacts.py`, `test_m3_researcher_study.py`, `test_m3_comparison_study.py` and source-specific families cover declared intake, causal/artifact and report contracts. Native estimator execution uses the separate M3 guide/environment. |
 | M4 secretion and kinetic studies | `experiments/m4/` | Root `test_m4_researcher_workflow.py`, `test_m4_secure_study.py`, `test_m4_comparison_run.py` and study-specific families cover bounded configuration, execution/report fixtures and compatibility. Task-specific `test_numerical.py` files select their documented native environment. |
 | M5 prognostic tasks | `experiments/m5/` | `test_m5_researcher_workflow.py`, `test_m5_native_rehearsal.py`, `test_m5_release_preflight.py`: frozen supplied-model task, synthetic rehearsal and conditional preflight. These do not verify human predictive validity. |
@@ -164,8 +165,13 @@ npm --prefix tests/browser test
 
 Set `PLAYWRIGHT_BROWSERS_PATH` to an absolute temporary browser-cache directory
 first. Linux hosts can add `-- --with-deps` to the browser-install command. The
-suite uses Playwright 1.64.1, one Chromium worker, no retries and eight synthetic
-checkout/installed task, failure, concept and reopen flows. Synthetic screenshots, traces, logs and failure
+suite uses Playwright 1.64.1, one Chromium worker, no retries and fourteen synthetic
+checkout/installed task, failure, concept and reopen flows. Its twelve-minute
+suite ceiling and twenty-minute Chromium job retain the separate five-minute
+documentation checks and cold setup; the [M3 integration record](research/installed-m3.md#hosted-chromium-correction)
+records the actual failed eight-minute attempt and pending-action correction.
+The Firefox/WebKit documentation-only jobs retain fifteen minutes.
+Synthetic screenshots, traces, logs and failure
 workspaces are under `output/playwright/`. The same required job also runs the
 [documentation browser checks](documentation-publication.md#browser-regression-checks)
 in a separate output directory, with a five-minute CI budget for each engine.

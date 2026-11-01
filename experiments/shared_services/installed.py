@@ -67,7 +67,7 @@ class Backend:
             "metadata_valid": True,
             "metadata": details,
             "observation_path_issues": issues,
-            "runtimes_ready": task.id in {"mmtt-sensitivity", "mmtt-sampling"},
+            "runtimes_ready": task.id in {"mmtt-sensitivity", "mmtt-sampling", "m3-compare"},
             "coordinator_runtime": runtime_identity(),
             "native_policy": "unavailable-public-policy"
             if task.id == "m4-study-secure"
@@ -96,7 +96,8 @@ class Backend:
                 record=recorded,
             )
         store.require(
-            operation == "reconstruct" or task.id in {"mmtt-sensitivity", "mmtt-sampling"},
+            operation == "reconstruct"
+            or task.id in {"mmtt-sensitivity", "mmtt-sampling", "m3-compare"},
             "Native runtime not admitted by installed policy",
         )
         command = [
@@ -112,8 +113,13 @@ class Backend:
         if operation == "run":
             command += ["--config", str(args.config), "--output", str(args.output)]
         else:
-            command += ["--archive", str(args.archive), "--output", str(args.output)]
-            if args.allow_failed:
+            command += [
+                "--study" if task.id == "m3-compare" else "--archive",
+                str(args.archive),
+                "--output",
+                str(args.output),
+            ]
+            if args.allow_failed and task.id != "m3-compare":
                 command.append("--allow-failed")
         return command
 
@@ -169,6 +175,16 @@ def workspace_path(value, bootstrap, *, fresh=False):
 
 def example(task, output, case):
     store.require(task in routes.TASKS, "Unselected installed task")
+    if task == "m3-compare":
+        from experiments.m3.comparison.fixtures import fixture
+
+        store.require(case == "complete", "Unselected M3 example")
+        fixture(output)
+        return {
+            "task": task,
+            "inputs": {"config.json": str(output / "comparison.json")},
+            "scientific_evidence": "synthetic-only",
+        }
     if task == "mmtt-sampling":
         from experiments.mmtt_sampling.fixtures import CASES, export_example
         from experiments.observation_analysis.intake import import_observations
@@ -252,8 +268,13 @@ def attempt_result(project, attempt):
 def dispatch(request, bootstrap, artifact, *, cancel=None):
     store.require(isinstance(request, dict), "Structured installed request required")
     action = request.get("action")
+    optional = (
+        {"expected_input_sha256"}
+        if action == "freeze" and "expected_input_sha256" in request
+        else set()
+    )
     store.require(
-        action in FIELDS and set(request) == {"action", *FIELDS[action]},
+        action in FIELDS and set(request) == {"action", *FIELDS[action], *optional},
         "Unsupported installed request fields",
     )
     if action in {"example", "validate", "inspect", "freeze"}:
@@ -491,6 +512,7 @@ def dispatch(request, bootstrap, artifact, *, cancel=None):
                 request["inputs"],
                 parent=request["parent"],
                 application={"identity": backend.application, "artifact": artifact},
+                expected_input_sha256=request.get("expected_input_sha256"),
             )
             return {"plan": identity, "task": request["task"]}
         if action == "check":
@@ -498,6 +520,14 @@ def dispatch(request, bootstrap, artifact, *, cancel=None):
 
             descriptor, folder = project.plans[request["plan"]]
             routes.validate_freeze(folder, descriptor, current=True)
+            if descriptor["task"] == "m3-compare":
+                from .forecasting import materialize
+
+                with tempfile.TemporaryDirectory(prefix="m3-check-") as temporary:
+                    inputs = materialize(folder, Path(temporary).resolve() / "invocation")["inputs"]
+                    return backend.check(
+                        backend.task("m3-compare"), SimpleNamespace(config=inputs["config.json"])
+                    )
             return backend.check(
                 backend.task(descriptor["task"]),
                 SimpleNamespace(

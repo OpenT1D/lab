@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { test, expect } from './installed-fixtures.mjs';
 
-async function finished(page) { await expect(page.locator('#job')).toBeHidden(); }
+async function finished(page) { await expect(page.locator('#job')).toBeHidden({ timeout: 60_000 }); }
 async function reportJSON(page) {
   const pending = page.waitForEvent('download');
   await page.locator('[data-download="report.json"]').click();
@@ -47,6 +47,7 @@ test('connected study: prospective stages, absent native admission, fixed failur
   await page.locator('#connected-name').fill('Missing observation control');
   await page.locator('#connected-case').selectOption('missing-evaluation');
   await page.locator('#connected-freeze').click(); await finished(page);
+  await expect(page.locator('#connected-select')).not.toHaveValue(study);
   await expect(page.locator('#saved-report')).toBeHidden();
   await page.locator('#connected-select').selectOption(study);
   await page.locator('#connected-open').click(); await finished(page);
