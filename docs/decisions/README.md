@@ -177,3 +177,4 @@ The M4 records were assigned numbers 0016–0028 when the parallel M3, LIT-002 a
 - [0001 — Project foundation](0001-project-foundation.md): modular laboratory, repository structure, language, licensing and current tooling.
 
 - [0092 — Exact M3-era MMTT reader successor](0092-exact-m3-reader-successor.md).
+- [0093 — LT1 sampled preparation](0093-lt1-sampled-preparation.md): separate kernel/fixture controls from native admission.
