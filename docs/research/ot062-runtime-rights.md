@@ -28,7 +28,7 @@ parameter CSV or native result was downloaded. Source retrieval and OSV queries
 are network reads; no native setup or experiment was run.
 
 The snapshot binds package versions, registry metadata hashes, upstream notices,
-source revisions and advisory ranges. It protects 26 files: all 19 tracked
+source revisions and advisory ranges. It protects 26 files: 19 selected tracked
 locks/baselines plus selected manifests, policies and audit fixtures. Raw
 responses, archives and inspection logs remain under ignored
 `results/adapter-audit/runtime-rights-20261101/`. Their public URLs and SHA-256
