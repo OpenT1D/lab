@@ -91,9 +91,10 @@ function render() {
   const chosen = project();
   $("welcome").classList.toggle("hidden", !!chosen); $("project-view").classList.toggle("hidden", !chosen);
   const active = data.jobs.find(job => job.id === data.active);
-  $("job").classList.toggle("hidden", !active && !data.closing);
+  $("job").classList.toggle("hidden", !pending && !active && !data.closing);
   if (active) { $("job-title").textContent = active.cancel_requested ? "Stop requested" : "Action in progress"; $("job-detail").textContent = `${active.phase} · ${active.elapsed_seconds}s elapsed. Native phase progress is not estimated.`; }
   else if (data.closing) { $("job-title").textContent = "Server stopping"; $("job-detail").textContent = "Waiting for the SDK action and its process cleanup. Keep the terminal open."; }
+  else if (pending) { $("job-title").textContent = "Action in progress"; $("job-detail").textContent = "Waiting for the server response and final display update."; }
   $("cancel-run").disabled = !active?.cancelable || active.cancel_requested;
   $("cancel-run").classList.toggle("hidden", !active?.cancelable);
   for (const button of document.querySelectorAll("form button, #refresh-project, #inspect-plan, #check-plan, #run-plan, #clear-runtime")) button.disabled = busy;

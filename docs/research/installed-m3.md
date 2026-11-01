@@ -65,6 +65,35 @@ temporary test logs. The first browser invocation failed before test execution
 because the macOS sandbox denied Chromium's Mach-port registration; an explicit
 process-authorized invocation supplies the actual browser evidence.
 
+### Hosted Chromium correction
+
+Run `41299476858`, attempt 1 on clean `b7bbe98`, passed the M3 flow in
+50.6 seconds, but failed the existing connected-study flow. The retained trace
+showed its completion helper passing approximately 17 ms after the second
+freeze click while the action was still pending; the next study-open request
+followed about 29.95 seconds after freeze. The job panel counted server-active
+work but omitted the pending client request. This could falsely present idle
+status and let the test inspect the previous report before the new freeze
+finished. Pending actions now keep the progress panel visible until the final
+display update, with cancellation still limited to an actual cancellable run.
+A controlled delayed-response test fails on the old visibility assertion and
+passes after the fix, including an idle poll and both success/refusal cleanup.
+The connected helper now waits up to 60 seconds within its existing 150-second
+test budget and also requires a changed selected study. No report assertion was
+removed.
+
+The same hosted attempt reached the 480-second whole-suite deadline after ten
+passes, one failure and three unrun cases. The expanded fourteen-flow family
+now has a 720-second suite ceiling and a twenty-minute Chromium job ceiling, allowing
+the existing separate five-minute documentation check and cold setup. Root
+keeps forty minutes; individual test budgets, one worker, zero retries, all
+families and numerical criteria remain unchanged. Firefox/WebKit jobs retain
+fifteen minutes. The failed attempt and the
+subsequent actual attempt are reported separately in the PR; a larger configured
+budget is not itself a passing run. The owner's in-progress local `b7bbe98`
+full check was explicitly interrupted (exit 130) before editing these files;
+it supplies no full-suite pass for the final revision.
+
 The existing researcher verification was run with the separately locked M3
 estimator. For both the invented trend and genuine synthetic donor Ridge, it
 checked 1,550 predictions and 1,516 paired targets across two planned people,

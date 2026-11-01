@@ -165,8 +165,13 @@ npm --prefix tests/browser test
 
 Set `PLAYWRIGHT_BROWSERS_PATH` to an absolute temporary browser-cache directory
 first. Linux hosts can add `-- --with-deps` to the browser-install command. The
-suite uses Playwright 1.64.1, one Chromium worker, no retries and eight synthetic
-checkout/installed task, failure, concept and reopen flows. Synthetic screenshots, traces, logs and failure
+suite uses Playwright 1.64.1, one Chromium worker, no retries and fourteen synthetic
+checkout/installed task, failure, concept and reopen flows. Its twelve-minute
+suite ceiling and twenty-minute Chromium job retain the separate five-minute
+documentation checks and cold setup; the [M3 integration record](research/installed-m3.md#hosted-chromium-correction)
+records the actual failed eight-minute attempt and pending-action correction.
+The Firefox/WebKit documentation-only jobs retain fifteen minutes.
+Synthetic screenshots, traces, logs and failure
 workspaces are under `output/playwright/`. The same required job also runs the
 [documentation browser checks](documentation-publication.md#browser-regression-checks)
 in a separate output directory, with a five-minute CI budget for each engine.
