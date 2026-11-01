@@ -75,6 +75,7 @@ subtrees:
       - file: docs/research/ot058-installer-verification
       - file: docs/shared-core-contracts
       - file: docs/research/ot059-contract-extraction
+      - file: docs/research/ot062-adapter-audit
       - file: docs/shared-project-services
       - file: docs/research/ot061-064-minimal-services
       - file: docs/installed-sdk
