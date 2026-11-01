@@ -245,6 +245,47 @@ solver conformance. C09 requires sampled duplicates to fail; an RHS must tolerat
 repeated/stage-reordered evaluation of identical arguments. Preserve the native
 solver as the only integrator and never mutate sampled controller state there.
 
+## Bounded browser fix dependencies
+
+The user subsequently requested that PR 48 retain the definitive shared fixes
+for its failed hosted browser run, with full final-head verification. These are
+explicitly reused dependencies of the audit PR, authored/reviewed with the CI
+and M3 owners; the independent engine contracts and fixtures above are unchanged.
+No full M3 migration or CI partitioning is included.
+
+- Source commit `d227ae9196d9c40dd310833909554a6fca717381` changes only
+  `documentation-audit.mjs` and `documentation-faults.spec.mjs`. The search
+  helper tracks actual requests through completion/failure, requires a fresh
+  quiescent interval and bounds browser settlement with a deadline outside the
+  browser. Existing asset/error assertions remain; seven added controls cover
+  cached network-idle, delayed summary errors/abort and blocked browser timers.
+- Four exact file patches from `e502d6427d0e4648457617f35532039c0c78e5a5`
+  retain pending-action visibility in the existing GUI, a delayed-response
+  frontend regression for success/refusal and idle polls, its 46-to-47 case
+  count, and the connected flow's bounded completion/changed-selection checks.
+  Pending feedback grants no process cancellation authority. This adopts the
+  existing repair, without creating a competing controller or SDK interface.
+- The exact e502 budget patches give the unsharded application suite 720 seconds
+  and the Chromium job 20 minutes, retaining zero retries, every existing case,
+  the separate five-minute documentation budget and 15-minute Firefox/WebKit
+  jobs. The connected-case patch from
+  `5bcd383b4a04992bcbdb4bb0079a32e0d0ebf75a` gives 180 seconds: the CI owner
+  recorded a 134.7-second hosted pass and a 150-second expiry during restart,
+  motivating 30 seconds' total reserve. Individual action/default assertion
+  limits remain 15/30 seconds; connected completion remains bounded at 60 seconds.
+
+Original hosted run [41300144495, attempt 1](https://github.com/OpenT1D/lab/actions/runs/41300144495)
+on `eb2284688b6976b9a9e708c71a9ee8bf9583708e` remains failed. Firefox passed
+388 cases and failed the search-target ordering assertion. Its retained trace
+shows actual navigation before the 800 ms summary finished and an aborted
+summary request, even though the target 404 was also detected. The old helper
+trusted an already achieved network-idle state. Chromium's connected case
+exhausted 150 seconds after restart and the 480-second suite left planned work
+unrun. A larger budget alone does not repair the visibility/completion defect
+or supply a pass. The new final head must run all thirteen application cases
+and the complete Chromium/Firefox/WebKit documentation matrix; targeted donor
+checks and an earlier clean local audit run do not replace it.
+
 ## Verification receipt and remaining gates
 
 Checks were selected before creating new transcript output: positive arithmetic,
@@ -280,6 +321,11 @@ checks and select any additional numerical oracle before execution.
 Final revision, full-check outcome, exact commands,
 skips and separate technical review are recorded in the PR handoff. The author
 owns the sole final full repository check; the reviewer runs targeted checks.
+The standalone audit commit `eb2284688b6976b9a9e708c71a9ee8bf9583708e`
+passed all 1,867 root tests with 32 expected skips (13 locked C1/PyTorch and
+19 actual-Windows cases), style/navigation/citation and the strict HTML build,
+with a clean worktree before and after. The later browser dependency combination
+requires its own full-check receipt and final diff review.
 Local results are not hosted CI. Agent review is technical review, not an
 independent human reproduction or biological assessment.
 

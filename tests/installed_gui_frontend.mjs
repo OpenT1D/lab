@@ -109,6 +109,23 @@ await check('slow_poll_still_updates_while_a_newer_poll_waits_and_revision_never
  assert.equal(e.run('data.runtime_revision'),1,'A later client request may have an earlier server snapshot');
  return {slow_poll_progress:true,older_server_snapshot_rejected:true};
 });
+await check('pending_submission_stays_visible_until_the_action_finishes',async()=>{
+ for(const refusal of [false,true]) {
+  const e=environment();seed(e);e.run('loaded=true;render();');let release;
+  e.context.fetch=url=>url==='/api/actions'?new Promise(resolve=>{release=resolve;}):Promise.resolve({ok:true,json:async()=>base()});
+  const running=e.run('action("study_freeze",{});');
+  assert.equal(e.byId('job').classList.contains('hidden'),false,'Submission must be visible before any server job is known');
+  assert.equal(e.byId('cancel-run').classList.contains('hidden'),true,'Submission grants no process cancellation authority');
+  assert.match(e.byId('job-detail').textContent,/Waiting for the server/);
+  // Even a poll returning no active server job must not announce completion.
+  await e.run('refresh();');assert.equal(e.byId('job').classList.contains('hidden'),false);
+  release(refusal?{ok:false,json:async()=>({error:'Controlled refusal'})}:{ok:true,json:async()=>({id:'submitted',status:'done',result:{}})});
+  await running;
+  assert.equal(e.byId('job').classList.contains('hidden'),true,'Completion or refusal clears pending feedback');
+  assert.equal(e.run('pending'),false);
+ }
+ return {before_post_response_visible:true,idle_poll_does_not_hide_submission:true,success_and_refusal_finish:true};
+});
 await check('rechecking_clears_previous_readiness_even_if_the_new_check_is_refused',async()=>{
  const e=environment();seed(e);e.byId('readiness').textContent=readyText;
  e.context.fetch=async()=>({ok:false,json:async()=>({error:'Controlled changed attachment'})});await e.run('action("check",{plan:"fasting"});');

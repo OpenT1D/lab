@@ -282,7 +282,7 @@ jobs:
   browser:
     name: Browser checks (${{ matrix.browser }})
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: ${{ matrix.browser == 'chromium' && 20 || 15 }}
     strategy:
       fail-fast: false
       matrix:

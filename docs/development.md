@@ -164,8 +164,15 @@ npm --prefix tests/browser test
 
 Set `PLAYWRIGHT_BROWSERS_PATH` to an absolute temporary browser-cache directory
 first. Linux hosts can add `-- --with-deps` to the browser-install command. The
-suite uses Playwright 1.64.1, one Chromium worker, no retries and eight synthetic
-checkout/installed task, failure, concept and reopen flows. Synthetic screenshots, traces, logs and failure
+suite uses Playwright 1.64.1, one Chromium worker, no retries and thirteen synthetic
+checkout/installed task, failure, concept and reopen flows. The unsharded suite
+has a twelve-minute ceiling; the Chromium job has twenty minutes for cold setup,
+application flows and the separate five-minute documentation checks.
+Firefox/WebKit documentation-only jobs retain fifteen minutes. The bounded
+connected case has 180 seconds while individual job/action waits stay bounded;
+the [adapter audit's browser dependency record](research/ot062-adapter-audit.md#bounded-browser-fix-dependencies)
+retains the failed runs, timing rationale and reused fixes.
+Synthetic screenshots, traces, logs and failure
 workspaces are under `output/playwright/`. The same required job also runs the
 [documentation browser checks](documentation-publication.md#browser-regression-checks)
 in a separate output directory, with a five-minute CI budget for each engine.

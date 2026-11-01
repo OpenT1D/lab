@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { test, expect } from './installed-fixtures.mjs';
 
-async function finished(page) { await expect(page.locator('#job')).toBeHidden(); }
+async function finished(page) { await expect(page.locator('#job')).toBeHidden({ timeout: 60_000 }); }
 async function reportJSON(page) {
   const pending = page.waitForEvent('download');
   await page.locator('[data-download="report.json"]').click();
@@ -9,7 +9,9 @@ async function reportJSON(page) {
 }
 
 test('connected study: prospective stages, absent native admission, fixed failures and prefix replay', async ({ page, app }, testInfo) => {
-  test.setTimeout(150_000); // Measured installed restart/reconstruction flow exceeds 90 seconds.
+  // Same-source hosted runs: 134s passed; 150s expired during restart loading.
+  // Retain bounded job waits/actions; allow 20% over the expired total budget.
+  test.setTimeout(180_000);
   const errors = []; page.on('pageerror', error => errors.push(error.message));
   await page.goto(app.url);
   await page.locator('#project-name').fill('Connected synthetic boundary');
@@ -47,6 +49,7 @@ test('connected study: prospective stages, absent native admission, fixed failur
   await page.locator('#connected-name').fill('Missing observation control');
   await page.locator('#connected-case').selectOption('missing-evaluation');
   await page.locator('#connected-freeze').click(); await finished(page);
+  await expect(page.locator('#connected-select')).not.toHaveValue(study);
   await expect(page.locator('#saved-report')).toBeHidden();
   await page.locator('#connected-select').selectOption(study);
   await page.locator('#connected-open').click(); await finished(page);
