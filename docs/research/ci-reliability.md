@@ -198,3 +198,42 @@ handoff. The final 13 search cases passed in all three engines (39 cases,
 browser matrix and hosted acceptance. The adapter audit reuses this exact fix
 and owns its separate final-source checks; this branch remains the only owner
 of the complete M3/CI integration check.
+
+## Follow-up after the first integrated run
+
+The first PR 49 run on clean `37ee62a`, run `41302689708` attempt 1, failed and
+is retained. Root shard 4 ran all 450 cases in 388.125 seconds but exposed the
+SDK-scope error-message regression; the M3 owner supplied exact fix
+`6e77f7b86d3418ac5702dfb1efdd0edf68cabd90` without weakening its assertion.
+Root shard 3 ran 499 cases in 702.899 seconds and exposed three reader-transition
+failures. [Decision 0092](../decisions/0092-exact-m3-reader-successor.md) selects
+the separately qualified successor while preserving the entire historical
+registry. Known existing M3-era MMTT comparisons have their own exact pinned
+identity; no wildcard, native exception or archived-code execution is added.
+The associated installed qualification explicitly selects policy 2; historical
+policy-1 qualification remains distinct.
+
+All three hosted documentation engines and platform smokes passed on that first
+source. Chromium group 1 passed four cases but exhausted the connected case's
+180-second total during its final replay. The trace shows that replay starting
+about 170 seconds after the first interaction, with preceding reads taking
+about 15 seconds; setup and cleanup also consume the total budget. All actions
+were admitted, and the pending panel accurately exposed unfinished work. The
+new bounded total is 240 seconds, preserving every 60-second job, 15-second
+action, default 30-second assertion, prefix-byte, restart and reflow check.
+Three explicit file groups now separate the long flows: connected/internal,
+comparison/integrated/MMTT and workbench/sampling/M3. Current IDs partition as
+2/6/6, exactly once. The selector checks the full configured and recursive
+on-disk application inventories, including unexpected nested specs; unknown,
+missing, duplicate or invalid selections fail. Each job retains one worker,
+zero retries and a 480-second suite budget. The local full roster is unchanged.
+
+The first local application attempt had 13 passes and one comparison timeout.
+Its trace's approximately 249-second event gap coincides with host Maintenance
+Sleep from 12:37:36 to 12:41:46 Europe/Amsterdam. That interrupted-host result is
+retained and does not motivate a product or comparison-timeout change. The
+owner's first full root attempt was explicitly interrupted (exit 130) after the
+known hosted contract failures; it is not a full pass. The final source must
+receive a fresh complete check and actual local/hosted outcomes. Wall-clock
+comparisons across sleep, changed source, extra coverage and different runners
+are not a causal speed benchmark.

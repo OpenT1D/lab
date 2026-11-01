@@ -9,9 +9,9 @@ async function reportJSON(page) {
 }
 
 test('connected study: prospective stages, absent native admission, fixed failures and prefix replay', async ({ page, app }, testInfo) => {
-  // Same-source hosted runs: 134s passed; 150s expired during restart loading.
-  // Retain bounded job waits/actions; allow 20% over the expired total budget.
-  test.setTimeout(180_000);
+  // Integrated 37ee62a: last replay began ~170s into the body and needed ~15s;
+  // the 180s total expired. Keep each 60s job wait and all report assertions.
+  test.setTimeout(240_000);
   const errors = []; page.on('pageerror', error => errors.push(error.message));
   await page.goto(app.url);
   await page.locator('#project-name').fill('Connected synthetic boundary');

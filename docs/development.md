@@ -185,7 +185,10 @@ see the [bounded CI record](research/ci-reliability.md#selected-implementation).
 suite uses Playwright 1.64.1, one Chromium worker, no retries and 14 synthetic
 checkout/installed task, failure, concept and reopen cases. CI partitions those
 cases into three isolated jobs, retaining one worker per job, zero retries and
-an eight-minute budget per shard. The default local combined suite retains the
+an eight-minute budget per shard. Complete whole-file groups are selected by
+`OPENT1D_BROWSER_SHARD=1/3` (or `2/3`, `3/3`) with
+`--config application-ci.config.mjs`; both configured and recursively present
+application specs must be assigned exactly once. The default local combined suite retains the
 M3 increment's twelve-minute ceiling; the separate documentation engines keep
 fifteen-minute jobs and five-minute test budgets. The
 [M3 integration record](research/installed-m3.md#hosted-chromium-correction)

@@ -450,8 +450,10 @@ jobs:
             tests/browser/install-browser.mjs --with-deps chromium \
             2>&1 | tee results/ci/browser-install.log
       - name: Run isolated Chromium application cases
+        env:
+          OPENT1D_BROWSER_SHARD: ${{ matrix.shard }}
         run: >-
-          npm --prefix tests/browser test -- --config application-ci.config.mjs --shard '${{ matrix.shard }}'
+          npm --prefix tests/browser test -- --config application-ci.config.mjs
           2>&1 | tee results/ci/browser.log
       - name: Preserve browser diagnostics
         if: always()

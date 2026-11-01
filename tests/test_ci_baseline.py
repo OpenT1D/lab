@@ -143,9 +143,8 @@ class CIBaselinePolicyTests(unittest.TestCase):
             if step.get("run", "").startswith("npm --prefix tests/browser test ")
         )
         self.assertNotIn("if", mmtt)
-        self.assertIn(
-            "--config application-ci.config.mjs --shard '${{ matrix.shard }}'", mmtt["run"]
-        )
+        self.assertIn("--config application-ci.config.mjs", mmtt["run"])
+        self.assertEqual(mmtt["env"], {"OPENT1D_BROWSER_SHARD": "${{ matrix.shard }}"})
         self.assertEqual(
             jobs["browser-apps"]["strategy"],
             {"fail-fast": False, "matrix": {"shard": ["1/3", "2/3", "3/3"]}},
