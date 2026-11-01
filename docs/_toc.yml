@@ -89,6 +89,7 @@ subtrees:
       - file: docs/research/editable-workbench
       - file: docs/research/workbench-comparisons
       - file: docs/research/connected-synthetic-study
+      - file: docs/research/ci-reliability
       - file: docs/research/m4-installed-runtime-protocol
       - file: docs/m4-synthetic-basal-equivalence
       - file: docs/m4-ultradian-basal-equivalence

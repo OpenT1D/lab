@@ -85,11 +85,23 @@ projects. Every generated documentation page is still checked in all three.
 Each CI engine uses four workers, no retries and a five-minute documentation
 budget. The matrix uses `fail-fast: false`, so one failing engine does not cancel
 the others' diagnostics. All three results must succeed for the required gate.
-The four MMTT application flows run only in the Chromium job. Local `test:docs`
+The 13 application cases run in a separate three-shard Chromium family. Local `test:docs`
 runs all three engines within a fifteen-minute total budget; select one with
 `npm --prefix tests/browser run test:docs -- --project firefox --global-timeout=300000`.
 The installer keeps Chromium as its default; explicit browser names select the
-requested engines. On Linux, add `--with-deps` before those names when needed.
+requested engines. On Linux, use the bounded wrapper explicitly as root when
+system dependencies are needed, so its supervisor can terminate owned apt
+descendants:
+
+```sh
+sudo --preserve-env=PLAYWRIGHT_BROWSERS_PATH -- "$(command -v node)" \
+  tests/browser/install-browser.mjs --with-deps chromium firefox webkit
+```
+
+Use a dedicated temporary browser cache. The application and browser tests then
+run as the ordinary runner user. The [CI reliability record](research/ci-reliability.md)
+explains the unchanged combined installation deadline, phase diagnostics and
+ephemeral hosted Ubuntu mirror/network selection.
 
 The pinned Mermaid module still requires jsDelivr access; a failed CDN load
 fails the browser check. Logs, per-page JSON receipts and failure screenshots

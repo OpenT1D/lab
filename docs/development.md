@@ -117,7 +117,10 @@ exercise to the two synthetic MMTT tasks. Initial publication used disabled
 Actions; later activation and exact hosted receipts are recorded in the
 [security boundary](publication-security.md). Local results must not be reported
 as hosted CI. The active `Root checks` job explicitly installs the selected Python 3.12, uv 0.11.16 and Node 24.22.1,
-then runs the root suite and standard-library boundary checks. Its Node preflight
+then runs style/documentation and standard-library boundary checks after four isolated
+root-test shards succeed. The default local command still runs all stages and
+all tests. The [CI reliability record](research/ci-reliability.md) owns the
+measured partition, complete-selection checks and exact-run diagnostics. Its Node preflight
 fails when Node is unavailable. Historical native jobs additionally require
 literal private-repository/manual-dispatch guards and cannot run in a public
 repository, even if a changed scope helper reports them enabled.
@@ -146,7 +149,8 @@ Follow the [activation procedure](publication-security.md#activate-on-the-select
 to review the exact Action allowlist, enable the intended checks, obtain actual
 PR/main results and only then require `Repository checks`. Source changes alone
 do not activate GitHub settings. That stable result now aggregates the root job,
-the Linux/macOS/Windows public-smoke matrix, the Linux Chromium application flows and
+the complete four-shard root-test matrix, the Linux/macOS/Windows public-smoke
+matrix, the three-shard Linux Chromium application family and
 the Chromium/Firefox/WebKit documentation matrix. Every
 family must succeed; cancellation or a missing result cannot pass the gate.
 Dependency Review is also required on pull requests. Only its explicit skip on
@@ -163,10 +167,24 @@ npm --prefix tests/browser test
 ```
 
 Set `PLAYWRIGHT_BROWSERS_PATH` to an absolute temporary browser-cache directory
-first. Linux hosts can add `-- --with-deps` to the browser-install command. The
-suite uses Playwright 1.64.1, one Chromium worker, no retries and eight synthetic
-checkout/installed task, failure, concept and reopen flows. Synthetic screenshots, traces, logs and failure
-workspaces are under `output/playwright/`. The same required job also runs the
+first. For Linux system dependencies, run the complete bounded wrapper as root so its
+supervisor can terminate owned apt descendants:
+
+```sh
+sudo --preserve-env=PLAYWRIGHT_BROWSERS_PATH -- "$(command -v node)" \
+  tests/browser/install-browser.mjs --with-deps chromium
+```
+
+Use an ephemeral, dedicated browser cache; this command does not launch the app
+as root. System
+dependencies and browser download share a 300-second budget and log separate
+phases. The ephemeral hosted browser runners select the official Ubuntu archive
+for the exact Azure mirror URI and retain authenticated, fail-closed APT setup;
+see the [bounded CI record](research/ci-reliability.md#selected-implementation). The
+suite uses Playwright 1.64.1, one Chromium worker, no retries and 13 synthetic
+checkout/installed task, failure, concept and reopen cases. CI partitions those
+cases into three isolated jobs, retaining one worker per job and zero retries. Synthetic screenshots, traces, logs and failure
+workspaces are under `output/playwright/`. The separate required browser matrix runs the
 [documentation browser checks](documentation-publication.md#browser-regression-checks)
 in a separate output directory, with a five-minute CI budget for each engine.
 All three documentation engines must pass the required gate. The guide includes
@@ -192,6 +210,19 @@ The site includes only the listed pages. Data, results, build outputs and hidden
 The research report's Mermaid diagram uses a pinned browser library from jsDelivr and requires network access to render. The document text, navigation and search are served locally.
 
 The [M3 tutorial](m3-tutorial.md) owns the separately locked statistical-estimator environment and synthetic forecast checks. Repository tests also validate M3 contracts and artifacts; native estimator execution remains separate, as do all original physiological regression jobs.
+
+For CI diagnosis, a complete root selection can be listed without execution:
+
+```sh
+uv run --locked python scripts/root_tests.py --shard 1/4 --list
+uv run --locked python scripts/check.py --stage tests --test-shard 1/4
+```
+
+Use all four shards to cover the full suite. The default full command never
+accepts an implicit partial selection. Root receipts under `results/ci/` bind
+the source and selected IDs and record failures and skips. For rerun status,
+use the [exact-run diagnostic](research/ci-reliability.md#check-provenance-and-verification-handoff);
+a successful latest attempt can coexist with stale failed entries in the PR UI.
 
 ## Individual checks
 
