@@ -79,6 +79,9 @@ subtrees:
       - file: docs/research/ot061-064-minimal-services
       - file: docs/installed-sdk
       - file: docs/internal-mmtt-candidate
+      - file: docs/mmtt-formative-session
+      - file: docs/templates/mmtt-session-participant
+      - file: docs/templates/mmtt-session-record
       - file: docs/internal-integrated-candidate
       - file: docs/installed-m3
       - file: docs/research/installed-m3
