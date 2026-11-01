@@ -179,3 +179,4 @@ The M4 records were assigned numbers 0016–0028 when the parallel M3, LIT-002 a
 - [0092 — Exact M3-era MMTT reader successor](0092-exact-m3-reader-successor.md).
 - [0093 — LT1 sampled preparation](0093-lt1-sampled-preparation.md): separate kernel/fixture controls from native admission.
 - [0094 — LT1 diagnostic harness and reader](0094-lt1-diagnostic-harness-reader.md): independent construction, causal release and exact fractional-interval reading with native admission closed.
+- [0095 — Separate LT1 native worker admission](0095-lt1-native-worker-admission.md): fixed reviewed grants, complete staging identities and unchanged setup/host gates.
