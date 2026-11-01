@@ -35,6 +35,8 @@ slots/origins, resealed report refusal, unknown readers, changed referenced byte
 and unfinished recovery. `test_installed_m3.py` builds an actual noneditable
 wheel and exercises Python/CLI identity, direct/installed trace and common-metric
 parity, retry/derivation, physical input/predictor removal and relocated reports.
+An exact legacy direct comparison is also imported retrospectively and its
+original report reconstructed byte for byte through the installed reader.
 Its actual slow predictor is cancelled; owned cleanup completes and an unrelated
 process survives. Missing input and nonfinite output retain native incomplete
 reports and require explicit incomplete-evidence reading.
@@ -46,6 +48,13 @@ Chromium test covers concept correction, referenced-byte invalidation, freezing,
 execution after deleting original inputs/predictors, exact report downloads,
 relaunch, relocation and narrow/200-percent text layout. Browser results and
 agent review do not qualify screen readers or intended-user usability.
+
+The selected M3 family completed 344 tests successfully. Its first sandboxed
+run had four process-inspection errors because `ps` was denied; the authorized
+rerun exercised those unchanged process checks. The shared-services family
+completed all 17 tests, including its real nested deadline/crash controls.
+Separate review identified the missing strict direct-archive import branch;
+the added installed case verifies original report bytes and retrospective mode.
 
 The first development wheel exposed missing installed Git provenance; the fixed
 SDK context now supplies the verified descriptor identity without changing

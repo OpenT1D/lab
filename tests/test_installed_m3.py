@@ -85,6 +85,28 @@ class InstalledM3(unittest.TestCase):
         project, plan, config, filename = self.prepare()
         self.assertTrue(self.call("check", "--project", project, "--plan", plan)["runtimes_ready"])
         direct = study.run_study(filename, self.root / "direct")
+        legacy = self.root / "legacy-project"
+        self.call("create", "--project", legacy, "--name", "Retrospective native M3 import")
+        legacy_plan = self.call(
+            "freeze", "--project", legacy, "--task", "m3-compare", "--config", filename
+        )["plan"]
+        imported = self.call(
+            "import", "--project", legacy, "--plan", legacy_plan, "--archive", self.root / "direct"
+        )
+        self.call(
+            "reconstruct",
+            "--project",
+            legacy,
+            "--attempt",
+            imported["attempt"],
+            "--output",
+            self.root / "imported-report",
+        )
+        self.assertEqual(self.call("info", "--project", legacy)["attempts"][0]["mode"], "import")
+        self.assertEqual(
+            (self.root / "imported-report/report.json").read_bytes(),
+            (self.root / "direct/report.json").read_bytes(),
+        )
         installed = self.call("run", "--project", project, "--plan", plan)
         self.assertEqual(installed["result"]["completeness"], "complete")
         with opened(project) as ledger:

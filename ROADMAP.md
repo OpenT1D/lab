@@ -263,7 +263,7 @@ causal availability and complete support/failure rules. Supply a bounded
 adapter example and record the additional core/GUI code needed. This is a
 reuse test, not a new model-training pipeline or stable general plugin API.
 The source-pinned GluPredKit mapping assessment is recorded; execution of such
-an adapter remains separate. future meal/insulin
+an adapter remains separate. Future meal/insulin
 features cannot silently enter a historical-CGM-only contract. Keep new external
 dependencies in an identified separate environment.
 

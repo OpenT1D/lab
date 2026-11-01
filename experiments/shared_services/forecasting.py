@@ -213,9 +213,17 @@ def native_result(archive, descriptor, folder):
     )
     native = read(archive / "plan.json")
     config = read(folder / "original/config.json")
-    first = native["config"]["candidates"][0]
-    invocation = recorded_path(first["declaration"]).parents[2]
-    require(native["config"] == effective(config, invocation), "M3 invocation differs from freeze")
+    # Explicit passive import also accepts an unchanged legacy direct archive.
+    # Both spellings must bind to the same prospective resource bytes; an import
+    # remains retrospective in the ledger and grants no execution authority.
+    direct = native["config"] == config
+    invocation = None
+    if not direct:
+        first = native["config"]["candidates"][0]
+        invocation = recorded_path(first["declaration"]).parents[2]
+        require(
+            native["config"] == effective(config, invocation), "M3 invocation differs from freeze"
+        )
     require(
         native["provenance"]["sources"]
         == descriptor["boundary"]["binding"]["implementation_sha256"],
@@ -226,11 +234,19 @@ def native_result(archive, descriptor, folder):
         original = folder / "original/candidates" / identity
         frozen = archive / "frozen" / identity
         expected = read(original / "declaration.json")
-        expected["source"]["file"] = str(invocation / "candidates" / identity / "source.py")
-        expected["settings"]["file"] = str(invocation / "candidates" / identity / "settings.json")
+        if not direct:
+            expected["source"]["file"] = str(invocation / "candidates" / identity / "source.py")
+            expected["settings"]["file"] = str(
+                invocation / "candidates" / identity / "settings.json"
+            )
         require(
             native["candidates"][identity]["declaration"] == expected,
             "M3 predictor declaration differs from freeze",
+        )
+        require(
+            (frozen / "original-declaration.json").read_bytes()
+            == ((original / "declaration.json").read_bytes() if direct else encoded(expected)),
+            "M3 predictor declaration bytes differ from freeze",
         )
         for name in ("source.py", "settings.json"):
             require(

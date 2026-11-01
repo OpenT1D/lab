@@ -106,6 +106,10 @@ predictor and invocation paths are not opened. Archived Python remains opaque;
 unknown reader/source/protocol identities and changed saved reports refuse.
 The original native CLI/archive schemas remain available and unchanged.
 This increment adds no reader migration exception or general archive importer.
+Explicit `import_attempt`/CLI `import` can retain an existing direct M3 comparison
+with exactly matching configuration and frozen predictor/observation bytes.
+The ledger labels it retrospective `import`; it cannot stand in for prospective
+execution. The same authoritative readers verify it after relocation.
 
 The [integration record](research/installed-m3.md) distinguishes installed,
 reference, browser and hosted checks, failures and outstanding evidence.
