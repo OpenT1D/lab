@@ -150,7 +150,10 @@ does not cause archived paths or code to be opened.
 
 The reader recomputes its current initializer-aware source identity and delegates
 scientific row/plan/causality checks and exact fractional integration to the original
-trusted reader. It never imports a candidate engine or archived code. Only complete
+trusted reader. It never imports a candidate engine or archived code. Source
+inventory keys use canonical POSIX spelling on both path flavors; a pure
+Windows-path counterexample caught and corrected host-dependent string conversion.
+This does not qualify a native Windows runtime. Only complete
 newline-terminated records are scored; a torn final record is retained as an
 uncommitted byte count. Invalid committed records, repeated ordinals, data after a
 finish, stale code/plan, mismatched receipt/output/owner or unknown cleanup refuse.

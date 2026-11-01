@@ -8,13 +8,25 @@ import subprocess
 import tempfile
 import threading
 import unittest
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
+from unittest.mock import patch
 
 from experiments.lt1_diagnostic import journal_reader as journal
 from experiments.lt1_diagnostic import reader
 from experiments.shared_services.execution import supervise
 
 ROOT = reader.ROOT
+
+
+class LT1JournalSourcePathTests(unittest.TestCase):
+    def test_source_keys_are_canonical_posix_on_both_path_flavors(self):
+        for flavor, root in ((PurePosixPath, "/study"), (PureWindowsPath, "C:/study")):
+            base = flavor(root)
+            path = base / "experiments/lt1_diagnostic/reader.py"
+            with patch.object(journal, "ROOT", base):
+                self.assertEqual(
+                    journal.relative_source_name(path), "experiments/lt1_diagnostic/reader.py"
+                )
 
 
 @unittest.skipUnless(os.name == "posix" and shutil.which("node"), "POSIX Node fixture required")

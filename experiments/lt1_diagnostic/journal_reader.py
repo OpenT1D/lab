@@ -22,11 +22,15 @@ JS_FILES = (
 SCHEMA = "opent1d.lt1-attempt-journal/1"
 
 
+def relative_source_name(path):
+    return path.relative_to(ROOT).as_posix()
+
+
 def identity(plan_raw):
     paths = set(reader.implementation()) | {"experiments/lt1_diagnostic/journal_reader.py"}
     paths.update((Path("experiments/lt1_diagnostic") / name).as_posix() for name in JS_FILES)
     # Normalize the fixed ../ references before static closure; never archive paths.
-    paths = {str((ROOT / name).resolve().relative_to(ROOT)) for name in paths}
+    paths = {relative_source_name((ROOT / name).resolve()) for name in paths}
     while True:
         paths = set(source_closure(paths))
         initializers = {
