@@ -323,8 +323,10 @@ dependencies in an identified separate environment.
 controller contract on LT1 and simglucose, then a second controller/question.
 The [first LT1 preparation packet](docs/research/ot062-lt1-preparation.md) adds
 a sampled kernel, invented ledger-reader controls and passively verified candidate
-artifact identities. Direct/wrapped native construction, the release queue and
-fractional-grid native reader remain the next implementation scope; runtime,
+artifact identities. The [LT1 harness increment](docs/research/ot062-lt1-harness.md)
+implements injected direct/wrapped construction, the release queue and a fractional
+data reader with invented controls. Positive native loading, actual native
+qualification and process/store migration remain unimplemented/unrun; runtime,
 restricted-use, setup and host execution gates remain open.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
