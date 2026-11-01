@@ -134,10 +134,47 @@ class LT1HostProbeTests(unittest.TestCase):
             "experiments/lt1_diagnostic/host_fixture.py",
             "experiments/shared_services/execution.py",
             "experiments/gui/ownership.py",
+            "experiments/gui/__init__.py",
+            "experiments/lt1_diagnostic/__init__.py",
             "experiments/platform_process.py",
         ):
             self.assertIn(name, files)
             self.assertEqual(files[name], probe.digest(probe.ROOT / name))
+
+    def test_initializer_changes_and_their_recursive_imports_withdraw_qualification(self):
+        files = {
+            "experiments/lt1_diagnostic/host_probe.py": (
+                "from experiments.gui.ownership import marker\n"
+            ),
+            "experiments/lt1_diagnostic/host_fixture.py": "# invented fixture\n",
+            "experiments/lt1_diagnostic/__init__.py": "# package entry\n",
+            "experiments/gui/ownership.py": "marker = 1\n",
+            "experiments/gui/__init__.py": "from experiments.extra.tools import marker\n",
+            "experiments/extra/tools.py": "marker = 2\n",
+            "experiments/extra/__init__.py": "# nested package entry\n",
+        }
+        for name, content in files.items():
+            path = self.root / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(content)
+        with (
+            patch.object(probe, "ROOT", self.root),
+            patch("experiments.m4.initial_load.common.ROOT", self.root),
+        ):
+            before = probe.sources()
+            self.assertEqual(set(before), set(files))
+            unchanged = {"status": "passed", "implementation": before}
+            probe.check_final_sources(unchanged)
+            self.assertEqual(unchanged["status"], "passed")
+            for name in ("experiments/gui/__init__.py", "experiments/extra/__init__.py"):
+                path = self.root / name
+                original = path.read_bytes()
+                path.write_text("raise RuntimeError('invented initializer change')\n")
+                report = {"status": "passed", "implementation": before}
+                probe.check_final_sources(report)
+                self.assertEqual(report["status"], "failed")
+                self.assertTrue(report["source_change"])
+                path.write_bytes(original)
 
     def test_unsupported_host_refuses_before_output_creation(self):
         target = self.root / "not-created"

@@ -90,8 +90,12 @@ It accepts a fresh private output directory, never a command, model, runtime
 candidate, policy file or plugin. It reuses `shared_services.execution.supervise`,
 `platform_process` and `Ownership`; there is no new process manager or native
 dispatch route. The receipt binds the actual Python executable, sandbox binary,
-OS identity, exact profile text and 141-file static local implementation closure,
-including the borrowed supervisor/ownership code. It checks source hashes again
+OS identity, exact profile text and 148-file static local implementation closure,
+including the borrowed supervisor/ownership code and package ancestor initializers.
+Initializer imports are closed recursively; changing initializer bytes withdraws
+qualification. The original 141-file inventory omitted normally executed package
+initializers. A fresh PR review reproduced that gap on disposable source copies;
+the corrected inventory and host run replace that incomplete identity evidence. It checks source hashes again
 before the final receipt; a missing/invalid changed source withdraws qualification
 while retaining failure evidence. This inventory is not arbitrary dynamic-import
 proof or an immutable native installation.

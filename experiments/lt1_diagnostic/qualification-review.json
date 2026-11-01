@@ -101,9 +101,9 @@
         "boundary_groups": 2
       }
     },
-    "implementation_files": 141,
-    "implementation_inventory_sha256": "4831426c648de2e6bd13d7b41b3d7f21ebc3ce6bf86e09b35f140f307093dd28",
-    "private_receipt_sha256": "8d7795d762dcdf5691baae1684407f886acfb29bc0f7e323c9a83722b7aa91c7",
+    "implementation_files": 148,
+    "implementation_inventory_sha256": "61d15fc0bfc4cfe45ed030c9adf909010f7c6d4d1d9f11513ea3a073f680e78d",
+    "private_receipt_sha256": "049516d74ca79351cdbae06b9aface628febf73ed22ba21d32a812f1d41c1d67",
     "native_qualification": false,
     "observations": "Direct file-content read/write and loopback socket denial; explicit clean isolated startup; durable invented prefix; parent failure, deadline/cancel, live child ownership/cleanup and unrelated-process preservation. No arbitrary-code, native-loader, immutable-staging or project-store acceptance."
   },

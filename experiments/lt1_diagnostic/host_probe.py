@@ -28,15 +28,22 @@ def digest(path):
 
 
 def sources():
-    return {
-        name: digest(ROOT / name)
-        for name in source_closure(
-            (
-                "experiments/lt1_diagnostic/host_probe.py",
-                "experiments/lt1_diagnostic/host_fixture.py",
-            )
-        )
+    names = {
+        "experiments/lt1_diagnostic/host_probe.py",
+        "experiments/lt1_diagnostic/host_fixture.py",
     }
+    while True:
+        closed = set(source_closure(names))
+        initializers = {
+            Path(*Path(name).parts[:length], "__init__.py").as_posix()
+            for name in closed
+            for length in range(1, len(Path(name).parts))
+        }
+        expanded = closed | {name for name in initializers if (ROOT / name).is_file()}
+        if expanded == names:
+            return {name: digest(ROOT / name) for name in sorted(names)}
+        # Initializers can import additional modules whose ancestors also execute.
+        names = expanded
 
 
 def check_final_sources(report):
