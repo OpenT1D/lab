@@ -49,7 +49,7 @@ def verify(package):
         != {"schema", "source", "build_label", "files", "tasks", "native_execution"}
         or not (
             (
-                metadata["schema"] == SCHEMA
+                metadata["schema"] in {SCHEMA, "opent1d.installed-sdk/5"}
                 and metadata["tasks"] == TASKS
                 and metadata["native_execution"] == "explicit-reviewed-attachment/1"
             )

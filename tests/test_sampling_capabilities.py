@@ -27,6 +27,7 @@ class SamplingCapabilities(unittest.TestCase):
                 (2, current[:3]),
                 (3, current),
                 (4, ["mmtt-sensitivity", "mmtt-sampling"]),
+                (5, current),
             ):
                 descriptor = {
                     "schema": f"opent1d.installed-sdk/{version}",
@@ -50,13 +51,28 @@ class SamplingCapabilities(unittest.TestCase):
                     manifest.write_text(json.dumps(changed))
                     with self.assertRaisesRegex(ValueError, "Unsupported installed artifact"):
                         INTEGRITY.verify(root)
-                    if version == 4:
+                    if version in {4, 5}:
                         for roster in (
                             tasks[::-1],
                             tasks + [tasks[0]],
-                            tasks + ["m4-study-installed"],
+                            tasks[:-1],
+                            ["mmtt-sensitivity", "mmtt-sampling", "m4-study-installed"],
                         ):
                             manifest.write_text(json.dumps({**descriptor, "tasks": roster}))
+                            with self.assertRaisesRegex(
+                                ValueError, "Unsupported installed artifact"
+                            ):
+                                INTEGRITY.verify(root)
+                        for policy in (
+                            "unrestricted",
+                            "explicit-reviewed-attachment/2",
+                            "explicit-reviewed-attachment/1"
+                            if version == 4
+                            else "unavailable-public-policy",
+                        ):
+                            manifest.write_text(
+                                json.dumps({**descriptor, "native_execution": policy})
+                            )
                             with self.assertRaisesRegex(
                                 ValueError, "Unsupported installed artifact"
                             ):

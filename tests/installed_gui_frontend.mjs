@@ -558,4 +558,19 @@ await check('bounded_candidate_only_offers_its_two_mmtt_tasks',async()=>{
  assert.match(e.byId('candidate-capabilities').textContent,/separately qualified candidate/);
  return {two_tasks_only:true,native_and_connected_hidden:true,explicit_scope:true};
 });
+await check('integrated_candidate_admits_current_native_and_connected_controls',async()=>{
+ const e=environment({concepts:true,comparisons:true,connected:true});seed(e);
+ e.run('data.installation.schema="opent1d.installed-sdk/5";data.installation.tasks=["mmtt-sensitivity","m4-study-secure","m4-study-installed","mmtt-sampling"];render();');
+ assert.deepEqual(e.byId('task').children.map(option=>option.value).sort(),['m4-study-installed','mmtt-sampling','mmtt-sensitivity']);
+ for(const id of ['native-card','runtime-controls','connected-study','connected-nav'])assert.equal(e.byId(id).classList.contains('hidden'),false,id);
+ assert.match(e.byId('candidate-capabilities').textContent,/internal candidate.*M4 secretion studies.*connected synthetic chain/);
+ assert.match(e.byId('candidate-capabilities').textContent,/attachment for this application and interpreter/);
+ assert.equal(e.byId('connected-freeze').disabled,false);
+ assert.equal(e.byId('connected-next').disabled,true,'A visible study panel must not invent a next action');
+ e.run('$("task").value="m4-study-installed";updateTask();data.installation.schema="opent1d.installed-sdk/4";data.installation.tasks=["mmtt-sensitivity","mmtt-sampling"];render();');
+ assert.deepEqual(e.byId('task').children.map(option=>option.value).sort(),['mmtt-sampling','mmtt-sensitivity']);
+ assert.ok(['mmtt-sensitivity','mmtt-sampling'].includes(e.byId('task').value));
+ for(const id of ['native-card','runtime-controls','connected-study','connected-nav'])assert.equal(e.byId(id).classList.contains('hidden'),true,id);
+ return {three_executable_choices:true,legacy_execution_not_offered:true,native_and_connected_controls_visible:true,attachment_scope_explicit:true,bounded_capabilities_restored:true};
+});
 receipt.passed=Object.values(receipt.tests).every(value=>value.passed);fs.writeFileSync(receiptPath,JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify({passed:receipt.passed,source_sha256:receipt.source_sha256,tests:Object.fromEntries(Object.entries(receipt.tests).map(([name,value])=>[name,value.passed])),receipt:receiptPath}));if(!receipt.passed)process.exitCode=1;
