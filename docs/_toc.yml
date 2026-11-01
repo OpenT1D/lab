@@ -80,6 +80,8 @@ subtrees:
       - file: docs/installed-sdk
       - file: docs/internal-mmtt-candidate
       - file: docs/internal-integrated-candidate
+      - file: docs/installed-m3
+      - file: docs/research/installed-m3
       - file: docs/installed-m4
       - file: docs/installed-gui
       - file: docs/research/ot060-installed-route
@@ -330,6 +332,7 @@ subtrees:
       - file: docs/decisions/0088-connected-synthetic-observation-study
       - file: docs/decisions/0089-internal-candidate-reader-transition
       - file: docs/decisions/0090-integrated-native-candidate
+      - file: docs/decisions/0091-m3-shared-workbench
       - file: docs/decisions/0059-maintained-runtimes-and-local-gui
       - file: docs/templates/model-card
       - file: docs/templates/experiment-protocol

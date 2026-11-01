@@ -32,6 +32,9 @@ passive SDK input inspection, explicit development sealing and original-input
 export. Its concepts remain workspace convenience state; SDK freezes stay
 authoritative and immutable.
 
+An explicit [M3 workbench build](installed-m3.md) selects descriptor 6 with
+`--m3-workbench`; default and prior candidate rosters remain unchanged.
+
 ## Build and install
 
 The builder uses the separately locked root tooling. Start from a clean source

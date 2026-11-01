@@ -12,6 +12,10 @@ owns predictor declarations, the callback and normalized observation format.
 Use the [local workflow entry](local-workflow-entry.md) to discover supported
 tasks and their installed runtime requirements.
 
+The explicit [shared SDK/workbench route](installed-m3.md) freezes the same task
+through the common project ledger while preserving this native contract and
+its parent/child readers.
+
 ## Run an invented example
 
 From the repository root on macOS or Linux, install the locked root tooling

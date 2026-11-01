@@ -21,8 +21,9 @@ function command(executable, args, options) {
 export const test = base.extend({
   mmttOnly: [false, { option: true }],
   integratedCandidate: [false, { option: true }],
-  app: async ({ mmttOnly, integratedCandidate }, use, testInfo) => {
-    if (mmttOnly && integratedCandidate) throw new Error('Choose one candidate scope');
+  m3Workbench: [false, { option: true }],
+  app: async ({ mmttOnly, integratedCandidate, m3Workbench }, use, testInfo) => {
+    if ([mmttOnly, integratedCandidate, m3Workbench].filter(Boolean).length > 1) throw new Error('Choose one candidate scope');
     const folder = await realpath(await mkdtemp(path.join(tmpdir(), 'opent1d-installed-browser-')));
     const env = { ...process.env, UV_CACHE_DIR: path.join(folder, 'cache'), PYTHONNOUSERSITE: '1' };
     delete env.PYTHONPATH;
@@ -59,7 +60,7 @@ export const test = base.extend({
     }
     try {
       const retained = integratedCandidate ? process.env.OPENT1D_INTEGRATED_CANDIDATE_RECEIPT : mmttOnly && process.env.OPENT1D_READER_CANDIDATE_RECEIPT;
-      const receipt = retained ? await readFile(retained, 'utf8') : command(python, [path.join(root, 'scripts/build_sdk.py'), '--output', path.join(folder, 'build'), '--allow-dirty', '--build-label', 'sampling-browser-regression', ...(mmttOnly ? ['--mmtt-only'] : integratedCandidate ? ['--integrated-candidate'] : [])], options);
+      const receipt = retained ? await readFile(retained, 'utf8') : command(python, [path.join(root, 'scripts/build_sdk.py'), '--output', path.join(folder, 'build'), '--allow-dirty', '--build-label', 'sampling-browser-regression', ...(mmttOnly ? ['--mmtt-only'] : integratedCandidate ? ['--integrated-candidate'] : m3Workbench ? ['--m3-workbench'] : [])], options);
       if (retained && createHash('sha256').update(await readFile(JSON.parse(receipt).wheel)).digest('hex') !== JSON.parse(receipt).wheel_sha256) throw new Error('Retained candidate wheel differs from its receipt');
       await writeFile(testInfo.outputPath('build-receipt.json'), receipt);
       const installedPython = path.join(folder, 'sdk/bin/python');

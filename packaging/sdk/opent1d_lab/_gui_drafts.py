@@ -21,6 +21,7 @@ FILES = {
     "mmtt-sensitivity": {"package.json", "observations.csv", "settings.json"},
     "mmtt-sampling": set(LIMITS) - {"config.json"},
     "m4-study-installed": {"config.json"},
+    "m3-compare": {"config.json"},
 }
 MAX_REVISIONS = 1024
 
