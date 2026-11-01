@@ -1,6 +1,6 @@
 # OpenT1D roadmap
 
-**Updated 30 October 2026.** This is the canonical implementation order for
+**Updated 1 November 2026.** This is the canonical implementation order for
 OpenT1D. The immediate public-development queue comes first; the shared-laboratory
 plan below retains its own dependencies and acceptance criteria. The
 [historical record](docs/research/roadmap-history-2026-10-28.md) preserves earlier
@@ -48,13 +48,16 @@ verification.
 
 ## Public development priorities
 
-The next selected outcome extends the merged installed SDK, native M4 successor
-and thin project GUI into an integrated local laboratory with both MMTT tasks,
-editable studies, reproducible comparisons and a connected synthetic study. The
-[selected development window](#selected-development-window-first-integrated-laboratory)
-uses approximately one week of available development before an intended user is
-expected to be available. It advances bounded parts of OT-060/061/063/064/065/067
-and prepares OT-072/073; it does not promise completion of those full packages.
+The [selected development window](#selected-development-window-first-integrated-laboratory)
+has implemented bounded installed SDK/workbench support for both MMTT tasks,
+editable studies, reproducible comparisons, the connected M4 study, internal
+candidates and frozen M3 comparisons. The
+[1 November integrated-main smoke](#integrated-main-smoke-and-current-status)
+adds local evidence for four user routes on their merged source. These increments
+advance bounded parts of OT-060/061/063/064/065/067/068 and prepare OT-072/073;
+they do not close those full packages. **OT-062 adapter conformance is the next
+selected development step**, starting with LT1 runtime/rights and harness review
+before separately admitted native setup and execution.
 The two existing synthetic MMTT tasks remain the maintained public exercise.
 Existing native M4 evidence retains its exact scope; sampling migration,
 reader transitions and optional M3 migration have their own acceptance gates.
@@ -81,8 +84,9 @@ dates. This planning change delivers no new runtime or scientific result.
 | Implemented internal increments — Installed SDK, native M4 and thin GUI | [PR 30](https://github.com/OpenT1D/lab/pull/30), [PR 32](https://github.com/OpenT1D/lab/pull/32) and [PR 35](https://github.com/OpenT1D/lab/pull/35) supply installed MMTT sensitivity, explicit `m4-study-installed` execution/parity/relocation and a supplied-example GUI with sealed formative preparation. | Their [SDK](docs/research/ot060-installed-route.md), [native](docs/research/ot060-native-m4.md) and [GUI](docs/research/ot065-072-shared-gui.md) records own the exact local evidence. Sampling, general editable studies, changed-reader compatibility, public native bundling and intended-user acceptance are not delivered by those increments. |
 | Implemented internal increment — Shared sampling | [Sampling integration](docs/research/installed-mmtt-sampling.md) adds installed Python/CLI and supplied-example workbench support with sealed development selection and native parent/child reports. | Exact native report parity, complete denominators, incomplete/cancelled evidence, owned cleanup, relocated reconstruction and actual installed Chromium checks have bounded local evidence. Estimator and OT-059 fixtures remain unchanged. That record supplies no editable-study or independent-use acceptance. |
 | Implemented internal increment — Editable studies | The [editable workbench](docs/research/editable-workbench.md) adds own bounded synthetic input, revisioned recoverable concepts, editable assumptions/schedules and derived plans over the same installed SDK. | Preserve exact source bytes and parent links through native validation, immutable freezes, cross-tab conflicts, restart and explicit GUI concept-history copying. Browser/software checks and technical review are distinct from independent use and broader accessibility qualification. |
-| Selected now — Extend the integrated laboratory | Execute the [development window](#selected-development-window-first-integrated-laboratory) from that merged foundation: shared sampling, editable workbench/comparisons, a connected synthetic study and an internal candidate with a real reader-transition test. | Preserve completed installed/native/GUI evidence and the step-specific criteria below. Review changed runtime/source identities rather than inheriting old artifact results. Prepare intended-user acceptance without claiming it. |
+| Implemented bounded increment — Integrated laboratory | The [development window](#selected-development-window-first-integrated-laboratory) supplies shared sampling, editable workbench/comparisons, a connected synthetic study and internal candidates with a pinned comparison-reader transition. The [integrated-main smoke](#integrated-main-smoke-and-current-status) verifies MMTT/sampling, M3, failure/retry and relocation on clean merged source. | Preserve each record's source/artifact/host scope. The new descriptor-6 smoke does not requalify native M4 or existing release candidates. Broader package, host, compatibility and intended-user acceptance remain open. |
 | Bounded stretch implemented — M3 reuse | The explicit [M3 SDK/workbench increment](docs/installed-m3.md) migrates the existing frozen synthetic comparison through the same services; its [record](docs/research/installed-m3.md) assesses one GluPredKit mapping without installing it. | Preserve the current causal history, horizon, frozen models, persistence reference and complete failure support. No new training pipeline, human-data intake or general plugin claim follows from this increment. |
+| Selected next — OT-062 native adapter conformance | Extend the [adapter audit](docs/research/ot062-adapter-audit.md) into a versioned direct/wrapped harness for one compatible sampled rate-controller contract, beginning with the LT1 candidate in the [runtime/rights proposal](docs/research/ot062-runtime-rights.md). Follow with a separately reviewed simglucose successor. | Complete exact runtime/security, restricted-use rights and harness/reader review before separately admitted setup. Require its verified setup receipt and host admission before native execution. Retain historical references and all failed cases; verify native parity, reset, timing, causal inputs, units, failures, cleanup and engine-free reading. The audit alone supplies no native admission or two-engine acceptance. |
 | Conditional follow-up — Mac distribution | Turn the verified probe into a signed/notarized download with a controlled build/release workflow and clean-host/user evidence. | The exact downloaded artifact passes the lifecycle, data-preservation and interpretation checks below. Signing credentials, runtime rights and actual hosts/users are prerequisites for the affected acceptance, not assumed resources. |
 | Subsequent shared-laboratory work | Extend the accepted foundation to adapter conformance and a suitable common controller on two engines, then fit/freeze/evaluate, justified campaign reuse and selective standards bridges. | The [delivery slices](#delivery-slices-and-integration-order) and [package dependencies](#planned-core-and-product-work-packages) remain binding. The selected MMTT/M4 work does not establish two-engine compatibility or close later packages. |
 
@@ -112,9 +116,56 @@ outside Linux Chromium, release/native qualification, independent usability or
 scientific validity. Historical native jobs retain their private/manual guards
 and remain excluded from the public gate.
 
+### Integrated-main smoke and current status
+
+On 1 November 2026, a bounded local exercise passed all four selected routes
+on clean merged source `a8e677d8241b0ee2174e7f4673bbf9638cbace1e`, after
+PRs [45](https://github.com/OpenT1D/lab/pull/45),
+[49](https://github.com/OpenT1D/lab/pull/49),
+[47](https://github.com/OpenT1D/lab/pull/47) and
+[48](https://github.com/OpenT1D/lab/pull/48). It used a fresh descriptor-6
+`--m3-workbench` wheel and installation outside the checkout on Apple Silicon
+macOS 26.5.2, CPython 3.12.13 and Playwright 1.64.1/Chromium with Node 24.22.1.
+The wheel SHA-256 is
+`bc79edd90f78997e2e85e8c9f5bd2de777dbcd9b2df89cbfd5f28be572599323`;
+its descriptor SHA-256 is
+`beaf394b7d349747fa2e892181156c9958eddc2f313e9e059a5988dc5f3afeb4`.
+No native dependencies were installed or attached, and M4 was not executed in
+this smoke. Earlier exact-artifact native qualification retains its own scope.
+
+| Route | Actual outcome and retained support |
+| --- | --- |
+| MMTT sensitivity and reduced sampling | Passed through the installed browser. Validated and froze a 4.585 L baseline and parent-linked 5.1 L assumption, then froze the three-member comparison before execution. All nine comparison cases completed; independent constant-equilibrium and volume-ratio checks passed. The full/reduced sampling route retained four schedules, five people, three variants, all 60 slots and 1,920 completed draw pairs with 32 draws per slot. Native full-schedule reading/download also passed. |
+| Frozen synthetic M3 comparison | Passed with the unchanged supplied trend/Ridge-coefficient fixtures and persistence, all four slots and both planned people. Each retained 859 origins and 758 common scored origins. All 3,436 saved trace rows were checked against six exact historical five-minute measurements, causal availability and the 30-minute target; exclusions and independently recomputed metrics agreed. No fitting or patient data was used. |
+| Failed attempt and explicit retry | Passed. An installed SDK/CLI deadline retained a real failed forensic first attempt with `WorkerDeadline` and all three planned slots. The browser's explicit retry succeeded and retained its link to the failure. The prospective comparison continued selecting the failed first attempt, with all six unavailable contrasts preserved. UI busy state disabled execution controls and ended with terminal ledger outcomes. |
+| Complete project relocation | Passed. After GUI copying and old-server shutdown, the original workspace/project/input/predictor paths were made unavailable. A fresh process/workspace reproduced the saved MMTT, sampling, M3 and comparison snapshot JSON bytes and ledger identities. All 951 original/copied project files later matched. An additional guarded installed M3 reader check blocked an archived-code execution counterexample and reconstructed identical report bytes without executing saved Python or opening original resources. |
+
+The private local dossier `opent1d-integrated-smoke-20261101` retains
+`REPORT.md`, `final-summary.json`, build/installation receipts, browser commands,
+downloads, semantic and reader-audit receipts, the complete synthetic project,
+cleanup evidence and `evidence/SHA256SUMS.json`. The final-summary SHA-256 is
+`34cec14d031f286b0d2e351ab3b4ca85131197cfadf4e33ce30565899c3a1948`.
+The initial sandbox-only browser launch failed before execution. Later, the
+driver's default five-second assertion expired during a successful freeze;
+shutdown drained it and the remaining routes continued from saved state with
+the repository's thirty-second assertion limit. Earlier successful executions
+were preserved, with zero automatic retries. All three started servers exited
+cleanly, owned cleanup was empty and original paths were restored. No source
+defect or fix was identified by the exercise.
+
+This is local synthetic integration evidence on the named source and artifact,
+not a new hosted CI result, M4/release qualification, broader reader migration,
+independent usability or biological validity. The shared foundation and selected
+MMTT/M4/M3 increments are implemented within their recorded scopes. The
+two-engine controller experiment, full fit/freeze/evaluate chain, wider host
+support and independently usable distribution remain open. The prepared
+[formative MMTT session](docs/mmtt-formative-session.md) can run when an intended
+user is available; it remains separate from the next OT-062 implementation.
+
 ### Selected development window: first integrated laboratory
 
-**Selected 30 October 2026; remaining increments planned.** Build on the
+**Selected 30 October 2026; bounded implementations and integrated smoke recorded
+by 1 November 2026.** The window built on the
 installed SDK, native M4 successor and thin GUI merged through PR 35. Use the
 available development window to extend those bounded working routes through
 one local laboratory. Aim for a researcher to create a project, execute an analysis,
@@ -159,8 +210,8 @@ Extend shared support to both MMTT tasks because they already reuse the same
 numerical core. Keep installed M4 on those services as the unlike scientific
 boundary: forward simulation with an observer versus retrospective inverse
 analysis. Add comparisons and a connected study so the integration produces
-usable research capabilities. M3 is the next unlike task if the primary
-integration succeeds. Measure new adapter code, core/GUI edits, preparation and
+usable research capabilities. M3 now supplies the next unlike task through its
+bounded installed increment. Measure new adapter code, core/GUI edits, preparation and
 verification effort for each migration; route counts or green checks alone
 cannot establish a product benefit.
 
@@ -187,12 +238,13 @@ name any additional host only after its own relevant checks.
 | 2 — Shared sampling and preserved native M4; OT-059/060/061/064/067 | Sampling migration implemented: installed shared services and supplied-example workbench retain its development seal and nested reports; [record and remaining gates](docs/research/installed-mmtt-sampling.md). Reuse the reviewed `m4-study-installed` successor and explicit runtime attachments. | Both MMTT routes execute and reconstruct after relocation without changing the estimator, sampling allocation or original payloads. Preserve OT-059 version-1 fixtures; descriptor version 3 adds sampling with strict legacy rosters. Keep historical M4 exclusion and the successor's dependency/source/rights, reference/refinement/observer/repeat gates. Assess relevant changes against recorded direct/installed parity and complete relocation; qualify new source/runtime identities when changed. A refusal or deadline never substitutes for native success. The existing selected native/offline installed boundary remains recorded as achieved; a new application still requires its own native attachment and relevant qualification. |
 | 3 — Extend the project workbench; OT-065 and bounded OT-072 preparation | Implemented bounded editable workbench: own synthetic MMTT/sampling inputs, selected M4 configurations, recoverable concept revisions, editable assumptions and derived immutable plans; [evidence and limits](docs/research/editable-workbench.md). | Preserve shared GUI/CLI ledger identities, runtime selection, cancellation/shutdown, verified downloads and relocation. Reopening retains concepts/history; changed inputs invalidate validation/readiness and cannot overwrite a freeze. Python/CLI and GUI consume the same scientific plan and native reports. Bounded browser checks cover keyboard/focus, narrow/200-percent text, accessible labels, text status and correction paths; actual screen-reader/independent-user qualification remains open. |
 | 4 — Variants and comparisons; bounded OT-063/064/065 | Implemented bounded [frozen workbench comparisons](docs/research/workbench-comparisons.md): within-plan variants and compatible derived plans, resolved changed fields, task-owned MMTT/sampling and supported M4 source/load tables, and shared SDK/CLI/GUI reconstruction. | Freeze the complete roster before any selected plan executes. Fixed first attempts retain failed, incomplete, unfinished and unattempted cases; later retries cannot replace them. Saved ledger tips reproduce exact reports after later execution or relocation. Authoritative native readers verify preserved evidence without rerunning supplied models. Incompatible endpoint/input/allocation/support/unit/source/reader bindings refuse. Sequential attempts preserve the existing lease and single-unfinished-attempt boundary. The record distinguishes actual/native, controlled, local/hosted and independent-use evidence; broader accessibility, empirical equivalence and reader transitions remain separate. |
-| 5 — Connected synthetic study; bounded OT-063/067 | Implemented versioned known secretion → forward C-peptide → inverse/sampling study through the SDK, CLI and workbench, reusing existing native tasks and readers. [Protocol and evidence](docs/research/connected-synthetic-study.md). | Prospectively freeze the two-source/two-scenario bridge, unchanged 0–120-minute prefix, units, four assumptions, schedules and development allocation. Preserve native 0–240 evidence, independently integrate known input and retain all 72 endpoint rows. Separate matched/mismatch point acceptance from native interval completeness; retain failed and missing cases. Materialization resumes from a sealed intent with fixed child/comparison identities. Exact prefixes reconstruct after retries and relocation without native execution. Current-artifact native admission and qualification remain explicit; failed forward evidence blocks the downstream chain. Step 6 remains the next selected increment and owns a supported changed-reader transition. |
+| 5 — Connected synthetic study; bounded OT-063/067 | Implemented versioned known secretion → forward C-peptide → inverse/sampling study through the SDK, CLI and workbench, reusing existing native tasks and readers. [Protocol and evidence](docs/research/connected-synthetic-study.md). | Prospectively freeze the two-source/two-scenario bridge, unchanged 0–120-minute prefix, units, four assumptions, schedules and development allocation. Preserve native 0–240 evidence, independently integrate known input and retain all 72 endpoint rows. Separate matched/mismatch point acceptance from native interval completeness; retain failed and missing cases. Materialization resumes from a sealed intent with fixed child/comparison identities. Exact prefixes reconstruct after retries and relocation without native execution. Current-artifact native admission and qualification remain explicit; failed forward evidence blocks the downstream chain. Step 6 retains the separately implemented candidate and its pinned comparison-reader transition. |
 | 6 — Internal candidate and handoff; bounded OT-064/072/073 | Retain the [two-MMTT candidate](docs/internal-mmtt-candidate.md) and pinned changed-comparison-reader transition. Add the explicit [integrated M4/connected candidate](docs/internal-integrated-candidate.md), strict descriptor-5 roster, unchanged scientific payload/readers and candidate-bound unanswered preparation. | Qualify exact clean Apple Silicon macOS CPython 3.12 artifacts, including reviewed dependency roles and fresh application/interpreter-bound attachments. Compare a clean merged PR-44 developer predecessor's direct four-slot native execution with the installed candidate across the predeclared scientific byte roster and all inherited numerical/reference gates. Prospectively freeze complete/missing connected studies and M4 comparisons, preserving all 72 rows. Exercise actual installed HTTP run/materialization/download, failure/blocked descendants, numerical cancellation/owned cleanup, relaunch and exact prefix/relocation reading with old applications, projects, inputs and private runtimes physically absent. Preserve the PR-43 MMTT transition, reject unknown native readers and resealed alterations, retain original inventories. Separate root/browser/actual-host/hosted evidence in the PR and qualification receipt. This selects unchanged native readers, not native reader migration. Signing, notarisation, clean-host, native redistribution and intended-user acceptance remain open. |
 
-The ambition is to complete the remaining work in steps 1–6 in the available
-window, building on their recorded partial implementation. A missing current
-runtime attachment or distribution prerequisite leaves that specific acceptance open;
+The bounded implementations in steps 1–6 and the M3 stretch are in place;
+their linked records retain the exact acceptance scope. OT-062 is the next
+selected development increment. A missing current runtime attachment or
+distribution prerequisite leaves that specific acceptance open;
 continue the admitted MMTT work, comparison UI, compatibility tests and session
 preparation. Do not call the smaller candidate full native integration. Keep
 the first user's MMTT exercise available even if the broader internal laboratory
@@ -267,8 +319,16 @@ an adapter remains separate. Future meal/insulin
 features cannot silently enter a historical-CGM-only contract. Keep new external
 dependencies in an identified separate environment.
 
-Next, extend the adapter conformance kit and test a suitable controller contract
-on simglucose and LT1 under OT-062, then a second controller/question. Reuse
+**Selected next: OT-062.** Extend the adapter conformance kit and test a suitable
+controller contract on LT1 and simglucose, then a second controller/question.
+The [contract audit](docs/research/ot062-adapter-audit.md) and
+[runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
+not native execution. Begin with the exact LT1 runtime/security and restricted-use
+rights decisions and a versioned direct/wrapped diagnostic harness/reader. Admit
+setup and bounded C15–C18 host execution separately; preserve the existing guards
+until a reviewed successor is selected. Historical simglucose remains excluded
+from fresh/public setup; assess a separately identified patched successor before
+its native checks. Reuse
 native references and test reset, timing, units, causal inputs, errors and
 refused combinations. Current M2's different complete systems do not satisfy
 that common-controller acceptance. Follow with a concrete fit/freeze/evaluate
@@ -456,10 +516,12 @@ rewritten to fit new contracts.
 
 Slices describe incremental integration, not four large batches. Complete and
 verify a small route before adding another capability. The selected development
-window advances the MMTT/M4 portion of slice 2 on the slice-0 foundation before
-full slice-1 control acceptance, with M3 as stretch. This is the immediate
-implementation priority; slice numbers do not require completing two-engine
-control before offline comparison or biological task migration. Package-specific
+window has implemented bounded MMTT/M4 work from slice 2 on the slice-0 foundation,
+with the M3 stretch and their recorded integration evidence. The next selected
+implementation is OT-062 toward slice-1 control acceptance; the full slice-2
+fit/freeze/evaluate chain and slice-3 independent use remain open. Slice numbers
+do not require completing two-engine control before offline comparison or
+biological task migration. Package-specific
 dependencies still govern each claim. Neither original C1 controller development
 nor new human measurements is a prerequisite for the shared-core extraction.
 
