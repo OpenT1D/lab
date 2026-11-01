@@ -1,0 +1,3312 @@
+{
+  "schema": "opent1d.ot062-runtime-rights-proposal/1",
+  "date": "2026-11-01",
+  "inspected_repository_revision": "af4c13a9dd1d2dd5851cc6f7a302ebc558a096da",
+  "status": "proposal-only; not consumed by installers or execution admission",
+  "authorizations": {
+    "native_installation": false,
+    "native_execution": false,
+    "public_native_ci": false,
+    "native_bundle_distribution": false,
+    "parameter_table_redistribution": false
+  },
+  "collection": {
+    "scope": "Passive metadata/source fetch only; no native package, source installation, import, build or execution",
+    "osv_role_queries": 84,
+    "osv_batch_metadata": [
+      {
+        "url": "https://api.osv.dev/v1/querybatch",
+        "sha256": "9989e511d2aa8f5d21d905dd2decadf7f106f6ef76c0d1dba1f1d177eacc15a5",
+        "bytes": 5249
+      },
+      {
+        "url": "https://api.osv.dev/v1/querybatch",
+        "sha256": "5ce28055944e1331f5bb86e5d00517ec00aafd4fa7a83be037235abce3f4a8bb",
+        "bytes": 387
+      }
+    ],
+    "counts": {
+      "python_lock_packages_excluding_virtual": 34,
+      "pypi_registry_runtime_packages": 32,
+      "git_runtime_packages": 2,
+      "npm_packages_excluding_private_root": 20,
+      "python_build_version_constraints": 2,
+      "runtime_setuptools_vendored_metadata_rows": 16,
+      "build_setuptools_vendored_metadata_rows": 12,
+      "distinct_matching_ghsa_ids": 49,
+      "simglucose_runtime_package_advisory_matches_including_vendor": 49,
+      "simglucose_build_package_advisory_matches_including_vendor": 2,
+      "lt1_npm_package_advisory_matches": 0
+    },
+    "limitations": [
+      "Dated name/version matches, not demonstrated exploitability; PYSEC aliases are not counted as additional vulnerabilities.",
+      "Zero npm matches excludes Node/V8, OS/compiler, upstream Git code and unqueried bundled components.",
+      "Registry URL/hash/integrity matching is not a byte download, signature check, complete SBOM or artifact licence review.",
+      "Only Gym 0.9.4 and the two setuptools wheel archives were fetched and hashed; inspected in memory without extraction/import/install.",
+      "Vendored METADATA establishes presence, not reachability of every code path.",
+      "No native interpreter, runtime setup, import, build or execution was performed."
+    ]
+  },
+  "protected_files": {
+    "experiments/adapter_audit/cases.json": "85f04b94b64642f95efcbd5fafa332dc1d36287af89ea795b38df2b7b502efc9",
+    "experiments/adapter_audit/pins.json": "7ae93840da074932aa55b80b6a4356245310ba1c6cdb03e719892425298d1346",
+    "experiments/c1/g2p2c_policy_source/uv.lock": "5a9d743129f059011d742e6583fb6d507d1e391aaad6aebc1be3442698bede29",
+    "experiments/c1/g2p2c_source/uv.lock": "411ed872e1ef680f7f9b13da80d2af447588db664317c35a995ff1e905d8f06d",
+    "experiments/c1/g2p2c_training_source/uv.lock": "7f07312dc7077aebf106aecb0e1800d55272287b050aafd32c684341dbd2b0e7",
+    "experiments/literature/lit001/runtime/uv.lock": "5c068b0ca01f165ad264fd0724e0ea0dd3fb6ef30d37ef143f00823ba1af3b03",
+    "experiments/m0/lt1/baseline.json": "fcbd8884c88ed1e952a1480e60468efd1ad3849cf18fcbb5a1bd812c61b8465e",
+    "experiments/m0/lt1/package-lock.json": "44ad7ba062a7d67032d91fcc9e0fa2aa3910b3856dce76bee5ba32093c1a150e",
+    "experiments/m0/lt1/package.json": "aafe7717cf0095b1db42ac43861bba419cccae0eca120530f820fffca9305087",
+    "experiments/m0/simglucose/baseline.json": "df1baf9bb878055d296f651b1e6bce2f0a85e273c8367ea0d2564e8d1e7c8f0d",
+    "experiments/m0/simglucose/protocol-settings.json": "6aab9c5268ef0bb10cd01a4b6fd0bb91edc7db3375b5ff987bf745e06678de3d",
+    "experiments/m0/simglucose/pyproject.toml": "6bbb5f49e74bd7df2e11ab39f69754a99ce1e4ef3736573943e3a75118c28007",
+    "experiments/m0/simglucose/uv.lock": "13d254dcebe8d1ab54c3140cdc07152d719a68477a1378d7fe77fc1568612aa9",
+    "experiments/m0/simglucose_secure/uv.lock": "cabe2652c61cdc9f9d8d90447175ac9c36e55939a4c39f0085c12861c6834207",
+    "experiments/m1/baseline.json": "8e84fec115fc9a3812c17e018910ce1b023f735eb09aa0b8838ab792e66331fb",
+    "experiments/m2/baseline.json": "7f50c9a1ba6a07da277917a199000d6cb440c3f631173497386cb8ba82355841",
+    "experiments/m3/runtime/uv.lock": "9d46932ab27160656ffb47d53046784c0dc06ff9072a004e38a959a34bff8717",
+    "experiments/m4/beta_cell/runtime/uv.lock": "c94a955f5d452f84673ac3a83b402779a080cb654ddf391db69d1d092be2bd04",
+    "experiments/m4/installed_study/build_inputs/uv.lock": "f64c12edcf26f41abd97471055a6e0ce5dfdefcb8aff92f3262ef1835b49eea2",
+    "experiments/m4/installed_study/native/uv.lock": "10b6e3cd610d4aec7301d18ec48cd2b8a0e7bb3f37037d4c7e92aa83bb08745f",
+    "experiments/m4/installed_study/observer/uv.lock": "905efbb678399437527a9e43ee37caec2daae961ded869327ff40e2cd7e92fb5",
+    "experiments/ot053_feasibility/webr-runtime/package-lock.json": "5c8a3bc3658de18b91c675abaf7dbc805ac47fa8b5beb7e36fbc27f27aebda38",
+    "publication-rights.json": "fd5f616db72273a0a5c698afa3e8d4b419ecada4c62b754b9b79e0b713bde4f0",
+    "publication-security.json": "c7c0be8620cd2e6405f09203a9a1c1228ad0b078adfcb028fed2140df1325f20",
+    "tests/browser/package-lock.json": "a54539b425f133465346fe2e5b4472440fca376ba7fcfffb0c6c6f981c07171d",
+    "uv.lock": "6681248ff966ad33f728b3d6f1bb109b17415e600c55e445e5f451d503032598"
+  },
+  "simglucose": {
+    "runtime_selector": {
+      "python_requirement": ">=3.12,<3.13",
+      "lock_requirement": "==3.12.*",
+      "historical_execution_patch": "3.12.13",
+      "patch_locked": false
+    },
+    "packages": [
+      {
+        "name": "certifi",
+        "version": "2026.7.22",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/certifi/2026.7.22/json",
+          "sha256": "1cdb529dfcaf4fea8e4fe581726f335a0da5abbbd5bde225205a6911ca1981b1",
+          "bytes": 6515
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)"
+        ],
+        "legacy_license_field_sha256": "09962c1dc23fac80a0e5a88b2eb7051b74a6443a568ca2a045a4ec2fb82aeee5",
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "charset-normalizer",
+        "version": "3.5.1",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/charset-normalizer/3.5.1/json",
+          "sha256": "d023a4c812bc4478f294dbb8b9c7e5699c62a98ed0516129c22982f983d47f95",
+          "bytes": 201829
+        },
+        "license_expression": null,
+        "license_classifiers": [],
+        "legacy_license_field_sha256": "e5dcffe836b6ec8a58e492419b550e65fb8cbdc308503979e5dacb33ac7ea3b7",
+        "lock_artifacts_matched_to_registry_metadata": 34,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "cloudpickle",
+        "version": "3.1.2",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/cloudpickle/3.1.2/json",
+          "sha256": "36cd9b8b2a3b6691c78f87bac524652edbe9e81cda0f13767577174de31954bc",
+          "bytes": 9624
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ],
+        "legacy_license_field_sha256": "118dbcd2d5c9f9b296a9ede9fcc469c5840f7b98ad2c88461055bf2ceda38037",
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "contourpy",
+        "version": "1.3.3",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/contourpy/1.3.3/json",
+          "sha256": "d9f84d19398beebd015473d40ea0b10a1eb96705ee18df05bd947a12584ac28d",
+          "bytes": 68262
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ],
+        "legacy_license_field_sha256": "ff9c6efe67196028eabc503c37ef989abf491e77ccb098e82e460bb55486fcec",
+        "lock_artifacts_matched_to_registry_metadata": 12,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "cycler",
+        "version": "0.12.1",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/cycler/0.12.1/json",
+          "sha256": "c4dc853a4b3611f48cfef3e363faeb85c70af63e3d49fe2c64dbe56ab5d688f0",
+          "bytes": 5598
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ],
+        "legacy_license_field_sha256": "cb7372e1f27c787510db83fea48ded461cb8f0e0c154017f0b1927371ab06df1",
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "dill",
+        "version": "0.4.1",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/dill/0.4.1/json",
+          "sha256": "3f326608b5939dfc66291b30ac368c5667f082dbd307a6434428e02b9639ee02",
+          "bytes": 12362
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ],
+        "legacy_license_field_sha256": "118dbcd2d5c9f9b296a9ede9fcc469c5840f7b98ad2c88461055bf2ceda38037",
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "farama-notifications",
+        "version": "0.0.6",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/farama-notifications/0.0.6/json",
+          "sha256": "255e53466f2342ed6fd2ac3a515fba20840db532ffffc4841f01a13140d081de",
+          "bytes": 3091
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: MIT License"
+        ],
+        "legacy_license_field_sha256": null,
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "fonttools",
+        "version": "4.65.0",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/fonttools/4.65.0/json",
+          "sha256": "27878d8fb497f32c4d9353937229f456b3a39a7d6ee0aa500b15ecc89bcc9cc7",
+          "bytes": 184936
+        },
+        "license_expression": null,
+        "license_classifiers": [],
+        "legacy_license_field_sha256": "e5dcffe836b6ec8a58e492419b550e65fb8cbdc308503979e5dacb33ac7ea3b7",
+        "lock_artifacts_matched_to_registry_metadata": 10,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "glucosim",
+        "version": "0.1.2",
+        "source": {
+          "git": "https://github.com/HassDhia/glucosim?rev=6422a91d533125a8feb4f2e8737aecd67fec95c9#6422a91d533125a8feb4f2e8737aecd67fec95c9"
+        },
+        "advisory_coverage": "Name/version OSV lookup only; no Git-commit advisory coverage or complete source audit"
+      },
+      {
+        "name": "gym",
+        "version": "0.9.4",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/gym/0.9.4/json",
+          "sha256": "b3b7c799c8dae97817825595d27f70fc41b081486bee9be0d600f85e5e9327ce",
+          "bytes": 1996
+        },
+        "license_expression": null,
+        "license_classifiers": [],
+        "legacy_license_field_sha256": null,
+        "lock_artifacts_matched_to_registry_metadata": 1,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "gymnasium",
+        "version": "0.29.1",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/gymnasium/0.29.1/json",
+          "sha256": "ad1e7384824679123fd7f4c6ae7c0e00ea1d1a7272f0131f717401c3304cc9a4",
+          "bytes": 11420
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: MIT License"
+        ],
+        "legacy_license_field_sha256": "abb2896dc3c2a9402f901b88d5035cf0a83d5cf7c17e73642cdf562b0b9d3bc5",
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "idna",
+        "version": "3.19",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/idna/3.19/json",
+          "sha256": "cf4ff5d748a88fe6e9d75ffbcc19b946d304b334dd10baa21bd90fb5566dfa44",
+          "bytes": 11179
+        },
+        "license_expression": "BSD-3-Clause",
+        "license_classifiers": [],
+        "legacy_license_field_sha256": null,
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "kiwisolver",
+        "version": "1.5.1",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/kiwisolver/1.5.1/json",
+          "sha256": "9b4053c476b6cd0da61e905cc5cdf4a7309dc0ce17809475e615c5444ade86fe",
+          "bytes": 128722
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ],
+        "legacy_license_field_sha256": "19d83466d386270c9bf7f7c4b642cc1ab1058e0f460889ee67477d0464ec046a",
+        "lock_artifacts_matched_to_registry_metadata": 19,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "matplotlib",
+        "version": "3.9.4",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/matplotlib/3.9.4/json",
+          "sha256": "d1bb36553f072548cd7ff6eda28f12c1971d31f9d37daac1a9f57abe71461e1c",
+          "bytes": 46458
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: Python Software Foundation License"
+        ],
+        "legacy_license_field_sha256": "21ea37bc0cffee037406eda4b59d4dbedda2334867aabb9827fe808568ff2bca",
+        "lock_artifacts_matched_to_registry_metadata": 7,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "multiprocess",
+        "version": "0.70.19",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/multiprocess/0.70.19/json",
+          "sha256": "0543301c4a1c4760dc2d488d6f668e5d7de468545329103df853049a67c25e30",
+          "bytes": 21661
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ],
+        "legacy_license_field_sha256": "118dbcd2d5c9f9b296a9ede9fcc469c5840f7b98ad2c88461055bf2ceda38037",
+        "lock_artifacts_matched_to_registry_metadata": 5,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "numpy",
+        "version": "1.26.4",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/numpy/1.26.4/json",
+          "sha256": "6c21b66b5bee58d30d9a317e2a7be61c873d5c62ce0bbca553e2fb31228ad3bf",
+          "bytes": 83524
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ],
+        "legacy_license_field_sha256": "9b6b27274d08efb5e6d8579c3049e30272ed26b7ec021bd3012495ca06bc471c",
+        "lock_artifacts_matched_to_registry_metadata": 9,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "packaging",
+        "version": "26.3",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/packaging/26.3/json",
+          "sha256": "4f190d2f0b312b3086058cee64ab4333bf3ce67fb78b4c2bdb43899049b29f4d",
+          "bytes": 5748
+        },
+        "license_expression": "Apache-2.0 OR BSD-2-Clause",
+        "license_classifiers": [],
+        "legacy_license_field_sha256": null,
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "pandas",
+        "version": "2.2.3",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/pandas/2.2.3/json",
+          "sha256": "3ee22756a4588e90895c910825e1d5aa303e43e634f30975c50f84c845cd95b7",
+          "bytes": 113854
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ],
+        "legacy_license_field_sha256": "b3d249b6de52e7674930690939e1b63b9bf405ac9c057f8b53dca169ac366452",
+        "lock_artifacts_matched_to_registry_metadata": 8,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "pathos",
+        "version": "0.3.5",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/pathos/0.3.5/json",
+          "sha256": "a66e123775db73b21a05f270687ce43496200492b4c1bcfdb803b57d997629ce",
+          "bytes": 13688
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ],
+        "legacy_license_field_sha256": "118dbcd2d5c9f9b296a9ede9fcc469c5840f7b98ad2c88461055bf2ceda38037",
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "pillow",
+        "version": "12.3.0",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/pillow/12.3.0/json",
+          "sha256": "5182199d7ea7bc53cf195aed977f24405f13becd6902f6efbddd3f18336e0b57",
+          "bytes": 509639
+        },
+        "license_expression": "MIT-CMU",
+        "license_classifiers": [],
+        "legacy_license_field_sha256": null,
+        "lock_artifacts_matched_to_registry_metadata": 10,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "pox",
+        "version": "0.3.7",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/pox/0.3.7/json",
+          "sha256": "8d8b83c9c15ea0ae293e5f147651422d3dc90aaf2f57dc6d24bb51548a13711b",
+          "bytes": 10246
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ],
+        "legacy_license_field_sha256": "118dbcd2d5c9f9b296a9ede9fcc469c5840f7b98ad2c88461055bf2ceda38037",
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "ppft",
+        "version": "1.7.8",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/ppft/1.7.8/json",
+          "sha256": "acb0fb99ddb765ada023b0a2391f85c02060a2f41a1e60560f9a3a3e1a1f8ca6",
+          "bytes": 14495
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ],
+        "legacy_license_field_sha256": "118dbcd2d5c9f9b296a9ede9fcc469c5840f7b98ad2c88461055bf2ceda38037",
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "pyglet",
+        "version": "2.1.16",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/pyglet/2.1.16/json",
+          "sha256": "bb9b7d250906c5077b3a90c6c2b01a11297551597089276e5ed390a19993ecad",
+          "bytes": 10485
+        },
+        "license_expression": null,
+        "license_classifiers": [],
+        "legacy_license_field_sha256": null,
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "pyparsing",
+        "version": "3.3.2",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/pyparsing/3.3.2/json",
+          "sha256": "b1adcb43a955d54b3b63ed35c5bd301cc24db1a31c31d108ea1064421906b3c2",
+          "bytes": 7910
+        },
+        "license_expression": "MIT",
+        "license_classifiers": [],
+        "legacy_license_field_sha256": null,
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "python-dateutil",
+        "version": "2.9.0.post0",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/python-dateutil/2.9.0.post0/json",
+          "sha256": "7938916002e8d70c9d32cbaf43c467d163af3aadd8c3b358bda5babd1f7836ee",
+          "bytes": 10760
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: Apache Software License",
+          "License :: OSI Approved :: BSD License"
+        ],
+        "legacy_license_field_sha256": "199628ddb098f90709bb2dc43f816a5a40fe31690de0e25d0f4d6455fe6bc609",
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "pytz",
+        "version": "2026.3.post1",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/pytz/2026.3.post1/json",
+          "sha256": "86c1192833f41ef1b5ab7fb56424ebb16e4bca9dda41b04656545cc97aeb18fd",
+          "bytes": 25296
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: MIT License"
+        ],
+        "legacy_license_field_sha256": "e5dcffe836b6ec8a58e492419b550e65fb8cbdc308503979e5dacb33ac7ea3b7",
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "requests",
+        "version": "2.34.2",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/requests/2.34.2/json",
+          "sha256": "8622e50ffd295ed759ec793f2a009172a4ed0204bbc5e948de23111bc3d2aeae",
+          "bytes": 6811
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: Apache Software License"
+        ],
+        "legacy_license_field_sha256": "2af71558e438db0b73a20beab92dc278a94e1bbe974c00c1a33e3ab62d53a608",
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "scipy",
+        "version": "1.13.1",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/scipy/1.13.1/json",
+          "sha256": "2a6161d32eaa2f69a091026940f18610eabddda17059db8abace1628ff03ab70",
+          "bytes": 73767
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ],
+        "legacy_license_field_sha256": "9edf439279800458af754d2e511edcb678d643fa6220910b867bb865bd2dba2d",
+        "lock_artifacts_matched_to_registry_metadata": 7,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "setuptools",
+        "version": "80.9.0",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/setuptools/80.9.0/json",
+          "sha256": "e3188a9a8921b0bd16ae2728753269376a4b90ca3413f67b77f77417ab2e503e",
+          "bytes": 15392
+        },
+        "license_expression": "MIT",
+        "license_classifiers": [],
+        "legacy_license_field_sha256": null,
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "simglucose",
+        "version": "0.2.11",
+        "source": {
+          "git": "https://github.com/jxx123/simglucose?rev=a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc#a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc"
+        },
+        "advisory_coverage": "Name/version OSV lookup only; no Git-commit advisory coverage or complete source audit"
+      },
+      {
+        "name": "six",
+        "version": "1.17.0",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/six/1.17.0/json",
+          "sha256": "d8de39dd52b73048d81a8fd78022ee2bc72f8b568bcf0d88e5d5069c302b1208",
+          "bytes": 3904
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: MIT License"
+        ],
+        "legacy_license_field_sha256": "e5dcffe836b6ec8a58e492419b550e65fb8cbdc308503979e5dacb33ac7ea3b7",
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "typing-extensions",
+        "version": "4.16.0",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/typing-extensions/4.16.0/json",
+          "sha256": "2140da00d62dde967f52d0be0ae28444f1d6a3fe603f52c83c23988c32122d5a",
+          "bytes": 5631
+        },
+        "license_expression": "PSF-2.0",
+        "license_classifiers": [],
+        "legacy_license_field_sha256": null,
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "tzdata",
+        "version": "2026.4",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/tzdata/2026.4/json",
+          "sha256": "09e4769272b45f018103a9ad940932650089144456b4e1481299efc03e5c7f46",
+          "bytes": 3613
+        },
+        "license_expression": null,
+        "license_classifiers": [],
+        "legacy_license_field_sha256": "2af71558e438db0b73a20beab92dc278a94e1bbe974c00c1a33e3ab62d53a608",
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "urllib3",
+        "version": "2.7.0",
+        "source": {
+          "registry": "https://pypi.org/simple"
+        },
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/urllib3/2.7.0/json",
+          "sha256": "54db1e362e04e390c23c2182dd425a6b3f0c1a73c5bd3f3e40611c3590c7a43a",
+          "bytes": 30292
+        },
+        "license_expression": "MIT",
+        "license_classifiers": [],
+        "legacy_license_field_sha256": null,
+        "lock_artifacts_matched_to_registry_metadata": 2,
+        "artifact_bytes_verified": false
+      }
+    ],
+    "build_constraints": [
+      {
+        "name": "setuptools",
+        "version": "84.0.0",
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/setuptools/84.0.0/json",
+          "sha256": "fc55c3c123a680b2f77f3071bc028741023be1c67f076b878907e5a3823b2dbd",
+          "bytes": 11090
+        },
+        "license_expression": "MIT",
+        "license_classifiers": [],
+        "scope": "Version constraint only; not a complete separately locked build closure or historical artifact receipt"
+      },
+      {
+        "name": "wheel",
+        "version": "0.43.0",
+        "registry_metadata": {
+          "url": "https://pypi.org/pypi/wheel/0.43.0/json",
+          "sha256": "b236a383bb98557efcfa9369b505c89120fc9555fbd348c8c61cc14702be24c8",
+          "bytes": 11865
+        },
+        "license_expression": null,
+        "license_classifiers": [
+          "License :: OSI Approved :: MIT License"
+        ],
+        "scope": "Version constraint only; not a complete separately locked build closure or historical artifact receipt"
+      }
+    ],
+    "vendored_archives": [
+      {
+        "role": "runtime",
+        "setuptools_version": "80.9.0",
+        "archive": {
+          "url": "https://files.pythonhosted.org/packages/a3/dc/17031897dae0efacfea57dfd3a82fdd2a2aeb58e0ff71b77b87e44edc772/setuptools-80.9.0-py3-none-any.whl",
+          "sha256": "062d34222ad13e0cc312a4c02d73f059e86a4acbfbdea8f8f76b28c99f306922",
+          "bytes": 1201486
+        },
+        "version_binding": "exact historical runtime lock",
+        "vendored_distributions": [
+          {
+            "name": "autocommand",
+            "version": "2.2.2",
+            "metadata_path": "setuptools/_vendor/autocommand-2.2.2.dist-info/METADATA",
+            "metadata_sha256": "3800d9b91dceea2065a6ed6279383362e97ac38b8e56b9343f404ee531860099",
+            "license_expression": null,
+            "legacy_license_first_line": "LGPLv3",
+            "license_classifiers": [
+              "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)"
+            ]
+          },
+          {
+            "name": "backports.tarfile",
+            "version": "1.2.0",
+            "metadata_path": "setuptools/_vendor/backports.tarfile-1.2.0.dist-info/METADATA",
+            "metadata_sha256": "8215c54ead77d9dc5a108a25c6bdc72b5999aa6f62c9499a440359412afa5a51",
+            "license_expression": null,
+            "legacy_license_first_line": null,
+            "license_classifiers": [
+              "License :: OSI Approved :: MIT License"
+            ]
+          },
+          {
+            "name": "importlib_metadata",
+            "version": "8.0.0",
+            "metadata_path": "setuptools/_vendor/importlib_metadata-8.0.0.dist-info/METADATA",
+            "metadata_sha256": "6a7b90effee1e09d5b484cdf7232016a43e2d9cc9543bcbb8e494b1ec05e1f59",
+            "license_expression": null,
+            "legacy_license_first_line": null,
+            "license_classifiers": [
+              "License :: OSI Approved :: Apache Software License"
+            ]
+          },
+          {
+            "name": "inflect",
+            "version": "7.3.1",
+            "metadata_path": "setuptools/_vendor/inflect-7.3.1.dist-info/METADATA",
+            "metadata_sha256": "66030d634580651b3e53cc19895d9231f8d22aa06b327817c8332cfc20303308",
+            "license_expression": null,
+            "legacy_license_first_line": null,
+            "license_classifiers": [
+              "License :: OSI Approved :: MIT License"
+            ]
+          },
+          {
+            "name": "jaraco.collections",
+            "version": "5.1.0",
+            "metadata_path": "setuptools/_vendor/jaraco.collections-5.1.0.dist-info/METADATA",
+            "metadata_sha256": "20c51a96236c0395f53b1f4c5d458e6a0721e51e16c1bff733b7aba76f5d06d8",
+            "license_expression": null,
+            "legacy_license_first_line": null,
+            "license_classifiers": [
+              "License :: OSI Approved :: MIT License"
+            ]
+          },
+          {
+            "name": "jaraco.context",
+            "version": "5.3.0",
+            "metadata_path": "setuptools/_vendor/jaraco.context-5.3.0.dist-info/METADATA",
+            "metadata_sha256": "c43b60b897a3d2d37d8845c252fc44261d9aef171e21154111a9012d2afffed6",
+            "license_expression": null,
+            "legacy_license_first_line": null,
+            "license_classifiers": [
+              "License :: OSI Approved :: MIT License"
+            ]
+          },
+          {
+            "name": "jaraco.functools",
+            "version": "4.0.1",
+            "metadata_path": "setuptools/_vendor/jaraco.functools-4.0.1.dist-info/METADATA",
+            "metadata_sha256": "8b86946900d7fa38dd1102b9c1ebe17a0cb1f09c8b7e29f61f2bda4a4dc51eca",
+            "license_expression": null,
+            "legacy_license_first_line": null,
+            "license_classifiers": [
+              "License :: OSI Approved :: MIT License"
+            ]
+          },
+          {
+            "name": "jaraco.text",
+            "version": "3.12.1",
+            "metadata_path": "setuptools/_vendor/jaraco.text-3.12.1.dist-info/METADATA",
+            "metadata_sha256": "03359d9ba56231f0ce3e840c7cb5a7db380141218949ccaa78ddbd4dcb965d52",
+            "license_expression": null,
+            "legacy_license_first_line": null,
+            "license_classifiers": [
+              "License :: OSI Approved :: MIT License"
+            ]
+          },
+          {
+            "name": "more-itertools",
+            "version": "10.3.0",
+            "metadata_path": "setuptools/_vendor/more_itertools-10.3.0.dist-info/METADATA",
+            "metadata_sha256": "0453bdd0ef9f2cd89540ca63ee8212e73b73809514419dd3037d8fe471f737e0",
+            "license_expression": null,
+            "legacy_license_first_line": null,
+            "license_classifiers": [
+              "License :: OSI Approved :: MIT License"
+            ]
+          },
+          {
+            "name": "packaging",
+            "version": "24.2",
+            "metadata_path": "setuptools/_vendor/packaging-24.2.dist-info/METADATA",
+            "metadata_sha256": "a211fceacea4e6621f4316364d2d0b7127c00de3856b8062082f9bc5957ea4db",
+            "license_expression": null,
+            "legacy_license_first_line": null,
+            "license_classifiers": [
+              "License :: OSI Approved :: Apache Software License",
+              "License :: OSI Approved :: BSD License"
+            ]
+          },
+          {
+            "name": "platformdirs",
+            "version": "4.2.2",
+            "metadata_path": "setuptools/_vendor/platformdirs-4.2.2.dist-info/METADATA",
+            "metadata_sha256": "ce6b227b4d46d4cb57474c2022fe57a557933bb89daf4596bdf9b12ac296b869",
+            "license_expression": "MIT",
+            "legacy_license_first_line": null,
+            "license_classifiers": [
+              "License :: OSI Approved :: MIT License"
+            ]
+          },
+          {
+            "name": "tomli",
+            "version": "2.0.1",
+            "metadata_path": "setuptools/_vendor/tomli-2.0.1.dist-info/METADATA",
+            "metadata_sha256": "ccf0dc78a98fc0918b5ad67292b1e2c4bed65575a6246cd9d63c914f9942a0f2",
+            "license_expression": null,
+            "legacy_license_first_line": null,
+            "license_classifiers": [
+              "License :: OSI Approved :: MIT License"
+            ]
+          },
+          {
+            "name": "typeguard",
+            "version": "4.3.0",
+            "metadata_path": "setuptools/_vendor/typeguard-4.3.0.dist-info/METADATA",
+            "metadata_sha256": "cf675c1c0a744f08580855390de87cc77d676b312582e8d4cfdb5bb8fd298d21",
+            "license_expression": null,
+            "legacy_license_first_line": "MIT",
+            "license_classifiers": [
+              "License :: OSI Approved :: MIT License"
+            ]
+          },
+          {
+            "name": "typing_extensions",
+            "version": "4.12.2",
+            "metadata_path": "setuptools/_vendor/typing_extensions-4.12.2.dist-info/METADATA",
+            "metadata_sha256": "05e51021af1c9d86eb8d6c7e37c4cece733d5065b91a6d8389c5690ed440f16d",
+            "license_expression": null,
+            "legacy_license_first_line": null,
+            "license_classifiers": [
+              "License :: OSI Approved :: Python Software Foundation License"
+            ]
+          },
+          {
+            "name": "wheel",
+            "version": "0.45.1",
+            "metadata_path": "setuptools/_vendor/wheel-0.45.1.dist-info/METADATA",
+            "metadata_sha256": "98acfce07ee6ee3b31272cde21c4d53918936f434f315dfd2af3886211a09a30",
+            "license_expression": null,
+            "legacy_license_first_line": null,
+            "license_classifiers": [
+              "License :: OSI Approved :: MIT License"
+            ]
+          },
+          {
+            "name": "zipp",
+            "version": "3.19.2",
+            "metadata_path": "setuptools/_vendor/zipp-3.19.2.dist-info/METADATA",
+            "metadata_sha256": "508ae4fe43081c64b0b0a2828588b3a8cc3430c6693d1676662569400b0dfdb1",
+            "license_expression": null,
+            "legacy_license_first_line": null,
+            "license_classifiers": [
+              "License :: OSI Approved :: MIT License"
+            ]
+          }
+        ]
+      },
+      {
+        "role": "build",
+        "setuptools_version": "84.0.0",
+        "archive": {
+          "url": "https://files.pythonhosted.org/packages/95/9c/c510029fc6ef33a6275cd2c5d3cecd6613dfd6aa401d57c54f1c18852ccf/setuptools-84.0.0-py3-none-any.whl",
+          "sha256": "51a52592b3b99e102b609654876bd65f19f999935166d1352678931132b0c670",
+          "bytes": 818216
+        },
+        "version_binding": "version constraint plus retrieved registry artifact; no historical build-artifact lock",
+        "vendored_distributions": [
+          {
+            "name": "autocommand",
+            "version": "2.2.2",
+            "metadata_path": "setuptools/_vendor/autocommand-2.2.2.dist-info/METADATA",
+            "metadata_sha256": "3800d9b91dceea2065a6ed6279383362e97ac38b8e56b9343f404ee531860099",
+            "license_expression": null,
+            "legacy_license_first_line": "LGPLv3",
+            "license_classifiers": [
+              "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)"
+            ]
+          },
+          {
+            "name": "backports.tarfile",
+            "version": "1.2.0",
+            "metadata_path": "setuptools/_vendor/backports.tarfile-1.2.0.dist-info/METADATA",
+            "metadata_sha256": "8215c54ead77d9dc5a108a25c6bdc72b5999aa6f62c9499a440359412afa5a51",
+            "license_expression": null,
+            "legacy_license_first_line": null,
+            "license_classifiers": [
+              "License :: OSI Approved :: MIT License"
+            ]
+          },
+          {
+            "name": "importlib_metadata",
+            "version": "8.7.1",
+            "metadata_path": "setuptools/_vendor/importlib_metadata-8.7.1.dist-info/METADATA",
+            "metadata_sha256": "a3e38b9ee4326289d4864704f30e299ee769e2309ce9f4a75f0de1a50ad0a356",
+            "license_expression": "Apache-2.0",
+            "legacy_license_first_line": null,
+            "license_classifiers": []
+          },
+          {
+            "name": "jaraco.text",
+            "version": "4.0.0",
+            "metadata_path": "setuptools/_vendor/jaraco.text-4.0.0.dist-info/METADATA",
+            "metadata_sha256": "5c2fd09012c954f139b10624978d5335a654c34014cd06f6f466ca683dbc9c56",
+            "license_expression": null,
+            "legacy_license_first_line": null,
+            "license_classifiers": [
+              "License :: OSI Approved :: MIT License"
+            ]
+          },
+          {
+            "name": "jaraco.context",
+            "version": "6.1.0",
+            "metadata_path": "setuptools/_vendor/jaraco_context-6.1.0.dist-info/METADATA",
+            "metadata_sha256": "0435ebfc52055c5a9974ed20c171b6454383eaf9dbb1508814ba7ad97c59d712",
+            "license_expression": "MIT",
+            "legacy_license_first_line": null,
+            "license_classifiers": []
+          },
+          {
+            "name": "jaraco.functools",
+            "version": "4.4.0",
+            "metadata_path": "setuptools/_vendor/jaraco_functools-4.4.0.dist-info/METADATA",
+            "metadata_sha256": "2e79da8dc3469924abe3ac8b22a3feb5692a79bf9f47bbc86b6535d618641849",
+            "license_expression": "MIT",
+            "legacy_license_first_line": null,
+            "license_classifiers": []
+          },
+          {
+            "name": "more-itertools",
+            "version": "10.8.0",
+            "metadata_path": "setuptools/_vendor/more_itertools-10.8.0.dist-info/METADATA",
+            "metadata_sha256": "6ab3515145abe58b067f087c867631cf4cf5d653fed81b9642ee12086c3904b8",
+            "license_expression": "MIT",
+            "legacy_license_first_line": null,
+            "license_classifiers": []
+          },
+          {
+            "name": "packaging",
+            "version": "26.0",
+            "metadata_path": "setuptools/_vendor/packaging-26.0.dist-info/METADATA",
+            "metadata_sha256": "3362bb7d6a26da2962ba8daaa4785cd0bacac21aba908a1195cc8f59580a265a",
+            "license_expression": "Apache-2.0 OR BSD-2-Clause",
+            "legacy_license_first_line": null,
+            "license_classifiers": []
+          },
+          {
+            "name": "platformdirs",
+            "version": "4.4.0",
+            "metadata_path": "setuptools/_vendor/platformdirs-4.4.0.dist-info/METADATA",
+            "metadata_sha256": "bbc5216d5f4c77bfbc57227264d52e66bccde71ccf79e75e1a6046d029d30223",
+            "license_expression": "MIT",
+            "legacy_license_first_line": null,
+            "license_classifiers": [
+              "License :: OSI Approved :: MIT License"
+            ]
+          },
+          {
+            "name": "tomli",
+            "version": "2.4.0",
+            "metadata_path": "setuptools/_vendor/tomli-2.4.0.dist-info/METADATA",
+            "metadata_sha256": "f5ac0a1f8fba908b4646cd655309e91aad969b6787616ac571ca462a3832ffce",
+            "license_expression": "MIT",
+            "legacy_license_first_line": null,
+            "license_classifiers": []
+          },
+          {
+            "name": "wheel",
+            "version": "0.46.3",
+            "metadata_path": "setuptools/_vendor/wheel-0.46.3.dist-info/METADATA",
+            "metadata_sha256": "22910aa97ca89cbcc20a019e27fe31360b7929a4bd66ca0d310f99a44f6ccd35",
+            "license_expression": "MIT",
+            "legacy_license_first_line": null,
+            "license_classifiers": []
+          },
+          {
+            "name": "zipp",
+            "version": "3.23.0",
+            "metadata_path": "setuptools/_vendor/zipp-3.23.0.dist-info/METADATA",
+            "metadata_sha256": "bdd67d4d16cf0bf3b893e7d18cd3d2d774adb82f37ed985bc7770c607226b35b",
+            "license_expression": "MIT",
+            "legacy_license_first_line": null,
+            "license_classifiers": []
+          }
+        ]
+      }
+    ],
+    "proposal": "Keep historical fresh/public installation excluded. Assess a new separately identified patched successor before any setup; any retained historical private reproduction requires a separate exact-artifact risk/use authorization."
+  },
+  "lt1": {
+    "upstream_revision": "9a6092065bd821f88691cd8d03b0550acd665573",
+    "node_guard": "22.22.2",
+    "packages": [
+      {
+        "name": "@cspotcode/source-map-support",
+        "version": "0.8.1",
+        "resolved": "https://registry.npmjs.org/@cspotcode/source-map-support/-/source-map-support-0.8.1.tgz",
+        "integrity": "sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==",
+        "registry_metadata": {
+          "url": "https://registry.npmjs.org/%40cspotcode%2Fsource-map-support/0.8.1",
+          "sha256": "dc842488ca0a56516df96cd06a52879d1a18b030c0b2551f5ff188fff73c62d4",
+          "bytes": 2731
+        },
+        "declared_license": "MIT",
+        "lifecycle_scripts": {},
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "@jridgewell/resolve-uri",
+        "version": "3.1.2",
+        "resolved": "https://registry.npmjs.org/@jridgewell/resolve-uri/-/resolve-uri-3.1.2.tgz",
+        "integrity": "sha512-bRISgCIjP20/tbWSPWMEi54QVPRZExkuD9lJL+UIxUKtwVJA8wW1Trb1jMs1RFXo1CBTNZ/5hpC9QvmKWdopKw==",
+        "registry_metadata": {
+          "url": "https://registry.npmjs.org/%40jridgewell%2Fresolve-uri/3.1.2",
+          "sha256": "4179096ded7325b5e30ff15c1c97bea61e46c6ea8ebc7809f3fd380d70cc477a",
+          "bytes": 2776
+        },
+        "declared_license": "MIT",
+        "lifecycle_scripts": {},
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "@jridgewell/sourcemap-codec",
+        "version": "1.6.0",
+        "resolved": "https://registry.npmjs.org/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.6.0.tgz",
+        "integrity": "sha512-T7jf+5zgsZHwNJ4lvQ7/aezbyk0nNX+zJVWpmHA7VYsEx7a7qr5Rg5IbtJFqkgze5Y2sruq1RUY8Q837Od7iFw==",
+        "registry_metadata": {
+          "url": "https://registry.npmjs.org/%40jridgewell%2Fsourcemap-codec/1.6.0",
+          "sha256": "c64e07350f24b5dcbce77e6538e8369e7694f15033719d186bb4d951180a2f95",
+          "bytes": 2996
+        },
+        "declared_license": "MIT",
+        "lifecycle_scripts": {},
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "@jridgewell/trace-mapping",
+        "version": "0.3.9",
+        "resolved": "https://registry.npmjs.org/@jridgewell/trace-mapping/-/trace-mapping-0.3.9.tgz",
+        "integrity": "sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==",
+        "registry_metadata": {
+          "url": "https://registry.npmjs.org/%40jridgewell%2Ftrace-mapping/0.3.9",
+          "sha256": "e01dca0fe4bc12e40e108958694d2a6980952fe8a719f8a68ac58a4b576cc5eb",
+          "bytes": 3838
+        },
+        "declared_license": "MIT",
+        "lifecycle_scripts": {},
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "@tsconfig/node10",
+        "version": "1.0.13",
+        "resolved": "https://registry.npmjs.org/@tsconfig/node10/-/node10-1.0.13.tgz",
+        "integrity": "sha512-gcLdvR9HO1ZJBypsOGqaP6TFEzb6vIta0KSTLt9NAQ6pXQO3cRgSVyCN6pzYqI9DlJgY71XKO0dpDhCf08b3pg==",
+        "registry_metadata": {
+          "url": "https://registry.npmjs.org/%40tsconfig%2Fnode10/1.0.13",
+          "sha256": "885abc7c16bda9a7701acd708cd2927ed2b942371853fc0126cde21e49c78305",
+          "bytes": 1690
+        },
+        "declared_license": "MIT",
+        "lifecycle_scripts": {},
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "@tsconfig/node12",
+        "version": "1.0.11",
+        "resolved": "https://registry.npmjs.org/@tsconfig/node12/-/node12-1.0.11.tgz",
+        "integrity": "sha512-cqefuRsh12pWyGsIoBKJA9luFu3mRxCA+ORZvA4ktLSzIuCUtWVxGIuXigEwO5/ywWFMZ2QEGKWvkZG1zDMTag==",
+        "registry_metadata": {
+          "url": "https://registry.npmjs.org/%40tsconfig%2Fnode12/1.0.11",
+          "sha256": "758a4e2218cbba66c2b894757b8f54ed5fa63fca239bc4325803f648aa5412d7",
+          "bytes": 2260
+        },
+        "declared_license": "MIT",
+        "lifecycle_scripts": {},
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "@tsconfig/node14",
+        "version": "1.0.3",
+        "resolved": "https://registry.npmjs.org/@tsconfig/node14/-/node14-1.0.3.tgz",
+        "integrity": "sha512-ysT8mhdixWK6Hw3i1V2AeRqZ5WfXg1G43mqoYlM2nc6388Fq5jcXyr5mRsqViLx/GJYdoL0bfXD8nmF+Zn/Iow==",
+        "registry_metadata": {
+          "url": "https://registry.npmjs.org/%40tsconfig%2Fnode14/1.0.3",
+          "sha256": "831c354adc1545a73e5e856cd4ac8d4f6c36cff27d524fa4924559566778cedc",
+          "bytes": 2256
+        },
+        "declared_license": "MIT",
+        "lifecycle_scripts": {},
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "@tsconfig/node16",
+        "version": "1.0.4",
+        "resolved": "https://registry.npmjs.org/@tsconfig/node16/-/node16-1.0.4.tgz",
+        "integrity": "sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==",
+        "registry_metadata": {
+          "url": "https://registry.npmjs.org/%40tsconfig%2Fnode16/1.0.4",
+          "sha256": "413558df59bc8bf1aed67d996da2b37c067207963b584d2499aeaa9b4a1ee518",
+          "bytes": 1337
+        },
+        "declared_license": "MIT",
+        "lifecycle_scripts": {},
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "@types/node",
+        "version": "22.10.7",
+        "resolved": "https://registry.npmjs.org/@types/node/-/node-22.10.7.tgz",
+        "integrity": "sha512-V09KvXxFiutGp6B7XkpaDXlNadZxrzajcY50EuoLIpQ6WWYCSvf19lVIazzfIzQvhUN2HjX12spLojTnhuKlGg==",
+        "registry_metadata": {
+          "url": "https://registry.npmjs.org/%40types%2Fnode/22.10.7",
+          "sha256": "7034affd1b29d42e8766194c695d111d87575bf5d542bc2c13386dcb7a8291ad",
+          "bytes": 4833
+        },
+        "declared_license": "MIT",
+        "lifecycle_scripts": {},
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "acorn",
+        "version": "8.18.0",
+        "resolved": "https://registry.npmjs.org/acorn/-/acorn-8.18.0.tgz",
+        "integrity": "sha512-lGq+9yr1/GuAWaVYIHRjvvySG5/4VfKIvC8EWxStPdcDh/Ka7FG3twP6v4d5BkravUilhIAsG4Qj83t02LWUPQ==",
+        "registry_metadata": {
+          "url": "https://registry.npmjs.org/acorn/8.18.0",
+          "sha256": "2c1a496478ffce47483887d731d05c627705ae27cbbab52786ae2916717232ae",
+          "bytes": 1758
+        },
+        "declared_license": "MIT",
+        "lifecycle_scripts": {
+          "prepare": "cd ..; npm run build:main"
+        },
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "acorn-walk",
+        "version": "8.3.5",
+        "resolved": "https://registry.npmjs.org/acorn-walk/-/acorn-walk-8.3.5.tgz",
+        "integrity": "sha512-HEHNfbars9v4pgpW6SO1KSPkfoS0xVOM/9UzkJltjlsHZmJasxg8aXkuZa7SMf8vKGIBhpUsPluQSqhJFCqebw==",
+        "registry_metadata": {
+          "url": "https://registry.npmjs.org/acorn-walk/8.3.5",
+          "sha256": "a5883276056f5c6636bc6a1e7afdeedfdbe34738ada05242f7226e9381b978cd",
+          "bytes": 1621
+        },
+        "declared_license": "MIT",
+        "lifecycle_scripts": {
+          "prepare": "cd ..; npm run build:walk"
+        },
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "arg",
+        "version": "4.1.3",
+        "resolved": "https://registry.npmjs.org/arg/-/arg-4.1.3.tgz",
+        "integrity": "sha512-58S9QDqG0Xx27YwPSt9fJxivjYl432YCwfDMfZ+71RAqUrZef7LrKQZ3LHLOwCS4FLNBplP533Zx895SeOCHvA==",
+        "registry_metadata": {
+          "url": "https://registry.npmjs.org/arg/4.1.3",
+          "sha256": "97b25dfb0ca67a039f5c5f68b898bf79561b27e4a0b9b7e79eed7de3892a2e10",
+          "bytes": 5188
+        },
+        "declared_license": "MIT",
+        "lifecycle_scripts": {},
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "create-require",
+        "version": "1.1.1",
+        "resolved": "https://registry.npmjs.org/create-require/-/create-require-1.1.1.tgz",
+        "integrity": "sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==",
+        "registry_metadata": {
+          "url": "https://registry.npmjs.org/create-require/1.1.1",
+          "sha256": "62ade7ac3e2cdeae406983d50df94ae94ee358a8b7359d0d3b7949dec7e072c1",
+          "bytes": 2716
+        },
+        "declared_license": "MIT",
+        "lifecycle_scripts": {},
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "diff",
+        "version": "4.0.4",
+        "resolved": "https://registry.npmjs.org/diff/-/diff-4.0.4.tgz",
+        "integrity": "sha512-X07nttJQkwkfKfvTPG/KSnE2OMdcUCao6+eXF3wmnIQRn2aPAHH3VxDbDOdegkd6JbPsXqShpvEOHfAT+nCNwQ==",
+        "registry_metadata": {
+          "url": "https://registry.npmjs.org/diff/4.0.4",
+          "sha256": "86d6ce353c1373ccee61d473170d0724cf4d5f1fccbdc0c6af58e9a68ca95f63",
+          "bytes": 4157
+        },
+        "declared_license": "BSD-3-Clause",
+        "lifecycle_scripts": {},
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "make-error",
+        "version": "1.3.6",
+        "resolved": "https://registry.npmjs.org/make-error/-/make-error-1.3.6.tgz",
+        "integrity": "sha512-s8UhlNe7vPKomQhC1qFelMokr/Sc3AgNbso3n74mVPA5LTZwkB9NlXf4XPamLxJE8h0gh73rM94xvwRT2CVInw==",
+        "registry_metadata": {
+          "url": "https://registry.npmjs.org/make-error/1.3.6",
+          "sha256": "b4f23e5eba8a0bfea81bd13abf0df53fd41f261172533f30e7ee9a068daeeda6",
+          "bytes": 3080
+        },
+        "declared_license": "ISC",
+        "lifecycle_scripts": {},
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "ts-node",
+        "version": "10.9.2",
+        "resolved": "https://registry.npmjs.org/ts-node/-/ts-node-10.9.2.tgz",
+        "integrity": "sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==",
+        "registry_metadata": {
+          "url": "https://registry.npmjs.org/ts-node/10.9.2",
+          "sha256": "9f90ab5d4c50dee32e2034b35a1ff1a8405797b49dfb4c54871400d08b010a44",
+          "bytes": 5773
+        },
+        "declared_license": "MIT",
+        "lifecycle_scripts": {
+          "prepare": "npm run clean && npm run build-nopack"
+        },
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "typescript",
+        "version": "5.7.3",
+        "resolved": "https://registry.npmjs.org/typescript/-/typescript-5.7.3.tgz",
+        "integrity": "sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==",
+        "registry_metadata": {
+          "url": "https://registry.npmjs.org/typescript/5.7.3",
+          "sha256": "b2b2d8f7f402dfbc69f9ed9030d9a8d330e49542ad90d3ddc6260a7bbc26990e",
+          "bytes": 3945
+        },
+        "declared_license": "Apache-2.0",
+        "lifecycle_scripts": {},
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "undici-types",
+        "version": "6.20.0",
+        "resolved": "https://registry.npmjs.org/undici-types/-/undici-types-6.20.0.tgz",
+        "integrity": "sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==",
+        "registry_metadata": {
+          "url": "https://registry.npmjs.org/undici-types/6.20.0",
+          "sha256": "df1111526477f39063b5e3d04be5240dd9446359e913c7625d2fc1a95edd0cf5",
+          "bytes": 1731
+        },
+        "declared_license": "MIT",
+        "lifecycle_scripts": {},
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "v8-compile-cache-lib",
+        "version": "3.0.1",
+        "resolved": "https://registry.npmjs.org/v8-compile-cache-lib/-/v8-compile-cache-lib-3.0.1.tgz",
+        "integrity": "sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==",
+        "registry_metadata": {
+          "url": "https://registry.npmjs.org/v8-compile-cache-lib/3.0.1",
+          "sha256": "2a382c5ac391bce0f363de9745a1809447005e5d6a4d528964bb0de52188cec0",
+          "bytes": 2661
+        },
+        "declared_license": "MIT",
+        "lifecycle_scripts": {},
+        "artifact_bytes_verified": false
+      },
+      {
+        "name": "yn",
+        "version": "3.1.1",
+        "resolved": "https://registry.npmjs.org/yn/-/yn-3.1.1.tgz",
+        "integrity": "sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==",
+        "registry_metadata": {
+          "url": "https://registry.npmjs.org/yn/3.1.1",
+          "sha256": "bf92b639c0eb7bf670b96c834b18c9f6e6a9c1188149aab47f98a11f88d43d6f",
+          "bytes": 2379
+        },
+        "declared_license": "MIT",
+        "lifecycle_scripts": {},
+        "artifact_bytes_verified": false
+      }
+    ],
+    "static_import_review": {
+      "scope": "Conservative text import closure including type imports; not a runtime trace or complete source inventory",
+      "roots": [
+        "src/core/Simulator.ts",
+        "src/core/models/Cambridge.ts",
+        "src/core/sensors/IdealCGM.ts",
+        "src/core/actuators/StaticInsulinPump.ts",
+        "src/core/controllers/PID.ts",
+        "src/core/controllers/MPC_Hovorka2004.ts",
+        "examples/MPC/IFAC_EDT_2025_Hauser/scripts/ReferenceScenario.ts"
+      ],
+      "files": {
+        "examples/MPC/IFAC_EDT_2025_Hauser/scripts/ReferenceScenario.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/examples/MPC/IFAC_EDT_2025_Hauser/scripts/ReferenceScenario.ts",
+          "sha256": "0f83faca10d32d345b3385b398329e180e41f667632d86bcfc96cd15779beb83",
+          "bytes": 1673
+        },
+        "src/core/Simulator.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/core/Simulator.ts",
+          "sha256": "8859ac9297ecb0a6d49672639ad1942009f3b00f07f973cceb6de9b6dce3d563",
+          "bytes": 15271
+        },
+        "src/core/actuators/StaticInsulinPump.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/core/actuators/StaticInsulinPump.ts",
+          "sha256": "a74af3bad723e0538614cb4d74219bf622dd17df2138029b3e07493be0fe5993",
+          "bytes": 4556
+        },
+        "src/core/controllers/MPC_Hovorka2004.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/core/controllers/MPC_Hovorka2004.ts",
+          "sha256": "3559367729613890d2250a73e8a635fd27d1a1bb33f60614bfafbc776f19eeee",
+          "bytes": 17705
+        },
+        "src/core/controllers/PID.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/core/controllers/PID.ts",
+          "sha256": "5c0f00fd6f1b6cf85e8a07b2a04b1f6f12f6377b1fc59d749caf6d108c042e61",
+          "bytes": 4643
+        },
+        "src/core/models/Cambridge.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/core/models/Cambridge.ts",
+          "sha256": "aa9b72e27e7bc947a9bd77123137dc24fd0e06383214daf94bcf2f5ceee8efad",
+          "bytes": 16946
+        },
+        "src/core/sensors/IdealCGM.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/core/sensors/IdealCGM.ts",
+          "sha256": "d1214a7b31401e68d4a4242c1d6ab8fab812f2b4c2e9023896bef952bd0b36d5",
+          "bytes": 1736
+        },
+        "src/common/DateUtility.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/common/DateUtility.ts",
+          "sha256": "66cde73c195601bb4f5d8529e922e42e3b99a45f36c7feb0dd46f5d83b4aa21d",
+          "bytes": 1102
+        },
+        "src/common/EKF.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/common/EKF.ts",
+          "sha256": "9ad60c8eb228a6353e8f9cdcf42bf71ee9f453f62f0a11bb23384242640a408c",
+          "bytes": 4159
+        },
+        "src/common/LevenbergMarquardt.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/common/LevenbergMarquardt.ts",
+          "sha256": "8204708e7df78a5b0563ec58fb27a42619587130beaf3a6618d3384147170270",
+          "bytes": 3417
+        },
+        "src/common/LinearAlgebra.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/common/LinearAlgebra.ts",
+          "sha256": "8166af39c7a85224f23e7c1ed58f676b4ac92af07ec7aff57d9c163d04d83faa",
+          "bytes": 5743
+        },
+        "src/common/NoiseAndError.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/common/NoiseAndError.ts",
+          "sha256": "0c81513df98ee965cac18d7298dd9a6659fbe8ca619d757bf241472d84346431",
+          "bytes": 1256
+        },
+        "src/common/UtilityFunctions.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/common/UtilityFunctions.ts",
+          "sha256": "64e3a3a66f62a58ba18880ad6858653d68398dcdc042e0e62d9ffde6c2772584",
+          "bytes": 1733
+        },
+        "src/common/errors/InvalidResultError.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/common/errors/InvalidResultError.ts",
+          "sha256": "eeec618145cbe714078e290efb02a5b2e430f498dfab22ff0f0453808d54c88f",
+          "bytes": 601
+        },
+        "src/common/random/RNG_Ziggurat_SHR3.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/common/random/RNG_Ziggurat_SHR3.ts",
+          "sha256": "57d840f55dc0682274dc73a2aaf45686b4960d14c4fd3ad7d507a4c8eb78e0ef",
+          "bytes": 2702
+        },
+        "src/core/AbstractActuator.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/core/AbstractActuator.ts",
+          "sha256": "d8e329198fcb2d348e2ea2e886affdd90d348a3a571db4906058c4b4da9b7167",
+          "bytes": 2978
+        },
+        "src/core/AbstractController.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/core/AbstractController.ts",
+          "sha256": "ddc7102b6725eb19e0e202c82489e5e4b9ebc0bf3dce6fea5025ee13755a0223",
+          "bytes": 3782
+        },
+        "src/core/AbstractODEPatient.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/core/AbstractODEPatient.ts",
+          "sha256": "ee350f796809e96c58a5b3f5925babf1b7125b453c9c9ad5d63b368a1e77f4ab",
+          "bytes": 9785
+        },
+        "src/core/AbstractSensor.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/core/AbstractSensor.ts",
+          "sha256": "a4869466429fc1e6c07711e651f3a0dd23184fe759f869c9b7ef77dad2755cb2",
+          "bytes": 3658
+        },
+        "src/core/ControllerUnion.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/core/ControllerUnion.ts",
+          "sha256": "66737b9dfd26819dea3790b0271f81af18b87a8f6366a02b1a4e82788d6ad46e",
+          "bytes": 7628
+        },
+        "src/core/solvers/SolverRK1.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/core/solvers/SolverRK1.ts",
+          "sha256": "8d47b3130499d5b2f0a0a653734698dc676a3226702d8628ea5b394e0bc8f2c4",
+          "bytes": 1785
+        },
+        "src/core/solvers/SolverRK1_2.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/core/solvers/SolverRK1_2.ts",
+          "sha256": "60bdb42df3217e85fe00952cbab764e30a2150f7d60988062b95584e92aeb190",
+          "bytes": 3271
+        },
+        "src/types/Actuator.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/types/Actuator.ts",
+          "sha256": "238d0340f4871bd92c1df837679898f44506bc3557b308cfed1688ec8f715329",
+          "bytes": 1154
+        },
+        "src/types/CommonTypes.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/types/CommonTypes.ts",
+          "sha256": "e75a6b09ca4fad0f7a23df750c693f30dca586c40289c9d55fd53794fe26464a",
+          "bytes": 348
+        },
+        "src/types/Controller.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/types/Controller.ts",
+          "sha256": "8c62e25e75d18bc36d1170d984042d7a3c0074066ab08e58f55e064fe9b84fc1",
+          "bytes": 2597
+        },
+        "src/types/Exercise.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/types/Exercise.ts",
+          "sha256": "af966c87fc2570f822f2b808bafc2aaccd6b796562deabb771200aa5bf9ccf5f",
+          "bytes": 500
+        },
+        "src/types/Meal.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/types/Meal.ts",
+          "sha256": "19356300e7ead210100ddac5dc60d6e6ee317147c2c2c563c86373a434aa158f",
+          "bytes": 810
+        },
+        "src/types/ModuleProfile.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/types/ModuleProfile.ts",
+          "sha256": "e81bf66b49b65efe170d9b57ebdfa0acc0c5fb2c2ef6d109191bb2bb3fcc795c",
+          "bytes": 1958
+        },
+        "src/types/ODEPatientModel.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/types/ODEPatientModel.ts",
+          "sha256": "03d9f15ce354c7ebf7990a5ea617057c05bdd2806dc08bbb1f1f6fa163799b0b",
+          "bytes": 3460
+        },
+        "src/types/ParametricModule.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/types/ParametricModule.ts",
+          "sha256": "28cc6905cdacf823a0acba2c17053275827cb49d208161ef39071359792ade71",
+          "bytes": 4392
+        },
+        "src/types/Patient.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/types/Patient.ts",
+          "sha256": "69f9c1cc6855a44d5c088ba859727246614dd1564be7910f14263ff6783e1735",
+          "bytes": 3125
+        },
+        "src/types/Sensor.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/types/Sensor.ts",
+          "sha256": "30c6e3d9303447fea6571b4a1cb67a86a1d1075b590a9514eb425ba766163765",
+          "bytes": 1252
+        },
+        "src/types/Signals.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/types/Signals.ts",
+          "sha256": "6d826685e5bd3ead18efc41d6a5b11da8ba330a89a8535ee22e6eb8e9fab977c",
+          "bytes": 4619
+        },
+        "src/types/SimulationResult.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/types/SimulationResult.ts",
+          "sha256": "989adce31f76fdd3eadd2e77d8fdbb3bf5ac3105bf63ef1ea2044f227b755d5c",
+          "bytes": 667
+        },
+        "src/types/Solver.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/types/Solver.ts",
+          "sha256": "9db966a7b96cfddde819ed378ea5516c38087d3e36cad37a6be069219edb60f6",
+          "bytes": 978
+        },
+        "src/common/DailyProfile.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/common/DailyProfile.ts",
+          "sha256": "fe3d960a4b9cbe660351b63a03bce085ce61012e217e7b2d20bd568922df166e",
+          "bytes": 7525
+        },
+        "src/common/Jacobian.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/common/Jacobian.ts",
+          "sha256": "b60439f5f9e4ceaefa090304da6b4b4c090b185a84fbdd07d8f5b29c4a6927a2",
+          "bytes": 1138
+        },
+        "src/common/LSESolver.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/common/LSESolver.ts",
+          "sha256": "df665908f46f4f750afb5a39eaf3b4202af01fe2b44335e62bf341c3f374f333",
+          "bytes": 3984
+        },
+        "src/common/NamedVectorUtil.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/common/NamedVectorUtil.ts",
+          "sha256": "4a6b7ee92ef746b8b0a6cb6b8e212bd9a0df3d9b19f5a4f5315bff64d4d85e76",
+          "bytes": 1496
+        },
+        "src/common/NewtonSolver.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/common/NewtonSolver.ts",
+          "sha256": "a07180f95353df208010f87f84315dfe4a249daa8fdae393f247c2df45a6d35e",
+          "bytes": 1234
+        },
+        "src/common/random/RNG_SHR3.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/common/random/RNG_SHR3.ts",
+          "sha256": "72b6f6759880c7c810cf4c875d3a1841f2179fde2a83d2731c88bd2048e1e7ed",
+          "bytes": 1224
+        },
+        "src/core/AbstractParametricModule.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/core/AbstractParametricModule.ts",
+          "sha256": "fe36d5874a04a4adb0d983eecbb14e98f8fb9931c7bca2879d04ebec798b8ad5",
+          "bytes": 8260
+        },
+        "src/types/IOModule.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/types/IOModule.ts",
+          "sha256": "7b3ab95b25e8816caf5ae417208c6a1b6772a5e7ff46865e70ed9074c4164ab8",
+          "bytes": 1698
+        },
+        "src/types/RandomNumberGenerator.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/types/RandomNumberGenerator.ts",
+          "sha256": "af02baa38ce1a45257e4da0f6e831eb43f7618db56100a59856eaada4a382336",
+          "bytes": 1104
+        },
+        "src/types/StructureDiagram.ts": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/src/types/StructureDiagram.ts",
+          "sha256": "f77e912126f474fc1b5e30939afb6ae68b877f701d22739a04a75b55bf5dfed1",
+          "bytes": 1459
+        }
+      },
+      "external_imports": [],
+      "dynamic_flags": []
+    },
+    "proposal": "First conditional local candidate on macOS arm64 after runtime, rights and new harness admission. Retain Node guard; a patched interpreter requires a new explicit identity and new parity evidence."
+  },
+  "advisory_queries": [
+    {
+      "role": "simglucose-runtime",
+      "name": "certifi",
+      "version": "2026.7.22",
+      "ghsa_matches": [
+        "GHSA-6q48-6c7w-9gw2"
+      ]
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "charset-normalizer",
+      "version": "3.5.1",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "cloudpickle",
+      "version": "3.1.2",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "contourpy",
+      "version": "1.3.3",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "cycler",
+      "version": "0.12.1",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "dill",
+      "version": "0.4.1",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "farama-notifications",
+      "version": "0.0.6",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "fonttools",
+      "version": "4.65.0",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "glucosim",
+      "version": "0.1.2",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "gym",
+      "version": "0.9.4",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "gymnasium",
+      "version": "0.29.1",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "idna",
+      "version": "3.19",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "kiwisolver",
+      "version": "1.5.1",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "matplotlib",
+      "version": "3.9.4",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "multiprocess",
+      "version": "0.70.19",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "numpy",
+      "version": "1.26.4",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "packaging",
+      "version": "26.3",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "pandas",
+      "version": "2.2.3",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "pathos",
+      "version": "0.3.5",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "pillow",
+      "version": "12.3.0",
+      "ghsa_matches": [
+        "GHSA-22hg-r758-rrw9",
+        "GHSA-24rc-8hj2-v98c",
+        "GHSA-254f-3936-288h",
+        "GHSA-27h8-gf7j-v5hc",
+        "GHSA-332p-7hrc-92wf",
+        "GHSA-3j72-p6qg-6xp7",
+        "GHSA-4558-3h8r-v8xp",
+        "GHSA-462x-pgg6-55fp",
+        "GHSA-4rm8-3hmm-39fg",
+        "GHSA-4rr5-89j8-mwwm",
+        "GHSA-58r4-6rv3-gfh8",
+        "GHSA-5x8w-8jj5-q52h",
+        "GHSA-5xm2-6676-qcp9",
+        "GHSA-654x-cwwv-5j9c",
+        "GHSA-65qm-jvmh-6pqg",
+        "GHSA-74r2-7ff9-mjj2",
+        "GHSA-78g4-xqwv-q3g8",
+        "GHSA-7mwm-ghpf-9vrm",
+        "GHSA-8g5g-8vmr-9782",
+        "GHSA-9v9v-9qvf-h2hj",
+        "GHSA-c6hw-5grf-ff96",
+        "GHSA-cp9v-662q-vvx9",
+        "GHSA-f2g6-542v-9j58",
+        "GHSA-fc9g-5qg7-mf45",
+        "GHSA-g4qv-2jxx-769h",
+        "GHSA-g7cr-3p24-7wf7",
+        "GHSA-g842-9rc4-69pw",
+        "GHSA-gg2r-wvfm-q9rx",
+        "GHSA-j4m9-6w36-pw47",
+        "GHSA-jg86-v3jv-hrpm",
+        "GHSA-mrfp-p49p-3hf2",
+        "GHSA-p4wg-p73j-c528",
+        "GHSA-p8hx-v2p6-rp84",
+        "GHSA-pchr-8j38-3x4p",
+        "GHSA-q45j-58j2-45rg",
+        "GHSA-rfgq-q3w2-pmv2",
+        "GHSA-v9pv-5gc8-w2m6",
+        "GHSA-vx6w-vv9f-6gvg",
+        "GHSA-w889-685w-c8fh",
+        "GHSA-xgh8-jp6q-p5x8",
+        "GHSA-xvh5-g6gv-559v"
+      ]
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "pox",
+      "version": "0.3.7",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "ppft",
+      "version": "1.7.8",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "pyglet",
+      "version": "2.1.16",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "pyparsing",
+      "version": "3.3.2",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "python-dateutil",
+      "version": "2.9.0.post0",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "pytz",
+      "version": "2026.3.post1",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "requests",
+      "version": "2.34.2",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "scipy",
+      "version": "1.13.1",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "setuptools",
+      "version": "80.9.0",
+      "ghsa_matches": [
+        "GHSA-h35f-9h28-mq5c",
+        "GHSA-xmj3-9gf7-h52w"
+      ]
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "simglucose",
+      "version": "0.2.11",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "six",
+      "version": "1.17.0",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "typing-extensions",
+      "version": "4.16.0",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "tzdata",
+      "version": "2026.4",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime",
+      "name": "urllib3",
+      "version": "2.7.0",
+      "ghsa_matches": [
+        "GHSA-8988-9cw3-xx77",
+        "GHSA-gh4c-6fx4-qh6g",
+        "GHSA-vxq7-64xx-v4gw"
+      ]
+    },
+    {
+      "role": "lt1-toolchain",
+      "name": "@cspotcode/source-map-support",
+      "version": "0.8.1",
+      "ghsa_matches": []
+    },
+    {
+      "role": "lt1-toolchain",
+      "name": "@jridgewell/resolve-uri",
+      "version": "3.1.2",
+      "ghsa_matches": []
+    },
+    {
+      "role": "lt1-toolchain",
+      "name": "@jridgewell/sourcemap-codec",
+      "version": "1.6.0",
+      "ghsa_matches": []
+    },
+    {
+      "role": "lt1-toolchain",
+      "name": "@jridgewell/trace-mapping",
+      "version": "0.3.9",
+      "ghsa_matches": []
+    },
+    {
+      "role": "lt1-toolchain",
+      "name": "@tsconfig/node10",
+      "version": "1.0.13",
+      "ghsa_matches": []
+    },
+    {
+      "role": "lt1-toolchain",
+      "name": "@tsconfig/node12",
+      "version": "1.0.11",
+      "ghsa_matches": []
+    },
+    {
+      "role": "lt1-toolchain",
+      "name": "@tsconfig/node14",
+      "version": "1.0.3",
+      "ghsa_matches": []
+    },
+    {
+      "role": "lt1-toolchain",
+      "name": "@tsconfig/node16",
+      "version": "1.0.4",
+      "ghsa_matches": []
+    },
+    {
+      "role": "lt1-toolchain",
+      "name": "@types/node",
+      "version": "22.10.7",
+      "ghsa_matches": []
+    },
+    {
+      "role": "lt1-toolchain",
+      "name": "acorn",
+      "version": "8.18.0",
+      "ghsa_matches": []
+    },
+    {
+      "role": "lt1-toolchain",
+      "name": "acorn-walk",
+      "version": "8.3.5",
+      "ghsa_matches": []
+    },
+    {
+      "role": "lt1-toolchain",
+      "name": "arg",
+      "version": "4.1.3",
+      "ghsa_matches": []
+    },
+    {
+      "role": "lt1-toolchain",
+      "name": "create-require",
+      "version": "1.1.1",
+      "ghsa_matches": []
+    },
+    {
+      "role": "lt1-toolchain",
+      "name": "diff",
+      "version": "4.0.4",
+      "ghsa_matches": []
+    },
+    {
+      "role": "lt1-toolchain",
+      "name": "make-error",
+      "version": "1.3.6",
+      "ghsa_matches": []
+    },
+    {
+      "role": "lt1-toolchain",
+      "name": "ts-node",
+      "version": "10.9.2",
+      "ghsa_matches": []
+    },
+    {
+      "role": "lt1-toolchain",
+      "name": "typescript",
+      "version": "5.7.3",
+      "ghsa_matches": []
+    },
+    {
+      "role": "lt1-toolchain",
+      "name": "undici-types",
+      "version": "6.20.0",
+      "ghsa_matches": []
+    },
+    {
+      "role": "lt1-toolchain",
+      "name": "v8-compile-cache-lib",
+      "version": "3.0.1",
+      "ghsa_matches": []
+    },
+    {
+      "role": "lt1-toolchain",
+      "name": "yn",
+      "version": "3.1.1",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-build",
+      "name": "setuptools",
+      "version": "84.0.0",
+      "ghsa_matches": [
+        "GHSA-xmj3-9gf7-h52w"
+      ]
+    },
+    {
+      "role": "simglucose-build",
+      "name": "wheel",
+      "version": "0.43.0",
+      "ghsa_matches": [
+        "GHSA-8rrh-rw8j-w5fx"
+      ]
+    },
+    {
+      "role": "simglucose-runtime-setuptools-vendor",
+      "name": "autocommand",
+      "version": "2.2.2",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime-setuptools-vendor",
+      "name": "backports.tarfile",
+      "version": "1.2.0",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime-setuptools-vendor",
+      "name": "importlib_metadata",
+      "version": "8.0.0",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime-setuptools-vendor",
+      "name": "inflect",
+      "version": "7.3.1",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime-setuptools-vendor",
+      "name": "jaraco.collections",
+      "version": "5.1.0",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime-setuptools-vendor",
+      "name": "jaraco.context",
+      "version": "5.3.0",
+      "ghsa_matches": [
+        "GHSA-58pv-8j8x-9vj2"
+      ]
+    },
+    {
+      "role": "simglucose-runtime-setuptools-vendor",
+      "name": "jaraco.functools",
+      "version": "4.0.1",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime-setuptools-vendor",
+      "name": "jaraco.text",
+      "version": "3.12.1",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime-setuptools-vendor",
+      "name": "more-itertools",
+      "version": "10.3.0",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime-setuptools-vendor",
+      "name": "packaging",
+      "version": "24.2",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime-setuptools-vendor",
+      "name": "platformdirs",
+      "version": "4.2.2",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime-setuptools-vendor",
+      "name": "tomli",
+      "version": "2.0.1",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime-setuptools-vendor",
+      "name": "typeguard",
+      "version": "4.3.0",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime-setuptools-vendor",
+      "name": "typing_extensions",
+      "version": "4.12.2",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-runtime-setuptools-vendor",
+      "name": "wheel",
+      "version": "0.45.1",
+      "ghsa_matches": [
+        "GHSA-8rrh-rw8j-w5fx"
+      ]
+    },
+    {
+      "role": "simglucose-runtime-setuptools-vendor",
+      "name": "zipp",
+      "version": "3.19.2",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-build-setuptools-vendor",
+      "name": "autocommand",
+      "version": "2.2.2",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-build-setuptools-vendor",
+      "name": "backports.tarfile",
+      "version": "1.2.0",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-build-setuptools-vendor",
+      "name": "importlib_metadata",
+      "version": "8.7.1",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-build-setuptools-vendor",
+      "name": "jaraco.text",
+      "version": "4.0.0",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-build-setuptools-vendor",
+      "name": "jaraco.context",
+      "version": "6.1.0",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-build-setuptools-vendor",
+      "name": "jaraco.functools",
+      "version": "4.4.0",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-build-setuptools-vendor",
+      "name": "more-itertools",
+      "version": "10.8.0",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-build-setuptools-vendor",
+      "name": "packaging",
+      "version": "26.0",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-build-setuptools-vendor",
+      "name": "platformdirs",
+      "version": "4.4.0",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-build-setuptools-vendor",
+      "name": "tomli",
+      "version": "2.4.0",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-build-setuptools-vendor",
+      "name": "wheel",
+      "version": "0.46.3",
+      "ghsa_matches": []
+    },
+    {
+      "role": "simglucose-build-setuptools-vendor",
+      "name": "zipp",
+      "version": "3.23.0",
+      "ghsa_matches": []
+    }
+  ],
+  "matching_advisories": [
+    {
+      "id": "GHSA-22hg-r758-rrw9",
+      "url": "https://github.com/advisories/GHSA-22hg-r758-rrw9",
+      "cve_id": "CVE-2026-112390",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-21T20:39:49Z",
+      "updated_at": "2026-10-21T20:39:50Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": ">= 7.2.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-22hg-r758-rrw9",
+        "sha256": "baca7cf6ab6d8c1c9614013347895342a8fe8a3299e025df9a3fa4c748d2c406",
+        "bytes": 17168
+      }
+    },
+    {
+      "id": "GHSA-24rc-8hj2-v98c",
+      "url": "https://github.com/advisories/GHSA-24rc-8hj2-v98c",
+      "cve_id": "CVE-2026-96638",
+      "severity": "medium",
+      "withdrawn_at": null,
+      "published_at": "2026-10-22T15:59:35Z",
+      "updated_at": "2026-10-22T15:59:36Z",
+      "affected_packages": [
+        {
+          "name": "pillow",
+          "range": ">= 9.1.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-24rc-8hj2-v98c",
+        "sha256": "97b1b3f78953cbd8e1a6ff772262172f169c50a20968e5dbe5bd5c2dcf63007c",
+        "bytes": 6745
+      }
+    },
+    {
+      "id": "GHSA-254f-3936-288h",
+      "url": "https://github.com/advisories/GHSA-254f-3936-288h",
+      "cve_id": "CVE-2026-112391",
+      "severity": "medium",
+      "withdrawn_at": null,
+      "published_at": "2026-10-21T21:11:07Z",
+      "updated_at": "2026-10-21T21:11:08Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": ">= 5.1.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-254f-3936-288h",
+        "sha256": "765274d316c78ee1a1a4479d535dab31a282716ae1b7173bf2b615df85311bc1",
+        "bytes": 6192
+      }
+    },
+    {
+      "id": "GHSA-27h8-gf7j-v5hc",
+      "url": "https://github.com/advisories/GHSA-27h8-gf7j-v5hc",
+      "cve_id": "CVE-2026-112392",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-21T20:32:37Z",
+      "updated_at": "2026-10-21T20:32:39Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": "<= 12.3.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-27h8-gf7j-v5hc",
+        "sha256": "e62b375c71786fcb242e10aa55945d6567394a9eeb80edef8edfc3ed4903702c",
+        "bytes": 18562
+      }
+    },
+    {
+      "id": "GHSA-332p-7hrc-92wf",
+      "url": "https://github.com/advisories/GHSA-332p-7hrc-92wf",
+      "cve_id": "CVE-2026-112393",
+      "severity": "critical",
+      "withdrawn_at": null,
+      "published_at": "2026-10-21T21:28:09Z",
+      "updated_at": "2026-10-21T21:28:09Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": ">= 2.0.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-332p-7hrc-92wf",
+        "sha256": "079c6b1f0741406c8407771e99ae6dbd1da50e0e736a46268d681565805b2931",
+        "bytes": 32901
+      }
+    },
+    {
+      "id": "GHSA-3j72-p6qg-6xp7",
+      "url": "https://github.com/advisories/GHSA-3j72-p6qg-6xp7",
+      "cve_id": "CVE-2026-96642",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-22T16:01:46Z",
+      "updated_at": "2026-10-22T16:01:48Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": "< 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-3j72-p6qg-6xp7",
+        "sha256": "d75fc7da204fcfe68ee0637e19935f078ba57688ef0e941d9447c0e15d78c4d9",
+        "bytes": 6745
+      }
+    },
+    {
+      "id": "GHSA-4558-3h8r-v8xp",
+      "url": "https://github.com/advisories/GHSA-4558-3h8r-v8xp",
+      "cve_id": "CVE-2026-112394",
+      "severity": "medium",
+      "withdrawn_at": null,
+      "published_at": "2026-10-21T20:00:32Z",
+      "updated_at": "2026-10-21T20:00:36Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": "<= 12.3.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-4558-3h8r-v8xp",
+        "sha256": "90d708eb44102a877f2d40889e7cfcbd21a5b16be1b35841d3306aac9c14f942",
+        "bytes": 12832
+      }
+    },
+    {
+      "id": "GHSA-462x-pgg6-55fp",
+      "url": "https://github.com/advisories/GHSA-462x-pgg6-55fp",
+      "cve_id": "CVE-2026-112395",
+      "severity": "medium",
+      "withdrawn_at": null,
+      "published_at": "2026-10-20T20:49:26Z",
+      "updated_at": "2026-10-20T20:49:27Z",
+      "affected_packages": [
+        {
+          "name": "pillow",
+          "range": ">= 8.2.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-462x-pgg6-55fp",
+        "sha256": "a27982d2c123256e885325ad22c2fcaf647c777814ae749386ea038e1f92487b",
+        "bytes": 9256
+      }
+    },
+    {
+      "id": "GHSA-4rm8-3hmm-39fg",
+      "url": "https://github.com/advisories/GHSA-4rm8-3hmm-39fg",
+      "cve_id": "CVE-2026-96641",
+      "severity": "medium",
+      "withdrawn_at": null,
+      "published_at": "2026-10-22T16:01:14Z",
+      "updated_at": "2026-10-22T16:01:15Z",
+      "affected_packages": [
+        {
+          "name": "pillow",
+          "range": "< 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-4rm8-3hmm-39fg",
+        "sha256": "97cc7957387f920fdbb6b9fa970c93cb2ee62a863a2bfd3077a1a5f92ecb0142",
+        "bytes": 9078
+      }
+    },
+    {
+      "id": "GHSA-4rr5-89j8-mwwm",
+      "url": "https://github.com/advisories/GHSA-4rr5-89j8-mwwm",
+      "cve_id": "CVE-2026-112396",
+      "severity": "medium",
+      "withdrawn_at": null,
+      "published_at": "2026-10-21T21:24:19Z",
+      "updated_at": "2026-10-21T21:24:20Z",
+      "affected_packages": [
+        {
+          "name": "pillow",
+          "range": ">= 11.3.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-4rr5-89j8-mwwm",
+        "sha256": "dc91be75826fca1f30a9118153d0db5ff7188e42c08cc523fce92e153034891a",
+        "bytes": 6258
+      }
+    },
+    {
+      "id": "GHSA-58r4-6rv3-gfh8",
+      "url": "https://github.com/advisories/GHSA-58r4-6rv3-gfh8",
+      "cve_id": "CVE-2026-112397",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-20T20:56:22Z",
+      "updated_at": "2026-10-20T20:56:23Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": "<= 12.3.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-58r4-6rv3-gfh8",
+        "sha256": "f19b0abb65bb505ba149f5de78f30fb6b82a34d9e5d208327a9d4cac24f7870f",
+        "bytes": 6194
+      }
+    },
+    {
+      "id": "GHSA-5x8w-8jj5-q52h",
+      "url": "https://github.com/advisories/GHSA-5x8w-8jj5-q52h",
+      "cve_id": "CVE-2026-112398",
+      "severity": "critical",
+      "withdrawn_at": null,
+      "published_at": "2026-10-23T21:55:21Z",
+      "updated_at": "2026-10-23T21:55:22Z",
+      "affected_packages": [
+        {
+          "name": "pillow",
+          "range": "<= 12.3.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-5x8w-8jj5-q52h",
+        "sha256": "e513a119e354dd8d9984dea5e45e623ff5462eaa25979a1b7839adfca6d3ff8c",
+        "bytes": 19946
+      }
+    },
+    {
+      "id": "GHSA-5xm2-6676-qcp9",
+      "url": "https://github.com/advisories/GHSA-5xm2-6676-qcp9",
+      "cve_id": "CVE-2026-112399",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-21T21:17:56Z",
+      "updated_at": "2026-10-21T21:17:58Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": ">= 8.1.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-5xm2-6676-qcp9",
+        "sha256": "51cb57a08e5301efab4f43353a39c1af806052f8f79fec5f83abdef98d8df9ac",
+        "bytes": 26230
+      }
+    },
+    {
+      "id": "GHSA-654x-cwwv-5j9c",
+      "url": "https://github.com/advisories/GHSA-654x-cwwv-5j9c",
+      "cve_id": "CVE-2026-114501",
+      "severity": "medium",
+      "withdrawn_at": null,
+      "published_at": "2026-10-23T21:53:21Z",
+      "updated_at": "2026-10-23T21:53:25Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": ">= 11.2.1, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-654x-cwwv-5j9c",
+        "sha256": "efa659e5ef7e7c848d808d4e74dbb1229ad5b406682233ae872b9bdd884e5971",
+        "bytes": 4552
+      }
+    },
+    {
+      "id": "GHSA-65qm-jvmh-6pqg",
+      "url": "https://github.com/advisories/GHSA-65qm-jvmh-6pqg",
+      "cve_id": "CVE-2026-112400",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-20T20:53:36Z",
+      "updated_at": "2026-10-20T20:53:38Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": ">= 9.2.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-65qm-jvmh-6pqg",
+        "sha256": "1e160278076d50d87ba2e6ac6a1554290a730bc0d734727221cc058df92831ab",
+        "bytes": 17757
+      }
+    },
+    {
+      "id": "GHSA-6q48-6c7w-9gw2",
+      "url": "https://github.com/advisories/GHSA-6q48-6c7w-9gw2",
+      "cve_id": null,
+      "severity": "critical",
+      "withdrawn_at": null,
+      "published_at": "2026-10-20T19:35:05Z",
+      "updated_at": "2026-10-26T16:02:13Z",
+      "affected_packages": [
+        {
+          "name": "certifi",
+          "range": ">= 2019.03.09, < 2026.10.18",
+          "first_patched_version": "2026.10.18"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-6q48-6c7w-9gw2",
+        "sha256": "74fddca9f5c07108f5374ff892870bf55473ff8f32e5e3a63e9f6de072eb327d",
+        "bytes": 2302
+      }
+    },
+    {
+      "id": "GHSA-74r2-7ff9-mjj2",
+      "url": "https://github.com/advisories/GHSA-74r2-7ff9-mjj2",
+      "cve_id": "CVE-2026-112401",
+      "severity": "medium",
+      "withdrawn_at": null,
+      "published_at": "2026-10-21T20:42:11Z",
+      "updated_at": "2026-10-21T20:42:12Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": ">= 5.4.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-74r2-7ff9-mjj2",
+        "sha256": "f2a151908d250c2071b2251db129567e499336dde4a07fbb7069a1a633623a11",
+        "bytes": 18544
+      }
+    },
+    {
+      "id": "GHSA-78g4-xqwv-q3g8",
+      "url": "https://github.com/advisories/GHSA-78g4-xqwv-q3g8",
+      "cve_id": null,
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-22T17:01:08Z",
+      "updated_at": "2026-10-22T17:01:19Z",
+      "affected_packages": [
+        {
+          "name": "pillow",
+          "range": ">= 11.1.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-78g4-xqwv-q3g8",
+        "sha256": "b6340f965c5fb17773478a738833ef378da55ac5dc2db2f175d417b9f2bd0c77",
+        "bytes": 9736
+      }
+    },
+    {
+      "id": "GHSA-7mwm-ghpf-9vrm",
+      "url": "https://github.com/advisories/GHSA-7mwm-ghpf-9vrm",
+      "cve_id": "CVE-2026-112402",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-21T20:03:56Z",
+      "updated_at": "2026-10-21T20:03:57Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": "<= 12.3.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-7mwm-ghpf-9vrm",
+        "sha256": "7c71318863ead1e53cb18ed2f518f65c2cd2e9a623e6c9a5afa0f61cc3896dde",
+        "bytes": 18913
+      }
+    },
+    {
+      "id": "GHSA-8988-9cw3-xx77",
+      "url": "https://github.com/advisories/GHSA-8988-9cw3-xx77",
+      "cve_id": "CVE-2026-97687",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-09-30T14:46:04Z",
+      "updated_at": "2026-09-30T14:46:05Z",
+      "affected_packages": [
+        {
+          "name": "urllib3",
+          "range": ">= 1.26.0, < 2.8.0",
+          "first_patched_version": "2.8.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-8988-9cw3-xx77",
+        "sha256": "316912ab93a3b5d5a03a0f829282806abcad988d35840667765828e926b4aac4",
+        "bytes": 14167
+      }
+    },
+    {
+      "id": "GHSA-8g5g-8vmr-9782",
+      "url": "https://github.com/advisories/GHSA-8g5g-8vmr-9782",
+      "cve_id": "CVE-2026-112403",
+      "severity": "critical",
+      "withdrawn_at": null,
+      "published_at": "2026-10-20T20:40:07Z",
+      "updated_at": "2026-10-20T20:40:09Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": "<= 12.3.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-8g5g-8vmr-9782",
+        "sha256": "86d32ee97332e64f23b0f828d8e08c4aff5bfd965381fb8a9dc524e4745ab83e",
+        "bytes": 16783
+      }
+    },
+    {
+      "id": "GHSA-8rrh-rw8j-w5fx",
+      "url": "https://github.com/advisories/GHSA-8rrh-rw8j-w5fx",
+      "cve_id": "CVE-2026-24049",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-01-22T18:02:56Z",
+      "updated_at": "2026-01-23T17:44:38Z",
+      "affected_packages": [
+        {
+          "name": "wheel",
+          "range": ">= 0.40.0, <= 0.46.1",
+          "first_patched_version": "0.46.2"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-8rrh-rw8j-w5fx",
+        "sha256": "d88d516d5fb9faf42f4a93fb2b24adc1fd168ddb928c3c93bff045c8c375f9f2",
+        "bytes": 13115
+      }
+    },
+    {
+      "id": "GHSA-9v9v-9qvf-h2hj",
+      "url": "https://github.com/advisories/GHSA-9v9v-9qvf-h2hj",
+      "cve_id": "CVE-2026-96644",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-22T16:03:14Z",
+      "updated_at": "2026-10-22T16:03:16Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": "< 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-9v9v-9qvf-h2hj",
+        "sha256": "1653868689ec17c95b10858f7121fb55fc7bf48f8fb5f4f1eabba4c96e5f88b2",
+        "bytes": 5183
+      }
+    },
+    {
+      "id": "GHSA-c6hw-5grf-ff96",
+      "url": "https://github.com/advisories/GHSA-c6hw-5grf-ff96",
+      "cve_id": "CVE-2026-112404",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-20T20:42:00Z",
+      "updated_at": "2026-10-20T20:42:01Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": ">= 8.1.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-c6hw-5grf-ff96",
+        "sha256": "ad1e77151158900f38f55b8d82001191db4d24bc55fb9fd38b4655573a24c13d",
+        "bytes": 33468
+      }
+    },
+    {
+      "id": "GHSA-cp9v-662q-vvx9",
+      "url": "https://github.com/advisories/GHSA-cp9v-662q-vvx9",
+      "cve_id": "CVE-2026-112405",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-21T20:30:25Z",
+      "updated_at": "2026-10-21T20:30:26Z",
+      "affected_packages": [
+        {
+          "name": "pillow",
+          "range": ">= 12.0.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-cp9v-662q-vvx9",
+        "sha256": "23d70db98a4e97a0dc20b27f80bf9bd423208f9b75cfba9e0826bab04f84a70a",
+        "bytes": 6642
+      }
+    },
+    {
+      "id": "GHSA-f2g6-542v-9j58",
+      "url": "https://github.com/advisories/GHSA-f2g6-542v-9j58",
+      "cve_id": "CVE-2026-112406",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-21T21:21:07Z",
+      "updated_at": "2026-10-21T21:21:09Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": ">= 5.1.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-f2g6-542v-9j58",
+        "sha256": "620eeaed9e7b2e23a565bd1cc327191a7994aa73af2d49743844bca763ab703a",
+        "bytes": 24706
+      }
+    },
+    {
+      "id": "GHSA-fc9g-5qg7-mf45",
+      "url": "https://github.com/advisories/GHSA-fc9g-5qg7-mf45",
+      "cve_id": "CVE-2026-112891",
+      "severity": "medium",
+      "withdrawn_at": null,
+      "published_at": "2026-10-21T20:38:43Z",
+      "updated_at": "2026-10-21T20:38:43Z",
+      "affected_packages": [
+        {
+          "name": "pillow",
+          "range": ">= 9.2.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-fc9g-5qg7-mf45",
+        "sha256": "ec4be61ffb5228423bdf51db6a69839c6ffc37f4f07cd6da2125fd800f8f73aa",
+        "bytes": 3107
+      }
+    },
+    {
+      "id": "GHSA-g4qv-2jxx-769h",
+      "url": "https://github.com/advisories/GHSA-g4qv-2jxx-769h",
+      "cve_id": "CVE-2026-96643",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-22T16:02:39Z",
+      "updated_at": "2026-10-22T16:02:41Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": ">= 11.0.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-g4qv-2jxx-769h",
+        "sha256": "f80918c1d558127cb481514aa941032fe37ec96c9a02e06a868cd0ba9beea417",
+        "bytes": 7435
+      }
+    },
+    {
+      "id": "GHSA-g7cr-3p24-7wf7",
+      "url": "https://github.com/advisories/GHSA-g7cr-3p24-7wf7",
+      "cve_id": "CVE-2026-96778",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-22T16:05:39Z",
+      "updated_at": "2026-10-22T16:05:41Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": ">= 9.4.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-g7cr-3p24-7wf7",
+        "sha256": "5ffcdcb366289a8a72e00b412ca26627063b4ee97c955056e6da2fda90abde20",
+        "bytes": 30015
+      }
+    },
+    {
+      "id": "GHSA-g842-9rc4-69pw",
+      "url": "https://github.com/advisories/GHSA-g842-9rc4-69pw",
+      "cve_id": "CVE-2026-96637",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-22T15:57:17Z",
+      "updated_at": "2026-10-22T15:57:18Z",
+      "affected_packages": [
+        {
+          "name": "pillow",
+          "range": "< 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-g842-9rc4-69pw",
+        "sha256": "8b026cc47fab67f659c7f15b228bff66c2132a9e548e23b6b93222133c3eefb4",
+        "bytes": 7554
+      }
+    },
+    {
+      "id": "GHSA-gg2r-wvfm-q9rx",
+      "url": "https://github.com/advisories/GHSA-gg2r-wvfm-q9rx",
+      "cve_id": "CVE-2026-112892",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-21T21:12:56Z",
+      "updated_at": "2026-10-21T21:12:57Z",
+      "affected_packages": [
+        {
+          "name": "pillow",
+          "range": ">= 4.1.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-gg2r-wvfm-q9rx",
+        "sha256": "a0b9095fa957bfdeb87adef49730ddf78c80136f157cc7b34c5d4c764a580f1f",
+        "bytes": 5249
+      }
+    },
+    {
+      "id": "GHSA-gh4c-6fx4-qh6g",
+      "url": "https://github.com/advisories/GHSA-gh4c-6fx4-qh6g",
+      "cve_id": "CVE-2026-97688",
+      "severity": "medium",
+      "withdrawn_at": null,
+      "published_at": "2026-09-30T15:00:38Z",
+      "updated_at": "2026-09-30T15:00:39Z",
+      "affected_packages": [
+        {
+          "name": "urllib3",
+          "range": ">= 2.6.2, < 2.8.0",
+          "first_patched_version": "2.8.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-gh4c-6fx4-qh6g",
+        "sha256": "cf10d1d9441bb55eb97b9a8080820f56c8fc8fd8b3f227c67dca42d54b4558ec",
+        "bytes": 6948
+      }
+    },
+    {
+      "id": "GHSA-h35f-9h28-mq5c",
+      "url": "https://github.com/advisories/GHSA-h35f-9h28-mq5c",
+      "cve_id": "CVE-2026-59890",
+      "severity": "medium",
+      "withdrawn_at": null,
+      "published_at": "2026-07-21T19:09:21Z",
+      "updated_at": "2026-07-21T19:09:21Z",
+      "affected_packages": [
+        {
+          "name": "setuptools",
+          "range": "< 83.0.0",
+          "first_patched_version": "83.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-h35f-9h28-mq5c",
+        "sha256": "919d82a1d486816037d1ef193fdb6eda850968540e8f7cd090afe90bcd89d25b",
+        "bytes": 7279
+      }
+    },
+    {
+      "id": "GHSA-j4m9-6w36-pw47",
+      "url": "https://github.com/advisories/GHSA-j4m9-6w36-pw47",
+      "cve_id": "CVE-2026-112893",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-21T20:06:34Z",
+      "updated_at": "2026-10-21T20:06:37Z",
+      "affected_packages": [
+        {
+          "name": "pillow",
+          "range": ">= 10.0.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-j4m9-6w36-pw47",
+        "sha256": "0fa687cad18755496133f55d160320f73597e2609d561c6cae940c7302ec2919",
+        "bytes": 7593
+      }
+    },
+    {
+      "id": "GHSA-jg86-v3jv-hrpm",
+      "url": "https://github.com/advisories/GHSA-jg86-v3jv-hrpm",
+      "cve_id": "CVE-2026-112894",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-21T21:11:44Z",
+      "updated_at": "2026-10-21T21:11:47Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": ">= 5.1.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-jg86-v3jv-hrpm",
+        "sha256": "ef7cc0e3efec78fc40cae44af5fe6f358f7afe29e8cb369372bf603721384963",
+        "bytes": 18529
+      }
+    },
+    {
+      "id": "GHSA-mrfp-p49p-3hf2",
+      "url": "https://github.com/advisories/GHSA-mrfp-p49p-3hf2",
+      "cve_id": "CVE-2026-96640",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-22T16:00:47Z",
+      "updated_at": "2026-10-22T16:00:47Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": ">= 5.1.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-mrfp-p49p-3hf2",
+        "sha256": "0544347c249cf5a654e51c11e967aa8c6b74ced0c27f7d5c7c89b465e00caeab",
+        "bytes": 14607
+      }
+    },
+    {
+      "id": "GHSA-p4wg-p73j-c528",
+      "url": "https://github.com/advisories/GHSA-p4wg-p73j-c528",
+      "cve_id": "CVE-2026-112895",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-20T20:50:49Z",
+      "updated_at": "2026-10-20T20:50:50Z",
+      "affected_packages": [
+        {
+          "name": "pillow",
+          "range": ">= 5.1.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-p4wg-p73j-c528",
+        "sha256": "ab315d7cfaf209b53eb172493892679009f81f651b8303d88af81e0ff97e41d5",
+        "bytes": 6152
+      }
+    },
+    {
+      "id": "GHSA-p8hx-v2p6-rp84",
+      "url": "https://github.com/advisories/GHSA-p8hx-v2p6-rp84",
+      "cve_id": "CVE-2026-96636",
+      "severity": "medium",
+      "withdrawn_at": null,
+      "published_at": "2026-10-22T15:56:37Z",
+      "updated_at": "2026-10-22T15:56:39Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": "< 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-p8hx-v2p6-rp84",
+        "sha256": "702a4d9bf18a58f49dc5c3848cbbe7319861ffc06b305a6d10ece279cf197da1",
+        "bytes": 9008
+      }
+    },
+    {
+      "id": "GHSA-pchr-8j38-3x4p",
+      "url": "https://github.com/advisories/GHSA-pchr-8j38-3x4p",
+      "cve_id": "CVE-2026-112896",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-20T20:51:40Z",
+      "updated_at": "2026-10-20T20:51:40Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": "<= 12.3.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-pchr-8j38-3x4p",
+        "sha256": "1f1d19ae3f2506448e8a2c55b1f5c965f286e79ef9ec3d5381a11796141c9d46",
+        "bytes": 24801
+      }
+    },
+    {
+      "id": "GHSA-q45j-58j2-45rg",
+      "url": "https://github.com/advisories/GHSA-q45j-58j2-45rg",
+      "cve_id": "CVE-2026-112897",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-20T20:52:43Z",
+      "updated_at": "2026-10-20T20:52:45Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": ">= 5.3.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-q45j-58j2-45rg",
+        "sha256": "7319122eb67a3bdb0531261036c75606ddad0aec529e763621b53b5dd7f9cc85",
+        "bytes": 23864
+      }
+    },
+    {
+      "id": "GHSA-rfgq-q3w2-pmv2",
+      "url": "https://github.com/advisories/GHSA-rfgq-q3w2-pmv2",
+      "cve_id": "CVE-2026-112898",
+      "severity": "medium",
+      "withdrawn_at": null,
+      "published_at": "2026-10-21T20:44:07Z",
+      "updated_at": "2026-10-21T20:44:08Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": ">= 9.1.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-rfgq-q3w2-pmv2",
+        "sha256": "72d8150c4439720a6925ca850d838d93d8600e92dd417ff6e567e8a2854d7e86",
+        "bytes": 20805
+      }
+    },
+    {
+      "id": "GHSA-v9pv-5gc8-w2m6",
+      "url": "https://github.com/advisories/GHSA-v9pv-5gc8-w2m6",
+      "cve_id": "CVE-2026-96639",
+      "severity": "critical",
+      "withdrawn_at": null,
+      "published_at": "2026-10-22T16:00:15Z",
+      "updated_at": "2026-10-22T16:00:15Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": ">= 11.0.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-v9pv-5gc8-w2m6",
+        "sha256": "e17ee9562b35d5d7d5dc7952dea2de7ba15d65a6e82b59c5fc2607de9dfc941b",
+        "bytes": 8224
+      }
+    },
+    {
+      "id": "GHSA-vx6w-vv9f-6gvg",
+      "url": "https://github.com/advisories/GHSA-vx6w-vv9f-6gvg",
+      "cve_id": "CVE-2026-112899",
+      "severity": "medium",
+      "withdrawn_at": null,
+      "published_at": "2026-10-20T20:53:21Z",
+      "updated_at": "2026-10-20T20:53:23Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": ">= 2.3.0, <= 12.3.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-vx6w-vv9f-6gvg",
+        "sha256": "2f3008467cfc61df2476014601131a89e4e3e692511ebf433bb245eec39c6c4b",
+        "bytes": 16615
+      }
+    },
+    {
+      "id": "GHSA-vxq7-64xx-v4gw",
+      "url": "https://github.com/advisories/GHSA-vxq7-64xx-v4gw",
+      "cve_id": "CVE-2026-97689",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-09-30T14:46:18Z",
+      "updated_at": "2026-09-30T14:46:20Z",
+      "affected_packages": [
+        {
+          "name": "urllib3",
+          "range": ">= 1.10.3, < 2.8.0",
+          "first_patched_version": "2.8.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-vxq7-64xx-v4gw",
+        "sha256": "d4c0340847fc570a04ad6956d4365aac48ecdea76223bd0afc8320bb8283d4b5",
+        "bytes": 5630
+      }
+    },
+    {
+      "id": "GHSA-w889-685w-c8fh",
+      "url": "https://github.com/advisories/GHSA-w889-685w-c8fh",
+      "cve_id": "CVE-2026-112900",
+      "severity": "critical",
+      "withdrawn_at": null,
+      "published_at": "2026-10-21T19:58:44Z",
+      "updated_at": "2026-10-21T19:58:45Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": ">= 2.6.0, < 13.0.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-w889-685w-c8fh",
+        "sha256": "6eb845991e81cc84427c0a5638cdc74462864fc9aab23fede0c40a4c12fccfaf",
+        "bytes": 13724
+      }
+    },
+    {
+      "id": "GHSA-xgh8-jp6q-p5x8",
+      "url": "https://github.com/advisories/GHSA-xgh8-jp6q-p5x8",
+      "cve_id": "CVE-2026-112901",
+      "severity": "medium",
+      "withdrawn_at": null,
+      "published_at": "2026-10-21T20:45:06Z",
+      "updated_at": "2026-10-21T20:45:07Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": "<= 12.3.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-xgh8-jp6q-p5x8",
+        "sha256": "5e9836e89c2aed6b56dfffa6b243c4eb543ea9cd9d9459ddba5689da865586ef",
+        "bytes": 19958
+      }
+    },
+    {
+      "id": "GHSA-xmj3-9gf7-h52w",
+      "url": "https://github.com/advisories/GHSA-xmj3-9gf7-h52w",
+      "cve_id": null,
+      "severity": "low",
+      "withdrawn_at": null,
+      "published_at": "2026-10-23T21:44:11Z",
+      "updated_at": "2026-10-23T21:44:13Z",
+      "affected_packages": [
+        {
+          "name": "setuptools",
+          "range": ">= 38.2.2, < 84.1.0",
+          "first_patched_version": "84.1.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-xmj3-9gf7-h52w",
+        "sha256": "b7e8bb268a6dfa9b4ad46dcc84d3b802fa37334433e141e53493b7154f973ea9",
+        "bytes": 5321
+      }
+    },
+    {
+      "id": "GHSA-xvh5-g6gv-559v",
+      "url": "https://github.com/advisories/GHSA-xvh5-g6gv-559v",
+      "cve_id": "CVE-2026-112902",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-10-21T21:29:16Z",
+      "updated_at": "2026-10-21T21:29:16Z",
+      "affected_packages": [
+        {
+          "name": "Pillow",
+          "range": "<= 12.3.0",
+          "first_patched_version": "13.0.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-xvh5-g6gv-559v",
+        "sha256": "5bc0173e24e7527f1d79a65940308a9fa718e28a75909dd426f3ff97f3e02013",
+        "bytes": 46198
+      }
+    },
+    {
+      "id": "GHSA-58pv-8j8x-9vj2",
+      "url": "https://github.com/advisories/GHSA-58pv-8j8x-9vj2",
+      "cve_id": "CVE-2026-23949",
+      "severity": "high",
+      "withdrawn_at": null,
+      "published_at": "2026-01-13T21:48:17Z",
+      "updated_at": "2026-01-22T22:25:56Z",
+      "affected_packages": [
+        {
+          "name": "jaraco.context",
+          "range": ">= 5.2.0, < 6.1.0",
+          "first_patched_version": "6.1.0"
+        }
+      ],
+      "primary_metadata": {
+        "url": "https://api.github.com/advisories/GHSA-58pv-8j8x-9vj2",
+        "sha256": "607cdbb078e8eff991b9b4670281dc6fddd6e0f4b6626cd8d3359896712f923f",
+        "bytes": 15248
+      }
+    }
+  ],
+  "rights": {
+    "upstream_notices": [
+      {
+        "asset": "simglucose",
+        "notice_path": "LICENSES/simglucose.txt",
+        "primary_source": {
+          "url": "https://raw.githubusercontent.com/jxx123/simglucose/a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc/LICENSE",
+          "sha256": "ddfd0daee4b3569977580f2d4fc52ffc953c88db7b97f81abecfe2c003e10c75",
+          "bytes": 1052
+        },
+        "code_declaration": "MIT",
+        "table_redistribution_clearance": false
+      },
+      {
+        "asset": "glucosim",
+        "notice_path": "LICENSES/GlucoSim.txt",
+        "primary_source": {
+          "url": "https://raw.githubusercontent.com/HassDhia/glucosim/6422a91d533125a8feb4f2e8737aecd67fec95c9/LICENSE",
+          "sha256": "177bc54a2a82bfe1add22145a8e52b7766666acdc221730536fcfbba3a51635a",
+          "bytes": 1115
+        },
+        "code_declaration": "MIT",
+        "table_redistribution_clearance": false
+      },
+      {
+        "asset": "lt1",
+        "notice_path": "LICENSES/LT1.txt",
+        "primary_source": {
+          "url": "https://raw.githubusercontent.com/hpeuscher/loopinsight1/9a6092065bd821f88691cd8d03b0550acd665573/LICENSE.md",
+          "sha256": "5b786cd1552015d73f9a6e294c4a78fbee89801c998345cfe226e36d624962eb",
+          "bytes": 1087
+        },
+        "code_declaration": "MIT",
+        "table_redistribution_clearance": false
+      }
+    ],
+    "parameter_assets_metadata_only": [
+      {
+        "path": "simglucose/params/Quest.csv",
+        "git_blob_sha": "640f2b8c87c0654f7f48b31fbff0686ef55a5aef",
+        "bytes": 1350
+      },
+      {
+        "path": "simglucose/params/pump_params.csv",
+        "git_blob_sha": "e4bae042a867fa295a8ce84eead0a7594c675472",
+        "bytes": 155
+      },
+      {
+        "path": "simglucose/params/sensor_params.csv",
+        "git_blob_sha": "0c8ad25125e38b4b734d3c014138ec9c294c581e",
+        "bytes": 224
+      },
+      {
+        "path": "simglucose/params/vpatient_params.csv",
+        "git_blob_sha": "bdbabcb7f1b5b88ed9e3c1f1b65e41f1c5722319",
+        "bytes": 17782
+      }
+    ],
+    "simglucose_manifest": {
+      "url": "https://raw.githubusercontent.com/jxx123/simglucose/a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc/MANIFEST.in",
+      "sha256": "d59aaa2080ed268b5ed6b4572a1dc2ae0702f02cd8aabc47fd256cc9a09efa06",
+      "bytes": 244
+    },
+    "gym_0_9_4_archive_notice_review": {
+      "archive": {
+        "url": "https://files.pythonhosted.org/packages/f8/9f/b50f4c04a97e316ebfccae3104e5edbfe7bc1c687ee9ebeca6fa6343d197/gym-0.9.4.tar.gz",
+        "sha256": "94f91ca790bab1243c584bcc3dc5f5e610709e500a554570bdc5464215c13888",
+        "bytes": 157829
+      },
+      "notices": [],
+      "license_headers": [
+        "License: UNKNOWN"
+      ],
+      "standalone_notice_present": false,
+      "inspection": "In-memory named members only; no extraction, build, installation or import"
+    },
+    "pyglet_source_notice": {
+      "url": "https://raw.githubusercontent.com/pyglet/pyglet/v2.1.16/LICENSE",
+      "sha256": "57e7eecb673c8d40cf3192633c4807fba8c81685329a37e1b763e1556d5ded34",
+      "bytes": 1546
+    },
+    "node_notice": {
+      "url": "https://raw.githubusercontent.com/nodejs/node/v22.22.2/LICENSE",
+      "sha256": "c738ae413cf561f174e34f6961f8ca458aae2369a73640dda6234c629b98bcc4",
+      "bytes": 145485
+    },
+    "limitations": [
+      "Code notices do not establish parameter-table chain of title or redistribution rights.",
+      "Full native parameter records and reports remain private; no parameter-table bytes are included.",
+      "Registry declarations are not complete wheel/binary/bundled-library notice inventories.",
+      "Gym archive has no standalone LICENSE/COPYING/NOTICE and PKG-INFO says UNKNOWN; resolve provenance/notice before proposed admission."
+    ]
+  },
+  "interpreter_review_sources": {
+    "node-index": {
+      "url": "https://nodejs.org/dist/index.json",
+      "sha256": "6b27fe5766e87929d16ccdde05c516cbdd12200eab62b28d4b2f31d34e21481a",
+      "bytes": 336201
+    },
+    "node-shasums": {
+      "url": "https://nodejs.org/dist/v22.22.2/SHASUMS256.txt",
+      "sha256": "62a55cf160c9005f0e0f0067f30b74ba8081320117c6fee6ce2938604e669d10",
+      "bytes": 3777
+    },
+    "node-release-schedule": {
+      "url": "https://raw.githubusercontent.com/nodejs/Release/main/schedule.json",
+      "sha256": "50fe35a4df02398f741fdffbc666aceca323fcdb7f46d05af93145bf610d0049",
+      "bytes": 3254
+    },
+    "node-release": {
+      "url": "https://nodejs.org/en/blog/release/v22.22.2",
+      "sha256": "3ea6828f82d815c9378a5a7079ea443abb0db05cb9d139d022ce7193709ab9fe",
+      "bytes": 297866
+    },
+    "python-release": {
+      "url": "https://www.python.org/downloads/release/python-31213/",
+      "sha256": "7bf7a51c2b9c091569e7edac9cddb291e4959e91e62674a23479a4e665bb4cbf",
+      "bytes": 40094
+    },
+    "node-later-security-release": {
+      "url": "https://nodejs.org/en/blog/release/v22.23.4",
+      "sha256": "9c14d32c0a124313eeacfa76a4978ebed7fff534df1ccaeac131b7e0e5663ec0",
+      "bytes": 302233
+    },
+    "python-later-security-release": {
+      "url": "https://www.python.org/downloads/release/python-31216/",
+      "sha256": "255e3cb79655340b619035136b34a1a7cca181596c71ec03715570eff9e03557",
+      "bytes": 38804
+    }
+  },
+  "proposed_case_ids": [
+    "C15",
+    "C16",
+    "C17",
+    "C18"
+  ],
+  "case_specification": "docs/research/ot062-runtime-rights.md",
+  "pending_admissions": [
+    "exact runtime/artifact/build inventory and current advisory disposition",
+    "restricted local use and source/parameter rights; separate export decision",
+    "versioned controller/harness/reader and source inventory",
+    "named-host process/network/file controls and bounded execution authorization",
+    "per-case direct/native results plus independent technical review",
+    "second controller and reusable adapter/conformance integration for OT-062 closure"
+  ]
+}

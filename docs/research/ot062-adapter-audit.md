@@ -335,6 +335,9 @@ native pump mapping, actual process cleanup per host, complete trusted-reader
 and relocation checks, then integrated SDK/CLI/workbench acceptance. A second
 controller/question and two-engine study remain unimplemented. No baseline,
 tolerance, numerical criterion, runtime lock or rights claim was relaxed.
+The [runtime and rights proposal](ot062-runtime-rights.md) records the dated
+passive inventory, remaining use/security decisions and concrete proposed
+C15–C18 packet. It grants no native installation, execution or distribution.
 Full parameter records, restricted reports, private inputs and credentials stay
 outside Git and public logs; this packet contains only invented inputs and
 public source/lock identities.
