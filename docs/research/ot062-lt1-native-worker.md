@@ -112,6 +112,11 @@ runtime manifest. No private native inputs or outputs are committed.
 
 ## Verification and next gate
 
+The subsequent [runtime follow-up and host fixture record](ot062-lt1-host-qualification.md)
+adds bounded embedded-library/rights dispositions and actual scripted Mac
+confinement/process observations. It does not qualify this worker's native branch
+or change either production admission list.
+
 The [Node controls](../../tests/lt1_native_loader.test.mjs), invoked by the root
 [Python check](../../tests/test_lt1_native_loader.py), exercise an invented grant
 and trust registry, positive fixed constructor loading, both scripted harness

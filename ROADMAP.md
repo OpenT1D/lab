@@ -332,6 +332,11 @@ loading/qualification and process/store migration remain unrun/unimplemented;
 runtime, restricted-use, setup and host execution gates remain open. Expanded
 passive review found affected bundled npm packages in the complete Node archive
 and in the separately inspected setup manager candidate; neither is admitted.
+The [host fixture qualification](docs/research/ot062-lt1-host-qualification.md)
+adds actual Darwin arm64 scripted confinement/failure/deadline/cancellation
+observations through the shared process owner, and more precise embedded-runtime
+and rights dispositions. It supplies no native runtime/setup/host admission;
+native staging, launch/store integration and C15–C18 remain open.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
 not native execution. Begin with the exact LT1 runtime/security and restricted-use
