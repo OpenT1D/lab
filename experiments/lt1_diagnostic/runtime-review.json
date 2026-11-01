@@ -1,0 +1,213 @@
+{
+  "schema": "opent1d.lt1-runtime-review/1",
+  "reviewed_on": "2026-11-01",
+  "authorizations": {
+    "setup": false,
+    "execution": false,
+    "distribution": false
+  },
+  "archive": {
+    "url": "https://nodejs.org/dist/v22.23.4/node-v22.23.4-darwin-arm64.tar.gz",
+    "sha256": "c9e1dbc748b33ed2d14f42445191ecaf14c56259c7a9a26d0042c49ec2b66428",
+    "bytes": 49996369
+  },
+  "minimal_runtime": {
+    "profile": "proposal-node22.23.4-darwin-arm64-binary-license-only/1",
+    "acquisition_archive_sha256": "c9e1dbc748b33ed2d14f42445191ecaf14c56259c7a9a26d0042c49ec2b66428",
+    "selected_members": {
+      "node-v22.23.4-darwin-arm64/bin/node": {
+        "bytes": 113002944,
+        "sha256": "2cc28a1880d0774616959f2210ee739bffa6ac695c887e8988a496a21271f6c0",
+        "archive_mode": "0o755"
+      },
+      "node-v22.23.4-darwin-arm64/LICENSE": {
+        "bytes": 145485,
+        "sha256": "c738ae413cf561f174e34f6961f8ca458aae2369a73640dda6234c629b98bcc4",
+        "archive_mode": "0o644"
+      }
+    },
+    "excluded": "all npm/corepack payload and other members; no extraction or staged runtime created",
+    "signature_verified": false,
+    "setup_authorized": false,
+    "execution_authorized": false
+  },
+  "node_signature": {
+    "primary_fingerprint": "5BE8A3F6C8A5C01D106C0AD820B1A390B168D356",
+    "key_bytes_sha256": "5115095e2f8010c75da052ecb1cfb3af630e084f0f8daa93a863557b01b0f90a",
+    "signature_verified": false,
+    "reason": "no installed OpenPGP verifier"
+  },
+  "archive_package_inventory": {
+    "rows": 197,
+    "unique_pairs": 186,
+    "inlined_corepack_closure_complete": false,
+    "root_local_notice_gaps": 7,
+    "affected": [
+      {
+        "package": "@sigstore/core",
+        "version": "2.0.0",
+        "advisories": [
+          "GHSA-jfc7-64v2-mr8c"
+        ]
+      },
+      {
+        "package": "brace-expansion",
+        "version": "2.0.2",
+        "advisories": [
+          "GHSA-3jxr-9vmj-r5cp",
+          "GHSA-6j4f-fj2g-mc7p",
+          "GHSA-f886-m6hf-6m8v",
+          "GHSA-mh99-v99m-4gvg",
+          "GHSA-q2hr-2g5m-vwhr",
+          "GHSA-qhr7-859c-m2p7",
+          "GHSA-rgw5-rvv9-x895"
+        ]
+      },
+      {
+        "package": "glob",
+        "version": "10.5.0",
+        "advisories": [
+          "GHSA-3g3m-2fjr-6pw4"
+        ]
+      },
+      {
+        "package": "ip-address",
+        "version": "10.1.0",
+        "advisories": [
+          "GHSA-h3mg-xc3c-68pw",
+          "GHSA-j6r3-76f7-8jcv",
+          "GHSA-mwp4-54f8-5fhr",
+          "GHSA-rpw4-54j3-4h4q",
+          "GHSA-rxp7-6hxx-x8q5",
+          "GHSA-v2v4-37r5-5v8g"
+        ]
+      },
+      {
+        "package": "minimatch",
+        "version": "9.0.9",
+        "advisories": [
+          "GHSA-g3hv-75wg-m249"
+        ]
+      },
+      {
+        "package": "pacote",
+        "version": "19.0.2",
+        "advisories": [
+          "GHSA-w4pp-8pjf-rmxw"
+        ]
+      },
+      {
+        "package": "pacote",
+        "version": "20.0.1",
+        "advisories": [
+          "GHSA-w4pp-8pjf-rmxw"
+        ]
+      },
+      {
+        "package": "picomatch",
+        "version": "4.0.3",
+        "advisories": [
+          "GHSA-3v7f-55p6-f55p",
+          "GHSA-c2c7-rcm5-vvqj"
+        ]
+      },
+      {
+        "package": "postcss-selector-parser",
+        "version": "7.1.1",
+        "advisories": [
+          "GHSA-rj75-hqrm-r3gf",
+          "GHSA-w9m9-85wc-3x92"
+        ]
+      },
+      {
+        "package": "sigstore",
+        "version": "3.1.0",
+        "advisories": [
+          "GHSA-52v5-jr5w-gjxr"
+        ]
+      }
+    ]
+  },
+  "headless_20_osv_matches": 0,
+  "separate_setup_manager": {
+    "candidate": {
+      "version": "12.2.1",
+      "engines": {
+        "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
+      },
+      "tarball": "https://registry.npmjs.org/npm/-/npm-12.2.1.tgz",
+      "sha256": "228bd64aaef23270dbdbd2cf3d5ef5c467602ef38c4066246cef1984adab9a67",
+      "bytes": 3062824,
+      "sha512_integrity_verified": true,
+      "members": 1942,
+      "package_rows": 148,
+      "unique_pairs": 145,
+      "verification_receipt": "npm-registry-signature-verification.json; both control signatures exit0 and modified-message controls exit1"
+    },
+    "registry_signature_controls": [
+      {
+        "exit": 0,
+        "modified_message_exit": 1,
+        "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+      },
+      {
+        "exit": 0,
+        "modified_message_exit": 1,
+        "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+      }
+    ],
+    "affected": [
+      {
+        "package": "glob",
+        "version": "13.0.6",
+        "advisories": [
+          "GHSA-3g3m-2fjr-6pw4"
+        ]
+      },
+      {
+        "package": "ip-address",
+        "version": "10.7.2",
+        "advisories": [
+          "GHSA-rxp7-6hxx-x8q5"
+        ]
+      },
+      {
+        "package": "minimatch",
+        "version": "10.2.5",
+        "advisories": [
+          "GHSA-g3hv-75wg-m249"
+        ]
+      },
+      {
+        "package": "undici",
+        "version": "6.29.0",
+        "advisories": [
+          "GHSA-2m5v-pch6-74hx",
+          "GHSA-4qv8-2p9j-2685",
+          "GHSA-9fm3-97px-rjf6",
+          "GHSA-qrxm-fqhp-jwvm",
+          "GHSA-xjj6-f33q-929c"
+        ]
+      }
+    ],
+    "root_local_notice_gaps": 5,
+    "admitted": false
+  },
+  "remaining_gates": [
+    "Node OpenPGP signature authentication using established verifier and reviewed release-key policy",
+    "full native embedded-library/advisory and exact artifact-to-source/build provenance disposition",
+    "separately qualified patched package-manager closure or separately reviewed task-specific setup implementation",
+    "actual notice obligations including package roots without bundled notice paths and inlined dependencies",
+    "restricted-local-use and private-output decision",
+    "explicit separately authorized setup + verified receipt",
+    "named-host file/network/process controls and explicit native case execution authorization"
+  ],
+  "sources": [
+    "https://nodejs.org/dist/v22.23.4/",
+    "https://github.com/nodejs/release-keys",
+    "https://registry.npmjs.org/npm/12.2.1",
+    "https://registry.npmjs.org/-/npm/v1/keys",
+    "https://api.osv.dev/v1/querybatch",
+    "https://github.com/hpeuscher/loopinsight1/blob/9a6092065bd821f88691cd8d03b0550acd665573/LICENSE.md"
+  ]
+}

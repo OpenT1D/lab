@@ -79,6 +79,7 @@ subtrees:
       - file: docs/research/ot062-runtime-rights
       - file: docs/research/ot062-lt1-preparation
       - file: docs/research/ot062-lt1-harness
+      - file: docs/research/ot062-lt1-native-worker
       - file: docs/shared-project-services
       - file: docs/research/ot061-064-minimal-services
       - file: docs/installed-sdk
@@ -344,6 +345,7 @@ subtrees:
       - file: docs/decisions/0092-exact-m3-reader-successor
       - file: docs/decisions/0093-lt1-sampled-preparation
       - file: docs/decisions/0094-lt1-diagnostic-harness-reader
+      - file: docs/decisions/0095-lt1-native-worker-admission
       - file: docs/decisions/0059-maintained-runtimes-and-local-gui
       - file: docs/templates/model-card
       - file: docs/templates/experiment-protocol

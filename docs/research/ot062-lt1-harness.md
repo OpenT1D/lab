@@ -143,6 +143,11 @@ parity or biological evidence.
 
 ## Remaining admission and integration work
 
+The subsequent [native worker successor](ot062-lt1-native-worker.md) implements a
+separate positive verifier and fixed-entry loader with an empty production grant
+registry. It preserves this guide's historical closed entry and reader identity;
+its native branch, setup and host process integration remain unqualified.
+
 Before setup: authenticate the selected Node checksum/signature, complete the
 bundled/runtime/build security disposition, record the restricted-use decision
 and notices, then review the exact positive native loader/worker, source inventory
