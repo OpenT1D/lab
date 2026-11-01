@@ -1,3 +1,7 @@
+import { setTimeout as delay } from 'node:timers/promises';
+
+const monitors = new WeakMap();
+
 // Listen before navigation, including the root entry's meta refresh. Keep
 // failures from the earlier document even after the browser has redirected.
 export function monitor(page) {
@@ -47,12 +51,17 @@ export function monitor(page) {
     },
   };
   for (const [event, listener] of Object.entries(listeners)) page.on(event, listener);
+  monitors.set(receipt, {
+    pending: () => Array.from(requests.values()).filter(item => !item.finished && !item.failed),
+    generation: () => order,
+  });
   return {
     receipt,
     documents,
     snapshot: () => Array.from(requests.values(), item => ({ ...item })),
     responseFor: item => browserResponses.get(item.id),
     stop: () => {
+      monitors.delete(receipt);
       for (const [event, listener] of Object.entries(listeners)) page.off(event, listener);
     },
   };
@@ -105,10 +114,51 @@ export function assertClean(receipt) {
 
 // Sphinx finishes listing links before its summary fetches settle. Keep the
 // original monitor active and reject errors before leaving the search page.
-export async function waitForSearchCompletion(page, receipt) {
-  await page.locator('#search-results').getByRole('heading', { name: 'Search Results', exact: true }).waitFor({ state: 'visible' });
-  await page.waitForLoadState('networkidle');
-  assertClean(receipt);
+export async function waitForSearchCompletion(page, receipt, { timeout = 15_000 } = {}) {
+  const state = monitors.get(receipt);
+  if (!state) throw new Error('Search completion requires an active request monitor');
+  if (!Number.isFinite(timeout) || timeout <= 0) throw new Error('Search deadline must be positive and finite');
+  const until = performance.now() + timeout;
+  let timer, expired;
+  function deadlineError() {
+    if (!expired) {
+      const message = `Search completion deadline exceeded; pending requests: ${state.pending().map(item => item.url).join(', ') || 'browser settlement'}`;
+      receipt.errors.push(message);
+      expired = Object.assign(new Error(message), { receipt });
+    }
+    return expired;
+  }
+  async function settle() {
+    await page.locator('#search-results').getByRole('heading', { name: 'Search Results', exact: true }).waitFor({ state: 'visible', timeout });
+    let quietSince = performance.now(), generation = state.generation();
+    while (performance.now() < until) {
+      assertClean(receipt);
+      // A load-state event can already be cached before summary fetches start,
+      // and response headers do not mean that their bodies have completed.
+      if (state.pending().length || generation !== state.generation()) {
+        quietSince = performance.now();
+        generation = state.generation();
+      } else if (performance.now() - quietSince >= 500) {
+        // Let body consumers and queued browser callbacks run before the final
+        // error check. The monitor remains active through target navigation.
+        await page.evaluate(() => new Promise(resolve => setTimeout(() => setTimeout(resolve, 0), 0)));
+        assertClean(receipt);
+        if (!state.pending().length && generation === state.generation()) return;
+        quietSince = performance.now();
+        generation = state.generation();
+      }
+      await delay(20);
+    }
+    throw deadlineError();
+  }
+  try {
+    // The Node deadline also bounds a blocked page.evaluate/browser task queue.
+    // This is not another attempt; any expiry preserves a failing receipt.
+    return await Promise.race([
+      new Promise((_, reject) => { timer = setTimeout(() => reject(deadlineError()), timeout); }),
+      settle(),
+    ]);
+  } finally { clearTimeout(timer); }
 }
 
 export async function inspectRendering(page, receipt, renderTimeout = 10_000) {

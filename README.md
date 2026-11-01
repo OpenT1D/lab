@@ -95,7 +95,9 @@ composes known secretion, forward C-peptide, inverse analysis and reduced
 sampling. The bounded [internal MMTT candidate](docs/internal-mmtt-candidate.md)
 adds an explicit, pinned transition for previous MMTT comparison readers;
 native candidate qualification and broader transitions remain separate.
-M3 migration is a stretch goal.
+The explicit [M3 SDK/workbench increment](docs/installed-m3.md) now reuses the
+same services for frozen synthetic predictor comparisons; broader adapters
+remain separate.
 Development can proceed while intended-user acceptance remains open. The
 implemented public checks and bounded Mac candidate retain their current scope.
 The shared-laboratory increment develops common services around the working routes:

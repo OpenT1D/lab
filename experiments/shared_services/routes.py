@@ -23,6 +23,7 @@ TASKS = {
     "mmtt-sampling": "experiments.mmtt_sampling",
     "m4-study-secure": "experiments.m4.secure_study",
     "m4-study-installed": "experiments.m4.installed_study",
+    "m3-compare": "experiments.m3.comparison",
 }
 
 
@@ -35,6 +36,10 @@ def native_provider(task):
 
 
 def reader(task):
+    if task == "m3-compare":
+        from .forecasting import reader as forecast_reader
+
+        return forecast_reader()
     if task == "mmtt-sampling":
         from .sampling import reader as sampling_reader
 
@@ -82,6 +87,10 @@ def reader_identity(task):
 def capture(task, inputs, target):
     """Freeze originals separately from effective relocatable M4 path spelling."""
     require(task in TASKS, "Unselected task")
+    if task == "m3-compare":
+        from .forecasting import capture as capture_forecast
+
+        return capture_forecast(inputs, target)
     if task == "mmtt-sampling":
         from .sampling import capture as capture_sampling
 
@@ -154,6 +163,10 @@ def capture(task, inputs, target):
 
 
 def validate_freeze(folder, descriptor, *, current):
+    if isinstance(descriptor, dict) and descriptor.get("task") == "m3-compare":
+        from .forecasting import validate_freeze as validate_forecast
+
+        return validate_forecast(folder, descriptor, current=current)
     if isinstance(descriptor, dict) and descriptor.get("task") == "mmtt-sampling":
         from .sampling import validate_freeze as validate_sampling
 
@@ -301,6 +314,10 @@ def native_result(archive, descriptor, plan):
     archive = safe_path(archive)
     inventory(archive, Budget())
     task = descriptor["task"]
+    if task == "m3-compare":
+        from .forecasting import native_result as forecast_result
+
+        return forecast_result(archive, descriptor, plan)
     if task == "mmtt-sampling":
         from .sampling import native_result as sampling_result
 
@@ -438,7 +455,16 @@ def validate_finish(evidence, data, descriptor, plan):
         )
 
 
-def freeze(store, task, inputs, *, parent=None, application=None, study_intent=None):
+def freeze(
+    store,
+    task,
+    inputs,
+    *,
+    parent=None,
+    application=None,
+    study_intent=None,
+    expected_input_sha256=None,
+):
     import tempfile
 
     store.require_lease(write_access=True)
@@ -446,6 +472,10 @@ def freeze(store, task, inputs, *, parent=None, application=None, study_intent=N
     with tempfile.TemporaryDirectory(prefix="opent1d-freeze-") as staging:
         captured = Path(staging).resolve() / "plan"
         descriptor = capture(task, inputs, captured)
+        require(
+            expected_input_sha256 is None or descriptor["original_sha256"] == expected_input_sha256,
+            "Inputs changed since validation",
+        )
         if application is not None:
             write(captured / "application.json", application)
         if parent is not None:

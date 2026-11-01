@@ -82,7 +82,7 @@ dates. This planning change delivers no new runtime or scientific result.
 | Implemented internal increment — Shared sampling | [Sampling integration](docs/research/installed-mmtt-sampling.md) adds installed Python/CLI and supplied-example workbench support with sealed development selection and native parent/child reports. | Exact native report parity, complete denominators, incomplete/cancelled evidence, owned cleanup, relocated reconstruction and actual installed Chromium checks have bounded local evidence. Estimator and OT-059 fixtures remain unchanged. That record supplies no editable-study or independent-use acceptance. |
 | Implemented internal increment — Editable studies | The [editable workbench](docs/research/editable-workbench.md) adds own bounded synthetic input, revisioned recoverable concepts, editable assumptions/schedules and derived plans over the same installed SDK. | Preserve exact source bytes and parent links through native validation, immutable freezes, cross-tab conflicts, restart and explicit GUI concept-history copying. Browser/software checks and technical review are distinct from independent use and broader accessibility qualification. |
 | Selected now — Extend the integrated laboratory | Execute the [development window](#selected-development-window-first-integrated-laboratory) from that merged foundation: shared sampling, editable workbench/comparisons, a connected synthetic study and an internal candidate with a real reader-transition test. | Preserve completed installed/native/GUI evidence and the step-specific criteria below. Review changed runtime/source identities rather than inheriting old artifact results. Prepare intended-user acceptance without claiming it. |
-| Stretch after the primary integration — M3 reuse | Migrate the existing frozen synthetic M3 comparison through the same services; supply a bounded adapter example and assess one GluPredKit mapping. | Preserve the current causal history, horizon, frozen models, persistence reference and complete failure support. No new training pipeline, human-data intake or general plugin claim follows from this increment. |
+| Bounded stretch implemented — M3 reuse | The explicit [M3 SDK/workbench increment](docs/installed-m3.md) migrates the existing frozen synthetic comparison through the same services; its [record](docs/research/installed-m3.md) assesses one GluPredKit mapping without installing it. | Preserve the current causal history, horizon, frozen models, persistence reference and complete failure support. No new training pipeline, human-data intake or general plugin claim follows from this increment. |
 | Conditional follow-up — Mac distribution | Turn the verified probe into a signed/notarized download with a controlled build/release workflow and clean-host/user evidence. | The exact downloaded artifact passes the lifecycle, data-preservation and interpretation checks below. Signing credentials, runtime rights and actual hosts/users are prerequisites for the affected acceptance, not assumed resources. |
 | Subsequent shared-laboratory work | Extend the accepted foundation to adapter conformance and a suitable common controller on two engines, then fit/freeze/evaluate, justified campaign reuse and selective standards bridges. | The [delivery slices](#delivery-slices-and-integration-order) and [package dependencies](#planned-core-and-product-work-packages) remain binding. The selected MMTT/M4 work does not establish two-engine compatibility or close later packages. |
 
@@ -254,14 +254,16 @@ does not replace the comparative OT-056 pilot or full LAB-A–G acceptance.
 
 #### Stretch and subsequent expansion
 
-After the primary integration is usable, select `m3-compare` as the next
-migration under OT-060/068. Reuse the
+The bounded `m3-compare` migration under OT-060/068 is implemented in the
+explicit [descriptor-6 SDK/workbench increment](docs/installed-m3.md); its
+[verification record](docs/research/installed-m3.md) retains the evidence scope. Reuse the
 [frozen comparison](docs/m3-candidate-comparison.md) and its child forecasts,
 six historical five-minute CGM values, 30-minute horizon, persistence baseline,
 causal availability and complete support/failure rules. Supply a bounded
 adapter example and record the additional core/GUI code needed. This is a
 reuse test, not a new model-training pipeline or stable general plugin API.
-Assess one GluPredKit mapping after that boundary works; future meal/insulin
+The source-pinned GluPredKit mapping assessment is recorded; execution of such
+an adapter remains separate. Future meal/insulin
 features cannot silently enter a historical-CGM-only contract. Keep new external
 dependencies in an identified separate environment.
 

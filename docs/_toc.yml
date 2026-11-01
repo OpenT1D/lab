@@ -80,6 +80,8 @@ subtrees:
       - file: docs/installed-sdk
       - file: docs/internal-mmtt-candidate
       - file: docs/internal-integrated-candidate
+      - file: docs/installed-m3
+      - file: docs/research/installed-m3
       - file: docs/installed-m4
       - file: docs/installed-gui
       - file: docs/research/ot060-installed-route
@@ -89,6 +91,7 @@ subtrees:
       - file: docs/research/editable-workbench
       - file: docs/research/workbench-comparisons
       - file: docs/research/connected-synthetic-study
+      - file: docs/research/ci-reliability
       - file: docs/research/m4-installed-runtime-protocol
       - file: docs/m4-synthetic-basal-equivalence
       - file: docs/m4-ultradian-basal-equivalence
@@ -330,6 +333,8 @@ subtrees:
       - file: docs/decisions/0088-connected-synthetic-observation-study
       - file: docs/decisions/0089-internal-candidate-reader-transition
       - file: docs/decisions/0090-integrated-native-candidate
+      - file: docs/decisions/0091-m3-shared-workbench
+      - file: docs/decisions/0092-exact-m3-reader-successor
       - file: docs/decisions/0059-maintained-runtimes-and-local-gui
       - file: docs/templates/model-card
       - file: docs/templates/experiment-protocol

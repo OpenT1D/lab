@@ -53,6 +53,7 @@ Ownership below means the implementation boundary responsible for a behavior. Re
 | File and process primitives | `experiments/platform_files.py`, `platform_process.py`, `experiments/gui/windows_process.py` | `test_regular_file_snapshots.py`, `test_windows_primitives.py`: stable reads and platform boundaries. `test_windows_launch.py`, `test_windows_source_admission.py`: current/base interpreter selection and source-only MMTT guards. Process callers also need their lifecycle tests, for example `test_local_campaign_process.py`, `test_maintained_campaign_process.py`, `test_task_setup.py`; host-specific cases can skip. |
 | Campaigns, catalogue and durable archives | `experiments/campaigns/`, `maintained_campaigns/`, `catalogue/`, `durable_archives/`, `historical_readers/` | `test_local_campaigns.py`, `test_maintained_campaigns.py`, `test_experiment_catalogue.py`, `test_durable_archives.py`, `test_historical_readers.py`: scheduling, eligibility, reconstruction and reader compatibility, with synthetic/fixture inputs. |
 | M0/M1/M2 and controller work | `experiments/m0/`, `m1/`, `m2/`, `p1_external/`, `c1/` | Root `test_m1_contracts.py`, `test_m1_artifacts.py`, `test_m2.py`, `test_p1_external.py` and `test_c1_*.py` cover their declared contracts/fixtures. Separately selected native tests and numerical runs in the task guides verify actual engines. |
+| Shared installed M3 comparison | `experiments/shared_services/forecasting.py`, `forecasting_context.py`, descriptor 6; [guide](installed-m3.md) | `test_m3_services.py`: frozen resources, passive intake, long failed prefixes, mismatches, unknown readers and recovery. `test_installed_m3.py`: actual noneditable direct/installed parity, retry/derivation, missing/nonfinite failure, cancellation and physical-removal relocation. `tests/browser/m3-workbench.spec.mjs`: actual installed correction/freeze/run/download/reopen/reflow. Original M3 readers and separate estimator verification remain authoritative. |
 | M3 forecasting | `experiments/m3/` | Root `test_m3_artifacts.py`, `test_m3_researcher_study.py`, `test_m3_comparison_study.py` and source-specific families cover declared intake, causal/artifact and report contracts. Native estimator execution uses the separate M3 guide/environment. |
 | M4 secretion and kinetic studies | `experiments/m4/` | Root `test_m4_researcher_workflow.py`, `test_m4_secure_study.py`, `test_m4_comparison_run.py` and study-specific families cover bounded configuration, execution/report fixtures and compatibility. Task-specific `test_numerical.py` files select their documented native environment. |
 | M5 prognostic tasks | `experiments/m5/` | `test_m5_researcher_workflow.py`, `test_m5_native_rehearsal.py`, `test_m5_release_preflight.py`: frozen supplied-model task, synthetic rehearsal and conditional preflight. These do not verify human predictive validity. |
@@ -117,7 +118,10 @@ exercise to the two synthetic MMTT tasks. Initial publication used disabled
 Actions; later activation and exact hosted receipts are recorded in the
 [security boundary](publication-security.md). Local results must not be reported
 as hosted CI. The active `Root checks` job explicitly installs the selected Python 3.12, uv 0.11.16 and Node 24.22.1,
-then runs the root suite and standard-library boundary checks. Its Node preflight
+then runs style/documentation and standard-library boundary checks after four isolated
+root-test shards succeed. The default local command still runs all stages and
+all tests. The [CI reliability record](research/ci-reliability.md) owns the
+measured partition, complete-selection checks and exact-run diagnostics. Its Node preflight
 fails when Node is unavailable. Historical native jobs additionally require
 literal private-repository/manual-dispatch guards and cannot run in a public
 repository, even if a changed scope helper reports them enabled.
@@ -146,7 +150,8 @@ Follow the [activation procedure](publication-security.md#activate-on-the-select
 to review the exact Action allowlist, enable the intended checks, obtain actual
 PR/main results and only then require `Repository checks`. Source changes alone
 do not activate GitHub settings. That stable result now aggregates the root job,
-the Linux/macOS/Windows public-smoke matrix, the Linux Chromium application flows and
+the complete four-shard root-test matrix, the Linux/macOS/Windows public-smoke
+matrix, the three-shard Linux Chromium application family and
 the Chromium/Firefox/WebKit documentation matrix. Every
 family must succeed; cancellation or a missing result cannot pass the gate.
 Dependency Review is also required on pull requests. Only its explicit skip on
@@ -163,10 +168,33 @@ npm --prefix tests/browser test
 ```
 
 Set `PLAYWRIGHT_BROWSERS_PATH` to an absolute temporary browser-cache directory
-first. Linux hosts can add `-- --with-deps` to the browser-install command. The
-suite uses Playwright 1.64.1, one Chromium worker, no retries and eight synthetic
-checkout/installed task, failure, concept and reopen flows. Synthetic screenshots, traces, logs and failure
-workspaces are under `output/playwright/`. The same required job also runs the
+first. For Linux system dependencies, run the complete bounded wrapper as root so its
+supervisor can terminate owned apt descendants:
+
+```sh
+sudo --preserve-env=PLAYWRIGHT_BROWSERS_PATH -- "$(command -v node)" \
+  tests/browser/install-browser.mjs --with-deps chromium
+```
+
+Use an ephemeral, dedicated browser cache; this command does not launch the app
+as root. System
+dependencies and browser download share a 300-second budget and log separate
+phases. The ephemeral hosted browser runners select the official Ubuntu archive
+for the exact Azure mirror URI and retain authenticated, fail-closed APT setup;
+see the [bounded CI record](research/ci-reliability.md#selected-implementation). The
+suite uses Playwright 1.64.1, one Chromium worker, no retries and 14 synthetic
+checkout/installed task, failure, concept and reopen cases. CI partitions those
+cases into three isolated jobs, retaining one worker per job, zero retries and
+an eight-minute budget per shard. Complete whole-file groups are selected by
+`OPENT1D_BROWSER_SHARD=1/3` (or `2/3`, `3/3`) with
+`--config application-ci.config.mjs`; both configured and recursively present
+application specs must be assigned exactly once. The default local combined suite retains the
+M3 increment's twelve-minute ceiling; the separate documentation engines keep
+fifteen-minute jobs and five-minute test budgets. The
+[M3 integration record](research/installed-m3.md#hosted-chromium-correction)
+records the actual pending-action/synchronization defect and its regression.
+Synthetic screenshots, traces, logs and failure workspaces are under
+`output/playwright/`. The separate required browser matrix runs the
 [documentation browser checks](documentation-publication.md#browser-regression-checks)
 in a separate output directory, with a five-minute CI budget for each engine.
 All three documentation engines must pass the required gate. The guide includes
@@ -192,6 +220,19 @@ The site includes only the listed pages. Data, results, build outputs and hidden
 The research report's Mermaid diagram uses a pinned browser library from jsDelivr and requires network access to render. The document text, navigation and search are served locally.
 
 The [M3 tutorial](m3-tutorial.md) owns the separately locked statistical-estimator environment and synthetic forecast checks. Repository tests also validate M3 contracts and artifacts; native estimator execution remains separate, as do all original physiological regression jobs.
+
+For CI diagnosis, a complete root selection can be listed without execution:
+
+```sh
+uv run --locked python scripts/root_tests.py --shard 1/4 --list
+uv run --locked python scripts/check.py --stage tests --test-shard 1/4
+```
+
+Use all four shards to cover the full suite. The default full command never
+accepts an implicit partial selection. Root receipts under `results/ci/` bind
+the source and selected IDs and record failures and skips. For rerun status,
+use the [exact-run diagnostic](research/ci-reliability.md#check-provenance-and-verification-handoff);
+a successful latest attempt can coexist with stale failed entries in the PR UI.
 
 ## Individual checks
 

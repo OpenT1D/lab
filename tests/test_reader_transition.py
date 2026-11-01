@@ -120,6 +120,61 @@ class ReaderTransition(unittest.TestCase):
                     pass
         self.assertEqual(store.inventory(self.project, store.Budget()), before)
 
+    def test_historical_registry_bytes_and_original_transition_are_preserved(self):
+        self.assertEqual(
+            store.digest(reader_compatibility.REGISTRY.read_bytes()),
+            "6b50b5b97f9888e55f2fdddd86388a35963ce090291f37850cffb4863ed6f0e0",
+        )
+        first = self.predecessor()
+        second = reader_compatibility.historical_successor()
+        self.assertTrue(reader_compatibility.accepts(first, second, "mmtt-sensitivity"))
+        receipt = reader_compatibility.receipt(first, second, "mmtt-sensitivity")
+        self.assertEqual(receipt["policy"], reader_compatibility.LEGACY_SCHEMA)
+        self.assertEqual(receipt["registry_sha256"], reader_compatibility.LEGACY_SHA256)
+        self.assertFalse(reader_compatibility.accepts(second, first, "mmtt-sensitivity"))
+
+    def test_qualified_historical_successor_retains_bytes_prefix_and_constant_oracle(self):
+        with patch.object(
+            self, "predecessor", return_value=reader_compatibility.historical_successor()
+        ):
+            self.test_actual_inverse_old_definition_prefix_and_inventory_are_preserved()
+
+    def test_every_historical_successor_field_is_required_for_the_new_edge(self):
+        previous = reader_compatibility.historical_successor()
+        current = comparisons.reader()
+        for task in ("mmtt-sensitivity", "mmtt-sampling"):
+            self.assertTrue(reader_compatibility.accepts(previous, current, task))
+        for task in ("m4-study-installed", "m4-study-secure", "m3-compare", "unknown"):
+            self.assertFalse(reader_compatibility.accepts(previous, current, task))
+        for key in previous:
+            altered = copy.deepcopy(previous)
+            altered[key] = None
+            self.assertFalse(reader_compatibility.accepts(altered, current, "mmtt-sampling"))
+        for name in previous["reader_static_dependencies_sha256"]:
+            altered = copy.deepcopy(previous)
+            altered["reader_static_dependencies_sha256"][name] = "0" * 64
+            self.assertFalse(reader_compatibility.accepts(altered, current, "mmtt-sampling"))
+        altered = copy.deepcopy(previous)
+        altered["archived_code_execution"] = 0
+        self.assertFalse(reader_compatibility.accepts(altered, current, "mmtt-sampling"))
+
+    def test_exact_m3_mmtt_predecessor_retains_original_comparison_and_oracle(self):
+        packet = store.read(reader_compatibility.CURRENT_REGISTRY)
+        previous = packet["m3_predecessor"]
+        self.assertEqual(
+            store.digest(store.encoded(previous)),
+            "b6fb575b6bf5532a53f0fb2fd20a3efad5bfadc162dae9f010a2e0d6442e24ec",
+        )
+        with patch.object(self, "predecessor", return_value=previous):
+            self.test_actual_inverse_old_definition_prefix_and_inventory_are_preserved()
+        current = comparisons.reader()
+        for name in previous["reader_static_dependencies_sha256"]:
+            altered = copy.deepcopy(previous)
+            altered["reader_static_dependencies_sha256"][name] = "0" * 64
+            self.assertFalse(reader_compatibility.accepts(altered, current, "mmtt-sensitivity"))
+        for task in ("m3-compare", "m4-study-installed"):
+            self.assertFalse(reader_compatibility.accepts(previous, current, task))
+
 
 if __name__ == "__main__":
     unittest.main()
