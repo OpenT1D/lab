@@ -154,9 +154,10 @@ class GUI:
 
     def stop(self):
         try:
-            if self.process and self.process.poll() is None:
-                self.request("/api/shutdown", {})
-                self.process.wait(timeout=60)
+            if self.process is not None:
+                if self.process.poll() is None:
+                    self.request("/api/shutdown", {})
+                    self.process.wait(timeout=60)
                 assert self.process.returncode == 0
         finally:
             if self.log:

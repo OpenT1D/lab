@@ -1,9 +1,14 @@
 """Reject false qualification claims before trusting an installed candidate."""
 
 import copy
+import subprocess
+import sys
+import tempfile
 import unittest
+from pathlib import Path
+from unittest.mock import patch
 
-from scripts.integrated_candidate_probe import connected_acceptance
+from scripts.integrated_candidate_probe import GUI, connected_acceptance
 from scripts.qualify_integrated_candidate import PREDECESSOR, TASKS, artifact_identity
 
 
@@ -85,6 +90,38 @@ class ArtifactQualification(unittest.TestCase):
         changed["numerical_acceptance"]["status"] = "passed"
         with self.assertRaises(AssertionError):
             connected_acceptance(changed, True)
+
+
+class LifecycleQualification(unittest.TestCase):
+    @staticmethod
+    def cleanup(process):
+        if process.poll() is None:
+            process.kill()
+        process.wait(timeout=10)
+
+    def test_already_exited_gui_must_have_succeeded(self):
+        with tempfile.TemporaryDirectory(prefix="integrated-gui-exit-") as temporary:
+            for exit_code in (0, 23):
+                with self.subTest(exit_code=exit_code):
+                    gui = GUI(Path(temporary))
+                    gui.log = (Path(temporary) / f"gui-{exit_code}.log").open("w")
+                    gui.token = "inert-disposable-token"
+                    gui.process = subprocess.Popen(
+                        [sys.executable, "-I", "-B", "-c", f"raise SystemExit({exit_code})"],
+                        stdout=gui.log,
+                        stderr=gui.log,
+                    )
+                    self.addCleanup(self.cleanup, gui.process)
+                    self.assertEqual(gui.process.wait(timeout=10), exit_code)
+                    with patch.object(gui, "request") as request:
+                        if exit_code:
+                            with self.assertRaises(AssertionError):
+                                gui.stop()
+                        else:
+                            gui.stop()
+                        request.assert_not_called()
+                    self.assertTrue(gui.log.closed)
+                    self.assertIsNone(gui.token)
 
 
 if __name__ == "__main__":
