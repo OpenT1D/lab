@@ -1,0 +1,226 @@
+{
+  "schema": "opent1d.lt1-headless-selection-proposal/1",
+  "profile": "proposal-lt1-headless-no-browser-bundle/1",
+  "canonical_filemap_encoding": "json.dumps(sort_keys=True,separators=(comma,colon),ensure_ascii=True); no newline; flat target path to bytes/sha256 object",
+  "historical_lock_sha256": "44ad7ba062a7d67032d91fcc9e0fa2aa3910b3856dce76bee5ba32093c1a150e",
+  "notice_inventory_sha256": "a20474c4dc25f7e5b2a51e1bb1b7853736570098e959cf2345ea14dfa4d18d1e",
+  "packages": [
+    {
+      "name": "@cspotcode/source-map-support",
+      "version": "0.8.1",
+      "lock_path": "node_modules/@cspotcode/source-map-support",
+      "archive_sha256": "9d143b2941a86f3ca20fbb1d6613c39fb743b7e45ce1008f22f75749ca18a4f0",
+      "root": "package",
+      "files": 10,
+      "payload_bytes": 102089,
+      "filemap_sha256": "a8da84187c3d0c58c433e3f5593e9720bad023355ce4dc099ca287b401e0d057"
+    },
+    {
+      "name": "@jridgewell/resolve-uri",
+      "version": "3.1.2",
+      "lock_path": "node_modules/@jridgewell/resolve-uri",
+      "archive_sha256": "db52f9f62558baab13353dd39e3200750fc33e6a129a575b46226f493776e230",
+      "root": "package",
+      "files": 8,
+      "payload_bytes": 53153,
+      "filemap_sha256": "4dd40c6a0c7f4d61ada8506d3704330e4fd32a0c23985f8445b34c5738089581"
+    },
+    {
+      "name": "@jridgewell/sourcemap-codec",
+      "version": "1.6.0",
+      "lock_path": "node_modules/@jridgewell/sourcemap-codec",
+      "archive_sha256": "f30a35f6af8c347d01b8ff2f8662272f7d986cf21b916704d86c249a90b97e25",
+      "root": "package",
+      "files": 32,
+      "payload_bytes": 96626,
+      "filemap_sha256": "f028730bcaa17307904adf4994f91508b46f7632b3bb79361d1be76f86c8a44d"
+    },
+    {
+      "name": "@jridgewell/trace-mapping",
+      "version": "0.3.9",
+      "lock_path": "node_modules/@jridgewell/trace-mapping",
+      "archive_sha256": "1fe8547469c55cca28bfd1aed79b69a673cf53233321f9145d51d6e96237f500",
+      "root": "package",
+      "files": 16,
+      "payload_bytes": 92278,
+      "filemap_sha256": "b6f9b931fabd61863c64ee4c71012e32b13f59d54027ffc263ef83c060d35c9f"
+    },
+    {
+      "name": "@tsconfig/node10",
+      "version": "1.0.13",
+      "lock_path": "node_modules/@tsconfig/node10",
+      "archive_sha256": "1fc784c7776589f7fa7d9ddc96cd5d4ebb1baaf4a7f94d17b3612558af8d7566",
+      "root": "package",
+      "files": 4,
+      "payload_bytes": 2356,
+      "filemap_sha256": "107edf2c7aebb870eb7b79e776b149652dcce95852c5a001b66c4d77dc984f66"
+    },
+    {
+      "name": "@tsconfig/node12",
+      "version": "1.0.11",
+      "lock_path": "node_modules/@tsconfig/node12",
+      "archive_sha256": "a7bfb13727b88b5c3f90c35c74633f2d5afe5f1671c20b66b6f1be0e505a9892",
+      "root": "package",
+      "files": 4,
+      "payload_bytes": 2497,
+      "filemap_sha256": "718875d35bedcabcac2101d28a82413c7ae075b804410a37a3846c6855705f47"
+    },
+    {
+      "name": "@tsconfig/node14",
+      "version": "1.0.3",
+      "lock_path": "node_modules/@tsconfig/node14",
+      "archive_sha256": "237d8d80d0f7e8caa6a73d4c3ad09b7316d4611d958ee48a51e1cb36ad5ab79d",
+      "root": "package",
+      "files": 4,
+      "payload_bytes": 2392,
+      "filemap_sha256": "378810fb36e3b7534d0ef98ef7a645c11ad4597de098f5a63409eaf6ae9af2cd"
+    },
+    {
+      "name": "@tsconfig/node16",
+      "version": "1.0.4",
+      "lock_path": "node_modules/@tsconfig/node16",
+      "archive_sha256": "ed672c6224758cea3eeb722528bb6285236de64609d9287b0228139c643d1006",
+      "root": "package",
+      "files": 4,
+      "payload_bytes": 2447,
+      "filemap_sha256": "ccb0e277136ac84b3757407c0172e28ccf917f4a62fa77019cba31223623f3cf"
+    },
+    {
+      "name": "@types/node",
+      "version": "22.10.7",
+      "lock_path": "node_modules/@types/node",
+      "archive_sha256": "22f32a85deb6d1deb2b08ace1b945c9d926ee95b5d7735a419dc3e9273624c33",
+      "root": "node",
+      "files": 67,
+      "payload_bytes": 2288069,
+      "filemap_sha256": "6b1f92c06e195cee0d49b1e3eac232cbb30a546d8a39d088f5abaf9d58ee0592"
+    },
+    {
+      "name": "acorn",
+      "version": "8.18.0",
+      "lock_path": "node_modules/acorn",
+      "archive_sha256": "0ad4c0f28f9bc5bb6f3eb879b4fd38265def6d7e1e5d61f96f78ee6a8a7be94a",
+      "root": "package",
+      "files": 10,
+      "payload_bytes": 565327,
+      "filemap_sha256": "198c6c02cc5d185859eb14e08aad6b245e5e8c24b72c78c678a9c5017c92dfaa"
+    },
+    {
+      "name": "acorn-walk",
+      "version": "8.3.5",
+      "lock_path": "node_modules/acorn-walk",
+      "archive_sha256": "4ee2ff737c58ac95afb2969a3c6134ffc1e78a99e178e75ba54c602aa4d3ffcd",
+      "root": "package",
+      "files": 8,
+      "payload_bytes": 53765,
+      "filemap_sha256": "46048eba93da246f262d48ca9e0b1b4e246e9b85b8bc20e7a927f394ddcd1f5c"
+    },
+    {
+      "name": "arg",
+      "version": "4.1.3",
+      "lock_path": "node_modules/arg",
+      "archive_sha256": "d54a7e10c9ca438c21c33515e5d4fd3a749781d2775f7ef1ed699b21e6503fef",
+      "root": "package",
+      "files": 5,
+      "payload_bytes": 12901,
+      "filemap_sha256": "f220194227f8acba9d459dffc120b41a865b00c5bc7c6990fd43c33f0b3229fc"
+    },
+    {
+      "name": "create-require",
+      "version": "1.1.1",
+      "lock_path": "node_modules/create-require",
+      "archive_sha256": "82b533c168e2eb5c1c7c6c807b02f824e10de3bb8034f4e68d5c1c11d7eda275",
+      "root": "package",
+      "files": 6,
+      "payload_bytes": 6254,
+      "filemap_sha256": "b54026d6f1953e719c61e85fda012571d9c9fe7c719ef542576d2a07b11db6be"
+    },
+    {
+      "name": "diff",
+      "version": "4.0.4",
+      "lock_path": "node_modules/diff",
+      "archive_sha256": "c65d9555d358e7f589926d72a85fe3c717d1c584bec31ac533fffb0b35a66579",
+      "root": "package",
+      "files": 27,
+      "payload_bytes": 332353,
+      "filemap_sha256": "886707d4c6f4fcb937a7dc0ba6b39b16a9a9c7374a17a65091a63fba347ef08b"
+    },
+    {
+      "name": "make-error",
+      "version": "1.3.6",
+      "lock_path": "node_modules/make-error",
+      "archive_sha256": "6a1b1f4375e7d775be9443e8a4f7782ae8b6523eda3831fd25fc4da2f20fce1a",
+      "root": "package",
+      "files": 6,
+      "payload_bytes": 12434,
+      "filemap_sha256": "26dceb9dbd8c4d6cf1f2fa98f7dd07cfe9f8ec42401072b7f7872ae7011b8801"
+    },
+    {
+      "name": "ts-node",
+      "version": "10.9.2",
+      "lock_path": "node_modules/ts-node",
+      "archive_sha256": "0290b8a665925d581da75499425c7156b1f433619af62b0ea51d159c18dff968",
+      "root": "package",
+      "files": 117,
+      "payload_bytes": 757333,
+      "filemap_sha256": "9cbc99fefeae789c6507531e3cb9bc2261a5996e935c9724a44acf4935ca43ec"
+    },
+    {
+      "name": "typescript",
+      "version": "5.7.3",
+      "lock_path": "node_modules/typescript",
+      "archive_sha256": "80cfca1254bab8e81d639178e42d6406d856fba6e34cad60d1ab50ee6e5f7ebb",
+      "root": "package",
+      "files": 129,
+      "payload_bytes": 22742077,
+      "filemap_sha256": "774bbc895f26c5541f588a67d57236595812a0caa751a6ce0dd4431d5cbc4a56"
+    },
+    {
+      "name": "undici-types",
+      "version": "6.20.0",
+      "lock_path": "node_modules/undici-types",
+      "archive_sha256": "728ca9fcff676372e4dcd648b5e26fbbdb289ec2bcf675e7601cc2134a5e8d6e",
+      "root": "package",
+      "files": 41,
+      "payload_bytes": 83349,
+      "filemap_sha256": "8c11f511235e6deba083622dfe7d0317db5b143777c822c92b163bb1b43a82e7"
+    },
+    {
+      "name": "v8-compile-cache-lib",
+      "version": "3.0.1",
+      "lock_path": "node_modules/v8-compile-cache-lib",
+      "archive_sha256": "196f4c667ca4703a522eb11ce2ea51815a0ce5bb1e6416067c643398f4a2298a",
+      "root": "package",
+      "files": 6,
+      "payload_bytes": 18165,
+      "filemap_sha256": "23b431b60e926d48b691bffd05f02d738b3efa8c12573d0a4f13e7238954d464"
+    },
+    {
+      "name": "yn",
+      "version": "3.1.1",
+      "lock_path": "node_modules/yn",
+      "archive_sha256": "677e8120a05c119993df555de0e66e3cf1fecd927c624d374785f9f9dc6d3822",
+      "root": "package",
+      "files": 6,
+      "payload_bytes": 6314,
+      "filemap_sha256": "f89fe93e9a96bd8a6658c7e13f1c024834174ee699b6697e07361b44e6ebb851"
+    }
+  ],
+  "source_filemap_sha256": "020c606abf9331476996742d08825b25632c9e1581f374589d43a695579100fe",
+  "source_files": 510,
+  "source_payload_bytes": 27232179,
+  "excluded": {
+    "path": "toolchain/node_modules/@cspotcode/source-map-support/browser-source-map-support.js",
+    "bytes": 53583,
+    "sha256": "ac3c30f584a62ae422e818928097be31b7f8b0a9988aafd6f166c4e538276833"
+  },
+  "selected_filemap_sha256": "a9c2874f3c9f62aa80f0a64c7edcd60d2757bf1e8f3b6c34afd86881d027bc73",
+  "selected_files": 509,
+  "selected_payload_bytes": 27178596,
+  "retained_notice_filemap_sha256": "34a7191baccc417091003cc2a4bd21092eaac9e5bf18cf14f061c3c12477a51a",
+  "recognized_notice_files": 22,
+  "complete_remaining_embedded_license_closure": false,
+  "functional_loader_qualification": "unrun",
+  "setup_authorized": false,
+  "execution_authorized": false
+}

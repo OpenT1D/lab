@@ -1,0 +1,61 @@
+{
+  "schema": "opent1d.lt1-runtime-disposition/1",
+  "assessed_on": "2026-11-02",
+  "status": "pending-security-build-os-and-use-decisions",
+  "runtime": "Node22.23.4 darwin-arm64",
+  "archive_sha256": "c9e1dbc748b33ed2d14f42445191ecaf14c56259c7a9a26d0042c49ec2b66428",
+  "binary_sha256": "2cc28a1880d0774616959f2210ee739bffa6ac695c887e8988a496a21271f6c0",
+  "authentication_record_sha256": "06053a5d7f5d298cb8065df18cae828454ad8678ec54775269f03b3e48a145bd",
+  "authentication_scope": "Exact archive signature authenticated in prior record; no verification rerun and no runtime admission",
+  "zlib": {
+    "assessment": "Unresolved applicability and supported-API reachability; absence of newer correction alone is insufficient",
+    "pinned_node_gzwrite_sha256": "469b1e58932ea11bdda2a153f6655f7b3c13254240fae157181b49ed1bc93b47",
+    "pinned_v8_gzwrite_sha256": "469b1e58932ea11bdda2a153f6655f7b3c13254240fae157181b49ed1bc93b47",
+    "identical_upstream_member": "zlib v1.3.1/gzwrite.c",
+    "nonblocking_lineage_introduced": "81cc0bebedd935daeb81b0b6e475d8786b51af3d",
+    "later_correction": "df84af25dc1942490e1d1c899a07619152a46148",
+    "older_path_observation": "Pinned source lacks gz_vacate/state->again retry path; write<0 is fatal Z_ERRNO and gzvprintf returns before memmove on that error",
+    "binary_writer_symbols_in_text": [
+      "_gzprintf",
+      "_gzvprintf",
+      "_gzwrite"
+    ],
+    "symbol_scope": "Non-debug external N_SECT symbols fall within __TEXT,__text; presence does not prove API reachability, exploitability or complete source-to-binary provenance",
+    "observed_upstream_assessment_issues": [
+      467,
+      492
+    ],
+    "issue_scope": "Open Node26/Node24 issues observed; neither supplies Node22 clearance"
+  },
+  "embedded_build_metadata": {
+    "platform": "macOS",
+    "minimum_os": "11.0.0",
+    "sdk": "15.0.0",
+    "linker_tool": 3,
+    "linker_version": "1115.7.3",
+    "scope": "Embedded binary declarations, not a reproduced build or OS compatibility/security qualification"
+  },
+  "remaining_evidence": [
+    "Adjudicate exact older zlib error/retry path and supported API reachability for the identified artifact",
+    "Complete full embedded-library, source/build and actual host OS/framework security disposition",
+    "Record actual named rights/use/storage/export decisions",
+    "Qualify the selected payload and frozen stager, then separately authorize setup and verify its receipt",
+    "Qualify immutable native source/runtime/reader, clean startup, native file/network/IPC/process ownership and explicit C15-C18 cases"
+  ],
+  "authorizations": {
+    "setup": false,
+    "native_execution": false,
+    "distribution": false
+  },
+  "sources": [
+    "https://github.com/nodejs/node/blob/v22.23.4/deps/zlib/gzwrite.c",
+    "https://github.com/nodejs/node/blob/v22.23.4/deps/v8/third_party/zlib/gzwrite.c",
+    "https://github.com/madler/zlib/blob/v1.3.1/gzwrite.c",
+    "https://github.com/madler/zlib/commit/81cc0bebedd935daeb81b0b6e475d8786b51af3d",
+    "https://github.com/madler/zlib/commit/df84af25dc1942490e1d1c899a07619152a46148",
+    "https://github.com/madler/zlib/issues/1310",
+    "https://github.com/nodejs/nodejs-dependency-vuln-assessments/issues/467",
+    "https://github.com/nodejs/nodejs-dependency-vuln-assessments/issues/492",
+    "https://github.com/nodejs/node/blob/v22.23.4/BUILDING.md"
+  ]
+}
