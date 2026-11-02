@@ -34,10 +34,12 @@ complete ancestry and notices have not been established by the recognized-file
 roster. The passive package count does not imply that this inlined closure is
 reviewed. Before setup, either establish and preserve its exact source/notices or
 review a newly identified payload excluding unused content and qualify that new
-payload. No exclusion or license clearance is silently applied here.
+payload. The separate selection proposal below makes that exclusion explicit;
+it supplies no clearance for the original complete archive.
 
-The [rights dossier](../../experiments/lt1_diagnostic/rights-dossier.json) still
-requires the actual owner/reviewer decision, users and named host, storage/access,
+The [rights dossier](../../experiments/lt1_diagnostic/rights-dossier.json) keeps
+personal role fields redacted; the owner and reviewer are recorded privately.
+It still requires their actual decision, users and named host, storage/access,
 retention, approved exports and parameter/default ancestry disposition. Complete
 Node LICENSE, LT1 source notices, headless package notices and the separate
 private verification utility remain distinct. The [Node license](https://github.com/nodejs/node/blob/v22.23.4/LICENSE)
@@ -78,6 +80,81 @@ compressed/expanded/member/file limits and truncated gzip. A separate control
 binds the public twenty-entry inventory back to the historical lock without
 fetching packages. Actual retained archives are assessed separately, not downloaded
 or installed by root tests/hosted CI.
+
+## Separately identified no-browser payload proposal
+
+[headless-selection.json](../../experiments/lt1_diagnostic/headless-selection.json)
+binds each original archive and its complete file map, then excludes one exact
+53,583-byte `browser-source-map-support.js` member. The resulting 509-file,
+27,178,596-byte proposal preserves all 22 recognized notice files, package
+metadata and historical lock bytes. Original archives remain unchanged.
+Source, selected and retained-notice maps have separate canonical JSON hashes;
+target paths explicitly use `toolchain/node_modules/` placement.
+
+[payload_selection.py](../../experiments/lt1_diagnostic/payload_selection.py)
+checks the reviewed profile digest, notice-inventory bytes, complete package
+roster, exact preflight file maps, exclusion bytes and unchanged notices. Its
+inputs must come from genuine retained archive preflight evidence; matching
+producer-supplied metadata hashes alone cannot authenticate archive consumption.
+The pure function returns a proposed file map and closed authorization fields.
+It creates no files, loads no engine and supplies no setup receipt.
+
+Passive source inspection found the excluded name only in the bundle itself,
+package metadata and README across the 510 supplied regular files. The package
+main entry is `source-map-support.js`, with declared `@jridgewell/trace-mapping`
+dependency. This motivates the proposed exclusion, but its generic `require`
+hook prevents a claim that name searches prove every computed resolution path.
+Actual loader compatibility, full remaining embedded-content rights and the
+target filesystem's alias/collision behavior still require qualification.
+No selected native environment has been constructed.
+
+## Refined runtime disposition from source and binary data
+
+[runtime-disposition.json](../../experiments/lt1_diagnostic/runtime-disposition.json)
+records the new passive observations separately from the historical assessment.
+The exact archive signature remains authenticated by the prior record; this
+increment does not rerun the verifier or execute the candidate.
+
+Both pinned `gzwrite.c` copies are byte-identical to
+[upstream zlib v1.3.1](https://github.com/madler/zlib/blob/v1.3.1/gzwrite.c).
+They predate the [nonblocking retry implementation](https://github.com/madler/zlib/commit/81cc0bebedd935daeb81b0b6e475d8786b51af3d)
+and lack its `gz_vacate`/`state->again` path. Before the error is cleared, their
+older write-error path treats negative writes as fatal and returns before the
+subsequent move operation.
+Therefore absence of the [later correction](https://github.com/madler/zlib/commit/df84af25dc1942490e1d1c899a07619152a46148)
+alone was insufficient to classify the older path. A fresh review located the
+[maintainer's 27 October adjudication](https://github.com/madler/zlib/issues/1292#issuecomment-6456517984):
+the old corruption route after `gzclearerr()` is also covered by CVE-2026-85091.
+Clearing the error revives stale external `next_in`/`avail_in`; fatal `Z_ERRNO`
+alone therefore cannot support a non-applicability decision. The embedded older
+C-library path is known affected; selected Node API/packet reachability remains
+a separate question. The open Node [26](https://github.com/nodejs/nodejs-dependency-vuln-assessments/issues/467)
+and [24](https://github.com/nodejs/nodejs-dependency-vuln-assessments/issues/492)
+assessment issues do not supply Node 22 clearance.
+
+Passive review of all 18,714 regular `src/lib/deps` members in the authenticated
+source archive found no client of the reviewed writer/error/open API names
+(`gzwrite`, `gzfwrite`, `gzprintf`, `gzvprintf`, `gzclearerr`, `gzopen`, `gzdopen`)
+outside the zlib trees and their test. The Node binding uses deflate/inflate streams, without an identified
+supported JavaScript gzFile entrypoint. These source observations do not prove
+absence of dynamic/binary reachability. They support only a named risk decision
+for one immutable trusted research packet, with actual extra-module/addon,
+startup and host enforcement still to qualify. The current worker rejects every
+`execArgv` option; permission/no-addon flags cannot be assumed without a reviewed
+successor guard.
+
+Independently checked Mach-O data from the authenticated binary contains external,
+non-debug `_gzwrite`, `_gzprintf` and `_gzvprintf` symbols with addresses inside
+`__TEXT,__text`. Consequently, assuming all gzip writer code was omitted or
+discarded by the linker is unsupported. Symbol presence does not establish a
+supported JavaScript call path, exploitability or exact build reproducibility.
+No binary was written to disk or executed during inspection.
+
+Embedded build metadata declares minimum macOS 11.0.0, SDK 15.0.0 and linker tool
+3/version 1115.7.3. These are observations from the artifact, not a reproduced
+compiler/SDK/build receipt or qualification of the actual host's libraries and
+frameworks. Full security/build/OS, formal rights and native host decisions remain
+open. No production admission or historical evidence record is rewritten.
 
 ## Concrete native qualification work, still unrun
 

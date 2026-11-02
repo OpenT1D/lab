@@ -347,6 +347,10 @@ binds twenty headless archives and recognized notices, checks their bounded
 in-memory layout, and specifies remaining native C15–C18 instrumentation.
 Inlined browser-bundle rights, named restricted-use decisions and actual native
 setup/qualification remain open; a passive archive pass grants no admission.
+Its explicit no-browser payload proposal now binds 509 selected files and all
+22 recognized notices to a new identity. Refined zlib lineage and passive binary
+symbol observations narrow the outstanding runtime questions without granting
+security, rights, setup or native execution clearance.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
 not native execution. Begin with the exact LT1 runtime/security and restricted-use

@@ -51,6 +51,15 @@
         "archives": 20,
         "notice_members": 22,
         "complete_license_closure": false
+      },
+      "proposed_selected_payload": {
+        "profile": "proposal-lt1-headless-no-browser-bundle/1",
+        "path": "experiments/lt1_diagnostic/headless-selection.json",
+        "sha256": "e9cb0ce784e96679eebb6f5c84b48cf8967b1181703db789c1b3fba0b1817a3c",
+        "selected_files": 509,
+        "selected_payload_bytes": 27178596,
+        "recognized_notices_retained": 22,
+        "scope": "New subset identity excludes exact browser bundle only; original archive unchanged and full archive browser ancestry not cleared; functional loading and remaining embedded-license closure unqualified"
       }
     },
     {
@@ -69,7 +78,7 @@
     "Record storage/access/retention and sanitized export classes",
     "Resolve or explicitly delimit parameter/default ancestry and any further introduced asset rights",
     "Review actual staged notice inventory and any combined distribution obligations",
-    "Establish inlined browser-source-map-support.js ancestry/notices or review a newly identified narrower payload before setup",
+    "Review the new no-browser selected-payload identity, retained notices and remaining embedded content; full original browser-bundle ancestry remains unestablished",
     "Retain and review complete TypeScript third-party and ts-node incorporated-code notices separately from package-level license labels"
   ],
   "public_redistribution": "not cleared",
@@ -83,5 +92,6 @@
     "https://github.com/nodejs/node/blob/v22.23.4/LICENSE",
     "https://github.com/openpgpjs/openpgpjs/blob/v6.3.2/LICENSE"
   ],
-  "retention_and_access_policy": null
+  "retention_and_access_policy": null,
+  "named_role_status": "Decision owner and reviewer confirmed privately; public fields redacted, use/storage/export scope and approval pending"
 }
