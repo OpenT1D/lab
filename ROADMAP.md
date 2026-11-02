@@ -361,6 +361,12 @@ records privately confirmed conditions, outstanding rights/runtime/host decision
 and a read-only expiry/copy/history planner with a manual removal procedure.
 Actual native host confinement, complete recovery coverage and effective erasure
 remain unqualified; all setup/execution authorities stay closed.
+The [host/removal fixtures](docs/research/ot062-lt1-host-removal.md) add a separate
+empty exact-removal authority, quarantine/prefix inspection and four owned
+invented removal cases. Two versioned Python host cases observe additional
+write/exec/alias denials with successful controls and inherited child confinement.
+Actual private-data removal, native host and backup/snapshot/physical erasure
+remain unqualified; historical identities and setup/execution gates are preserved.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
 not native execution. Begin with the exact LT1 runtime/security and restricted-use
