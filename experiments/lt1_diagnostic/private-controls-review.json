@@ -1,0 +1,66 @@
+{
+  "schema": "opent1d.lt1-private-controls-review/1",
+  "assessed_on": "2026-11-02",
+  "status": "private-conditions-confirmed-rights-risk-host-and-erasure-unqualified",
+  "prior_public_evidence_sha256": {
+    "experiments/lt1_diagnostic/rights-dossier.json": "faeb84eb8a839abe26e1b56444b9d1b4a57ecedcf1c9f42d478167c4bc8c7e2d",
+    "experiments/lt1_diagnostic/runtime-disposition.json": "7fb2c09c7d503d3ef0ee034994d0f32f880d2fe5a3dad25316a18beedf394187",
+    "experiments/lt1_diagnostic/headless-selection.json": "e9cb0ce784e96679eebb6f5c84b48cf8967b1181703db789c1b3fba0b1817a3c",
+    "experiments/lt1_diagnostic/headless-notices.json": "a20474c4dc25f7e5b2a51e1bb1b7853736570098e959cf2345ea14dfa4d18d1e"
+  },
+  "private_decision": {
+    "roles_and_limited_use_conditions_confirmed": true,
+    "names_host_storage_duration_and_personal_policy_hashes_published": false,
+    "overall_approval": null
+  },
+  "rights": {
+    "source_declared_MIT_notice_and_attribution_retained": true,
+    "per_default_origin_chain_of_title_closed": false,
+    "recognized_selected_notices": 22,
+    "remaining_embedded_notice_content_disposition_complete": false,
+    "actual_staged_notice_verification": "unrun",
+    "public_redistribution": "not cleared"
+  },
+  "runtime_risk": {
+    "known_old_zlib_C_path_affected": true,
+    "supported_JS_or_dynamic_selected_binary_reachability_clearance": false,
+    "upstream_Node26_and_Node24_inquiries_observed_open": "2026-11-02",
+    "recommendation": "Defer admission pending exact-packet rights/security decisions or separately reviewed fixed successor",
+    "verifier_or_exploit_rerun": false
+  },
+  "host": {
+    "current_host_session_compared_privately": true,
+    "read_only_scoped_storage_observations_retained_privately": true,
+    "FileVault_and_volume_detail_observations": "unavailable; no clearance inferred",
+    "complete_bootstrap_ACL_IPC_module_addon_and_native_process_qualification": false,
+    "native_C15_C18": "unrun"
+  },
+  "retention": {
+    "approved_duration": "private policy only; no actual duration or private policy digest published",
+    "implementation": "read-only planner; no filesystem access or deletion CLI",
+    "known_original_clock_and_global_copy_recovery_coverage_complete": false,
+    "Time_Machine_exclusion_proves_local_snapshot_exclusion": false,
+    "effective_erasure_verified": false,
+    "existing_evidence_backups_or_snapshots_deleted": false,
+    "automation_created": false,
+    "private_pilot": "Blocked: unestablished origin and incomplete copy/recovery/process coverage; no deletion"
+  },
+  "authorizations": {
+    "setup": false,
+    "native_execution": false,
+    "distribution": false,
+    "deletion": false
+  },
+  "production_authorities": {
+    "setup_requests": [],
+    "actual_setup_receipts": [],
+    "native_execution": []
+  },
+  "sources": [
+    "https://github.com/madler/zlib/issues/1292#issuecomment-6456517984",
+    "https://github.com/nodejs/nodejs-dependency-vuln-assessments/issues/467",
+    "https://github.com/nodejs/nodejs-dependency-vuln-assessments/issues/492",
+    "https://support.apple.com/en-au/guide/mac-help/mh15622/27/mac/27",
+    "https://support.apple.com/en-us/102154"
+  ]
+}

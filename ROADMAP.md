@@ -356,6 +356,11 @@ separate empty setup-request authority, data-only descriptor-relative stager,
 invented archive/materialization and owned-stop fixtures, and a redacted decision
 worksheet. Actual native setup, complete bootstrap/host qualification and
 verified setup-receipt/execution admissions remain open.
+The [private controls follow-up](docs/research/ot062-lt1-private-controls.md)
+records privately confirmed conditions, outstanding rights/runtime/host decisions
+and a read-only expiry/copy/history planner with a manual removal procedure.
+Actual native host confinement, complete recovery coverage and effective erasure
+remain unqualified; all setup/execution authorities stay closed.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
 not native execution. Begin with the exact LT1 runtime/security and restricted-use
