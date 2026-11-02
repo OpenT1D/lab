@@ -8,13 +8,13 @@
   "authentication_record_sha256": "06053a5d7f5d298cb8065df18cae828454ad8678ec54775269f03b3e48a145bd",
   "authentication_scope": "Exact archive signature authenticated in prior record; no verification rerun and no runtime admission",
   "zlib": {
-    "assessment": "Unresolved applicability and supported-API reachability; absence of newer correction alone is insufficient",
+    "assessment": "Known affected older C-library path, vendor-confirmed after gzclearerr; supported Node JavaScript and exact-packet dynamic reachability remain unestablished",
     "pinned_node_gzwrite_sha256": "469b1e58932ea11bdda2a153f6655f7b3c13254240fae157181b49ed1bc93b47",
     "pinned_v8_gzwrite_sha256": "469b1e58932ea11bdda2a153f6655f7b3c13254240fae157181b49ed1bc93b47",
     "identical_upstream_member": "zlib v1.3.1/gzwrite.c",
     "nonblocking_lineage_introduced": "81cc0bebedd935daeb81b0b6e475d8786b51af3d",
     "later_correction": "df84af25dc1942490e1d1c899a07619152a46148",
-    "older_path_observation": "Pinned source lacks gz_vacate/state->again retry path; write<0 is fatal Z_ERRNO and gzvprintf returns before memmove on that error",
+    "older_path_observation": "write<0 sets Z_ERRNO, but gzclearerr clears the error without repairing stale external next_in/avail_in; the old corruption route is vendor-confirmed under the same CVE",
     "binary_writer_symbols_in_text": [
       "_gzprintf",
       "_gzvprintf",
@@ -25,7 +25,27 @@
       467,
       492
     ],
-    "issue_scope": "Open Node26/Node24 issues observed; neither supplies Node22 clearance"
+    "issue_scope": "Open Node26/Node24 issues observed; neither supplies Node22 clearance",
+    "older_library_path_vendor_confirmed_affected": true,
+    "vendor_adjudication": "https://github.com/madler/zlib/issues/1292#issuecomment-6456517984",
+    "source_callsite_review": {
+      "authenticated_source_archive_sha256": "7b9adc82d612d0a2a863d96c46de2292552e250cee51956ebbe0146c42aacae9",
+      "regular_src_lib_deps_members_scanned": 18714,
+      "source_scan_skips": 0,
+      "supported_node_js_gzfile_binding_identified": false,
+      "dynamic_selected_binary_reachability_proved_absent": false,
+      "scope": "Static source/binding observations only; no general runtime clearance",
+      "literal_reviewed_api_clients_outside_zlib_trees_identified": 0,
+      "api_names_scanned": [
+        "gzwrite",
+        "gzfwrite",
+        "gzprintf",
+        "gzvprintf",
+        "gzclearerr",
+        "gzopen",
+        "gzdopen"
+      ]
+    }
   },
   "embedded_build_metadata": {
     "platform": "macOS",
@@ -36,7 +56,7 @@
     "scope": "Embedded binary declarations, not a reproduced build or OS compatibility/security qualification"
   },
   "remaining_evidence": [
-    "Adjudicate exact older zlib error/retry path and supported API reachability for the identified artifact",
+    "Record named acceptance or rejection of the known embedded C issue for the exact trusted packet; qualify supported API/extra-module/addon enforcement and remaining dynamic reachability risk",
     "Complete full embedded-library, source/build and actual host OS/framework security disposition",
     "Record actual named rights/use/storage/export decisions",
     "Qualify the selected payload and frozen stager, then separately authorize setup and verify its receipt",
@@ -56,6 +76,9 @@
     "https://github.com/madler/zlib/issues/1310",
     "https://github.com/nodejs/nodejs-dependency-vuln-assessments/issues/467",
     "https://github.com/nodejs/nodejs-dependency-vuln-assessments/issues/492",
-    "https://github.com/nodejs/node/blob/v22.23.4/BUILDING.md"
+    "https://github.com/nodejs/node/blob/v22.23.4/BUILDING.md",
+    "https://github.com/madler/zlib/issues/1292#issuecomment-6456517984",
+    "https://github.com/nodejs/node/blob/v22.23.4/src/node_zlib.cc",
+    "https://nodejs.org/dist/v22.23.4/node-v22.23.4.tar.xz"
   ]
 }

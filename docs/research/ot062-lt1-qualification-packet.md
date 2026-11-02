@@ -37,8 +37,9 @@ review a newly identified payload excluding unused content and qualify that new
 payload. The separate selection proposal below makes that exclusion explicit;
 it supplies no clearance for the original complete archive.
 
-The [rights dossier](../../experiments/lt1_diagnostic/rights-dossier.json) still
-requires the actual owner/reviewer decision, users and named host, storage/access,
+The [rights dossier](../../experiments/lt1_diagnostic/rights-dossier.json) keeps
+personal role fields redacted; the owner and reviewer are recorded privately.
+It still requires their actual decision, users and named host, storage/access,
 retention, approved exports and parameter/default ancestry disposition. Complete
 Node LICENSE, LT1 source notices, headless package notices and the separate
 private verification utility remain distinct. The [Node license](https://github.com/nodejs/node/blob/v22.23.4/LICENSE)
@@ -117,14 +118,30 @@ increment does not rerun the verifier or execute the candidate.
 Both pinned `gzwrite.c` copies are byte-identical to
 [upstream zlib v1.3.1](https://github.com/madler/zlib/blob/v1.3.1/gzwrite.c).
 They predate the [nonblocking retry implementation](https://github.com/madler/zlib/commit/81cc0bebedd935daeb81b0b6e475d8786b51af3d)
-and lack its `gz_vacate`/`state->again` path. Their older write-error path treats
-negative writes as fatal and returns before the subsequent move operation.
+and lack its `gz_vacate`/`state->again` path. Before the error is cleared, their
+older write-error path treats negative writes as fatal and returns before the
+subsequent move operation.
 Therefore absence of the [later correction](https://github.com/madler/zlib/commit/df84af25dc1942490e1d1c899a07619152a46148)
-alone does not establish that this artifact contains the affected implementation.
-Applicability remains unresolved pending adjudication of the exact older path;
-the observed open Node [26](https://github.com/nodejs/nodejs-dependency-vuln-assessments/issues/467)
+alone was insufficient to classify the older path. A fresh review located the
+[maintainer's 27 October adjudication](https://github.com/madler/zlib/issues/1292#issuecomment-6456517984):
+the old corruption route after `gzclearerr()` is also covered by CVE-2026-85091.
+Clearing the error revives stale external `next_in`/`avail_in`; fatal `Z_ERRNO`
+alone therefore cannot support a non-applicability decision. The embedded older
+C-library path is known affected; selected Node API/packet reachability remains
+a separate question. The open Node [26](https://github.com/nodejs/nodejs-dependency-vuln-assessments/issues/467)
 and [24](https://github.com/nodejs/nodejs-dependency-vuln-assessments/issues/492)
 assessment issues do not supply Node 22 clearance.
+
+Passive review of all 18,714 regular `src/lib/deps` members in the authenticated
+source archive found no client of the reviewed writer/error/open API names
+(`gzwrite`, `gzfwrite`, `gzprintf`, `gzvprintf`, `gzclearerr`, `gzopen`, `gzdopen`)
+outside the zlib trees and their test. The Node binding uses deflate/inflate streams, without an identified
+supported JavaScript gzFile entrypoint. These source observations do not prove
+absence of dynamic/binary reachability. They support only a named risk decision
+for one immutable trusted research packet, with actual extra-module/addon,
+startup and host enforcement still to qualify. The current worker rejects every
+`execArgv` option; permission/no-addon flags cannot be assumed without a reviewed
+successor guard.
 
 Independently checked Mach-O data from the authenticated binary contains external,
 non-debug `_gzwrite`, `_gzprintf` and `_gzvprintf` symbols with addresses inside

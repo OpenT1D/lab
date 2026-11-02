@@ -92,5 +92,6 @@
     "https://github.com/nodejs/node/blob/v22.23.4/LICENSE",
     "https://github.com/openpgpjs/openpgpjs/blob/v6.3.2/LICENSE"
   ],
-  "retention_and_access_policy": null
+  "retention_and_access_policy": null,
+  "named_role_status": "Decision owner and reviewer confirmed privately; public fields redacted, use/storage/export scope and approval pending"
 }
