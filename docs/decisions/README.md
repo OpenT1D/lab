@@ -181,3 +181,4 @@ The M4 records were assigned numbers 0016–0028 when the parallel M3, LIT-002 a
 - [0094 — LT1 diagnostic harness and reader](0094-lt1-diagnostic-harness-reader.md): independent construction, causal release and exact fractional-interval reading with native admission closed.
 - [0095 — Separate LT1 native worker admission](0095-lt1-native-worker-admission.md): fixed reviewed grants, complete staging identities and unchanged setup/host gates.
 - [0096 — Durable LT1 attempt integration](0096-lt1-durable-attempt-integration.md): separate integration authority, fsynced callback prefixes and engine-free process-receipt reconstruction without native admission.
+- [0097 — Separate LT1 setup request authority](0097-lt1-setup-request-authority.md): exact materialization requests, fixture-qualified data writing and independently verified actual setup receipts remain separate from execution admission.

@@ -1,0 +1,30 @@
+{
+  "schema": "opent1d.lt1-rights-decision-worksheet/1",
+  "status": "incomplete-review-worksheet-not-permission",
+  "proposed_use": "Restricted local research verification of one synthetic audit-1 LT1 plan; no human-data study or device evaluation",
+  "rights_dossier_sha256": "faeb84eb8a839abe26e1b56444b9d1b4a57ecedcf1c9f42d478167c4bc8c7e2d",
+  "selected_payload_profile_sha256": "e9cb0ce784e96679eebb6f5c84b48cf8967b1181703db789c1b3fba0b1817a3c",
+  "runtime_archive_sha256": "c9e1dbc748b33ed2d14f42445191ecaf14c56259c7a9a26d0042c49ec2b66428",
+  "decision_owner": null,
+  "reviewer": null,
+  "operator": null,
+  "decision_date": null,
+  "approved_users": null,
+  "named_host_and_os_scope": null,
+  "private_storage_location": null,
+  "access_controls": null,
+  "retention_period_and_deletion": null,
+  "permitted_sanitized_exports": [],
+  "parameter_default_ancestry_disposition": null,
+  "remaining_embedded_notice_disposition": null,
+  "security_risk_acceptance_for_exact_packet": null,
+  "approval": null,
+  "authorizations": {
+    "setup": false,
+    "native_execution": false,
+    "distribution": false
+  },
+  "authority_note": "Completing a worksheet or setting approval is not a setup grant, a verified actual setup receipt, or an execution grant; each needs its reviewed immutable packet and separate authority",
+  "named_role_status": "Owner and reviewer confirmed privately; public example redacted; scope and approval pending",
+  "privacy": "Actual roles, host/storage locations and personal worksheet remain private; this public example contains no private identity or private personal-record digest"
+}
