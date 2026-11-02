@@ -182,6 +182,27 @@ class LT1JournalTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "ordinal"):
             self.inspect(path, receipt)
 
+    def test_only_lf_commits_a_record(self):
+        path, receipt = self.run_fixture()
+        raw = path.read_bytes()
+        self.assertEqual(self.inspect(path, receipt)["status"], "completed")
+        # CRLF contains LF and remains valid JSON whitespace plus framing.
+        path.write_bytes(raw.replace(b"\n", b"\r\n"))
+        self.assertEqual(self.inspect(path, receipt)["status"], "completed")
+        # Bare CR must not split multiple JSON values into committed records.
+        path.write_bytes(raw.replace(b"\n", b"\r") + b"\n")
+        with self.assertRaises(ValueError):
+            self.inspect(path, receipt)
+        path, receipt = self.run_fixture("failure")
+        records = path.read_bytes().split(b"\n")
+        prefix = b"\n".join(records[:4]) + b"\n"
+        uncommitted = b"\r".join(records[4:])
+        path.write_bytes(prefix + uncommitted)
+        result = self.inspect(path, receipt)
+        self.assertEqual(result["native_callbacks"], 3)
+        self.assertEqual(result["uncommitted_tail_bytes"], len(uncommitted))
+        self.assertFalse(result["worker_finish_present"])
+
     def test_receipt_binding_cleanup_hashes_and_scientific_corruption_refuse(self):
         path, receipt = self.run_fixture()
         expected = reader.digest(path.read_bytes())

@@ -155,7 +155,11 @@ inventory keys use canonical POSIX spelling on both path flavors; a pure
 Windows-path counterexample caught and corrected host-dependent string conversion.
 This does not qualify a native Windows runtime. Only complete
 newline-terminated records are scored; a torn final record is retained as an
-uncommitted byte count. Invalid committed records, repeated ordinals, data after a
+uncommitted byte count. A fresh review caught bare carriage returns being treated
+as record delimiters; splitting exclusively on LF now rejects that false
+completion and leaves CR-only suffixes uncommitted. CRLF remains valid because it
+contains LF and JSON permits the preceding CR as whitespace.
+Invalid committed records, repeated ordinals, data after a
 finish, stale code/plan, mismatched receipt/output/owner or unknown cleanup refuse.
 An empty or single-row prefix has null delivered amount; no endpoint is padded.
 

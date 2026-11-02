@@ -74,10 +74,9 @@ def inspect(journal_path, plan_path, receipt_path, journal_sha256, receipt_sha25
     reader.require(type(receipt.get("exit_code")) is int, "process exit")
     if process_status == "completed":
         reader.require(receipt["exit_code"] == 0, "completion exit")
-    chunks = raw.splitlines(keepends=True)
-    tail = b""
-    if chunks and not chunks[-1].endswith(b"\n"):
-        tail = chunks.pop()
+    # Only the writer's LF commits a record. Bare CR is JSON whitespace,
+    # never a journal delimiter (bytes.splitlines also splits on CR).
+    *chunks, tail = raw.split(b"\n")
     reader.require(bool(chunks), "committed journal header")
     reader.require(len(chunks) <= 130, "journal record count")
     records = [reader.decode(chunk) for chunk in chunks]
