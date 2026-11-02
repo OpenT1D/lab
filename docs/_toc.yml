@@ -84,6 +84,7 @@ subtrees:
       - file: docs/research/ot062-lt1-auth-integration
       - file: docs/research/ot062-lt1-qualification-packet
       - file: docs/research/ot062-lt1-setup-packet
+      - file: docs/research/ot062-lt1-private-controls
       - file: docs/shared-project-services
       - file: docs/research/ot061-064-minimal-services
       - file: docs/installed-sdk
@@ -352,6 +353,7 @@ subtrees:
       - file: docs/decisions/0095-lt1-native-worker-admission
       - file: docs/decisions/0096-lt1-durable-attempt-integration
       - file: docs/decisions/0097-lt1-setup-request-authority
+      - file: docs/decisions/0098-private-retention-planning
       - file: docs/decisions/0059-maintained-runtimes-and-local-gui
       - file: docs/templates/model-card
       - file: docs/templates/experiment-protocol

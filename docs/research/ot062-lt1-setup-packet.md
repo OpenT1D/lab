@@ -24,6 +24,10 @@ still require their actual decision. No names, private host/storage paths or
 hash of the private personal worksheet are published. Public source and PRs,
 including their ordinary GitHub account/commit metadata, remain public.
 
+The later [private controls review](ot062-lt1-private-controls.md) records privately
+confirmed limited use conditions, remaining rights/runtime/host decisions and
+read-only retention planning. This worksheet stays a redacted preparation example.
+
 ## Packet contract
 
 [frozen_setup.py](../../experiments/lt1_diagnostic/frozen_setup.py) binds an exact
