@@ -184,9 +184,10 @@ Neither number is a physiological tolerance. Existing baseline values,
 scientific tolerances, M2 guards, native workers/readers, publication allowlists
 and task/SDK/GUI registrations remain unchanged.
 
-Next setup implementation is still the separately reviewed data-only frozen
-stager: exact path placement, no scripts/resolver/shims, fresh private root,
-confined/atomic completion, notice preservation and retained failed evidence.
-This preflight is only its read-only prerequisite. No runtime has been staged;
+The [data-only frozen stager](ot062-lt1-setup-packet.md) now implements bounded
+byte materialization with a separate closed request authority and invented
+fixture qualification. Exact native packet assembly, complete bootstrap/host
+controls and actual verified setup remain separate. This preflight is its
+read-only prerequisite. No native runtime has been staged;
 positive native TypeScript initialization, native process qualification and
 C15–C18 remain unrun. Production setup/execution admission lists remain empty.

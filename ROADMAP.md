@@ -351,6 +351,11 @@ Its explicit no-browser payload proposal now binds 509 selected files and all
 22 recognized notices to a new identity. Refined zlib lineage and passive binary
 symbol observations narrow the outstanding runtime questions without granting
 security, rights, setup or native execution clearance.
+The [frozen setup increment](docs/research/ot062-lt1-setup-packet.md) adds a
+separate empty setup-request authority, data-only descriptor-relative stager,
+invented archive/materialization and owned-stop fixtures, and a redacted decision
+worksheet. Actual native setup, complete bootstrap/host qualification and
+verified setup-receipt/execution admissions remain open.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
 not native execution. Begin with the exact LT1 runtime/security and restricted-use
