@@ -342,6 +342,11 @@ authenticates the exact Node archive signature, records a still-pending rights
 dossier and adds a separately gated durable worker/journal reader with scripted
 process controls. Native initialization/TypeScript, immutable staging, host/store
 integration and native acceptance remain unqualified; production grants stay empty.
+The [notice/preflight packet](docs/research/ot062-lt1-qualification-packet.md)
+binds twenty headless archives and recognized notices, checks their bounded
+in-memory layout, and specifies remaining native C15–C18 instrumentation.
+Inlined browser-bundle rights, named restricted-use decisions and actual native
+setup/qualification remain open; a passive archive pass grants no admission.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
 not native execution. Begin with the exact LT1 runtime/security and restricted-use

@@ -82,6 +82,7 @@ subtrees:
       - file: docs/research/ot062-lt1-native-worker
       - file: docs/research/ot062-lt1-host-qualification
       - file: docs/research/ot062-lt1-auth-integration
+      - file: docs/research/ot062-lt1-qualification-packet
       - file: docs/shared-project-services
       - file: docs/research/ot061-064-minimal-services
       - file: docs/installed-sdk
