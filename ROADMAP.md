@@ -337,6 +337,11 @@ adds actual Darwin arm64 scripted confinement/failure/deadline/cancellation
 observations through the shared process owner, and more precise embedded-runtime
 and rights dispositions. It supplies no native runtime/setup/host admission;
 native staging, launch/store integration and C15–C18 remain open.
+The [authentication/integration increment](docs/research/ot062-lt1-auth-integration.md)
+authenticates the exact Node archive signature, records a still-pending rights
+dossier and adds a separately gated durable worker/journal reader with scripted
+process controls. Native initialization/TypeScript, immutable staging, host/store
+integration and native acceptance remain unqualified; production grants stay empty.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
 not native execution. Begin with the exact LT1 runtime/security and restricted-use

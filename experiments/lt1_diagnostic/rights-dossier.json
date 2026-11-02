@@ -1,0 +1,77 @@
+{
+  "schema": "opent1d.lt1-rights-dossier/1",
+  "status": "pending-owner-and-reviewer-decision",
+  "decision_owner": null,
+  "decision_date": null,
+  "reviewer": null,
+  "approval": null,
+  "proposed_use": "Restricted local research verification of one synthetic audit-1 LT1 plan; no human-data study or device evaluation",
+  "permitted_users_and_host_scope": null,
+  "private_storage_and_output_scope": null,
+  "permitted_sanitized_exports": [],
+  "assets": [
+    {
+      "asset": "Selected LT1 source and source-defined Cambridge/IdealCGM/StaticInsulinPump defaults",
+      "source_revision": "9a6092065bd821f88691cd8d03b0550acd665573",
+      "declared_license": "MIT",
+      "license_sha256": "5b786cd1552015d73f9a6e294c4a78fbee89801c998345cfe226e36d624962eb",
+      "notice_inventory": [
+        "Full upstream license/disclaimer",
+        "Selected MIT source headers",
+        "Hovorka 2004 and Andersen 2014 scholarly attribution"
+      ],
+      "ancestry": "17 Cambridge, one sensor and nine pump source defaults; no per-default primary-source mapping or independent chain-of-title investigation",
+      "scope": "No separate manufacturer/patient table, upstream PID/MPC/reference/frontend or oref0 selected"
+    },
+    {
+      "asset": "Proposed Node binary and complete Node LICENSE only",
+      "archive_sha256": "c9e1dbc748b33ed2d14f42445191ecaf14c56259c7a9a26d0042c49ec2b66428",
+      "declared_license": "Multiple component notices in full Node LICENSE",
+      "notice_inventory": [
+        "Complete Node LICENSE member SHA256 c738ae413cf561f174e34f6961f8ca458aae2369a73640dda6234c629b98bcc4"
+      ],
+      "scope": "No runtime staged; bundled npm/Corepack excluded from proposed payload; security/build/OS disposition remains open",
+      "payload_profile": "proposal-node22.23.4-darwin-arm64-binary-license-only/1",
+      "selected_member_sha256": {
+        "bin/node": "2cc28a1880d0774616959f2210ee739bffa6ac695c887e8988a496a21271f6c0",
+        "LICENSE": "c738ae413cf561f174e34f6961f8ca458aae2369a73640dda6234c629b98bcc4"
+      }
+    },
+    {
+      "asset": "Twenty frozen headless package archives",
+      "lock_sha256": "44ad7ba062a7d67032d91fcc9e0fa2aa3910b3856dce76bee5ba32093c1a150e",
+      "declared_license": "Per-package declared notices retained in private artifact inventory",
+      "notice_inventory": [
+        "Twenty exact archives and recognized notice members from the passive runtime packet"
+      ],
+      "scope": "Frozen data-only stager proposal; no package installation/resolution or lifecycle scripts"
+    },
+    {
+      "asset": "Private public-signature verification utility",
+      "source_version": "OpenPGP.js 6.3.2",
+      "declared_license": "LGPL-3.0-or-later plus eight embedded-package notices",
+      "notice_inventory": [
+        "Full LGPL notice, exact official source archive and eight embedded dependency notices retained privately"
+      ],
+      "scope": "Separate local verification utility, not vendored into repository/application/native runtime; redistribution or embedding not cleared"
+    }
+  ],
+  "output_policy": "Full native settings, initial states, raw trajectories and reports remain private until explicit export classification. This is project policy, not a universal MIT restriction on numeric outputs.",
+  "unresolved_rights_questions": [
+    "Name the decision owner/reviewer, intended users/host/purpose and precise approved scope",
+    "Record storage/access/retention and sanitized export classes",
+    "Resolve or explicitly delimit parameter/default ancestry and any further introduced asset rights",
+    "Review actual staged notice inventory and any combined distribution obligations"
+  ],
+  "public_redistribution": "not cleared",
+  "authorizations": {
+    "setup": false,
+    "native_execution": false,
+    "distribution": false
+  },
+  "sources": [
+    "https://github.com/hpeuscher/loopinsight1/blob/9a6092065bd821f88691cd8d03b0550acd665573/LICENSE.md",
+    "https://github.com/nodejs/node/blob/v22.23.4/LICENSE",
+    "https://github.com/openpgpjs/openpgpjs/blob/v6.3.2/LICENSE"
+  ]
+}
