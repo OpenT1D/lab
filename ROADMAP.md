@@ -381,7 +381,7 @@ and historical reader identities. A separately invoked read-only probe observes 
 reviewed local files without claiming complete recovery coverage. Actual Node/LT1
 qualification and effective removal remain open; no production admission is added.
 The selected [evidence readback successor](docs/research/ot062-lt1-evidence-readback.md)
-will correlate existing attempt and recovery observations without granting authority;
+correlates existing attempt and recovery observations without granting authority;
 actual native qualification and effective removal remain open.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
