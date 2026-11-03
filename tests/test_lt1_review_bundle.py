@@ -69,6 +69,10 @@ class ReviewBundleTests(unittest.TestCase):
             bundle.removal.safe_name(path.name)
         self.assert_false_gates(result)
         self.assert_false_gates(read)
+        self.assertTrue(result["new_bundle_copy_registration_required"])
+        self.assertFalse(result["global_copy_coverage_verified"])
+        self.assertTrue(read["intent"]["new_bundle_copy_registration_required"])
+        self.assertFalse(read["intent"]["global_copy_coverage_verified"])
 
     def test_intent_is_durable_before_copies_and_keeps_unknown_origins_holds(self):
         subject = self.fixture.current["subjects"]["object-one"]
@@ -376,3 +380,68 @@ class ReviewBundleTests(unittest.TestCase):
         (self.output / bundle.MANIFEST).write_bytes(raw)
         with self.assertRaisesRegex(ValueError, "exact stored proposal replay"):
             self.inspect(result, expected_manifest_sha256=bundle.bridge.digest(raw))
+
+    def test_prepared_request_refuses_under_actual_empty_production_registry(self):
+        result = self.save()
+        evidence = self.parent / "removal-evidence"
+        evidence.mkdir(mode=0o700)
+        host = {
+            "platform": "darwin",
+            "machine": "arm64",
+            "name": "invented-host",
+            "uid": os.getuid(),
+        }
+        with patch.object(bundle.removal, "host", return_value=host):
+            prepared = bundle.prepare_removal_request(
+                self.output,
+                result["manifest_sha256"],
+                self.inputs["expected_register_sha256"],
+                self.inputs["expected_context_sha256"],
+                as_of=self.inputs["as_of"],
+                context_raw=self.context,
+                evidence_parent=evidence,
+                attempt="invented-removal",
+            )
+        registry = bundle.removal.HERE / "removal-admissions.json"
+        before_registry = registry.read_bytes()
+        self.assertEqual(json.loads(before_registry)["requests"], [])
+        before = {p.name: p.read_bytes() for p in self.output.iterdir()}
+        with patch.object(bundle.removal, "_request", side_effect=AssertionError("path intake")):
+            with self.assertRaisesRegex(ValueError, "no reviewed removal request"):
+                bundle.removal.remove(prepared["request_raw"], self.context)
+        self.assertEqual({p.name: p.read_bytes() for p in self.output.iterdir()}, before)
+        self.assertEqual(registry.read_bytes(), before_registry)
+        self.assertEqual(list(evidence.iterdir()), [])
+
+    def test_complete_pending_cannot_be_used_as_published_request_target(self):
+        stopped = False
+
+        def halt(event, _name):
+            nonlocal stopped
+            if event == "prepared":
+                stopped = True
+
+        result = self.save(stop=lambda: stopped, checkpoint=halt)
+        self.assertEqual(result["status"], "interrupted")
+        pending = Path(result["pending"])
+        before = {p.name: p.read_bytes() for p in pending.iterdir()}
+        args = (
+            pending,
+            result["manifest_sha256"],
+            self.inputs["expected_register_sha256"],
+            self.inputs["expected_context_sha256"],
+        )
+        with self.assertRaisesRegex(ValueError, "intended published leaf"):
+            bundle.inspect_bundle(*args, as_of=self.inputs["as_of"])
+        evidence = self.parent / "removal-evidence"
+        evidence.mkdir(mode=0o700)
+        with self.assertRaisesRegex(ValueError, "intended published leaf"):
+            bundle.prepare_removal_request(
+                *args,
+                as_of=self.inputs["as_of"],
+                context_raw=self.context,
+                evidence_parent=evidence,
+                attempt="invented-removal",
+            )
+        self.assertEqual({p.name: p.read_bytes() for p in pending.iterdir()}, before)
+        self.assertFalse(self.output.exists())

@@ -20,6 +20,10 @@ INPUTS = ("register", "policy", "scope", "mapping", "probe")
 MANIFEST = "manifest.json"
 INTENT = "intent.json"
 AUTHORITY = {**bridge.AUTHORITY, "removal_admitted": False, "new_authority_granted": False}
+COPY_SCOPE = {
+    "new_bundle_copy_registration_required": True,
+    "global_copy_coverage_verified": False,
+}
 
 
 def need(ok, reason):
@@ -43,8 +47,10 @@ def _manifest(files):
     )
 
 
-def _material(inputs):
+def _material(inputs, output_name):
     """Recompute before path intake; caller dictionaries/bytes are not modified."""
+    removal.safe_name(output_name)
+    need(not output_name.endswith(".pending"), "reserved pending leaf")
     proposal = bridge.propose(**inputs)
     current = retention.register(inputs["register_raw"], inputs["expected_register_sha256"])
     files = {name + ".json": inputs[name + "_raw"] for name in INPUTS}
@@ -53,6 +59,7 @@ def _material(inputs):
     intent = {
         "schema": "opent1d.lt1-review-bundle-intent/1",
         "kind": proposal["kind"],
+        "output_name": output_name,
         "source_identity": source_identity(),
         "as_of": inputs["as_of"],
         "context_sha256": inputs["expected_context_sha256"],
@@ -60,6 +67,7 @@ def _material(inputs):
             name: {"bytes": len(raw), "sha256": bridge.digest(raw)}
             for name, raw in sorted(files.items())
         },
+        **COPY_SCOPE,
         "subjects": {
             name: {
                 **{
@@ -184,10 +192,9 @@ def save_review_bundle(output, *, stop=lambda: False, checkpoint=lambda *_: None
     No staging prefix is removed on failure/cancellation. A committed rename with
     failed final verification/fsync is reported uncertain and never overwritten.
     """
-    files, _, intent = _material(inputs)
     output = Path(output)
     need(output.is_absolute(), "absolute output")
-    removal.safe_name(output.name)
+    files, _, intent = _material(inputs, output.name)
     published, pending, created, stage_fd = False, None, False, None
     manifest_sha = bridge.digest(files[MANIFEST])
     with _opened(output.parent) as (parent, parent_fd):
@@ -196,7 +203,13 @@ def save_review_bundle(output, *, stop=lambda: False, checkpoint=lambda *_: None
             not os.path.lexists(output) and not os.path.lexists(pending), "fresh output and pending"
         )
         if stop():
-            return {"status": "interrupted", "published": False, "pending": None, **AUTHORITY}
+            return {
+                "status": "interrupted",
+                "published": False,
+                "pending": None,
+                **AUTHORITY,
+                **COPY_SCOPE,
+            }
         try:
             os.mkdir(pending.name, 0o700, dir_fd=parent_fd)
             created = True
@@ -230,6 +243,7 @@ def save_review_bundle(output, *, stop=lambda: False, checkpoint=lambda *_: None
                 "path": str(output),
                 "manifest_sha256": manifest_sha,
                 **AUTHORITY,
+                **COPY_SCOPE,
             }
         except (Exception, KeyboardInterrupt) as error:
             if created and stage_fd is not None:
@@ -255,6 +269,7 @@ def save_review_bundle(output, *, stop=lambda: False, checkpoint=lambda *_: None
                 "manifest_sha256": manifest_sha,
                 "error_type": type(error).__name__,
                 **AUTHORITY,
+                **COPY_SCOPE,
             }
         finally:
             if stage_fd is not None:
@@ -269,13 +284,18 @@ def _inspect(
         files = snapshot[0]
         need(INTENT in files, "intent required")
         intent = bridge.decoded(files[INTENT], bridge.digest(files[INTENT]))
-        retention.fields(intent, "schema kind source_identity as_of context_sha256 inputs subjects")
+        retention.fields(
+            intent,
+            "schema kind output_name source_identity as_of context_sha256 inputs subjects "
+            "new_bundle_copy_registration_required global_copy_coverage_verified",
+        )
         need(
             intent["schema"] == "opent1d.lt1-review-bundle-intent/1"
             and intent["context_sha256"] == expected_context_sha256
             and retention.sha(expected_context_sha256),
             "external context identity",
         )
+        need(intent["output_name"] == path.name, "intended published leaf")
         metadata = intent["inputs"]
         need(
             isinstance(metadata, dict)
@@ -298,7 +318,7 @@ def _inspect(
             args["expected_register_sha256"] == expected_current_register_sha256,
             "external current register identity",
         )
-        replay_files, proposal, _ = _material(args)
+        replay_files, proposal, _ = _material(args, intent["output_name"])
         need(replay_files == files, "exact stored proposal replay")
         need(
             retention.stamp(as_of) >= retention.stamp(intent["as_of"]),
@@ -318,6 +338,7 @@ def _inspect(
             "current_assessment": current["assessment"],
             "intent": intent,
             **AUTHORITY,
+            **COPY_SCOPE,
         }, snapshot
 
 
@@ -397,4 +418,5 @@ def prepare_removal_request(
             "request_sha256": bridge.digest(raw),
             "assessment": report["current_assessment"],
             **AUTHORITY,
+            **COPY_SCOPE,
         }
