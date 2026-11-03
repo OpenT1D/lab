@@ -383,6 +383,9 @@ qualification and effective removal remain open; no production admission is adde
 The selected [evidence readback successor](docs/research/ot062-lt1-evidence-readback.md)
 correlates existing attempt and recovery observations without granting authority;
 actual native qualification and effective removal remain open.
+The selected [entry-observation/review-bundle increment](docs/research/ot062-lt1-entry-review-bundle.md)
+implements bounded entry framing and durable private proposals; actual native wiring,
+qualification and effective removal remain separately gated.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
 not native execution. Begin with the exact LT1 runtime/security and restricted-use
