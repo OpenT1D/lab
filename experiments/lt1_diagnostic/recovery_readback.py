@@ -7,6 +7,7 @@ import hashlib
 import json
 import plistlib
 from datetime import UTC, datetime
+from pathlib import PurePosixPath
 from xml.parsers.expat import ExpatError
 
 from experiments.lt1_diagnostic import recovery_evidence as evidence
@@ -247,6 +248,16 @@ def propose(
         need(start <= lower <= upper <= end, "readback outside acquisition interval")
         need(row["state"] in ("present", "absence-observed", "unknown"), "readback state")
         if row["state"] != "unknown":
+            need(
+                "error" not in row and "inspected_bytes" not in row,
+                "known readback contains failure or partial-read metadata",
+            )
+            need(
+                not path.startswith("//")
+                and PurePosixPath(path).as_posix() == path
+                and all(part not in ("", ".", "..") for part in path.split("/")[1:]),
+                "known readback needs canonical lexical path",
+            )
             need(
                 row["data_device_matches"] is True
                 and type(row.get("device")) is int

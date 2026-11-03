@@ -51,6 +51,23 @@ def _read(path, expected, limit):
     return raw
 
 
+def _owned_tree(owned, owner):
+    """The retained first-observation graph must descend from one spawned entry."""
+    by_pid = {row["pid"]: row for row in owned}
+    need(owner not in by_pid, "supervisor cannot be an owned descendant")
+    entries = [row["pid"] for row in owned if row["ppid"] == owner]
+    need(len(entries) == 1, "exactly one owned entry required")
+    connected = {owner}
+    for pid in by_pid:
+        chain, current = set(), pid
+        while current not in connected:
+            need(current in by_pid and current not in chain, "owned parent chain missing or cyclic")
+            chain.add(current)
+            current = by_pid[current]["ppid"]
+        connected.update(chain)
+    return entries[0]
+
+
 def inspect_attempt(
     journal_path,
     plan_path,
@@ -231,6 +248,7 @@ def inspect_attempt(
         and engine["host"] == context["host"]["hostname"],
         "same observed owner/context",
     )
+    _owned_tree(owned, integration["owner_pid"])
     stage = native_preflight.absolute(engine["staging_root"])
     packet = native_preflight.absolute(capsule["packet_root"])
     output = native_preflight.absolute(integration["output_root"])

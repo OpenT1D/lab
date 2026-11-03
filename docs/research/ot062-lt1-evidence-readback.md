@@ -31,7 +31,8 @@ absence instant. Successful system queries never establish channel coverage.
 [native_readback.py](../../experiments/lt1_diagnostic/native_readback.py) exposes
 `inspect_attempt`. Its externally pinned capsule and eight packet blobs bind the
 three exact private journal/plan/process-receipt files. The wrapper checks the
-fixed argv and root roles, owner/context, engine/integration grants and each
+fixed argv and root roles, owner/context, one connected acyclic owned process
+tree with a single spawned entry, engine/integration grants and each
 setup/host/rights/security receipt. It checks current worker/reader/launcher source
 identity, selected executable inventory identity and reviewed mechanism/profile
 bindings, then calls the unchanged `journal_reader.inspect`. It reads the exact
@@ -67,7 +68,8 @@ be retained privately by the caller before using their identities. Nothing is
 saved automatically. The successor points to the exact current register, after
 validating its own predecessor where required. It preserves every subject/copy,
 original origin and evidence, hold, policy and coverage field. Only supported
-present/absence states update mapped copy evidence. Unknown readbacks leave the
+present/absence states update mapped copy evidence. Known states require canonical
+lexical paths and cannot contain error or partial-read metadata. Unknown readbacks leave the
 registered state/evidence unchanged and remain unknown observations.
 
 Per-copy provenance keeps the exact logical readback and both raw UTC endpoints,

@@ -385,3 +385,44 @@ class NativeReadbackTests(unittest.TestCase):
         ]
         with self.assertRaisesRegex(ValueError, "aliased root"):
             self.inspect()
+
+    def test_rehashed_owner_self_and_impossible_descendant_graphs_refuse(self):
+        owner = self.integration["owner_pid"]
+        entry = copy.deepcopy(self.receipt["owned_processes"][0])
+        invalid = [
+            [{"pid": owner, "ppid": owner, "start": "invented-owner"}],
+            [entry, {"pid": 65432, "ppid": owner, "start": "second-entry"}],
+            [entry, {"pid": 65432, "ppid": 99999, "start": "missing-parent"}],
+            [
+                entry,
+                {"pid": 65432, "ppid": 65433, "start": "cycle-a"},
+                {"pid": 65433, "ppid": 65432, "start": "cycle-b"},
+            ],
+            [entry, {"pid": 65432, "ppid": 65432, "start": "self-cycle"}],
+            [entry, {"pid": owner, "ppid": entry["pid"], "start": "owner-in-cycle"}],
+        ]
+        for owned in invalid:
+            self.receipt["owned_processes"] = owned
+            with self.subTest(owned=owned), self.assertRaises(ValueError):
+                self.inspect()
+        self.receipt["owned_processes"] = [
+            entry,
+            {"pid": 65432, "ppid": entry["pid"], "start": "child"},
+            {"pid": 65433, "ppid": 65432, "start": "grandchild"},
+            {"pid": 65434, "ppid": entry["pid"], "start": "branch"},
+        ]
+        self.assertTrue(self.inspect()["structurally_correlated"])
+
+
+class OwnedReadbackGraphTests(unittest.TestCase):
+    def test_unsorted_full_capacity_tree_is_connected_without_live_os_reads(self):
+        owner = 100
+        rows = [
+            {"pid": 1000 + i, "ppid": owner if i == 0 else 999 + i, "start": f"invented-{i}"}
+            for i in range(readback.MAX_OWNED)
+        ]
+        with patch("subprocess.run", side_effect=AssertionError("spawn")):
+            self.assertEqual(readback._owned_tree(list(reversed(rows)), owner), 1000)
+        rows[-1]["ppid"] = rows[-1]["pid"]
+        with self.assertRaisesRegex(ValueError, "cyclic"):
+            readback._owned_tree(rows, owner)

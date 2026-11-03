@@ -358,3 +358,55 @@ class RecoveryReadbackTests(unittest.TestCase):
         self.current["policy_sha256"] = policy_sha
         self.fixture.scope["policy_sha256"] = policy_sha
         self.assertEqual(self.run_bridge()["assessment"]["retention_timing"], "unknown")
+
+    def test_known_absence_or_presence_cannot_carry_failed_read_metadata(self):
+        original = copy.deepcopy(self.report)
+        for index in (0, 1):
+            for changes in (
+                {"error": "controlled partial read failure"},
+                {"error": None},
+                {"inspected_bytes": 1},
+                {"inspected_bytes": 0},
+            ):
+                self.report = copy.deepcopy(original)
+                self.report["local_readbacks"][index].update(changes)
+                with (
+                    self.subTest(index=index, changes=changes),
+                    self.assertRaisesRegex(ValueError, "failure or partial-read"),
+                ):
+                    self.run_bridge()
+
+    def test_rehashed_noncanonical_known_path_cannot_update_copy_state(self):
+        for path in (
+            "/invented/private/../private/live",
+            "/invented/private/./live",
+            "//invented/private/live",
+            "/invented//private/live",
+            "/invented/private/live/",
+        ):
+            self.report["local_readbacks"][0]["path"] = path
+            self.mapping["copies"]["copy-live"]["path"] = path
+            with self.subTest(path=path), self.assertRaisesRegex(ValueError, "canonical lexical"):
+                self.run_bridge()
+
+    def test_unknown_noncanonical_path_preserves_previous_state_and_uncertainty(self):
+        path = "/invented/private/../private/live"
+        old = copy.deepcopy(self.current["subjects"]["object-one"]["copies"]["copy-live"])
+        self.report["local_readbacks"][0] = {
+            "path": path,
+            "observed_from": "2026-11-05T11:59:58.900Z",
+            "observed_to": "2026-11-05T11:59:59.200Z",
+            "state": "unknown",
+            "data_device_matches": None,
+            "error": "noncanonical parent",
+            "inspected_bytes": 0,
+        }
+        self.mapping["copies"]["copy-live"]["path"] = path
+        self.report["status"] = "partial"
+        result = self.run_bridge()
+        self.assertEqual(
+            json.loads(result["register_raw"])["subjects"]["object-one"]["copies"]["copy-live"], old
+        )
+        observation = json.loads(result["observations_raw"])["copies"]["copy-live"]
+        self.assertEqual(observation["state"], "unknown")
+        self.assertIsNone(observation["absent_since"])
