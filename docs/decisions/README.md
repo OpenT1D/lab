@@ -188,3 +188,4 @@ The M4 records were assigned numbers 0016–0028 when the parallel M3, LIT-002 a
 - [0101 — LT1 owned pre-start and recovery probe](0101-lt1-owned-prestart-and-recovery-probe.md): existing exact grants guard fixed owned launch before startup; read-only local recovery observations grant no coverage or removal authority.
 - [0102 — LT1 attempt and recovery readback](0102-lt1-attempt-and-recovery-readback.md): correlate exact observations without granting native or removal authority.
 - [0103 — LT1 entry observations and review bundles](0103-lt1-entry-observation-review-bundle.md): bounded entry framing and durable private proposals preserve original clocks and closed operational authorities.
+- [0104 — LT1 entry handoff and copy registration](0104-lt1-entry-handoff-copy-registration.md): bound frame acknowledgment and propose explicit bundle-copy accounting without native or removal authority.
