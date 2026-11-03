@@ -373,6 +373,13 @@ without starting Node. A logical-recovery assessor keeps declared scope coverage
 original deadline timing and authority separate; positive invented evidence does
 not qualify actual storage or grant removal. Actual native acceptance and reviewed
 copy/snapshot/backup coverage remain open, with all operational authorities closed.
+The [owned pre-start/recovery increment](docs/research/ot062-lt1-prestart-recovery-probe.md)
+adds a fixed qualification launcher under those same empty authorities, same-live-owner
+and last-byte checks, explicit stdio/environment controls and fixed Python process
+fixtures. A task-local invocation adapter retains the exact shared supervisor source
+and historical reader identities. A separately invoked read-only probe observes Data-volume responses and
+reviewed local files without claiming complete recovery coverage. Actual Node/LT1
+qualification and effective removal remain open; no production admission is added.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
 not native execution. Begin with the exact LT1 runtime/security and restricted-use
