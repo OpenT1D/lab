@@ -156,3 +156,8 @@ native source/startup, native file/network/IPC/module/addon/process behavior and
 C15–C18 remain open. All four production authority lists are empty. Historical
 locks/guards, scientific readers/baselines/tolerances and public task/SDK/GUI/CI
 scope remain unchanged.
+
+The [native/recovery preparation](ot062-lt1-native-recovery.md) follows this record
+with a read-only launch contract, explicit private host observations and separate
+scoped logical-recovery/timing assessment. It does not promote these Python
+fixtures to actual native or recovery qualification.

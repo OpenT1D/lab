@@ -1,0 +1,74 @@
+{
+  "schema": "opent1d.lt1-native-recovery-review/1",
+  "assessed_on": "2026-11-03",
+  "status": "read-only-preparation-native-and-actual-recovery-unqualified",
+  "base": {
+    "pr": 60,
+    "merge": "bc323c91600d11f3d8046c24b2ca04e7e0c5a207",
+    "reviewed_head": "88332f61268b643185b7f86100c6542469e3df5e",
+    "merged_tree_equals_tested": true,
+    "root_tests": 2029,
+    "expected_skips": 32,
+    "hosted_run": 41533158512
+  },
+  "host_context": {
+    "fixed_read_only_queries_available": 4,
+    "status": "observed",
+    "source_files": 49,
+    "public_source_inventory_sha256": "fb29d332307ea83338709e256cf93ba515e4970ff4581b33623f391c377161d3",
+    "actual_identifiers_published": false,
+    "login_or_audit_session_continuity_proved": false,
+    "observer_is_future_launcher": false,
+    "native_host_qualified": false
+  },
+  "native_preparation": {
+    "structural_spec_valid": true,
+    "status": "blocked",
+    "source_files": 68,
+    "public_source_inventory_sha256": "99eb24f633d4d26d6107253953a45a676fdb859724b30efa467a5f4d285a2805",
+    "assessment_clock": "historical observation completion, not current launch readiness",
+    "setup_receipt": "explicit missing placeholder, no actual receipt",
+    "review_gate_states": "pending",
+    "actual_native_case_families": 6,
+    "actual_native_cases_run": 0,
+    "candidate_started": false,
+    "opaque_input_bytes_are_semantic_approval": false,
+    "actual_filesystem_or_full_bootstrap_qualified": false
+  },
+  "logical_recovery": {
+    "actual_private_pilot": "incomplete",
+    "actual_scope_decision": "proposed",
+    "original_retention_time": "unknown, unchanged",
+    "complete_copy_and_restore_coverage": false,
+    "actual_retention_timing": "unknown",
+    "positive_invented_scoped_evidence_supported": true,
+    "invented_example_duration_days": 7,
+    "physical_sanitization_verified": false,
+    "existing_private_payload_copied_or_removed": false
+  },
+  "privacy": {
+    "actual_host_account_storage_and_personal_policy_values_published": false,
+    "private_context_personal_or_policy_record_hashes_published": false,
+    "ordinary_GitHub_account_and_commit_attribution": "public"
+  },
+  "public_source_inventory_hash_scope": "Relative public source paths and source-byte SHA256 values only; no host/context/spec/receipt/personal-policy hashes",
+  "authorizations": {
+    "setup": false,
+    "native_execution": false,
+    "distribution": false,
+    "production_removal": false,
+    "effective_erasure_verified": false
+  },
+  "production_authorities": {
+    "setup_requests": [],
+    "actual_setup_receipts": [],
+    "execution": [],
+    "removal_requests": []
+  },
+  "remaining": [
+    "Exact runtime/security and restricted-use decisions, actual setup receipt and execution admission",
+    "Current future-launcher observation and actual native bootstrap/modules/addons/process/file/network/host-mechanism cases; C15-C18",
+    "Reviewed actual recovery scope, original clocks and complete live/quarantine/snapshot/backup coverage",
+    "Concrete storage-appropriate removal mechanism and separately admitted exact removal request"
+  ]
+}

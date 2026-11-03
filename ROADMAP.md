@@ -367,6 +367,12 @@ invented removal cases. Two versioned Python host cases observe additional
 write/exec/alias denials with successful controls and inherited child confinement.
 Actual private-data removal, native host and backup/snapshot/physical erasure
 remain unqualified; historical identities and setup/execution gates are preserved.
+The [native/recovery preparation](docs/research/ot062-lt1-native-recovery.md)
+binds a data-only launch contract and explicit private boot/process observations,
+without starting Node. A logical-recovery assessor keeps declared scope coverage,
+original deadline timing and authority separate; positive invented evidence does
+not qualify actual storage or grant removal. Actual native acceptance and reviewed
+copy/snapshot/backup coverage remain open, with all operational authorities closed.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
 not native execution. Begin with the exact LT1 runtime/security and restricted-use
