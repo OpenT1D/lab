@@ -29,9 +29,10 @@ root identities, fixed sandbox/profile bytes and bounded clocks. Prepare/review
 the receipt and grants in that still-live owner process. Reobserve current stable
 fields without resealing approved bytes. Keep the engine host receipt separate.
 
-Add optional stdin and last-pre-spawn controls to the shared supervisor; existing
-callers retain normal stdin behavior. Native qualification passes DEVNULL,
-explicit close-fds and exactly three environment keys. Its hook checks the opened
+Use a task-local invocation adapter for the unchanged canonical supervisor code,
+defaults and ownership loop. A separate globals dictionary per call replaces only
+its spawn binding; no shared module global is patched. Native qualification passes
+DEVNULL, explicit close-fds and exactly three environment keys. Its hook checks the opened
 private log, captures the current owner before consuming final bytes, then checks
 source/tool/packet/staging/root bindings and context expiry again before spawn.
 An already cancelled hooked launch starts no worker. Preserve failures, owned
@@ -54,9 +55,12 @@ actual setup or effective removal. Broadly allowing checkout reads, executing No
 to discover its version before admission, or treating query success as backup
 closure would bypass the selected boundary.
 
-The supervisor source identity changes; historical inventories remain historical.
-New packets and qualification receipts must bind the new source. Existing workers,
-readers, registries, locks, scientific baselines and tolerances remain unchanged.
+An initial shared-supervisor extension broke the exact historical MMTT comparison
+reader identity (six root-test failures). Restore that source byte-for-byte; do not
+refreeze a reader registry or oracle to accept an unnecessary shared change. New
+LT1 packets and qualification receipts bind the task-local adapter. Existing shared
+supervisor, workers, readers, registries, locks, scientific baselines and tolerances
+remain unchanged. Historical qualification inventories remain historical.
 Revisit after exact runtime/rights/setup decisions, admitted native cases and a
 reviewed actual recovery scope supply evidence described in the
 [implementation record](../research/ot062-lt1-prestart-recovery-probe.md).

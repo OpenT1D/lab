@@ -19,7 +19,7 @@ from pathlib import Path
 from experiments.lt1_diagnostic import frozen_setup as storage
 from experiments.lt1_diagnostic import host_context, journal_reader, native_preflight, reader
 from experiments.lt1_diagnostic.control_identity import ROOT, identity
-from experiments.shared_services.execution import supervise
+from experiments.lt1_diagnostic.native_supervisor import supervise
 
 HERE = ROOT / "experiments/lt1_diagnostic"
 SANDBOX = Path("/usr/bin/sandbox-exec")

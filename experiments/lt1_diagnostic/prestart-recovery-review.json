@@ -48,8 +48,8 @@
         "unrelated_reaped": true
       }
     },
-    "source_files": 155,
-    "public_source_inventory_sha256": "ea677cfbf15ba0582a864e30ffe22a389cb1bec7ec0ce728b3a28eec3d2e831b",
+    "source_files": 156,
+    "public_source_inventory_sha256": "6b13dbc120e610bd95157c679c0c67f7cead0b03a2382a2421a0e84d68fb9d16",
     "actual_spawn_stdin": "DEVNULL",
     "actual_spawn_close_fds": true,
     "actual_passed_environment_keys": [
@@ -116,5 +116,12 @@
     "Admitted actual same-owner native bootstrap/modules/addons/file/network/IPC/process qualification and C15-C18",
     "Approved ordinary recovery scope, original clocks and complete live/quarantine/snapshot/backup copy coverage",
     "Separately reviewed storage-appropriate exact removal; no production removal request admitted"
-  ]
+  ],
+  "supervisor_compatibility": {
+    "canonical_shared_source_unchanged": true,
+    "historical_comparison_reader_identity_unchanged": true,
+    "adapter": "task-local copied globals; canonical code, defaults, closure and process owner",
+    "initial_shared_extension_regression": "six historical reader-transition test failures retained; shared bytes restored without refreezing reader registries or oracles",
+    "final_revision_requires_its_own_full_check": true
+  }
 }

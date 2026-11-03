@@ -4,6 +4,7 @@ import copy
 import json
 import os
 import re
+import signal
 import stat
 import subprocess
 import sys
@@ -20,6 +21,7 @@ from test_lt1_host_context import invented_context
 
 from experiments.gui.ownership import ProcessTable
 from experiments.lt1_diagnostic import native_launcher as launch
+from experiments.lt1_diagnostic import native_supervisor as supervisor
 from experiments.shared_services import execution
 
 
@@ -680,7 +682,99 @@ class NativePrestartProcessTests(unittest.TestCase):
                 self.assertEqual(result["status"], "failed")
                 spawn.assert_called_once()
                 self.assertNotIn("stdin", spawn.call_args.kwargs)
-                self.assertIs(spawn.call_args.kwargs["close_fds"], True)
+                self.assertNotIn("close_fds", spawn.call_args.kwargs)
+
+
+@unittest.skipUnless(os.name == "posix", "POSIX task-local supervisor controls required")
+class NativeSupervisorTests(unittest.TestCase):
+    def test_views_keep_canonical_code_defaults_and_only_isolate_spawn(self):
+        base = execution.supervise
+        before = dict(base.__globals__)
+        first_spawn, second_spawn = lambda *a, **k: None, lambda *a, **k: None
+        first = supervisor._supervisor_view(first_spawn)
+        second = supervisor._supervisor_view(second_spawn)
+        for view, spawn in ((first, first_spawn), (second, second_spawn)):
+            self.assertIs(view.__code__, base.__code__)
+            self.assertIs(view.__defaults__, base.__defaults__)
+            self.assertIs(view.__closure__, base.__closure__)
+            self.assertEqual(view.__kwdefaults__, base.__kwdefaults__)
+            self.assertIsNot(view.__kwdefaults__, base.__kwdefaults__)
+            self.assertEqual(view.__globals__.keys(), before.keys())
+            self.assertIs(view.__globals__["spawn"], spawn)
+            for name in before.keys() - {"spawn"}:
+                self.assertIs(view.__globals__[name], before[name])
+        self.assertIsNot(first.__globals__, second.__globals__)
+        self.assertEqual(execution.supervise.__globals__.keys(), before.keys())
+        for name in before:
+            self.assertIs(execution.supervise.__globals__[name], before[name])
+
+    def test_two_views_keep_spawn_and_signal_observations_separate(self):
+        original_spawn = execution.spawn
+        signals = {signum: signal.getsignal(signum) for signum in execution.handled_signals()}
+        called = []
+
+        def recorder(label):
+            def spawn(*args, **kwargs):
+                called.append(label)
+                raise OSError(label)
+
+            return spawn
+
+        first = supervisor._supervisor_view(recorder("first"))
+        second = supervisor._supervisor_view(recorder("second"))
+        with tempfile.TemporaryDirectory() as folder:
+            for index, (view, label) in enumerate(
+                ((first, "first"), (second, "second"), (first, "first"))
+            ):
+                result = view(["never-start"], Path(folder) / str(index), timeout=1)
+                self.assertEqual(result["status"], "failed")
+                self.assertEqual(result["error"], "OSError: " + label)
+                self.assertEqual(result["received_signals"], [])
+                self.assertEqual(result["remaining_owned_processes"], [])
+                self.assertEqual({s: signal.getsignal(s) for s in signals}, signals)
+        self.assertEqual(called, ["first", "second", "first"])
+        self.assertIs(execution.spawn, original_spawn)
+
+    def test_cancel_does_not_mask_ordinary_guard_or_spawn_failure(self):
+        with tempfile.TemporaryDirectory() as folder:
+            for index, kind in enumerate((ValueError, OSError)):
+                cancel = threading.Event()
+
+                def failed_guard(log):
+                    cancel.set()
+                    raise kind("ordinary guard failure")
+
+                with patch.object(execution, "spawn") as spawn:
+                    result = launch._run(
+                        ["never-start"], Path(folder) / str(index), 1, 0, failed_guard, cancel
+                    )
+                    spawn.assert_not_called()
+                self.assertEqual(result["status"], "failed")
+                self.assertEqual(result["error"], kind.__name__ + ": ordinary guard failure")
+            cancel = threading.Event()
+
+            def failed_spawn(*args, **kwargs):
+                cancel.set()
+                raise OSError("ordinary spawn failure")
+
+            with patch.object(execution, "spawn", side_effect=failed_spawn):
+                result = launch._run(
+                    ["never-start"], Path(folder) / "spawn", 1, 0, lambda log: None, cancel
+                )
+            self.assertEqual(result["status"], "failed")
+            self.assertEqual(result["error"], "OSError: ordinary spawn failure")
+
+    def test_replaced_canonical_function_is_refused_before_log_or_spawn(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "never.log"
+            with (
+                patch.object(execution, "supervise", lambda *a, **k: None),
+                patch.object(execution, "spawn") as spawn,
+            ):
+                with self.assertRaisesRegex(ValueError, "provenance"):
+                    launch._run(["never-start"], path, 1, 0, lambda log: None, None)
+                spawn.assert_not_called()
+            self.assertFalse(path.exists())
 
 
 if __name__ == "__main__":

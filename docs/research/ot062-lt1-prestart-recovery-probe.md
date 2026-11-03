@@ -57,9 +57,12 @@ Following admission, reobserve boot/OS, UID, PID/start and POSIX-session fields
 against the approved bytes without replacing timestamps, receipts or grant hashes.
 A POSIX session remains distinct from login/audit-session continuity.
 
-The optional hook in [the shared supervisor](../../experiments/shared_services/execution.py)
-runs after log opening and directly before its existing process spawn. The native
-adapter sets the log to 0600 and checks its descriptor/inode binding. It performs
+The [task-local adapter](../../experiments/lt1_diagnostic/native_supervisor.py)
+uses the unchanged canonical shared supervisor code, defaults and ownership loop.
+Each invocation copies its globals and replaces only the spawn binding with a
+trusted guarded closure; shared module globals are untouched. The hook runs after
+log opening, directly before the existing spawn. The native adapter sets the log
+to 0600 and checks its descriptor/inode binding. It performs
 the potentially slow owner capture before final source/packet/staging consumption,
 then rechecks mechanism bytes, root/log/empty-output bindings and context expiry.
 Cancellation before spawn returns interrupted with no worker; cancellation after
@@ -69,8 +72,7 @@ guard leaves any available log and starts no worker.
 The fixed command uses `sandbox-exec`, the reviewed profile, selected staging Node
 and the canonical integration worker with staging/packet/output arguments. The
 caller supplies no flags. Exactly LANG, LC_ALL and PATH are passed, stdin is
-DEVNULL and inherited descriptors are closed. Existing callers without the hook
-retain normal stdin behavior. The actual process fixture checks the passed spawn
+DEVNULL and inherited descriptors are closed. Existing shared callers retain their exact source and normal stdin behavior. The actual process fixture checks the passed spawn
 arguments as well as EOF and noninheritance of a known inheritable descriptor.
 Darwin Python may add `__CF_USER_TEXT_ENCODING` during startup; that observation is
 kept separate from the exact three-key environment passed by the launcher.
@@ -99,7 +101,7 @@ Four separately retained Python cases passed on the declared private host:
 complete, primary exit 23, deadline and cancel. Each recorded the actual stdin/
 close-fds/environment spawn contract, observed live parent/child start identities
 and stopped heartbeat, preserved the unrelated sentinel and reaped it explicitly.
-The 155-file static implementation/fixture map matched before/after and before
+The 156-file static implementation/fixture map matched before/after and before
 every spawn. The private runner preserves interruption/failure prefixes and
 planned unrun slots; review corrected an interrupt handler that could otherwise
 continue to a later fixture. No Node, sandbox or model was started for these cases.
@@ -161,6 +163,12 @@ Actual native setup/startup/confinement and C15–C18 remain unrun. Actual recov
 scope approval, complete copy/restore coverage, original timing and a separately
 admitted storage-appropriate removal operation remain open. The exact-removal
 authority and setup/execution lists remain empty. Historical qualification records
-keep their old source inventories; the supervisor extension requires new source
+keep their old source inventories; the task-local adapter requires new LT1 source
 bindings for current receipts. No old reader, lock, baseline, tolerance, public
 task/SDK/GUI route or automatic native-CI gate is refrozen or expanded.
+
+The first implementation changed shared supervisor bytes and failed six historical
+MMTT reader-transition tests in both local and hosted checks. Those failed receipts
+remain retained. Restoring the shared source exactly and using the task-local
+adapter preserves the qualified historical identities; the corrected revision is checked separately with fresh Python process evidence.
+The associated pull request records the final exact revision and full-check results.

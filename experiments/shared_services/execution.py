@@ -96,18 +96,7 @@ def finish(store, attempt, work, receipt, *, forensic=False):
     return attempt
 
 
-def supervise(
-    argv,
-    log_path,
-    *,
-    timeout,
-    cancel=None,
-    grace=30,
-    header=None,
-    environment=None,
-    stdin=None,
-    before_spawn=None,
-):
+def supervise(argv, log_path, *, timeout, cancel=None, grace=30, header=None, environment=None):
     """Forward cancellation to the coordinator; retain observed nested ownership."""
     require(
         type(timeout) in (int, float) and math.isfinite(timeout) and timeout > 0,
@@ -133,34 +122,23 @@ def supervise(
         "cleanup_forced": False,
         "owned_processes": [],
         "remaining_owned_processes": None,
-        "received_signals": received,
     }
     try:
         if threading.current_thread() is threading.main_thread():
             for signum in handled_signals():
                 previous[signum] = signal.signal(signum, stop)
-        if before_spawn is not None and cancel.is_set():
-            receipt.update(status="interrupted", error="Cancelled")
-            return receipt
         with Path(log_path).open("xb") as log:
             if header is not None:
                 import json
 
                 log.write((json.dumps(header, sort_keys=True) + "\n").encode())
                 log.flush()
-            if before_spawn is not None:
-                before_spawn(log)
-                if cancel.is_set():
-                    receipt.update(status="interrupted", error="Cancelled")
-                    return receipt
             process = spawn(
                 argv,
                 cwd=ROOT,
                 env=child_environment() if environment is None else environment,
                 stdout=log,
                 stderr=subprocess.STDOUT,
-                close_fds=True,
-                **({"stdin": stdin} if stdin is not None else {}),
             )
             ownership = Ownership(process)
             deadline, stopped = time.monotonic() + timeout, None
