@@ -186,3 +186,4 @@ The M4 records were assigned numbers 0016–0028 when the parallel M3, LIT-002 a
 - [0099 — LT1 quarantine and host fixtures](0099-lt1-quarantine-and-host-fixtures.md): exact-file quarantine/removal has separate empty authority and retained partial evidence; versioned host boundary fixtures confer no native or effective-erasure admission.
 - [0100 — LT1 prelaunch and recovery evidence](0100-lt1-prelaunch-and-recovery-evidence.md): read-only native preparation and logical recovery evidence keep current absence, retention timing and operational authority separate.
 - [0101 — LT1 owned pre-start and recovery probe](0101-lt1-owned-prestart-and-recovery-probe.md): existing exact grants guard fixed owned launch before startup; read-only local recovery observations grant no coverage or removal authority.
+- [0102 — LT1 attempt and recovery readback](0102-lt1-attempt-and-recovery-readback.md): correlate exact observations without granting native or removal authority.
