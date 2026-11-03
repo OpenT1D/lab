@@ -1,0 +1,106 @@
+{
+  "schema": "opent1d.lt1-host-removal-review/1",
+  "assessed_on": "2026-11-02",
+  "status": "invented-fixtures-qualified-native-host-and-effective-erasure-open",
+  "base": {
+    "pr": 59,
+    "merge": "28d098deb673e09472d7ddf15652da980d36b2c5",
+    "reviewed_head": "b545cd7c6767a387018ce5af0c44aa64179dd5ce",
+    "merged_tree_equals_tested": true,
+    "root_tests": 1993,
+    "expected_skips": 32,
+    "hosted_run": 41519164950
+  },
+  "host_boundary": {
+    "kind": "invented Python only",
+    "cases": {
+      "complete": {
+        "status": "passed",
+        "groups": 2,
+        "denials_per_group": 9,
+        "unconfined_controls": 9
+      },
+      "cancel": {
+        "status": "passed",
+        "groups": 2,
+        "denials_per_group": 9,
+        "unconfined_controls": 9
+      }
+    },
+    "source_files": 149,
+    "public_source_inventory_sha256": "8a3f81185bbd66acf28851dd355755f96b4578e74f871f476641f0867d93ca4e",
+    "unrelated_reaped": true,
+    "legacy_sources_changed": false,
+    "whole_bootstrap_native_host_or_hostile_IPC_qualified": false
+  },
+  "removal": {
+    "kind": "fresh invented data only",
+    "cases": {
+      "complete": {
+        "status": "passed",
+        "outer_status": "completed",
+        "outer_error": null,
+        "remaining_owned_processes": [],
+        "unrelated_survived": true,
+        "effective_erasure_verified": false
+      },
+      "prepared": {
+        "status": "passed",
+        "outer_status": "failed",
+        "outer_error": "WorkerDeadline",
+        "remaining_owned_processes": [],
+        "unrelated_survived": true,
+        "effective_erasure_verified": false
+      },
+      "removed": {
+        "status": "passed",
+        "outer_status": "failed",
+        "outer_error": "WorkerDeadline",
+        "remaining_owned_processes": [],
+        "unrelated_survived": true,
+        "effective_erasure_verified": false
+      },
+      "quarantined": {
+        "status": "passed",
+        "outer_status": "interrupted",
+        "outer_error": "Cancelled",
+        "remaining_owned_processes": [],
+        "unrelated_survived": true,
+        "effective_erasure_verified": false
+      }
+    },
+    "source_files": 50,
+    "public_source_inventory_sha256": "6454ea1bfd4881875cb5857b604e3272cb49e1813423a4b6513893b7d69735d9",
+    "unrelated_reaped": true,
+    "namespace_only": true,
+    "quiet_trusted_owner_required": true,
+    "atomic_expected_inode_unlink_claimed": false,
+    "backup_snapshot_or_physical_erasure_qualified": false,
+    "remaining_invented_file_bytes_independently_verified": true
+  },
+  "source_inventory_hash_scope": "Public relative source paths plus source-byte SHA256 values only; excludes all private host/context/request/receipt/personal-policy fields",
+  "privacy": {
+    "personal_dossier_details_and_actual_retention_duration_published": false,
+    "personal_or_private_policy_record_hashes_published": false,
+    "ordinary_GitHub_account_and_commit_attribution": "public"
+  },
+  "authorizations": {
+    "setup": false,
+    "native_execution": false,
+    "distribution": false,
+    "production_removal": false,
+    "effective_erasure_verified": false
+  },
+  "production_authorities": {
+    "setup_requests": [],
+    "actual_setup_receipts": [],
+    "execution": [],
+    "removal_requests": []
+  },
+  "remaining": [
+    "Exact runtime/rights and native setup/receipt decisions",
+    "Immutable native bootstrap/file/network/IPC/module/addon/process qualification and C15-C18",
+    "Original retention clocks and complete copy/snapshot/backup coverage",
+    "Independently reviewed effective-erasure mechanism for the actual storage; namespace absence is insufficient"
+  ]
+}

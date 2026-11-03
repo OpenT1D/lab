@@ -155,3 +155,8 @@ and global copy/temp/cache/log/backup coverage remain incomplete. Native host
 admission and effective erasure remain unqualified. Historical locks/guards,
 scientific readers, baselines/tolerances, publication scope and all production
 admissions are unchanged.
+
+The [host/removal successor](ot062-lt1-host-removal.md) implements separate exact
+quarantine/removal authority and explicit invented boundary/process fixtures.
+It qualifies neither actual private cleanup nor effective recovery/physical erasure;
+the manual procedure and all existing setup/execution gates remain in force.
