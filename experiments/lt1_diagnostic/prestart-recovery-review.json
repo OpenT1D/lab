@@ -1,0 +1,120 @@
+{
+  "schema": "opent1d.lt1-prestart-recovery-review/1",
+  "assessed_on": "2026-11-03",
+  "status": "invented-prestart-qualified-native-and-effective-removal-open",
+  "base": {
+    "pr": 61,
+    "merge": "ee2faab9bed51064ca292d931bf3b366eee82a44",
+    "reviewed_head": "86f2e95a582ba0c2fe4fd8b89d3e9f80d3075003",
+    "merged_tree_equals_tested": true,
+    "root_tests": 2066,
+    "expected_skips": 32,
+    "hosted_run": 41602738665,
+    "hosted_attempt": 2
+  },
+  "prestart_process": {
+    "kind": "fixed invented Python only",
+    "cases": {
+      "complete": {
+        "status": "passed",
+        "outer_status": "completed",
+        "outer_error": null,
+        "remaining_owned_processes": [],
+        "unrelated_survived": true,
+        "unrelated_reaped": true
+      },
+      "failure": {
+        "status": "passed",
+        "outer_status": "failed",
+        "outer_error": null,
+        "remaining_owned_processes": [],
+        "unrelated_survived": true,
+        "unrelated_reaped": true
+      },
+      "deadline": {
+        "status": "passed",
+        "outer_status": "failed",
+        "outer_error": "WorkerDeadline",
+        "remaining_owned_processes": [],
+        "unrelated_survived": true,
+        "unrelated_reaped": true
+      },
+      "cancel": {
+        "status": "passed",
+        "outer_status": "interrupted",
+        "outer_error": "Cancelled",
+        "remaining_owned_processes": [],
+        "unrelated_survived": true,
+        "unrelated_reaped": true
+      }
+    },
+    "source_files": 155,
+    "public_source_inventory_sha256": "ea677cfbf15ba0582a864e30ffe22a389cb1bec7ec0ce728b3a28eec3d2e831b",
+    "actual_spawn_stdin": "DEVNULL",
+    "actual_spawn_close_fds": true,
+    "actual_passed_environment_keys": [
+      "LANG",
+      "LC_ALL",
+      "PATH"
+    ],
+    "runtime_environment_additions": "Darwin Python CF encoding field observed separately; raw value private",
+    "candidate_started": false,
+    "sandbox_started": false,
+    "native_host_qualified": false,
+    "native_acceptance": false
+  },
+  "native_intake": {
+    "positive_test_kind": "invented staging with mocked executable identity, materialization, owner and native backend",
+    "execution_authority": "existing engine and integration hashes; no new registry",
+    "setup_authority": "existing separately admitted actual setup receipt hash",
+    "all_native_cases_required_passed_before_first_qualification": false,
+    "fixed_reader_source_paths": 62,
+    "whole_bootstrap_IPC_or_atomic_hash_to_exec_qualified": false,
+    "native_cases_run": 0
+  },
+  "recovery_probe": {
+    "kind": "private read-only point observation",
+    "query_responses": {
+      "apfs_snapshots": "response-observed",
+      "configured_destinations": "response-observed",
+      "time_machine_snapshots": "response-observed"
+    },
+    "known_private_record_state": "present",
+    "source_files": 49,
+    "public_source_inventory_sha256": "fb8f8256d5488180d9e14b131b2ad78b46e9d9bf6d8f35fc25f5adf8e23e8cfb",
+    "coverage": {
+      "all_copies_registered": false,
+      "backup_coverage_complete": false,
+      "recovery_scope_reviewed": false,
+      "snapshot_coverage_complete": false
+    },
+    "actual_private_payload_copied_or_removed": false,
+    "backup_snapshot_mount_FDA_or_key_changed": false,
+    "original_retention_time": "unknown, not reset",
+    "actual_recovery_scope": "proposed, not approved"
+  },
+  "privacy": {
+    "actual_host_account_storage_personal_values_or_record_hashes_published": false,
+    "ordinary_GitHub_account_and_commit_attribution": "public"
+  },
+  "source_inventory_hash_scope": "Public relative repository source paths and source-byte SHA256 values only; no private runtime, host, context, request, receipt or personal-policy hashes",
+  "authorizations": {
+    "setup": false,
+    "native_execution": false,
+    "distribution": false,
+    "production_removal": false,
+    "effective_erasure_verified": false
+  },
+  "production_authorities": {
+    "setup_requests": [],
+    "actual_setup_receipts": [],
+    "execution": [],
+    "removal_requests": []
+  },
+  "remaining": [
+    "Exact runtime/security/restricted-use and actual setup decisions",
+    "Admitted actual same-owner native bootstrap/modules/addons/file/network/IPC/process qualification and C15-C18",
+    "Approved ordinary recovery scope, original clocks and complete live/quarantine/snapshot/backup copy coverage",
+    "Separately reviewed storage-appropriate exact removal; no production removal request admitted"
+  ]
+}

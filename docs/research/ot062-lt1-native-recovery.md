@@ -152,3 +152,8 @@ sanitization. Regression controls cover missing/stale/future evidence, context a
 history mismatch, retained quarantine, unknown origins, late recovery and deadline
 observation boundaries. Numerical behavior, historical guards/readers/baselines,
 native locks and public task/SDK/GUI/CI scope remain unchanged.
+
+The [owned pre-start/recovery successor](ot062-lt1-prestart-recovery-probe.md)
+enforces the fixed launch boundary under the existing empty authorities and adds
+separate read-only storage observations. This preparation record retains its
+original source inventories and unqualified stdio conventions.
