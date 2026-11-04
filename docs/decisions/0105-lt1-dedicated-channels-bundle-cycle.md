@@ -8,7 +8,7 @@ supervisor, native workers, process owner and four empty authority lists unchang
 
 Use fixed inherited socket descriptors 3 (ACK input) and 4 (frame output), separate
 from each other and from all stdio descriptor identities. Validate before adoption;
-own and close only these descriptors afterward. The current-process wrapper must
+own and request closure of only these descriptors afterward. The current-process wrapper must
 pass existing observation admission before descriptor inspection. Its later handoff
 rechecks admission. No model import or worker continuation follows an ACK.
 

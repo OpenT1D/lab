@@ -20,12 +20,22 @@ their separation from each other and all open stdio identities, and socket type.
 The owner must supply these trusted, exclusively transferred channels; local stat
 checks do not prove peer identity or native confinement.
 
+`withFixedChannels` adopts both descriptors only after successful validation and
+passes trusted application code separate readable/writable Socket wrappers. Its
+finalizer requests destruction even if that callback throws; small passive guards
+own asynchronous close errors without retaining exchange bytes. It does not wait
+for independently verified closure. It is a transport resource helper, not an
+admission API or a permission to execute a supplied callback from packet text.
+
 The current-process wrapper performs existing observation admission before any
 descriptor inspection, then the bounded handoff performs its own observation and
 admission again. Both synchronous observations precede the asynchronous handoff
 budget; this is not a total startup deadline. No worker or model is imported after
 ACK. There is no CLI or automatic launcher route. The old launcher, fixed worker,
 profile and descriptor-inheritance policy remain unchanged.
+Old reader/source inventories do not qualify this new adapter or its eventual
+launcher integration. A consistent historical ACK still does not prove channel
+identity, closure, a pre-model phase or any native acceptance case.
 
 The integrated fixture uses ordinary tooling Node and invented facts in real
 parent/child processes under the existing shared process owner. It exercises
@@ -39,7 +49,7 @@ profile permissions, bootstrap/phase/modules/addons and C15–C18 stay open.
 Create and publish only new invented metadata in a private temporary directory.
 Propose one explicit new bundle-copy ID for every old subject without activating
 the register. Prepare an exact removal request against the bundle's stored original
-base, not the separate registration successor. Preserve the active original
+base, not the separate registration successor. Preserve the original fixture
 register, origins, holds and all other files.
 
 First prove that production removal refuses the request. Only the trusted fixture
@@ -53,5 +63,7 @@ reconciliation or active-register transition follows fixture absence.
 This does not establish complete live/quarantine/snapshot/backup accounting,
 ordinary restore coverage, physical sanitization, actual retention compliance or
 effective private-data erasure. No existing private pilot, backup, snapshot or key
-is read or removed. All four production authority lists remain empty. Public
-records contain no actual names, host/account/storage values or private receipts.
+is read or removed. All four production authority lists remain empty. Added
+source, examples and research documentation contain no actual personal names,
+host/account/storage values or private receipts. Ordinary configured Git and
+GitHub author attribution remains public.
