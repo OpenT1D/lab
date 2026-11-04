@@ -405,6 +405,11 @@ The selected [candidate-host/packet-cleanup increment](docs/research/ot062-lt1-c
 binds the exact provisional native profile to a static review plan and prepares
 unadmitted whole-packet cleanup independently of old live evidence availability.
 Native case outcomes, complete restore coverage and effective erasure remain open.
+The selected [entry-continuation/packet-reconciliation increment](docs/research/ot062-lt1-entry-continuation-packet-reconciliation.md)
+keeps a versioned entry continuation behind the existing admissions and selects
+exact allocated packet-copy readback without transferring native or erasure
+authority. These bounded consumers are implemented; native launcher/host
+qualification, complete restore coverage and effective private erasure remain open.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
 not native execution. Begin with the exact LT1 runtime/security and restricted-use

@@ -16,6 +16,22 @@ delegate. Raw grants travel through a trusted-code API, not self-referential
 process arguments. No new native launcher or CLI is selected. Ordinary tooling
 Node and a fixed invented continuation exercise the channel boundary only.
 
+Keep the complete current source/authority audit as independent trusted context.
+Only the three canonical mutable authority JSON files are excluded from the
+grant-bound code projection; all transitive code remains bound. Check those
+authority files independently through their exact canonical memberships and
+current audit identities. Derive the external audit context after any separately
+reviewed local membership update, so adding a membership cannot change the bytes
+of its own grant. This increment performs no such update or publication of real
+private grant identities.
+
+Use one versioned public source-key manifest shared by the Python and JavaScript
+validators. It contains canonical paths, including its own path, not content
+hashes. Python checks its computed closure against that roster; both validators
+require the exact roster. Include the manifest's content hash in the grant-bound
+code projection. Consistently rewriting caller metadata must not omit a
+transitive dependency.
+
 Select a separate packet-copy reconciliation reader. Externally pinned retained
 packet/intent/accounting/provenance, request/context, journal and actual owned
 process receipt bind the exact deleted packet without reopening it or replaying

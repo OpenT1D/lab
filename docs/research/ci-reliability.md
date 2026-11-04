@@ -165,6 +165,31 @@ remain incomplete or failed evidence. Final-source local and hosted results must
 be reported separately. This fixture change admits no production removal, selected
 runtime setup or native execution and supplies no effective private-erasure result.
 
+## Original packet producer phase follow-up
+
+The planning-only PR 70 source `922c9ba048674688b6cd9249d2b321e6d763d4a9`
+retained the PR 69 implementation. Its
+[run 41901040557](https://github.com/OpenT1D/lab/actions/runs/41901040557),
+root shard 2 job `126823211518`, failed the complete cleanup subcase while its
+original producer reached the existing 30-second deadline. The retained empty
+child log does not locate the exact child subphase. Its owner observed no
+remaining owned processes. This failure is not counted as a capacity cancellation.
+
+The original producer still combined fresh `cycle.prepare`, retained input
+construction and actual removal inside that deadline. The test-only successor
+moves the fresh construction into the parent and pins its controls before the
+unchanged 30-second/0.2-second owned removal phase. The worker validates exact
+fresh invented inventory, source/request/context, parent/target/evidence identity
+and closed prefix before fixture-only injection, while production refusal stays.
+It checks its own isolated/no-site/no-bytecode flags; preparation flags remain
+attributed to the parent. Every actual removal/source guard and existing assertion
+remains. No source check is cached or mocked to make the operation fit.
+
+Targeted producer, cleanup and reconciliation checks and final integrated
+verification belong to the successor PR and their actual source identities.
+This phase separation neither qualifies the selected native runtime nor changes
+production authority, worker deadlines or private-erasure claims.
+
 ## Check provenance and verification handoff
 
 The old PR rollup included the failed/cancelled attempt-1 checks even after
