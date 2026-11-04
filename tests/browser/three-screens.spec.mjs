@@ -46,6 +46,9 @@ test('three screens retain local concept edits before autosave and disclose loca
   await page.locator('#nav-projects').click();
   await expect(page.locator('#projects-screen')).toBeVisible();
   await expect(page.locator('#project-view')).toBeHidden();
+  await expect(page.locator('#projects-heading')).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(page.locator('#project-list .project-choice').first()).toBeFocused();
   await page.locator('#nav-study').click();
   await expect(page.locator('#assumption-draws')).toHaveValue('64');
   await expect(page.locator('#draft-status')).toContainText('Unsaved changes');
@@ -72,6 +75,27 @@ test('three screens retain local concept edits before autosave and disclose loca
   });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.screenshot({ path: testInfo.outputPath('three-screens-research-narrow.png'), fullPage: false });
+  await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
+  await page.setViewportSize({ width: 1280, height: 900 });
+
+  // Exercise the actual primary guidance actions, while the detailed controls
+  // remain separately covered by the existing installed workbench flows.
+  await expect(page.locator('#next-action')).toHaveText('Check saved inputs');
+  await page.locator('#next-action').click();
+  await expect(page.locator('#next-action')).toHaveText('Freeze this plan');
+  await page.locator('#next-action').click();
+  await expect(page.locator('#next-action')).toHaveText('Check this plan');
+  await page.locator('#next-action').click();
+  await expect(page.locator('#next-action')).toHaveText('Start execution');
+  await page.locator('#next-action').click();
+  await expect(page.locator('#next-action')).toHaveText('View results');
+  await expect(page.locator('#nav-study')).toHaveAttribute('aria-current', 'page');
+  const project = await page.locator('#selected-path').textContent();
+  const attempt = app.command('info', '--project', project).attempts[0];
+  await page.locator('#next-action').click();
+  await expect(page.locator('#nav-results')).toHaveAttribute('aria-current', 'page');
+  await expect(page.locator('#attempt-select')).toHaveValue(attempt.id);
+  await expect(page.locator('#attempt-list')).toContainText('Execution: completed');
   expect(errors).toEqual([]);
 });
 
