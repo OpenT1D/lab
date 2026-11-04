@@ -374,6 +374,7 @@ subtrees:
       - file: docs/decisions/0106-lt1-owned-transport-reconciliation
       - file: docs/decisions/0107-lt1-tooling-host-removal-evidence
       - file: docs/decisions/0108-lt1-candidate-host-plan-packet-cleanup
+      - file: docs/decisions/0109-lt1-entry-continuation-packet-reconciliation
       - file: docs/decisions/0059-maintained-runtimes-and-local-gui
       - file: docs/templates/model-card
       - file: docs/templates/experiment-protocol
