@@ -7,6 +7,7 @@ import shutil
 import sys
 import tempfile
 import threading
+import time
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -21,6 +22,9 @@ wire, bundle = packet.wire, packet.bundle
 
 
 def owned_case(parent, phase):
+    started = time.perf_counter()
+    pins = fixture.prepare(parent)
+    preparation_seconds = time.perf_counter() - started
     stopped, done = threading.Event(), threading.Event()
 
     def watch():
@@ -34,6 +38,7 @@ def owned_case(parent, phase):
         thread.start()
     try:
         with tempfile.TemporaryDirectory() as logs:
+            removal_started = time.perf_counter()
             outer = supervise(
                 [
                     sys.executable,
@@ -43,6 +48,7 @@ def owned_case(parent, phase):
                     str(ROOT / "tests/lt1_reconciliation_packet_fixture.py"),
                     str(parent),
                     phase,
+                    wire.encoded(pins).decode("utf-8"),
                 ],
                 Path(logs) / "process.log",
                 timeout=30,
@@ -59,6 +65,11 @@ def owned_case(parent, phase):
         "completed" if phase == "complete" else "interrupted"
     ):
         raise AssertionError((outer, log))
+    print(
+        f"Invented bundle preparation {preparation_seconds:.3f}s; "
+        f"owned removal {time.perf_counter() - removal_started:.3f}s",
+        flush=True,
+    )
     return outer
 
 
@@ -126,6 +137,7 @@ class ReconciliationPacketTests(unittest.TestCase):
             self.inputs["expected_outer_sha256"],
         )
         self.assertTrue(self.outer["owned_processes"])
+        self.assertEqual(len(self.outer["owned_processes"]), 1)
         base = json.loads(self.inputs["registration_raw"])
         proposed = json.loads(read["packet_copy_accounting"]["register_raw"])
         for name, old in base["subjects"].items():
@@ -154,6 +166,59 @@ class ReconciliationPacketTests(unittest.TestCase):
                 self.inputs["expected_context_sha256"],
                 as_of=self.inputs["as_of"],
             )
+        # Exercise the new boundary without loosening any production authority.
+        with tempfile.TemporaryDirectory() as folder:
+            parent = Path(folder).resolve()
+            parent.chmod(0o700)
+            pins = fixture.prepare(parent)
+            raw, context = fixture.load_prepared(parent, pins)
+            with self.assertRaisesRegex(ValueError, "no reviewed removal request"):
+                fixture.cycle.removal.remove(raw, context)
+            self.assertEqual(list((parent / "reports").iterdir()), [])
+            for field in ("request_sha256", "context_sha256", "source_sha256", "helper_sha256"):
+                altered = copy.deepcopy(pins)
+                altered[field] = "a" * 64
+                with self.subTest(pin=field), self.assertRaises(ValueError):
+                    fixture.load_prepared(parent, altered)
+            for field in ("parent", "root", "evidence"):
+                altered = copy.deepcopy(pins)
+                altered[field]["inode"] += 1
+                with self.subTest(pin=field), self.assertRaises(ValueError):
+                    fixture.load_prepared(parent, altered)
+            for field, value in (
+                ("kind", "private-data"),
+                ("attempt", "other-attempt"),
+                ("evidence_parent", str(parent / "other-evidence")),
+                ("root", {**pins["root"], "path": str(parent / "other-target")}),
+            ):
+                request = json.loads(raw)
+                request[field] = value
+                changed = wire.encoded(request)
+                (parent / "request.json").write_bytes(changed)
+                altered = copy.deepcopy(pins)
+                altered["request_sha256"] = wire.digest(changed)
+                altered["files"]["request.json"] = {
+                    "bytes": len(changed),
+                    "sha256": wire.digest(changed),
+                }
+                if field == "root":
+                    altered["root"] = value
+                try:
+                    with (
+                        self.subTest(boundary=field),
+                        self.assertRaisesRegex(ValueError, "fixed invented removal boundary"),
+                    ):
+                        fixture.load_prepared(parent, altered)
+                finally:
+                    (parent / "request.json").write_bytes(raw)
+            (parent / "ready").write_bytes(b"invented stale fixture prefix")
+            (parent / "ready").chmod(0o600)
+            try:
+                with self.assertRaisesRegex(ValueError, "closed prepared prefix"):
+                    fixture.load_prepared(parent, pins)
+            finally:
+                (parent / "ready").unlink()
+            self.assertEqual(fixture.load_prepared(parent, pins), (raw, context))
 
     def test_owned_cancel_prefix_is_saved_without_absence_or_register_activation(self):
         with tempfile.TemporaryDirectory() as folder:
