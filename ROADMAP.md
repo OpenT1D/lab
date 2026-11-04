@@ -393,6 +393,10 @@ The selected [process-channel/bundle-cycle increment](docs/research/ot062-lt1-ch
 exercises dedicated inherited channels and a full fresh-metadata removal cycle;
 actual native profile/entry wiring, complete restore coverage and private-data
 erasure remain separately gated.
+The selected [owned-transport/reconciliation increment](docs/research/ot062-lt1-owned-transport-reconciliation.md)
+brings dedicated channels under the existing process owner and proposes conservative
+reconciliation of exact bundle-copy IDs; native launch admission, original private
+timing, complete restore coverage and effective erasure remain separate.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
 not native execution. Begin with the exact LT1 runtime/security and restricted-use

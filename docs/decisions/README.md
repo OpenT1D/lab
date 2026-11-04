@@ -190,3 +190,4 @@ The M4 records were assigned numbers 0016–0028 when the parallel M3, LIT-002 a
 - [0103 — LT1 entry observations and review bundles](0103-lt1-entry-observation-review-bundle.md): bounded entry framing and durable private proposals preserve original clocks and closed operational authorities.
 - [0104 — LT1 entry handoff and copy registration](0104-lt1-entry-handoff-copy-registration.md): bound frame acknowledgment and propose explicit bundle-copy accounting without native or removal authority.
 - [0105 — LT1 dedicated channels and whole-bundle removal cycle](0105-lt1-dedicated-channels-bundle-cycle.md): exercise inherited process channels and fresh metadata removal without changing native or removal admission.
+- [0106 — LT1 owned transport and bundle-copy reconciliation](0106-lt1-owned-transport-reconciliation.md): reuse the shared owner for dedicated channels and propose allocated-copy absence without native, retention-timing or erasure authority.
