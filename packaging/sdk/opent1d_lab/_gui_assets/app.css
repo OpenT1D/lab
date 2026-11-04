@@ -10,3 +10,11 @@
 #comparison-form>*,#connected-form>*{min-width:0;max-width:100%}#comparisons button,#connected-study button{max-width:100%;overflow-wrap:anywhere}.report-heading>div{min-width:0;max-width:100%}
 .report-text th,.report-text td{min-width:5rem}.report-text th:first-child,.report-text td:first-child{min-width:7rem}
 .concept-picker{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.6rem;margin-top:1.5rem}.concept-picker label{grid-column:1/-1}fieldset{border:1px solid var(--line);border-radius:6px;margin:1rem 0;padding:1rem;min-width:0}legend{font-size:.88rem;font-weight:650;padding:0 .4rem}fieldset label{margin-top:.7rem}textarea{display:block;width:100%;resize:vertical;min-height:140px;max-height:480px;border:1px solid #b9cbce;border-radius:6px;padding:.7rem;background:white;color:var(--ink);font: .8rem/1.5 ui-monospace,monospace;tab-size:2}textarea:focus{outline:3px solid #76c7bc;outline-offset:3px}[aria-invalid=true]{border-color:var(--danger)}#assumptions>fieldset>fieldset{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem 1rem}#draft-status{margin:.8rem 0}#draft-issues{white-space:pre-wrap}@media(max-width:650px){.concept-picker{grid-template-columns:1fr}#assumptions>fieldset>fieldset{grid-template-columns:1fr}}
+
+/* Three main screens share one live editor and the same SDK action lifecycle. */
+.screen-nav{display:flex;flex-wrap:wrap;gap:.5rem;padding:.8rem 2rem;background:var(--paper);border-bottom:1px solid var(--line)}
+.screen-nav button{background:transparent;border-color:transparent}.screen-nav button[aria-current=page]{background:var(--teal);color:var(--paper)}
+.layout.project-open{display:block}.layout.project-open main{margin:auto;width:100%;max-width:1120px}
+.storage-details{margin-bottom:1.5rem;padding:1rem;border:1px solid var(--line);background:var(--paper);border-radius:8px}
+.storage-details p{margin:.65rem 0;overflow-wrap:anywhere}.storage-details #handoff{margin-top:1.2rem;border-top:1px solid var(--line);padding-top:1.2rem}
+@media(max-width:700px){.screen-nav{padding:.7rem 1rem}.screen-nav button{padding:.5rem .65rem}.storage-details{padding:.8rem}}

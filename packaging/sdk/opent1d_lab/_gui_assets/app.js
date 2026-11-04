@@ -22,6 +22,7 @@ async function request(url, body) {
 }
 async function action(operation, arguments_ = {}, project = selected) {
   if (pending || data?.active) { notice("Another action is still running. Stop the run or wait for it to finish.", true); return; }
+  globalThis.researchUI?.start(operation);
   if (operation === "check") invalidatePlanView();
   if (["verify", "comparison_verify", "study_verify"].includes(operation)) reportIssued++;
   pendingOperation = operation; pending = true; render();
@@ -78,6 +79,7 @@ async function refresh() {
       else if (job.operation === "select_attachment") { invalidatePlanView(); notice("Attachment selected. Check a frozen plan to validate it for this application."); }
       else if (job.operation === "clear_attachment") { invalidatePlanView(); notice("Runtime selection cleared. Saved reports remain readable."); }
       else { draft = null; selectedPlan = null; currentReport = null; invalidatePlanView(); notice("Saved project opened. No experiment was run."); }
+      globalThis.researchUI?.finish(job.operation);
     }
     render();
   } catch (error) { notice(error instanceof TypeError ? "Connection unavailable. Inspect the server terminal before assuming a run stopped. Reload this page after restarting the server." : error.message, true); }
@@ -87,7 +89,7 @@ function render() {
   if (!data) return;
   const busy = pending || !!data.active || data.closing;
   $("project-count").textContent = data.projects.length;
-  $("project-list").replaceChildren(...data.projects.map(item => { const button = element("button", item.name, "project-choice" + (item.id === selected ? " selected" : "")); button.disabled = busy; button.onclick = () => { withdrawReport(); selected = item.id; selectedPlan = null; draft = null; invalidatePlanView(); action("refresh", {}, item.id); }; return button; }));
+  $("project-list").replaceChildren(...data.projects.map(item => { const button = element("button", item.name, "project-choice" + (item.id === selected ? " selected" : "")); button.disabled = busy; button.onclick = () => { if (selected === item.id) { globalThis.researchUI?.show("study"); return; } withdrawReport(); selected = item.id; selectedPlan = null; draft = null; invalidatePlanView(); globalThis.researchUI?.show("study"); action("refresh", {}, item.id); }; return button; }));
   const chosen = project();
   $("welcome").classList.toggle("hidden", !!chosen); $("project-view").classList.toggle("hidden", !chosen);
   const active = data.jobs.find(job => job.id === data.active);
@@ -110,7 +112,7 @@ function render() {
     if ($("task").value !== previous) updateTask();
   }
   $("workspace-path").textContent = data.workspace;
-  if (!chosen) return;
+  if (!chosen) { globalThis.researchUI?.render(); return; }
   $("selected-name").textContent = chosen.name; $("selected-path").textContent = chosen.path;
   const plans = chosen.info?.plans || [];
   if (!plans.some(plan => plan.id === selectedPlan)) { selectedPlan = plans[0]?.id || null; invalidatePlanView(); }
@@ -134,6 +136,7 @@ function render() {
   globalThis.workbench?.render(data, chosen, busy);
   globalThis.comparisons?.render(data, chosen, busy);
   globalThis.connected?.render(data, chosen, busy);
+  globalThis.researchUI?.render();
 }
 function renderAttempts(attempts, plans, busy) {
   if (!attempts.length) { $("attempt-list").replaceChildren(element("p", "No attempts yet. A run preserves its own outcome here.", "muted")); return; }
@@ -247,4 +250,5 @@ for (const button of document.querySelectorAll("[data-download]")) button.onclic
 globalThis.workbench?.bind();
 globalThis.comparisons?.bind();
 globalThis.connected?.bind();
+globalThis.researchUI?.bind();
 updateTask(); refresh(); setInterval(refresh, 1500);
