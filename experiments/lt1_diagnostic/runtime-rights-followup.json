@@ -272,7 +272,7 @@
   "limitations": [
     "No selected runtime, setup, compiler/toolchain package, native experiment or exploit was executed.",
     "Compressed TypeScript/ts-node publisher archives were privately retained, hashed and read in memory; notice/source text was saved privately for review, without extraction into a staging tree, installation, import or lifecycle scripts.",
-    "Only public canonical metadata and newly fetched public sources/notices were inspected; no actual private-pilot, backup, snapshot, container or key was read or changed.",
+    "Public runtime/rights sources were assessed. Historical private verification records were consulted solely to compare their public implementation source-hash maps; private host values were not assessed or published. No actual private-pilot, backup, snapshot, container or key data was accessed or changed.",
     "This successor record supplements the frozen historical records without rewriting their identities, private clocks or grants."
   ]
 }
