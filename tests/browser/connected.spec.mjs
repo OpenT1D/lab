@@ -33,6 +33,7 @@ test('connected study: prospective stages, absent native admission, fixed failur
   expect(csv.trim().split('\n')).toHaveLength(73);
   // This public/root test deliberately has no native attachment. It must retain
   // a genuine failed first attempt and all downstream rows, without a fake chain.
+  await page.locator('#nav-study').click();
   await page.locator('#connected-next').click(); await finished(page);
   await expect(page.locator('#connected-next')).toBeDisabled();
   await expect(page.locator('#connected-stages')).toContainText('failed');
@@ -44,11 +45,14 @@ test('connected study: prospective stages, absent native admission, fixed failur
   expect(failed.definition.stages.forward.status).toBe('failed');
   expect(failed.definition.sampling_plan).toBeNull();
   // Programmatically selecting a newly frozen study must withdraw the old report.
+  await page.locator('#nav-study').click();
   await page.locator('#connected-name').fill('Missing observation control');
   await page.locator('#connected-case').selectOption('missing-evaluation');
   await page.locator('#connected-freeze').click(); await finished(page);
   await expect(page.locator('#connected-select')).not.toHaveValue(study);
+  await page.locator('#nav-results').click();
   await expect(page.locator('#saved-report')).toBeHidden();
+  await page.locator('#nav-study').click();
   await page.locator('#connected-select').selectOption(study);
   await page.locator('#connected-open').click(); await finished(page);
   await page.locator('#connected-tip').fill(original.definition.snapshot.tip);
@@ -73,6 +77,7 @@ test('connected study: prospective stages, absent native admission, fixed failur
   expect(await page.locator('.attempt h3').evaluateAll(headings => headings.every(heading =>
     heading.getBoundingClientRect().right <= heading.parentElement.getBoundingClientRect().right + 0.5,
   ))).toBe(true);
+  await page.locator('#nav-study').click();
   await page.locator('#connected-open').focus(); await page.keyboard.press('Tab');
   await expect(page.locator('#connected-next')).not.toBeFocused(); // Disabled stages are skipped.
   await expect(page.locator('#connected-verify')).toBeFocused();

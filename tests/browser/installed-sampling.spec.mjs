@@ -23,6 +23,7 @@ test('installed sampling: native children, relocation, restart and tamper withdr
   await expect(page.locator('#readiness')).toContainText('Ready for explicit execution');
   await page.locator('#run-plan').click();
   await expect(page.locator('#attempt-list')).toContainText('60/60 planned slots complete');
+  await page.locator('#nav-results').click();
   await page.getByRole('button', { name: 'Verify saved report', exact: true }).click();
   await expect(page.locator('#saved-report')).toBeVisible();
   await expect(page.locator('#report-completeness')).toHaveText('complete');
@@ -47,6 +48,7 @@ test('installed sampling: native children, relocation, restart and tamper withdr
   await page.setViewportSize({ width: 1280, height: 900 });
 
   const moved = path.join(app.folder, 'moved-project');
+  await page.locator('#storage-details > summary').click();
   await page.locator('#relocate-path').fill(moved);
   await page.locator('#relocate-form button').click();
   await expect(page.locator('#selected-path')).toHaveText(moved);
@@ -54,6 +56,7 @@ test('installed sampling: native children, relocation, restart and tamper withdr
   await rename(original, original + '-unavailable');
   await page.goto(app.url);
   await page.getByRole('button', { name: 'Installed sampling browser control — copy', exact: true }).click();
+  await page.locator('#nav-results').click();
   await page.getByRole('button', { name: 'Verify saved report', exact: true }).click();
   await expect(page.locator('#saved-report')).toBeVisible();
   const token = await page.locator('meta[name="opent1d-token"]').getAttribute('content');
