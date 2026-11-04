@@ -120,6 +120,110 @@ class ReaderTransition(unittest.TestCase):
                     pass
         self.assertEqual(store.inventory(self.project, store.Budget()), before)
 
+    def test_historical_registry_bytes_and_original_transition_are_preserved(self):
+        self.assertEqual(
+            store.digest(reader_compatibility.REGISTRY.read_bytes()),
+            "6b50b5b97f9888e55f2fdddd86388a35963ce090291f37850cffb4863ed6f0e0",
+        )
+        first = self.predecessor()
+        second = reader_compatibility.historical_successor()
+        self.assertTrue(reader_compatibility.accepts(first, second, "mmtt-sensitivity"))
+        receipt = reader_compatibility.receipt(first, second, "mmtt-sensitivity")
+        self.assertEqual(receipt["policy"], reader_compatibility.LEGACY_SCHEMA)
+        self.assertEqual(receipt["registry_sha256"], reader_compatibility.LEGACY_SHA256)
+        self.assertFalse(reader_compatibility.accepts(second, first, "mmtt-sensitivity"))
+
+    def test_qualified_historical_successor_retains_bytes_prefix_and_constant_oracle(self):
+        with patch.object(
+            self, "predecessor", return_value=reader_compatibility.historical_successor()
+        ):
+            self.test_actual_inverse_old_definition_prefix_and_inventory_are_preserved()
+
+    def test_every_historical_successor_field_is_required_for_the_new_edge(self):
+        previous = reader_compatibility.historical_successor()
+        current = comparisons.reader()
+        for task in ("mmtt-sensitivity", "mmtt-sampling"):
+            self.assertTrue(reader_compatibility.accepts(previous, current, task))
+        for task in ("m4-study-installed", "m4-study-secure", "m3-compare", "unknown"):
+            self.assertFalse(reader_compatibility.accepts(previous, current, task))
+        for key in previous:
+            altered = copy.deepcopy(previous)
+            altered[key] = None
+            self.assertFalse(reader_compatibility.accepts(altered, current, "mmtt-sampling"))
+        for name in previous["reader_static_dependencies_sha256"]:
+            altered = copy.deepcopy(previous)
+            altered["reader_static_dependencies_sha256"][name] = "0" * 64
+            self.assertFalse(reader_compatibility.accepts(altered, current, "mmtt-sampling"))
+        altered = copy.deepcopy(previous)
+        altered["archived_code_execution"] = 0
+        self.assertFalse(reader_compatibility.accepts(altered, current, "mmtt-sampling"))
+
+    def test_exact_m3_mmtt_predecessor_retains_original_comparison_and_oracle(self):
+        packet = store.read(reader_compatibility.CURRENT_REGISTRY)
+        previous = packet["m3_predecessor"]
+        self.assertEqual(
+            store.digest(store.encoded(previous)),
+            "b6fb575b6bf5532a53f0fb2fd20a3efad5bfadc162dae9f010a2e0d6442e24ec",
+        )
+        with patch.object(self, "predecessor", return_value=previous):
+            self.test_actual_inverse_old_definition_prefix_and_inventory_are_preserved()
+        current = comparisons.reader()
+        for name in previous["reader_static_dependencies_sha256"]:
+            altered = copy.deepcopy(previous)
+            altered["reader_static_dependencies_sha256"][name] = "0" * 64
+            self.assertFalse(reader_compatibility.accepts(altered, current, "mmtt-sensitivity"))
+        for task in ("m3-compare", "m4-study-installed"):
+            self.assertFalse(reader_compatibility.accepts(previous, current, task))
+
+    def test_missing_extra_and_altered_metadata_never_authorize_transition(self):
+        current = comparisons.reader()
+        legacy = reader_compatibility.historical_successor()
+        m3 = store.read(reader_compatibility.CURRENT_REGISTRY)["m3_predecessor"]
+        for previous in (self.predecessor(), legacy, m3):
+            for key in previous:
+                altered = copy.deepcopy(previous)
+                altered[key] = None
+                self.assertFalse(reader_compatibility.accepts(altered, current, "mmtt-sampling"))
+            for identity, saved_side in ((previous, True), (current, False)):
+                for mode in ("missing", "extra"):
+                    altered = copy.deepcopy(identity)
+                    dependencies = altered["reader_static_dependencies_sha256"]
+                    if mode == "missing":
+                        dependencies.pop(next(iter(dependencies)))
+                    else:
+                        dependencies["experiments/unqualified.py"] = "0" * 64
+                    self.assertFalse(
+                        reader_compatibility.accepts(
+                            altered if saved_side else previous,
+                            current if saved_side else altered,
+                            "mmtt-sampling",
+                        )
+                    )
+        del legacy["compatibility"]
+        self.assertFalse(reader_compatibility.accepts(legacy, current, "mmtt-sampling"))
+
+    def test_tampered_packets_refuse_even_with_a_matching_policy_digest(self):
+        current = comparisons.reader()
+        historical = reader_compatibility.REGISTRY.read_bytes()
+        packet = reader_compatibility.CURRENT_REGISTRY.read_bytes()
+        for path, raw, field in (
+            (reader_compatibility.REGISTRY, historical, "predecessor"),
+            (reader_compatibility.CURRENT_REGISTRY, packet, "m3_predecessor"),
+        ):
+            altered = store.decode(raw)
+            altered[field]["archived_code_execution"] = 0
+            altered_raw = store.encoded(altered)
+            changed = copy.deepcopy(current)
+            if path == reader_compatibility.CURRENT_REGISTRY:
+                changed["compatibility"]["registry_sha256"] = store.digest(altered_raw)
+
+            def read(candidate, *args):
+                return altered_raw if candidate == path else historical
+
+            with patch.object(reader_compatibility, "read_regular", side_effect=read):
+                with self.assertRaisesRegex(ValueError, "registry identity|compatibility packet"):
+                    reader_compatibility.accepts(self.predecessor(), changed, "mmtt-sampling")
+
 
 if __name__ == "__main__":
     unittest.main()

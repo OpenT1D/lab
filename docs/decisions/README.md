@@ -1,5 +1,7 @@
 # Decision records
 
+- [0092 — Exact M3-era MMTT reader successor](0092-exact-m3-reader-successor.md): preserve the original registry and qualify one complete successor.
+
 - [0091 — Shared M3 workbench](0091-m3-shared-workbench.md): preserve the native frozen comparison and causal readers through installed project services.
 
 - [0090 — Integrated native candidate](0090-integrated-native-candidate.md): qualify M4 and the connected synthetic study in an explicit internal candidate while preserving readers and runtime boundaries.

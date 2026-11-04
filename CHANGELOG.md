@@ -4,6 +4,14 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Restore the exact MMTT comparison reader transition after M3 integration by
+  adding a separately packaged successor packet. Preserve the original registry,
+  original definitions and report bytes; admit only the pinned PR-43, original
+  successor and M3-era MMTT comparison identities. Keep complete source checks,
+  canonical metadata, task limits and numerical tolerances. Bind explicit policy
+  selection and wheel packet bytes in both qualification procedures; reject
+  changed installed helpers even after a file-manifest update.
+
 - Group the installed SDK GUI into My research, Research and Results, with a
   suggested next action, execution selection and read-only inspection of the
   frozen inputs used by an attempt. Derive variants from the selected execution

@@ -7,6 +7,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import zipfile
 from pathlib import Path
 
 from experiments.catalogue.storage import encoded
@@ -52,6 +53,20 @@ class InstalledM3(unittest.TestCase):
     def setUp(self):
         self.root = self.base / self._testMethodName
         self.root.mkdir()
+
+    def test_m3_wheel_retains_both_exact_reader_packets(self):
+        from experiments.shared_services import reader_compatibility
+
+        with zipfile.ZipFile(self.receipt["wheel"]) as wheel:
+            prefix = "opent1d_lab/_payload/app/experiments/shared_services/"
+            self.assertEqual(
+                wheel.read(prefix + "reader_compatibility.json"),
+                reader_compatibility.REGISTRY.read_bytes(),
+            )
+            self.assertEqual(
+                wheel.read(prefix + "reader_compatibility_m3.json"),
+                reader_compatibility.CURRENT_REGISTRY.read_bytes(),
+            )
 
     def call(self, *args, expected=0):
         result = subprocess.run(

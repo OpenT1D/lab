@@ -8,8 +8,11 @@ macOS. It does not provide a standalone `.app`, public native distribution,
 signing, clean-host acceptance or intended-user evidence.
 
 The [two-MMTT candidate](internal-mmtt-candidate.md) remains available with its
-existing scope. This guide owns the integrated candidate; the [installed M4
-guide](installed-m4.md) owns runtime attachment and scientific execution, and the
+existing scope. Newly built artifacts with the exact version-2 reader packet require
+`--mmtt-reader-policy opent1d.comparison-reader-transition/2` in the qualification
+command below. The default preserves historical version-1 reproduction; this
+selection does not qualify native reader migration. This guide owns the
+integrated candidate; the [installed M4 guide](installed-m4.md) owns runtime attachment and scientific execution, and the
 [connected protocol](research/connected-synthetic-study.md) owns the synthetic
 study's numerical meaning. Read [decision 0090](decisions/0090-integrated-native-candidate.md)
 for the qualification selected before execution.
@@ -92,7 +95,7 @@ units, the native 0–240-minute quarter-minute grid and the downstream declared
 | Evidence | Integrated candidate behavior |
 | --- | --- |
 | Both MMTT tasks and current comparisons | Uses the existing trusted scientific readers and exact current comparison identity. |
-| PR-43 MMTT comparisons at the pinned source in decision 0089 | Retains the single supported comparison-reader transition, original report bytes/provenance and separately recorded current reader identity. |
+| MMTT comparisons with the exact PR-43, original successor or M3-era identities in decisions 0089/0092 | Uses the explicitly selected successor packet, preserving the original registry, report bytes/provenance and separately recorded current reader identity. Unknown identities still refuse. |
 | M4 and connected projects with exactly unchanged native/shared reader bindings | Reconstructs preserved evidence without old applications, runtime directories or a current execution attachment. Complete inventories and authoritative report checks remain required. |
 | Clean merged PR-44 predecessor at `b96a288ce4b0a0feaae4929475c992e95e6b7624` | Qualification compares its developer wheel's entire embedded source/data payload with the integrated wheel. Its direct M4 execution is imported retrospectively into an A project; C's connected execution is prospective. |
 | Unknown/changed native readers, scientific bindings or resealed altered evidence | Refuses. There is no changed-native-reader migration or archived callback execution. Older PR-43 native evidence has no newly granted exception. |

@@ -87,6 +87,7 @@ def source_closure():
             "experiments/setup/contract.json",
             "experiments/shared_services/connected_protocol.json",
             "experiments/shared_services/reader_compatibility.json",
+            "experiments/shared_services/reader_compatibility_m3.json",
             "experiments/shared_services/forecasting_context.py",
         }
     )
