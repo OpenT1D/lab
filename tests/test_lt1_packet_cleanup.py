@@ -287,6 +287,40 @@ class PacketCleanupTests(unittest.TestCase):
                 with self.subTest(phase=phase), tempfile.TemporaryDirectory() as folder:
                     parent = Path(folder).resolve()
                     parent.chmod(0o700)
+                    pins = fixture.prepare_case(parent)
+                    if phase == "complete":
+                        for field in ("request_sha256", "context_sha256", "source_sha256"):
+                            bad = copy.deepcopy(pins)
+                            bad[field] = "a" * 64
+                            with self.subTest(pin=field), self.assertRaises(ValueError):
+                                fixture.load_prepared(parent, bad)
+                        for field in ("parent", "root", "evidence"):
+                            bad = copy.deepcopy(pins)
+                            bad[field]["inode"] += 1
+                            with self.subTest(pin=field), self.assertRaises(ValueError):
+                                fixture.load_prepared(parent, bad)
+                        request_path = parent / "request.json"
+                        original = request_path.read_bytes()
+                        for field, value in (
+                            ("kind", "private-data"),
+                            ("attempt", "other-attempt"),
+                            ("evidence_parent", str(parent / "other-evidence")),
+                            ("root", {**pins["root"], "path": str(parent / "other-target")}),
+                        ):
+                            changed = json.loads(original)
+                            changed[field] = value
+                            raw = wire.encoded(changed)
+                            request_path.write_bytes(raw)
+                            bad = copy.deepcopy(pins)
+                            bad["request_sha256"] = wire.digest(raw)
+                            if field == "root":
+                                bad["root"] = value
+                            try:
+                                with self.subTest(boundary=field), self.assertRaises(ValueError):
+                                    fixture.load_prepared(parent, bad)
+                            finally:
+                                request_path.write_bytes(original)
+                        self.assertEqual(fixture.load_prepared(parent, pins)[0], original)
                     stopped, done = threading.Event(), threading.Event()
 
                     def watch():
@@ -309,6 +343,7 @@ class PacketCleanupTests(unittest.TestCase):
                                     str(ROOT / "tests/lt1_packet_cleanup_fixture.py"),
                                     str(parent),
                                     phase,
+                                    wire.encoded(pins).decode("utf-8"),
                                 ],
                                 Path(logs) / "process.log",
                                 timeout=60,
@@ -325,6 +360,7 @@ class PacketCleanupTests(unittest.TestCase):
                         outer["status"], "completed" if phase == "complete" else "interrupted", log
                     )
                     self.assertEqual(outer["remaining_owned_processes"], [])
+                    self.assertEqual(len(outer["owned_processes"]), 1)
                     self.assertEqual(outer["received_signals"], [])
                     self.assertIsNone(unrelated.poll())
                     raw, context = (
@@ -341,6 +377,15 @@ class PacketCleanupTests(unittest.TestCase):
                     self.assertTrue(all(read[k] is False for k in cleanup.removal.AUTHORITY))
                     before = json.loads((parent / "before.json").read_bytes())
                     self.assertTrue(before["production_gate_refused"])
+                    self.assertEqual(
+                        wire.digest(wire.encoded(before["producer_receipt"])),
+                        before["producer_receipt_sha256"],
+                    )
+                    self.assertEqual(before["producer_receipt"]["status"], "completed")
+                    self.assertEqual(before["producer_receipt"]["remaining_owned_processes"], [])
+                    self.assertIs(
+                        before["retained_fixture_metadata_copy_accounted_or_approved"], False
+                    )
                     self.assertEqual(
                         wire.digest((parent / "producer/proposed-register.json").read_bytes()),
                         before["old_registration_sha256"],
