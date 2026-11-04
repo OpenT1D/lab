@@ -136,6 +136,35 @@ scientific criterion or native admission guard is relaxed. Final source-bound
 local and exact Node 24 hosted results accompany the PR; earlier source results
 remain historical evidence.
 
+## Packet cleanup fixture phase follow-up
+
+PR 69 root shard 2 also failed on both
+`17cba78ce5abd6a96ddc922e16fc754dc7509c8b` and
+`6be5a6ec17e3babe2c573b52da5124a3a21af345`. On the latter source,
+[run 41885523091](https://github.com/OpenT1D/lab/actions/runs/41885523091),
+job `126768804808`, records two nested synthetic producer
+deadlines before packet cleanup began. The supervisor stopped its owned producer
+and observed no remaining owned processes. This is separate from the installer
+correction. A fresh local producer control showed substantial source-identity
+validation work, without an ownership
+wait stall; it does not establish a Linux deadlock or its exact scheduling cause.
+
+The fixture now constructs the fresh packet in the test parent using the real
+canonical producer owner before starting the owned cleanup worker. That worker
+accepts only externally pinned request/context bytes, the current removal-source
+identity and exact private parent, target and evidence identities. It checks the
+fixed invented request, closed prefix and production-gate refusal before
+fixture-only removal injection.
+The existing 30-second producer and 60-second cleanup deadlines and cleanup grace
+remain unchanged. Existing completion, cancellation, retained-byte, original-clock,
+copy-state and unrelated-process assertions remain; substitution controls and
+separate producer/cleanup ownership checks distinguish the phase boundary.
+
+Both failed hosted sources and their deliberately interrupted local full checks
+remain incomplete or failed evidence. Final-source local and hosted results must
+be reported separately. This fixture change admits no production removal, selected
+runtime setup or native execution and supplies no effective private-erasure result.
+
 ## Check provenance and verification handoff
 
 The old PR rollup included the failed/cancelled attempt-1 checks even after
