@@ -43,6 +43,16 @@ OS sandbox automatically. Tooling-host observations cannot satisfy the six actua
 native-family denominator or C15–C18. Selected-runtime rights/security/setup and
 native execution remain separately gated; all four production lists stay empty.
 
+An explicit local observation on the supported host passed both completion and
+cancellation with the fixed profile, without widening it. In each case both the
+parent and child recorded all four permission denials and successful allowed
+operations; matched unconfined operations succeeded. The inherited handoff/ACK
+completed, owned process/start lineage was retained, child activity stopped, and
+the unrelated control survived until its explicit cleanup and reap. Private source
+and tooling/host mechanism identities matched at final readback. This is one local
+tooling-host observation, not hosted OS-profile evidence or selected-runtime
+qualification; exact source and final repository/hosted results accompany the PR.
+
 ## Retained removal-evidence packet
 
 The fresh fixture producer retains the original manifest and intent before its
@@ -56,6 +66,10 @@ bounded members, publishes exclusively and reopens by external manifest/register
 context/source identities. Failed/cancelled prefixes remain available; a complete
 pending map cannot masquerade as the published leaf. Replay recomputes the exact
 stored proposal and rechecks source and live namespaces under quiet ownership.
+The intent binds the publication parent and physical root identity; copying or
+relocating a packet cannot reuse its allocated copy IDs. Readback preserves the
+stored `assessment_as_of` with `assessment_refreshed: false`; it does not silently
+refresh the retention assessment.
 
 The first intent assigns unused aggregate packet-copy IDs for every original
 subject and preserves origins/holds. Postpublication provenance and additional-copy
@@ -71,3 +85,18 @@ restore exclusion or effective erasure is established. Unknown original clocks
 stay unknown. No existing private pilot, backup, snapshot or key is read or removed.
 Added source/examples contain no actual personal names, host/account/storage values
 or private record hashes. Ordinary configured Git/GitHub attribution remains public.
+
+## Remaining qualification
+
+The selected-runtime bootstrap, modules/addons, entry/profile integration and
+confinement still require their exact admitted setup and independent execution
+decision. All six actual native-family cases and C15–C18 remain unrun. The next
+host decision must bind that candidate's real executable, bootstrap and imports,
+rather than transfer this tooling fixture's result. Keep the production launcher,
+profile, worker and authorities unchanged until those decisions exist.
+
+For effective deletion, review complete original-copy and ordinary restore
+coverage and the unknown private retention origin before any removal decision.
+This increment retains actual owned **fixture** removal receipts and conservative
+separate proposals; it does not settle backup/snapshot/key coverage, approve a
+register, establish a removal time, or remove an existing private payload.
