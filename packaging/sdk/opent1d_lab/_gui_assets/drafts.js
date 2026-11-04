@@ -49,6 +49,7 @@ globalThis.workbench = (() => {
     $("restore-draft").disabled = busy || dirty || conflict;
     $("reload-draft").textContent = dirty || conflict ? "Reload saved version — discard local edits" : "Reload saved version";
     if (blocksRun()) { $("run-plan").disabled = true; $("check-plan").disabled = true; $("readiness").textContent = "An editable concept is open. Freeze it to run its saved assumptions, or return to the existing frozen plans."; }
+    globalThis.researchUI?.updateGuidance();
   }
   function editor(name, value) {
     const box = element("fieldset"), legend = element("legend", name), id = "source-" + name.replaceAll(".", "-");
@@ -264,6 +265,7 @@ globalThis.workbench = (() => {
     globalThis.addEventListener("keydown", event => { if (current && (event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s") { event.preventDefault(); save(); } });
   }
   return {accept, open, save, validate, close, blocksRun, render: renderState, bind,
+    state() { return {open: !!current, dirty, conflict, saving, saveError, uploadError: Object.values(invalidFiles)[0] || null, valid: !!current && valid(), unsettled: dirty || conflict || saving || !!saveError || !!Object.keys(invalidFiles).length}; },
     async freeze() {
       if (!current || dirty || conflict || Object.keys(invalidFiles).length || !valid() || current.frozen_plan) { notice("Save and validate this concept before freezing.", true); return; }
       return action("freeze", {draft: current.id, revision: current.revision, name: current.name, parent: current.parent});

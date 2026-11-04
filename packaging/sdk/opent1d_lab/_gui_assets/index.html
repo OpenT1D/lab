@@ -51,9 +51,10 @@
       <p class="limit">These are invented engineering examples. They do not establish accuracy in people, biological validity or treatment effects.</p>
     </section>
     <div id="project-view" class="hidden">
-      <section class="project-heading"><div><p class="eyebrow">Research project</p><h1 id="selected-name"></h1></div><button id="refresh-project">Refresh saved ledger</button></section>
+      <section class="project-heading"><div><p class="eyebrow">Research question / project</p><h1 id="selected-name"></h1></div><button id="refresh-project">Refresh saved ledger</button></section>
       <details id="storage-details" class="storage-details"><summary>Storage, inputs and project handoff</summary>
         <p class="muted">Project folder</p><p id="selected-path" class="path"></p>
+        <p class="muted">GUI workspace</p><p id="project-workspace-location" class="path"></p>
         <p class="muted">Frozen plans retain their admitted original inputs in this project. This interface does not connect a separate data vault or grant access to another person. Execution takes place on this computer.</p>
         <section id="handoff">
           <h2>Keep and hand off the project</h2><p>Copy the entire project, including original inputs, plans, attempts and native evidence.</p>
@@ -62,6 +63,13 @@
         </section>
       </details>
       <div id="study-screen">
+      <section id="research-guidance" class="next-step" aria-label="Next research step">
+        <p class="eyebrow">Your next step</p><h2 id="next-title">Choose an approach</h2>
+        <p id="next-detail">Prepare a supplied synthetic example or start with your own supported synthetic inputs.</p>
+        <div class="actions"><button id="next-action" type="button" class="primary">Choose an approach</button></div>
+        <ol class="research-steps" aria-label="Research steps"><li id="step-approach">Question and approach</li><li id="step-inputs">Inputs and settings</li><li id="step-freeze">Check and freeze</li><li id="step-run">Execute</li></ol>
+        <p id="research-identity" class="muted"></p>
+      </section>
       <nav class="section-nav" aria-label="Research sections"><a href="#study">Study setup</a><a href="#comparisons">Frozen comparisons</a><a id="connected-nav" href="#connected-study">Connected study</a></nav>
       <section id="study" class="panel">
         <div class="section-title"><span class="step">1</span><div><h2>Prepare a study</h2><p>Choose supplied inputs, inspect their assumptions, then freeze a named plan.</p></div></div>
