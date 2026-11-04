@@ -22,6 +22,11 @@ changes no shared source. The internal Python exec shim maps two inherited socke
 to descriptors 3/4, then execs a trusted entry under the same owned PID. DEVNULL
 stdin, the three-key clean environment, close-fds policy and private ordinary log
 remain explicit. Protocol bytes do not use stdout/stderr.
+The passed exec environment is distinct from runtime initialization: the declared
+macOS tooling Node adds a CoreFoundation encoding field after startup. Its raw
+value stays private. The fixture observes this addition; it does not strip it,
+extend the existing production observer's environment allowance or qualify the
+selected native runtime, whose behavior remains unrun.
 
 The spawn hook starts bounded channel work and returns promptly so the canonical
 supervisor can enforce its process deadline. Parent intake retains a bounded frame
@@ -48,6 +53,8 @@ byte/identity/delta/source bindings before filesystem intake. The removal reques
 must name that whole manifest/root/leaf and bind the same context. Use the unchanged
 strict removal reader against exact journal and outer-process bytes, then recheck
 source and live readback before returning.
+These are snapshot observations under quiet exclusive ownership, not atomic
+control over a hostile same-user writer or independent proof of supplied receipts.
 
 Only a fully completed result may propose `absence-observed` for the explicitly
 allocated new aggregate bundle copies. No older copy or object is changed.
