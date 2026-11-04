@@ -91,6 +91,7 @@ subtrees:
       - file: docs/research/ot062-lt1-evidence-readback
       - file: docs/research/ot062-lt1-entry-review-bundle
       - file: docs/research/ot062-lt1-handoff-copy-registration
+      - file: docs/research/ot062-lt1-channel-bundle-cycle
       - file: docs/shared-project-services
       - file: docs/research/ot061-064-minimal-services
       - file: docs/installed-sdk
