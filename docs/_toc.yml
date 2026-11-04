@@ -94,6 +94,7 @@ subtrees:
       - file: docs/research/ot062-lt1-channel-bundle-cycle
       - file: docs/research/ot062-lt1-owned-transport-reconciliation
       - file: docs/research/ot062-lt1-tooling-host-removal-evidence
+      - file: docs/research/ot062-lt1-candidate-host-packet-cleanup
       - file: docs/shared-project-services
       - file: docs/research/ot061-064-minimal-services
       - file: docs/installed-sdk
@@ -372,6 +373,7 @@ subtrees:
       - file: docs/decisions/0105-lt1-dedicated-channels-bundle-cycle
       - file: docs/decisions/0106-lt1-owned-transport-reconciliation
       - file: docs/decisions/0107-lt1-tooling-host-removal-evidence
+      - file: docs/decisions/0108-lt1-candidate-host-plan-packet-cleanup
       - file: docs/decisions/0059-maintained-runtimes-and-local-gui
       - file: docs/templates/model-card
       - file: docs/templates/experiment-protocol

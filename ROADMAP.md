@@ -401,6 +401,10 @@ The selected [tooling-host/removal-evidence increment](docs/research/ot062-lt1-t
 exercises the descriptor transport under a fixed engine-free tooling profile and
 retains actual owned fixture-removal evidence in immutable private packets. It
 does not admit the selected native runtime or establish effective private erasure.
+The selected [candidate-host/packet-cleanup increment](docs/research/ot062-lt1-candidate-host-packet-cleanup.md)
+binds the exact provisional native profile to a static review plan and prepares
+unadmitted whole-packet cleanup independently of old live evidence availability.
+Native case outcomes, complete restore coverage and effective erasure remain open.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
 not native execution. Begin with the exact LT1 runtime/security and restricted-use
