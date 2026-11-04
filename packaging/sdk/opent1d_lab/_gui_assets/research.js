@@ -8,7 +8,7 @@ globalThis.researchUI = (() => {
     if (!["projects", "study", "results"].includes(next) || next !== "projects" && !project()) return;
     screen = next; epoch++;
     paint();
-    if (focus) $("main").focus();
+    if (focus) $(screen === "projects" ? "projects-heading" : "main").focus();
   }
   function paint() {
     const chosen = project();
@@ -75,12 +75,18 @@ globalThis.researchUI = (() => {
       guide(valid ? "Inspect and freeze this study" : "Check the saved inputs", valid ? "Review the assumptions below. Freezing retains this exact saved revision; it does not run the analysis." : "Validation checks this saved input version. Correct any reported problems before freezing.", valid ? "Freeze this plan" : "Check saved inputs", () => $(valid ? "freeze-draft" : "validate-draft").click(), "freeze"); return;
     }
     if (!plan) { guide("Choose an approach", "Choose a supported research task, then prepare a supplied synthetic example or add the admitted synthetic input files.", "Choose research task", () => $("task").focus(), "approach"); return; }
-    if (attempt) { guide("Review the saved execution", "Inspect its outcome and completeness. A retry or a changed study preserves the original attempt.", "View results", () => show("results"), "run"); return; }
+    if (attempt) { guide("Review the saved execution", "Inspect its outcome and completeness. A retry or a changed study preserves the original attempt.", "View results", () => showAttempt(attempt.id), "run"); return; }
     const checked = planReadiness && planReadiness.project === selected && planReadiness.plan === selectedPlan && planReadiness.runtime_revision === data.runtime_revision && planReadiness.runtime_attachment === data.runtime_attachment;
     if (checked && !planReadiness.ready) { guide("Execution needs a reviewed runtime", "Inspect the runtime selection and check this plan again. No dependencies are installed by this interface.", "Review runtime selection", () => { $("runtime-controls").open = true; $("runtime-controls").scrollIntoView({block: "start"}); }, "run"); return; }
     guide(checked ? "Ready to execute this frozen plan" : "Check whether the plan can run", checked ? "Starting creates a new recorded attempt using the frozen inputs. It does not change the plan." : "Check the selected plan and current runtime before explicit execution.", checked ? "Start execution" : "Check this plan", () => $(checked ? "run-plan" : "check-plan").click(), "run");
   }
   function selectedAttempt() { return project()?.info?.attempts?.find(attempt => attempt.id === attemptId); }
+  function showAttempt(identity) {
+    if (!project()?.info?.attempts?.some(attempt => attempt.id === identity)) return;
+    attemptId = identity; clearInspection();
+    if (currentReport?.attempt !== identity) withdrawReport();
+    show("results");
+  }
   function clearInspection() { inspectionEpoch++; $("used-plan-inspector").classList.add("hidden"); $("used-plan-inspector").open = false; $("used-plan-details").textContent = ""; $("used-plan-context").textContent = ""; }
   function paintResults() {
     const chosen = project(), busy = pending || !!data?.active || data?.closing;
