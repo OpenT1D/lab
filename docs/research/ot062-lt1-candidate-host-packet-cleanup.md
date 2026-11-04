@@ -5,8 +5,14 @@ publish a packet before its additional-copy register deterministically exceeded
 the byte limit. The correction preflights the exact canonical successor size
 before replay or private intake. Independent full-input old/fixed cases, exact
 boundary cases and a meaningful omitted-guard control verify the correction.
-The merged revision and final checks are recorded in the PR; predecessor results
-remain scoped to the [tooling-host/removal-evidence increment](ot062-lt1-tooling-host-removal-evidence.md).
+It was merged as `8fe0b5ee22bbe3bdcab1cc296baa2e08a026553f`, with exactly the tree
+of tested `ad4a292bb743f97365786be6d3fe3141854642b8`. Its full local check passed
+2,289 tests with 32 expected skips. All sixteen required jobs in
+[hosted run 41856176235](https://github.com/OpenT1D/lab/actions/runs/41856176235),
+attempt 3, passed, retaining fourteen earlier successful jobs. The first two
+macOS capacity cancellations and their failed aggregates remain retained.
+These predecessor results remain scoped to the
+[tooling-host/removal-evidence increment](ot062-lt1-tooling-host-removal-evidence.md).
 
 [ADR 0108](../decisions/0108-lt1-candidate-host-plan-packet-cleanup.md) selects two
 bounded consumers. Neither admits setup or native execution. Private identities,
