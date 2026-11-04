@@ -710,3 +710,52 @@ class NativeEntryTests(unittest.TestCase):
                 finally:
                     for sock in (ack_parent, ack_child, frame_parent, frame_child):
                         sock.close()
+
+    def test_python_packet_and_source_context_are_owned_during_preparation(self):
+        # Source collection is synchronous but may yield to a caller's other thread.
+        # A late dictionary replacement must never become unchecked semantic input.
+        import copy
+
+        for changed in ("packet", "context"):
+            with self.subTest(changed=changed), tempfile.TemporaryDirectory() as temp:
+                source = entry.source_identity()
+                raw, observation, packet = material(
+                    Path(temp).resolve(), "native-before-fd", source, self.runtime, native=True
+                )
+                expected = copy.deepcopy(source)
+                digest = entry.base.preflight.digest
+                registry = {
+                    "schema": "opent1d.lt1-native-admissions/1",
+                    "setup": [digest(packet["setup_receipt.json"])],
+                    "execution": [
+                        digest(value)
+                        for value in (
+                            raw,
+                            observation,
+                            packet["grant.json"],
+                            packet["integration-grant.json"],
+                        )
+                    ],
+                }
+                calls = 0
+
+                def observe():
+                    nonlocal calls
+                    calls += 1
+                    if calls == 1:
+                        if changed == "packet":
+                            value = json.loads(packet["grant.json"])
+                            value["unreviewed_late_payload"] = True
+                            packet["grant.json"] = entry.encoded(value)
+                        else:
+                            expected["python"] = "caller changed source context"
+                    return source
+
+                with patch.object(entry, "source_identity", side_effect=observe):
+                    with self.assertRaisesRegex(ValueError, "caller .* changed"):
+                        entry._validate(
+                            raw, observation, packet, expected, registry, invented=False
+                        )
+                self.assertEqual(calls, 2)
+                if changed == "packet":
+                    self.assertNotIn(digest(packet["grant.json"]), registry["execution"])

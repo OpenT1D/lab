@@ -173,6 +173,8 @@ def _validate(
     entry = _admit(entry_raw, observation_raw, registry, invented=invented)
     observation = _decoded(observation_raw)
     base.preflight.fields(packet, " ".join(PACKET))
+    original_packet = packet
+    packet = dict(packet)
     need(
         all(isinstance(raw, bytes) and 0 < len(raw) <= 4 * LIMIT for raw in packet.values())
         and sum(map(len, packet.values())) <= 32 * LIMIT,
@@ -192,6 +194,8 @@ def _validate(
         and entry["setup_sha256"] == digests["setup_receipt.json"],
         "complete actual packet binding before context intake",
     )
+    original_expected_identity = expected_identity
+    expected_identity = copy.deepcopy(expected_identity)
     source = source_identity()
     need(source == expected_identity, "expected entry source")
     if authority_sha is not None:
@@ -287,6 +291,11 @@ def _validate(
         "underlying packet bindings; semantic native verification remains separate",
     )
     need(source_identity() == source, "entry preparation source changed")
+    need(original_packet == packet, "caller packet changed during preparation")
+    need(
+        original_expected_identity == expected_identity,
+        "caller source context changed during preparation",
+    )
     return {
         "schema": "opent1d.lt1-native-entry-preparation/1",
         "kind": entry["kind"],
