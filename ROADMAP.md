@@ -397,6 +397,10 @@ The selected [owned-transport/reconciliation increment](docs/research/ot062-lt1-
 brings dedicated channels under the existing process owner and proposes conservative
 reconciliation of exact bundle-copy IDs; native launch admission, original private
 timing, complete restore coverage and effective erasure remain separate.
+The selected [tooling-host/removal-evidence increment](docs/research/ot062-lt1-tooling-host-removal-evidence.md)
+exercises the descriptor transport under a fixed engine-free tooling profile and
+retains actual owned fixture-removal evidence in immutable private packets. It
+does not admit the selected native runtime or establish effective private erasure.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
 not native execution. Begin with the exact LT1 runtime/security and restricted-use
