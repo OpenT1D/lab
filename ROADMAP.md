@@ -386,6 +386,9 @@ actual native qualification and effective removal remain open.
 The selected [entry-observation/review-bundle increment](docs/research/ot062-lt1-entry-review-bundle.md)
 implements bounded entry framing and durable private proposals; actual native wiring,
 qualification and effective removal remain separately gated.
+The selected [handoff/copy-registration increment](docs/research/ot062-lt1-handoff-copy-registration.md)
+prepares bounded entry transfer and explicit additional-copy accounting; actual
+native wiring, complete recovery coverage and effective removal remain gated.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
 not native execution. Begin with the exact LT1 runtime/security and restricted-use

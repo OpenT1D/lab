@@ -90,6 +90,7 @@ subtrees:
       - file: docs/research/ot062-lt1-prestart-recovery-probe
       - file: docs/research/ot062-lt1-evidence-readback
       - file: docs/research/ot062-lt1-entry-review-bundle
+      - file: docs/research/ot062-lt1-handoff-copy-registration
       - file: docs/shared-project-services
       - file: docs/research/ot061-064-minimal-services
       - file: docs/installed-sdk
@@ -364,6 +365,7 @@ subtrees:
       - file: docs/decisions/0101-lt1-owned-prestart-and-recovery-probe
       - file: docs/decisions/0102-lt1-attempt-and-recovery-readback
       - file: docs/decisions/0103-lt1-entry-observation-review-bundle
+      - file: docs/decisions/0104-lt1-entry-handoff-copy-registration
       - file: docs/decisions/0059-maintained-runtimes-and-local-gui
       - file: docs/templates/model-card
       - file: docs/templates/experiment-protocol
