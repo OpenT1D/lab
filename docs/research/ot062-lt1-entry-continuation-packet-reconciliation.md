@@ -95,6 +95,17 @@ unreviewed copy/restore coverage remain blockers. Fresh invented complete and
 interrupted fixtures do not establish effective erasure of an existing private
 pilot, backup, snapshot, container or key.
 
+## Synthetic cycle phase boundary
+
+The original synthetic bundle-cycle fixture also combined publication,
+registration and retained-input construction with actual owned removal in one
+deadline. The local failure record, separate exact-source reproduction and
+source-bound correction are described in the
+[CI phase follow-up](ci-reliability.md#bundle-cycle-owner-phase-follow-up).
+Keep preparation facts separate from actual worker isolation and owned removal
+facts. A fixture preparation result is neither completed removal nor native
+qualification, and incomplete readback cannot promote any copy to absent.
+
 ## Gates and verification boundary
 
 All four production authority lists remain empty. Exact runtime/security and

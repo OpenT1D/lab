@@ -190,6 +190,41 @@ verification belong to the successor PR and their actual source identities.
 This phase separation neither qualifies the selected native runtime nor changes
 production authority, worker deadlines or private-erasure claims.
 
+## Bundle cycle owner phase follow-up
+
+The full local check of PR 70 source
+`a0209dc618a8950e7d5f293ad5ce8f96dedac8bb` reported a failure in the existing
+complete bundle-removal-cycle test. The owner stopped that already failed run
+at a verified child-free point and retained its failed partial log and discovery
+record. It did not complete or emit the final assertion traceback, so that marker
+alone identifies neither the assertion detail nor the child subphase.
+
+A separate fresh exact-source reproduction retained a real `WorkerDeadline`
+after 30.039 seconds, exit -15 and an empty child log, with no surviving owned
+processes. Its actual journal/readback showed eight of thirteen members removed,
+five still present and no terminal event. This reproduction reached actual
+removal after preparation had consumed part of the same 30-second budget; it
+does not identify the original full run's precise failure. Neither outcome
+establishes complete removal or effective erasure. All sixteen hosted jobs on
+that exact source passed in
+[run 41912255926](https://github.com/OpenT1D/lab/actions/runs/41912255926),
+attempt 1; that separate pass does not erase the local failure or qualify a fix.
+
+The test-only correction leaves the fresh `cycle.prepare` constructor unchanged.
+The parent prepares and pins its invented bytes before starting the owned worker.
+That worker reuses the existing strict retained-input validation, adds its own
+fixture-source pin, checks production refusal and its own isolated/no-site/
+no-bytecode flags, and performs actual removal with the original source guards.
+The existing 30-second complete/cancel budget, 20-second intentional post-unlink
+budget and 0.2-second grace remain. Preparation flags stay attributed to the
+parent, separately from actual worker facts. Existing payload, accounting,
+namespace and readback assertions remain; no source check is cached or mocked.
+
+Separate phase timings explain ownership rather than establish a causal speedup:
+host load is not controlled between probes. The fixed source still needs its own
+critical review, actual full local result and exact-source hosted checks. This
+fixture change grants no setup, native execution or private removal authority.
+
 ## Check provenance and verification handoff
 
 The old PR rollup included the failed/cancelled attempt-1 checks even after
