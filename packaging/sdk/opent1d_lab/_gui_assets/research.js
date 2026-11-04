@@ -2,6 +2,7 @@
 // Navigation is presentation state. The SDK ledger remains authoritative.
 globalThis.researchUI = (() => {
   let screen = "projects", epoch = 0, nextAction = null;
+  let attemptProject = null, attemptId = "", inspectionEpoch = 0, inspecting = null;
   const started = new Map();
   function show(next, focus = true) {
     if (!["projects", "study", "results"].includes(next) || next !== "projects" && !project()) return;
@@ -24,6 +25,7 @@ globalThis.researchUI = (() => {
       if (name === screen) button.setAttribute("aria-current", "page"); else button.removeAttribute("aria-current");
     }
     updateGuidance();
+    paintResults();
   }
   function start(operation) { started.set(operation, {epoch, project: selected}); }
   function finish(job) {
@@ -78,9 +80,48 @@ globalThis.researchUI = (() => {
     if (checked && !planReadiness.ready) { guide("Execution needs a reviewed runtime", "Inspect the runtime selection and check this plan again. No dependencies are installed by this interface.", "Review runtime selection", () => { $("runtime-controls").open = true; $("runtime-controls").scrollIntoView({block: "start"}); }, "run"); return; }
     guide(checked ? "Ready to execute this frozen plan" : "Check whether the plan can run", checked ? "Starting creates a new recorded attempt using the frozen inputs. It does not change the plan." : "Check the selected plan and current runtime before explicit execution.", checked ? "Start execution" : "Check this plan", () => $(checked ? "run-plan" : "check-plan").click(), "run");
   }
+  function selectedAttempt() { return project()?.info?.attempts?.find(attempt => attempt.id === attemptId); }
+  function clearInspection() { inspectionEpoch++; $("used-plan-inspector").classList.add("hidden"); $("used-plan-inspector").open = false; $("used-plan-details").textContent = ""; $("used-plan-context").textContent = ""; }
+  function paintResults() {
+    const chosen = project(), busy = pending || !!data?.active || data?.closing;
+    if (attemptProject !== selected) { attemptProject = selected; attemptId = ""; clearInspection(); }
+    const attempts = chosen?.info?.attempts || [], plans = chosen?.info?.plans || [];
+    if (attemptId && !attempts.some(attempt => attempt.id === attemptId)) { attemptId = ""; clearInspection(); withdrawReport(); }
+    options($("attempt-select"), [["", "All executions"], ...attempts.slice().reverse().map(attempt => {
+      const plan = plans.find(item => item.id === attempt.plan), outcome = attempt.outcome;
+      return [attempt.id, `${plan ? label(plan) : "Saved plan"} · attempt ${attempt.ordinal} · ${typeof outcome === "object" ? outcome.execution_status + " / " + outcome.completeness : "unfinished"}`];
+    })], attemptId);
+    $("attempt-select").disabled = busy || !attempts.length;
+    const attempt = selectedAttempt();
+    $("attempt-context").textContent = attempt ? `Attempt: ${attempt.id} · frozen plan: ${attempt.plan}. Viewing inputs does not replace your open study concept.` : attempts.length ? "Choose an execution to inspect its exact inputs or derive a changed study." : "No executions yet. Prepare and run a frozen plan in Research.";
+    $("inspect-used-plan").disabled = busy || !attempt;
+    const plan = plans.find(item => item.id === attempt?.plan);
+    $("derive-used-plan").disabled = busy || !plan || !(data?.installation.tasks || []).includes(plan.task) || !!globalThis.workbench?.state?.().unsettled;
+    for (const row of document.querySelectorAll("#attempt-list .attempt")) row.classList.toggle("hidden", !!attemptId && row.getAttribute("data-attempt") !== attemptId);
+  }
+  async function inspectUsed() {
+    const attempt = selectedAttempt();
+    if (!attempt || pending || data?.active) return;
+    const expected = selected, identity = attempt.id, issued = ++inspectionEpoch;
+    inspecting = {project: expected, plan: attempt.plan};
+    show("study");
+    try {
+      const job = await action("plan", {plan: attempt.plan});
+      if (job?.status !== "done" || issued !== inspectionEpoch || selected !== expected || attemptId !== identity) return;
+      $("used-plan-context").textContent = `Attempt: ${identity} · frozen plan: ${attempt.plan}. Read-only; your editable concept and frozen-plan selection are unchanged.`;
+      $("used-plan-details").textContent = planText(job.result);
+      $("used-plan-inspector").classList.remove("hidden"); $("used-plan-inspector").open = true;
+      if (screen === "study") $("used-plan-inspector").scrollIntoView({block: "start"});
+    } finally { inspecting = null; }
+  }
+  function usedInspection(job) { return !!inspecting && job.project === inspecting.project && job.arguments?.plan === inspecting.plan; }
   function bind() {
     for (const name of ["projects", "study", "results"]) $("nav-" + name).onclick = () => show(name);
     $("next-action").onclick = () => nextAction?.();
+    $("attempt-select").onchange = () => { attemptId = $("attempt-select").value; clearInspection(); withdrawReport(); paintResults(); };
+    $("inspect-used-plan").onclick = inspectUsed;
+    $("derive-used-plan").onclick = () => { const attempt = selectedAttempt(); if (attempt && !pending && !data?.active && !globalThis.workbench?.state?.().unsettled) { show("study"); globalThis.workbench?.derive(attempt.plan); } };
+    $("open-comparisons").onclick = () => { show("study"); $("comparisons").scrollIntoView({block: "start"}); };
   }
-  return {bind, render: paint, show, start, finish, projectStatus, updateGuidance};
+  return {bind, render: paint, show, start, finish, projectStatus, updateGuidance, usedInspection};
 })();

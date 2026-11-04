@@ -220,6 +220,12 @@ globalThis.workbench = (() => {
   }
   function close() { if (dirty) backup(); generation++; clearTimeout(timer); current = null; draft = null; inputs = {}; invalidFiles = {}; fileEdits = {}; dirty = false; conflict = false; saveError = null; }
   function blocksRun() { return !!current && (dirty || !current.frozen_plan); }
+  async function derive(plan = selectedPlan) {
+    if (dirty || conflict || saving || saveError || Object.keys(invalidFiles).length) { notice("Save or resolve the open concept before deriving a variant. Your local edits are retained.", true); return; }
+    const stamp = generation, previous = current, values = current ? snapshot() : null;
+    const job = await action("derive", {plan});
+    if (job?.status === "done") { switchResult(job.result, stamp, previous, values); $("plan-name").focus(); }
+  }
   function renderState(incoming, chosen, busy) {
     if (current && current.project !== selected) close();
     const entries = (incoming.drafts || []).filter(item => item.project === selected);
@@ -260,11 +266,11 @@ globalThis.workbench = (() => {
       const job = await action("draft_restore", {draft: current.id, revision: current.revision, selected: Number($("draft-revision").value)}, current.project);
       if (job?.status === "done") finishRevision(job.result, previous, values, stamp);
     };
-    $("derive-plan").onclick = async () => { const stamp = generation, previous = current, values = current ? snapshot() : null; const job = await action("derive", {plan: selectedPlan}); if (job?.status === "done") { switchResult(job.result, stamp, previous, values); $("plan-name").focus(); } };
+    $("derive-plan").onclick = () => derive();
     globalThis.addEventListener("beforeunload", event => { if (dirty || saving) { backup(); event.preventDefault(); event.returnValue = ""; } });
     globalThis.addEventListener("keydown", event => { if (current && (event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s") { event.preventDefault(); save(); } });
   }
-  return {accept, open, save, validate, close, blocksRun, render: renderState, bind,
+  return {accept, open, save, validate, close, blocksRun, derive, render: renderState, bind,
     state() { return {open: !!current, dirty, conflict, saving, saveError, uploadError: Object.values(invalidFiles)[0] || null, valid: !!current && valid(), unsettled: dirty || conflict || saving || !!saveError || !!Object.keys(invalidFiles).length}; },
     async freeze() {
       if (!current || dirty || conflict || Object.keys(invalidFiles).length || !valid() || current.frozen_plan) { notice("Save and validate this concept before freezing.", true); return; }

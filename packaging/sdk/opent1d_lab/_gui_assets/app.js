@@ -70,7 +70,7 @@ async function refresh() {
       if (job.operation === "prepare") { if (globalThis.workbench) await workbench.open(result.id, false); else { draft = result; $("plan-name").value = `${names[result.task]} — ${cases[result.task].find(row => row[0] === result.case)[1]}`; } notice(draft?.validation?.valid === false ? "Concept saved. Correct its validation errors before freezing." : "Inputs validated. Inspect the assumptions and freeze a plan before running."); }
       else if (job.operation.startsWith("draft_") || job.operation === "derive") { notice(job.operation === "draft_validate" ? "Validation finished. Inspect the saved concept and its diagnostics." : "Study concept saved. No frozen plan was changed."); }
       else if (job.operation === "freeze") { selectedPlan = result.plan; draft = null; globalThis.workbench?.close(); invalidatePlanView(); notice("Plan frozen. The original inputs and assumptions are retained."); }
-      else if (job.operation === "plan") { if (typeof result.scientific_input_text === "string") { const metadata = {...result}; delete metadata.scientific_input; delete metadata.scientific_input_text; $("plan-details").textContent = JSON.stringify(metadata, null, 2) + "\n\nScientific inputs (exact saved JSON):\n" + result.scientific_input_text; } else $("plan-details").textContent = JSON.stringify(result, null, 2); $("plan-inspector").classList.remove("hidden"); $("plan-inspector").open = true; }
+      else if (job.operation === "plan") { if (!globalThis.researchUI?.usedInspection(job)) { $("plan-details").textContent = planText(result); $("plan-inspector").classList.remove("hidden"); $("plan-inspector").open = true; } }
       else if (job.operation === "check") { planReadiness = {...job.check_context, ready: result.runtimes_ready}; $("readiness").textContent = result.runtimes_ready ? "Ready for explicit execution. This check did not run a model or install dependencies." : "Native execution is unavailable with the current selection. Configure reviewed runtimes; an explicit run without them retains an admission failure and performs no setup."; notice(result.runtimes_ready ? "Readiness check passed." : "Readiness check found unavailable native runtimes.", !result.runtimes_ready); }
       else if (job.operation === "run") { notice(`Execution ${result.result.execution_status}; scientific evidence ${result.result.completeness}. Verify the saved report explicitly to inspect its conclusions.`, result.result.completeness !== "complete"); }
       else if (job.operation === "verify") { if (await showReport(result.report)) notice("Saved analysis verified. This did not run the model again."); }
@@ -146,6 +146,7 @@ function renderAttempts(attempts, plans, busy) {
   if (!attempts.length) { $("attempt-list").replaceChildren(element("p", "No attempts yet. A run preserves its own outcome here.", "muted")); return; }
   $("attempt-list").replaceChildren(...attempts.slice().reverse().map(attempt => {
     const row = element("article", undefined, "attempt");
+    row.setAttribute("data-attempt", attempt.id);
     const plan = plans.find(item => item.id === attempt.plan);
     const result = typeof attempt.outcome === "object" ? attempt.outcome : null;
     const top = element("div", undefined, "attempt-top"); top.append(element("h3", `${plan ? label(plan) : "Saved plan"} · attempt ${attempt.ordinal}`), badge(result?.completeness || "unfinished", result?.completeness || "unfinished"));
@@ -159,6 +160,11 @@ function renderAttempts(attempts, plans, busy) {
     if (result && attempt.id === (attempts.filter(item => item.plan === attempt.plan).at(-1)?.id)) { const retry = element("button", "Run a new attempt"); retry.disabled = busy || !["mmtt-sensitivity", "mmtt-sampling", "m4-study-installed", "m3-compare"].includes(plan?.task); retry.onclick = () => action("run", {plan: attempt.plan, retry_of: attempt.id}); actions.append(retry); }
     row.append(actions); return row;
   }));
+}
+function planText(result) {
+  if (typeof result.scientific_input_text !== "string") return JSON.stringify(result, null, 2);
+  const metadata = {...result}; delete metadata.scientific_input; delete metadata.scientific_input_text;
+  return JSON.stringify(metadata, null, 2) + "\n\nScientific inputs (exact saved JSON):\n" + result.scientific_input_text;
 }
 function tableCells(line) {
   const cells = []; let start = 0, slashes = 0;
@@ -228,6 +234,8 @@ async function showReport(identity) {
   if (hasFigure) $("report-figure").src = imageURL;
   currentReport = record;
   $("report-context").textContent = `Verified ${new Date(record.verified_at).toLocaleString()} · ` + (record.study ? `connected study ${record.study.slice(0, 12)} · snapshot ${record.snapshot.tip}` : record.comparison ? `comparison ${record.comparison.slice(0, 12)} · snapshot ${record.snapshot.tip}` : `attempt ${record.attempt.slice(0, 12)}`);
+  const usedAttempt = project()?.info?.attempts.find(attempt => attempt.id === record.attempt);
+  if (usedAttempt) $("report-context").textContent += ` · frozen plan ${usedAttempt.plan.slice(0, 12)}. Inspect used inputs to see the retained source identities and settings.`;
   $("report-completeness").textContent = record.completeness + (record.numerical_acceptance ? ` · point checks ${record.numerical_acceptance.status}` : "");
   $("report-completeness").className = "tag" + (record.completeness === "complete" && (!record.numerical_acceptance || record.numerical_acceptance.all_passed) ? "" : " warn");
   $("saved-report").classList.remove("hidden"); $("saved-report").scrollIntoView({behavior: "smooth", block: "start"});

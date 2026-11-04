@@ -63,6 +63,7 @@
         </section>
       </details>
       <div id="study-screen">
+      <details id="used-plan-inspector" class="panel hidden"><summary>Read-only inputs used by the selected execution</summary><p id="used-plan-context" class="muted"></p><pre id="used-plan-details"></pre></details>
       <section id="research-guidance" class="next-step" aria-label="Next research step">
         <p class="eyebrow">Your next step</p><h2 id="next-title">Choose an approach</h2>
         <p id="next-detail">Prepare a supplied synthetic example or start with your own supported synthetic inputs.</p>
@@ -151,6 +152,14 @@
       </section>
       </div>
       <div id="results-screen" class="hidden">
+      <section class="panel" aria-label="Selected execution">
+        <h2>Executions and results</h2><p class="muted">Each attempt retains its frozen inputs and outcome, including failed, stopped and unfinished work.</p>
+        <label for="attempt-select">Execution to inspect</label><select id="attempt-select"><option value="">All executions</option></select>
+        <p id="attempt-context" class="muted"></p>
+        <div class="actions"><button id="inspect-used-plan" type="button">Inspect used inputs</button><button id="derive-used-plan" type="button">Make a variant from this execution</button></div>
+        <button id="open-comparisons" type="button" class="quiet">Open frozen comparison setup and reports</button>
+        <p class="muted">Comparison membership is frozen in Research before execution. Results below use the native reports; no ranking or new scientific calculation is added here.</p>
+      </section>
       <section id="attempts" class="panel">
         <div class="section-title"><span class="step">3</span><div><h2>Find and verify results</h2><p>Execution, scientific completeness and report verification are separate.</p></div></div>
         <div id="attempt-list"></div>
