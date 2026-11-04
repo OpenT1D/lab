@@ -109,6 +109,33 @@ on timeout/interruption or orphaned descendants; unrelated processes are retaine
 The mirror change reduces the observed endpoint failure exposure, but cannot
 guarantee future network availability.
 
+## Installer stop confirmation follow-up
+
+The first hosted run of PR 69 on `17cba78ce5abd6a96ddc922e16fc754dc7509c8b`,
+[run 41881075877](https://github.com/OpenT1D/lab/actions/runs/41881075877),
+Firefox job `126753391640`, failed in the installer process test before browser
+acquisition. A descendant heartbeat changed after the phase returned: the helper
+sent SIGKILL without observing subsequent process-group quiescence. This is a
+process-settlement race, separate from APT/network availability.
+
+For the fixed CI caller's finite phase and grace budgets, the helper now observes
+the group after forced termination and bounds direct-child exit observation.
+The original deadline or interruption error code is retained. Signal/probe errors
+and a group that remains observable produce explicit unconfirmed cleanup;
+denied stops do not establish reaping, and the live child handle remains retained.
+The actual POSIX parent/descendant and unrelated-process assertions remain.
+This supplies no new Windows process-tree or native host qualification.
+
+Deterministic controls delay owned SIGKILL delivery, retain a never-disappearing
+group and deny graceful or all stop signals. The old delayed-delivery case returns
+before the kill and leaves a changing heartbeat; the corrected case waits for
+settlement. Direct-child exit observation also has a bound when both stop signals
+fail. These cases retain primary failures and explicit
+cleanup uncertainty. No test assertion, selected runner, execution timeout,
+scientific criterion or native admission guard is relaxed. Final source-bound
+local and exact Node 24 hosted results accompany the PR; earlier source results
+remain historical evidence.
+
 ## Check provenance and verification handoff
 
 The old PR rollup included the failed/cancelled attempt-1 checks even after
