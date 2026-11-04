@@ -1,5 +1,6 @@
 """One fresh invented bundle cycle; never admits an existing removal request."""
 
+import json
 import os
 import stat
 import sys
@@ -154,11 +155,70 @@ def prepare(parent):
     return raw, registry, context
 
 
+def prepare_owned(parent):
+    """Prepare outside the removal budget, preserving the constructor's phase facts.
+
+    The existing producer's bounded reader validates this same fresh invented
+    bundle. Import locally because that producer uses this module's constructor.
+    The two additional retained metadata files are fixture copies, not a newly
+    approved accounting branch or proof of complete storage coverage.
+    """
+    import lt1_reconciliation_packet_fixture as producer
+
+    return {
+        "schema": "opent1d.invented-bundle-cycle-worker/1",
+        "kind": "invented",
+        "helper_sha256": wire.digest(Path(__file__).read_bytes()),
+        "prepared": producer.prepare(Path(parent)),
+    }
+
+
+def load_owned(parent, pins):
+    """Accept only externally pinned, closed fresh-fixture preparation."""
+    import lt1_reconciliation_packet_fixture as producer
+
+    removal.fields(pins, "schema kind helper_sha256 prepared")
+    producer.need(
+        pins["schema"] == "opent1d.invented-bundle-cycle-worker/1"
+        and pins["kind"] == "invented"
+        and removal.sha(pins["helper_sha256"])
+        and wire.digest(Path(__file__).read_bytes()) == pins["helper_sha256"],
+        "fixed bundle worker pin",
+    )
+    return producer.load_prepared(Path(parent), pins["prepared"])
+
+
 def main():
+    if len(sys.argv) != 4 or len(sys.argv[3]) > 16384:
+        raise ValueError("Bounded external bundle fixture pins required")
     parent, phase = Path(sys.argv[1]), sys.argv[2]
     if phase not in {"complete", "removed", "quarantined"}:
         raise ValueError("Fixed invented cycle phase required")
-    raw, registry, context = prepare(parent)
+    if not (sys.flags.isolated and sys.flags.no_site and sys.flags.dont_write_bytecode):
+        raise ValueError("Fixed isolated bundle removal worker required")
+    raw, context = load_owned(
+        parent, json.loads(sys.argv[3], object_pairs_hook=removal.unique_object)
+    )
+    try:
+        removal.remove(raw, context)
+    except ValueError as error:
+        if "no reviewed removal request" not in str(error):
+            raise
+    else:
+        raise AssertionError("Invented cycle unexpectedly passed production removal gate")
+    write_private(
+        parent / "worker.json",
+        wire.encoded(
+            {
+                "schema": "opent1d.invented-bundle-cycle-worker-flags/1",
+                "kind": "invented",
+                "isolated": bool(sys.flags.isolated),
+                "no_site": bool(sys.flags.no_site),
+                "dont_write_bytecode": bool(sys.flags.dont_write_bytecode),
+                "production_gate_refused": True,
+            }
+        ),
+    )
 
     def checkpoint(event, name):
         if event == phase:
@@ -167,6 +227,7 @@ def main():
             while True:
                 time.sleep(0.02)
 
+    registry = {"schema": "opent1d.lt1-removal-admissions/1", "requests": [wire.digest(raw)]}
     outcome = removal._remove_reviewed(raw, registry, context, checkpoint=checkpoint)
     write_private(parent / "outcome.json", wire.encoded(outcome))
     return 0 if outcome["status"] == "namespace-absence-observed" else 23

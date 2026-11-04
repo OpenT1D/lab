@@ -5,6 +5,7 @@ import os
 import sys
 import tempfile
 import threading
+import time
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -35,6 +36,33 @@ class BundleCycleGateTests(unittest.TestCase):
             self.assertEqual(
                 sentinel.read_bytes(), b"existing invented request must not be consumed"
             )
+            # The old two-argument CLI cannot start construction or private intake.
+            with (
+                patch.object(sys, "argv", ["fixture", str(parent), "complete"]),
+                patch.object(fixture, "prepare", side_effect=AssertionError("construction")),
+                patch.object(fixture, "load_owned", side_effect=AssertionError("private intake")),
+            ):
+                with self.assertRaisesRegex(ValueError, "Bounded external"):
+                    fixture.main()
+            import lt1_reconciliation_packet_fixture as producer
+
+            pins = {
+                "schema": "opent1d.invented-bundle-cycle-worker/1",
+                "kind": "invented",
+                "helper_sha256": wire.digest(Path(fixture.__file__).read_bytes()),
+                "prepared": object(),
+            }
+            for key, wrong in (
+                ("schema", "foreign"),
+                ("kind", "private"),
+                ("helper_sha256", "0" * 64),
+            ):
+                with (
+                    self.subTest(pin=key),
+                    patch.object(producer, "load_prepared", side_effect=AssertionError("intake")),
+                ):
+                    with self.assertRaisesRegex(ValueError, "fixed bundle worker pin"):
+                        fixture.load_owned(parent, {**pins, key: wrong})
 
 
 @unittest.skipUnless(os.name == "posix", "POSIX owned bundle removal fixture required")
@@ -43,6 +71,9 @@ class BundleRemovalCycleTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             parent = Path(folder).resolve()
             parent.chmod(0o700)
+            started = time.monotonic()
+            pins = fixture.prepare_owned(parent)
+            preparation_seconds = time.monotonic() - started
             cancel, done = threading.Event(), threading.Event()
 
             def watcher():
@@ -59,6 +90,7 @@ class BundleRemovalCycleTests(unittest.TestCase):
             # The supervisor's log lives outside the required-empty fixture root.
             with tempfile.TemporaryDirectory() as logs:
                 try:
+                    started = time.monotonic()
                     outer = supervise(
                         [
                             sys.executable,
@@ -68,6 +100,7 @@ class BundleRemovalCycleTests(unittest.TestCase):
                             str(ROOT / "tests/lt1_bundle_removal_fixture.py"),
                             str(parent),
                             phase,
+                            wire.encoded(pins).decode(),
                         ],
                         Path(logs) / "process.log",
                         timeout=20 if phase == "removed" else 30,
@@ -75,11 +108,17 @@ class BundleRemovalCycleTests(unittest.TestCase):
                         cancel=cancel,
                         environment={"LANG": "C", "LC_ALL": "C", "PATH": "/usr/bin:/bin"},
                     )
+                    owned_seconds = time.monotonic() - started
                 finally:
                     done.set()
                     if thread:
                         thread.join(timeout=1)
                 log = (Path(logs) / "process.log").read_bytes()
+            print(
+                f"bundle-cycle phase={phase} preparation_seconds={preparation_seconds:.3f} "
+                f"owned_removal_seconds={owned_seconds:.3f}",
+                flush=True,
+            )
             complete = phase == "complete"
             self.assertEqual(
                 outer["status"],
@@ -93,12 +132,17 @@ class BundleRemovalCycleTests(unittest.TestCase):
             self.assertEqual(outer["remaining_owned_processes"], [])
             self.assertEqual(outer["received_signals"], [])
             self.assertIsNone(outer.get("cleanup_error"))
+            self.assertEqual(len(outer["owned_processes"]), 1)
             cycle = json.loads((parent / "cycle.json").read_bytes())
             self.assertEqual(cycle["kind"], "invented")
             self.assertTrue(cycle["production_gate_refused"])
             self.assertTrue(cycle["successor_cannot_rebase_bundle"])
-            self.assertTrue(cycle["isolated"])
-            self.assertTrue(cycle["no_site"])
+            self.assertEqual(cycle["isolated"], bool(sys.flags.isolated))
+            self.assertEqual(cycle["no_site"], bool(sys.flags.no_site))
+            worker = json.loads((parent / "worker.json").read_bytes())
+            self.assertEqual(worker["kind"], "invented")
+            for key in ("isolated", "no_site", "dont_write_bytecode", "production_gate_refused"):
+                self.assertIs(worker[key], True)
             self.assertFalse(cycle["proposal_saved_or_approved"])
             self.assertFalse(cycle["global_copy_coverage_verified"])
             self.assertTrue(all(value is False for value in cycle["proposal_flags"].values()))
