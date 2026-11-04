@@ -109,6 +109,62 @@ on timeout/interruption or orphaned descendants; unrelated processes are retaine
 The mirror change reduces the observed endpoint failure exposure, but cannot
 guarantee future network availability.
 
+## Installer stop confirmation follow-up
+
+The first hosted run of PR 69 on `17cba78ce5abd6a96ddc922e16fc754dc7509c8b`,
+[run 41881075877](https://github.com/OpenT1D/lab/actions/runs/41881075877),
+Firefox job `126753391640`, failed in the installer process test before browser
+acquisition. A descendant heartbeat changed after the phase returned: the helper
+sent SIGKILL without observing subsequent process-group quiescence. This is a
+process-settlement race, separate from APT/network availability.
+
+For the fixed CI caller's finite phase and grace budgets, the helper now observes
+the group after forced termination and bounds direct-child exit observation.
+The original deadline or interruption error code is retained. Signal/probe errors
+and a group that remains observable produce explicit unconfirmed cleanup;
+denied stops do not establish reaping, and the live child handle remains retained.
+The actual POSIX parent/descendant and unrelated-process assertions remain.
+This supplies no new Windows process-tree or native host qualification.
+
+Deterministic controls delay owned SIGKILL delivery, retain a never-disappearing
+group and deny graceful or all stop signals. The old delayed-delivery case returns
+before the kill and leaves a changing heartbeat; the corrected case waits for
+settlement. Direct-child exit observation also has a bound when both stop signals
+fail. These cases retain primary failures and explicit
+cleanup uncertainty. No test assertion, selected runner, execution timeout,
+scientific criterion or native admission guard is relaxed. Final source-bound
+local and exact Node 24 hosted results accompany the PR; earlier source results
+remain historical evidence.
+
+## Packet cleanup fixture phase follow-up
+
+PR 69 root shard 2 also failed on both
+`17cba78ce5abd6a96ddc922e16fc754dc7509c8b` and
+`6be5a6ec17e3babe2c573b52da5124a3a21af345`. On the latter source,
+[run 41885523091](https://github.com/OpenT1D/lab/actions/runs/41885523091),
+job `126768804808`, records two nested synthetic producer
+deadlines before packet cleanup began. The supervisor stopped its owned producer
+and observed no remaining owned processes. This is separate from the installer
+correction. A fresh local producer control showed substantial source-identity
+validation work, without an ownership
+wait stall; it does not establish a Linux deadlock or its exact scheduling cause.
+
+The fixture now constructs the fresh packet in the test parent using the real
+canonical producer owner before starting the owned cleanup worker. That worker
+accepts only externally pinned request/context bytes, the current removal-source
+identity and exact private parent, target and evidence identities. It checks the
+fixed invented request, closed prefix and production-gate refusal before
+fixture-only removal injection.
+The existing 30-second producer and 60-second cleanup deadlines and cleanup grace
+remain unchanged. Existing completion, cancellation, retained-byte, original-clock,
+copy-state and unrelated-process assertions remain; substitution controls and
+separate producer/cleanup ownership checks distinguish the phase boundary.
+
+Both failed hosted sources and their deliberately interrupted local full checks
+remain incomplete or failed evidence. Final-source local and hosted results must
+be reported separately. This fixture change admits no production removal, selected
+runtime setup or native execution and supplies no effective private-erasure result.
+
 ## Check provenance and verification handoff
 
 The old PR rollup included the failed/cancelled attempt-1 checks even after
