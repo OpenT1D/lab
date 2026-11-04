@@ -61,6 +61,15 @@ test('three screens retain local concept edits before autosave and disclose loca
   await expect(page.locator('#relocate-form')).toBeVisible();
   await page.setViewportSize({ width: 390, height: 844 });
   await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+  const overflow = await page.evaluate(() => [...document.querySelectorAll('body *')].filter(element => {
+    const box = element.getBoundingClientRect();
+    return box.width && box.height && box.right > innerWidth + 0.5;
+  }).map(element => ({ tag: element.tagName, id: element.id, className: String(element.className),
+    right: element.getBoundingClientRect().right, width: element.getBoundingClientRect().width,
+    text: element.textContent.trim().slice(0, 160) })));
+  if (overflow.length) await testInfo.attach('narrow-reflow-elements.json', {
+    body: JSON.stringify(overflow, null, 2), contentType: 'application/json',
+  });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.screenshot({ path: testInfo.outputPath('three-screens-research-narrow.png'), fullPage: false });
   expect(errors).toEqual([]);
@@ -191,5 +200,17 @@ test('selected execution binds used inputs, variant parent and report; delayed v
     release();
     await page.unroute(route);
   }
+  // Guided navigation must bind the selected plan's execution, even when a
+  // different plan's report and execution filter were most recently viewed.
+  await page.locator('#nav-study').click();
+  await page.locator('#plan-select').selectOption(firstPlan);
+  await expect(page.locator('#next-action')).toHaveText('View results');
+  await page.locator('#next-action').click();
+  await expect(page.locator('#nav-results')).toHaveAttribute('aria-current', 'page');
+  await expect(page.locator('#attempt-select')).toHaveValue(first.attempt);
+  await expect(page.locator('#saved-report')).toBeHidden();
+  await page.getByRole('button', { name: 'Verify saved report', exact: true }).click();
+  await expect(page.locator('#report-context')).toContainText(first.attempt.slice(0, 12));
+  expect(await downloadJSON(page)).toEqual(await readFile(path.join(first.evidence, 'native/report.json')));
   expect(errors).toEqual([]);
 });
