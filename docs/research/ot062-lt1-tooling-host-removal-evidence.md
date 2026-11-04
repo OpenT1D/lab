@@ -79,6 +79,13 @@ old states, retaining conservative `present` copies. Stored reconciliation propo
 are unapproved metadata; no automatic composition, activation or absence approval
 follows. Saving returned metadata creates further copies requiring accounting.
 
+A later critical review found that a valid near-limit registration could produce
+an oversized additional-copy register only after packet publication. The writer
+now computes that exact successor byte bound with fixed-width evidence hashes
+before reconciliation replay or private filesystem intake. Known unrepresentable
+successors refuse without creating a pending or published packet; genuinely
+interrupted or uncertain operations still retain their available evidence.
+
 These are private snapshot/software observations. No removal timestamp, retention
 deadline compliance, complete live/quarantine/snapshot/backup coverage, ordinary
 restore exclusion or effective erasure is established. Unknown original clocks

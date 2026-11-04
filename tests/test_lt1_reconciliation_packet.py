@@ -248,6 +248,67 @@ class ReconciliationPacketTests(unittest.TestCase):
                         )
         self.assertFalse(self.output.exists())
 
+    def test_successor_register_byte_bound_refuses_before_replay_or_private_copies(self):
+        original = json.loads(self.inputs["registration_raw"])
+        subject = sorted(original["subjects"])[0]
+        count = sum(len(row["copies"]) for row in original["subjects"].values())
+
+        def enlarged(extra):
+            value = copy.deepcopy(original)
+            for index in range(extra):
+                value["subjects"][subject]["copies"][f"padding-{index:05d}" + "x" * 51] = {
+                    "state": "present",
+                    "evidence_sha256": "f" * 64,
+                }
+            return wire.encoded(value)
+
+        lower, upper = 0, packet.retention.MAX_COPIES - count - len(self.copy_ids)
+        while lower < upper:
+            middle = (lower + upper + 1) // 2
+            if len(enlarged(middle)) <= packet.retention.LIMIT:
+                lower = middle
+            else:
+                upper = middle - 1
+        raw = enlarged(lower)
+        current = packet.retention.register(raw, wire.digest(raw))
+        assigned = {
+            name: f"packet-{index}-" + "z" * 55 for index, name in enumerate(current["subjects"])
+        }
+        self.inputs.update(registration_raw=raw, expected_registration_sha256=wire.digest(raw))
+        self.copy_ids = assigned
+        hypothetical = copy.deepcopy(current)
+        hypothetical["previous_sha256"] = wire.digest(raw)
+        for key in ("all_copies_registered", "recovery_scope_reviewed", "processes_stopped"):
+            hypothetical["coverage"][key] = False
+        for name, copy_id in assigned.items():
+            hypothetical["subjects"][name]["copies"][copy_id] = {
+                "state": "present",
+                "evidence_sha256": "0" * 64,
+            }
+        self.assertGreater(len(wire.encoded(hypothetical)), packet.retention.LIMIT)
+        before = copy.deepcopy(self.inputs)
+        with (
+            patch.object(bundle, "_opened", side_effect=AssertionError("private intake")),
+            patch.object(
+                packet.reconciliation,
+                "propose_reconciliation",
+                side_effect=AssertionError("replay"),
+            ),
+        ):
+            with self.assertRaisesRegex(ValueError, "successor register byte bound"):
+                self.save()
+        self.assertEqual(self.inputs, before)
+        self.assertFalse(self.output.exists())
+        self.assertFalse(self.output.with_name(self.output.name + ".pending").exists())
+        # A nearby representable successor still passes the allocation preflight.
+        smaller = enlarged(max(0, lower - 3))
+        inputs = {
+            **self.inputs,
+            "registration_raw": smaller,
+            "expected_registration_sha256": wire.digest(smaller),
+        }
+        packet._allocation(inputs, assigned)
+
     def test_rehashed_packet_context_cannot_rebind_external_input_identity(self):
         self.save()
         (self.output / "context.bin").write_bytes(b"forged invented context")

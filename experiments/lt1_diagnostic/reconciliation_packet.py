@@ -56,6 +56,18 @@ def _allocation(inputs, copy_ids):
         and len(old_ids) + len(assigned) <= retention.MAX_COPIES,
         "globally unused bounded packet-copy IDs",
     )
+    proposed = copy.deepcopy(current)
+    proposed["previous_sha256"] = inputs["expected_registration_sha256"]
+    for key in ("all_copies_registered", "recovery_scope_reviewed", "processes_stopped"):
+        proposed["coverage"][key] = False
+    for name, copy_id in assigned.items():
+        proposed["subjects"][name]["copies"][copy_id] = {
+            "state": "present",
+            "evidence_sha256": "0" * 64,
+        }
+    # Evidence hashes have fixed width: reject a known unrepresentable successor
+    # before any private packet copy, rather than after exclusive publication.
+    need(len(wire.encoded(proposed)) <= retention.LIMIT, "successor register byte bound")
     return current, assigned
 
 
