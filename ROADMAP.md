@@ -389,6 +389,10 @@ qualification and effective removal remain separately gated.
 The selected [handoff/copy-registration increment](docs/research/ot062-lt1-handoff-copy-registration.md)
 prepares bounded entry transfer and explicit additional-copy accounting; actual
 native wiring, complete recovery coverage and effective removal remain gated.
+The selected [process-channel/bundle-cycle increment](docs/research/ot062-lt1-channel-bundle-cycle.md)
+exercises dedicated inherited channels and a full fresh-metadata removal cycle;
+actual native profile/entry wiring, complete restore coverage and private-data
+erasure remain separately gated.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
 not native execution. Begin with the exact LT1 runtime/security and restricted-use
