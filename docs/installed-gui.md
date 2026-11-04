@@ -7,7 +7,9 @@ the SDK project is the authoritative research record. This interface covers
 supplied examples and user-chosen synthetic inputs for paired-sensitivity and
 reduced-sampling MMTT, plus editable selected configurations for the
 [installed M4 successor](installed-m4.md).
-The older checkout GUI and its historical exercises retain their own scope.
+The three-screen navigation below belongs to this installed SDK GUI. It does
+not change the older source-checkout GUI, its historical exercises or the
+separate [Mac application's interface](mac-mmtt-candidate.md).
 The [bounded internal MMTT candidate](internal-mmtt-candidate.md) deliberately
 admits only the two MMTT tasks and their comparisons. Its startup view and
 service gates omit native/connected execution and runtime attachments.
@@ -25,13 +27,63 @@ the SDK environment and all existing project stores. Only one server may own
 that workspace. The candidate selects POSIX CPython 3.12; current local native
 qualification is macOS arm64. It is not a public installer or a clean-host test.
 
+## Three screens
+
+The installed GUI groups the existing project workflow into three screens:
+
+- **My research** lists saved projects with a short status, creates a named
+  project and opens an existing SDK project folder. Open a project to continue
+  in **Research**. Opening reads the saved state; it does not execute a task.
+- **Research** prepares editable concepts, validates saved inputs, freezes
+  plans and explicitly runs them. **Your next step** suggests one action for the
+  current selection, including saving, correcting a conflict, checking inputs,
+  freezing or checking execution readiness. Existing task controls remain
+  available below it. The concept, frozen plan and execution attempt remain
+  different records; changing screens does not merge them or stop an action.
+- **Results** lists executions, their outcomes and completeness. Select an
+  **Execution to inspect** to focus on an attempt, including failed, stopped or
+  unfinished work. Selecting it does not verify a report automatically.
+
+In **Results**, **Inspect used inputs** opens a read-only view in **Research**
+of the selected attempt's frozen inputs, assumptions and hashes. It does not
+replace an open editable concept or change the selected frozen plan. **Make a
+variant from this execution** instead derives a new editable study from that
+attempt's plan, retaining its parent. Save or resolve unsettled edits before
+deriving a variant.
+
+Prospective comparison setup stays in **Research**: freeze the full comparison
+roster before its plans execute. **Open frozen comparison setup and reports**
+returns there from **Results**; it does not turn arbitrary past attempts into a
+new prospective comparison. The
+[connected study](#connect-known-secretion-to-inverse-analysis) and explicit
+[M3 workbench](installed-m3.md) retain their specialist controls and the selected
+installation's capability limits.
+
+## Storage and project handoff
+
+Above **Research** and **Results**, expand **Storage, inputs and project handoff**
+(`#storage-details`) to see the project folder and GUI workspace paths and to
+use **Copy complete project**. Frozen plans retain their admitted original
+inputs in the project. A complete copy includes those inputs, plans, attempts
+and native evidence; it is not a data-free sharing package. The GUI copy also
+transfers concept revision histories as described below. Open the copy and
+verify its reports before removing the original.
+
+Execution takes place on the computer running this GUI. This interface does
+not connect a separate data vault or remote executor, provide shared accounts
+or grant another person access. The storage display and project copy do not
+establish authorization to share data or qualification for handling health
+records. Keep private health records out of these synthetic workflows. Native
+parameter/table redistribution rights remain separate.
+
 ## Research workflow
 
-1. Create a named project, or open an existing SDK project folder. Opening and
-   refreshing read the ledger; they do not execute a task. GUI project handles
+1. In **My research**, create a named project, or open an existing SDK project
+   folder. Opening and refreshing read the ledger; they do not execute a task.
+   GUI project handles
    and display names differ from the authoritative plan and attempt IDs.
-2. Select a task and supplied example, or choose **Start with my synthetic
-   inputs**. Upload or edit the named UTF-8 source files, inspect/edit assumptions
+2. In **Research**, select a task and supplied example, or choose **Start with my
+   synthetic inputs**. Upload or edit the named UTF-8 source files, inspect/edit assumptions
    and save a concept. **Validate saved inputs** uses the SDK without estimation.
    Correct invalid text in the retained concept; validation errors do not erase
    it. **Freeze plan** requires this exact saved and validated revision. For 15 g,
@@ -56,8 +108,9 @@ qualification is macOS arm64. It is not a public installer or a clean-host test.
    admission failure. Correct it and run an explicit new attempt; the retry
    preserves earlier failures. Unfinished crash evidence requires the existing
    explicit CLI recovery procedure after the old executor has stopped.
-5. In **Attempts**, distinguish execution outcome, native/forensic payload,
-   scientific completeness and planned-slot counts. **Verify saved report**
+5. In **Results**, use **Execution to inspect** or browse all executions under
+   **Find and verify results**. Distinguish execution outcome, native/forensic
+   payload, scientific completeness and planned-slot counts. **Verify saved report**
    explicitly calls the trusted reader. Incomplete native evidence requires
    the separate checkbox; forensic-only failures have no admissible report.
    MMTT offers JSON/Markdown; M4 additionally offers SVG. Verification checks
@@ -69,8 +122,9 @@ qualification is macOS arm64. It is not a public installer or a clean-host test.
    paths are served; changed nested copies withdraw the displayed verification
    on refusal or the next invalid-state update. Verify again from the preserved
    project to create a fresh copy.
-6. **Copy complete project** relocates all plans, inputs, attempts and native
-   evidence to a fresh folder. Open the copy and verify its reports before
+6. Under **Storage, inputs and project handoff**, **Copy complete project**
+   relocates all plans, inputs, attempts and native evidence to a fresh folder.
+   Open the copy and verify its reports before
    removing the original. This GUI action also copies concept revision histories
    to the new workspace handle, clearing their validation. A CLI project copy
    carries the authoritative SDK ledger; it does not transfer GUI workspace

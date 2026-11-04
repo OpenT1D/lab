@@ -4,6 +4,15 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Group the installed SDK GUI into My research, Research and Results, with a
+  suggested next action, execution selection and read-only inspection of the
+  frozen inputs used by an attempt. Derive variants from the selected execution
+  while preserving concepts, plans and earlier attempts. Keep prospective
+  comparisons in Research and explicit trusted report verification in Results.
+  Expose project/workspace paths and full project copying under storage details;
+  execution remains local, without shared accounts or external data-vault access.
+  The source-checkout GUI and separate Mac application's interface are unchanged.
+
 - Add an explicit integrated internal candidate for maintained M4 and the
   connected synthetic study, retaining the two-MMTT build and unchanged scientific
   payload/readers. Add exact-artifact qualification for reviewed runtime roles,
