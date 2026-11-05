@@ -329,6 +329,127 @@ class HostPairTests(unittest.TestCase):
             )
             self.assertIsNone(result["parent_witness_sha256"])
 
+    def test_seed_storage_failure_retains_both_slots_and_partial_canaries(self):
+        with tempfile.TemporaryDirectory() as directory:
+            items = self.pair(Path(directory).resolve())
+            original_create = host._create
+            created = []
+
+            def fail_third_canary(path, raw):
+                if len(created) == 2:
+                    raise OSError(28, "invented canary ENOSPC")
+                original_create(path, raw)
+                created.append(path)
+
+            with (
+                patch.object(host, "_create", side_effect=fail_third_canary),
+                patch.object(host.socket, "socket", side_effect=AssertionError("seed listener")),
+                patch.object(
+                    route.transport, "_supervise", side_effect=AssertionError("seed spawn")
+                ),
+            ):
+                result = cases._run(
+                    "C19",
+                    [(v["entry_raw"], v["observation_raw"]) for v in items],
+                    items[0]["expected_identity"],
+                    None,
+                    invented=True,
+                )
+            self.assertEqual([r["slot"] for r in result["records"]], list(host.SLOTS))
+            self.assertTrue(result["all_slots_accounted"])
+            self.assertTrue(all(r["status"] == "not-run-pair-unsafe" for r in result["records"]))
+            self.assertTrue(all("ENOSPC" in r["error"] for r in result["records"]))
+            self.assertEqual(result["comparisons"]["state"], "inconclusive")
+            self.assertIsNone(result["parent_witness_sha256"])
+            self.assertIn("incomplete canary seeding", result["parent_witness_error"])
+            self.assertTrue(result["private_evidence_may_remain"])
+            self.assertEqual(set(Path(items[0]["roots"]["output"]).iterdir()), set(created))
+            self.assertEqual(list(Path(items[1]["roots"]["output"]).iterdir()), [])
+            self.assertEqual(list(Path(items[0]["roots"]["evidence"]).iterdir()), [])
+
+    def test_witness_storage_failure_never_returns_a_pin_for_partial_bytes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            items = self.pair(Path(directory).resolve())
+            original_create = host._create
+
+            def fail_witness(path, raw):
+                if Path(path).name == host.WITNESS:
+                    original_create(path, b"{")
+                    raise OSError(28, "invented witness ENOSPC")
+                original_create(path, raw)
+
+            with (
+                patch.object(host, "_create", side_effect=fail_witness),
+                patch.object(
+                    host._PairContext, "start_listener", side_effect=OSError("busy control")
+                ),
+            ):
+                result = cases._run(
+                    "C19",
+                    [(v["entry_raw"], v["observation_raw"]) for v in items],
+                    items[0]["expected_identity"],
+                    None,
+                    invented=True,
+                )
+            self.assertTrue(result["all_slots_accounted"])
+            self.assertTrue(all(r["receipt"] is None for r in result["records"]))
+            self.assertEqual(result["comparisons"]["state"], "inconclusive")
+            self.assertFalse(result["comparisons"]["checks"]["parent_witness_persisted"])
+            self.assertIsNone(result["parent_witness_sha256"])
+            self.assertIn("witness ENOSPC", result["parent_witness_error"])
+            self.assertTrue(result["private_evidence_may_remain"])
+            witness = Path(items[0]["roots"]["evidence"]) / host.WITNESS
+            self.assertEqual(witness.read_bytes(), b"{")
+
+    def test_cold_parent_witness_preserves_authority_history_without_restoring_it(self):
+        with tempfile.TemporaryDirectory() as directory:
+            items = self.pair(Path(directory).resolve())
+            attempts = [(v["entry_raw"], v["observation_raw"]) for v in items]
+            with patch.object(
+                host._PairContext, "start_listener", side_effect=OSError("unavailable control")
+            ):
+                result = cases._run(
+                    "C19", attempts, items[0]["expected_identity"], None, invented=True
+                )
+            witness_raw = (Path(items[0]["roots"]["evidence"]) / host.WITNESS).read_bytes()
+            args = (
+                witness_raw,
+                result["parent_witness_sha256"],
+                attempts,
+                [None, None],
+                [v["packet"] for v in items],
+                [{}, {}],
+            )
+            source = items[0]["expected_identity"]
+            control = host.inspect_pair(*args, expected_identity=source)
+            self.assertEqual(control["state"], "inconclusive")
+            for authority in route.prior.AUTHORITY_SOURCES:
+                with self.subTest(authority=authority):
+                    current = copy.deepcopy(source)
+                    current["implementation"][authority] = "f" * 64
+                    with patch.object(route, "source_identity", return_value=current):
+                        self.assertEqual(
+                            host.inspect_pair(*args, expected_identity=current), control
+                        )
+            current = copy.deepcopy(source)
+            current["implementation"]["experiments/lt1_diagnostic/native_route_host.py"] = "f" * 64
+            with patch.object(route, "source_identity", return_value=current):
+                with self.assertRaisesRegex(ValueError, "parent witness origin/source"):
+                    host.inspect_pair(*args, expected_identity=current)
+            witness = route.decode(witness_raw)
+            for change in (
+                lambda s: s["implementation"].pop(next(iter(route.prior.AUTHORITY_SOURCES))),
+                lambda s: s["implementation"].update(
+                    {next(iter(route.prior.AUTHORITY_SOURCES)): "not-a-digest"}
+                ),
+                lambda s: s.update(extra="unreviewed producer field"),
+            ):
+                altered = copy.deepcopy(witness)
+                change(altered["source_identity"])
+                raw = route.encoded(altered)
+                with self.assertRaises(ValueError):
+                    host.inspect_pair(raw, host._digest(raw), *args[2:], expected_identity=source)
+
     def test_busy_endpoint_accounts_both_slots_without_a_denial_claim(self):
         with tempfile.TemporaryDirectory() as directory, socket.socket() as foreign:
             foreign.bind(("127.0.0.1", host.PORT))
@@ -379,6 +500,22 @@ class HostPairTests(unittest.TestCase):
                 expected_identity=items[0]["expected_identity"],
             )
             self.assertEqual(assessment, result["comparisons"])
+            original_source = items[0]["expected_identity"]
+            for authority in route.prior.AUTHORITY_SOURCES:
+                with self.subTest(retained_receipts_after_authority_change=authority):
+                    current = copy.deepcopy(original_source)
+                    current["implementation"][authority] = "f" * 64
+                    with patch.object(route, "source_identity", return_value=current):
+                        self.assertEqual(
+                            host.inspect_pair(
+                                witness_raw,
+                                result["parent_witness_sha256"],
+                                *args,
+                                expected_identity=current,
+                            ),
+                            assessment,
+                        )
+            self.assertEqual(route.decode(witness_raw)["source_identity"], original_source)
             self.assertTrue(assessment["checks"]["actual_twin_write"])
             self.assertTrue(assessment["checks"]["same_read_seed"])
             self.assertTrue(assessment["checks"]["owned_listener_cleanup"])

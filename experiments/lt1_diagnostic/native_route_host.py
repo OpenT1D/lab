@@ -515,10 +515,10 @@ def _run_pair(attempts, expected_identity, cancel, *, invented=False):
     if not invented:
         route.need(route.legacy._admissions() == registry, "pair authority before first write")
     route.legacy._roots(pair.paths)  # Cross-slot physical ancestry, including case aliases.
-    pair.seed()
     records = []
     pair_error = None
     try:
+        pair.seed()
         pair.start_listener()
         for ordinal, ((entry_raw, observation_raw), entry) in enumerate(zip(owned, pair.entries)):
             if cancel is not None and cancel.is_set():
@@ -615,8 +615,21 @@ def _run_pair(attempts, expected_identity, cancel, *, invented=False):
         "native_host_qualified": False,
     }
     assessment = _assessment(pair.entries, records, witness)
-    raw = route.encoded(witness)
-    _create(pair.evidence / WITNESS, raw)
+    witness_sha256 = None
+    witness_error = None
+    if len(pair.initial) != 6:
+        witness_error = "incomplete canary seeding; no valid parent witness"
+    else:
+        raw = route.encoded(witness)
+        try:
+            _create(pair.evidence / WITNESS, raw)
+            witness_sha256 = _digest(raw)
+        except OSError as error:
+            witness_error = type(error).__name__ + ": " + str(error)
+    if witness_error is not None:
+        assessment["checks"]["parent_witness_persisted"] = False
+        if assessment["state"] == "demonstrated":
+            assessment["state"] = "inconclusive"
     return {
         "schema": "opent1d.lt1-native-case-observation/2",
         "case_id": "C19",
@@ -625,7 +638,9 @@ def _run_pair(attempts, expected_identity, cancel, *, invented=False):
         "records": records,
         "comparisons": assessment,
         "all_slots_accounted": len(records) == 2,
-        "parent_witness_sha256": _digest(raw),
+        "parent_witness_sha256": witness_sha256,
+        "parent_witness_error": witness_error,
+        "private_evidence_may_remain": True,
         "unrelated_sentinel": None,
         "native_acceptance": False,
         "native_execution_authorized": False,
@@ -655,9 +670,26 @@ def inspect_pair(
         "final_canaries base_artifacts listener_records listener_errors listener_closed "
         "pair_error native_host_qualified",
     )
+    current = route.source_identity()
+    route.need(current == expected_identity, "current parent witness reader source")
+    producer = witness["source_identity"]
+    route.storage.fields(producer, "implementation python executable_sha256")
+    route.need(
+        type(producer["implementation"]) is dict
+        and set(producer["implementation"]) == set(current["implementation"])
+        and all(
+            route.prior.base.preflight.host_context.sha(value)
+            for value in producer["implementation"].values()
+        ),
+        "historical complete parent producer audit",
+    )
+    producer_code, current_code = copy.deepcopy(producer), copy.deepcopy(current)
+    for name in route.prior.AUTHORITY_SOURCES:
+        producer_code["implementation"].pop(name)
+        current_code["implementation"].pop(name)
     route.need(
         witness["schema"] == "opent1d.lt1-c19-parent-witness/1"
-        and witness["source_identity"] == expected_identity == route.source_identity()
+        and producer_code == current_code
         and witness["native_host_qualified"] is False,
         "parent witness origin/source",
     )
