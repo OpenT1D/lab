@@ -501,6 +501,12 @@ keeps the next module/addon mechanism controls and original immutable packet-roo
 cleanup in one successor. Use fixed ordinary-tooling positive controls and a
 separately journaled post-quarantine permission transition; retain selected native
 setup/execution, complete copy/restore coverage and effective-erasure gates.
+The [mixed historical-directory decision](docs/decisions/0113-lt1-historical-leaf-removal.md)
+selects one additive single-leaf removal helper and strict reader, with owned
+invented fixtures and a private copy/recovery assessment in the same increment.
+Preserve the unrelated immediate sibling namespace, historical flat/tree
+removers, original clocks and all closed operational admissions. Scoped target
+absence supplies no complete recovery or effective-erasure clearance.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
 not native execution. Begin with the exact LT1 runtime/security and restricted-use
