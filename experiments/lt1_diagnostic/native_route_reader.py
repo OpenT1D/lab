@@ -273,6 +273,17 @@ def _control(entry, observation, packet, source, producer_paths):
         and all(host["roots"][k]["path"] == entry["roots"][k] for k in roots),
         "host root crossbindings",
     )
+    route.need(
+        type(entry["case_id"]) is str and type(entry["slot"]) is str,
+        "typed fixed case/slot",
+    )
+    # Cases import this reader for the live consumer; defer the reverse import
+    # until both modules are initialized and validate only the owned plan bytes.
+    from experiments.lt1_diagnostic.native_route_cases import validate_plan
+
+    validate_plan(
+        entry["case_id"], entry["slot"], reader.decode(packet["plan.json"]), engine["mode"]
+    )
     return engine["mode"]
 
 

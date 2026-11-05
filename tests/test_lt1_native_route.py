@@ -512,6 +512,32 @@ assert result['status']=='completed';print('completed')
         receipt["output_sha256"]["route.json"] = route.storage.digest(files["route.json"])
         self.assertEqual(self.inspect(receipt, files=files)["status"], "incomplete")
 
+    def test_consistently_rehashed_case_and_slot_still_require_fixed_protocol(self):
+        for case, slot in (
+            ("C99", "complete"),
+            ("attempt", "foreign"),
+            ([], []),
+            ("C15", "direct-reset"),
+            ("C15", "wrapped-reset"),
+            ("C16", "wrapped-filtered"),
+        ):
+            receipt = copy.deepcopy(self.receipt)
+            value = copy.deepcopy(self.value)
+            files = dict(self.captured["output_files"])
+            entry = json.loads(value["entry_raw"])
+            entry.update(case_id=case, slot=slot)
+            value["entry_raw"] = route.encoded(entry)
+            receipt.update(
+                case_id=case, slot=slot, entry_sha256=route.storage.digest(value["entry_raw"])
+            )
+            child = json.loads(files["route.json"])
+            for record in (child, child["worker"]):
+                record.update(case_id=case, slot=slot)
+            files["route.json"] = route.encoded(child)
+            receipt["output_sha256"]["route.json"] = route.storage.digest(files["route.json"])
+            with self.subTest(case=case, slot=slot), self.assertRaises(ValueError):
+                self.inspect(receipt, value=value, files=files)
+
     def test_carrier_complete_bootstrap_bound_and_exec_budget_precede_resources(self):
         with (
             patch.object(route.os, "sysconf", return_value=16),
