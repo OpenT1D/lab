@@ -651,6 +651,7 @@ def inspect(
                 bind(parent_path, parent, r["parent"])
                 bind(cleanup_path, cleanup, r["cleanup_parent"])
                 bind(root_path, root, r["root"], initial=True)
+                _tree(root, r["inventory"], initial=True)
                 need(
                     not present(parent, quarantine_path.name)
                     and not present(cleanup, r["attempt"]),
@@ -878,7 +879,8 @@ def inspect(
             gaps.append("packet-mode")
         from experiments.lt1_diagnostic import native_tree_removal_exec as runner
 
-        outer_ok = runner.complete_outer(outer_receipt, raw, r, context_raw, audit)
+        outer_valid = runner.complete_outer(outer_receipt, raw, r, context_raw, audit)
+        outer_ok = outer_valid
         if outer_ok:
             outer_ok = bool(
                 journal_stat is not None
@@ -906,6 +908,11 @@ def inspect(
             (attempt_path, attempt, attempt_identity),
         ):
             bind(path, fd, expected)
+        if r["role"] == "native-packet":
+            need(
+                removal.names(attempt, 2) <= allowed_attempt,
+                "late reader attempt namespace",
+            )
         if journal_stat is not None:
             need(
                 _read_at(attempt, "events.jsonl", JOURNAL_LIMIT) == journal,
@@ -918,6 +925,11 @@ def inspect(
             )
         else:
             need(not present(attempt, "events.jsonl"), "missing journal appeared")
+        if r["role"] == "native-packet":
+            need(
+                runner.complete_outer(outer_receipt, raw, r, context_raw, audit) == outer_valid,
+                "outer evidence changed during readback",
+            )
         if r["role"] != "native-packet":
             need(source_identity() == reader_audit, "reader current source changed")
         if root is not None:

@@ -605,6 +605,87 @@ class OriginalTreeTests(unittest.TestCase):
             fixture.inspect(value, outer)
         self.assertEqual((wrong / "unregistered").read_bytes(), b"preserve wrong-parent record")
 
+    def test_native_packet_reader_rechecks_final_attempt_namespace(self):
+        value = self.prepare_packet()
+        outer = fixture.run(value)
+        self.assert_complete(value, outer)
+        source_identity = tree.source_identity
+        calls = 0
+        unknown = value["cleanup"] / value["request"]["attempt"] / "unknown-record"
+
+        def source():
+            nonlocal calls
+            calls += 1
+            if calls == 2:
+                unknown.write_bytes(b"preserve unknown record")
+                unknown.chmod(0o600)
+            return source_identity()
+
+        with patch.object(tree, "source_identity", side_effect=source):
+            with self.assertRaisesRegex(ValueError, "late reader attempt namespace"):
+                fixture.inspect(value, outer)
+        self.assertEqual(calls, 2)
+        self.assertEqual(unknown.read_bytes(), b"preserve unknown record")
+        self.assertFalse(value["root"].exists())
+        self.assertFalse(fixture.target(value).exists())
+
+    def test_native_packet_reader_rechecks_final_outer_evidence(self):
+        for key in ("control_path", "log_path"):
+            with self.subTest(key=key):
+                value = self.prepare_packet()
+                outer = fixture.run(value)
+                self.assert_complete(value, outer)
+                source_identity = tree.source_identity
+                calls = 0
+                path = Path(outer[key])
+                before = path.read_bytes()
+
+                def source():
+                    nonlocal calls
+                    calls += 1
+                    if calls == 2:
+                        path.write_bytes(before + b"changed invented outer evidence")
+                    return source_identity()
+
+                with patch.object(tree, "source_identity", side_effect=source):
+                    with self.assertRaisesRegex(ValueError, "outer evidence changed"):
+                        fixture.inspect(value, outer)
+                self.assertEqual(calls, 2)
+                self.assertEqual(path.read_bytes(), before + b"changed invented outer evidence")
+                self.assertFalse(value["root"].exists())
+                self.assertFalse(fixture.target(value).exists())
+                self.assertEqual(fixture.inspect(value, None)["status"], "incomplete")
+
+    def test_native_packet_reader_rechecks_unstarted_packet_leaves(self):
+        for change in ("bytes", "mode", "link"):
+            with self.subTest(change=change):
+                value = self.prepare_packet()
+                self.assertEqual(fixture.inspect(value, None)["status"], "incomplete")
+                source_identity = tree.source_identity
+                calls = 0
+                leaf = value["root"] / "grant.json"
+
+                def source():
+                    nonlocal calls
+                    calls += 1
+                    if calls == 2:
+                        if change == "link":
+                            os.link(leaf, value["root"].parent / "changed-link")
+                        else:
+                            leaf.chmod(0o600)
+                            if change == "bytes":
+                                leaf.write_bytes(b"changed invented packet data")
+                                leaf.chmod(0o400)
+                    return source_identity()
+
+                with patch.object(tree, "source_identity", side_effect=source):
+                    with self.assertRaises(ValueError):
+                        fixture.inspect(value, None)
+                self.assertEqual(calls, 2)
+                self.assertTrue(value["root"].exists())
+                self.assertFalse(fixture.target(value).exists())
+                self.assertFalse((value["cleanup"] / value["request"]["attempt"]).exists())
+
     def test_original_empty_partial_malformed_and_empty_session_trees(self):
         for files in (
             {},
