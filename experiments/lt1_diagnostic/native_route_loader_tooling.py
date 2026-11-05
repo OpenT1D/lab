@@ -449,7 +449,10 @@ def _assess(records, initial, final, error):
     result = {"state": "inconclusive", "checks": {}, **AUTHORITY}
     if len(records) != 3 or any(r.get("probe") is None for r in records):
         return result
-    complete = all(_complete(r["outer"]) and r["error"] is None for r in records)
+    complete = all(
+        r.get("status") == "completed" and _complete(r["outer"]) and r["error"] is None
+        for r in records
+    )
     valid, base, twin = [r["probe"]["operations"] for r in records]
 
     def positive(operations):
@@ -1061,6 +1064,7 @@ def inspect(raw, expected_sha256, *, expected_identity):
     )
     nonces = []
     observed_runtime = None
+    unfinished = False
     for record in report["records"]:
         _fields(record, "slot entry profile outer log probe error status")
         need(
@@ -1069,7 +1073,29 @@ def inspect(raw, expected_sha256, *, expected_identity):
             "typed slot outcome",
         )
         entry = record["entry"]
+        need(
+            not unfinished or record["status"] == "not-run" and entry is None,
+            "actual sequential loader outcome prefix",
+        )
+        if record["status"] != "completed":
+            need(
+                report["error"] is not None and record["error"] == report["error"],
+                "unfinished slot retains parent failure",
+            )
+            need(
+                (record["status"] == "incomplete" and record["outer"] is not None)
+                or (
+                    record["status"] == "not-run"
+                    and all(record[k] is None for k in ("outer", "log", "probe"))
+                ),
+                "actual unfinished slot status",
+            )
+            unfinished = True
         if entry is not None:
+            need(
+                set(report["initial_artifacts"]) == {"module.mjs", "addon.node"},
+                "immutable artifacts before loader entry",
+            )
             need(tools is not None and context is not None, "actual slot context")
             _fields(entry, "kind slot nonce_sha256 owner_pid targets")
             need(

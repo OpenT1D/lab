@@ -388,6 +388,79 @@ class LoaderContractTests(unittest.TestCase):
             "base-unconfined",
         )
 
+    def test_cold_reader_rejects_contradictory_slot_status_and_execution_prefixes(self):
+        report = witness(self.source)
+        for status in ("not-run", "incomplete"):
+            changed = copy.deepcopy(report)
+            for record in changed["records"]:
+                record["status"] = status
+            changed["assessment"] = loader._assess(
+                changed["records"],
+                changed["initial_artifacts"],
+                changed["final_artifacts"],
+                changed["error"],
+            )
+            self.assertEqual(changed["assessment"]["state"], "inconclusive")
+            self.assertFalse(changed["assessment"]["checks"]["all_owned_slots_complete"])
+            with self.subTest(status=status), self.assertRaises(ValueError):
+                self.inspect(changed)
+        changed = copy.deepcopy(report)
+        changed["error"] = "invented failure"
+        changed["records"][0].update(status="incomplete", error=changed["error"])
+        changed["assessment"] = loader._assess(
+            changed["records"],
+            changed["initial_artifacts"],
+            changed["final_artifacts"],
+            changed["error"],
+        )
+        with self.assertRaisesRegex(ValueError, "sequential loader outcome prefix"):
+            self.inspect(changed)
+
+    def test_cold_reader_retains_each_actual_incomplete_loader_prefix(self):
+        for index in range(len(loader.SLOTS)):
+            for outer_started in (False, True):
+                with self.subTest(index=index, outer_started=outer_started):
+                    report = witness(self.source)
+                    report.update(error="invented loader interruption", final_artifacts={})
+                    record = report["records"][index]
+                    record.update(
+                        status="incomplete" if outer_started else "not-run",
+                        error=report["error"],
+                    )
+                    if not outer_started:
+                        record.update(outer=None, log=None, probe=None)
+                    for later in report["records"][index + 1 :]:
+                        later.update(
+                            entry=None,
+                            profile=None,
+                            outer=None,
+                            log=None,
+                            probe=None,
+                            status="not-run",
+                            error=report["error"],
+                        )
+                    report["assessment"] = loader._assess(
+                        report["records"], report["initial_artifacts"], {}, report["error"]
+                    )
+                    self.assertEqual(self.inspect(report)["state"], "inconclusive")
+                    for corrupt in (
+                        "missing-parent-error",
+                        "mismatched-slot-error",
+                        "missing-artifacts",
+                    ):
+                        altered = copy.deepcopy(report)
+                        if corrupt == "missing-parent-error":
+                            altered["error"] = None
+                        elif corrupt == "mismatched-slot-error":
+                            altered["records"][index]["error"] = "other failure"
+                        else:
+                            altered["initial_artifacts"] = {}
+                        altered["assessment"] = loader._assess(
+                            altered["records"], altered["initial_artifacts"], {}, altered["error"]
+                        )
+                        with self.subTest(corrupt=corrupt), self.assertRaises(ValueError):
+                            self.inspect(altered)
+
     def test_cold_reader_consumes_owned_bytes_without_reopening_any_historical_tools(self):
         report = witness(self.source)
         with (
