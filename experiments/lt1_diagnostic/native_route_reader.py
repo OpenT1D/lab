@@ -5,7 +5,9 @@ scientific rows use the unchanged strict fractional trace validator.
 """
 
 import base64
+import copy
 import json
+import re
 from pathlib import PurePosixPath
 
 from experiments.gui.ownership import ProcessTable
@@ -122,7 +124,159 @@ def acknowledge(raw, entry_raw, observation_raw, packet, *, invented):
     return ack_for(raw, value), child
 
 
-def _session(raw, name, entry, plan_raw, outer, kind):
+def _control(entry, observation, packet, source, producer_paths):
+    route.storage.fields(entry, route.FIELDS)
+    route.storage.fields(
+        observation,
+        "schema packet_sha256 runtime entry_executable owner_pid owner_start "
+        "attempt nonce_sha256 profile_sha256 producer_sha256 reader_identity "
+        "process_argv runtime_environment",
+    )
+    route.need(
+        type(entry["owner_pid"]) is int
+        and entry["owner_pid"] > 1
+        and type(entry["owner_start"]) is str
+        and 0 < len(entry["owner_start"]) <= 512
+        and re.fullmatch("[a-z0-9][a-z0-9-]{0,63}", entry["attempt"])
+        and route.prior.base.preflight.host_context.sha(entry["nonce_sha256"]),
+        "typed control owner/attempt/nonce",
+    )
+    roots = route.prior.base._roots(entry["roots"])
+    historical_root = PurePosixPath(producer_paths["root"])
+    role = historical_root / (
+        "tests/lt1_native_route_fixture.mjs"
+        if entry["kind"] == "invented"
+        else "experiments/lt1_diagnostic/native_route_cli.mjs"
+    )
+    argv = entry["process_argv"]
+    route.need(
+        type(argv) is list
+        and len(argv) == 5
+        and argv[1] == str(role)
+        and argv[2:] == [str(roots[k]) for k in ("staging", "packet", "output")]
+        and type(argv[0]) is str
+        and argv[0].startswith("/"),
+        "fixed historical Node ABI",
+    )
+    route.need(
+        all(
+            observation[k] == entry[k]
+            for k in (
+                "owner_pid",
+                "owner_start",
+                "attempt",
+                "nonce_sha256",
+                "profile_sha256",
+                "process_argv",
+            )
+        )
+        and observation["entry_executable"] == argv[0],
+        "complete observation/entry crossbindings",
+    )
+    route.storage.fields(observation["runtime"], "node platform arch executable_sha256")
+    if entry["kind"] == "native-unadmitted":
+        route.need(
+            argv[0] == str(roots["staging"] / "runtime/bin/node")
+            and observation["runtime"]
+            == {
+                k: route.prior.base.preflight.RUNTIME[k]
+                for k in ("node", "platform", "arch", "executable_sha256")
+            },
+            "selected native producer ABI",
+        )
+    runtime_env = observation["runtime_environment"]
+    route.need(
+        type(runtime_env) is dict
+        and all(runtime_env.get(k) == v for k, v in route.transport.owner.ENVIRONMENT.items())
+        and set(runtime_env)
+        <= set(route.transport.owner.ENVIRONMENT)
+        | ({"__CF_USER_TEXT_ENCODING"} if observation["runtime"]["platform"] == "darwin" else set())
+        and all(type(v) is str and 0 < len(v) <= 128 for v in runtime_env.values()),
+        "explicit historical runtime environment",
+    )
+    engine = route.legacy.decoded(packet["grant.json"])
+    integration = route.legacy.decoded(packet["integration-grant.json"])
+    host = route.decode(packet["integration_host_receipt.json"])
+    route.storage.fields(
+        engine,
+        "schema source_revision node platform arch host staging_root mode "
+        "plan_sha256 setup_receipt_sha256 host_receipt_sha256 "
+        "rights_receipt_sha256 security_receipt_sha256 files worker_files",
+    )
+    route.storage.fields(
+        integration,
+        "schema engine_grant_sha256 host_receipt_sha256 output_root attempt "
+        "owner_pid reader_identity implementation",
+    )
+    route.need(
+        engine["schema"] == "opent1d.lt1-native-grant/1"
+        and engine["source_revision"] == route.prior.base.preflight.REVISION
+        and engine["mode"] in ("direct", "wrapped")
+        and engine["staging_root"] == entry["roots"]["staging"]
+        and all(
+            engine[k] == route.prior.base.preflight.RUNTIME[k] for k in ("node", "platform", "arch")
+        ),
+        "engine schema/source/runtime/roots",
+    )
+    route.need(
+        all(
+            engine[n + "_sha256"] == route.storage.digest(packet[n + ".json"])
+            for n in route.legacy.RECEIPTS
+        )
+        and engine["setup_receipt_sha256"] == entry["setup_sha256"]
+        and engine["worker_files"] == route.legacy._worker(route.legacy.WORKER),
+        "opaque packet/old worker byte bindings",
+    )
+    route.need(
+        type(engine["files"]) is dict
+        and set(route.legacy.ENTRIES) <= set(engine["files"])
+        and len(engine["files"]) <= 4096
+        and all(
+            type(k) is str
+            and len(k) <= 512
+            and not k.startswith("/")
+            and all(p not in ("", ".", "..") for p in k.split("/"))
+            and "\\" not in k
+            and route.prior.base.preflight.host_context.sha(v)
+            for k, v in engine["files"].items()
+        ),
+        "bounded declared staging map",
+    )
+    route.need(
+        integration["schema"] == "opent1d.lt1-integration-grant/1"
+        and integration["engine_grant_sha256"] == entry["engine_sha256"]
+        and integration["host_receipt_sha256"]
+        == route.storage.digest(packet["integration_host_receipt.json"])
+        and integration["output_root"] == entry["roots"]["output"]
+        and type(integration["owner_pid"]) is int
+        and integration["owner_pid"] == entry["owner_pid"]
+        and integration["attempt"] == entry["attempt"]
+        and integration["reader_identity"]
+        == observation["reader_identity"]
+        == journal_reader.identity(packet["plan.json"])
+        and integration["implementation"] == route.legacy._worker(route.legacy.INTEGRATION),
+        "complete integration/reader bindings",
+    )
+    route.need(
+        host["schema"] == "opent1d.lt1-native-route-host/2"
+        and host["kind"] == ("invented" if entry["kind"] == "invented" else "observed")
+        and host["purpose"] == "qualification-only"
+        and host["entry_sources"] == entry["entry_sources"]
+        and host["profile_sha256"] == entry["profile_sha256"]
+        and host["runtime_environment"] == runtime_env
+        and host["owner_context"]["observer"]["pid"] == entry["owner_pid"]
+        and host["owner_context"]["observer"]["start"] == entry["owner_start"],
+        "versioned historical host origin/context",
+    )
+    route.need(
+        set(host["roots"]) == set(roots)
+        and all(host["roots"][k]["path"] == entry["roots"][k] for k in roots),
+        "host root crossbindings",
+    )
+    return engine["mode"]
+
+
+def _session(raw, name, entry, plan_raw, outer, kind, mode):
     route.need(isinstance(raw, bytes) and 0 < len(raw) <= 16 * 1024 * 1024, "bounded journal")
     *chunks, tail = raw.split(b"\n")
     route.need(chunks and len(chunks) <= 130, "committed header/count")
@@ -137,7 +291,7 @@ def _session(raw, name, entry, plan_raw, outer, kind):
         head["type"] == "start"
         and head["schema"] == journal_reader.SCHEMA
         and head["kind"] == kind
-        and head["mode"] in ("direct", "wrapped")
+        and head["mode"] == mode
         and head["identity"] == journal_reader.identity(plan_raw),
         "journal source/origin",
     )
@@ -234,10 +388,27 @@ def inspect(
     expected_identity,
 ):
     """Bounded externally pinned data only; never reopens a packet or native code."""
+    original_packet, original_outputs, original_expected = packet, output_files, expected_identity
+    route.need(
+        type(packet) is dict
+        and set(packet) == set(route.PACKET)
+        and all(type(v) is bytes and 0 < len(v) <= 4 * 1024 * 1024 for v in packet.values())
+        and sum(map(len, packet.values())) <= 32 * 1024 * 1024,
+        "immutable exact packet buffers",
+    )
+    route.need(
+        type(output_files) is dict
+        and len(output_files) <= 16
+        and all(type(v) is bytes and len(v) <= 16 * 1024 * 1024 for v in output_files.values())
+        and sum(map(len, output_files.values())) <= 32 * 1024 * 1024,
+        "immutable bounded output buffers",
+    )
+    packet, output_files = dict(packet), dict(output_files)
+    expected_identity = copy.deepcopy(expected_identity)
     source = route.source_identity()
     route.need(source == expected_identity, "current route reader source")
     route.need(
-        isinstance(receipt_raw, bytes)
+        type(receipt_raw) is bytes
         and len(receipt_raw) <= 4 * 1024 * 1024
         and route.storage.digest(receipt_raw) == expected_receipt_sha256,
         "expected actual route receipt",
@@ -245,10 +416,26 @@ def inspect(
     receipt = json.loads(receipt_raw, object_pairs_hook=route.storage.unique_object)
     entry = route.decode(entry_raw)
     observation = route.decode(observation_raw)
+    producer = receipt["source_identity"]
+    route.storage.fields(producer, "implementation python executable_sha256")
+    route.need(
+        type(producer["implementation"]) is dict
+        and set(producer["implementation"]) == set(source["implementation"])
+        and all(
+            route.prior.base.preflight.host_context.sha(v)
+            for v in producer["implementation"].values()
+        ),
+        "historical complete producer audit",
+    )
+    producer_code = copy.deepcopy(producer)
+    current_code = copy.deepcopy(source)
+    for name in route.prior.AUTHORITY_SOURCES:
+        producer_code["implementation"].pop(name)
+        current_code["implementation"].pop(name)
+    route.need(producer_code == current_code, "unchanged producer code and nonauthority context")
     route.need(
         receipt["schema"] == "opent1d.lt1-native-route-receipt/2"
         and receipt["kind"] == entry["kind"]
-        and receipt["source_identity"] == source
         and receipt["entry_sha256"] == route.storage.digest(entry_raw)
         and receipt["observation_sha256"] == route.storage.digest(observation_raw),
         "route source/control identity",
@@ -261,6 +448,21 @@ def inspect(
         == source["implementation"]["experiments/lt1_diagnostic/native_route_observation.mjs"],
         "current version2 complete control source",
     )
+    producer_paths = receipt["producer_paths"]
+    route.storage.fields(producer_paths, "root python")
+    route.need(
+        all(
+            type(v) is str
+            and 0 < len(v) <= 4096
+            and "\0" not in v
+            and PurePosixPath(v).is_absolute()
+            and str(PurePosixPath(v)) == v
+            and ".." not in PurePosixPath(v).parts
+            for v in producer_paths.values()
+        ),
+        "historical producer paths",
+    )
+    mode = _control(entry, observation, packet, source, producer_paths)
     route.need(
         receipt["packet_sha256"] == route.packet_binding(entry, observation, packet)
         and receipt["roots"] == entry["roots"]
@@ -294,10 +496,33 @@ def inspect(
         {k: route.storage.digest(v) for k, v in output_files.items()} == receipt["output_sha256"],
         "externally pinned exact output inventory",
     )
+    route.storage.fields(entry, route.FIELDS)
+    route.need(
+        entry["kind"] in ("invented", "native-unadmitted")
+        and type(entry["owner_pid"]) is int
+        and entry["owner_pid"] > 1
+        and isinstance(entry["owner_start"], str)
+        and 0 < len(entry["owner_start"]) <= 512,
+        "typed owner context",
+    )
     outer = receipt["transport"]["outer"]
     argv = outer.get("argv")
     route.need(
         isinstance(argv, list)
+        and len(argv) == 12
+        and all(type(v) is str and 0 < len(v) <= 4096 and "\0" not in v for v in argv)
+        and argv[0] == producer_paths["python"]
+        and argv[4]
+        == str(
+            PurePosixPath(producer_paths["root"])
+            / (
+                "tests/lt1_native_route_exec.py"
+                if entry["kind"] == "invented"
+                else "experiments/lt1_diagnostic/native_route_exec.py"
+            )
+        )
+        and all(v.isascii() and v.isdigit() and str(int(v)) == v and int(v) > 2 for v in argv[5:7])
+        and argv[5] != argv[6]
         and argv[-5:] == entry["process_argv"]
         and argv[1:4] == ["-I", "-S", "-B"],
         "actual grant-free outer argv",
@@ -332,9 +557,14 @@ def inspect(
             and not receipt["transport"]["resource_close_errors"]
         )
     wanted = 2 if entry["case_id"] == "C15" else 1
-    allowed = {"route.json", "descendant-root.json", "grandchild.json", "descendant-stop"} | {
-        f"session-{i:04d}/events.jsonl" for i in range(wanted)
-    }
+    allowed = (
+        {"route.json"}
+        | (
+            {"descendant-root.json", "grandchild.json", "descendant-stop"}
+            if entry["case_id"] == "C18"
+            else set()
+        )
+    ) | {f"session-{i:04d}/events.jsonl" for i in range(wanted)}
     route.need(set(output_files) <= allowed, "closed route/session inventory")
     for index in range(wanted):
         name = f"session-{index:04d}"
@@ -342,11 +572,15 @@ def inspect(
         if key in output_files:
             route.need(channel, "journal without acknowledged owned entry")
             sessions.append(
-                _session(output_files[key], name, entry, packet["plan.json"], outer, entry["kind"])
+                _session(
+                    output_files[key], name, entry, packet["plan.json"], outer, entry["kind"], mode
+                )
             )
     completed = (
         channel
         and receipt["source_and_packet_stable"] is True
+        and receipt["transport"].get("source_stable") is True
+        and receipt["transport"].get("local_exchange_and_process_complete") is True
         and len(sessions) == wanted
         and all(v["status"] == "completed" for v in sessions)
     )
@@ -380,6 +614,12 @@ def inspect(
     else:
         completed = False
     route.need(route.source_identity() == source, "reader source changed")
+    route.need(
+        original_packet == packet
+        and original_outputs == output_files
+        and original_expected == expected_identity,
+        "caller packet/output/context changed during readback",
+    )
     return {
         "schema": "opent1d.lt1-native-route-readback/2",
         "kind": entry["kind"],

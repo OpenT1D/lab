@@ -11,6 +11,7 @@ import math
 import os
 import platform
 import stat
+import threading
 from contextlib import ExitStack
 from pathlib import Path
 
@@ -27,6 +28,7 @@ ENTRY = HERE / "native_route_cli.mjs"
 FIXTURE = ROOT / "tests/lt1_native_route_fixture.mjs"
 SOURCES = "experiments/lt1_diagnostic/native_route_sources.json"
 FILES = (
+    "plan.json",
     "native_route.py",
     "native_route_exec.py",
     "native_route_transport.py",
@@ -39,11 +41,17 @@ FILES = (
     "native_route_handoff.mjs",
     "native_route_cases.py",
     "native_route_cases.json",
+    "native_route_observer.py",
+    "native_route_coordinator.py",
+    "native_route_sentinel.py",
 )
 TEST_SOURCES = (
     "tests/lt1_native_route_fixture.mjs",
+    "tests/lt1_native_route_fixture.py",
     "tests/lt1_native_route_exec.py",
     "tests/lt1_diagnostic_fixture.mjs",
+    "tests/lt1_native_route_coordinator.py",
+    "tests/lt1_native_route_models.mjs",
 )
 PACKET = prior.PACKET
 FIELDS = (
@@ -64,7 +72,7 @@ def encoded(value):
 
 
 def decode(raw):
-    need(isinstance(raw, bytes) and 0 < len(raw) <= 1024 * 1024, "bounded raw control")
+    need(type(raw) is bytes and 0 < len(raw) <= 1024 * 1024, "bounded raw control")
     value = json.loads(raw, object_pairs_hook=storage.unique_object)
     need(encoded(value) == raw, "canonical control bytes")
     return value
@@ -105,9 +113,10 @@ def profile(roots, source):
 
 def admit(entry_raw, observation_raw, registry, invented=False):
     registry = prior._registry(copy.deepcopy(registry))
+    need(registry["setup"] and registry["execution"], "no reviewed route authority")
     for raw in (entry_raw, observation_raw):
         need(
-            isinstance(raw, bytes) and storage.digest(raw) in registry["execution"],
+            type(raw) is bytes and storage.digest(raw) in registry["execution"],
             "exact entry/observation membership",
         )
     entry, observation = decode(entry_raw), decode(observation_raw)
@@ -134,17 +143,34 @@ def admit(entry_raw, observation_raw, registry, invented=False):
 
 
 def carrier(entry_raw, observation_raw, audit, argv):
-    raw = encoded(
-        {
-            "schema": "opent1d.lt1-route-carrier/2",
-            "entry": entry_raw.decode("utf8"),
-            "observation": observation_raw.decode("utf8"),
-            "audit": audit,
-            "bootstrap": None,
-        }
+    value = {
+        "schema": "opent1d.lt1-route-carrier/2",
+        "entry": entry_raw.decode("utf8"),
+        "observation": observation_raw.decode("utf8"),
+        "audit": audit,
+        "bootstrap": None,
+    }
+    raw = encoded(value)
+    maximum_bootstrap = {
+        "supplied_environment_keys": sorted([*transport.owner.ENVIRONMENT, CARRIER]),
+        "observed_environment_keys": sorted(
+            [*transport.owner.ENVIRONMENT, CARRIER, "__CF_USER_TEXT_ENCODING"]
+        ),
+        "runtime_added_environment_keys": ["__CF_USER_TEXT_ENCODING"],
+    }
+    largest = encoded({**value, "bootstrap": maximum_bootstrap})
+    need(
+        len(largest) <= CARRIER_LIMIT and b"\0" not in raw,
+        "64KiB complete bootstrap carrier ceiling",
     )
-    need(len(raw) <= CARRIER_LIMIT and b"\0" not in raw, "64KiB carrier ceiling")
-    env = {**transport.owner.ENVIRONMENT, CARRIER: raw.decode()}
+    env = {**transport.owner.ENVIRONMENT, CARRIER: largest.decode()}
+    need(
+        all(
+            len(os.fsencode(v)) + 1 <= 128 * 1024
+            for v in [*argv, *(k + "=" + v for k, v in env.items())]
+        ),
+        "bounded individual exec strings",
+    )
     total = (
         sum(len(os.fsencode(v)) + 1 for v in argv)
         + sum(len(os.fsencode(k + "=" + v)) + 1 for k, v in env.items())
@@ -225,9 +251,15 @@ def _launch(
         observation["entry_executable"] if invented else str(roots["staging"] / "runtime/bin/node")
     )
     if invented:
-        import shutil
-
-        need(runtime == str(Path(shutil.which("node")).resolve()), "fixed ordinary tooling Node")
+        executable = Path(runtime)
+        need(
+            executable.is_absolute()
+            and executable.name == "node"
+            and executable.resolve() == executable
+            and storage.digest(executable.read_bytes())
+            == observation["runtime"]["executable_sha256"],
+            "parent-observed ordinary tooling Node",
+        )
     else:
         need(
             os.sys.platform == "darwin"
@@ -248,20 +280,21 @@ def _launch(
         and observation["owner_start"] == owner["start"],
         "fixed grant-free Node argv",
     )
-    control = carrier(
-        entry_raw,
-        observation_raw,
-        source,
-        [
-            os.sys.executable,
-            "-I",
-            "-S",
-            "-B",
-            str(HERE / "native_route_exec.py"),
-            *argv,
-            *([] if invented else [str(legacy.SANDBOX), "-p", policy, *argv]),
-        ],
-    )
+    shim = ROOT / "tests/lt1_native_route_exec.py" if invented else HERE / "native_route_exec.py"
+    parent_argv = [
+        os.sys.executable,
+        "-I",
+        "-S",
+        "-B",
+        str(shim),
+        "2147483647",
+        "2147483646",
+        *argv,
+    ]
+    control = carrier(entry_raw, observation_raw, source, parent_argv)
+    carrier(entry_raw, observation_raw, source, argv)
+    if not invented:
+        carrier(entry_raw, observation_raw, source, [str(legacy.SANDBOX), "-p", policy, *argv])
     roots = dict(zip(prior.base.ROOTS, legacy._roots(tuple(roots.values()))))
     with ExitStack() as stack:
         bound = {}
@@ -384,19 +417,57 @@ def _launch(
             verified.update(child)
             return ack
 
-        receipt = transport._supervise(
-            argv,
-            roots["evidence"] / "launch.log",
-            expected_identity=transport.source_identity(),
-            carrier=control,
-            invented=invented,
-            verify_frame=verify,
-            timeout=host["timeout_seconds"],
-            handoff_timeout=min(30, host["timeout_seconds"]),
-            grace=host["grace_seconds"],
-            cancel=cancel,
-            before_spawn=check,
-        )
+        # This fixed qualification action is source-bound, not a caller callback.
+        # Its reader starts only after all grant, packet and physical-root checks.
+        case_stop, watch_done = threading.Event(), threading.Event()
+
+        class CaseCancel:
+            def is_set(self):
+                return case_stop.is_set() or (cancel is not None and cancel.is_set())
+
+        watcher = None
+        if entry["case_id"] in ("C17", "C18") and entry["slot"] == "before-init-block":
+
+            def watch_header():
+                path = roots["output"] / "session-0000/events.jsonl"
+                while not watch_done.wait(0.01):
+                    try:
+                        info = path.lstat()
+                        if (
+                            stat.S_ISREG(info.st_mode)
+                            and info.st_uid == os.getuid()
+                            and info.st_nlink == 1
+                        ):
+                            case_stop.set()
+                            return
+                    except FileNotFoundError:
+                        continue
+
+            watcher = threading.Thread(target=watch_header, daemon=True)
+            watcher.start()
+        try:
+            receipt = transport._supervise(
+                argv,
+                roots["evidence"] / "launch.log",
+                expected_identity=transport.source_identity(),
+                carrier=control,
+                invented=invented,
+                live_binding={
+                    "entry_sha256": storage.digest(entry_raw),
+                    "nonce_sha256": entry["nonce_sha256"],
+                },
+                verify_frame=verify,
+                timeout=host["timeout_seconds"],
+                handoff_timeout=min(30, host["timeout_seconds"]),
+                grace=host["grace_seconds"],
+                cancel=CaseCancel() if watcher else cancel,
+                before_spawn=check,
+            )
+        finally:
+            watch_done.set()
+            if watcher:
+                watcher.join(timeout=1)
+                need(not watcher.is_alive(), "case cancellation watcher stopped")
         post_error = None
         try:
             stable = source_identity() == source and _packet(bound["packet"][0]) == packet
@@ -422,6 +493,7 @@ def _launch(
         "observation_sha256": storage.digest(observation_raw),
         "packet_sha256": hashes,
         "source_identity": source,
+        "producer_paths": {"root": str(ROOT), "python": os.sys.executable},
         "roots": entry["roots"],
         "entry_identity": verified,
         "transport": receipt,

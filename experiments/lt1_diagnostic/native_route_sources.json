@@ -46,16 +46,20 @@
     "experiments/lt1_diagnostic/native_route_cases.py",
     "experiments/lt1_diagnostic/native_route_cli.mjs",
     "experiments/lt1_diagnostic/native_route_contract.mjs",
+    "experiments/lt1_diagnostic/native_route_coordinator.py",
     "experiments/lt1_diagnostic/native_route_descendant.mjs",
     "experiments/lt1_diagnostic/native_route_exec.py",
     "experiments/lt1_diagnostic/native_route_handoff.mjs",
     "experiments/lt1_diagnostic/native_route_observation.mjs",
+    "experiments/lt1_diagnostic/native_route_observer.py",
     "experiments/lt1_diagnostic/native_route_reader.py",
+    "experiments/lt1_diagnostic/native_route_sentinel.py",
     "experiments/lt1_diagnostic/native_route_sources.json",
     "experiments/lt1_diagnostic/native_route_transport.py",
     "experiments/lt1_diagnostic/native_route_worker.mjs",
     "experiments/lt1_diagnostic/native_supervisor.py",
     "experiments/lt1_diagnostic/native_worker.mjs",
+    "experiments/lt1_diagnostic/plan.json",
     "experiments/lt1_diagnostic/protocol.mjs",
     "experiments/lt1_diagnostic/reader.py",
     "experiments/lt1_diagnostic/removal-admissions.json",
@@ -193,7 +197,10 @@
     "experiments/workflows/dispatch.py",
     "experiments/workflows/registry.py",
     "tests/lt1_diagnostic_fixture.mjs",
+    "tests/lt1_native_route_coordinator.py",
     "tests/lt1_native_route_exec.py",
-    "tests/lt1_native_route_fixture.mjs"
+    "tests/lt1_native_route_fixture.mjs",
+    "tests/lt1_native_route_fixture.py",
+    "tests/lt1_native_route_models.mjs"
   ]
 }

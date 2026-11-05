@@ -68,6 +68,7 @@ async function execute(invented,authority,authorityHash){
    encodeInvented(state.observationRaw,facts,new Date().toISOString());
    exchange=await withFixedChannels((input,output)=>handoffInvented(state.observationRaw,facts,new Date().toISOString(),input,output,options));
   }else{collectCurrent(state.observationRaw,state.packet,state.startup);exchange=await withFixedChannels((input,output)=>handoffCurrent(state.observationRaw,state.packet,state.startup,input,output,options));}
+  if(exchange.status==='acknowledged'&&entry.case_id==='C17'&&entry.slot==='after-ack-cancel')abort.abort();
   if(exchange.status==='acknowledged'&&!abort.signal.aborted){
    checkSources(entry.entry_sources,state.expected,authorityHash);need(process.ppid===entry.owner_pid,'owner changed after ACK');
    const fixed=await import('./native_route_worker.mjs');

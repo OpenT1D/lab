@@ -10,7 +10,15 @@ from experiments.gui.ownership import ProcessTable
 from experiments.lt1_diagnostic import native_route as route
 
 
-def prepare(parent, *, case_id="attempt", slot="complete", mode="wrapped", timeout=10):
+def prepare(
+    parent,
+    *,
+    case_id="attempt",
+    slot="complete",
+    mode="wrapped",
+    timeout=10,
+    _observed_tooling=None,
+):
     parent = Path(parent)
     route.need(parent.resolve() == parent and not any(parent.iterdir()), "fresh empty fixture")
     roots = {k: str(parent / k) for k in ("staging", "packet", "output", "evidence")}
@@ -20,7 +28,17 @@ def prepare(parent, *, case_id="attempt", slot="complete", mode="wrapped", timeo
     code = route.prior.grant_sources(source)
     policy = route.profile(roots, source)
     owner = ProcessTable().one(os.getpid())
-    node = str(Path(shutil.which("node")).resolve())
+    if _observed_tooling is None:
+        node = str(Path(shutil.which("node")).resolve())
+    else:
+        route.storage.fields(_observed_tooling, "path sha256")
+        node = _observed_tooling["path"]
+        route.need(
+            Path(node).is_absolute()
+            and str(Path(node).resolve()) == node
+            and route.storage.digest(Path(node).read_bytes()) == _observed_tooling["sha256"],
+            "unchanged parent-observed fixture tooling",
+        )
     runtime = json.loads(
         subprocess.check_output(
             [

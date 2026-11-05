@@ -9,7 +9,9 @@ import subprocess
 import sys
 import threading
 import time
+from pathlib import Path
 
+from experiments.gui.ownership import ProcessTable
 from experiments.lt1_diagnostic import native_supervisor as owner
 from experiments.lt1_diagnostic.control_identity import ROOT, identity
 
@@ -49,6 +51,7 @@ def _supervise(
     expected_identity,
     carrier,
     invented=False,
+    live_binding=None,
     verify_frame,
     timeout,
     handoff_timeout,
@@ -59,7 +62,8 @@ def _supervise(
     """Trusted-code resource helper, never metadata dispatch or native admission.
 
     The sole production caller admits exact raw grants before creating resources.
-    The actual startup environment has four keys; post-clear observation has three.
+    Four keys are supplied; the reviewed runtime may add the fixed Darwin CF key.
+    The carrier is removed before the explicitly bound post-clear observation.
     Callback execution is not preemptible; unfinished daemon work is explicit.
     """
     need(os.name == "posix", "POSIX channels required")
@@ -226,6 +230,27 @@ def _supervise(
         thread.start()
         process = owner.canonical.spawn(actual_argv, **kwargs)
         spawned_pid = process.pid
+        if live_binding is not None:
+            try:
+                actual = ProcessTable().one(process.pid)
+                need(actual is not None, "live entry identity unavailable")
+                raw = json.dumps(
+                    {
+                        "schema": "opent1d.lt1-live-route-entry/2",
+                        **live_binding,
+                        "identity": actual,
+                    },
+                    separators=(",", ":"),
+                ).encode()
+                path = Path(log_path).parent / "live-entry.json"
+                with os.fdopen(
+                    os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600), "wb"
+                ) as stream:
+                    stream.write(raw)
+                    stream.flush()
+                    os.fsync(stream.fileno())
+            except Exception as error:
+                close_errors.append("spawn-evidence:" + type(error).__name__)
         spawned.set()
         started = True
         # A post-Popen resource error must still hand this Popen to its owner.

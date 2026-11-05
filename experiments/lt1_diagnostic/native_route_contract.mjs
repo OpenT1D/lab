@@ -59,7 +59,7 @@ export function admit(entryRaw,observationRaw,authority,invented){
   'exact declared engine/integration/setup membership');
 }
 function sourceFile(name){
- need(typeof name==='string'&&(name.startsWith('experiments/')||['tests/lt1_native_route_fixture.mjs','tests/lt1_native_route_exec.py','tests/lt1_diagnostic_fixture.mjs'].includes(name))&&name.length<=512&&
+ need(typeof name==='string'&&(name.startsWith('experiments/')||['tests/lt1_native_route_fixture.mjs','tests/lt1_native_route_fixture.py','tests/lt1_native_route_exec.py','tests/lt1_diagnostic_fixture.mjs','tests/lt1_native_route_coordinator.py','tests/lt1_native_route_models.mjs'].includes(name))&&name.length<=512&&
  !name.includes('\\')&&!name.includes('\0')&&name.split('/').every(p=>p&&p!=='.'&&p!=='..'),'public source path');
  const path=resolve(ROOT,name);need(fs.realpathSync(path)===path,'canonical public source');
  const fd=fs.openSync(path,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);

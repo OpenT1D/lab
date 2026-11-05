@@ -71,16 +71,15 @@ def execute(*, invented=False):
         "fixed exec argv",
     )
     if invented:
-        import shutil
-
+        executable = Path(expected[0])
         route.need(
-            expected[0]
-            == str(
-                Path(
-                    shutil.which("node", path="/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin")
-                ).resolve()
-            ),
-            "fixed tooling executable",
+            executable.is_absolute()
+            and executable.name == "node"
+            and executable.resolve() == executable
+            and observation["entry_executable"] == str(executable)
+            and route.storage.digest(executable.read_bytes())
+            == observation["runtime"]["executable_sha256"],
+            "parent-observed fixed tooling executable",
         )
     else:
         route.need(

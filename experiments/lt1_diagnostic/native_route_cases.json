@@ -4,7 +4,7 @@
     "attempt": ["complete"],
     "C15": ["direct-reset", "wrapped-reset", "direct-fresh", "wrapped-fresh"],
     "C16": ["direct-filtered", "wrapped-filtered", "direct-unfiltered", "wrapped-unfiltered", "direct-fractional", "wrapped-fractional", "direct-future80", "wrapped-future80"],
-    "C17": ["complete", "loader-error", "invalid-init", "after-two", "diagnostic-error", "before-init-block", "blocked", "terminal-tail", "after-finish-block", "corrupt-output"],
+    "C17": ["complete", "after-ack-cancel", "loader-error", "invalid-init", "after-two", "diagnostic-error", "before-init-block", "blocked", "terminal-tail", "after-finish-block", "corrupt-output"],
     "C18": ["complete", "before-init-block", "blocked"]
   }
 }

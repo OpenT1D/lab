@@ -96,6 +96,7 @@ function hashFile(path,limit) {
 export function collectCurrent(raw,packet,startup) {
  // Only this source-local authority is consulted; no caller command/path is opened.
  const registry=JSON.parse(fs.readFileSync(new URL('./native-admissions.json',import.meta.url),'utf8'));
+ need(registry&&registry.schema==='opent1d.lt1-native-admissions/1'&&Array.isArray(registry.setup)&&registry.setup.length>0&&Array.isArray(registry.execution)&&registry.execution.length>0,'no reviewed observation authority');
  need(registry.schema==='opent1d.lt1-native-admissions/1' && Array.isArray(registry.execution) &&
  Array.isArray(registry.setup) && Buffer.isBuffer(raw) && raw.length<=1024*1024 &&
  registry.execution.includes(digest(raw)),'no reviewed observation grant');

@@ -55,7 +55,7 @@ async function run(state,invented){
    if(ordinal===0){
     try{
   if(slot==='loader-error')throw Error('Fixed qualification loader failure');
-  if(invented){const fixed=await import('../../tests/lt1_diagnostic_fixture.mjs');modules=fixed.fixtureModules(admitted.plan);}
+  if(invented){const fixed=await import('../../tests/lt1_native_route_models.mjs');modules=fixed.routeFixtureModules(admitted.plan);}
   else{
    process.env.TS_NODE_PROJECT=join(entry.roots.staging,'toolchain/tsconfig.json');process.env.TS_NODE_CWD=join(entry.roots.staging,'toolchain');
    register(pathToFileURL(join(entry.roots.staging,'toolchain/node_modules/ts-node/esm.mjs')),pathToFileURL(join(entry.roots.staging,'toolchain/')));
@@ -66,15 +66,13 @@ async function run(state,invented){
    if(loadError)throw Error(loadError);
    checkSources(entry.entry_sources,state.expected,state.authorityHash);need(process.ppid===entry.owner_pid&&!state.signal?.aborted,'owner/cancellation before construction');
    if(ordinal===0&&modules){
-    const Native=modules.Cambridge;modules={...modules,Cambridge:class extends Native{computeIIR(...args){const value=super.computeIIR(...args);basal={value:Number.isFinite(value)?value:null,finite:Number.isFinite(value),unit:'U/h',source:'unchanged Cambridge.computeIIR at frozen GPEQ/START',source_revision:'9a6092065bd821f88691cd8d03b0550acd665573',calls:(basal?.calls??0)+1};return value;}reset(...args){patientResets+=1;return super.reset(...args);}}};
+    const Native=modules.Cambridge;modules={...modules,Cambridge:class extends Native{computeIIR(...args){const value=super.computeIIR(...args);basal={value:Number.isFinite(value)?value:null,finite:Number.isFinite(value),unit:'U/h',source:invented?'fixed invented Cambridge fixture computeIIR':'unchanged Cambridge.computeIIR at frozen GPEQ/START',source_revision:invented?null:'9a6092065bd821f88691cd8d03b0550acd665573',calls:(basal?.calls??0)+1};return value;}reset(...args){patientResets+=1;return super.reset(...args);}}};
    }
    if(!built){
     constructionCount+=1;built=(admitted.mode==='direct'?assembleDirect:assembleWrapped)(modules,admitted.plan);
     if(slot==='invalid-init'){
      const fields=['Q1','Q2','S1','S2','I','x1','x2','x3','D1','D2'];
-     let baseline;
-     if(invented){baseline=Object.fromEntries(fields.map((n,i)=>[n,i]));let initial=null;const original=built.patient.getState.bind(built.patient);built.patient.setInitialState=value=>{initial={...value};};built.patient.getState=()=>initial?{...original(),...initial}:original();}
-     else{need(typeof built.patient.computeSteadyState==='function'&&typeof built.patient.setInitialState==='function','pinned native initialization API');baseline=built.patient.computeSteadyState({iir:admitted.plan.basal_u_h},new Date('2024-07-20T00:00:00Z'));}
+     need(typeof built.patient.computeSteadyState==='function'&&typeof built.patient.setInitialState==='function','pinned native initialization API');const baseline=built.patient.computeSteadyState({iir:admitted.plan.basal_u_h},new Date('2024-07-20T00:00:00Z'));
      need(same(Object.keys(baseline).sort(),[...fields].sort())&&Object.values(baseline).every(Number.isFinite),'finite steady-state probe baseline');
      built.patient.setInitialState({...baseline,Q1:NaN});nonfiniteProbe=true;
     }
@@ -93,7 +91,7 @@ async function run(state,invented){
  }
  if(child&&slot==='complete'){fs.writeFileSync(join(entry.roots.output,'descendant-stop'),'fixed stop',{flag:'wx',mode:0o600});const until=performance.now()+3000;while(child.exitCode===null&&child.signalCode===null){need(performance.now()<until,'C18 child cooperative stop deadline');await new Promise(r=>setTimeout(r,10));}}
  return {schema:'opent1d.lt1-buffer-worker/2',kind:entry.kind,case_id:entry.case_id,slot,verification_context_origin:invented?'invented':'current-runtime',
-  completed:results.every(r=>r.status==='completed'),construction_count:constructionCount,patient_reset_calls:patientResets,nonfinite_initial_state_probe:nonfiniteProbe,native_basal:basal,sessions:results,packet_sha256:Object.fromEntries(PACKET.map(n=>[n,digest(packet[n])])),native_acceptance:false,native_execution_authorized:false};
+  completed:results.every(r=>r.status==='completed'),construction_count:constructionCount,patient_reset_calls:patientResets,nonfinite_initial_state_probe:nonfiniteProbe,initial_state_consumed_observation:invented&&nonfiniteProbe?built.patient.initialStateConsumed:null,native_basal:basal,sessions:results,packet_sha256:Object.fromEntries(PACKET.map(n=>[n,digest(packet[n])])),native_acceptance:false,native_execution_authorized:false};
 }
 function own(state,authority,invented,authorityHash){
  admit(state.entryRaw,state.observationRaw,authority,invented);
