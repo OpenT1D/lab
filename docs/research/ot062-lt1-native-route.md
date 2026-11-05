@@ -322,6 +322,12 @@ reviewed diagnostic added only the literal executable-map deny: the same addon
 remained readable but loading failed with `ERR_DLOPEN_FAILED` and a sandbox mmap
 diagnostic, while validity and twin stayed positive. This supports the local
 explicit-deny correction, not a general inheritance explanation or kernel claim.
+The fresh complete capture on the corrected profile source then completed both
+preparation processes and all three fresh Node slots, with all nine mechanism
+checks true and identical cold readback. The addon remained readable in base
+while executable loading was denied; validity and twin returned the fixed
+markers. All native setup/execution/qualification and erasure authorities stayed
+false. This qualifies the fixed ordinary-tooling mechanism, not selected LT1.
 
 ## Runtime, rights and operational decisions
 
