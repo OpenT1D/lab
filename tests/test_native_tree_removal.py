@@ -205,18 +205,53 @@ class OriginalTreeTests(unittest.TestCase):
                 self.assertEqual(result["register_raw"], value["register_raw"])
                 self.assertEqual(result["provenance_raw"], args["provenance_raw"])
 
-    def test_actual_worker_deadline_preserves_incomplete_quarantine(self):
-        value = self.prepare(
-            files={"route.json": b"keep"},
-            context={"kind": "invented", "fixture_phase": "quarantined", "fixture_pause": 4},
-        )
-        outer = fixture.run(value, timeout=1.5)
-        self.assertEqual(outer["receipt"]["status"], "failed")
-        self.assertEqual(outer["receipt"]["error"], "WorkerDeadline")
-        self.assertEqual(outer["receipt"]["remaining_owned_processes"], [])
-        result = fixture.inspect(value, outer)
-        self.assertEqual(result["status"], "incomplete")
-        self.assertTrue(result["quarantine_present"])
+    def test_actual_worker_deadline_preserves_the_observed_incomplete_prefix(self):
+        for phase in ("prepared", "quarantined"):
+            with self.subTest(pause_at=phase):
+                value = self.prepare(
+                    files={"route.json": b"keep"},
+                    context={"kind": "invented", "fixture_phase": phase, "fixture_pause": 4},
+                )
+                outer = fixture.run(value, timeout=1.5)
+                self.assertEqual(outer["receipt"]["status"], "failed")
+                self.assertEqual(outer["receipt"]["error"], "WorkerDeadline")
+                self.assertEqual(outer["receipt"]["remaining_owned_processes"], [])
+                result = fixture.inspect(value, outer)
+                self.assertEqual(result["status"], "incomplete")
+                self.assertFalse(result["outer_complete"])
+                original = value["root"]
+                quarantine = value["cleanup"] / value["request"]["attempt"] / "target"
+                # The real owner deadline includes import/source verification.
+                # A slower host can stop before the requested pause checkpoint.
+                present = [path for path in (original, quarantine) if path.exists()]
+                self.assertEqual(len(present), 1)
+                self.assertEqual(result["original_present"], original.exists())
+                self.assertEqual(result["quarantine_present"], quarantine.exists())
+                root = present[0]
+                actual_root = fixture.signature(root)
+                for key in tree.STABLE_DIR:
+                    self.assertEqual(actual_root[key], value["request"]["root"][key])
+                leaf = root / "route.json"
+                actual_leaf = {
+                    **tree.removal.signature(leaf.stat(follow_symlinks=False)),
+                    "sha256": tree.digest(leaf.read_bytes()),
+                }
+                self.assertEqual(actual_leaf, value["request"]["inventory"]["files"]["route.json"])
+                self.assertEqual(leaf.stat(follow_symlinks=False).st_nlink, 1)
+                self.assertEqual(leaf.read_bytes(), b"keep")
+                self.assertEqual(result["removed"], [])
+                self.assertEqual(result["directories_removed"], [])
+                events = [
+                    json.loads(line)
+                    for line in fixture.journal(value).splitlines(keepends=True)
+                    if line.endswith(b"\n")
+                ]
+                self.assertFalse(
+                    any(
+                        event["event"] in {"removed", "directory-removed", "root-removed"}
+                        for event in events
+                    )
+                )
 
     def test_unstarted_missing_empty_and_partial_header_prefixes_remain_incomplete(self):
         for journal_raw in (None, b"", b'{"event":"prepared"'):
