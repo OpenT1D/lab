@@ -31,10 +31,14 @@ Raw grants never appear in process arguments. Carry only the bounded entry,
 observation and external source context through one fixed internal environment
 field, not the potentially large packet buffers. Enforce a 64 KiB ceiling and the
 actual exec-size budget before spawn. The entry owns and readmits the carrier,
-then removes it before the existing exact-environment observation. Startup with
-that carrier and the later three-key environment are distinct facts: clearing it
-is not evidence that the whole startup had only three environment keys. This new
-bootstrap remains a separate host-qualification obligation.
+then removes it before a version-2 exact-environment observation. Distinguish the
+four owner-supplied keys, runtime-added keys and the actual post-removal keyset.
+The ordinary-tooling Mac bootstrap exposes `__CF_USER_TEXT_ENCODING`; do not
+strip that key to make the old three-key observer pass. Bind the complete runtime
+keyset and values to independently reviewed private host context and reject
+unexpected additions or changes. The actual selected runtime and whole startup
+remain a separate host-qualification obligation; a supplied environment is not
+an observation of its complete startup lineage.
 
 After exact declared admissions, read the eight fixed packet members once into
 owned buffers and bind their actual bytes before descriptor adoption. Complete
@@ -50,6 +54,25 @@ current implementation and durable journal. Function invocation or a successful
 ACK cannot establish model completion. Use the strict existing journal/trace
 reader for row and interval meaning; incomplete, signalled or failed ownership
 cannot become a complete native result.
+
+For C15, run two resets of the same constructed engine in the same process,
+retain a distinct durable subjournal for each session and compare a separately
+owned fresh-process counterpart. Keep the real outer receipt and actual argv
+unchanged. The version-2 reader must bind each fixed session subdirectory to that
+actual parent output/owner; do not relabel a receipt to satisfy the historical
+single-journal reader's output-path check. Reuse the unchanged scientific trace
+validator for each committed session and exact scientific comparisons.
+
+C18 coordinator-loss observation is a separate fixed operation. An owner killed
+by the test cannot return its real outer receipt. The observer must use a genuine
+live fixed-coordinator child created by that observer, not a saved PID or a fake
+process handle. Bind the observer and coordinator start identities, fixed argv,
+entry/source and precise stop action in an exact reviewed execution envelope.
+Check authority before process-table/private-path/signal intake. Any preliminary
+non-native coordinator may only wait for reviewed input; it cannot start the
+native route or select another command. Retain a missing owner receipt as missing
+and incomplete. Cleanup must preserve unrelated processes and use actual owned
+identities; never manufacture an outer receipt or a store seal.
 
 Preserve LT1 revision `9a6092065bd821f88691cd8d03b0550acd665573`, audit-1 plan,
 seed 101, native reset/solver/sensor/pump ownership, causal release and separate

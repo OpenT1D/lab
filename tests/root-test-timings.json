@@ -5,7 +5,24 @@
   "run_attempt": 1,
   "job_id": 124802396765,
   "runner": "ubuntu-24.04 x86_64; image 20261021.618",
-  "purpose": "Scheduling estimates from consecutive verbose test-completion timestamps; includes intervening fixture overhead. Not a test allowlist or benchmark. Unknown modules use test count as fallback weight.",
+  "purpose": "Scheduling estimates from consecutive verbose test-completion timestamps, plus explicitly identified local supplemental observations; includes fixture overhead. Not a test allowlist or benchmark. Unknown modules use test count as fallback weight.",
+  "supplemental_measurements": [
+    {
+      "module": "test_lt1_native_route",
+      "measured_on": "2026-11-05",
+      "measured_writer_commit": "463cc3daf9f4e7a0cc7d378a704044554fd01516",
+      "test_file_sha256": "aee1582ca899bf1ff7286c7076bb423273809d112948ebe28dd1652ff5437283",
+      "elapsed_seconds": 522.563,
+      "tests": 24,
+      "skips": 0,
+      "exit_code": 0,
+      "platform": "darwin-arm64",
+      "python": "3.12.13",
+      "tooling_node": "22.22.2",
+      "invocation_shape": "PYTHONPATH=tests [root tooling Python] -m unittest -v test_lt1_native_route",
+      "scope": "Actual older local module run before the narrow sent-ACK and failure-label followup; a scheduling estimate, not a final-source, hosted CI or native qualification result."
+    }
+  ],
   "module_seconds": {
     "test_admission_exit_observation": 0.124,
     "test_analysis_phase_wait": 0.016,
@@ -94,6 +111,7 @@
     "test_local_campaign_process": 11.349,
     "test_local_campaigns": 1.307,
     "test_local_gui": 5.139,
+    "test_lt1_native_route": 522.563,
     "test_m1_artifacts": 1.483,
     "test_m1_contracts": 0.003,
     "test_m1_review": 1.258,

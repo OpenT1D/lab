@@ -410,6 +410,12 @@ keeps a versioned entry continuation behind the existing admissions and selects
 exact allocated packet-copy readback without transferring native or erasure
 authority. These bounded consumers are implemented; native launcher/host
 qualification, complete restore coverage and effective private erasure remain open.
+The selected [one owned native route](docs/research/ot062-lt1-native-route.md)
+bundles fixed launch, dedicated-channel acknowledgment, owned packet consumption,
+durable journaling and strict readback with the current runtime/rights assessment
+in one successor. Its actual native qualification remains behind separate setup
+and execution admissions; do not close it through more separately merged
+preparation layers or transfer earlier software checks into native clearance.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
 not native execution. Begin with the exact LT1 runtime/security and restricted-use

@@ -96,6 +96,7 @@ subtrees:
       - file: docs/research/ot062-lt1-tooling-host-removal-evidence
       - file: docs/research/ot062-lt1-candidate-host-packet-cleanup
       - file: docs/research/ot062-lt1-entry-continuation-packet-reconciliation
+      - file: docs/research/ot062-lt1-native-route
       - file: docs/shared-project-services
       - file: docs/research/ot061-064-minimal-services
       - file: docs/installed-sdk
