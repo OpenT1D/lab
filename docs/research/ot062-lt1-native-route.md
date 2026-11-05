@@ -274,6 +274,9 @@ markers, parent snapshots and genuine outer ownership separate. An
 failed positive controls remain inconclusive; unexpected base success cannot
 demonstrate confinement. Preparation and storage failures must preserve all
 planned slots without pinning partially written witnesses.
+Cold readback requires a consistent completed-slot prefix and retains the same
+parent failure for every unfinished slot. A changed status label cannot preserve
+a successful mechanism assessment; genuine stopped prefixes remain inconclusive.
 
 The shared namespace adds one distinct `native-packet` role for exactly the eight
 original packet names. Its initial root is `0500`, its leaves are single-link
@@ -294,6 +297,10 @@ an event or establish complete removal. Original-root mode changes and
 contradictory events refuse. Existing output/evidence behavior stays unchanged.
 Readback checks both original and sibling names even if the journal attempt is
 missing, and refuses a preexisting or replaced quarantine.
+After the last source check, packet readback rechecks the cleanup-attempt
+namespace, the original leaves of an unstarted packet and the real outer
+control/log evidence. Late mutations cannot retain a completed result or an
+unchanged-inventory claim.
 It does not resume an interrupted removal or repair the quarantined mode;
 incomplete targets remain separate review and cleanup blockers.
 

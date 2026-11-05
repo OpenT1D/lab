@@ -9,6 +9,8 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
   automatic root checks, journal the descriptor permission transition after
   quarantine, and preserve incomplete mode/crash evidence, exact allocated-copy
   accounting and closed selected-runtime setup/execution and erasure authority.
+  Bind cold loader results to consistent slot statuses and recheck packet leaves,
+  cleanup names and actual outer evidence after the final source check.
 
 - Extend the gated LT1 route with matched fixed host I/O controls and an
   additive remover/reader for original output and evidence trees, including
