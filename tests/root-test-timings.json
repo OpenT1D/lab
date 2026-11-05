@@ -52,6 +52,22 @@
       "tooling_node": "22.22.2",
       "invocation_shape": "PYTHONPATH=tests [locked root tooling Python] -m unittest -v test_lt1_native_host",
       "scope": "Actual final local module run on frozen bytes, committed unchanged as the identified writer commit; includes fixture overhead. Scheduling estimate only, not hosted CI, selected-native qualification or the separately invoked Mac tooling experiment."
+    },
+    {
+      "module": "test_native_tree_removal",
+      "measured_on": "2026-11-05",
+      "frozen_source_committed_as": "a04dc56e3e6da0b8a8d39838ccbccec80ffa31c9",
+      "source_freeze_sha256": "b431ef29b50ca7d5d00b4726db9c1c710164a59a96f86f34c584650f9999c0a2",
+      "test_file_sha256": "ec1cabe7768205a39cb688d24ac2708cb5b577991c9c0e4ff7b3da4d3b4b7229",
+      "elapsed_seconds": 412.366,
+      "tests": 27,
+      "skips": 0,
+      "exit_code": 0,
+      "platform": "darwin-arm64",
+      "python": "3.12.13",
+      "tooling_node": "22.22.2",
+      "invocation_shape": "PYTHONPATH=.:tests [locked root tooling Python] -B -m unittest test_native_tree_removal -v",
+      "scope": "Actual complete local module run before the narrow final active-packet reader binding followup; includes fixture overhead. Scheduling estimate only, not final-source, hosted CI, native qualification or effective-erasure evidence."
     }
   ],
   "module_seconds": {
@@ -227,7 +243,7 @@
     "test_mmtt_sampling_platform": 4.114,
     "test_mmtt_sampling_required_times": 0.067,
     "test_mmtt_sampling_workflow": 6.896,
-    "test_native_tree_removal": 246.726,
+    "test_native_tree_removal": 412.366,
     "test_observation_analysis": 0.689,
     "test_observation_estimator": 0.015,
     "test_observation_import": 0.017,

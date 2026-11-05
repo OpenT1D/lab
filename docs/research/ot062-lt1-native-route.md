@@ -257,8 +257,9 @@ minimal N-API addon with fixed exports, under the unchanged process owner.
 
 `native_route_loader_tooling` separates read-only installed-tool observation,
 explicit capture and cold inspection. Compilation uses fixed preinstalled tools,
-not package acquisition. Bind the compiler, linker, headers, runtime, source and
-emitted artifacts before and after their use. Automatic root checks exercise
+not package acquisition. Bind the compiler, linker, fixed SDK system-library
+stub, headers, runtime, source and emitted artifacts before and after their use.
+Automatic root checks exercise
 portable contracts and ordinary module fixtures; they invoke neither a compiler
 nor Mac sandbox profiles.
 
