@@ -85,6 +85,14 @@ not establish biological validity, clinical benefit or independent usability.
 
 ## Product direction
 
+The [vision](docs/vision.md) aims toward assessed digital twins that contribute
+to research into preserving, restoring and replacing endogenous insulin
+production, and ultimately prevention and cures. The first selected scientific
+focus is beta-cell function and disease progression. The
+[next research-data increment](ROADMAP.md#next-bounded-research-data-increment)
+connects a demonstrated research need, reliable source-specific intake and a
+reconstructed study to the existing laboratory before personal-model assessment.
+
 The [public-development queue](ROADMAP.md#public-development-priorities) now
 selects [further integrated laboratory work](ROADMAP.md#selected-development-window-first-integrated-laboratory)
 on the merged installed SDK, native M4 successor and project GUI. Shared sampling

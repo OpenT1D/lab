@@ -1,18 +1,91 @@
 # Vision
 
-OpenT1D aims to make type 1 diabetes research computationally connected:
-researchers should be able to bring their own suitable models and authorized
-data, investigate a question and reproduce or extend each other's experiments.
+OpenT1D builds an open, shared virtual laboratory to better understand type 1
+diabetes and accelerate research into preserving, restoring and replacing
+endogenous insulin production. Researchers should be able to connect authorized
+human measurements with suitable biological models, investigate disease
+progression and interventions, and reproduce or extend each other's experiments.
 The primary product is a **common research laboratory**, connecting experiment
 design, model integration, execution, analysis and evidence. OpenT1D supplies
 research tools, not a patient dataset or a clinical treatment.
 
-The long-term ambition includes compatible multiscale models linking glucose
-metabolism, insulin dynamics, beta-cell function, immunity, devices and
-therapies. Such tools could support research toward better treatment,
-prevention and functional cures. These ambitions require progressively
-stronger models, observations and external assessment; this repository does
-not currently provide a validated multiscale digital twin.
+The long-term ambition is scientifically assessed **digital twins that help
+advance prevention, better treatment and cures**. Compatible multiscale models
+could link glucose metabolism, insulin dynamics, beta-cell function, immunity,
+devices and therapies, while representing meaningful differences between people.
+The laboratory should help researchers test explanations, identify informative
+measurements and design better experiments, including disease-modifying and
+cell-replacement studies. These ambitions require progressively stronger models,
+observations and external assessment; this repository does not currently provide
+a validated multiscale digital twin or evidence of treatment benefit.
+
+## From measurements to research twins
+
+A research twin is a model linked to a specified physical counterpart, updated
+with new measurements, with predictive capability and a defined use in the
+research process. Its identity includes the model and observation assumptions,
+data lineage, estimated parameters or states, uncertainty and evidence for that
+use. A personalized fit or a synthetic virtual patient alone does not establish
+these properties. A first bounded twin could help choose the next measurement
+or experiment, with researchers assessing the resulting observations. Real-time
+operation and autonomous treatment decisions are not prerequisites for that
+research use.
+
+The laboratory is the primary software product; twins are scientific artifacts
+developed and assessed within it. Shared data intake, analysis, calibration,
+simulation and reporting should serve one coherent research workflow through
+GUI, Python and CLI access. Separate tools or services are justified by a real
+boundary or user need, rather than by creating an application for each stage.
+
+The first selected scientific focus is **beta-cell function and disease
+progression**: how endogenous insulin production changes over time, which
+individual differences can be measured or explained, and what evidence would
+distinguish an intervention effect from the natural course. Repeated MMTT,
+C-peptide and relevant glucose observations are a starting point to assess with
+researchers, not an assumed available dataset. Existing synthetic observation
+and secretion tasks provide useful infrastructure and reference cases. The
+current MMTT tasks remain synthetic-only; human-data execution needs a separately
+qualified method and authorized protocol while preserving those contracts. Their
+fixed-kinetics inverse MMTT estimator does not calibrate the causal M4 model,
+establish anatomical beta-cell mass or identify an intervention effect.
+
+This focus connects a tractable starting task to the larger ambition. Richer
+immune and cell-replacement mechanisms can follow when suitable measurements,
+scientific reviewers and intervention-specific evaluation support them. A virtual
+graft study is a conditional feasibility direction, requiring an experimental
+question and appropriate collaborators; it is not a second implementation
+commitment or an existing partnership. The
+[roadmap](../ROADMAP.md#research-direction-data-to-assessed-digital-twins) owns
+the ordered steps and their evidence gates.
+
+## Reliable data as an entry into the laboratory
+
+The first data contribution is a trustworthy path from a selected research
+source to a reproducible study. Participant and visit linkage, units, clocks,
+missing or censored observations, extraction versions and quality decisions
+must remain inspectable. A repeated export should not require rebuilding the
+study by hand. Ambiguous linkage or an unsupported measurement needs an explicit
+decision rather than a silent correction.
+
+Build only the source-specific bridges and scientific checks needed for that
+path. Reuse suitable hospital extraction, identity, storage and interoperability
+systems, and existing models and estimation tools. Research groups should be
+able to keep restricted data in their approved local environment. OpenT1D's
+contribution is the preserved connection between measurements, assumptions,
+models and assessable results, rather than a universal hospital integration
+platform or a centrally owned patient-data collection.
+
+The research direction has external precedent: the
+[NIDDK data-standards workshop](https://www.niddk.nih.gov/news/meetings-workshops/2025/data-standards-2025)
+addresses integration and interoperability gaps; the
+[NIH digital-twin topic](https://grants.nih.gov/funding/find-a-fit-for-your-research/highlighted-topics/129)
+emphasizes fit-for-purpose twins, updating and uncertainty assessment.
+[C-Path's 2025 trial-simulation pilot announcement](https://c-path.org/c-paths-t1d-consortium-to-release-a-clinical-trial-simulation-tool-for-new-onset-trial-design/)
+also shows existing work on longitudinal C-peptide and trial design. These are
+reasons to test a useful complementary contribution, not evidence of demand for
+OpenT1D, access to those resources or a reason to rebuild their tools. Establish
+that need with intended users and compare against their competent existing
+workflow before broadening the product.
 
 ## A connected laboratory
 
@@ -121,7 +194,11 @@ when there is a reproducible task and a suitable evaluation protocol.
 Measure progress by complete studies independently used and extended,
 additional integration effort for a second and third task, useful modules
 contributed, successful project handoffs and conclusions assessed against
-appropriate external evidence. More code, engines, screens or simulated
+appropriate external evidence. For the data-to-twin direction, measure repeated
+data-preparation effort and correctness, independent reconstruction, predictive
+or scientific information beyond simpler methods, and whether results improve
+the choice of a subsequent measurement or experiment. Preserve unfavorable and
+inconclusive findings. More code, engines, screens or simulated
 profiles alone do not demonstrate product value or scientific progress.
 
 The common laboratory grows through these reusable capabilities and complete
