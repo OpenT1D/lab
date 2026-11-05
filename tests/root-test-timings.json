@@ -68,6 +68,21 @@
       "tooling_node": "22.22.2",
       "invocation_shape": "PYTHONPATH=.:tests [locked root tooling Python] -B -m unittest test_native_tree_removal -v",
       "scope": "Actual complete local module run before the narrow final active-packet reader binding followup; includes fixture overhead. Scheduling estimate only, not final-source, hosted CI, native qualification or effective-erasure evidence."
+    },
+    {
+      "module": "test_lt1_native_loader",
+      "measured_on": "2026-11-05",
+      "frozen_source_committed_as": "e0a2949195e339d1adf3c7a32fe6e6b19a5872f9",
+      "test_file_sha256": "7809032b07ca27ec9d645ffad88af2491f4cc0a192f80321c179118179802096",
+      "elapsed_seconds": 1.451,
+      "tests": 16,
+      "skips": 0,
+      "exit_code": 0,
+      "platform": "darwin-arm64",
+      "python": "3.12.13",
+      "tooling_node": "22.22.2",
+      "invocation_shape": "PYTHONPATH=.:tests [locked root tooling Python] -B -m unittest test_lt1_native_loader -v",
+      "scope": "Actual complete local portable module run on the identified frozen writer revision, including the original loader test; no compiler or Mac profile invoked. Scheduling estimate only, not hosted CI or selected-native qualification."
     }
   ],
   "module_seconds": {
@@ -159,6 +174,7 @@
     "test_local_campaigns": 1.307,
     "test_local_gui": 5.139,
     "test_lt1_native_host": 112.832,
+    "test_lt1_native_loader": 1.451,
     "test_lt1_native_route": 522.563,
     "test_m1_artifacts": 1.483,
     "test_m1_contracts": 0.003,
