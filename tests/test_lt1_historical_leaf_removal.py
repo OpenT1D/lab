@@ -19,6 +19,25 @@ class HistoricalLeafAdmissionTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "no reviewed removal request"):
                 leaf.remove(b"not json", object())
 
+    def test_unknown_request_does_not_intake_cancel_object(self):
+        class Cancel:
+            @property
+            def is_set(self):
+                raise AssertionError("cancel intake before admission")
+
+        with self.assertRaisesRegex(ValueError, "no reviewed removal request"):
+            leaf.remove(b"not json", object(), cancel=Cancel())
+
+    def test_unknown_fixture_request_does_not_call_provider_or_stop(self):
+        def forbidden():
+            raise AssertionError("callback intake before admission")
+
+        registry = {"schema": "opent1d.lt1-removal-admissions/1", "requests": []}
+        with self.assertRaisesRegex(ValueError, "no reviewed removal request"):
+            leaf._remove_reviewed(
+                b"not json", registry, object(), stop=forbidden, _registry_provider=forbidden
+            )
+
 
 @unittest.skipUnless(os.name == "posix", "POSIX invented namespace required")
 class HistoricalLeafTests(unittest.TestCase):
@@ -192,6 +211,117 @@ class HistoricalLeafTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.run_removal()
         self.assert_sentinels()
+
+    def test_membership_withdrawn_before_move_keeps_original_and_incomplete_prefix(self):
+        def withdraw(event, _name):
+            if event == "prepared":
+                self.registry["requests"].clear()
+
+        result = self.run_removal(checkpoint=withdraw)
+        self.assertEqual(result["status"], "failed")
+        self.assertEqual(result["removed"], [])
+        self.assertTrue(self.target.is_file())
+        self.assertFalse(list((self.attempt / "quarantine").iterdir()))
+        self.assertEqual(self.read()["status"], "incomplete")
+        self.assert_sentinels()
+
+    def test_membership_withdrawn_in_quarantine_never_unlinks(self):
+        def withdraw(event, _name):
+            if event == "quarantined":
+                self.registry["requests"].clear()
+
+        result = self.run_removal(checkpoint=withdraw)
+        self.assertEqual(result["status"], "failed")
+        self.assertEqual(result["removed"], [])
+        retained = self.attempt / "quarantine" / self.target.name
+        self.assertEqual(retained.read_bytes(), b'{"invented": true}\n')
+        self.assertEqual(self.read()["status"], "incomplete")
+        self.assert_sentinels()
+
+    def test_withdrawal_during_final_source_check_before_move_is_observed(self):
+        actual = leaf.source_identity()
+        active, calls = False, 0
+
+        def source():
+            nonlocal calls
+            if active:
+                calls += 1
+                if calls == 2:
+                    self.registry["requests"].clear()
+            return actual
+
+        def checkpoint(event, _name):
+            nonlocal active
+            if event == "prepared":
+                active = True
+
+        with patch.object(leaf, "source_identity", side_effect=source):
+            result = self.run_removal(checkpoint=checkpoint)
+        self.assertEqual(result["status"], "failed")
+        self.assertTrue(self.target.is_file())
+        self.assertFalse(list((self.attempt / "quarantine").iterdir()))
+
+    def test_withdrawal_during_final_source_check_before_unlink_is_observed(self):
+        actual = leaf.source_identity()
+        active, calls = False, 0
+
+        def source():
+            nonlocal calls
+            if active:
+                calls += 1
+                if calls == 2:
+                    self.registry["requests"].clear()
+            return actual
+
+        def checkpoint(event, _name):
+            nonlocal active
+            if event == "quarantined":
+                active = True
+
+        with patch.object(leaf, "source_identity", side_effect=source):
+            result = self.run_removal(checkpoint=checkpoint)
+        self.assertEqual(result["status"], "failed")
+        self.assertEqual(result["removed"], [])
+        self.assertTrue((self.attempt / "quarantine" / self.target.name).is_file())
+
+    def test_withdrawal_after_unlink_cannot_report_completed_operation(self):
+        def withdraw(event, _name):
+            if event == "before-complete":
+                self.registry["requests"].clear()
+
+        result = self.run_removal(checkpoint=withdraw)
+        self.assertEqual(result["status"], "failed")
+        self.assertEqual(result["removed"], [self.target.name])
+        self.assertFalse(self.target.exists())
+        self.assertEqual(self.read()["status"], "incomplete")
+
+    def test_public_remove_rereads_canonical_provider_after_prepared_event(self):
+        actual = leaf.source_identity()
+
+        def provider():
+            return json.loads(json.dumps(self.registry))
+
+        def source():
+            journal = self.attempt / "events.jsonl"
+            if journal.exists() and journal.stat().st_size:
+                self.registry["requests"].clear()
+            return actual
+
+        with patch.object(leaf, "_canonical_registry", side_effect=provider) as read_registry:
+            with patch.object(leaf, "source_identity", side_effect=source):
+                result = leaf.remove(self.raw, self.context)
+        self.assertGreater(read_registry.call_count, 2)
+        self.assertEqual(result["status"], "failed")
+        self.assertEqual(result["removed"], [])
+        self.assertTrue(self.target.is_file())
+        self.assertEqual(self.read()["status"], "incomplete")
+
+    def test_readback_after_historical_completion_needs_no_current_admission(self):
+        self.assertEqual(self.run_removal()["status"], leaf.STATUS)
+        self.registry["requests"].clear()
+        report = self.read()
+        self.assertEqual(report["status"], "completed")
+        self.assertTrue(all(report[key] is False for key in leaf.AUTHORITY))
 
     def test_unrecorded_move_and_unlink_gaps_never_complete(self):
         def fail(event, _name):

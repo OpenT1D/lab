@@ -167,11 +167,28 @@ def _siblings(root, request, target_present):
         need(sibling_signature(actual) == expected, "sibling identity changed")
 
 
-def _remove_reviewed(raw, registry, context_raw, *, stop=lambda: False, checkpoint=lambda *_: None):
+def _remove_reviewed(
+    raw,
+    registry,
+    context_raw,
+    *,
+    stop=lambda: False,
+    checkpoint=lambda *_: None,
+    _registry_provider=None,
+):
     """Fixture registry injection; exclusive quiescent ownership is a prerequisite."""
     _admitted(raw, registry)  # No request/path/source/context intake before membership.
+
+    def admit():
+        current = registry if _registry_provider is None else _registry_provider()
+        _admitted(raw, current)
+
+    admit()
     request = _request(raw, context_raw)
-    if stop():
+    admit()
+    stopped = stop()
+    admit()
+    if stopped:
         return {"status": "interrupted", "attempt_created": False, "removed": [], **AUTHORITY}
     root_path = Path(request["root"]["path"])
     evidence_path = Path(request["evidence_parent"]["path"])
@@ -203,6 +220,7 @@ def _remove_reviewed(raw, registry, context_raw, *, stop=lambda: False, checkpoi
         os.fsync(attempt)
 
         def check():
+            admit()
             need(request["source_identity"] == source_identity(), "source changed")
             _directory_binding(request["root"], root)
             _directory_binding(request["evidence_parent"], evidence)
@@ -264,6 +282,7 @@ def _remove_reviewed(raw, registry, context_raw, *, stop=lambda: False, checkpoi
                 verify = _file(root, target, expected)
                 os.close(verify)
                 check()
+                admit()
                 exclusive_rename(root_path / target, quarantine_path / target)
                 location = "quarantine"
                 os.fsync(root)
@@ -301,6 +320,7 @@ def _remove_reviewed(raw, registry, context_raw, *, stop=lambda: False, checkpoi
                             )
                             # Unlink has no atomic expected-inode argument. This
                             # cannot isolate an adversarial same-UID writer.
+                            admit()
                             os.unlink(target, dir_fd=quarantine)
                             location = "absent"
                             os.fsync(quarantine)
@@ -310,7 +330,9 @@ def _remove_reviewed(raw, registry, context_raw, *, stop=lambda: False, checkpoi
                             checkpoint("removed", target)
                             checkpoint("before-complete", target)
                             check()
-                            status = "interrupted" if stop() else STATUS
+                            stopped = stop()
+                            admit()
+                            status = "interrupted" if stopped else STATUS
                     finally:
                         os.close(verify)
         except Exception as exc:
@@ -339,12 +361,20 @@ def _remove_reviewed(raw, registry, context_raw, *, stop=lambda: False, checkpoi
                 os.close(fd)
 
 
-def remove(raw, context_raw, *, cancel=None):
-    registry = json.loads(
+def _canonical_registry():
+    return json.loads(
         (HERE / "removal-admissions.json").read_bytes(), object_pairs_hook=unique_object
     )
+
+
+def remove(raw, context_raw, *, cancel=None):
+    registry = _canonical_registry()
     return _remove_reviewed(
-        raw, registry, context_raw, stop=cancel.is_set if cancel is not None else lambda: False
+        raw,
+        registry,
+        context_raw,
+        stop=lambda: cancel.is_set() if cancel is not None else False,
+        _registry_provider=_canonical_registry,
     )
 
 
