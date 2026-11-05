@@ -225,6 +225,21 @@ class HistoricalLeafTests(unittest.TestCase):
         self.assertEqual(self.read()["status"], "incomplete")
         self.assert_sentinels()
 
+    def test_membership_withdrawn_during_initial_target_read_creates_no_attempt(self):
+        read = leaf._file
+
+        def withdraw(*args, **kwargs):
+            fd = read(*args, **kwargs)
+            self.registry["requests"].clear()
+            return fd
+
+        with patch.object(leaf, "_file", side_effect=withdraw):
+            with self.assertRaisesRegex(ValueError, "no reviewed removal request"):
+                self.run_removal()
+        self.assertFalse(self.attempt.exists())
+        self.assertTrue(self.target.is_file())
+        self.assert_sentinels()
+
     def test_membership_withdrawn_in_quarantine_never_unlinks(self):
         def withdraw(event, _name):
             if event == "quarantined":

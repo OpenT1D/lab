@@ -203,6 +203,7 @@ def _remove_reviewed(
         _directory_binding(request["evidence_parent"], evidence, initial=True)
         _siblings(root, request, True)
         held = _file(root, target, expected)
+        admit()
         os.mkdir(request["attempt"], 0o700, dir_fd=evidence)
         os.fsync(evidence)
         attempt_path = evidence_path / request["attempt"]
