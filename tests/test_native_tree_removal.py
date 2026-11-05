@@ -46,6 +46,54 @@ class TreeGateTests(unittest.TestCase):
         self.assertNotEqual(tree.code_source(audit), tree.code_source(changed))
         self.assertEqual(len(tree.AUTHORITY_FILES), 3)
         self.assertFalse(any("native_route" in n for n in audit["implementation"]))
+        self.assertLessEqual(
+            reconciliation.source_identity()["implementation"].keys(),
+            audit["implementation"].keys(),
+        )
+
+    def test_changed_recovery_assessor_invalidates_the_original_request_projection(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            copied = Path(temporary).resolve() / "reader-code"
+            sources = (
+                tree.source_identity()["implementation"].keys()
+                | reconciliation.source_identity()["implementation"].keys()
+                | {"tests/lt1_native_tree_fixture.py"}
+            )
+            for name in sources:
+                path = copied / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(tree.ROOT / name, path)
+            script = copied / "exercise.py"
+            script.write_text("""import importlib,pathlib,sys
+from unittest.mock import patch
+sys.path[:0]=[str(pathlib.Path(__file__).parent),str(pathlib.Path(__file__).parent/'tests')]
+import lt1_native_tree_fixture as f
+from experiments.lt1_diagnostic import native_tree_removal as t,native_tree_reconciliation as r
+from experiments.lt1_diagnostic import recovery_evidence
+work=t.ROOT/'fresh';work.mkdir(mode=0o700)
+v=f.prepare(work,files={'route.json':b'fresh invented data'})
+args=f.proposal(v,None)
+assert r.propose(**args)['status']=='incomplete'
+before=t.source_identity()
+p=t.ROOT/'experiments/lt1_diagnostic/recovery_evidence.py'
+p.write_text(p.read_text()+
+    "\\ndef assess(*args, **kwargs):\\n    return {'changed_assessor': True}\\n")
+importlib.reload(recovery_evidence)
+assert t.source_identity()!=before, 'executing recovery dependency missing from audit'
+with patch.object(t,'_private_directory',side_effect=AssertionError('private intake before gate')):
+    try:r.propose(**args)
+    except ValueError as error:assert 'context/current code/host identity' in str(error)
+    else:raise AssertionError('changed recovery assessor accepted under original request')
+assert (v['root']/'route.json').read_bytes()==b'fresh invented data'
+""")
+            result = subprocess.run(
+                [sys.executable, "-B", str(script)],
+                cwd=copied,
+                capture_output=True,
+                text=True,
+                timeout=60,
+            )
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
 
 @unittest.skipUnless(SUPPORTED, "descriptor-relative exclusive rename requires macOS/Linux")

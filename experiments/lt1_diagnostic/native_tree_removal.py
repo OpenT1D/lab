@@ -32,6 +32,7 @@ SOURCE_FILES = (
     "experiments/lt1_diagnostic/native_tree_removal_exec.py",
     "experiments/lt1_diagnostic/native_tree_removal_worker.py",
     "experiments/lt1_diagnostic/native_tree_reconciliation.py",
+    "experiments/lt1_diagnostic/recovery_evidence.py",
     "experiments/lt1_diagnostic/native_attempt_namespace.json",
     "tests/lt1_native_tree_worker.py",
 )
