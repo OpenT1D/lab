@@ -1,11 +1,22 @@
 # Product requirements: a shared T1D research laboratory
 
 **Planning requirements, 25 October 2026; contribution and scope clarification,
-29 October 2026.** OpenT1D aims to provide one coherent
+29 October 2026; research-data direction refinement, 5 November 2026.**
+OpenT1D aims to provide one coherent
 laboratory in which researchers can combine, replace and compare suitable
 existing models and methods. Its contribution is shared research infrastructure
 and useful integrations. Developing an original controller or physiological
 engine is an optional research choice.
+
+The [vision](vision.md) connects this laboratory to the long-term ambition of
+assessed digital twins and research toward prevention and cures. Its first
+selected scientific focus is beta-cell function and disease progression. Data
+intake, personal-model assessment and prospective updating extend the same
+laboratory; a twin is a scientific artifact with a defined use and evidence,
+not a requirement for another application. The
+[research-data increment](../ROADMAP.md#next-bounded-research-data-increment)
+selects the immediate source-to-study scope. This refinement adds no delivered
+capability or empirical evidence.
 
 This guide owns the product requirements and acceptance jobs. The
 [roadmap](../ROADMAP.md) is the sole authority for implementation order,
@@ -130,6 +141,14 @@ availability times, missing or censored values, participant/visit/episode
 relationships, conversion rules and authorized access. Unknown treatment or
 meal events must not silently become zeros.
 
+For a selected source-to-study route, retain extraction and mapping versions,
+report ambiguous links and quality decisions, and demonstrate a repeat export
+without reconstructing the study manually. Reuse suitable upstream extraction,
+identity and storage systems. Restricted observations remain in the approved
+research environment; public fixtures and support material must not disclose
+them. Compare preparation effort and correctness with the researcher's existing
+workflow before claiming a product improvement.
+
 Separate preparation, fitting, frozen model artifacts, simulation or prediction,
 and scoring where the task requires it. Observation functions, noise models,
 fixed and estimated parameters, bounds and shared parameters need explicit
@@ -139,8 +158,11 @@ problems separately from the underlying dynamical model.
 
 The M4 source/observer and MMTT tasks must use shared project, execution and
 result facilities while retaining their distinct forward and inverse contracts.
-The current fixed-kinetic MMTT estimator does not automatically calibrate the
-causal M4 model. Assess identifiability and compare suitable simpler analyses;
+Existing MMTT tasks remain synthetic-only and refuse declared human packages.
+Execution with human observations requires an authorized protocol and a separately
+versioned, scientifically reviewed successor or a suitable integrated method;
+preserve legacy task contracts and readers. The current fixed-kinetic MMTT
+estimator does not automatically calibrate the causal M4 model. Assess identifiability and compare suitable simpler analyses;
 better fit alone does not identify the correct biological mechanism.
 
 ### Execution, runtime and resource management

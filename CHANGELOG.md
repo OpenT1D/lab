@@ -4,6 +4,14 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Refine the vision and roadmap toward assessed research digital twins and
+  contributions to prevention and cures, starting with beta-cell function and
+  disease progression. Select bounded need/source/reuse assessment, repeatable
+  data intake and a reconstructed study on the existing laboratory. Preserve
+  implemented workflows and distinguish planned personal-model and prospective
+  assessment from current synthetic evidence. This changes direction and
+  priorities, not runtime behavior or scientific results.
+
 - Add an explicit integrated internal candidate for maintained M4 and the
   connected synthetic study, retaining the two-MMTT build and unchanged scientific
   payload/readers. Add exact-artifact qualification for reviewed runtime roles,
