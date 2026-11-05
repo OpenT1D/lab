@@ -186,6 +186,13 @@ confinement. Nonces bind a phase exchange, not the kernel identity of the TCP
 peer. Keep scientific completion, the bounded I/O assessment and full host
 qualification distinct; `native_host_qualified` remains false.
 
+Canary creation and witness-storage failures retain both planned slot records.
+Partial private files may remain for separately reviewed cleanup; partially
+seeded canaries or an unwritten witness supply no witness hash. Historical audits
+retain all original authority hashes, while cold readback compares code and Python
+identity after excluding only the three mutable admission files. Withdrawing an
+admission does not require restoring it to read retained evidence.
+
 The separately invoked `native_route_host_tooling.capture` uses a small fixed
 Mac profile, ordinary tooling Node and a fresh private synthetic parent. It has
 no native packet, loader or scientific session and excludes the selected native
@@ -232,6 +239,8 @@ for that exact completed allocated root copy. Incomplete outcomes preserve input
 register and provenance bytes. Keep original origin/deadline/hold evidence and
 all other copy IDs; newly created request, control, journal, log, outer and readback
 records require explicit separate accounting. Unobserved records stay unobserved.
+The current code projection includes the recovery assessor used by proposals;
+changing that executing dependency invalidates the original request binding.
 No proposal activates a register. Stage/packet, relocated, snapshot, backup and
 unregistered copies remain outside this removal. Namespace absence establishes
 neither original absence onset, retention compliance, complete restore exclusion
