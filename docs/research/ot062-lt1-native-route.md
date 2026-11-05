@@ -292,6 +292,8 @@ an event or establish complete removal. Original-root mode changes and
 contradictory events refuse. Existing output/evidence behavior stays unchanged.
 Readback checks both original and sibling names even if the journal attempt is
 missing, and refuses a preexisting or replaced quarantine.
+It does not resume an interrupted removal or repair the quarantined mode;
+incomplete targets remain separate review and cleanup blockers.
 
 The pair's two original packet roots require distinct allocations and exact
 requests, in addition to its three output/evidence targets. Complete readback can
