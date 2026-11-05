@@ -114,6 +114,21 @@ def failure(code="EPERM"):
     }
 
 
+def changed_runtime(report, values, *, slots=(0, 1, 2)):
+    """Alter the declared runtime coherently, including actual retained log pins."""
+    for i in slots:
+        record = report["records"][i]
+        record["probe"]["runtime"].update(values)
+        record["log"] = log_data(loader.encoded(record["probe"]) + b"\n")
+
+
+def changed_processes(report, starts):
+    for record, start in zip(report["records"], starts):
+        record["outer"]["owned_processes"][0].update(pid=100, pgid=100, start=start)
+        record["probe"]["runtime"]["pid"] = 100
+        record["log"] = log_data(loader.encoded(record["probe"]) + b"\n")
+
+
 def witness(source):
     """Closed synthetic full report, deliberately without a real compiled addon."""
     producer_root = PurePosixPath("/private/tmp/c20-reviewed-code")
@@ -198,14 +213,14 @@ def witness(source):
             }
         )
     preparation = []
-    for scan in (True, False):
+    for i, scan in enumerate((True, False)):
         argv = loader._compile_argv(
             tools["sdk"], parent / "targets", parent / "build", scan=scan, source_root=producer_root
         )
         preparation.append(
             {
                 "phase": "dependency-scan" if scan else "compile",
-                "outer": outer(argv),
+                "outer": outer(argv, pid=90 + i),
                 "log": log_data(b""),
             }
         )
@@ -286,14 +301,17 @@ class LoaderContractTests(unittest.TestCase):
         sdk, targets, build = (
             PurePosixPath(p) for p in ("/fixed/sdk", "/fresh/targets", "/fresh/build")
         )
-        scan = loader._compile_argv(sdk, targets, build, scan=True)
-        compile_ = loader._compile_argv(sdk, targets, build, scan=False)
+        source_root = PurePosixPath("/reviewed/ordinary-tooling-code")
+        scan = loader._compile_argv(sdk, targets, build, scan=True, source_root=source_root)
+        compile_ = loader._compile_argv(sdk, targets, build, scan=False, source_root=source_root)
         self.assertEqual(scan[0], str(loader.CLANG))
         self.assertIn("-M", scan)
         self.assertIn("-DNAPI_VERSION=8", compile_)
         self.assertIn("-nostdlib", compile_)
         self.assertIn("-fuse-ld=" + str(loader.LINKER), compile_)
-        self.assertEqual(compile_[-1], str(loader.ADDON))
+        self.assertEqual(
+            compile_[-1], str(source_root / loader.ADDON.relative_to(loader.ROOT).as_posix())
+        )
         self.assertNotIn("npm", compile_)
 
     def test_typed_probe_and_actual_marker_are_distinct_checks(self):
@@ -367,10 +385,55 @@ class LoaderContractTests(unittest.TestCase):
             patch.object(loader.subprocess, "Popen", side_effect=AssertionError("cold process")),
         ):
             self.assertEqual(self.inspect(report), report["assessment"])
+            partial = copy.deepcopy(report)
+            target = partial["context"]["targets"]
+            partial["context"]["directories"] = {target: [1, 20, 501, 0o700]}
+            partial.update(
+                preparation=[],
+                header_closure={},
+                initial_artifacts={},
+                final_artifacts={},
+                error="incomplete directory preparation",
+            )
+            for record in partial["records"]:
+                record.update(
+                    entry=None,
+                    profile=None,
+                    outer=None,
+                    log=None,
+                    probe=None,
+                    error=partial["error"],
+                    status="not-run",
+                )
+            partial["assessment"] = loader._assess(partial["records"], {}, {}, partial["error"])
+            self.assertEqual(self.inspect(partial)["state"], "inconclusive")
+            reuse = copy.deepcopy(report)
+            changed_processes(reuse, ("invented:100", "invented:101", "invented:102"))
+            self.assertEqual(self.inspect(reuse), report["assessment"])
 
     def test_cold_reader_rejects_rehashed_context_profile_outer_log_and_source_drift(self):
         report = witness(self.source)
         variants = (
+            lambda r: r["context"]["directories"].pop(r["context"]["build"]),
+            lambda r: r["context"]["directories"].pop(r["context"]["records"]),
+            lambda r: r["context"]["directories"][r["context"]["build"]].__setitem__(
+                slice(0, 2), r["context"]["directories"][r["context"]["records"]][:2]
+            ),
+            lambda r: r["records"][0]["log"]["snapshot"]["identity"].__setitem__(2, 0),
+            lambda r: r["preparation"][0]["log"]["snapshot"]["identity"].__setitem__(2, 0),
+            lambda r: changed_processes(r, ("invented:1", "invented:1", "invented:1")),
+            lambda r: r["preparation"][1]["outer"].update(
+                owned_processes=copy.deepcopy(r["preparation"][0]["outer"]["owned_processes"])
+            ),
+            lambda r: changed_runtime(r, {"platform": "linux"}),
+            lambda r: changed_runtime(r, {"arch": "x64"}),
+            lambda r: changed_runtime(r, {"napi": "7"}),
+            lambda r: changed_runtime(r, {"napi": "08"}),
+            lambda r: changed_runtime(r, {"node": "22.22.2"}),
+            lambda r: changed_runtime(r, {"node": "v022.22.2"}),
+            lambda r: changed_runtime(r, {"node": "v22.22.2\n"}),
+            lambda r: changed_runtime(r, {"node": "v22.22.3"}, slots=(2,)),
+            lambda r: changed_runtime(r, {"napi": "9"}, slots=(2,)),
             lambda r: r["records"][1].update(profile=r["records"][2]["profile"]),
             lambda r: r["records"][0]["outer"]["argv"].append("foreign"),
             lambda r: r["records"][0]["log"].update(raw_b64="e30K"),
@@ -390,10 +453,10 @@ class LoaderContractTests(unittest.TestCase):
             lambda r: r["header_closure"].pop(str(loader.HEADERS / "js_native_api.h")),
             lambda r: r["initial_artifacts"]["module.mjs"].update(sha256="f" * 64),
         )
-        for change in variants:
+        for i, change in enumerate(variants):
             altered = copy.deepcopy(report)
             change(altered)
-            with self.assertRaises(ValueError):
+            with self.subTest(counterexample=i), self.assertRaises(ValueError):
                 self.inspect(altered)
         raw = loader.encoded(report)
         with self.assertRaisesRegex(ValueError, "externally pinned"):

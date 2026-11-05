@@ -10,6 +10,7 @@ import hashlib
 import json
 import os
 import platform
+import re
 import secrets
 import shlex
 import shutil
@@ -324,6 +325,15 @@ def _complete(outer):
     )
 
 
+def _fresh_process(outer, observed):
+    need(_ownership_complete(outer["owned_processes"]), "actual rooted process identity")
+    pids = {p["pid"] for p in outer["owned_processes"]}
+    root = next(p for p in outer["owned_processes"] if p["ppid"] not in pids)
+    key = (root["pid"], root["start"])
+    need(key not in observed, "fresh owned process per preparation/loader slot")
+    observed.add(key)
+
+
 def _owned(argv, log, guard, *, control=None, timeout=15):
     expected = tuple(argv)
     environment = dict(owner.ENVIRONMENT)
@@ -409,6 +419,27 @@ def _validate_probe(report, entry, node):
     return report
 
 
+def _mac_runtime(report, previous=None):
+    """The explicit Mac experiment has no caller-selected runtime platform."""
+    runtime = report["runtime"]
+    need(
+        runtime["platform"] == "darwin"
+        and runtime["arch"] == "arm64"
+        and re.fullmatch(
+            r"v(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)", runtime["node"]
+        )
+        is not None
+        and runtime["napi"].isascii()
+        and runtime["napi"].isdigit()
+        and str(int(runtime["napi"])) == runtime["napi"]
+        and int(runtime["napi"]) >= 8,
+        "fixed Mac platform/architecture, canonical stable Node and N-API-8 minimum",
+    )
+    current = tuple(runtime[k] for k in ("exec_path", "node", "platform", "arch", "napi"))
+    need(previous is None or current == previous, "same runtime across loader slots")
+    return current
+
+
 def _assess(records, initial, final, error):
     result = {"state": "inconclusive", "checks": {}, **AUTHORITY}
     if len(records) != 3 or any(r.get("probe") is None for r in records):
@@ -461,6 +492,7 @@ def _assess(records, initial, final, error):
 
 def _read_log(path):
     snapshot = _snapshot(path, maximum=65536)
+    need(snapshot["identity"][2:5] == [os.getuid(), 0o600, 1], "private parent-owned actual log")
     raw = Path(path).read_bytes()
     need(digest(raw) == snapshot["sha256"], "actual bounded log bytes")
     return {"snapshot": snapshot, "raw_b64": base64.b64encode(raw).decode()}
@@ -579,6 +611,7 @@ def capture(parent, *, expected_identity, expected_toolchain):
 
         _create(targets / "module.mjs", MODULE.read_bytes())
         (targets / "module.mjs").chmod(0o400)
+        observed_processes = set()
         for scan in (True, False):
             name = "dependency-scan" if scan else "compile"
             log = logs / (name + ".log")
@@ -588,6 +621,8 @@ def capture(parent, *, expected_identity, expected_toolchain):
             item["outer"] = _owned(
                 _compile_argv(tools["sdk"], targets, build, scan=scan), log, guard
             )
+            if item["outer"]["owned_processes"]:
+                _fresh_process(item["outer"], observed_processes)
             item["log"] = _read_log(log)
             need(_complete(item["outer"]), "actual " + name + " owner incomplete")
             dependencies = _dependencies(
@@ -615,6 +650,7 @@ def capture(parent, *, expected_identity, expected_toolchain):
             }
 
         report["initial_artifacts"] = artifacts()
+        observed_runtime = None
         for record in records:
             slot = record["slot"]
             entry = {
@@ -636,12 +672,16 @@ def capture(parent, *, expected_identity, expected_toolchain):
                 need(artifacts() == report["initial_artifacts"], "artifact changed before loader")
 
             record["outer"] = _owned(command, log, slot_guard, control=entry)
+            if record["outer"]["owned_processes"]:
+                _fresh_process(record["outer"], observed_processes)
             record["log"] = _read_log(log)
             raw = base64.b64decode(record["log"]["raw_b64"], validate=True)
             need(raw.endswith(b"\n") and raw.count(b"\n") == 1, "one actual loader report")
-            record["probe"] = _validate_probe(
+            probe = _validate_probe(
                 json.loads(raw, object_pairs_hook=_unique), entry, tools["node"]
             )
+            observed_runtime = _mac_runtime(probe, observed_runtime)
+            record["probe"] = probe
             need(_complete(record["outer"]), "actual loader owner incomplete")
             need(artifacts() == report["initial_artifacts"], "artifact changed after loader")
             record["status"] = "completed"
@@ -708,7 +748,7 @@ def _path_data(value):
     return PurePosixPath(value)
 
 
-def _log_data(value):
+def _log_data(value, uid):
     _fields(value, "snapshot raw_b64")
     _snapshot_data(value["snapshot"])
     need(
@@ -720,6 +760,7 @@ def _log_data(value):
         len(raw) <= 65536
         and base64.b64encode(raw).decode() == value["raw_b64"]
         and value["snapshot"]["identity"][3:5] == [0o600, 1]
+        and value["snapshot"]["identity"][2] == uid
         and value["snapshot"]["identity"][5] == len(raw)
         and digest(raw) == value["snapshot"]["sha256"],
         "actual retained log binding",
@@ -907,6 +948,11 @@ def inspect(raw, expected_sha256, *, expected_identity):
             <= {context[n] for n in ("targets", "build", "records")},
             "fixed partial directory bindings",
         )
+        directory_roles = [context[name] for name in ("targets", "build", "records")]
+        need(
+            set(context["directories"]) in [set(directory_roles[:i]) for i in range(4)],
+            "actual directory creation prefix",
+        )
         for path, sig in context["directories"].items():
             need(
                 type(sig) is list
@@ -916,6 +962,11 @@ def inspect(raw, expected_sha256, *, expected_identity):
                 and sig[3] in ((0o500, 0o700) if path == context["targets"] else (0o700,)),
                 "typed preparation directory",
             )
+        physical = [tuple(sig[:2]) for sig in context["directories"].values()]
+        need(
+            len(physical) == len(set(physical)) and tuple(signature[:2]) not in physical,
+            "distinct physical preparation directories",
+        )
     need(
         type(report["preparation"]) is list
         and len(report["preparation"]) <= 2
@@ -923,9 +974,16 @@ def inspect(raw, expected_sha256, *, expected_identity):
         == ["dependency-scan", "compile"][: len(report["preparation"])],
         "planned preparation prefix",
     )
+    observed_processes = set()
     for preparation in report["preparation"]:
         _fields(preparation, "phase outer log")
-        need(tools is not None and context is not None, "actual preparation context")
+        need(
+            tools is not None
+            and context is not None
+            and set(context["directories"])
+            == {context[n] for n in ("targets", "build", "records")},
+            "actual complete preparation directory context",
+        )
         if preparation["outer"] is not None:
             argv = _compile_argv(
                 sdk,
@@ -935,9 +993,11 @@ def inspect(raw, expected_sha256, *, expected_identity):
                 source_root=producer_root,
             )
             _outer_data(preparation["outer"], argv, context["owner_pid"])
+            if preparation["outer"]["owned_processes"]:
+                _fresh_process(preparation["outer"], observed_processes)
         if preparation["log"] is not None:
             need(preparation["outer"] is not None, "actual preparation log")
-            _log_data(preparation["log"])
+            _log_data(preparation["log"], context["parent_identity"][2])
     if report["initial_artifacts"]:
         need(
             tools is not None
@@ -986,6 +1046,7 @@ def inspect(raw, expected_sha256, *, expected_identity):
         "all planned slots",
     )
     nonces = []
+    observed_runtime = None
     for record in report["records"]:
         _fields(record, "slot entry profile outer log probe error status")
         need(
@@ -1020,6 +1081,8 @@ def inspect(raw, expected_sha256, *, expected_identity):
                 command = [str(SANDBOX), "-p", policy, *command]
             if record["outer"] is not None:
                 _outer_data(record["outer"], command, context["owner_pid"])
+                if record["outer"]["owned_processes"]:
+                    _fresh_process(record["outer"], observed_processes)
         else:
             need(
                 all(record[k] is None for k in ("profile", "outer", "log", "probe"))
@@ -1028,7 +1091,7 @@ def inspect(raw, expected_sha256, *, expected_identity):
             )
         if record["log"] is not None:
             need(record["outer"] is not None, "actual slot log requires outer")
-            data = _log_data(record["log"])
+            data = _log_data(record["log"], context["parent_identity"][2])
         if record["probe"] is not None:
             need(
                 tools is not None
@@ -1038,6 +1101,7 @@ def inspect(raw, expected_sha256, *, expected_identity):
                 "actual probe bindings",
             )
             _validate_probe(record["probe"], record["entry"], tools["node"])
+            observed_runtime = _mac_runtime(record["probe"], observed_runtime)
             need(
                 data.endswith(b"\n")
                 and data.count(b"\n") == 1
