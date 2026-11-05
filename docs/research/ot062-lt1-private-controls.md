@@ -189,9 +189,19 @@ passed admission: retain prepared/quarantined evidence and stop further mutation
 Historical readback does not restore or require the old live grant. Tests inject
 authority only for freshly invented objects.
 
+Canonical spellings alone do not establish separate physical roles. On macOS,
+APFS firmlinks can name the same directory through different canonical paths.
+Use opened directory identities and bounded descriptor-relative parent walks to
+reject identical root/evidence objects and either physical ancestor relationship
+before target intake or evidence creation. Recheck those roles in transitions
+and readback; sharing only a common ancestor is valid for disjoint roots.
+
 Quarantine only the pinned target through an exclusive same-volume rename. Hold
 and recheck descriptors, exact bytes, source, journal, directories and immediate
-sibling identities before the irreversible unlink. New entries, replacements,
+sibling identities before moving and before the irreversible unlink. Refresh
+target bytes and held/path binding after the last source check, and refresh
+source/directory roles after long initial reads before creating evidence.
+New entries, replacements,
 changed bindings and collisions refuse. Cancellation and crash gaps retain their
 actual journal and target/quarantine observations; they do not resume or infer a
 missing mutation event. The exclusive-owner assumption remains essential because

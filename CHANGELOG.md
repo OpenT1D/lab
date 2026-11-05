@@ -8,7 +8,9 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
   directories, preserving the reviewed immediate sibling namespace and existing
   flat/tree removers. Bind request, source, directories, journal and owned outer
   evidence; retain interruption and mutation gaps, and recheck live canonical
-  removal authority before mutation and completion. Keep passive copy/recovery
+  removal authority before mutation and completion. Reject physical root/evidence
+  aliases and ancestry, including macOS firmlink spellings, before evidence
+  creation. Keep passive copy/recovery
   scope, original retention clocks and actual private/native/erasure admissions
   separate from invented fixture results.
 

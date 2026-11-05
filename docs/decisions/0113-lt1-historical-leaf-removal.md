@@ -22,6 +22,14 @@ evidence-parent and target identities. Sibling metadata establishes only the
 reviewed immediate namespace; it does not attest every descendant's bytes or
 grant any sibling deletion. Do not traverse subdirectories or follow links.
 
+Lexical canonicality is insufficient on macOS: APFS firmlinks can expose the
+same directory under different canonical spellings. Compare opened directory
+identities and bounded descriptor-relative parent chains before target intake
+or evidence creation, and recheck the physical roles during mutation/readback.
+Reject identical roots and either ancestor relationship. Ordinary disjoint roots
+remain valid when they share only a common ancestor. Do not create evidence in
+a target or its reviewed sibling through an alternate spelling.
+
 Check request membership in the existing canonical removal registry before
 parsing caller bytes or acquiring private paths. No caller-selected registry or
 automatic request publication is added. Re-read that fixed registry before
@@ -37,7 +45,10 @@ private modes, source and journal identities. Require separately reviewed ACL
 and process-quiescence context; Unix modes alone do not prove either. Quarantine
 only the target through exclusive same-volume rename before unlinking it. Reject
 unexpected immediate entries, parent/target/journal replacement, changed sibling
-metadata and collisions. Preserve failures and move-before-journal gaps without
+metadata and collisions. Recheck final target bytes, held-descriptor and path
+binding after the last source check before either move or unlink. Refresh source
+and directory roles after long initial reads before creating evidence.
+Preserve failures and move-before-journal gaps without
 resuming or manufacturing missing events. Retain the existing exclusive-owner
 assumption: POSIX unlink does not atomically compare an expected inode, and this
 helper does not isolate a hostile same-UID process.
