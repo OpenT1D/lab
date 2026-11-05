@@ -377,6 +377,77 @@ def _session(raw, name, entry, plan_raw, outer, kind, mode):
     }
 
 
+def _producer_errors(receipt):
+    """Recorded intake failures remain authoritative even beside positive flags."""
+    route.need(
+        type(receipt) is dict
+        and all(name in receipt for name in ("postcheck_error", "output_snapshot_error")),
+        "producer error fields",
+    )
+    for name in ("postcheck_error", "output_snapshot_error"):
+        value = receipt[name]
+        route.need(
+            value is None or (type(value) is str and 0 < len(value) <= 16384),
+            "bounded producer error",
+        )
+    return all(receipt[name] is None for name in ("postcheck_error", "output_snapshot_error"))
+
+
+def _worker_report(worker, entry, packet_hashes, sessions, output_files):
+    route.storage.fields(
+        worker,
+        "schema kind case_id slot verification_context_origin completed construction_count "
+        "patient_reset_calls nonfinite_initial_state_probe initial_state_consumed_observation "
+        "native_basal sessions packet_sha256 native_acceptance native_execution_authorized",
+    )
+    route.need(
+        worker["schema"] == "opent1d.lt1-buffer-worker/2"
+        and all(worker[k] == entry[k] for k in ("kind", "case_id", "slot"))
+        and worker["verification_context_origin"]
+        == ("invented" if entry["kind"] == "invented" else "current-runtime")
+        and type(worker["completed"]) is bool
+        and worker["native_acceptance"] is False
+        and worker["native_execution_authorized"] is False,
+        "worker schema/origin/case context",
+    )
+    route.need(worker["packet_sha256"] == packet_hashes, "worker consumed owned packet")
+    route.need(type(worker["sessions"]) is list, "worker session reports")
+    expected = []
+    for session in sessions:
+        name = session["name"]
+        raw = output_files[name + "/events.jsonl"]
+        # _session already validates these exact bytes. Bind the producer footer,
+        # not its effective status/committed count after an outer failure downgrade.
+        terminal = reader.decode(raw.split(b"\n")[-2]) if raw.endswith(b"\n") else None
+        route.need(
+            terminal is not None and terminal.get("type") == "finish",
+            "worker report without durable terminal",
+        )
+        expected.append(
+            {
+                "name": name,
+                "status": terminal["status"],
+                "rows": terminal["rows_in_memory"],
+                "journal_sha256": route.storage.digest(raw),
+            }
+        )
+    route.need(
+        worker["sessions"] == expected
+        and all(
+            type(item) is dict
+            and type(item.get("rows")) is int
+            and set(item) == {"name", "status", "rows", "journal_sha256"}
+            for item in worker["sessions"]
+        ),
+        "worker reports exact durable sessions",
+    )
+    route.need(
+        worker["completed"]
+        == (bool(expected) and all(s["status"] == "completed" for s in expected)),
+        "worker terminal completion",
+    )
+
+
 def inspect(
     receipt_raw,
     expected_receipt_sha256,
@@ -414,6 +485,7 @@ def inspect(
         "expected actual route receipt",
     )
     receipt = json.loads(receipt_raw, object_pairs_hook=route.storage.unique_object)
+    producer_clean = _producer_errors(receipt)
     entry = route.decode(entry_raw)
     observation = route.decode(observation_raw)
     producer = receipt["source_identity"]
@@ -586,6 +658,7 @@ def inspect(
             )
     completed = (
         channel
+        and producer_clean
         and receipt["source_and_packet_stable"] is True
         and receipt["transport"].get("source_stable") is True
         and receipt["transport"].get("local_exchange_and_process_complete") is True
@@ -596,16 +669,25 @@ def inspect(
         child = json.loads(
             output_files["route.json"], object_pairs_hook=route.storage.unique_object
         )
+        route.storage.fields(
+            child,
+            "schema kind pid ppid startup_environment_keys post_clear_environment_keys bootstrap "
+            "startup_confinement_qualified frame_sha256 ack_sha256 exchange_status worker case_id "
+            "slot native_acceptance native_execution_authorized",
+        )
         route.need(
-            child["kind"] == entry["kind"]
+            child["schema"] == "opent1d.lt1-native-route-child/2"
+            and all(child[k] == entry[k] for k in ("kind", "case_id", "slot"))
+            and child["startup_confinement_qualified"] is False
+            and child["native_acceptance"] is False
+            and child["native_execution_authorized"] is False
             and child["frame_sha256"] == route.storage.digest(frame)
             and child["ack_sha256"] == route.storage.digest(ack),
             "child channel/origin binding",
         )
-        route.need(
-            child["worker"] is None or child["worker"]["packet_sha256"] == receipt["packet_sha256"],
-            "worker consumed owned packet",
-        )
+        if child["worker"] is not None:
+            route.need(child["exchange_status"] == "acknowledged", "worker without child ACK")
+            _worker_report(child["worker"], entry, receipt["packet_sha256"], sessions, output_files)
         route.need(
             child["pid"] == receipt["entry_identity"]["pid"]
             and child["ppid"] == entry["owner_pid"]
@@ -617,6 +699,7 @@ def inspect(
         completed = (
             completed
             and child.get("worker") is not None
+            and child["exchange_status"] == "acknowledged"
             and child["worker"].get("completed") is True
         )
     else:

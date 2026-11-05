@@ -458,6 +458,60 @@ assert result['status']=='completed';print('completed')
             receipt["transport"]["outer"].update(change)
             self.assertEqual(self.inspect(receipt)["status"], "incomplete")
 
+    def test_recorded_producer_errors_cannot_be_hidden_by_positive_flags(self):
+        for field in ("postcheck_error", "output_snapshot_error"):
+            receipt = copy.deepcopy(self.receipt)
+            receipt[field] = "Recorded producer intake failure"
+            self.assertEqual(self.inspect(receipt)["status"], "incomplete")
+            for invalid in (False, 1, "", "x" * 16385):
+                receipt[field] = invalid
+                with self.subTest(field=field, invalid=type(invalid).__name__):
+                    with self.assertRaisesRegex(ValueError, "producer error"):
+                        self.inspect(receipt)
+            del receipt[field]
+            with self.assertRaisesRegex(ValueError, "producer error"):
+                self.inspect(receipt)
+
+    def test_child_and_worker_context_and_durable_session_reports_must_agree(self):
+        changes = [
+            (("schema",), "foreign"),
+            (("case_id",), "C99"),
+            (("slot",), "foreign"),
+            (("exchange_status",), "failed"),
+            (("worker", "schema"), "foreign"),
+            (("worker", "kind"), "native-unadmitted"),
+            (("worker", "case_id"), "C99"),
+            (("worker", "slot"), "foreign"),
+            (("worker", "verification_context_origin"), "current-runtime"),
+            (("worker", "completed"), False),
+            (("worker", "sessions", 0, "name"), "session-0001"),
+            (("worker", "sessions", 0, "status"), "failed"),
+            (("worker", "sessions", 0, "rows"), 0),
+            (("worker", "sessions", 0, "journal_sha256"), "f" * 64),
+        ]
+        for path, value in changes:
+            receipt = copy.deepcopy(self.receipt)
+            files = dict(self.captured["output_files"])
+            child = json.loads(files["route.json"])
+            target = child
+            for key in path[:-1]:
+                target = target[key]
+            target[path[-1]] = value
+            files["route.json"] = route.encoded(child)
+            receipt["output_sha256"]["route.json"] = route.storage.digest(files["route.json"])
+            with self.subTest(path=path), self.assertRaises(ValueError):
+                self.inspect(receipt, files=files)
+
+        # Missing worker evidence remains incomplete; a complete footer is not
+        # overwritten to make it match a downgraded failed/signalled outer.
+        receipt = copy.deepcopy(self.receipt)
+        files = dict(self.captured["output_files"])
+        child = json.loads(files["route.json"])
+        child["worker"] = None
+        files["route.json"] = route.encoded(child)
+        receipt["output_sha256"]["route.json"] = route.storage.digest(files["route.json"])
+        self.assertEqual(self.inspect(receipt, files=files)["status"], "incomplete")
+
     def test_carrier_complete_bootstrap_bound_and_exec_budget_precede_resources(self):
         with (
             patch.object(route.os, "sysconf", return_value=16),
