@@ -7,7 +7,8 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 - Add a separately gated single-leaf removal helper for mixed historical LT1
   directories, preserving the reviewed immediate sibling namespace and existing
   flat/tree removers. Bind request, source, directories, journal and owned outer
-  evidence; retain interruption and mutation gaps. Keep passive copy/recovery
+  evidence; retain interruption and mutation gaps, and recheck live canonical
+  removal authority before mutation and completion. Keep passive copy/recovery
   scope, original retention clocks and actual private/native/erasure admissions
   separate from invented fixture results.
 

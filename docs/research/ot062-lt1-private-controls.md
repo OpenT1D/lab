@@ -183,7 +183,11 @@ still require separate review; mode bits do not establish them.
 The production entry checks the exact raw request's membership in the existing
 canonical removal registry before request/path intake. No alternative registry,
 automatic approval or general recursive cleanup command is added. The registry
-remains empty. Tests inject authority only for freshly invented objects.
+remains empty. Re-read its live membership before moving, unlinking and recording
+completion. Revocation is not ignored merely because the operation previously
+passed admission: retain prepared/quarantined evidence and stop further mutation.
+Historical readback does not restore or require the old live grant. Tests inject
+authority only for freshly invented objects.
 
 Quarantine only the pinned target through an exclusive same-volume rename. Hold
 and recheck descriptors, exact bytes, source, journal, directories and immediate

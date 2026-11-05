@@ -24,7 +24,11 @@ grant any sibling deletion. Do not traverse subdirectories or follow links.
 
 Check request membership in the existing canonical removal registry before
 parsing caller bytes or acquiring private paths. No caller-selected registry or
-automatic request publication is added. Retain private fixture injection for
+automatic request publication is added. Re-read that fixed registry before
+moving or unlinking the target and before recording completion; an initial
+snapshot is not an irrevocable grant. Withdrawal retains the actual prepared or
+quarantined prefix and prevents further mutation. Cold historical readback does
+not require restoring a withdrawn live grant. Retain private fixture injection for
 newly created invented objects only. Actual private data still needs separate
 review and exact removal admission after process, storage and recovery checks.
 
@@ -52,7 +56,7 @@ owner alone runs the final full repository check. Exercise actual owned processe
 on fresh invented mixed directories: success, deadline, cancellation, exact
 quarantine prefix and untouched sibling/process sentinels. Challenge stale bytes,
 source/context/pins, parent/evidence/journal swaps, links, namespace changes and
-late transitions. Keep portable fixtures separate from selected native runtime
+late transitions, including live canonical authority withdrawal. Keep portable fixtures separate from selected native runtime
 qualification; no existing private file is a destructive test input.
 
 The private copy/recovery assessment may narrow actual previous exclusions using
