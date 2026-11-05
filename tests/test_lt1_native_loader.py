@@ -285,12 +285,19 @@ class LoaderContractTests(unittest.TestCase):
         node, log = "/ordinary/bin/node", "/private/tmp/base.log"
         base = loader._profile(node, root, "base", log)
         twin = loader._profile(node, root, "allow-twin", log)
+        deny = '(deny file-map-executable (literal "/private/tmp/fresh-targets/addon.node"))\n'
+        self.assertTrue(base.endswith(deny))
         self.assertEqual(
-            twin[len(base) :],
-            '(allow file-read-data (literal "/private/tmp/fresh-targets/module.mjs"))\n'
+            twin,
+            base.removesuffix(deny)
+            + '(allow file-read-data (literal "/private/tmp/fresh-targets/module.mjs"))\n'
             '(allow file-map-executable (literal "/private/tmp/fresh-targets/addon.node"))\n',
         )
-        self.assertEqual(base.count(str(root / "addon.node")), 1)
+        self.assertEqual(base.count(str(root / "addon.node")), 2)
+        self.assertNotIn(deny, twin)
+        self.assertNotIn(
+            '(allow file-map-executable (literal "' + str(root / "addon.node") + '"))', base
+        )
         self.assertNotIn(str(root / "module.mjs"), base)
         self.assertIn('(allow file-read-data (literal "/ordinary/bin/node")', base)
         self.assertNotIn('(subpath "/private/tmp', base)
