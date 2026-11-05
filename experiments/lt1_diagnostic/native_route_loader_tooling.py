@@ -216,7 +216,9 @@ def _profile(node, targets, slot, log, *, source_root=ROOT):
             "",
         ]
     )
-    if slot == "allow-twin":
+    if slot == "base":
+        base += f"(deny file-map-executable (literal {q(PurePosixPath(targets) / 'addon.node')}))\n"
+    else:
         base += f"(allow file-read-data (literal {q(PurePosixPath(targets) / 'module.mjs')}))\n"
         base += (
             f"(allow file-map-executable (literal {q(PurePosixPath(targets) / 'addon.node')}))\n"
