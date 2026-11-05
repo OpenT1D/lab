@@ -1,7 +1,5 @@
 # Decision records
 
-- [0092 — Exact M3-era MMTT reader successor](0092-exact-m3-reader-successor.md): preserve the original registry and qualify one complete successor.
-
 - [0091 — Shared M3 workbench](0091-m3-shared-workbench.md): preserve the native frozen comparison and causal readers through installed project services.
 
 - [0090 — Integrated native candidate](0090-integrated-native-candidate.md): qualify M4 and the connected synthetic study in an explicit internal candidate while preserving readers and runtime boundaries.
@@ -177,3 +175,22 @@ The M4 records were assigned numbers 0016–0028 when the parallel M3, LIT-002 a
 - [0002 — Reference reproduction before integration](0002-m0-reference-first.md): accepted M1 engine-integration boundary following native probes, with reproduction separated from comparison.
 
 - [0001 — Project foundation](0001-project-foundation.md): modular laboratory, repository structure, language, licensing and current tooling.
+
+- [0092 — Exact M3-era MMTT reader successor](0092-exact-m3-reader-successor.md).
+- [0093 — LT1 sampled preparation](0093-lt1-sampled-preparation.md): separate kernel/fixture controls from native admission.
+- [0094 — LT1 diagnostic harness and reader](0094-lt1-diagnostic-harness-reader.md): independent construction, causal release and exact fractional-interval reading with native admission closed.
+- [0095 — Separate LT1 native worker admission](0095-lt1-native-worker-admission.md): fixed reviewed grants, complete staging identities and unchanged setup/host gates.
+- [0096 — Durable LT1 attempt integration](0096-lt1-durable-attempt-integration.md): separate integration authority, fsynced callback prefixes and engine-free process-receipt reconstruction without native admission.
+- [0097 — Separate LT1 setup request authority](0097-lt1-setup-request-authority.md): exact materialization requests, fixture-qualified data writing and independently verified actual setup receipts remain separate from execution admission.
+- [0098 — Private retention planning](0098-private-retention-planning.md): private expiry, copy/revision history and recovery/hold blockers produce review items without removal or native authority.
+- [0099 — LT1 quarantine and host fixtures](0099-lt1-quarantine-and-host-fixtures.md): exact-file quarantine/removal has separate empty authority and retained partial evidence; versioned host boundary fixtures confer no native or effective-erasure admission.
+- [0100 — LT1 prelaunch and recovery evidence](0100-lt1-prelaunch-and-recovery-evidence.md): read-only native preparation and logical recovery evidence keep current absence, retention timing and operational authority separate.
+- [0101 — LT1 owned pre-start and recovery probe](0101-lt1-owned-prestart-and-recovery-probe.md): existing exact grants guard fixed owned launch before startup; read-only local recovery observations grant no coverage or removal authority.
+- [0102 — LT1 attempt and recovery readback](0102-lt1-attempt-and-recovery-readback.md): correlate exact observations without granting native or removal authority.
+- [0103 — LT1 entry observations and review bundles](0103-lt1-entry-observation-review-bundle.md): bounded entry framing and durable private proposals preserve original clocks and closed operational authorities.
+- [0104 — LT1 entry handoff and copy registration](0104-lt1-entry-handoff-copy-registration.md): bound frame acknowledgment and propose explicit bundle-copy accounting without native or removal authority.
+- [0105 — LT1 dedicated channels and whole-bundle removal cycle](0105-lt1-dedicated-channels-bundle-cycle.md): exercise inherited process channels and fresh metadata removal without changing native or removal admission.
+- [0106 — LT1 owned transport and bundle-copy reconciliation](0106-lt1-owned-transport-reconciliation.md): reuse the shared owner for dedicated channels and propose allocated-copy absence without native, retention-timing or erasure authority.
+- [0107 — LT1 tooling-host probe and retained removal evidence](0107-lt1-tooling-host-removal-evidence.md): explicit engine-free host observations and immutable private removal packets preserve closed native and erasure gates.
+- [0108 — LT1 candidate host plan and exact packet cleanup](0108-lt1-candidate-host-plan-packet-cleanup.md): bind a static candidate-specific profile plan and prepare unadmitted packet cleanup without requiring original live evidence.
+- [0109 — LT1 entry continuation and packet-copy reconciliation](0109-lt1-entry-continuation-packet-reconciliation.md): gate versioned entry continuation and exact allocated packet-copy absence proposals without native or erasure admission.

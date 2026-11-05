@@ -40,11 +40,12 @@ const html = body => `<!doctype html><link rel="icon" href="_static/icon.svg"><t
 // Like Sphinx, expose the result link and finished heading while a non-blocking
 // summary fetch is still pending. Real HTTP latency makes an early click abort
 // that request; no browser errors are intercepted or substituted.
-function searchFixture(site, fault = 'healthy') {
+function searchFixture(site, fault = 'healthy', { deferred = false, stalled = false } = {}) {
   const state = { summaryFinished: false, targetRequested: false, targetBeforeSummary: false };
   const summary = site.handle('__search-summary.txt', (_request, response) => {
     response.writeHead(fault === 'missing summary' ? 404 : 200, { 'Content-Type': 'text/plain' });
     response.flushHeaders();
+    if (stalled) return;
     const timer = setTimeout(() => {
       response.end('Delayed summary is complete');
     }, 800);
@@ -60,14 +61,17 @@ function searchFixture(site, fault = 'healthy') {
   const lateFault = {
     'console error': 'console.error("delayed search console fault")',
     'JavaScript exception': 'throw new Error("delayed search page fault")',
+    'queued console error': 'setTimeout(() => console.error("queued search console fault"), 0)',
+    'queued JavaScript exception': 'setTimeout(() => { throw new Error("queued search page fault"); }, 0)',
   }[fault] || '';
   const source = site.put('__search.html', html(`
     <div id="search-results"><h2>Search Results</h2><a href="${target}">First result</a><p id="summary"></p></div>
     <script>
-      fetch(${JSON.stringify(summary)}).then(response => response.text()).then(text => {
-        document.getElementById('summary').textContent = text;
-        ${lateFault}
-      });
+      window.startSearchSummary = () => fetch(${JSON.stringify(summary)}).then(response => response.text()).then(text => {
+          document.getElementById('summary').textContent = text;
+          ${lateFault}
+        });
+      ${deferred ? '' : 'window.startSearchSummary();'}
     </script>`));
   return { source, target, summary, state };
 }
@@ -137,6 +141,90 @@ test('search keeps monitoring asset errors after opening the result', async ({ p
     await testInfo.attach('search-target-fault.json', { body: JSON.stringify({ ...fixture.state, ...receipt }), contentType: 'application/json' });
   }
 });
+
+test('search waits for a summary started after the cached networkidle state', async ({ page, faultSite }) => {
+  const fixture = searchFixture(faultSite, 'healthy', { deferred: true });
+  const { receipt, stop } = monitor(page);
+  try {
+    await page.goto(fixture.source);
+    await page.waitForLoadState('networkidle');
+    await page.evaluate(() => { setTimeout(() => window.startSearchSummary(), 100); });
+    await waitForSearchCompletion(page, receipt);
+    expect(await page.locator('#summary').textContent()).toBe('Delayed summary is complete');
+    await page.getByRole('link', { name: 'First result' }).click();
+    await expect(page).toHaveURL(fixture.target);
+    await page.waitForLoadState('networkidle');
+    assertClean(receipt);
+    expect(fixture.state).toEqual({ summaryFinished: true, targetRequested: true, targetBeforeSummary: false });
+  } finally { stop(); }
+});
+
+for (const [fault, error] of [
+  ['queued console error', /Console: queued search console fault/],
+  ['queued JavaScript exception', /JavaScript: (?:Error: )?queued search page fault/],
+]) {
+  test(`search preserves ${fault} after the summary body finishes`, async ({ page, faultSite }) => {
+    const fixture = searchFixture(faultSite, fault);
+    const { receipt, stop } = monitor(page);
+    try {
+      await page.goto(fixture.source);
+      await expect(waitForSearchCompletion(page, receipt)).rejects.toThrow(error);
+      expect(receipt.errors.some(message => error.test(message))).toBe(true);
+      expect(fixture.state.summaryFinished).toBe(true);
+      expect(fixture.state.targetRequested).toBe(false);
+    } finally { stop(); }
+  });
+}
+
+test('search fails within a bounded deadline when summary headers arrive without a body', async ({ page, faultSite }) => {
+  const fixture = searchFixture(faultSite, 'healthy', { stalled: true });
+  const { receipt, stop } = monitor(page);
+  try {
+    await page.goto(fixture.source);
+    await expect(waitForSearchCompletion(page, receipt, { timeout: 300 })).rejects.toThrow(/Search completion deadline exceeded; pending requests: .*__search-summary.txt/);
+    expect(fixture.state.summaryFinished).toBe(false);
+    expect(fixture.state.targetRequested).toBe(false);
+    expect(receipt.errors.some(error => error.includes('deadline exceeded'))).toBe(true);
+  } finally { stop(); }
+});
+
+test('search deadline bounds browser settlement when page timers hold callbacks', async ({ page, faultSite }) => {
+  const fixture = searchFixture(faultSite);
+  const { receipt, stop } = monitor(page);
+  try {
+    await page.goto(fixture.source);
+    await page.evaluate(() => {
+      window.heldSearchCallbacks = 0;
+      window.setTimeout = () => { window.heldSearchCallbacks += 1; return 0; };
+    });
+    await expect(waitForSearchCompletion(page, receipt, { timeout: 2000 })).rejects.toThrow(/Search completion deadline exceeded; pending requests: browser settlement/);
+    expect(fixture.state.summaryFinished).toBe(true);
+    expect(await page.evaluate(() => window.heldSearchCallbacks)).toBeGreaterThan(0);
+    expect(fixture.state.targetRequested).toBe(false);
+    expect(receipt.errors.some(error => error.includes('deadline exceeded'))).toBe(true);
+    expect(page.url()).toBe(fixture.source);
+  } finally { stop(); }
+});
+
+for (const [fault, error] of [
+  ['missing summary', /HTTP 404: .*__search-summary.txt/],
+  ['aborted summary', /Request failed: .*__search-summary.txt/],
+]) {
+  test(`search preserves ${fault} started after cached networkidle`, async ({ page, faultSite }) => {
+    const fixture = searchFixture(faultSite, fault, { deferred: true });
+    if (fault === 'aborted summary') await page.route('**/__search-summary.txt', route => route.abort('aborted'));
+    const { receipt, stop } = monitor(page);
+    try {
+      await page.goto(fixture.source);
+      await page.waitForLoadState('networkidle');
+      await page.evaluate(() => { setTimeout(() => window.startSearchSummary(), 100); });
+      await expect(waitForSearchCompletion(page, receipt)).rejects.toThrow(error);
+      expect(receipt.errors.some(message => error.test(message))).toBe(true);
+      expect(fixture.state.targetRequested).toBe(false);
+      expect(page.url()).toBe(fixture.source);
+    } finally { stop(); }
+  });
+}
 
 const cases = [
   ['missing image', '<img src="__missing-image.svg">', /HTTP 404: .*__missing-image.svg/],

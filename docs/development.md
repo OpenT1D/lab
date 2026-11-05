@@ -38,6 +38,24 @@ Ownership below means the implementation boundary responsible for a behavior. Re
 | Task registry, dispatch and setup | `experiments/workflows/`, `experiments/setup/` | `test_workflow_entry.py`, `test_workflow_study.py`, `test_task_setup.py`: passive checks, explicit runtime selection, dispatch, source binding and installation refusal. Test files in this table are under `tests/` unless stated otherwise. |
 | OT-059 shared contract packet | `experiments/shared_contracts/`; [contract guide](shared-core-contracts.md) | `test_shared_contract_packet.py`: ten-route inventory, two-route metadata/lineage, refusal, actual MMTT and controlled M4 failed-launch/relocation readers. No native M4 success or route migration. |
 | Minimal OT-061/064 project services | `experiments/shared_services/`; [service guide](shared-project-services.md) | `test_shared_services.py`: complete event ledger, freezes/retries, isolated MMTT workers, controlled M4 failure, forensic recovery, native readers/relocation and observed nested POSIX ownership. No installed SDK or native M4 success. |
+| OT-062 LT1 worker successor | `experiments/lt1_diagnostic/`; [worker guide](research/ot062-lt1-native-worker.md) | `test_lt1_native_loader.py`: invented admission/constructor controls and production refusal. No native setup/import, positive ts-node registration or host execution qualification. |
+| OT-062 host fixture qualification | `experiments/lt1_diagnostic/host_probe.py`; [host record](research/ot062-lt1-host-qualification.md) | `test_lt1_host_probe.py`: pure evidence/source/profile controls. Explicit Darwin arm64 probe uses scripted Python only; native host/runtime/store qualification remains open. |
+| OT-062 durable LT1 attempt integration | `experiments/lt1_diagnostic/`; [integration record](research/ot062-lt1-auth-integration.md) | `test_lt1_journal.py`: dual-grant controls, scripted process deadline/cancel and engine-free fractional-prefix reconstruction. Actual native loader, immutable host launch and store route remain unqualified. |
+| OT-062 passive archive preflight | `experiments/lt1_diagnostic/archive_preflight.py`; [notice/qualification packet](research/ot062-lt1-qualification-packet.md) | `test_lt1_archive_preflight.py`: invented malformed archives, bounds, hidden metadata and exact notice-inventory/lock binding. Root checks do not fetch, extract or install packages; native qualification remains separate. |
+| OT-062 proposed headless payload selection | `experiments/lt1_diagnostic/payload_selection.py`; [selection/runtime record](research/ot062-lt1-qualification-packet.md) | `test_lt1_payload_selection.py`: exact inventory/profile/report bindings, explicit exclusion, notice preservation and rejected authority promotion. Selection remains metadata-only; no staging or native loading. |
+| OT-062 frozen data stager | `experiments/lt1_diagnostic/frozen_setup.py`, `setup_payload.py`; [setup packet](research/ot062-lt1-setup-packet.md) | `test_lt1_frozen_setup.py`, `test_lt1_setup_payload.py`, `test_lt1_setup_process.py`: invented data/archive materialization, descriptor/marker races, schema/limits and owned stops. No actual native setup or automatic receipt/execution admission. |
+| OT-062 private retention controls | `experiments/lt1_diagnostic/retention.py`; [private controls](research/ot062-lt1-private-controls.md) | `test_lt1_retention.py`: invented expiry, copy/revision origins, policy/predecessor preservation, backup/hold/context blockers and false authorities. No private-file access, removal, scheduler or native host/erasure qualification. |
+| OT-062 host boundary and removal fixtures | `experiments/lt1_diagnostic/host_boundary_probe.py`, `host_boundary_fixture.py`, `removal.py`, `control_identity.py`; [record](research/ot062-lt1-host-removal.md) | `test_lt1_host_boundary.py`, `test_lt1_removal.py`, `test_lt1_removal_process.py`: pure allow/deny/process-schema controls, exact invented quarantine/unlink, malformed inputs, descriptor/journal/namespace changes and owned stops. Actual Darwin sandbox qualification is explicit; all production authorities and effective-erasure clearance remain closed. |
+| OT-062 native/recovery evidence preparation | `experiments/lt1_diagnostic/host_context.py`, `native_preflight.py`, `recovery_evidence.py`; [record](research/ot062-lt1-native-recovery.md) | `test_lt1_host_context.py`, `test_lt1_native_preflight.py`, `test_lt1_recovery_evidence.py`: mocked fixed collector, byte-only command/environment/source/reader binding and invented scoped absence/coverage/deadline/history controls. No automatic host capture, Node, actual deletion or admission. |
+| OT-062 owned pre-start and recovery observations | `experiments/lt1_diagnostic/native_launcher.py`, `native_supervisor.py`, `recovery_probe.py`; unchanged shared supervisor code; [record](research/ot062-lt1-prestart-recovery-probe.md) | `test_lt1_native_launcher.py`, `lt1_prestart_fixture.py`, `test_lt1_recovery_probe.py`: mocked native packet binding, late owner/source/byte refusals, actual fixed Python stdio/environment/owned stops, mocked recovery queries and fresh exact-file readback. Explicit real recovery capture stays private; no automatic Node, scope approval or removal. |
+| OT-062 correlated attempt/recovery readback | `experiments/lt1_diagnostic/native_readback.py`, `recovery_readback.py`; [record](research/ot062-lt1-evidence-readback.md) | `test_lt1_native_readback.py`, `test_lt1_recovery_readback.py`: exact invented packet/journal/process binding through the unchanged reader, incomplete prefixes, copy/provenance/history/interval mapping and conservative timing. No automatic OS query, native qualification, proposal saving or removal. |
+| OT-062 entry observations and private review bundles | `experiments/lt1_diagnostic/entry_observation.mjs`, `entry_readback.py`, `review_bundle.py`; [record](research/ot062-lt1-entry-review-bundle.md) | `test_lt1_entry_readback.py` / `lt1_entry_observation.test.mjs`: invented strict frames, canonical grants/time, exact entry/parent bindings and empty production-observation gate. `test_lt1_review_bundle.py`: fresh invented private bundles, intent/publication/replay, inherited origins/holds, stale assessments and whole-bundle unadmitted removal requests. No automatic native launch/transport or private-pilot changes. |
+| OT-062 entry handoff and copy registration | `experiments/lt1_diagnostic/entry_handoff.mjs`, `handoff_readback.py`, `bundle_registration.py`; [record](research/ot062-lt1-handoff-copy-registration.md) | `test_lt1_handoff_readback.py` / `lt1_entry_handoff.test.mjs`: invented bounded frame/ACK, EOF/backpressure/deadline/cancel/cleanup and byte/source readback. `test_lt1_bundle_registration.py`: fresh metadata bundle-copy proposals, exact base/history/origins/holds, allocation bounds and late namespace/source refusal. No native launch, register activation, coverage or removal admission. |
+| OT-062 dedicated channels and whole-bundle cycle | `experiments/lt1_diagnostic/entry_channels.mjs`; [record](research/ot062-lt1-channel-bundle-cycle.md) | `test_lt1_entry_channels.py`: real tooling-Node process channels, EOF/deadline/cancel and owned cleanup. `test_lt1_bundle_removal_cycle.py`: fresh parent publication/registration and exact pinned input validation before the unchanged fixture-only owned removal phase; separate actual worker isolation, closed production gate and strict prefix readback. No actual native qualification or private-data erasure. |
+| OT-062 owned transport and bundle reconciliation | `experiments/lt1_diagnostic/entry_transport.py`, `entry_exec.py`, `bundle_reconciliation.py`; [record](research/ot062-lt1-owned-transport-reconciliation.md) | `test_lt1_entry_transport.py`: direct same-PID inherited channels under the shared owner, bounded frame/ACK/EOF and cleanup. `test_lt1_bundle_reconciliation.py`: exact retained registration/removal bindings, complete-only allocated-copy absence proposals and incomplete preservation. No native route, register activation or effective erasure. |
+| OT-062 tooling host and removal evidence | `experiments/lt1_diagnostic/host_entry_probe.py`, `host_entry_fixture.mjs`, `reconciliation_packet.py`; [record](research/ot062-lt1-tooling-host-removal-evidence.md) | `test_lt1_host_entry.py`: bounded validators/profile controls; explicit actual OS probe separately. `test_lt1_reconciliation_packet.py`: actual owned invented-removal receipts, durable intent/publication/reopen, conservative separate copy accounting and retained partial evidence. No selected-runtime execution, active register or effective erasure. |
+| OT-062 candidate host plan and packet cleanup | `experiments/lt1_diagnostic/native_host_plan.py`, `packet_cleanup.py`; [record](research/ot062-lt1-candidate-host-packet-cleanup.md) | `test_lt1_native_host_plan.py`: exact static candidate/profile/source/roots, no native start or authority transfer. `test_lt1_packet_cleanup.py`: exact published-packet inventory, historical/current context separation, conservative optional accounting and fixture-only owned removal. No production admission or effective private erasure. |
+| OT-062 entry continuation and packet-copy reconciliation | `experiments/lt1_diagnostic/native_entry.py`, `native_entry.mjs`, `packet_reconciliation.py`; [record](research/ot062-lt1-entry-continuation-packet-reconciliation.md) | `test_lt1_native_entry.py`: prepare-only source/profile contract, early exact gates and owned invented FD3/4 continuation. `test_lt1_packet_reconciliation.py`: exact retained accounting, complete-only allocated-copy proposals, incomplete preservation and live rechecks. No new native launcher, native qualification or effective private erasure. |
 | Internal OT-060 installed developer candidate | `scripts/build_sdk.py`, `packaging/sdk/`, `experiments/shared_services/installed.py`; [installed guide](installed-sdk.md) | `test_installed_sdk.py`, `sdk_ownership_probe.py`, `sdk_cancel_probe.py`, `sdk_early_cancel_probe.py`: noneditable wheels outside checkout, MMTT run/retry/move/read, passive M4 and failed readers, wrapper A/B provenance, incompatible readers, poisoned lookup/cache, unsafe output/FIFO refusal, controlled installed/early cancellation and owned child cleanup. Native M4 success, general upgrades and other-host qualification remain open. |
 | Explicit installed M4 successor | `experiments/m4/installed_study/`, `experiments/shared_services/installed_m4.py`, `scripts/prepare_m4_runtimes.py`; [candidate guide](installed-m4.md) | `test_installed_m4.py`: preserved scientific criteria/conditions, reviewed selectors, inert profile/version/provenance consistency, actual stage ownership and FIFO refusal. `test_installed_sdk.py` covers source/data-wheel registration and missing-attachment refusal without native setup. Actual native checks use the separately reviewed native/observer overlays and the [preselected verification record](research/ot060-native-m4.md); source-checkout recorder tests remain distinct from installed scientific execution. |
 | Thin installed project GUI and formative packet | `packaging/sdk/opent1d_lab/_gui*`, `gui.py`, `study_packet.py`; [GUI guide](installed-gui.md) | `test_installed_gui.py`: controlled admission, paths, report copies, HTTP deadlines/authentication and lifecycle; `test_installed_sdk.py`: actual installed GUI/CLI MMTT plan/parent/attempt parity, report downloads and relocation. `test_installed_gui_frontend.py` / `installed_gui_frontend.mjs`: reproduced parent/readiness/report identity regressions. `test_shared_gui_packet.py`: reference bindings, unchanged source, unanswered observations and tampering. `_gui_assets/research.js` owns the three-screen presentation; `tests/browser/three-screens.spec.mjs` exercises editor preservation before autosave, primary guided actions, keyboard/reflow, active cancellation, used-plan identity and late report navigation. Actual native GUI/browser and agent checks are separate evidence in the [selected record](research/ot065-072-shared-gui.md), not human sessions. |
@@ -118,7 +136,10 @@ exercise to the two synthetic MMTT tasks. Initial publication used disabled
 Actions; later activation and exact hosted receipts are recorded in the
 [security boundary](publication-security.md). Local results must not be reported
 as hosted CI. The active `Root checks` job explicitly installs the selected Python 3.12, uv 0.11.16 and Node 24.22.1,
-then runs the root suite and standard-library boundary checks. Its Node preflight
+then runs style/documentation and standard-library boundary checks after four isolated
+root-test shards succeed. The default local command still runs all stages and
+all tests. The [CI reliability record](research/ci-reliability.md) owns the
+measured partition, complete-selection checks and exact-run diagnostics. Its Node preflight
 fails when Node is unavailable. Historical native jobs additionally require
 literal private-repository/manual-dispatch guards and cannot run in a public
 repository, even if a changed scope helper reports them enabled.
@@ -147,7 +168,8 @@ Follow the [activation procedure](publication-security.md#activate-on-the-select
 to review the exact Action allowlist, enable the intended checks, obtain actual
 PR/main results and only then require `Repository checks`. Source changes alone
 do not activate GitHub settings. That stable result now aggregates the root job,
-the Linux/macOS/Windows public-smoke matrix, the Linux Chromium application flows and
+the complete four-shard root-test matrix, the Linux/macOS/Windows public-smoke
+matrix, the three-shard Linux Chromium application family and
 the Chromium/Firefox/WebKit documentation matrix. Every
 family must succeed; cancellation or a missing result cannot pass the gate.
 Dependency Review is also required on pull requests. Only its explicit skip on
@@ -164,15 +186,33 @@ npm --prefix tests/browser test
 ```
 
 Set `PLAYWRIGHT_BROWSERS_PATH` to an absolute temporary browser-cache directory
-first. Linux hosts can add `-- --with-deps` to the browser-install command. The
-suite uses Playwright 1.64.1, one Chromium worker, no retries and fourteen synthetic
-checkout/installed task, failure, concept and reopen flows. Its twelve-minute
-suite ceiling and twenty-minute Chromium job retain the separate five-minute
-documentation checks and cold setup; the [M3 integration record](research/installed-m3.md#hosted-chromium-correction)
-records the actual failed eight-minute attempt and pending-action correction.
-The Firefox/WebKit documentation-only jobs retain fifteen minutes.
-Synthetic screenshots, traces, logs and failure
-workspaces are under `output/playwright/`. The same required job also runs the
+first. For Linux system dependencies, run the complete bounded wrapper as root so its
+supervisor can terminate owned apt descendants:
+
+```sh
+sudo --preserve-env=PLAYWRIGHT_BROWSERS_PATH -- "$(command -v node)" \
+  tests/browser/install-browser.mjs --with-deps chromium
+```
+
+Use an ephemeral, dedicated browser cache; this command does not launch the app
+as root. System
+dependencies and browser download share a 300-second budget and log separate
+phases. The ephemeral hosted browser runners select the official Ubuntu archive
+for the exact Azure mirror URI and retain authenticated, fail-closed APT setup;
+see the [bounded CI record](research/ci-reliability.md#selected-implementation). The
+suite uses Playwright 1.64.1, one Chromium worker, no retries and 17 synthetic
+checkout/installed task, failure, concept and reopen cases. CI partitions those
+cases into three isolated jobs, retaining one worker per job, zero retries and
+an eight-minute budget per shard. Complete whole-file groups are selected by
+`OPENT1D_BROWSER_SHARD=1/3` (or `2/3`, `3/3`) with
+`--config application-ci.config.mjs`; both configured and recursively present
+application specs must be assigned exactly once. The default local combined suite retains the
+M3 increment's twelve-minute ceiling; the separate documentation engines keep
+fifteen-minute jobs and five-minute test budgets. The
+[M3 integration record](research/installed-m3.md#hosted-chromium-correction)
+records the actual pending-action/synchronization defect and its regression.
+Synthetic screenshots, traces, logs and failure workspaces are under
+`output/playwright/`. The separate required browser matrix runs the
 [documentation browser checks](documentation-publication.md#browser-regression-checks)
 in a separate output directory, with a five-minute CI budget for each engine.
 All three documentation engines must pass the required gate. The guide includes
@@ -198,6 +238,19 @@ The site includes only the listed pages. Data, results, build outputs and hidden
 The research report's Mermaid diagram uses a pinned browser library from jsDelivr and requires network access to render. The document text, navigation and search are served locally.
 
 The [M3 tutorial](m3-tutorial.md) owns the separately locked statistical-estimator environment and synthetic forecast checks. Repository tests also validate M3 contracts and artifacts; native estimator execution remains separate, as do all original physiological regression jobs.
+
+For CI diagnosis, a complete root selection can be listed without execution:
+
+```sh
+uv run --locked python scripts/root_tests.py --shard 1/4 --list
+uv run --locked python scripts/check.py --stage tests --test-shard 1/4
+```
+
+Use all four shards to cover the full suite. The default full command never
+accepts an implicit partial selection. Root receipts under `results/ci/` bind
+the source and selected IDs and record failures and skips. For rerun status,
+use the [exact-run diagnostic](research/ci-reliability.md#check-provenance-and-verification-handoff);
+a successful latest attempt can coexist with stale failed entries in the PR UI.
 
 ## Individual checks
 

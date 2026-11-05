@@ -89,17 +89,30 @@ def check_style() -> None:
     check_navigation(markdown)
 
 
-def check_tests() -> None:
-    run(sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v")
+def check_tests(shard="1/1") -> None:
+    run(
+        sys.executable,
+        "scripts/root_tests.py",
+        "--shard",
+        shard,
+        "--output",
+        "results/ci/root-tests-" + shard.replace("/", "-of-") + ".json",
+    )
 
 
 def main(argv=None) -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--stage", choices=("style", "tests", "docs"))
+    parser.add_argument("--test-shard", help="INDEX/TOTAL; requires --stage tests")
     args = parser.parse_args(argv)
+    if args.test_shard and args.stage != "tests":
+        parser.error("--test-shard requires --stage tests")
     stages = {"style": check_style, "tests": check_tests, "docs": build_documentation}
     for stage in (args.stage,) if args.stage else stages:
-        stages[stage]()
+        if stage == "tests" and args.test_shard:
+            check_tests(args.test_shard)
+        else:
+            stages[stage]()
 
 
 if __name__ == "__main__":

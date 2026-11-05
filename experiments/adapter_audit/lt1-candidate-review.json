@@ -1,0 +1,1057 @@
+{
+  "schema": "opent1d.ot062-lt1-candidate-review/1",
+  "date": "2026-11-01",
+  "base_revision": "a2e5058ec833e016033195843b623f6bce92762c",
+  "candidate": "lt1-cambridge-audit1-node22.23.4-darwin-arm64-preparation-1",
+  "status": "preparation only; no setup or native execution authority",
+  "authorizations": {
+    "native_installation": false,
+    "native_execution": false,
+    "public_native_ci": false,
+    "native_bundle_distribution": false,
+    "parameter_table_redistribution": false
+  },
+  "upstream_revision": "9a6092065bd821f88691cd8d03b0550acd665573",
+  "historical_lock_sha256": "44ad7ba062a7d67032d91fcc9e0fa2aa3910b3856dce76bee5ba32093c1a150e",
+  "node_artifact": {
+    "url": "https://nodejs.org/dist/v22.23.4/node-v22.23.4-darwin-arm64.tar.gz",
+    "sha256": "c9e1dbc748b33ed2d14f42445191ecaf14c56259c7a9a26d0042c49ec2b66428",
+    "bytes": 49996369,
+    "members": 5866,
+    "notice_files": [
+      {
+        "path": "node-v22.23.4-darwin-arm64/LICENSE",
+        "sha256": "c738ae413cf561f174e34f6961f8ca458aae2369a73640dda6234c629b98bcc4"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/LICENSE",
+        "sha256": "7610d223851f421d315df5e77974f1c68a04b97e02060e5bbbcf13d95e3ca257"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/path-scurry/LICENSE.md",
+        "sha256": "8a1af140fdfbf5afd3df27f7e662f989c5b963a300020dfafce42033cae9e004"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/json-stringify-nice/LICENSE",
+        "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/isexe/LICENSE",
+        "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/p-map/license",
+        "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/debug/LICENSE",
+        "sha256": "3a61c6c96caf5c1d9b623fb9b04c822b783dfcb78aa7e49c76a3f643e6ed7f95"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/nopt/LICENSE",
+        "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/shebang-command/license",
+        "sha256": "69dee148a2cc470554dfa7142e830662062394d0fe67cddd379aba90dc60d6b3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/npm-bundled/LICENSE",
+        "sha256": "ec361617c0473d39347b020eaa6dceedaebab43879fa1cd8b8f0f97a8e80a475"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/is-cidr/LICENSE",
+        "sha256": "23e60503dc06abf04b9e535e17797b4e0f9224e6c5abf9207317d5a67c88c743"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/graceful-fs/LICENSE",
+        "sha256": "f65c5d9f22a317b2a10803bd1868461ce6499c2ed7217bc80c0cc772a748789c"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/libnpmexec/LICENSE",
+        "sha256": "7967f87257c7d5f0ef29012d472a8b99a0fb1c5202b6d861a2c81671329a2ee4"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/cidr-regex/LICENSE",
+        "sha256": "23e60503dc06abf04b9e535e17797b4e0f9224e6c5abf9207317d5a67c88c743"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/string-width-cjs/license",
+        "sha256": "48da2f39e100d4085767e94966b43f4fa95ff6a0698fba57ed460914e35f94a0"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/which/LICENSE",
+        "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/which/node_modules/isexe/LICENSE.md",
+        "sha256": "8a1af140fdfbf5afd3df27f7e662f989c5b963a300020dfafce42033cae9e004"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/minipass-fetch/LICENSE",
+        "sha256": "1dedee6f84f5875ce4dc398d4d767274eb952a43cfd510a6ada856b2ed347472"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/qrcode-terminal/LICENSE",
+        "sha256": "b3c7a2fadb2515b8106eae58439a4b9c0581a4eaa88d6a265701f8d4dd7dadb8"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/validate-npm-package-name/LICENSE",
+        "sha256": "f3e1645267f7dd77ee6545283cc1766e5883e8fb3b5088fe2cfb995defbb3dde"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/tar/LICENSE.md",
+        "sha256": "8a1af140fdfbf5afd3df27f7e662f989c5b963a300020dfafce42033cae9e004"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/npm-package-arg/LICENSE",
+        "sha256": "898c2bcff663681498ad1ca8235d45b6e70b10cdf1f869a5b5e69f6e46efedd3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/libnpmsearch/LICENSE",
+        "sha256": "77d72758faff2d3a086b1c77f66f4dcfa63a1ee1a9bab5df4ab3c2e8f3eb646d"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/npm-pick-manifest/LICENSE.md",
+        "sha256": "720836c9bdad386485a492ab41fe08007ecf85ca278ddd8f9333494dcac4949d"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/libnpmteam/LICENSE",
+        "sha256": "77d72758faff2d3a086b1c77f66f4dcfa63a1ee1a9bab5df4ab3c2e8f3eb646d"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/http-proxy-agent/LICENSE",
+        "sha256": "71368fd0f5b4129191e9afcd1e1ef2dc89a9090d3e4d80bbab92dafd032b3bef"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/read-package-json-fast/LICENSE",
+        "sha256": "ec361617c0473d39347b020eaa6dceedaebab43879fa1cd8b8f0f97a8e80a475"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/yallist/LICENSE.md",
+        "sha256": "a49c9ba464796f65b59fca3f1e6ca40912df1e859f575383223f7ec6c5baae09"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/minipass/LICENSE.md",
+        "sha256": "8a1af140fdfbf5afd3df27f7e662f989c5b963a300020dfafce42033cae9e004"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/string-width/license",
+        "sha256": "48da2f39e100d4085767e94966b43f4fa95ff6a0698fba57ed460914e35f94a0"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/promise-retry/LICENSE",
+        "sha256": "b1344bd78ebcbf8a359225ec444d038a653c6a5f9ecf405a50d4a5c11fbf27d1"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/https-proxy-agent/LICENSE",
+        "sha256": "8d8c55319c7729d57be811c747452636688d54f19701ee0752b6b15ad3771d9a"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/promise-call-limit/LICENSE",
+        "sha256": "05dc4d785ac3a488676d3ed10e901b75ad89dafcc63f8e66610fd4a39cc5c7e8"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/glob/LICENSE",
+        "sha256": "cdbc258d13806538e727964c2436a8806e6e2496ccd616224aace6f7bf98dbc1"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/socks/LICENSE",
+        "sha256": "4f4f28866154c8d758241a64296e8790d45d7d912ff7b029930778c06d8f2a72"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/tuf-js/LICENSE",
+        "sha256": "564bcb001d6e131452a8e9fba0f0ccc59e8b881f84ce3e46e319a5a33e191e10"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/tuf-js/node_modules/@tufjs/models/LICENSE",
+        "sha256": "564bcb001d6e131452a8e9fba0f0ccc59e8b881f84ce3e46e319a5a33e191e10"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/libnpmfund/LICENSE",
+        "sha256": "9dd1bc5666fd1e32f086518046532e993f5307749327aff37cecf98355f2b9a0"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/bin-links/LICENSE",
+        "sha256": "898c2bcff663681498ad1ca8235d45b6e70b10cdf1f869a5b5e69f6e46efedd3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/cross-spawn/LICENSE",
+        "sha256": "aaa78451b6fecd1b9c4594c796c133c0e90cad100372ff8bc6de615e9ef9adf1"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/cross-spawn/node_modules/which/LICENSE",
+        "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/package-json-from-dist/LICENSE.md",
+        "sha256": "a49c9ba464796f65b59fca3f1e6ca40912df1e859f575383223f7ec6c5baae09"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/spdx-expression-parse/LICENSE",
+        "sha256": "7edb57f7065309027de249642341292a5b21410d5773cc55bba73ff9cf01060e"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/node-gyp/LICENSE",
+        "sha256": "662a1b0115251cfb29c6aed0f221f8847bc49c6365d1c53a62c9f4bccc2489c3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/node-gyp/gyp/LICENSE",
+        "sha256": "ca90abb6ed71de0774461ef9f928de33e748b617aeb79f9e52415cf08d69230e"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/packaging/LICENSE",
+        "sha256": "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/sigstore/LICENSE",
+        "sha256": "364a130d2ca340bd56eb1e6d045fc6929bb0f9d0aa018f2c1949b29517e1cdd0"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/parse-conflict-json/LICENSE.md",
+        "sha256": "27d998b503b18cdb16c49e93da04069a99ba8a1d7e18d67146de8e242f9a6d21"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/proggy/LICENSE",
+        "sha256": "dc32a0dee275e0a9aeffbc974dbf4899a30dcdc2e5ffa8934aecb69261065864"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/libnpmhook/LICENSE.md",
+        "sha256": "720836c9bdad386485a492ab41fe08007ecf85ca278ddd8f9333494dcac4949d"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/validate-npm-package-license/LICENSE",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/validate-npm-package-license/node_modules/spdx-expression-parse/LICENSE",
+        "sha256": "7edb57f7065309027de249642341292a5b21410d5773cc55bba73ff9cf01060e"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/negotiator/LICENSE",
+        "sha256": "553d4d20029a24e315b428a1a54a9e109eaa340f2e958a4f50a92362c2c4070b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@sigstore/sign/LICENSE",
+        "sha256": "364a130d2ca340bd56eb1e6d045fc6929bb0f9d0aa018f2c1949b29517e1cdd0"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@sigstore/protobuf-specs/LICENSE",
+        "sha256": "364a130d2ca340bd56eb1e6d045fc6929bb0f9d0aa018f2c1949b29517e1cdd0"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@sigstore/bundle/LICENSE",
+        "sha256": "364a130d2ca340bd56eb1e6d045fc6929bb0f9d0aa018f2c1949b29517e1cdd0"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@sigstore/tuf/LICENSE",
+        "sha256": "364a130d2ca340bd56eb1e6d045fc6929bb0f9d0aa018f2c1949b29517e1cdd0"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@sigstore/core/LICENSE",
+        "sha256": "364a130d2ca340bd56eb1e6d045fc6929bb0f9d0aa018f2c1949b29517e1cdd0"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/ansi-styles/license",
+        "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/npm-normalize-package-bin/LICENSE",
+        "sha256": "898c2bcff663681498ad1ca8235d45b6e70b10cdf1f869a5b5e69f6e46efedd3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/libnpmpublish/LICENSE",
+        "sha256": "77d72758faff2d3a086b1c77f66f4dcfa63a1ee1a9bab5df4ab3c2e8f3eb646d"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/libnpmversion/LICENSE",
+        "sha256": "05dc4d785ac3a488676d3ed10e901b75ad89dafcc63f8e66610fd4a39cc5c7e8"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/minimatch/LICENSE",
+        "sha256": "d11323827fa4edeaafc437cc5b91b6971b335f0127efeeb42bf5122fe8657e8f"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/just-diff/LICENSE",
+        "sha256": "ebb30d70f7ebd918f223ce6ed7621fa4cef3ec2d59d6707c23868b01def28ce2"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/minipass-collect/LICENSE",
+        "sha256": "b630651f34d0e0284ea940601bbe0a58f306ad7e9819e351d9dfab812f8d0f38"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/ini/LICENSE",
+        "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/semver/LICENSE",
+        "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/npm-audit-report/LICENSE",
+        "sha256": "720836c9bdad386485a492ab41fe08007ecf85ca278ddd8f9333494dcac4949d"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/minizlib/LICENSE",
+        "sha256": "df05697a04b8997c79d423930534e59cc18828f6e22d0c8c2d62fcbea1c4f50b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@npmcli/git/LICENSE",
+        "sha256": "565acf764f4583abe4cf4b02128f01b5d4d1b4c62c253e92df7ed6a8a8ad406b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@npmcli/fs/LICENSE.md",
+        "sha256": "27d998b503b18cdb16c49e93da04069a99ba8a1d7e18d67146de8e242f9a6d21"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@npmcli/fs/lib/cp/LICENSE",
+        "sha256": "1e76029602ae9b21cc4e612db2496d92febed882ba13ba745f8b3309e85f9d39"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@npmcli/query/LICENSE",
+        "sha256": "27d998b503b18cdb16c49e93da04069a99ba8a1d7e18d67146de8e242f9a6d21"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@npmcli/arborist/LICENSE.md",
+        "sha256": "27d998b503b18cdb16c49e93da04069a99ba8a1d7e18d67146de8e242f9a6d21"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@npmcli/node-gyp/LICENSE",
+        "sha256": "8da13c785af46eb3d0bf2ce4c34bdf191b8c57bf43e410e9359d5b5eab5f4b0f"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@npmcli/installed-package-contents/LICENSE",
+        "sha256": "898c2bcff663681498ad1ca8235d45b6e70b10cdf1f869a5b5e69f6e46efedd3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@npmcli/map-workspaces/LICENSE.md",
+        "sha256": "27d998b503b18cdb16c49e93da04069a99ba8a1d7e18d67146de8e242f9a6d21"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@npmcli/package-json/LICENSE",
+        "sha256": "65675229fc81818c9490a1942f361f7ef31cd525bef9111e62a6c84e9bd4769d"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@npmcli/redact/LICENSE",
+        "sha256": "d0b7cddf14a2005e05b397a950b9f69e1de412b8c6749e5b5d70610fb119e9ee"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@npmcli/run-script/LICENSE",
+        "sha256": "898c2bcff663681498ad1ca8235d45b6e70b10cdf1f869a5b5e69f6e46efedd3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@npmcli/name-from-folder/LICENSE",
+        "sha256": "802fae69bfe8fcb201f15b6a12505580028158679c3ed3254df5ea8f0912aed4"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@npmcli/config/LICENSE",
+        "sha256": "898c2bcff663681498ad1ca8235d45b6e70b10cdf1f869a5b5e69f6e46efedd3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@npmcli/metavuln-calculator/LICENSE",
+        "sha256": "898c2bcff663681498ad1ca8235d45b6e70b10cdf1f869a5b5e69f6e46efedd3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@npmcli/metavuln-calculator/node_modules/pacote/LICENSE",
+        "sha256": "36ec394cd0f976603cfec687c19175a703c1c0d9db717a76915391e756522c8e"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@npmcli/promise-spawn/LICENSE",
+        "sha256": "565acf764f4583abe4cf4b02128f01b5d4d1b4c62c253e92df7ed6a8a8ad406b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/unique-slug/LICENSE",
+        "sha256": "8e8b31dd3582eb47f1b28bd6f009b54cd926adb9431e8424db7c2eae7c4af437"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/make-fetch-happen/LICENSE",
+        "sha256": "a806e21000ee60cfd64a6f1416f29c7552b4834701974e86c0156f99c0cdd806"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/ip-regex/license",
+        "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/util-deprecate/LICENSE",
+        "sha256": "0154425673db15cdfa80ecba2c9b1f1a867f7197a006764712849bfc3a93cbb7"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/read-cmd-shim/LICENSE",
+        "sha256": "0cef05dfff8b6aa7f35596984f5709f0d17c2582924a751efa471a76de7cdc11"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/binary-extensions/license",
+        "sha256": "96f0820026bd6dadc4af99c6dba7111d2e0190c092c376a746c13863e151d072"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/aproba/LICENSE",
+        "sha256": "0cef05dfff8b6aa7f35596984f5709f0d17c2582924a751efa471a76de7cdc11"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/foreground-child/LICENSE",
+        "sha256": "93f5d82a8d59442fe3275383453a255fef761647fb28265644010ba799806148"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/brace-expansion/LICENSE",
+        "sha256": "68f12f6e2c33688699249c01d8f9623c534da20aa71989c57b061b7bc1676d14"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/proc-log/LICENSE",
+        "sha256": "dc32a0dee275e0a9aeffbc974dbf4899a30dcdc2e5ffa8934aecb69261065864"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/path-key/license",
+        "sha256": "48da2f39e100d4085767e94966b43f4fa95ff6a0698fba57ed460914e35f94a0"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/color-convert/LICENSE",
+        "sha256": "693866fc419c6f61c8570438ec00659d156ec2b4d4a4d04091711f5f11a365d4"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/fs-minipass/LICENSE",
+        "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/fdir/LICENSE",
+        "sha256": "9a39f2aadab11a3697edd668ff2d8ad885b649737b7ab4d3bf12b34e5ada0c86"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/wrap-ansi-cjs/license",
+        "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/wrap-ansi-cjs/node_modules/ansi-styles/license",
+        "sha256": "48da2f39e100d4085767e94966b43f4fa95ff6a0698fba57ed460914e35f94a0"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/supports-color/license",
+        "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/ansi-regex/license",
+        "sha256": "48da2f39e100d4085767e94966b43f4fa95ff6a0698fba57ed460914e35f94a0"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/chalk/license",
+        "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/cacache/LICENSE.md",
+        "sha256": "720836c9bdad386485a492ab41fe08007ecf85ca278ddd8f9333494dcac4949d"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@isaacs/string-locale-compare/LICENSE",
+        "sha256": "05dc4d785ac3a488676d3ed10e901b75ad89dafcc63f8e66610fd4a39cc5c7e8"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@isaacs/cliui/LICENSE.txt",
+        "sha256": "2dc0465729366c3a7890dfa9e972a1ba7048a26c02116fb8b419a6a1ac110149"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@isaacs/cliui/node_modules/string-width/license",
+        "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@isaacs/cliui/node_modules/ansi-regex/license",
+        "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@isaacs/cliui/node_modules/strip-ansi/license",
+        "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@isaacs/fs-minipass/LICENSE",
+        "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/diff/LICENSE",
+        "sha256": "eda81a415869e67809f6a9f3fd6056062cb83a462118e07eec5e92b2e0c40ce9"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/safer-buffer/LICENSE",
+        "sha256": "4bc935e71be198c67ddf3c2b5fddb195f6edc182bfc155a96a6db61b44b494b9"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/encoding/LICENSE",
+        "sha256": "2453d3b90aa23715eec80b25fcda1bebf71052ad41a6694d58a9aa867d103c81"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/minipass-sized/LICENSE",
+        "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/minipass-sized/node_modules/yallist/LICENSE",
+        "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/minipass-sized/node_modules/minipass/LICENSE",
+        "sha256": "a5a110eb524bf3217958e405b5e3411277e915a2f5902c330348877000337e53"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/smart-buffer/LICENSE",
+        "sha256": "c46e2c333e1c9e6fcfd130cf91b8e54bf67b60fabbc04996f7e199b990353ff3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/strip-ansi-cjs/license",
+        "sha256": "48da2f39e100d4085767e94966b43f4fa95ff6a0698fba57ed460914e35f94a0"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/jackspeak/LICENSE.md",
+        "sha256": "2c7c5d22ed5a8ee968c64757710979afcd77438c48b4a265b94e615babd8a901"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/treeverse/LICENSE",
+        "sha256": "ec361617c0473d39347b020eaa6dceedaebab43879fa1cd8b8f0f97a8e80a475"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/tiny-relative-date/LICENSE.md",
+        "sha256": "b219efd4921cb32913a471269807d931b4973190d48269bedcfda6205c526100"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/mute-stream/LICENSE",
+        "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/common-ancestor-path/LICENSE",
+        "sha256": "05dc4d785ac3a488676d3ed10e901b75ad89dafcc63f8e66610fd4a39cc5c7e8"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/color-name/LICENSE",
+        "sha256": "c064f7a3e353bc1bc977f3c897941c75ef763f44f41677e0a15370ca0853d6e2"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/read/LICENSE",
+        "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/pacote/LICENSE",
+        "sha256": "36ec394cd0f976603cfec687c19175a703c1c0d9db717a76915391e756522c8e"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/iconv-lite/LICENSE",
+        "sha256": "ac779f7314c74f232ef847ea86e714abe25cf6eeb5cc97b69451b74e2af6492d"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/exponential-backoff/LICENSE",
+        "sha256": "f5afc95c69e116ea6b1755f91a8763f53eadb78b4f1582a08d2d18586a03a117"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/unique-filename/LICENSE",
+        "sha256": "11734bf6e540e2c021413451205315e5053932de9df9e81279cf2acad6f135ed"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/env-paths/license",
+        "sha256": "48da2f39e100d4085767e94966b43f4fa95ff6a0698fba57ed460914e35f94a0"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/is-fullwidth-code-point/license",
+        "sha256": "48da2f39e100d4085767e94966b43f4fa95ff6a0698fba57ed460914e35f94a0"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/socks-proxy-agent/LICENSE",
+        "sha256": "8d8c55319c7729d57be811c747452636688d54f19701ee0752b6b15ad3771d9a"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/minipass-flush/LICENSE",
+        "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/minipass-flush/node_modules/yallist/LICENSE",
+        "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/minipass-flush/node_modules/minipass/LICENSE",
+        "sha256": "a5a110eb524bf3217958e405b5e3411277e915a2f5902c330348877000337e53"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/libnpmaccess/LICENSE",
+        "sha256": "77d72758faff2d3a086b1c77f66f4dcfa63a1ee1a9bab5df4ab3c2e8f3eb646d"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/write-file-atomic/LICENSE.md",
+        "sha256": "ff75aaa5aaf56005eeea7723b287f9df3dd45b33b310a7eb347d3ab28ea26593"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/picomatch/LICENSE",
+        "sha256": "d0cd141b0c322fded5dfad1d4645bb2fedfc05b7321fe1009469638190d59ef9"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/spdx-correct/LICENSE",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/spdx-correct/node_modules/spdx-expression-parse/LICENSE",
+        "sha256": "7edb57f7065309027de249642341292a5b21410d5773cc55bba73ff9cf01060e"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/npm-user-validate/LICENSE",
+        "sha256": "8b8404b77ea2a20e045fbad73de1661091a852bfe1f4997e0b646c688f3d18e4"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/just-diff-apply/LICENSE",
+        "sha256": "ebb30d70f7ebd918f223ce6ed7621fa4cef3ec2d59d6707c23868b01def28ce2"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/promise-all-reject-late/LICENSE",
+        "sha256": "05dc4d785ac3a488676d3ed10e901b75ad89dafcc63f8e66610fd4a39cc5c7e8"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/archy/LICENSE",
+        "sha256": "435a6722c786b0a56fbe7387028f1d9d3f3a2d0fb615bb8fee118727c3f59b7b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/cmd-shim/LICENSE",
+        "sha256": "ec361617c0473d39347b020eaa6dceedaebab43879fa1cd8b8f0f97a8e80a475"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/wrap-ansi/license",
+        "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/wrap-ansi/node_modules/string-width/license",
+        "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/wrap-ansi/node_modules/ansi-regex/license",
+        "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/wrap-ansi/node_modules/strip-ansi/license",
+        "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/libnpmorg/LICENSE",
+        "sha256": "77d72758faff2d3a086b1c77f66f4dcfa63a1ee1a9bab5df4ab3c2e8f3eb646d"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/signal-exit/LICENSE.txt",
+        "sha256": "b173e19b9a78df305577ace0e52ef45a4bcc915ea28b47b256dc3b68dcb1f7e7"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/fastest-levenshtein/LICENSE.md",
+        "sha256": "b8baf91be313643f3e87a01da77704b68e12795184a62e51e537a5a43c2932f3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/ignore-walk/LICENSE",
+        "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/retry/License",
+        "sha256": "01ad164273e8e095abc9dbd1c21e194594a671af7d528cb43ee7b4c903ba7da3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@tufjs/canonical-json/LICENSE",
+        "sha256": "564bcb001d6e131452a8e9fba0f0ccc59e8b881f84ce3e46e319a5a33e191e10"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/balanced-match/LICENSE.md",
+        "sha256": "a1bd5deadb6a06dd74efa852c1b8b23f63b67f2214fbe9c8bd591da51da69268"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/libnpmdiff/LICENSE",
+        "sha256": "7967f87257c7d5f0ef29012d472a8b99a0fb1c5202b6d861a2c81671329a2ee4"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/npm-install-checks/LICENSE",
+        "sha256": "f674630c4d3e668dabac6d955fb5f74c75b4a63a707ac93a8833b74bdc57221e"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/ip-address/LICENSE",
+        "sha256": "f8d791359a50cbcac82c29cb7b0b1b889b28be76fdd35b8ee33f0f7c8704702a"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/text-table/LICENSE",
+        "sha256": "435a6722c786b0a56fbe7387028f1d9d3f3a2d0fb615bb8fee118727c3f59b7b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/ci-info/LICENSE",
+        "sha256": "f58943cb354fb2707fea2f7b26b04e6014ddb56835cdfd414c9d2c6c59165b64"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/abbrev/LICENSE",
+        "sha256": "9e0d5c7989f7e9f07d7c4b158aceff270f235eb7464ace41c5e7b200834a43e0"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/chownr/LICENSE.md",
+        "sha256": "a49c9ba464796f65b59fca3f1e6ca40912df1e859f575383223f7ec6c5baae09"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/npm-packlist/LICENSE",
+        "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/minipass-pipeline/LICENSE",
+        "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/minipass-pipeline/node_modules/yallist/LICENSE",
+        "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/minipass-pipeline/node_modules/minipass/LICENSE",
+        "sha256": "a5a110eb524bf3217958e405b5e3411277e915a2f5902c330348877000337e53"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/lru-cache/LICENSE",
+        "sha256": "451ec07eeb9c4e1b86de9abdaa426462a8be48f887ec7421cf0bbb9c769555ab"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/libnpmpack/LICENSE",
+        "sha256": "77d72758faff2d3a086b1c77f66f4dcfa63a1ee1a9bab5df4ab3c2e8f3eb646d"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/ms/license.md",
+        "sha256": "1662fae9b5314d11cf51284e2dcd1f006a354f7343f08712a730fcff9a359801"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/walk-up-path/LICENSE",
+        "sha256": "05dc4d785ac3a488676d3ed10e901b75ad89dafcc63f8e66610fd4a39cc5c7e8"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/agent-base/LICENSE",
+        "sha256": "8d8c55319c7729d57be811c747452636688d54f19701ee0752b6b15ad3771d9a"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/jsonparse/LICENSE",
+        "sha256": "ed251dc3a48522399fffe95fe04d94fbcadcd9edd0e7689f3b71cf73403a6138"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/ssri/LICENSE.md",
+        "sha256": "3749709146345fa15546aaba4e3ab1b3b92a4d930077b5bc32d90815cb63afaf"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/strip-ansi/license",
+        "sha256": "48da2f39e100d4085767e94966b43f4fa95ff6a0698fba57ed460914e35f94a0"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/init-package-json/LICENSE.md",
+        "sha256": "7f75bb21103e77b7acfcf88a6ad0286741a18b5d13c4326160346e8cf7e356ad"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/normalize-package-data/LICENSE",
+        "sha256": "a5f6f572f26172e1289f2f769cd93acf63ae90dcbb71a9f4953ced871ab38544"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/json-parse-even-better-errors/LICENSE.md",
+        "sha256": "50627796eb4236cd05674e71d090e594447995225b7d94cd59e57c25fa3a0217"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/http-cache-semantics/LICENSE",
+        "sha256": "ab868ad5a2ef5068560d9cd3b2180ec63c140bb4c5cae1ba779d300a0ac74fa3"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/shebang-regex/license",
+        "sha256": "48da2f39e100d4085767e94966b43f4fa95ff6a0698fba57ed460914e35f94a0"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/promzard/LICENSE",
+        "sha256": "05dc4d785ac3a488676d3ed10e901b75ad89dafcc63f8e66610fd4a39cc5c7e8"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/hosted-git-info/LICENSE",
+        "sha256": "c1476ec53119cd4c8370f91f5152ac76312a29b4fae2d49b5e0e0970fe0fa5ee"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/npm-registry-fetch/LICENSE.md",
+        "sha256": "27d998b503b18cdb16c49e93da04069a99ba8a1d7e18d67146de8e242f9a6d21"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/@pkgjs/parseargs/LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/npm-profile/LICENSE.md",
+        "sha256": "27d998b503b18cdb16c49e93da04069a99ba8a1d7e18d67146de8e242f9a6d21"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/cli-columns/license",
+        "sha256": "b4c8d681302b783f22b980a224da87e6074a2517b11f53219dc392f23c5a2a46"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/npm/node_modules/tinyglobby/LICENSE",
+        "sha256": "22c68811e174cbbfb3813d4135918df4f540959c14d872e601d9abe83d3cde8f"
+      },
+      {
+        "path": "node-v22.23.4-darwin-arm64/lib/node_modules/corepack/LICENSE.md",
+        "sha256": "30a7b8ba5c4483d97d6123f5634da2362d578fb81f42ed6e1dfbb84fb1cd8fe4"
+      }
+    ],
+    "signature_verified": false,
+    "executed": false
+  },
+  "npm_artifacts": [
+    {
+      "name": "@cspotcode/source-map-support",
+      "version": "0.8.1",
+      "sha256": "9d143b2941a86f3ca20fbb1d6613c39fb743b7e45ce1008f22f75749ca18a4f0",
+      "bytes": 31413,
+      "notices": [
+        {
+          "path": "package/LICENSE.md",
+          "sha256": "3a7d3bb198e909ed642bd68bd29a7d7c09a636d27a51ec663d35f00c4760ec42"
+        }
+      ]
+    },
+    {
+      "name": "@jridgewell/resolve-uri",
+      "version": "3.1.2",
+      "sha256": "db52f9f62558baab13353dd39e3200750fc33e6a129a575b46226f493776e230",
+      "bytes": 9622,
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "b8778b155bfde5a28b023a558753c0fa058a52bb9de35c343c250be1bbcdedab"
+        }
+      ]
+    },
+    {
+      "name": "@jridgewell/sourcemap-codec",
+      "version": "1.6.0",
+      "sha256": "f30a35f6af8c347d01b8ff2f8662272f7d986cf21b916704d86c249a90b97e25",
+      "bytes": 18401,
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "769d154fbde32a915af110b1123650bc79f4cbe675acc66e005265bf069c6c6c"
+        }
+      ]
+    },
+    {
+      "name": "@jridgewell/trace-mapping",
+      "version": "0.3.9",
+      "sha256": "1fe8547469c55cca28bfd1aed79b69a673cf53233321f9145d51d6e96237f500",
+      "bytes": 21014,
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0daa3c2445c4bfaaa7e8c69ec2742a8841bc920b75818ef2c7a510242de2b04a"
+        }
+      ]
+    },
+    {
+      "name": "@tsconfig/node10",
+      "version": "1.0.13",
+      "sha256": "1fc784c7776589f7fa7d9ddc96cd5d4ebb1baaf4a7f94d17b3612558af8d7566",
+      "bytes": 1306,
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "646f8936b8ddcd14e13e578ff6857e368780b0d1a4f6066bee89211923a373e2"
+        }
+      ]
+    },
+    {
+      "name": "@tsconfig/node12",
+      "version": "1.0.11",
+      "sha256": "a7bfb13727b88b5c3f90c35c74633f2d5afe5f1671c20b66b6f1be0e505a9892",
+      "bytes": 1355,
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "646f8936b8ddcd14e13e578ff6857e368780b0d1a4f6066bee89211923a373e2"
+        }
+      ]
+    },
+    {
+      "name": "@tsconfig/node14",
+      "version": "1.0.3",
+      "sha256": "237d8d80d0f7e8caa6a73d4c3ad09b7316d4611d958ee48a51e1cb36ad5ab79d",
+      "bytes": 1329,
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "646f8936b8ddcd14e13e578ff6857e368780b0d1a4f6066bee89211923a373e2"
+        }
+      ]
+    },
+    {
+      "name": "@tsconfig/node16",
+      "version": "1.0.4",
+      "sha256": "ed672c6224758cea3eeb722528bb6285236de64609d9287b0228139c643d1006",
+      "bytes": 1311,
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "646f8936b8ddcd14e13e578ff6857e368780b0d1a4f6066bee89211923a373e2"
+        }
+      ]
+    },
+    {
+      "name": "@types/node",
+      "version": "22.10.7",
+      "sha256": "22f32a85deb6d1deb2b08ace1b945c9d926ee95b5d7735a419dc3e9273624c33",
+      "bytes": 419704,
+      "notices": [
+        {
+          "path": "node/LICENSE",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+        }
+      ]
+    },
+    {
+      "name": "acorn",
+      "version": "8.18.0",
+      "sha256": "0ad4c0f28f9bc5bb6f3eb879b4fd38265def6d7e1e5d61f96f78ee6a8a7be94a",
+      "bytes": 133521,
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "76a876cf886ff9be2a8b5e2e86514fed06223c8c9f0c1e9ee9606e93841e00b7"
+        }
+      ]
+    },
+    {
+      "name": "acorn-walk",
+      "version": "8.3.5",
+      "sha256": "4ee2ff737c58ac95afb2969a3c6134ffc1e78a99e178e75ba54c602aa4d3ffcd",
+      "bytes": 9793,
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "c2d8184ea9becd063aa40be243e8c6ec2c4f72828fdfe4b0752664ef73e96ed3"
+        }
+      ]
+    },
+    {
+      "name": "arg",
+      "version": "4.1.3",
+      "sha256": "d54a7e10c9ca438c21c33515e5d4fd3a749781d2775f7ef1ed699b21e6503fef",
+      "bytes": 5352,
+      "notices": [
+        {
+          "path": "package/LICENSE.md",
+          "sha256": "8d30579b10154fc04c6054c64e322d7e9e495a668f82db8510732592801f2c87"
+        }
+      ]
+    },
+    {
+      "name": "create-require",
+      "version": "1.1.1",
+      "sha256": "82b533c168e2eb5c1c7c6c807b02f824e10de3bb8034f4e68d5c1c11d7eda275",
+      "bytes": 2710,
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "ec00b84b47c341b1a5978fcc2614bdc340e6dffd435a0728b84d7c7fb00ee059"
+        }
+      ]
+    },
+    {
+      "name": "diff",
+      "version": "4.0.4",
+      "sha256": "c65d9555d358e7f589926d72a85fe3c717d1c584bec31ac533fffb0b35a66579",
+      "bytes": 98055,
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "152f0fb43e953fcf5c56c5bfa4c834bb96b1603e4026319c613dd3e734f305cf"
+        }
+      ]
+    },
+    {
+      "name": "make-error",
+      "version": "1.3.6",
+      "sha256": "6a1b1f4375e7d775be9443e8a4f7782ae8b6523eda3831fd25fc4da2f20fce1a",
+      "bytes": 4430,
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "26da15c6dfbc3e685988c83dea650f3c42ee1189d42aadf324d3b47da8c8ec91"
+        }
+      ]
+    },
+    {
+      "name": "ts-node",
+      "version": "10.9.2",
+      "sha256": "0290b8a665925d581da75499425c7156b1f433619af62b0ea51d159c18dff968",
+      "bytes": 196739,
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "4eeb3271453a891df609e5a9f4ee79a68307f730c13417a3bfeffa604ac8cf25"
+        },
+        {
+          "path": "package/dist-raw/NODE-LICENSE.md",
+          "sha256": "ef1213c5081049cd0a7486f13b5a2f36afa86b7c28a4c728cb711694804a7e25"
+        }
+      ]
+    },
+    {
+      "name": "typescript",
+      "version": "5.7.3",
+      "sha256": "80cfca1254bab8e81d639178e42d6406d856fba6e34cad60d1ab50ee6e5f7ebb",
+      "bytes": 4232501,
+      "notices": [
+        {
+          "path": "package/LICENSE.txt",
+          "sha256": "a7d00bfd54525bc694b6e32f64c7ebcf5e6b7ae3657be5cc12767bce74654a47"
+        },
+        {
+          "path": "package/ThirdPartyNoticeText.txt",
+          "sha256": "1af3c68039c57e539422da82a4faada506ce6d0ea6f90e0b699d02dbcdb7a90c"
+        }
+      ]
+    },
+    {
+      "name": "undici-types",
+      "version": "6.20.0",
+      "sha256": "728ca9fcff676372e4dcd648b5e26fbbdb289ec2bcf675e7601cc2134a5e8d6e",
+      "bytes": 20933,
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "a6db8096b2707bc0102d256917d4d33f298ba36d8c3f25de067a2b5bb379db27"
+        }
+      ]
+    },
+    {
+      "name": "v8-compile-cache-lib",
+      "version": "3.0.1",
+      "sha256": "196f4c667ca4703a522eb11ce2ea51815a0ce5bb1e6416067c643398f4a2298a",
+      "bytes": 6391,
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "c77674258a3fdf3036a5d13d2aecd30d7a25aa6191cb0a9a7dd45b975dc7fe69"
+        }
+      ]
+    },
+    {
+      "name": "yn",
+      "version": "3.1.1",
+      "sha256": "677e8120a05c119993df555de0e66e3cf1fecd927c624d374785f9f9dc6d3822",
+      "bytes": 2729,
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "48da2f39e100d4085767e94966b43f4fa95ff6a0698fba57ed460914e35f94a0"
+        }
+      ]
+    }
+  ],
+  "osv": {
+    "query_url": "https://api.osv.dev/v1/querybatch",
+    "query_count": 20,
+    "matches": 0,
+    "response_sha256": "a97b693d2e180240c1eb2be03c1d7c4ce625e2823b9546dd25d1991f5d0d723e",
+    "excludes": [
+      "Node bundled components",
+      "OS and compiler",
+      "upstream Git source"
+    ]
+  },
+  "metadata": {
+    "node-index.json": "6b27fe5766e87929d16ccdde05c516cbdd12200eab62b28d4b2f31d34e21481a",
+    "node-shasums.txt": "c90c3f1478fda8308b22cc1a1b0dc536169196444e67ee8b5c582fd351d02bce",
+    "node-shasums.asc": "a662bf8938f1ea15a9ba0017a89a53a28812b8ab179be11dd62d642cb6e33396",
+    "node-LICENSE.txt": "c738ae413cf561f174e34f6961f8ca458aae2369a73640dda6234c629b98bcc4"
+  },
+  "remaining_gates": [
+    "authenticated release checksum/signature verification",
+    "complete bundled-library/vendor advisory disposition",
+    "separate restricted-use decision",
+    "native direct/wrapped harness and fractional-grid reader qualification",
+    "separately authorized setup and verified setup receipt",
+    "named-host execution authorization"
+  ]
+}

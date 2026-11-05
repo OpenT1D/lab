@@ -4,7 +4,16 @@ import json
 import os
 import sys
 
-REQUIRED = frozenset({"repository-checks", "public-smoke", "browser", "dependency-review"})
+REQUIRED = frozenset(
+    {
+        "repository-checks",
+        "root-tests",
+        "public-smoke",
+        "browser",
+        "browser-apps",
+        "dependency-review",
+    }
+)
 EVENTS = frozenset({"pull_request", "push", "workflow_dispatch"})
 
 

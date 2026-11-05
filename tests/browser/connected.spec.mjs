@@ -9,7 +9,9 @@ async function reportJSON(page) {
 }
 
 test('connected study: prospective stages, absent native admission, fixed failures and prefix replay', async ({ page, app }, testInfo) => {
-  test.setTimeout(150_000); // Measured installed restart/reconstruction flow exceeds 90 seconds.
+  // Integrated 37ee62a: last replay began ~170s into the body and needed ~15s;
+  // the 180s total expired. Keep each 60s job wait and all report assertions.
+  test.setTimeout(240_000);
   const errors = []; page.on('pageerror', error => errors.push(error.message));
   await page.goto(app.url);
   await page.locator('#project-name').fill('Connected synthetic boundary');

@@ -93,6 +93,11 @@ builds a development fixture. A development build is not an artifact receipt.
 
 ## Prepared formative exercise and open gates
 
+The [first-session supplement](mmtt-formative-session.md) fixes a short MMTT-only
+task order, artifact/start checklist, separate neutral participant card, actual
+reference key and blank observation/report structure. Use it with the retained
+packet; preparation does not record a human session or independent handoff.
+
 Successful qualification generates `formative-packet/`: give only `participant/`
 to an actual intended analyst. Keep `facilitator/`, its actual reference reports
 and blank observation template separate. A participant recovery project contains

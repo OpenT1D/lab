@@ -1,8 +1,6 @@
 # 0092 — Qualify an exact M3-era MMTT comparison reader
 
 Date: 1 November 2026. Status: selected before qualification.
-The bounded fix is reused on the separate GUI-based repair branch on 5 November
-2026; the original registry and selected identities remain unchanged.
 
 ## Observed boundary
 
@@ -45,7 +43,6 @@ Build the exact clean successor wheel with both registry files bound. Qualify
 that artifact against the retained clean A wheel with the existing installed
 qualification procedure; separately exercise B-to-C preserved comparisons.
 Review the full source/packet and changed-reader counterexamples independently.
-The verification owner reruns the complete root suite on the final integrated
-source. Local browser checks and hosted checks are separate evidence; report
-only those actually run. A passing test cannot qualify an unmatched future
+The CI owner reruns the complete integrated root suite and actual browser/hosted
+families on the final source. A passing test cannot qualify an unmatched future
 reader, a native artifact, independent use or scientific validity.

@@ -1,0 +1,11 @@
+{
+  "schema": "opent1d.lt1-diagnostic-plan/1",
+  "engine": "lt1_cambridge",
+  "source_revision": "9a6092065bd821f88691cd8d03b0550acd665573",
+  "seed": 101,
+  "horizon_ms": 1800000,
+  "basal_u_h": 1.2,
+  "meals": [{"id": "invented-meal", "start_ms": 150000, "duration_ms": 90000, "grams": 40}],
+  "announcements": [{"id": "invented-announcement", "event_id": "invented-meal", "start_ms": 150000, "available_ms": 900000, "grams": 20}],
+  "release_rules": [{"measured_ms": 600000, "available_ms": 900000}, {"measured_ms": 900000, "available_ms": null}]
+}

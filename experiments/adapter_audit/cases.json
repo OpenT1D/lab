@@ -1,0 +1,278 @@
+{
+  "simglucose": {
+    "input": {
+      "engine": "simglucose",
+      "step_min": 3,
+      "horizon_min": 12,
+      "seed": 101,
+      "basal_u_h": 1.2,
+      "target_mg_dl": 120,
+      "gain": 0.01,
+      "max_u_h": 3,
+      "samples": [
+        {
+          "measured_min": 0,
+          "available_min": 0,
+          "glucose_mg_dl": 120
+        },
+        {
+          "measured_min": 3,
+          "available_min": 3,
+          "glucose_mg_dl": 180
+        },
+        {
+          "measured_min": 6,
+          "available_min": 9,
+          "glucose_mg_dl": 60
+        },
+        {
+          "measured_min": 9,
+          "available_min": 12,
+          "glucose_mg_dl": 150
+        }
+      ],
+      "actual_events": [
+        {
+          "id": "meal-1",
+          "start_min": 6,
+          "grams": 40
+        }
+      ],
+      "announcements": [
+        {
+          "id": "announce-1",
+          "event_id": "meal-1",
+          "start_min": 6,
+          "available_min": 3,
+          "grams": 20
+        }
+      ]
+    },
+    "identity": {
+      "input_sha256": "27364528e00dff825db62f6b44e1731e75fc51122def1db771acb97c3b79e7bb",
+      "upstream_revision": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc",
+      "runtime_lock_sha256": "13d254dcebe8d1ab54c3140cdc07152d719a68477a1378d7fe77fc1568612aa9"
+    },
+    "status": "completed",
+    "error": null,
+    "rows": [
+      {
+        "time_min": 0,
+        "observation": {
+          "measured_min": 0,
+          "available_min": 0,
+          "glucose_mg_dl": 120,
+          "fresh": true
+        },
+        "new_announcements": [],
+        "previous_mg_dl": 120,
+        "command_u_h": 1.2,
+        "native_action": {
+          "kind": "basal_rate",
+          "unit": "U/min",
+          "rate": 0.02
+        },
+        "delivered_rate": 0.018,
+        "interval_end_min": 3
+      },
+      {
+        "time_min": 3,
+        "observation": {
+          "measured_min": 3,
+          "available_min": 3,
+          "glucose_mg_dl": 180,
+          "fresh": true
+        },
+        "new_announcements": [
+          "announce-1"
+        ],
+        "previous_mg_dl": 120,
+        "command_u_h": 1.2,
+        "native_action": {
+          "kind": "basal_rate",
+          "unit": "U/min",
+          "rate": 0.02
+        },
+        "delivered_rate": 0.02,
+        "interval_end_min": 6
+      },
+      {
+        "time_min": 6,
+        "observation": {
+          "measured_min": 3,
+          "available_min": 3,
+          "glucose_mg_dl": 180,
+          "fresh": false
+        },
+        "new_announcements": [],
+        "previous_mg_dl": 180,
+        "command_u_h": 1.2,
+        "native_action": {
+          "kind": "basal_rate",
+          "unit": "U/min",
+          "rate": 0.02
+        },
+        "delivered_rate": 0.02,
+        "interval_end_min": 9
+      },
+      {
+        "time_min": 9,
+        "observation": {
+          "measured_min": 6,
+          "available_min": 9,
+          "glucose_mg_dl": 60,
+          "fresh": true
+        },
+        "new_announcements": [],
+        "previous_mg_dl": 180,
+        "command_u_h": 1.8,
+        "native_action": {
+          "kind": "basal_rate",
+          "unit": "U/min",
+          "rate": 0.03
+        },
+        "delivered_rate": 0.025,
+        "interval_end_min": 12
+      }
+    ],
+    "delivered_u": 0.249
+  },
+  "lt1_cambridge": {
+    "input": {
+      "engine": "lt1_cambridge",
+      "step_min": 5,
+      "horizon_min": 20,
+      "seed": 101,
+      "basal_u_h": 1.2,
+      "target_mg_dl": 120,
+      "gain": 0.01,
+      "max_u_h": 3,
+      "samples": [
+        {
+          "measured_min": 0,
+          "available_min": 0,
+          "glucose_mg_dl": 120
+        },
+        {
+          "measured_min": 5,
+          "available_min": 5,
+          "glucose_mg_dl": 180
+        },
+        {
+          "measured_min": 10,
+          "available_min": 15,
+          "glucose_mg_dl": 60
+        },
+        {
+          "measured_min": 15,
+          "available_min": 20,
+          "glucose_mg_dl": 150
+        }
+      ],
+      "actual_events": [
+        {
+          "id": "meal-1",
+          "start_min": 10,
+          "grams": 40
+        }
+      ],
+      "announcements": [
+        {
+          "id": "announce-1",
+          "event_id": "meal-1",
+          "start_min": 10,
+          "available_min": 5,
+          "grams": 20
+        }
+      ]
+    },
+    "identity": {
+      "input_sha256": "4ef88665a22c45c9f3c421d2235e9bba5cde6fa063bcf27428322195e0665a83",
+      "upstream_revision": "9a6092065bd821f88691cd8d03b0550acd665573",
+      "runtime_lock_sha256": "44ad7ba062a7d67032d91fcc9e0fa2aa3910b3856dce76bee5ba32093c1a150e"
+    },
+    "status": "completed",
+    "error": null,
+    "rows": [
+      {
+        "time_min": 0,
+        "observation": {
+          "measured_min": 0,
+          "available_min": 0,
+          "glucose_mg_dl": 120,
+          "fresh": true
+        },
+        "new_announcements": [],
+        "previous_mg_dl": 120,
+        "command_u_h": 1.2,
+        "native_action": {
+          "kind": "basal_rate",
+          "unit": "U/h",
+          "rate": 1.2
+        },
+        "delivered_rate": 0.9,
+        "interval_end_min": 5
+      },
+      {
+        "time_min": 5,
+        "observation": {
+          "measured_min": 5,
+          "available_min": 5,
+          "glucose_mg_dl": 180,
+          "fresh": true
+        },
+        "new_announcements": [
+          "announce-1"
+        ],
+        "previous_mg_dl": 120,
+        "command_u_h": 1.2,
+        "native_action": {
+          "kind": "basal_rate",
+          "unit": "U/h",
+          "rate": 1.2
+        },
+        "delivered_rate": 1.2,
+        "interval_end_min": 10
+      },
+      {
+        "time_min": 10,
+        "observation": {
+          "measured_min": 5,
+          "available_min": 5,
+          "glucose_mg_dl": 180,
+          "fresh": false
+        },
+        "new_announcements": [],
+        "previous_mg_dl": 180,
+        "command_u_h": 1.2,
+        "native_action": {
+          "kind": "basal_rate",
+          "unit": "U/h",
+          "rate": 1.2
+        },
+        "delivered_rate": 1.2,
+        "interval_end_min": 15
+      },
+      {
+        "time_min": 15,
+        "observation": {
+          "measured_min": 10,
+          "available_min": 15,
+          "glucose_mg_dl": 60,
+          "fresh": true
+        },
+        "new_announcements": [],
+        "previous_mg_dl": 180,
+        "command_u_h": 1.8,
+        "native_action": {
+          "kind": "basal_rate",
+          "unit": "U/h",
+          "rate": 1.8
+        },
+        "delivered_rate": 1.5,
+        "interval_end_min": 20
+      }
+    ],
+    "delivered_u": 0.4
+  }
+}

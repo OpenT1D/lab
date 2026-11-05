@@ -52,3 +52,25 @@ scientific validity, a release or an activated service. Exact PR/main hosted
 results and protected-branch behavior remain acceptance requirements. Revisit
 the selection when supported tasks/platforms change or measured runtime warrants
 a smaller root job or further families.
+
+## Measured partition — 1 November 2026
+
+The [bounded CI record](../research/ci-reliability.md) records the 1,850-test
+baseline reaching 2,377.604 seconds, subsequent documentation cancellation at
+40 minutes, and Chromium per-case/global budget failures. This evidence now
+justifies four complete root-test shards and three application-browser shards
+on isolated Linux jobs. Whole-module root selection preserves fixture order;
+unknown tests remain included and import failures fail before selection. Keep
+the unchanged complete local command. `Root checks` depends on all root tests
+before style/docs, paired checks or native steps; downstream private/manual
+native preflight and the original scope guards therefore remain enforced.
+
+Require `root-tests` and `browser-apps` alongside the existing four public
+families in the stable aggregate. Keep all host smokes, all three documentation
+engines, assertions, zero browser retries and the pinned Action allowlist.
+Retain uncached, separate builds/installations rather than introducing an
+unmeasured shared fixture/artifact trust boundary. Only ephemeral browser jobs
+receive the narrowly scoped Ubuntu mirror/network configuration. Exact-run
+read-only diagnostics retain old failures and do not rewrite statuses or infer
+merge eligibility from a successful attempt. PR-head hosted verification and
+later combined-source M3 integration remain separate acceptance evidence.

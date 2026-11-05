@@ -83,8 +83,8 @@ test budget and also requires a changed selected study. No report assertion was
 removed.
 
 The same hosted attempt reached the 480-second whole-suite deadline after ten
-passes, one failure and three unrun cases. The expanded fourteen-flow family
-now has a 720-second suite ceiling and a twenty-minute Chromium job ceiling, allowing
+passes, one failure and three unrun cases. The M3 predecessor selected a 720-second suite ceiling and a twenty-minute
+combined Chromium job ceiling for the expanded fourteen-flow family, allowing
 the existing separate five-minute documentation check and cold setup. Root
 keeps forty minutes; individual test budgets, one worker, zero retries, all
 families and numerical criteria remain unchanged. Firefox/WebKit jobs retain
@@ -93,6 +93,13 @@ subsequent actual attempt are reported separately in the PR; a larger configured
 budget is not itself a passing run. The owner's in-progress local `b7bbe98`
 full check was explicitly interrupted (exit 130) before editing these files;
 it supplies no full-suite pass for the final revision.
+
+The subsequent [CI integration](ci-reliability.md#exact-m3-integration) preserves
+this pending-request fix and every assertion while splitting application cases
+and documentation into separate jobs. It owns the final integrated orchestration,
+budgets, complete selection accounting and full-check receipt. The interrupted
+standalone check and the predecessor's local browser result remain separate
+from that integrated acceptance.
 
 The existing researcher verification was run with the separately locked M3
 estimator. For both the invented trend and genuine synthetic donor Ridge, it
