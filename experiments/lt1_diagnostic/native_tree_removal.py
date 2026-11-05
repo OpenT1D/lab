@@ -926,8 +926,11 @@ def inspect(
         else:
             need(not present(attempt, "events.jsonl"), "missing journal appeared")
         if r["role"] == "native-packet":
+            final_outer = encoded(outer_receipt)
             need(
-                runner.complete_outer(outer_receipt, raw, r, context_raw, audit) == outer_valid,
+                len(final_outer) <= LIMIT
+                and digest(final_outer) == expected_outer_sha256
+                and runner.complete_outer(outer_receipt, raw, r, context_raw, audit) == outer_valid,
                 "outer evidence changed during readback",
             )
         if r["role"] != "native-packet":

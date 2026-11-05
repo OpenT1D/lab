@@ -630,14 +630,14 @@ class OriginalTreeTests(unittest.TestCase):
         self.assertFalse(fixture.target(value).exists())
 
     def test_native_packet_reader_rechecks_final_outer_evidence(self):
-        for key in ("control_path", "log_path"):
+        for key in ("control_path", "log_path", "coherent-log"):
             with self.subTest(key=key):
                 value = self.prepare_packet()
                 outer = fixture.run(value)
                 self.assert_complete(value, outer)
                 source_identity = tree.source_identity
                 calls = 0
-                path = Path(outer[key])
+                path = Path(outer["log_path" if key == "coherent-log" else key])
                 before = path.read_bytes()
 
                 def source():
@@ -645,6 +645,8 @@ class OriginalTreeTests(unittest.TestCase):
                     calls += 1
                     if calls == 2:
                         path.write_bytes(before + b"changed invented outer evidence")
+                        if key == "coherent-log":
+                            outer["log_sha256"] = tree.digest(path.read_bytes())
                     return source_identity()
 
                 with patch.object(tree, "source_identity", side_effect=source):
