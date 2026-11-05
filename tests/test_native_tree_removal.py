@@ -503,6 +503,42 @@ class OriginalTreeTests(unittest.TestCase):
                     fixture.inspect(value, None)
 
     def test_native_packet_reader_binds_both_sibling_names_and_rejects_wrong_parent_target(self):
+        for change in (
+            "original-replaced",
+            "original-missing",
+            "original-mode",
+            "quarantine-appeared",
+            "attempt-appeared",
+            "cleanup-parent-replaced",
+        ):
+            with self.subTest(unstarted_change=change):
+                value = self.prepare_packet()
+                source_identity = tree.source_identity
+                calls = 0
+
+                def source():
+                    nonlocal calls
+                    calls += 1
+                    if calls == 2:
+                        if change in ("original-replaced", "original-missing"):
+                            value["root"].rename(value["root"].parent / "displaced-original")
+                            if change == "original-replaced":
+                                value["root"].mkdir(mode=0o500)
+                        elif change == "original-mode":
+                            value["root"].chmod(0o700)
+                        elif change == "quarantine-appeared":
+                            fixture.target(value).mkdir(mode=0o500)
+                        elif change == "attempt-appeared":
+                            (value["cleanup"] / value["request"]["attempt"]).mkdir(mode=0o700)
+                        else:
+                            value["cleanup"].rename(value["cleanup"].parent / "displaced-cleanup")
+                            value["cleanup"].mkdir(mode=0o700)
+                    return source_identity()
+
+                with patch.object(tree, "source_identity", side_effect=source):
+                    with self.assertRaises((OSError, ValueError)):
+                        fixture.inspect(value, None)
+                self.assertEqual(calls, 2)
         for returned in ("original", "quarantine"):
             with self.subTest(returned=returned):
                 value = self.prepare_packet()

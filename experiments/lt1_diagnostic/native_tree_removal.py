@@ -638,8 +638,9 @@ def inspect(
             need(expected_journal_sha256 == digest(b""), "missing attempt has no journal")
             root = _open_directory(parent, root_path.name, r["root"], initial=True)
             _tree(root, r["inventory"], initial=True)
-            os.close(root)
-            root = None
+            if r["role"] != "native-packet":
+                os.close(root)
+                root = None
             bind(parent_path, parent, r["parent"])
             bind(cleanup_path, cleanup, r["cleanup_parent"])
             need(
@@ -647,10 +648,16 @@ def inspect(
                 "unstarted evidence changed",
             )
             if r["role"] == "native-packet":
+                bind(parent_path, parent, r["parent"])
+                bind(cleanup_path, cleanup, r["cleanup_parent"])
+                bind(root_path, root, r["root"], initial=True)
                 need(
-                    not present(parent, quarantine_path.name),
-                    "late unstarted packet quarantine appeared",
+                    not present(parent, quarantine_path.name)
+                    and not present(cleanup, r["attempt"]),
+                    "late unstarted packet namespace changed",
                 )
+                os.close(root)
+                root = None
             return {
                 "schema": "opent1d.lt1-native-tree-removal-readback/1",
                 "status": "incomplete",
