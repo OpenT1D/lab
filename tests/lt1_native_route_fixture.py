@@ -2,6 +2,7 @@
 
 import json
 import os
+import secrets
 import shutil
 import subprocess
 from pathlib import Path
@@ -18,15 +19,23 @@ def prepare(
     mode="wrapped",
     timeout=10,
     _observed_tooling=None,
+    _shared=None,
 ):
     parent = Path(parent)
     route.need(parent.resolve() == parent and not any(parent.iterdir()), "fresh empty fixture")
     roots = {k: str(parent / k) for k in ("staging", "packet", "output", "evidence")}
+    if _shared is not None:
+        route.need(
+            case_id == "C19" and set(_shared) == {"staging", "evidence"},
+            "fixed shared C19 fixture roles",
+        )
+        roots.update(_shared)
     for key, path in roots.items():
-        Path(path).mkdir(mode=0o500 if key in ("staging", "packet") else 0o700)
+        if _shared is None or key not in _shared:
+            Path(path).mkdir(mode=0o500 if key in ("staging", "packet") else 0o700)
     source = route.source_identity()
     code = route.prior.grant_sources(source)
-    policy = route.profile(roots, source)
+    policy = route.profile(roots, source, case_id=case_id, slot=slot)
     owner = ProcessTable().one(os.getpid())
     if _observed_tooling is None:
         node = str(Path(shutil.which("node")).resolve())
@@ -121,7 +130,7 @@ def prepare(
         "owner_pid": os.getpid(),
         "owner_start": owner["start"],
         "attempt": attempt,
-        "nonce_sha256": "a" * 64,
+        "nonce_sha256": secrets.token_hex(32) if case_id == "C19" else "a" * 64,
         "profile_sha256": host["profile_sha256"],
         "producer_sha256": source["implementation"][
             "experiments/lt1_diagnostic/native_route_observation.mjs"

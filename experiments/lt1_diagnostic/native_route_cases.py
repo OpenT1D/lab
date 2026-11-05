@@ -1,4 +1,4 @@
-"""Fixed C15-C18 invocations, never an arbitrary command or an admission.
+"""Fixed C15-C19 invocations, never an arbitrary command or an admission.
 
 All slots are gated before any private root or process resource. Native outcomes
 are not_run until separately admitted. Fixture outcomes cannot become native.
@@ -61,6 +61,10 @@ def _run(case, attempts, expected_identity, cancel, *, invented=False):
         case in SLOTS and isinstance(attempts, (tuple, list)) and len(attempts) == len(SLOTS[case]),
         "complete fixed case denominator",
     )
+    if case == "C19":
+        from experiments.lt1_diagnostic.native_route_host import _run_pair
+
+        return _run_pair(attempts, expected_identity, cancel, invented=invented)
     owned = copy.deepcopy(attempts)
     # Validate every opaque grant before the first slot acquires resources.
     for (entry_raw, observation_raw), slot in zip(owned, SLOTS[case]):

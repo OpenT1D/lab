@@ -114,7 +114,9 @@ def execute(*, invented=False):
             else [
                 str(route.legacy.SANDBOX),
                 "-p",
-                route.profile(entry["roots"], control["audit"]),
+                route.profile(
+                    entry["roots"], control["audit"], case_id=entry["case_id"], slot=entry["slot"]
+                ),
                 *expected,
             ]
         )
