@@ -539,6 +539,41 @@ class OriginalTreeTests(unittest.TestCase):
                     with self.assertRaises((OSError, ValueError)):
                         fixture.inspect(value, None)
                 self.assertEqual(calls, 2)
+        for changed in ("quarantine", "attempt", "journal"):
+            with self.subTest(active_change=changed):
+                context = {"kind": "invented"}
+                if changed == "quarantine":
+                    context.update(fixture_phase="packet-writable", fixture_crash=True)
+                value = self.prepare_packet(context=context)
+                outer = fixture.run(value)
+                self.assertEqual(
+                    fixture.inspect(value, outer)["status"],
+                    "incomplete" if changed == "quarantine" else "completed",
+                )
+                source_identity = tree.source_identity
+                calls = 0
+
+                def source():
+                    nonlocal calls
+                    calls += 1
+                    if calls == 2:
+                        attempt = value["cleanup"] / value["request"]["attempt"]
+                        target = fixture.target(value) if changed == "quarantine" else attempt
+                        if changed == "journal":
+                            target = attempt / "events.jsonl"
+                            raw = target.read_bytes()
+                        target.rename(target.with_name("displaced-" + target.name))
+                        if changed == "journal":
+                            target.write_bytes(raw)
+                            target.chmod(0o600)
+                        else:
+                            target.mkdir(mode=0o700)
+                    return source_identity()
+
+                with patch.object(tree, "source_identity", side_effect=source):
+                    with self.assertRaises((OSError, ValueError)):
+                        fixture.inspect(value, outer)
+                self.assertEqual(calls, 2)
         for returned in ("original", "quarantine"):
             with self.subTest(returned=returned):
                 value = self.prepare_packet()

@@ -854,8 +854,9 @@ def inspect(
             observed_files, observed_dirs = _observed_tree(
                 root, r["inventory"], removed, directories, initial=original_present
             )
-            os.close(root)
-            root = None
+            if r["role"] != "native-packet":
+                os.close(root)
+                root = None
         if terminal is not None:
             need(
                 terminal["original_present"] == original_present
@@ -897,6 +898,8 @@ def inspect(
             and not gaps
             and outer_ok
         )
+        if r["role"] == "native-packet":
+            need(source_identity() == reader_audit, "reader current source changed")
         for path, fd, expected in (
             (parent_path, parent, r["parent"]),
             (cleanup_path, cleanup, r["cleanup_parent"]),
@@ -915,12 +918,28 @@ def inspect(
             )
         else:
             need(not present(attempt, "events.jsonl"), "missing journal appeared")
-        need(source_identity() == reader_audit, "reader current source changed")
+        if r["role"] != "native-packet":
+            need(source_identity() == reader_audit, "reader current source changed")
+        if root is not None:
+            bind(
+                root_path if original_present else quarantine_path,
+                root,
+                expected_root,
+                initial=original_present,
+            )
+            need(
+                _observed_tree(root, r["inventory"], removed, directories, initial=original_present)
+                == (observed_files, observed_dirs),
+                "late packet tree changed",
+            )
         need(
             present(parent, root_path.name) == original_present
             and present(quarantine_parent, quarantine_path.name) == quarantine_present,
             "late target namespace changed",
         )
+        if root is not None:
+            os.close(root)
+            root = None
         return {
             "schema": "opent1d.lt1-native-tree-removal-readback/1",
             "status": "completed" if complete else "incomplete",
