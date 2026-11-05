@@ -4,6 +4,14 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Add an internal versioned LT1 route joining fixed owned launch, inherited
+  channel acknowledgment, owned packet consumption, durable sessions and strict
+  engine-free readback. Keep grants out of process arguments and distinguish
+  supplied, runtime-added and post-carrier environment facts. Preserve audit-1
+  timing, native ownership and historical readers. Refresh passive runtime and
+  notice evidence without granting setup, native qualification, distribution or
+  private erasure; actual native cases retain their separate admission gates.
+
 - Refine the vision and roadmap toward assessed research digital twins and
   contributions to prevention and cures, starting with beta-cell function and
   disease progression. Select bounded need/source/reuse assessment, repeatable

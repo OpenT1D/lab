@@ -1,0 +1,278 @@
+{
+  "schema": "opent1d.lt1-runtime-rights-followup/1",
+  "assessed_on": "2026-11-05",
+  "status": "pending-exact-packet-security-rights-host-and-setup-decisions",
+  "scope": "Passive exact-version source, publisher-archive notice and dated advisory refresh; technical evidence, not a rights-owner decision, legal clearance or runtime admission.",
+  "prior_public_record_sha256": {
+    "experiments/lt1_diagnostic/runtime-authentication.json": "06053a5d7f5d298cb8065df18cae828454ad8678ec54775269f03b3e48a145bd",
+    "experiments/lt1_diagnostic/runtime-disposition.json": "7fb2c09c7d503d3ef0ee034994d0f32f880d2fe5a3dad25316a18beedf394187",
+    "experiments/lt1_diagnostic/runtime-review.json": "28b561cc69c6c1de9341951995149488691c9954154d04775a84f0f4d3a98c26",
+    "experiments/lt1_diagnostic/rights-dossier.json": "faeb84eb8a839abe26e1b56444b9d1b4a57ecedcf1c9f42d478167c4bc8c7e2d",
+    "experiments/lt1_diagnostic/private-controls-review.json": "32f9a267c6c3b9b5fedefca7a1f2477cc8be4e0ceeae987f6c9cfc43ad9ca109",
+    "experiments/lt1_diagnostic/headless-notices.json": "a20474c4dc25f7e5b2a51e1bb1b7853736570098e959cf2345ea14dfa4d18d1e",
+    "experiments/lt1_diagnostic/headless-selection.json": "e9cb0ce784e96679eebb6f5c84b48cf8967b1181703db789c1b3fba0b1817a3c"
+  },
+  "candidate": {
+    "id": "lt1-cambridge-audit1-node22.23.4-darwin-arm64-preparation-1",
+    "node": "v22.23.4",
+    "platform": "darwin",
+    "arch": "arm64",
+    "archive_url": "https://nodejs.org/dist/v22.23.4/node-v22.23.4-darwin-arm64.tar.gz",
+    "archive_sha256": "c9e1dbc748b33ed2d14f42445191ecaf14c56259c7a9a26d0042c49ec2b66428",
+    "archive_bytes": 49996369,
+    "binary_sha256": "2cc28a1880d0774616959f2210ee739bffa6ac695c887e8988a496a21271f6c0",
+    "minimal_payload_profile": "proposal-node22.23.4-darwin-arm64-binary-license-only/1",
+    "minimal_payload_members": {
+      "node-v22.23.4-darwin-arm64/bin/node": {
+        "bytes": 113002944,
+        "sha256": "2cc28a1880d0774616959f2210ee739bffa6ac695c887e8988a496a21271f6c0",
+        "archive_mode": "0o755"
+      },
+      "node-v22.23.4-darwin-arm64/LICENSE": {
+        "bytes": 145485,
+        "sha256": "c738ae413cf561f174e34f6961f8ca458aae2369a73640dda6234c629b98bcc4",
+        "archive_mode": "0o644"
+      }
+    },
+    "npm_corepack_and_other_archive_members_selected": false,
+    "prior_signature_authentication_record_sha256": "06053a5d7f5d298cb8065df18cae828454ad8678ec54775269f03b3e48a145bd",
+    "prior_exact_archive_signature_authenticated": true,
+    "signature_verification_or_binary_authentication_rerun": false,
+    "binary_downloaded_staged_or_executed_in_this_followup": false
+  },
+  "fresh_security_observations": {
+    "upcoming_release": {
+      "source": "https://nodejs.org/en/blog/vulnerability/november-2026-security-releases",
+      "source_markdown_sha256": "ef0f65afb240746c9d96812cabce3aa23195d56070b3370eeed06b19b14ff03b",
+      "published_on": "2026-11-03",
+      "announced_on_or_after": "2026-11-11",
+      "release_lines": [
+        "22.x",
+        "24.x",
+        "26.x"
+      ],
+      "announced_maximum_severity": "HIGH",
+      "exact_candidate_applicability_and_fixed_artifact": "Not specified in the inspected announcement; not inferred.",
+      "disposition": "Pending updated exact-candidate advisory and risk disposition before any admission; an announcement is not a released or authenticated replacement."
+    },
+    "zlib": {
+      "cve": "CVE-2026-85091",
+      "source_files": [
+        {
+          "url": "https://github.com/nodejs/node/blob/v22.23.4/deps/zlib/gzwrite.c",
+          "bytes": 19237,
+          "sha256": "469b1e58932ea11bdda2a153f6655f7b3c13254240fae157181b49ed1bc93b47"
+        },
+        {
+          "url": "https://github.com/nodejs/node/blob/v22.23.4/deps/v8/third_party/zlib/gzwrite.c",
+          "bytes": 19237,
+          "sha256": "469b1e58932ea11bdda2a153f6655f7b3c13254240fae157181b49ed1bc93b47"
+        }
+      ],
+      "both_exact_source_files_match_prior_affected_path_review": true,
+      "vendor_old_path_confirmation": "https://github.com/madler/zlib/issues/1292#issuecomment-6456517984",
+      "upstream_correction": "https://github.com/madler/zlib/commit/df84af25dc1942490e1d1c899a07619152a46148",
+      "affected_library_path": "The upstream owner confirms the older continued-write-after-gzclearerr path belongs to the same CVE. This does not establish a supported Node JavaScript exploit.",
+      "node_inquiries": [
+        {
+          "url": "https://github.com/nodejs/nodejs-dependency-vuln-assessments/issues/467",
+          "state": "open",
+          "comments": 0,
+          "scope": "Node 26 question; not a Node 22 maintainer adjudication."
+        },
+        {
+          "url": "https://github.com/nodejs/nodejs-dependency-vuln-assessments/issues/492",
+          "state": "open",
+          "comments": 0,
+          "scope": "Node 24 question; not a Node 22 maintainer adjudication."
+        }
+      ],
+      "supported_JS_reachability_or_dynamic_binary_nonapplicability_proved": false,
+      "exploit_or_selected_runtime_probe_run": false
+    },
+    "headless_npm_advisories": {
+      "source": "https://api.osv.dev/v1/querybatch",
+      "ecosystem": "npm",
+      "exact_locked_package_versions_queried": 20,
+      "matching_packages": 0,
+      "matching_advisories": 0,
+      "inventory_sha256": "a20474c4dc25f7e5b2a51e1bb1b7853736570098e959cf2345ea14dfa4d18d1e",
+      "request_sha256": "8126a847cade027294c19189d794fceeb99b9a3598c503da30d1b0257e506059",
+      "response_sha256": "a97b693d2e180240c1eb2be03c1d7c4ce625e2823b9546dd25d1991f5d0d723e",
+      "scope": "Dated exact npm name/version matches only; excludes Node/V8/native libraries, copied historical Node code, Git source, build/OS and unqueried embedded material. Zero matches is not runtime or rights clearance."
+    }
+  },
+  "notice_content_review": {
+    "node_full_license": {
+      "source": "https://github.com/nodejs/node/blob/v22.23.4/LICENSE",
+      "bytes": 145485,
+      "sha256": "c738ae413cf561f174e34f6961f8ca458aae2369a73640dda6234c629b98bcc4",
+      "matches_prior_selected_archive_notice": true,
+      "scope": "Complete notice text retrieved and retained. This is not a complete embedded-component/version/build mapping or binary-security disposition."
+    },
+    "fresh_exact_packages": [
+      {
+        "name": "ts-node",
+        "version": "10.9.2",
+        "publisher_archive_url": "https://registry.npmjs.org/ts-node/-/ts-node-10.9.2.tgz",
+        "archive_sha256": "0290b8a665925d581da75499425c7156b1f433619af62b0ea51d159c18dff968",
+        "archive_bytes": 196739,
+        "locked_sha512_integrity": "sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==",
+        "archive_sha256_and_locked_sha512_verified": true,
+        "notice_members": [
+          {
+            "path": "package/LICENSE",
+            "bytes": 1103,
+            "sha256": "4eeb3271453a891df609e5a9f4ee79a68307f730c13417a3bfeffa604ac8cf25"
+          },
+          {
+            "path": "package/dist-raw/NODE-LICENSE.md",
+            "bytes": 1168,
+            "sha256": "ef1213c5081049cd0a7486f13b5a2f36afa86b7c28a4c728cb711694804a7e25"
+          }
+        ],
+        "all_notice_members_in_exact_archive_read_in_full": true
+      },
+      {
+        "name": "typescript",
+        "version": "5.7.3",
+        "publisher_archive_url": "https://registry.npmjs.org/typescript/-/typescript-5.7.3.tgz",
+        "archive_sha256": "80cfca1254bab8e81d639178e42d6406d856fba6e34cad60d1ab50ee6e5f7ebb",
+        "archive_bytes": 4232501,
+        "locked_sha512_integrity": "sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==",
+        "archive_sha256_and_locked_sha512_verified": true,
+        "notice_members": [
+          {
+            "path": "package/LICENSE.txt",
+            "bytes": 9197,
+            "sha256": "a7d00bfd54525bc694b6e32f64c7ebcf5e6b7ae3657be5cc12767bce74654a47"
+          },
+          {
+            "path": "package/ThirdPartyNoticeText.txt",
+            "bytes": 37824,
+            "sha256": "1af3c68039c57e539422da82a4faada506ce6d0ea6f90e0b699d02dbcdb7a90c"
+          }
+        ],
+        "all_notice_members_in_exact_archive_read_in_full": true
+      }
+    ],
+    "typescript_content_groups": [
+      {
+        "component": "TypeScript",
+        "notice": "Apache-2.0 text in LICENSE.txt"
+      },
+      {
+        "component": "DefinitelyTyped",
+        "notice": "MIT text plus supplier informational/EULA preamble in ThirdPartyNoticeText.txt"
+      },
+      {
+        "component": "Unicode",
+        "notice": "Unicode data/software copyright and permission terms"
+      },
+      {
+        "component": "Document Object Model",
+        "notice": "W3C License text, including retained notices and modification attribution"
+      },
+      {
+        "component": "WHATWG DOM",
+        "notice": "Creative Commons Attribution 4.0 International text"
+      },
+      {
+        "component": "Web Background Synchronization",
+        "notice": "W3C Community Final Specification Agreement, with specification-attribution and patent provisions"
+      },
+      {
+        "component": "WebGL",
+        "notice": "Khronos materials permission and disclaimer text"
+      }
+    ],
+    "ts_node_content_groups": [
+      {
+        "component": "ts-node",
+        "notice": "Package MIT text retained separately"
+      },
+      {
+        "component": "Copied Node.js portions",
+        "notice": "dist-raw/NODE-LICENSE.md MIT text retained separately; dist-raw README and file headers identify modified Node internals, including v15.3.0/v17.0.1 and pinned commits."
+      }
+    ],
+    "content_disposition": [
+      "Retain the four exact TypeScript/ts-node notice members with their corresponding selected payload, including the complete third-party text rather than only package-level license labels.",
+      "Record modification and attribution requirements against the actual payload before any separately reviewed distribution; the additional notice texts are not automatic public redistribution approval.",
+      "The DefinitelyTyped informational/EULA wording and specification provenance/version attribution remain facts for the actual rights reviewer; this technical reading asserts no license incompatibility or independent chain-of-title closure.",
+      "A newer Node binary does not replace ts-node 10.9.2 copied historical Node internals; security and functional qualification must include that separate code."
+    ],
+    "prior_headless_notice_inventory_count": 22,
+    "prior_headless_inventory_sha256": "a20474c4dc25f7e5b2a51e1bb1b7853736570098e959cf2345ea14dfa4d18d1e",
+    "full_twenty_archive_notice_reaudit_performed": false,
+    "headless_selected_payload_file_count": 509,
+    "headless_selected_payload_filemap_sha256": "a9c2874f3c9f62aa80f0a64c7edcd60d2757bf1e8f3b6c34afd86881d027bc73",
+    "headless_selected_payload_unchanged": true,
+    "complete_embedded_license_and_parameter_origin_closure": false,
+    "actual_staged_notice_verification": "unrun",
+    "legal_or_rights_owner_approval": null
+  },
+  "private_scope": {
+    "roles_and_limited_private_conditions_confirmed_privately": true,
+    "public_names_host_storage_duration_values_or_private_policy_hashes": false,
+    "overall_runtime_or_asset_rights_approval": null,
+    "setup_execution_distribution_or_private_removal_permission_inferred": false,
+    "existing_private_origin_and_retention_clock_changed": false,
+    "existing_private_copy_or_restore_coverage_claimed": false,
+    "scope": "Keep the existing privately confirmed limited-use conditions. No new named-role request, broader users/hosts, exports, retention-origin reset or deletion is created by this technical assessment."
+  },
+  "remaining_blockers": [
+    {
+      "id": "runtime-security",
+      "status": "open",
+      "required": "Updated exact-candidate disposition for known embedded C issue, newly announced security update, all embedded libraries, source/build provenance and actual host OS/framework context; no absence-of-reachability inference from synthetic or npm-only checks."
+    },
+    {
+      "id": "asset-rights",
+      "status": "open",
+      "required": "Actual recorded restricted-use basis for selected source/defaults and complete embedded content; final rights-reviewer decision separate from technical inventory and privately confirmed storage/use conditions."
+    },
+    {
+      "id": "setup",
+      "status": "closed-pending-review",
+      "required": "Qualify immutable selected payload/stager and retained notices, separately authorize exact setup, then verify its real receipt; no install or lifecycle-script allowance follows from this record."
+    },
+    {
+      "id": "new-native-route-host",
+      "status": "unqualified",
+      "required": "New source/profile/startup and grant-carrier TCB, actual byte-bound worker intake, module/addon/file/network/IPC/process ownership and explicit native C15-C18 qualification. Old host or ordinary tooling receipts cannot qualify the new route."
+    },
+    {
+      "id": "private-recovery-removal",
+      "status": "open",
+      "required": "Known original origins, holds, complete copy/process/ordinary-restore scope and exact private removal review. No absence-onset, physical-erasure, clock-reset or global coverage claim follows from metadata/fixture removal."
+    },
+    {
+      "id": "distribution",
+      "status": "not-cleared",
+      "required": "Separate actual-payload and combined-notice review and explicit distribution/export decision; public native bundles, tables and full reports remain outside this assessment."
+    }
+  ],
+  "authorizations": {
+    "setup": false,
+    "native_execution": false,
+    "distribution": false,
+    "production_removal": false,
+    "effective_erasure_verified": false,
+    "new_authority_granted": false
+  },
+  "closed_grants": {
+    "not_an_admission_file": true,
+    "canonical_registry_bytes_unchanged": true,
+    "setup": [],
+    "execution": [],
+    "setup_requests": [],
+    "removal_requests": []
+  },
+  "limitations": [
+    "No selected runtime, setup, compiler/toolchain package, native experiment or exploit was executed.",
+    "Compressed TypeScript/ts-node publisher archives were privately retained, hashed and read in memory; notice/source text was saved privately for review, without extraction into a staging tree, installation, import or lifecycle scripts.",
+    "Public runtime/rights sources were assessed. Historical private verification records were consulted solely to compare their public implementation source-hash maps; private host values were not assessed or published. No actual private-pilot, backup, snapshot, container or key data was accessed or changed.",
+    "This successor record supplements the frozen historical records without rewriting their identities, private clocks or grants."
+  ]
+}
