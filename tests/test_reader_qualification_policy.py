@@ -2,10 +2,14 @@
 
 import copy
 import json
+import tempfile
 import unittest
+import zipfile
+from pathlib import Path
 
 from experiments.shared_services import reader_compatibility
 from scripts import qualify_reader_candidate as qualification
+from scripts.qualify_integrated_candidate import mmtt_replay_arguments
 
 
 class QualificationPolicyTests(unittest.TestCase):
@@ -76,6 +80,50 @@ class QualificationPolicyTests(unittest.TestCase):
             qualification.transition_identity(
                 altered_result, qualification.CURRENT_POLICY, altered_raw
             )
+
+    def test_both_qualification_callers_select_the_exact_wheel_packet(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            wheel = root / "candidate.whl"
+            prefix = "opent1d_lab/_payload/app/experiments/shared_services/"
+            raw = reader_compatibility.CURRENT_REGISTRY.read_bytes()
+            for tamper in (None, "reader_compatibility.json", "reader_compatibility_m3.json"):
+                with zipfile.ZipFile(wheel, "w") as payload:
+                    for name, content in (
+                        ("reader_compatibility.json", reader_compatibility.REGISTRY.read_bytes()),
+                        ("reader_compatibility_m3.json", raw),
+                    ):
+                        if name == tamper:
+                            value = json.loads(content)
+                            value["tasks"].append("m3-compare")
+                            content = qualification.canonical(value)
+                        payload.writestr(prefix + name, content)
+                for caller in (
+                    lambda policy: qualification.replay_arguments(
+                        wheel, policy, root / "packet.json"
+                    ),
+                    lambda policy: mmtt_replay_arguments(wheel, policy, root),
+                ):
+                    self.assertEqual(
+                        caller(qualification.LEGACY_POLICY),
+                        ["--reader-policy", qualification.LEGACY_POLICY],
+                    )
+                    with self.assertRaises(AssertionError):
+                        caller("unknown")
+                    if tamper:
+                        with self.assertRaises(AssertionError):
+                            caller(qualification.CURRENT_POLICY)
+                    else:
+                        arguments = caller(qualification.CURRENT_POLICY)
+                        self.assertEqual(
+                            arguments[:3],
+                            [
+                                "--reader-policy",
+                                qualification.CURRENT_POLICY,
+                                "--qualification-packet",
+                            ],
+                        )
+                        self.assertEqual(Path(arguments[3]).read_bytes(), raw)
 
 
 if __name__ == "__main__":

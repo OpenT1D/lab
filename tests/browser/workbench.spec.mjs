@@ -73,9 +73,11 @@ test('own synthetic input: autosave, correction, exact bytes and immutable deriv
   expect(detail.original_sha256['observations.csv']).toBe(createHash('sha256').update(Buffer.from(files['observations.csv'])).digest('hex'));
   await page.locator('#run-plan').click();
   await expect(page.locator('#attempt-list')).toContainText('3/3 planned slots complete');
+  await page.locator('#nav-results').click();
   await page.getByRole('button', { name: 'Verify saved report', exact: true }).click();
   await expect(page.locator('#saved-report')).toBeVisible();
   const before = app.command('export-inputs', '--project', project, '--plan', original, '--output', path.join(app.folder, 'before-derive'));
+  await page.locator('#nav-study').click();
   await page.locator('#derive-plan').click();
   await expect(page.locator('#parent-plan')).toHaveValue(original);
   await page.locator('#variant-0-volume_l').fill('5.1');

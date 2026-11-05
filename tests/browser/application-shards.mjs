@@ -10,10 +10,10 @@ export function presentApplicationFiles(directory) {
     .filter(name => !name.split('/').includes('node_modules'));
 }
 
-// Whole-file groups balance the measured 37ee62a Linux flows (~200s/group).
+// Keep the measured long flows apart and explicitly assign new files.
 // A new configured file must be assigned explicitly; it cannot disappear.
 const groups = [
-  ['connected.spec.mjs', 'internal-candidate.spec.mjs'],
+  ['connected.spec.mjs', 'internal-candidate.spec.mjs', 'three-screens.spec.mjs'],
   ['comparisons.spec.mjs', 'integrated-candidate.spec.mjs', 'mmtt.spec.mjs'],
   ['workbench.spec.mjs', 'installed-sampling.spec.mjs', 'm3-workbench.spec.mjs'],
 ];
