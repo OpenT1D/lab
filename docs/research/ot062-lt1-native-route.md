@@ -1,13 +1,14 @@
 # OT-062 one owned LT1 attempt route
 
-[ADR 0110](../decisions/0110-lt1-owned-native-route.md) selects one integrated
-successor, tracked in [PR #71](https://github.com/OpenT1D/lab/pull/71). The scope is
-one bounded audit-1 attempt from fixed launch through entry acknowledgment,
-owned packet consumption, durable journaling and trusted readback. Track the
-runtime/rights assessment, pending decisions and full case-specific qualification
-wiring in this same PR. Actual native results require separate reviewed admissions
-and remain pending while the gates are closed. Do not open another separately
-merged preparation layer in place of completing this route.
+[ADR 0110](../decisions/0110-lt1-owned-native-route.md) selected the integrated
+route merged in [PR #71](https://github.com/OpenT1D/lab/pull/71). Its scope is one
+bounded audit-1 attempt from fixed launch through entry acknowledgment, owned
+packet consumption, durable journaling and trusted readback. Actual native
+results still require separate reviewed admissions. The current
+[ADR 0111](../decisions/0111-lt1-matched-host-tree-removal.md) successor, tracked in
+[PR #74](https://github.com/OpenT1D/lab/pull/74), keeps matched host probes and
+original output/evidence-tree removal together; it is not a native clearance or
+a separately merged design-only layer.
 
 PR #70 was critically reviewed again by two agents and merged as
 `8c072d135e7652f0b8d8a9508c5daf685f8538bc`, with exactly the tested tree of
@@ -17,6 +18,31 @@ with the same 32 expected skips, and all sixteen required jobs in
 [run 41923531306](https://github.com/OpenT1D/lab/actions/runs/41923531306), attempt 1,
 were freshly verified before merge. Those results cover the predecessor, not
 this route or actual native execution.
+
+## PR #71 critical review and merge
+
+The fresh two-agent review reproduced and corrected three reader defects:
+recorded producer errors could be ignored; child/worker context and durable
+session reports were insufficiently bound; and a consistently rehashed unknown
+case, slot or mismatched scientific plan could be accepted. Regression controls
+exercise the old defects and their corrected refusal. The writer's two changed
+files received separate review.
+
+Main advanced through GUI/reader PR #72 and documentation PR #73 during review.
+The final integrated source preserves both contributions and the LT1 gates;
+independent review checked the exact changelog/roadmap unions. The actual final
+`uv sync --locked` and `uv run --locked python scripts/check.py` on clean
+`f6a1ad10a95363cf96cc29fa9bb35be3a97e0ebe` exited 0: 2,362 tests, all previous
+IDs retained, the same 32 expected skips, no failures/errors/fixture skips, and
+strict documentation. The full command took 3,274.283 seconds. All sixteen
+required jobs in [run 42007664487](https://github.com/OpenT1D/lab/actions/runs/42007664487),
+attempt 1, passed without reruns. Conditional skips are not passes.
+
+PR #71 merged as `bb3076f5cb66d2be87de08b1ba27d379126711a8`, with exactly the tested
+tree and actual main parent `a321de3e7a9762d6c8b1491b15d5fe5dc1abdfca`. The old
+156/49/170 source maps and all four empty authority lists were byte-identical.
+Those results verify that route revision and its invented controls, not the
+current successor, selected native execution or effective private erasure.
 
 ## Fixed end-to-end boundary
 
@@ -123,6 +149,94 @@ native parity, biological validation or device evidence. Actual direct/wrapped
 native references, reset/repeat, timing/causality, failure and C15–C18 observations
 remain a separately admitted task with the frozen criteria.
 
+## Matched host I/O and original-tree successor
+
+[ADR 0111](../decisions/0111-lt1-matched-host-tree-removal.md) keeps these two
+bounded components in one successor. `native_attempt_namespace.json` owns the
+fixed output/evidence leaves and the two known session subdirectories. The new
+source/profile roster needs its own qualification; the PR #71 result and its
+201-source producer identity do not qualify changed code. Historical producer
+maps remain data. The archived PR #71 tree and earlier frozen readers retain
+their original scope; no automatic reader transition is claimed here.
+
+C19 uses exactly two slots, `base` and `allow-twin`. Both exact grants, owned
+packets and all physical root contexts pass preflight before canary creation,
+listener setup or process start. Both slots share the same staging root and
+physical evidence targets, with separate packet/output roots, attempts and
+nonces. Reject cross-slot physical aliases before any pair resource. Only the
+source-owned in-process pair may adopt its own six canaries and preserve its
+fixed base log/live-entry records; this is not a caller inventory exception.
+
+The twin adds two literal evidence-canary accesses and one fixed outbound TCP
+loopback endpoint. SBPL expresses the loopback family as `localhost`; the fixed
+socket connects to IPv4 `127.0.0.1:57321`. The rule is not an exact-IP predicate.
+The fixed Node probe runs after owned-buffer acknowledgment
+and before normal model initialization, without reopening packet paths or adding
+model resets. Parent read-seed checks, actual accepted challenge/reply bytes and
+final write readback remain separate from the child's operation report. Known
+unexpected successful base writes stay failed confinement observations; retain
+and pin their actual source-known bytes before any safe twin continuation.
+Unknown mutation, bad cleanup, cancellation or changed authority stops it.
+
+`native_route_host.inspect_pair` binds the separately pinned parent witness and
+both real route receipts/packet buffers/journals. Missing slots remain accounted
+for. A permission error needs its successful matched target control; unavailable,
+busy or timed-out targets are inconclusive. An unconfined base cannot demonstrate
+confinement. Nonces bind a phase exchange, not the kernel identity of the TCP
+peer. Keep scientific completion, the bounded I/O assessment and full host
+qualification distinct; `native_host_qualified` remains false.
+
+The separately invoked `native_route_host_tooling.capture` uses a small fixed
+Mac profile, ordinary tooling Node and a fresh private synthetic parent. It has
+no native packet, loader or scientific session and excludes the selected native
+binary. This experiment is outside automatic root CI. Its exact-source actual
+results belong to the PR handoff; ordinary tooling I/O cannot qualify the selected
+runtime's startup, modules/addons, broader IPC, hard resource limits or hostile
+same-user isolation.
+
+The explicit 5 November ordinary-Node 22.22.2 Mac experiment completed both real
+owned processes: the base observed `EPERM` for the evidence read, evidence write
+and loopback operation; the allow-twin succeeded on those same physical targets.
+All seventeen mechanism checks passed, including unchanged read canaries,
+independent final write readback, accepted nonce/reply bytes and listener cleanup.
+Separate technical review challenged the matched consumer with unavailable and
+missing positive controls, changed target/seed/challenge and cleanup errors.
+An earlier caller-API failure and unsupported literal-IP SBPL predicate are
+retained as failed/inconclusive attempts; neither supplied a denial pass.
+`native_host_qualified`, native execution authorization and effective-erasure
+verification remained false. These are scoped mechanism observations, not native
+bootstrap, model or general Mac qualification.
+
+`native_tree_removal_exec.remove` and the separate strict reader handle one
+exactly allocated original `output` or `evidence` tree under the existing removal
+registry. A C19 pair has three targets: two outputs and one shared evidence root.
+Known empty, interrupted, failed or malformed trees are cleanable without model
+replay. Unknown names, extra depth, links and special files refuse. The old flat
+remover stays unchanged. Bound private directories, single-link leaves, bytes,
+source and namespace; quarantine the whole root exclusively on the same volume,
+sync each mutation and remove only its reviewed leaves and directories.
+These descriptor/name checks require quiet exclusive ownership. POSIX unlink is
+not conditional on an expected inode; this is not isolation from a concurrent
+hostile process with the same user ID.
+
+The new reader binds the original and quarantine parents through every prefix,
+including the final absence of both roots. Actual outer process completion and
+an intact journal are necessary for completion; missing or malformed outer data,
+cancellation, deadlines and unjournaled crash gaps remain incomplete. Bind
+archived producer authority snapshots and path labels as externally pinned data,
+while independently checking the current reader's code/Python projection. Reading
+must not reactivate old permissions or open old producer code/runtime paths.
+
+`native_tree_reconciliation.propose` can prepare an unsaved absence proposal only
+for that exact completed allocated root copy. Incomplete outcomes preserve input
+register and provenance bytes. Keep original origin/deadline/hold evidence and
+all other copy IDs; newly created request, control, journal, log, outer and readback
+records require explicit separate accounting. Unobserved records stay unobserved.
+No proposal activates a register. Stage/packet, relocated, snapshot, backup and
+unregistered copies remain outside this removal. Namespace absence establishes
+neither original absence onset, retention compliance, complete restore exclusion
+nor physical sanitization; effective erasure remains unverified.
+
 ## Runtime, rights and operational decisions
 
 The [successor assessment](../../experiments/lt1_diagnostic/runtime-rights-followup.json) records a passive 5 November 2026 review of the unchanged Node 22.23.4 darwin-arm64 candidate. The earlier exact-archive signature authentication remains historical evidence; it was not rerun. No candidate binary, compiler, toolchain package, setup or native experiment was executed. Twenty exact locked npm name/version queries returned no OSV matches, which supplies no clearance for Node, native libraries, copied historical code, build provenance or the host OS.
@@ -167,14 +281,15 @@ attempt or replacement for the missing real outer receipt.
 
 The sole integration owner runs `uv sync --locked` and the full
 `uv run --locked python scripts/check.py` on the final integrated source. Separate
-technical review, the final-revision handoff and exact-source hosted results belong
-to PR #71. Predecessor or component results do not substitute for those final
-checks. None of these software checks establishes actual native qualification.
+technical review, the final-revision handoff and exact-source hosted results
+remain required for each successor. The PR #71 results above describe its exact
+merged source; they do not substitute for the current successor's final checks.
+None of these software checks establishes actual native qualification.
 
 All four production authority lists remain empty. Actual selected-runtime setup,
 verified actual setup receipts and bounded native execution require their separate
 reviewed admissions. Native bootstrap, modules, addons, processes, file/network and
-host-mechanism cases and C15–C18 remain unrun while those gates are closed. Keep
+host-mechanism cases and C15–C19 remain unrun while those gates are closed. Keep
 missing matched allow/deny controls, actual case outputs and broad-rule/resource
 questions explicit; an unavailable probe or missing target is not successful
 confinement evidence.
