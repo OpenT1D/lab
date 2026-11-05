@@ -48,6 +48,7 @@ test('frozen comparison: variants and derived plans, first attempts, snapshots a
   expect(original.coverage.planned_members).toBe(3);
   expect(original.members.every(m => m.attempt.status === 'unattempted')).toBe(true);
   const comparison = await page.locator('#comparison-select').inputValue();
+  await page.locator('#nav-study').click();
   for (let i = 0; i < 2; i++) {
     await expect(page.locator('#comparison-next')).toBeEnabled();
     await page.locator('#comparison-next').click();
@@ -67,6 +68,7 @@ test('frozen comparison: variants and derived plans, first attempts, snapshots a
   expect(complete.members[2].attempt.attempt).not.toBe(complete.members[0].attempt.attempt);
   const csvWaiting = page.waitForEvent('download'); await page.locator('#download-comparison').click();
   expect(await readFile(await (await csvWaiting).path(), 'utf8')).toContain('member-3');
+  await page.locator('#nav-study').click();
   await page.locator('#comparison-tip').fill(original.definition.snapshot.tip);
   await page.locator('#comparison-replay').click();
   await expect(page.locator('#report-completeness')).toHaveText('incomplete');
@@ -80,8 +82,9 @@ test('frozen comparison: variants and derived plans, first attempts, snapshots a
   await expect(page.locator('#report-completeness')).toHaveText('complete');
   await page.setViewportSize({ width: 520, height: 900 });
   await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
-  await page.evaluate(() => { document.querySelector('.section-nav').style.fontFamily = 'monospace'; });
+  await page.evaluate(() => { document.querySelector('#nav-study').closest('nav').style.fontFamily = 'monospace'; });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await page.locator('#nav-study').click();
   await page.locator('#comparison-open').focus(); await page.keyboard.press('Tab');
   await expect(page.locator('#comparison-verify')).toBeFocused();
   await page.screenshot({ path: testInfo.outputPath('comparison-narrow.png'), fullPage: false });

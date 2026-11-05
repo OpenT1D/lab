@@ -6,9 +6,10 @@ const cases = {"m3-compare": [["complete", "Invented trend and portable Ridge"]]
 const context = {"m3-compare": "Compare frozen predictors and persistence on shared causal support. Six five-minute CGM values; 30-minute horizon; mg/dL. All planned people and origins, failures and exclusions remain in the native report. Trusted local Python runs with your permissions. Synthetic observations only; no fitting or human prediction claim.", "mmtt-sampling": "Compare full and reduced actual measurement times using the same estimator and assumptions. Development-only selection is frozen before analysis; evaluation results do not select schedules. Whole-body total secretion including basal over 0–120 minutes (pmol). Full curves are references, not biological truth. Invented data only.", "mmtt-sensitivity": "Whole-body total endogenous secretion, including basal, over observed 0–120 minutes (pmol). Change is follow-up minus baseline. Three required assumption variants; 128 perturbations with seed 117. Invented data only.", "m4-study-installed": "Both supplied sources · adult#001 · 240 minutes · 961 quarter-minute samples. The gastric amount is an initial condition, not a timed meal. Native runtimes must be prepared separately."};
 let data = null, selected = null, draft = null, selectedPlan = null, currentReport = null, pending = false, pendingOperation = null, watched = null, loaded = false;
 let imageURL = null, parentDraft = null, refreshIssued = 0, refreshApplied = 0, reportIssued = 0;
+let planReadiness = null;
 const handled = new Set();
 const invalidReports = new Set();
-function invalidatePlanView() { $("plan-inspector").classList.add("hidden"); $("plan-inspector").open = false; $("plan-details").textContent = ""; $("readiness").textContent = "Check this frozen plan with the current runtime selection before execution."; }
+function invalidatePlanView() { planReadiness = null; $("plan-inspector").classList.add("hidden"); $("plan-inspector").open = false; $("plan-details").textContent = ""; $("readiness").textContent = "Check this frozen plan with the current runtime selection before execution."; }
 function element(tag, text, cls) { const node = document.createElement(tag); if (text !== undefined) node.textContent = text; if (cls) node.className = cls; return node; }
 function notice(message, error = false) { $("notice").textContent = message; $("notice").className = "notice" + (error ? " error" : ""); if (error) $("notice").focus(); }
 function withdrawReport(cancelLoading = true) { if (cancelLoading) reportIssued++; currentReport = null; $("report-text").replaceChildren(); $("child-reports").replaceChildren(); if (imageURL) URL.revokeObjectURL(imageURL); imageURL = null; $("report-figure").src = ""; $("saved-report").classList.add("hidden"); }
@@ -22,6 +23,8 @@ async function request(url, body) {
 }
 async function action(operation, arguments_ = {}, project = selected) {
   if (pending || data?.active) { notice("Another action is still running. Stop the run or wait for it to finish.", true); return; }
+  if (["create", "open", "relocate"].includes(operation) && globalThis.workbench?.state?.().unsettled) { notice("Save or resolve the open concept before switching projects. Your local edits are retained.", true); globalThis.researchUI?.show("study"); return; }
+  globalThis.researchUI?.start(operation);
   if (operation === "check") invalidatePlanView();
   if (["verify", "comparison_verify", "study_verify"].includes(operation)) reportIssued++;
   pendingOperation = operation; pending = true; render();
@@ -67,8 +70,8 @@ async function refresh() {
       if (job.operation === "prepare") { if (globalThis.workbench) await workbench.open(result.id, false); else { draft = result; $("plan-name").value = `${names[result.task]} — ${cases[result.task].find(row => row[0] === result.case)[1]}`; } notice(draft?.validation?.valid === false ? "Concept saved. Correct its validation errors before freezing." : "Inputs validated. Inspect the assumptions and freeze a plan before running."); }
       else if (job.operation.startsWith("draft_") || job.operation === "derive") { notice(job.operation === "draft_validate" ? "Validation finished. Inspect the saved concept and its diagnostics." : "Study concept saved. No frozen plan was changed."); }
       else if (job.operation === "freeze") { selectedPlan = result.plan; draft = null; globalThis.workbench?.close(); invalidatePlanView(); notice("Plan frozen. The original inputs and assumptions are retained."); }
-      else if (job.operation === "plan") { if (typeof result.scientific_input_text === "string") { const metadata = {...result}; delete metadata.scientific_input; delete metadata.scientific_input_text; $("plan-details").textContent = JSON.stringify(metadata, null, 2) + "\n\nScientific inputs (exact saved JSON):\n" + result.scientific_input_text; } else $("plan-details").textContent = JSON.stringify(result, null, 2); $("plan-inspector").classList.remove("hidden"); $("plan-inspector").open = true; }
-      else if (job.operation === "check") { $("readiness").textContent = result.runtimes_ready ? "Ready for explicit execution. This check did not run a model or install dependencies." : "Native execution is unavailable with the current selection. Configure reviewed runtimes; an explicit run without them retains an admission failure and performs no setup."; notice(result.runtimes_ready ? "Readiness check passed." : "Readiness check found unavailable native runtimes.", !result.runtimes_ready); }
+      else if (job.operation === "plan") { if (!globalThis.researchUI?.usedInspection(job)) { $("plan-details").textContent = planText(result); $("plan-inspector").classList.remove("hidden"); $("plan-inspector").open = true; } }
+      else if (job.operation === "check") { planReadiness = {...job.check_context, ready: result.runtimes_ready}; $("readiness").textContent = result.runtimes_ready ? "Ready for explicit execution. This check did not run a model or install dependencies." : "Native execution is unavailable with the current selection. Configure reviewed runtimes; an explicit run without them retains an admission failure and performs no setup."; notice(result.runtimes_ready ? "Readiness check passed." : "Readiness check found unavailable native runtimes.", !result.runtimes_ready); }
       else if (job.operation === "run") { notice(`Execution ${result.result.execution_status}; scientific evidence ${result.result.completeness}. Verify the saved report explicitly to inspect its conclusions.`, result.result.completeness !== "complete"); }
       else if (job.operation === "verify") { if (await showReport(result.report)) notice("Saved analysis verified. This did not run the model again."); }
       else if (job.operation.startsWith("comparison_")) { if (job.operation === "comparison_verify") { if (await showReport(result.report)) notice("Comparison reconstructed from fixed native evidence. Every planned member is retained."); } else notice("Comparison metadata read or saved. No model was run."); }
@@ -77,7 +80,9 @@ async function refresh() {
       else if (job.operation === "attach") { invalidatePlanView(); notice("Prepared dependencies verified and attached to this application."); }
       else if (job.operation === "select_attachment") { invalidatePlanView(); notice("Attachment selected. Check a frozen plan to validate it for this application."); }
       else if (job.operation === "clear_attachment") { invalidatePlanView(); notice("Runtime selection cleared. Saved reports remain readable."); }
+      else if (job.operation === "refresh") { notice("Saved project metadata refreshed. No experiment was run."); }
       else { draft = null; selectedPlan = null; currentReport = null; invalidatePlanView(); notice("Saved project opened. No experiment was run."); }
+      globalThis.researchUI?.finish(job);
     }
     render();
   } catch (error) { notice(error instanceof TypeError ? "Connection unavailable. Inspect the server terminal before assuming a run stopped. Reload this page after restarting the server." : error.message, true); }
@@ -87,7 +92,7 @@ function render() {
   if (!data) return;
   const busy = pending || !!data.active || data.closing;
   $("project-count").textContent = data.projects.length;
-  $("project-list").replaceChildren(...data.projects.map(item => { const button = element("button", item.name, "project-choice" + (item.id === selected ? " selected" : "")); button.disabled = busy; button.onclick = () => { withdrawReport(); selected = item.id; selectedPlan = null; draft = null; invalidatePlanView(); action("refresh", {}, item.id); }; return button; }));
+  $("project-list").replaceChildren(...data.projects.map(item => { const row = element("div", undefined, "project-row"), button = element("button", item.name, "project-choice" + (item.id === selected ? " selected" : "")); button.disabled = busy || item.id !== selected && !!globalThis.workbench?.state?.().unsettled; button.onclick = () => { if (selected === item.id) { globalThis.researchUI?.show("study"); return; } if (globalThis.workbench?.state?.().unsettled) { notice("Save or resolve the open concept before switching projects. Your local edits are retained.", true); return; } withdrawReport(); selected = item.id; selectedPlan = null; draft = null; invalidatePlanView(); globalThis.researchUI?.show("study"); action("refresh", {}, item.id); }; row.append(button, element("p", globalThis.researchUI?.projectStatus(item) || "Open to inspect saved research", "project-status")); return row; }));
   const chosen = project();
   $("welcome").classList.toggle("hidden", !!chosen); $("project-view").classList.toggle("hidden", !chosen);
   const active = data.jobs.find(job => job.id === data.active);
@@ -110,7 +115,8 @@ function render() {
     if ($("task").value !== previous) updateTask();
   }
   $("workspace-path").textContent = data.workspace;
-  if (!chosen) return;
+  $("project-workspace-location").textContent = data.workspace;
+  if (!chosen) { globalThis.researchUI?.render(); return; }
   $("selected-name").textContent = chosen.name; $("selected-path").textContent = chosen.path;
   const plans = chosen.info?.plans || [];
   if (!plans.some(plan => plan.id === selectedPlan)) { selectedPlan = plans[0]?.id || null; invalidatePlanView(); }
@@ -134,11 +140,13 @@ function render() {
   globalThis.workbench?.render(data, chosen, busy);
   globalThis.comparisons?.render(data, chosen, busy);
   globalThis.connected?.render(data, chosen, busy);
+  globalThis.researchUI?.render();
 }
 function renderAttempts(attempts, plans, busy) {
   if (!attempts.length) { $("attempt-list").replaceChildren(element("p", "No attempts yet. A run preserves its own outcome here.", "muted")); return; }
   $("attempt-list").replaceChildren(...attempts.slice().reverse().map(attempt => {
     const row = element("article", undefined, "attempt");
+    row.setAttribute("data-attempt", attempt.id);
     const plan = plans.find(item => item.id === attempt.plan);
     const result = typeof attempt.outcome === "object" ? attempt.outcome : null;
     const top = element("div", undefined, "attempt-top"); top.append(element("h3", `${plan ? label(plan) : "Saved plan"} · attempt ${attempt.ordinal}`), badge(result?.completeness || "unfinished", result?.completeness || "unfinished"));
@@ -152,6 +160,11 @@ function renderAttempts(attempts, plans, busy) {
     if (result && attempt.id === (attempts.filter(item => item.plan === attempt.plan).at(-1)?.id)) { const retry = element("button", "Run a new attempt"); retry.disabled = busy || !["mmtt-sensitivity", "mmtt-sampling", "m4-study-installed", "m3-compare"].includes(plan?.task); retry.onclick = () => action("run", {plan: attempt.plan, retry_of: attempt.id}); actions.append(retry); }
     row.append(actions); return row;
   }));
+}
+function planText(result) {
+  if (typeof result.scientific_input_text !== "string") return JSON.stringify(result, null, 2);
+  const metadata = {...result}; delete metadata.scientific_input; delete metadata.scientific_input_text;
+  return JSON.stringify(metadata, null, 2) + "\n\nScientific inputs (exact saved JSON):\n" + result.scientific_input_text;
 }
 function tableCells(line) {
   const cells = []; let start = 0, slashes = 0;
@@ -221,6 +234,8 @@ async function showReport(identity) {
   if (hasFigure) $("report-figure").src = imageURL;
   currentReport = record;
   $("report-context").textContent = `Verified ${new Date(record.verified_at).toLocaleString()} · ` + (record.study ? `connected study ${record.study.slice(0, 12)} · snapshot ${record.snapshot.tip}` : record.comparison ? `comparison ${record.comparison.slice(0, 12)} · snapshot ${record.snapshot.tip}` : `attempt ${record.attempt.slice(0, 12)}`);
+  const usedAttempt = project()?.info?.attempts.find(attempt => attempt.id === record.attempt);
+  if (usedAttempt) $("report-context").textContent += ` · frozen plan ${usedAttempt.plan.slice(0, 12)}. Inspect used inputs to see the retained source identities and settings.`;
   $("report-completeness").textContent = record.completeness + (record.numerical_acceptance ? ` · point checks ${record.numerical_acceptance.status}` : "");
   $("report-completeness").className = "tag" + (record.completeness === "complete" && (!record.numerical_acceptance || record.numerical_acceptance.all_passed) ? "" : " warn");
   $("saved-report").classList.remove("hidden"); $("saved-report").scrollIntoView({behavior: "smooth", block: "start"});
@@ -247,4 +262,5 @@ for (const button of document.querySelectorAll("[data-download]")) button.onclic
 globalThis.workbench?.bind();
 globalThis.comparisons?.bind();
 globalThis.connected?.bind();
+globalThis.researchUI?.bind();
 updateTask(); refresh(); setInterval(refresh, 1500);

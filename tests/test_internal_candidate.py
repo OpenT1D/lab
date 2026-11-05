@@ -1,6 +1,7 @@
 """Actual installed two-task capability gates, readonly reports and GUI lifecycle."""
 
 import functools
+import hashlib
 import json
 import os
 import subprocess
@@ -10,6 +11,7 @@ from unittest.mock import patch
 
 from experiments.shared_services import store
 from tests import test_installed_sampling as installed
+from tests import test_reader_transition as transition
 from tests import test_workbench_installed as editable
 
 
@@ -26,6 +28,50 @@ class InternalCandidate(unittest.TestCase):
     setUp = installed.InstalledSampling.setUp
     call = installed.InstalledSampling.call
     server = editable.EditableWorkbench.server
+
+    def test_preserved_reader_rejects_changed_installed_helper_even_after_manifest_reseal(self):
+        fixture = transition.ReaderTransition()
+        fixture.setUp()
+        self.addCleanup(fixture.doCleanups)
+        _, comparison = fixture.freeze_previous()
+        before = store.inventory(fixture.project, store.Budget())
+        self.call("comparison", "--project", fixture.project, "--comparison", comparison)
+        package = self.environment / "lib/python3.12/site-packages/opent1d_lab"
+        relative = "_payload/app/experiments/shared_services/comparison_reports.py"
+        helper = package / relative
+        manifest = package / "_manifest.json"
+        original_helper, original_manifest = helper.read_bytes(), manifest.read_bytes()
+        changed = original_helper + b"\n# Disposable changed reader source.\n"
+        try:
+            for reseal in (False, True):
+                helper.write_bytes(changed)
+                if reseal:
+                    metadata = json.loads(original_manifest)
+                    metadata["files"][relative] = {
+                        "sha256": hashlib.sha256(changed).hexdigest(),
+                        "bytes": len(changed),
+                    }
+                    manifest.write_bytes(store.encoded(metadata))
+                refused = self.call(
+                    "comparison",
+                    "--project",
+                    fixture.project,
+                    "--comparison",
+                    comparison,
+                    expected=2,
+                )
+                self.assertIn(
+                    "Frozen comparison/source identity differs"
+                    if reseal
+                    else "Installed source identity changed",
+                    refused["error"],
+                )
+                self.assertEqual(store.inventory(fixture.project, store.Budget()), before)
+        finally:
+            helper.write_bytes(original_helper)
+            manifest.write_bytes(original_manifest)
+        self.call("comparison", "--project", fixture.project, "--comparison", comparison)
+        self.assertEqual(store.inventory(fixture.project, store.Budget()), before)
 
     def test_enforced_manifest_facade_and_bootstrap_native_refusals(self):
         metadata = self.call("installation")

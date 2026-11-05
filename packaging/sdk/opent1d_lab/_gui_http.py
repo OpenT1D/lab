@@ -18,6 +18,7 @@ STATIC = {
     "/drafts.js": ("drafts.js", "text/javascript; charset=utf-8"),
     "/comparisons.js": ("comparisons.js", "text/javascript; charset=utf-8"),
     "/connected.js": ("connected.js", "text/javascript; charset=utf-8"),
+    "/research.js": ("research.js", "text/javascript; charset=utf-8"),
     "/app.css": ("app.css", "text/css; charset=utf-8"),
 }
 DOWNLOAD_HEADERS = {

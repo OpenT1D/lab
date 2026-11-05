@@ -52,6 +52,7 @@ test('installed M3: correction, frozen bytes, exact download and reopened reloca
   for (const candidate of config.candidates) await rm(path.dirname(candidate.declaration), { recursive: true });
   await page.locator('#run-plan').click();
   await expect(page.locator('#attempt-list')).toContainText('4/4 planned slots complete');
+  await page.locator('#nav-results').click();
   await page.getByRole('button', { name: 'Verify saved report', exact: true }).click();
   await expect(page.locator('#report-text')).toContainText('Primary support includes every frozen candidate and persistence');
   const download = page.waitForEvent('download');
@@ -68,6 +69,7 @@ test('installed M3: correction, frozen bytes, exact download and reopened reloca
   await page.locator('#open-path').fill(moved);
   await page.locator('#open-project button').click();
   await expect(page.locator('#attempt-list')).toContainText('4/4 planned slots complete');
+  await page.locator('#nav-results').click();
   await page.getByRole('button', { name: 'Verify saved report', exact: true }).click();
   await expect(page.locator('#saved-report')).toBeVisible();
   const repeated = page.waitForEvent('download');
