@@ -1,5 +1,6 @@
 """Actual fresh original-tree removal; no private data or native qualification."""
 
+import ast
 import copy
 import json
 import os
@@ -117,11 +118,457 @@ class OriginalTreeTests(unittest.TestCase):
         self.assertEqual(outer["receipt"]["status"], "completed")
         self.assertEqual(outer["receipt"]["remaining_owned_processes"], [])
         self.assertFalse(value["root"].exists())
-        self.assertFalse((value["cleanup"] / value["request"]["attempt"] / "target").exists())
+        self.assertFalse(fixture.target(value).exists())
         result = fixture.inspect(value, outer)
         self.assertEqual(result["status"], "completed")
         self.assertTrue(all(result[k] is False for k in tree.AUTHORITY))
         return result
+
+    def prepare_packet(self, **kwargs):
+        names = json.loads(tree.NAMESPACE.read_bytes())["roles"]["native-packet"]["files"]
+        return self.prepare(
+            role="native-packet",
+            files={name: ("invented:" + name).encode() for name in names},
+            **kwargs,
+        )
+
+    def test_original_native_packet_root_is_removed_with_a_recorded_fixed_mode_transition(self):
+        names = json.loads(tree.NAMESPACE.read_bytes())["roles"]["native-packet"]["files"]
+        entry = ast.parse((tree.ROOT / "experiments/lt1_diagnostic/native_entry.py").read_text())
+        packet = next(
+            node.value
+            for node in entry.body
+            if isinstance(node, ast.Assign)
+            and any(
+                isinstance(target, ast.Name) and target.id == "PACKET" for target in node.targets
+            )
+        )
+        self.assertEqual(set(names), set(ast.literal_eval(packet)))
+        value = self.prepare_packet(hold=True)
+        before = value["request"]["root"]
+        self.assertEqual(before["mode"], 0o500)
+        self.assertTrue(
+            all(v["mode"] == 0o400 for v in value["request"]["inventory"]["files"].values())
+        )
+        outer = fixture.run(value)
+        result = self.assert_complete(value, outer)
+        events = [json.loads(line) for line in fixture.journal(value).splitlines()]
+        self.assertEqual(
+            [e["event"] for e in events[:3]], ["prepared", "quarantined", "packet-writable"]
+        )
+        self.assertEqual(events[2], {"event": "packet-writable"})
+        self.assertEqual(result["packet_mode"], {"writable_recorded": True, "observed": None})
+        self.assertEqual(result["removed"], sorted(names))
+        proposal = reconciliation.propose(**fixture.proposal(value, outer))
+        self.assertEqual(proposal["status"], "proposed")
+        self.assertEqual(proposal["readback"]["role"], "native-packet")
+        self.assertFalse(proposal["effective_erasure_verified"])
+        before, after = (
+            json.loads(raw)["subjects"]["subject-one"]
+            for raw in (value["register_raw"], proposal["register_raw"])
+        )
+        for key in ("retained_since", "origin_evidence_sha256", "hold"):
+            self.assertEqual(after[key], before[key])
+        self.assertEqual(after["copies"]["other-copy"], before["copies"]["other-copy"])
+        self.assertEqual(after["copies"]["original-copy"]["state"], "absence-observed")
+        self.assertTrue(proposal["unregistered_records_block_effective_erasure"])
+        self.assertFalse(proposal["new_records_registered"])
+        self.assertEqual(fixture.inspect(value, None)["status"], "incomplete")
+        for key, changed in (("role", "output"), ("copy", "other-copy")):
+            args = fixture.proposal(value, outer)
+            allocation = json.loads(args["allocation_raw"])
+            allocation[key] = changed
+            args["allocation_raw"] = tree.encoded(allocation)
+            args["expected_allocation_sha256"] = tree.digest(args["allocation_raw"])
+            with self.subTest(allocation_key=key), self.assertRaises(ValueError):
+                reconciliation.propose(**args)
+
+    def test_native_packet_requires_exact_members_and_fixed_original_modes_before_launch(self):
+        value = self.prepare_packet()
+        for change in ("missing", "extra", "directory", "root700", "parent500", "leaf600"):
+            r = copy.deepcopy(value["request"])
+            if change == "missing":
+                r["inventory"]["files"].pop("grant.json")
+            elif change == "extra":
+                r["inventory"]["files"]["unknown.json"] = r["inventory"]["files"]["grant.json"]
+            elif change == "directory":
+                r["inventory"]["directories"]["session-0000"] = {
+                    k: v for k, v in r["root"].items() if k != "path"
+                }
+            elif change == "root700":
+                r["root"]["mode"] = 0o700
+            elif change == "parent500":
+                r["parent"]["mode"] = 0o500
+            else:
+                r["inventory"]["files"]["grant.json"]["mode"] = 0o600
+            raw = tree.encoded(r)
+            grants = {"schema": "opent1d.lt1-removal-admissions/1", "requests": [tree.digest(raw)]}
+            with (
+                self.subTest(change=change),
+                patch.object(tree, "_private_directory", side_effect=AssertionError("path intake")),
+                patch.object(runner.owner, "supervise", side_effect=AssertionError("spawn intake")),
+                self.assertRaises(ValueError),
+            ):
+                runner._run_reviewed(raw, grants, value["context"], value["audit"], invented=True)
+        self.assertEqual(fixture.pin(value["root"]), value["request"]["inventory"])
+        self.assertEqual(fixture.signature(value["root"])["mode"], 0o500)
+        with patch.object(tree.os, "fchmod", side_effect=AssertionError("original path chmod")):
+            result = tree._remove_reviewed(
+                value["raw"],
+                value["grants"],
+                value["context"],
+                value["audit"],
+                invented=True,
+                stop=lambda: True,
+            )
+        self.assertEqual(result["status"], "interrupted")
+
+    def test_native_packet_actual_unknown_entries_and_links_refuse_before_quarantine(self):
+        for kind in ("unknown", "symlink", "hardlink", "fifo"):
+            with self.subTest(kind=kind):
+                value = self.prepare_packet()
+                root = value["root"]
+                root.chmod(0o700)
+                if kind == "unknown":
+                    (root / "unknown").write_bytes(b"preserve")
+                elif kind == "hardlink":
+                    os.link(root / "grant.json", root.parent / "copy")
+                else:
+                    (root / "grant.json").unlink()
+                    if kind == "symlink":
+                        (root / "grant.json").symlink_to(root.parent / "unrelated.txt")
+                    else:
+                        os.mkfifo(root / "grant.json", 0o400)
+                root.chmod(0o500)
+                value["request"]["root"] = {"path": str(root), **fixture.signature(root)}
+                value["raw"] = tree.encoded(value["request"])
+                value["grants"]["requests"] = [tree.digest(value["raw"])]
+                outer = fixture.run(value)
+                self.assertEqual(outer["receipt"]["status"], "failed")
+                self.assertEqual(fixture.signature(root)["mode"], 0o500)
+                self.assertFalse((value["cleanup"] / value["request"]["attempt"]).exists())
+
+    def test_native_packet_chmod_and_sync_failures_preserve_truthful_mode_prefixes(self):
+        for failure, mode in (("chmod", 0o500), ("sync", 0o700)):
+            with self.subTest(failure=failure):
+                value = self.prepare_packet()
+                original_chmod, original_sync = os.fchmod, os.fsync
+                root_identity = tuple(value["request"]["root"][k] for k in ("device", "inode"))
+                calls = []
+
+                def chmod(fd, requested):
+                    info = os.fstat(fd)
+                    self.assertEqual((info.st_dev, info.st_ino), root_identity)
+                    target = fixture.target(value)
+                    self.assertFalse(value["root"].exists())
+                    self.assertEqual(fixture.signature(target)["mode"], 0o500)
+                    self.assertEqual(requested, 0o700)
+                    calls.append(requested)
+                    if failure == "chmod":
+                        raise OSError("invented fchmod failure")
+                    return original_chmod(fd, requested)
+
+                def sync(fd):
+                    info = os.fstat(fd)
+                    if (info.st_dev, info.st_ino) == root_identity:
+                        raise OSError("invented root fsync failure")
+                    return original_sync(fd)
+
+                with (
+                    patch.object(tree.os, "fchmod", side_effect=chmod),
+                    patch.object(tree.os, "fsync", side_effect=sync),
+                ):
+                    result = tree._remove_reviewed(
+                        value["raw"],
+                        value["grants"],
+                        value["context"],
+                        value["audit"],
+                        invented=True,
+                    )
+                self.assertEqual(result["status"], "failed")
+                self.assertEqual(calls, [0o700])
+                readback = fixture.inspect(value, None)
+                self.assertEqual(readback["status"], "incomplete")
+                self.assertEqual(
+                    readback["packet_mode"], {"writable_recorded": False, "observed": mode}
+                )
+                self.assertEqual(
+                    "packet-mode" in readback["unrecorded_mutations"], failure == "sync"
+                )
+                target = fixture.target(value)
+                self.assertEqual(fixture.pin(target), value["request"]["inventory"])
+                self.assertNotIn(b'"event":"packet-writable"', fixture.journal(value))
+
+    def test_native_packet_actual_crash_prefixes_preserve_mode_and_unrecorded_mutations(self):
+        for phase, mode, recorded, gap in (
+            ("after-rename-before-journal", 0o500, False, "root-rename"),
+            ("after-packet-chmod-before-journal", 0o700, False, "packet-mode"),
+            ("packet-writable", 0o700, True, None),
+            ("after-unlink-before-journal:grant.json", 0o700, True, "grant.json"),
+            ("after-root-rmdir-before-journal", None, True, "root-rmdir"),
+        ):
+            with self.subTest(phase=phase):
+                value = self.prepare_packet(
+                    context={"kind": "invented", "fixture_phase": phase, "fixture_crash": True}
+                )
+                outer = fixture.run(value)
+                self.assertEqual(outer["receipt"]["exit_code"], 61)
+                self.assertEqual(outer["receipt"]["remaining_owned_processes"], [])
+                result = fixture.inspect(value, outer)
+                self.assertEqual(result["status"], "incomplete")
+                self.assertEqual(
+                    result["packet_mode"], {"writable_recorded": recorded, "observed": mode}
+                )
+                if gap:
+                    self.assertIn(gap, result["unrecorded_mutations"])
+                journal = fixture.journal(value)
+                self.assertEqual(b'"event":"packet-writable"' in journal, recorded)
+                args = fixture.proposal(value, outer)
+                proposal = reconciliation.propose(**args)
+                self.assertEqual(proposal["register_raw"], value["register_raw"])
+                self.assertEqual(proposal["provenance_raw"], args["provenance_raw"])
+                if mode is not None:
+                    target = fixture.target(value)
+                    actual = fixture.signature(target)
+                    for key in ("device", "inode", "uid"):
+                        self.assertEqual(actual[key], value["request"]["root"][key])
+                    self.assertEqual(actual["mode"], mode)
+                    if phase == "after-packet-chmod-before-journal":
+                        self.assertEqual(fixture.pin(target), value["request"]["inventory"])
+
+    def test_native_packet_cancel_and_deadline_preserve_actual_fixed_mode_prefix(self):
+        for phase in (None, "quarantined", "packet-writable"):
+            with self.subTest(phase=phase):
+                value = self.prepare_packet(
+                    context={
+                        "kind": "invented",
+                        "fixture_phase": phase,
+                        "fixture_pause": 4,
+                    }
+                )
+                cancel = threading.Event()
+                if phase is None:
+                    cancel.set()
+                else:
+                    wanted = tree.encoded({"event": phase})
+
+                    def trigger():
+                        end = time.monotonic() + 20
+                        while time.monotonic() < end:
+                            if wanted in fixture.journal(value):
+                                cancel.set()
+                                return
+                            time.sleep(0.01)
+
+                    thread = threading.Thread(target=trigger)
+                    thread.start()
+                outer = fixture.run(value, cancel=cancel)
+                if phase is not None:
+                    thread.join(20)
+                    self.assertFalse(thread.is_alive())
+                    self.assertTrue(cancel.is_set())
+                self.assertEqual(outer["receipt"]["status"], "interrupted")
+                self.assertEqual(outer["receipt"]["remaining_owned_processes"], [])
+                result = fixture.inspect(value, outer)
+                self.assertEqual(result["status"], "incomplete")
+                self.assertEqual(
+                    result["packet_mode"],
+                    {
+                        "writable_recorded": phase == "packet-writable",
+                        "observed": 0o700 if phase == "packet-writable" else 0o500,
+                    },
+                )
+                root = value["root"] if phase is None else fixture.target(value)
+                self.assertEqual(fixture.pin(root), value["request"]["inventory"])
+        value = self.prepare_packet(
+            context={
+                "kind": "invented",
+                "fixture_phase": "packet-writable",
+                "fixture_pause": 4,
+            }
+        )
+        outer = fixture.run(value, timeout=1.5)
+        self.assertEqual(outer["receipt"]["status"], "failed")
+        self.assertEqual(outer["receipt"]["error"], "WorkerDeadline")
+        self.assertEqual(outer["receipt"]["remaining_owned_processes"], [])
+        result = fixture.inspect(value, outer)
+        self.assertEqual(result["status"], "incomplete")
+        roots = [p for p in (value["root"], fixture.target(value)) if p.exists()]
+        self.assertEqual(len(roots), 1)
+        self.assertEqual(fixture.pin(roots[0]), value["request"]["inventory"])
+        self.assertIn(result["packet_mode"]["observed"], (0o500, 0o700))
+        self.assertEqual(result["removed"], [])
+
+    def test_native_packet_reader_refuses_mode_event_contradictions_even_when_rehashed(self):
+        value = self.prepare_packet()
+        outer = fixture.run(value)
+        self.assert_complete(value, outer)
+        path = value["cleanup"] / value["request"]["attempt"] / "events.jsonl"
+        events = [json.loads(line) for line in path.read_bytes().splitlines()]
+        for change in ("duplicate", "missing", "early", "late", "selector"):
+            changed = copy.deepcopy(events)
+            if change == "duplicate":
+                changed.insert(3, {"event": "packet-writable"})
+            elif change == "missing":
+                changed.pop(2)
+            elif change == "early":
+                changed.insert(1, changed.pop(2))
+            elif change == "late":
+                changed.insert(3, changed.pop(2))
+            else:
+                changed[2]["mode"] = 0o777
+            path.write_bytes(b"".join(tree.encoded(e) + b"\n" for e in changed))
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                fixture.inspect(value, outer)
+        value = self.prepare_packet(
+            context={
+                "kind": "invented",
+                "fixture_phase": "packet-writable",
+                "fixture_crash": True,
+            }
+        )
+        outer = fixture.run(value)
+        target = fixture.target(value)
+        for mode in (0o500, 0o600, 0o750):
+            target.chmod(mode)
+            with self.subTest(mode=mode), self.assertRaises(ValueError):
+                fixture.inspect(value, outer)
+        target.chmod(0o700)
+        self.assertEqual(fixture.inspect(value, outer)["status"], "incomplete")
+        value = self.prepare_packet()
+        value["root"].chmod(0o700)
+        with self.assertRaises(ValueError):
+            fixture.inspect(value, None)
+        value = self.prepare(files={"route.json": b"unchanged output behavior"})
+        outer = fixture.run(value)
+        path = value["cleanup"] / value["request"]["attempt"] / "events.jsonl"
+        events = [json.loads(line) for line in path.read_bytes().splitlines()]
+        events.insert(2, {"event": "packet-writable"})
+        path.write_bytes(b"".join(tree.encoded(e) + b"\n" for e in events))
+        with self.assertRaisesRegex(ValueError, "packet mode event order"):
+            fixture.inspect(value, outer)
+
+    def test_native_packet_sibling_quarantine_collision_and_name_changes_preserve_objects(self):
+        value = self.prepare_packet()
+        target = fixture.target(value)
+        self.assertEqual(target.parent, value["root"].parent)
+        self.assertEqual(target.name, "lt1-packet-" + tree.digest(value["raw"]))
+        target.mkdir(mode=0o700)
+        (target / "unrelated").write_bytes(b"preserve collision")
+        identity = fixture.signature(target)
+        outer = fixture.run(value)
+        self.assertEqual(outer["receipt"]["status"], "failed")
+        self.assertEqual(fixture.signature(target), identity)
+        self.assertEqual((target / "unrelated").read_bytes(), b"preserve collision")
+        self.assertEqual(fixture.signature(value["root"])["mode"], 0o500)
+        self.assertFalse((value["cleanup"] / value["request"]["attempt"]).exists())
+        with self.assertRaisesRegex(ValueError, "unstarted packet quarantine appeared"):
+            fixture.inspect(value, outer)
+        for change in ("exclusive-collision", "replaced-quarantine"):
+            with self.subTest(change=change):
+                value = self.prepare_packet()
+                target = fixture.target(value)
+                displaced = target.parent / "displaced-packet"
+                original_rename = tree._rename
+
+                def rename(*args):
+                    target.mkdir(mode=0o500)
+                    return original_rename(*args)
+
+                def checkpoint(phase):
+                    if change == "replaced-quarantine" and phase == "quarantined":
+                        target.rename(displaced)
+                        target.mkdir(mode=0o500)
+
+                with patch.object(
+                    tree,
+                    "_rename",
+                    side_effect=rename if change == "exclusive-collision" else original_rename,
+                ):
+                    result = tree._remove_reviewed(
+                        value["raw"],
+                        value["grants"],
+                        value["context"],
+                        value["audit"],
+                        invented=True,
+                        checkpoint=checkpoint,
+                    )
+                self.assertEqual(result["status"], "failed")
+                preserved = value["root"] if change == "exclusive-collision" else displaced
+                self.assertEqual(fixture.pin(preserved), value["request"]["inventory"])
+                self.assertEqual(fixture.signature(preserved)["mode"], 0o500)
+                self.assertEqual(list(target.iterdir()), [])
+                self.assertNotIn(b'"event":"packet-writable"', fixture.journal(value))
+                with self.assertRaises(ValueError):
+                    fixture.inspect(value, None)
+
+    def test_native_packet_reader_binds_both_sibling_names_and_rejects_wrong_parent_target(self):
+        for change in (
+            "original-replaced",
+            "original-missing",
+            "original-mode",
+            "quarantine-appeared",
+            "attempt-appeared",
+            "cleanup-parent-replaced",
+        ):
+            with self.subTest(unstarted_change=change):
+                value = self.prepare_packet()
+                source_identity = tree.source_identity
+                calls = 0
+
+                def source():
+                    nonlocal calls
+                    calls += 1
+                    if calls == 2:
+                        if change in ("original-replaced", "original-missing"):
+                            value["root"].rename(value["root"].parent / "displaced-original")
+                            if change == "original-replaced":
+                                value["root"].mkdir(mode=0o500)
+                        elif change == "original-mode":
+                            value["root"].chmod(0o700)
+                        elif change == "quarantine-appeared":
+                            fixture.target(value).mkdir(mode=0o500)
+                        elif change == "attempt-appeared":
+                            (value["cleanup"] / value["request"]["attempt"]).mkdir(mode=0o700)
+                        else:
+                            value["cleanup"].rename(value["cleanup"].parent / "displaced-cleanup")
+                            value["cleanup"].mkdir(mode=0o700)
+                    return source_identity()
+
+                with patch.object(tree, "source_identity", side_effect=source):
+                    with self.assertRaises((OSError, ValueError)):
+                        fixture.inspect(value, None)
+                self.assertEqual(calls, 2)
+        for returned in ("original", "quarantine"):
+            with self.subTest(returned=returned):
+                value = self.prepare_packet()
+                outer = fixture.run(value)
+                self.assert_complete(value, outer)
+                source_identity = tree.source_identity
+                calls = 0
+
+                def source():
+                    nonlocal calls
+                    calls += 1
+                    if calls == 2:
+                        (value["root"] if returned == "original" else fixture.target(value)).mkdir(
+                            mode=0o500
+                        )
+                    return source_identity()
+
+                with patch.object(tree, "source_identity", side_effect=source):
+                    with self.assertRaisesRegex(ValueError, "late target namespace changed"):
+                        fixture.inspect(value, outer)
+                self.assertEqual(calls, 2)
+        value = self.prepare_packet()
+        outer = fixture.run(value)
+        self.assert_complete(value, outer)
+        wrong = value["cleanup"] / value["request"]["attempt"] / "target"
+        wrong.mkdir(mode=0o700)
+        (wrong / "unregistered").write_bytes(b"preserve wrong-parent record")
+        with self.assertRaisesRegex(ValueError, "reader attempt namespace"):
+            fixture.inspect(value, outer)
+        self.assertEqual((wrong / "unregistered").read_bytes(), b"preserve wrong-parent record")
 
     def test_original_empty_partial_malformed_and_empty_session_trees(self):
         for files in (

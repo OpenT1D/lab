@@ -120,11 +120,11 @@ def admitted(raw, grants):
     )
 
 
-def _directory(record, *, path=False):
+def _directory(record, *, path=False, native_packet=False):
     retention.fields(record, DIR_FIELDS + (" path" if path else ""))
     need(
         all(type(record[k]) is int and record[k] >= 0 for k in DIR_FIELDS.split())
-        and record["mode"] == 0o700
+        and record["mode"] == (0o500 if native_packet else 0o700)
         and record["uid"] == os.getuid(),
         "private directory identity",
     )
@@ -195,7 +195,9 @@ def request(raw, context_raw, audit, *, invented=False):
     )
     _producer(value["producer"])
     for key in ("root", "parent", "cleanup_parent"):
-        _directory(value[key], path=True)
+        _directory(
+            value[key], path=True, native_packet=key == "root" and value["role"] == "native-packet"
+        )
     root, parent, cleanup = (Path(value[k]["path"]) for k in ("root", "parent", "cleanup_parent"))
     need(
         root.parent == parent
@@ -209,6 +211,8 @@ def request(raw, context_raw, audit, *, invented=False):
     retention.fields(inventory, "files directories")
     files, directories = inventory["files"], inventory["directories"]
     need(type(files) is dict and type(directories) is dict, "closed inventory maps")
+    if value["role"] == "native-packet":
+        need(set(files) == set(role["files"]) and not directories, "exact native packet members")
     need(len(files) + len(directories) <= 128, "inventory count")
     need(set(directories) <= set(role["directories"]), "known depth-one directories")
     for name, record in directories.items():
@@ -229,7 +233,7 @@ def request(raw, context_raw, audit, *, invented=False):
         need(
             all(type(record[k]) is int and record[k] >= 0 for k in FILE_FIELDS.split()[:-1])
             and record["uid"] == os.getuid()
-            and record["mode"] in (0o400, 0o600)
+            and record["mode"] in ((0o400,) if value["role"] == "native-packet" else (0o400, 0o600))
             and record["bytes"] <= removal.FILE_LIMIT
             and retention.sha(record["sha256"]),
             "private bounded file identity",
@@ -248,6 +252,14 @@ def present(folder, name):
         return True
     except FileNotFoundError:
         return False
+
+
+def _quarantine_path(request, raw):
+    if request["role"] == "native-packet":
+        # A read-only directory cannot change parent on supported hosts. The
+        # canonical request bytes select one fixed, exclusive sibling name.
+        return Path(request["parent"]["path"]) / ("lt1-packet-" + digest(raw))
+    return Path(request["cleanup_parent"]["path"]) / request["attempt"] / "target"
 
 
 def _rename(source_parent, source, target_parent, target):
@@ -275,7 +287,19 @@ def _rename(source_parent, source, target_parent, target):
 
 
 def bind(path, fd, expected, *, initial=False):
-    removal._binding(path, fd)
+    # The historical flat helper only accepts 0700. This binding additionally
+    # supports the source-fixed immutable packet root before its transition.
+    path = Path(path)
+    live, opened = path.lstat(), os.fstat(fd)
+    need(
+        path.resolve() == path
+        and stat.S_ISDIR(live.st_mode)
+        and (live.st_dev, live.st_ino) == (opened.st_dev, opened.st_ino)
+        and opened.st_uid == os.getuid()
+        and expected["mode"] in (0o500, 0o700)
+        and stat.S_IMODE(opened.st_mode) == expected["mode"],
+        "directory binding or fixed mode",
+    )
     actual = directory_signature(os.fstat(fd))
     keys = DIR_FIELDS.split() if initial else STABLE_DIR
     need(all(actual[k] == expected[k] for k in keys), "directory changed")
@@ -343,14 +367,17 @@ def _remove_reviewed(
     root_path, parent_path, cleanup_path = (
         Path(r[k]["path"]) for k in ("root", "parent", "cleanup_parent")
     )
+    quarantine_path = _quarantine_path(r, raw)
     parent = cleanup = attempt = root = journal = None
     removed, removed_dirs, recorded_removed, recorded_dirs = [], [], [], []
-    moved = root_removed = False
+    moved = root_removed = packet_writable = False
     try:
         parent, cleanup = _private_directory(parent_path), _private_directory(cleanup_path)
         bind(parent_path, parent, r["parent"])
         bind(cleanup_path, cleanup, r["cleanup_parent"])
         need(os.fstat(parent).st_dev == os.fstat(cleanup).st_dev, "same filesystem")
+        if r["role"] == "native-packet":
+            need(not present(parent, quarantine_path.name), "packet quarantine appeared")
         root = _open_directory(parent, root_path.name, r["root"], initial=True)
         _tree(root, r["inventory"], initial=True)
         need(source_identity() == audit, "source before evidence creation")
@@ -358,6 +385,7 @@ def _remove_reviewed(
         os.fsync(cleanup)
         attempt_path = cleanup_path / r["attempt"]
         attempt = _private_directory(attempt_path)
+        quarantine_parent = parent if r["role"] == "native-packet" else attempt
         attempt_identity = directory_signature(os.fstat(attempt))
         journal = os.open(
             "events.jsonl",
@@ -402,14 +430,24 @@ def _remove_reviewed(
             )
             need(
                 removal.names(attempt, 2)
-                == {"events.jsonl"} | ({"target"} if moved and not root_removed else set()),
+                == {"events.jsonl"}
+                | (
+                    {"target"}
+                    if r["role"] != "native-packet" and moved and not root_removed
+                    else set()
+                ),
                 "attempt namespace",
             )
             if not root_removed:
-                target = attempt_path / "target" if moved else root_path
-                bind(target, root, r["root"], initial=not moved)
+                target = quarantine_path if moved else root_path
+                expected_root = {**r["root"], "mode": 0o700} if packet_writable else r["root"]
+                bind(target, root, expected_root, initial=not moved)
                 _tree(root, r["inventory"], removed=removed, removed_dirs=removed_dirs)
             need(present(parent, root_path.name) is (not moved), "original namespace phase")
+            need(
+                present(quarantine_parent, quarantine_path.name) is (moved and not root_removed),
+                "quarantine namespace phase",
+            )
 
         append(
             {
@@ -423,13 +461,23 @@ def _remove_reviewed(
         try:
             guard("prepared")
             # Both named parents and original tree were bound immediately above.
-            _rename(parent, root_path.name, attempt, "target")
+            _rename(parent, root_path.name, quarantine_parent, quarantine_path.name)
             moved = True
             os.fsync(parent)
-            os.fsync(attempt)
+            if quarantine_parent != parent:
+                os.fsync(quarantine_parent)
             checkpoint("after-rename-before-journal")
             append({"event": "quarantined"})
             guard("quarantined")
+            if r["role"] == "native-packet":
+                # No path chmod or caller mode: the exclusively quarantined FD
+                # has just been bound in its original fixed 0500 mode.
+                os.fchmod(root, 0o700)
+                packet_writable = True
+                os.fsync(root)
+                checkpoint("after-packet-chmod-before-journal")
+                append({"event": "packet-writable"})
+                guard("packet-writable")
             for name, expected in sorted(r["inventory"]["files"].items()):
                 guard("before-unlink:" + name)
                 parts = name.split("/")
@@ -471,9 +519,9 @@ def _remove_reviewed(
                 recorded_dirs.append(name)
             guard("before-root-rmdir")
             need(not removal.names(root), "quarantined root empty")
-            os.rmdir("target", dir_fd=attempt)
+            os.rmdir(quarantine_path.name, dir_fd=quarantine_parent)
             root_removed = True
-            os.fsync(attempt)
+            os.fsync(quarantine_parent)
             os.close(root)
             root = None
             checkpoint("after-root-rmdir-before-journal")
@@ -494,7 +542,7 @@ def _remove_reviewed(
                 "removed": recorded_removed,
                 "directories_removed": recorded_dirs,
                 "original_present": present(parent, root_path.name),
-                "quarantine_present": "target" in removal.names(attempt),
+                "quarantine_present": present(quarantine_parent, quarantine_path.name),
                 **AUTHORITY,
             }
         )
@@ -574,6 +622,7 @@ def inspect(
     root_path, parent_path, cleanup_path = (
         Path(r[k]["path"]) for k in ("root", "parent", "cleanup_parent")
     )
+    quarantine_path = _quarantine_path(r, raw)
     parent = cleanup = attempt = root = None
     try:
         parent, cleanup = _private_directory(parent_path), _private_directory(cleanup_path)
@@ -581,17 +630,34 @@ def inspect(
         bind(cleanup_path, cleanup, r["cleanup_parent"])
         attempt_path = cleanup_path / r["attempt"]
         if not present(cleanup, r["attempt"]):
+            if r["role"] == "native-packet":
+                need(
+                    not present(parent, quarantine_path.name),
+                    "unstarted packet quarantine appeared",
+                )
             need(expected_journal_sha256 == digest(b""), "missing attempt has no journal")
             root = _open_directory(parent, root_path.name, r["root"], initial=True)
             _tree(root, r["inventory"], initial=True)
-            os.close(root)
-            root = None
+            if r["role"] != "native-packet":
+                os.close(root)
+                root = None
             bind(parent_path, parent, r["parent"])
             bind(cleanup_path, cleanup, r["cleanup_parent"])
             need(
                 not present(cleanup, r["attempt"]) and source_identity() == reader_audit,
                 "unstarted evidence changed",
             )
+            if r["role"] == "native-packet":
+                bind(parent_path, parent, r["parent"])
+                bind(cleanup_path, cleanup, r["cleanup_parent"])
+                bind(root_path, root, r["root"], initial=True)
+                need(
+                    not present(parent, quarantine_path.name)
+                    and not present(cleanup, r["attempt"]),
+                    "late unstarted packet namespace changed",
+                )
+                os.close(root)
+                root = None
             return {
                 "schema": "opent1d.lt1-native-tree-removal-readback/1",
                 "status": "incomplete",
@@ -610,11 +676,18 @@ def inspect(
                 "truncated": False,
                 "outer_complete": False,
                 "prepared": False,
+                **(
+                    {"packet_mode": {"writable_recorded": False, "observed": 0o500}}
+                    if r["role"] == "native-packet"
+                    else {}
+                ),
                 **AUTHORITY,
             }
         attempt = _private_directory(attempt_path)
+        quarantine_parent = parent if r["role"] == "native-packet" else attempt
         attempt_identity = directory_signature(os.fstat(attempt))
-        need(removal.names(attempt, 2) <= {"events.jsonl", "target"}, "reader attempt namespace")
+        allowed_attempt = {"events.jsonl"} | ({"target"} if r["role"] != "native-packet" else set())
+        need(removal.names(attempt, 2) <= allowed_attempt, "reader attempt namespace")
         journal = (
             _read_at(attempt, "events.jsonl", JOURNAL_LIMIT)
             if present(attempt, "events.jsonl")
@@ -654,10 +727,11 @@ def inspect(
             )
         else:
             need(
-                not present(attempt, "target") and present(parent, root_path.name),
+                not present(quarantine_parent, quarantine_path.name)
+                and present(parent, root_path.name),
                 "unprepared original tree",
             )
-        moved = root_removed = False
+        moved = root_removed = packet_writable = False
         removed, directories, terminal = [], [], None
         for e in events[1:]:
             need(terminal is None and type(e) is dict, "event after terminal")
@@ -666,11 +740,24 @@ def inspect(
                 retention.fields(e, "event")
                 need(not moved, "duplicate quarantine")
                 moved = True
+            elif event == "packet-writable":
+                retention.fields(e, "event")
+                need(
+                    r["role"] == "native-packet"
+                    and moved
+                    and not packet_writable
+                    and not root_removed
+                    and not removed
+                    and not directories,
+                    "packet mode event order",
+                )
+                packet_writable = True
             elif event == "removed":
                 retention.fields(e, "event name")
                 name = e["name"]
                 need(
                     moved
+                    and (r["role"] != "native-packet" or packet_writable)
                     and not root_removed
                     and type(name) is str
                     and name in r["inventory"]["files"]
@@ -698,6 +785,7 @@ def inspect(
                 retention.fields(e, "event")
                 need(
                     moved
+                    and (r["role"] != "native-packet" or packet_writable)
                     and not root_removed
                     and set(removed) == set(r["inventory"]["files"])
                     and set(directories) == set(r["inventory"]["directories"]),
@@ -734,16 +822,35 @@ def inspect(
                     )
                 terminal = e
         original_present = present(parent, root_path.name)
-        quarantine_present = "target" in removal.names(attempt)
+        quarantine_present = present(quarantine_parent, quarantine_path.name)
         need(not (original_present and quarantine_present), "two target namespaces")
         need(
             not (moved and original_present) and not (root_removed and quarantine_present),
             "recorded namespace contradiction",
         )
         observed_files, observed_dirs = [], []
+        observed_mode = None
+        mode_gap = False
         if original_present or quarantine_present:
-            folder, name = (parent, root_path.name) if original_present else (attempt, "target")
-            root = _open_directory(folder, name, r["root"], initial=original_present)
+            folder, name = (
+                (parent, root_path.name)
+                if original_present
+                else (quarantine_parent, quarantine_path.name)
+            )
+            expected_root = r["root"]
+            if r["role"] == "native-packet":
+                observed_mode = stat.S_IMODE(
+                    os.stat(name, dir_fd=folder, follow_symlinks=False).st_mode
+                )
+                if quarantine_present:
+                    need(observed_mode in (0o500, 0o700), "fixed quarantined packet mode")
+                    need(
+                        not packet_writable or observed_mode == 0o700,
+                        "recorded packet mode contradiction",
+                    )
+                    mode_gap = observed_mode == 0o700 and not packet_writable
+                    expected_root = {**r["root"], "mode": observed_mode}
+            root = _open_directory(folder, name, expected_root, initial=original_present)
             observed_files, observed_dirs = _observed_tree(
                 root, r["inventory"], removed, directories, initial=original_present
             )
@@ -766,6 +873,8 @@ def inspect(
             gaps.append("root-rmdir")
         if not moved and not original_present and not quarantine_present:
             gaps.append("unobserved-root-absence")
+        if mode_gap:
+            gaps.append("packet-mode")
         from experiments.lt1_diagnostic import native_tree_removal_exec as runner
 
         outer_ok = runner.complete_outer(outer_receipt, raw, r, context_raw, audit)
@@ -809,7 +918,7 @@ def inspect(
         need(source_identity() == reader_audit, "reader current source changed")
         need(
             present(parent, root_path.name) == original_present
-            and ("target" in removal.names(attempt)) == quarantine_present,
+            and present(quarantine_parent, quarantine_path.name) == quarantine_present,
             "late target namespace changed",
         )
         return {
@@ -830,6 +939,11 @@ def inspect(
             "truncated": truncated,
             "outer_complete": outer_ok,
             "prepared": bool(events),
+            **(
+                {"packet_mode": {"writable_recorded": packet_writable, "observed": observed_mode}}
+                if r["role"] == "native-packet"
+                else {}
+            ),
             **AUTHORITY,
         }
     finally:
