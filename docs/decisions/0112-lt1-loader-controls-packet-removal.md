@@ -40,12 +40,19 @@ removal membership still precedes caller, source, private path and process intak
 Preserve the existing output/evidence behavior and old flat remover.
 
 Quarantine the whole reviewed original root exclusively on the same volume.
+For this immutable packet role, use the source-derived sibling name
+`lt1-packet-<sha256(request_raw)>` under the original private parent; the separate
+cleanup attempt holds its journal. The Mac fixture refuses cross-parent moves
+of a `0500` directory, while a same-parent exclusive rename succeeds. Do not
+change the original mode to make a cross-parent rename work. Existing writable
+output/evidence trees retain their cleanup-attempt quarantine location.
 Only then may the held root descriptor undergo the fixed `0500` to `0700`
 transition. Sync it and record a distinct `packet-writable` event before unlinking
 leaves. There is no caller-selected mode or path chmod. The writer and reader
 must bind the actual mode at each phase; a crash after chmod but before its event
 is an explicit incomplete mutation gap, never a manufactured event. Preserve
-real cancellation/deadline/outer evidence and final absence of both root names.
+real cancellation/deadline/outer evidence and final absence of both root names,
+including a sibling quarantine when the journal attempt is missing.
 
 Only complete strict readback may propose absence for that allocated packet-root
 copy. Preserve original clocks, holds, other copies, producer history and all

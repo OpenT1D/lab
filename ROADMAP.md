@@ -496,6 +496,11 @@ selects one combined successor for the next bounded host I/O controls and cleanu
 of original output/evidence trees. Keep matched successful controls, actual owned
 removal/readback and allocated-copy proposals separate from full native admission,
 complete restore coverage and effective erasure.
+The [loader/packet decision](docs/decisions/0112-lt1-loader-controls-packet-removal.md)
+keeps the next module/addon mechanism controls and original immutable packet-root
+cleanup in one successor. Use fixed ordinary-tooling positive controls and a
+separately journaled post-quarantine permission transition; retain selected native
+setup/execution, complete copy/restore coverage and effective-erasure gates.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
 not native execution. Begin with the exact LT1 runtime/security and restricted-use

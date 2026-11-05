@@ -4,6 +4,12 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Add fixed ordinary-tooling module/addon controls and an original immutable
+  native-packet cleanup role. Keep compilation and actual Mac profiles outside
+  automatic root checks, journal the descriptor permission transition after
+  quarantine, and preserve incomplete mode/crash evidence, exact allocated-copy
+  accounting and closed selected-runtime setup/execution and erasure authority.
+
 - Extend the gated LT1 route with matched fixed host I/O controls and an
   additive remover/reader for original output and evidence trees, including
   nested session journals. Preserve genuine interruption/crash evidence and

@@ -241,10 +241,65 @@ all other copy IDs; newly created request, control, journal, log, outer and read
 records require explicit separate accounting. Unobserved records stay unobserved.
 The current code projection includes the recovery assessor used by proposals;
 changing that executing dependency invalidates the original request binding.
-No proposal activates a register. Stage/packet, relocated, snapshot, backup and
-unregistered copies remain outside this removal. Namespace absence establishes
+No proposal activates a register. Staging, unselected packet copies, relocated,
+snapshot, backup and unregistered copies remain outside the allocated removal.
+Namespace absence establishes
 neither original absence onset, retention compliance, complete restore exclusion
 nor physical sanitization; effective erasure remains unverified.
+
+## Ordinary loader controls and immutable packet cleanup
+
+[ADR 0112](../decisions/0112-lt1-loader-controls-packet-removal.md) extends the
+bounded host mechanisms and original-copy cleanup in one successor. This does
+not admit the selected runtime or change the scientific route. The loader
+experiment uses its own source identity, a source-owned JavaScript module and a
+minimal N-API addon with fixed exports, under the unchanged process owner.
+
+`native_route_loader_tooling` separates read-only installed-tool observation,
+explicit capture and cold inspection. Compilation uses fixed preinstalled tools,
+not package acquisition. Bind the compiler, linker, headers, runtime, source and
+emitted artifacts before and after their use. Automatic root checks exercise
+portable contracts and ordinary module fixtures; they invoke neither a compiler
+nor Mac sandbox profiles.
+
+Retain three planned slots: `validity-control`, `base` and `allow-twin`. The
+unprofiled control must successfully import both valid targets. Each fresh
+restricted process uses the same immutable physical artifacts. Base allows addon
+data reads; twin adds only literal module-data read and addon executable-map
+permissions. Keep file-read digests, actual loader results, fixed returned
+markers, parent snapshots and genuine outer ownership separate. An
+`ERR_DLOPEN_FAILED` result alone cannot identify a permission failure. Missing or
+failed positive controls remain inconclusive; unexpected base success cannot
+demonstrate confinement. Preparation and storage failures must preserve all
+planned slots without pinning partially written witnesses.
+
+The shared namespace adds one distinct `native-packet` role for exactly the eight
+original packet names. Its initial root is `0500`, its leaves are single-link
+regular files at `0400`, and it has no subdirectories. Missing/extra names, wrong
+modes, links and changed bindings refuse. This role does not select arbitrary
+read-only directories or reuse the published reconciliation-packet protocol.
+
+After exact removal admission and exclusive whole-root quarantine on the same
+volume, only the held packet-root descriptor may change from `0500` to `0700`.
+The packet quarantine is the fixed sibling name
+`lt1-packet-<sha256(request_raw)>` under the original private parent; its journal
+remains in the separate cleanup attempt. This preserves the original mode until
+quarantine on the Mac fixture, where a cross-parent `0500` move is refused.
+Sync that mutation and record `packet-writable` before any leaf unlink. The strict
+reader binds the phase-specific mode and event order. A crash after chmod but
+before its journal event remains an incomplete mode gap; it does not manufacture
+an event or establish complete removal. Original-root mode changes and
+contradictory events refuse. Existing output/evidence behavior stays unchanged.
+Readback checks both original and sibling names even if the journal attempt is
+missing, and refuses a preexisting or replaced quarantine.
+
+The pair's two original packet roots require distinct allocations and exact
+requests, in addition to its three output/evidence targets. Complete readback can
+propose only the allocated root copy's absence. Other packet copies, staging,
+in-memory buffers, compiler artifacts, snapshots, backups and newly retained
+control/proof records remain separate accounting and recovery blockers. Neither
+this loader mechanism nor original packet removal establishes native host
+qualification or effective private erasure.
 
 ## Runtime, rights and operational decisions
 
