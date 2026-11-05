@@ -7,6 +7,7 @@ import {register} from 'node:module';
 import {spawn} from 'node:child_process';
 import {verifyIntegration,readerSourcePaths,INTEGRATION_FILES} from './integration_gate.mjs';
 import {inventory,executableWithin,loadConstructors,WORKER_FILES} from './native_loader.mjs';
+import {probe} from './native_route_host.mjs';
 import {AttemptJournal,runJournaled} from './attempt_journal.mjs';
 import {assembleDirect} from './direct.mjs';
 import {assembleWrapped} from './wrapped.mjs';
@@ -38,6 +39,7 @@ async function run(state,invented){
  }
  if(entry.case_id!=='attempt')need(same(reference,admitted.plan),'fixed case scientific plan');
  if(['C15','C16'].includes(entry.case_id))need(slot.startsWith(admitted.mode+'-'),'fixed case mode');
+ const hostProbe=entry.case_id==='C19'?await probe(entry,state.signal):null;
  let modules=null,loadError=null,basal=null,constructionCount=0,child=null,patientResets=0,nonfiniteProbe=false;
  const count=entry.case_id==='C15'?2:1,results=[];let built=null;
  for(let ordinal=0;ordinal<count;ordinal++){
@@ -91,7 +93,7 @@ async function run(state,invented){
  }
  if(child&&slot==='complete'){fs.writeFileSync(join(entry.roots.output,'descendant-stop'),'fixed stop',{flag:'wx',mode:0o600});const until=performance.now()+3000;while(child.exitCode===null&&child.signalCode===null){need(performance.now()<until,'C18 child cooperative stop deadline');await new Promise(r=>setTimeout(r,10));}}
  return {schema:'opent1d.lt1-buffer-worker/2',kind:entry.kind,case_id:entry.case_id,slot,verification_context_origin:invented?'invented':'current-runtime',
-  completed:results.every(r=>r.status==='completed'),construction_count:constructionCount,patient_reset_calls:patientResets,nonfinite_initial_state_probe:nonfiniteProbe,initial_state_consumed_observation:invented&&nonfiniteProbe?built.patient.initialStateConsumed:null,native_basal:basal,sessions:results,packet_sha256:Object.fromEntries(PACKET.map(n=>[n,digest(packet[n])])),native_acceptance:false,native_execution_authorized:false};
+  ...(entry.case_id==='C19'?{host_probe:hostProbe}:{}),completed:results.every(r=>r.status==='completed'),construction_count:constructionCount,patient_reset_calls:patientResets,nonfinite_initial_state_probe:nonfiniteProbe,initial_state_consumed_observation:invented&&nonfiniteProbe?built.patient.initialStateConsumed:null,native_basal:basal,sessions:results,packet_sha256:Object.fromEntries(PACKET.map(n=>[n,digest(packet[n])])),native_acceptance:false,native_execution_authorized:false};
 }
 function own(state,authority,invented,authorityHash){
  admit(state.entryRaw,state.observationRaw,authority,invented);

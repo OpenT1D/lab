@@ -58,6 +58,7 @@ def _supervise(
     cancel=None,
     grace=0.2,
     before_spawn=None,
+    _live_name="live-entry.json",
 ):
     """Trusted-code resource helper, never metadata dispatch or native admission.
 
@@ -66,6 +67,11 @@ def _supervise(
     The carrier is removed before the explicitly bound post-clear observation.
     Callback execution is not preemptible; unfinished daemon work is explicit.
     """
+    need(
+        _live_name
+        in ("live-entry.json", "c19-base-live-entry.json", "c19-allow-twin-live-entry.json"),
+        "fixed live entry leaf",
+    )
     need(os.name == "posix", "POSIX channels required")
     need(
         isinstance(carrier, str) and 0 < len(carrier.encode()) <= 65536, "bounded internal carrier"
@@ -242,7 +248,7 @@ def _supervise(
                     },
                     separators=(",", ":"),
                 ).encode()
-                path = Path(log_path).parent / "live-entry.json"
+                path = Path(log_path).parent / _live_name
                 with os.fdopen(
                     os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600), "wb"
                 ) as stream:

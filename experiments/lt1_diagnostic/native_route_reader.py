@@ -407,7 +407,8 @@ def _producer_errors(receipt):
 def _worker_report(worker, entry, packet_hashes, sessions, output_files):
     route.storage.fields(
         worker,
-        "schema kind case_id slot verification_context_origin completed construction_count "
+        ("host_probe " if entry["case_id"] == "C19" else "")
+        + "schema kind case_id slot verification_context_origin completed construction_count "
         "patient_reset_calls nonfinite_initial_state_probe initial_state_consumed_observation "
         "native_basal sessions packet_sha256 native_acceptance native_execution_authorized",
     )
@@ -421,6 +422,10 @@ def _worker_report(worker, entry, packet_hashes, sessions, output_files):
         and worker["native_execution_authorized"] is False,
         "worker schema/origin/case context",
     )
+    if entry["case_id"] == "C19":
+        from experiments.lt1_diagnostic.native_route_host import validate_probe
+
+        validate_probe(worker["host_probe"], entry)
     route.need(worker["packet_sha256"] == packet_hashes, "worker consumed owned packet")
     route.need(type(worker["sessions"]) is list, "worker session reports")
     expected = []
@@ -647,6 +652,7 @@ def inspect(
             and exchange["thread_finished"] is True
             and not receipt["transport"]["resource_close_errors"]
         )
+    host_probe = None
     wanted = 2 if entry["case_id"] == "C15" else 1
     allowed = (
         {"route.json"}
@@ -656,6 +662,8 @@ def inspect(
             else set()
         )
     ) | {f"session-{i:04d}/events.jsonl" for i in range(wanted)}
+    if entry["case_id"] == "C19":
+        allowed |= {"c19-allowed-read.txt", "c19-allowed-write.txt"}
     route.need(set(output_files) <= allowed, "closed route/session inventory")
     for index in range(wanted):
         name = f"session-{index:04d}"
@@ -699,6 +707,8 @@ def inspect(
         if child["worker"] is not None:
             route.need(child["exchange_status"] == "acknowledged", "worker without child ACK")
             _worker_report(child["worker"], entry, receipt["packet_sha256"], sessions, output_files)
+            if entry["case_id"] == "C19":
+                host_probe = child["worker"]["host_probe"]
         route.need(
             child["pid"] == receipt["entry_identity"]["pid"]
             and child["ppid"] == entry["owner_pid"]
@@ -728,6 +738,7 @@ def inspect(
         "status": "completed" if completed else "incomplete",
         "sessions": sessions,
         "channel_bound": channel,
+        **({"host_probe": host_probe} if entry["case_id"] == "C19" else {}),
         "actual_outer_unchanged": True,
         "output_copy_accounting_required": True,
         **route.AUTHORITY,
