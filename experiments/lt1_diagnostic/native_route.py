@@ -44,6 +44,11 @@ FILES = (
     "native_route_observer.py",
     "native_route_coordinator.py",
     "native_route_sentinel.py",
+    "native_route_host.py",
+    "native_route_host.mjs",
+    "native_route_host_tooling.py",
+    "native_route_host_tooling.mjs",
+    "native_attempt_namespace.json",
 )
 TEST_SOURCES = (
     "tests/lt1_native_route_fixture.mjs",
@@ -99,9 +104,9 @@ def source_identity():
     return value
 
 
-def profile(roots, source):
+def profile(roots, source, *, case_id=None, slot=None):
     parsed = prior.base._roots(roots)
-    return (
+    result = (
         legacy.profile(*(parsed[k] for k in ("staging", "packet", "output")))
         + "(allow file-read* "
         + " ".join(
@@ -109,6 +114,11 @@ def profile(roots, source):
         )
         + ")\n"
     )
+    if case_id == "C19":
+        from experiments.lt1_diagnostic.native_route_host import profile_delta
+
+        result += profile_delta(roots, slot)
+    return result
 
 
 def admit(entry_raw, observation_raw, registry, invented=False):
@@ -134,7 +144,7 @@ def admit(entry_raw, observation_raw, registry, invented=False):
         "exact declared memberships",
     )
     need(
-        entry["case_id"] in ("attempt", "C15", "C16", "C17", "C18")
+        entry["case_id"] in ("attempt", "C15", "C16", "C17", "C18", "C19")
         and isinstance(entry["slot"], str)
         and len(entry["slot"]) <= 64,
         "fixed case",
@@ -214,7 +224,15 @@ def packet_binding(entry, observation, packet):
 
 
 def _launch(
-    entry_raw, observation_raw, expected_identity, cancel, *, invented=False, _captured=None
+    entry_raw,
+    observation_raw,
+    expected_identity,
+    cancel,
+    *,
+    invented=False,
+    _captured=None,
+    _pair=None,
+    _preflight_only=False,
 ):
     # Production membership comes only from the compiled-in canonical authority.
     if invented:
@@ -240,7 +258,13 @@ def _launch(
         "reviewed version2 source context",
     )
     roots = prior.base._roots(entry["roots"])
-    policy = profile(entry["roots"], source)
+    policy = profile(entry["roots"], source, case_id=entry["case_id"], slot=entry["slot"])
+    if entry["case_id"] == "C19":
+        from experiments.lt1_diagnostic.native_route_host import _PairContext
+
+        need(type(_pair) is _PairContext and _pair.contains(entry_raw), "owned C19 pair only")
+    else:
+        need(_pair is None and not _preflight_only, "ordinary route context")
     need(entry["profile_sha256"] == storage.digest(policy.encode()), "version2 profile")
     owner = ProcessTable().one(os.getpid())
     need(
@@ -304,10 +328,13 @@ def _launch(
             mode = 0o500 if key in ("staging", "packet") else 0o700
             need(stat.S_IMODE(os.fstat(fd).st_mode) == mode, "root mode")
             bound[key] = (fd, legacy._signature(os.fstat(fd)))
-        need(
-            not os.listdir(bound["output"][0]) and not os.listdir(bound["evidence"][0]),
-            "empty fresh outputs",
-        )
+        if _pair is None:
+            need(
+                not os.listdir(bound["output"][0]) and not os.listdir(bound["evidence"][0]),
+                "empty fresh outputs",
+            )
+        else:
+            _pair.check(entry, roots)
         packet = _packet(bound["packet"][0])
         hashes = packet_binding(entry, observation, packet)
         from experiments.lt1_diagnostic.native_route_cases import validate_plan
@@ -401,14 +428,26 @@ def _launch(
                     "root rebound",
                 )
             need(_packet(bound["packet"][0]) == packet, "packet replaced before spawn")
-            need(not os.listdir(bound["output"][0]), "output adopted")
-            need(
-                set(os.listdir(bound["evidence"][0])) == (set() if log is None else {"launch.log"}),
-                "evidence adopted",
-            )
+            if _pair is None:
+                need(not os.listdir(bound["output"][0]), "output adopted")
+                need(
+                    set(os.listdir(bound["evidence"][0]))
+                    == (set() if log is None else {"launch.log"}),
+                    "evidence adopted",
+                )
+            else:
+                _pair.check(entry, roots, log=log is not None)
 
         check()
-        from experiments.lt1_diagnostic.native_route_reader import acknowledge
+        from experiments.lt1_diagnostic.native_route_reader import _control, acknowledge
+
+        if _preflight_only:
+            _control(
+                entry, observation, packet, source, {"root": str(ROOT), "python": os.sys.executable}
+            )
+            return {"packet": dict(packet), "host": host}
+
+        from experiments.lt1_diagnostic.native_route_host import log_name
 
         verified = {}
 
@@ -448,10 +487,13 @@ def _launch(
         try:
             receipt = transport._supervise(
                 argv,
-                roots["evidence"] / "launch.log",
+                roots["evidence"] / log_name(entry),
                 expected_identity=transport.source_identity(),
                 carrier=control,
                 invented=invented,
+                _live_name=("c19-" + entry["slot"] + "-live-entry.json")
+                if _pair
+                else "live-entry.json",
                 live_binding={
                     "entry_sha256": storage.digest(entry_raw),
                     "nonce_sha256": entry["nonce_sha256"],
@@ -552,7 +594,14 @@ def snapshot_output(path):
             else:
                 need(
                     name
-                    in ("route.json", "descendant-root.json", "grandchild.json", "descendant-stop"),
+                    in (
+                        "route.json",
+                        "descendant-root.json",
+                        "grandchild.json",
+                        "descendant-stop",
+                        "c19-allowed-read.txt",
+                        "c19-allowed-write.txt",
+                    ),
                     "fixed output leaf",
                 )
                 read(root, name, name)

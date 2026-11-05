@@ -21,6 +21,37 @@
       "tooling_node": "22.22.2",
       "invocation_shape": "PYTHONPATH=tests [root tooling Python] -m unittest -v test_lt1_native_route",
       "scope": "Actual older local module run before the narrow sent-ACK and failure-label followup; a scheduling estimate, not a final-source, hosted CI or native qualification result."
+    },
+    {
+      "module": "test_native_tree_removal",
+      "measured_on": "2026-11-05",
+      "frozen_source_committed_as": "555b23e69e47454274236816a2b6b493b0087747",
+      "source_freeze_sha256": "a25f1282d4e0bc2e69c377ef8c48a8464382db87c94b0131a90fab15ed230daa",
+      "test_file_sha256": "a9ac95635c260948612d7bb0aeda08883a7e557fa07033983c440fff40d52494",
+      "elapsed_seconds": 246.726,
+      "tests": 17,
+      "skips": 0,
+      "exit_code": 0,
+      "platform": "darwin-arm64",
+      "python": "3.12.13",
+      "tooling_node": "22.22.2",
+      "invocation_shape": "PYTHONPATH=.:tests [locked root tooling Python] -B -m unittest test_native_tree_removal -v",
+      "scope": "Actual local module run on frozen bytes, later committed unchanged as the identified writer commit; includes fixture overhead. Scheduling estimate only, not a hosted CI, native qualification or effective-erasure result."
+    },
+    {
+      "module": "test_lt1_native_host",
+      "measured_on": "2026-11-05",
+      "frozen_source_committed_as": "6be066a55bf8d35b151d6eb0e5afcb5d9409424c",
+      "test_file_sha256": "11d8f66793052b60550860c14ecc46300763c25e295964aceecd3b6e2705be6c",
+      "elapsed_seconds": 112.832,
+      "tests": 11,
+      "skips": 0,
+      "exit_code": 0,
+      "platform": "darwin-arm64",
+      "python": "3.12.13",
+      "tooling_node": "22.22.2",
+      "invocation_shape": "PYTHONPATH=tests [locked root tooling Python] -m unittest -v test_lt1_native_host",
+      "scope": "Actual final local module run on frozen bytes, committed unchanged as the identified writer commit; includes fixture overhead. Scheduling estimate only, not hosted CI, selected-native qualification or the separately invoked Mac tooling experiment."
     }
   ],
   "module_seconds": {
@@ -111,6 +142,7 @@
     "test_local_campaign_process": 11.349,
     "test_local_campaigns": 1.307,
     "test_local_gui": 5.139,
+    "test_lt1_native_host": 112.832,
     "test_lt1_native_route": 522.563,
     "test_m1_artifacts": 1.483,
     "test_m1_contracts": 0.003,
@@ -195,6 +227,7 @@
     "test_mmtt_sampling_platform": 4.114,
     "test_mmtt_sampling_required_times": 0.067,
     "test_mmtt_sampling_workflow": 6.896,
+    "test_native_tree_removal": 246.726,
     "test_observation_analysis": 0.689,
     "test_observation_estimator": 0.015,
     "test_observation_import": 0.017,

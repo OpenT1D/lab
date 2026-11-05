@@ -491,6 +491,11 @@ durable journaling and strict readback with the current runtime/rights assessmen
 in one successor. Its actual native qualification remains behind separate setup
 and execution admissions; do not close it through more separately merged
 preparation layers or transfer earlier software checks into native clearance.
+The [matched-host/original-tree decision](docs/decisions/0111-lt1-matched-host-tree-removal.md)
+selects one combined successor for the next bounded host I/O controls and cleanup
+of original output/evidence trees. Keep matched successful controls, actual owned
+removal/readback and allocated-copy proposals separate from full native admission,
+complete restore coverage and effective erasure.
 The [contract audit](docs/research/ot062-adapter-audit.md) and
 [runtime/rights proposal](docs/research/ot062-runtime-rights.md) supply preparation,
 not native execution. Begin with the exact LT1 runtime/security and restricted-use

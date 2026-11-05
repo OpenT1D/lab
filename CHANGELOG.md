@@ -4,6 +4,15 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Extend the gated LT1 route with matched fixed host I/O controls and an
+  additive remover/reader for original output and evidence trees, including
+  nested session journals. Preserve genuine interruption/crash evidence and
+  separate historical authority snapshots from current reader code. Propose
+  absence only for an exactly allocated completed root copy; retain original
+  clocks, holds, other copies and new-record accounting blockers. Keep actual
+  selected-runtime setup/execution, full host qualification and effective
+  private erasure separately gated.
+
 - Add an internal versioned LT1 route joining fixed owned launch, inherited
   channel acknowledgment, owned packet consumption, durable sessions and strict
   engine-free readback. Keep grants out of process arguments and distinguish

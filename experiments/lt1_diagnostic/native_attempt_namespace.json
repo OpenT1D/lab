@@ -1,0 +1,37 @@
+{
+  "schema": "opent1d.lt1-attempt-namespace/1",
+  "roles": {
+    "output": {
+      "files": [
+        "c19-allowed-read.txt",
+        "c19-allowed-write.txt",
+        "descendant-root.json",
+        "descendant-stop",
+        "grandchild.json",
+        "route.json"
+      ],
+      "directories": {
+        "session-0000": [
+          "events.jsonl"
+        ],
+        "session-0001": [
+          "events.jsonl"
+        ]
+      }
+    },
+    "evidence": {
+      "files": [
+        "c19-allow-twin-launch.log",
+        "c19-allow-twin-live-entry.json",
+        "c19-base-launch.log",
+        "c19-base-live-entry.json",
+        "c19-denied-read.txt",
+        "c19-denied-write.txt",
+        "c19-parent-witness.json",
+        "launch.log",
+        "live-entry.json"
+      ],
+      "directories": {}
+    }
+  }
+}
