@@ -4,6 +4,13 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Add a separately gated single-leaf removal helper for mixed historical LT1
+  directories, preserving the reviewed immediate sibling namespace and existing
+  flat/tree removers. Bind request, source, directories, journal and owned outer
+  evidence; retain interruption and mutation gaps. Keep passive copy/recovery
+  scope, original retention clocks and actual private/native/erasure admissions
+  separate from invented fixture results.
+
 - Add fixed ordinary-tooling module/addon controls and an original immutable
   native-packet cleanup role. Keep compilation and actual Mac profiles outside
   automatic root checks, journal the descriptor permission transition after

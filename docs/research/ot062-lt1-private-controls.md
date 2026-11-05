@@ -160,3 +160,66 @@ The [host/removal successor](ot062-lt1-host-removal.md) implements separate exac
 quarantine/removal authority and explicit invented boundary/process fixtures.
 It qualifies neither actual private cleanup nor effective recovery/physical erasure;
 the manual procedure and all existing setup/execution gates remain in force.
+
+## One leaf in a mixed historical directory
+
+[ADR 0113](../decisions/0113-lt1-historical-leaf-removal.md) selects an additive
+[historical-leaf helper](../../experiments/lt1_diagnostic/historical_leaf_removal.py).
+The flat remover's closed all-file inventory and native tree remover's fixed
+roles remain unchanged. A historical directory containing unrelated files and
+subdirectories cannot be represented by approving its whole contents just to
+remove one record.
+
+The versioned request identifies exactly one ordinary single-link target, its
+private canonical parent, every reviewed immediate sibling and a separate private
+same-volume evidence parent. Bind target bytes and metadata, both directory
+identities, current implementation/host and externally reviewed context. The
+bounded sibling inventory is nonrecursive metadata: it grants no sibling or
+descendant deletion and does not prove descendant bytes unchanged. Links,
+special files and unsupported namespaces refuse rather than becoming traversal
+instructions. ACLs, exclusive process ownership and full storage/recovery scope
+still require separate review; mode bits do not establish them.
+
+The production entry checks the exact raw request's membership in the existing
+canonical removal registry before request/path intake. No alternative registry,
+automatic approval or general recursive cleanup command is added. The registry
+remains empty. Tests inject authority only for freshly invented objects.
+
+Quarantine only the pinned target through an exclusive same-volume rename. Hold
+and recheck descriptors, exact bytes, source, journal, directories and immediate
+sibling identities before the irreversible unlink. New entries, replacements,
+changed bindings and collisions refuse. Cancellation and crash gaps retain their
+actual journal and target/quarantine observations; they do not resume or infer a
+missing mutation event. The exclusive-owner assumption remains essential because
+POSIX unlink cannot atomically compare the expected inode against a hostile
+same-UID writer.
+
+The reader consumes externally pinned request, journal and actual owned outer
+receipt bytes. The reviewed context binds the expected command; a concrete
+supervisor receipt must preserve that command and process start identities.
+External byte pins do not authenticate a producer: the reviewer must establish
+the trusted producer and its correspondence to this operation independently.
+Completion requires a coherent finished journal, successful process cleanup,
+current target absence and the reviewed immediate sibling state.
+An incomplete process, missing event, changed evidence or mismatched external pin
+cannot become a completed result merely by resealing inner data. Completion
+describes the target namespace only. No setup, native execution, new authority,
+timely retention or effective-erasure clearance follows.
+
+The private copy/recovery follow-up distinguishes literal personal-record copies
+from preexisting source attribution and public commit metadata. Bounded passive
+reads may narrow actual text, binary, bytecode and archive exclusions; link
+targets and source/predecessor references need their own explicit accounting.
+Owner reports remain separate from collected observations. Current empty
+snapshot/destination queries, exclusions and volume encryption do not establish
+historical/offline coverage, future recovery limits or per-file key destruction.
+Original clocks and holds remain unchanged, and newly retained proof files are
+copies or new subjects requiring their own bounded retention. Actual paths,
+identities, host values and policy hashes stay outside Git.
+
+The [focused tests](../../tests/test_lt1_historical_leaf_removal.py) and
+[process fixtures](../../tests/test_lt1_historical_leaf_process.py) use invented
+data only. Actual native host qualification and removal of existing private
+records remain behind their separate gates. An unknown original origin prevents
+a timely-retention claim; it does not permanently prohibit an independently
+reviewed, separately admitted exact known-copy cleanup.

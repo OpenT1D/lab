@@ -338,6 +338,13 @@ false. This qualifies the fixed ordinary-tooling mechanism, not selected LT1.
 
 ## Runtime, rights and operational decisions
 
+The [historical-leaf increment](ot062-lt1-private-controls.md#one-leaf-in-a-mixed-historical-directory)
+addresses one private record in a mixed historical directory through a separate
+exact request, untouched immediate siblings and retained partial evidence.
+It preserves this route, the flat/tree removers and every setup/execution/removal
+admission. Fixture removal and narrower passive copy/recovery observations do not
+qualify native LT1 or effective private erasure.
+
 The [successor assessment](../../experiments/lt1_diagnostic/runtime-rights-followup.json) records a passive 5 November 2026 review of the unchanged Node 22.23.4 darwin-arm64 candidate. The earlier exact-archive signature authentication remains historical evidence; it was not rerun. No candidate binary, compiler, toolchain package, setup or native experiment was executed. Twenty exact locked npm name/version queries returned no OSV matches, which supplies no clearance for Node, native libraries, copied historical code, build provenance or the host OS.
 
 The two versioned `gzwrite.c` files still match the previously reviewed source bytes. The [zlib owner's confirmation](https://github.com/madler/zlib/issues/1292#issuecomment-6456517984) covers the older continued-write-after-`gzclearerr` library path. Supported Node JavaScript reachability and dynamic applicability remain unestablished. The unanswered [Node 26](https://github.com/nodejs/nodejs-dependency-vuln-assessments/issues/467) and [Node 24](https://github.com/nodejs/nodejs-dependency-vuln-assessments/issues/492) questions provide no Node 22 adjudication. On 3 November the project [announced HIGH security releases](https://nodejs.org/en/blog/vulnerability/november-2026-security-releases) for 22.x, 24.x and 26.x on or after 11 November. The inspected announcement supplies neither exact 22.23.4 applicability nor a released replacement; admission still requires a current exact-candidate disposition.
