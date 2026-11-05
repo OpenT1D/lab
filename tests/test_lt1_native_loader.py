@@ -72,6 +72,7 @@ def tools_data():
             loader.SANDBOX,
             loader.DYLD,
             PurePosixPath(sdk) / "SDKSettings.json",
+            PurePosixPath(sdk) / "usr/lib/libSystem.B.tbd",
             node,
         )
     }
@@ -309,6 +310,11 @@ class LoaderContractTests(unittest.TestCase):
         self.assertIn("-DNAPI_VERSION=8", compile_)
         self.assertIn("-nostdlib", compile_)
         self.assertIn("-fuse-ld=" + str(loader.LINKER), compile_)
+        system_stub = str(sdk / "usr/lib/libSystem.B.tbd")
+        self.assertIn(system_stub, compile_)
+        self.assertNotIn(system_stub, scan)
+        self.assertNotIn("-lSystem", compile_)
+        self.assertNotIn("-L", compile_)
         self.assertEqual(
             compile_[-1], str(source_root / loader.ADDON.relative_to(loader.ROOT).as_posix())
         )
@@ -414,6 +420,9 @@ class LoaderContractTests(unittest.TestCase):
     def test_cold_reader_rejects_rehashed_context_profile_outer_log_and_source_drift(self):
         report = witness(self.source)
         variants = (
+            lambda r: r["toolchain"]["files"].pop(
+                str(PurePosixPath(r["toolchain"]["sdk"]) / "usr/lib/libSystem.B.tbd")
+            ),
             lambda r: r["context"]["directories"].pop(r["context"]["build"]),
             lambda r: r["context"]["directories"].pop(r["context"]["records"]),
             lambda r: r["context"]["directories"][r["context"]["build"]].__setitem__(
