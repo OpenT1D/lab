@@ -137,7 +137,7 @@ def _run(case, attempts, expected_identity, cancel, *, invented=False):
                 records.append(
                     {
                         "slot": entry["slot"],
-                        "status": "preflight-refused",
+                        "status": "route-refused",
                         "receipt": None,
                         "readback": None,
                         "error": str(error),

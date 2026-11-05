@@ -531,6 +531,13 @@ def inspect(
     exchange = receipt["transport"]["exchange"]
     frame = base64.b64decode(exchange["frame_raw_b64"], validate=True)
     ack = base64.b64decode(exchange["ack_raw_b64"], validate=True)
+    sent_text = exchange.get("ack_sent_raw_b64")
+    route.need(type(sent_text) is str and len(sent_text) <= 1368, "bounded actual sent ACK")
+    sent = base64.b64decode(sent_text, validate=True)
+    route.need(
+        len(sent) <= 1024 and base64.b64encode(sent).decode() == sent_text,
+        "canonical actual sent ACK",
+    )
     sessions = []
     channel = False
     if frame:
@@ -549,6 +556,7 @@ def inspect(
         )
         channel = (
             ack == ack_for(frame, value)
+            and sent == ack
             and exchange["status"] == "ack-sent"
             and exchange["ack_sent"] is True
             and exchange["frame_eof"] is True

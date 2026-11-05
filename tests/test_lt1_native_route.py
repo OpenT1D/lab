@@ -69,6 +69,37 @@ class RouteClosedGateTests(unittest.TestCase):
         self.assertEqual(observer._code_context(source), observer._code_context(newer))
         newer["implementation"]["experiments/lt1_diagnostic/native_route.py"] = "e" * 64
         self.assertNotEqual(observer._code_context(source), observer._code_context(newer))
+        # A route exception carries no independently observed phase boundary.
+        attempts = []
+        for slot in cases.SLOTS["C17"]:
+            entry = {k: None for k in route.FIELDS.split()}
+            entry.update(
+                schema="opent1d.lt1-native-route-grant/2",
+                kind="invented",
+                observation_sha256=route.storage.digest(b"{}"),
+                engine_sha256="a" * 64,
+                integration_sha256="b" * 64,
+                setup_sha256="c" * 64,
+                entry_sources=route.prior.grant_sources(source),
+                owner_pid=os.getpid(),
+                owner_start="fixed owner",
+                case_id="C17",
+                slot=slot,
+            )
+            attempts.append((route.encoded(entry), b"{}"))
+        with (
+            patch.object(cases, "ProcessTable") as table,
+            patch.object(route, "_launch", side_effect=OSError("phase not observed")),
+        ):
+            table.return_value.one.return_value = {"start": "fixed owner"}
+            result = cases._run("C17", attempts, source, None, invented=True)
+        self.assertTrue(result["all_slots_accounted"])
+        self.assertTrue(
+            all(
+                record["status"] == "route-refused" and record["receipt"] is None
+                for record in result["records"]
+            )
+        )
 
     @unittest.skipUnless(NODE, "ordinary Node required")
     def test_js_native_entries_gate_before_caller_prototype_and_environment(self):
@@ -405,6 +436,17 @@ assert result['status']=='completed';print('completed')
                     expected_identity=self.source,
                 )
                 self.assertEqual(report["status"], "incomplete")
+
+        for sent in ("", base64.b64encode(b"OPENT").decode()):
+            receipt = copy.deepcopy(self.receipt)
+            receipt["transport"]["exchange"]["ack_sent_raw_b64"] = sent
+            with self.assertRaisesRegex(ValueError, "journal without acknowledged"):
+                self.inspect(receipt)
+        for sent in ("a" * 1369, "!!!!", base64.b64encode(b"a").decode() + "="):
+            receipt = copy.deepcopy(self.receipt)
+            receipt["transport"]["exchange"]["ack_sent_raw_b64"] = sent
+            with self.assertRaises(ValueError):
+                self.inspect(receipt)
 
     def test_complete_footer_never_promotes_failed_or_signalled_outer(self):
         for change in (
