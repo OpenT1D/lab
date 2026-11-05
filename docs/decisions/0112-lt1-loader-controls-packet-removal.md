@@ -26,8 +26,13 @@ artifact identities and preserve partial preparation records.
 Account for three fixed slots: unprofiled validity control, base and allow-twin.
 Use the same immutable physical artifacts and a fresh process for each slot.
 The validity control must load both targets successfully. Base permits addon
-data reads but lacks module-data read and addon executable-map rights. Twin adds
-only the two corresponding literal permissions. Keep reads, actual imports,
+data reads, withholds module-data read and explicitly denies the addon's literal
+executable mapping. Twin omits only that deny and adds the two corresponding
+literal permissions. Absence of an explicit mapping allow did not block the
+readable addon in the first successful-build Mac experiment. A separately
+reviewed diagnostic blocked it with the explicit deny while preserving positive
+controls; retain that negative predecessor rather than relabeling it a pass.
+Keep reads, actual imports,
 returned markers, owned outer receipts and parent artifact snapshots distinct.
 An addon loader error alone is not a permission diagnosis. Missing, malformed,
 changed, interrupted or failed positive controls remain inconclusive; unexpected

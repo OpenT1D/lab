@@ -266,7 +266,8 @@ nor Mac sandbox profiles.
 Retain three planned slots: `validity-control`, `base` and `allow-twin`. The
 unprofiled control must successfully import both valid targets. Each fresh
 restricted process uses the same immutable physical artifacts. Base allows addon
-data reads; twin adds only literal module-data read and addon executable-map
+data reads and explicitly denies that addon's executable mapping. Twin omits
+only that literal deny and adds literal module-data read and addon executable-map
 permissions. Keep file-read digests, actual loader results, fixed returned
 markers, parent snapshots and genuine outer ownership separate. An
 `ERR_DLOPEN_FAILED` result alone cannot identify a permission failure. Missing or
@@ -303,6 +304,24 @@ in-memory buffers, compiler artifacts, snapshots, backups and newly retained
 control/proof records remain separate accounting and recovery blockers. Neither
 this loader mechanism nor original packet removal establishes native host
 qualification or effective private erasure.
+
+The explicit 5 November integration on fresh invented objects completed two C19
+sessions with 32 rows each, then removed their five original output, evidence
+and packet roots through owned workers and strict readback. Staging and the
+unrelated sibling retained their bytes and inode identities. The resulting
+control/proof and memory copies remain separate blockers; this is no private-data
+erasure claim.
+
+The first loader compilation stopped at a missing explicit system-library link;
+no loader slots ran and the retained result was inconclusive. The fixed recipe
+binds the SDK's regular `libSystem.B.tbd` as an explicit input. The next actual
+experiment built a valid N-API-8 addon and completed all three ordinary Node
+22.22.2 processes. Base refused module read/import with `EPERM` but loaded the
+readable addon. Its `base-unconfined` result remains negative evidence. A separate
+reviewed diagnostic added only the literal executable-map deny: the same addon
+remained readable but loading failed with `ERR_DLOPEN_FAILED` and a sandbox mmap
+diagnostic, while validity and twin stayed positive. This supports the local
+explicit-deny correction, not a general inheritance explanation or kernel claim.
 
 ## Runtime, rights and operational decisions
 
