@@ -53,6 +53,10 @@ def prepare(
                 leaf.parent.mkdir(mode=0o700, exist_ok=True)
             leaf.write_bytes(raw)
             leaf.chmod(0o600)
+        if role == "native-packet":
+            for leaf in root.iterdir():
+                leaf.chmod(0o400)
+            root.chmod(0o500)
     cleanup.mkdir(mode=0o700, exist_ok=True)
     context_raw = tree.encoded(context or {"kind": "invented"})
     inherited = {
@@ -154,6 +158,10 @@ def run(value, **kwargs):
 def journal(value):
     path = value["cleanup"] / value["request"]["attempt"] / "events.jsonl"
     return path.read_bytes() if path.exists() else b""
+
+
+def target(value):
+    return tree._quarantine_path(value["request"], value["raw"])
 
 
 def inspect(value, outer, *, reader_audit=None):

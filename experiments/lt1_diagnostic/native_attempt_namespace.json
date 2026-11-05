@@ -32,6 +32,19 @@
         "live-entry.json"
       ],
       "directories": {}
+    },
+    "native-packet": {
+      "files": [
+        "grant.json",
+        "host_receipt.json",
+        "integration-grant.json",
+        "integration_host_receipt.json",
+        "plan.json",
+        "rights_receipt.json",
+        "security_receipt.json",
+        "setup_receipt.json"
+      ],
+      "directories": {}
     }
   }
 }
