@@ -164,7 +164,9 @@ def toolchain_identity():
     node = Path(node).resolve(strict=True)
     need(node.name == "node", "fixed ordinary Node leaf")
     sdk = Path(SDK).resolve(strict=True)
-    paths = (CLANG, LINKER, SANDBOX, DYLD, sdk / "SDKSettings.json", node)
+    system_stub = sdk / "usr/lib/libSystem.B.tbd"
+    need(system_stub.resolve(strict=True) == system_stub, "fixed resolved SDK libSystem stub")
+    paths = (CLANG, LINKER, SANDBOX, DYLD, sdk / "SDKSettings.json", system_stub, node)
     files = {str(path): _snapshot(path) for path in paths}
     need(files[str(node)]["sha256"] != RUNTIME["executable_sha256"], "selected candidate excluded")
     headers = {
@@ -258,6 +260,7 @@ def _compile_argv(sdk, targets, build, *, scan, source_root=ROOT):
         str(build / "compiled-dependencies.mk"),
         "-o",
         str(targets / "addon.node"),
+        str(PurePosixPath(sdk) / "usr/lib/libSystem.B.tbd"),
         str(addon),
     ]
 
@@ -830,7 +833,16 @@ def _toolchain_data(tools):
         "fixed historical installed toolchain",
     )
     expected_files = {
-        str(p) for p in (CLANG, LINKER, SANDBOX, DYLD, sdk / "SDKSettings.json", node)
+        str(p)
+        for p in (
+            CLANG,
+            LINKER,
+            SANDBOX,
+            DYLD,
+            sdk / "SDKSettings.json",
+            sdk / "usr/lib/libSystem.B.tbd",
+            node,
+        )
     }
     expected_headers = {
         str(HEADERS / n)
