@@ -96,6 +96,59 @@ class HistoricalLeafTests(unittest.TestCase):
             self.assertIs(result[key], False)
             self.assertIs(report[key], False)
 
+    def test_physical_descriptor_ancestry_rejects_same_and_ancestor_roles(self):
+        root = leaf._private_directory(self.target.parent)
+        sibling = leaf._private_directory(self.attempt.parent)
+        ancestor = leaf._private_directory(self.parent)
+        try:
+            leaf._physical_separate(root, sibling)
+            for first, second in ((root, root), (root, ancestor), (ancestor, root)):
+                with self.subTest(first=first, second=second):
+                    with self.assertRaisesRegex(ValueError, "physically overlapping"):
+                        leaf._physical_separate(first, second)
+            self.assertIn(
+                (os.fstat(root).st_dev, os.fstat(root).st_ino), leaf._physical_ancestors(root)
+            )
+            with self.assertRaisesRegex(ValueError, "physical ancestry bound"):
+                leaf._physical_ancestors(root, limit=1)
+            os.fstat(root)  # The caller's descriptor remains open after failures.
+        finally:
+            for fd in (ancestor, sibling, root):
+                os.close(fd)
+
+    def test_physical_overlap_refuses_before_target_read_and_evidence_creation(self):
+        with patch.object(leaf, "_physical_separate", side_effect=ValueError("physical overlap")):
+            with patch.object(leaf, "_file", side_effect=AssertionError("target intake")):
+                with self.assertRaisesRegex(ValueError, "physical overlap"):
+                    self.run_removal()
+        self.assertTrue(self.target.is_file())
+        self.assertFalse(self.attempt.exists())
+        self.assert_sentinels()
+
+    def test_physical_roles_are_rechecked_in_quarantine_and_cold_readback(self):
+        original = leaf._physical_separate
+        armed = False
+
+        def check(*args):
+            if armed:
+                raise ValueError("invented changed physical ancestry")
+            return original(*args)
+
+        def checkpoint(event, _name):
+            nonlocal armed
+            if event == "quarantined":
+                armed = True
+
+        with patch.object(leaf, "_physical_separate", side_effect=check):
+            result = self.run_removal(checkpoint=checkpoint)
+        self.assertEqual(result["status"], "failed")
+        self.assertEqual(result["removed"], [])
+        self.assertTrue((self.attempt / "quarantine" / self.target.name).is_file())
+        with patch.object(leaf, "_physical_separate", side_effect=check):
+            with self.assertRaisesRegex(ValueError, "physical ancestry"):
+                self.read()
+        self.assert_sentinels()
+
     def test_historical_flat_helper_still_refuses_the_mixed_namespace(self):
         request = json.loads(self.raw)
         old = {
@@ -411,6 +464,32 @@ class HistoricalLeafTests(unittest.TestCase):
         self.assertEqual(result["status"], "failed")
         self.assertEqual(result["removed"], [])
         self.assertEqual(path.read_bytes(), b"invented late changed bytes")
+
+    def test_late_target_replacement_during_final_source_check_is_not_moved(self):
+        actual = leaf.source_identity()
+        active, calls = False, 0
+
+        def source():
+            nonlocal calls
+            if active:
+                calls += 1
+                if calls == 2:
+                    self.target.rename(self.parent / "retained-original")
+                    self.target.write_bytes(b"invented late root replacement")
+                    self.target.chmod(0o600)
+            return actual
+
+        def checkpoint(event, _name):
+            nonlocal active
+            if event == "prepared":
+                active = True
+
+        with patch.object(leaf, "source_identity", side_effect=source):
+            result = self.run_removal(checkpoint=checkpoint)
+        self.assertEqual(result["status"], "failed")
+        self.assertEqual(result["removed"], [])
+        self.assertEqual(self.target.read_bytes(), b"invented late root replacement")
+        self.assertFalse(list((self.attempt / "quarantine").iterdir()))
 
     def test_late_reader_source_hook_cannot_mutate_journal_into_completion(self):
         self.run_removal()

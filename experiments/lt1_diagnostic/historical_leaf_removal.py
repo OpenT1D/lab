@@ -4,6 +4,7 @@ import json
 import os
 import re
 import stat
+from contextlib import ExitStack
 from pathlib import Path
 
 from experiments.durable_archives.storage import exclusive_rename
@@ -18,6 +19,7 @@ LIMIT = 1024 * 1024
 JOURNAL_LIMIT = 2 * LIMIT
 FILE_LIMIT = 16 * LIMIT
 MAX_SIBLINGS = 128
+MAX_ANCESTORS = 128
 SCHEMA = "opent1d.lt1-historical-leaf-removal-request/1"
 STATUS = "target-namespace-absence-observed"
 IDENTITY_FIELDS = "device inode uid bytes mode mtime_ns ctime_ns"
@@ -147,6 +149,45 @@ def _directory_binding(record, fd, *, initial=False):
     need(all(current[k] == record[k] for k in keys.split()), "directory identity changed")
 
 
+def _physical_ancestors(fd, *, limit=MAX_ANCESTORS):
+    """Bounded descriptor-relative ancestry, including the directory itself.
+
+    Lexical canonicality does not resolve APFS firmlinks, case aliases or other
+    physical role collisions. This is a point observation, not an atomic host
+    topology snapshot or isolation from a hostile same-UID owner.
+    """
+    need(type(limit) is int and 0 < limit <= MAX_ANCESTORS, "physical ancestry limit")
+    seen = set()
+    with ExitStack() as stack:
+        current = os.dup(fd)
+        stack.callback(os.close, current)
+        for _ in range(limit):
+            info = os.fstat(current)
+            node = (info.st_dev, info.st_ino)
+            need(stat.S_ISDIR(info.st_mode) and node not in seen, "physical ancestry cycle/type")
+            seen.add(node)
+            parent = os.open(
+                "..", os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC, dir_fd=current
+            )
+            stack.callback(os.close, parent)
+            info = os.fstat(parent)
+            if (info.st_dev, info.st_ino) == node:
+                return seen
+            current = parent
+        need(False, "physical ancestry bound")
+
+
+def _physical_separate(root, evidence):
+    root_info, evidence_info = os.fstat(root), os.fstat(evidence)
+    root_id = (root_info.st_dev, root_info.st_ino)
+    evidence_id = (evidence_info.st_dev, evidence_info.st_ino)
+    need(
+        root_id not in _physical_ancestors(evidence)
+        and evidence_id not in _physical_ancestors(root),
+        "physically overlapping root/evidence roles",
+    )
+
+
 def sibling_signature(info):
     """Immediate metadata only; never reads or inventories directory contents."""
     kind = (
@@ -201,8 +242,13 @@ def _remove_reviewed(
         evidence = _private_directory(evidence_path)
         _directory_binding(request["root"], root, initial=True)
         _directory_binding(request["evidence_parent"], evidence, initial=True)
+        _physical_separate(root, evidence)
         _siblings(root, request, True)
         held = _file(root, target, expected)
+        need(request["source_identity"] == source_identity(), "source changed before evidence")
+        _directory_binding(request["root"], root, initial=True)
+        _directory_binding(request["evidence_parent"], evidence, initial=True)
+        _physical_separate(root, evidence)
         admit()
         os.mkdir(request["attempt"], 0o700, dir_fd=evidence)
         os.fsync(evidence)
@@ -225,6 +271,7 @@ def _remove_reviewed(
             need(request["source_identity"] == source_identity(), "source changed")
             _directory_binding(request["root"], root)
             _directory_binding(request["evidence_parent"], evidence)
+            _physical_separate(root, evidence)
             _binding(attempt_path, attempt)
             _binding(quarantine_path, quarantine)
             _siblings(root, request, location == "root")
@@ -283,8 +330,20 @@ def _remove_reviewed(
                 verify = _file(root, target, expected)
                 os.close(verify)
                 check()
-                admit()
-                exclusive_rename(root_path / target, quarantine_path / target)
+                verify = _file(root, target, expected)
+                try:
+                    verified = signature(os.fstat(verify))
+                    need(
+                        signature(os.fstat(held))
+                        == signature(os.stat(target, dir_fd=root, follow_symlinks=False))
+                        == verified
+                        and os.fstat(held).st_nlink == 1,
+                        "target changed immediately before move",
+                    )
+                    admit()
+                    exclusive_rename(root_path / target, quarantine_path / target)
+                finally:
+                    os.close(verify)
                 location = "quarantine"
                 os.fsync(root)
                 os.fsync(quarantine)
@@ -474,6 +533,7 @@ def inspect(
         def bindings():
             _directory_binding(request["root"], root)
             _directory_binding(request["evidence_parent"], evidence)
+            _physical_separate(root, evidence)
             _binding(attempt_path, attempt)
             _binding(attempt_path / "quarantine", quarantine)
             need(_names(attempt, 2) == {"quarantine", "events.jsonl"}, "reader attempt namespace")
