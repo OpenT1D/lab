@@ -22,6 +22,12 @@ PREDECESSOR = "b96a288ce4b0a0feaae4929475c992e95e6b7624"
 TASKS = ["mmtt-sensitivity", "m4-study-secure", "m4-study-installed", "mmtt-sampling"]
 
 
+def mmtt_replay_arguments(wheel, reader_policy, root):
+    from scripts.qualify_reader_candidate import replay_arguments
+
+    return replay_arguments(wheel, reader_policy, root / "qualified-reader-packet.json")
+
+
 def read(path):
     return json.loads(path.read_bytes())
 
@@ -216,12 +222,15 @@ def orchestrate(args):
         }
     write(root / "reviewed-roles.json", role_receipts)
     artifacts, interpreters, payloads = {}, {}, {}
+    mmtt_options = None
     for label in ("predecessor", "candidate", "reader"):
         original_label = "candidate" if label == "reader" else label
         receipt_path = getattr(args, original_label + "_receipt")
         receipt = read(receipt_path)
         wheel = getattr(args, original_label + "_wheel").absolute()
         assert sha(wheel) == receipt["wheel_sha256"]
+        if label == "candidate":
+            mmtt_options = mmtt_replay_arguments(wheel, args.mmtt_reader_policy, root)
         destination = root / ("artifact-" + label)
         destination.mkdir()
         shutil.copyfile(wheel, destination / wheel.name)
@@ -362,7 +371,11 @@ def orchestrate(args):
     write(root / "scientific-parity.json", matched)
     for mode, output, extra in (
         ("prepare", root / "mmtt-current", []),
-        ("replay", root / "mmtt-transition", ["--source", args.mmtt_predecessor.absolute()]),
+        (
+            "replay",
+            root / "mmtt-transition",
+            ["--source", args.mmtt_predecessor.absolute(), *mmtt_options],
+        ),
     ):
         run(
             "mmtt-" + mode,
@@ -425,6 +438,10 @@ def orchestrate(args):
         "human_sessions": "not_recorded",
         "public_release": False,
     }
+    if args.mmtt_reader_policy == "opent1d.comparison-reader-transition/2":
+        result["schema"] = "opent1d.internal-integrated-candidate-qualification/2"
+        result["mmtt_reader_transition"] = args.mmtt_reader_policy
+        result["mmtt_reader_packet_sha256"] = sha(root / "qualified-reader-packet.json")
     materials(root / "formative-packet", result, candidate, adverse)
     result["formative_packet_sha256"] = sha(root / "formative-packet/packet.json")
     write(root / "qualification.json", result)
@@ -447,6 +464,14 @@ def main():
         parser.add_argument("--" + label + "-receipt", required=True, type=Path)
     parser.add_argument("--runtime-receipt", required=True, type=Path)
     parser.add_argument("--mmtt-predecessor", required=True, type=Path)
+    parser.add_argument(
+        "--mmtt-reader-policy",
+        choices=(
+            "opent1d.comparison-reader-transition/1",
+            "opent1d.comparison-reader-transition/2",
+        ),
+        default="opent1d.comparison-reader-transition/1",
+    )
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
     if sys.flags.optimize:

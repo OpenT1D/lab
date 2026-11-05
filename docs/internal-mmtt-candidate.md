@@ -139,5 +139,8 @@ schema 2; it never relabels an old version-1 receipt. The original task,
 failure/cancellation, saved-prefix, relocation, rollback and constant-input
 controls still run. Additional retained B/M3-era comparisons need their own
 installed source-bound replay evidence, not a declaration that a root check
-qualified a wheel. Final exact artifacts and receipts belong to the associated
-CI integration PR; distribution and native qualification remain separate.
+qualified a wheel. Retain exact artifacts and receipts with the source revision that was actually
+checked; distribution and native qualification remain separate. The integrated
+candidate procedure requires the same explicit selection through
+`--mmtt-reader-policy opent1d.comparison-reader-transition/2`. Its native
+qualification remains a separate exercise.

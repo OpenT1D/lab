@@ -9,18 +9,24 @@
   <script src="/drafts.js" defer></script>
   <script src="/comparisons.js" defer></script>
   <script src="/connected.js" defer></script>
+  <script src="/research.js" defer></script>
   <script src="/app.js" defer></script>
 </head>
 <body>
-<a class="skip" href="#main">Skip to the study</a>
+<a class="skip" href="#main">Skip to research</a>
 <header class="topbar">
   <a class="brand" href="/" aria-label="OpenT1D project laboratory"><span class="brand-mark" aria-hidden="true">o</span><span>OpenT1D<small>PROJECT LABORATORY</small></span></a>
   <span class="scope">Internal research candidate · invented data</span>
   <button id="stop-server" class="quiet">Stop server</button>
 </header>
+<nav class="screen-nav" aria-label="Main screens">
+  <button id="nav-projects" type="button" aria-current="page" aria-controls="projects-screen">My research</button>
+  <button id="nav-study" type="button" aria-controls="study-screen" disabled>Research</button>
+  <button id="nav-results" type="button" aria-controls="results-screen" disabled>Results</button>
+</nav>
 <div class="layout">
-  <aside class="sidebar" aria-label="Projects">
-    <div class="side-heading"><h2>Your projects</h2><span id="project-count" class="count">0</span></div>
+  <aside id="projects-screen" class="sidebar" aria-label="My research">
+    <div class="side-heading"><h2 id="projects-heading" tabindex="-1">Your projects</h2><span id="project-count" class="count">0</span></div>
     <nav id="project-list" aria-label="Saved projects"></nav>
     <form id="create-project" class="side-form">
       <label for="project-name">New project name</label>
@@ -45,8 +51,27 @@
       <p class="limit">These are invented engineering examples. They do not establish accuracy in people, biological validity or treatment effects.</p>
     </section>
     <div id="project-view" class="hidden">
-      <section class="project-heading"><div><p class="eyebrow">Shared SDK project</p><h1 id="selected-name"></h1><p id="selected-path" class="muted path"></p></div><button id="refresh-project">Refresh saved ledger</button></section>
-      <nav class="section-nav" aria-label="Project sections"><a href="#study">Study</a><a href="#comparisons">Comparisons</a><a id="connected-nav" href="#connected-study">Connected study</a><a href="#attempts">Attempts</a><a href="#saved-report">Report</a><a href="#handoff">Handoff</a></nav>
+      <section class="project-heading"><div><p class="eyebrow">Research question / project</p><h1 id="selected-name"></h1></div><button id="refresh-project">Refresh saved ledger</button></section>
+      <details id="storage-details" class="storage-details"><summary>Storage, inputs and project handoff</summary>
+        <p class="muted">Project folder</p><p id="selected-path" class="path"></p>
+        <p class="muted">GUI workspace</p><p id="project-workspace-location" class="path"></p>
+        <p class="muted">Frozen plans retain their admitted original inputs in this project. This interface does not connect a separate data vault or grant access to another person. Execution takes place on this computer.</p>
+        <section id="handoff">
+          <h2>Keep and hand off the project</h2><p>Copy the entire project, including original inputs, plans, attempts and native evidence.</p>
+          <form id="relocate-form" class="form-grid"><div class="full"><label for="relocate-path">New project folder</label><input id="relocate-path" placeholder="A new absolute location outside any existing project" required></div><button type="submit">Copy complete project</button></form>
+          <p class="muted">This is a full project copy, including its input files. Keep the original until you have opened the copy and verified its reports. Native parameter records remain local while redistribution rights are unresolved.</p>
+        </section>
+      </details>
+      <div id="study-screen">
+      <details id="used-plan-inspector" class="panel hidden"><summary>Read-only inputs used by the selected execution</summary><p id="used-plan-context" class="muted"></p><pre id="used-plan-details"></pre></details>
+      <section id="research-guidance" class="next-step" aria-label="Next research step">
+        <p class="eyebrow">Your next step</p><h2 id="next-title">Choose an approach</h2>
+        <p id="next-detail">Prepare a supplied synthetic example or start with your own supported synthetic inputs.</p>
+        <div class="actions"><button id="next-action" type="button" class="primary">Choose an approach</button></div>
+        <ol class="research-steps" aria-label="Research steps"><li id="step-approach">Question and approach</li><li id="step-inputs">Inputs and settings</li><li id="step-freeze">Check and freeze</li><li id="step-run">Execute</li></ol>
+        <p id="research-identity" class="muted"></p>
+      </section>
+      <nav class="section-nav" aria-label="Research sections"><a href="#study">Study setup</a><a href="#comparisons">Frozen comparisons</a><a id="connected-nav" href="#connected-study">Connected study</a></nav>
       <section id="study" class="panel">
         <div class="section-title"><span class="step">1</span><div><h2>Prepare a study</h2><p>Choose supplied inputs, inspect their assumptions, then freeze a named plan.</p></div></div>
         <form id="prepare-form" class="form-grid">
@@ -125,6 +150,16 @@
         <p id="connected-status" role="status" aria-live="polite"></p><div id="connected-stages"></div>
         <details><summary>Frozen study protocol, planned support and cross-task identities</summary><pre id="connected-details"></pre></details>
       </section>
+      </div>
+      <div id="results-screen" class="hidden">
+      <section class="panel" aria-label="Selected execution">
+        <h2>Executions and results</h2><p class="muted">Each attempt retains its frozen inputs and outcome, including failed, stopped and unfinished work.</p>
+        <label for="attempt-select">Execution to inspect</label><select id="attempt-select"><option value="">All executions</option></select>
+        <p id="attempt-context" class="muted"></p>
+        <div class="actions"><button id="inspect-used-plan" type="button">Inspect used inputs</button><button id="derive-used-plan" type="button">Make a variant from this execution</button></div>
+        <button id="open-comparisons" type="button" class="quiet">Open frozen comparison setup and reports</button>
+        <p class="muted">Comparison membership is frozen in Research before execution. Results below use the native reports; no ranking or new scientific calculation is added here.</p>
+      </section>
       <section id="attempts" class="panel">
         <div class="section-title"><span class="step">3</span><div><h2>Find and verify results</h2><p>Execution, scientific completeness and report verification are separate.</p></div></div>
         <div id="attempt-list"></div>
@@ -138,11 +173,7 @@
         <section id="child-reports" class="hidden" aria-label="Native reports for each measurement schedule"></section>
         <img id="report-figure" alt="Authoritative saved research figure; quantities and units are also described in the report." class="report-figure">
       </section>
-      <section id="handoff" class="panel">
-        <div class="section-title"><span class="step">4</span><div><h2>Keep and hand off the project</h2><p>Copy the entire project, including original inputs, plans, attempts and native evidence.</p></div></div>
-        <form id="relocate-form" class="form-grid"><div class="full"><label for="relocate-path">New project folder</label><input id="relocate-path" placeholder="A new absolute location outside any existing project" required></div><button type="submit">Copy complete project</button></form>
-        <p class="muted">Keep the original until you have opened the copy and verified its reports. Native parameter records remain local while redistribution rights are unresolved.</p>
-      </section>
+      </div>
       <p class="limit">Synthetic software evidence only. No insulin dosing, device operation or clinical decisions.</p>
     </div>
     <footer><span id="application"></span><details><summary>Workspace location</summary><span id="workspace-path" class="path"></span></details></footer>

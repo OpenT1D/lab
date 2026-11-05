@@ -23,6 +23,7 @@ test('bounded candidate exposes two MMTT tasks and preserves work across relaunc
   await expect(page.locator('#plan-select option')).toHaveCount(1);
   await page.getByRole('button', { name: 'Run plan', exact: true }).click();
   await expect(page.locator('#attempt-list')).toContainText('Execution: completed');
+  await page.locator('#nav-results').click();
   await page.getByRole('button', { name: 'Verify saved report', exact: true }).click();
   await expect(page.locator('#saved-report')).toBeVisible();
   await expect(page.locator('#report-completeness')).toContainText('complete');
@@ -31,6 +32,7 @@ test('bounded candidate exposes two MMTT tasks and preserves work across relaunc
   await page.getByRole('button', { name: 'Internal candidate exercise', exact: true }).click();
   await expect(page.locator('#attempt-list')).toContainText('Execution: completed');
   await expect(page.locator('#task option')).toHaveCount(2);
+  await page.locator('#nav-results').click();
   await page.setViewportSize({ width: 520, height: 900 });
   await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);

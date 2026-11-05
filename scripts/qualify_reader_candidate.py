@@ -54,6 +54,36 @@ def transition_identity(result, reader_policy=LEGACY_POLICY, packet_raw=None):
     ) == canonical(packet["successor"])
 
 
+def replay_arguments(wheel, reader_policy, packet_path):
+    """Select an exact policy; retain packet bytes from the verified wheel."""
+    assert reader_policy in (LEGACY_POLICY, CURRENT_POLICY)
+    arguments = ["--reader-policy", reader_policy]
+    if reader_policy == CURRENT_POLICY:
+        with zipfile.ZipFile(wheel) as payload:
+            prefix = "opent1d_lab/_payload/app/experiments/shared_services/"
+            legacy = payload.read(prefix + "reader_compatibility.json")
+            assert hashlib.sha256(legacy).hexdigest() == (
+                "6b50b5b97f9888e55f2fdddd86388a35963ce090291f37850cffb4863ed6f0e0"
+            )
+            raw = payload.read(prefix + "reader_compatibility_m3.json")
+        packet = json.loads(raw)
+        binding = {"schema": CURRENT_POLICY, "registry_sha256": hashlib.sha256(raw).hexdigest()}
+        transition_identity(
+            {
+                "reader": packet["successor"] | {"compatibility": binding},
+                "reader_transition": {
+                    "policy": CURRENT_POLICY,
+                    "registry_sha256": binding["registry_sha256"],
+                },
+            },
+            CURRENT_POLICY,
+            raw,
+        )
+        packet_path.write_bytes(raw)
+        arguments += ["--qualification-packet", str(packet_path)]
+    return arguments
+
+
 def write(path, value):
     path.write_text(json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n")
 
@@ -399,7 +429,8 @@ def orchestrate(args):
     probe = root / "qualification.py"
     shutil.copyfile(__file__, probe)
     artifacts = {}
-    packet_path = None
+    packet_path = root / "qualified-reader-packet.json"
+    replay_options = None
     env = {key: value for key, value in os.environ.items() if key != "PYTHONPATH"}
     env["UV_CACHE_DIR"] = str(root / "cache")
     for label in ("a", "b"):
@@ -413,15 +444,7 @@ def orchestrate(args):
         else:
             assert receipt["source"]["revision"] != PREDECESSOR
             assert receipt["tasks"] == TASKS
-            if args.reader_policy == CURRENT_POLICY:
-                with zipfile.ZipFile(wheel) as payload:
-                    prefix = "opent1d_lab/_payload/app/experiments/shared_services/"
-                    legacy = payload.read(prefix + "reader_compatibility.json")
-                    assert hashlib.sha256(legacy).hexdigest() == (
-                        "6b50b5b97f9888e55f2fdddd86388a35963ce090291f37850cffb4863ed6f0e0"
-                    )
-                    packet_path = root / "qualified-reader-packet.json"
-                    packet_path.write_bytes(payload.read(prefix + "reader_compatibility_m3.json"))
+            replay_options = replay_arguments(wheel, args.reader_policy, packet_path)
         destination = root / ("artifact-" + label)
         destination.mkdir()
         shutil.copyfile(wheel, destination / wheel.name)
@@ -470,9 +493,7 @@ def orchestrate(args):
         if source:
             command += ["--source", str(source)]
         if mode == "replay":
-            command += ["--reader-policy", args.reader_policy]
-            if packet_path:
-                command += ["--qualification-packet", str(packet_path)]
+            command += replay_options
         with (root / (label + "-" + mode + ".log")).open("xb") as log:
             subprocess.run(
                 command,
