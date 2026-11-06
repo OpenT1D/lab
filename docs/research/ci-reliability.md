@@ -371,9 +371,10 @@ The scheduling table still estimated `test_lt1_native_route` at 522.563 seconds
 from an older local 24-case observation. `test_lt1_bundle_reconciliation` had no
 measured entry and used its sixteen-case fallback weight. Both modules completed
 in the first cancelled hosted job before its deadline: all 27 route cases and
-all sixteen reconciliation cases were observed. Refresh only these two costs to
-1,309.458 and 652.446 seconds, respectively, preserving every older measurement
-and appending exact source/run/attempt/job and public-log provenance.
+all sixteen reconciliation cases were observed. The first correction refreshed
+these two costs to 1,309.458 and 652.446 seconds, respectively, preserving every
+older measurement and appending exact source/run/attempt/job and public-log
+provenance.
 
 These costs sum consecutive verbose-completion timestamp intervals and include
 fixture and logging overhead. They are scheduling estimates, not isolated
@@ -388,8 +389,32 @@ first attempt's observed completion costs gives approximately 1,457, 1,574,
 1,710 and 1,935 seconds. Those replay values omit the 94 unobserved cases and
 are neither upper bounds nor a promise that a new runner will finish on time.
 
+The scheduling successor `1f0eb7b20351d692ca0a2c65a2b572df7e4ddb04` then passed
+root groups 1, 2 and 3 in [run 42141156604](https://github.com/OpenT1D/lab/actions/runs/42141156604),
+but group 4, job `127641510299`, reached the unchanged forty-minute job budget.
+Its test step's recorded interval was 2,403 seconds. It completed an exact
+ordered prefix of 618 of 739 cases, leaving 121 without completion; the log
+contains no assertion failure headers. Root checks skipped and the repository
+aggregate failed. These outcomes remain unsuccessful.
+
+That job fully observed all fourteen `test_lt1_native_host` cases in 345.874
+seconds of consecutive completion intervals, compared with the table's older
+112.832-second cost. Update only this additional measured cost, retaining all
+nine earlier supplemental rows and appending exact public source, job, log and
+test-file provenance. The tree-removal module completed only 21 of thirty cases;
+its partial interval is not stored as a full-module cost. A faster older full
+tree observation does not predict the missing current work.
+
+The unchanged greedy partitioner now produces groups of 503, 559, 621 and 784
+cases, covering all 2,467 IDs exactly once in whole modules. Replaying known completion
+intervals gives approximately 1,902, 1,287, 1,914 and 1,727 seconds. This replay
+includes the observed partial tree interval as a lower bound and omits all 121
+uncompleted cases; unknown work is neither zero nor success. The replay is not
+a runtime upper bound, causal speed comparison or new hosted result. The small
+measured refresh is selected without an automatic rerun of the cancelled job.
+
 The correction changes no test, assertion, skip, timeout, retry policy, number of
 shards, public job roster or historical-native guard. Default unsharded root
-selection remains complete. Keep both failed attempts, independently review the
+selection remains complete. Keep the failed attempts, independently review the
 partition and require fresh final-revision local and hosted checks; an earlier
 full pass on the helper source does not qualify the new scheduling revision.

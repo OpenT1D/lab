@@ -143,6 +143,22 @@
       "log_sha256": "445d9d20b2cd697727a6deb1dfe05b35b635556062058c75d68845655a94dce9",
       "measurement_method": "Sum of consecutive observed verbose-completion timestamp intervals, including fixture/logging overhead. Entire module completed before the enclosing job deadline. Scheduling estimate, not an isolated benchmark or a passing enclosing-job claim.",
       "scope": "Invented boundary/process fixtures only; no selected native runtime or scientific qualification."
+    },
+    {
+      "module": "test_lt1_native_host",
+      "measured_on": "2026-11-06",
+      "source_sha": "1f0eb7b20351d692ca0a2c65a2b572df7e4ddb04",
+      "workflow_run": 42141156604,
+      "run_attempt": 1,
+      "job_id": 127641510299,
+      "tests": 14,
+      "completion_delta_seconds": 345.874,
+      "enclosing_job_conclusion": "cancelled",
+      "module_cases_observed_complete": true,
+      "test_file_sha256": "95eaf14b02494cc834afe0e73f00f9f4d7a3cde44a8c11f7d08574d0ae4b1dc9",
+      "log_sha256": "b4ecf9038bb9c914908e1d293e9d4414230ad81b2722e4bc4d52517634fd6023",
+      "measurement_method": "Sum of consecutive observed verbose-completion timestamp intervals, including fixture, prior teardown, logging and runner effects. All module cases completed before the enclosing job cancellation. Scheduling estimate only; not an isolated benchmark or a passing enclosing-job claim.",
+      "scope": "Invented boundary/process fixtures only; no selected native runtime, host or scientific qualification."
     }
   ],
   "module_seconds": {
@@ -233,7 +249,7 @@
     "test_local_campaign_process": 11.349,
     "test_local_campaigns": 1.307,
     "test_local_gui": 5.139,
-    "test_lt1_native_host": 112.832,
+    "test_lt1_native_host": 345.874,
     "test_lt1_native_loader": 1.689,
     "test_lt1_native_route": 1309.458,
     "test_m1_artifacts": 1.483,
