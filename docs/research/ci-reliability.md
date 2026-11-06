@@ -353,3 +353,43 @@ known hosted contract failures; it is not a full pass. The final source must
 receive a fresh complete check and actual local/hosted outcomes. Wall-clock
 comparisons across sleep, changed source, extra coverage and different runners
 are not a causal speed benchmark.
+
+## Measured LT1 shard-weight correction
+
+The mixed historical-directory helper's source
+`af5a378cb1ae50880977e1f8109b60e587a66ebb` passed its full local root check, but
+root shard 1 in [run 42129161961](https://github.com/OpenT1D/lab/actions/runs/42129161961)
+reached the unchanged forty-minute root-job budget in both attempts 1 and 2,
+with both cancellations observed during the test step.
+The first job, `127601132749`, completed an exact ordered prefix of 544 of its
+638 selected cases; 94 remained uncompleted. Its retained log has no assertion
+failure headers. Cancellation and incomplete coverage are not a successful run.
+The new helper modules were assigned to shards 3 and 4; they were not the
+cancelled shard's new workload.
+
+The scheduling table still estimated `test_lt1_native_route` at 522.563 seconds
+from an older local 24-case observation. `test_lt1_bundle_reconciliation` had no
+measured entry and used its sixteen-case fallback weight. Both modules completed
+in the first cancelled hosted job before its deadline: all 27 route cases and
+all sixteen reconciliation cases were observed. Refresh only these two costs to
+1,309.458 and 652.446 seconds, respectively, preserving every older measurement
+and appending exact source/run/attempt/job and public-log provenance.
+
+These costs sum consecutive verbose-completion timestamp intervals and include
+fixture and logging overhead. They are scheduling estimates, not isolated
+benchmarks, scientific results or a passing enclosing-job claim. Different
+observed module times and stale weights both contributed uncertainty; the retry
+does not establish a purely infrastructure or nondeterministic cause.
+
+Replay the unchanged greedy whole-module partition over the actual 2,467-ID
+discovery roster. The revised four groups contain 389, 611, 728 and 739 cases:
+every ID exactly once, no empty group and no split module. Applying only the
+first attempt's observed completion costs gives approximately 1,457, 1,574,
+1,710 and 1,935 seconds. Those replay values omit the 94 unobserved cases and
+are neither upper bounds nor a promise that a new runner will finish on time.
+
+The correction changes no test, assertion, skip, timeout, retry policy, number of
+shards, public job roster or historical-native guard. Default unsharded root
+selection remains complete. Keep both failed attempts, independently review the
+partition and require fresh final-revision local and hosted checks; an earlier
+full pass on the helper source does not qualify the new scheduling revision.

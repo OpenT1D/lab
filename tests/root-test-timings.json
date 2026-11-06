@@ -113,6 +113,36 @@
       "tooling_node": "22.22.2",
       "invocation_shape": "PYTHONPATH=.:tests [locked root tooling Python] -B [private run-tree.py using unittest.TextTestRunner on the whole module]",
       "scope": "Actual complete local module run before the final coherent outer-digest followup; late namespace, original-leaf and real outer-file regressions included. Scheduling estimate only, not final-source, hosted CI, native qualification or effective-erasure evidence."
+    },
+    {
+      "module": "test_lt1_native_route",
+      "measured_on": "2026-11-06",
+      "source_sha": "af5a378cb1ae50880977e1f8109b60e587a66ebb",
+      "workflow_run": 42129161961,
+      "run_attempt": 1,
+      "job_id": 127601132749,
+      "tests": 27,
+      "completion_delta_seconds": 1309.458,
+      "enclosing_job_conclusion": "cancelled",
+      "module_cases_observed_complete": true,
+      "log_sha256": "445d9d20b2cd697727a6deb1dfe05b35b635556062058c75d68845655a94dce9",
+      "measurement_method": "Sum of consecutive observed verbose-completion timestamp intervals, including fixture/logging overhead. Entire module completed before the enclosing job deadline. Scheduling estimate, not an isolated benchmark or a passing enclosing-job claim.",
+      "scope": "Invented boundary/process fixtures only; no selected native runtime or scientific qualification."
+    },
+    {
+      "module": "test_lt1_bundle_reconciliation",
+      "measured_on": "2026-11-06",
+      "source_sha": "af5a378cb1ae50880977e1f8109b60e587a66ebb",
+      "workflow_run": 42129161961,
+      "run_attempt": 1,
+      "job_id": 127601132749,
+      "tests": 16,
+      "completion_delta_seconds": 652.446,
+      "enclosing_job_conclusion": "cancelled",
+      "module_cases_observed_complete": true,
+      "log_sha256": "445d9d20b2cd697727a6deb1dfe05b35b635556062058c75d68845655a94dce9",
+      "measurement_method": "Sum of consecutive observed verbose-completion timestamp intervals, including fixture/logging overhead. Entire module completed before the enclosing job deadline. Scheduling estimate, not an isolated benchmark or a passing enclosing-job claim.",
+      "scope": "Invented boundary/process fixtures only; no selected native runtime or scientific qualification."
     }
   ],
   "module_seconds": {
@@ -205,7 +235,7 @@
     "test_local_gui": 5.139,
     "test_lt1_native_host": 112.832,
     "test_lt1_native_loader": 1.689,
-    "test_lt1_native_route": 522.563,
+    "test_lt1_native_route": 1309.458,
     "test_m1_artifacts": 1.483,
     "test_m1_contracts": 0.003,
     "test_m1_review": 1.258,
@@ -341,6 +371,7 @@
     "test_workbench_installed": 133.533,
     "test_workflow_acceptance": 0.329,
     "test_workflow_entry": 0.803,
-    "test_workflow_study": 0.018
+    "test_workflow_study": 0.018,
+    "test_lt1_bundle_reconciliation": 652.446
   }
 }
