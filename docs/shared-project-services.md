@@ -53,7 +53,8 @@ effective config, and the shared freeze binds both forms. The two existing
 Dalla Man/ultradian example pairs are the admitted M4 sources in this increment.
 MMTT uses its existing sealed native plan without scientific conversion.
 Only public synthetic fixtures are admitted; private references, permissioned
-handoff and support-bundle export are still separate OT-064 work.
+handoff and support-bundle export are still separate OT-064 work. The bounded
+[developer diagnostics](#developer-diagnostic-export) below export counts only.
 
 An event is published with the existing atomic exclusive directory primitive,
 followed by a flushed head replacement. A power loss or forced termination
@@ -63,6 +64,47 @@ An unfinished registered execution can reopen as unfinished and be explicitly
 recovered after execution is confirmed stopped. Recovery never adopts or
 signals a persisted PID. A committed terminal event whose duplicate live
 workspace was not removed is also refused pending forensic inspection.
+
+## Developer diagnostic export
+
+From a checkout, use the locked root environment to summarize an existing valid
+synthetic project into one fresh JSON file outside that project:
+
+```sh
+uv run --locked python scripts/export_project_diagnostics.py \
+  --project /absolute/path/to/project \
+  --output /absolute/path/to/new-diagnostics.json
+```
+
+The version-1 report contains only fixed exporter/report/store schema identities,
+supported task types, plan and attempt counts, plans without attempts, and counts
+grouped by process status, result execution status and completeness. Process and
+result status remain separate: a failed coordinator can retain a complete native
+result, and a completed process can produce incomplete scientific evidence.
+A durable start without a finish counts as `unfinished`, with `unknown` result
+status and completeness. It does not prove a currently running process.
+Retries and unfinished attempts remain in the totals.
+
+The tool opens the current shared project store with `write_access=False` and
+holds its shared read lease through publication. Existing ledger and native
+binding validation must succeed; the source bytes remain unchanged. Project
+names, local paths, host records, inputs/observations, supplied model code,
+scientific reports, identifiers, free-text logs and error text are omitted.
+It runs no task, model callback, reader reconstruction command or recovery;
+existing validators retain their passive checks. This summary neither verifies
+scientific conclusions nor transfers a reconstructible project.
+
+Invalid, corrupt, unknown, incompatible or writer-locked projects are refused
+with the fixed stderr category `project_refused`. Unsuitable destinations,
+including linked ancestors, locations inside the project and existing outputs,
+use `output_refused`; a non-POSIX host uses `unsupported_host`. Refusals exit
+nonzero without publishing a successful report. Output parents must already
+exist. A complete staged file is published exclusively, so an existing or newly
+appearing destination is never overwritten. Success exits zero without printing
+project details. The first local host is macOS using the existing POSIX store;
+this adds no Windows support or distribution qualification. There is no fallback
+parser, migration or repair. LT1 review bundles, permissioned handoff and broader
+OT-064/073 distribution work remain separate.
 
 ## Developer example
 
