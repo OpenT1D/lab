@@ -1,7 +1,7 @@
 # OpenT1D roadmap
 
-**Updated 5 November 2026.** This is the canonical implementation order for
-OpenT1D. The immediate public-development queue comes first; the shared-laboratory
+**Updated 13 November 2026.** This is the canonical implementation order for
+OpenT1D. The current execution selection below owns immediate work; the shared-laboratory
 plan below retains its own dependencies and acceptance criteria. The
 [historical record](docs/research/roadmap-history-2026-10-28.md) preserves earlier
 plans, completed work, exact source records and detailed milestone criteria.
@@ -46,6 +46,38 @@ disabled-Actions state; the [security boundary](docs/publication-security.md)
 still governs public execution. Dependency-service runs are not repository
 verification.
 
+## Current execution selection
+
+**Selected 13 November 2026.** OT-062 is in progress. This records the active
+work selection, not adapter completion or qualification of an unreviewed branch.
+Keep its owner, actual revision, next artifact and verification evidence in the
+implementation issue or PR, following the [development handoff](docs/development.md#task-and-review-handoff).
+The October development window below records the implemented foundation and its
+remaining acceptance boundaries; it is no longer a one-week delivery forecast.
+
+| State and package | Next bounded artifact | Start condition and acceptance |
+| --- | --- | --- |
+| Active — OT-062 | Two native adapters and their conformance kit, preserving the implemented [LT1 native route](docs/research/ot062-lt1-native-route.md), its admission boundaries and the existing native references. Publish a minimal supported plan/result fixture and explicit incompatible cases for the comparison handoff. | Preserve native solvers, timing, units, causal inputs, action support and source identity. The [full package](#planned-core-and-product-work-packages) retains native parity, first/second-controller and reusable-template acceptance; progress on one adapter does not close it. |
+| Preferred second implementation — bounded OT-063 | Connect existing M1/M2 comparison logic to the selected OT-062 results, starting with fixture-based report reconstruction. | Start after the OT-062 owner freezes the consumed plan/result fixture and meanings. Reuse existing within-engine contrasts rather than create another metric implementation. Preserve planned support, failed/missing cases, units and signal/time semantics; integrated engine acceptance still requires actual adapter runs. |
+| Independently startable alternative — bounded OT-064/073 diagnostics | A read-only developer export for supported synthetic projects, containing allowlisted software/schema/task identities and execution-status accounting. | Agree the diagnostic fields for an author/reviewer handoff. First use a separate script/module and targeted checks, without changing the store schema, adapters, runtime lifecycle, readers or SDK/GUI dispatch. Exclude raw inputs, model code, reports, free-text logs/labels and local paths; verify unchanged source bytes, omission controls, no supplied-code execution and explicit unsupported/corrupt-project refusal. This is a diagnostic summary, not permissioned scientific project handoff. |
+| Research selection — bounded OT-067/068 | Select one concrete question/source/method route using the existing [OT-053 dossier](docs/research/ot053-mmtt-feasibility.md), recording researcher involvement and access status, then select the smallest source-specific intake. | Identify the export format, required versus available fields, suitable method, baseline workflow and access/review gaps. Synthetic source fixtures and a converter may proceed against that declared format while participant/access gaps remain open. Human execution needs its separately authorized and scientifically qualified route; it does not inherit current synthetic MMTT acceptance. |
+| External acceptance — OT-072 | Run an existing candidate-bound exercise with an actual intended user and result recipient. | Use a technically qualified exact candidate and the task scope covered by its packet. Preserve assistance, errors, interpretation and recovery observations. Existing preparation and same-estimator notebooks need not be recreated; new exercise scope must be specified before sessions. |
+
+Choose at most one second implementation alongside OT-062, in a separate
+worktree with explicit file ownership. Prefer the OT-063 handoff when its fixture
+is ready; use the diagnostic export as the independent alternative when that
+boundary is still changing. Source/method decisions and actual user sessions can
+proceed alongside development when the required people and sources are available.
+The OT-062 owner retains shared adapter contracts; any change to shared project,
+runtime, reader or SDK/GUI boundaries needs one agreed owner. Broad cache,
+portability, registry or reader refactors are not selected by this queue.
+
+Updating stale roadmap labels is bounded maintenance alongside this work. The
+[package dependencies](#planned-core-and-product-work-packages) govern integrated
+acceptance and already allow earlier design, fixtures and feasibility probes.
+No OT-069 dependency is removed by this selection; a calibration increment still
+needs a specific scientific question and its applicable evidence.
+
 ## Research direction: data to assessed digital twins
 
 The [vision](docs/vision.md) sets the horizon: an open virtual laboratory that
@@ -85,18 +117,19 @@ the question without discarding useful infrastructure.
 
 ### Next bounded research-data increment
 
-Build on the [implemented integrated-laboratory window](#selected-development-window-first-integrated-laboratory)
-and its recorded candidate/handoff evidence. Preserve the current OT-062
-native-control work and its separate admissions. Begin need, data-inventory and
-reuse discovery in parallel. The next selection in the research-data stream is
-a bounded OT-067/068 source-to-study route, reusing the qualified shared services
-and separately qualifying its new source/method boundary. It need not wait for
-full two-engine control conformance, public distribution or completion of every
-shared package.
+Build on the [integrated-laboratory foundation](#selected-development-window-first-integrated-laboratory)
+and its recorded candidate/handoff acceptance. The next research-data selection
+is a bounded OT-067/068 source-to-study route, alongside the active control work
+in the [current execution selection](#current-execution-selection). Reuse the
+existing OT-053 question, source and method assessment; resolve its concrete
+researcher, export and scientific-method gaps before choosing intake software.
+Implementation consumes the relevant technically qualified shared services and
+handoff. It need not wait for full two-engine control
+conformance, public distribution or completion of every shared package.
 
 | Work packet, in order | Concrete artifact and exit check |
 | --- | --- |
-| Question, source and reuse assessment | Write a short study protocol with the intended user, disease stage, longitudinal question, estimand, required versus available measurements, current baseline workflow and correctness criteria. Inventory repeat MMTT/C-peptide and relevant glucose/laboratory exports as the first candidate. Check identifiers/account mapping, visit schedules, extraction behavior, rights and approved execution/storage location. Compare suitable existing extraction, standards and analysis tools before choosing an adapter. Record missing access, reviewer and data requirements explicitly; do not assume them resolved. |
+| Question, source and reuse decision | Build on the dated OT-053 dossier to record a separately versioned study protocol in the task handoff, preserving its historical NARROW decision and scope. Specify the intended user and actual involvement, disease stage, longitudinal question, estimand, required versus available measurements, baseline workflow and correctness criteria. Use repeat MMTT/C-peptide and relevant glucose/laboratory exports as the first candidate; select an identified format before writing a converter. Check identifiers/account mapping, visit schedules, extraction behavior, rights and approved execution/storage location. Compare suitable existing extraction, standards and analysis tools before choosing an adapter. Record missing access, reviewer and data requirements explicitly; do not assume them resolved or repeat a generic inventory as a new implementation result. |
 | One repeatable intake chain | Implement the smallest justified adapter and quality report against versioned synthetic fixtures first, then assess an authorized export in its approved environment when available. Retain source bytes or authorized immutable references and extraction/mapping versions; keep pseudonymous participant/visit linkage reviewable without building a new account service. Test duplicated, ambiguous, missing, censored and mismatched-unit/time cases plus a repeated export. Reuse approved local storage and upstream extraction. Add a second actual format only when its availability and research need justify it. |
 | One reconstructed study in the current lab | First exercise the intake-to-analysis chain with synthetic fixtures through shared projects, plans, attempts and readers. The existing MMTT tasks remain synthetic-only and refuse human packages. Before measured-data execution, specify and qualify a separately versioned, scientifically reviewed successor or integrate a suitable existing method, with an authorized protocol, eligible measurements, justified kinetics and assay/error assumptions, and reports that truthfully describe the data and method scope. Preserve legacy contracts/readers and retain exclusions and uncertainty. A second researcher reopens the authorized study and compares correctness, repeated manual effort and assistance with the baseline workflow. Keep technical, authorized-data and independent-use acceptance separate. End with an explicit decision on whether a personal-model study is scientifically supportable and what measurements it would require. |
 
@@ -125,21 +158,26 @@ candidates and frozen M3 comparisons. The
 [1 November integrated-main smoke](#integrated-main-smoke-and-current-status)
 adds local evidence for four user routes on their merged source. These increments
 advance bounded parts of OT-060/061/063/064/065/067/068 and prepare OT-072/073;
-they do not close those full packages. **OT-062 adapter conformance is the next
-selected development step**, starting with LT1 runtime/rights and harness review
-before separately admitted native setup and execution.
+they do not close those full packages. **OT-062 adapter conformance is active.**
+The [current execution selection](#current-execution-selection) chooses its
+bounded parallel work; the LT1 records below retain each implemented increment
+and its separate runtime/rights/setup/host admission and qualification scope.
 The two existing synthetic MMTT tasks remain the maintained public exercise.
 Existing native M4 evidence retains its exact scope; sampling migration,
 reader transitions and optional M3 migration have their own acceptance gates.
 
 The public development loop and internal Mac candidate are already implemented.
-Maintain those boundaries while developing the laboratory. Prepare first-use
-tasks now and run them when a participant and technically verified candidate
-are available. Their timing does not block internal implementation. Queue names
+Maintain those boundaries while developing the laboratory. Reuse existing
+first-use materials and run their declared tasks when a participant and
+technically verified candidate are available. Their timing does not block internal implementation. Queue names
 are planning labels, not new issue numbers, releases or guaranteed delivery
 dates. This planning change delivers no new runtime or scientific result.
 
 ### Now, next and later
+
+Immediate work is selected in [the current queue](#current-execution-selection).
+This table retains completed increments and conditional follow-ups; completed
+rows are evidence to preserve, not instructions to repeat their implementation.
 
 | Order | Bounded change | Exit criterion and dependency |
 | --- | --- | --- |
@@ -149,14 +187,14 @@ dates. This planning change delivers no new runtime or scientific result.
 | Implemented public increment — Test families and platform coverage | [PR 11](https://github.com/OpenT1D/lab/pull/11) adds named local style/tests/docs stages, one broad Linux root job, three-host public smokes, four Linux Chromium flows and one required public gate. | The final PR-head families passed; integrated-main acceptance is recorded below. Both MMTT tasks, local HTTP, filesystem/process behavior and byte-exact reconstruction have bounded actual-host coverage. The gate rejects failed, cancelled, skipped or missing public families. Broader root, browser and release coverage remains separate. |
 | Implemented public increment — Dependency updates and PR review | Monthly root uv/Action updates and read-only high/critical dependency-delta review, with complete snapshot data bound to the official scan. | The [hosted probes and update-service observations](docs/publication-security.md#prepared-dependency-updates-and-pr-review) record root uv-lock coverage, dependency-driven aggregate failure, all-green safe results and successful corrected uv/Actions discovery. Generated update PRs require separate review. Historical native locks and existing alerts remain separate. |
 | Implemented publication; open first-use acceptance | The reviewed-main workflow publishes [the documentation site](https://opent1d.github.io/lab/), with actual navigation, search, assets and byte-exact notebook checks. Improve first-use routes with an actual intended user when available. | A warning-free build and live-site acceptance are recorded for PR 13. Intended-user preparation, freezing, interpretation and reopening still need observed assistance, mistakes and failed attempts. User availability does not block internal fixes or packaging. |
-| Documentation regression checks | Run the required documentation family in Chromium, Firefox and WebKit to inspect every built page under `/lab/`, assets/downloads, browser errors and search/theme behavior. | Each engine's [browser suite](docs/documentation-publication.md#browser-regression-checks) must accept the healthy build and reject injected asset/JavaScript faults; all three matrix members must pass the public gate. Live deployment acceptance remains separate. |
+| Implemented public increment — Documentation regression checks | Maintain the required documentation family in Chromium, Firefox and WebKit for every built page under `/lab/`, assets/downloads, browser errors and search/theme behavior. | Each engine's [browser suite](docs/documentation-publication.md#browser-regression-checks) must accept the healthy build and reject injected asset/JavaScript faults; all three matrix members must pass the public gate. Live deployment acceptance and results for new revisions remain separate. |
 | Implemented internal candidate — Mac application | The [Apple Silicon MMTT candidate](docs/mac-mmtt-candidate.md) bundles real pinned CPython and a native launcher for two existing synthetic tasks. | Qualify each exact artifact with repeat-build inventories, LaunchServices/browser task chains, report reconstruction, lifecycle/data-preservation checks and unchanged bundled-interpreter numerical references. Keep source/runtime/architecture/rights identities. This remains unsigned internal evidence; minimum-OS, clean-host, arbitrary upgrade and independent-user acceptance are separate. |
 | Implemented internal increments — Installed SDK, native M4 and thin GUI | [PR 30](https://github.com/OpenT1D/lab/pull/30), [PR 32](https://github.com/OpenT1D/lab/pull/32) and [PR 35](https://github.com/OpenT1D/lab/pull/35) supply installed MMTT sensitivity, explicit `m4-study-installed` execution/parity/relocation and a supplied-example GUI with sealed formative preparation. | Their [SDK](docs/research/ot060-installed-route.md), [native](docs/research/ot060-native-m4.md) and [GUI](docs/research/ot065-072-shared-gui.md) records own the exact local evidence. Sampling, general editable studies, changed-reader compatibility, public native bundling and intended-user acceptance are not delivered by those increments. |
 | Implemented internal increment — Shared sampling | [Sampling integration](docs/research/installed-mmtt-sampling.md) adds installed Python/CLI and supplied-example workbench support with sealed development selection and native parent/child reports. | Exact native report parity, complete denominators, incomplete/cancelled evidence, owned cleanup, relocated reconstruction and actual installed Chromium checks have bounded local evidence. Estimator and OT-059 fixtures remain unchanged. That record supplies no editable-study or independent-use acceptance. |
 | Implemented internal increment — Editable studies | The [editable workbench](docs/research/editable-workbench.md) adds own bounded synthetic input, revisioned recoverable concepts, editable assumptions/schedules and derived plans over the same installed SDK. | Preserve exact source bytes and parent links through native validation, immutable freezes, cross-tab conflicts, restart and explicit GUI concept-history copying. Browser/software checks and technical review are distinct from independent use and broader accessibility qualification. |
 | Implemented bounded increment — Integrated laboratory | The [development window](#selected-development-window-first-integrated-laboratory) supplies shared sampling, editable workbench/comparisons, a connected synthetic study and internal candidates with a pinned comparison-reader transition. The [integrated-main smoke](#integrated-main-smoke-and-current-status) verifies MMTT/sampling, M3, failure/retry and relocation on clean merged source. | Preserve each record's source/artifact/host scope. The new descriptor-6 smoke does not requalify native M4 or existing release candidates. Broader package, host, compatibility and intended-user acceptance remain open. |
 | Bounded stretch implemented — M3 reuse | The explicit [M3 SDK/workbench increment](docs/installed-m3.md) migrates the existing frozen synthetic comparison through the same services; its [record](docs/research/installed-m3.md) assesses one GluPredKit mapping without installing it. | Preserve the current causal history, horizon, frozen models, persistence reference and complete failure support. No new training pipeline, human-data intake or general plugin claim follows from this increment. |
-| Selected next — OT-062 native adapter conformance | Extend the [adapter audit](docs/research/ot062-adapter-audit.md) into a versioned direct/wrapped harness for one compatible sampled rate-controller contract, beginning with the LT1 candidate in the [runtime/rights proposal](docs/research/ot062-runtime-rights.md). Follow with a separately reviewed simglucose successor. | Complete exact runtime/security, restricted-use rights and harness/reader review before separately admitted setup. Require its verified setup receipt and host admission before native execution. Retain historical references and all failed cases; verify native parity, reset, timing, causal inputs, units, failures, cleanup and engine-free reading. The audit alone supplies no native admission or two-engine acceptance. |
+| Active — OT-062 native adapter conformance | Continue the [adapter audit](docs/research/ot062-adapter-audit.md), the implemented [LT1 native route](docs/research/ot062-lt1-native-route.md) and its exact evidence/admission boundaries toward the two-engine controller acceptance. Follow with a separately reviewed simglucose successor. | The [current execution selection](#current-execution-selection) defines the result-fixture handoff for bounded OT-063 work. Preserve runtime/security, restricted-use rights, setup and host admission requirements for each new artifact; earlier scripted/passive evidence is not native acceptance. Retain historical references and all failed cases; verify native parity, reset, timing, causal inputs, units, failures, cleanup and engine-free reading. Partial LT1 progress does not close two-engine acceptance. |
 | Conditional follow-up — Mac distribution | Turn the verified probe into a signed/notarized download with a controlled build/release workflow and clean-host/user evidence. | The exact downloaded artifact passes the lifecycle, data-preservation and interpretation checks below. Signing credentials, runtime rights and actual hosts/users are prerequisites for the affected acceptance, not assumed resources. |
 | Next research-data increment | Select the [source-to-study packets](#next-bounded-research-data-increment) on the accepted MMTT/M4 foundation. Begin user/question/source/reuse assessment now; qualify one repeatable intake chain and reconstructed study before selecting personal fitting. | Bounded OT-067/068 with the relevant OT-059/060/061/063/064 services and OT-072 independent-use gate. Synthetic fixtures do not close human-data or user acceptance. Full two-engine conformance is not a prerequisite for this offline route. |
 | Subsequent shared-laboratory work | Extend adapter conformance and a suitable common controller on two engines for control/composition claims; add justified fit/freeze/evaluate, campaign reuse and selective standards bridges for their consuming questions. | The [delivery slices](#delivery-slices-and-integration-order) and [package dependencies](#planned-core-and-product-work-packages) remain binding. The selected MMTT/M4 and data work does not establish two-engine compatibility or close later packages. |
@@ -231,20 +269,19 @@ MMTT/M4/M3 increments are implemented within their recorded scopes. The
 two-engine controller experiment, full fit/freeze/evaluate chain, wider host
 support and independently usable distribution remain open. The prepared
 [formative MMTT session](docs/mmtt-formative-session.md) can run when an intended
-user is available; it remains separate from the next OT-062 implementation.
+user is available; it remains separate from the active OT-062 implementation.
 
 ### Selected development window: first integrated laboratory
 
-**Selected 30 October 2026; bounded implementations and integrated smoke recorded
-by 1 November 2026.** The window built on the
-installed SDK, native M4 successor and thin GUI merged through PR 35. Use the
-available development window to extend those bounded working routes through
-one local laboratory. Aim for a researcher to create a project, execute an analysis,
-derive a changed plan, compare outcomes, follow a synthetic observation chain
-and reopen the work after moving the project or replacing the application.
-AI-assisted development can advance these implementation steps while intended
-users are unavailable; it does not replace their later observations or supply
-a measured delivery-speed claim.
+**Selected 30 October 2026; bounded implementation status reconciled 13 November
+2026.** This section retains the selection, integration order and acceptance
+criteria of the first installed laboratory window, built on the SDK, native M4
+successor and thin GUI merged through PR 35. Its bounded implemented increments and separately recorded [integrated-main smoke](#integrated-main-smoke-and-current-status)
+let a researcher create a project, execute an analysis, derive a changed plan,
+compare outcomes, follow a synthetic observation chain and reopen preserved work.
+The [current execution selection](#current-execution-selection) owns new work.
+Recorded technical implementation does not replace intended-user observations
+or supply a measured delivery-speed claim.
 
 #### Starting point and selection rationale
 
@@ -271,18 +308,23 @@ bounded [internal MMTT candidate](docs/internal-mmtt-candidate.md) adds a pinned
 comparison-reader transition from the merged PR-43 source, preserving exact
 native identity and original evidence. The [integrated candidate](docs/internal-integrated-candidate.md)
 now adds an explicit native-capable artifact and exact-artifact M4/connected
-qualification procedure with unchanged scientific/service readers. Broader native
+qualification with unchanged scientific/service readers. The retained local
+receipt for clean source `94805ed12bc972acd3707313ad0a718b5753cf14` records twelve
+completed qualification phases, complete embedded-payload equality and byte parity
+for 274 scientific files. The [M3 record](docs/research/installed-m3.md)
+preserves that candidate's separate source/wheel identity. This is exact-artifact
+Apple Silicon macOS evidence; later sources and OT-062 artifacts need their own
+qualification. Broader native
 reader transitions remain open. Services allow one unfinished execution per project
 and one active SDK action per GUI workspace, using POSIX ownership/leases.
 Their qualified host remains local Apple Silicon macOS. Existing public OS
 smokes do not qualify these installed services on other hosts.
 
-Extend shared support to both MMTT tasks because they already reuse the same
-numerical core. Keep installed M4 on those services as the unlike scientific
-boundary: forward simulation with an observer versus retrospective inverse
-analysis. Add comparisons and a connected study so the integration produces
-usable research capabilities. M3 now supplies the next unlike task through its
-bounded installed increment. Measure new adapter code, core/GUI edits, preparation and
+Both MMTT tasks now share the numerical core and installed project services.
+Installed M4 exercises the unlike scientific boundary of forward simulation with
+an observer versus retrospective inverse analysis. Comparisons, the connected
+study and the bounded M3 migration are also implemented. Measure new adapter
+code, core/GUI edits, preparation and
 verification effort for each migration; route counts or green checks alone
 cannot establish a product benefit.
 
@@ -298,10 +340,11 @@ OpenT1D's usefulness. Keep the existing
 
 #### Ordered implementation and acceptance
 
-The following steps select bounded increments of existing OT packages, not new
-package IDs. Each has a complete artifact and a counterexample that could expose
-an incomplete implementation. Begin on the evidenced Apple Silicon macOS host;
-name any additional host only after its own relevant checks.
+The following steps retain the selected bounded increments of existing OT
+packages, not new package IDs. Their records distinguish implemented scope from
+remaining acceptance. Each has an artifact and a counterexample that could expose
+an incomplete implementation. Recorded native qualification is on Apple Silicon
+macOS; name any additional host only after its own relevant checks.
 
 | Step and packages | Selected artifact | Acceptance and dependency |
 | --- | --- | --- |
@@ -310,11 +353,11 @@ name any additional host only after its own relevant checks.
 | 3 — Extend the project workbench; OT-065 and bounded OT-072 preparation | Implemented bounded editable workbench: own synthetic MMTT/sampling inputs, selected M4 configurations, recoverable concept revisions, editable assumptions and derived immutable plans; [evidence and limits](docs/research/editable-workbench.md). | Preserve shared GUI/CLI ledger identities, runtime selection, cancellation/shutdown, verified downloads and relocation. Reopening retains concepts/history; changed inputs invalidate validation/readiness and cannot overwrite a freeze. Python/CLI and GUI consume the same scientific plan and native reports. Bounded browser checks cover keyboard/focus, narrow/200-percent text, accessible labels, text status and correction paths; actual screen-reader/independent-user qualification remains open. |
 | 4 — Variants and comparisons; bounded OT-063/064/065 | Implemented bounded [frozen workbench comparisons](docs/research/workbench-comparisons.md): within-plan variants and compatible derived plans, resolved changed fields, task-owned MMTT/sampling and supported M4 source/load tables, and shared SDK/CLI/GUI reconstruction. | Freeze the complete roster before any selected plan executes. Fixed first attempts retain failed, incomplete, unfinished and unattempted cases; later retries cannot replace them. Saved ledger tips reproduce exact reports after later execution or relocation. Authoritative native readers verify preserved evidence without rerunning supplied models. Incompatible endpoint/input/allocation/support/unit/source/reader bindings refuse. Sequential attempts preserve the existing lease and single-unfinished-attempt boundary. The record distinguishes actual/native, controlled, local/hosted and independent-use evidence; broader accessibility, empirical equivalence and reader transitions remain separate. |
 | 5 — Connected synthetic study; bounded OT-063/067 | Implemented versioned known secretion → forward C-peptide → inverse/sampling study through the SDK, CLI and workbench, reusing existing native tasks and readers. [Protocol and evidence](docs/research/connected-synthetic-study.md). | Prospectively freeze the two-source/two-scenario bridge, unchanged 0–120-minute prefix, units, four assumptions, schedules and development allocation. Preserve native 0–240 evidence, independently integrate known input and retain all 72 endpoint rows. Separate matched/mismatch point acceptance from native interval completeness; retain failed and missing cases. Materialization resumes from a sealed intent with fixed child/comparison identities. Exact prefixes reconstruct after retries and relocation without native execution. Current-artifact native admission and qualification remain explicit; failed forward evidence blocks the downstream chain. Step 6 retains the separately implemented candidate and its pinned comparison-reader transition. |
-| 6 — Internal candidate and handoff; bounded OT-064/072/073 | Retain the [two-MMTT candidate](docs/internal-mmtt-candidate.md) and pinned changed-comparison-reader transition. Add the explicit [integrated M4/connected candidate](docs/internal-integrated-candidate.md), strict descriptor-5 roster, unchanged scientific payload/readers and candidate-bound unanswered preparation. | Qualify exact clean Apple Silicon macOS CPython 3.12 artifacts, including reviewed dependency roles and fresh application/interpreter-bound attachments. Compare a clean merged PR-44 developer predecessor's direct four-slot native execution with the installed candidate across the predeclared scientific byte roster and all inherited numerical/reference gates. Prospectively freeze complete/missing connected studies and M4 comparisons, preserving all 72 rows. Exercise actual installed HTTP run/materialization/download, failure/blocked descendants, numerical cancellation/owned cleanup, relaunch and exact prefix/relocation reading with old applications, projects, inputs and private runtimes physically absent. Preserve the PR-43 MMTT transition, reject unknown native readers and resealed alterations, retain original inventories. Separate root/browser/actual-host/hosted evidence in the PR and qualification receipt. This selects unchanged native readers, not native reader migration. Signing, notarisation, clean-host, native redistribution and intended-user acceptance remain open. |
+| 6 — Internal candidate and handoff; bounded OT-064/072/073 | Implemented bounded [two-MMTT candidate](docs/internal-mmtt-candidate.md) and pinned changed-comparison-reader transition, followed by the qualified [integrated M4/connected candidate](docs/internal-integrated-candidate.md), strict descriptor-5 roster, unchanged scientific payload/readers and candidate-bound unanswered preparation. | Retain the exact clean Apple Silicon macOS CPython 3.12 qualification, including reviewed dependency roles and fresh application/interpreter-bound attachments. Compare a clean merged PR-44 developer predecessor's direct four-slot native execution with each new candidate across the predeclared scientific byte roster and applicable inherited numerical/reference gates. Prospectively freeze complete/missing connected studies and M4 comparisons, preserving all 72 rows. Retain actual installed HTTP run/materialization/download, failure/blocked descendants, numerical cancellation/owned cleanup, relaunch and exact prefix/relocation evidence with old applications, projects, inputs and private runtimes physically absent. Preserve the PR-43 MMTT transition, reject unknown native readers and resealed alterations, retain original inventories. Separate root/browser/actual-host/hosted evidence in the PR and qualification receipt. Recorded acceptance uses unchanged native readers, not native reader migration. Signing, notarisation, clean-host, native redistribution and intended-user acceptance remain open. |
 
 The bounded implementations in steps 1–6 and the M3 stretch are in place;
-their linked records retain the exact acceptance scope. OT-062 is the next
-selected development increment. A missing current runtime attachment or
+their linked records retain the exact acceptance scope. OT-062 is the active
+development increment; the current queue defines its bounded parallel work. A missing current runtime attachment or
 distribution prerequisite leaves that specific acceptance open;
 continue the admitted MMTT work, comparison UI, compatibility tests and session
 preparation. Do not call the smaller candidate full native integration. Keep
@@ -350,12 +393,11 @@ implementation; this window does not itself change the estimator or tolerances.
 
 #### Working cadence, review and first-use evidence
 
-Use the beginning of the window to confirm the merged installed/native/GUI
-baseline and implement sampling, the middle for editable studies and comparisons, and the
-remaining time for the connected study, candidate upgrade and integrated checks.
-Advance when a step's acceptance passes; these are work horizons rather than
-promised daily deliveries. Reassess the next bounded artifact from actual
-progress, retaining unfinished gates instead of weakening them to meet a date.
+The original window sequenced the installed/native/GUI baseline and sampling,
+then editable studies and comparisons, then the connected study and candidate
+qualification. Those horizons are retained as implementation context. Select
+new work from the current queue and advance when its acceptance passes,
+retaining unfinished gates instead of weakening them to meet a date.
 
 Start with at most two concurrent implementation changes in isolated worktrees:
 one owner for core/runtime/reader contracts and one for the workbench against
@@ -394,7 +436,7 @@ The next bounded source-to-study selection is defined in the
 [research-data increment](#next-bounded-research-data-increment). Its need,
 source and reuse assessment can proceed alongside the native-control stream.
 
-**Selected next: OT-062.** Extend the adapter conformance kit and test a suitable
+**Active: OT-062.** Extend the adapter conformance kit and test a suitable
 controller contract on LT1 and simglucose, then a second controller/question.
 The [first LT1 preparation packet](docs/research/ot062-lt1-preparation.md) adds
 a sampled kernel, invented ledger-reader controls and passively verified candidate
@@ -607,11 +649,12 @@ storage or runtime limits, or supply agent API credits.
 
 ### Mac feasibility and distribution boundary
 
-Prefer a real bundled Python interpreter because current workers execute
-`sys.executable -m ...`. Assess the actual ARM64 runtime artifact and its links,
-licenses and minimum OS before selecting it. The current packaged-runtime
-contract is Windows-specific; version the required descriptor/capability changes
-with a short decision record and keep Windows-v1 readers supported. A legitimate
+The [implemented unsigned candidate](docs/mac-mmtt-candidate.md) supplies a real
+bundled Python interpreter and a versioned Mac capability contract; workers
+execute `sys.executable -m ...`. Its guide owns the exact runtime/artifact and
+recorded checks. Any successor must assess its ARM64 runtime links, licenses and
+minimum OS, version descriptor/capability changes with a short decision record
+when needed, and keep supported Windows-v1 readers intact. A legitimate
 stdlib-only runtime may have an empty third-party distribution inventory.
 Do not weaken general archive link checks to accommodate a runtime layout.
 
@@ -641,7 +684,7 @@ development selection, 30 October 2026 —**
 OT-059 increment 1 now has an internal
 [contract/extraction packet](docs/shared-core-contracts.md), followed by the
 bounded [increment 2 services](docs/shared-project-services.md). The full
-OT-060–074 packages and later increments remain planned; the
+OT-060–074 packages retain open full acceptance; the
 [selected development window](#selected-development-window-first-integrated-laboratory)
 extends their merged installed SDK/native M4/GUI increments. Initial packet and
 service records retain their original scope; the bounded installed increments
@@ -705,7 +748,7 @@ Slices describe incremental integration, not four large batches. Complete and
 verify a small route before adding another capability. The selected development
 window has implemented bounded MMTT/M4 work from slice 2 on the slice-0 foundation,
 with the M3 stretch and their recorded integration evidence. The next selected
-implementation in the native-control stream is OT-062 toward slice-1
+implementation in the native-control stream is the active OT-062 work toward slice-1
 acceptance. The [research-data increment](#next-bounded-research-data-increment)
 selects bounded source-to-study work alongside it; the full slice-2
 fit/freeze/evaluate chain and slice-3 independent use remain open. Slice numbers
@@ -785,14 +828,18 @@ criteria of the selected routes.
 
 ### Parallel streams and handoffs
 
-| Stream | Can start now | Shared handoff and dependency |
+The [current execution selection](#current-execution-selection) chooses which
+bounded work is active. This map describes handoffs and conditional follow-ups;
+it does not allocate every stream or restart completed extraction and GUI work.
+
+| Stream | Bounded next work | Shared handoff and dependency |
 | --- | --- | --- |
-| Scientific contracts and study design | Inventory meanings, comparison scopes, evidence labels and golden fixtures (OT-059); draft scenarios and estimands (OT-063) | Publish a small versioned fixture set with positive and refused cases before adapters, GUI or SDK claim conformance. Revise it from actual integrations rather than designing every future domain. |
-| Core, SDK and native adapters | Inventory/extraction design (OT-060); separate simglucose and LT1 adapter audits (OT-062) | Implement against OT-059 and the OT-061 lifecycle. Native adapter work can proceed in parallel after the common boundary is frozen; integrated parity is checked per engine before comparison. |
-| Projects, results and data | Storage/readers/private-export design (OT-064); owned-data lineage (OT-068) | Use the same frozen identities and failure semantics; a relocated archive must reconstruct before a route is declared migrated. Data intake has source-specific authorization gates. |
-| GUI and researcher experience | Prototype task/project flow and accessible forms against fixtures (OT-065); prepare formative/comparative protocol (OT-072) | Render the shared plan and native reports; integrate only through the same core services. New controller adapters must not require new core/GUI dispatch branches. |
-| Runtime, packaging and operations | OT-061 process audit and clean-host spikes; review the existing OT-058 installer candidate and remaining gates; OT-073 rights/build inventory | Reuse the recorded native-Windows decision and bounded host evidence; verify new source/artifact identities separately. Package only declared, distributable runtimes. Packaging preparation can start before the SDK is complete. |
-| Biological and forecast applications | Select representative existing M4/MMTT and M3 chains (OT-067/068), preserve their current numerical evidence | Consume shared projects/results rather than building another isolated workflow framework. Shared science conventions depend on OT-059/063; empirical claims remain independently gated. |
+| Scientific contracts and study design | Freeze the selected OT-062 plan/result and refusal fixtures; connect existing within-engine analysis under OT-063 after that handoff | Reuse the OT-059 packet and native M1/M2 analysis. Fix timing, signal and action meanings before translations; fixture reconstruction alone does not establish native compatibility. |
+| Core, SDK and native adapters | Complete the active simglucose/LT1 OT-062 increment on the existing SDK and lifecycle | The OT-062 owner controls the shared adapter contract. Separate native adapter work can proceed after its common boundary is frozen; check parity per engine before comparison. Existing SDK extraction is not a new prerequisite project. |
+| Projects, results and data | Select the bounded diagnostic export as the independent software alternative; define source-specific lineage only after the OT-068 source/method decision | Keep the first diagnostic script outside shared store/runtime/reader interfaces. Permissioned handoff, private-data semantics and wider reader changes retain separate scopes and owners. |
+| GUI and researcher experience | Execute the existing OT-072 exercise when participants are available; specify any new control-workbench scope against the OT-062 fixture | Render the shared plan and native reports through the same services. New controllers within an admitted family must not require new core/GUI dispatch branches. Broader accessibility and independent use retain their own evidence. |
+| Runtime, packaging and operations | Select a named missing host/artifact check from the OT-058/061/073 records when the necessary host/runtime is available | Reuse the recorded native-Windows decision and bounded host evidence; verify new source/artifact identities separately. Package only declared, distributable runtimes. Generic portability refactoring is not selected alongside OT-062. |
+| Biological and forecast applications | Resolve the concrete OT-067/068 researcher/source/method decision using OT-053; preserve the implemented M4/MMTT and M3 integrations | Consume existing shared projects/results. A converter follows an identified format; human-data access and empirical claims retain separate gates. Optional forecast or calibration additions need a named consuming question. |
 | Maintenance and contributors | Assign ownership when available, write compatibility/review rules and adapter documentation (OT-073/074) | Templates and support can start early; external integration acceptance requires an actual contributor and recorded assistance. No contributor, reviewer or partner is presumed. |
 
 Do not allocate every package simultaneously. Select an unblocked bounded
