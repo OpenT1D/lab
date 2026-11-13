@@ -24,12 +24,13 @@ settings and current-revision results. Local checks are not hosted CI results.
 
 - Write public-facing guides and research reports in English; preserve historical findings, source references and link targets when translating.
 - Keep each guide canonical and update `docs/_toc.yml` for new public documentation.
-- Use `uv sync --locked` and `uv run --locked python scripts/check.py` for repository checks.
+- Use `uv sync --locked` and the [development guide's verification policy](docs/development.md#check-a-change). For documentation-only changes, run local style, internal-link and strict documentation checks; the full suite runs through required CI. Other changes retain their affected checks and final full repository check.
 - Root Python is tooling, orchestration and the standard-library MMTT tasks, not
   a simulation package. Native work uses its separately locked task environment.
 - Use isolated worktrees for concurrent writing, at most two implementation
   changes initially, one owner per shared interface and a separate diff review.
-  Assign the final full repository check to one owner.
+  Assign final verification to one owner; do not duplicate the full suite locally
+  for documentation-only changes already covered by required CI.
 - Add numerical checks when model behavior exists and the change warrants them.
 - Preserve frozen baselines and tolerances; investigate mismatches before
   proposing a scientifically justified change.

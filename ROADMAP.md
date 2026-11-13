@@ -405,8 +405,10 @@ those fixtures. Assign owners when work begins, without presuming another
 maintainer. Use separate technical diff review and one final full-check owner,
 following the [development handoff](docs/development.md#task-and-review-handoff).
 Record exact revisions, dirty state, targeted outcomes, host/runtime evidence
-and gaps; run `uv sync --locked` and `uv run --locked python scripts/check.py`
-on the final integrated tree. Installed, native, browser and application checks
+and gaps; apply the [verification policy](docs/development.md#check-a-change)
+on the final integrated tree. Documentation-only changes use local style/link/docs
+checks and the full suite in required CI; other changes retain their final full
+local check. Installed, native, browser and application checks
 must address their actual boundaries. Root CI alone cannot qualify them.
 
 Prepare the first-use task and interpretation criteria before observations:
@@ -597,10 +599,11 @@ agent automation or release workflow:
   and a separate technical review of the diff and counterexamples. Start with at
   most two concurrent implementation changes; revise that limit from actual
   maintainer capacity. Agent review is not independent scientific validation.
-- Select targeted checks during development, then run
-  `uv sync --locked` and `uv run --locked python scripts/check.py` on the final
-  revision. Assign the full check to one owner instead of duplicating it across
-  agents. Native changes still need their task-specific numerical checks.
+- Select checks using the [verification policy](docs/development.md#check-a-change).
+  Documentation-only changes use local style/link/docs checks and the full suite
+  in required CI. For other changes, assign the final full local check to one
+  owner instead of duplicating it across agents. Native changes still need their
+  task-specific numerical checks.
 - Evaluate on a small set of real changes: maintainer review time, interventions,
   correction rounds, missed regressions and unnecessary edits. Report observed
   results before claiming productivity gains. Preserve tolerances and source

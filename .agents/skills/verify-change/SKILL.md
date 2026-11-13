@@ -46,7 +46,23 @@ do not remove or bypass that gate to complete verification. Report unavailable
 or excluded checks and the resulting evidence gap. A root-suite pass or skipped
 native job supplies no native numerical result.
 
-Assign the final full repository check to one owner:
+For [documentation-only changes](../../../docs/development.md#documentation-only-changes),
+run local style, internal-link and strict documentation checks:
+
+```sh
+uv sync --locked
+uv run --locked python scripts/check.py --stage style
+uv run --locked python scripts/check.py --stage docs
+```
+
+The strict documentation build checks published internal links and anchors;
+check links in unpublished instruction/skill files separately. Use the guide's
+external-link procedure where relevant. The complete required CI on the final
+PR revision supplies the full-suite result before merge. Do not also run the
+full suite locally solely because the documentation change is ready for handoff.
+Report pending or failed CI honestly; local documentation checks do not replace it.
+
+For other changes, assign the final full repository check to one owner:
 
 ```sh
 uv sync --locked
@@ -54,8 +70,9 @@ uv run --locked python scripts/check.py
 ```
 
 Use the final integrated revision. A later relevant edit needs the affected
-checks again and a new full-check receipt for the final revision; do not report
-an earlier tree as checked. In concurrent work, use isolated worktrees for
+local checks again and current CI evidence; for other changes, also refresh the
+required full-check receipt. Do not report an earlier tree as checked.
+In concurrent work, use isolated worktrees for
 writers and a separate technical reviewer for the diff and counterexamples.
 Keep one owner for shared interfaces; do not duplicate the full suite across
 agents. Agent review does not satisfy independent human reproduction.
