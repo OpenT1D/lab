@@ -7,9 +7,11 @@ platform readbacks. A local build is not a deployment receipt.
 
 ## Build and preview
 
-Run `uv sync --locked` and `uv run --locked python scripts/check.py` for the
-complete repository check. For a documentation-only iteration, use
-`uv run --locked python scripts/check.py --stage docs`. The build replaces
+For documentation-only changes, follow the [verification policy](development.md#documentation-only-changes):
+run `uv sync --locked`, then `uv run --locked python scripts/check.py --stage style`
+and `uv run --locked python scripts/check.py --stage docs` locally. The full suite
+runs through required CI before merge. Changes to build/publication behavior
+retain their affected checks and full local verification. The strict build replaces
 `_build/html`, treats warnings as errors and retains the configured project
 subpath handling, search, assets and source downloads.
 

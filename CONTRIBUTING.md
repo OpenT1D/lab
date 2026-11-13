@@ -69,7 +69,7 @@ Small corrections can go straight to a pull request. For a new module, dependenc
 1. Fork the repository, or create a branch if you have write access.
 2. Clone your fork and install the tooling using [the development guide](docs/development.md).
 3. Make a focused change with an explanation that another contributor can assess.
-4. Run `uv run --locked python scripts/check.py` from the repository root.
+4. Follow the [verification policy](docs/development.md#check-a-change): documentation-only changes use local style, internal-link and strict documentation checks, with the full suite in required CI. Other changes retain their affected checks and final full repository check.
 5. Open a pull request describing the problem, change, verification and remaining limitations.
 
 The [public source installation and CI policy](docs/publication-security.md)

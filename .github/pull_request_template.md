@@ -22,8 +22,11 @@ links and navigation checked.
 ## Evidence
 
 List the revision/dirty state, commands actually run, outcomes, skips and retained
-output locations. Identify the owner/result of the final full repository check;
-explain missing checks. Distinguish local results from hosted CI. For models or
+output locations. For documentation-only changes, list local style/link/docs
+results and the required CI run/status for the final PR revision; do not duplicate
+the full suite locally. For other changes, identify the owner/result of the
+final full repository check. Explain missing checks and distinguish local
+results from hosted CI. For models or
 experiments, link the reference, protocol and numerical evidence and state the
 scope of scientific review. Do not refreeze outputs or loosen tolerances merely
 to pass a check.

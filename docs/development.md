@@ -97,11 +97,51 @@ For concurrent writing, use isolated worktrees with explicit file boundaries. St
 
 The repository skills at `.agents/skills/scientific-numerical-change/SKILL.md` and `.agents/skills/verify-change/SKILL.md` provide focused workflows pointing back to the canonical guides. Use the scientific workflow when a change affects numerical behavior or interpretation, and verification for selecting and reporting checks. The [AI-development trial record](research/ai-development-trial.md) records observed review cases and limitations; do not claim productivity gains from an unmeasured workflow.
 
-Hand the reviewer a concise evidence packet: revision and dirty state, changed behavior, commands actually run with outcomes and skips, retained output locations, unresolved checks and risks, and any baseline/tolerance proposal. The reviewer records the revision reviewed, counterexamples attempted, findings and their disposition. Identify one integration owner to run `uv sync --locked` and `uv run --locked python scripts/check.py` on the final revision; other agents run targeted checks during development. Native changes also need the appropriate task-specific numerical checks. Report software checks, numerical evidence and remaining external acceptance separately.
+Hand the reviewer a concise evidence packet: revision and dirty state, changed behavior, commands actually run with outcomes and skips, retained output locations, unresolved checks and risks, and any baseline/tolerance proposal. The reviewer records the revision reviewed, counterexamples attempted, findings and their disposition. Identify one integration owner for final verification under the policy below; other agents run targeted checks during development. Documentation-only changes use local style/link/docs checks and the full suite in required CI. Other changes retain the final local full check; native changes also need the appropriate task-specific numerical checks. Report software checks, numerical evidence and remaining external acceptance separately.
 
 ## Check a change
 
-Run the repository entry point defined for local checks and the CI workflow:
+Choose verification from the changed boundary, using the repository entry point
+shared by local checks and CI.
+
+### Documentation-only changes
+
+This applies to prose, non-executable repository guidance (including `AGENTS.md`
+and `SKILL.md`), documentation navigation and non-executable documentation assets.
+Changes to executable code, notebook code cells or examples executed by tools/tests,
+build/test/publication code or configuration, dependencies, scientific contracts,
+fixtures, frozen reference values or tolerances use the affected-behavior workflow even when their files
+live under `docs/`. Declarative documentation navigation is covered by the
+documentation-only route.
+
+Run locally:
+
+```sh
+uv sync --locked
+uv run --locked python scripts/check.py --stage style
+uv run --locked python scripts/check.py --stage docs
+```
+
+The style stage checks formatting, metadata and navigation. The clean strict
+documentation build checks internal document links and anchors; unresolved
+references fail the build. Check relative links in unpublished guidance, such
+as `AGENTS.md`, `.agents/` and `.github/` Markdown, separately because those
+files are not included in the Sphinx site. Check changed external links against
+their source as appropriate; the [external-link procedure](#individual-checks)
+remains available and network failures must not become unrelated merge blockers.
+
+The full suite runs through the existing required CI on the final PR revision.
+All required families, including root tests and browser/platform checks, must
+succeed before merge. This exception changes local verification only: do not
+skip CI families, change workflow path filters or bypass `Repository checks`.
+Do not start a second full local run merely to duplicate that CI result. At
+handoff, report local check results and the exact required CI run/status; if CI
+has not run or is still pending, say so rather than claim full verification.
+
+### Other changes
+
+Run affected tests during development and assign the final full local check on
+the integrated revision to one owner:
 
 ```sh
 uv run --locked python scripts/check.py
@@ -118,8 +158,9 @@ uv run --locked python scripts/public_smoke.py --output results/ci/local-smoke.j
 ```
 
 Style includes metadata and navigation checks; tests runs root unittest discovery;
-docs performs the clean strict Sphinx build. These focused commands do not replace
-the integration owner's final full check. The public smoke receipt needs a fresh
+docs performs the clean strict Sphinx build. For changes beyond documentation,
+these focused commands do not replace the integration owner's final full local
+check. The public smoke receipt needs a fresh
 output path. It runs explicit synthetic CLI/HTTP, file and process cases on the
 actual host, refuses unexpected skips/missing cases and installs no native runtime.
 Windows selects its control-pipe and Job tests; Linux/macOS select POSIX lifecycle
@@ -227,13 +268,13 @@ do not establish hosted passes.
 ## Preview the documentation
 
 ```sh
-uv run --locked python scripts/check.py
+uv run --locked python scripts/check.py --stage docs
 uv run --locked python -m http.server 8000 --bind 127.0.0.1 --directory _build/html
 ```
 
 Open `http://127.0.0.1:8000/docs/index.html`. Stop the server with Ctrl+C. You can open `_build/html/docs/index.html` directly for reading; use the local server for search and browser-loaded assets.
 
-Rerun `scripts/check.py` after changes to refresh the preview. It replaces the generated HTML directory, including old pages and downloads. A direct Sphinx rebuild does not remove all obsolete output, even with `-E -a`; use the repository check before sharing or publishing the site.
+Rerun `scripts/check.py --stage docs` after changes to refresh the preview. It replaces the generated HTML directory, including old pages and downloads. A direct Sphinx rebuild does not remove all obsolete output, even with `-E -a`; use this clean documentation stage before sharing or publishing the site. Before merge, also complete the applicable local checks and required CI above.
 
 Markdown files are the canonical content on GitHub and in the generated site. Sphinx, MyST and the external table of contents build root documents and `docs/` together. List each new public guide explicitly in `docs/_toc.yml`; the repository check catches missing entries. Do not create a second copy of the README or roadmap.
 
