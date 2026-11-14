@@ -99,6 +99,7 @@ subtrees:
       - file: docs/research/ot062-lt1-native-route
       - file: docs/shared-project-services
       - file: docs/research/ot061-064-minimal-services
+      - file: docs/research/ot064-073-diagnostic-ai-control
       - file: docs/installed-sdk
       - file: docs/internal-mmtt-candidate
       - file: docs/mmtt-formative-session
