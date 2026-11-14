@@ -115,6 +115,10 @@ handoff and tests software accounting; no actual recipient session, independent
 usability result or scientific validation is recorded by this preparation.
 The exporter, store schema and shared interfaces are unchanged.
 
+The [non-blind AI control](research/ot064-073-diagnostic-ai-control.md) records
+fifteen accounting matches on the prepared JSON packet. The reviewer had prior
+implementation/reference knowledge; the human recipient exercise remains open.
+
 ### Prepare the controlled cases
 
 From the checkout with the locked root environment, choose a fresh scratch
@@ -223,7 +227,9 @@ Run the complete diagnostic family with:
 uv run --locked python -m unittest tests.test_project_diagnostics -v
 ```
 
-An actual recipient exercise remains **unrun**. When a recipient is available,
+The actual human recipient exercise remains **open and unrun**. No first human
+interpretation answers, case-assistance observations or participant task times
+have been recorded. When a recipient is available,
 record their first answers, assistance, errors and actual elapsed time before
 revealing the key. Keep unanswered or blocked cases and corrections in that
 record. Fixture generation and an internal technical review cannot stand in
