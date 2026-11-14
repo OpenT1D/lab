@@ -15,10 +15,189 @@ from unittest.mock import patch
 from experiments.catalogue.storage import digest, encoded, seal
 from experiments.m3.comparison import fixtures as m3_fixtures
 from experiments.m3.researcher.fixtures import write_predictor
+from experiments.mmtt_sampling.run import run as run_sampling
 from experiments.observation_analysis.run import run as run_mmtt
 from experiments.shared_contracts.selected import FIXTURES
-from experiments.shared_services import execution, routes, store
+from experiments.shared_services import execution, installed, routes, store
 from scripts import export_project_diagnostics as diagnostics
+
+# Case names disclose no outcome to a recipient. The facilitator key is in the
+# canonical service guide; these are controlled software fixtures, not sessions.
+SUPPORT_CASES = {"A": (None, "empty")}
+for _task, _letters in (("mmtt-sensitivity", "BCDEFGH"), ("mmtt-sampling", "IJKLMNO")):
+    SUPPORT_CASES.update(
+        zip(
+            _letters,
+            (
+                (_task, state)
+                for state in (
+                    "complete",
+                    "incomplete",
+                    "failed",
+                    "interrupted",
+                    "unfinished",
+                    "unattempted",
+                    "retry",
+                )
+            ),
+            strict=True,
+        )
+    )
+
+
+def support_reference(task, state):
+    """Literal accounting oracle, independent of the exporter and project data."""
+    complete = ("completed", "completed", "complete")
+    rows = {
+        "empty": (),
+        "complete": (complete,),
+        "incomplete": (("completed", "completed", "incomplete"),),
+        "failed": (("failed", "failed", "incomplete"),),
+        "interrupted": (("interrupted", "interrupted", "incomplete"),),
+        "unfinished": (("unfinished", "unknown", "unknown"),),
+        "unattempted": (),
+        "retry": (complete, ("failed", "failed", "incomplete")),
+    }[state]
+    attempts = {"empty": 0, "unattempted": 0, "retry": 2}.get(state, 1)
+    return {
+        "schema": "opent1d.project-diagnostics/1",
+        "exporter": "opent1d.export-project-diagnostics/1",
+        "project_schema": "opent1d.project-store/1",
+        "plans": 0 if state == "empty" else 1,
+        "attempts": attempts,
+        "tasks": []
+        if state == "empty"
+        else [
+            {
+                "task": task,
+                "plans": 1,
+                "plans_without_attempts": int(state == "unattempted"),
+                "attempts": attempts,
+                "outcomes": [
+                    {
+                        "process_status": process,
+                        "execution_status": status,
+                        "completeness": completeness,
+                        "count": 1,
+                    }
+                    for process, status, completeness in rows
+                ],
+            }
+        ],
+    }
+
+
+def prepare_support_handoff(output):
+    """Build only fresh stopped synthetic fixtures and return the handoff root.
+
+    Preparation runs trusted MMTT arithmetic with controlled process receipts.
+    Copying these owned fixtures exercises diagnostic relocation, including an
+    unfinished ledger. It does not extend Store.relocate or move a user's project.
+    Only recipient/*.json is handed to a recipient; no session is performed here.
+    """
+    store.require(os.name == "posix", "Support fixtures require the existing POSIX store")
+    output = store.safe_path(output, fresh=True)
+    output.mkdir()
+    sender, recipient = output / "sender", output / "recipient"
+    sender.mkdir()
+    recipient.mkdir()
+    for name in ("inputs", "originals", "relocated", "before"):
+        (sender / name).mkdir()
+    inputs = {}
+    for task, cases in (
+        ("mmtt-sensitivity", ("complete", "censored")),
+        ("mmtt-sampling", ("information-loss", "incomplete")),
+    ):
+        for case in cases:
+            inputs[task, case] = installed.example(
+                task, sender / "inputs" / (task + "-" + case), case
+            )["inputs"]
+
+    def inventory(path):
+        return store.inventory(path, store.Budget())[0]
+
+    def export_unchanged(project, report):
+        before = inventory(project)
+        with (
+            patch.object(execution, "execute", side_effect=AssertionError("No execution")),
+            patch.object(execution, "recover", side_effect=AssertionError("No recovery")),
+            patch.object(execution, "reconstruct", side_effect=AssertionError("No reader command")),
+            patch(
+                "experiments.observation_analysis.run.run",
+                side_effect=AssertionError("No analysis during export"),
+            ),
+            patch(
+                "experiments.mmtt_sampling.run.run",
+                side_effect=AssertionError("No sampling during export"),
+            ),
+            patch.object(
+                subprocess, "Popen", side_effect=AssertionError("No command during export")
+            ),
+        ):
+            diagnostics.export(project, report)
+        store.require(inventory(project) == before, "Diagnostic export changed fixture bytes")
+
+    for label, (task, state) in SUPPORT_CASES.items():
+        original = store.create(sender / "originals" / label, "HANDOFF_NAME_OMIT-" + label)
+        if task is not None:
+            case = (
+                ("censored" if state == "incomplete" else "complete")
+                if task == "mmtt-sensitivity"
+                else ("incomplete" if state == "incomplete" else "information-loss")
+            )
+            with store.opened(original, write_access=True) as project:
+                plan = routes.freeze(project, task, inputs[task, case])
+                prior = None
+                stages = ("failed", "complete") if state == "retry" else (state,)
+                for stage in stages:
+                    if stage == "unattempted":
+                        continue
+                    attempt, work = execution.begin(
+                        project,
+                        plan,
+                        retry_of=prior,
+                        application={"fixture": "HANDOFF_HOST_OMIT"},
+                    )
+                    (work / "worker.log").write_text("HANDOFF_LOG_OMIT")
+                    if stage == "unfinished":
+                        if task == "mmtt-sampling":
+                            shutil.rmtree(work)
+                        continue
+                    if stage in {"complete", "incomplete"}:
+                        run = run_mmtt if task == "mmtt-sensitivity" else run_sampling
+                        run(project.plans[plan][1] / "input", work / "native")
+                    execution.finish(
+                        project,
+                        attempt,
+                        work,
+                        {
+                            "status": "completed" if stage in {"complete", "incomplete"} else stage,
+                            "remaining_owned_processes": [],
+                            "error": "HANDOFF_ERROR_OMIT"
+                            if stage in {"failed", "interrupted"}
+                            else None,
+                        },
+                        forensic=stage in {"failed", "interrupted"},
+                    )
+                    prior = attempt
+        # Never bypass relocation policy for real projects: this is a stopped,
+        # newly constructed test fixture, copied under its shared read lease.
+        with store.opened(original):
+            export_unchanged(original, sender / "before" / f"case-{label}.json")
+            moved = sender / "relocated" / label
+            shutil.copytree(original, moved)
+            store.require(inventory(moved) == inventory(original), "Fixture copy differs")
+    shutil.rmtree(sender / "originals")
+    shutil.rmtree(sender / "inputs")
+    # Export after all original project/input paths have actually disappeared.
+    for label in SUPPORT_CASES:
+        report = recipient / f"case-{label}.json"
+        export_unchanged(sender / "relocated" / label, report)
+        store.require(
+            report.read_bytes() == (sender / "before" / report.name).read_bytes(),
+            "Diagnostics changed after relocation",
+        )
+    return output
 
 
 @unittest.skipUnless(os.name == "posix", "Existing project store requires POSIX")
@@ -472,6 +651,70 @@ class ProjectDiagnosticsTests(unittest.TestCase):
             with self.assertRaisesRegex(diagnostics.Refused, "^unsupported_host$"):
                 diagnostics.export(self.project, self.output)
         self.assertFalse(self.output.exists())
+
+
+@unittest.skipUnless(os.name == "posix", "Existing MMTT support fixtures require POSIX")
+class DiagnosticSupportHandoffTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="mmtt-support-OMIT-")
+        cls.addClassCleanup(cls.temporary.cleanup)
+        cls.root = prepare_support_handoff(Path(cls.temporary.name).resolve() / "exercise")
+
+    def test_all_fifteen_reports_match_the_independent_accounting_key(self):
+        for label, (task, state) in SUPPORT_CASES.items():
+            with self.subTest(case=label, task=task, state=state):
+                actual = json.loads((self.root / "recipient" / f"case-{label}.json").read_bytes())
+                self.assertEqual(actual, support_reference(task, state))
+
+    def test_same_json_after_relocation_with_original_inputs_and_projects_absent(self):
+        self.assertFalse((self.root / "sender/inputs").exists())
+        self.assertFalse((self.root / "sender/originals").exists())
+        for label in SUPPORT_CASES:
+            with self.subTest(case=label):
+                name = f"case-{label}.json"
+                self.assertEqual(
+                    (self.root / "recipient" / name).read_bytes(),
+                    (self.root / "sender/before" / name).read_bytes(),
+                )
+                with store.opened(self.root / "sender/relocated" / label) as project:
+                    if label in {"H", "O"}:
+                        self.assertEqual(len(project.plans), 1)
+                        self.assertEqual(len(project.attempts), 2)
+                        self.assertEqual(len(project.finishes), 2)
+                    if label in {"F", "M"}:
+                        target = self.root / ("refused-product-relocation-" + label)
+                        with self.assertRaisesRegex(ValueError, "Recover unfinished"):
+                            project.relocate(target)
+                        self.assertFalse(target.exists())
+
+    def test_recipient_directory_contains_only_json_without_sender_information(self):
+        recipient = self.root / "recipient"
+        self.assertEqual(
+            {path.name for path in recipient.iterdir()},
+            {f"case-{label}.json" for label in SUPPORT_CASES},
+        )
+        for report in recipient.iterdir():
+            for excluded in (
+                "OMIT",
+                str(self.root),
+                "invented-01",
+                "nominal",
+                "provenance",
+                "worker.log",
+                "report.json",
+                "host",
+                "error",
+                "source.py",
+            ):
+                with self.subTest(file=report.name, excluded=excluded):
+                    self.assertNotIn(excluded, report.read_text())
+
+    def test_preparation_refuses_existing_destination_without_changing_packet(self):
+        before = store.inventory(self.root, store.Budget())[0]
+        with self.assertRaisesRegex(ValueError, "fresh"):
+            prepare_support_handoff(self.root)
+        self.assertEqual(store.inventory(self.root, store.Budget())[0], before)
 
 
 if __name__ == "__main__":
