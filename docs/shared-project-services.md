@@ -106,6 +106,129 @@ this adds no Windows support or distribution qualification. There is no fallback
 parser, migration or repair. LT1 review bundles, permissioned handoff and broader
 OT-064/073 distribution work remain separate.
 
+## Synthetic diagnostic support handoff
+
+This prepared OT-064/073 exercise uses the existing version-1 diagnostic JSON
+for `mmtt-sensitivity` and `mmtt-sampling` on the current trusted checkout.
+The first local host is Apple Silicon macOS. It prepares a sender/recipient
+handoff and tests software accounting; no actual recipient session, independent
+usability result or scientific validation is recorded by this preparation.
+The exporter, store schema and shared interfaces are unchanged.
+
+### Prepare the controlled cases
+
+From the checkout with the locked root environment, choose a fresh scratch
+directory outside projects and the checkout, with an existing parent:
+
+```sh
+uv run --locked python - <<'PY'
+from pathlib import Path
+from tests.test_project_diagnostics import prepare_support_handoff
+
+root = prepare_support_handoff(
+    Path("/private/tmp/mmtt-diagnostic-support").resolve()
+)
+print(root / "recipient")
+PY
+```
+
+This is a developer test-fixture recipe, not an installed SDK command or a
+general project mover. It creates only new invented fixtures. Preparation runs
+the unchanged standard-library MMTT analyses and uses controlled coordinator
+receipts for complete, incomplete, failed and interrupted cases. Those receipts
+do not demonstrate actual process interruption. No physiological runtime is
+installed. The unclosed starts are constructed with no running worker.
+
+The helper exports each fixture, copies it under a shared read lease, checks
+complete inventories, then removes its own original projects and input
+directories. It exports the relocated fixtures again and requires identical
+JSON and unchanged project inventories. Execution, analysis, reconstruction and
+recovery entry points are guarded during both export phases. The trusted
+checkout and its matching reader bindings remain available.
+This fixture-only copy does not extend `Store.relocate`: that production method
+still refuses unfinished attempts. No application upgrade or wider historical
+reader compatibility follows from the exercise.
+
+Successful preparation produces fifteen files, `case-A.json` through
+`case-O.json`, in `recipient/`. Existing output directories are refused.
+Use the packet only after preparation exits successfully with all fifteen
+files. Retain an incomplete preparation for inspection and choose a new scratch
+directory for another attempt.
+
+The `sender/` directory retains the relocated projects and the before-relocation
+JSON. It contains frozen inputs, logs and other evidence excluded from the
+diagnostic. Copy **only `recipient/`** to the recipient's separate location,
+along with the questions below. Keep the sender directory and reference key
+separate until first answers have been recorded. Directory separation alone is
+not access control, and these published deterministic cases are not a blinded
+empirical study.
+
+### Questions for the recipient
+
+Read only the supplied JSON files. For each case:
+
+1. Record the reported task, frozen-plan count, attempt count, plans without
+   attempts and every outcome count. Distinguish a valid empty report from an
+   absent file; absence is not a zero-attempt result.
+2. Identify process completion with incomplete evidence, recorded failures or
+   interruptions, unclosed starts and plans that have never started an attempt.
+3. Explain which reports retain both a failed and a complete attempt. State
+   whether their order or the identity of the latest attempt is available.
+4. State what cannot be concluded about current process liveness, failure cause,
+   host/application compatibility, report authenticity and scientific validity.
+
+`unfinished` records a start without a finish; it does not prove a running
+process. A `completed` process does not imply complete evidence. A diagnostic
+contains no scientific report and cannot reconstruct an analysis. It omits
+identifiers, ordinals, free-text errors and local provenance. It is not a signed
+attestation or an independent verification of the producer's source project.
+If an export was refused, ask the sender for its fixed refusal category rather
+than interpreting a missing JSON file as an empty project.
+
+### Sender reference key
+
+All files use `opent1d.project-diagnostics/1`,
+`opent1d.export-project-diagnostics/1` and `opent1d.project-store/1`.
+In each paired case below the first letter is `mmtt-sensitivity` and the second
+is `mmtt-sampling`. Case A has no task row.
+Outcome notation is `process_status / execution_status / completeness × count`.
+
+| Cases | Frozen plans | Plans without attempts | Attempts | Expected outcomes |
+| --- | --- | --- | --- | --- |
+| A | 0 | 0 | 0 | No task row or outcomes |
+| B, I | 1 | 0 | 1 | `completed / completed / complete × 1` |
+| C, J | 1 | 0 | 1 | `completed / completed / incomplete × 1` |
+| D, K | 1 | 0 | 1 | `failed / failed / incomplete × 1` |
+| E, L | 1 | 0 | 1 | `interrupted / interrupted / incomplete × 1` |
+| F, M | 1 | 0 | 1 | `unfinished / unknown / unknown × 1` |
+| G, N | 1 | 1 | 0 | No outcomes |
+| H, O | 1 | 0 | 2 | `completed / completed / complete × 1` and `failed / failed / incomplete × 1` |
+
+F retains a partial workspace; M has no workspace. Both correctly retain the
+unclosed start. H and O are constructed as an explicit successful retry after
+a failed attempt on the same plan. The JSON retains both counts but does not
+encode their order or retry linkage. The sender key supplies that construction
+history; it cannot be inferred from outcome ordering in the JSON.
+Case A reports no frozen plans; it says nothing about available task capabilities
+or separate GUI drafts.
+
+The four `DiagnosticSupportHandoffTests` in
+`tests/test_project_diagnostics.py` compare all fifteen reports with a literal
+accounting oracle, require byte-identical JSON after original paths disappear,
+check the recipient file roster and omission controls, preserve the production
+unfinished-relocation refusal, and refuse reuse of an existing preparation.
+Run the complete diagnostic family with:
+
+```sh
+uv run --locked python -m unittest tests.test_project_diagnostics -v
+```
+
+An actual recipient exercise remains **unrun**. When a recipient is available,
+record their first answers, assistance, errors and actual elapsed time before
+revealing the key. Keep unanswered or blocked cases and corrections in that
+record. Fixture generation and an internal technical review cannot stand in
+for that observation or qualify a wider support/distribution scope.
+
 ## Developer example
 
 Use the locked root environment. Run this Python from the checkout, choosing
