@@ -63,6 +63,84 @@ remote runtime assets. The Inter notice is included in the SDK package. The
 initial implementation covers the two synthetic MMTT tasks; independent user
 acceptance and broader accessibility/platform qualification remain separate.
 
+### First analyst exercise
+
+Use this walkthrough to ask: **How do fixed assumptions and fewer measurement
+times change the estimated paired secretion?** Start the installed two-task
+workbench or open the Concept Mac app as described below. No physiological
+runtime or human records are needed. Keep the supplied settings for this first
+exercise; they use three assumption variants, 128 perturbations and seed 117.
+The [paired-analysis guide](observation-analysis.md#frozen-method-and-assumptions)
+and [sampling guide](mmtt-sampling.md#frozen-design-and-shared-settings) explain
+the scientific conventions.
+
+1. Choose **New project**, enter a recognizable project name and select
+   **Compare paired responses**. In Study, name the question. Open **Synthetic
+   observations** to inspect the invented participant, linked visits, declared
+   units, actual times and input files; close the dialog without changing them.
+   Open **Analysis assumptions** to inspect the visit order, fixed kinetics,
+   volume and uncertainty settings. The research-question text is a study label;
+   the saved input files determine the calculation.
+2. Save any pending changes with `Command+S` / `Ctrl+S`, then **Review study**.
+   A successful review checks the saved revision without calculating estimates.
+   Choose **Freeze study** in that review
+   dialog. Note the full frozen-plan identity and revision in Analysis.
+   Later edits create a new revision and need their own review/freeze.
+3. Before running, open **Results → Planned comparison → Plan a new comparison**.
+   Name the comparison and question, choose this unattempted plan and **Read
+   available variants**. Add `nominal` and `volume-120` with distinct member
+   labels using **Add planned member**, choose the nominal member as the baseline
+   and **Freeze comparison**. Both members use this one plan's first attempt. The
+   [comparison procedure](#compare-variants-and-frozen-plans) explains compatible
+   support and why a roster frozen after execution is refused.
+4. Return to **Study**, select that frozen study, **Check readiness**, then
+   **Run analysis**. Wait for the real action phase and elapsed time. The attempt
+   remains in history with its execution status, evidence completeness and all
+   planned slots. **Cancel analysis** requests cleanup; wait for the outcome
+   before leaving or retrying. Opening saved work never starts another run.
+5. Open the attempt's **Results** and **Verify saved report**. Check the plan and
+   attempt identities, every required variant and perturbation, and the paired
+   endpoint: whole-body total secretion including basal over 0–120 minutes in
+   pmol, follow-up minus baseline. Keep C-peptide AUC and glucose context separate.
+   Then select **Planned comparison**, inspect the saved comparison and
+   **Verify comparison report**. Export its JSON/Markdown and **Export comparison
+   table**; the table's contrasts are member minus the declared baseline.
+   An unavailable or unresolved interval does not establish no change.
+6. Return to Study and change **Approach** to **Compare measurement schedules**.
+   Confirm the separate study; the paired study remains saved. Inspect the
+   supplied design and development files as well as the observations/settings.
+   Save, review, freeze, check readiness and explicitly run this second plan.
+   Verify its report in Results. Inspect all four full/reduced schedules, the
+   development/evaluation allocation and each schedule's native child report.
+   The default information-loss control is constructed to show a three-time
+   conclusion reversal. Full curves are references, not biological truth; this
+   demonstrates software behavior rather than a human sampling recommendation.
+7. From a verified attempt, **Inspect used inputs** checks the frozen settings.
+   **Make a variant** creates a separate editable study with that frozen plan as
+   its parent. Save a changed question or assumption, review and freeze it, and
+   confirm that the original plan/attempt is still available. A new prospective
+   comparison requires fresh unattempted member plans.
+8. Save and quit normally. Reopen the same workspace and project, use
+   **Project actions → Open another study** to select the earlier study, and
+   verify the retained reports again. Keep the workspace for editable concepts
+   and the project directory for the authoritative plans, attempts and results.
+   A report download alone does not contain that full history.
+
+For correction practice, keep a separate study: **Start empty** exposes its
+required files and review reports the missing inputs without running. Complete
+or replace those files, save and review again. From the launcher, **Use a
+template → Compare measurement schedules → Incomplete measurements** supplies
+a retained missing/censored control. Its completed process can have incomplete
+scientific evidence; explicitly permit incomplete
+evidence when verifying, then inspect the failed slots and reasons. Do not erase
+the first attempt or treat missing estimates as zero. A retry is a new attempt;
+the [recovery procedure](#review-freeze-and-run) covers an unfinished executor.
+
+The [installed Python/CLI route](installed-sdk.md#continue-the-same-project-in-concept)
+opens these same project plans and attempts. This tutorial is internal onboarding,
+not a completed intended-user session, accessibility qualification or biological
+validation. The separate formative packets below remain candidate-bound.
+
 ### Review, freeze and run
 
 Start with **Compare paired responses** (`mmtt-sensitivity`). Open or create a
