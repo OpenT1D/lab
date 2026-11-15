@@ -4,6 +4,14 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Add the Concept v1 compact project launcher and dark Study workspace for the
+  two synthetic MMTT tasks. Reuse existing project and draft services for
+  creation, opening, editing, autosave, conflict recovery and reopening. Provide
+  an internal Apple Silicon Mac app with bundled runtimes, native menus and
+  directory selection, and owned save/shutdown recovery. Preserve scientific
+  code and frozen-reader identities; Windows and public distribution remain
+  separate.
+
 - Add a separately gated single-leaf removal helper for mixed historical LT1
   directories, preserving the reviewed immediate sibling namespace and existing
   flat/tree removers. Bind request, source, directories, journal and owned outer
