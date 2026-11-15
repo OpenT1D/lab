@@ -8,6 +8,7 @@ const node = (tag, text, className) => {
 const identified = (label, value) => { const p = node('p', undefined, 'execution-identity'); p.append(node('span', label + ': '), node('code', value)); return p; };
 
 export function createExecutionView({ store, container, onResults }) {
+  container.tabIndex = -1;
   const refresh = node('button', 'Refresh saved history', 'secondary'); refresh.id = 'refresh-study'; refresh.type = 'button';
   const title = node('h2', 'Analysis'), draftState = node('p', '', 'muted'); draftState.id = 'execution-draft-state';
   const empty = node('p', 'Review and freeze the saved study to prepare an analysis.', 'muted');
@@ -27,12 +28,21 @@ export function createExecutionView({ store, container, onResults }) {
   container.replaceChildren(title, refresh, draftState, empty, controls, status, elapsed, historyTitle, history);
   let planSignature = '', historySignature = '', statusSignature = '';
   const stopped = new Set();
-  const perform = fn => async () => { try { await fn(); } catch (error) { store.error = error.message; store.emit(); } };
-  refresh.onclick = perform(() => store.refreshProject());
+  const perform = (fn, next = () => null) => async event => {
+    const focused = event?.currentTarget === document.activeElement;
+    if (focused) container.focus({ preventScroll: true });
+    try { await fn(); } catch (error) { store.error = error.message; store.emit(); }
+    finally {
+      const target = next();
+      if (focused && document.activeElement === container && target?.isConnected && !target.disabled) target.focus();
+    }
+  };
+  const latestResult = () => history.querySelector('.execution-attempt button');
+  refresh.onclick = perform(() => store.refreshProject(), () => refresh);
   select.onchange = () => store.selectPlan(select.value);
-  check.onclick = perform(() => store.checkPlan());
-  run.onclick = perform(() => store.runPlan());
-  cancel.onclick = perform(() => store.cancelRun());
+  check.onclick = perform(() => store.checkPlan(), () => store.ready ? run : check);
+  run.onclick = perform(() => store.runPlan(), latestResult);
+  cancel.onclick = perform(() => store.cancelRun(), () => cancel.hidden ? latestResult() : cancel);
   const planName = plan => store.project?.labels?.[plan.id] || plan.task;
   function renderAttempts() {
     const plans = store.plans, attempts = store.attempts.filter(attempt => plans.some(plan => plan.id === attempt.plan && ['mmtt-sensitivity', 'mmtt-sampling'].includes(plan.task)));
@@ -59,14 +69,14 @@ export function createExecutionView({ store, container, onResults }) {
       const latest = attempts.filter(value => value.plan === attempt.plan).at(-1);
       if (result && latest?.id === attempt.id) {
         const retry = node('button', 'Run a new attempt', 'secondary'); retry.type = 'button'; retry.disabled = store.locked;
-        retry.onclick = perform(async () => { store.selectPlan(attempt.plan); if (!store.ready) await store.checkPlan(); if (store.ready) await store.runPlan(); }); buttons.append(retry);
+        retry.onclick = perform(async () => { store.selectPlan(attempt.plan); if (!store.ready) await store.checkPlan(); if (store.ready) await store.runPlan(); }, latestResult); buttons.append(retry);
       }
       if (!result) {
         const recovery = node('div', undefined, 'attempt-recovery'), consent = node('label'), checkbox = node('input'); checkbox.type = 'checkbox'; checkbox.checked = stopped.has(attempt.id); checkbox.disabled = store.locked;
         consent.append(checkbox, document.createTextNode(' I have confirmed that the previous executor has stopped.'));
         const recover = node('button', 'Recover unfinished attempt', 'secondary'); recover.type = 'button'; recover.disabled = store.locked || !checkbox.checked;
         checkbox.onchange = () => { if (checkbox.checked) stopped.add(attempt.id); else stopped.delete(attempt.id); recover.disabled = store.locked || !checkbox.checked; };
-        recover.onclick = perform(() => store.recoverAttempt(attempt.id, checkbox.checked));
+        recover.onclick = perform(() => store.recoverAttempt(attempt.id, checkbox.checked), latestResult);
         recovery.append(node('p', 'Recovery records an interrupted outcome. It does not adopt or signal the previous process.', 'muted'), consent, recover); row.append(recovery);
       }
       row.append(buttons); return row;

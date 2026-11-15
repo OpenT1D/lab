@@ -139,10 +139,15 @@ export function createResultsView({ store, container, showStudy = () => {}, befo
   }
   async function task(label, action) {
     if (busy()) return;
+    const invoker = document.activeElement, focused = container.contains(invoker);
+    if (focused) heading.focus({ preventScroll: true });
     const expected = token(); pending = true; notice(label); render();
     try { await action(expected); }
     catch (error) { if (current(expected)) notice(error.message || 'The action did not complete. Try again.', true); }
-    finally { pending = false; render(); }
+    finally {
+      pending = false; render();
+      if (focused && current(expected) && document.activeElement === heading && invoker.isConnected && !invoker.disabled) invoker.focus();
+    }
   }
   function withdraw() {
     reportEpoch++; report = null; saved.hidden = true; reportText.replaceChildren(); children.replaceChildren(); exports.replaceChildren();
@@ -413,7 +418,8 @@ export function createResultsView({ store, container, showStudy = () => {}, befo
   async function show(attemptId) {
     if (!await beforeNavigate()) return false;
     active = true; render();
-    if (attemptId && attempts().some(attempt => attempt.id === attemptId)) { mode = 'attempts'; selectedPlan = ''; selectedAttempt = attemptId; selectionChanged(); }
+    const attempt = attempts().find(item => item.id === attemptId);
+    if (attempt) { mode = 'attempts'; selectedPlan = attempt.plan; selectedAttempt = attemptId; selectionChanged(); }
     container.hidden = false; heading.focus(); return true;
   }
   function hide() { active = false; epoch++; withdraw(); container.hidden = true; }

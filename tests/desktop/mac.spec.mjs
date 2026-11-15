@@ -205,6 +205,7 @@ async function freezeAndCheck(page) {
   await expect(page.locator('#execution-plan-identity')).toContainText(frozen);
   await page.locator('#check-study').click();
   await expect(page.locator('#run-study')).toBeEnabled();
+  await expect(page.locator('#run-study')).toBeFocused();
   return frozen;
 }
 async function finished(page, count) {
@@ -404,8 +405,9 @@ test('observed numerical worker failure retains forensic evidence and an explici
     const evidence = await nativeEvidence(project, first.id); expect(evidence.receipt.status).toBe('failed'); expect(evidence.receipt.remaining_owned_processes).toEqual([]);
     await identitiesGone(observed.owned); expectSentinel(sentinel);
     await page.locator(`#execution-attempts article[data-attempt="${first.id}"]`).getByRole('button', { name: 'Open results', exact: true }).click();
-    await page.locator('#results-allow-failed').check(); await page.locator('#results-verify').click();
-    await expect(page.locator('#results-message')).toHaveAttribute('role', 'alert'); await expect(page.locator('#results-message')).toContainText(/forensic|Native reconstruction unavailable/i);
+    await expect(page.locator('#results-attempt-summary')).toContainText('No admissible native report');
+    await expect(page.locator('#results-verify')).toBeDisabled();
+    await expect(page.locator('#results-allow-failed')).not.toBeVisible();
     await expect(page.locator('#results-report')).not.toBeVisible();
     await page.locator('#results-back-study').click(); await expect(page.locator('#run-study')).toBeEnabled(); await page.locator('#run-study').click();
     const attempts = await finished(page, 2), retried = attempts[1];

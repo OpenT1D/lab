@@ -634,7 +634,7 @@ a {
   color:var(--muted);
 }
 
-summary:focus-visible,.results-table-scroll:focus-visible {
+summary:focus-visible,.results-table-scroll:focus-visible,.execution-panel:focus-visible {
   outline:2px solid var(--blue);
   outline-offset:3px;
 }

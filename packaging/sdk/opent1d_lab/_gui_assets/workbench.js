@@ -260,7 +260,7 @@ $('study-form').onsubmit = attempt(async () => {
     const button = node('button', store.record.frozen_plan ? 'Use frozen study' : 'Freeze study', 'primary'); button.id = 'freeze-study'; button.type = 'button';
     button.onclick = attempt(async () => {
       button.disabled = true;
-      try { await store.freeze(); $('information-dialog').close(); showStudy(); $('check-study')?.focus(); }
+      try { await store.freeze(); informationInvoker = $('check-study'); $('information-dialog').close(); showStudy(); $('check-study')?.focus(); }
       finally { button.disabled = false; }
     });
     $('information-dialog').querySelector('.dialog-actions').prepend(button);
