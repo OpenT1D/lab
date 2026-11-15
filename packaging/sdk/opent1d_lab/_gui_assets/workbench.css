@@ -629,6 +629,10 @@ a {
   overflow:auto;
 }
 
+#project-loading {
+  padding:32px;
+}
+
 .tab:not([aria-current=page]),.tab:not([aria-current=page])+.close-tab {
   background:var(--navigation);
   color:var(--muted);

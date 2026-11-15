@@ -41,11 +41,11 @@
     </aside>
     <main class="study-panel">
       <div class="tabs"><button id="study-tab" class="tab" aria-current="page"><img src="/wb-1-file3.svg" width="18" height="18" alt="">Study</button><button id="close-study" class="close-tab" aria-label="Close study tab"><img src="/wb-1-close.svg" width="14" height="14" alt=""></button><button id="results-tab" class="tab" hidden>Results</button><button id="close-results" class="close-tab" aria-label="Close results tab" hidden>×</button></div>
+      <p id="project-loading" class="muted" role="status" tabindex="-1" hidden>Opening saved study and execution history…</p>
       <div id="study-body" class="study-body">
         <div class="study-form">
           <div class="study-intro"><div class="title-line"><h1 id="study-heading" tabindex="-1">Study</h1><span class="draft-badge">Draft</span><span class="grow"></span><span id="save-state" class="muted" role="status"></span><button id="save-study" class="secondary" hidden>Save changes</button></div><p class="muted">Define your question and review the inputs.</p></div>
           <div id="study-empty" class="empty-study" hidden><p>No editable MMTT study is open in this project.</p><button id="create-study" class="primary">Create a study</button><button id="choose-study" class="secondary">Open saved study</button></div>
-          <p id="project-loading" class="muted" role="status" hidden>Opening saved study and execution history…</p>
           <form id="study-form" novalidate>
             <div class="definition"><label for="research-question">Research question</label><input id="research-question" maxlength="100" autocomplete="off" required><label for="approach">Approach</label><select id="approach"></select></div>
             <section class="inputs"><h2>Inputs</h2><button id="observations" type="button" class="input-row"><img src="/wb-1-file.svg" width="24" height="24" alt=""><span class="input-description"><strong>Synthetic observations</strong><span id="observations-description" class="muted"></span></span><span id="observations-action" class="muted">View</span><img src="/wb-1-chevron.svg" width="16" height="16" alt=""></button><button id="assumptions" type="button" class="input-row"><img src="/wb-1-sliders2.svg" width="24" height="24" alt=""><span class="input-description"><strong>Analysis assumptions</strong><span id="assumptions-description" class="muted"></span></span><span id="assumptions-action" class="muted">Review</span><img src="/wb-1-chevron.svg" width="16" height="16" alt=""></button></section>

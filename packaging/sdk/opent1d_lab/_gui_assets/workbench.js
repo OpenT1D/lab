@@ -78,6 +78,7 @@ function render() {
     document.title = project.name + ' · OpenT1D'; $('project-title').textContent = project.name; $('tree-project-name').textContent = project.name;
     $('study-empty').hidden = !!record || store.loadingProject; $('study-form').hidden = !record;
     if ($('project-loading')) $('project-loading').hidden = !store.loadingProject;
+    if (store.loadingProject) { $('study-body').hidden = true; if ($('results-body')) $('results-body').hidden = true; }
     for (const id of ['tree-study', 'tree-results', 'study-tab', 'results-tab']) if ($(id)) $(id).disabled = store.loadingProject;
     $('save-study').hidden = !store.dirty && !store.saving;
     $('save-study').disabled = busy || store.conflict || !store.dirty;
@@ -95,7 +96,7 @@ function render() {
   }
   if (!project) document.title = 'OpenT1D';
   const skip = document.querySelector('.skip');
-  if (skip) { skip.href = !project ? '#projects-heading' : activeView === 'results' ? '#results-heading' : '#study-heading'; skip.textContent = !project ? 'Skip to projects' : activeView === 'results' ? 'Skip to results' : 'Skip to study'; }
+  if (skip) { skip.href = !project ? '#projects-heading' : store.loadingProject ? '#project-loading' : activeView === 'results' ? '#results-heading' : '#study-heading'; skip.textContent = !project ? 'Skip to projects' : store.loadingProject ? 'Skip to opening status' : activeView === 'results' ? 'Skip to results' : 'Skip to study'; }
   const badge = document.querySelector('.draft-badge');
   if (badge) badge.textContent = record?.frozen_plan && !store.dirty ? 'Frozen' : record?.validation?.valid && !store.dirty ? 'Reviewed' : 'Draft';
   executionView?.render(); resultsView?.render();
