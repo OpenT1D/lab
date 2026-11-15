@@ -1,10 +1,8 @@
 """Invented material only; no retained report/diagnostic or verifier execution."""
 
 import copy
-import json
 import os
 import stat
-import sys
 import tempfile
 import threading
 import time
@@ -13,27 +11,24 @@ from datetime import timedelta
 from pathlib import Path
 from unittest import mock
 
+from experiments.simglucose_audit import fixture_time
 from experiments.simglucose_audit import gh_error_review as g
-
-FORBIDDEN = json.loads(os.environ.get("OT062_FIXTURE_FORBIDDEN_PATHS", "[]"))
-
-
-def deny(event, args):
-    if event in ("socket.connect", "socket.getaddrinfo"):
-        raise PermissionError("fixture-network-denied")
-    if (
-        event == "open"
-        and args
-        and isinstance(args[0], (str, bytes))
-        and os.fsdecode(args[0]) in FORBIDDEN
-    ):
-        raise PermissionError("actual-material-denied")
-
-
-sys.addaudithook(deny)
 
 
 class ErrorReviewTests(unittest.TestCase):
+    def setUp(self):
+        self.enterContext(fixture_time.use(True))
+        # Scope network denials to this case; discovery must not change other tests.
+        for target in (
+            "socket.create_connection",
+            "socket.getaddrinfo",
+            "socket.socket.connect",
+            "socket.socket.connect_ex",
+        ):
+            guard = mock.patch(target, side_effect=PermissionError("fixture-network-denied"))
+            guard.start()
+            self.addCleanup(guard.stop)
+
     def fixture(self, **kwargs):
         p = Path(
             tempfile.mkdtemp(prefix="error-invented-", dir=os.environ.get("OT062_FIXTURE_ROOT"))

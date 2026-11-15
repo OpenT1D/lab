@@ -21,6 +21,7 @@ from pathlib import Path
 
 from experiments import platform_process
 
+from . import fixture_time
 from . import intake_collector as core
 from . import retained_source_review as previous
 from .contract import AUTHORITY, decode, digest, encode, fields, require
@@ -102,6 +103,7 @@ def _held_documents(plan_raw, approval_raw, origin_raw, held):
     return tuple(map(decode, (plan_raw, approval_raw, origin_raw)))
 
 
+@fixture_time.selected(4)
 def _gate(
     plan_raw, approval_raw, origin_raw, held, fixture=False, headroom=False, historical_at=None
 ):
@@ -745,7 +747,8 @@ def _entry():
                 subprocess.Popen(
                     [sys.executable, "-I", "-S", "-B", "-c", "import time;time.sleep(30)"]
                 )
-        _produce(wire)
+        with fixture_time.use(wire["fixture"]):
+            _produce(wire)
         if wire["fixture"] and wire["case"] == "late-error":
             _emit({"error": "invented-late-protocol-error"})
         if wire["fixture"] and wire["case"] == "nonzero":
@@ -807,6 +810,7 @@ def _supervise(wire, deadline):
     return None if forced or not clean else result
 
 
+@fixture_time.selected(4)
 def _execute(plan_raw, approval_raw, origin_raw, held, fixture=False, case=None, whole_seconds=10):
     start = time.monotonic()
     deadline = start + whole_seconds
@@ -832,6 +836,7 @@ def _execute(plan_raw, approval_raw, origin_raw, held, fixture=False, case=None,
     return result
 
 
+@fixture_time.actual
 def review_approved(plan_raw, approval_raw, origin_raw, held):
     """Trusted fixed caller only; returns one explicitly material private view."""
     return _execute(plan_raw, approval_raw, origin_raw, held)
@@ -850,6 +855,7 @@ def _fixture_key(inputs):
     )
 
 
+@fixture_time.invented
 def fixture_inputs(parent, stderr=b"INVENTED diagnostic only.\n", *, mutate_report=None):
     """Mint only new owned synthetic bytes, with no filesystem input selector."""
     require(type(stderr) is bytes and 0 < len(stderr) <= STDERR_CAP, "invented-stderr-cap")
@@ -1040,12 +1046,14 @@ def fixture_inputs(parent, stderr=b"INVENTED diagnostic only.\n", *, mutate_repo
     return inputs
 
 
+@fixture_time.invented
 def run_fixture_review(inputs, case="ok", *, whole_seconds=10):
     require(_fixture_key(inputs) in _FIXTURES and case in CASES, "minted-fixed-fixture")
     require(type(whole_seconds) in (int, float) and 0 < whole_seconds <= 10, "bounded-fixture-time")
     return _execute(*inputs, True, case, whole_seconds)
 
 
+@fixture_time.selected(4)
 def inspect_receipt_metadata(
     plan_raw, approval_raw, origin_raw, held, *, held_receipt_sha256, fixture=False
 ):

@@ -22,6 +22,7 @@ from pathlib import Path
 
 from experiments import platform_process
 
+from . import fixture_time
 from . import intake_collector as core
 from .contract import AUTHORITY, SOURCE_FILES, decode, digest, encode, fields, require
 
@@ -120,7 +121,7 @@ def _token(info):
         info.st_size,
         info.st_mtime_ns,
         info.st_ctime_ns,
-        info.st_flags,
+        getattr(info, "st_flags", 0),
     ]
 
 
@@ -133,6 +134,7 @@ def _limits(targets):
     }
 
 
+@fixture_time.selected(4)
 def _gate(
     plan_raw,
     approval_raw,
@@ -1199,11 +1201,13 @@ def _entry():
                     raise PermissionError("fixture-material-denied")
 
             sys.addaudithook(deny)
-        (_produce_A if wire["substep"] == "A" else _produce_B)(wire)
+        with fixture_time.use(wire["fixture"]):
+            (_produce_A if wire["substep"] == "A" else _produce_B)(wire)
     except (OSError, ValueError, RuntimeError, TimeoutError):
         _emit({"error": "retained-review-worker-rejected"})
 
 
+@fixture_time.selected(5)
 def _execute(
     plan_raw,
     approval_raw,
@@ -1259,11 +1263,13 @@ def _execute(
     return result
 
 
+@fixture_time.actual
 def read_approved(plan_raw, approval_raw, origin_raw, held):
     """Privileged source pass; trusted caller must independently hold actual consent."""
     return _execute(plan_raw, approval_raw, origin_raw, held, "A")
 
 
+@fixture_time.actual
 def review_report_approved(
     plan_raw, approval_raw, origin_raw, held, *, held_producer_receipt_sha256, held_report_sha256
 ):
@@ -1470,6 +1476,7 @@ def _validate_B(result, plan, held, producer_pin, report_pin, issued, expiry):
     _validate_report(result["review"], raw, {"source_rows": rows}, plan, held)
 
 
+@fixture_time.invented
 def fixture_inputs(parent, *, go_text=None, notice_text=FIXTURE_NOTICE):
     """Create only caller-owned invented files; never consult retained materials."""
     parent = Path(parent)
@@ -1603,6 +1610,7 @@ def fixture_inputs(parent, *, go_text=None, notice_text=FIXTURE_NOTICE):
     return inputs
 
 
+@fixture_time.invented
 def run_fixture_review(
     inputs,
     *,
@@ -1625,6 +1633,7 @@ def run_fixture_review(
     )
 
 
+@fixture_time.selected(4)
 def inspect_receipt_metadata(
     plan_raw, approval_raw, origin_raw, held, *, held_receipt_sha256, fixture=False
 ):

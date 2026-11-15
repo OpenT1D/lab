@@ -23,6 +23,7 @@ from pathlib import Path
 
 from experiments import platform_process
 
+from . import fixture_time
 from . import intake_collector as core
 from . import retained_source_review as previous
 from .contract import AUTHORITY, decode, digest, encode, fields, require
@@ -158,6 +159,26 @@ def _policy_identity(expiry=None):
         os.close(fd)
 
 
+def _fixture_policy_identity():
+    """Fixed invented metadata, never a capture of this host's sandbox policy."""
+    raw = b"INVENTED controller policy identity; no OS policy was read.\n"
+    return {
+        "kind": "invented-controller-policy",
+        "host_policy_observed": False,
+        "dyld_path": str(DYLD),
+        "dyld_sha256": digest(raw),
+        "dyld_token": [0, 1, 0, 0o644, 1, len(raw), 0, 0, 0],
+        "transitive_imports": [],
+        "sandbox_path": str(SANDBOX),
+        "sandbox_token": [0, 2, 0, 0o755, 1, 1, 0, 0, 0],
+        "system_read_roots": list(SYSTEM_READ_ROOTS),
+        "global_sysctl_read": False,
+        "sysctl_read_names": list(SYSCTL_READ_NAMES),
+        "fork_allowed": False,
+        "mach_lookup_allowed": False,
+    }
+
+
 def _profile(plan, fixture=False, *, control=None):
     binary = Path(sys.executable).resolve() if fixture else _path(plan["binary"]["path"])
 
@@ -205,6 +226,7 @@ def _profile(plan, fixture=False, *, control=None):
     return "\n".join(rules) + "\n"
 
 
+@fixture_time.selected(4)
 def _gate(
     plan_raw, approval_raw, origin_raw, held, fixture=False, headroom=False, historical_at=None
 ):
@@ -370,7 +392,8 @@ def _gate(
         "current-source-owner",
     )
     require(
-        plan["OS_policy"] == _policy_identity(read_expiry)
+        plan["OS_policy"]
+        == (_fixture_policy_identity() if fixture else _policy_identity(read_expiry))
         and digest(_profile(plan, fixture).encode())
         == plan["profile_sha256"]
         == held["profile_sha256"],
@@ -1050,7 +1073,8 @@ def _entry():
                     raise PermissionError("actual-material-denied")
 
             sys.addaudithook(deny)
-        _produce(wire)
+        with fixture_time.use(wire["fixture"]):
+            _produce(wire)
         if wire["fixture"] and wire["case"] == "receipt-then-error":
             _emit({"error": "invented-late-protocol-error"})
         if wire["fixture"] and wire["case"] == "receipt-then-nonzero":
@@ -1205,6 +1229,7 @@ def _validate_receipt(receipt, plan, held, fixture, issued, expiry):
     )
 
 
+@fixture_time.selected(4)
 def _execute(
     plan_raw,
     approval_raw,
@@ -1250,6 +1275,7 @@ def _execute(
     return result
 
 
+@fixture_time.actual
 def probe_approved(plan_raw, approval_raw, origin_raw, held):
     """Trusted caller only; fixed external consent/qualified snapshot are mandatory."""
     return _execute(plan_raw, approval_raw, origin_raw, held)
@@ -1268,6 +1294,7 @@ def _fixture_key(inputs):
     )
 
 
+@fixture_time.invented
 def fixture_inputs(parent):
     parent = Path(parent)
     fd = core._directory(str(parent))
@@ -1324,7 +1351,7 @@ def fixture_inputs(parent):
         "limits": dict(LIMITS),
         "source": source,
         "owner": owner,
-        "OS_policy": _policy_identity(),
+        "OS_policy": _fixture_policy_identity(),
         "profile_sha256": "pending",
         "rights_basis_sha256": digest(b"INVENTED probe-only rights"),
         "qualification_sha256": digest(b"INVENTED only, not actual OS admission"),
@@ -1384,6 +1411,7 @@ def fixture_inputs(parent):
     return inputs
 
 
+@fixture_time.invented
 def run_fixture_probe(inputs, case="ok", *, whole_seconds=60, probe_seconds=10):
     require(_fixture_key(inputs) in _FIXTURES and case in CASES, "minted-fixed-fixture")
     require(
@@ -1396,6 +1424,7 @@ def run_fixture_probe(inputs, case="ok", *, whole_seconds=60, probe_seconds=10):
     return _execute(*inputs, True, case, whole_seconds, probe_seconds)
 
 
+@fixture_time.selected(4)
 def inspect_receipt_metadata(
     plan_raw, approval_raw, origin_raw, held, *, held_receipt_sha256, fixture=False
 ):

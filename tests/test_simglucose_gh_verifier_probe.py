@@ -2,9 +2,9 @@
 
 import base64
 import copy
-import json
 import os
 import stat
+import subprocess
 import sys
 import tempfile
 import time
@@ -13,27 +13,43 @@ from datetime import timedelta
 from pathlib import Path
 from unittest import mock
 
+from experiments.simglucose_audit import fixture_time
 from experiments.simglucose_audit import gh_verifier_probe as g
 
-FORBIDDEN = json.loads(os.environ.get("OT062_FIXTURE_FORBIDDEN_PATHS", "[]"))
 
-
-def deny(event, args):
-    if event in ("socket.connect", "socket.getaddrinfo"):
-        raise PermissionError("fixture-network-denied")
-    if (
-        event == "open"
-        and args
-        and isinstance(args[0], (str, bytes))
-        and os.fsdecode(args[0]) in FORBIDDEN
-    ):
-        raise PermissionError("actual-material-denied")
-
-
-sys.addaudithook(deny)
+class FixtureImportIsolationTests(unittest.TestCase):
+    def test_discovery_imports_do_not_install_process_global_network_denials(self):
+        script = """import importlib,sys
+for name in ('gh_error_review','gh_verifier_probe','retained_source_review'):
+ importlib.import_module('tests.test_simglucose_'+name)
+sys.audit('socket.getaddrinfo','localhost',9,0,0,0)
+sys.audit('socket.connect',None,('127.0.0.1',9))
+"""
+        # The exact events trigger the old hooks, without requiring network privileges.
+        script = "import sys;sys.path.insert(0," + repr(str(g.ROOT)) + ");" + script
+        result = subprocess.run(
+            [sys.executable, "-I", "-S", "-B", "-c", script],
+            cwd=g.ROOT,
+            capture_output=True,
+            timeout=5,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
 
 
 class GHProbeTests(unittest.TestCase):
+    def setUp(self):
+        self.enterContext(fixture_time.use(True))
+        # Scope network denials to this case; discovery must not change other tests.
+        for target in (
+            "socket.create_connection",
+            "socket.getaddrinfo",
+            "socket.socket.connect",
+            "socket.socket.connect_ex",
+        ):
+            guard = mock.patch(target, side_effect=PermissionError("fixture-network-denied"))
+            guard.start()
+            self.addCleanup(guard.stop)
+
     def fixture(self):
         parent = Path(
             tempfile.mkdtemp(prefix="gh-probe-invented-", dir=os.environ.get("OT062_FIXTURE_ROOT"))
@@ -53,6 +69,21 @@ class GHProbeTests(unittest.TestCase):
 
         with self.assertRaises(PermissionError):
             g.run_probe(Trap())
+
+    def test_invented_policy_factory_and_gate_never_capture_host_policy(self):
+        with mock.patch.object(g, "_policy_identity", side_effect=AssertionError("host policy")):
+            _, inputs = self.fixture()
+            plan, _ = g._gate(*inputs, fixture=True, headroom=True)
+        self.assertEqual(plan["OS_policy"]["kind"], "invented-controller-policy")
+        self.assertFalse(plan["OS_policy"]["host_policy_observed"])
+        with self.assertRaises(ValueError):
+            g.probe_approved(*inputs)
+
+    def test_case_scoped_network_guard_is_active(self):
+        import socket
+
+        with self.assertRaisesRegex(PermissionError, "fixture-network-denied"):
+            socket.getaddrinfo("unused.invalid", 443)
 
     def test_two_ordered_probes_metadata_only_and_environment_empty(self):
         parent, inputs, result = self.completed()

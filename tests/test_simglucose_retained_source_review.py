@@ -1,38 +1,48 @@
 """Invented fixtures only: no retained source/notice/runtime material access."""
 
 import copy
-import json
 import os
 import stat
-import sys
 import tempfile
 import time
 import unittest
 from datetime import timedelta
 from pathlib import Path
+from types import SimpleNamespace
 from unittest import mock
 
+from experiments.simglucose_audit import fixture_time
 from experiments.simglucose_audit import retained_source_review as r
-
-FORBIDDEN = json.loads(os.environ.get("OT062_FIXTURE_FORBIDDEN_PATHS", "[]"))
-
-
-def deny(event, args):
-    if event in ("socket.connect", "socket.getaddrinfo"):
-        raise PermissionError("fixture-network-denied")
-    if (
-        event == "open"
-        and args
-        and isinstance(args[0], (str, bytes))
-        and os.fsdecode(args[0]) in FORBIDDEN
-    ):
-        raise PermissionError("retained-material-denied")
-
-
-sys.addaudithook(deny)
 
 
 class RetainedSourceReviewTests(unittest.TestCase):
+    def setUp(self):
+        self.enterContext(fixture_time.use(True))
+        # Scope network denials to this case; discovery must not change other tests.
+        for target in (
+            "socket.create_connection",
+            "socket.getaddrinfo",
+            "socket.socket.connect",
+            "socket.socket.connect_ex",
+        ):
+            guard = mock.patch(target, side_effect=PermissionError("fixture-network-denied"))
+            guard.start()
+            self.addCleanup(guard.stop)
+
+    def test_stat_tokens_preserve_flags_only_where_the_platform_exposes_them(self):
+        info = dict(
+            st_dev=1,
+            st_ino=2,
+            st_uid=3,
+            st_mode=stat.S_IFREG | 0o600,
+            st_nlink=1,
+            st_size=4,
+            st_mtime_ns=5,
+            st_ctime_ns=6,
+        )
+        self.assertEqual(r._token(SimpleNamespace(**info)), [1, 2, 3, 0o600, 1, 4, 5, 6, 0])
+        self.assertEqual(r._token(SimpleNamespace(**info, st_flags=8))[-1], 8)
+
     def fixture(self, **kwargs):
         parent = Path(
             tempfile.mkdtemp(prefix="retained-invented-", dir=os.environ.get("OT062_FIXTURE_ROOT"))
