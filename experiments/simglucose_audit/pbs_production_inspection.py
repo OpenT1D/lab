@@ -848,6 +848,7 @@ def _worker(scenario, fresh_root, expected_source, expires, deadline):
 
 def _stop(process, whole_deadline):
     errors = []
+    stop_deadline = min(whole_deadline, time.monotonic() + STOP_SECONDS)
     try:
         if process.poll() is None or platform_process.tree_exists(process):
             platform_process.force_tree(process)
@@ -855,18 +856,20 @@ def _stop(process, whole_deadline):
         errors.append("owned-force-error")
     try:
         if process.poll() is None:
-            process.wait(timeout=max(0.01, min(STOP_SECONDS, whole_deadline - time.monotonic())))
+            process.wait(timeout=max(0, stop_deadline - time.monotonic()))
     except (OSError, RuntimeError, subprocess.TimeoutExpired):
         errors.append("owned-wait-error")
     try:
-        platform_process.close_tree(process)
-    except (OSError, RuntimeError):
-        errors.append("owned-tree-close-error")
-    try:
+        while platform_process.tree_exists(process) and time.monotonic() < stop_deadline:
+            time.sleep(min(0.005, max(0, stop_deadline - time.monotonic())))
         if platform_process.tree_exists(process):
             errors.append("owned-tree-remains")
     except (OSError, RuntimeError):
         errors.append("owned-tree-observation-error")
+    try:
+        platform_process.close_tree(process)
+    except (OSError, RuntimeError):
+        errors.append("owned-tree-close-error")
     return ";".join(errors) or None
 
 

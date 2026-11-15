@@ -565,22 +565,26 @@ def _reader(stream, events, maximum=65536):
 
 def _finish_process(process, reader, owned):
     error = None
+    stop_deadline = time.monotonic() + 1  # Share the existing one-second stop allowance.
     try:
         if process.poll() is None:
             if owned:
                 platform_process.force_tree(process)
             else:
                 process.kill()  # Fixed leaf, inherits the outer owned session/Job.
-            process.wait(timeout=1)
+            process.wait(timeout=max(0, stop_deadline - time.monotonic()))
         if owned:
+            while platform_process.tree_exists(process) and time.monotonic() < stop_deadline:
+                time.sleep(min(0.005, max(0, stop_deadline - time.monotonic())))
             if platform_process.tree_exists(process):
                 error = "owned-tree-remains"
             else:
                 platform_process.close_tree(process)
     except (OSError, RuntimeError, subprocess.TimeoutExpired):
         error = "owned-stop-failed"
-    reader.join(timeout=1)
-    if reader.is_alive():
+    if reader is not None:
+        reader.join(timeout=1)
+    if reader is not None and reader.is_alive():
         error = error or "reader-not-joined"
     else:
         try:
@@ -1122,24 +1126,7 @@ def _supervise(wire, recovery=False):
     except (OSError, ValueError, RuntimeError, subprocess.TimeoutExpired):
         error = "controller-protocol-failure"
     finally:
-        cleanup = None
-        if reader in started:
-            cleanup = _finish_process(process, reader, True)
-        else:
-            try:
-                if process.poll() is None:
-                    platform_process.force_tree(process)
-                    process.wait(timeout=1)
-                if platform_process.tree_exists(process):
-                    cleanup = "owned-tree-remains"
-                else:
-                    platform_process.close_tree(process)
-            except (OSError, RuntimeError, subprocess.TimeoutExpired):
-                cleanup = "owned-stop-failed"
-            try:
-                process.stdout.close()
-            except OSError:
-                cleanup = cleanup or "pipe-close-failed"
+        cleanup = _finish_process(process, reader if reader in started else None, True)
         if writer in started:
             writer.join(timeout=1)
             if writer.is_alive():

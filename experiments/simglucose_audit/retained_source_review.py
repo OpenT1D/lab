@@ -462,6 +462,8 @@ def _stop(process, reader, writer, owned, deadline):
         except (OSError, RuntimeError, ValueError, subprocess.TimeoutExpired):
             errors.append("owned-tree-stop-error")
         try:
+            while platform_process.tree_exists(process) and time.monotonic() < deadline:
+                time.sleep(min(0.005, max(0, deadline - time.monotonic())))
             require(not platform_process.tree_exists(process), "owned-tree-stop")
         except (OSError, RuntimeError, ValueError):
             errors.append("owned-tree-unconfirmed")

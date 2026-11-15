@@ -315,8 +315,23 @@ class CollectorTests(unittest.TestCase):
             output = self.output()
             started = time.monotonic()
             with self.subTest(case=case):
-                receipt = p.run_fixture(output, case, whole_seconds=1.6, request_seconds=0.6)
-                self.assertLess(time.monotonic() - started, 2.5)
+                whole_seconds = 3 if case == "stall-storage" else 1.6
+                spawned, spawn = [], p.platform_process.spawn
+
+                def owned_spawn(*args, **kwargs):
+                    process = spawn(*args, **kwargs)
+                    spawned.append(process)
+                    return process
+
+                with mock.patch.object(p.platform_process, "spawn", side_effect=owned_spawn):
+                    receipt = p.run_fixture(
+                        output, case, whole_seconds=whole_seconds, request_seconds=0.6
+                    )
+                self.assertLess(time.monotonic() - started, 4 if case == "stall-storage" else 2.5)
+                self.assertTrue(spawned)
+                for process in spawned:
+                    self.assertIsNotNone(process.poll())
+                    self.assertTrue(process.stdin.closed and process.stdout.closed)
                 self.assertNotEqual(receipt["status"], "completed")
                 self.assertIsNone(receipt["accepted_sha256"])
                 self.assertTrue((output / "archive.opaque").exists())
