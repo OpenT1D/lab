@@ -22,7 +22,7 @@ const test = base.extend({
     const workspace = path.join(folder, 'workspace'), apps = [];
     const launch = async () => {
       const env = { ...process.env }; delete env.ELECTRON_RUN_AS_NODE; delete env.PYTHONPATH;
-      const app = await _electron.launch({ executablePath: build.executable, args: ['--workspace', workspace], env, timeout: 45000 });
+      const app = await _electron.launch({ executablePath: build.executable, args: ['--workspace', workspace], env, acceptDownloads: true, timeout: 45000 });
       processes.set(app, app.process());
       apps.push(app);
       const page = await app.firstWindow();
@@ -263,7 +263,7 @@ async function liveAnalysis(page, app, project) {
         observed = { attempt, backend: table.find(item => item.pid === backend), worker, owned, execution };
         return true;
       }
-    } catch (error) { if (!['ENOENT', 'ENOTDIR'].includes(error.code)) throw error; }
+    } catch (error) { if (!(error instanceof SyntaxError) && !['ENOENT', 'ENOTDIR'].includes(error.code)) throw error; }
     return false;
   }, { intervals: [20, 50, 100], timeout: 30000 }).toBe(true);
   expect(observed.backend).toBeTruthy(); expect(observed.owned.length).toBeGreaterThan(0);
@@ -299,7 +299,9 @@ async function slowStudy(page, app, title) {
   expect(supplied.participants).toHaveLength(1);
   const lines = draft.files['observations.csv'].trimEnd().split(/\r?\n/), header = lines.shift(), rows = [];
   expect(lines).toHaveLength(10);
-  supplied.participants = Array.from({ length: 20 }, (_, index) => {
+  // Keep complete retry reports below the unchanged shared reader's 16 MiB
+  // record limit while retaining enough real numerical work to observe a stop.
+  supplied.participants = Array.from({ length: 4 }, (_, index) => {
     const id = 'invented-lifecycle-' + String(index + 1).padStart(2, '0');
     for (const line of lines) rows.push(id + line.slice(line.indexOf(',')));
     return { ...structuredClone(prototype), id };
