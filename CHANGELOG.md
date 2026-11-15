@@ -4,6 +4,13 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Connect the existing two-task Concept workflow into an explicit analyst
+  tutorial and installed Python/CLI/notebook entry. Record the OT-065
+  criterion/evidence audit, existing Figma design preparation and exact-candidate
+  accessibility protocol. Actual VoiceOver activation was observed, but its
+  speech/navigation could not be qualified through the available observation
+  channel; OT-065 remains open. No scientific implementation or reader changes.
+
 - Connect Concept v1 Study to the existing two synthetic MMTT execution and
   result services: explicit revision validation/freeze/run, real action status,
   owned cancellation, retained retries and explicit unfinished-attempt recovery.

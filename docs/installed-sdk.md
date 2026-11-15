@@ -72,8 +72,24 @@ cannot be nested inside any existing project store.
 
 ## Python exercise outside the checkout
 
-Use the installed environment's Python from an unrelated working directory.
-This creates only invented synthetic data and a new project:
+For a first exercise with only the two synthetic MMTT tasks, use the
+[bounded candidate's build](internal-mmtt-candidate.md#build-and-retain-the-candidate)
+with `--mmtt-only`, or the broader developer installation above. The Concept Mac
+app includes its own backend; it does not install a host Python notebook kernel.
+
+Create an unrelated working directory and start the installed environment's
+Python there. Replace the environment path if you used the bounded candidate:
+
+```sh
+mkdir /private/tmp/opent1d-sdk-exercise
+cd /private/tmp/opent1d-sdk-exercise
+/private/tmp/opent1d-sdk-env/bin/python
+```
+
+Paste the following into that interpreter, or run it as a Python script with the
+same interpreter and working directory. The question is whether the paired
+synthetic estimate depends on the frozen assumptions. This creates invented
+data, a project, two retained attempts and reconstructed reports:
 
 ```python
 from pathlib import Path
@@ -101,6 +117,12 @@ every repeat must explicitly name the previous terminal attempt with `retry_of`.
 The result separates process status, scientific completeness and slot
 availability. The selected MMTT plan retains three variants, 128 draws and seed
 117. A completed process can still have incomplete scientific evidence.
+Read `first-report/report.md` alongside its JSON: check the original input and
+plan identity, every variant and draw, whole-body secretion including basal in
+pmol over 0–120 minutes, and follow-up minus baseline. C-peptide AUC is a separate
+quantity. An unresolved interval does not establish no change. The
+[analysis guide](observation-analysis.md#frozen-method-and-assumptions)
+owns the estimator's assumptions and interpretation.
 
 For censored evidence use `lab.example(..., case="censored")` in a fresh input
 directory. Reading incomplete/interrupted native evidence requires explicit
@@ -126,6 +148,8 @@ Successful commands emit JSON. `run` exits 1 for an incomplete result;
 refusals/errors exit 2. Set an absolute CLI path and run outside the checkout:
 
 ```bash
+mkdir /private/tmp/opent1d-cli-exercise
+cd /private/tmp/opent1d-cli-exercise
 SDK=/private/tmp/opent1d-sdk-env/bin/opent1d-lab
 "$SDK" installation
 "$SDK" example --task mmtt-sensitivity --output "$PWD/cli-inputs"
@@ -143,16 +167,68 @@ SDK=/private/tmp/opent1d-sdk-env/bin/opent1d-lab
 Copy the returned plan identifier into `PLAN`, then use:
 
 ```bash
+PLAN=RETURNED_PLAN_ID
 "$SDK" check --project "$PWD/cli-study" --plan "$PLAN"
 "$SDK" run --project "$PWD/cli-study" --plan "$PLAN" --timeout 600
 "$SDK" info --project "$PWD/cli-study"
 ```
 
-Use the returned attempt identifier with `reconstruct --attempt ... --output ...`;
-add `--allow-failed` for incomplete/failed evidence. `run --retry-of ...`,
+Copy the returned attempt identifier into `ATTEMPT` and verify its saved report
+in a fresh directory:
+
+```bash
+ATTEMPT=RETURNED_ATTEMPT_ID
+"$SDK" reconstruct --project "$PWD/cli-study" --attempt "$ATTEMPT" \
+  --output "$PWD/cli-report"
+```
+
+Add `--allow-failed` for incomplete/failed evidence and read the retained slot
+failures before interpreting it. `run --retry-of ...`,
 `import --archive ...`, `relocate --output ...` and
 `recover --attempt ... --execution-stopped` mirror the Python operations.
 `--help` lists each command's required fields.
+
+### Continue the same project in Concept
+
+After each command returns, open the absolute `study` or `moved-study` directory
+through Concept's **Open project**. For a CLI project, open `cli-study`. Use the
+same installed source/reader candidate: matching task names or the development
+version alone do not promise compatibility. The project explorer's **Results**
+shows the saved plans and attempts, which can be verified without another run.
+The [analyst tutorial](installed-gui.md#first-analyst-exercise) follows the same
+validation, freeze, execution and reader boundaries.
+
+A Python/CLI project has no editable GUI concept until you create or derive one.
+From a saved attempt, **Inspect used inputs** displays its actual frozen inputs;
+**Make a variant** creates a separate editable concept parented to that plan.
+Editing it does not replace the original. Conversely, `lab.open_project(path)`
+and CLI `info` read GUI-created plans and attempts from that same project
+directory. Keep the GUI workspace as well as the project if you need its editable
+concept revisions; copying the project alone retains the SDK ledger and results.
+
+### Existing same-estimator notebooks
+
+The programmer baseline already has a
+[paired-analysis notebook](../experiments/ot056_pilot/same-estimator.ipynb) and a
+[sampling notebook](../experiments/ot056_pilot/same-estimator-sampling.ipynb).
+They call the shared estimator and report functions directly, preserving the
+same physical endpoint, assumptions, perturbations, planned failures and
+sampling isolation. They do not invoke the CLI or introduce a second estimator.
+
+These are trusted source-checkout workflows, rather than installed SDK project
+stores. Follow the notebooks' input/path cells and the
+[canonical preparation and execution commands](research/ot056-researcher-pilot.md#combined-native-rehearsal).
+The fixed standard-library cell runner retains executed cells and outputs;
+Jupyter installation and its interactive UI are a separate environment choice,
+not a dependency of the installed exercise. The
+[Task 1 record](research/ot056-researcher-pilot.md#controlled-task-1-execution)
+and combined rehearsal define the exact native/notebook parity checks.
+
+Use the installed Python exercise above when a notebook should create a project
+that Concept or the CLI can reopen: execute those public `opent1d_lab` calls in
+the installed interpreter. A direct-estimator notebook output directory is not
+an SDK project and cannot be opened as one. A notebook run or an internal
+rehearsal supplies no independent-user, human-data or biological evidence.
 
 ## Inspect and derive user-chosen synthetic inputs
 

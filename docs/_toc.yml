@@ -113,6 +113,8 @@ subtrees:
       - file: docs/research/ot060-installed-route
       - file: docs/research/ot060-native-m4
       - file: docs/research/ot065-072-shared-gui
+      - file: docs/research/ot065-criteria-evidence
+      - file: docs/research/ot065-accessibility-qualification
       - file: docs/research/installed-mmtt-sampling
       - file: docs/research/editable-workbench
       - file: docs/research/workbench-comparisons
