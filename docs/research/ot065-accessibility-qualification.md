@@ -8,10 +8,25 @@ synthetic MMTT tasks, Study execution, selected results and prospective
 comparisons. It does not qualify the full laboratory, another operating system,
 a public distribution or independent intended-user acceptance.
 
+### Subsequent package-closure decision
+
+After PR 86 merged with OT-065 open, the user explicitly requested on
+15 November 2026 that the missing VoiceOver check be skipped for package
+closure. OT-065 is now closed for the selected internal two-task MMTT
+workbench/onboarding scope under that explicit exception. Actual screen-reader
+qualification remains an [open named follow-up](../../ROADMAP.md#deferred-screen-reader-qualification).
+The general accessibility requirement remains; no screen-reader support or
+complete-accessibility claim follows from closing OT-065.
+
+The observations, ten-case protocol and case dispositions below are retained
+unchanged. Actual VoiceOver phrases/navigation remain unobserved. This later
+decision changes acceptance scope and does not turn an inconclusive or unrun
+case into a passing result.
+
 The [selected Concept increment](../../ROADMAP.md#selected-concept-v1-implementation-slice-ot-065)
 requires keyboard/focus, narrow/zoomed layouts and non-color status. Actual
-screen-reader qualification remains a separate requirement in
-[OT-065](../../ROADMAP.md#planned-core-and-product-work-packages) and the
+screen-reader qualification was originally a binding requirement in
+[OT-065](../../ROADMAP.md#planned-core-and-product-work-packages) and remains in the
 [product requirements](../product-laboratory.md#workbench-delivery-and-long-term-use).
 The [installed GUI guide](../installed-gui.md#concept-v1-desktop-application)
 owns the application procedure; [decision 0114](../decisions/0114-concept-v1-desktop-workspace.md)
@@ -209,4 +224,6 @@ availability is not presumed. The existing user's older app and `Testing`
 project were left untouched. VoiceOver Utility and the test-opened Settings
 window were closed. The existing keyboard, zoom, reflow, non-color status and
 native-export checks retain their bounded passing scope. This outcome does not
-close actual screen-reader use under [OT-065](ot065-criteria-evidence.md).
+qualify actual screen-reader use. The later
+[OT-065 closure decision](ot065-criteria-evidence.md#decision-and-scope)
+explicitly defers that unmet check to the open follow-up; it adds no observation.

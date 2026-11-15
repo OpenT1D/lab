@@ -2,16 +2,27 @@
 
 ## Decision and scope
 
-Audit date: 15 November 2026. **OT-065 remains open: actual screen-reader
-qualification is not yet established.** The implemented selected workflow is
+Audit and subsequent scope decision: 15 November 2026. **OT-065 is closed for
+the selected internal scope, with actual screen-reader qualification explicitly
+deferred to an open follow-up.** The implemented selected workflow is
 the two synthetic MMTT tasks on the internal Apple Silicon Mac Concept v1
 application, with the same installed Python/CLI project services. The
 [roadmap](../../ROADMAP.md#selected-concept-v1-implementation-slice-ot-065)
 selects implementation scope; the full
 [OT-065 acceptance row](../../ROADMAP.md#planned-core-and-product-work-packages)
 and [product requirements](../product-laboratory.md#workbench-delivery-and-long-term-use)
-retain the accessibility and onboarding requirements. This audit does not
-silently remove a criterion to close the package.
+retain the accessibility and onboarding requirements. The later explicit
+[user-directed scope exception](../../ROADMAP.md#deferred-screen-reader-qualification)
+removes actual screen-reader qualification as a prerequisite for this package's
+closure. It preserves the unmet criterion and protocol as an open follow-up;
+no test is relabelled as passed and no accessibility evidence is added.
+
+PR 86 merged as `82ce4b2cc1a01d8890af0987bbca7d4dec32b199` while OT-065 was
+still open under its then-binding screen-reader criterion. The user subsequently
+asked to skip that check and close OT-065. This record distinguishes that later
+acceptance-scope decision from the original audit and observations. The general
+product requirement, independent intended-user acceptance and distribution
+qualification remain separate from this internal closure.
 
 The work started from clean current main
 `194805ba5647e4eee7388798440b698ea898a647`, the PR 85 merge. Its tree,
@@ -21,12 +32,20 @@ exact-artifact results to support the unchanged product implementation. It
 does not turn a later documentation revision into a newly built app or a new
 screen-reader result.
 
+The later PR 87 integration retains the reviewed OT-062 consolidation from
+main `4e0d2db0351ea99920feb23a4d98466e6e846348` unchanged. PR 87 differs from
+that expanded baseline only in its six closure/scope documents. The earlier
+app receipts retain their exact source/artifact scope; they do not qualify new
+OT-062 code or a newly built application.
+
 ## Criterion-to-evidence matrix
 
 The four dispositions are **proved** (implemented with appropriate bounded
 evidence), **underverified** (implemented but required evidence remains),
 **missing** (an absent deliverable) and **separate** (explicitly outside the
-selected OT-065 increment). An onboarding presentation gap found in this audit
+selected OT-065 increment). The original screen-reader criterion remains
+**underverified** even though the explicit scope decision defers it from
+closure; deferral is not proof. An onboarding presentation gap found in this audit
 is addressed below. No additional missing implementation was identified in the
 selected workflow; that finding does not imply exhaustive defect detection.
 
@@ -39,7 +58,7 @@ selected workflow; that finding does not imply exhaustive defect detection.
 | Question-led comparison and native report/table export | **Proved.** Prospective question, baseline and roster precede execution. Paired desktop comparison and separate sampling comparison retain first attempts and unavailable support. JSON/Markdown/CSV and sampling child exports match native bytes. | Comparison direction and full denominators remain task-specific; no universal ranking or additional scientific estimand. |
 | Screen/interaction specification, component guide and annotated states | **Proved as design preparation.** The existing Figma specification, three-screen examples, 14 annotated states, compact guide and internal walkthrough were found and read; see the design map below. | Static design review supplies neither executed product behavior nor user acceptance. Current Concept choices supersede the earlier presentation details. |
 | Keyboard, zoom, narrow layout and status beyond color | **Proved within selected checks.** Packaged cases include actual Electron zoom factor 2 at an 800-pixel content width, no page overflow, focus transitions and explorer Escape. Browser cases cover narrow text reflow, controls and dialogs. Status and completeness use text. | These selected checks are not complete WCAG, contrast or assistive-technology qualification. |
-| Actual screen-reader operation | **Underverified.** The [accessibility record and ten-case protocol](ot065-accessibility-qualification.md) identify the exact app, prepared fixtures, actual activation attempt and missing observation channel. | Genuine VoiceOver phrases/navigation, table header/value relationships and necessary status/error announcements must be observed. Ordinary AX/ARIA or a running VoiceOver process cannot close this row. |
+| Actual screen-reader operation — explicitly deferred from closure | **Underverified; deferred by the subsequent user scope decision.** The [accessibility record and ten-case protocol](ot065-accessibility-qualification.md) identify the exact app, prepared fixtures, actual activation attempt and missing observation channel. | The [open follow-up](../../ROADMAP.md#deferred-screen-reader-qualification) retains actual VoiceOver phrases/navigation, table/header relationships and necessary status/error announcements. Ordinary AX/ARIA or a running VoiceOver process cannot satisfy that check. OT-065 closes under the explicit exception, not because this row passed. |
 | Reopen preserves work | **Proved.** Native save/quit/reopen, authoritative history hydration, retained attempts and prospective comparison restart checks pass on the candidate. Source/browser cases preserve failed/unapplied edits and conflicts. | SDK project copying alone does not copy GUI workspace concept histories; keep the stated storage boundary. |
 | Analyst tutorial | **Proved as supplied and technically reviewed guidance.** The [two-task tutorial](../installed-gui.md#first-analyst-exercise) connects the existing creation, freeze/run, result, comparison, variant and reopen procedures with expected checkpoints. Labels and ordering were separately checked against the implementation. | A fresh independent analyst has not completed it; that is OT-072. |
 | Programmer adapter/notebook route | **Proved within the selected offline scope.** [Python/CLI](../installed-sdk.md#python-exercise-outside-the-checkout) and the [notebook entry](../installed-sdk.md#existing-same-estimator-notebooks) reuse the existing SDK and both same-estimator notebooks. Fresh installed operations and notebook comparison passed. No new adapter is needed for this task family. | Notebooks run in the pinned checkout and do not create SDK ledgers. Installed plans are explicitly opened/derived in Concept; no Jupyter UI or external contributor claim. |
@@ -138,5 +157,8 @@ required CI run. This is a documentation-only change: required CI supplies the
 full current-revision suite under the [verification policy](../development.md#documentation-only-changes).
 The earlier full run is unchanged-implementation evidence, not the full CI
 receipt for these new documents. Screen-reader observations remain subject to
-the explicit accessibility record; this package cannot be marked complete
-while that binding row is underverified.
+the explicit accessibility record. At the PR 86 handoff that unmet row blocked
+OT-065 closure. The subsequent user-directed scope exception closes the
+selected internal package and transfers the still-underverified qualification
+to the named open follow-up. It does not convert the original audit into proof
+that every original criterion passed.

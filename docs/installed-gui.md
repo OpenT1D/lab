@@ -267,10 +267,12 @@ native export. The existing SDK capabilities retain their original meaning.
 Actual screen-reader use, independent intended-user acceptance, clean-host
 distribution and Apple notarisation remain separate from internal checks.
 The [OT-065 audit](research/ot065-criteria-evidence.md) maps the existing design,
-software and onboarding evidence. Its binding screen-reader criterion remains
-open; the [qualification record](research/ot065-accessibility-qualification.md)
-supplies an exact-candidate protocol and the inconclusive actual activation
-attempt, without claiming VoiceOver speech/navigation was observed.
+software and onboarding evidence. OT-065 is closed for the selected internal
+scope by the user's explicit decision to defer actual screen-reader
+qualification to an [open follow-up](../ROADMAP.md#deferred-screen-reader-qualification).
+The [qualification record](research/ot065-accessibility-qualification.md) retains
+the exact-candidate protocol and inconclusive activation attempt. VoiceOver
+speech/navigation remains unverified; the closure adds no accessibility claim.
 
 ## Three screens
 

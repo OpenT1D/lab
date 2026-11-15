@@ -4,6 +4,14 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Close OT-065 for the selected internal two-task MMTT Mac workbench and shared
+  SDK/onboarding under the user's explicit scope decision. Defer the missing
+  actual VoiceOver qualification to a named open follow-up, preserving its
+  inconclusive result and protocol. This supersedes the earlier package-open
+  status below and adds no accessibility evidence or software behavior change.
+  General accessibility requirements, independent intended-user acceptance and
+  distribution qualification remain open within their separate scope.
+
 - Consolidate the gated OT-062 simglucose audit-1 consumer, independent invented-
   data reconstruction, owned fixture workers and passive intake/inspection
   preparation. Keep fixture clocks and host metadata independent of actual
