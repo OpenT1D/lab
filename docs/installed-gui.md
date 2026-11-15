@@ -79,6 +79,13 @@ cancellation and waits for owned cleanup. An action returning is distinct from
 an execution succeeding or its scientific evidence being complete. Inspect the
 retained outcome even when an action fails or is refused.
 
+Input validation does not guarantee that an eventual report fits every existing
+reader bound. A large custom cohort with many perturbation draws can complete
+its numerical work but exceed the shared reader's 16 MiB report-record limit.
+The SDK retains that admission refusal as a failed forensic attempt; it does
+not promote it to complete evidence. Keep the failed attempt and derive a
+smaller study if that boundary is reached. This UI does not widen reader limits.
+
 **Run a new attempt** retries explicitly and retains every earlier attempt.
 An unfinished attempt requires the separate stopped-executor confirmation and
 **Recover unfinished attempt** action. Recovery records an interrupted outcome;

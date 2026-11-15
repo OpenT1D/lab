@@ -74,7 +74,7 @@ async function exportExact(app, page, testInfo, desktop, record, label, filename
   const before = await app.evaluate(() => globalThis.comparisonDownloads.length);
   await page.getByRole('button', { name: label, exact: true }).click();
   await expect.poll(() => app.evaluate(() => globalThis.comparisonDownloads.length)).toBe(before + 1);
-  const download = await app.evaluate(index => globalThis.comparisonDownloads[index], before);
+  const download = await app.evaluate((_electron, index) => globalThis.comparisonDownloads[index], before);
   expect(download).toMatchObject({ filename, status: 'completed' });
   expect(path.dirname(download.path)).toBe(desktop.downloads);
   const bytes = await readFile(download.path); await writeFile(testInfo.outputPath(savedName), bytes);

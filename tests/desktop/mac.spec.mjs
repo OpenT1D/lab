@@ -349,6 +349,8 @@ for (const [task, title] of [['mmtt-sensitivity', 'Native paired analysis'], ['m
     expect(evidence.receipt.remaining_owned_processes).toEqual([]);
     await page.locator(`#execution-attempts article[data-attempt="${attempt.id}"]`).getByRole('button', { name: 'Open results', exact: true }).click();
     await expect(page.locator('#results-heading')).toBeFocused();
+    await expect(page.locator('#tree-results')).toHaveClass(/active/);
+    await expect(page.locator('#tree-study')).not.toHaveClass(/active/);
     await expect(page.locator('#results-plan')).toHaveValue(plan); await expect(page.locator('#results-attempt')).toHaveValue(attempt.id);
     await page.locator('#results-inspect-inputs').click();
     await expect(page.locator('.results-used-inputs')).toContainText(plan);

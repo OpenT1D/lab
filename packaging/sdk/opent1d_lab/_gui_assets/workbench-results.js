@@ -284,12 +284,16 @@ export function createResultsView({ store, container, showStudy = () => {}, befo
       attemptSummary.querySelector('.results-used-inputs')?.remove();
       const details = node('details', undefined, 'results-used-inputs'); details.open = true;
       const summary = node('summary', 'Used inputs · read only');
-      let text = JSON.stringify(value, null, 2);
+      let text = JSON.stringify(value, null, 2), metadataText;
       if (typeof value.scientific_input_text === 'string') {
         const metadata = { ...value }; delete metadata.scientific_input; delete metadata.scientific_input_text;
-        text = JSON.stringify(metadata, null, 2) + '\n\nScientific inputs (exact saved JSON):\n' + value.scientific_input_text;
+        metadataText = JSON.stringify(metadata, null, 2);
+        text = 'Scientific inputs (exact saved JSON):\n' + value.scientific_input_text;
       }
       details.append(summary, node('p', `Attempt ${attempt.id} · frozen plan ${attempt.plan}. Your editable Study is unchanged.`, 'muted'), node('pre', text));
+      if (metadataText) {
+        const source = node('details'); source.append(node('summary', 'Source and reader identities'), node('pre', metadataText)); details.append(source);
+      }
       attemptSummary.append(details); summary.tabIndex = -1; summary.focus();
       notice('Exact frozen inputs read. Your editable Study and selected execution plan are unchanged.');
     });

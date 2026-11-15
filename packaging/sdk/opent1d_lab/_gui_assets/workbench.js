@@ -36,6 +36,7 @@ function showStudy() {
   activeView = 'study'; resultsView?.hide();
   if ($('results-tab')) $('results-tab').removeAttribute('aria-current');
   $('study-tab').setAttribute('aria-current', 'page'); $('tree-study').setAttribute('aria-current', 'page'); $('tree-results').removeAttribute('aria-current');
+  $('tree-study').classList.add('active'); $('tree-results').classList.remove('active');
   for (const id of ['study-body', 'study-tab', 'close-study']) $(id).hidden = false;
   render();
   $('study-heading').focus();
@@ -249,6 +250,7 @@ async function showResults(attemptId) {
   if (opened === false) return;
   activeView = 'results'; $('study-body').hidden = true;
   $('study-tab').removeAttribute('aria-current'); $('tree-study').removeAttribute('aria-current'); $('tree-results').setAttribute('aria-current', 'page');
+  $('tree-study').classList.remove('active'); $('tree-results').classList.add('active');
   if ($('results-tab')) { $('results-tab').hidden = false; $('results-tab').setAttribute('aria-current', 'page'); }
   if ($('close-results')) $('close-results').hidden = false;
   $('results-heading')?.focus(); render();
