@@ -195,6 +195,13 @@ comparison and reopening. Errors must identify the problem and a usable next
 step without discarding input. Keyboard, screen-reader, zoom and narrow-window
 use require verification; figures need units and accessible tables or exports.
 
+The user's 15 November 2026 [scope decision](../ROADMAP.md#deferred-screen-reader-qualification)
+closes the selected internal OT-065 two-task MMTT workbench/onboarding package
+while explicitly deferring actual screen-reader qualification to an open
+follow-up. This exception changes package closure, not this product requirement
+or the observed evidence. Screen-reader support remains unverified; closing
+OT-065 supplies no complete-accessibility, intended-user or distribution claim.
+
 The existing [OT-058 requirement](../ROADMAP.md#planned-windows-installer-ot-058)
 remains: one graphical Windows installer and launch shortcut, with no separate
 user-managed Git, WSL, Python or terminal setup. The application must manage its
@@ -381,7 +388,7 @@ existing Windows installer scope.
 | UX-07 | Understandable evidence and limitations | OT-059, OT-065 |
 | UX-08 | Handoff, archives and collaboration | OT-064 |
 | UX-09 | Onboarding, tutorials and programmer entry | OT-065 |
-| UX-10 | Accessibility, correction and diagnosis | OT-065, OT-073 |
+| UX-10 | Accessibility, correction and diagnosis | OT-065, the [open deferred screen-reader follow-up](../ROADMAP.md#deferred-screen-reader-qualification), OT-073 |
 | UX-11 | Independent user validation and adoption evidence | OT-072 |
 | UX-12 | Support, governance and maintained extensions | OT-073, OT-074 |
 | CORE-01 | Architecture inventory and gradual route extraction | OT-059, OT-060 |
