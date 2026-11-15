@@ -86,6 +86,7 @@ export class WorkbenchStore {
   }
   selectPlan(id) {
     if (id && !this.plans.some(plan => plan.id === id)) throw new Error('This frozen plan is unavailable. Refresh the project.');
+    if (this.selectedPlanId !== (id || null)) this.readiness = null;
     this.selectedPlanId = id || null; this.emit();
   }
   async refreshProject() {
@@ -99,8 +100,10 @@ export class WorkbenchStore {
     if (record.validation?.valid !== true || record.validation.revision !== record.revision) throw new Error('Review this saved study revision before freezing.');
     const result = await this.action('freeze', { draft: record.id, revision: record.revision, name: this.name, parent: record.parent || null });
     const annotated = await this.request('/api/drafts/' + record.id);
-    if (this.generation === generation && this.epoch === epoch && this.record?.id === record.id) this.accept(annotated);
-    this.selectedPlanId = result.plan; this.readiness = null; this.emit(); return result;
+    if (this.generation === generation && this.epoch === epoch && this.record?.id === record.id) {
+      this.accept(annotated); this.selectedPlanId = result.plan; this.readiness = null;
+    }
+    this.emit(); return result;
   }
   async checkPlan() {
     const plan = this.selectedPlanId, project = this.projectId, runtime = this.data?.runtime_revision;
@@ -138,6 +141,7 @@ export class WorkbenchStore {
         const saved = JSON.parse(this.storage?.getItem(this.key()) || 'null');
         if (saved && typeof saved.name === 'string' && saved.files && approaches[record.task].files.every(f => typeof saved.files[f] === 'string')) {
           this.name = saved.name; this.files = { ...saved.files }; this.dirty = true;
+          this.selectedPlanId = null; this.readiness = null;
           this.conflict = saved.revision !== record.revision;
           this.error = this.conflict ? 'This study changed elsewhere. Your unsaved edits are retained. Reload the saved study or save your edits as a separate study.' : 'Recovered unsaved edits. Save to keep them in your workspace.';
         }

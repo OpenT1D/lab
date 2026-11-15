@@ -62,6 +62,13 @@ test('native paired attempts retain earlier evidence and withdraw refused export
   await expect(page.locator('#results-limits')).toContainText('Synthetic observations only');
   const original = await download(page, 'Export report JSON');
   expect(original.filename).toBe('report.json');
+  const draftBefore = await page.evaluate(() => globalThis.resultsStore.record.id);
+  await page.locator('#results-inspect-inputs').click();
+  await expect(page.locator('.results-used-inputs')).toContainText(study.plan);
+  expect(await page.evaluate(() => globalThis.resultsStore.record.id)).toBe(draftBefore);
+  await page.locator('#results-derive').click();
+  await expect.poll(() => page.evaluate(() => globalThis.resultsStore.record.parent)).toBe(study.plan);
+  expect(await page.evaluate(() => globalThis.resultsStore.record.id)).not.toBe(draftBefore);
   const firstId = await page.locator('#results-attempt').inputValue();
   await run(page, study.plan, firstId);
   await expect(page.locator('#results-attempt option')).toHaveCount(2);
@@ -128,7 +135,9 @@ test('sampling native reports keep planned denominator, child reports, incomplet
   await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.locator('#results-verify').focus(); await page.keyboard.press('Tab');
-  await expect(page.locator('#results-back-study')).toBeFocused();
+  await expect(page.locator('#results-inspect-inputs')).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(page.locator('#results-derive')).toBeFocused();
   await page.screenshot({ path: testInfo.outputPath('sampling-incomplete-narrow.png') });
   expect(errors).toEqual([]);
 });

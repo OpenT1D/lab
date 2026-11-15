@@ -57,7 +57,7 @@ function markdown(text, container) {
   container.replaceChildren(...nodes);
 }
 
-export function createResultsView({ store, container, showStudy = () => {}, beforeNavigate = () => store.flush() }) {
+export function createResultsView({ store, container, showStudy = () => {}, beforeNavigate = () => store.flush(), runPlan = plan => store.action('run', { plan, retry_of: null }) }) {
   let projectId = null, active = false, mode = 'attempts', pending = false, epoch = 0, reportEpoch = 0;
   let selectedAttempt = '', selectedPlan = '', selectedComparison = '', loadedComparison = null, available = [];
   let report = null, imageURL = null, roster = [], nextId = 1, attemptSignature = '', comparisonSignature = '';
@@ -85,7 +85,7 @@ export function createResultsView({ store, container, showStudy = () => {}, befo
   const allowLabel = node('label', undefined, 'results-check');
   const allowFailed = element('input', 'results-allow-failed'); allowFailed.type = 'checkbox';
   allowLabel.append(allowFailed, node('span', 'Include incomplete native evidence'));
-  attemptActions.append(button('results-verify', 'Verify saved report', verifyAttempt, true), button('results-back-study', 'Back to Study', () => showStudy()));
+  attemptActions.append(button('results-verify', 'Verify saved report', verifyAttempt, true), button('results-inspect-inputs', 'Inspect used inputs', inspectInputs), button('results-derive', 'Make a variant', deriveAttempt), button('results-back-study', 'Back to Study', () => showStudy()));
   attemptsPanel.append(attemptFields, attemptSummary, allowLabel, attemptActions);
 
   const comparisonPanel = element('section', 'results-comparison'); comparisonPanel.setAttribute('aria-label', 'Planned comparisons');
@@ -206,13 +206,15 @@ export function createResultsView({ store, container, showStudy = () => {}, befo
           const details = node('details'); details.append(node('summary', 'All planned slots'), table(['Planned slot', 'Status'], slots, 'Complete planned slot accounting')); attemptSummary.append(details);
           if (outcome.payload !== 'native') attemptSummary.append(node('p', 'No admissible native report is available. The failure ledger and forensic files are retained in the project.', 'results-contract'));
           else if (outcome.completeness !== 'complete') attemptSummary.append(node('p', 'Incomplete evidence cannot support a complete conclusion. Include it explicitly to inspect the native failure and missing-case accounting.', 'results-contract'));
-        } else attemptSummary.append(node('p', 'Unfinished or unobserved execution. No completed outcome has been recorded. Confirm the old executor has stopped before explicit CLI recovery.', 'results-contract'));
+        } else attemptSummary.append(node('p', 'Unfinished or unobserved execution. No completed outcome has been recorded. Confirm the old executor has stopped, then return to Study to recover explicitly.', 'results-contract'));
         const identity = node('details'); identity.append(node('summary', 'Frozen plan and attempt identities'), node('p', 'Plan: ' + attempt.plan), node('p', 'Attempt: ' + attempt.id));
         if (attempt.retry_of) identity.append(node('p', 'Retry of: ' + attempt.retry_of)); attemptSummary.append(identity);
       }
     }
     ui['results-plan'].disabled = busy() || !list.length; ui['results-attempt'].disabled = busy() || !visible.length;
     ui['results-verify'].disabled = busy() || !outcome || outcome.payload !== 'native';
+    ui['results-inspect-inputs'].disabled = busy() || !attempt;
+    ui['results-derive'].disabled = busy() || !attempt;
     ui['results-verify'].textContent = outcome?.completeness === 'complete' ? 'Verify saved report' : 'Verify incomplete evidence';
     allowLabel.hidden = !outcome || outcome.payload !== 'native' || outcome.completeness === 'complete'; allowFailed.disabled = busy();
   }
@@ -268,6 +270,34 @@ export function createResultsView({ store, container, showStudy = () => {}, befo
       if (current(expected) && mode === 'attempts' && selectedAttempt === attempt) await showReport(result.report, expected);
     });
   }
+  async function inspectInputs() {
+    const attempt = attempts().find(item => item.id === selectedAttempt);
+    if (!attempt) return;
+    await task('Reading the exact frozen inputs…', async expected => {
+      const value = await store.action('plan', { plan: attempt.plan });
+      if (!current(expected) || selectedAttempt !== attempt.id) return;
+      attemptSummary.querySelector('.results-used-inputs')?.remove();
+      const details = node('details', undefined, 'results-used-inputs'); details.open = true;
+      const summary = node('summary', 'Used inputs · read only');
+      let text = JSON.stringify(value, null, 2);
+      if (typeof value.scientific_input_text === 'string') {
+        const metadata = { ...value }; delete metadata.scientific_input; delete metadata.scientific_input_text;
+        text = JSON.stringify(metadata, null, 2) + '\n\nScientific inputs (exact saved JSON):\n' + value.scientific_input_text;
+      }
+      details.append(summary, node('p', `Attempt ${attempt.id} · frozen plan ${attempt.plan}. Your editable Study is unchanged.`, 'muted'), node('pre', text));
+      attemptSummary.append(details); summary.tabIndex = -1; summary.focus();
+      notice('Exact frozen inputs read. Your editable Study and selected execution plan are unchanged.');
+    });
+  }
+  async function deriveAttempt() {
+    const attempt = attempts().find(item => item.id === selectedAttempt);
+    if (!attempt || !await beforeNavigate()) return;
+    await task('Creating a separate editable variant…', async expected => {
+      const value = await store.action('derive', { plan: attempt.plan });
+      if (!current(expected) || selectedAttempt !== attempt.id) return;
+      store.accept(value); showStudy();
+    });
+  }
   async function loadOptions() {
     const plan = ui['results-member-plan'].value;
     await task('Reading native comparison options…', async expected => {
@@ -320,7 +350,7 @@ export function createResultsView({ store, container, showStudy = () => {}, befo
     const comparison = selectedComparison, plan = loadedComparison.variants.map(member => member.plan).find(plan => loadedComparison.attempts[plan].status === 'unattempted');
     if (!plan) return;
     await task('Running the next planned analysis. Its first attempt will remain in this comparison…', async expected => {
-      await store.action('run', { plan, retry_of: null });
+      await runPlan(plan);
       if (!current(expected) || selectedComparison !== comparison) return;
       const value = await store.action('comparison_open', { comparison, at: null });
       if (current(expected) && selectedComparison === comparison) { loadedComparison = value; notice('Planned attempt retained. Verify the comparison to reconstruct the current complete denominator.'); }

@@ -37,6 +37,7 @@ function showStudy() {
   if ($('results-tab')) $('results-tab').removeAttribute('aria-current');
   $('study-tab').setAttribute('aria-current', 'page'); $('tree-study').setAttribute('aria-current', 'page'); $('tree-results').removeAttribute('aria-current');
   for (const id of ['study-body', 'study-tab', 'close-study']) $(id).hidden = false;
+  render();
   $('study-heading').focus();
 }
 async function openProject(id) { if (!await beforeNavigate()) return; if (await store.openProject(id)) { rememberProject(); showStudy(); } }
@@ -249,6 +250,7 @@ async function showResults(attemptId) {
   activeView = 'results'; $('study-body').hidden = true;
   $('study-tab').removeAttribute('aria-current'); $('tree-study').removeAttribute('aria-current'); $('tree-results').setAttribute('aria-current', 'page');
   if ($('results-tab')) { $('results-tab').hidden = false; $('results-tab').setAttribute('aria-current', 'page'); }
+  if ($('close-results')) $('close-results').hidden = false;
   $('results-heading')?.focus(); render();
 }
 $('study-form').onsubmit = attempt(async () => {
@@ -279,7 +281,7 @@ document.addEventListener('keydown', event => { if (event.key === 'Escape' && ma
 $('workspace-settings').onclick = () => information('Workspace details', ['Project folder: ' + store.project.path, 'Workspace: ' + store.data.workspace], true);
 $('tree-results').onclick = attempt(() => showResults());
 if ($('results-tab')) $('results-tab').onclick = attempt(() => showResults());
-if ($('close-results')) $('close-results').onclick = () => { resultsView?.hide(); $('results-tab').hidden = true; showStudy(); };
+if ($('close-results')) $('close-results').onclick = () => { resultsView?.hide(); $('results-tab').hidden = true; $('close-results').hidden = true; showStudy(); };
 for (const id of ['quit-start', 'quit-workspace']) $(id).onclick = attempt(quit);
 for (const b of document.querySelectorAll('.dialog-close')) b.onclick = () => b.closest('dialog').close();
 async function saveCurrent() { if (applyEditor()) return store.save(); return false; }
@@ -291,7 +293,7 @@ if (desktop) {
       const choice = await desktop.confirmEditor();
       if (choice === 'cancel') return;
       if (choice === 'save') { if (!applyEditor() || !await store.flush()) return; }
-      else { editor = null; uploadGeneration++; closeDialogs(); }
+      else { if (store.dirty) store.backup(); else store.clearBackup(); editor = null; uploadGeneration++; closeDialogs(); }
     }
     if (command === 'save') await saveCurrent();
     else if (buttons[command]) $(buttons[command]).click();
@@ -313,7 +315,10 @@ window.addEventListener('beforeunload', event => { if (store.dirty || store.savi
 async function installWorkflow() {
   if (!$('execution-panel')?.tagName || !$('results-body')?.tagName) return;
   const [{ createExecutionView }, { createResultsView }] = await Promise.all([import('/workbench-execution.js'), import('/workbench-results.js')]);
-  resultsView = createResultsView({ store, container: $('results-body'), showStudy, beforeNavigate });
+  resultsView = createResultsView({ store, container: $('results-body'), showStudy, beforeNavigate, runPlan: async plan => {
+    store.selectPlan(plan); showStudy(); await store.checkPlan();
+    if (store.ready) await store.runPlan();
+  } });
   executionView = createExecutionView({ store, container: $('execution-panel'), onResults: showResults });
   render();
 }

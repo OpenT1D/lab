@@ -42,6 +42,25 @@ test('editing reviewed scientific input invalidates the old ready selection', as
   assert.equal(store.plans.length, 2, 'frozen plans must remain available after editing');
 });
 
+test('a late freeze annotation cannot select old inputs after a newer edit', async () => {
+  const store = create(), calls = [];
+  store.accept(saved({ frozen_plan: null }));
+  let finish, requested = false;
+  store.action = async (operation, args) => {
+    calls.push(operation);
+    return operation === 'freeze' ? { plan } : saved({ revision: 4, frozen_plan: null, validation: null, files: args.files });
+  };
+  store.request = async () => { requested = true; return new Promise(resolve => { finish = resolve; }); };
+  const freezing = store.freeze();
+  await until(() => requested);
+  store.edit(store.name, { ...store.files, 'observations.csv': 'newer than frozen inputs' }, false);
+  finish(saved({ revision: 4 })); await freezing;
+  assert.equal(store.selectedPlanId, null); assert.equal(store.ready, false);
+  await assert.rejects(store.runPlan(), /Check this frozen plan/);
+  assert.deepEqual(calls, ['freeze', 'draft_save']);
+  assert.equal(store.record.files['observations.csv'], 'newer than frozen inputs');
+});
+
 test('recovered post-freeze input bytes cannot silently run the older plan', async () => {
   const store = create(), calls = [];
   store.storage.setItem(store.key(), JSON.stringify({ revision: 3, name: store.name, files: { ...store.files, 'observations.csv': 'recovered new observations' }, parent: null }));

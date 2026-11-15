@@ -8,7 +8,7 @@ import unittest
 import uuid
 from pathlib import Path
 
-from test_installed_gui import ControlledSDK, state
+from tests.test_installed_gui import ControlledSDK, state
 
 ROOT = Path(__file__).resolve().parents[1]
 

@@ -5,7 +5,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
-const files = ['mmtt.spec.mjs', 'installed-sampling.spec.mjs', 'workbench.spec.mjs', 'comparisons.spec.mjs', 'connected.spec.mjs', 'internal-candidate.spec.mjs', 'integrated-candidate.spec.mjs', 'm3-workbench.spec.mjs', 'three-screens.spec.mjs', 'concept-v1.spec.mjs'];
+const files = ['mmtt.spec.mjs', 'installed-sampling.spec.mjs', 'workbench.spec.mjs', 'comparisons.spec.mjs', 'connected.spec.mjs', 'internal-candidate.spec.mjs', 'integrated-candidate.spec.mjs', 'm3-workbench.spec.mjs', 'three-screens.spec.mjs', 'concept-v1.spec.mjs', 'concept-results.spec.mjs'];
 test('complete canonical file multiset, including M3 and the three research screens, is selected exactly once', () => {
   const all = [1, 2, 3].flatMap(i => applicationFiles(files, `${i}/3`));
   assert.deepEqual(all.sort(), [...files].sort());
@@ -22,7 +22,7 @@ test('new, missing, duplicate files and invalid groups fail closed', () => {
 });
 test('caller mutation does not contaminate later file selections', () => {
   applicationFiles(files, '1/3').pop();
-  assert.equal(applicationFiles(files, '1/3').length, 3);
+  assert.equal(applicationFiles(files, '1/3').length, 4);
 });
 
 test('recursive inventory detects an unlisted nested app spec and ignores dependency/docs specs', () => {

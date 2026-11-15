@@ -63,8 +63,9 @@ internal build, saved workspace and exact-artifact checks. Signing, notarisation
 clean-host and independent-user acceptance remain separate.
 
 The internal [Concept v1 Mac workspace](docs/installed-gui.md#concept-v1-desktop-application)
-places the compact launcher and Study editor in their own application window,
-reusing the installed SDK services. Its desktop bundle and lifecycle checks are
+connects the compact launcher and Study editor to execution, retained attempts,
+verified results, prospective comparisons and native exports in its own
+application window, reusing the installed SDK services. Its desktop bundle and lifecycle checks are
 separate from the earlier browser-launcher candidate. Windows is deferred.
 
 Historical native environments retain dependency advisories. The public snapshot

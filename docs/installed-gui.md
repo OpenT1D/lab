@@ -53,15 +53,74 @@ No second project format, estimator or execution service is introduced.
   edits and prevent project switching. Conflicts offer reloading the saved
   version or saving a separate study. A failed reload preserves the recovery
   copy. Closing and reopening the same workspace reloads saved revisions.
-- **Review study** saves and invokes the existing task validation. It does not
-  freeze or execute an analysis. Existing execution, comparison and result
-  functions remain in **Project actions → Open full laboratory**; their visual
-  redesign is a later increment.
+- **Review study** saves and invokes the existing task validation. Freezing and
+  execution are separate, explicit steps in the execution section below Study.
+  The Results tab uses the same SDK attempts, trusted readers and exports as the
+  full laboratory.
 
 The workbench bundles its Figma SVG assets and Inter font locally, with no
 remote runtime assets. The Inter notice is included in the SDK package. The
 initial implementation covers the two synthetic MMTT tasks; independent user
 acceptance and broader accessibility/platform qualification remain separate.
+
+### Review, freeze and run
+
+Start with **Compare paired responses** (`mmtt-sensitivity`). Open or create a
+study, edit the synthetic observations or assumptions, and save. **Review study**
+checks that saved revision without running estimation. Correct any reported
+input error in the retained study, save and review again. **Freeze study** records
+the reviewed revision explicitly. The execution section shows the concept revision and full
+frozen-plan identity; later edits never overwrite that plan.
+
+Choose the frozen plan, **Check readiness** and explicitly **Run analysis**. The
+display reports the controller's real action phase and elapsed time, rather
+than an estimated completion percentage. **Cancel analysis** requests SDK
+cancellation and waits for owned cleanup. An action returning is distinct from
+an execution succeeding or its scientific evidence being complete. Inspect the
+retained outcome even when an action fails or is refused.
+
+**Run a new attempt** retries explicitly and retains every earlier attempt.
+An unfinished attempt requires the separate stopped-executor confirmation and
+**Recover unfinished attempt** action. Recovery records an interrupted outcome;
+it does not resume computation or adopt/signal an old recorded process. Confirm
+that the earlier executor has stopped before recovering. Reopening a project
+reads its authoritative plans and attempts and never automatically runs one.
+
+The same route supports **Compare measurement schedules** (`mmtt-sampling`).
+Its extra design and development inputs retain their existing allocation/seal
+contract; use the [sampling guide](mmtt-sampling.md) to interpret them. These two
+routes use the existing standard-library analysis; no physiological runtime is
+installed or selected here.
+
+### Inspect, compare and export
+
+Open **Results** from the explorer, its tab or a retained attempt. Select the
+execution to inspect, then explicitly verify its saved report. The result view
+keeps the plan and attempt identity, execution outcome and evidence completeness
+separate. **Inspect used inputs** reads that attempt's frozen settings without
+replacing your editable Study. **Make a variant** creates a separate concept
+with that frozen plan as its parent, after saving settled edits. Failed/unfinished
+work remains in the list. Incomplete evidence needs
+explicit consent where the reader supports it; forensic-only evidence has no
+admissible scientific report. Sampling retains its native child analyses and
+planned slots. The supplied data are invented; successful reconstruction is not
+human-data or biological validation.
+
+Export uses the existing verified native JSON/Markdown reports, sampling child
+reports and comparison CSV table. Verification reads saved evidence rather than
+rerunning the analysis. A refused download withdraws the displayed copy; verify
+again after correcting the project evidence. A downloaded report alone does
+not carry editable concept histories or the complete project ledger.
+
+For a question about analysis variants, prepare and freeze all member plans
+before executing any of them. Declare the question, baseline and complete
+prospective comparison roster through the comparison section in Results, then
+run those frozen plans through Study. Reopen and verify the saved comparison to
+inspect its full roster, first attempts and incomplete/unattempted cases. The
+native comparison direction and denominators remain authoritative; choosing
+arbitrary past attempts does not create an equivalent prospective comparison.
+The [comparison contract](#compare-variants-and-frozen-plans) explains the
+supported tasks, changed fields and interpretation limits.
 
 ## Concept v1 desktop application
 
@@ -117,10 +176,11 @@ native menu/dialog integration, save/reopen, window bounds, renderer failure and
 owner-crash cleanup. Dirty development builds require the additional explicit
 `OPENT1D_DESKTOP_ALLOW_DIRTY=1`; retain that distinction in evidence.
 
-This UI increment covers creating/opening projects, editing inputs, saving and
-reopening for both synthetic MMTT approaches. **Review study** validates saved
-inputs. The full laboratory's execution/result interface is a later design
-increment; the existing SDK capabilities retain their original meaning.
+This bounded UI increment connects both synthetic MMTT approaches through saved
+concepts, frozen plans, attempts, verification, prospective comparison and
+native export. The existing SDK capabilities retain their original meaning.
+Actual screen-reader use, independent intended-user acceptance, clean-host
+distribution and Apple notarisation remain separate from internal checks.
 
 ## Three screens
 
