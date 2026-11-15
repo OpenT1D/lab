@@ -551,6 +551,98 @@ a {
   max-width:840px;
 }
 
+.execution-panel {
+  display:grid;
+  gap:16px;
+  margin-top:32px;
+  padding-top:24px;
+  border-top:1px solid var(--line);
+  font-size:14px;
+  overflow-wrap:anywhere;
+}
+
+.execution-panel>h2 {
+  font-size:20px;
+}
+
+.execution-panel>#refresh-study {
+  justify-self:start;
+}
+
+.execution-controls,.execution-attempts,.attempt-recovery {
+  display:grid;
+  gap:12px;
+  min-width:0;
+}
+
+.execution-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.execution-identity code {
+  font-size:12px;
+  overflow-wrap:anywhere;
+}
+
+.execution-status,.execution-attempt {
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:var(--navigation);
+}
+
+.execution-attempt>*+*,.execution-status>*+* {
+  margin-top:12px;
+}
+
+.execution-attempt h4,.execution-panel h3 {
+  margin:0;
+  font-size:14px;
+}
+
+.execution-attempt details {
+  color:var(--muted);
+}
+
+.execution-attempt summary {
+  cursor:pointer;
+}
+
+.attempt-recovery input[type=checkbox] {
+  width:18px;
+  min-height:18px;
+  height:18px;
+  accent-color:var(--blue);
+}
+
+.attempt-recovery label {
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+#results-body {
+  flex:1;
+  min-height:0;
+  overflow:auto;
+}
+
+#project-loading {
+  padding:32px;
+}
+
+.tab:not([aria-current=page]),.tab:not([aria-current=page])+.close-tab {
+  background:var(--navigation);
+  color:var(--muted);
+}
+
+summary:focus-visible,.results-table-scroll:focus-visible,.execution-panel:focus-visible {
+  outline:2px solid var(--blue);
+  outline-offset:3px;
+}
+
 .study-intro {
   margin-bottom:32px;
   min-height:68px;

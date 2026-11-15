@@ -13,7 +13,7 @@ export function presentApplicationFiles(directory) {
 // Keep the measured long flows apart and explicitly assign new files.
 // A new configured file must be assigned explicitly; it cannot disappear.
 const groups = [
-  ['connected.spec.mjs', 'internal-candidate.spec.mjs', 'three-screens.spec.mjs'],
+  ['connected.spec.mjs', 'internal-candidate.spec.mjs', 'three-screens.spec.mjs', 'concept-results.spec.mjs'],
   ['comparisons.spec.mjs', 'integrated-candidate.spec.mjs', 'mmtt.spec.mjs', 'concept-v1.spec.mjs'],
   ['workbench.spec.mjs', 'installed-sampling.spec.mjs', 'm3-workbench.spec.mjs'],
 ];
