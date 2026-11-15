@@ -1,6 +1,7 @@
 import { WorkbenchStore, approaches } from '/workbench-store.js';
 
 const $ = id => document.getElementById(id);
+const parseSourceJSON = text => JSON.parse(text.replace(/^\uFEFF/, ''));
 const node = (tag, text, cls) => { const n = document.createElement(tag); if (text !== undefined) n.textContent = text; if (cls) n.className = cls; return n; };
 const icon = (name, size) => { const n = node('img'); n.src = '/' + name; n.width = size; n.height = size; n.alt = ''; return n; };
 let renderedRecord = null, creationMode = 'guided', editor = null, uploadGeneration = 0, stopped = false;
@@ -49,7 +50,7 @@ function inputSummary() {
   const files = store.files, observed = files['observations.csv']?.trim();
   $('observations-description').textContent = observed ? 'observations.csv · synthetic measurements' : 'Add your synthetic measurement files';
   $('observations-action').textContent = observed ? 'View' : 'Add';
-  let settings; try { settings = JSON.parse(files['settings.json']); } catch { /* Raw text stays editable. */ }
+  let settings; try { settings = parseSourceJSON(files['settings.json']); } catch { /* Raw text stays editable. */ }
   $('assumptions-description').textContent = settings?.variants ? `settings.json · ${settings.variants.length} assumption variants` : 'Add or review analysis settings';
   $('assumptions-action').textContent = settings ? 'Review' : 'Add';
 }
@@ -122,7 +123,7 @@ function unsafeNumber(value) {
 function paintStructured() {
   const file = $('input-file').value;
   let settings, unsafe = false;
-  try { settings = JSON.parse(editor.files[file].replace(/^\uFEFF/, '')); unsafe = unsafeNumber(settings); }
+  try { settings = parseSourceJSON(editor.files[file]); unsafe = unsafeNumber(settings); }
   catch { /* Keep malformed raw text editable. */ }
   $('structured-settings').hidden = file !== 'settings.json' || !settings?.uncertainty || unsafe;
   $('structured-warning').hidden = file !== 'settings.json' || !unsafe;
@@ -183,8 +184,8 @@ for (const id of ['draws', 'seed']) $(id).oninput = () => {
   if (value === '' || !Number.isSafeInteger(number)) { $(id).setAttribute('aria-invalid', 'true'); $(id).setCustomValidity('Enter a whole number within the exact editor range.'); return; }
   $(id).removeAttribute('aria-invalid');
   $(id).setCustomValidity('');
-  try { const settings = JSON.parse(editor.files['settings.json']); settings.uncertainty[id] = number; editor.files['settings.json'] = JSON.stringify(settings, null, 2) + '\n'; editor.dirty = true; $('input-text').value = editor.files['settings.json']; }
-  catch (error) { $('file-error').textContent = error.message; $('file-error').hidden = false; }
+  try { const settings = parseSourceJSON(editor.files['settings.json']); settings.uncertainty[id] = number; editor.files['settings.json'] = JSON.stringify(settings, null, 2) + '\n'; editor.dirty = true; $('input-text').value = editor.files['settings.json']; }
+  catch (error) { $(id).setCustomValidity('Correct the settings file before applying this edit.'); $('file-error').textContent = error.message; $('file-error').hidden = false; }
 };
 $('input-upload').onchange = async () => {
   const file = $('input-upload').files[0], name = $('input-file').value, generation = ++uploadGeneration, active = editor;

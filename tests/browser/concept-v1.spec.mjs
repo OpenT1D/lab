@@ -153,7 +153,17 @@ test('two-tab conflict preserves both revisions and permits a separate saved stu
 test('raw and uploaded inputs preserve large integers, BOM and line endings', async ({ page, app }) => {
   await create(page, app, 'Concept persistence');
   const before = await currentDraft(page, app);
-  const exactSettings = before.files['settings.json'].replace(/"seed":\s*\d+/, '"seed":9007199254740993');
+  await page.locator('#assumptions').click();
+  await page.locator('#input-text').fill('\uFEFF' + before.files['settings.json']);
+  await expect(page.locator('#draws')).toBeVisible();
+  await page.locator('#draws').fill('64');
+  await expect(page.locator('#file-error')).not.toBeVisible();
+  await page.locator('#files-form button[type=submit]').click();
+  await page.keyboard.press('ControlOrMeta+s');
+  await expect(page.locator('#save-state')).toHaveText('');
+  const changedSettings = (await currentDraft(page, app)).files['settings.json'];
+  expect(JSON.parse(changedSettings).uncertainty.draws).toBe(64);
+  const exactSettings = '\uFEFF' + changedSettings.replace(/"seed":\s*\d+/, '"seed":9007199254740993');
   expect(exactSettings).toContain('9007199254740993');
   await page.locator('#assumptions').click();
   await page.locator('#input-text').fill(exactSettings);
@@ -163,7 +173,7 @@ test('raw and uploaded inputs preserve large integers, BOM and line endings', as
   await page.keyboard.press('ControlOrMeta+s');
   await expect(page.locator('#save-state')).toHaveText('');
   await page.locator('#observations').click();
-  const exactObservations = '\uFEFF' + before.files['observations.csv'].replaceAll('\n', '\r\n');
+  const exactObservations = '\uFEFF' + before.files['observations.csv'].replace(/\r\n?|\n/g, '\r\n');
   await page.locator('#input-upload').setInputFiles({ name: 'observations.csv', mimeType: 'text/csv', buffer: Buffer.from(exactObservations) });
   await expect(page.locator('#input-text')).toHaveValue(exactObservations.replaceAll('\r\n', '\n'));
   await page.locator('#files-form button[type=submit]').click();
