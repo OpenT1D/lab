@@ -140,3 +140,17 @@ test('reopening a server-restored project reads its saved plans and all attempts
   assert.equal(await store.openProject('project'), true);
   assert.deepEqual(calls, ['refresh']); assert.equal(store.plans.length, 1); assert.equal(store.attempts.length, 2);
 });
+
+test('project loading stays explicit until saved concept hydration finishes', async () => {
+  const store = create();
+  store.project.info = null;
+  store.data.drafts = [{ id: saved().id, project: 'project', task: 'mmtt-sensitivity', saved_at: '2026-11-15' }];
+  store.action = async () => { store.project.info = { plans: [{ id: plan, task: 'mmtt-sensitivity' }], attempts: [] }; };
+  let finish;
+  store.request = () => new Promise(resolve => { finish = resolve; });
+  const opening = store.openProject('project');
+  await until(() => !!finish);
+  assert.equal(store.loadingProject, true); assert.equal(store.record, null);
+  finish(saved()); await opening;
+  assert.equal(store.loadingProject, false); assert.equal(store.record.id, saved().id);
+});

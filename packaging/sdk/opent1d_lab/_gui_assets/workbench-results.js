@@ -292,7 +292,7 @@ export function createResultsView({ store, container, showStudy = () => {}, befo
       }
       details.append(summary, node('p', `Attempt ${attempt.id} · frozen plan ${attempt.plan}. Your editable Study is unchanged.`, 'muted'), node('pre', text));
       if (metadataText) {
-        const source = node('details'); source.append(node('summary', 'Source and reader identities'), node('pre', metadataText)); details.append(source);
+        const source = node('details'); source.append(node('summary', 'Source and protocol identities'), node('pre', metadataText)); details.append(source);
       }
       attemptSummary.append(details); summary.tabIndex = -1; summary.focus();
       notice('Exact frozen inputs read. Your editable Study and selected execution plan are unchanged.');

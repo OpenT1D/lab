@@ -12,6 +12,7 @@ export class WorkbenchStore {
     this.dirty = false; this.saving = false; this.busy = false; this.conflict = false; this.error = '';
     this.generation = 0; this.epoch = 0; this.refreshSequence = 0; this.appliedRefresh = 0;
     this.selectedPlanId = null; this.ownedJob = null; this.lastAction = null; this.readiness = null;
+    this.loadingProject = false;
   }
   emit() { this.notify(this); }
   get project() { return this.data?.projects.find(p => p.id === this.projectId); }
@@ -160,11 +161,14 @@ export class WorkbenchStore {
   async openProject(id) {
     if (!await this.flush()) return false;
     if (!this.data.projects.some(p => p.id === id)) throw new Error('This project is no longer available.');
+    this.loadingProject = true;
     clearTimeout(this.timer); this.generation++; this.projectId = id; this.record = null; this.selectedPlanId = null; this.readiness = null; this.dirty = false; this.error = ''; this.emit();
-    if (!this.project.info && !this.locked) await this.refreshProject();
-    if (this.drafts.length) await this.loadDraft(this.drafts[0].id);
-    if (!this.record && !this.selectedPlanId) this.selectedPlanId = this.plans.filter(plan => approaches[plan.task]).at(-1)?.id || null;
-    return true;
+    try {
+      if (!this.project.info && !this.locked) await this.refreshProject();
+      if (this.drafts.length) await this.loadDraft(this.drafts[0].id);
+      if (!this.record && !this.selectedPlanId) this.selectedPlanId = this.plans.filter(plan => approaches[plan.task]).at(-1)?.id || null;
+      return true;
+    } finally { this.loadingProject = false; this.emit(); }
   }
   async closeProject() {
     if (!await this.flush()) return false;

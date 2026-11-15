@@ -67,7 +67,7 @@ function inputSummary() {
 }
 function render() {
   if (stopped) return;
-  const project = store.project, record = store.record, busy = store.locked;
+  const project = store.project, record = store.record, busy = store.locked || store.loadingProject;
   const view = project ? 'workspace' : 'startup';
   if (desktop && desktopView !== view) { desktopView = view; desktop.setView(view); }
   $('startup').hidden = !!project; $('workspace').hidden = !project;
@@ -76,7 +76,9 @@ function render() {
   if (!project) { renderRecents(); }
   else {
     document.title = project.name + ' · OpenT1D'; $('project-title').textContent = project.name; $('tree-project-name').textContent = project.name;
-    $('study-empty').hidden = !!record; $('study-form').hidden = !record;
+    $('study-empty').hidden = !!record || store.loadingProject; $('study-form').hidden = !record;
+    if ($('project-loading')) $('project-loading').hidden = !store.loadingProject;
+    for (const id of ['tree-study', 'tree-results', 'study-tab', 'results-tab']) if ($(id)) $(id).disabled = store.loadingProject;
     $('save-study').hidden = !store.dirty && !store.saving;
     $('save-study').disabled = busy || store.conflict || !store.dirty;
     $('save-state').textContent = store.saving ? 'Saving…' : store.dirty ? 'Unsaved changes' : '';

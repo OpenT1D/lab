@@ -29,6 +29,29 @@ async function currentDraft(page, app) {
   return (await page.request.get(new URL('/api/drafts/' + summary.id, app.url).href, { headers: { 'X-OpenT1D-Token': token } })).json();
 }
 
+test('reopening holds navigation until the saved concept and execution history are loaded', async ({ page, app }) => {
+  await create(page, app, 'Opening saved work');
+  const incoming = await state(page, app), project = incoming.projects.find(value => value.name === 'Opening saved work');
+  const draft = incoming.drafts.find(value => value.project === project.id);
+  await page.locator('#all-projects').click();
+  let release, requested;
+  const held = new Promise(resolve => { release = resolve; }), arrived = new Promise(resolve => { requested = resolve; });
+  await page.route('**/api/drafts/' + draft.id, async route => { requested(); await held; await route.continue(); });
+  await page.locator('#recent-projects button').filter({ hasText: 'Opening saved work' }).click();
+  await arrived;
+  try {
+    await expect(page.locator('#tree-results')).toBeDisabled();
+    await expect(page.locator('#tree-study')).toBeDisabled();
+    await expect(page.locator('#project-loading')).toBeVisible();
+    await expect(page.locator('#study-empty')).not.toBeVisible();
+  } finally { release(); }
+  await expect(page.locator('#project-loading')).not.toBeVisible();
+  await expect(page.locator('#tree-results')).toBeEnabled();
+  await page.locator('#tree-results').click();
+  await expect(page.locator('#results-body')).toBeVisible();
+  await expect(page.locator('#results-heading')).toBeFocused();
+});
+
 test('both MMTT approaches persist through close, browser reload and actual installed-server restart', async ({ page, app }, testInfo) => {
   const errors = []; page.on('pageerror', e => errors.push(e.message));
   await page.setViewportSize({ width: 1440, height: 900 });
