@@ -190,7 +190,7 @@ else {
   app.whenReady().then(async () => {
     try {
       ready = await startBackend();
-      if (finalQuit) return;
+      if (finalQuit || quitting) return;
       app.setAboutPanelOptions({ applicationName: 'OpenT1D', applicationVersion: 'Concept v1 (internal)', copyright: 'OpenT1D contributors' });
       window = new BrowserWindow({
         title: 'OpenT1D', width: 920, height: 420, minWidth: 760, minHeight: 420,
@@ -223,6 +223,7 @@ else {
       window.once('ready-to-show', () => window.show());
       await window.loadURL(ready.origin + '/workbench');
     } catch (error) {
+      if (finalQuit || quitting) return;
       if (backend?.stdin.writable) backend.stdin.end();
       dialog.showErrorBox('OpenT1D could not start', error.message);
       finalQuit = true; app.exit(1);
