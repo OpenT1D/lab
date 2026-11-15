@@ -1,5 +1,7 @@
 # Decision records
 
+- [0114 — Concept v1 Mac desktop workspace](0114-concept-v1-desktop-workspace.md): an owned application window, existing SDK services and explicit desktop lifecycle.
+
 - [0091 — Shared M3 workbench](0091-m3-shared-workbench.md): preserve the native frozen comparison and causal readers through installed project services.
 
 - [0090 — Integrated native candidate](0090-integrated-native-candidate.md): qualify M4 and the connected synthetic study in an explicit internal candidate while preserving readers and runtime boundaries.

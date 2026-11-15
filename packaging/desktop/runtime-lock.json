@@ -1,0 +1,14 @@
+{
+  "schema": "opent1d.concept-desktop-runtime/1",
+  "electron": "45.3.2",
+  "release_page": "https://github.com/electron/electron/releases/tag/v45.3.2",
+  "checksum_source": "https://github.com/electron/electron/releases/download/v45.3.2/SHASUMS256.txt",
+  "targets": {
+    "darwin-arm64": {
+      "url": "https://github.com/electron/electron/releases/download/v45.3.2/electron-v45.3.2-darwin-arm64.zip",
+      "sha256": "8bdf5d55fbcc2c348b5d34b9e87a364cd2947d00b7c8bfadc6cc50233cd79ac6",
+      "python_lock": "packaging/mac/runtime-lock.json",
+      "python_cache": "python-mac.tar.gz"
+    }
+  }
+}

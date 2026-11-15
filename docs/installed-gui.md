@@ -63,6 +63,65 @@ remote runtime assets. The Inter notice is included in the SDK package. The
 initial implementation covers the two synthetic MMTT tasks; independent user
 acceptance and broader accessibility/platform qualification remain separate.
 
+## Concept v1 desktop application
+
+The internal Mac Apple Silicon build displays the same launcher and Study
+interface in its own application window. Its local service and interpreter are
+included; starting it does not open a browser. Windows is a later increment.
+The original SDK services, two-task capabilities and scientific identities remain
+unchanged. Earlier browser-launcher packages retain their separate evidence.
+
+Open `OpenT1D.app`. Native **File → Open Project** selects an existing SDK project
+directory. **Save** and `Command+S` save through the existing revisioned draft
+service. Closing the window or quitting saves settled changes and offers
+save/discard/cancel for unapplied edits, then stops the owned local service. The
+startup window is compact; opening a project expands it to Study. Renderer
+failure offers a native reload/quit path; saved work stays in the workspace.
+
+The default workspace is
+`~/Library/Application Support/OpenT1D/Concept-v1/workspace`, outside the app.
+Quit before replacing the bundle. Saved work remains in that directory. An
+explicit `--workspace` reopens a retained SDK GUI workspace after its previous
+owner has stopped. Keep that workspace to retain editable concept histories.
+
+Maintainers build from the selected clean source on Apple Silicon macOS:
+
+```sh
+uv sync --locked
+uv run --locked python scripts/build_concept_desktop.py \
+  --target darwin-arm64 --output /private/tmp/opent1d-desktop-mac \
+  --cache /private/tmp/opent1d-desktop-cache
+```
+
+The build uses Apple's signing/ZIP tools and `zstd` on the build PATH for the
+pinned provider metadata. End users need none of these tools. The locked Electron
+bundle declares macOS 13 as its minimum; that declaration is not a minimum-OS
+test. `--allow-dirty` is for local development only and records that state.
+The result includes exact source/runtime identities, all delivered file hashes,
+provider notices/source material and the ZIP checksum. Local ad-hoc signatures
+are not Developer ID signing or notarisation. Public distribution, clean-host
+and independent-user acceptance remain separate.
+
+For the actual packaged-window checks, install the locked browser test tooling
+and select the exact desktop build receipt:
+
+```sh
+cd tests/browser
+npm ci --ignore-scripts
+OPENT1D_DESKTOP_BUILD=/private/tmp/opent1d-desktop-mac/build-result.json \
+  npx playwright test --config ../desktop/playwright.config.mjs
+```
+
+This uses the app's included Electron renderer. It checks both task editors,
+native menu/dialog integration, save/reopen, window bounds, renderer failure and
+owner-crash cleanup. Dirty development builds require the additional explicit
+`OPENT1D_DESKTOP_ALLOW_DIRTY=1`; retain that distinction in evidence.
+
+This UI increment covers creating/opening projects, editing inputs, saving and
+reopening for both synthetic MMTT approaches. **Review study** validates saved
+inputs. The full laboratory's execution/result interface is a later design
+increment; the existing SDK capabilities retain their original meaning.
+
 ## Three screens
 
 The installed GUI groups the existing project workflow into three screens:

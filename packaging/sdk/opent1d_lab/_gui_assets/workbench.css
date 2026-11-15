@@ -1018,3 +1018,30 @@ textarea {
   min-width:0;
   overflow:hidden;
 }
+
+/* The native titlebar controls live in the existing 48px application header. */
+html.desktop .startup {
+  padding:0;
+}
+html.desktop .start-window {
+  width:100%;
+  border:0;
+  border-radius:0;
+}
+html.desktop #quit-start {
+  display:none;
+}
+html.desktop .start-header,
+html.desktop .workspace-header {
+  -webkit-app-region:drag;
+}
+html.desktop button,
+html.desktop input,
+html.desktop select,
+html.desktop a {
+  -webkit-app-region:no-drag;
+}
+html.desktop.darwin .start-header,
+html.desktop.darwin .workspace-header {
+  padding-left:90px;
+}

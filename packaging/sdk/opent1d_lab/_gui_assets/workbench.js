@@ -1,6 +1,12 @@
 import { WorkbenchStore, approaches } from '/workbench-store.js';
 
 const $ = id => document.getElementById(id);
+const desktop = globalThis.openT1DDesktop;
+let desktopView;
+if (desktop) {
+  document.documentElement.classList.add('desktop', desktop.platform);
+  document.querySelectorAll('a[href="/"]').forEach(a => { a.hidden = true; });
+}
 const parseSourceJSON = text => JSON.parse(text.replace(/^\uFEFF/, ''));
 const node = (tag, text, cls) => { const n = document.createElement(tag); if (text !== undefined) n.textContent = text; if (cls) n.className = cls; return n; };
 const icon = (name, size) => { const n = node('img'); n.src = '/' + name; n.width = size; n.height = size; n.alt = ''; return n; };
@@ -8,7 +14,7 @@ let renderedRecord = null, creationMode = 'guided', editor = null, uploadGenerat
 let recentSignature = '';
 let storage; try { storage = localStorage; } catch { storage = null; }
 const store = new WorkbenchStore({ token: document.querySelector('meta[name="opent1d-token"]').content, storage, notify: render });
-const attempt = fn => async event => { event?.preventDefault(); try { await fn(event); } catch (error) { store.error = error.message; render(); } };
+const attempt = fn => async event => { event?.preventDefault?.(); try { await fn(event); } catch (error) { store.error = error.message; render(); } };
 const closeDialogs = () => document.querySelectorAll('dialog[open]').forEach(d => d.close());
 function options(select, values, chosen) {
   const signature = JSON.stringify(values);
@@ -57,6 +63,8 @@ function inputSummary() {
 function render() {
   if (stopped) return;
   const project = store.project, record = store.record, busy = store.locked;
+  const view = project ? 'workspace' : 'startup';
+  if (desktop && desktopView !== view) { desktopView = view; desktop.setView(view); }
   $('startup').hidden = !!project; $('workspace').hidden = !project;
   for (const id of ['new-project', 'start-empty', 'use-template', 'open-project']) $(id).disabled = !store.data || busy;
   $('quit-start').disabled = !store.data || busy;
@@ -105,7 +113,7 @@ function updateTemplates() {
 function information(title, paragraphs, link = false) {
   closeDialogs(); $('information-title').textContent = title;
   $('information-content').replaceChildren(...paragraphs.map(text => node('p', text)));
-  if (link) { const a = node('a', 'Open full laboratory'); a.href = '/'; $('information-content').append(a); }
+  if (link && !desktop) { const a = node('a', 'Open full laboratory'); a.href = '/'; $('information-content').append(a); }
   $('information-dialog').showModal();
 }
 function showStudies() {
@@ -148,6 +156,7 @@ function editInputs(kind) {
   $('file-error').hidden = true; paintEditor(); $('files-dialog').showModal();
 }
 async function quit() {
+  if (desktop) { desktop.quit(); return; }
   if (!await store.flush()) return;
   await store.request('/api/shutdown', {}); stopped = true; closeDialogs(); $('workspace').hidden = true; $('startup').hidden = false;
   $('recent-projects').replaceChildren(node('p', 'Application stopped. Your saved work is kept.'));
@@ -155,7 +164,13 @@ async function quit() {
 }
 
 $('new-project').onclick = () => newDialog('guided'); $('start-empty').onclick = () => newDialog('empty');
-$('use-template').onclick = () => newDialog('template'); $('open-project').onclick = () => newDialog('open');
+$('use-template').onclick = () => newDialog('template');
+$('open-project').onclick = desktop ? attempt(async () => {
+  if (!await store.flush()) return;
+  closeDialogs();
+  const folder = await desktop.openProject();
+  if (folder && await store.openPath(folder)) { rememberProject(); showStudy(); }
+}) : () => newDialog('open');
 $('new-approach').onchange = updateTemplates;
 $('project-dialog-form').onsubmit = async event => {
   event.preventDefault(); $('confirm-project').disabled = true; $('project-error').hidden = true;
@@ -197,7 +212,12 @@ $('input-upload').onchange = async () => {
     editor.files[name] = text; editor.dirty = true; paintEditor(); $('file-error').hidden = true;
   } catch (error) { if (generation === uploadGeneration) { $('file-error').textContent = error.message; $('file-error').hidden = false; } }
 };
-$('files-form').onsubmit = event => { event.preventDefault(); if (editor?.id === store.record?.id) store.edit(store.name, editor.files); editor = null; uploadGeneration++; closeDialogs(); };
+function applyEditor() {
+  if (!editor) return true;
+  if (!$('files-form').reportValidity() || editor.id !== store.record?.id) return false;
+  store.edit(store.name, editor.files); editor = null; uploadGeneration++; closeDialogs(); return true;
+}
+$('files-form').onsubmit = event => { event.preventDefault(); applyEditor(); };
 $('files-dialog').addEventListener('close', () => { editor = null; uploadGeneration++; });
 $('study-form').onsubmit = attempt(async () => {
   const validation = await store.review(); if (!validation) return;
@@ -219,7 +239,33 @@ $('workspace-settings').onclick = () => information('Workspace details', ['Proje
 $('tree-results').onclick = () => information('Results', ['This workspace currently covers creating and editing studies. Existing executions and verified reports are available in the full laboratory.'], true);
 for (const id of ['quit-start', 'quit-workspace']) $(id).onclick = attempt(quit);
 for (const b of document.querySelectorAll('.dialog-close')) b.onclick = () => b.closest('dialog').close();
-document.addEventListener('keydown', event => { if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') { event.preventDefault(); attempt(() => store.save())(); } });
+async function saveCurrent() { if (applyEditor()) return store.save(); return false; }
+document.addEventListener('keydown', event => { if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') { event.preventDefault(); attempt(saveCurrent)(); } });
+if (desktop) {
+  desktop.onCommand(attempt(async command => {
+    const buttons = { 'new-project': 'new-project', 'open-project': 'open-project', 'all-projects': 'all-projects', 'toggle-explorer': 'toggle-explorer' };
+    if (editor?.dirty && ['new-project', 'open-project', 'all-projects'].includes(command)) {
+      const choice = await desktop.confirmEditor();
+      if (choice === 'cancel') return;
+      if (choice === 'save') { if (!applyEditor() || !await store.flush()) return; }
+      else { editor = null; uploadGeneration++; closeDialogs(); }
+    }
+    if (command === 'save') await saveCurrent();
+    else if (buttons[command]) $(buttons[command]).click();
+  }));
+  desktop.onPrepareClose(async mode => {
+    if (mode === 'discard') {
+      if (store.savePromise) await store.savePromise;
+      clearTimeout(store.timer); if (store.record) store.clearBackup();
+      store.dirty = false; editor = null; uploadGeneration++; return { canClose: true };
+    }
+    if (store.locked && !store.saving) return { canClose: false, busy: true, message: 'A project action is still running. Quitting will stop it and retain the last saved study.' };
+    if (editor?.dirty && mode !== 'save') return { canClose: false, message: 'The input editor has unapplied changes. Save them before quitting?' };
+    if (mode === 'save' && !applyEditor()) return { canClose: false, message: 'Correct the highlighted input before saving and quitting.' };
+    const canClose = await store.flush();
+    return { canClose, message: canClose ? '' : store.error || 'The study could not be saved. Your unsaved changes are still open.' };
+  });
+}
 window.addEventListener('beforeunload', event => { if (store.dirty || store.saving || editor?.dirty) { store.backup(); event.preventDefault(); event.returnValue = ''; } });
 attempt(() => store.refresh())();
 // Also observe actions started in another tab/the full laboratory. Rebuilding
