@@ -390,9 +390,17 @@ class CollectorTests(unittest.TestCase):
         process.stdin = io.BytesIO()
         reader = mock.Mock(ident=1)
         reader.is_alive.return_value = False
+        group_alive = [True]
+
+        def force_group(_process):
+            self.assertIs(_process, process)
+            group_alive[0] = False
+
         with (
-            mock.patch.object(p.platform_process, "tree_exists", side_effect=[True, False]),
-            mock.patch.object(p.platform_process, "force_tree") as force,
+            mock.patch.object(
+                p.platform_process, "tree_exists", side_effect=lambda _: group_alive[0]
+            ),
+            mock.patch.object(p.platform_process, "force_tree", side_effect=force_group) as force,
             mock.patch.object(p.platform_process, "close_tree") as close,
         ):
             self.assertTrue(p._stop(process, reader, None, True, time.monotonic() + 1))
