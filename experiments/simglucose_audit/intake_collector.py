@@ -397,6 +397,7 @@ def _headers(raw, expected):
 
 def _open_https():
     context = ssl.create_default_context()
+    context.minimum_version = ssl.TLSVersion.TLSv1_2
     require(
         context.verify_mode == ssl.CERT_REQUIRED and context.check_hostname is True,
         "verified-TLS-required",

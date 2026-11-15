@@ -211,6 +211,7 @@ def _headers(raw):
 def _connect(url):
     parsed = urlsplit(url)
     context = ssl.create_default_context()
+    context.minimum_version = ssl.TLSVersion.TLSv1_2
     context.keylog_filename = None
     require(context.check_hostname and context.verify_mode == ssl.CERT_REQUIRED, "tls-defaults")
     sock = socket.create_connection((parsed.hostname, 443), timeout=30)
