@@ -15,6 +15,7 @@ from datetime import timedelta
 from pathlib import Path
 from unittest.mock import Mock, patch
 
+from experiments.simglucose_audit import fixture_time
 from experiments.simglucose_audit import intake_collector as collector
 from experiments.simglucose_audit.contract import decode, digest, encode
 
@@ -25,6 +26,7 @@ from experiments.simglucose_audit.contract import decode, digest, encode
 )
 class SimglucoseIntakeCollectorTests(unittest.TestCase):
     def setUp(self):
+        self.enterContext(fixture_time.use(True))
         base = os.environ.get("OT062_COLLECTOR_FIXTURE_PROOF_ROOT", tempfile.gettempdir())
         self.root = Path(tempfile.mkdtemp(prefix="collector-test-", dir=base)).resolve()
 
@@ -117,7 +119,11 @@ class SimglucoseIntakeCollectorTests(unittest.TestCase):
             )
             self.inspect(inputs, result, files)
             if case == "slow-body":
-                self.assertGreater(len(files["objects/vpatient_params.csv"]), 0)
+                # The whole request clock includes cold child startup. A deadline
+                # can precede its first byte; preserve exactly the prefix returned.
+                prefix = files.get("objects/vpatient_params.csv", b"")
+                self.assertEqual(len(prefix), result["receipt"]["targets"][0]["actual_bytes"])
+                self.assertLess(len(prefix), collector.SIZES[0])
 
     def test_outer_storage_deadline_recovers_published_body_once_without_late_success(self):
         start = time.monotonic()
@@ -421,7 +427,7 @@ class SimglucoseIntakeCollectorTests(unittest.TestCase):
         destination = self.root / "historical"
         p_raw, a_raw, notice, o_raw = collector.fixture_inputs(destination)
         plan, approval, origin = decode(p_raw), decode(a_raw), decode(o_raw)
-        later = collector._now().replace(microsecond=0) + timedelta(hours=2)
+        later = fixture_time.FIXTURE_UTC + timedelta(hours=2)
         for row in origin["records"]:
             row["deadline_utc"] = collector._stamp(later)
         o_raw = encode(origin)
@@ -449,7 +455,7 @@ class SimglucoseIntakeCollectorTests(unittest.TestCase):
     def test_short_approval_refused_before_any_path_or_process(self):
         p_raw, a_raw, notice, o_raw = collector.fixture_inputs(self.root / "never")
         approval = decode(a_raw)
-        approval["expires_utc"] = collector._stamp(collector._now() + timedelta(seconds=20))
+        approval["expires_utc"] = collector._stamp(fixture_time.FIXTURE_UTC + timedelta(seconds=20))
         a_raw = encode(approval)
         with (
             patch.object(collector, "_supervise", side_effect=AssertionError("spawn")),

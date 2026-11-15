@@ -12,7 +12,7 @@ import time
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
-from . import pbs_archive
+from . import fixture_time, pbs_archive
 from .contract import AUTHORITY, decode, digest, encode, require, source_identity
 
 SCHEMA = "opent1d.pbs-two-pass-inspection-fixture/1"
@@ -51,7 +51,7 @@ def _identity():
 
 
 def _now():
-    return datetime.now(UTC)
+    return fixture_time.now()
 
 
 def _instant(text):
@@ -67,6 +67,7 @@ def _instant(text):
     return value
 
 
+@fixture_time.invented
 def make_invented_context(raw):
     """Fixed invented-only test context. This creates no actual admission."""
     require(
@@ -92,6 +93,7 @@ def make_invented_context(raw):
     )
 
 
+@fixture_time.invented
 def _context(raw, pin):
     require(
         type(raw) is bytes and 0 < len(raw) <= 65536 and digest(raw) == pin, "held-bounded-context"
@@ -243,6 +245,7 @@ def _base(input_pin, context_pin, context):
     }
 
 
+@fixture_time.invented
 def inspect_invented_file(raw, held_input_sha256, context_raw, held_context_sha256, fresh_root):
     """Create a NEW private owned fixture file, then hold its FD for two passes.
 
@@ -373,6 +376,7 @@ def inspect_invented_file(raw, held_input_sha256, context_raw, held_context_sha2
     return result
 
 
+@fixture_time.invented
 def inspect_fixture_report(
     report_raw, held_report_sha256, raw, held_input_sha256, context_raw, held_context_sha256
 ):

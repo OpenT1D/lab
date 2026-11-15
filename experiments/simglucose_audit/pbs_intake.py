@@ -24,6 +24,7 @@ from urllib.parse import urlsplit
 
 from experiments import platform_process
 
+from . import fixture_time
 from . import intake_collector as core
 from .contract import AUTHORITY, SOURCE_FILES, decode, digest, encode, fields, require
 
@@ -136,6 +137,7 @@ def _target(fixture=False):
     }
 
 
+@fixture_time.selected(4)
 def _gate(plan_raw, approval_raw, origin_raw, held, fixture=False, headroom=False):
     fields(
         held,
@@ -662,119 +664,123 @@ def _namespace(directory, plan):
 
 
 def _controller(wire):
-    plan, expiry = _inputs(wire, True)
-    deadline = min(wire["deadline"], time.monotonic() + (expiry - core._now()).total_seconds())
-    parent = core._directory(str(Path(plan["output_root"]).parent))
-    try:
-        require(_parent_identity(parent) == plan["parent_identity"], "physical-parent-current")
-        _live(expiry, deadline)
-        marker = ".pbs-consumed-" + wire["held"]["approval_sha256"]
-        core._write_file(
-            parent, marker, encode({"approval_sha256": wire["held"]["approval_sha256"]})
-        )
-        _live(expiry, deadline)
-        name = Path(plan["output_root"]).name
-        os.mkdir(name, 0o700, dir_fd=parent)
-        os.fsync(parent)
-        directory = os.open(name, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=parent)
-        core._private_directory(directory)
-        _namespace(directory, plan)
-    finally:
-        os.close(parent)
-    fd, count, hasher, error = None, 0, hashlib.sha256(), None
-    try:
-        _live(expiry, deadline)
-        fd = os.open(
-            "archive.opaque",
-            os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW,
-            0o600,
-            dir_fd=directory,
-        )
-        core._regular(fd)
+    with fixture_time.use(wire["fixture"]):
+        plan, expiry = _inputs(wire, True)
+        deadline = min(wire["deadline"], time.monotonic() + (expiry - core._now()).total_seconds())
+        parent = core._directory(str(Path(plan["output_root"]).parent))
         try:
-            count, redirect = _request(wire, fd, hasher, count, deadline, expiry)
-            if redirect is not None:
-                count, second = _request(wire, fd, hasher, count, deadline, expiry, redirect)
-                require(second is None, "one-redirect")
-        except (OSError, ValueError, RuntimeError, TimeoutError, subprocess.TimeoutExpired):
-            error = "transport-or-storage-rejected"
-        count = os.fstat(fd).st_size
-        require(count <= plan["target"]["published_bytes"] + 1, "stored-body-cap")
-        _live(expiry, deadline)
-        _namespace(directory, plan)
-        if wire["fixture"] and wire["case"] == "stall-fsync":
-            time.sleep(30)
-        os.fsync(fd)
-        opened = os.fstat(fd)
-        named = os.stat("archive.opaque", dir_fd=directory, follow_symlinks=False)
-        core._regular(fd)
-        require(core._fingerprint(opened) == core._fingerprint(named), "body-physical-binding")
-        plan_after, _ = _inputs(wire)
-        require(plan_after == plan, "late-plan-binding")
-        if wire["fixture"] and wire["case"] == "late-source":
-            raise ValueError("invented-late-source-change")
-        target = plan["target"]
-        accepted = (
-            error is None
-            and count == target["published_bytes"]
-            and hasher.hexdigest() == target["published_sha256"]
-        )
-        receipt = _receipt(
-            wire, "completed" if accepted else "rejected", count, hasher.hexdigest(), error
-        )
-        if wire["fixture"] and wire["case"] == "stall-finalize":
-            time.sleep(30)
-        _live(expiry, deadline)
-        _namespace(directory, plan)
-        raw = encode(receipt)
-        require(len(raw) <= 65536, "receipt-cap")
-        core._write_file(directory, "intake-receipt.private.json", raw)
-        _live(expiry, deadline)
-        _inputs(wire)
-        _emit({"receipt": receipt})
-    finally:
-        if fd is not None:
-            os.close(fd)
-        os.close(directory)
+            require(_parent_identity(parent) == plan["parent_identity"], "physical-parent-current")
+            _live(expiry, deadline)
+            marker = ".pbs-consumed-" + wire["held"]["approval_sha256"]
+            core._write_file(
+                parent, marker, encode({"approval_sha256": wire["held"]["approval_sha256"]})
+            )
+            _live(expiry, deadline)
+            name = Path(plan["output_root"]).name
+            os.mkdir(name, 0o700, dir_fd=parent)
+            os.fsync(parent)
+            directory = os.open(name, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=parent)
+            core._private_directory(directory)
+            _namespace(directory, plan)
+        finally:
+            os.close(parent)
+        fd, count, hasher, error = None, 0, hashlib.sha256(), None
+        try:
+            _live(expiry, deadline)
+            fd = os.open(
+                "archive.opaque",
+                os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW,
+                0o600,
+                dir_fd=directory,
+            )
+            core._regular(fd)
+            try:
+                count, redirect = _request(wire, fd, hasher, count, deadline, expiry)
+                if redirect is not None:
+                    count, second = _request(wire, fd, hasher, count, deadline, expiry, redirect)
+                    require(second is None, "one-redirect")
+            except (OSError, ValueError, RuntimeError, TimeoutError, subprocess.TimeoutExpired):
+                error = "transport-or-storage-rejected"
+            count = os.fstat(fd).st_size
+            require(count <= plan["target"]["published_bytes"] + 1, "stored-body-cap")
+            _live(expiry, deadline)
+            _namespace(directory, plan)
+            if wire["fixture"] and wire["case"] == "stall-fsync":
+                time.sleep(30)
+            os.fsync(fd)
+            opened = os.fstat(fd)
+            named = os.stat("archive.opaque", dir_fd=directory, follow_symlinks=False)
+            core._regular(fd)
+            require(core._fingerprint(opened) == core._fingerprint(named), "body-physical-binding")
+            plan_after, _ = _inputs(wire)
+            require(plan_after == plan, "late-plan-binding")
+            if wire["fixture"] and wire["case"] == "late-source":
+                raise ValueError("invented-late-source-change")
+            target = plan["target"]
+            accepted = (
+                error is None
+                and count == target["published_bytes"]
+                and hasher.hexdigest() == target["published_sha256"]
+            )
+            receipt = _receipt(
+                wire, "completed" if accepted else "rejected", count, hasher.hexdigest(), error
+            )
+            if wire["fixture"] and wire["case"] == "stall-finalize":
+                time.sleep(30)
+            _live(expiry, deadline)
+            _namespace(directory, plan)
+            raw = encode(receipt)
+            require(len(raw) <= 65536, "receipt-cap")
+            core._write_file(directory, "intake-receipt.private.json", raw)
+            _live(expiry, deadline)
+            _inputs(wire)
+            _emit({"receipt": receipt})
+        finally:
+            if fd is not None:
+                os.close(fd)
+            os.close(directory)
 
 
 def _recover(wire):
-    plan, expiry = _inputs(wire)
-    _live(expiry, wire["deadline"])
-    directory = core._directory(plan["output_root"])
-    try:
-        _namespace(directory, plan)
-        # Exactly the same exclusive receipt pathname, never a second partial record.
-        try:
-            os.stat("intake-receipt.private.json", dir_fd=directory, follow_symlinks=False)
-        except FileNotFoundError:
-            pass
-        else:
-            raise ValueError("receipt-path-already-consumed")
+    with fixture_time.use(wire["fixture"]):
+        plan, expiry = _inputs(wire)
         _live(expiry, wire["deadline"])
-        fd = os.open(
-            "archive.opaque", os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=directory
-        )
+        directory = core._directory(plan["output_root"])
         try:
-            core._regular(fd)
-            opened = os.fstat(fd)
-            named = os.stat("archive.opaque", dir_fd=directory, follow_symlinks=False)
-            require(core._fingerprint(opened) == core._fingerprint(named), "recovery-body-binding")
-            count = opened.st_size  # Metadata only: NO opaque-body read.
+            _namespace(directory, plan)
+            # Exactly the same exclusive receipt pathname, never a second partial record.
+            try:
+                os.stat("intake-receipt.private.json", dir_fd=directory, follow_symlinks=False)
+            except FileNotFoundError:
+                pass
+            else:
+                raise ValueError("receipt-path-already-consumed")
+            _live(expiry, wire["deadline"])
+            fd = os.open(
+                "archive.opaque", os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=directory
+            )
+            try:
+                core._regular(fd)
+                opened = os.fstat(fd)
+                named = os.stat("archive.opaque", dir_fd=directory, follow_symlinks=False)
+                require(
+                    core._fingerprint(opened) == core._fingerprint(named), "recovery-body-binding"
+                )
+                count = opened.st_size  # Metadata only: NO opaque-body read.
+            finally:
+                os.close(fd)
+            require(count <= plan["target"]["published_bytes"] + 1, "recovery-prefix-cap")
+            receipt = _receipt(wire, "incomplete", count, None, "owned-controller-failure")
+            _live(expiry, wire["deadline"])
+            _namespace(directory, plan)
+            raw = encode(receipt)
+            require(len(raw) <= 65536, "recovery-receipt-cap")
+            core._write_file(directory, "intake-receipt.private.json", raw)
+            _live(expiry, wire["deadline"])
+            _inputs(wire)
+            _emit({"receipt": receipt})
         finally:
-            os.close(fd)
-        require(count <= plan["target"]["published_bytes"] + 1, "recovery-prefix-cap")
-        receipt = _receipt(wire, "incomplete", count, None, "owned-controller-failure")
-        _live(expiry, wire["deadline"])
-        _namespace(directory, plan)
-        raw = encode(receipt)
-        require(len(raw) <= 65536, "recovery-receipt-cap")
-        core._write_file(directory, "intake-receipt.private.json", raw)
-        _live(expiry, wire["deadline"])
-        _inputs(wire)
-        _emit({"receipt": receipt})
-    finally:
-        os.close(directory)
+            os.close(directory)
 
 
 def _entry():
@@ -802,6 +808,7 @@ def _entry():
         _emit({"error": "controller-rejected"})
 
 
+@fixture_time.selected(4)
 def _execute(
     plan_raw,
     approval_raw,
@@ -895,6 +902,7 @@ def _supervise(wire, deadline):
     return None if forced or not clean else receipt
 
 
+@fixture_time.selected(2)
 def _validate_receipt(receipt, held, fixture, issued=None, expiry=None):
     fields(
         receipt,
@@ -960,6 +968,7 @@ def _validate_receipt(receipt, held, fixture, issued=None, expiry=None):
         )
 
 
+@fixture_time.actual
 def collect_approved(plan_raw, approval_raw, origin_raw, held):
     """Trusted caller must independently hold exact approval and policy pins.
 
@@ -970,6 +979,7 @@ def collect_approved(plan_raw, approval_raw, origin_raw, held):
     return _execute(plan_raw, approval_raw, origin_raw, held)
 
 
+@fixture_time.invented
 def fixture_inputs(output):
     """Invented metadata, incapable of admission through collect_approved."""
     parent = core._directory(str(Path(output).parent))
@@ -1046,6 +1056,7 @@ def fixture_inputs(output):
     return plan_raw, approval_raw, origin_raw, held
 
 
+@fixture_time.invented
 def run_fixture(output, case="ok", whole_seconds=3, request_seconds=1):
     require(
         case in CASES and 0.1 < whole_seconds <= 5 and 0.1 < request_seconds <= 2,

@@ -16,6 +16,7 @@ SOURCE_FILES = (
     "__main__.py",
     "bootstrap.py",
     "contract.py",
+    "fixture_time.py",
     "consumer.py",
     "_fixture.py",
     "reference.py",

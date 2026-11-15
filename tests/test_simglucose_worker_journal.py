@@ -17,7 +17,7 @@ from experiments.simglucose_audit.contract import decode, digest, encode
 
 class SimglucoseWorkerJournalTests(unittest.TestCase):
     def setUp(self):
-        base = os.environ.get("OT062_JOURNAL_FIXTURE_PROOF_ROOT", "/private/tmp")
+        base = os.environ.get("OT062_JOURNAL_FIXTURE_PROOF_ROOT", tempfile.gettempdir())
         self.root = Path(tempfile.mkdtemp(prefix="journal-test-", dir=base)).resolve()
         # Retain these invented fixtures: no removal/erasure operation is tested.
 

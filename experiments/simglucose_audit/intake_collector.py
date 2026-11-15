@@ -23,6 +23,7 @@ from pathlib import Path
 
 from experiments import platform_process
 
+from . import fixture_time
 from .contract import AUTHORITY, decode, digest, encode, fields, require, source_identity
 
 SCHEMA = "opent1d.simglucose-three-csv-intake/1"
@@ -129,9 +130,10 @@ def _stamp(value):
 
 
 def _now():
-    return datetime.now(UTC)
+    return fixture_time.now()
 
 
+@fixture_time.selected(7)
 def _gate(
     plan_raw,
     plan_pin,
@@ -757,97 +759,102 @@ def _store_receipt(directory, receipt):
 
 
 def _controller(wire):
-    plan_raw, approval_raw, origin_raw, notice_raw = (
-        base64.b64decode(wire[name], validate=True)
-        for name in ("plan", "approval", "origin", "notice")
-    )
-    plan, expiry = _gate(
-        plan_raw,
-        wire["plan_pin"],
-        approval_raw,
-        wire["approval_pin"],
-        notice_raw,
-        origin_raw,
-        wire["origin_pin"],
-        wire["case"] is not None,
-    )
-    deadline = min(
-        time.monotonic() + wire["whole_seconds"],
-        time.monotonic() + max(0, (expiry - _now()).total_seconds()),
-    )
-    directory = _directory(plan["output_root"], fresh=True)
-    receipt = _receipt_base(wire)
-    try:
-        os.mkdir("objects", 0o700, dir_fd=directory)
-        os.mkdir("notices", 0o700, dir_fd=directory)
-        os.fsync(directory)
-        notices = os.open("notices", os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=directory)
+    with fixture_time.use(wire["case"] is not None):
+        plan_raw, approval_raw, origin_raw, notice_raw = (
+            base64.b64decode(wire[name], validate=True)
+            for name in ("plan", "approval", "origin", "notice")
+        )
+        plan, expiry = _gate(
+            plan_raw,
+            wire["plan_pin"],
+            approval_raw,
+            wire["approval_pin"],
+            notice_raw,
+            origin_raw,
+            wire["origin_pin"],
+            wire["case"] is not None,
+        )
+        deadline = min(
+            time.monotonic() + wire["whole_seconds"],
+            time.monotonic() + max(0, (expiry - _now()).total_seconds()),
+        )
+        directory = _directory(plan["output_root"], fresh=True)
+        receipt = _receipt_base(wire)
         try:
-            _write_file(notices, "simglucose-LICENSE.txt", notice_raw)
-        finally:
-            os.close(notices)
-        receipt["inventory"]["notices/simglucose-LICENSE.txt"] = {
-            "bytes": len(notice_raw),
-            "sha256": digest(notice_raw),
-        }
-        _emit({"phase": "notice-preserved"})
-        objects = os.open("objects", os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=directory)
-        try:
-            for index, row in enumerate(receipt["targets"]):
-                if time.monotonic() >= deadline:
-                    row.update(status="incomplete", error="whole-deadline")
-                    break
-                _emit({"phase": "target-start", "index": index})
-                body, headers, error, observed = _one_request(
-                    index, wire["case"], deadline, wire["request_seconds"]
-                )
-                row.update(actual_bytes=len(body), headers=headers, process=observed)
-                if body:
-                    if wire["case"] == "stall-storage" and index == 0:
-                        time.sleep(5)
-                    _write_file(objects, row["name"], body)
-                    row["body_path"] = "objects/" + row["name"]
-                    receipt["inventory"][row["body_path"]] = {
-                        "bytes": len(body),
-                        "sha256": digest(body),
-                    }
-                if error:
-                    row.update(
-                        status="incomplete" if "deadline" in error else "rejected", error=error
+            os.mkdir("objects", 0o700, dir_fd=directory)
+            os.mkdir("notices", 0o700, dir_fd=directory)
+            os.fsync(directory)
+            notices = os.open(
+                "notices", os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=directory
+            )
+            try:
+                _write_file(notices, "simglucose-LICENSE.txt", notice_raw)
+            finally:
+                os.close(notices)
+            receipt["inventory"]["notices/simglucose-LICENSE.txt"] = {
+                "bytes": len(notice_raw),
+                "sha256": digest(notice_raw),
+            }
+            _emit({"phase": "notice-preserved"})
+            objects = os.open(
+                "objects", os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=directory
+            )
+            try:
+                for index, row in enumerate(receipt["targets"]):
+                    if time.monotonic() >= deadline:
+                        row.update(status="incomplete", error="whole-deadline")
+                        break
+                    _emit({"phase": "target-start", "index": index})
+                    body, headers, error, observed = _one_request(
+                        index, wire["case"], deadline, wire["request_seconds"]
                     )
-                elif len(body) != row["bytes"]:
-                    row.update(status="rejected", error="body-size")
-                else:
-                    row["computed_git_blob_sha1"] = _blob(body)
-                    if row["computed_git_blob_sha1"] != row["git_blob_sha1"]:
-                        row.update(status="rejected", error="git-blob-mismatch")
+                    row.update(actual_bytes=len(body), headers=headers, process=observed)
+                    if body:
+                        if wire["case"] == "stall-storage" and index == 0:
+                            time.sleep(5)
+                        _write_file(objects, row["name"], body)
+                        row["body_path"] = "objects/" + row["name"]
+                        receipt["inventory"][row["body_path"]] = {
+                            "bytes": len(body),
+                            "sha256": digest(body),
+                        }
+                    if error:
+                        row.update(
+                            status="incomplete" if "deadline" in error else "rejected", error=error
+                        )
+                    elif len(body) != row["bytes"]:
+                        row.update(status="rejected", error="body-size")
                     else:
-                        row.update(status="accepted", accepted_sha256=digest(body))
-                if time.monotonic() >= deadline:
-                    row.update(status="incomplete", error="whole-deadline")
-                _emit({"phase": "target-finish", "index": index, "row": row})
-                if row["status"] != "accepted":
-                    break
+                        row["computed_git_blob_sha1"] = _blob(body)
+                        if row["computed_git_blob_sha1"] != row["git_blob_sha1"]:
+                            row.update(status="rejected", error="git-blob-mismatch")
+                        else:
+                            row.update(status="accepted", accepted_sha256=digest(body))
+                    if time.monotonic() >= deadline:
+                        row.update(status="incomplete", error="whole-deadline")
+                    _emit({"phase": "target-finish", "index": index, "row": row})
+                    if row["status"] != "accepted":
+                        break
+            finally:
+                os.close(objects)
+            receipt["status"] = (
+                "completed"
+                if all(row["status"] == "accepted" for row in receipt["targets"])
+                else "incomplete"
+            )
+            if time.monotonic() >= deadline:
+                receipt.update(status="incomplete", error="whole-deadline")
+            require(_identity() == plan["source_identity"], "source-changed-during-intake")
+            receipt.update(
+                controller_ended_utc=_stamp(_now()),
+                source_identity_after=_identity(),
+                controller_elapsed_ns=max(0, time.monotonic_ns() - wire["started_monotonic_ns"]),
+            )
+            raw = _store_receipt(directory, receipt)
+            require(time.monotonic() < deadline, "finalization-deadline")
+            _emit({"phase": "receipt", "receipt_b64": base64.b64encode(raw).decode("ascii")})
         finally:
-            os.close(objects)
-        receipt["status"] = (
-            "completed"
-            if all(row["status"] == "accepted" for row in receipt["targets"])
-            else "incomplete"
-        )
-        if time.monotonic() >= deadline:
-            receipt.update(status="incomplete", error="whole-deadline")
-        require(_identity() == plan["source_identity"], "source-changed-during-intake")
-        receipt.update(
-            controller_ended_utc=_stamp(_now()),
-            source_identity_after=_identity(),
-            controller_elapsed_ns=max(0, time.monotonic_ns() - wire["started_monotonic_ns"]),
-        )
-        raw = _store_receipt(directory, receipt)
-        require(time.monotonic() < deadline, "finalization-deadline")
-        _emit({"phase": "receipt", "receipt_b64": base64.b64encode(raw).decode("ascii")})
-    finally:
-        os.close(directory)
+            os.close(directory)
 
 
 def _wire(value, recovery=False):
@@ -892,122 +899,126 @@ def _recovery_entry():
         raw = sys.stdin.buffer.read(262145)
         require(len(raw) <= 262144, "bounded-private-wire")
         wire = _wire(decode(raw), recovery=True)
-        plan_raw, approval_raw, origin_raw, notice = (
-            base64.b64decode(wire[name], validate=True)
-            for name in ("plan", "approval", "origin", "notice")
-        )
-        plan, _expiry = _gate(
-            plan_raw,
-            wire["plan_pin"],
-            approval_raw,
-            wire["approval_pin"],
-            notice,
-            origin_raw,
-            wire["origin_pin"],
-            wire["case"] is not None,
-            _at=_utc(wire["started_utc"]),
-        )
-        origin = decode(origin_raw)
-        retention_deadline = min(
-            _expiry,
-            _utc(RETENTION["not_after_utc"]),
-            *(_utc(row["deadline_utc"]) for row in origin["records"]),
-        )
-        require(
-            _now() + timedelta(seconds=5) < retention_deadline, "current-retention-before-recovery"
-        )
-        directory = _directory(plan["output_root"])
-        try:
-            names = set(os.listdir(directory))
+        with fixture_time.use(wire["case"] is not None):
+            plan_raw, approval_raw, origin_raw, notice = (
+                base64.b64decode(wire[name], validate=True)
+                for name in ("plan", "approval", "origin", "notice")
+            )
+            plan, _expiry = _gate(
+                plan_raw,
+                wire["plan_pin"],
+                approval_raw,
+                wire["approval_pin"],
+                notice,
+                origin_raw,
+                wire["origin_pin"],
+                wire["case"] is not None,
+                _at=_utc(wire["started_utc"]),
+            )
+            origin = decode(origin_raw)
+            retention_deadline = min(
+                _expiry,
+                _utc(RETENTION["not_after_utc"]),
+                *(_utc(row["deadline_utc"]) for row in origin["records"]),
+            )
             require(
-                not names & {"intake-receipt.private.json", "intake-failure.private.json"},
-                "unissued-existing-receipt-preserved",
+                _now() + timedelta(seconds=5) < retention_deadline,
+                "current-retention-before-recovery",
             )
-            receipt = _receipt_base(wire)
-            receipt.update(
-                error=wire["acquisition_error"], controller_started_utc=wire["started_utc"]
-            )
-            notices = os.open(
-                "notices", os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=directory
-            )
+            directory = _directory(plan["output_root"])
             try:
-                copied_notice = _read_file(notices, "simglucose-LICENSE.txt", 1052)
-                require(copied_notice == notice, "notice-before-recovery")
-            finally:
-                os.close(notices)
-            receipt["inventory"]["notices/simglucose-LICENSE.txt"] = {
-                "bytes": len(notice),
-                "sha256": digest(notice),
-            }
-            objects = os.open(
-                "objects", os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=directory
-            )
-            try:
-                existing = set(os.listdir(objects))
-                require(existing <= set(NAMES), "fixed-recovery-objects")
-                finished = {
-                    item["index"]: item["row"]
-                    for item in wire["progress"]
-                    if item["phase"] == "target-finish"
-                }
-                started = {
-                    item["index"] for item in wire["progress"] if item["phase"] == "target-start"
-                }
-                stopped = False
-                for index, row in enumerate(receipt["targets"]):
-                    published = base64.b64decode(
-                        wire["acquired"].get(str(index), ""), validate=True
-                    )
-                    require(len(published) <= SIZES[index] + 1, "bounded-recovery-prefix")
-                    if row["name"] not in existing and published:
-                        require(
-                            _now() < retention_deadline,
-                            "current-retention-before-preservation-write",
-                        )
-                        _write_file(objects, row["name"], published)
-                    body = (
-                        _read_file(objects, row["name"], SIZES[index] + 1)
-                        if row["name"] in existing or published
-                        else b""
-                    )
-                    require(not body or published.startswith(body), "published-prefix-binding")
-                    if index in finished and not stopped:
-                        row.update(finished[index])
-                    elif index in started or body:
-                        row.update(status="incomplete", error=wire["acquisition_error"])
-                        stopped = True
-                    retained = row["name"] in existing or bool(published)
-                    row.update(
-                        actual_bytes=len(body),
-                        body_path="objects/" + row["name"] if retained else None,
-                    )
-                    if row["status"] != "accepted":
-                        row["accepted_sha256"] = None
-                    if retained:
-                        receipt["inventory"][row["body_path"]] = {
-                            "bytes": len(body),
-                            "sha256": digest(body),
-                        }
+                names = set(os.listdir(directory))
+                require(
+                    not names & {"intake-receipt.private.json", "intake-failure.private.json"},
+                    "unissued-existing-receipt-preserved",
+                )
+                receipt = _receipt_base(wire)
                 receipt.update(
-                    status="incomplete",
-                    controller_ended_utc=_stamp(_now()),
-                    source_identity_after=_identity(),
-                    controller_elapsed_ns=max(
-                        0, time.monotonic_ns() - wire["started_monotonic_ns"]
-                    ),
+                    error=wire["acquisition_error"], controller_started_utc=wire["started_utc"]
                 )
-                require(_now() < retention_deadline, "current-retention-before-failure-receipt")
-                receipt_raw = _store_receipt(directory, receipt)
-                _emit(
-                    {
-                        "phase": "receipt",
-                        "receipt_b64": base64.b64encode(receipt_raw).decode("ascii"),
+                notices = os.open(
+                    "notices", os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=directory
+                )
+                try:
+                    copied_notice = _read_file(notices, "simglucose-LICENSE.txt", 1052)
+                    require(copied_notice == notice, "notice-before-recovery")
+                finally:
+                    os.close(notices)
+                receipt["inventory"]["notices/simglucose-LICENSE.txt"] = {
+                    "bytes": len(notice),
+                    "sha256": digest(notice),
+                }
+                objects = os.open(
+                    "objects", os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=directory
+                )
+                try:
+                    existing = set(os.listdir(objects))
+                    require(existing <= set(NAMES), "fixed-recovery-objects")
+                    finished = {
+                        item["index"]: item["row"]
+                        for item in wire["progress"]
+                        if item["phase"] == "target-finish"
                     }
-                )
+                    started = {
+                        item["index"]
+                        for item in wire["progress"]
+                        if item["phase"] == "target-start"
+                    }
+                    stopped = False
+                    for index, row in enumerate(receipt["targets"]):
+                        published = base64.b64decode(
+                            wire["acquired"].get(str(index), ""), validate=True
+                        )
+                        require(len(published) <= SIZES[index] + 1, "bounded-recovery-prefix")
+                        if row["name"] not in existing and published:
+                            require(
+                                _now() < retention_deadline,
+                                "current-retention-before-preservation-write",
+                            )
+                            _write_file(objects, row["name"], published)
+                        body = (
+                            _read_file(objects, row["name"], SIZES[index] + 1)
+                            if row["name"] in existing or published
+                            else b""
+                        )
+                        require(not body or published.startswith(body), "published-prefix-binding")
+                        if index in finished and not stopped:
+                            row.update(finished[index])
+                        elif index in started or body:
+                            row.update(status="incomplete", error=wire["acquisition_error"])
+                            stopped = True
+                        retained = row["name"] in existing or bool(published)
+                        row.update(
+                            actual_bytes=len(body),
+                            body_path="objects/" + row["name"] if retained else None,
+                        )
+                        if row["status"] != "accepted":
+                            row["accepted_sha256"] = None
+                        if retained:
+                            receipt["inventory"][row["body_path"]] = {
+                                "bytes": len(body),
+                                "sha256": digest(body),
+                            }
+                    receipt.update(
+                        status="incomplete",
+                        controller_ended_utc=_stamp(_now()),
+                        source_identity_after=_identity(),
+                        controller_elapsed_ns=max(
+                            0, time.monotonic_ns() - wire["started_monotonic_ns"]
+                        ),
+                    )
+                    require(_now() < retention_deadline, "current-retention-before-failure-receipt")
+                    receipt_raw = _store_receipt(directory, receipt)
+                    _emit(
+                        {
+                            "phase": "receipt",
+                            "receipt_b64": base64.b64encode(receipt_raw).decode("ascii"),
+                        }
+                    )
+                finally:
+                    os.close(objects)
             finally:
-                os.close(objects)
-        finally:
-            os.close(directory)
+                os.close(directory)
     except (OSError, ValueError, TimeoutError):
         _emit({"phase": "controller-error", "reason": "bounded-failure-preservation-incomplete"})
 
@@ -1168,75 +1179,78 @@ def _supervise(wire, recovery=False):
 def _collect(
     plan_raw, plan_pin, approval_raw, approval_pin, notice_raw, origin_raw, origin_pin, case=None
 ):
-    _plan, expiry = _gate(
-        plan_raw,
-        plan_pin,
-        approval_raw,
-        approval_pin,
-        notice_raw,
-        origin_raw,
-        origin_pin,
-        case is not None,
-    )
-    whole = min(90, max(0, (expiry - _now()).total_seconds()))
-    request = 30
-    if case in ("slow-headers", "slow-body", "stall-connect"):
-        request = 0.2
-    if case in ("stall-storage", "outer-deadline"):
-        whole = min(whole, 0.3)
-    wire = {
-        name: base64.b64encode(raw).decode("ascii")
-        for name, raw in (
-            ("plan", plan_raw),
-            ("approval", approval_raw),
-            ("notice", notice_raw),
-            ("origin", origin_raw),
+    with fixture_time.use(case is not None):
+        _plan, expiry = _gate(
+            plan_raw,
+            plan_pin,
+            approval_raw,
+            approval_pin,
+            notice_raw,
+            origin_raw,
+            origin_pin,
+            case is not None,
         )
-    }
-    wire.update(
-        plan_pin=plan_pin,
-        approval_pin=approval_pin,
-        origin_pin=origin_pin,
-        case=case,
-        whole_seconds=whole,
-        request_seconds=request,
-        started_utc=_stamp(_now()),
-        started_monotonic_ns=time.monotonic_ns(),
-    )
-    result = _supervise(wire)
-    acquired = result.pop("_acquired", {})
-    if result["receipt_sha256"] is None and result["owned_cleanup_error"] is None:
-        failure = dict(
-            wire,
-            whole_seconds=2,
-            acquisition_error=result["error"],
-            progress=result.get("progress", []),
-            acquired={
-                str(index): base64.b64encode(body).decode("ascii")
-                for index, body in acquired.items()
-            },
-        )
-        recovered = _supervise(failure, recovery=True)
-        recovered.pop("_acquired", None)
-        if recovered["receipt_sha256"] is not None:
-            recovered["acquisition_error"] = result["error"]
-            recovered["acquisition_process"] = {
-                key: result[key] for key in ("controller_pid", "returncode", "owned_cleanup_error")
-            }
-            recovered["acquisition_progress"] = result.get("progress", [])
-            result = recovered
-        else:
-            result["failure_preservation_error"] = recovered.get(
-                "error", "failure-preservation-incomplete"
+        whole = min(90, max(0, (expiry - _now()).total_seconds()))
+        request = 30
+        if case in ("slow-headers", "slow-body", "stall-connect"):
+            request = 0.2
+        if case in ("stall-storage", "outer-deadline"):
+            whole = min(whole, 0.3)
+        wire = {
+            name: base64.b64encode(raw).decode("ascii")
+            for name, raw in (
+                ("plan", plan_raw),
+                ("approval", approval_raw),
+                ("notice", notice_raw),
+                ("origin", origin_raw),
             )
-    if (
-        _identity() != _plan["source_identity"]
-        or _owner() != _plan["process_owner_source_identity"]
-    ):
-        result.update(status="incomplete", error="source-changed", receipt_sha256=None)
-    return result
+        }
+        wire.update(
+            plan_pin=plan_pin,
+            approval_pin=approval_pin,
+            origin_pin=origin_pin,
+            case=case,
+            whole_seconds=whole,
+            request_seconds=request,
+            started_utc=_stamp(_now()),
+            started_monotonic_ns=time.monotonic_ns(),
+        )
+        result = _supervise(wire)
+        acquired = result.pop("_acquired", {})
+        if result["receipt_sha256"] is None and result["owned_cleanup_error"] is None:
+            failure = dict(
+                wire,
+                whole_seconds=2,
+                acquisition_error=result["error"],
+                progress=result.get("progress", []),
+                acquired={
+                    str(index): base64.b64encode(body).decode("ascii")
+                    for index, body in acquired.items()
+                },
+            )
+            recovered = _supervise(failure, recovery=True)
+            recovered.pop("_acquired", None)
+            if recovered["receipt_sha256"] is not None:
+                recovered["acquisition_error"] = result["error"]
+                recovered["acquisition_process"] = {
+                    key: result[key]
+                    for key in ("controller_pid", "returncode", "owned_cleanup_error")
+                }
+                recovered["acquisition_progress"] = result.get("progress", [])
+                result = recovered
+            else:
+                result["failure_preservation_error"] = recovered.get(
+                    "error", "failure-preservation-incomplete"
+                )
+        if (
+            _identity() != _plan["source_identity"]
+            or _owner() != _plan["process_owner_source_identity"]
+        ):
+            result.update(status="incomplete", error="source-changed", receipt_sha256=None)
+        return result
 
 
+@fixture_time.actual
 def collect_approved(
     plan_raw,
     expected_plan_sha256,
@@ -1258,6 +1272,7 @@ def collect_approved(
     )
 
 
+@fixture_time.invented
 def fixture_inputs(destination):
     """Invented approval/context bytes cannot enter collect_approved."""
     now = _now().replace(microsecond=0) - timedelta(seconds=1)
@@ -1311,6 +1326,7 @@ def fixture_inputs(destination):
     return plan_raw, encode(approval), NOTICE, origin_raw
 
 
+@fixture_time.invented
 def run_fixture_collector(raw, destination):
     value = decode(raw)
     fields(value, "schema kind case", "fixture-intake-fields")
@@ -1404,6 +1420,7 @@ def read_intake_fixture(destination):
         os.close(directory)
 
 
+@fixture_time.invented
 def inspect_intake_fixture(
     files,
     expected_receipt_sha256,
@@ -1427,6 +1444,7 @@ def inspect_intake_fixture(
     )
 
 
+@fixture_time.actual
 def inspect_approved_intake(
     files,
     expected_receipt_sha256,
@@ -1450,6 +1468,7 @@ def inspect_approved_intake(
     )
 
 
+@fixture_time.selected(8)
 def _inspect_intake(
     files,
     expected_receipt_sha256,

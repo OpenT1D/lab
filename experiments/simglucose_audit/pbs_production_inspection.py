@@ -22,6 +22,7 @@ from pathlib import Path
 
 from experiments import platform_process
 
+from . import fixture_time
 from .contract import AUTHORITY, SOURCE_FILES, digest, encode, require
 
 SCHEMA = "opent1d.pbs-production-reader-fixture/1"
@@ -185,7 +186,7 @@ def _identity(deadline=None):
 
 
 def _now():
-    return datetime.now(UTC)
+    return fixture_time.now()
 
 
 def _stamp(value):
@@ -655,6 +656,7 @@ def _generate(fd, scenario, guard):
     return writer.hasher.hexdigest(), writer.count
 
 
+@fixture_time.invented
 def _worker(scenario, fresh_root, expected_source, expires, deadline):
     require(
         scenario in SCENARIOS and _identity(deadline) == expected_source, "fixed-source-scenario"
@@ -868,6 +870,7 @@ def _stop(process, whole_deadline):
     return ";".join(errors) or None
 
 
+@fixture_time.invented
 def _supervise(scenario, fresh_root, whole_seconds):
     start = time.monotonic()
     whole_deadline = start + whole_seconds
@@ -999,6 +1002,7 @@ def _supervise(scenario, fresh_root, whole_seconds):
     return outer
 
 
+@fixture_time.invented
 def qualify_invented_scenario(scenario, fresh_root):
     """Fixed generated fixtures only; no input archive path/auth boolean exists."""
     require(type(scenario) is str and scenario in SCENARIOS, "fixed-invented-scenario")
@@ -1061,6 +1065,7 @@ def _cold_rows(rows):
     return size, drained
 
 
+@fixture_time.invented
 def inspect_fixture_metadata(raw, held_report_sha256, held_completion_pin):
     """Metadata-only cold reader; no third compressed-file pass or producer call."""
     require(
@@ -1397,6 +1402,7 @@ def _fixture_audit(event, _args):
         raise PermissionError("invented reader worker forbids network/process activation")
 
 
+@fixture_time.invented
 def _entry():
     require(len(sys.argv) == 7 and sys.argv[1] == "--fixed-invented-worker", "fixed-worker-argv")
     scenario, fresh_root, source_pin, expires, deadline = sys.argv[2:]

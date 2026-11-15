@@ -12,6 +12,7 @@ from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from unittest.mock import patch
 
+from experiments.simglucose_audit import fixture_time
 from experiments.simglucose_audit import pbs_production_inspection as reader
 from experiments.simglucose_audit.contract import digest, encode
 
@@ -33,6 +34,9 @@ def change(raw, start, value):
 
 
 class ProductionReaderTests(unittest.TestCase):
+    def setUp(self):
+        self.enterContext(fixture_time.use(True))
+
     @classmethod
     def setUpClass(cls):
         if not hasattr(os, "O_NOFOLLOW") or os.open not in os.supports_dir_fd:
@@ -349,7 +353,11 @@ class ProductionReaderTests(unittest.TestCase):
         self.assertFalse(path.exists())
         with self.assertRaises(ValueError):
             reader._worker(
-                "small", path, {}, datetime.now(UTC) + timedelta(seconds=30), time.monotonic() + 30
+                "small",
+                path,
+                {},
+                fixture_time.FIXTURE_UTC + timedelta(seconds=30),
+                time.monotonic() + 30,
             )
         self.assertFalse(path.exists())
 
@@ -437,7 +445,7 @@ class ProductionReaderTests(unittest.TestCase):
             scenario,
             self.path(),
             reader._identity(),
-            datetime.now(UTC) + timedelta(seconds=30),
+            fixture_time.FIXTURE_UTC + timedelta(seconds=30),
             time.monotonic() + 30,
         )
 
@@ -524,7 +532,7 @@ class ProductionReaderTests(unittest.TestCase):
                 "small",
                 selected,
                 reader._identity(),
-                datetime.now(UTC) + timedelta(seconds=30),
+                fixture_time.FIXTURE_UTC + timedelta(seconds=30),
                 time.monotonic() + 30,
             )
         self.assertEqual(result["status"], "incomplete")

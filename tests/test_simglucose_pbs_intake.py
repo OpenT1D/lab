@@ -9,16 +9,20 @@ import uuid
 from pathlib import Path
 from unittest import mock
 
+from experiments.simglucose_audit import fixture_time
 from experiments.simglucose_audit import pbs_intake as p
 
 
 class CollectorTests(unittest.TestCase):
+    def setUp(self):
+        self.enterContext(fixture_time.use(True))
+
     @classmethod
     def setUpClass(cls):
         raw = os.environ.get("OT062_PBS_INTAKE_FIXTURE_PROOF_ROOT")
         if not raw:
             raw = tempfile.mkdtemp(prefix="ot062-pbs-fixture-")  # Retained, no cleanup.
-        cls.root = Path(raw)
+        cls.root = Path(raw).resolve()
         cls.root.mkdir(mode=0o700, parents=True, exist_ok=True)
 
     def output(self):

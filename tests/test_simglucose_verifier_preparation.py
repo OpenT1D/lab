@@ -11,18 +11,22 @@ import uuid
 from pathlib import Path
 from unittest import mock
 
+from experiments.simglucose_audit import fixture_time
 from experiments.simglucose_audit import verifier_preparation as p
 
 
 class DiscoveryTests(unittest.TestCase):
+    def setUp(self):
+        self.enterContext(fixture_time.use(True))
+
     @classmethod
     def setUpClass(cls):
         parent = os.environ.get("OT062_DISCOVERY_FIXTURE_PROOF_ROOT")
         cls.root = Path(
             parent
             if parent
-            else tempfile.mkdtemp(prefix="ot062-discovery-invented-", dir="/private/tmp")
-        )
+            else tempfile.mkdtemp(prefix="ot062-discovery-invented-", dir=tempfile.gettempdir())
+        ).resolve()
         cls.root.mkdir(mode=0o700, parents=True, exist_ok=True)
 
     def output(self):
@@ -227,7 +231,7 @@ class DiscoveryTests(unittest.TestCase):
     def test_earlier_grant_and_origin_fences(self):
         inputs = p.fixture_inputs(self.output())
         approval = p.decode(inputs[1])
-        approval["expires_utc"] = p.core._stamp(p.core._now() + p.timedelta(seconds=139))
+        approval["expires_utc"] = p.core._stamp(fixture_time.FIXTURE_UTC + p.timedelta(seconds=139))
         raw = p.encode(approval)
         held = dict(inputs[3], approval_sha256=p.digest(raw))
         with self.assertRaises(ValueError):
