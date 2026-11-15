@@ -4,6 +4,13 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Consolidate the gated OT-062 simglucose audit-1 consumer, independent invented-
+  data reconstruction, owned fixture workers and passive intake/inspection
+  preparation. Keep fixture clocks and host metadata independent of actual
+  runtime permissions, and preserve closed native/Node, setup, use and removal
+  gates. Reject completed LT1 C15 reports with inconsistent construction, reset
+  or basal-call counts without changing numerical baselines.
+
 - Add the Concept v1 compact project launcher and dark Study workspace for the
   two synthetic MMTT tasks. Reuse existing project and draft services for
   creation, opening, editing, autosave, conflict recovery and reopening. Provide

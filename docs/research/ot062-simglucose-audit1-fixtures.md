@@ -24,6 +24,33 @@ role records or operational grants. Source metadata and published notices do not
 establish rights to use the parameter/device assets. Quest remains excluded from
 the consumer; absence from a future built artifact is still unproved.
 
+## Consolidation boundary — 15 November 2026
+
+This consolidation makes the previously local source and invented-input tests
+reviewable together. It includes no private decisions, receipts, host paths,
+selected runtime binaries, archive members or CSV payloads. The dated sections
+below retain development observations; their action-specific private approvals
+are not reusable permissions supplied by this checkout.
+
+Reusable fixtures must be portable across root-test hosts and independent of the
+current calendar. Their fixed invented UTC context does not extend historical
+retention or grant actual access. Production operations retain their real-time
+checks and unchanged deadlines. Selected-tool fixtures use invented policy
+metadata; actual macOS policy capture remains an explicit, separately gated
+operation. Test network-denial guards must not affect unrelated test modules.
+
+The companion LT1 C15 reader correction enforces the producer's existing completed
+worker contract: exactly one construction, two patient resets and one basal call,
+all represented by strict integers. Failed prefixes and other cases keep their
+existing behavior. The test_lt1_native_reader_lifecycle.py fixtures check the
+worker/footer handoff; the existing coupled route tests cover integration.
+No solver, units, event order, tolerances or frozen numerical baseline changes.
+
+Repository and hosted PR checks establish their declared software scope. They do
+not supply native-reference parity, host/runtime acceptance or biological results.
+Private evidence stays outside Git; actual intake, cryptography, selected-runtime
+setup and native execution remain separately authorized work.
+
 ## Executable fixture contract
 
 The built-in fixture has eleven explicitly invented CGM values and ten modeled
