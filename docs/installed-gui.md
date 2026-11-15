@@ -266,6 +266,11 @@ concepts, frozen plans, attempts, verification, prospective comparison and
 native export. The existing SDK capabilities retain their original meaning.
 Actual screen-reader use, independent intended-user acceptance, clean-host
 distribution and Apple notarisation remain separate from internal checks.
+The [OT-065 audit](research/ot065-criteria-evidence.md) maps the existing design,
+software and onboarding evidence. Its binding screen-reader criterion remains
+open; the [qualification record](research/ot065-accessibility-qualification.md)
+supplies an exact-candidate protocol and the inconclusive actual activation
+attempt, without claiming VoiceOver speech/navigation was observed.
 
 ## Three screens
 

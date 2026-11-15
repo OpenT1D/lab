@@ -159,12 +159,54 @@ session qualifies only the cases and states actually exercised. It does not
 supply WCAG conformance, another assistive technology, another host or OT-072
 acceptance.
 
-## Current qualification boundary
+## Actual session outcome
 
-The fixture preparation, artifact readback and initial exact-app launch are
-completed internal technical work. At the preparation boundary, no genuine
-VoiceOver phrase or navigation result has yet been recorded in this document.
-The screen-reader criterion therefore remains open until the session outcome
-is appended with its actual evidence and case dispositions. The existing
-keyboard, zoom, reflow, non-color status and native-export checks retain their
-bounded passing scope.
+Date: 15 November 2026.
+
+The coordinator used native computer-use against the exact relocated app and
+the prepared accessibility-session workspace. A normal sandboxed launch exited
+134 without a diagnostic; an explicitly approved native launch succeeded.
+The app's launcher exposed both fixture projects through the actual macOS AX
+tree. The paired project opened and displayed the authoritative saved-history
+loading state followed by its Study heading, frozen revision 5 and full plan
+identity. This is ordinary app-tree/window evidence, not VoiceOver speech.
+
+The initial Command-F5 attempt did not activate VoiceOver. Selecting the
+background VoiceOver app through computer-use timed out, including one
+199.570-second call. VoiceOver Utility exposed AppleScript control as off;
+it was left off. The caption-panel setting was observed as on before actual
+activation and was not changed in the utility. An earlier attempted caption
+shortcut had no observable output; its effect was not inferred.
+
+The coordinator then observed the macOS Accessibility → VoiceOver switch off,
+switched it on and selected **Use VoiceOver** in the real welcome dialog,
+leaving **Do not show this message again** unchecked. A read-only OS process
+query subsequently observed the actual VoiceOver worker and speech-output
+helper. Settings continued to show the switch on. Computer-use's application
+inventory nevertheless identified the background starter as not running;
+that inventory alone is therefore not the activation authority.
+
+No actual VoiceOver phrase was captured. Selecting VoiceOver still timed out,
+and the refreshed available-surface inventory exposed no caption/helper window.
+An attempted VO-Right command left the ordinary app focus on Study; no
+VoiceOver cursor or phrase could be observed, so it is not a navigation pass.
+The documented computer-use API supplied the OpenT1D window, not a global
+VoiceOver caption overlay or audio channel. The screen-reader criterion
+therefore remains **inconclusive**, rather than passed or a demonstrated
+application defect. No scripting permission, speech/voice, tracking, verbosity
+or Quick Nav preference was changed to bypass this observation boundary.
+
+| Protocol cases | Actual disposition |
+| --- | --- |
+| VO-01 | Inconclusive: fixture launcher and genuine activation were observed, but the required first VoiceOver phrase and VO navigation were not. |
+| VO-02–VO-09 | Unrun as screen-reader cases: no own-output observation channel was established. Ordinary app text and existing renderer tests are not substituted. The paired plan remains unattempted. |
+| VO-10 | Partial environmental cleanup only: the switch was visibly restored to off and the test-owned app quit through its native menu, exit 0. The prepared workspace remains. No VoiceOver reopen observation is claimed. |
+
+The concrete next step is a listener or caption observer using the preserved
+candidate/workspace and the protocol above, recording actual phrases, commands,
+assistance and each case's result. A request for that observation was made;
+availability is not presumed. The existing user's older app and `Testing`
+project were left untouched. VoiceOver Utility and the test-opened Settings
+window were closed. The existing keyboard, zoom, reflow, non-color status and
+native-export checks retain their bounded passing scope. This outcome does not
+close actual screen-reader use under [OT-065](ot065-criteria-evidence.md).
