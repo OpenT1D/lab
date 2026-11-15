@@ -32,6 +32,12 @@ exact-artifact results to support the unchanged product implementation. It
 does not turn a later documentation revision into a newly built app or a new
 screen-reader result.
 
+The later PR 87 integration retains the reviewed OT-062 consolidation from
+main `4e0d2db0351ea99920feb23a4d98466e6e846348` unchanged. PR 87 differs from
+that expanded baseline only in its six closure/scope documents. The earlier
+app receipts retain their exact source/artifact scope; they do not qualify new
+OT-062 code or a newly built application.
+
 ## Criterion-to-evidence matrix
 
 The four dispositions are **proved** (implemented with appropriate bounded

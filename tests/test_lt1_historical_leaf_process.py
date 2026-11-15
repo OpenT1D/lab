@@ -5,6 +5,7 @@ import subprocess
 import sys
 import tempfile
 import threading
+import time
 import unittest
 from pathlib import Path
 
@@ -15,29 +16,38 @@ from tests.lt1_historical_leaf_fixture import command, outer
 
 @unittest.skipUnless(os.name == "posix", "POSIX owned fixture required")
 class HistoricalLeafProcessTests(unittest.TestCase):
-    def case(self, phase, *, cancel=False):
+    def case(self, phase, *, cancel=False, delayed_start=False, timeout=10):
         with tempfile.TemporaryDirectory() as directory:
             parent = Path(directory).resolve()
             parent.chmod(0o700)
             cancellation, done = threading.Event(), threading.Event()
+            ready_seen = []
             sentinel = subprocess.Popen(
                 [sys.executable, "-I", "-S", "-B", "-c", "import time; time.sleep(60)"]
             )
 
             def watcher():
                 while not done.wait(0.01):
-                    if (parent / "ready").is_file():
-                        cancellation.set()
+                    try:
+                        ready = (parent / "ready").read_bytes()
+                    except FileNotFoundError:
+                        continue
+                    if ready == phase.encode():
+                        ready_seen.append(time.monotonic())
+                        if cancel:
+                            cancellation.set()
                         return
 
-            thread = threading.Thread(target=watcher, daemon=True) if cancel else None
+            complete = phase == "complete"
+            thread = threading.Thread(target=watcher, daemon=True) if not complete else None
             if thread:
                 thread.start()
             try:
+                started = time.monotonic()
                 receipt = supervise(
-                    command(parent, phase),
+                    command(parent, phase, delayed_start=delayed_start),
                     parent / "worker.log",
-                    timeout=10 if cancel or phase == "complete" else 3,
+                    timeout=timeout,
                     grace=0.2,
                     cancel=cancellation,
                     environment={"LANG": "C", "LC_ALL": "C", "PATH": "/usr/bin:/bin"},
@@ -49,7 +59,6 @@ class HistoricalLeafProcessTests(unittest.TestCase):
                     thread.join(timeout=1)
                 sentinel.terminate()
                 sentinel.wait(timeout=5)
-            complete = phase == "complete"
             self.assertEqual(receipt["remaining_owned_processes"], [])
             self.assertEqual(receipt["received_signals"], [])
             self.assertEqual(
@@ -57,9 +66,22 @@ class HistoricalLeafProcessTests(unittest.TestCase):
                 "completed" if complete else "interrupted" if cancel else "failed",
             )
             if not complete:
+                self.assertEqual(receipt["error"], "Cancelled" if cancel else "WorkerDeadline")
+                diagnostic = {name: receipt.get(name) for name in ("status", "error", "exit_code")}
                 self.assertTrue(
-                    (parent / "ready").is_file(), "intended phase must actually be reached"
+                    ready_seen,
+                    f"intended phase must actually be reached: {diagnostic}",
                 )
+                self.assertEqual((parent / "ready").read_bytes(), phase.encode())
+                if not cancel:
+                    # The supervisor starts its clock after spawn. Observing the
+                    # exact phase before this earlier bound proves a real window
+                    # remains for the selected, indefinitely paused checkpoint.
+                    self.assertLessEqual(
+                        ready_seen[0],
+                        started + timeout - 0.1,
+                        f"intended phase must actually be reached before deadline: {diagnostic}",
+                    )
                 self.assertFalse((parent / "outcome.json").exists())
             raw = (parent / "request.json").read_bytes()
             context = (parent / "context.json").read_bytes()
@@ -101,6 +123,13 @@ class HistoricalLeafProcessTests(unittest.TestCase):
 
     def test_deadline_before_remove_event_does_not_manufacture_removal(self):
         self.assertTrue(self.case("unlinked-unrecorded")["absence_without_recorded_removal"])
+
+    def test_delayed_start_needs_phase_budget_before_testing_postphase_deadline(self):
+        # These are two fresh invented attempts, not a retry/resume of evidence.
+        with self.assertRaisesRegex(AssertionError, "intended phase must actually be reached"):
+            self.case("unlinked-unrecorded", delayed_start=True, timeout=3)
+        report = self.case("unlinked-unrecorded", delayed_start=True)
+        self.assertTrue(report["absence_without_recorded_removal"])
 
 
 if __name__ == "__main__":

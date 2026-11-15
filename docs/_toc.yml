@@ -77,6 +77,7 @@ subtrees:
       - file: docs/research/ot059-contract-extraction
       - file: docs/research/ot062-adapter-audit
       - file: docs/research/ot062-runtime-rights
+      - file: docs/research/ot062-simglucose-audit1-fixtures
       - file: docs/research/ot062-lt1-preparation
       - file: docs/research/ot062-lt1-harness
       - file: docs/research/ot062-lt1-native-worker

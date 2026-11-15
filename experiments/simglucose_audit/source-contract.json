@@ -1,0 +1,1139 @@
+{
+  "asset_semantics": {
+    "artifact_extra_CSV_paths_metadata_only": [
+      {
+        "bytes": 95,
+        "git_blob_sha1": "d95d79f16115a30a74cee75192ac6ddcae7b198b",
+        "path": "examples/results/2017-12-31_17-46-32/CVGA_stats.csv"
+      },
+      {
+        "bytes": 59476,
+        "git_blob_sha1": "84c4aa05c9d32858191fcffb7a5dcc0675091dcf",
+        "path": "examples/results/2017-12-31_17-46-32/adolescent#001.csv"
+      },
+      {
+        "bytes": 55853,
+        "git_blob_sha1": "f0f67e2945ae6e300e299d81098d37224adf6841",
+        "path": "examples/results/2017-12-31_17-46-32/adolescent#002.csv"
+      },
+      {
+        "bytes": 58883,
+        "git_blob_sha1": "0e7621a2804360bf08d0fc40f725849937c21c9f",
+        "path": "examples/results/2017-12-31_17-46-32/adolescent#003.csv"
+      },
+      {
+        "bytes": 58625,
+        "git_blob_sha1": "f5bb8624719d1c39079fdc7779712752d37d878b",
+        "path": "examples/results/2017-12-31_17-46-32/adolescent#004.csv"
+      },
+      {
+        "bytes": 59055,
+        "git_blob_sha1": "c39bfbbbdee7a8c87b1b5c28ee68f30ff0fe5220",
+        "path": "examples/results/2017-12-31_17-46-32/adolescent#005.csv"
+      },
+      {
+        "bytes": 59613,
+        "git_blob_sha1": "a5abd5b35597755b10598e7c6c552f7b2dfcf998",
+        "path": "examples/results/2017-12-31_17-46-32/adolescent#006.csv"
+      },
+      {
+        "bytes": 58021,
+        "git_blob_sha1": "9e46f0b388ee620162ed22ee39f80dc3ff16716a",
+        "path": "examples/results/2017-12-31_17-46-32/adolescent#007.csv"
+      },
+      {
+        "bytes": 58843,
+        "git_blob_sha1": "2eccdd8826d7db19541fa7ea5466d24a0f022a01",
+        "path": "examples/results/2017-12-31_17-46-32/adolescent#008.csv"
+      },
+      {
+        "bytes": 59230,
+        "git_blob_sha1": "afbe6f35955eaddf66fe1c0d7bf67fc6fafbee5c",
+        "path": "examples/results/2017-12-31_17-46-32/adolescent#009.csv"
+      },
+      {
+        "bytes": 58820,
+        "git_blob_sha1": "1debd1fc3d2e1973a28372bd3842f2540e5f93d7",
+        "path": "examples/results/2017-12-31_17-46-32/adolescent#010.csv"
+      },
+      {
+        "bytes": 53613,
+        "git_blob_sha1": "438580c8526acbdcd3c7335496f9dc3597758a33",
+        "path": "examples/results/2017-12-31_17-46-32/adult#001.csv"
+      },
+      {
+        "bytes": 53838,
+        "git_blob_sha1": "a97de1dbd9121769ebf885e4ae68b88db959c51d",
+        "path": "examples/results/2017-12-31_17-46-32/adult#002.csv"
+      },
+      {
+        "bytes": 59333,
+        "git_blob_sha1": "3a24f433a58c956045e9538e638e2fe5aeeb12c3",
+        "path": "examples/results/2017-12-31_17-46-32/adult#003.csv"
+      },
+      {
+        "bytes": 52852,
+        "git_blob_sha1": "4a28c7821383ffc9cccb33f4f705f46ab4eb2fd6",
+        "path": "examples/results/2017-12-31_17-46-32/adult#004.csv"
+      },
+      {
+        "bytes": 59429,
+        "git_blob_sha1": "1c225bec4d0dda84baad79e9ad19a0cdc7d76955",
+        "path": "examples/results/2017-12-31_17-46-32/adult#005.csv"
+      },
+      {
+        "bytes": 59363,
+        "git_blob_sha1": "8a6bc86a5ae6a81b0d2df3efddc63fe9768773af",
+        "path": "examples/results/2017-12-31_17-46-32/adult#006.csv"
+      },
+      {
+        "bytes": 59380,
+        "git_blob_sha1": "3845452e876256d095d024d9ba921b21abcd1444",
+        "path": "examples/results/2017-12-31_17-46-32/adult#007.csv"
+      },
+      {
+        "bytes": 53688,
+        "git_blob_sha1": "84cbf224a680c934c23ef5c1f25787dda6229544",
+        "path": "examples/results/2017-12-31_17-46-32/adult#008.csv"
+      },
+      {
+        "bytes": 51600,
+        "git_blob_sha1": "4a2aac17a6205a066f8bd9a33dcf4c8e68edeeae",
+        "path": "examples/results/2017-12-31_17-46-32/adult#009.csv"
+      },
+      {
+        "bytes": 53718,
+        "git_blob_sha1": "4bd09a4f8a02cbd55e0bf9777a113430c1d17f2f",
+        "path": "examples/results/2017-12-31_17-46-32/adult#010.csv"
+      },
+      {
+        "bytes": 58010,
+        "git_blob_sha1": "5b62ced872d61bb57f072ca3fc9952edd525d745",
+        "path": "examples/results/2017-12-31_17-46-32/child#001.csv"
+      },
+      {
+        "bytes": 57268,
+        "git_blob_sha1": "d1d1b9fd5f7e4e325f8d0e9580f0aa419692a7e3",
+        "path": "examples/results/2017-12-31_17-46-32/child#002.csv"
+      },
+      {
+        "bytes": 55428,
+        "git_blob_sha1": "293fcee77b77e6fa37d9134691dbd14191eba36f",
+        "path": "examples/results/2017-12-31_17-46-32/child#003.csv"
+      },
+      {
+        "bytes": 58224,
+        "git_blob_sha1": "99d6524b851e28c7b02178f21acf197820995309",
+        "path": "examples/results/2017-12-31_17-46-32/child#004.csv"
+      },
+      {
+        "bytes": 59174,
+        "git_blob_sha1": "dad51783b6671ef39afe5b94c01478f2440da6e1",
+        "path": "examples/results/2017-12-31_17-46-32/child#005.csv"
+      },
+      {
+        "bytes": 55040,
+        "git_blob_sha1": "94994aed6abc98e3ce2c1483d12239e09477a064",
+        "path": "examples/results/2017-12-31_17-46-32/child#006.csv"
+      },
+      {
+        "bytes": 60080,
+        "git_blob_sha1": "6c90f817b62569e60a33d460d7f2ed2121a74a54",
+        "path": "examples/results/2017-12-31_17-46-32/child#007.csv"
+      },
+      {
+        "bytes": 53799,
+        "git_blob_sha1": "12fe5a1b4929258250ef43fc2fb743c630604d5b",
+        "path": "examples/results/2017-12-31_17-46-32/child#008.csv"
+      },
+      {
+        "bytes": 59657,
+        "git_blob_sha1": "bdc66344e08697a52651075d9a343d733e9b3be4",
+        "path": "examples/results/2017-12-31_17-46-32/child#009.csv"
+      },
+      {
+        "bytes": 58586,
+        "git_blob_sha1": "8674a3ee46ecd8d9384f9339c27477871980ec33",
+        "path": "examples/results/2017-12-31_17-46-32/child#010.csv"
+      },
+      {
+        "bytes": 4371,
+        "git_blob_sha1": "ebe67046fff48fa3290873957407efee204da174",
+        "path": "examples/results/2017-12-31_17-46-32/performance_stats.csv"
+      },
+      {
+        "bytes": 12538,
+        "git_blob_sha1": "f4ecce00ebac77d6327cc9056f5940a7848b98ff",
+        "path": "examples/results/2017-12-31_17-46-32/risk_trace.csv"
+      },
+      {
+        "bytes": 119737,
+        "git_blob_sha1": "56382d445efd26fa914d04b2f35fdfbe3e5a3bf7",
+        "path": "tests/sim_results.csv"
+      }
+    ],
+    "complete_external_native_build_vendor_manifest_sha256": null,
+    "consumer_excluded_asset_metadata": [
+      {
+        "artifact_exclusion_proven": false,
+        "consumer_allowed": false,
+        "distribution_review_still_required": true,
+        "expected_bytes_from_tree": 1350,
+        "git_blob_sha1": "640f2b8c87c0654f7f48b31fbff0686ef55a5aef",
+        "package": "simglucose",
+        "payload_intake": "not_read_or_downloaded",
+        "payload_sha256": null,
+        "resource_argument": "params/Quest.csv",
+        "rights_use_decision_sha256": null,
+        "row_only_access_claimed": false,
+        "upstream_path": "simglucose/params/Quest.csv",
+        "whole_file_read_required": true
+      }
+    ],
+    "future_path_read_policy": {
+      "bind_complete_file_bytes_size_hash_and_artifact_membership_before_import": true,
+      "canonical_regular_owned_nonlink_paths": true,
+      "drift_invalidates_acceptance": true,
+      "no_Quest_or_BB_source_fallback": true,
+      "no_automatic_dependency_or_artifact_pruning": true,
+      "only_resource_arguments": [
+        "params/vpatient_params.csv",
+        "params/sensor_params.csv",
+        "params/pump_params.csv"
+      ],
+      "package_exact": "simglucose",
+      "path_API_is_not_atomic_or_hostile_same_UID_protection": true,
+      "reject_missing_sha256_or_rights_or_extra_resource": true,
+      "snapshot_guard_before_constructors_and_after_attempt": true,
+      "upstream_pandas_read_csv_unchanged": true
+    },
+    "new_asset_payload_collected": false,
+    "notices": [
+      {
+        "asset_title_or_use_clearance_implied": false,
+        "bytes": 1052,
+        "declared_license": "MIT",
+        "keep_full_notice": true,
+        "sha256": "ddfd0daee4b3569977580f2d4fc52ffc953c88db7b97f81abecfe2c003e10c75",
+        "upstream_path": "LICENSE"
+      }
+    ],
+    "required_resources": [
+      {
+        "consumer": "T1DPatient.withName/withID",
+        "expected_bytes_from_tree": 17782,
+        "git_blob_sha1": "bdbabcb7f1b5b88ed9e3c1f1b65e41f1c5722319",
+        "package": "simglucose",
+        "payload_intake": "not_read_or_downloaded",
+        "payload_sha256": null,
+        "required_before_any_selected_import": true,
+        "resource_argument": "params/vpatient_params.csv",
+        "rights_use_decision_sha256": null,
+        "row_only_access_claimed": false,
+        "upstream_path": "simglucose/params/vpatient_params.csv",
+        "whole_file_read_required": true
+      },
+      {
+        "consumer": "CGMSensor.withName",
+        "expected_bytes_from_tree": 224,
+        "git_blob_sha1": "0c8ad25125e38b4b734d3c014138ec9c294c581e",
+        "package": "simglucose",
+        "payload_intake": "not_read_or_downloaded",
+        "payload_sha256": null,
+        "required_before_any_selected_import": true,
+        "resource_argument": "params/sensor_params.csv",
+        "rights_use_decision_sha256": null,
+        "row_only_access_claimed": false,
+        "upstream_path": "simglucose/params/sensor_params.csv",
+        "whole_file_read_required": true
+      },
+      {
+        "consumer": "InsulinPump.withName",
+        "expected_bytes_from_tree": 155,
+        "git_blob_sha1": "e4bae042a867fa295a8ce84eead0a7594c675472",
+        "package": "simglucose",
+        "payload_intake": "not_read_or_downloaded",
+        "payload_sha256": null,
+        "required_before_any_selected_import": true,
+        "resource_argument": "params/pump_params.csv",
+        "rights_use_decision_sha256": null,
+        "row_only_access_claimed": false,
+        "upstream_path": "simglucose/params/pump_params.csv",
+        "whole_file_read_required": true
+      }
+    ],
+    "scope": "exact selected source plus metadata-only resource requirements; not an installed-artifact inventory",
+    "selected_code": [
+      {
+        "bytes": 125,
+        "git_blob_sha1": "ea4ffe5325161722db47ebe7ef2da34e675a1042",
+        "module": "simglucose",
+        "package_initializer": true,
+        "sha256": "67bd87d9fda816e7470bc74eb2f5b8651562df8640c25fb9edfbb13aaaacab47",
+        "upstream_path": "simglucose/__init__.py"
+      },
+      {
+        "bytes": 0,
+        "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "module": "simglucose.actuator",
+        "package_initializer": true,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "upstream_path": "simglucose/actuator/__init__.py"
+      },
+      {
+        "bytes": 1401,
+        "git_blob_sha1": "717b77161953a2a0589d17c40f62784077233225",
+        "module": "simglucose.actuator.pump",
+        "package_initializer": false,
+        "sha256": "54dc4ec98f34ae600dacd1edd2e43fc2701512eb0824ce33acb07f3f756a9719",
+        "upstream_path": "simglucose/actuator/pump.py"
+      },
+      {
+        "bytes": 0,
+        "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "module": "simglucose.analysis",
+        "package_initializer": true,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "upstream_path": "simglucose/analysis/__init__.py"
+      },
+      {
+        "bytes": 1155,
+        "git_blob_sha1": "7cfaa43f598399888be7971922324bc10f2ae9b7",
+        "module": "simglucose.analysis.risk",
+        "package_initializer": false,
+        "sha256": "d886f6226f14c213ced4c1c28a905fa4b527ec88be8d76bb9982e348a90d4455",
+        "upstream_path": "simglucose/analysis/risk.py"
+      },
+      {
+        "bytes": 0,
+        "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "module": "simglucose.controller",
+        "package_initializer": true,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "upstream_path": "simglucose/controller/__init__.py"
+      },
+      {
+        "bytes": 1186,
+        "git_blob_sha1": "cf8560377a00d0d66d1fc1649e6721f2345f495e",
+        "module": "simglucose.controller.base",
+        "package_initializer": false,
+        "sha256": "4db8677be5e3d23d512dc82ea969ed7bc77fe50671cd422f743cd9b403ebc7e2",
+        "upstream_path": "simglucose/controller/base.py"
+      },
+      {
+        "bytes": 0,
+        "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "module": "simglucose.patient",
+        "package_initializer": true,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "upstream_path": "simglucose/patient/__init__.py"
+      },
+      {
+        "bytes": 691,
+        "git_blob_sha1": "c2b290e8c6d3e38d8da23a7cb6b84f6d97d319c5",
+        "module": "simglucose.patient.base",
+        "package_initializer": false,
+        "sha256": "e30c8077759b24aa7179ff10dc3fed344f38d7627285bc671d21d1d1333aa840",
+        "upstream_path": "simglucose/patient/base.py"
+      },
+      {
+        "bytes": 10360,
+        "git_blob_sha1": "de75c925c5a21189e35ffb2bae6c500eb9f12c2a",
+        "module": "simglucose.patient.t1dpatient",
+        "package_initializer": false,
+        "sha256": "7ad1302fbf064805e2294bbcffd482e55448e37e48b63e629a1ed7f11c701547",
+        "upstream_path": "simglucose/patient/t1dpatient.py"
+      },
+      {
+        "bytes": 0,
+        "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "module": "simglucose.sensor",
+        "package_initializer": true,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "upstream_path": "simglucose/sensor/__init__.py"
+      },
+      {
+        "bytes": 1503,
+        "git_blob_sha1": "99f3b3c93fa60a11659ae583562c2dbd8ba0be34",
+        "module": "simglucose.sensor.cgm",
+        "package_initializer": false,
+        "sha256": "97f3e1b3aeb01a9225e9500efa6ca940c41a178f6b8a80c9c41a430ec3a8563d",
+        "upstream_path": "simglucose/sensor/cgm.py"
+      },
+      {
+        "bytes": 3013,
+        "git_blob_sha1": "20e54d3edad32e1e642d28b9ee5612598e9f63ae",
+        "module": "simglucose.sensor.noise_gen",
+        "package_initializer": false,
+        "sha256": "b5b435940523d65b03c12228447ce6acf16a2371e1b8f688639a1648d6e1e509",
+        "upstream_path": "simglucose/sensor/noise_gen.py"
+      },
+      {
+        "bytes": 0,
+        "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "module": "simglucose.simulation",
+        "package_initializer": true,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "upstream_path": "simglucose/simulation/__init__.py"
+      },
+      {
+        "bytes": 5678,
+        "git_blob_sha1": "45a43cb63d796243aef5992e39b584ed3bcae3d0",
+        "module": "simglucose.simulation.env",
+        "package_initializer": false,
+        "sha256": "8c5d16b66df270b22b13cd64f8e059efe0a5f7c732f8673f36af0170d5d0d199",
+        "upstream_path": "simglucose/simulation/env.py"
+      },
+      {
+        "bytes": 5641,
+        "git_blob_sha1": "0cf948989d88261b1a4bc3e55a21b32191f13bce",
+        "module": "simglucose.simulation.rendering",
+        "package_initializer": false,
+        "sha256": "cce998769d876bec6ff1d412bf696388daf744ad9f3ca4caffe3f48603f92f3c",
+        "upstream_path": "simglucose/simulation/rendering.py"
+      },
+      {
+        "bytes": 1886,
+        "git_blob_sha1": "ab7770601b76d99eea00c3dbb0bac5322ca95454",
+        "module": "simglucose.simulation.scenario",
+        "package_initializer": false,
+        "sha256": "e6b0e19a64421d1ede1f8a45c368e5eb9dcb15d35738b7aae28ed9d4ffa7a5eb",
+        "upstream_path": "simglucose/simulation/scenario.py"
+      }
+    ],
+    "upstream_revision": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc"
+  },
+  "bootstrap_semantics": {
+    "all_future_component_source_sha256": null,
+    "compatibility_contract": {
+      "EntryPoint": {
+        "consumer_uses_gym_make_or_load": false,
+        "future_allowed_targets": [],
+        "no_arbitrary_target_or_generic_M4_EntryPoint_load_reuse": true,
+        "optional_import_only_symbol_must_be_proven_by_exact_Gym_source_review": true,
+        "parse_or_load_allowed": false
+      },
+      "Matplotlib": {
+        "Agg_and_private_cache_required_before_any_pyplot_import": true,
+        "actual_font_data_and_cache_dependency_inventory_sha256": null,
+        "eager_source_paths": [
+          "simglucose/simulation/rendering.py",
+          "simglucose/sensor/noise_gen.py"
+        ],
+        "patient_pyplot_is_main_demo_only": true,
+        "render_and_show_calls_allowed": false
+      },
+      "distutils": {
+        "candidate_setuptools": "84.2.1",
+        "execute_hook_only_after_separate_actual_grants": true,
+        "explicit_context": "shim",
+        "explicit_module": "_distutils_hack",
+        "full_hook_and_dependency_source_hashes": null,
+        "no_pth_interpretation": true
+      },
+      "gym_package_init": {
+        "complete_Gym_init_and_registration_source_sha256": null,
+        "registered_target_literal": "simglucose.envs:T1DSimEnv",
+        "registered_target_load_allowed": false,
+        "registration_call": "gym.envs.registration.register",
+        "registration_id": "simglucose-v0"
+      },
+      "implementation_source_sha256": null,
+      "pkg_resources_fallback_to_real_package": false,
+      "resource_filename": {
+        "arguments": [
+          "params/vpatient_params.csv",
+          "params/sensor_params.csv",
+          "params/pump_params.csv"
+        ],
+        "only_package": "simglucose",
+        "reject_extra_absolute_parent_symlink_missing_hash_or_wrong_distribution": true,
+        "use_exact_asset_manifest_identity": true
+      },
+      "rllab": {
+        "absence_is_not_currently_observed": true,
+        "must_be_absent_from_admitted_import_roots": true,
+        "upstream_ImportError_fallback_unchanged": true
+      }
+    },
+    "external_closure_complete": false,
+    "external_direct_source_imports": [
+      "collections",
+      "datetime",
+      "gym.envs.registration",
+      "logging",
+      "math",
+      "matplotlib.dates",
+      "matplotlib.pyplot",
+      "numpy",
+      "pandas",
+      "pkg_resources",
+      "rllab.envs.base",
+      "scipy.integrate",
+      "scipy.interpolate"
+    ],
+    "external_import_listing_is_static_including_guarded_demo_edges": true,
+    "future_launch_contract": {
+      "actual_argv_environment_capacity_each_execstage_required": true,
+      "ambient_user_site_or_pth_execution": false,
+      "argv_flags": [
+        "-I",
+        "-S",
+        "-B"
+      ],
+      "bytecode_reads_from_unreviewed_caches": false,
+      "environment_is_not_a_host_receipt": true,
+      "environment_template": {
+        "LANG": "C",
+        "LC_ALL": "C",
+        "MPLBACKEND": "Agg",
+        "MPLCONFIGDIR": "<owned-attempt-scratch>/matplotlib",
+        "PATH": "/usr/bin:/bin"
+      },
+      "fixed_owned_cwd": null,
+      "fixed_trusted_bootstrap_path": null,
+      "fixed_trusted_bootstrap_sha256": null,
+      "generated_bytecode_write": false,
+      "manifest_cannot_select_command_or_module": true,
+      "network": "deny after separately admitted setup; host enforcement unqualified",
+      "openblas_threads_or_other_numeric_environment_not_silently_changed": true,
+      "raw_grants_in_argv": false,
+      "runtime_added_environment_key_values": null,
+      "unexpected_environment_refused": true,
+      "writes": "only owned attempt output/scratch/cache after admission"
+    },
+    "no_inherited_M4_common_adapter_observer_or_GlucoSim_import": true,
+    "phase_order": [
+      {
+        "id": "P00",
+        "native_import_allowed": false,
+        "work": "Data-only validate proposal shape/source pins. Real bootstrap must refuse kind=proposal-only, all authorities false or any unresolved required field."
+      },
+      {
+        "id": "P01",
+        "native_import_allowed": false,
+        "work": "Only a separately reviewed operational successor may bind explicit risk/rights/harness approvals plus user lift of native postponement."
+      },
+      {
+        "id": "P02",
+        "native_import_allowed": false,
+        "work": "Verify exact interpreter/stdlib/native+package/build/artifact/source/asset hashes and current genuine owner/boot/UID/roots; require independently verified setup receipt."
+      },
+      {
+        "id": "P03",
+        "native_import_allowed": false,
+        "work": "Bind owned supervisor, immutable input/output namespaces, host policy, exact environment/capacity and durable attempt marker; no retry/resume."
+      },
+      {
+        "id": "P04",
+        "native_import_allowed": false,
+        "work": "Bind only reviewed import roots/distribution metadata/full initializers; reject ambient site/.pth/caches, prove rllab absent and pending Gym/compat closure complete. Set Agg/private scratch before imports."
+      },
+      {
+        "id": "P05",
+        "native_import_allowed": "future-only-with-separate-reviewed-grants",
+        "work": "Only after all preceding checks and applicable actual grants enter exact distutils context and bounded compatibility symbols, then fixed six imports; verify full asset/source bindings."
+      },
+      {
+        "id": "P06",
+        "native_import_allowed": "future-only-with-separate-reviewed-grants",
+        "work": "Construct direct/wrapped independently under frozen consumer plan; preserve native constructors, resets, sample calls and owned lifecycle."
+      },
+      {
+        "id": "P07",
+        "native_import_allowed": false,
+        "work": "Recheck source/resource identities and withdraw grants; preserve actual producer/journal/outer and owned cleanup. Cold reconstruction uses only trusted code and immutable bytes, no engine."
+      }
+    ],
+    "proposed_limits_for_later_review": {
+      "attempt_outer_seconds": 300,
+      "goals_not_observed_guarantees_or_numeric_tolerances": true,
+      "live_context_freshness_and_whole_budget_binding_required": true,
+      "no_extension_retry_resume_or_timestamp_refresh": true,
+      "post_stop_cleanup_goal_seconds": 40,
+      "shared_cleanup_grace_seconds": 30
+    },
+    "runtime": {
+      "complete_distribution_metadata_entrypoint_inventory_sha256": null,
+      "interpreter_executable_path": null,
+      "interpreter_executable_sha256": null,
+      "new_OT062_lock_sha256": null,
+      "new_OT062_project_sha256": null,
+      "old_M4_admission_inherited": false,
+      "predecessor_build_lock_path": "experiments/m4/installed_study/build_inputs/uv.lock",
+      "predecessor_build_lock_sha256": "f64c12edcf26f41abd97471055a6e0ce5dfdefcb8aff92f3262ef1835b49eea2",
+      "predecessor_native_lock_path": "experiments/m4/installed_study/native/uv.lock",
+      "predecessor_native_lock_sha256": "10b6e3cd610d4aec7301d18ec48cd2b8a0e7bb3f37037d4c7e92aa83bb08745f",
+      "setup_request_sha256": null,
+      "stdlib_native_library_OS_artifact_closure_sha256": null,
+      "verified_materialization_receipt_sha256": null
+    },
+    "source_modules_exact": [
+      "simglucose",
+      "simglucose.actuator",
+      "simglucose.actuator.pump",
+      "simglucose.analysis",
+      "simglucose.analysis.risk",
+      "simglucose.controller",
+      "simglucose.controller.base",
+      "simglucose.patient",
+      "simglucose.patient.base",
+      "simglucose.patient.t1dpatient",
+      "simglucose.sensor",
+      "simglucose.sensor.cgm",
+      "simglucose.sensor.noise_gen",
+      "simglucose.simulation",
+      "simglucose.simulation.env",
+      "simglucose.simulation.rendering",
+      "simglucose.simulation.scenario"
+    ],
+    "standalone_component_roles": [
+      "trusted_preimport_verifier",
+      "bounded_compat_symbols",
+      "direct_reference_builder",
+      "wrapped_consumer_builder",
+      "audit1_controller_and_release_queue",
+      "owned_supervisor_and_durable_writer",
+      "trusted_engine_free_reader"
+    ]
+  },
+  "code": [
+    {
+      "bytes": 125,
+      "git_blob_sha1": "ea4ffe5325161722db47ebe7ef2da34e675a1042",
+      "module": "simglucose",
+      "package_initializer": true,
+      "sha256": "67bd87d9fda816e7470bc74eb2f5b8651562df8640c25fb9edfbb13aaaacab47",
+      "upstream_path": "simglucose/__init__.py"
+    },
+    {
+      "bytes": 0,
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "module": "simglucose.actuator",
+      "package_initializer": true,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "upstream_path": "simglucose/actuator/__init__.py"
+    },
+    {
+      "bytes": 1401,
+      "git_blob_sha1": "717b77161953a2a0589d17c40f62784077233225",
+      "module": "simglucose.actuator.pump",
+      "package_initializer": false,
+      "sha256": "54dc4ec98f34ae600dacd1edd2e43fc2701512eb0824ce33acb07f3f756a9719",
+      "upstream_path": "simglucose/actuator/pump.py"
+    },
+    {
+      "bytes": 0,
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "module": "simglucose.analysis",
+      "package_initializer": true,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "upstream_path": "simglucose/analysis/__init__.py"
+    },
+    {
+      "bytes": 1155,
+      "git_blob_sha1": "7cfaa43f598399888be7971922324bc10f2ae9b7",
+      "module": "simglucose.analysis.risk",
+      "package_initializer": false,
+      "sha256": "d886f6226f14c213ced4c1c28a905fa4b527ec88be8d76bb9982e348a90d4455",
+      "upstream_path": "simglucose/analysis/risk.py"
+    },
+    {
+      "bytes": 0,
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "module": "simglucose.controller",
+      "package_initializer": true,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "upstream_path": "simglucose/controller/__init__.py"
+    },
+    {
+      "bytes": 1186,
+      "git_blob_sha1": "cf8560377a00d0d66d1fc1649e6721f2345f495e",
+      "module": "simglucose.controller.base",
+      "package_initializer": false,
+      "sha256": "4db8677be5e3d23d512dc82ea969ed7bc77fe50671cd422f743cd9b403ebc7e2",
+      "upstream_path": "simglucose/controller/base.py"
+    },
+    {
+      "bytes": 0,
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "module": "simglucose.patient",
+      "package_initializer": true,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "upstream_path": "simglucose/patient/__init__.py"
+    },
+    {
+      "bytes": 691,
+      "git_blob_sha1": "c2b290e8c6d3e38d8da23a7cb6b84f6d97d319c5",
+      "module": "simglucose.patient.base",
+      "package_initializer": false,
+      "sha256": "e30c8077759b24aa7179ff10dc3fed344f38d7627285bc671d21d1d1333aa840",
+      "upstream_path": "simglucose/patient/base.py"
+    },
+    {
+      "bytes": 10360,
+      "git_blob_sha1": "de75c925c5a21189e35ffb2bae6c500eb9f12c2a",
+      "module": "simglucose.patient.t1dpatient",
+      "package_initializer": false,
+      "sha256": "7ad1302fbf064805e2294bbcffd482e55448e37e48b63e629a1ed7f11c701547",
+      "upstream_path": "simglucose/patient/t1dpatient.py"
+    },
+    {
+      "bytes": 0,
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "module": "simglucose.sensor",
+      "package_initializer": true,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "upstream_path": "simglucose/sensor/__init__.py"
+    },
+    {
+      "bytes": 1503,
+      "git_blob_sha1": "99f3b3c93fa60a11659ae583562c2dbd8ba0be34",
+      "module": "simglucose.sensor.cgm",
+      "package_initializer": false,
+      "sha256": "97f3e1b3aeb01a9225e9500efa6ca940c41a178f6b8a80c9c41a430ec3a8563d",
+      "upstream_path": "simglucose/sensor/cgm.py"
+    },
+    {
+      "bytes": 3013,
+      "git_blob_sha1": "20e54d3edad32e1e642d28b9ee5612598e9f63ae",
+      "module": "simglucose.sensor.noise_gen",
+      "package_initializer": false,
+      "sha256": "b5b435940523d65b03c12228447ce6acf16a2371e1b8f688639a1648d6e1e509",
+      "upstream_path": "simglucose/sensor/noise_gen.py"
+    },
+    {
+      "bytes": 0,
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "module": "simglucose.simulation",
+      "package_initializer": true,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "upstream_path": "simglucose/simulation/__init__.py"
+    },
+    {
+      "bytes": 5678,
+      "git_blob_sha1": "45a43cb63d796243aef5992e39b584ed3bcae3d0",
+      "module": "simglucose.simulation.env",
+      "package_initializer": false,
+      "sha256": "8c5d16b66df270b22b13cd64f8e059efe0a5f7c732f8673f36af0170d5d0d199",
+      "upstream_path": "simglucose/simulation/env.py"
+    },
+    {
+      "bytes": 5641,
+      "git_blob_sha1": "0cf948989d88261b1a4bc3e55a21b32191f13bce",
+      "module": "simglucose.simulation.rendering",
+      "package_initializer": false,
+      "sha256": "cce998769d876bec6ff1d412bf696388daf744ad9f3ca4caffe3f48603f92f3c",
+      "upstream_path": "simglucose/simulation/rendering.py"
+    },
+    {
+      "bytes": 1886,
+      "git_blob_sha1": "ab7770601b76d99eea00c3dbb0bac5322ca95454",
+      "module": "simglucose.simulation.scenario",
+      "package_initializer": false,
+      "sha256": "e6b0e19a64421d1ede1f8a45c368e5eb9dcb15d35738b7aae28ed9d4ffa7a5eb",
+      "upstream_path": "simglucose/simulation/scenario.py"
+    }
+  ],
+  "consumer_semantics": {
+    "action_and_output": {
+      "both_direct_and_wrapped_use_same_ordered_u_h_to_u_min_conversion": true,
+      "command_and_native_modeled_delivery_separate": true,
+      "frozen_public_summary_no_parameter_rows": true,
+      "interval_modeled_amount": "integrate recorded native U/min rate/history interval mean across its native interval minutes using declared trusted-reader numeric policy; no inference from command alone",
+      "native_CHO_history_is_interval_event_input_not_consumed_carbs": true,
+      "native_pump_quantization_clipping_unchanged": true,
+      "no_terminal_action_amount_or_imputed_tail": true,
+      "observation_meaning": "returned CGM: initial native point, then native interval summary; preserve source/availability times, no plasma/tissue relabel",
+      "only_action": "nonnegative basal rate U/h, finite[0,3]",
+      "record_native_basal_u_min_frozen_b_u_h_and_actual_native_command_u_min_separately": true,
+      "to_native": "divide U/h command by60 for U/min basal; native bolus field0; no bolus/dose conversion supported"
+    },
+    "configuration": {
+      "clock": "naive synthetic datetime; no timezone conversion",
+      "command_tick_ms": [
+        0,
+        180000,
+        360000,
+        540000,
+        720000,
+        900000,
+        1080000,
+        1260000,
+        1440000,
+        1620000
+      ],
+      "controller_basal": {
+        "algebraic_reassociation_for_execution_allowed": false,
+        "binary64_u_h": null,
+        "binary64_u_min": null,
+        "fixture_b_1_2_is_not_native_value": true,
+        "ordered_operations": [
+          {
+            "left": "selected_patient.u2ss",
+            "op": "multiply",
+            "right": "selected_patient.BW"
+          },
+          {
+            "op": "divide_previous",
+            "result_unit": "U/min",
+            "right": 6000
+          },
+          {
+            "left": 60,
+            "op": "multiply_previous",
+            "result_unit": "U/h"
+          }
+        ],
+        "out_of_range": "refuse; do not clip or fit basal",
+        "parameter_payload_not_read": true,
+        "required_finite_range_u_h": [
+          0,
+          3
+        ],
+        "roundtrip_bit_equality_to_original_native_u_min_not_assumed": true,
+        "serialized_u_h": null,
+        "source": "native source-derived parameter relationship, to be frozen before actual attempt"
+      },
+      "expected_outer_step_ms": 180000,
+      "horizon_ms": 1800000,
+      "native_minute_ms": 60000,
+      "native_solver": "unchanged scipy.integrate.ode/dopri5 and upstream settings",
+      "no_patient_seed_or_custom_state_injected": true,
+      "observation_grid_ms": [
+        0,
+        180000,
+        360000,
+        540000,
+        720000,
+        900000,
+        1080000,
+        1260000,
+        1440000,
+        1620000,
+        1800000
+      ],
+      "patient_init_state_effective_native_default": null,
+      "patient_random_init_bg_effective_native_default": false,
+      "patient_seed_effective_native_default": null,
+      "patient_withName_kwargs": {},
+      "profile": "adult#001",
+      "pump": "Insulet",
+      "sensor": "Dexcom",
+      "sensor_seed": 101,
+      "synthetic_start": "2024-07-20T00:00:00",
+      "verify_preset_step_not_overwrite": true
+    },
+    "controller": {
+      "announcement_fields": [
+        "id",
+        "event_id",
+        "intended_start_ms",
+        "available_ms",
+        "grams"
+      ],
+      "announcements_ignored_by_controller_but_delivered_once_and_checked": true,
+      "command_clip_u_h": [
+        0,
+        3
+      ],
+      "extra_or_unknown_input_fields_refused": true,
+      "fresh_rule": "newest measured sample available by tick; no older released sample replaces a newer one",
+      "fresh_update_order": [
+        "compute clip(b+0.01*(previous_glucose-120),0,3) from previous memory",
+        "update memory to released glucose after computing command",
+        "record last consumed measurement timestamp exactly once"
+      ],
+      "gain_u_h_per_mg_dl": 0.01,
+      "held_rule": "command b; retain memory and original measurement/availability timestamps",
+      "id": "lagged-proportional-basal/audit-1",
+      "input_fields": [
+        "time_ms",
+        "released_observation",
+        "newly_released_announcements"
+      ],
+      "memory_reset_mg_dl": 120,
+      "no_native_info_patient_state_reward_or_future_scenario_passed": true,
+      "no_sampled_state_mutation_inside_continuous_RHS": true,
+      "released_observation_fields": [
+        "measured_ms",
+        "available_ms",
+        "glucose_mg_dl"
+      ],
+      "target_mg_dl": 120
+    },
+    "events_and_release": {
+      "actual_intake": "Native eating queue, no replacement duration/absorption model.",
+      "actual_meals": [
+        {
+          "grams": 40,
+          "id": "synthetic-meal",
+          "native_scenario_numeric_hours": 0.25,
+          "start_ms": 900000
+        }
+      ],
+      "announcements": [
+        {
+          "available_ms": 900000,
+          "event_id": "synthetic-meal",
+          "grams": 20,
+          "id": "synthetic-announcement",
+          "intended_start_ms": 900000
+        }
+      ],
+      "base_case_id": "SG-A1-C16-filtered-30m-proposal",
+      "default_availability": "after normal native generation at measurement time",
+      "filter_after_native_sampling_no_native_calls_changed": true,
+      "release_rules": [
+        {
+          "available_ms": 900000,
+          "measured_ms": 540000
+        },
+        {
+          "available_ms": null,
+          "measured_ms": 720000
+        },
+        {
+          "available_ms": null,
+          "measured_ms": 900000
+        }
+      ],
+      "variant_contracts": [
+        {
+          "changes": "meals=[], announcements=[], release_rules=[]; same profile/devices/controller/reset semantics",
+          "id": "SG-A1-C15-fasting-30m-proposal"
+        },
+        {
+          "changes": "release_rules=[] only; identity changes",
+          "id": "SG-A1-C16-unfiltered-30m-proposal"
+        },
+        {
+          "changes": "actual meal grams40\u219280 only; new identity; premeal five samples at0,3,6,9,12min unchanged within each direct/wrapped mode",
+          "id": "SG-A1-C16-future80-30m-proposal"
+        },
+        {
+          "expected": "refuse before native construction; unrepresentable integer-minute native event; no rounding",
+          "id": "SG-A1-reject-fractional-time-proposal",
+          "requested_meal_start_ms": 150000
+        }
+      ],
+      "variant_ids_are_not_a_final_execution_case_roster": true
+    },
+    "evidence_acceptance": {
+      "all_planned_failures_partial_refusals_not_run_accounted": true,
+      "biological_or_clinical_acceptance_claimed": false,
+      "complete_scientific_status_requires_genuine_outer_and_cleanup": true,
+      "engine_free_cold_read_only_no_supplied_code_execution": true,
+      "exact_direct_wrapped_serialized_scientific_rows": true,
+      "exclude_only_declared_operational_fields": [
+        "PID/start identity",
+        "wall-clock timing",
+        "owned output/scratch paths"
+      ],
+      "historical_M0_M1_baselines_unchanged": true,
+      "independent_controller_oracle_source_paths": [
+        "experiments/adapter_audit/check.py",
+        "experiments/adapter_audit/cases.json"
+      ],
+      "new_30min_plan_not_implicitly_admitted_by_old48h_reader": true,
+      "new_reader_source_sha256": null,
+      "no_rounding_or_new_tolerance_to_force_parity": true,
+      "producer_outer_owner_journal_resource_and_current_reader_hashes_required": true,
+      "source_fixture_and_native_evidence_separate": true
+    },
+    "exact_entrypoints": [
+      {
+        "module": "simglucose.patient.t1dpatient",
+        "module_sha256": "7ad1302fbf064805e2294bbcffd482e55448e37e48b63e629a1ed7f11c701547",
+        "symbol": "T1DPatient",
+        "use": "withName"
+      },
+      {
+        "module": "simglucose.sensor.cgm",
+        "module_sha256": "97f3e1b3aeb01a9225e9500efa6ca940c41a178f6b8a80c9c41a430ec3a8563d",
+        "symbol": "CGMSensor",
+        "use": "withName"
+      },
+      {
+        "module": "simglucose.actuator.pump",
+        "module_sha256": "54dc4ec98f34ae600dacd1edd2e43fc2701512eb0824ce33acb07f3f756a9719",
+        "symbol": "InsulinPump",
+        "use": "withName"
+      },
+      {
+        "module": "simglucose.simulation.scenario",
+        "module_sha256": "e6b0e19a64421d1ede1f8a45c368e5eb9dcb15d35738b7aae28ed9d4ffa7a5eb",
+        "symbol": "CustomScenario",
+        "use": "constructor"
+      },
+      {
+        "module": "simglucose.simulation.env",
+        "module_sha256": "8c5d16b66df270b22b13cd64f8e059efe0a5f7c732f8673f36af0170d5d0d199",
+        "symbol": "T1DSimEnv",
+        "use": "constructor"
+      },
+      {
+        "module": "simglucose.controller.base",
+        "module_sha256": "4db8677be5e3d23d512dc82ea969ed7bc77fe50671cd422f743cd9b403ebc7e2",
+        "symbol": "Action",
+        "use": "namedtuple"
+      }
+    ],
+    "independent_paths": {
+      "direct": "Independent inspected upstream constructor/step orchestration; must not call wrapped builder/adapter as oracle.",
+      "direct_builder_source_sha256": null,
+      "no_SimObj_BB_PID_GlucoSim_or_M4_consumer_reuse": true,
+      "shared_native_engine_allowed": true,
+      "wrapped": "Standalone bounded consumer around the same unmodified upstream constructors.",
+      "wrapped_builder_source_sha256": null
+    },
+    "native_calls_and_lifecycle": {
+      "attempt_reset": "Call env.reset() once after construction; repeated-reset qualification reuses same object with separately journalled resets. No reset at scoring.",
+      "constructor_sequence": [
+        "T1DPatient.withName(adult#001) with native defaults",
+        "CGMSensor.withName(Dexcom, seed=101)",
+        "InsulinPump.withName(Insulet)",
+        "CustomScenario(fixed naive start, [(15/60,40)])",
+        "T1DSimEnv(patient,sensor,pump,scenario)"
+      ],
+      "early_done": "Retain exact completed prefix and real native-terminal status; not complete 30-minute result.",
+      "env_reset_two_existing_sensor_measures_not_normalized": true,
+      "initial_history_CGM_and_returned_reset_CGM_may_differ_keep_channels_separate": true,
+      "native_constructor_and_env__reset_consumption_preserved": true,
+      "native_step": "At each nonterminal 3-minute command tick call env.step(Action(basal=command_u_h/60,bolus=0)); retain native one-minute mini_step behavior.",
+      "no_extra_sensor_measure_patient_reset_or_RNG_call_for_logging": true,
+      "no_step_after_native_done_or_terminal_tick": true,
+      "reset_calls_patient_sensor_pump_scenario_and_native__reset_unchanged": true,
+      "terminal_30min_observation": "Diagnostic only, no new command or delivered interval.",
+      "use_returned_observation_for_controller_not_extra_CGM_measure": true
+    },
+    "question": "Does the same sampled audit1 rate policy use only released observations, update memory once per tick, and translate basal rates through intact engine semantics?",
+    "shared_interface_or_historical_scientific_convention_changed": false,
+    "source_revision": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc",
+    "unresolved_runtime_bindings": {
+      "actual_asset_SHA256_and_rights_bundle_sha256": null,
+      "actual_host_owner_boot_profile_sha256": null,
+      "complete_interpreter_and_external_import_closure_sha256": null,
+      "consumer_implementation_sha256": null,
+      "harness_reader_acceptance_sha256": null,
+      "new_runtime_lock_sha256": null,
+      "numeric_basal_binding_sha256": null,
+      "setup_receipt_sha256": null
+    }
+  },
+  "proposal_top_fields": {
+    "asset": [
+      "activation_command",
+      "approval_requested",
+      "artifact_extra_CSV_paths_metadata_only",
+      "authority",
+      "complete_external_native_build_vendor_manifest_sha256",
+      "consumer_excluded_asset_metadata",
+      "eligible_for_admission_registry",
+      "future_path_read_policy",
+      "implementation_exists",
+      "kind",
+      "new_asset_payload_collected",
+      "notices",
+      "required_resources",
+      "retention",
+      "runtime_observation",
+      "schema",
+      "scope",
+      "selected_code",
+      "upstream_revision"
+    ],
+    "bootstrap": [
+      "activation_command",
+      "all_future_component_source_sha256",
+      "approval_requested",
+      "asset_manifest_sha256",
+      "authority",
+      "compatibility_contract",
+      "eligible_for_admission_registry",
+      "external_closure_complete",
+      "external_direct_source_imports",
+      "external_import_listing_is_static_including_guarded_demo_edges",
+      "future_launch_contract",
+      "implementation_exists",
+      "kind",
+      "no_inherited_M4_common_adapter_observer_or_GlucoSim_import",
+      "phase_order",
+      "proposed_limits_for_later_review",
+      "retention",
+      "runtime",
+      "runtime_observation",
+      "schema",
+      "source_modules_exact",
+      "standalone_component_roles"
+    ],
+    "consumer": [
+      "action_and_output",
+      "activation_command",
+      "approval_requested",
+      "asset_manifest_sha256",
+      "authority",
+      "bootstrap_manifest_sha256",
+      "configuration",
+      "controller",
+      "eligible_for_admission_registry",
+      "events_and_release",
+      "evidence_acceptance",
+      "exact_entrypoints",
+      "implementation_exists",
+      "independent_paths",
+      "kind",
+      "native_calls_and_lifecycle",
+      "question",
+      "retention",
+      "runtime_observation",
+      "schema",
+      "shared_interface_or_historical_scientific_convention_changed",
+      "source_revision",
+      "unresolved_runtime_bindings"
+    ]
+  },
+  "resources": [
+    {
+      "expected_bytes_from_tree": 17782,
+      "git_blob_sha1": "bdbabcb7f1b5b88ed9e3c1f1b65e41f1c5722319",
+      "package": "simglucose",
+      "payload_intake": "not_read_or_downloaded",
+      "payload_sha256": null,
+      "required_before_any_selected_import": true,
+      "resource_argument": "params/vpatient_params.csv",
+      "rights_use_decision_sha256": null,
+      "row_only_access_claimed": false,
+      "upstream_path": "simglucose/params/vpatient_params.csv",
+      "whole_file_read_required": true
+    },
+    {
+      "expected_bytes_from_tree": 224,
+      "git_blob_sha1": "0c8ad25125e38b4b734d3c014138ec9c294c581e",
+      "package": "simglucose",
+      "payload_intake": "not_read_or_downloaded",
+      "payload_sha256": null,
+      "required_before_any_selected_import": true,
+      "resource_argument": "params/sensor_params.csv",
+      "rights_use_decision_sha256": null,
+      "row_only_access_claimed": false,
+      "upstream_path": "simglucose/params/sensor_params.csv",
+      "whole_file_read_required": true
+    },
+    {
+      "expected_bytes_from_tree": 155,
+      "git_blob_sha1": "e4bae042a867fa295a8ce84eead0a7594c675472",
+      "package": "simglucose",
+      "payload_intake": "not_read_or_downloaded",
+      "payload_sha256": null,
+      "required_before_any_selected_import": true,
+      "resource_argument": "params/pump_params.csv",
+      "rights_use_decision_sha256": null,
+      "row_only_access_claimed": false,
+      "upstream_path": "simglucose/params/pump_params.csv",
+      "whole_file_read_required": true
+    }
+  ],
+  "schema": "opent1d.simglucose-audit1-source-contract/1",
+  "upstream_revision": "a6f6777586c860457a2a1e6cce6d0bd3fd33d1cc"
+}
