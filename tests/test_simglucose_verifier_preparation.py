@@ -15,6 +15,107 @@ from experiments.simglucose_audit import fixture_time
 from experiments.simglucose_audit import verifier_preparation as p
 
 
+class StopTests(unittest.TestCase):
+    def process(self):
+        process = mock.Mock()
+        process.poll.return_value = process.wait.return_value = 0
+        process.stdout, process.stdin = io.BytesIO(), io.BytesIO()
+        return process
+
+    def test_delayed_owned_group_disappearance_uses_existing_deadline(self):
+        process, now, sleeps = self.process(), [0.0], []
+
+        def sleep(seconds):
+            self.assertGreaterEqual(seconds, 0)
+            self.assertLessEqual(seconds, 0.005)
+            sleeps.append(seconds)
+            now[0] += seconds
+
+        with (
+            mock.patch.object(p.time, "monotonic", side_effect=lambda: now[0]),
+            mock.patch.object(p.time, "sleep", side_effect=sleep),
+            mock.patch.object(
+                p.platform_process, "tree_exists", side_effect=lambda _: now[0] < 0.01
+            ),
+            mock.patch.object(p.platform_process, "force_tree") as force,
+            mock.patch.object(p.platform_process, "close_tree") as close,
+        ):
+            # A forced cleanup remains forced: it must not promote a receipt.
+            self.assertTrue(p._stop(process, None, None, True, 0.05))
+        self.assertTrue(sleeps)
+        self.assertLess(now[0], 0.05)
+        force.assert_called_once_with(process)
+        close.assert_called_once_with(process)
+        self.assertEqual(process.wait.call_count, 2)
+        self.assertTrue(process.stdout.closed and process.stdin.closed)
+
+    def test_persistent_group_or_expired_deadline_remains_refused(self):
+        for start, deadline in ((0.0, 0.02), (1.0, 0.5)):
+            with self.subTest(start=start):
+                process, now, sleeps = self.process(), [start], []
+
+                def sleep(seconds):
+                    self.assertGreaterEqual(seconds, 0)
+                    self.assertLessEqual(seconds, max(0, deadline - now[0]))
+                    sleeps.append(seconds)
+                    now[0] += seconds
+
+                with (
+                    mock.patch.object(p.time, "monotonic", side_effect=lambda: now[0]),
+                    mock.patch.object(p.time, "sleep", side_effect=sleep),
+                    mock.patch.object(p.platform_process, "tree_exists", return_value=True),
+                    mock.patch.object(p.platform_process, "force_tree") as force,
+                    mock.patch.object(p.platform_process, "close_tree") as close,
+                    self.assertRaisesRegex(ValueError, "^owned-cleanup-failed$"),
+                ):
+                    p._stop(process, None, None, True, deadline)
+                self.assertGreaterEqual(now[0], deadline)
+                self.assertLessEqual(len(sleeps), 5)
+                if start > deadline:
+                    self.assertEqual(sleeps, [])  # No new cleanup window.
+                force.assert_called_once_with(process)
+                close.assert_not_called()  # Unconfirmed ownership is not released.
+                self.assertTrue(process.stdout.closed and process.stdin.closed)
+
+    def test_poll_crossing_deadline_never_sleeps_negative_or_resets_time(self):
+        process = self.process()
+        samples = iter((0.0, 0.0, 0.0, 0.03, 0.03))
+        with (
+            mock.patch.object(p.time, "monotonic", side_effect=lambda: next(samples, 0.03)),
+            mock.patch.object(p.time, "sleep") as sleep,
+            mock.patch.object(p.platform_process, "tree_exists", return_value=True),
+            mock.patch.object(p.platform_process, "force_tree"),
+            mock.patch.object(p.platform_process, "close_tree") as close,
+            self.assertRaisesRegex(ValueError, "^owned-cleanup-failed$"),
+        ):
+            p._stop(process, None, None, True, 0.02)
+        sleep.assert_called_once_with(0)
+        close.assert_not_called()
+
+    def test_wait_join_and_observation_errors_are_not_cleared_by_polling(self):
+        for fault in ("wait", "join", "observation"):
+            with self.subTest(fault=fault):
+                process, reader = self.process(), None
+                if fault == "wait":
+                    process.wait.side_effect = p.subprocess.TimeoutExpired("invented", 0.01)
+                if fault == "join":
+                    reader = mock.Mock(ident=1)
+                    reader.join.side_effect = RuntimeError("invented join refusal")
+                    reader.is_alive.return_value = False
+                with (
+                    mock.patch.object(p.time, "monotonic", return_value=0),
+                    mock.patch.object(
+                        p.platform_process, "tree_exists", return_value=False
+                    ) as tree,
+                    mock.patch.object(p.platform_process, "close_tree"),
+                    self.assertRaisesRegex(ValueError, "^owned-cleanup-failed$"),
+                ):
+                    if fault == "observation":
+                        tree.side_effect = OSError("invented observation refusal")
+                    p._stop(process, reader, None, True, 0.05)
+                self.assertTrue(process.stdout.closed and process.stdin.closed)
+
+
 class DiscoveryTests(unittest.TestCase):
     def setUp(self):
         self.enterContext(fixture_time.use(True))
@@ -287,10 +388,29 @@ class DiscoveryTests(unittest.TestCase):
         ):
             with self.subTest(case=case):
                 output = self.output()
+                # Storage blocks the controller while its fetch child can still
+                # belong to the owned group. Use the existing normal fixture
+                # allowance: .8s leaves only .133s for outer cleanup, whereas
+                # 3s reserves .5s. Actual operation budgets remain unchanged.
+                whole_seconds = 3 if case == "stall-storage" else 0.8
+                spawned, spawn = [], p.platform_process.spawn
+
+                def owned_spawn(*args, **kwargs):
+                    process = spawn(*args, **kwargs)
+                    spawned.append(process)
+                    return process
+
                 start = time.monotonic()
-                result = p.run_fixture(output, case, whole_seconds=0.8, request_seconds=0.3)
+                with mock.patch.object(p.platform_process, "spawn", side_effect=owned_spawn):
+                    result = p.run_fixture(
+                        output, case, whole_seconds=whole_seconds, request_seconds=0.3
+                    )
                 self.assertNotEqual(result["status"], "completed")
-                self.assertLess(time.monotonic() - start, 2)
+                self.assertLess(time.monotonic() - start, max(2, whole_seconds + 1))
+                self.assertTrue(spawned)
+                for process in spawned:
+                    self.assertIsNotNone(process.poll())
+                    self.assertTrue(process.stdin.closed and process.stdout.closed)
                 if "rows" in result:
                     for row in result["rows"]:
                         self.assertIsNone(row["accepted_observed_sha256"])

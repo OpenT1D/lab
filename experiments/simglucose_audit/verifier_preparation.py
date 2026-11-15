@@ -285,6 +285,10 @@ def _stop(process, reader, writer, owned, deadline):
                 forced = True
                 platform_process.force_tree(process)
                 process.wait(timeout=max(0.001, min(0.5, deadline - time.monotonic())))
+            # Descendant disappearance can lag leader reaping. Observe only this
+            # owned tree, within the caller's existing cleanup deadline.
+            while platform_process.tree_exists(process) and time.monotonic() < deadline:
+                time.sleep(min(0.005, max(0, deadline - time.monotonic())))
             require(not platform_process.tree_exists(process), "owned-tree-stop")
             platform_process.close_tree(process)
         except (OSError, RuntimeError, ValueError, subprocess.TimeoutExpired):
