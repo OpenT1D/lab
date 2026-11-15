@@ -108,6 +108,12 @@ test('empty and template creation, real validation errors and opening an existin
   await page.locator('#create-study').click();
   await page.locator('#confirm-project').click();
   await expect(page.locator('#study-form')).toBeVisible();
+  await page.locator('#all-projects').click();
+  await expect(page.locator('#recent-projects button')).toHaveCount(3);
+  expect((await page.locator('.start-window').boundingBox()).height).toBeLessThanOrEqual(424);
+  expect(await page.locator('#recent-projects').evaluate(e => e.scrollHeight > e.clientHeight)).toBe(true);
+  await page.locator('#recent-projects button').filter({ hasText: 'Empty project' }).click();
+  await expect(page.locator('#research-question')).toHaveValue('My blank sampling question');
 });
 
 test('failed saves retain edits and refuse navigation; retry preserves untouched source bytes', async ({ page, app }) => {

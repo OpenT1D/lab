@@ -1010,6 +1010,8 @@ textarea {
 
 .recent-projects {
   grid-template-columns:minmax(0,1fr);
+  max-height:132px;
+  overflow-y:auto;
 }
 
 .recent-project {
