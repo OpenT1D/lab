@@ -12,6 +12,20 @@ ROOT = Path(__file__).resolve().parents[1]
 
 class InstalledGUIFrontendTests(unittest.TestCase):
     @unittest.skipUnless(shutil.which("node"), "Node is required for controlled frontend checks")
+    def test_workbench_preserves_edits_during_asynchronous_requests(self):
+        result = subprocess.run(
+            [shutil.which("node"), str(ROOT / "tests/workbench_store.mjs")],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        evidence = json.loads(result.stdout)
+        self.assertTrue(evidence["passed"], evidence)
+        self.assertEqual(len(evidence["results"]), 6)
+
+    @unittest.skipUnless(shutil.which("node"), "Node is required for controlled frontend checks")
     def test_parent_readiness_and_atomic_report_identity(self):
         with tempfile.TemporaryDirectory(prefix="installed-gui-dom-") as temporary:
             receipt = Path(temporary) / "receipt.json"

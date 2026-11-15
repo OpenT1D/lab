@@ -27,6 +27,42 @@ the SDK environment and all existing project stores. Only one server may own
 that workspace. The candidate selects POSIX CPython 3.12; current local native
 qualification is macOS arm64. It is not a public installer or a clean-host test.
 
+## Concept v1 Study workbench
+
+The separately selected Concept v1 increment implements the compact project
+launcher and dark Study workspace from the
+[Figma design](https://www.figma.com/design/OXMicPqyaLtz26ZzO56qfm?node-id=20-94).
+Open the printed **Study workbench** address (`/workbench`), or choose
+**Open Study workbench** in the existing laboratory. Both interfaces use the
+same authenticated controller, workspace catalog and revisioned draft services.
+No second project format, estimator or execution service is introduced.
+
+- **New project** creates a project and prepares an editable supplied synthetic
+  example for either MMTT approach. **Start empty** creates the exact required
+  empty input roster. **Use a template** selects an existing supplied control.
+- **Open project** accepts an existing SDK project's absolute directory.
+  Opening and selecting a project do not run an analysis or create a study.
+  Existing concepts can be selected through **Project actions → Open another
+  study**. A project without an editable MMTT concept offers **Create a study**.
+- The **Research question** edits the existing concept name (1–100 characters),
+  rather than adding a scientific-input field. Changing the approach creates a
+  separate concept and preserves the previous one. Input dialogs edit the
+  existing JSON/CSV roster; untouched file text is preserved.
+- Changes autosave to the existing immutable concept revisions. **Save changes**
+  and `Ctrl+S` / `Command+S` also save explicitly. Failed saves retain the live
+  edits and prevent project switching. Conflicts offer reloading the saved
+  version or saving a separate study. A failed reload preserves the recovery
+  copy. Closing and reopening the same workspace reloads saved revisions.
+- **Review study** saves and invokes the existing task validation. It does not
+  freeze or execute an analysis. Existing execution, comparison and result
+  functions remain in **Project actions → Open full laboratory**; their visual
+  redesign is a later increment.
+
+The workbench bundles its Figma SVG assets and Inter font locally, with no
+remote runtime assets. The Inter notice is included in the SDK package. The
+initial implementation covers the two synthetic MMTT tasks; independent user
+acceptance and broader accessibility/platform qualification remain separate.
+
 ## Three screens
 
 The installed GUI groups the existing project workflow into three screens:

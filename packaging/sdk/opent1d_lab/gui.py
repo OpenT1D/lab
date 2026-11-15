@@ -19,6 +19,7 @@ def serve(workspace, *, port=0, runtime_attachment=None):
         for number in (signal.SIGINT, signal.SIGTERM, signal.SIGHUP):
             previous[number] = signal.signal(number, stop)
         print("OpenT1D project GUI: " + server.origin, flush=True)
+        print("OpenT1D Study workbench: " + server.origin + "/workbench", flush=True)
         print(
             "Closing a browser tab keeps work running. Use Stop server or Ctrl+C "
             "to stop runs and finish project actions.",
