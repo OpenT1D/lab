@@ -213,7 +213,9 @@ def build(output, cache, target, *, allow_dirty=False):
         "electron": {"version": lock["electron"], "sha256": selected["sha256"]},
         "python": python_lock,
         "sdk": sdk,
-        "scope": "Concept v1 launcher and Study editor; existing two-task MMTT SDK",
+        "scope": (
+            "Concept v1 Study, execution, results and prospective comparisons; two-task MMTT SDK"
+        ),
         "public_release": False,
     }
     (resources / "desktop-build.json").write_text(json.dumps(record, indent=2) + "\n")

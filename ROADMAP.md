@@ -929,6 +929,25 @@ application identity requires its own checks and does not inherit intended-user
 acceptance. One integration owner runs final repository verification after the
 separate technical diff review.
 
+The next selected **Concept v1 MMTT workflow increment** carries those saved
+studies through the existing two-task SDK: review the exact revision, freeze
+explicitly, check readiness and run; show real action/attempt state, request
+owned cancellation and retain every retry. Add explicit stopped-executor
+recovery, selected-attempt result verification, prospective question/roster
+comparisons and existing native report/table export. Keep the compact launcher
+and Study layout, with a small execution section and a Results tab. The
+[continuation design](https://www.figma.com/design/OXMicPqyaLtz26ZzO56qfm?node-id=49-35)
+records the bounded flow and recovery/accessibility criteria.
+
+Acceptance covers both synthetic MMTT tasks, invalid/refused/failed/incomplete
+work, cancellation/retry and retained attempts; safe navigation/save/reopen;
+correct identities and verified exports; keyboard/focus, narrow/zoomed layouts
+and non-color status. Check a fresh packaged Mac app, including native menus,
+active-run quit and owner-loss cleanup. Independent user acceptance (OT-072),
+actual screen-reader qualification, clean-host distribution, notarisation,
+Windows, new engines and M5 execution remain separate. This selection does not
+complete the broader OT-065 package.
+
 ### Planned core and product work packages
 
 The separately selected **Concept v1 Mac desktop increment** continues the two-screen

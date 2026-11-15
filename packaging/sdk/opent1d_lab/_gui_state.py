@@ -42,6 +42,7 @@ FIELDS = {
     "study_verify": {"study", "at"},
     "check": {"plan"},
     "run": {"plan", "retry_of"},
+    "recover": {"attempt", "execution_stopped"},
     "verify": {"attempt", "allow_failed"},
     "relocate": {"output"},
     "attach": {"native_site", "observer_site"},
@@ -609,6 +610,12 @@ class Controller:
                 runtime_attachment=self.runtime_attachment,
             )
             return result, handle
+        if operation == "recover":
+            require(
+                args["execution_stopped"] is True,
+                "Explicit confirmation that execution stopped is required",
+            )
+            return project.recover(args["attempt"], execution_stopped=True), handle
         if operation in {"verify", "comparison_verify", "study_verify"}:
             key = uuid.uuid4().hex
             destination = self.root / "reports" / key

@@ -11,6 +11,15 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
   gates. Reject completed LT1 C15 reports with inconsistent construction, reset
   or basal-call counts without changing numerical baselines.
 
+- Connect Concept v1 Study to the existing two synthetic MMTT execution and
+  result services: explicit revision validation/freeze/run, real action status,
+  owned cancellation, retained retries and explicit unfinished-attempt recovery.
+  Add selected-attempt verification, prospective question/roster comparisons
+  and existing native report/table exports. Retain unapplied input recovery and
+  improve dialog names, keyboard focus and narrow/zoomed layouts. Scientific
+  methods, source/readers and frozen comparison accounting remain unchanged;
+  independent user/screen-reader acceptance and distribution remain separate.
+
 - Add the Concept v1 compact project launcher and dark Study workspace for the
   two synthetic MMTT tasks. Reuse existing project and draft services for
   creation, opening, editing, autosave, conflict recovery and reopening. Provide

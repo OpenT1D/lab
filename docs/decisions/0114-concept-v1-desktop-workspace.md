@@ -35,8 +35,14 @@ Keep renderer Node access disabled, sandbox/context isolation enabled, and
 restrict navigation, new windows and privileged IPC to the owned main frame.
 Use the SDK launcher's fresh bytecode-cache-prefix rule before importing the
 facade. Keep the existing services, source/reader identities, data schema and
-scientific code unchanged. The UI remains the two-screen editing slice; existing
-SDK execution capabilities are neither rewritten nor newly exposed here.
+scientific code unchanged. The initial shell increment exposed the two-screen
+editing slice. The separately selected MMTT workflow continuation exposes the
+existing freeze/run/cancel/recover, attempt/result, prospective comparison and
+verified-export services in that same window. It adds an execution section and
+Results tab rather than another application or ledger. Recovery requires an
+explicit stopped-executor assertion and retains the SDK's live-lease checks;
+opening or refreshing a project never resumes an attempt. Numerical methods,
+source/reader identities and existing comparison denominators are unchanged.
 
 Use `backend/lib/python3.12/site-packages/opent1d_lab` so the SDK's existing
 installation-root boundary names the complete private backend. Writable work

@@ -11,7 +11,7 @@ const parseSourceJSON = text => JSON.parse(text.replace(/^\uFEFF/, ''));
 const node = (tag, text, cls) => { const n = document.createElement(tag); if (text !== undefined) n.textContent = text; if (cls) n.className = cls; return n; };
 const icon = (name, size) => { const n = node('img'); n.src = '/' + name; n.width = size; n.height = size; n.alt = ''; return n; };
 let renderedRecord = null, creationMode = 'guided', editor = null, uploadGeneration = 0, stopped = false;
-let recentSignature = '';
+let recentSignature = '', executionView, resultsView, activeView = 'study', informationInvoker;
 let storage; try { storage = localStorage; } catch { storage = null; }
 const store = new WorkbenchStore({ token: document.querySelector('meta[name="opent1d-token"]').content, storage, notify: render });
 const attempt = fn => async event => { event?.preventDefault?.(); try { await fn(event); } catch (error) { store.error = error.message; render(); } };
@@ -33,10 +33,15 @@ function relativeDate(value) {
   return date.toDateString() === today.toDateString() ? 'Today' : date.toDateString() === yesterday.toDateString() ? 'Yesterday' : date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
 }
 function showStudy() {
+  activeView = 'study'; resultsView?.hide();
+  if ($('results-tab')) $('results-tab').removeAttribute('aria-current');
+  $('study-tab').setAttribute('aria-current', 'page'); $('tree-study').setAttribute('aria-current', 'page'); $('tree-results').removeAttribute('aria-current');
+  $('tree-study').classList.add('active'); $('tree-results').classList.remove('active');
   for (const id of ['study-body', 'study-tab', 'close-study']) $(id).hidden = false;
+  render();
   $('study-heading').focus();
 }
-async function openProject(id) { if (await store.openProject(id)) { rememberProject(); showStudy(); } }
+async function openProject(id) { if (!await beforeNavigate()) return; if (await store.openProject(id)) { rememberProject(); showStudy(); } }
 function renderRecents() {
   if (!store.data) return;
   const dates = recents(), projects = [...store.data.projects].sort((a, b) => (dates[b.id] || '').localeCompare(dates[a.id] || ''));
@@ -62,7 +67,7 @@ function inputSummary() {
 }
 function render() {
   if (stopped) return;
-  const project = store.project, record = store.record, busy = store.locked;
+  const project = store.project, record = store.record, busy = store.locked || store.loadingProject;
   const view = project ? 'workspace' : 'startup';
   if (desktop && desktopView !== view) { desktopView = view; desktop.setView(view); }
   $('startup').hidden = !!project; $('workspace').hidden = !project;
@@ -71,7 +76,10 @@ function render() {
   if (!project) { renderRecents(); }
   else {
     document.title = project.name + ' · OpenT1D'; $('project-title').textContent = project.name; $('tree-project-name').textContent = project.name;
-    $('study-empty').hidden = !!record; $('study-form').hidden = !record;
+    $('study-empty').hidden = !!record || store.loadingProject; $('study-form').hidden = !record;
+    if ($('project-loading')) $('project-loading').hidden = !store.loadingProject;
+    if (store.loadingProject) { $('study-body').hidden = true; if ($('results-body')) $('results-body').hidden = true; }
+    for (const id of ['tree-study', 'tree-results', 'study-tab', 'results-tab']) if ($(id)) $(id).disabled = store.loadingProject;
     $('save-study').hidden = !store.dirty && !store.saving;
     $('save-study').disabled = busy || store.conflict || !store.dirty;
     $('save-state').textContent = store.saving ? 'Saving…' : store.dirty ? 'Unsaved changes' : '';
@@ -87,6 +95,12 @@ function render() {
     }
   }
   if (!project) document.title = 'OpenT1D';
+  const skip = document.querySelector('.skip');
+  if (skip) { skip.href = !project ? '#projects-heading' : store.loadingProject ? '#project-loading' : activeView === 'results' ? '#results-heading' : '#study-heading'; skip.textContent = !project ? 'Skip to projects' : store.loadingProject ? 'Skip to opening status' : activeView === 'results' ? 'Skip to results' : 'Skip to study'; }
+  const badge = document.querySelector('.draft-badge');
+  if (badge) badge.textContent = record?.frozen_plan && !store.dirty ? 'Frozen' : record?.validation?.valid && !store.dirty ? 'Reviewed' : 'Draft';
+  executionView?.render(); resultsView?.render();
+  if (editor?.dirty) backupEditor();
   $('notice').hidden = !store.error; $('notice-text').textContent = store.error;
   $('retry-save').hidden = !store.dirty || store.conflict;
   $('reload-study').hidden = !store.conflict; $('save-copy').hidden = !store.conflict;
@@ -110,7 +124,8 @@ function updateTemplates() {
   const sampling = $('new-approach').value === 'mmtt-sampling';
   options($('template-case'), sampling ? [['information-loss', 'Information-loss example'], ['constant', 'Constant-input control'], ['incomplete', 'Incomplete measurements'], ['steep-response', 'Steep-response boundary control']] : [['complete', 'Paired meal tests'], ['censored', 'Censored measurements']]);
 }
-function information(title, paragraphs, link = false) {
+function information(title, paragraphs, link = false, invoker = document.activeElement) {
+  informationInvoker = invoker; $('freeze-study')?.remove();
   closeDialogs(); $('information-title').textContent = title;
   $('information-content').replaceChildren(...paragraphs.map(text => node('p', text)));
   if (link && !desktop) { const a = node('a', 'Open full laboratory'); a.href = '/'; $('information-content').append(a); }
@@ -157,7 +172,7 @@ function editInputs(kind) {
 }
 async function quit() {
   if (desktop) { desktop.quit(); return; }
-  if (!await store.flush()) return;
+  if (!await beforeNavigate()) return;
   await store.request('/api/shutdown', {}); stopped = true; closeDialogs(); $('workspace').hidden = true; $('startup').hidden = false;
   $('recent-projects').replaceChildren(node('p', 'Application stopped. Your saved work is kept.'));
   for (const b of document.querySelectorAll('button')) b.disabled = true;
@@ -166,8 +181,7 @@ async function quit() {
 $('new-project').onclick = () => newDialog('guided'); $('start-empty').onclick = () => newDialog('empty');
 $('use-template').onclick = () => newDialog('template');
 $('open-project').onclick = desktop ? attempt(async () => {
-  if (!await store.flush()) return;
-  closeDialogs();
+  if (!await beforeNavigate()) return;
   const folder = await desktop.openProject();
   if (folder && await store.openPath(folder)) { rememberProject(); showStudy(); }
 }) : () => newDialog('open');
@@ -192,14 +206,14 @@ $('approach').onchange = () => { const task = $('approach').value; $('approach')
 for (const id of ['observations', 'tree-observations']) $(id).onclick = () => editInputs('observations');
 for (const id of ['assumptions', 'tree-assumptions']) $(id).onclick = () => editInputs('assumptions');
 $('input-file').onchange = () => { uploadGeneration++; paintEditor(); };
-$('input-text').oninput = () => { uploadGeneration++; editor.files[$('input-file').value] = $('input-text').value; editor.dirty = true; paintStructured(); };
+$('input-text').oninput = () => { uploadGeneration++; editor.files[$('input-file').value] = $('input-text').value; editor.dirty = true; backupEditor(); paintStructured(); };
 for (const id of ['draws', 'seed']) $(id).oninput = () => {
   uploadGeneration++;
   const value = $(id).value, number = Number(value);
   if (value === '' || !Number.isSafeInteger(number)) { $(id).setAttribute('aria-invalid', 'true'); $(id).setCustomValidity('Enter a whole number within the exact editor range.'); return; }
   $(id).removeAttribute('aria-invalid');
   $(id).setCustomValidity('');
-  try { const settings = parseSourceJSON(editor.files['settings.json']); settings.uncertainty[id] = number; editor.files['settings.json'] = JSON.stringify(settings, null, 2) + '\n'; editor.dirty = true; $('input-text').value = editor.files['settings.json']; }
+  try { const settings = parseSourceJSON(editor.files['settings.json']); settings.uncertainty[id] = number; editor.files['settings.json'] = JSON.stringify(settings, null, 2) + '\n'; editor.dirty = true; backupEditor(); $('input-text').value = editor.files['settings.json']; }
   catch (error) { $(id).setCustomValidity('Correct the settings file before applying this edit.'); $('file-error').textContent = error.message; $('file-error').hidden = false; }
 };
 $('input-upload').onchange = async () => {
@@ -209,7 +223,7 @@ $('input-upload').onchange = async () => {
     if (file.size > (name.endsWith('.csv') ? 512 : 128) * 1024) throw new Error('This file exceeds the study byte limit.');
     const text = new TextDecoder('utf-8', { fatal: true, ignoreBOM: true }).decode(await file.arrayBuffer());
     if (generation !== uploadGeneration || editor !== active || !$('files-dialog').open) return;
-    editor.files[name] = text; editor.dirty = true; paintEditor(); $('file-error').hidden = true;
+    editor.files[name] = text; editor.dirty = true; backupEditor(); paintEditor(); $('file-error').hidden = true;
   } catch (error) { if (generation === uploadGeneration) { $('file-error').textContent = error.message; $('file-error').hidden = false; } }
 };
 function applyEditor() {
@@ -218,25 +232,61 @@ function applyEditor() {
   store.edit(store.name, editor.files); editor = null; uploadGeneration++; closeDialogs(); return true;
 }
 $('files-form').onsubmit = event => { event.preventDefault(); applyEditor(); };
-$('files-dialog').addEventListener('close', () => { editor = null; uploadGeneration++; });
+function backupEditor() {
+  if (!editor?.dirty || editor.id !== store.record?.id) return;
+  try { store.storage?.setItem(store.key(), JSON.stringify({ revision: store.record.revision, name: store.name, files: editor.files, parent: store.record.parent || null })); }
+  catch { store.error = 'Browser recovery is unavailable. Apply and save your input changes before leaving.'; }
+}
+$('files-dialog').addEventListener('close', () => {
+  if (editor?.dirty) { if (store.dirty) store.backup(); else store.clearBackup(); }
+  editor = null; uploadGeneration++;
+});
+$('information-dialog').addEventListener('close', () => { if (informationInvoker?.isConnected && !informationInvoker.disabled) informationInvoker.focus(); });
+async function beforeNavigate() {
+  if (editor?.dirty && !applyEditor()) return false;
+  if (!await store.flush()) return false;
+  closeDialogs(); return true;
+}
+async function showResults(attemptId) {
+  if (!resultsView) return;
+  const opened = await resultsView.show(attemptId);
+  if (opened === false) return;
+  activeView = 'results'; $('study-body').hidden = true;
+  $('study-tab').removeAttribute('aria-current'); $('tree-study').removeAttribute('aria-current'); $('tree-results').setAttribute('aria-current', 'page');
+  $('tree-study').classList.remove('active'); $('tree-results').classList.add('active');
+  if ($('results-tab')) { $('results-tab').hidden = false; $('results-tab').setAttribute('aria-current', 'page'); }
+  if ($('close-results')) $('close-results').hidden = false;
+  $('results-heading')?.focus(); render();
+}
 $('study-form').onsubmit = attempt(async () => {
-  const validation = await store.review(); if (!validation) return;
-  information(validation.valid ? 'Review study' : 'Check the study inputs', validation.valid ? [store.name, `${approaches[store.record.task].label}. Saved revision ${store.record.revision}.`, 'The saved synthetic inputs passed the existing task validation. No analysis has been run.'] : [validation.error || 'The saved inputs need correction. Open observations or assumptions to edit them.']);
+  const invoker = $('review-study'), validation = await store.review(); if (!validation) return;
+  information(validation.valid ? 'Review study' : 'Check the study inputs', validation.valid ? [store.name, `${approaches[store.record.task].label}. Saved revision ${store.record.revision}.`, 'The saved synthetic inputs passed the existing task validation. No analysis has been run.', store.record.frozen_plan ? 'This revision already has a preserved frozen plan.' : 'Freeze this reviewed revision to preserve its inputs. Running the analysis is a separate action.'] : [validation.error || 'The saved inputs need correction. Open observations or assumptions to edit them.'], false, invoker);
+  if (validation.valid) {
+    const button = node('button', store.record.frozen_plan ? 'Use frozen study' : 'Freeze study', 'primary'); button.id = 'freeze-study'; button.type = 'button';
+    button.onclick = attempt(async () => {
+      button.disabled = true;
+      try { await store.freeze(); informationInvoker = $('check-study'); $('information-dialog').close(); showStudy(); $('check-study')?.focus(); }
+      finally { button.disabled = false; }
+    });
+    $('information-dialog').querySelector('.dialog-actions').prepend(button);
+  }
 });
 $('retry-save').onclick = attempt(() => store.save()); $('reload-study').onclick = attempt(() => store.reloadSaved()); $('save-copy').onclick = attempt(() => store.saveCopy());
 $('dismiss-notice').onclick = () => { store.error = ''; render(); };
-for (const id of ['all-projects', 'project-switcher', 'menu-projects']) $(id).onclick = attempt(async () => { if (await store.closeProject()) { closeDialogs(); $('projects-heading').focus(); } });
-$('project-menu').onclick = () => $('actions-dialog').showModal(); $('menu-studies').onclick = showStudies; $('choose-study').onclick = showStudies;
+for (const id of ['all-projects', 'project-switcher', 'menu-projects']) $(id).onclick = attempt(async () => { if (await beforeNavigate() && await store.closeProject()) { resultsView?.hide(); closeDialogs(); $('projects-heading').focus(); } });
+$('project-menu').onclick = () => $('actions-dialog').showModal(); $('menu-studies').onclick = attempt(async () => { if (await beforeNavigate()) showStudies(); }); $('choose-study').onclick = $('menu-studies').onclick;
 $('create-study').onclick = () => newDialog('study'); $('another-study').onclick = () => newDialog('study');
 for (const id of ['study-tab', 'tree-study']) $(id).onclick = showStudy;
-$('close-study').onclick = attempt(async () => { if (await store.flush()) { $('study-body').hidden = true; $('study-tab').hidden = true; $('close-study').hidden = true; $('tree-study').focus(); } });
+$('close-study').onclick = attempt(async () => { if (await beforeNavigate()) { $('study-body').hidden = true; $('study-tab').hidden = true; $('close-study').hidden = true; $('tree-study').focus(); } });
 for (const [button, target] of [['tree-project', 'project-children'], ['tree-inputs', 'input-children']]) $(button).onclick = () => { $(target).hidden = !$(target).hidden; $(button).setAttribute('aria-expanded', String(!$(target).hidden)); };
 function explorer(show) { $('workbench').classList.toggle('explorer-hidden', !show); $('workbench').classList.toggle('mobile-explorer', show); $('toggle-explorer').setAttribute('aria-expanded', String(show)); $('show-project').setAttribute('aria-expanded', String(show)); }
 $('toggle-explorer').onclick = () => explorer($('workbench').classList.contains('explorer-hidden'));
 $('show-project').onclick = () => explorer(!matchMedia('(max-width:650px)').matches || !$('workbench').classList.contains('mobile-explorer'));
 document.addEventListener('keydown', event => { if (event.key === 'Escape' && matchMedia('(max-width:650px)').matches && $('workbench').classList.contains('mobile-explorer')) { explorer(false); $('show-project').focus(); } });
 $('workspace-settings').onclick = () => information('Workspace details', ['Project folder: ' + store.project.path, 'Workspace: ' + store.data.workspace], true);
-$('tree-results').onclick = () => information('Results', ['This workspace currently covers creating and editing studies. Existing executions and verified reports are available in the full laboratory.'], true);
+$('tree-results').onclick = attempt(() => showResults());
+if ($('results-tab')) $('results-tab').onclick = attempt(() => showResults());
+if ($('close-results')) $('close-results').onclick = () => { resultsView?.hide(); $('results-tab').hidden = true; $('close-results').hidden = true; showStudy(); };
 for (const id of ['quit-start', 'quit-workspace']) $(id).onclick = attempt(quit);
 for (const b of document.querySelectorAll('.dialog-close')) b.onclick = () => b.closest('dialog').close();
 async function saveCurrent() { if (applyEditor()) return store.save(); return false; }
@@ -248,7 +298,7 @@ if (desktop) {
       const choice = await desktop.confirmEditor();
       if (choice === 'cancel') return;
       if (choice === 'save') { if (!applyEditor() || !await store.flush()) return; }
-      else { editor = null; uploadGeneration++; closeDialogs(); }
+      else { if (store.dirty) store.backup(); else store.clearBackup(); editor = null; uploadGeneration++; closeDialogs(); }
     }
     if (command === 'save') await saveCurrent();
     else if (buttons[command]) $(buttons[command]).click();
@@ -266,7 +316,18 @@ if (desktop) {
     return { canClose, message: canClose ? '' : store.error || 'The study could not be saved. Your unsaved changes are still open.' };
   });
 }
-window.addEventListener('beforeunload', event => { if (store.dirty || store.saving || editor?.dirty) { store.backup(); event.preventDefault(); event.returnValue = ''; } });
+window.addEventListener('beforeunload', event => { if (store.dirty || store.saving || editor?.dirty) { if (editor?.dirty) backupEditor(); else store.backup(); event.preventDefault(); event.returnValue = ''; } });
+async function installWorkflow() {
+  if (!$('execution-panel')?.tagName || !$('results-body')?.tagName) return;
+  const [{ createExecutionView }, { createResultsView }] = await Promise.all([import('/workbench-execution.js'), import('/workbench-results.js')]);
+  resultsView = createResultsView({ store, container: $('results-body'), showStudy, beforeNavigate, runPlan: async plan => {
+    store.selectPlan(plan); showStudy(); await store.checkPlan();
+    if (store.ready) await store.runPlan();
+  } });
+  executionView = createExecutionView({ store, container: $('execution-panel'), onResults: showResults });
+  render();
+}
+attempt(installWorkflow)();
 attempt(() => store.refresh())();
 // Also observe actions started in another tab/the full laboratory. Rebuilding
 // only changed recent lists preserves keyboard focus during these refreshes.
