@@ -5,7 +5,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
-const files = ['mmtt.spec.mjs', 'installed-sampling.spec.mjs', 'workbench.spec.mjs', 'comparisons.spec.mjs', 'connected.spec.mjs', 'internal-candidate.spec.mjs', 'integrated-candidate.spec.mjs', 'm3-workbench.spec.mjs', 'three-screens.spec.mjs'];
+const files = ['mmtt.spec.mjs', 'installed-sampling.spec.mjs', 'workbench.spec.mjs', 'comparisons.spec.mjs', 'connected.spec.mjs', 'internal-candidate.spec.mjs', 'integrated-candidate.spec.mjs', 'm3-workbench.spec.mjs', 'three-screens.spec.mjs', 'concept-v1.spec.mjs'];
 test('complete canonical file multiset, including M3 and the three research screens, is selected exactly once', () => {
   const all = [1, 2, 3].flatMap(i => applicationFiles(files, `${i}/3`));
   assert.deepEqual(all.sort(), [...files].sort());

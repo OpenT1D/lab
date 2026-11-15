@@ -14,6 +14,11 @@ from ._integrity import verify
 
 STATIC = {
     "/": ("index.html", "text/html; charset=utf-8"),
+    "/workbench": ("workbench.html", "text/html; charset=utf-8"),
+    "/workbench.css": ("workbench.css", "text/css; charset=utf-8"),
+    "/workbench.js": ("workbench.js", "text/javascript; charset=utf-8"),
+    "/workbench-store.js": ("workbench-store.js", "text/javascript; charset=utf-8"),
+    "/InterVariable.woff2": ("InterVariable.woff2", "font/woff2"),
     "/app.js": ("app.js", "text/javascript; charset=utf-8"),
     "/drafts.js": ("drafts.js", "text/javascript; charset=utf-8"),
     "/comparisons.js": ("comparisons.js", "text/javascript; charset=utf-8"),
@@ -21,6 +26,34 @@ STATIC = {
     "/research.js": ("research.js", "text/javascript; charset=utf-8"),
     "/app.css": ("app.css", "text/css; charset=utf-8"),
 }
+for _name in (
+    "wb-0-folder",
+    "wb-0-close",
+    "wb-0-empty-project",
+    "wb-0-file",
+    "wb-0-right",
+    "wb-1-file",
+    "wb-1-sliders",
+    "wb-1-chevron",
+    "wb-1-down",
+    "wb-1-folder",
+    "wb-1-down1",
+    "wb-1-layout",
+    "wb-1-more",
+    "wb-1-folder1",
+    "wb-1-gear",
+    "wb-1-down2",
+    "wb-1-folder2",
+    "wb-1-file1",
+    "wb-1-file2",
+    "wb-1-sliders1",
+    "wb-1-chevron1",
+    "wb-1-file3",
+    "wb-1-close",
+    "wb-1-down3",
+    "wb-1-sliders2",
+):
+    STATIC["/" + _name + ".svg"] = (_name + ".svg", "image/svg+xml")
 DOWNLOAD_HEADERS = {
     "report.json": 'attachment; filename="report.json"',
     "report.md": 'attachment; filename="report.md"',
@@ -29,7 +62,8 @@ DOWNLOAD_HEADERS = {
     "study.csv": 'attachment; filename="study.csv"',
 }
 CSP = (
-    "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' blob:; "
+    "default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; "
+    "img-src 'self' blob:; "
     "connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'; "
     "object-src 'none'"
 )
@@ -58,6 +92,10 @@ class Server(ThreadingHTTPServer):
         self.assets["index.html"] = self.assets["index.html"].replace(
             b"__SESSION_TOKEN__", self.token.encode()
         )
+        if "workbench.html" in self.assets:
+            self.assets["workbench.html"] = self.assets["workbench.html"].replace(
+                b"__SESSION_TOKEN__", self.token.encode()
+            )
         self.request_slots = threading.BoundedSemaphore(16)
         super().__init__(("127.0.0.1", port), Handler)
         self.origin = f"http://127.0.0.1:{self.server_port}"

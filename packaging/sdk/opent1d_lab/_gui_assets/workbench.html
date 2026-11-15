@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="opent1d-token" content="__SESSION_TOKEN__">
+  <title>OpenT1D</title>
+  <link rel="stylesheet" href="/workbench.css">
+  <script type="module" src="/workbench.js"></script>
+</head>
+<body>
+<a class="skip" href="#study-heading">Skip to study</a>
+<div id="startup" class="startup">
+  <section class="start-window" aria-label="OpenT1D projects">
+    <header class="start-header"><span class="brand"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>OpenT1D</span><button class="icon-button" id="quit-start" aria-label="Stop application"><img src="/wb-0-close.svg" width="20" height="20" alt=""></button></header>
+    <div class="launcher">
+      <section class="start-column"><h1 id="projects-heading" tabindex="-1">Recent projects</h1><div id="recent-projects" class="recent-projects" aria-label="Recent projects"></div><button id="open-project" class="secondary open-button">Open project…</button></section>
+      <section class="start-column"><h2>Create a project</h2><p class="muted start-description">Start with a short guided setup.</p><button id="new-project" class="primary new-button">New project</button><button id="start-empty" class="text-action"><img src="/wb-0-empty-project.svg" width="20" height="20" alt=""><span>Start empty</span><span class="muted">No guided setup</span></button><button id="use-template" class="text-action template-action"><img src="/wb-0-file.svg" width="20" height="20" alt=""><span>Use a template</span><img class="trailing" src="/wb-0-right.svg" width="20" height="20" alt=""></button></section>
+    </div>
+  </section>
+</div>
+<div id="workspace" class="window" hidden>
+  <header class="workspace-header">
+    <button id="all-projects" class="brand brand-button" title="All projects"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>OpenT1D</button><span class="identity-divider"></span>
+    <button id="project-switcher" class="project-switcher" title="Open another project"><img src="/wb-1-folder.svg" width="20" height="20" alt=""><span id="project-title"></span><img src="/wb-1-down1.svg" width="16" height="16" alt=""></button>
+    <span class="grow"></span><button id="toggle-explorer" class="icon-button" aria-label="Toggle project explorer" aria-expanded="true"><img src="/wb-1-layout.svg" width="20" height="20" alt=""></button><button id="project-menu" class="icon-button" aria-label="Project actions"><img src="/wb-1-more.svg" width="20" height="20" alt=""></button>
+  </header>
+  <div id="workbench" class="workbench">
+    <nav class="activity-rail" aria-label="Workspace tools"><button id="show-project" class="rail-active" aria-label="Show project explorer"><img src="/wb-1-folder1.svg" width="22" height="22" alt=""></button><span class="grow"></span><button id="workspace-settings" class="icon-button" aria-label="Workspace details"><img src="/wb-1-gear.svg" width="22" height="22" alt=""></button></nav>
+    <aside id="explorer" class="explorer" aria-label="Project explorer">
+      <h2>Project</h2>
+      <button id="tree-project" class="tree-row level-0" aria-expanded="true"><span class="caret"><img src="/wb-1-down2.svg" width="14" height="14" alt=""></span><img src="/wb-1-folder2.svg" width="16" height="16" alt=""><span id="tree-project-name" class="tree-label"></span></button>
+      <div id="project-children">
+        <button id="tree-study" class="tree-row level-1 active" aria-current="page"><span class="caret"></span><img src="/wb-1-file1.svg" width="16" height="16" alt=""><span>Study</span></button>
+        <button id="tree-inputs" class="tree-row level-1" aria-expanded="true"><span class="caret"><img src="/wb-1-down2.svg" width="14" height="14" alt=""></span><img src="/wb-1-folder2.svg" width="16" height="16" alt=""><span>Inputs</span></button>
+        <div id="input-children"><button id="tree-observations" class="tree-row level-2"><span class="caret"></span><img src="/wb-1-file2.svg" width="16" height="16" alt=""><span>Synthetic observations</span></button><button id="tree-assumptions" class="tree-row level-2"><span class="caret"></span><img src="/wb-1-sliders1.svg" width="16" height="16" alt=""><span>Analysis assumptions</span></button></div>
+        <button id="tree-results" class="tree-row level-1"><span class="caret"><img src="/wb-1-chevron1.svg" width="14" height="14" alt=""></span><img src="/wb-1-folder2.svg" width="16" height="16" alt=""><span>Results</span></button>
+      </div>
+      <span class="grow"></span><p class="synthetic-label">Synthetic example</p>
+    </aside>
+    <main class="study-panel">
+      <div class="tabs"><button id="study-tab" class="tab" aria-current="page"><img src="/wb-1-file3.svg" width="18" height="18" alt="">Study</button><button id="close-study" class="close-tab" aria-label="Close study tab"><img src="/wb-1-close.svg" width="14" height="14" alt=""></button></div>
+      <div id="study-body" class="study-body">
+        <div class="study-form">
+          <div class="study-intro"><div class="title-line"><h1 id="study-heading" tabindex="-1">Study</h1><span class="draft-badge">Draft</span><span class="grow"></span><span id="save-state" class="muted" role="status"></span><button id="save-study" class="secondary" hidden>Save changes</button></div><p class="muted">Define your question and review the inputs.</p></div>
+          <div id="study-empty" class="empty-study" hidden><p>No editable MMTT study is open in this project.</p><button id="create-study" class="primary">Create a study</button><button id="choose-study" class="secondary">Open saved study</button></div>
+          <form id="study-form" novalidate>
+            <div class="definition"><label for="research-question">Research question</label><input id="research-question" maxlength="100" autocomplete="off" required><label for="approach">Approach</label><select id="approach"></select></div>
+            <section class="inputs"><h2>Inputs</h2><button id="observations" type="button" class="input-row"><img src="/wb-1-file.svg" width="24" height="24" alt=""><span class="input-description"><strong>Synthetic observations</strong><span id="observations-description" class="muted"></span></span><span id="observations-action" class="muted">View</span><img src="/wb-1-chevron.svg" width="16" height="16" alt=""></button><button id="assumptions" type="button" class="input-row"><img src="/wb-1-sliders2.svg" width="24" height="24" alt=""><span class="input-description"><strong>Analysis assumptions</strong><span id="assumptions-description" class="muted"></span></span><span id="assumptions-action" class="muted">Review</span><img src="/wb-1-chevron.svg" width="16" height="16" alt=""></button></section>
+            <div class="next-step"><button id="review-study" class="primary" type="submit">Review study</button><p class="muted">Check your question and inputs before continuing.</p></div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<div id="notice" class="notice" role="alert" tabindex="-1" hidden><span id="notice-text"></span><div class="notice-actions"><button id="retry-save" hidden>Retry save</button><button id="reload-study" hidden>Reload saved study</button><button id="save-copy" hidden>Save as separate study</button><button id="dismiss-notice" aria-label="Dismiss message">×</button></div></div>
+<dialog id="project-dialog"><form id="project-dialog-form"><div class="dialog-title"><h2 id="project-dialog-title">New project</h2><button type="button" class="dialog-close" aria-label="Close dialog">×</button></div><p id="project-dialog-description" class="muted"></p><label id="project-name-label" for="project-name">Project name</label><input id="project-name" maxlength="100" required autocomplete="off"><div id="creation-options"><label for="new-approach">Approach</label><select id="new-approach"></select><div id="template-options" hidden><label for="template-case">Synthetic template</label><select id="template-case"></select></div></div><p id="project-error" class="inline-error" role="alert" hidden></p><div class="dialog-actions"><button type="button" class="dialog-close secondary">Cancel</button><button id="confirm-project" class="primary" type="submit">Create project</button></div></form></dialog>
+<dialog id="files-dialog"><form id="files-form"><div class="dialog-title"><h2 id="files-title">Inputs</h2><button type="button" class="dialog-close" aria-label="Close dialog">×</button></div><p class="muted">Synthetic inputs only. Changes are saved as a new study revision.</p><label for="input-file">Input file</label><select id="input-file"></select><div id="structured-settings" hidden><div><label for="draws">Perturbation draws</label><input id="draws" type="number" min="32" max="1024" step="1"></div><div><label for="seed">Seed</label><input id="seed" type="number" min="0" step="1"></div></div><p id="structured-warning" class="muted" hidden>This file contains numbers outside the exact editor range. Edit the file contents to preserve them.</p><label for="input-text">File contents</label><textarea id="input-text" rows="12" spellcheck="false"></textarea><label for="input-upload">Replace this file</label><input id="input-upload" type="file" accept=".json,.csv,application/json,text/csv"><p id="file-error" class="inline-error" role="alert" hidden></p><div class="dialog-actions"><button type="button" class="dialog-close secondary">Cancel</button><button type="submit" class="primary">Apply changes</button></div></form></dialog>
+<dialog id="information-dialog"><div class="dialog-title"><h2 id="information-title"></h2><button class="dialog-close" aria-label="Close dialog">×</button></div><div id="information-content"></div><div class="dialog-actions"><button class="dialog-close secondary">Back to study</button></div></dialog>
+<dialog id="studies-dialog"><div class="dialog-title"><h2>Saved studies</h2><button class="dialog-close" aria-label="Close dialog">×</button></div><div id="saved-studies"></div><div class="dialog-actions"><button id="another-study" class="primary">New study</button></div></dialog>
+<dialog id="actions-dialog"><div class="dialog-title"><h2>Project actions</h2><button class="dialog-close" aria-label="Close dialog">×</button></div><div class="action-list"><button id="menu-save">Save changes <kbd>Ctrl / ⌘ S</kbd></button><button id="menu-studies">Open another study</button><button id="menu-projects">All projects</button><a href="/">Open full laboratory</a><button id="quit-workspace">Stop application</button></div></dialog>
+</body>
+</html>

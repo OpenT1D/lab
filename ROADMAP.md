@@ -895,7 +895,37 @@ controls and store/runtime/reader changes are outside this increment. Select
 any implementation separately under the two-implementation limit; control-task
 extensions consume the OT-062 owner's agreed fixtures.
 
+### Selected Concept v1 implementation slice (OT-065)
+
+Following the bounded design work, a separate implementation slice selects only
+the compact project launcher and Study workspace for the two synthetic MMTT
+tasks. The [operational guide](docs/installed-gui.md#concept-v1-study-workbench)
+owns its `/workbench` entry, project creation/opening, concept edits, explicit
+save/autosave, conflict handling and saved-work reopening. It reuses the
+installed GUI controller and existing draft services without changing shared
+project contracts, numerical code, frozen plans, execution or report readers.
+The current full laboratory remains available for those later workflow stages.
+
+Acceptance for this slice covers actual installed-browser creation and editing
+for both approaches, empty/template setup, external-project opening, exact
+untouched input text, failed-save retention, cross-tab conflicts and reopening
+after a server restart. Check the two reference layouts and narrow-window
+navigation. Keep the current candidate/exercise records historical; this new
+application identity requires its own checks and does not inherit intended-user
+acceptance. One integration owner runs final repository verification after the
+separate technical diff review.
+
 ### Planned core and product work packages
+
+The separately selected **Concept v1 Mac desktop increment** continues the two-screen
+slice in an owned Apple Silicon application window. [Decision 0114](docs/decisions/0114-concept-v1-desktop-workspace.md)
+owns the shell, pinned runtimes and lifecycle. Reuse the existing SDK controller,
+input revisions and project ledger without changing scientific/source-reader
+identities. Add native opening, menus, window bounds and save/shutdown ownership.
+Check actual Mac application behavior and the exact delivered bundle. Windows is
+deferred; older installer evidence remains historical. The
+[installed GUI guide](docs/installed-gui.md#concept-v1-desktop-application) owns
+build, launch and saved-work commands.
 
 Dependencies below are prerequisites for integrated acceptance, not prohibitions
 on earlier design, fixture creation or feasibility probes. IDs reserve work in

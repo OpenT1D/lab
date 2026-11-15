@@ -431,7 +431,12 @@ class GUIHTTPTests(unittest.TestCase):
         self.controller = state.Controller(self.root / "workspace", sdk=ControlledSDK())
         self.server = transport.Server(
             self.controller,
-            assets={"index.html": b"__SESSION_TOKEN__", "app.js": b"", "app.css": b""},
+            assets={
+                "index.html": b"__SESSION_TOKEN__",
+                "workbench.html": b"workbench:__SESSION_TOKEN__",
+                "app.js": b"",
+                "app.css": b"",
+            },
         )
         self.thread = threading.Thread(
             target=self.server.serve_forever, kwargs={"poll_interval": 0.02}
@@ -462,6 +467,16 @@ class GUIHTTPTests(unittest.TestCase):
             return response.status, response.read(), dict(response.getheaders())
         finally:
             connection.close()
+
+    def test_workbench_has_its_current_session_token_and_same_origin_font_policy(self):
+        status, raw, headers = self.call("/workbench")
+        self.assertEqual(status, 200)
+        self.assertEqual(raw, b"workbench:" + self.server.token.encode())
+        self.assertEqual(headers["Content-Type"], "text/html; charset=utf-8")
+        self.assertIn("font-src 'self'", headers["Content-Security-Policy"])
+        status, raw, _ = self.call("/workbench?path=elsewhere")
+        self.assertEqual(status, 409)
+        self.assertIn(b"Only fixed origin-form routes are supported", raw)
 
     def test_real_http_positive_controls_and_authentication(self):
         status, raw, headers = self.call("/")

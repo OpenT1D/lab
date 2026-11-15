@@ -14,7 +14,7 @@ export function presentApplicationFiles(directory) {
 // A new configured file must be assigned explicitly; it cannot disappear.
 const groups = [
   ['connected.spec.mjs', 'internal-candidate.spec.mjs', 'three-screens.spec.mjs'],
-  ['comparisons.spec.mjs', 'integrated-candidate.spec.mjs', 'mmtt.spec.mjs'],
+  ['comparisons.spec.mjs', 'integrated-candidate.spec.mjs', 'mmtt.spec.mjs', 'concept-v1.spec.mjs'],
   ['workbench.spec.mjs', 'installed-sampling.spec.mjs', 'm3-workbench.spec.mjs'],
 ];
 

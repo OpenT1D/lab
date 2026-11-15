@@ -7,6 +7,11 @@ Individual contributors retain copyright in their contributions.
 Third-party material, when included, retains its own license and notices.
 See docs/licensing.md and publication-rights.json for the reviewed source boundary.
 
+The Study workbench bundles the Inter variable font, copyright 2016 The Inter
+Project Authors (https://github.com/rsms/inter), under the SIL Open Font License
+1.1. Its full notice is retained in
+packaging/sdk/opent1d_lab/_gui_assets/Inter-LICENSE.txt and in the SDK wheel.
+
 Generated SVG figures contain DejaVu Sans glyph outlines. The applicable
 Bitstream/DejaVu notice is reproduced in LICENSES/DejaVu.txt.
 Pinned upstream reference notices are retained in LICENSES/simglucose.txt,
