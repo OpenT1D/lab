@@ -560,7 +560,97 @@ The [contract audit](docs/research/ot062-adapter-audit.md) and
 not native execution. Begin with the exact LT1 runtime/security and restricted-use
 rights decisions and a versioned direct/wrapped diagnostic harness/reader. Admit
 setup and bounded C15–C18 host execution separately; preserve the existing guards
-until a reviewed successor is selected. Historical simglucose remains excluded
+until a reviewed successor is selected. The
+[simglucose audit-1 fixture consumer/bootstrap](docs/research/ot062-simglucose-audit1-fixtures.md)
+adds standard-library scripted execution, an independent engine-free reader,
+passive proposal-byte checks and exact source/predecessor-lock syntax inspection.
+The latter retains guarded imports and all 34 native/eight build package rows;
+it supplies no full external/artifact closure. This preparation supplies no native
+adapter, setup, runtime/asset rights or host acceptance. A subsequent passive
+external-source review binds 38 registry archives and their notice inventories,
+identifies Gym parent effects, setuptools import mutations and Matplotlib font/
+cache/subprocess paths, and prepares a private runtime/rights proposal. Gym
+provenance, complete artifact/native/asset rights and actual host behavior remain
+open; that proposal supplies no admission. A parallel follow-up explains the Gym
+logging/version deltas and resource blob history, bounds ts-node compiler-cache
+I/O and implements fixed engine-free worker IPC/stop/readback. The 9 November
+Node-metadata observation still has no successor; neither the metadata nor the
+worker fixtures qualify native execution. The next integrated candidate adds a
+durable invented-worker journal/cold reader and fixed three-buffer/import-only
+compatibility fixture. Its private decision descriptors propose one interpreter/
+project metadata identity, a separately authorized three-CSV passive intake and
+bounded notice reliance. That candidate supplied no actual asset reader, new
+native lock, executable or host admission. A following bounded collector increment qualifies the proposed
+three-CSV acquisition contract using invented transport/body fixtures, with a
+separate exact approval packet; no actual asset is acquired or grant activated.
+The following private metadata review binds the separately authorized intake
+receipt and the accepted three-file rights assessment without rereading resource
+payloads. An integrated preparation retains inert 34-role native/eight-role build
+project specifications, four proposed build recipes and twelve matched host
+control specifications with an invented-frame cold reader. No new lock, build,
+OS policy or selected-runtime probe is qualified. Publisher metadata and
+attestation statements still require cryptographic and local-byte verification;
+resolving project metadata can itself fetch assets and execute package code.
+A following no-download preparation qualifies a separate opaque PBS collector
+with invented transport/storage and owned root-Python watchdog cases, plus a
+strict invented-only gzip/ustar reader. The proposed one-copy intake supplies no
+archive/member/notice inspection or authentication authority. Streaming hashes
+describe bytes acknowledged by writes; no retained-body readback is included.
+Cryptographic verifier/trust identities and actual reader admission remain open.
+A separately approved private opaque intake subsequently completed with the
+published byte count and a matching producer-observed streaming hash, without
+body readback, authentication or member inspection. Conditional phase-B
+preparation adds invented authentication-control receipts and owned two-pass
+descriptor fixtures. A local verifier reuse candidate is identified at metadata
+level; its actual trust bootstrap, implementation/dependency qualification and
+artifact-read behavior are unresolved. The two-pass real inspection proposal is
+not ready for execution approval. Its production reader, full-size bounds and
+owned enforcement remain separate from the smaller invented grammar fixtures.
+A further preparation candidate supplies a separately gated three-text verifier
+source-discovery collector and a generic full-ceiling reader exercised only with
+internally generated data. It proposes no download now; observed source hashes
+would not authenticate the mutable tag, installed binary or trust roots. Real
+crypto, artifact-read compatibility and phase-B admission remain open. The
+unread actual archive is not a prerequisite for testing supported grammar and
+limits with invented data. A separately authorized three-text discovery later
+completed; its receipt-only follow-up binds observed identities and the limited
+reliance decision without reopening the captured bodies. The module summary is
+truncated, and neither the captured notice nor source/binary correspondence has
+received semantic or cryptographic clearance. The synthetic reader qualification
+is distinct from real authentication, executor custody and archive compatibility.
+A further retained-source reader candidate bounds one forward pass of each
+selected module/notice file, an explicit private notice-bearing report copy and
+one separately counted report-review attempt. Qualification uses invented inputs;
+no retained source payload is opened during preparation. Complete lexical context
+is distinct from dependency/API/build or rights clearance. The future material
+view and partial-copy/delivery limits require their own exact approval; existing
+capture grants cannot be replayed. A later, separately authorized source/report
+review supplied complete supported lexical context and a literal notice view;
+its allowances are consumed. Metadata derived from that completed review does
+not establish dependency contents, binary correspondence or full rights.
+A startup/help controller candidate now tests a narrower next step with invented
+files and matched OS controls. A future exact grant would permit one selected
+binary identity pass and at most two controller-dispatched version/help probes under a
+fixed deny-default policy, with no artifact argument or cryptographic result.
+A separately approved attempt then matched the selected binary digest but
+stopped at the version command with exit code 2. Help was not attempted and no
+retry followed. A bounded reader candidate
+prepares one separately approved report-container pass and one private escaped
+view of the selected error bytes, using invented fixtures only during preparation.
+The source-container byte budget is distinct from the decoded error length;
+copy/view custody and partial delivery require their own limited decision.
+A later authorized one-pass private error view identified an early Go-runtime
+failure to determine the system page size. It did not establish the exact syscall
+or policy cause. A successor candidate adds only the exact read-only
+`hw.pagesize` query to the existing deny-default profile, subject to matched
+numeric/name controls and independent review. SDK constants and stand-ins can
+qualify that narrow mechanism; they do not prove the installed GH needs only
+that query or will start successfully. No new GH attempt or payload read occurs
+while preparing the new private probe decision. Existing grants are consumed.
+Actual compatibility, source/build qualification, trust roots and artifact-read
+accounting remain open. Native
+execution remains postponed and all operational gates are unchanged.
+Historical simglucose remains excluded
 from fresh/public setup; assess a separately identified patched successor before
 its native checks. Reuse
 native references and test reset, timing, units, causal inputs, errors and

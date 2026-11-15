@@ -462,6 +462,18 @@ def _worker_report(worker, entry, packet_hashes, sessions, output_files):
         == (bool(expected) and all(s["status"] == "completed" for s in expected)),
         "worker terminal completion",
     )
+    if entry["case_id"] == "C15" and worker["completed"]:
+        basal = worker["native_basal"]
+        route.need(
+            type(worker["construction_count"]) is int
+            and worker["construction_count"] == 1
+            and type(worker["patient_reset_calls"]) is int
+            and worker["patient_reset_calls"] == 2
+            and type(basal) is dict
+            and type(basal.get("calls")) is int
+            and basal["calls"] == 1,
+            "C15 one-engine/two-reset/basal-call lifecycle",
+        )
 
 
 def inspect(
