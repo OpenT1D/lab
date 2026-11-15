@@ -62,7 +62,7 @@ remaining acceptance boundaries; it is no longer a one-week delivery forecast.
 | Preferred second implementation — bounded OT-063 | Connect existing M1/M2 comparison logic to the selected OT-062 results, starting with fixture-based report reconstruction. | Start after the OT-062 owner freezes the consumed plan/result fixture and meanings. Reuse existing within-engine contrasts rather than create another metric implementation. Preserve planned support, failed/missing cases, units and signal/time semantics; integrated engine acceptance still requires actual adapter runs. |
 | Implemented — bounded OT-064/073 diagnostics v1 | [PR 79](https://github.com/OpenT1D/lab/pull/79) adds the [read-only developer export](docs/shared-project-services.md#developer-diagnostic-export): allowlisted exporter/schema/task identities and complete plan/attempt status accounting. | Local and exact PR/main hosted checks passed on the implemented revision. Source-byte preservation, omission controls, inert supplied code and invalid/unknown/locked-project refusals are covered. This remains a diagnostic summary, not permissioned scientific project handoff or distribution qualification. |
 | Prepared support exercise; AI control recorded — bounded OT-064/073 handoff | The [two-MMTT diagnostic support exercise](docs/shared-project-services.md#synthetic-diagnostic-support-handoff) supplies fifteen synthetic JSON cases, questions and a separate sender key. The [non-blind AI control](docs/research/ot064-073-diagnostic-ai-control.md) records fifteen accounting matches and two rejected inconsistent copies. | Existing fixture checks retain source preservation and relocation coverage. The AI reviewer had prior implementation/reference knowledge; the control establishes no independent or human-usability acceptance. The actual human recipient exercise remains open and unrun, with interpretation answers, assessment and participant times unfilled. The v1 exporter and shared interfaces are unchanged; broader OT-064/073 qualification remains separate. |
-| Design preparation — bounded OT-065 | Specify the existing three-screen workbench, a compact visual/component guide and relevant empty, loading, error and incomplete-result states; [scope and acceptance](#bounded-workbench-design-preparation-ot-065). | Design artifacts can proceed alongside OT-062 and the selected second implementation. Reuse the installed GUI and synthetic MMTT workflows; GUI implementation, new task controls and shared-interface changes require a separately selected increment. |
+| Prepared design; implemented selected Mac workflow — bounded OT-065 | Existing three-screen specification, compact guide and annotated states were found and reviewed; Concept v1 now implements both synthetic MMTT workflows. The [criteria/evidence audit](docs/research/ot065-criteria-evidence.md) connects those artifacts, current software and onboarding. | Actual screen-reader qualification remains open under OT-065. Existing keyboard/zoom checks and real VoiceOver activation do not replace observed screen-reader output. OT-072 user acceptance and OT-073 distribution remain separate. Further controls or shared-interface changes require their own selection. |
 | Research selection — bounded OT-067/068 | Select one concrete question/source/method route using the existing [OT-053 dossier](docs/research/ot053-mmtt-feasibility.md), recording researcher involvement and access status, then select the smallest source-specific intake. | Identify the export format, required versus available fields, suitable method, baseline workflow and access/review gaps. Synthetic source fixtures and a converter may proceed against that declared format while participant/access gaps remain open. Human execution needs its separately authorized and scientifically qualified route; it does not inherit current synthetic MMTT acceptance. |
 | External acceptance — OT-072 | Run an existing candidate-bound exercise with an actual intended user and result recipient. | Use a technically qualified exact candidate and the task scope covered by its packet. Preserve assistance, errors, interpretation and recovery observations. Existing preparation and same-estimator notebooks need not be recreated; new exercise scope must be specified before sessions. |
 
@@ -874,8 +874,13 @@ is resolved before either side hard-codes a conversion.
 
 The [installed GUI](docs/installed-gui.md#three-screens) already implements
 **My research**, **Research** and **Results**, with existing responsive styling.
-The next design increment makes their interaction and visual conventions
-explicit. It is planned design work, not a completed redesign or user acceptance.
+The bounded design increment specified their interaction and visual conventions.
+Its existing [specification, annotated states, compact guide and internal
+walkthrough](docs/research/ot065-criteria-evidence.md#existing-design-evidence-and-supersession)
+were verified in the 15 November audit. This is design preparation, not executed
+product behavior or user acceptance. The deliverables and acceptance below
+retain the original scope; the later selected Concept implementation supersedes
+its older presentation details where explicitly recorded.
 Keep the first scope to the two supported synthetic MMTT tasks and their
 existing comparison workflow.
 
@@ -929,7 +934,7 @@ application identity requires its own checks and does not inherit intended-user
 acceptance. One integration owner runs final repository verification after the
 separate technical diff review.
 
-The next selected **Concept v1 MMTT workflow increment** carries those saved
+The implemented **Concept v1 MMTT workflow increment** carries those saved
 studies through the existing two-task SDK: review the exact revision, freeze
 explicitly, check readiness and run; show real action/attempt state, request
 owned cancellation and retain every retry. Add explicit stopped-executor
@@ -946,7 +951,13 @@ and non-color status. Check a fresh packaged Mac app, including native menus,
 active-run quit and owner-loss cleanup. Independent user acceptance (OT-072),
 actual screen-reader qualification, clean-host distribution, notarisation,
 Windows, new engines and M5 execution remain separate. This selection does not
-complete the broader OT-065 package.
+complete the broader OT-065 package. The current
+[criterion-to-evidence matrix](docs/research/ot065-criteria-evidence.md#criterion-to-evidence-matrix)
+records the implemented and verified scope, explicit analyst/programmer routes
+and the remaining binding screen-reader gap. The
+[actual VoiceOver attempt](docs/research/ot065-accessibility-qualification.md#actual-session-outcome)
+established activation but no observable phrase/navigation channel; it is
+inconclusive. OT-065 remains open.
 
 ### Planned core and product work packages
 
