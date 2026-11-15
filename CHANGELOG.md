@@ -4,6 +4,13 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Consolidate the gated OT-062 simglucose audit-1 consumer, independent invented-
+  data reconstruction, owned fixture workers and passive intake/inspection
+  preparation. Keep fixture clocks and host metadata independent of actual
+  runtime permissions, and preserve closed native/Node, setup, use and removal
+  gates. Reject completed LT1 C15 reports with inconsistent construction, reset
+  or basal-call counts without changing numerical baselines.
+
 - Connect the existing two-task Concept workflow into an explicit analyst
   tutorial and installed Python/CLI/notebook entry. Record the OT-065
   criterion/evidence audit, existing Figma design preparation and exact-candidate

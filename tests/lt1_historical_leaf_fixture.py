@@ -16,11 +16,12 @@ def directory(path):
     return {"path": str(path), **{k: v for k, v in leaf.signature(info).items() if k != "bytes"}}
 
 
-def command(parent, phase="complete"):
-    return [sys.executable, "-I", "-S", "-B", str(Path(__file__).resolve()), str(parent), phase]
+def command(parent, phase="complete", *, delayed_start=False):
+    argv = [sys.executable, "-I", "-S", "-B", str(Path(__file__).resolve()), str(parent), phase]
+    return argv + (["--delayed-start"] if delayed_start else [])
 
 
-def prepare(parent, phase="complete"):
+def prepare(parent, phase="complete", *, delayed_start=False):
     parent = Path(parent).resolve()
     parent.chmod(0o700)
     root, reports = parent / "mixed", parent / "reports"
@@ -43,7 +44,9 @@ def prepare(parent, phase="complete"):
                 "process_quiescent": True,
                 "exclusive_ownership_reviewed": True,
                 "recovery_disposition_sha256": leaf.digest(b"invented scoped recovery disposition"),
-                "outer_argv_sha256": leaf.command_digest(command(parent, phase)),
+                "outer_argv_sha256": leaf.command_digest(
+                    command(parent, phase, delayed_start=delayed_start)
+                ),
             },
             sort_keys=True,
         )
@@ -106,7 +109,11 @@ def outer(raw, supervision=None):
 
 def main():
     parent, phase = Path(sys.argv[1]), sys.argv[2]
-    raw, registry, context, _target, _attempt = prepare(parent, phase)
+    leaf.need(sys.argv[3:] in ([], ["--delayed-start"]), "fixed fixture startup mode")
+    delayed_start = bool(sys.argv[3:])
+    if delayed_start:
+        time.sleep(3.5)  # Fixed startup counterexample; no model or native work.
+    raw, registry, context, _target, _attempt = prepare(parent, phase, delayed_start=delayed_start)
     (parent / "request.json").write_bytes(raw)
     (parent / "context.json").write_bytes(context)
 

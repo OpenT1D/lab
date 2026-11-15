@@ -560,7 +560,21 @@ The [contract audit](docs/research/ot062-adapter-audit.md) and
 not native execution. Begin with the exact LT1 runtime/security and restricted-use
 rights decisions and a versioned direct/wrapped diagnostic harness/reader. Admit
 setup and bounded C15–C18 host execution separately; preserve the existing guards
-until a reviewed successor is selected. Historical simglucose remains excluded
+until a reviewed successor is selected. The
+[simglucose audit-1 preparation](docs/research/ot062-simglucose-audit1-fixtures.md)
+now consolidates the standard-library consumer, independent invented-data oracle,
+owned fixture workers and journals, compatibility and intake/archive/inspection
+contracts, and selected-tool preparation. Root checks exercise these boundaries
+with invented inputs; ordinary native and material-access entry points remain
+closed. The guide retains the dated source/runtime observations and distinguishes
+private, action-specific evidence from reproducible repository checks. The C15
+reader also rejects completed worker claims that violate the existing
+one-engine/two-reset/one-basal-call contract; incomplete evidence and numerical
+baselines are unchanged. These increments do not qualify either native adapter,
+select a distributable runtime, admit asset use or complete OT-062. Native/Node
+execution remains postponed; rights, setup, execution, export and removal retain
+their separate gates.
+Historical simglucose remains excluded
 from fresh/public setup; assess a separately identified patched successor before
 its native checks. Reuse
 native references and test reset, timing, units, causal inputs, errors and
