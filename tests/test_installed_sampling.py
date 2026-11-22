@@ -6,7 +6,6 @@ import os
 import re
 import subprocess
 import sys
-import tempfile
 import time
 import unittest
 import uuid
@@ -15,55 +14,13 @@ from pathlib import Path
 from experiments.catalogue.storage import dump
 from experiments.mmtt_sampling.run import run as direct_run
 from experiments.shared_services.store import opened
-from scripts import build_sdk
+from tests.installed_sdk_fixture import InstalledWheelTestCase
 
 
 @unittest.skipUnless(
     os.name == "posix" and sys.version_info[:2] == (3, 12), "POSIX CPython 3.12 SDK"
 )
-class InstalledSampling(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.temporary = tempfile.TemporaryDirectory(prefix="installed-sampling-")
-        cls.addClassCleanup(cls.temporary.cleanup)
-        cls.base = Path(cls.temporary.name).resolve()
-        cls.env = {**os.environ, "UV_CACHE_DIR": str(cls.base / "cache")}
-        cls.env.pop("PYTHONPATH", None)
-        receipt = build_sdk.build(cls.base / "build", allow_dirty=True, build_label="sampling-test")
-        cls.environment = cls.base / "sdk"
-        for command in (
-            ["uv", "venv", "--offline", "--python", sys.executable, str(cls.environment)],
-            [
-                "uv",
-                "pip",
-                "install",
-                "--offline",
-                "--no-deps",
-                "--link-mode=copy",
-                "--python",
-                str(cls.environment / "bin/python"),
-                receipt["wheel"],
-            ],
-        ):
-            subprocess.run(command, env=cls.env, capture_output=True, check=True)
-        cls.cli = cls.environment / "bin/opent1d-lab"
-
-    def setUp(self):
-        self.root = self.base / self._testMethodName
-        self.root.mkdir()
-
-    def call(self, *args, expected=0):
-        result = subprocess.run(
-            [str(self.cli), *map(str, args)],
-            cwd=self.root,
-            env=self.env,
-            capture_output=True,
-            text=True,
-            timeout=120,
-        )
-        self.assertEqual(result.returncode, expected, result.stdout + result.stderr)
-        return json.loads(result.stdout)
-
+class InstalledSampling(InstalledWheelTestCase):
     def prepared(self, case):
         inputs = self.call(
             "example",

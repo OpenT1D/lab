@@ -1,6 +1,5 @@
 """Actual integrated source/data wheel, without installing native physiology."""
 
-import functools
 import hashlib
 import json
 import os
@@ -9,12 +8,12 @@ import sys
 import unittest
 import zipfile
 from pathlib import Path
-from unittest.mock import patch
 
 from experiments.shared_services import store
+from scripts import build_sdk
 from tests import test_installed_connected as connected
-from tests import test_installed_sampling as installed
 from tests import test_workbench_installed as editable
+from tests.installed_sdk_fixture import InstalledWheelTestCase
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -22,23 +21,21 @@ ROOT = Path(__file__).resolve().parents[1]
 @unittest.skipUnless(
     os.name == "posix" and sys.version_info[:2] == (3, 12), "POSIX CPython 3.12 candidate"
 )
-class IntegratedCandidate(unittest.TestCase):
+class IntegratedCandidate(InstalledWheelTestCase):
+    wheel_options = {"integrated_candidate": True}
+
     @classmethod
     def setUpClass(cls):
-        builder = functools.partial(installed.build_sdk.build, integrated_candidate=True)
-        with patch.object(installed.build_sdk, "build", builder):
-            installed.InstalledSampling.setUpClass.__func__(cls)
+        super().setUpClass()
         cls.receipts = {5: json.loads((cls.base / "build/receipt.json").read_bytes())}
         for version, flags in ((3, {}), (4, {"mmtt_only": True})):
-            cls.receipts[version] = installed.build_sdk.build(
+            cls.receipts[version] = build_sdk.build(
                 cls.base / f"build-{version}",
                 allow_dirty=True,
                 build_label="sampling-test",
                 **flags,
             )
 
-    setUp = installed.InstalledSampling.setUp
-    call = installed.InstalledSampling.call
     python = connected.InstalledConnectedStudies.python
     server = editable.EditableWorkbench.server
 
@@ -169,9 +166,7 @@ class IntegratedCandidate(unittest.TestCase):
     def test_mutually_exclusive_candidate_builds_leave_no_output(self):
         output = self.root / "ambiguous-api-build"
         with self.assertRaisesRegex(ValueError, "Choose either"):
-            installed.build_sdk.build(
-                output, allow_dirty=True, mmtt_only=True, integrated_candidate=True
-            )
+            build_sdk.build(output, allow_dirty=True, mmtt_only=True, integrated_candidate=True)
         self.assertFalse(output.exists())
         output = self.root / "ambiguous-cli-build"
         result = subprocess.run(
