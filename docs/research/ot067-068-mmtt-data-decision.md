@@ -42,6 +42,9 @@ The rehearsal uses fixed supplied kinetics and invented measurement error.
 
 ## Source and minimum crosswalk
 
+The [TN05 v2 CSV field mapping](tn05-v2-csv-field-mapping.md) records the
+follow-up audit of linkage, timing, units and censoring metadata.
+
 The production NIDDK-CR catalogue was retrieved on 22 November 2026. TN05
 Version 2 (DOI `10.58020/1bv7-0y43`) is available for controlled request for
 T1D and related complications. The trial enrolled across pediatric and adult
