@@ -254,7 +254,7 @@ dependencies and browser download share a 300-second budget and log separate
 phases. The ephemeral hosted browser runners select the official Ubuntu archive
 for the exact Azure mirror URI and retain authenticated, fail-closed APT setup;
 see the [bounded CI record](research/ci-reliability.md#selected-implementation). The
-suite uses Playwright 1.64.1, one Chromium worker, no retries and 17 synthetic
+suite uses Playwright 1.64.1, one Chromium worker, no retries and 27 synthetic
 checkout/installed task, failure, concept and reopen cases. CI partitions those
 cases into three isolated jobs, retaining one worker per job, zero retries and
 an eight-minute budget per shard. Complete whole-file groups are selected by
@@ -309,8 +309,8 @@ a successful latest attempt can coexist with stale failed entries in the PR UI.
 ## Individual checks
 
 ```sh
-uv run --locked ruff check docs/conf.py scripts tests experiments packaging/sdk/opent1d_lab
-uv run --locked ruff format --check docs/conf.py scripts tests experiments packaging/sdk/opent1d_lab
+uv run --locked ruff check docs/conf.py scripts tests experiments packaging
+uv run --locked ruff format --check docs/conf.py scripts tests experiments packaging
 uv run --locked python -m unittest discover -s tests -v
 uv run --locked cffconvert --validate
 ```
