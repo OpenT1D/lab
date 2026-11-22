@@ -59,7 +59,7 @@ def descriptor():
     }
 
 
-def verify(directory):
+def verify(directory, *, readback=False):
     directory = profile.archive(directory)
     require(not directory.is_symlink(), "Reference cannot be a symlink")
     manifest = read(directory / "manifest.json")
@@ -73,10 +73,13 @@ def verify(directory):
         result = inherited_reference(directory)
         verify_reference_sources(directory)
         return result
-    require(
-        read(directory / "execution.json") == descriptor(),
-        "Maintained reference execution descriptor changed",
-    )
+    attachment = profile.evidence(read(directory / "runtime-context.json"), readback=readback)
+    execution = read(directory / "execution.json")
+    expected = descriptor()
+    expected["implementation_sources_sha256"] = {
+        name: value["sha256"] for name, value in attachment["source_files"].items()
+    }
+    require(execution == expected, "Maintained reference execution descriptor changed")
     for folder in (directory, directory / "repeat"):
         for name in ("protocol.json", "source-cases.json"):
             require(
@@ -87,9 +90,7 @@ def verify(directory):
         sha256(directory / "sources.json") == sha256(bc.HERE / "sources.json"),
         "Inherited reference attribution bytes changed",
     )
-    for name, expected in read(directory / "execution.json")[
-        "implementation_sources_sha256"
-    ].items():
+    for name, expected in execution["implementation_sources_sha256"].items():
         require(
             sha256(directory / "implementation" / name) == expected,
             "Maintained reference implementation snapshot changed",
@@ -110,7 +111,6 @@ def verify(directory):
             "Maintained reference runtime changed",
         )
     p = protocol()
-    attachment = profile.evidence(read(directory / "runtime-context.json"))
     require(
         sha256(directory / "runtime-context.json")
         == manifest["execution_locations"]["attachment_sha256"],
@@ -118,7 +118,7 @@ def verify(directory):
     )
     for folder in (directory, directory / "repeat"):
         receipt = read(folder / "runtime.json")
-        validate(receipt, NATIVE_PROJECT, p, attachment)
+        validate(receipt, NATIVE_PROJECT, p, attachment, readback=readback)
         for name in ("native.json", "probe.json"):
             validate_numerical_runtime(receipt, read(folder / name)["runtime"])
     require(

@@ -10,6 +10,8 @@ import stat
 import sys
 from pathlib import Path, PurePosixPath
 
+from experiments.shared_services import reader_compatibility
+
 SCHEMA = "opent1d.m4-runtime-attachment/1"
 MAX_FILES = 40000
 MAX_BYTES = 2 * 1024 * 1024 * 1024
@@ -211,7 +213,7 @@ def create(native, observer, output, application):
     return {"attachment": str(destination), "sha256": hashlib.sha256(canonical(result)).hexdigest()}
 
 
-def evidence(record):
+def evidence(record, *, readback=False):
     """Validate recorded identity without inspecting old dependency locations."""
     from .common import NATIVE_PROJECT, OBSERVER_PROJECT, package_records, protocol
 
@@ -253,7 +255,15 @@ def evidence(record):
         and application["native_execution"] == "explicit-reviewed-attachment/1",
         "Invalid current application evidence",
     )
-    require(record["source_files"] == source_records(), "Attached source payload changed")
+    attached, current = record["source_files"], source_records()
+    require(
+        attached == current
+        or (
+            readback
+            and reader_compatibility.accepts_predecessor("m4-attachment-sources", attached, current)
+        ),
+        "Attached source payload changed",
+    )
     require(set(record["roles"]) == {"native", "observer"}, "Two explicit roles required")
     p = protocol()
     for role, project in (("native", NATIVE_PROJECT), ("observer", OBSERVER_PROJECT)):

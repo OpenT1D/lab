@@ -32,7 +32,7 @@ def validate_frozen(directory, files):
     if "execution_locations" in plan:
         locations.validate(plan["execution_locations"])
     require(digest(files["config.json"]) == plan.get("config_sha256"), "Config binding changed")
-    attachment = profile.evidence(read(directory / "runtime-context.json"))
+    attachment = profile.evidence(read(directory / "runtime-context.json"), readback=True)
     provenance = plan.get("provenance", {})
     require(
         provenance.get("application") == attachment["application"]
@@ -142,12 +142,12 @@ def validate_ownership(directory, plan, state):
 
 def assessment(directory, plan, state):
     validate_ownership(directory, plan, state)
-    attachment = profile.evidence(read(directory / "runtime-context.json"))
+    attachment = profile.evidence(read(directory / "runtime-context.json"), readback=True)
 
     def receipt(path, project, owner):
         if path.is_file():
             record = read(path)
-            validate(record, project, plan["protocol"], attachment)
+            validate(record, project, plan["protocol"], attachment, readback=True)
             require(
                 record["executable"]
                 == locations.executable(plan, project, plan["provenance"]["checkout_path"]),
@@ -192,5 +192,5 @@ def reconstruct(archive, write_to=None, allow_failed=False):
     from .adapter import activate
 
     archive = profile.archive(archive)
-    with activate():
+    with activate(readback=True):
         return INHERITED_RECONSTRUCT(archive, write_to=write_to, allow_failed=allow_failed)

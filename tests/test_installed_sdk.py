@@ -1,8 +1,10 @@
 """Noneditable wheel use outside checkout, retained readers and adverse artifacts."""
 
+import csv
 import hashlib
 import http.client
 import importlib.util
+import io
 import json
 import marshal
 import os
@@ -20,6 +22,7 @@ from unittest.mock import patch
 
 from experiments.catalogue.storage import digest, encoded
 from experiments.gui.ownership import Ownership
+from experiments.observation_analysis.observations import COLUMNS
 from experiments.shared_services.store import opened
 from scripts import build_sdk
 from scripts.build_source import source_inventory
@@ -135,6 +138,73 @@ class InstalledSDK(unittest.TestCase):
     def native(self, project, attempt):
         with opened(project) as store:
             return store.finishes[attempt][1] / "native"
+
+    def test_mmtt_sensitivity_uses_native_input_size_limits(self):
+        task = "mmtt-sensitivity"
+        source = self.root / "large-inputs"
+        inputs = self.call("example", "--task", task, "--output", source)["inputs"]
+        package_path = Path(inputs["package.json"])
+        package = json.loads(package_path.read_bytes())
+        rows = [
+            (
+                person["id"],
+                visit["id"],
+                visit["challenge_id"],
+                f"{sample * 0.6:.3f}",
+                "5.5",
+                "observed",
+                "0.3",
+                "observed",
+            )
+            for person in package["participants"]
+            for visit in person["visits"]
+            for sample in range(201)
+        ]
+        base = io.StringIO(newline="")
+        writer = csv.writer(base)
+        writer.writerow(COLUMNS)
+        writer.writerows(rows)
+        limit = 16 * 1024 * 1024
+        padding, remainder = divmod(limit - len(base.getvalue().encode("utf-8")), len(rows))
+        csv_path = Path(inputs["observations.csv"])
+        with csv_path.open("w", encoding="utf-8", newline="") as stream:
+            writer = csv.writer(stream)
+            writer.writerow(COLUMNS)
+            for index, row in enumerate(rows):
+                # Whitespace in a measured numeric field preserves its parsed value.
+                glucose = row[4] + " " * (padding + (index < remainder))
+                writer.writerow((*row[:4], glucose, *row[5:]))
+        originals = {name: Path(path).read_bytes() for name, path in inputs.items()}
+        self.assertEqual(len(originals["observations.csv"]), limit)
+
+        flags = ["--task", task, "--package", package_path, "--csv", csv_path]
+        flags += ["--settings", inputs["settings.json"]]
+        self.assertTrue(self.call("validate", *flags)["valid"])
+        observations = self.call("inspect", *flags)["observations"]
+        self.assertTrue(observations["valid"])
+        self.assertEqual(sum(visit["rows"] for visit in observations["visits"]), len(rows))
+        project = self.root / "project"
+        self.call("create", "--project", project, "--name", "Large invented observations")
+        plan = self.call("freeze", "--project", project, *flags)["plan"]
+
+        limits_mib = {"package.json": 1, "observations.csv": 16, "settings.json": 1}
+        for name, mebibytes in limits_mib.items():
+            with self.subTest(file=name):
+                path = Path(inputs[name])
+                with path.open("r+b") as stream:
+                    stream.truncate(mebibytes * 1024 * 1024 + 1)
+                refused = self.call("validate", *flags, expected=2)
+                self.assertIn("scientific input exceeds byte limit", refused["error"])
+                path.write_bytes(originals[name])
+
+        shutil.rmtree(source)
+        self.assertTrue(self.call("check", "--project", project, "--plan", plan)["runtimes_ready"])
+        export = self.call(
+            "export-inputs", "--project", project, "--plan", plan, "--output", self.root / "export"
+        )
+        self.assertEqual(
+            {name: Path(path).read_bytes() for name, path in export["inputs"].items()}, originals
+        )
 
     def test_api_metadata_helpers_use_trusted_system_path(self):
         code = (

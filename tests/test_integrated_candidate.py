@@ -9,7 +9,7 @@ import unittest
 import zipfile
 from pathlib import Path
 
-from experiments.shared_services import store
+from experiments.shared_services import comparisons, reader_compatibility, store
 from scripts import build_sdk
 from tests import test_installed_connected as connected
 from tests import test_workbench_installed as editable
@@ -39,23 +39,28 @@ class IntegratedCandidate(InstalledWheelTestCase):
     python = connected.InstalledConnectedStudies.python
     server = editable.EditableWorkbench.server
 
-    def test_all_existing_wheel_scopes_bind_both_reader_packets_and_helper(self):
+    def test_all_existing_wheel_scopes_bind_reader_packets_and_helper(self):
+        reader = comparisons.reader()
+        self.assertTrue(reader_compatibility.qualified_successor("comparison", reader))
         for receipt in self.receipts.values():
             with zipfile.ZipFile(receipt["wheel"]) as wheel:
                 metadata = json.loads(wheel.read("opent1d_lab/_manifest.json"))
                 prefix = "_payload/app/experiments/shared_services/"
-                for name in ("reader_compatibility.json", "reader_compatibility_m3.json"):
-                    raw = wheel.read("opent1d_lab/" + prefix + name)
+                for packet in (
+                    reader_compatibility.REGISTRY,
+                    reader_compatibility.CURRENT_REGISTRY,
+                    reader_compatibility.SUCCESSOR_REGISTRY,
+                ):
+                    raw = wheel.read("opent1d_lab/" + prefix + packet.name)
+                    self.assertEqual(raw, packet.read_bytes())
                     self.assertEqual(
-                        hashlib.sha256(raw).hexdigest(), metadata["files"][prefix + name]["sha256"]
+                        hashlib.sha256(raw).hexdigest(),
+                        metadata["files"][prefix + packet.name]["sha256"],
                     )
-                packet = json.loads(
-                    wheel.read("opent1d_lab/" + prefix + "reader_compatibility_m3.json")
-                )
                 helper = wheel.read("opent1d_lab/" + prefix + "reader_compatibility.py")
                 self.assertEqual(
                     hashlib.sha256(helper).hexdigest(),
-                    packet["successor"]["reader_static_dependencies_sha256"][
+                    reader["reader_static_dependencies_sha256"][
                         "experiments/shared_services/reader_compatibility.py"
                     ],
                 )

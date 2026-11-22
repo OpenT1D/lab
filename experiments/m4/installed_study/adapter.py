@@ -5,6 +5,7 @@ thread-safe in-process service API. Every binding is restored even after failure
 """
 
 from contextlib import contextmanager
+from functools import partial
 
 from experiments.m4.causal_secretion import common as causal
 from experiments.m4.initial_load import analysis, common, report, run
@@ -60,17 +61,18 @@ def supervise_stage(args, log_path, timeout, control):
 
 
 @contextmanager
-def activate():
+def activate(*, readback=False):
     from .reference import verify
     from .report import assessment, expected_stage, validate_frozen
 
+    verify_reference = partial(verify, readback=readback)
     bindings = {
         common: {
             "VERSION": secure.VERSION,
             "provenance": context.provenance,
             "protocol": secure.protocol,
             "source_paths": secure.source_paths,
-            "verify_reference": verify,
+            "verify_reference": verify_reference,
         },
         run: {
             "freeze": freeze,
@@ -80,7 +82,7 @@ def activate():
             "intake": secure.intake,
             "protocol": secure.protocol,
             "source_snapshots": secure.source_snapshots,
-            "verify_reference": verify,
+            "verify_reference": verify_reference,
             "worker_args": worker_args,
             "supervise": supervise_stage,
         },
@@ -93,8 +95,8 @@ def activate():
             "expected_stage": expected_stage,
             "assessment": assessment,
         },
-        analysis: {"verify_reference": verify},
-        causal: {"reference": verify},
+        analysis: {"verify_reference": verify_reference},
+        causal: {"reference": verify_reference},
     }
     saved = [
         (module, key, getattr(module, key)) for module, values in bindings.items() for key in values

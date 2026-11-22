@@ -1,0 +1,9 @@
+{
+  "schema": "opent1d.mmtt-input-limits-reader-transition/1",
+  "successor_sha256": {
+    "comparison": "1b5ae3a829f92c713d9a9ae910d88a36e648539b9e22a12541af72621553ecc2",
+    "connected": "a20328d8b9f14ff8b96000d025a4b3980d597d7de1226bd9aa05f1a039d66cc2",
+    "m4-attachment-sources": "cf8c52a57a83e7a439a39fe05acee3284b82dd10b0746a234fdb66c09514451a",
+    "m4-study-installed": "88056c9fe221611f67adcfd2439fa53d3aace86a4dcc7758e18d8fb5303d66a1"
+  }
+}

@@ -5,7 +5,15 @@ import os
 import unittest
 from unittest.mock import patch
 
-from experiments.shared_services import comparisons, execution, reader_compatibility, store
+from experiments.m4.installed_study.profile import source_records
+from experiments.shared_services import (
+    comparisons,
+    connected,
+    execution,
+    reader_compatibility,
+    routes,
+    store,
+)
 from tests import test_plan_comparisons as fixtures
 
 
@@ -35,7 +43,9 @@ class ReaderTransition(unittest.TestCase):
             original = comparisons.view(project, identity)
             self.assertEqual(original["reader"], self.predecessor())
             self.assertNotEqual(result["reader"], original["reader"])
-            self.assertEqual(result["reader_transition"]["policy"], reader_compatibility.SCHEMA)
+            self.assertEqual(
+                result["reader_transition"]["policy"], reader_compatibility.SUCCESSOR_SCHEMA
+            )
             report = store.read(self.root / "report/report.json")
             self.assertEqual(report["definition"]["reader"], original["reader"])
             for row in report["members"][1]["rows"]:
@@ -68,6 +78,35 @@ class ReaderTransition(unittest.TestCase):
             altered = copy.deepcopy(current)
             altered["reader_static_dependencies_sha256"][name] = "0" * 64
             self.assertFalse(reader_compatibility.accepts(previous, altered, "mmtt-sampling"), name)
+
+    def test_input_limit_transition_accepts_only_the_exact_immediate_predecessor(self):
+        raw = reader_compatibility.current_bytes()
+        previous = store.decode(raw)["successor"] | {
+            "compatibility": {
+                "schema": reader_compatibility.SCHEMA,
+                "registry_sha256": store.digest(raw),
+            }
+        }
+        current = comparisons.reader()
+        for task in ("mmtt-sensitivity", "mmtt-sampling", "m4-study-installed"):
+            self.assertTrue(reader_compatibility.accepts(previous, current, task))
+            self.assertFalse(reader_compatibility.accepts(current, previous, task))
+            changed = {**previous, "archived_code_execution": 0}
+            self.assertFalse(reader_compatibility.accepts(changed, current, task))
+            changed = {**current, "archived_code_execution": 0}
+            self.assertFalse(reader_compatibility.accepts(previous, changed, task))
+
+    def test_input_limit_packet_binds_the_connected_and_m4_readers(self):
+        readers = {
+            "connected": connected.reader(),
+            "m4-attachment-sources": source_records(),
+            "m4-study-installed": routes.reader_identity("m4-study-installed"),
+        }
+        for kind, reader in readers.items():
+            with self.subTest(kind=kind):
+                self.assertTrue(reader_compatibility.qualified_successor(kind, reader))
+                changed = {**reader, "archived_code_execution": 0}
+                self.assertFalse(reader_compatibility.qualified_successor(kind, changed))
 
     def test_other_definition_fields_are_still_canonical(self):
         _, identity = self.freeze_previous()
@@ -217,8 +256,10 @@ class ReaderTransition(unittest.TestCase):
             if path == reader_compatibility.CURRENT_REGISTRY:
                 changed["compatibility"]["registry_sha256"] = store.digest(altered_raw)
 
+            read_regular = reader_compatibility.read_regular
+
             def read(candidate, *args):
-                return altered_raw if candidate == path else historical
+                return altered_raw if candidate == path else read_regular(candidate, *args)
 
             with patch.object(reader_compatibility, "read_regular", side_effect=read):
                 with self.assertRaisesRegex(ValueError, "registry identity|compatibility packet"):

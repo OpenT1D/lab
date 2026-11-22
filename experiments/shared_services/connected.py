@@ -8,7 +8,7 @@ from experiments.catalogue.storage import load_sealed, seal
 from experiments.m3.researcher.intake import read_regular
 from experiments.shared_contracts.inventory import reader_source_inventory
 
-from . import comparisons, connected_bridge, execution, routes, store
+from . import comparisons, connected_bridge, execution, reader_compatibility, routes, store
 
 HERE = Path(__file__).resolve().parent
 SCHEMA = "opent1d.connected-study/1"
@@ -71,8 +71,13 @@ def definition(project, request):
 def validate(project, value):
     store.require(isinstance(value, dict), "Invalid frozen study")
     request = {key: value[key] for key in ("name", "question", "forward_plan", "observation_case")}
+    expected = definition(project, request)
+    if reader_compatibility.accepts_predecessor(
+        "connected", value.get("reader"), expected["reader"]
+    ):
+        expected["reader"] = value["reader"]
     store.require(
-        store.encoded(value) == store.encoded(definition(project, request)),
+        store.encoded(value) == store.encoded(expected),
         "Study/source identity differs",
     )
 

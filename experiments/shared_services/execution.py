@@ -17,7 +17,7 @@ from experiments.workflows.checks import check
 from experiments.workflows.dispatch import child_environment, command_for
 from experiments.workflows.registry import TASKS
 
-from .routes import ROOT, forensic_result, native_result, reader_identity, validate_freeze
+from .routes import ROOT, forensic_result, native_result, validate_freeze
 from .store import require, safe_path, snapshot, write
 
 
@@ -316,10 +316,6 @@ def reconstruct(store, attempt, output, *, allow_failed=False, backend=None):
     )
     descriptor, plan = store.plans[store.attempts[attempt]["plan"]]
     validate_freeze(plan, descriptor, current=False)
-    require(
-        descriptor["reader"] == reader_identity(descriptor["task"]),
-        "Unsupported trusted reader version",
-    )
     output = safe_path(output, fresh=True)
     require(
         not output.exists() and not output.is_relative_to(store.path),

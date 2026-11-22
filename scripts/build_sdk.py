@@ -88,6 +88,7 @@ def source_closure():
             "experiments/shared_services/connected_protocol.json",
             "experiments/shared_services/reader_compatibility.json",
             "experiments/shared_services/reader_compatibility_m3.json",
+            "experiments/shared_services/reader_compatibility_mmtt_input_limits.json",
             "experiments/shared_services/forecasting_context.py",
         }
     )
