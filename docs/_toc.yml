@@ -389,6 +389,7 @@ subtrees:
       - file: docs/decisions/0113-lt1-historical-leaf-removal
       - file: docs/decisions/0114-concept-v1-desktop-workspace
       - file: docs/decisions/0115-shared-build-source-inventory
+      - file: docs/decisions/0116-mmtt-input-limit-reader-transition
       - file: docs/decisions/0059-maintained-runtimes-and-local-gui
       - file: docs/templates/model-card
       - file: docs/templates/experiment-protocol

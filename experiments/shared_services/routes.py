@@ -15,6 +15,7 @@ from experiments.shared_contracts.selected import boundary as legacy_boundary
 from experiments.shared_contracts.selected import outcome as legacy_outcome
 from experiments.shared_contracts.selected import reader as legacy_reader
 
+from . import reader_compatibility
 from .store import Budget, inventory, read, require, safe_path, snapshot, write
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -190,22 +191,39 @@ def validate_freeze(folder, descriptor, *, current):
         {name: digest(raw) for name, raw in payload.items()} == descriptor["original_sha256"],
         "Original input identity differs",
     )
-    require(
-        boundary(task, payload) == descriptor["boundary"],
-        "Frozen task/source/runtime identity differs",
-    )
     reader_metadata = descriptor["reader"]
+    current_reader = reader_identity(task)
+    predecessor = task == "m4-study-installed" and reader_compatibility.accepts_predecessor(
+        task, reader_metadata, current_reader
+    )
+    expected_boundary = boundary(task, payload)
+    if predecessor:
+        expected_boundary["binding"]["implementation_sha256"] = reader_metadata[
+            "trusted_sources_sha256"
+        ]
     require(
-        reader_metadata == reader_identity(task),
+        expected_boundary == descriptor["boundary"], "Frozen task/source/runtime identity differs"
+    )
+    require(
+        reader_metadata == current_reader or predecessor,
         "Unsupported trusted reader version; archived code stays opaque",
     )
-    expected = set(reader_metadata["trusted_sources_sha256"]) | set(
-        reader_metadata["reader_static_dependencies_sha256"]
+    require(not (predecessor and current), "Freeze a new M4 plan before executing with this reader")
+    saved_sources = (
+        reader_metadata["trusted_sources_sha256"]
+        | reader_metadata["reader_static_dependencies_sha256"]
     )
+    current_sources = (
+        current_reader["trusted_sources_sha256"]
+        | current_reader["reader_static_dependencies_sha256"]
+    )
+    expected = set(saved_sources)
     expected.update(mmtt.ANCESTRY if task == "mmtt-sensitivity" else ())
     expected.update(runtime_paths(descriptor["boundary"]["binding"]))
     require(set(descriptor["trusted_sha256"]) == expected, "Missing source/reader/runtime snapshot")
     for name, sha in descriptor["trusted_sha256"].items():
+        if predecessor:
+            require(saved_sources.get(name, sha) == sha, "Predecessor snapshot identity differs")
         require(
             digest(
                 read_regular(folder / "trusted" / name, 4 * 1024 * 1024, "opaque trusted snapshot")
@@ -214,7 +232,8 @@ def validate_freeze(folder, descriptor, *, current):
             "Trusted snapshot differs",
         )
         require(
-            digest(read_regular(ROOT / name, 4 * 1024 * 1024, "current trusted source")) == sha,
+            digest(read_regular(ROOT / name, 4 * 1024 * 1024, "current trusted source"))
+            == (current_sources.get(name, sha) if predecessor else sha),
             "Current implementation/runtime/source differs",
         )
     if task == "mmtt-sensitivity":

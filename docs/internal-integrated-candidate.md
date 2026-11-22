@@ -106,6 +106,10 @@ preserves the complete embedded scientific/service payload and comparison
 registry. Any later relevant source change needs its own reader decision and
 artifact qualification.
 
+The [MMTT input-limit successor](decisions/0116-mmtt-input-limit-reader-transition.md)
+adds an exact readback edge for an identified predecessor. Use that decision
+for the successor's archive scope and execution requirements.
+
 ## Repeat qualification
 
 Keep the clean PR-44 predecessor wheel/receipt, a clean integrated wheel/receipt,

@@ -26,8 +26,8 @@ def attest(project):
     }
 
 
-def validate(record, project, p, attachment=None):
-    attachment = profile.evidence(attachment or context.current()["record"])
+def validate(record, project, p, attachment=None, *, readback=False):
+    attachment = profile.evidence(attachment or context.current()["record"], readback=readback)
     role = "native" if project == NATIVE_PROJECT else "observer"
     require(project in (NATIVE_PROJECT, OBSERVER_PROJECT), "Unknown recorded numerical project")
     selected = attachment["roles"][role]

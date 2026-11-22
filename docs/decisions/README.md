@@ -1,5 +1,7 @@
 # Decision records
 
+- [0116 — MMTT input limits and exact reader transition](0116-mmtt-input-limit-reader-transition.md) binds readback across the installed MMTT input-limit correction.
+
 - [0115 — Shared build source inventory](0115-shared-build-source-inventory.md) records the common Git inventory used by SDK and application builds and qualification.
 
 - [0114 — Concept v1 Mac desktop workspace](0114-concept-v1-desktop-workspace.md): an owned application window, existing SDK services and explicit desktop lifecycle.
