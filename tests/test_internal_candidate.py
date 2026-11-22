@@ -1,32 +1,23 @@
 """Actual installed two-task capability gates, readonly reports and GUI lifecycle."""
 
-import functools
 import hashlib
 import json
 import os
 import subprocess
 import sys
 import unittest
-from unittest.mock import patch
 
 from experiments.shared_services import store
-from tests import test_installed_sampling as installed
 from tests import test_reader_transition as transition
 from tests import test_workbench_installed as editable
+from tests.installed_sdk_fixture import InstalledWheelTestCase
 
 
 @unittest.skipUnless(
     os.name == "posix" and sys.version_info[:2] == (3, 12), "POSIX CPython 3.12 candidate"
 )
-class InternalCandidate(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        builder = functools.partial(installed.build_sdk.build, mmtt_only=True)
-        with patch.object(installed.build_sdk, "build", builder):
-            installed.InstalledSampling.setUpClass.__func__(cls)
-
-    setUp = installed.InstalledSampling.setUp
-    call = installed.InstalledSampling.call
+class InternalCandidate(InstalledWheelTestCase):
+    wheel_options = {"mmtt_only": True}
     server = editable.EditableWorkbench.server
 
     def test_preserved_reader_rejects_changed_installed_helper_even_after_manifest_reseal(self):

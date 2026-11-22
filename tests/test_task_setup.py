@@ -15,6 +15,8 @@ from unittest.mock import patch
 from experiments.catalogue.storage import ROOT
 from experiments.platform_files import native_absolute
 from experiments.setup import core
+from experiments.workflows.checks import runtime_requirements
+from experiments.workflows.registry import TASKS
 
 
 class SetupTests(unittest.TestCase):
@@ -45,6 +47,16 @@ class SetupTests(unittest.TestCase):
         self.assertEqual(list(core.requirements("m4-study-secure", reconstruction=True)), ["."])
         with self.assertRaises(ValueError):
             core.requirements("arbitrary-archive-module")
+
+    def test_setup_and_workflow_agree_on_base_runtime_requirements(self):
+        self.assertEqual(set(core.TASKS), set(TASKS))
+        for task in TASKS.values():
+            for reconstruction in (False, True):
+                with self.subTest(task=task.id, reconstruction=reconstruction):
+                    self.assertEqual(
+                        core.requirements(task.id, reconstruction=reconstruction),
+                        runtime_requirements(task, reconstruction=reconstruction),
+                    )
 
     def test_missing_environment_check_never_installs(self):
         expected = {

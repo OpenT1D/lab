@@ -104,7 +104,7 @@ def build(
     m3_workbench=False,
 ):
     from experiments.durable_archives.storage import safe_path
-    from scripts.build_windows_installer import source_inventory
+    from scripts.build_source import source_inventory
 
     if sum((mmtt_only, integrated_candidate, m3_workbench)) > 1:
         raise ValueError("Choose either --mmtt-only, --integrated-candidate or --m3-workbench")

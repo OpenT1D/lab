@@ -87,7 +87,7 @@ projects. Every generated documentation page is still checked in all three.
 Each CI engine uses four workers, no retries and a five-minute documentation
 budget. The matrix uses `fail-fast: false`, so one failing engine does not cancel
 the others' diagnostics. All three results must succeed for the required gate.
-The 14 application cases run in a separate three-shard Chromium family. Local `test:docs`
+The 27 synthetic application cases run in a separate three-shard Chromium family. Local `test:docs`
 runs all three engines within a fifteen-minute total budget; select one with
 `npm --prefix tests/browser run test:docs -- --project firefox --global-timeout=300000`.
 The installer keeps Chromium as its default; explicit browser names select the
@@ -119,7 +119,7 @@ qualification remain separate.
 Only a `push` to `refs/heads/main` in `OpenT1D/lab` uploads a Pages artifact. The
 artifact name includes its run ID and attempt. The deployment job waits for the
 same run's complete `Repository checks` gate: root checks, the three-host smoke
-matrix, Chromium MMTT flows and all three documentation engines must succeed. A failed, cancelled or skipped
+matrix, all three Chromium application shards and all three documentation engines must succeed. A failed, cancelled or skipped
 family prevents deployment. The deployment job is not a dependency of that gate.
 
 Pull requests also require the read-only [dependency review](publication-security.md).

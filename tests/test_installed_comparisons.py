@@ -7,17 +7,14 @@ import sys
 import unittest
 from pathlib import Path
 
-from tests import test_installed_sampling as installed
 from tests import test_workbench_installed as editable
+from tests.installed_sdk_fixture import InstalledWheelTestCase
 
 
 @unittest.skipUnless(
     os.name == "posix" and sys.version_info[:2] == (3, 12), "POSIX CPython 3.12 installed SDK"
 )
-class InstalledComparisons(unittest.TestCase):
-    setUpClass = classmethod(installed.InstalledSampling.setUpClass.__func__)
-    setUp = installed.InstalledSampling.setUp
-    call = installed.InstalledSampling.call
+class InstalledComparisons(InstalledWheelTestCase):
     server = editable.EditableWorkbench.server
     inputs = editable.EditableWorkbench.inputs
 

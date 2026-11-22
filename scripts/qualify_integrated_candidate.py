@@ -181,7 +181,7 @@ def materials(root, result, reference, adverse):
 def orchestrate(args):
     from experiments.m4.installed_study import common, profile
     from experiments.shared_services.execution import supervise
-    from scripts.build_windows_installer import source_inventory
+    from scripts.build_source import source_inventory
     from scripts.prepare_m4_runtimes import PROJECTS, validate_policy
 
     assert platform.system() == "Darwin" and platform.machine() == "arm64"

@@ -230,7 +230,7 @@ class MacBuildBoundaryTests(unittest.TestCase):
         self.assertEqual(len(lock["sha256"]), 64)
 
     def test_actual_payload_excludes_historical_environments_outputs_and_root_tooling(self):
-        from scripts.build_windows_installer import source_inventory
+        from scripts.build_source import source_inventory
 
         selected = builder.selected_source(source_inventory(builder.ROOT, allow_dirty=True))
         for name in selected:

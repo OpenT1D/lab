@@ -22,7 +22,7 @@ from experiments.catalogue.storage import digest, encoded
 from experiments.gui.ownership import Ownership
 from experiments.shared_services.store import opened
 from scripts import build_sdk
-from scripts.build_windows_installer import source_inventory
+from scripts.build_source import source_inventory
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -801,9 +801,7 @@ class InstalledSDK(unittest.TestCase):
         with (
             patch.object(build_sdk, "ROOT", source),
             patch.object(build_sdk, "source_closure", return_value=[]),
-            patch(
-                "scripts.build_windows_installer.source_inventory", side_effect=snapshot_then_change
-            ),
+            patch("scripts.build_source.source_inventory", side_effect=snapshot_then_change),
             self.assertRaisesRegex(
                 ValueError, "Source changed during SDK staging: packaging/sdk/opent1d_lab/api.py"
             ),

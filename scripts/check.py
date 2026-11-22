@@ -80,7 +80,7 @@ def check_style() -> None:
     files = sorted({name for name in files if name and (ROOT / name).is_file()})
     markdown = [name for name in files if name.endswith(".md")]
     yaml = [name for name in files if name.endswith((".yml", ".yaml", ".cff"))]
-    python = ("docs/conf.py", "scripts", "tests", "experiments", "packaging/sdk/opent1d_lab")
+    python = ("docs/conf.py", "scripts", "tests", "experiments", "packaging")
     run("ruff", "check", *python)
     run("ruff", "format", "--check", *python)
     run("pymarkdown", "--config", ".pymarkdown.json", "scan", *markdown)
