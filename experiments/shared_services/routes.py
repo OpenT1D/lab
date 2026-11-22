@@ -25,6 +25,9 @@ TASKS = {
     "m4-study-installed": "experiments.m4.installed_study",
     "m3-compare": "experiments.m3.comparison",
 }
+# Match the native observation intake and analysis plan limits.
+MMTT_INPUT_LIMITS = {**mmtt.INPUTS, "settings.json": 1024 * 1024}
+M4_INPUT_LIMITS = {"config.json": 4 * 1024 * 1024}
 
 
 def native_provider(task):
@@ -99,14 +102,10 @@ def capture(task, inputs, target):
     original = target / "original"
     original.mkdir()
     payload = {}
-    expected = (
-        {"config.json"}
-        if task != "mmtt-sensitivity"
-        else {"package.json", "observations.csv", "settings.json"}
-    )
-    require(set(inputs) == expected, "Explicit native input roster required")
+    limits = MMTT_INPUT_LIMITS if task == "mmtt-sensitivity" else M4_INPUT_LIMITS
+    require(set(inputs) == set(limits), "Explicit native input roster required")
     for name, path in inputs.items():
-        raw = read_regular(path, 4 * 1024 * 1024, "scientific input")
+        raw = read_regular(path, limits[name], "scientific input")
         (original / name).write_bytes(raw)
         payload[name] = raw
     metadata = boundary(task, payload)
@@ -181,17 +180,10 @@ def validate_freeze(folder, descriptor, *, current):
         "Unsupported or changed freeze identity",
     )
     task = descriptor["task"]
-    require(
-        set(descriptor["original_sha256"])
-        == (
-            {"config.json"}
-            if task != "mmtt-sensitivity"
-            else {"package.json", "observations.csv", "settings.json"}
-        ),
-        "Original input roster differs",
-    )
+    limits = MMTT_INPUT_LIMITS if task == "mmtt-sensitivity" else M4_INPUT_LIMITS
+    require(set(descriptor["original_sha256"]) == set(limits), "Original input roster differs")
     payload = {
-        name: read_regular(folder / "original" / name, 4 * 1024 * 1024, "original input")
+        name: read_regular(folder / "original" / name, limits[name], "original input")
         for name in descriptor["original_sha256"]
     }
     require(

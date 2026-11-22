@@ -4,6 +4,10 @@ Notable changes to OpenT1D are recorded here. No version has been released yet.
 
 ## Unreleased
 
+- Apply the MMTT sensitivity task's input limits when the installed SDK
+  captures and rereads original inputs. Synthetic observation CSVs can be up
+  to 16 MiB, with separate 1 MiB limits for package metadata and settings.
+
 - Close OT-065 for the selected internal two-task MMTT Mac workbench and shared
   SDK/onboarding under the user's explicit scope decision. Defer the missing
   actual VoiceOver qualification to a named open follow-up, preserving its
