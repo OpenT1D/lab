@@ -35,21 +35,24 @@ release-specific evidence. The audit used public documentation and metadata.
 The 2007 draft Manual of Operations places four-hour tests at screening,
 month 12 and month 24. Screening MMTT and the week-0 randomization visit are
 distinct events. The manual lists Week 52 as Month 12 and gives different
-visit windows according to the associated procedures. The trial article uses
-the pretreatment and one-year MMTTs for its baseline and follow-up comparisons.
+visit windows according to the associated procedures. The participant-specific
+schedule in the manual uses the randomization date for follow-up targets.
+The trial article describes its one-year outcome relative to the first infusion.
+Preserve both dates and verify the applicable scheduling anchor and window for
+the released test. The pretreatment MMTT supplies the candidate analytic baseline.
 The historical data integrity check (DSIC) selects `Screening` and `52 weeks`
 among the visits it processes for `PEP120`. That selection supports the
 candidate labels. Coverage of the full paired series and its linkage remain
 unverified.
-[Manual of Operations, §§7.2.5 and 12.3 and Appendix G](https://repository.niddk.nih.gov/public/study_document/TN05_V2/TN-05%20Documentation/TN05_Manual_of_Operations.pdf),
+[Manual of Operations, §§7.2.5, 12.3 and 14.3 and Appendix G](https://repository.niddk.nih.gov/public/study_document/TN05_V2/TN-05%20Documentation/TN05_Manual_of_Operations.pdf),
 [TN05 trial article](https://pmc.ncbi.nlm.nih.gov/articles/PMC6410357/),
 [DSIC, Appendix 1, pp. 17–18](https://repository.niddk.nih.gov/public/study_document/TN05_V2/TN-05%20DSIC/DSIC_TrialNet-05%20Rituximab_final.pdf)
 
 | Link or context | Verified public metadata | Needed to admit a pair |
 | --- | --- | --- |
 | Participant and assigned arm | Participant Registration and Participant Treatment Table expose `MaskID`. Treatment Table includes `TreatmentName`, `RegistrationGroup`, `Randomization_Date`, `Treatment_Start_Date` and `SequenceNumber`. The DSIC uses `TreatmentName` on rows with a randomization date and presents placebo and rituximab groups. | Confirm one masked person across the required tables and a documented rule that identifies one randomized assignment per person. Retain repeat treatment rows and exclusions until resolved. Confirm the assigned arm independently of received treatments. |
-| Analytic baseline | Screening Form RIT01 exposes `MaskID`, `Visit`, `Date_of_Visit`, `Date_At_MMTT`, `Age` and `sex`. The form has a field for the four-hour collection date. The baseline randomization form RIT06 records age and randomization date in the clinic. | Link the qualifying pretreatment test to its screening record and assignment. Establish age at the selected baseline, especially near the adult cutoff. Treat clinic, test and randomization dates as separate fields. |
-| Month 12 and missing visits | RIT12 labels a Month 12 visit and exposes `MaskID`, `Visit`, `Date_of_Visit`, `_4HourMMTT` and `Date_At_4HrMMTT`. RIT16 lists `VistMissed` and `ReasonForMissedVisit`. | Confirm the CSV visit alias, applicable visit-window anchor and one completed four-hour test per intended visit. Reconcile reschedules, conflicting dates and absent visits. Retain the reason when a visit or sample is unavailable. |
+| Analytic baseline | Screening Form RIT01 exposes `MaskID`, `Visit`, `Date_of_Visit`, `Date_At_MMTT`, `Age` and `sex`. The form has a field for the four-hour collection date. The public RIT06 form records age and randomization date at week 0. Its CSV export was not identified. | Link the qualifying pretreatment test to its screening record and assignment. Establish age at the selected baseline, especially near the adult cutoff. Treat clinic, test and randomization dates as separate fields. |
+| Month 12 and missing visits | RIT12 labels a Month 12 visit and exposes `MaskID`, `Visit`, `Date_of_Visit`, `_4HourMMTT` and `Date_At_4HrMMTT`. The RIT16 dictionary labels `VistMissed` as the missed visit and `ReasonForMissedVisit` as the reason. | Confirm the completed and missed visit code mappings and one qualifying four-hour test per intended visit. Use the dedicated missed-visit field after decoding it. Reconcile reschedules, conflicting dates and absent visits. |
 | Challenge and specimen | The manual specifies four-hour form `RIT99M4` and a separate `MMT4` barcode block per test. The block's labels associate the transmittal form and its timed specimen tubes. Research Labs exposes `event_title`, `SPEC_NAME`, `TEST_NAME`, `SampleMaskID`, `MaskID`, `Visit` and `Date_of_Draw`. | Verify how the form event and barcode block were carried through masking. Establish a unique test instance and a traceable link from each analyte result to its specimen and timed draw. A participant/date or label alone cannot separate repeated tests. Distinct glucose and C-peptide tubes may have distinct masked specimen identifiers. |
 | Eligibility and visit context | RIT02 lists `Date_At_T1DDiag`. RIT03 and RIT12 document body size (`WeightInKgs`/`HeightInCm` and `WeightKG`/`HeightCM`). RIT09/RIT10 cover insulin or medications and RIT21 covers deviations. The lab workbook labels `CREA` as creatinine in the chemistry panel. | Link dated renal measures and units, body size and relevant medication, fasting, meal dose/completion and deviation records to each test. Validate timing relative to the challenge before use. |
 
@@ -75,6 +78,10 @@ visit, challenge instance, specimen/result identity, analyte, nominal slot,
 actual minutes, value, unit and status. Form a paired-analyte observation only
 after both tubes are linked to the same timed draw. Preserve analyte-specific
 clocks where supplied and resolve discordances under an explicit timing rule.
+Keep the intended visits and expected sampling slots in coverage even when
+one or both analytes are absent. A single linked result retains its value and
+clock. Record absent results, unsuccessful linkage and censoring separately,
+with unknown draw times left unset.
 
 ## Nominal schedule and measured time
 
