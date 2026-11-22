@@ -95,13 +95,12 @@ The [vision](docs/vision.md) aims toward assessed digital twins that contribute
 to research into preserving, restoring and replacing endogenous insulin
 production, and ultimately prevention and cures. The first selected scientific
 focus is beta-cell function and disease progression. The
-[next research-data increment](ROADMAP.md#next-bounded-research-data-increment)
+[research-data direction](ROADMAP.md#now-next-and-later)
 connects a demonstrated research need, reliable source-specific intake and a
 reconstructed study to the existing laboratory before personal-model assessment.
 
-The [public-development queue](ROADMAP.md#public-development-priorities) now
-selects [further integrated laboratory work](ROADMAP.md#selected-development-window-first-integrated-laboratory)
-on the merged installed SDK, native M4 successor and project GUI. Shared sampling
+The [roadmap](ROADMAP.md#now-next-and-later) connects ongoing controller research
+and paired MMTT studies to the installed SDK, native M4 successor and project GUI. Shared sampling
 and the bounded [editable workbench](docs/research/editable-workbench.md) are
 implemented, alongside [reproducible frozen comparisons](docs/research/workbench-comparisons.md).
 The [connected synthetic study](docs/research/connected-synthetic-study.md) now

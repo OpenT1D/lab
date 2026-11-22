@@ -19,6 +19,7 @@ subtrees:
       - file: docs/documentation-publication
   - caption: Research
     entries:
+      - file: docs/research/roadmap-history-2026-11-22
       - file: docs/research/roadmap-history-2026-10-28
       - file: docs/research/ot056-researcher-pilot
       - file: docs/research/ot056-pilot-forms
