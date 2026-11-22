@@ -14,9 +14,11 @@ import tarfile
 from pathlib import Path, PurePosixPath
 
 try:
-    from scripts.build_windows_installer import download_runtime, sha256, source_inventory
+    from scripts.build_source import source_inventory
+    from scripts.build_windows_installer import download_runtime, sha256
 except ModuleNotFoundError:
-    from build_windows_installer import download_runtime, sha256, source_inventory
+    from build_source import source_inventory
+    from build_windows_installer import download_runtime, sha256
 
 ROOT = Path(__file__).resolve().parents[1]
 TASKS = ["mmtt-sensitivity", "mmtt-sampling"]

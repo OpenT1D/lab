@@ -1,5 +1,7 @@
 # Decision records
 
+- [0115 — Shared build source inventory](0115-shared-build-source-inventory.md) records the common Git inventory used by SDK and application builds and qualification.
+
 - [0114 — Concept v1 Mac desktop workspace](0114-concept-v1-desktop-workspace.md): an owned application window, existing SDK services and explicit desktop lifecycle.
 
 - [0091 — Shared M3 workbench](0091-m3-shared-workbench.md): preserve the native frozen comparison and causal readers through installed project services.

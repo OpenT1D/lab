@@ -19,10 +19,8 @@ sys.path.insert(0, str(ROOT))
 from scripts.build_mac_app import extract_runtime as extract_mac  # noqa: E402
 from scripts.build_mac_app import runtime_materials  # noqa: E402
 from scripts.build_sdk import build as build_sdk  # noqa: E402
-from scripts.build_windows_installer import (  # noqa: E402
-    sha256,
-    source_inventory,
-)
+from scripts.build_source import source_inventory  # noqa: E402
+from scripts.build_windows_installer import sha256  # noqa: E402
 
 
 def download(lock, destination):

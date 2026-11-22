@@ -56,7 +56,7 @@ def prepare(output):
     from experiments.platform_files import atomic_write_bytes
     from experiments.shared_services.execution import supervise
     from experiments.shared_services.store import encoded, safe_path
-    from scripts.build_windows_installer import source_inventory
+    from scripts.build_source import source_inventory
 
     review = validate_policy()
     output = safe_path(output, fresh=True)
